@@ -69,7 +69,7 @@
                 <div class="p-4">
                     <div class="row text-white ml-4">
                         <div class="col-auto mt-2 mr-3 p-0">
-                            <h3 class="h6">CES No. <span class="bg-danger py-1 px-2 rounded h6">{{ $item->cesno }}</span></h3>  
+                            <h3 class="h6">CES No. <span class="bg-danger py-1 px-2 rounded h6">{{ $item->cesno }}</span></h3>
                         </div>
                 @endforeach
 
@@ -227,7 +227,7 @@
                             <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/edit`, `personal_data`, `Update`, `updatePersonalDataTable`, `resetPersonalDataForm`, `personal_data_submit`, `None`, `None`)">
                             @else
 
-                            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/add`, `personal_data`, `Add`, `None`, `None`, `personal_data_submit`, `Yes`, `None`)"> 
+                            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/add`, `personal_data`, `Add`, `None`, `None`, `personal_data_submit`, `Yes`, `None`)">
                             @endif
 
                                 @csrf
@@ -446,8 +446,7 @@
                                             <select name="cm_pa" aria-aria-controls='example' style="text-transform:capitalize" class="w-100 form-control mb-3" required>
                                                 <option value="">Please Select</option>
                                                     @foreach ($CityMunicipality as $item)
-
-                                                    <option value="{{ $item->CODE }}">{{ $item->NAME }}</option>
+                                                        <option value="{{ $item->CODE }}">{{ $item->NAME }}</option>
                                                     @endforeach
 
                                             </select>
@@ -803,7 +802,7 @@
                                             <input type="submit" id="spouse_records_form_submit" class="btn btn-primary mb-1" value="Add Record" hidden disabled>
                                             <input type="button" id="spouse_records_form_go_back_to_add_record_button" class="btn btn-info mb-1" value="Go to Add Record" onclick="resetSpouseRecordsForm()">
                                             @elseif(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Family Background Profile','Edit') == 'true')
-                                            
+
                                             <input type="submit" id="spouse_records_form_submit" class="btn btn-secondary mb-1" value="Edit Record" hidden disabled>
                                             @endif
                                             @endif
@@ -1484,7 +1483,7 @@
                                             </tr>
                                             @endforeach
                                             @endif
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -1566,7 +1565,7 @@
                                                 <td>
                                                     <a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetLicenseDetailsForm({{ $item->id }},`View`)">View</a>
                                                     @if(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Examinations Taken','Edit') == 'true')
-                                                    
+
                                                     <a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetLicenseDetailsForm({{ $item->id }},`Edit`)">Edit</a>
                                                     @endif
                                                     @if(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Examinations Taken','Delete') == 'true')
@@ -1857,7 +1856,7 @@
                                             <input type="submit" id="assessment_center_hr_form_submit" class="btn btn-primary mb-1" value="Add Record" hidden disabled>
                                             <input type="button" id="assessment_center_hr_form_go_back_to_add_record_button" class="btn btn-info mb-1" value="Go to Add Record" onclick="resetAssessmentCenterForm()">
                                             @elseif(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker','Edit') == 'true')
-                                            
+
                                             <input type="submit" id="assessment_center_hr_form_submit" class="btn btn-secondary mb-1" value="Edit Record" hidden disabled>
                                             @endif
                                             @endif
@@ -2417,7 +2416,7 @@
                                             </tr>
                                             @endforeach
                                             @endif
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -3502,7 +3501,7 @@
                         <!-- end award and citations -->
                         @endif
                         @if(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Case Records','Category Only') == 'true')
-                        
+
                         <!-- start case record -->
                         <div class="tab-pane fade" id="case_records" role="tabpanel" aria-labelledby="case_records-tab">
                             <form class="user" id="case_records_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/case-records/add`, `case_records_form`, `Add`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `case_records_form_submit`, `None`, `None`)">
@@ -3696,7 +3695,7 @@
                                             </tr>
                                             @endforeach
                                             @endif
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -3926,7 +3925,7 @@
                         @endif
                         @if(App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Attached PDF Files','Category Only') == 'true')
 
-                        <!-- start PDF files -->    
+                        <!-- start PDF files -->
                         <div class="tab-pane fade" id="pdf_files" role="tabpanel" aria-labelledby="pdf_files-tab">
                             <form class="user" id="pdf_files_form" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/pdf-files/add`, `pdf_files_form`, `Add`, `updatePdfFilesTable`, `resetPdfFilesForm`, `pdf_files_form_submit`, `None`, `None`)">
                                 @csrf
@@ -4067,33 +4066,33 @@
                 // Populate Data to form
                 var inputFieldNames = [
                     // Personal Data
-                    "cesno", 
-                    "sp", 
-                    "moig", 
-                    "pwd", 
-                    "title", 
-                    "gsis", 
-                    "pagibig", 
-                    "philhealt", 
-                    "sss_no", 
-                    "tin", 
-                    "status", 
-                    "citizenship", 
-                    "d_citizenship", 
-                    "lastname", 
-                    "firstname", 
-                    "middlename", 
-                    "mi", 
-                    "ne", 
-                    "nickname", 
-                    "birthdate", 
+                    "cesno",
+                    "sp",
+                    "moig",
+                    "pwd",
+                    "title",
+                    "gsis",
+                    "pagibig",
+                    "philhealt",
+                    "sss_no",
+                    "tin",
+                    "status",
+                    "citizenship",
+                    "d_citizenship",
+                    "lastname",
+                    "firstname",
+                    "middlename",
+                    "mi",
+                    "ne",
+                    "nickname",
+                    "birthdate",
                     "age",
-                    "birth_place", 
-                    "gender", 
-                    "civil_status", 
-                    "religion", 
-                    "height", 
-                    "weight", 
+                    "birth_place",
+                    "gender",
+                    "civil_status",
+                    "religion",
+                    "height",
+                    "weight",
                     // Home/Permanent address
                     "fb_pa",
                     "ns_pa",
@@ -4126,8 +4125,8 @@
                     "{{ $item->status }}",
                     "{{ $item->citizenship }}",
                     "{{ $item->d_citizenship }}",
-                    "{{ $item->lastname }}", 
-                    "{{ $item->firstname }}", 
+                    "{{ $item->lastname }}",
+                    "{{ $item->firstname }}",
                     "{{ $item->middlename }}",
                     "{{ $item->mi }}",
                     "{{ $item->ne }}",
@@ -5084,7 +5083,7 @@
             </script>
             @endforeach
         @endif
-        
+
         <script>
             $('#onlyYear').datepicker({
                 minViewMode: 2,

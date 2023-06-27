@@ -74,7 +74,7 @@ class ProfileController extends Controller
                 // Validate value
 
                 $validator = Validator::make(
-                        
+
                     array(
                         'oea_ma' => $value,
                     ),
@@ -209,7 +209,7 @@ class ProfileController extends Controller
                 // Validate value
 
                 $validator = Validator::make(
-                        
+
                     array(
                         'mobileno1_ma' => $value,
                     ),
@@ -305,14 +305,15 @@ class ProfileController extends Controller
 
             $personalData = PersonalData::offset(0)->limit(50)->orderBy('cesno','desc')->get();
             $latestCesNo = ProfileController::latestCesNo();
+            $CityMunicipality = profilelib_tblareacode::orderBy('created_at', 'desc')->get();
 
-            return view('admin.add_view_edit_201_profile', compact('latestCesNo', 'personalData'))->render();
+            return view('admin.add_view_edit_201_profile', compact('latestCesNo', 'personalData', 'CityMunicipality'))->render();
         }
         else{
 
             return view('restricted');
         }
- 
+
     }
 
     public function view201ProfilePage($cesno, $numberOfResult = 50){
@@ -374,7 +375,7 @@ class ProfileController extends Controller
                 $LocationProvince = profilelib_tblprovince::orderBy('created_at', 'desc')->get();
                 $LocationRegion = profilelib_tblregion::orderBy('created_at', 'desc')->get();
 
-                
+
                 return view('admin.add_view_edit_201_profile', compact('searched', 'personalData','HomePermanentAddress','MailingAddress','SpouseRecords','FamilyProfile','ChildrenRecords','EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
                 'CesWe','AssessmentCenter','ValidationHr','BoardInterview','CesStatus','RecordOfCespesRatings','WorkExperience','FieldExpertise','CesTrainings','OtherManagementTrainings',
                 'ResearchAndStudies','Scholarships','Affiliations','AwardAndCitations','CaseRecords','HealthRecords','HistoricalRecordOfMedicalCondition','PdfLinks','CityMunicipality','Degree','CourseMajor','School','ExaminationReference','LanguageDialects','CesStatusReference',
@@ -394,7 +395,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'sp' =>  $request->sp,
@@ -511,9 +512,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $picture_file_name = '';  
-                }   
+
+                    $picture_file_name = '';
+                }
 
                 PersonalData::create([
                     'cesno' => $request->cesno,
@@ -605,20 +606,20 @@ class ProfileController extends Controller
                     'encoder' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                 ]);
-        
+
                 // Try and catch error on sending emails
-        
-                try{ 
-        
+
+                try{
+
                     Mail::to($request->oea_ma)->send(new CreatedNewAccountMail($random_password, $generated_username));
                 }
                 catch (\exception $e){
-                    
+
                     // Report an exception via the exception handler without rendering an error page to the user
-                    
+
                     report($e);
                 }
-        
+
                 return 'Successfully added';
 
             }
@@ -636,7 +637,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'sp' =>  $request->sp,
                     'moig' => $request->moig,
@@ -765,9 +766,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $picture_file_name = $PersonalData_picture_file_name;  
-                }   
+
+                    $picture_file_name = $PersonalData_picture_file_name;
+                }
 
                 PersonalData::where('cesno', $request->cesno)
                     ->update([
@@ -856,7 +857,7 @@ class ProfileController extends Controller
 
             return 'Restricted';
         }
-        
+
     }
 
     // public function getAllPersonalData(){
@@ -871,7 +872,7 @@ class ProfileController extends Controller
 
     //         return 'Restricted';
     //     }
-        
+
     // }
 
     // public function deletePersonalData($id){
@@ -885,7 +886,7 @@ class ProfileController extends Controller
     //             $personaldata_cesno = '';
     //         }
     //         else{
-                
+
     //             $personaldata_cesno = $personaldata[0]->cesno;
     //         }
 
@@ -958,7 +959,7 @@ class ProfileController extends Controller
             $EducationalAttainmentEdit = RolesController::validateUserExecutive201RoleAccess('Educational Background or Attainment', 'Edit');
             $EducationalAttainmentDelete = RolesController::validateUserExecutive201RoleAccess('Educational Background or Attainment', 'Delete');
             $EducationalAttainmentViewOnly = RolesController::validateUserExecutive201RoleAccess('Educational Background or Attainment', 'View Only');
-            
+
             // Examinations Taken
             $ExaminationsTaken = ExaminationsTaken::where('cesno','=',$request)->get();
             $LicenseDetails = LicenseDetails::where('cesno','=',$request)->get();
@@ -1102,7 +1103,7 @@ class ProfileController extends Controller
 
                 $search = $request->input('search');
                 $numberOfResult = $request->input('numberOfResult') ?? 50;
-            
+
                 if(is_numeric($search)){
 
                     $searched = PersonalData::where('cesno', '=', $search)->offset(0)->limit($numberOfResult)->get();
@@ -1111,7 +1112,7 @@ class ProfileController extends Controller
 
                     $searched = PersonalData::where('lastname', 'LIKE', "%$search%")->orWhere('firstname', 'LIKE', "%$search%")->orWhere('middlename', 'LIKE', "%$search%")->offset(0)->limit($numberOfResult)->get();
                 }
-                
+
                 $personalData = PersonalData::where('cesno','=','1')->offset(0)->limit(1)->get();
                 $SpouseRecords = SpouseRecords::where('cesno','=','1')->get();
                 $FamilyProfile = FamilyProfile::where('cesno','=','1')->get();
@@ -1173,7 +1174,7 @@ class ProfileController extends Controller
     // public function addHomePermanentAddress(Request $request){
 
     //     if(RolesController::validateUserExecutive201RoleAccess('Personal Data','Add') == 'true'){
-            
+
     //         HomePermanentAddress::create([
     //             'fb_pa' => $request->fb_pa,
     //             'ns_pa' =>  $request->ns_pa,
@@ -1253,7 +1254,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'lastname_sn_fp' => Str::ucfirst($request->lastname_sn_fp),
@@ -1328,7 +1329,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'lastname_sn_fp' => Str::ucfirst($request->lastname_sn_fp),
                     'first_sn_fp' =>  Str::ucfirst($request->first_sn_fp),
@@ -1419,7 +1420,7 @@ class ProfileController extends Controller
 
             return 'Restricted';
         }
-        
+
     }
 
     public function addFamilyProfile(Request $request){
@@ -1429,7 +1430,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'fn_lastname_fp' => Str::ucfirst($request->fn_lastname_fp),
@@ -1489,7 +1490,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'fn_lastname_fp' => Str::ucfirst($request->fn_lastname_fp),
                     'fn_first_fp' =>  Str::ucfirst($request->fn_first_fp),
@@ -1574,7 +1575,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'ch_lastname_fp' => Str::ucfirst($request->ch_lastname_fp),
@@ -1634,7 +1635,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'ch_lastname_fp' => Str::ucfirst($request->ch_lastname_fp),
                     'ch_first_fp' =>  Str::ucfirst($request->ch_first_fp),
@@ -1719,7 +1720,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'level_ea' => $request->level_ea,
@@ -1788,7 +1789,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'level_ea' => $request->level_ea,
                     'school_ea' =>  $request->school_ea,
@@ -1882,7 +1883,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'tox_et' => $request->tox_et,
@@ -1906,7 +1907,7 @@ class ProfileController extends Controller
                 return $errors;
 
             }else{
-                
+
                 ExaminationsTaken::create([
                     'cesno' => $request->cesno,
                     'tox_et' => $request->tox_et,
@@ -1916,7 +1917,7 @@ class ProfileController extends Controller
                     'encoder' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                 ]);
-                
+
                 return 'Successfully added';
             }
         }
@@ -1933,7 +1934,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'tox_et' => $request->tox_et,
                     'rating_et' =>  $request->rating_et,
@@ -1964,7 +1965,7 @@ class ProfileController extends Controller
                     'poe_et' => $request->poe_et,
                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                 ]);
-                
+
                 return 'Successfully updated';
             }
         }
@@ -2009,7 +2010,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'ld_ln_et' => $request->ld_ln_et,
@@ -2057,7 +2058,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'ld_ln_et' => $request->ld_ln_et,
                     'ld_da_et' =>  $request->ld_da_et,
@@ -2077,7 +2078,7 @@ class ProfileController extends Controller
                 return $errors;
 
             }else{
-                
+
                 LicenseDetails::where('id', $request->cesno_examinations_taken_license_details_id)
                 ->update([
                     'ld_ln_et' => $request->ld_ln_et,
@@ -2122,7 +2123,7 @@ class ProfileController extends Controller
             return 'Restricted';
         }
     }
-    
+
     public function addLanguagesDialects(Request $request){
 
         if(RolesController::validateUserExecutive201RoleAccess('Language Dialects','Add') == 'true'){
@@ -2130,7 +2131,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'lang_languages_dialects' => $request->lang_languages_dialects,
@@ -2172,7 +2173,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'lang_languages_dialects' => $request->lang_languages_dialects,
                 ),
@@ -2235,11 +2236,11 @@ class ProfileController extends Controller
     public function addCesWe(Request $request){
 
         if(RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker','Add') == 'true'){
-        
+
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'ed_ces_we' => $request->ed_ces_we,
@@ -2293,7 +2294,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'ed_ces_we' => $request->ed_ces_we,
                     'r_ces_we' =>  $request->r_ces_we,
@@ -2372,7 +2373,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'an_achr_ces_we' => $request->an_achr_ces_we,
@@ -2423,7 +2424,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'an_achr_ces_we' => $request->an_achr_ces_we,
                     'ad_achr_ces_we' =>  $request->ad_achr_ces_we,
@@ -2499,7 +2500,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'vd_vhr_ces_we' => $request->vd_vhr_ces_we,
@@ -2547,7 +2548,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'vd_vhr_ces_we' => $request->vd_vhr_ces_we,
                     'tov_vhr_ces_we' =>  $request->tov_vhr_ces_we,
@@ -2620,7 +2621,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'bid_bi_ces_we' => $request->bid_bi_ces_we,
@@ -2665,7 +2666,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'bid_bi_ces_we' => $request->bid_bi_ces_we,
                     'r_bi_ces_we' =>  $request->r_bi_ces_we,
@@ -2735,7 +2736,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'cs_cs_ces_we' => $request->cs_cs_ces_we,
@@ -2797,7 +2798,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cs_cs_ces_we' => $request->cs_cs_ces_we,
                     'at_cs_ces_we' =>  $request->at_cs_ces_we,
@@ -2900,7 +2901,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_from_rocr' => $request->date_from_rocr,
@@ -2928,7 +2929,7 @@ class ProfileController extends Controller
                 return $errors;
 
             }else{
-            
+
                 if($request->hasFile('pdf_rating_certificate_rocr')){
 
                     // Get file details
@@ -2943,9 +2944,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $pdf_rating_certificate_rocr_file_name = '';  
-                }   
+
+                    $pdf_rating_certificate_rocr_file_name = '';
+                }
 
                 RecordOfCespesRatings::create([
                     'cesno' => $request->cesno,
@@ -2975,7 +2976,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_from_rocr' => $request->date_from_rocr,
                     'date_to_rocr' =>  $request->date_to_rocr,
@@ -3026,9 +3027,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $pdf_rating_certificate_rocr_file_name = $RecordOfCespesRatings_pdf_rating_certificate_rocr_file_name;  
-                }   
+
+                    $pdf_rating_certificate_rocr_file_name = $RecordOfCespesRatings_pdf_rating_certificate_rocr_file_name;
+                }
 
                 RecordOfCespesRatings::where('id', $request->cesno_record_of_cespes_rating_hr_id)
                 ->update([
@@ -3095,7 +3096,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_from_work_experience' => $request->date_from_work_experience,
@@ -3160,11 +3161,11 @@ class ProfileController extends Controller
     public function editWorkExperience(Request $request){
 
         if(RolesController::validateUserExecutive201RoleAccess('Work Experience','Edit') == 'true'){
-        
+
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_from_work_experience' => $request->date_from_work_experience,
                     'date_to_work_experience' =>  $request->date_to_work_experience,
@@ -3258,7 +3259,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'ec_field_expertise' => $request->ec_field_expertise,
@@ -3303,7 +3304,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'ec_field_expertise' => $request->ec_field_expertise,
                     'ss_field_expertise' =>  $request->ss_field_expertise,
@@ -3373,7 +3374,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     's_title_ces_trainings' => $request->s_title_ces_trainings,
@@ -3451,7 +3452,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     's_title_ces_trainings' => $request->s_title_ces_trainings,
                     's_no_ces_trainings' =>  $request->s_no_ces_trainings,
@@ -3554,7 +3555,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_f_onat' => $request->date_f_onat,
@@ -3617,7 +3618,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_f_onat' => $request->date_f_onat,
                     'date_t_onat' =>  $request->date_t_onat,
@@ -3705,7 +3706,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_f_ras' => $request->date_f_ras,
@@ -3756,7 +3757,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_f_ras' => $request->date_f_ras,
                     'date_t_ras' =>  $request->date_t_ras,
@@ -3832,7 +3833,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_f_scholarships' => $request->date_f_scholarships,
@@ -3886,7 +3887,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_f_scholarships' => $request->date_f_scholarships,
                     'date_t_scholarships' =>  $request->date_t_scholarships,
@@ -3965,7 +3966,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_f_mcapa' => $request->date_f_mcapa,
@@ -4016,7 +4017,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_f_mcapa' => $request->date_f_mcapa,
                     'date_t_mcapa' =>  $request->date_t_mcapa,
@@ -4073,7 +4074,7 @@ class ProfileController extends Controller
     }
 
     public function deleteAffiliations($id){
-        
+
         if(RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations','Delete') == 'true'){
 
             $Affiliations = Affiliations::where('id','=',$id)->delete();
@@ -4093,7 +4094,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_aac' => $request->date_aac,
@@ -4141,7 +4142,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_aac' => $request->date_aac,
                     'title_of_award_aac' =>  $request->title_of_award_aac,
@@ -4214,7 +4215,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'parties_case_records' => $request->parties_case_records,
@@ -4283,7 +4284,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'parties_case_records' => $request->parties_case_records,
                     'offence_case_records' =>  $request->offence_case_records,
@@ -4377,7 +4378,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'mcfdpra_hr' => $request->mcfdpra_hr,
@@ -4425,7 +4426,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'mcfdpra_hr' => $request->mcfdpra_hr,
                     'blood_type_hr' =>  $request->blood_type_hr,
@@ -4498,7 +4499,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'date_hronc' => $request->date_hronc,
@@ -4542,11 +4543,11 @@ class ProfileController extends Controller
     public function editHistoricalRecordOfMedicalCondition(Request $request){
 
         if(RolesController::validateUserExecutive201RoleAccess('Health Record','Edit') == 'true'){
-        
+
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'date_hronc' => $request->date_hronc,
                     'mci_hronc' =>  $request->mci_hronc,
@@ -4619,7 +4620,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'cesno' => $request->cesno,
                     'pdflink' =>  $request->pdflink,
@@ -4647,7 +4648,7 @@ class ProfileController extends Controller
             }else{
 
                 // Set relevant path
-                
+
                 if($request->validated == 'No'){
 
                     $relevant_path_pdf_files = 'PDF Documents/201 Folder/For Validation/';
@@ -4671,9 +4672,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $pdflink_file_name = '';  
-                }   
+
+                    $pdflink_file_name = '';
+                }
 
                 PdfLinks::create([
                     'cesno' => $request->cesno,
@@ -4684,7 +4685,7 @@ class ProfileController extends Controller
                     'encoder' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                 ]);
-        
+
                 return 'Successfully added';
 
             }
@@ -4702,7 +4703,7 @@ class ProfileController extends Controller
             // Validate form
 
             $validator = Validator::make(
-                    
+
                 array(
                     'pdflink' =>  $request->pdflink,
                     'validated' => $request->validated,
@@ -4725,7 +4726,7 @@ class ProfileController extends Controller
 
             }else{
 
-            
+
                 // Get pdflink file name and relevant path
 
                 $PdfLinks = PdfLinks::where('id','=',$request->cesno_pdf_files_id)->get();
@@ -4733,7 +4734,7 @@ class ProfileController extends Controller
                 $PdfLinks_pdflink_relevant_path = $PdfLinks[0]->relevant_path_pdf_files;
 
                 // Set relevant path
-                
+
                 if($request->validated == 'No'){
 
                     if($PdfLinks_pdflink_relevant_path == '' && $PdfLinks_pdflink_file_name != ''){
@@ -4758,7 +4759,7 @@ class ProfileController extends Controller
 
                         $current_relevant_path_pdf_files = $PdfLinks_pdflink_relevant_path;
                         $relevant_path_pdf_files = 'PDF Documents/201 Folder/'.date('Y').'/';
-                    }   
+                    }
                 }
 
                 if($request->hasFile('pdflink')){
@@ -4782,9 +4783,9 @@ class ProfileController extends Controller
 
                 }
                 else{
-                
-                    $pdflink_file_name = $PdfLinks_pdflink_file_name;  
-                }   
+
+                    $pdflink_file_name = $PdfLinks_pdflink_file_name;
+                }
 
                 PdfLinks::where('id', $request->cesno_pdf_files_id)
                 ->update([
@@ -4794,7 +4795,7 @@ class ProfileController extends Controller
                     'remarks_pdf_files' => Str::ucfirst($request->remarks_pdf_files),
                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
                 ]);
-        
+
                 return 'Successfully updated';
 
             }
@@ -4830,7 +4831,7 @@ class ProfileController extends Controller
             $PdfLinks_pdflink_relevant_path = $PdfLinks[0]->relevant_path_pdf_files;
 
             // Set relevant path
-            
+
             if($PdfLinks_pdflink_relevant_path == '' && $PdfLinks_pdflink_file_name != ''){
 
                 $relevant_path_pdf_files = 'PDF Documents/201 Folder/';
@@ -4838,7 +4839,7 @@ class ProfileController extends Controller
             else{
 
                 $relevant_path_pdf_files = $PdfLinks_pdflink_relevant_path;
-            }  
+            }
 
             // Delete pdflink file
 
@@ -4855,5 +4856,5 @@ class ProfileController extends Controller
 
             return 'Restricted';
         }
-    }    
+    }
 }
