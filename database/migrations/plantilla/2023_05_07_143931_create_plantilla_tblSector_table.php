@@ -8,18 +8,20 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaTblSector
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_sectors', function (Blueprint $table) {
-            $table->id();
-            $table->string('sectorid')->nullable();
+        Schema::create('plantilla_tblSector', function (Blueprint $table) {
+            $table->id('sectorid');
+            // $table->string('sectorid')->nullable();
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->string('encdate')->nullable();
             $table->string('lastupd_date')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_sectors');
+        Schema::dropIfExists('plantilla_tblSector');
     }
 };

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaTblDeptAgency extends Model
 {
     use HasFactory;
+
+    protected $table = "plantilla_tblDeptAgency";
+
 }

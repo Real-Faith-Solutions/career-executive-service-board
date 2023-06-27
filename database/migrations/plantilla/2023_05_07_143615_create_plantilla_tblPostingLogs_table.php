@@ -8,17 +8,17 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaTblPostingLogs
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tbl_agency_locations', function (Blueprint $table) {
+        Schema::create('plantilla_tblPostingLogs', function (Blueprint $table) {
             $table->id();
-            $table->string('agencyloc_id')->nullable();
-            $table->string('title')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_dt')->nullable();
-            $table->string('encoder')->nullable();
+            $table->string('posted_dt')->nullable();
+            $table->string('table_name')->nullable();
+            // $table->string('sector')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tbl_agency_locations');
+        Schema::dropIfExists('plantilla_tblPostingLogs');
     }
 };

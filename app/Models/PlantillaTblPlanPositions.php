@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaTblPlanPositions extends Model
 {
     use HasFactory;
+
+    protected $table = "plantilla_tblPlanPositions";
+
 }
