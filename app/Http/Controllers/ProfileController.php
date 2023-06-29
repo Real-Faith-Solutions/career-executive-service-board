@@ -44,23 +44,23 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\profilelib_tblareacode;
-use App\Models\profilelib_tblEducDegree;
-use App\Models\profilelib_tblEducMajor;
-use App\Models\profilelib_tblEducSchools;
-use App\Models\profilelib_tblExamRef;
-use App\Models\profilelib_tblLanguageRef;
+use App\Models\ProfileLibTblAreaCode;
+use App\Models\ProfileLibTblEducDegree;
+use App\Models\ProfileLibTblEducMajor;
+use App\Models\ProfileLibTblEducSchool;
+use App\Models\ProfileLibTblExamRef;
+use App\Models\ProfileLibTblLanguageRef;
 use App\Models\profilelib_tblcesstatus;
-use App\Models\profilelib_tblcesstatusAcc;
-use App\Models\profilelib_tblcesstatustype;
-use App\Models\profilelib_tblappAuthority;
-use App\Models\profilelib_tblExpertiseGen;
-use App\Models\profilelib_tblExpertiseSpec;
-use App\Models\profilelib_tblCaseNature;
-use App\Models\profilelib_tblCaseStatus;
-use App\Models\profilelib_tblcities;
-use App\Models\profilelib_tblprovince;
-use App\Models\profilelib_tblregion;
+use App\Models\ProfileLibTblCesStatusAcc;
+use App\Models\ProfileLibTblCesStatusType;
+use App\Models\ProfileLibTblAppAuthority;
+use App\Models\ProfileLibTblExpertiseGen;
+use App\Models\ProfileLibTblExpertiseSpec;
+use App\Models\ProfileLibTblCaseNature;
+use App\Models\ProfileLibTblCaseStatus;
+use App\Models\ProfileLibTblCities;
+use App\Models\ProfileLibTblProvince;
+use App\Models\ProfileLibTblRegion;
 
 class ProfileController extends Controller
 {
@@ -305,7 +305,7 @@ class ProfileController extends Controller
 
             $personalData = PersonalData::offset(0)->limit(50)->orderBy('cesno','desc')->get();
             $latestCesNo = ProfileController::latestCesNo();
-            $CityMunicipality = profilelib_tblareacode::orderBy('created_at', 'desc')->get();
+            $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
 
             return view('admin.add_view_edit_201_profile', compact('latestCesNo', 'personalData', 'CityMunicipality'))->render();
         }
@@ -357,23 +357,23 @@ class ProfileController extends Controller
 
                 $searched = PersonalData::offset(0)->limit($numberOfResult)->get();
 
-                $CityMunicipality = profilelib_tblareacode::orderBy('created_at', 'desc')->get();
-                $Degree = profilelib_tblEducDegree::orderBy('created_at', 'desc')->get();
-                $CourseMajor = profilelib_tblEducMajor::orderBy('created_at', 'desc')->get();
-                $School = profilelib_tblEducSchools::orderBy('created_at', 'desc')->get();
-                $ExaminationReference = profilelib_tblExamRef::orderBy('created_at', 'desc')->get();
-                $LanguageDialects = profilelib_tblLanguageRef::orderBy('created_at', 'desc')->get();
+                $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
+                $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
+                $CourseMajor = ProfileLibTblEducMajor::orderBy('created_at', 'desc')->get();
+                $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
+                $ExaminationReference = ProfileLibTblExamRef::orderBy('created_at', 'desc')->get();
+                $LanguageDialects = ProfileLibTblLanguageRef::orderBy('created_at', 'desc')->get();
                 $CesStatusReference = profilelib_tblcesstatus::orderBy('created_at', 'desc')->get();
-                $AcquiredThru = profilelib_tblcesstatusAcc::orderBy('created_at', 'desc')->get();
-                $StatusType = profilelib_tblcesstatustype::orderBy('created_at', 'desc')->get();
-                $AppointingAuthority = profilelib_tblappAuthority::orderBy('created_at', 'desc')->get();
-                $ExpertiseCategory = profilelib_tblExpertiseGen::orderBy('created_at', 'desc')->get();
-                $SpecialSkill = profilelib_tblExpertiseSpec::orderBy('created_at', 'desc')->get();
-                $CaseNature = profilelib_tblCaseNature::orderBy('created_at', 'desc')->get();
-                $CaseStatus = profilelib_tblCaseStatus::orderBy('created_at', 'desc')->get();
-                $LocationCity = profilelib_tblcities::orderBy('created_at', 'desc')->get();
-                $LocationProvince = profilelib_tblprovince::orderBy('created_at', 'desc')->get();
-                $LocationRegion = profilelib_tblregion::orderBy('created_at', 'desc')->get();
+                $AcquiredThru = ProfileLibTblCesStatusAcc::orderBy('created_at', 'desc')->get();
+                $StatusType = ProfileLibTblCesStatusType::orderBy('created_at', 'desc')->get();
+                $AppointingAuthority = ProfileLibTblAppAuthority::orderBy('created_at', 'desc')->get();
+                $ExpertiseCategory = ProfileLibTblExpertiseGen::orderBy('created_at', 'desc')->get();
+                $SpecialSkill = ProfileLibTblExpertiseSpec::orderBy('created_at', 'desc')->get();
+                $CaseNature = ProfileLibTblCaseNature::orderBy('created_at', 'desc')->get();
+                $CaseStatus = ProfileLibTblCaseStatus::orderBy('created_at', 'desc')->get();
+                $LocationCity = ProfileLibTblCities::orderBy('created_at', 'desc')->get();
+                $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
+                $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
 
 
                 return view('admin.add_view_edit_201_profile', compact('searched', 'personalData','HomePermanentAddress','MailingAddress','SpouseRecords','FamilyProfile','ChildrenRecords','EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
@@ -1140,23 +1140,23 @@ class ProfileController extends Controller
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno','=','1')->get();
                 $PdfLinks = PdfLinks::where('cesno','=','1')->get();
 
-                $CityMunicipality = profilelib_tblareacode::orderBy('created_at', 'desc')->get();
-                $Degree = profilelib_tblEducDegree::orderBy('created_at', 'desc')->get();
-                $CourseMajor = profilelib_tblEducMajor::orderBy('created_at', 'desc')->get();
-                $School = profilelib_tblEducSchools::orderBy('created_at', 'desc')->get();
-                $ExaminationReference = profilelib_tblExamRef::orderBy('created_at', 'desc')->get();
-                $LanguageDialects = profilelib_tblLanguageRef::orderBy('created_at', 'desc')->get();
+                $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
+                $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
+                $CourseMajor = ProfileLibTblEducMajor::orderBy('created_at', 'desc')->get();
+                $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
+                $ExaminationReference = ProfileLibTblExamRef::orderBy('created_at', 'desc')->get();
+                $LanguageDialects = ProfileLibTblLanguageRef::orderBy('created_at', 'desc')->get();
                 $CesStatusReference = profilelib_tblcesstatus::orderBy('created_at', 'desc')->get();
-                $AcquiredThru = profilelib_tblcesstatusAcc::orderBy('created_at', 'desc')->get();
-                $StatusType = profilelib_tblcesstatustype::orderBy('created_at', 'desc')->get();
-                $AppointingAuthority = profilelib_tblappAuthority::orderBy('created_at', 'desc')->get();
-                $ExpertiseCategory = profilelib_tblExpertiseGen::orderBy('created_at', 'desc')->get();
-                $SpecialSkill = profilelib_tblExpertiseSpec::orderBy('created_at', 'desc')->get();
-                $CaseNature = profilelib_tblCaseNature::orderBy('created_at', 'desc')->get();
-                $CaseStatus = profilelib_tblCaseStatus::orderBy('created_at', 'desc')->get();
-                $LocationCity = profilelib_tblcities::orderBy('created_at', 'desc')->get();
-                $LocationProvince = profilelib_tblprovince::orderBy('created_at', 'desc')->get();
-                $LocationRegion = profilelib_tblregion::orderBy('created_at', 'desc')->get();
+                $AcquiredThru = ProfileLibTblCesStatusAcc::orderBy('created_at', 'desc')->get();
+                $StatusType = ProfileLibTblCesStatusType::orderBy('created_at', 'desc')->get();
+                $AppointingAuthority = ProfileLibTblAppAuthority::orderBy('created_at', 'desc')->get();
+                $ExpertiseCategory = ProfileLibTblExpertiseGen::orderBy('created_at', 'desc')->get();
+                $SpecialSkill = ProfileLibTblExpertiseSpec::orderBy('created_at', 'desc')->get();
+                $CaseNature = ProfileLibTblCaseNature::orderBy('created_at', 'desc')->get();
+                $CaseStatus = ProfileLibTblCaseStatus::orderBy('created_at', 'desc')->get();
+                $LocationCity = ProfileLibTblCities::orderBy('created_at', 'desc')->get();
+                $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
+                $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
 
                 return view('admin.add_view_edit_201_profile', compact('search', 'searched', 'personalData', 'SpouseRecords', 'FamilyProfile', 'ChildrenRecords', 'EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
                 'CesWe','AssessmentCenter','ValidationHr','BoardInterview','CesStatus','RecordOfCespesRatings','WorkExperience','FieldExpertise','CesTrainings','OtherManagementTrainings',
