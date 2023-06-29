@@ -2,103 +2,51 @@
 @section('title', 'Create 201 profile')
 @section('content')
 
-    <style>
-        .nav-pills .nav-link {
-            border: 1px solid #111;
-            margin: 4px;
-        }
-    </style>
     <div class="@if (str_contains(Request::url(), 'profile/view'))  @endif">
         <!-- Main content -->
-        @if (Auth::user()->role != 'User')
-            @if (str_contains(Request::url(), 'profile/view'))
-
-                <section class="col-md-3">
-                    <div>
-                        <form class="d-flex" action="{{ url('admin/profile/view') }}" role="search" method="post">
-                            @csrf
-                            <div class="input-group">
-                                <input class="form-control me-2" type="search" name="search" placeholder="Search here..." @if (!empty($search)) value="{{ $search }}" @endif>
-                                <input class="form-control btn btn-primary" type="submit" value="Search">
-                            </div>
-                        </form>
-                        <div class="my-3 bg-white">
-                            <table class="table-striped display-6 table text-black">
-                                <thead class="bg-secondary bg-gardient text-white">
-                                    <tr>
-                                        <th scope="col">Ces No.</th>
-                                        <th scope="col">Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (count($searched) === 0)
-
-                                        <tr>
-                                            <td class="text-danger">-</td>
-                                            <td class="text-danger">No result found</td>
-                                        </tr>
-                                    @else
-                                        @foreach ($searched as $item)
-                                            <tr>
-                                                <td>
-                                                    <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">{{ $item->cesno }}</a>
-                                                </td>
-                                                <td>
-                                                    <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">{{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}</a>
-                                                    <a class="badge badge-pill badge-danger float-right" style="display:none">Delete</a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-            @endif
-        @endif
 
         <section class="content @if (str_contains(Request::url(), 'profile/view')) @if (Auth::user()->role == 'User') ml-2 col @else col-md-9 @endif @endif">
             @if (str_contains(Request::url(), 'profile/view'))
 
-                <div class="@if (Auth::user()->role == 'User') p-3 pb-5 @else p-3 pb-5 @endif text-warning bg-blue-500 text-left text-white">
-                    @foreach ($personalData as $item)
-                        <img id="profile_picture" src="{{ $item->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/201 Photos/' . $item->picture) }}" onerror="this.src = '{{ asset('images/person.png') }}'" class="bg-light float-right mt-2 mr-3 rounded" height="190" width="190" alt="...">
-                        <div class="p-4">
-                            <div class="row ml-4 text-white">
-                                <div class="col-auto mt-2 mr-3 p-0">
-                                    <h3 class="h6">CES No. <span class="bg-danger h6 rounded py-1 px-2">{{ $item->cesno }}</span></h3>
-                                </div>
-                    @endforeach
+                <div class="bg-blue-500 text-left text-white">
+                    <div class="flex justify-between p-5">
+                        <div>
+                            @foreach ($personalData as $item)
+                                <h1 class="text-2xl uppercase">{{ $item->lastname }} {{ $item->firstname }} {{ $item->ne }} {{ $item->middlename }}</h1>
+                                <h3 class="h6">CES number <span class="bg-danger h6 rounded py-1 px-2">{{ $item->cesno }}</span></h3>
+                            @endforeach
 
-                    <div class="col-auto mt-2 mr-3 p-0">
-                        <h3 class="h6">Ac No. <span id="profile_ac_no" class="bg-danger h6 rounded py-1 px-2">
-                                @if ($AssessmentCenter == '[]')---
-                                @else
-                                    @foreach ($AssessmentCenter as $item)
-                                        {{ $loop->last ? $item->an_achr_ces_we : '' }}
-                                    @endforeach
-                                @endif
-                            </span></h3>
-                    </div>
-                    <div class="col-auto mt-2 mr-3 p-0">
-                        <h3 class="h6">CES Status: <span id="profile_ces_status" class="@foreach ($personalData as $item) @if ($item->status == 'Retired') bg-danger @elseif($item->status == 'Deceased') bg-dark @else bg-success @endif @endforeach h6 rounded py-1 px-2">
-                                @if ($CesStatus == '[]')---
-                                @else
-                                    @foreach ($CesStatus as $item)
-                                        {{ $loop->last ? $item->cs_cs_ces_we : '' }}
-                                    @endforeach
-                                @endif
-                            </span></h3>
+                            <div class="col-auto mt-2 mr-3 p-0">
+                                <h3 class="h6">Ac No. <span id="profile_ac_no" class="bg-danger h6 rounded py-1 px-2">
+                                        @if ($AssessmentCenter == '[]')---
+                                        @else
+                                            @foreach ($AssessmentCenter as $item)
+                                                {{ $loop->last ? $item->an_achr_ces_we : '' }}
+                                            @endforeach
+                                        @endif
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="col-auto mt-2 mr-3 p-0">
+                                <h3 class="h6">CES Status: <span id="profile_ces_status" class="@foreach ($personalData as $item) @if ($item->status == 'Retired') bg-danger @elseif($item->status == 'Deceased') bg-dark @else bg-success @endif @endforeach h6 rounded py-1 px-2">
+                                        @if ($CesStatus == '[]')---
+                                        @else
+                                            @foreach ($CesStatus as $item)
+                                                {{ $loop->last ? $item->cs_cs_ces_we : '' }}
+                                            @endforeach
+                                        @endif
+                                    </span></h3>
+                            </div>
+                        </div>
+
+                        <div>
+                            @foreach ($personalData as $item)
+                                <img id="profile_picture" src="{{ $item->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/201 Photos/' . $item->picture) }}" onerror="this.src = '{{ asset('images/person.png') }}'" class="rounded-full" height="190" width="190">
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-                @foreach ($personalData as $item)
-                    <h1 class="@if ($item->status == 'Retired') text-danger @elseif ($item->status == 'Deceased') text-dark @else text-success @endif font-weight-bold display-4 text-uppercase">
-                        <span id="profile_lastname">{{ $item->lastname }}</span>, <span id="profile_firstname">{{ $item->firstname }}</span> <span id="profile_middlename">{{ $item->middlename }}</span>
-                    </h1>
-                @endforeach
-
-    </div>
+        </section>
     </div>
 
     <script>
@@ -672,14 +620,14 @@
                                         <label class="form-label ml-2 mb-0">Brgy. / District<sup>*</sup></label>
                                         <input type="text" name="bd_pa" style="text-transform:capitalize" class="form-control w-100 mb-3" required>
                                         <!-- <select name="bd_pa" aria-aria-controls='example' style="text-transform:capitalize" class="w-100 form-control mb-3">
-                                                                                            <option value="">Please Select</option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                        </select> -->
+                                                                                                        <option value="">Please Select</option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                    </select> -->
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label ml-2 mb-0">City / Municipality<sup>*</sup></label>
@@ -718,14 +666,14 @@
                                         <label class="form-label ml-2 mb-0">Brgy. / District<sup>*</sup></label>
                                         <input type="text" name="bd_ma" style="text-transform:capitalize" class="form-control w-100 mb-3" required>
                                         <!-- <select name="bd_ma" aria-aria-controls='example' style="text-transform:capitalize" class="w-100 form-control mb-3">
-                                                                                            <option value="">Please Select</option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                            <option value=""></option>
-                                                                                        </select> -->
+                                                                                                        <option value="">Please Select</option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                        <option value=""></option>
+                                                                                                    </select> -->
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label ml-2 mb-0">City / Municipality<sup>*</sup></label>
@@ -763,7 +711,6 @@
 
                             </div>
                         </section> {{-- end of mailing address --}}
-
 
                         {{-- <div class="overflow-auto">
                             <table class="table-responsive-lg table-hover table">
@@ -931,7 +878,6 @@
                                 </tbody>
                             </table>
                         </div> --}}
-
 
                         </form>
                     </div>
@@ -2372,7 +2318,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <!-- <label class="form-label ml-2 mb-0">Appointing Authority<sup>*</sup></label>
-                                                                                        <input type="text" class="form-control w-100 mb-3" name="aa_cs_ces_we" placeholder="Name of Presidents" required> -->
+                                                                                                    <input type="text" class="form-control w-100 mb-3" name="aa_cs_ces_we" placeholder="Name of Presidents" required> -->
                                             <label class="form-label ml-2 mb-0">Appointing Authority<sup>*</sup></label>
                                             <select name="aa_cs_ces_we" class="form-control w-100 mb-3" required>
                                                 <option value="">Please Select</option>
