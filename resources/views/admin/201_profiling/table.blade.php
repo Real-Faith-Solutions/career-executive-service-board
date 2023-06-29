@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'table')
+@section('title', '201 profiling table')
 @section('content')
 
     <section>
@@ -35,17 +35,20 @@
                         </tr>
                     @else
                         @foreach ($searched as $item)
-                            <tr class="border-b bg-white">
-                                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                    <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">{{ $item->cesno }}</a>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">{{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}</a>
-                                    <a class="badge badge-pill badge-danger float-right" style="display:none">Delete</a>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">View profile</a>
-                            </td>
+                            <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
+                                <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">
+                                    <th class="text-center" scope="row">
+                                        {{ $item->cesno }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}" class="font-medium text-blue-600 hover:underline">View profile</a>
+                                    </td>
+
+                                </a>
+
                             </tr>
                         @endforeach
                     @endif
