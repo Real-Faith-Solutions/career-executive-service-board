@@ -1,5 +1,5 @@
-@extends('layout')
-
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
 @section('content')
 
 <style>
