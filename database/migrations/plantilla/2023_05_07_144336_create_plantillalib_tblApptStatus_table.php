@@ -8,14 +8,16 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillalibTblApptStatus
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tbl_appt_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('appt_stat_code')->nullable();
+        Schema::create('plantillalib_tblApptStatus', function (Blueprint $table) {
+            $table->id('appt_stat_code');
+            // $table->string('appt_stat_code')->nullable();
             $table->string('title')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tbl_appt_statuses');
+        Schema::dropIfExists('plantillalib_tblApptStatus');
     }
 };

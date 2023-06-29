@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
