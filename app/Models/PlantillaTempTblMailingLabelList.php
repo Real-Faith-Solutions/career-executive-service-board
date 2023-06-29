@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PlantillaManangementAccess extends Model
+class PlantillaTempTblMailingLabelList extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-
-    protected $table = "plantilla_manangement_accesses";
+    protected $table = "plantillatemp_tblMailingLabelList";
 
 }

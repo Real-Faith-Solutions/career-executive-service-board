@@ -8,6 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaManangementAccess
+     * this migration has no counterpart on DB of legacy system
      */
     public function up(): void
     {
