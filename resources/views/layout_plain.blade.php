@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,34 +20,36 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-     <!-- jQuery -->
+    <!-- jQuery -->
     <!-- Bootstrap core JavaScript-->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 
 </head>
+
 <body class="hold-transition sidebar-mini">
-    <div id="wrapper">
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Topbar -->
 
-                <!-- End of Topbar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid p-3">
-                    @yield('content')
-                </div>
-                <!-- /.container-fluid -->
+            <!-- End of Topbar -->
 
-                <footer class="main-footer p-3 text-center">
-                    <strong><a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>.</strong>
-                    All rights reserved.
-                </footer>
+            <!-- Begin Page Content -->
+            <div class="container-fluid p-3">
+                @yield('content')
             </div>
+            <!-- /.container-fluid -->
+
+            <footer class="main-footer p-3 text-center">
+                <strong><a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a>.</strong>
+                All rights reserved.
+            </footer>
         </div>
-        <!-- ./wrapper -->
+    </div>
+
+    <!-- ./wrapper -->
 
     <!-- jQuery -->
     <!-- Bootstrap core JavaScript-->
@@ -63,13 +66,16 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-    <script>changeRootURL('{{ env('APP_URL') }}');</script>
+    <script>
+        changeRootURL('{{ env('APP_URL') }}');
+    </script>
 
 
     <!-- <script>
-    $(document).ready(function () {
-        bsCustomFileInput.init();
-    });
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
     </script> -->
-    </body>
+</body>
+
 </html>
