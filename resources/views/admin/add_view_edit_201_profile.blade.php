@@ -17,25 +17,28 @@
                             @endforeach
 
                             <div class="col-auto mt-2 mr-3 p-0">
-                                <h3 class="h6">Ac No. <span id="profile_ac_no" class="bg-danger h6 rounded py-1 px-2">
-                                        @if ($AssessmentCenter == '[]')---
-                                        @else
-                                            @foreach ($AssessmentCenter as $item)
-                                                {{ $loop->last ? $item->an_achr_ces_we : '' }}
-                                            @endforeach
-                                        @endif
-                                    </span>
-                                </h3>
+                                <h1>Ac No.
+                                    @if ($AssessmentCenter == '[]')
+                                    ---
+                                    @else
+                                        @foreach ($AssessmentCenter as $item)
+                                            {{ $loop->last ? $item->an_achr_ces_we : '' }}
+                                        @endforeach
+                                    @endif
+                                </h1>
                             </div>
+
                             <div class="col-auto mt-2 mr-3 p-0">
-                                <h3 class="h6">CES Status: <span id="profile_ces_status" class="@foreach ($personalData as $item) @if ($item->status == 'Retired') bg-danger @elseif($item->status == 'Deceased') bg-dark @else bg-success @endif @endforeach h6 rounded py-1 px-2">
+                                <h1 class="h6">CES Status:
+                                    <span id="profile_ces_status" class="@foreach ($personalData as $item) @if ($item->status == 'Retired') bg-danger @elseif($item->status == 'Deceased') bg-dark @else bg-success @endif @endforeach h6 rounded py-1 px-2">
                                         @if ($CesStatus == '[]')---
                                         @else
                                             @foreach ($CesStatus as $item)
                                                 {{ $loop->last ? $item->cs_cs_ces_we : '' }}
                                             @endforeach
                                         @endif
-                                    </span></h3>
+                                    </span>
+                                </h1>
                             </div>
                         </div>
 
@@ -46,136 +49,91 @@
                         </div>
                     </div>
                 </div>
+            @endif
         </section>
     </div>
 
-    <script>
-        setPageTitle('View 201 Profile');
-    </script>
-@else
-    <script>
-        setPageTitle('Create 201 Profile');
-    </script>
-    @endif
 
-    <div class="container-fluid py-3 pt-3">
-        <div class="row">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+
+            <section class="grid grid-cols-6" id="myTab" role="tablist"> {{-- category section --}}
+
                 @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Category Only') == 'true')
-
-                    <li class="nav-item" role="presentation">
                         <a class="btn text-blue-500" id="person-data-tab" data-bs-toggle="tab" href="#person-data" role="tab" aria-controls="home" aria-selected="true">Personal Data</a>
-                    </li>
                 @endif
 
                 @if (str_contains(Request::url(), 'profile/view')) {{-- Start hiding other category if profile/view --}}
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="family-profile-tab" data-bs-toggle="tab" href="#family-profile" role="tab" aria-controls="family-profile" aria-selected="false">Family Profile</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Educational Background or Attainment', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="educational_attainment-tab" data-bs-toggle="tab" href="#educational_attainment" role="tab" aria-controls="educational_attainment" aria-selected="false">Educational Background / Attainment</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Examinations Taken', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="examinations_taken-tab" data-bs-toggle="tab" href="#examinations_taken" role="tab" aria-controls="examinations_taken" aria-selected="false">Examinations Taken</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="languages_dialects-tab" data-bs-toggle="tab" href="#languages_dialects" role="tab" aria-controls="languages_dialects" aria-selected="false">Languages Dialects</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="eligibility_and_rank_tracker-tab" data-bs-toggle="tab" href="#eligibility_and_rank_tracker" role="tab" aria-controls="eligibility_and_rank_tracker" aria-selected="false">Eligibility and Rank Tracker</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Record of CESPES Ratings', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="record_of_cespes_rating_hr-tab" data-bs-toggle="tab" href="#record_of_cespes_rating_hr" role="tab" aria-controls="record_of_cespes_rating_hr" aria-selected="false">Record of Cespes Ratings</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="work_experience-tab" data-bs-toggle="tab" href="#work_experience" role="tab" aria-controls="work_experience" aria-selected="false">Work Experience</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="field_expertise-tab" data-bs-toggle="tab" href="#field_expertise" role="tab" aria-controls="field_expertise" aria-selected="false">Field Expertise</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('CES Trainings', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="ces_trainings-tab" data-bs-toggle="tab" href="#ces_trainings" role="tab" aria-controls="ces_trainings" aria-selected="false">Ces Trainings</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="other_management_trainings-tab" data-bs-toggle="tab" href="#other_management_trainings" role="tab" aria-controls="other_management_trainings" aria-selected="false">Other Trainings</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="research_and_studies-tab" data-bs-toggle="tab" href="#research_and_studies" role="tab" aria-controls="research_and_studies" aria-selected="false">Research And Studies</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="scholarships-tab" data-bs-toggle="tab" href="#scholarships" role="tab" aria-controls="scholarships" aria-selected="false">Scholarships</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="major_civic_and_professional_affiliations-tab" data-bs-toggle="tab" href="#major_civic_and_professional_affiliations" role="tab" aria-controls="major_civic_and_professional_affiliations" aria-selected="false">Major Civic and Professional Affiliations</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="award_and_citations-tab" data-bs-toggle="tab" href="#award_and_citations" role="tab" aria-controls="award_and_citations" aria-selected="false">Award And Citations</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Case Records', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="case_records-tab" data-bs-toggle="tab" href="#case_records" role="tab" aria-controls="case_records" aria-selected="false">Case Records</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Health Record', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="health_records-tab" data-bs-toggle="tab" href="#health_records" role="tab" aria-controls="health_records" aria-selected="false">Health Records</a>
-                        </li>
                     @endif
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Attached PDF Files', 'Category Only') == 'true')
 
-                        <li class="nav-item" role="presentation">
                             <a class="btn" id="pdf_files-tab" data-bs-toggle="tab" href="#pdf_files" role="tab" aria-controls="pdf_files" aria-selected="false">PDF Files</a>
-                        </li>
                     @endif
                 @endif {{-- End hiding other category if profile/view --}}
 
-            </ul>
-        </div>
-    </div>
+            </section>
     <hr>
 
     <div class="row">
@@ -888,7 +846,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Category Only') == 'true')
 
                         <!-- start family profile -->
-                        <div class="tab-pane fade" id="family-profile" role="tabpanel" aria-labelledby="family-profile-tab">
+                        <div class="tab-pane fade hidden" id="family-profile" role="tabpanel" aria-labelledby="family-profile-tab">
                             <form class="user" id="spouse_records_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/spouse-records/add`, `spouse_records_form`, `Add`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `spouse_records_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="bg-blue-500 p-2 uppercase text-white">
@@ -1357,7 +1315,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Educational Background or Attainment', 'Category Only') == 'true')
 
                         <!-- start educational attainment -->
-                        <div class="tab-pane fade" id="educational_attainment" role="tabpanel" aria-labelledby="educational_attainment-tab">
+                        <div class="tab-pane fade hidden" id="educational_attainment" role="tabpanel" aria-labelledby="educational_attainment-tab">
                             <form class="user" id="educational_attainment_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/educational-attainment/add`, `educational_attainment_form`, `Add`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `educational_attainment_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="bg-blue-500 p-2 uppercase text-white">
@@ -1537,7 +1495,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Examinations Taken', 'Category Only') == 'true')
 
                         <!-- start examination taken -->
-                        <div class="tab-pane fade" id="examinations_taken" role="tabpanel" aria-labelledby="examinations_taken-tab">
+                        <div class="tab-pane fade hidden" id="examinations_taken" role="tabpanel" aria-labelledby="examinations_taken-tab">
                             <form class="user" id="examinations_taken_historical_record_of_examinations_taken_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/examination-taken/add`, `examinations_taken_historical_record_of_examinations_taken_form`, `Add`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `examinations_taken_historical_record_of_examinations_taken_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="bg-blue-500 p-2 uppercase text-white">
@@ -1751,7 +1709,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Category Only') == 'true')
 
                         <!-- start languages dialects -->
-                        <div class="tab-pane fade" id="languages_dialects" role="tabpanel" aria-labelledby="languages_dialects-tab">
+                        <div class="tab-pane fade hidden" id="languages_dialects" role="tabpanel" aria-labelledby="languages_dialects-tab">
                             <form class="user" id="languages_dialects_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/languages-dialects/add`, `languages_dialects_form`, `Add`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `languages_dialects_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="bg-blue-500 p-2 uppercase text-white">
@@ -1847,7 +1805,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Category Only') == 'true')
 
                         <!-- start eligibility and rank tracker -->
-                        <div class="tab-pane fade" id="eligibility_and_rank_tracker" role="tabpanel" aria-labelledby="eligibility_and_rank_tracker-tab">
+                        <div class="tab-pane fade hidden" id="eligibility_and_rank_tracker" role="tabpanel" aria-labelledby="eligibility_and_rank_tracker-tab">
                             <form class="user" id="ceswe_hr_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/ces-we/add`, `ceswe_hr_form`, `Add`, `updateCesWeTable`, `resetCesWeForm`, `ceswe_hr_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -2430,7 +2388,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Record of CESPES Ratings', 'Category Only') == 'true')
 
                         <!-- start record of cespes ratings -->
-                        <div class="tab-pane fade" id="record_of_cespes_rating_hr" role="tabpanel" aria-labelledby="record_of_cespes_rating_hr-tab">
+                        <div class="tab-pane fade hidden" id="record_of_cespes_rating_hr" role="tabpanel" aria-labelledby="record_of_cespes_rating_hr-tab">
                             <form class="user" id="record_of_cespes_rating_hr_form" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/record-of-cespes-ratings/add`, `record_of_cespes_rating_hr_form`, `Add`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `record_of_cespes_rating_hr_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -2557,7 +2515,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Category Only') == 'true')
 
                         <!-- start work experience -->
-                        <div class="tab-pane fade" id="work_experience" role="tabpanel" aria-labelledby="work_experience-tab">
+                        <div class="tab-pane fade hidden" id="work_experience" role="tabpanel" aria-labelledby="work_experience-tab">
                             <form class="user" id="work_experience_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/work-experience/add`, `work_experience_form`, `Add`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `work_experience_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -2714,7 +2672,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Category Only') == 'true')
 
                         <!-- start field expertise -->
-                        <div class="tab-pane fade" id="field_expertise" role="tabpanel" aria-labelledby="field_expertise-tab">
+                        <div class="tab-pane fade hidden" id="field_expertise" role="tabpanel" aria-labelledby="field_expertise-tab">
                             <form class="user" id="field_expertise_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/field-expertise/add`, `field_expertise_form`, `Add`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `field_expertise_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -2811,7 +2769,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('CES Trainings', 'Category Only') == 'true')
 
                         <!-- start ces trainings -->
-                        <div class="tab-pane fade" id="ces_trainings" role="tabpanel" aria-labelledby="ces_trainings-tab">
+                        <div class="tab-pane fade hidden" id="ces_trainings" role="tabpanel" aria-labelledby="ces_trainings-tab">
                             <form class="user" id="ces_trainings_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/ces-trainings/add`, `ces_trainings_form`, `Add`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `ces_trainings_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3004,7 +2962,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Category Only') == 'true')
 
                         <!-- start other management trainings -->
-                        <div class="tab-pane fade" id="other_management_trainings" role="tabpanel" aria-labelledby="other_management_trainings-tab">
+                        <div class="tab-pane fade hidden" id="other_management_trainings" role="tabpanel" aria-labelledby="other_management_trainings-tab">
                             <form class="user" id="other_management_trainings_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/other-management-trainings/add`, `other_management_trainings_form`, `Add`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `other_management_trainings_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3145,7 +3103,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Category Only') == 'true')
 
                         <!-- start research and studies -->
-                        <div class="tab-pane fade" id="research_and_studies" role="tabpanel" aria-labelledby="research_and_studies-tab">
+                        <div class="tab-pane fade hidden" id="research_and_studies" role="tabpanel" aria-labelledby="research_and_studies-tab">
                             <form class="user" id="research_and_studies_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/research-and-studies/add`, `research_and_studies_form`, `Add`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `research_and_studies_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3258,7 +3216,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Category Only') == 'true')
 
                         <!-- start scholarships -->
-                        <div class="tab-pane fade" id="scholarships" role="tabpanel" aria-labelledby="scholarships-tab">
+                        <div class="tab-pane fade hidden" id="scholarships" role="tabpanel" aria-labelledby="scholarships-tab">
                             <form class="user" id="scholarships_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/scholarships/add`, `scholarships_form`, `Add`, `updateScholarshipsTable`, `resetScholarshipsForm`, `scholarships_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3382,7 +3340,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Category Only') == 'true')
 
                         <!-- start major civic and professional affiliations -->
-                        <div class="tab-pane fade" id="major_civic_and_professional_affiliations" role="tabpanel" aria-labelledby="major_civic_and_professional_affiliations-tab">
+                        <div class="tab-pane fade hidden" id="major_civic_and_professional_affiliations" role="tabpanel" aria-labelledby="major_civic_and_professional_affiliations-tab">
                             <form class="user" id="major_civic_and_professional_affiliations_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/major-civic-and-professional-affiliations/add`, `major_civic_and_professional_affiliations_form`, `Add`, `updateAffiliationsTable`, `resetAffiliationsForm`, `major_civic_and_professional_affiliations_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3495,7 +3453,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Category Only') == 'true')
 
                         <!-- start award and citations -->
-                        <div class="tab-pane fade" id="award_and_citations" role="tabpanel" aria-labelledby="award_and_citations-tab">
+                        <div class="tab-pane fade hidden" id="award_and_citations" role="tabpanel" aria-labelledby="award_and_citations-tab">
                             <form class="user" id="award_and_citations_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/award-and-citations/add`, `award_and_citations_form`, `Add`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `award_and_citations_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3601,7 +3559,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Case Records', 'Category Only') == 'true')
 
                         <!-- start case record -->
-                        <div class="tab-pane fade" id="case_records" role="tabpanel" aria-labelledby="case_records-tab">
+                        <div class="tab-pane fade hidden" id="case_records" role="tabpanel" aria-labelledby="case_records-tab">
                             <form class="user" id="case_records_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/case-records/add`, `case_records_form`, `Add`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `case_records_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -3800,7 +3758,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Health Record', 'Category Only') == 'true')
 
                         <!-- start health record -->
-                        <div class="tab-pane fade" id="health_records" role="tabpanel" aria-labelledby="health_records-tab">
+                        <div class="tab-pane fade hidden" id="health_records" role="tabpanel" aria-labelledby="health_records-tab">
                             <form class="user" id="health_records_magna_carta_for_disabled_persons_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/health-records/add`, `health_records_magna_carta_for_disabled_persons_form`, `Add`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `health_records_magna_carta_for_disabled_persons_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
@@ -4012,7 +3970,7 @@
                     @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Attached PDF Files', 'Category Only') == 'true')
 
                         <!-- start PDF files -->
-                        <div class="tab-pane fade" id="pdf_files" role="tabpanel" aria-labelledby="pdf_files-tab">
+                        <div class="tab-pane fade hidden" id="pdf_files" role="tabpanel" aria-labelledby="pdf_files-tab">
                             <form class="user" id="pdf_files_form" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/pdf-files/add`, `pdf_files_form`, `Add`, `updatePdfFilesTable`, `resetPdfFilesForm`, `pdf_files_form_submit`, `None`, `None`)">
                                 @csrf
                                 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
