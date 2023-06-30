@@ -1158,7 +1158,7 @@ class ProfileController extends Controller
                 $LocationProvince = profilelib_tblprovince::orderBy('created_at', 'desc')->get();
                 $LocationRegion = profilelib_tblregion::orderBy('created_at', 'desc')->get();
 
-                return view('admin.add_view_edit_201_profile', compact('search', 'searched', 'personalData', 'SpouseRecords', 'FamilyProfile', 'ChildrenRecords', 'EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
+                return view('admin.201_profiling.table', compact('search', 'searched', 'personalData', 'SpouseRecords', 'FamilyProfile', 'ChildrenRecords', 'EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
                 'CesWe','AssessmentCenter','ValidationHr','BoardInterview','CesStatus','RecordOfCespesRatings','WorkExperience','FieldExpertise','CesTrainings','OtherManagementTrainings',
                 'ResearchAndStudies','Scholarships','Affiliations','AwardAndCitations','CaseRecords','HealthRecords','HistoricalRecordOfMedicalCondition','PdfLinks','CityMunicipality','Degree','CourseMajor','School','ExaminationReference','LanguageDialects','CesStatusReference',
                 'AcquiredThru','StatusType','AppointingAuthority','ExpertiseCategory','SpecialSkill','CaseNature','CaseStatus','LocationCity','LocationProvince','LocationRegion'))->render();

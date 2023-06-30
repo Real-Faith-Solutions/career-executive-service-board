@@ -439,13 +439,14 @@ Route::group([
         Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
     });
 
-    Route::group([
-        'prefix'     => 'profile',
-    ], function () {
+    Route::group(['prefix'=> 'profile',], function () {
+
         Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
         Route::get('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
         Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
+        
         Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
+
     });
 
     Route::group([
