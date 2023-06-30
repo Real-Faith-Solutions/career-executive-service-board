@@ -21,7 +21,7 @@ use App\Models\ValidationHr;
 use App\Models\BoardInterview;
 use App\Models\CesStatus;
 use App\Models\RecordOfCespesRatings;
-use App\Models\WorkExperience;
+use App\Models\ProfileTblWorkExperience;
 use App\Models\FieldExpertise;
 use App\Models\CesTrainings;
 use App\Models\training_tblparticipants;
@@ -786,7 +786,7 @@ class MigrationController extends Controller
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
             // Reset work_experiences table
-            WorkExperience::truncate();
+            ProfileTblWorkExperience::truncate();
 
             $start = new \DateTime();
 
@@ -794,7 +794,7 @@ class MigrationController extends Controller
 
             foreach($profile_tblWorkExperience as $item){
 
-                WorkExperience::create([
+                ProfileTblWorkExperience::create([
                     'cesno' => $item->cesno,
                     'date_from_work_experience' => $item->from_dt,
                     'date_to_work_experience' => $item->to_dt,
