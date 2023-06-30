@@ -7,7 +7,7 @@ use App\Models\FamilyProfile;
 use App\Models\Addresses;
 use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
-use App\Models\CesStatus;
+use App\Models\ProfileTblCesStatus;
 use App\Models\LanguagesDialects;
 use App\Models\WorkExperience;
 use App\Models\FieldExpertise;
@@ -79,7 +79,7 @@ class CompetencyController extends Controller
             $AssessmentCenter = AssessmentCenter::where('cesno','=','1')->get();
             $ValidationHr = ValidationHr::where('cesno','=','1')->get();
             $BoardInterview = BoardInterview::where('cesno','=','1')->get();
-            $CesStatus = CesStatus::where('cesno','=','1')->get();
+            $CesStatus = ProfileTblCesStatus::where('cesno','=','1')->get();
             $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
             $WorkExperience = WorkExperience::where('cesno','=','1')->get();
             $FieldExpertise = FieldExpertise::where('cesno','=','1')->get();
