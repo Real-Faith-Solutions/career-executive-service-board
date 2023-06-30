@@ -3,7 +3,7 @@
 @section('content')
 
     <section>
-        <div class="grid grid-cols-4">
+        <div class="grid grid-cols-3">
             @include('components.search')
         </div>
 
@@ -44,7 +44,7 @@
                                         {{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}" class="font-medium text-blue-600 hover:underline">View profile</a>
+                                        <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}" class="font-medium">View profile</a>
                                     </td>
 
                                 </a>
