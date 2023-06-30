@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblcesstatus', function (Blueprint $table) {
             $table->id('code');
-            $table->string('description');
+            // $table->bigInteger('code');
+            $table->string('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

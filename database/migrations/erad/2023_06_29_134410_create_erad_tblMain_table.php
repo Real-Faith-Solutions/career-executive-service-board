@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('erad_tblMain', function (Blueprint $table) {
             $table->id('acbatchno');
-            $table->string('acno');
+            $table->integer('acno');
             $table->string('lastname');
             $table->string('firstname');
             $table->string('middlename');
