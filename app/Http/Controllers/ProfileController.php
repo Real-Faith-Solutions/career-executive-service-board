@@ -15,7 +15,7 @@ use App\Models\ExaminationsTaken;
 use App\Models\CesStatus;
 use App\Models\LanguagesDialects;
 use App\Models\ProfileTblWorkExperience;
-use App\Models\FieldExpertise;
+use App\Models\ProfileTblExpertise;
 use App\Models\CesTrainings;
 use App\Models\OtherManagementTrainings;
 use App\Models\ResearchAndStudies;
@@ -343,7 +343,7 @@ class ProfileController extends Controller
                 $CesStatus = CesStatus::where('cesno','=',$cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=',$cesno)->get();
                 $WorkExperience = ProfileTblWorkExperience::where('cesno','=',$cesno)->get();
-                $FieldExpertise = FieldExpertise::where('cesno','=',$cesno)->get();
+                $FieldExpertise = ProfileTblExpertise::where('cesno','=',$cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno','=',$cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno','=',$cesno)->get();
                 $ResearchAndStudies = ResearchAndStudies::where('cesno','=',$cesno)->get();
@@ -1001,7 +1001,7 @@ class ProfileController extends Controller
             $WorkExperienceViewOnly = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'View Only');
 
             // Records of Field of Expertise or Specialization
-            $FieldExpertise = FieldExpertise::where('cesno','=',$request)->get();
+            $FieldExpertise = ProfileTblExpertise::where('cesno','=',$request)->get();
             $FieldExpertiseAdd = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Add');
             $FieldExpertiseEdit = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Edit');
             $FieldExpertiseDelete = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Delete');
@@ -1128,7 +1128,7 @@ class ProfileController extends Controller
                 $CesStatus = CesStatus::where('cesno','=','1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
                 $WorkExperience = ProfileTblWorkExperience::where('cesno','=','1')->get();
-                $FieldExpertise = FieldExpertise::where('cesno','=','1')->get();
+                $FieldExpertise = ProfileTblExpertise::where('cesno','=','1')->get();
                 $CesTrainings = CesTrainings::where('cesno','=','1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno','=','1')->get();
                 $ResearchAndStudies = ResearchAndStudies::where('cesno','=','1')->get();
@@ -3280,7 +3280,7 @@ class ProfileController extends Controller
 
             }else{
 
-                FieldExpertise::create([
+                ProfileTblExpertise::create([
                     'cesno' => $request->cesno,
                     'ec_field_expertise' => $request->ec_field_expertise,
                     'ss_field_expertise' =>  $request->ss_field_expertise,
@@ -3323,7 +3323,7 @@ class ProfileController extends Controller
 
             }else{
 
-                FieldExpertise::where('id', $request->cesno_field_expertise_id)
+                ProfileTblExpertise::where('id', $request->cesno_field_expertise_id)
                 ->update([
                     'ec_field_expertise' => $request->ec_field_expertise,
                     'ss_field_expertise' =>  $request->ss_field_expertise,
@@ -3343,7 +3343,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization','Category Only') == 'true'){
 
-            $FieldExpertise = FieldExpertise::where('id','=',$id)->get();
+            $FieldExpertise = ProfileTblExpertise::where('id','=',$id)->get();
 
             return $FieldExpertise;
         }
@@ -3357,7 +3357,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization','Delete') == 'true'){
 
-            $FieldExpertise = FieldExpertise::where('id','=',$id)->delete();
+            $FieldExpertise = ProfileTblExpertise::where('id','=',$id)->delete();
 
             return 'Successfully deleted';
         }

@@ -22,7 +22,7 @@ use App\Models\BoardInterview;
 use App\Models\CesStatus;
 use App\Models\RecordOfCespesRatings;
 use App\Models\ProfileTblWorkExperience;
-use App\Models\FieldExpertise;
+use App\Models\profileTblExpertise;
 use App\Models\CesTrainings;
 use App\Models\training_tblparticipants;
 use App\Models\training_tblSessions;
@@ -841,7 +841,7 @@ class MigrationController extends Controller
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
             // Reset field_expertises table
-            FieldExpertise::truncate();
+            ProfileTblWorkExperience::truncate();
 
             $start = new \DateTime();
 
@@ -849,7 +849,7 @@ class MigrationController extends Controller
 
             foreach($profile_tblExpertise as $item){
 
-                FieldExpertise::create([
+                ProfileTblWorkExperience::create([
                     'cesno' => $item->cesno,
                     'ec_field_expertise' => null,
                     'ss_field_expertise' => $item->SpeExp_Code,

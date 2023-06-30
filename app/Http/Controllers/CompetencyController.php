@@ -10,7 +10,7 @@ use App\Models\ExaminationsTaken;
 use App\Models\ProfileTblCesStatus;
 use App\Models\LanguagesDialects;
 use App\Models\ProfileTblWorkExperience;
-use App\Models\FieldExpertise;
+use App\Models\profileTblExpertise;
 use App\Models\CesTrainings;
 use App\Models\OtherManagementTrainings;
 use App\Models\ResearchAndStudies;
@@ -82,7 +82,7 @@ class CompetencyController extends Controller
             $CesStatus = ProfileTblCesStatus::where('cesno','=','1')->get();
             $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
             $WorkExperience = ProfileTblWorkExperience::where('cesno','=','1')->get();
-            $FieldExpertise = FieldExpertise::where('cesno','=','1')->get();
+            $FieldExpertise = profileTblExpertise::where('cesno','=','1')->get();
             $CesTrainings = CesTrainings::where('cesno','=','1')->get();
             $OtherManagementTrainings = OtherManagementTrainings::where('cesno','=','1')->get();
             $ResearchAndStudies = ResearchAndStudies::where('cesno','=','1')->get();
