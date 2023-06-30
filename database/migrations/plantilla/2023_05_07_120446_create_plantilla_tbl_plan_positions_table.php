@@ -8,13 +8,12 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillaTblPlanPositions
      */
     public function up(): void
     {
-        Schema::create('plantilla_tblPlanPositions', function (Blueprint $table) {
-            $table->id('plantilla_id');
-            // $table->string('plantilla_id')->nullable();
+        Schema::create('plantilla_tbl_plan_positions', function (Blueprint $table) {
+            $table->id();
+            $table->string('plantilla_id')->nullable();
             $table->string('officeid')->nullable();
             $table->string('pos_code')->nullable();
             $table->string('pos_suffix')->nullable();
@@ -38,7 +37,6 @@ return new class extends Migration
             $table->string('is_generic')->nullable();
             $table->string('is_head')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -47,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tblPlanPositions');
+        Schema::dropIfExists('plantilla_tbl_plan_positions');
     }
 };

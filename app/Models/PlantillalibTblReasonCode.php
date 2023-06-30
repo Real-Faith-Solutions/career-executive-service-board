@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillalibTblReasonCode extends Model
 {
     use HasFactory;
-
-    protected $table = "plantillalib_tblReasonCode";
-
 }

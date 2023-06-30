@@ -8,13 +8,12 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillaTblOffice
      */
     public function up(): void
     {
-        Schema::create('plantilla_tblOffice', function (Blueprint $table) {
-            $table->id('officeid');
-            // $table->string('officeid')->nullable();
+        Schema::create('plantilla_tbl_offices', function (Blueprint $table) {
+            $table->id();
+            $table->string('officeid')->nullable();
             $table->string('officelocid')->nullable();
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
@@ -25,7 +24,6 @@ return new class extends Migration
             $table->string('lastupd_enc')->nullable();
             $table->string('is_active')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tblOffice');
+        Schema::dropIfExists('plantilla_tbl_offices');
     }
 };

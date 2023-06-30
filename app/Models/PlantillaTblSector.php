@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaTblSector extends Model
 {
     use HasFactory;
-
-    protected $table = "plantilla_tblSector";
-
 }

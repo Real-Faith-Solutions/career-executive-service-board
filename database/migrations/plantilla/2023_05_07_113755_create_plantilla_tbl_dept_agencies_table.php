@@ -8,13 +8,12 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillaTblDeptAgency
      */
     public function up(): void
     {
-        Schema::create('plantilla_tblDeptAgency', function (Blueprint $table) {
-            $table->id('deptid');
-            // $table->string('deptid')->nullable();
+        Schema::create('plantilla_tbl_dept_agencies', function (Blueprint $table) {
+            $table->id();
+            $table->string('deptid')->nullable();
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('agency_typeid')->nullable();
@@ -23,12 +22,11 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('lastsubmit_dt')->nullable();
             $table->string('submitted_by')->nullable();
-            $table->string('remarks')->nullable();
-            $table->string('encdate')->nullable();
+            $table->string('remakrs')->nullable();
+            $table->string('endcdate')->nullable();
             $table->string('lastupd_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -37,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tblDeptAgency');
+        Schema::dropIfExists('plantilla_tbl_dept_agencies');
     }
 };

@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaTempRptOccupancy extends Model
 {
     use HasFactory;
-
-    protected $table = "plantillatemp_rptOccupancy";
-
 }

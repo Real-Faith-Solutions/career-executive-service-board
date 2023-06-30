@@ -8,18 +8,17 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * Plantillalib_TblClassBasis
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tblClassBasis', function (Blueprint $table) {
-            $table->id('cbasis_code');
-            // $table->string('cbasis_code')->nullable();
-            $table->string('basis')->nullable();
+        Schema::create('plantillalib_tbl_agency_locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('agencyloc_id')->nullable();
             $table->string('title')->nullable();
-            $table->string('classdate')->nullable();
+            $table->string('encdate')->nullable();
+            $table->string('lastupd_dt')->nullable();
+            $table->string('encoder')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tblClassBasis');
+        Schema::dropIfExists('plantillalib_tbl_agency_locations');
     }
 };
