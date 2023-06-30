@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('r_catid');
             $table->integer('r_ctrlno');
             $table->string('description');
-            $table->stringid('remarks');
+            $table->string('remarks');
             $table->string('submit_dt');
             $table->string('encdate');
             $table->string('encoder');
