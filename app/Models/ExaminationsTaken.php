@@ -9,4 +9,5 @@ class ExaminationsTaken extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table= 'profile_tblExaminations';
 }

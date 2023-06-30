@@ -9,4 +9,6 @@ class EducationalAttainment extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'profile_tblEducation';
+
 }
