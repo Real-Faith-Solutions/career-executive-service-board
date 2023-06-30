@@ -14,7 +14,7 @@ use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
 use App\Models\CesStatus;
 use App\Models\LanguagesDialects;
-use App\Models\WorkExperience;
+use App\Models\ProfileTblWorkExperience;
 use App\Models\FieldExpertise;
 use App\Models\CesTrainings;
 use App\Models\OtherManagementTrainings;
@@ -342,7 +342,7 @@ class ProfileController extends Controller
                 $BoardInterview = BoardInterview::where('cesno','=',$cesno)->get();
                 $CesStatus = CesStatus::where('cesno','=',$cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=',$cesno)->get();
-                $WorkExperience = WorkExperience::where('cesno','=',$cesno)->get();
+                $WorkExperience = ProfileTblWorkExperience::where('cesno','=',$cesno)->get();
                 $FieldExpertise = FieldExpertise::where('cesno','=',$cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno','=',$cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno','=',$cesno)->get();
@@ -994,7 +994,7 @@ class ProfileController extends Controller
             $RecordOfCespesRatingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Record of CESPES Ratings', 'View Only');
 
             // Work Experience
-            $WorkExperience = WorkExperience::where('cesno','=',$request)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('cesno','=',$request)->get();
             $WorkExperienceAdd = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Add');
             $WorkExperienceEdit = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Edit');
             $WorkExperienceDelete = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Delete');
@@ -1127,7 +1127,7 @@ class ProfileController extends Controller
                 $BoardInterview = BoardInterview::where('cesno','=','1')->get();
                 $CesStatus = CesStatus::where('cesno','=','1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
-                $WorkExperience = WorkExperience::where('cesno','=','1')->get();
+                $WorkExperience = ProfileTblWorkExperience::where('cesno','=','1')->get();
                 $FieldExpertise = FieldExpertise::where('cesno','=','1')->get();
                 $CesTrainings = CesTrainings::where('cesno','=','1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno','=','1')->get();
@@ -3133,7 +3133,7 @@ class ProfileController extends Controller
 
             }else{
 
-                WorkExperience::create([
+                ProfileTblWorkExperience::create([
                     'cesno' => $request->cesno,
                     'date_from_work_experience' => $request->date_from_work_experience,
                     'date_to_work_experience' =>  $request->date_to_work_experience,
@@ -3200,7 +3200,7 @@ class ProfileController extends Controller
 
             }else{
 
-                WorkExperience::where('id', $request->cesno_work_experience_id)
+                ProfileTblWorkExperience::where('id', $request->cesno_work_experience_id)
                 ->update([
                     'date_from_work_experience' => $request->date_from_work_experience,
                     'date_to_work_experience' =>  $request->date_to_work_experience,
@@ -3228,7 +3228,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Work Experience','Category Only') == 'true'){
 
-            $WorkExperience = WorkExperience::where('id','=',$id)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('id','=',$id)->get();
 
             return $WorkExperience;
         }
@@ -3242,7 +3242,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Work Experience','Delete') == 'true'){
 
-            $WorkExperience = WorkExperience::where('id','=',$id)->delete();
+            $WorkExperience = ProfileTblWorkExperience::where('id','=',$id)->delete();
 
             return 'Successfully deleted';
         }
