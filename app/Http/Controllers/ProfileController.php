@@ -50,7 +50,7 @@ use App\Models\ProfileLibTblEducMajor;
 use App\Models\ProfileLibTblEducSchool;
 use App\Models\ProfileLibTblExamRef;
 use App\Models\ProfileLibTblLanguageRef;
-use App\Models\profilelib_tblcesstatus;
+use App\Models\ProfileLibTblCesStatus;
 use App\Models\ProfileLibTblCesStatusAcc;
 use App\Models\ProfileLibTblCesStatusType;
 use App\Models\ProfileLibTblAppAuthority;
@@ -363,7 +363,7 @@ class ProfileController extends Controller
                 $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
                 $ExaminationReference = ProfileLibTblExamRef::orderBy('created_at', 'desc')->get();
                 $LanguageDialects = ProfileLibTblLanguageRef::orderBy('created_at', 'desc')->get();
-                $CesStatusReference = profilelib_tblcesstatus::orderBy('created_at', 'desc')->get();
+                $CesStatusReference = ProfileLibTblCesStatus::orderBy('created_at', 'desc')->get();
                 $AcquiredThru = ProfileLibTblCesStatusAcc::orderBy('created_at', 'desc')->get();
                 $StatusType = ProfileLibTblCesStatusType::orderBy('created_at', 'desc')->get();
                 $AppointingAuthority = ProfileLibTblAppAuthority::orderBy('created_at', 'desc')->get();
@@ -1146,7 +1146,7 @@ class ProfileController extends Controller
                 $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
                 $ExaminationReference = ProfileLibTblExamRef::orderBy('created_at', 'desc')->get();
                 $LanguageDialects = ProfileLibTblLanguageRef::orderBy('created_at', 'desc')->get();
-                $CesStatusReference = profilelib_tblcesstatus::orderBy('created_at', 'desc')->get();
+                $CesStatusReference = ProfileLibTblCesStatus::orderBy('created_at', 'desc')->get();
                 $AcquiredThru = ProfileLibTblCesStatusAcc::orderBy('created_at', 'desc')->get();
                 $StatusType = ProfileLibTblCesStatusType::orderBy('created_at', 'desc')->get();
                 $AppointingAuthority = ProfileLibTblAppAuthority::orderBy('created_at', 'desc')->get();
