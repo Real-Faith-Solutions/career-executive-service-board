@@ -122,10 +122,11 @@
 
     <div class="grid">
         {{-- Start hiding other category if profile/view --}}
+        <div class="category">
+            @include('admin.201_profiling.partials.personal_data')
+        </div>
+        
         @if (str_contains(Request::url(), 'profile/view'))
-            <div class="category">
-                @include('admin.201_profiling.partials.personal_data')
-            </div>
 
             <div class="category">
                 @include('admin.201_profiling.partials.family_profile')
