@@ -8,23 +8,23 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\profilelib_tblareacode;
-use App\Models\profilelib_tblEducDegree;
-use App\Models\profilelib_tblEducMajor;
-use App\Models\profilelib_tblEducSchools;
-use App\Models\profilelib_tblExamRef;
-use App\Models\profilelib_tblLanguageRef;
-use App\Models\profilelib_tblcesstatus;
-use App\Models\profilelib_tblcesstatusAcc;
-use App\Models\profilelib_tblcesstatustype;
-use App\Models\profilelib_tblappAuthority;
-use App\Models\profilelib_tblExpertiseGen;
-use App\Models\profilelib_tblExpertiseSpec;
-use App\Models\profilelib_tblCaseNature;
-use App\Models\profilelib_tblCaseStatus;
-use App\Models\profilelib_tblcities;
-use App\Models\profilelib_tblprovince;
-use App\Models\profilelib_tblregion;
+use App\Models\ProfileLibTblAreaCode;
+use App\Models\ProfileLibTblEducDegree;
+use App\Models\ProfileLibTblEducMajor;
+use App\Models\ProfileLibTblEducSchool;
+use App\Models\ProfileLibTblExamRef;
+use App\Models\ProfileLibTblLanguageRef;
+use App\Models\ProfileLibTblCesStatus;
+use App\Models\ProfileLibTblCesStatusAcc;
+use App\Models\ProfileLibTblCesStatusType;
+use App\Models\ProfileLibTblAppAuthority;
+use App\Models\ProfileLibTblExpertiseGen;
+use App\Models\ProfileLibTblExpertiseSpec;
+use App\Models\ProfileLibTblCaseNature;
+use App\Models\ProfileLibTblCaseStatus;
+use App\Models\ProfileLibTblCities;
+use App\Models\ProfileLibTblProvince;
+use App\Models\ProfileLibTblRegion;
 
 
 class LibraryController extends Controller
@@ -33,23 +33,23 @@ class LibraryController extends Controller
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('System Utility') == 'true'){
 
-            $CityMunicipality = profilelib_tblareacode::orderBy('created_at', 'desc')->get();
-            $Degree = profilelib_tblEducDegree::orderBy('created_at', 'desc')->get();
-            $CourseMajor = profilelib_tblEducMajor::orderBy('created_at', 'desc')->get();
-            $School = profilelib_tblEducSchools::orderBy('created_at', 'desc')->get();
-            $ExaminationReference = profilelib_tblExamRef::orderBy('created_at', 'desc')->get();
-            $LanguageDialects = profilelib_tblLanguageRef::orderBy('created_at', 'desc')->get();
-            $CesStatusReference = profilelib_tblcesstatus::orderBy('created_at', 'desc')->get();
-            $AcquiredThru = profilelib_tblcesstatusAcc::orderBy('created_at', 'desc')->get();
-            $StatusType = profilelib_tblcesstatustype::orderBy('created_at', 'desc')->get();
-            $AppointingAuthority = profilelib_tblappAuthority::orderBy('created_at', 'desc')->get();
-            $ExpertiseCategory = profilelib_tblExpertiseGen::orderBy('created_at', 'desc')->get();
-            $SpecialSkill = profilelib_tblExpertiseSpec::orderBy('created_at', 'desc')->get();
-            $CaseNature = profilelib_tblCaseNature::orderBy('created_at', 'desc')->get();
-            $CaseStatus = profilelib_tblCaseStatus::orderBy('created_at', 'desc')->get();
-            $LocationCity = profilelib_tblcities::orderBy('created_at', 'desc')->get();
-            $LocationProvince = profilelib_tblprovince::orderBy('created_at', 'desc')->get();
-            $LocationRegion = profilelib_tblregion::orderBy('created_at', 'desc')->get();
+            $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
+            $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
+            $CourseMajor = ProfileLibTblEducMajor::orderBy('created_at', 'desc')->get();
+            $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
+            $ExaminationReference = ProfileLibTblExamRef::orderBy('created_at', 'desc')->get();
+            $LanguageDialects = ProfileLibTblLanguageRef::orderBy('created_at', 'desc')->get();
+            $CesStatusReference = ProfileLibTblCesStatus::orderBy('created_at', 'desc')->get();
+            $AcquiredThru = ProfileLibTblCesStatusAcc::orderBy('created_at', 'desc')->get();
+            $StatusType = ProfileLibTblCesStatusType::orderBy('created_at', 'desc')->get();
+            $AppointingAuthority = ProfileLibTblAppAuthority::orderBy('created_at', 'desc')->get();
+            $ExpertiseCategory = ProfileLibTblExpertiseGen::orderBy('created_at', 'desc')->get();
+            $SpecialSkill = ProfileLibTblExpertiseSpec::orderBy('created_at', 'desc')->get();
+            $CaseNature = ProfileLibTblCaseNature::orderBy('created_at', 'desc')->get();
+            $CaseStatus = ProfileLibTblCaseStatus::orderBy('created_at', 'desc')->get();
+            $LocationCity = ProfileLibTblCities::orderBy('created_at', 'desc')->get();
+            $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
+            $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
             // dd($CityMunicipality);
             return view('admin.201_library.index', compact('CityMunicipality','Degree','CourseMajor','School','ExaminationReference','LanguageDialects','CesStatusReference',
             'AcquiredThru','StatusType','AppointingAuthority','ExpertiseCategory','SpecialSkill','CaseNature','CaseStatus','LocationCity','LocationProvince','LocationRegion'))->render();
@@ -64,7 +64,7 @@ class LibraryController extends Controller
 
     public function addCityMunicipality(Request $request){
 
-        $get_last_code = profilelib_tblareacode::select('CODE')->get()->max();
+        $get_last_code = ProfileLibTblAreaCode::select('CODE')->get()->max();
 
         if($get_last_code == null){
 
@@ -75,7 +75,7 @@ class LibraryController extends Controller
             $latest_code = ($get_last_code->CODE + 1);
         }
                 
-        profilelib_tblareacode::create([
+        ProfileLibTblAreaCode::create([
             'CODE' => $latest_code,
             'NAME' =>  $request->NAME,
             'ZIPCODE' => $request->ZIPCODE,
@@ -85,14 +85,14 @@ class LibraryController extends Controller
     }
 
     public function getCityMunicipality(Request $request){
-        $CityMunicipality = profilelib_tblareacode::all();
+        $CityMunicipality = ProfileLibTblAreaCode::all();
 
         return $CityMunicipality;
     }
 
     public function addDegree(Request $request){
 
-        $get_last_code = profilelib_tblEducDegree::select('CODE')->get()->max();
+        $get_last_code = ProfileLibTblEducDegree::select('CODE')->get()->max();
 
         if($get_last_code == null){
 
@@ -103,7 +103,7 @@ class LibraryController extends Controller
             $latest_code = ($get_last_code->CODE + 1);
         }
 
-        profilelib_tblEducDegree::create([
+        ProfileLibTblEducDegree::create([
             'CODE' => $latest_code,
             'DEGREE' =>  $request->DEGREE,
         ]);
@@ -112,14 +112,14 @@ class LibraryController extends Controller
     }
 
     public function getDegree(Request $request){
-        $Degree = profilelib_tblEducDegree::all();
+        $Degree = ProfileLibTblEducDegree::all();
 
         return $Degree;
     }
 
     public function addCourseMajor(Request $request){
 
-        $get_last_code = profilelib_tblEducMajor::select('CODE')->get()->max();
+        $get_last_code = ProfileLibTblEducMajor::select('CODE')->get()->max();
 
         if($get_last_code == null){
 
@@ -130,7 +130,7 @@ class LibraryController extends Controller
             $latest_code = ($get_last_code->CODE + 1);
         }
 
-        profilelib_tblEducMajor::create([
+        ProfileLibTblEducMajor::create([
             'CODE' => $latest_code,
             'COURSE' =>  $request->COURSE,
         ]);
@@ -139,14 +139,14 @@ class LibraryController extends Controller
     }
 
     public function getCourseMajor(Request $request){
-        $CourseMajor = profilelib_tblEducMajor::all();
+        $CourseMajor = ProfileLibTblEducMajor::all();
 
         return $CourseMajor;
     }
 
     public function addSchool(Request $request){
 
-        $get_last_code = profilelib_tblEducSchools::select('CODE')->get()->max();
+        $get_last_code = ProfileLibTblEducSchool::select('CODE')->get()->max();
 
         if($get_last_code == null){
 
@@ -157,7 +157,7 @@ class LibraryController extends Controller
             $latest_code = ($get_last_code->CODE + 1);
         }
 
-        profilelib_tblEducSchools::create([
+        ProfileLibTblEducSchool::create([
             'CODE' => $latest_code,
             'SCHOOL' =>  $request->SCHOOL,
         ]);
@@ -166,13 +166,13 @@ class LibraryController extends Controller
     }
 
     public function getSchool(Request $request){
-        $School = profilelib_tblEducSchools::all();
+        $School = ProfileLibTblEducSchool::all();
 
         return $School;
     }
 
     public function addExaminationReference(Request $request){
-        profilelib_tblExamRef::create([
+        ProfileLibTblExamRef::create([
             'CODE' => $request->CODE,
             'TITLE' =>  $request->TITLE,
         ]);
@@ -180,13 +180,13 @@ class LibraryController extends Controller
     }
 
     public function getExaminationReference(Request $request){
-        $ExaminationReference = profilelib_tblExamRef::all();
+        $ExaminationReference = ProfileLibTblExamRef::all();
 
         return $ExaminationReference;
     }
 
     public function addLanguageDialects(Request $request){
-        profilelib_tblLanguageRef::create([
+        ProfileLibTblLanguageRef::create([
             'code' => $request->code,
             'title' =>  $request->title,
         ]);
@@ -194,13 +194,13 @@ class LibraryController extends Controller
     }
 
     public function getLanguageDialects(Request $request){
-        $LanguageDialects = profilelib_tblLanguageRef::all();
+        $LanguageDialects = ProfileLibTblLanguageRef::all();
 
         return $LanguageDialects;
     }
 
     public function addCesStatusReference(Request $request){
-        profilelib_tblcesstatus::create([
+        ProfileLibTblCesStatus::create([
             'code' => $request->code,
             'description' =>  $request->title,
         ]);
@@ -208,13 +208,13 @@ class LibraryController extends Controller
     }
 
     public function getCesStatusReference(Request $request){
-        $CesStatusReference = profilelib_tblcesstatus::all();
+        $CesStatusReference = ProfileLibTblCesStatus::all();
 
         return $CesStatusReference;
     }
 
     public function addAcquiredThru(Request $request){
-        profilelib_tblcesstatusAcc::create([
+        ProfileLibTblCesStatusAcc::create([
             'code' => $request->code,
             'description' =>  $request->description,
         ]);
@@ -222,13 +222,13 @@ class LibraryController extends Controller
     }
 
     public function getAcquiredThru(Request $request){
-        $AcquiredThru = profilelib_tblcesstatusAcc::all();
+        $AcquiredThru = ProfileLibTblCesStatusAcc::all();
 
         return $AcquiredThru;
     }
 
     public function addStatusType(Request $request){
-        profilelib_tblcesstatustype::create([
+        ProfileLibTblCesStatusType::create([
             'code' => $request->code,
             'description' =>  $request->description,
         ]);
@@ -236,13 +236,13 @@ class LibraryController extends Controller
     }
 
     public function getStatusType(Request $request){
-        $StatusType = profilelib_tblcesstatustype::all();
+        $StatusType = ProfileLibTblCesStatusType::all();
 
         return $StatusType;
     }
 
     public function addAppointingAuthority(Request $request){
-        profilelib_tblappAuthority::create([
+        ProfileLibTblAppAuthority::create([
             'code' => $request->code,
             'description' =>  $request->description,
         ]);
@@ -250,13 +250,13 @@ class LibraryController extends Controller
     }
 
     public function getAppointingAuthority(Request $request){
-        $AppointingAuthority = profilelib_tblappAuthority::all();
+        $AppointingAuthority = ProfileLibTblAppAuthority::all();
 
         return $AppointingAuthority;
     }
 
     public function addExpertiseCategory(Request $request){
-        profilelib_tblExpertiseGen::create([
+        ProfileLibTblExpertiseGen::create([
             'GenExp_Code' => $request->GenExp_Code,
             'Title' =>  $request->Title,
         ]);
@@ -264,13 +264,13 @@ class LibraryController extends Controller
     }
 
     public function getExpertiseCategory(Request $request){
-        $ExpertiseCategory = profilelib_tblExpertiseGen::all();
+        $ExpertiseCategory = ProfileLibTblExpertiseGen::all();
 
         return $ExpertiseCategory;
     }
 
     public function addSpecialSkill(Request $request){
-        profilelib_tblExpertiseSpec::create([
+        ProfileLibTblExpertiseSpec::create([
             'SpeExp_Code' => $request->SpeExp_Code,
             'Title' =>  $request->Title,
         ]);
@@ -278,13 +278,13 @@ class LibraryController extends Controller
     }
 
     public function getSpecialSkill(Request $request){
-        $SpecialSkill = profilelib_tblExpertiseSpec::all();
+        $SpecialSkill = ProfileLibTblExpertiseSpec::all();
 
         return $SpecialSkill;
     }
 
     public function addCaseNature(Request $request){
-        profilelib_tblCaseNature::create([
+        ProfileLibTblCaseNature::create([
             'STATUS_CODE' => $request->STATUS_CODE,
             'TITLE' =>  $request->TITLE,
         ]);
@@ -292,13 +292,13 @@ class LibraryController extends Controller
     }
 
     public function getCaseNature(Request $request){
-        $CaseNature = profilelib_tblCaseNature::all();
+        $CaseNature = ProfileLibTblCaseNature::all();
 
         return $CaseNature;
     }
 
     public function addCaseStatus(Request $request){
-        profilelib_tblCaseStatus::create([
+        ProfileLibTblCaseStatus::create([
             'STATUS_CODE' => $request->STATUS_CODE,
             'TITLE' =>  $request->TITLE,
         ]);
@@ -306,13 +306,13 @@ class LibraryController extends Controller
     }
 
     public function getCaseStatus(Request $request){
-        $CaseStatus = profilelib_tblCaseStatus::all();
+        $CaseStatus = ProfileLibTblCaseStatus::all();
 
         return $CaseStatus;
     }
 
     public function addLocationCity(Request $request){
-        profilelib_tblcities::create([
+        ProfileLibTblCities::create([
             'city_code' => $request->city_code,
             'prov_code' =>  $request->prov_code,
             'name' =>  $request->name,
@@ -322,13 +322,13 @@ class LibraryController extends Controller
     }
 
     public function getLocationCity(Request $request){
-        $LocationCity = profilelib_tblcities::all();
+        $LocationCity = ProfileLibTblCities::all();
 
         return $LocationCity;
     }
 
     public function addLocationProvince(Request $request){
-        profilelib_tblprovince::create([
+        ProfileLibTblProvince::create([
             'prov_code' => $request->prov_code,
             'reg_code' =>  $request->reg_code,
             'name' =>  $request->name,
@@ -338,13 +338,13 @@ class LibraryController extends Controller
     }
 
     public function getLocationProvince(Request $request){
-        $LocationProvince = profilelib_tblprovince::all();
+        $LocationProvince = ProfileLibTblProvince::all();
 
         return $LocationProvince;
     }
 
     public function addLocationRegion(Request $request){
-        profilelib_tblregion::create([
+        ProfileLibTblRegion::create([
             'reg_code' => $request->reg_code,
             'name' =>  $request->name,
             'acronym' =>  $request->acronym,
@@ -355,7 +355,7 @@ class LibraryController extends Controller
     }
 
     public function getLocationRegion(Request $request){
-        $LocationRegion = profilelib_tblregion::all();
+        $LocationRegion = ProfileLibTblRegion::all();
 
         return $LocationRegion;
     }
