@@ -9,4 +9,6 @@ class ResearchAndStudies extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $table ="profile_tblResearch";
 }
