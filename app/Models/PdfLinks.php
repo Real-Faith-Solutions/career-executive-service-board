@@ -9,4 +9,6 @@ class PdfLinks extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $table ="profile_tblmain_pdflink";
 }

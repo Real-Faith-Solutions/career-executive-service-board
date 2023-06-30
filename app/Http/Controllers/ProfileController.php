@@ -320,7 +320,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('201 Profiling') == 'true'){
 
-            if(ProfileController::latestCesNo() == 1){
+            if(ProfileController::latestCesNo() == 0){
 
                 return Redirect::to('/admin/profile/add');
             }
@@ -1095,7 +1095,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('201 Profiling') == 'true'){
 
-            if(ProfileController::latestCesNo() == 1){
+            if(ProfileController::latestCesNo() == 0){
 
                 return Redirect::to('/admin/profile/add');
             }
