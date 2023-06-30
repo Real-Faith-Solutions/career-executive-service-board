@@ -35,10 +35,10 @@ use App\Models\CaseRecords;
 use App\Models\HealthRecords;
 use App\Models\HistoricalRecordOfMedicalCondition;
 use App\Models\PdfLinks;
-use App\Models\profilelib_tblareacode;
-use App\Models\profilelib_tblEducDegree;
-use App\Models\profilelib_tblEducMajor;
-use App\Models\profilelib_tblEducSchools;
+use App\Models\ProfileLibTblAreaCode;
+use App\Models\ProfileLibTblEducDegree;
+use App\Models\ProfileLibTblEducMajor;
+use App\Models\ProfileLibTblEducSchool;
 
 class MigrationController extends Controller
 {
@@ -1423,16 +1423,16 @@ class MigrationController extends Controller
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
-            // Reset profilelib_tblareacodes table
-            profilelib_tblareacode::truncate();
+            // Reset ProfileLibTblAreaCodes table
+            ProfileLibTblAreaCode::truncate();
 
             $start = new \DateTime();
 
-            $profilelib_tblareacode = DB::connection('sqlsrv-2')->table('profilelib_tblareacode')->get();
+            $ProfileLibTblAreaCode = DB::connection('sqlsrv-2')->table('ProfileLibTblAreaCode')->get();
 
-            foreach($profilelib_tblareacode as $item){
+            foreach($ProfileLibTblAreaCode as $item){
 
-                profilelib_tblareacode::create([
+                ProfileLibTblAreaCode::create([
                     'CODE' => $item->CODE,
                     'NAME' => $item->NAME,
                     'ZIPCODE' => $item->ZIPCODE,
@@ -1449,7 +1449,7 @@ class MigrationController extends Controller
             DatabaseMigrations::create([
 
                 'updated_category' => '201 Library - Address (City-Municipality)',
-                'table_source' => 'profilelib_tblareacode,',
+                'table_source' => 'ProfileLibTblAreaCode,',
                 'start' => $start,
                 'finish' => $finish,
                 'duration_in_minutes' => $start->diff($finish)->format('%I'),
@@ -1471,15 +1471,15 @@ class MigrationController extends Controller
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
             // Reset profilelib_tbl_educ_degrees table
-            profilelib_tblEducDegree::truncate();
+            ProfileLibTblEducDegree::truncate();
 
             $start = new \DateTime();
 
-            $profilelib_tblEducDegree = DB::connection('sqlsrv-2')->table('profilelib_tblEducDegree')->get();
+            $ProfileLibTblEducDegree = DB::connection('sqlsrv-2')->table('ProfileLibTblEducDegree')->get();
 
-            foreach($profilelib_tblEducDegree as $item){
+            foreach($ProfileLibTblEducDegree as $item){
 
-                profilelib_tblEducDegree::create([
+                ProfileLibTblEducDegree::create([
                     'CODE' => round($item->CODE),
                     'DEGREE' => $item->DEGREE,
                     'encoder' => null,
@@ -1495,7 +1495,7 @@ class MigrationController extends Controller
             DatabaseMigrations::create([
 
                 'updated_category' => '201 Library - Education (Degree)',
-                'table_source' => 'profilelib_tblEducDegree,',
+                'table_source' => 'ProfileLibTblEducDegree,',
                 'start' => $start,
                 'finish' => $finish,
                 'duration_in_minutes' => $start->diff($finish)->format('%I'),
@@ -1517,15 +1517,15 @@ class MigrationController extends Controller
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
             // Reset profilelib_tbl_educ_majors table
-            profilelib_tblEducMajor::truncate();
+            ProfileLibTblEducMajor::truncate();
 
             $start = new \DateTime();
 
-            $profilelib_tblEducMajor = DB::connection('sqlsrv-2')->table('profilelib_tblEducMajor')->get();
+            $ProfileLibTblEducMajor = DB::connection('sqlsrv-2')->table('ProfileLibTblEducMajor')->get();
 
-            foreach($profilelib_tblEducMajor as $item){
+            foreach($ProfileLibTblEducMajor as $item){
 
-                profilelib_tblEducMajor::create([
+                ProfileLibTblEducMajor::create([
                     'CODE' => round($item->CODE),
                     'COURSE' => $item->COURSE,
                     'encoder' => null,
@@ -1541,7 +1541,7 @@ class MigrationController extends Controller
             DatabaseMigrations::create([
 
                 'updated_category' => '201 Library - Education (Course Major)',
-                'table_source' => 'profilelib_tblEducMajor,',
+                'table_source' => 'ProfileLibTblEducMajor,',
                 'start' => $start,
                 'finish' => $finish,
                 'duration_in_minutes' => $start->diff($finish)->format('%I'),
@@ -1563,15 +1563,15 @@ class MigrationController extends Controller
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true'){
 
             // Reset profilelib_tbl_educ_schools table
-            profilelib_tblEducSchools::truncate();
+            ProfileLibTblEducSchool::truncate();
 
             $start = new \DateTime();
 
-            $profilelib_tblEducSchools = DB::connection('sqlsrv-2')->table('profilelib_tblEducSchools')->get();
+            $ProfileLibTblEducSchool = DB::connection('sqlsrv-2')->table('ProfileLibTblEducSchool')->get();
 
-            foreach($profilelib_tblEducSchools as $item){
+            foreach($ProfileLibTblEducSchool as $item){
 
-                profilelib_tblEducSchools::create([
+                ProfileLibTblEducSchool::create([
                     'CODE' => $item->CODE,
                     'SCHOOL' => $item->SCHOOL,
                     'encoder' => null,
@@ -1587,7 +1587,7 @@ class MigrationController extends Controller
             DatabaseMigrations::create([
 
                 'updated_category' => '201 Library - Education (School)',
-                'table_source' => 'profilelib_tblEducSchools,',
+                'table_source' => 'ProfileLibTblEducSchool,',
                 'start' => $start,
                 'finish' => $finish,
                 'duration_in_minutes' => $start->diff($finish)->format('%I'),
