@@ -36,19 +36,19 @@
                     @else
                         @foreach ($searched as $item)
                             <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
+
                                 <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">
-                                    <th class="text-center" scope="row">
+                                    <th scope="col" class="px-6 py-3">
                                         {{ $item->cesno }}
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td scope="col" class="px-6 py-3">
                                         {{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}
                                     </td>
                                     <td class="px-6 py-4 text-right">
                                         <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}" class="font-medium">View profile</a>
                                     </td>
-
                                 </a>
-
+                                    
                             </tr>
                         @endforeach
                     @endif
