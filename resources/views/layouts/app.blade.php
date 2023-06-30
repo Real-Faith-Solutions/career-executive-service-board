@@ -21,6 +21,7 @@
     @include('layouts.partials.header')
     @include('layouts.partials.sidebar')
 
+    {{-- @include('layouts.partials.preloader') --}}
 
     <div class="p-4 sm:ml-64">
         <div class="mt-14 rounded-lg p-4">
