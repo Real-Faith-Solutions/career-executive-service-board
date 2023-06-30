@@ -8,12 +8,13 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaTblOtherAssignment
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_other_assignments', function (Blueprint $table) {
-            $table->id();
-            $table->string('detailed_code')->nullable();
+        Schema::create('plantilla_tblOtherAssignment', function (Blueprint $table) {
+            $table->id('detailed_code');
+            // $table->string('detailed_code')->nullable();
             $table->string('cesno')->nullable();
             $table->string('appt_status_code')->nullable();
             $table->string('position')->nullable();
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->string('lastupd_dt')->nullable();
             $table->string('lastupd_enc')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_other_assignments');
+        Schema::dropIfExists('plantilla_tblOtherAssignment');
     }
 };

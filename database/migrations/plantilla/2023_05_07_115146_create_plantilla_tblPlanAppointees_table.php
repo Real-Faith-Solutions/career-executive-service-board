@@ -8,12 +8,13 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaTblPlanAppointees
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_plan_appointees', function (Blueprint $table) {
-            $table->id();
-            $table->string('appointee_id')->nullable();
+        Schema::create('plantilla_tblPlanAppointees', function (Blueprint $table) {
+            $table->id('appointee_id');
+            // $table->string('appointee_id')->nullable();
             $table->string('plantilla_id')->nullable();
             $table->string('cesno')->nullable();
             $table->string('appt_stat_code')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->string('lastupd_dt')->nullable();
             $table->string('lastupd_user')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_plan_appointees');
+        Schema::dropIfExists('plantilla_tblPlanAppointees');
     }
 };

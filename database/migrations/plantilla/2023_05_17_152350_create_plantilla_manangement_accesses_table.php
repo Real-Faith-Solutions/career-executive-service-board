@@ -8,6 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * PlantillaManangementAccess
+     * this migration has no counterpart on DB of legacy system
      */
     public function up(): void
     {
@@ -27,6 +29,7 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

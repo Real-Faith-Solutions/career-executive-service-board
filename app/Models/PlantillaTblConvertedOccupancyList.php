@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaTblConvertedOccupancyList extends Model
 {
     use HasFactory;
+
+    protected $table = "plantilla_tblConverted_OccupancyList";
+
 }

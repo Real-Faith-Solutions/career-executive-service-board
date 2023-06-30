@@ -8,18 +8,20 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * Plantillalib_TblPositionLevel
      */
     public function up(): void
     {
-        Schema::create('plantillalib__tbl_position_levels', function (Blueprint $table) {
-            $table->id();
-            $table->string('poslevel_code')->nullable();
+        Schema::create('plantillalib_tblPositionLevel', function (Blueprint $table) {
+            $table->id('poslevel_code');
+            // $table->string('poslevel_code')->nullable();
             $table->string('seq')->nullable();
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('sg')->nullable();
             $table->string('pl_func_name')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib__tbl_position_levels');
+        Schema::dropIfExists('plantillalib_tblPositionLevel');
     }
 };

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Plantillalib_TblPositionLevel extends Model
 {
     use HasFactory;
+
+    protected $table = "plantillalib_tblPositionLevel";
+
 }
