@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="png" href="{{ asset('image/branding.png') }}">
+    <link rel="icon" type="png" href="{{ asset('images/alpha_logo.png') }}">
     <title>{{ config('app.name') }}</title>
 </head>
 
@@ -14,7 +14,7 @@
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
         <div>
             <a href="{{ url('/') }}">
-                <img src="{{ asset('image/branding.png') }}" alt="AQUALAB PH" class="h-20 fill-current text-gray-500">
+                <img src="{{ asset('images/alpha_logo.png') }}" class="h-20 fill-current text-gray-500">
                 {{-- AQUA LAB PH --}}
             </a>
         </div>
