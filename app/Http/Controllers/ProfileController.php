@@ -12,7 +12,7 @@ use App\Models\FamilyProfile;
 use App\Models\Addresses;
 use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
-use App\Models\CesStatus;
+use App\Models\ProfileTblCesStatus;
 use App\Models\LanguagesDialects;
 use App\Models\ProfileTblWorkExperience;
 use App\Models\ProfileTblExpertise;
@@ -340,7 +340,7 @@ class ProfileController extends Controller
                 $AssessmentCenter = AssessmentCenter::where('cesno','=',$cesno)->get();
                 $ValidationHr = ValidationHr::where('cesno','=',$cesno)->get();
                 $BoardInterview = BoardInterview::where('cesno','=',$cesno)->get();
-                $CesStatus = CesStatus::where('cesno','=',$cesno)->get();
+                $CesStatus = ProfileTblCesStatus::where('cesno','=',$cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=',$cesno)->get();
                 $WorkExperience = ProfileTblWorkExperience::where('cesno','=',$cesno)->get();
                 $FieldExpertise = ProfileTblExpertise::where('cesno','=',$cesno)->get();
@@ -980,7 +980,7 @@ class ProfileController extends Controller
             $AssessmentCenter = AssessmentCenter::where('cesno','=',$request)->get();
             $ValidationHr = ValidationHr::where('cesno','=',$request)->get();
             $BoardInterview = BoardInterview::where('cesno','=',$request)->get();
-            $CesStatus = CesStatus::where('cesno','=',$request)->get();
+            $CesStatus = ProfileTblCesStatus::where('cesno','=',$request)->get();
             $EligibilityAndRankTrackerAdd = RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Add');
             $EligibilityAndRankTrackerEdit = RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Edit');
             $EligibilityAndRankTrackerDelete = RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Delete');
@@ -1125,7 +1125,7 @@ class ProfileController extends Controller
                 $AssessmentCenter = AssessmentCenter::where('cesno','=','1')->get();
                 $ValidationHr = ValidationHr::where('cesno','=','1')->get();
                 $BoardInterview = BoardInterview::where('cesno','=','1')->get();
-                $CesStatus = CesStatus::where('cesno','=','1')->get();
+                $CesStatus = ProfileTblCesStatus::where('cesno','=','1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
                 $WorkExperience = ProfileTblWorkExperience::where('cesno','=','1')->get();
                 $FieldExpertise = ProfileTblExpertise::where('cesno','=','1')->get();
@@ -2765,7 +2765,7 @@ class ProfileController extends Controller
 
             }else{
 
-                CesStatus::create([
+                ProfileTblCesStatus::create([
                     'cesno' => $request->cesno,
                     'cs_cs_ces_we' => $request->cs_cs_ces_we,
                     'at_cs_ces_we' =>  $request->at_cs_ces_we,
@@ -2825,7 +2825,7 @@ class ProfileController extends Controller
 
             }else{
 
-                CesStatus::where('id', $request->cesno_ces_status_hr_id)
+                ProfileTblCesStatus::where('id', $request->cesno_ces_status_hr_id)
                 ->update([
                     'cs_cs_ces_we' => $request->cs_cs_ces_we,
                     'at_cs_ces_we' =>  $request->at_cs_ces_we,
@@ -2870,7 +2870,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker','Category Only') == 'true'){
 
-            $cesstatus = CesStatus::where('id','=',$id)->get();
+            $cesstatus = ProfileTblCesStatus::where('id','=',$id)->get();
 
             return $cesstatus;
         }
@@ -2884,7 +2884,7 @@ class ProfileController extends Controller
 
         if(RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker','Delete') == 'true'){
 
-            $cesstatus = CesStatus::where('id','=',$id)->delete();
+            $cesstatus = ProfileTblCesStatus::where('id','=',$id)->delete();
 
             return 'Successfully deleted';
         }
