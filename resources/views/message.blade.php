@@ -1,15 +1,6 @@
-@extends('layout_plain')
+@extends('layouts.guest')
 
 @section('content')
-<br/><br/>
-<div class="jumbotron shadow bg-primary text-white"><center>
-    <p class="lead">Request results says...</p>
-    <h1 class="display-4">{{ $response['message'] }}</h1>
-    <hr class="my-4">
-    <p>Click the Login button to retry.</p>
-    <br/>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="{{ $response['link'] }}" role="button">Login</a>
-    </p>
-</center></div>
+    <h1 class="text-red-500">{{ $response['message'] }}</h1>
+    <a class="btn btn-primary my-5" href="{{ $response['link'] }}" role="button">Try again</a>
 @endsection
