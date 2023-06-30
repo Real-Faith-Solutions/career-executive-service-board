@@ -67,6 +67,11 @@
                     <option value="Retired">Retired</option>
                     <option value="Deceased">Deceased</option>
                 </select>
+                @error('status')
+                    <span class="invalid" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
         </div>
