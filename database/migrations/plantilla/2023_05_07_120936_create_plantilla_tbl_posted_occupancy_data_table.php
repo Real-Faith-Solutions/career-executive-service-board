@@ -8,36 +8,22 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillaTblConvertedOccupancyList
      */
     public function up(): void
     {
-        Schema::create('plantilla_tblConverted_OccupancyList', function (Blueprint $table) {
+        Schema::create('plantilla_tbl_posted_occupancy_data', function (Blueprint $table) {
             $table->id();
-            $table->string('posting_dt')->nullable();
             $table->string('ctrlno')->nullable();
             $table->string('plantilla_id')->nullable();
             $table->string('pos_code')->nullable();
             $table->string('deptid')->nullable();
             $table->string('department')->nullable();
-            $table->string('MotherDeptID')->nullable();
-            $table->string('MotherDept')->nullable();
             $table->string('agencytype')->nullable();
             $table->string('officelocid')->nullable();
             $table->string('AgencyLocation')->nullable();
             $table->string('RegionSeq')->nullable();
             $table->string('officeid')->nullable();
             $table->string('office')->nullable();
-            $table->string('floor_bldg')->nullable();
-            $table->string('house_no_st')->nullable();
-            $table->string('brgy_dist')->nullable();
-            $table->string('city_code')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zipcode')->nullable();
-            $table->string('provine')->nullable();
-            $table->string('region')->nullable();
-            $table->string('contactno')->nullable();
-            $table->string('emailadd')->nullable();
             $table->string('is_ces_pos')->nullable();
             $table->string('is_generic')->nullable();
             $table->string('pres_apptee')->nullable();
@@ -48,22 +34,24 @@ return new class extends Migration
             $table->string('item_no')->nullable();
             $table->string('sg')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('apptee_cesno')->nullable();
+            $table->string('apptee_fullname')->nullable();
+            $table->string('apptee_cesstatus')->nullable();
+            $table->string('apptee_apptdate')->nullable();
+            $table->string('apptee_assumdate')->nullable();
+            $table->string('apptee_specAssign')->nullable();
             $table->string('occu_cesno')->nullable();
-            $table->string('occu_title')->nullable();
-            $table->string('occu_lastname')->nullable();
-            $table->string('occu_firstname')->nullable();
-            $table->string('occu_middlename')->nullable();
-            $table->string('occu_mi')->nullable();
             $table->string('occu_fullname')->nullable();
-            $table->string('occu_gender')->nullable();
             $table->string('occu_cesstatus')->nullable();
             $table->string('occu_appstatus')->nullable();
             $table->string('occu_specAssign')->nullable();
-            $table->date('occu_apptdate')->nullable();
-            $table->string('occu_birthdate')->nullable();
-            $table->string('sequence_no')->nullable();
+            $table->string('cbasis_code')->nullable();
+            $table->string('classremarks')->nullable();
+            $table->string('classdate')->nullable();
+            $table->string('pos_count')->nullable();
+            $table->string('occu_apptdate')->nullable();
+            $table->string('lastupd_dt')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -72,6 +60,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tblConverted_OccupancyList');
+        Schema::dropIfExists('plantilla_tbl_posted_occupancy_data');
     }
 };

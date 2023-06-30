@@ -8,17 +8,15 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillalibTblReasonCode
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tblReasonCode', function (Blueprint $table) {
-            $table->id('reason_code');
-            // $table->string('reason_code')->nullable();
+        Schema::create('plantillalib_tbl_reason_codes', function (Blueprint $table) {
+            $table->id();
+            $table->string('reason_code')->nullable();
             $table->string('module')->nullable();
             $table->string('title')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tblReasonCode');
+        Schema::dropIfExists('plantillalib_tbl_reason_codes');
     }
 };

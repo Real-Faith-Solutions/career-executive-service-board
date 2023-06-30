@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Plantillalib_TblClassBasis extends Model
 {
     use HasFactory;
-
-    protected $table = "plantillalib_tblClassBasis";
-
 }

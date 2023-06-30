@@ -8,9 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PlantillaManangementAccess extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
-
-    protected $table = "plantilla_manangement_accesses";
-
 }

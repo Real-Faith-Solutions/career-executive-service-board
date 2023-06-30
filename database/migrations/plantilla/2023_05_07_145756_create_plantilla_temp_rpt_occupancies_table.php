@@ -8,13 +8,12 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * PlantillaTempRptOccupancy
      */
     public function up(): void
     {
-        Schema::create('plantillatemp_rptOccupancy', function (Blueprint $table) {
-            $table->id('plantilla_id');
-            // $table->string('plantilla_id')->nullable();
+        Schema::create('plantilla_temp_rpt_occupancies', function (Blueprint $table) {
+            $table->id();
+            $table->string('plantilla_id')->nullable();
             $table->string('pos_code')->nullable();
             $table->string('deptid')->nullable();
             $table->string('officelocid')->nullable();
@@ -47,13 +46,12 @@ return new class extends Migration
             $table->string('OfcAddr_Bldg')->nullable();
             $table->string('OfcAddr_No_St')->nullable();
             $table->string('OfcAddr_City')->nullable();
-            $table->string('OfcZipCode')->nullable();
             $table->string('OfcTelNo')->nullable();
             $table->string('OfcEmail')->nullable();
             $table->string('appointee_id')->nullable();
             $table->string('cesno')->nullable();
             $table->string('Appt_Status')->nullable();
-            $table->string('appt_date')->nullable();
+            $table->string('app_date')->nullable();
             $table->string('assum_date')->nullable();
             $table->string('is_appointee')->nullable();
             $table->string('lastname')->nullable();
@@ -74,7 +72,6 @@ return new class extends Migration
             $table->string('submitted_by')->nullable();
             $table->string('lastPlantilla_DT')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -83,6 +80,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillatemp_rptOccupancy');
+        Schema::dropIfExists('plantilla_temp_rpt_occupancies');
     }
 };
