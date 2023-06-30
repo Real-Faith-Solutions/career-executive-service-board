@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profilelib_tblcities', function (Blueprint $table) {
-            $table->id('city_code');
-            // $table->string('city_code')->unique();
-            $table->string('prov_code')->nullable();
-            $table->string('name')->nullable();
-            $table->string('zipcode')->nullable();
+        Schema::create('profilelib_tblareacode', function (Blueprint $table) {
+            $table->id('CODE');
+            // $table->string('CODE')->unique();
+            $table->string('NAME')->nullable();
+            $table->string('ZIPCODE')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profilelib_tblcities');
+        Schema::dropIfExists('profilelib_tblareacode');
     }
 };

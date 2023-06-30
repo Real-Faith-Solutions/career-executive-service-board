@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlantillaTblOffice;
 use Illuminate\Http\Request;
 
 class OfficeManagerController extends Controller

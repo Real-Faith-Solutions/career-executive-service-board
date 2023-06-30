@@ -25,6 +25,5 @@ class AppServiceProvider extends ServiceProvider
         $paths = array_merge([$migrationsPath], $directories);
 
         $this->loadMigrationsFrom($paths);
-
     }
 }

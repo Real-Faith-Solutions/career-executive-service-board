@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PlantillaTblAgencyLocation;
 use Illuminate\Http\Request;
 
 class AgencyLocationyController extends Controller
