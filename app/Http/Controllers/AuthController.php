@@ -14,11 +14,11 @@ use Illuminate\Validation\Rules\Password;
 class AuthController extends Controller
 {
     public function getLoginHomePage(Request $request){
-       
+
         // Valdate if user already login or not
 
         if (Auth::check() === true) {
-            
+
             return Redirect::to('/admin/dashboard');
         }
         else{
@@ -28,17 +28,17 @@ class AuthController extends Controller
     }
 
     public function userChangeDefaultPasswordPage(Request $request){
-       
+
         // Login User once for changing default password
 
         if (Auth::once(['email' => $request->email, 'password' => $request->input_old_password])) {
-            
+
             if(Auth::user()->default_password_change != 'true'){
 
                 // Validate form
 
                 $validator = Validator::make(
-                        
+
                     array(
                         'email' => $request->email,
                         'old_password' =>  Hash::check($request->input_old_password, Auth::user()->password),
@@ -68,7 +68,7 @@ class AuthController extends Controller
                     return $errors;
 
                 }else{
-                    
+
                     User::where('email', Auth::user()->email)
                         ->update([
                         'default_password_change' => 'true',
@@ -108,9 +108,9 @@ class AuthController extends Controller
         // Attempt to log user once to changed default password and regenerate session to user that already changed their password
 
         if (Auth::once(['email' => $request->email, 'password' => $request->password])) {
- 
+
             if(Auth::user()->default_password_change != 'true'){
-             
+
                 $email = $request->email;
 
                 return view('change_default_password', compact('email'))->render();
@@ -118,9 +118,9 @@ class AuthController extends Controller
             else{
 
                 if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            
+
                     $request->session()->regenerate();
-        
+
                     if(Auth::user()->role == 'User'){
 
                         return Redirect::to('/admin/profile/views/'.Auth::user()->cesno);
@@ -129,7 +129,7 @@ class AuthController extends Controller
 
                         return Redirect::to('/admin');
                     }
-                    
+
                 }
             }
         }
@@ -138,7 +138,7 @@ class AuthController extends Controller
             // Return response if invalid login credentials
 
             $response = [];
-            $response['message'] = 'Login failed! Info mismatched.';
+            $response['message'] = 'Your username or password are incorrect';
             $response['link'] = 'login';
 
             return view('message', compact('response'))->render();
@@ -148,11 +148,11 @@ class AuthController extends Controller
     public function userLogout(Request $request){
 
         // Logout user, invalidate, and regenerate token session
-        
+
         Auth::logout();
- 
+
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
