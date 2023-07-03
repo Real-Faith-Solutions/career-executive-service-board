@@ -318,10 +318,11 @@ class ProfileController extends Controller
 
     public function viewDetails($cesno){
         $mainProfile = PersonalData::find($cesno);
+        $familyProfile = FamilyProfile::find($mainProfile);
 
 
 
-    return view('admin.201_profiling.profile', compact('mainProfile'));
+        return view('admin.201_profiling.profile', compact('mainProfile', 'familyProfile'));
     }
 
 

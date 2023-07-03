@@ -26,13 +26,16 @@
             @include('admin.201_profiling.partials.personal_data')
         </div>
 
-        {{-- <div class="category familyProfileTab hidden">
-                @include('admin.201_profiling.partials.family_profile')
-            </div>
+        <div class="category familyProfileTab hidden">
+            @include('admin.201_profiling.partials.family_profile')
+        </div>
+        <div class="category educationalAttainmentTab hidden">
+            @include('admin.201_profiling.partials.educational_attainment')
+        </div>
 
-            <div class="category educationalAttainmentTab hidden">
-                @include('admin.201_profiling.partials.educational_attainment')
-            </div>
+        {{--
+
+
 
             <div class="category examinationsTakenTab hidden">
                 @include('admin.201_profiling.partials.examinations_taken')
