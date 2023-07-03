@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="educational_attainment" role="tabpanel" aria-labelledby="educational_attainment-tab">
+<div class="tab-pane fade" id="educational_attainment" role="tabpanel" aria-labelledby="educational_attainment-tab">
     <form class="user" id="educational_attainment_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/educational-attainment/add`, `educational_attainment_form`, `Add`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `educational_attainment_form_submit`, `None`, `None`)">
         @csrf
         <div class="bg-blue-500 p-2 uppercase text-white">

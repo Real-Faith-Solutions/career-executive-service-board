@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="case_records" role="tabpanel" aria-labelledby="case_records-tab">
+<div class="tab-pane fade" id="case_records" role="tabpanel" aria-labelledby="case_records-tab">
     <form class="user" id="case_records_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/case-records/add`, `case_records_form`, `Add`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `case_records_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

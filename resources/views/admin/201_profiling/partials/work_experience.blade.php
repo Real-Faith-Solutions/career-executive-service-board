@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="work_experience" role="tabpanel" aria-labelledby="work_experience-tab">
+<div class="tab-pane fade" id="work_experience" role="tabpanel" aria-labelledby="work_experience-tab">
     <form class="user" id="work_experience_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/work-experience/add`, `work_experience_form`, `Add`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `work_experience_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

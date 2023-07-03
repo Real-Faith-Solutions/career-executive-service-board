@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="field_expertise" role="tabpanel" aria-labelledby="field_expertise-tab">
+<div class="tab-pane fade" id="field_expertise" role="tabpanel" aria-labelledby="field_expertise-tab">
     <form class="user" id="field_expertise_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/field-expertise/add`, `field_expertise_form`, `Add`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `field_expertise_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

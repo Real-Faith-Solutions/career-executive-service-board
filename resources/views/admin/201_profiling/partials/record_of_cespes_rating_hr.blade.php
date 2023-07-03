@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="record_of_cespes_rating_hr" role="tabpanel" aria-labelledby="record_of_cespes_rating_hr-tab">
+<div class="tab-pane fade" id="record_of_cespes_rating_hr" role="tabpanel" aria-labelledby="record_of_cespes_rating_hr-tab">
     <form class="user" id="record_of_cespes_rating_hr_form" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/record-of-cespes-ratings/add`, `record_of_cespes_rating_hr_form`, `Add`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `record_of_cespes_rating_hr_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="eligibility_and_rank_tracker" role="tabpanel" aria-labelledby="eligibility_and_rank_tracker-tab">
+<div class="tab-pane fade" id="eligibility_and_rank_tracker" role="tabpanel" aria-labelledby="eligibility_and_rank_tracker-tab">
     <form class="user" id="ceswe_hr_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/ces-we/add`, `ceswe_hr_form`, `Add`, `updateCesWeTable`, `resetCesWeForm`, `ceswe_hr_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

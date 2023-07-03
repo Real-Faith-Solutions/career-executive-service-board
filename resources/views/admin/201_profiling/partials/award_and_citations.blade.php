@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="award_and_citations" role="tabpanel" aria-labelledby="award_and_citations-tab">
+<div class="tab-pane fade" id="award_and_citations" role="tabpanel" aria-labelledby="award_and_citations-tab">
     <form class="user" id="award_and_citations_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/award-and-citations/add`, `award_and_citations_form`, `Add`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `award_and_citations_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

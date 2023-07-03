@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="scholarships" role="tabpanel" aria-labelledby="scholarships-tab">
+<div class="tab-pane fade" id="scholarships" role="tabpanel" aria-labelledby="scholarships-tab">
     <form class="user" id="scholarships_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/scholarships/add`, `scholarships_form`, `Add`, `updateScholarshipsTable`, `resetScholarshipsForm`, `scholarships_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

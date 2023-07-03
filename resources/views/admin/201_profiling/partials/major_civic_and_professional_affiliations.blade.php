@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="major_civic_and_professional_affiliations" role="tabpanel" aria-labelledby="major_civic_and_professional_affiliations-tab">
+<div class="tab-pane fade" id="major_civic_and_professional_affiliations" role="tabpanel" aria-labelledby="major_civic_and_professional_affiliations-tab">
     <form class="user" id="major_civic_and_professional_affiliations_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/major-civic-and-professional-affiliations/add`, `major_civic_and_professional_affiliations_form`, `Add`, `updateAffiliationsTable`, `resetAffiliationsForm`, `major_civic_and_professional_affiliations_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

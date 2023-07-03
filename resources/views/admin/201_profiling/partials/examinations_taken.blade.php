@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="examinations_taken" role="tabpanel" aria-labelledby="examinations_taken-tab">
+<div class="tab-pane fade" id="examinations_taken" role="tabpanel" aria-labelledby="examinations_taken-tab">
     <form class="user" id="examinations_taken_historical_record_of_examinations_taken_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/examination-taken/add`, `examinations_taken_historical_record_of_examinations_taken_form`, `Add`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `examinations_taken_historical_record_of_examinations_taken_form_submit`, `None`, `None`)">
         @csrf
         <div class="bg-blue-500 p-2 uppercase text-white">

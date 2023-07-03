@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="research_and_studies" role="tabpanel" aria-labelledby="research_and_studies-tab">
+<div class="tab-pane fade" id="research_and_studies" role="tabpanel" aria-labelledby="research_and_studies-tab">
     <form class="user" id="research_and_studies_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/research-and-studies/add`, `research_and_studies_form`, `Add`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `research_and_studies_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

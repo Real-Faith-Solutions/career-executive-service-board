@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="ces_trainings" role="tabpanel" aria-labelledby="ces_trainings-tab">
+<div class="tab-pane fade" id="ces_trainings" role="tabpanel" aria-labelledby="ces_trainings-tab">
     <form class="user" id="ces_trainings_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/ces-trainings/add`, `ces_trainings_form`, `Add`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `ces_trainings_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

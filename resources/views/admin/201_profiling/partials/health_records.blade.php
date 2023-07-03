@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="health_records" role="tabpanel" aria-labelledby="health_records-tab">
+<div class="tab-pane fade" id="health_records" role="tabpanel" aria-labelledby="health_records-tab">
     <form class="user" id="health_records_magna_carta_for_disabled_persons_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/health-records/add`, `health_records_magna_carta_for_disabled_persons_form`, `Add`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `health_records_magna_carta_for_disabled_persons_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

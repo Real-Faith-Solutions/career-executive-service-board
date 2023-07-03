@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="pdf_files" role="tabpanel" aria-labelledby="pdf_files-tab">
+<div class="tab-pane fade" id="pdf_files" role="tabpanel" aria-labelledby="pdf_files-tab">
     <form class="user" id="pdf_files_form" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/pdf-files/add`, `pdf_files_form`, `Add`, `updatePdfFilesTable`, `resetPdfFilesForm`, `pdf_files_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

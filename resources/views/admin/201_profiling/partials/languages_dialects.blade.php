@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="languages_dialects" role="tabpanel" aria-labelledby="languages_dialects-tab">
+<div class="tab-pane fade" id="languages_dialects" role="tabpanel" aria-labelledby="languages_dialects-tab">
     <form class="user" id="languages_dialects_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/languages-dialects/add`, `languages_dialects_form`, `Add`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `languages_dialects_form_submit`, `None`, `None`)">
         @csrf
         <div class="bg-blue-500 p-2 uppercase text-white">

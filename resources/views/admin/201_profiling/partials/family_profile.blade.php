@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="family-profile" role="tabpanel" aria-labelledby="family-profile-tab">
+<div class="tab-pane fade" id="family-profile" role="tabpanel" aria-labelledby="family-profile-tab">
     <form class="user" id="spouse_records_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/spouse-records/add`, `spouse_records_form`, `Add`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `spouse_records_form_submit`, `None`, `None`)">
         @csrf
         <div class="bg-blue-500 p-2 uppercase text-white">

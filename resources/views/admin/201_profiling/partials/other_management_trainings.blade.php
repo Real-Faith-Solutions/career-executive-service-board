@@ -1,4 +1,4 @@
-<div class="tab-pane fade hidden" id="other_management_trainings" role="tabpanel" aria-labelledby="other_management_trainings-tab">
+<div class="tab-pane fade" id="other_management_trainings" role="tabpanel" aria-labelledby="other_management_trainings-tab">
     <form class="user" id="other_management_trainings_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/other-management-trainings/add`, `other_management_trainings_form`, `Add`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `other_management_trainings_form_submit`, `None`, `None`)">
         @csrf
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">

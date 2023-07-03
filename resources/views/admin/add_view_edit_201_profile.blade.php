@@ -60,24 +60,24 @@
 
         {{-- Start hiding other category if profile/view --}}
         @if (str_contains(Request::url(), 'profile/view'))
-            <button class="btn category-button text-blue-500" onclick="personDataTab()">Personal Data</button>
-            <button class="btn category-button" onclick="familyProfileTab()">Family Profile</button>
-            <button class="btn category-button" onclick="educationalAttainmentTab()">Educational Background / Attainment</button>
-            <button class="btn category-button" onclick="examinationsTakenTab()">Examinations Taken</button>
-            <button class="btn category-button" onclick="languagesDialectsTab()">Languages Dialects</button>
-            <button class="btn category-button" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</button>
-            <button class="btn category-button" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</button>
-            <button class="btn category-button" onclick="workExperienceTab()">Work Experience</button>
-            <button class="btn category-button" onclick="fieldExpertiseTab()">Field Expertise</button>
-            <button class="btn category-button" onclick="cesTrainingsTab()">Ces Trainings</button>
-            <button class="btn category-button" onclick="otherManagementTrainingsTab()">Other Trainings</button>
-            <button class="btn category-button" onclick="researchAndStudiesTab()">Research And Studies</button>
-            <button class="btn category-button" onclick="scholarshipsTab()">Scholarships</button>
-            <button class="btn category-button" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</button>
-            <button class="btn category-button" onclick="awardAndCitationsTab()">Award And Citations</button>
-            <button class="btn category-button" onclick="caseRecordsTab()">Case Records</button>
-            <button class="btn category-button" onclick="healthRecordsTab()">Health Records</button>
-            <button class="btn category-button" onclick="pdfFilesTab()">PDF Files</button>
+            <a class="btn category-button text-blue-500" href="#personDataTab" onclick="personDataTab()">Personal Data</a>
+            <a class="btn category-button" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
+            <a class="btn category-button" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
+            <a class="btn category-button" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
+            <a class="btn category-button" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
+            <a class="btn category-button" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
+            <a class="btn category-button" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
+            <a class="btn category-button" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
+            <a class="btn category-button" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
+            <a class="btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
+            <a class="btn category-button" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
+            <a class="btn category-button" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
+            <a class="btn category-button" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
+            <a class="btn category-button" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>
+            <a class="btn category-button" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
+            <a class="btn category-button" href="#caseRecordsTab" onclick="caseRecordsTab()">Case Records</a>
+            <a class="btn category-button" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
+            <a class="btn category-button" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
         @endif
 
     </section>
