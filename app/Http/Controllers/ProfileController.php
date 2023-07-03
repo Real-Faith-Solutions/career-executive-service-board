@@ -96,7 +96,7 @@ class ProfileController extends Controller
 
                     if($search_email_201_profile == '[]' && $search_email_user == '[]'){
 
-                        $validation_result = 'false';
+                        $validation_result = 'true';
 
                         return $validation_result;
                     }
@@ -115,7 +115,7 @@ class ProfileController extends Controller
 
                 if($search_gsis_201_profile == '[]'){
 
-                    $validation_result = 'false';
+                    $validation_result = 'true';
 
                     return $validation_result;
                 }
@@ -134,7 +134,7 @@ class ProfileController extends Controller
 
                 if($search_pagibig_201_profile == '[]'){
 
-                    $validation_result = 'false';
+                    $validation_result = 'true';
 
                     return $validation_result;
                 }
@@ -153,7 +153,7 @@ class ProfileController extends Controller
 
                 if($search_philhealt_201_profile == '[]'){
 
-                    $validation_result = 'false';
+                    $validation_result = 'true';
 
                     return $validation_result;
                 }
@@ -172,7 +172,7 @@ class ProfileController extends Controller
 
                 if($search_sss_no_201_profile == '[]'){
 
-                    $validation_result = 'false';
+                    $validation_result = 'true';
 
                     return $validation_result;
                 }
@@ -191,7 +191,7 @@ class ProfileController extends Controller
 
                 if($search_tin_201_profile == '[]'){
 
-                    $validation_result = 'false';
+                    $validation_result = 'true';
 
                     return $validation_result;
                 }
@@ -230,7 +230,7 @@ class ProfileController extends Controller
 
                     if($search_mobileno1_ma_201_profile == '[]'){
 
-                        $validation_result = 'false';
+                        $validation_result = 'true';
 
                         return $validation_result;
                     }
@@ -260,7 +260,7 @@ class ProfileController extends Controller
 
             if($search_201_profile_by_name == '[]' && $search_201_profile_by_name_and_birthday == '[]'){
 
-                $validation_result = 'false';
+                $validation_result = 'true';
 
                 return $validation_result;
             }
