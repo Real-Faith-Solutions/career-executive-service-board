@@ -450,7 +450,7 @@
                 <div class="col-md-6">
                     <label class="form-label ml-2 mb-0">City / Municipality<sup>*</sup></label>
                     <select name="cm_pa" aria-aria-controls='example' style="text-transform:capitalize" class="w-100 form-control mb-3" required>
-                        <option value="">Please Select</option>
+                        <option disabled selected>Please Select</option>
                         @foreach ($CityMunicipality as $item)
                             <option value="{{ $item->CODE }}">{{ $item->NAME }}</option>
                         @endforeach
@@ -496,7 +496,7 @@
                 <div class="col-md-6">
                     <label class="form-label ml-2 mb-0">City / Municipality<sup>*</sup></label>
                     <select name="cm_ma" aria-aria-controls='example' style="text-transform:capitalize" class="w-100 form-control mb-3" required>
-                        <option value="">Please Select</option>
+                        <option disabled selected>Please Select</option>
                         @foreach ($CityMunicipality as $item)
                             <option value="{{ $item->CODE }}">{{ $item->NAME }}</option>
                         @endforeach
@@ -697,5 +697,10 @@
                             </table>
                         </div> --}}
 
+    <div class="flex justify-end">
+        <button class="btn btn-primary" type="submit">
+            Submit
+        </button>
+    </div>
     </form>
 </div>
