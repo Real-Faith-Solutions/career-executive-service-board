@@ -1,12 +1,14 @@
 <div class="tab-pane fade show active" id="person-data" role="tabpanel" aria-labelledby="person-data-tab">
-    @if (str_contains(Request::url(), 'profile/view'))
+    {{-- @if (str_contains(Request::url(), 'profile/view'))
         <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/edit`, `personal_data`, `Update`, `updatePersonalDataTable`, `resetPersonalDataForm`, `personal_data_submit`, `None`, `None`)">
-        @else
-            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/add`, `personal_data`, `Add`, `None`, `None`, `personal_data_submit`, `Yes`, `None`)">
-    @endif
+        @else --}}
+            {{-- <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/add`, `personal_data`, `Add`, `None`, `None`, `personal_data_submit`, `Yes`, `None`)"> --}}
+            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="{{ route('/add-profile-201') }}>
+    {{-- @endif --}}
 
     @csrf
-    <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
+
+    <div class = "mb-3 bg-blue-500 p-2 uppercase text-white">
         <h1>Personal data</h1>
     </div>
 
@@ -360,7 +362,7 @@
     </div>
 
     {{-- identification cards --}}
-    <section>
+    {{-- <section>
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
             <h1>Identification cards</h1>
         </div>
@@ -417,9 +419,11 @@
                 @enderror
             </div>
         </div>
-    </section> {{-- end of identification card --}}
+    </section>  --}}
+    {{-- end of identification card --}}
 
-    <section> {{-- permandent address --}}
+    {{-- permandent address --}}
+    {{-- <section> 
 
         <div class="bg-blue-500 p-2 uppercase text-white">
             <h1>Home / Permanent Address</h1>
@@ -464,9 +468,11 @@
             </div>
         </div>
 
-    </section> {{-- end of permanent address --}}
+    </section>  --}}
+    {{-- end of permanent address --}}
 
-    <section> {{-- mailing address --}}
+    {{-- mailing address --}}
+    {{-- <section> 
         <div class="bg-blue-500 p-2 uppercase text-white">
             <h1>Mailing address</h1>
         </div>
@@ -528,179 +534,184 @@
             </div>
 
         </div>
-    </section> {{-- end of mailing address --}}
+    </section>  --}}
+    {{-- end of mailing address --}}
 
     {{-- <div class="overflow-auto">
-                            <table class="table-responsive-lg table-hover table">
-                                <thead class="bg-secondary bg-gardient text-white">
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">Ces No.</th>
-                                        <th scope="col">Solo Parent?</th>
-                                        <th scope="col">Member of Indigenous Group?</th>
-                                        <th scope="col">Is PWD?</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">GSIS ID No.</th>
-                                        <th scope="col">PAG-IBIG ID No.</th>
-                                        <th scope="col">PHILHEALTH ID No.</th>
-                                        <th scope="col">SSS ID No.</th>
-                                        <th scope="col">TIN ID No.</th>
-                                        <th scope="col">Record Status</th>
-                                        <th scope="col">Citizenship</th>
-                                        <th scope="col">Dual Citizenship</th>
-                                        <th scope="col">Lastname</th>
-                                        <th scope="col">Firstname</th>
-                                        <th scope="col">Middlename</th>
-                                        <th scope="col">M.I</th>
-                                        <th scope="col">Name Extension</th>
-                                        <th scope="col">Nickname</th>
-                                        <th scope="col">Birthdate</th>
-                                        <th scope="col">Age</th>
-                                        <th scope="col">Birthplace</th>
-                                        <th scope="col">Gender</th>
-                                        <th scope="col">Civil Status</th>
-                                        <th scope="col">Religion</th>
-                                        <th scope="col">Height</th>
-                                        <th scope="col">Weight</th>
-                                        <th scope="col">Home Floor/Bldg.</th>
-                                        <th scope="col">Home No./Street</th>
-                                        <th scope="col">Home Brgy./District</th>
-                                        <th scope="col">Home City/Municipality</th>
-                                        <th scope="col">Home Zip Code</th>
-                                        <th scope="col">Mailing Floor/Bldg.</th>
-                                        <th scope="col">Mailing No./Street</th>
-                                        <th scope="col">Mailing Brgy./District</th>
-                                        <th scope="col">Mailing City/Municipality</th>
-                                        <th scope="col">Mailing Zip Code</th>
-                                        <th scope="col">Mailing Official Email Address</th>
-                                        <th scope="col">Mailing Tel. No.1(landline)</th>
-                                        <th scope="col">Mailing Personal Mobile No.1</th>
-                                        <th scope="col">Mailing Personal Mobile No.2</th>
-                                        <th scope="col">Encoded By</th>
-                                        <th scope="col">Encoded Date</th>
-                                        <th scope="col">Last Updated By</th>
-                                        <th scope="col">Last Update Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="PersonalData_tbody">
-                                    @if (count($personalData) === 0)
 
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                        </tr>
-                                    @else
-                                        @foreach ($personalData as $item)
+        <table class="table-responsive-lg table-hover table">
+            <thead class="bg-secondary bg-gardient text-white">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ces No.</th>
+                    <th scope="col">Solo Parent?</th>
+                    <th scope="col">Member of Indigenous Group?</th>
+                    <th scope="col">Is PWD?</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">GSIS ID No.</th>
+                    <th scope="col">PAG-IBIG ID No.</th>
+                    <th scope="col">PHILHEALTH ID No.</th>
+                    <th scope="col">SSS ID No.</th>
+                    <th scope="col">TIN ID No.</th>
+                    <th scope="col">Record Status</th>
+                    <th scope="col">Citizenship</th>
+                    <th scope="col">Dual Citizenship</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Middlename</th>
+                    <th scope="col">M.I</th>
+                    <th scope="col">Name Extension</th>
+                    <th scope="col">Nickname</th>
+                    <th scope="col">Birthdate</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Birthplace</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Civil Status</th>
+                    <th scope="col">Religion</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Home Floor/Bldg.</th>
+                    <th scope="col">Home No./Street</th>
+                    <th scope="col">Home Brgy./District</th>
+                    <th scope="col">Home City/Municipality</th>
+                    <th scope="col">Home Zip Code</th>
+                    <th scope="col">Mailing Floor/Bldg.</th>
+                    <th scope="col">Mailing No./Street</th>
+                    <th scope="col">Mailing Brgy./District</th>
+                    <th scope="col">Mailing City/Municipality</th>
+                    <th scope="col">Mailing Zip Code</th>
+                    <th scope="col">Mailing Official Email Address</th>
+                    <th scope="col">Mailing Tel. No.1(landline)</th>
+                    <th scope="col">Mailing Personal Mobile No.1</th>
+                    <th scope="col">Mailing Personal Mobile No.2</th>
+                    <th scope="col">Encoded By</th>
+                    <th scope="col">Encoded Date</th>
+                    <th scope="col">Last Updated By</th>
+                    <th scope="col">Last Update Date</th>
+                </tr>
+            </thead>
+            <tbody id="PersonalData_tbody">
+                @if (count($personalData) === 0)
 
-                                            <tr>
-                                                <td>
-                                                    @if (str_contains(Request::url(), 'profile/view'))
-                                                        @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Edit') == 'true')
-                                                            <a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPersonalDataForm(`Edit`)">Edit</a>
-                                                        @endif
-                                                    @endif
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                @else
+                    @foreach ($personalData as $item)
 
-                                                </td>
-                                                <td>{{ $item->cesno ?? '-' }}</td>
-                                                <td>{{ $item->sp ?? '-' }}</td>
-                                                <td>{{ $item->moig ?? '-' }}</td>
-                                                <td>{{ $item->pwd ?? '-' }}</td>
-                                                <td>{{ $item->title ?? '-' }}</td>
-                                                <td>{{ $item->gsis ?? '-' }}</td>
-                                                <td>{{ $item->pagibig ?? '-' }}</td>
-                                                <td>{{ $item->philhealt ?? '-' }}</td>
-                                                <td>{{ $item->sss_no ?? '-' }}</td>
-                                                <td>{{ $item->tin ?? '-' }}</td>
-                                                <td>{{ $item->status ?? '-' }}</td>
-                                                <td>{{ $item->citizenship ?? '-' }}</td>
-                                                <td>{{ $item->d_citizenship ?? '-' }}</td>
-                                                <td>{{ $item->lastname ?? '-' }}</td>
-                                                <td>{{ $item->firstname ?? '-' }}</td>
-                                                <td>{{ $item->middlename ?? '-' }}</td>
-                                                <td>{{ $item->mi ?? '-' }}</td>
-                                                <td>{{ $item->ne ?? '-' }}</td>
-                                                <td>{{ $item->nickname ?? '-' }}</td>
-                                                <td>{{ $item->birthdate ?? '-' }}</td>
-                                                <td>{{ $item->age ?? '-' }}</td>
-                                                <td>{{ $item->birth_place ?? '-' }}</td>
-                                                <td>{{ $item->gender ?? '-' }}</td>
-                                                <td>{{ $item->civil_status ?? '-' }}</td>
-                                                <td>{{ $item->religion ?? '-' }}</td>
-                                                <td>{{ $item->height ?? '-' }}</td>
-                                                <td>{{ $item->weight ?? '-' }}</td>
-                                                <td>{{ $item->fb_pa ?? '-' }}</td>
-                                                <td>{{ $item->ns_pa ?? '-' }}</td>
-                                                <td>{{ $item->bd_pa ?? '-' }}</td>
-                                                <td>{{ $item->cm_pa ?? '-' }}</td>
-                                                <td>{{ $item->zc_pa ?? '-' }}</td>
-                                                <td>{{ $item->fb_ma ?? '-' }}</td>
-                                                <td>{{ $item->ns_ma ?? '-' }}</td>
-                                                <td>{{ $item->bd_ma ?? '-' }}</td>
-                                                <td>{{ $item->cm_ma ?? '-' }}</td>
-                                                <td>{{ $item->zc_ma ?? '-' }}</td>
-                                                <td>{{ $item->oea_ma ?? '-' }}</td>
-                                                <td>{{ $item->telno1_ma ?? '-' }}</td>
-                                                <td>{{ $item->mobileno1_ma ?? '-' }}</td>
-                                                <td>{{ $item->mobileno2_ma ?? '-' }}</td>
-                                                <td nowrap="nowrap">{{ $item->encoder ?? '-' }}</td>
-                                                <td nowrap="nowrap">{{ strftime('%m/%d/%Y, %r', strtotime($item->created_at)) ?? '-' }}</td>
-                                                <td nowrap="nowrap">{{ $item->last_updated_by ?? '-' }}</td>
-                                                <td nowrap="nowrap">{{ strftime('%m/%d/%Y, %r', strtotime($item->updated_at)) ?? '-' }}</td>
-                                            </tr>
-                                        @endforeach
+                        <tr>
+                            <td>
+                                @if (str_contains(Request::url(), 'profile/view'))
+                                    @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Edit') == 'true')
+                                        <a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPersonalDataForm(`Edit`)">Edit</a>
                                     @endif
-                                </tbody>
-                            </table>
-                        </div> --}}
+                                @endif
+
+                            </td>
+                            <td>{{ $item->cesno ?? '-' }}</td>
+                            <td>{{ $item->sp ?? '-' }}</td>
+                            <td>{{ $item->moig ?? '-' }}</td>
+                            <td>{{ $item->pwd ?? '-' }}</td>
+                            <td>{{ $item->title ?? '-' }}</td>
+                            <td>{{ $item->gsis ?? '-' }}</td>
+                            <td>{{ $item->pagibig ?? '-' }}</td>
+                            <td>{{ $item->philhealt ?? '-' }}</td>
+                            <td>{{ $item->sss_no ?? '-' }}</td>
+                            <td>{{ $item->tin ?? '-' }}</td>
+                            <td>{{ $item->status ?? '-' }}</td>
+                            <td>{{ $item->citizenship ?? '-' }}</td>
+                            <td>{{ $item->d_citizenship ?? '-' }}</td>
+                            <td>{{ $item->lastname ?? '-' }}</td>
+                            <td>{{ $item->firstname ?? '-' }}</td>
+                            <td>{{ $item->middlename ?? '-' }}</td>
+                            <td>{{ $item->mi ?? '-' }}</td>
+                            <td>{{ $item->ne ?? '-' }}</td>
+                            <td>{{ $item->nickname ?? '-' }}</td>
+                            <td>{{ $item->birthdate ?? '-' }}</td>
+                            <td>{{ $item->age ?? '-' }}</td>
+                            <td>{{ $item->birth_place ?? '-' }}</td>
+                            <td>{{ $item->gender ?? '-' }}</td>
+                            <td>{{ $item->civil_status ?? '-' }}</td>
+                            <td>{{ $item->religion ?? '-' }}</td>
+                            <td>{{ $item->height ?? '-' }}</td>
+                            <td>{{ $item->weight ?? '-' }}</td>
+                            <td>{{ $item->fb_pa ?? '-' }}</td>
+                            <td>{{ $item->ns_pa ?? '-' }}</td>
+                            <td>{{ $item->bd_pa ?? '-' }}</td>
+                            <td>{{ $item->cm_pa ?? '-' }}</td>
+                            <td>{{ $item->zc_pa ?? '-' }}</td>
+                            <td>{{ $item->fb_ma ?? '-' }}</td>
+                            <td>{{ $item->ns_ma ?? '-' }}</td>
+                            <td>{{ $item->bd_ma ?? '-' }}</td>
+                            <td>{{ $item->cm_ma ?? '-' }}</td>
+                            <td>{{ $item->zc_ma ?? '-' }}</td>
+                            <td>{{ $item->oea_ma ?? '-' }}</td>
+                            <td>{{ $item->telno1_ma ?? '-' }}</td>
+                            <td>{{ $item->mobileno1_ma ?? '-' }}</td>
+                            <td>{{ $item->mobileno2_ma ?? '-' }}</td>
+                            <td nowrap="nowrap">{{ $item->encoder ?? '-' }}</td>
+                            <td nowrap="nowrap">{{ strftime('%m/%d/%Y, %r', strtotime($item->created_at)) ?? '-' }}</td>
+                            <td nowrap="nowrap">{{ $item->last_updated_by ?? '-' }}</td>
+                            <td nowrap="nowrap">{{ strftime('%m/%d/%Y, %r', strtotime($item->updated_at)) ?? '-' }}</td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div> --}}
 
     <div class="flex justify-end">
-        <button class="btn btn-primary" type="submit">
+        {{-- <button class="btn btn-primary" type="submit">
             Submit
-        </button>
+        </button> --}}
+        <input type="submit" value="submit">
     </div>
+
     </form>
+
 </div>

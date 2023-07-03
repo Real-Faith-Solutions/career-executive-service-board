@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
@@ -43,6 +44,10 @@ Route::get('/logout', [AuthController::class, 'userLogout']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.email');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPasswordResetPage'])->name('password.reset');
+
+// new routes
+Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201')->middleware('userauth');
+// end
 
 
 // API route
