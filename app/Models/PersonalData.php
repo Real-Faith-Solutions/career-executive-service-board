@@ -11,6 +11,7 @@ class PersonalData extends Model
     use HasFactory;
     protected $guarded = [];
     protected $appends = ['age_now'];
+    protected $primaryKey = 'cesno';
 
     public function cesstatusvalue(){
         return $this->hasOne(profilelib_tblcesstatus::class, 'code', 'cesstat_code');

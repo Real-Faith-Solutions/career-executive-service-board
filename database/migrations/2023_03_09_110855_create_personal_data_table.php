@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('personal_data', function (Blueprint $table) {
 
-            $table->id();
-            $table->bigInteger('cesno')->unique();
+            $table->id('cesno');
+            // $table->bigInteger('cesno')->unique();
             $table->string('sp')->nullable();
             $table->string('moig')->nullable();
             $table->string('pwd')->nullable();
