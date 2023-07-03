@@ -60,24 +60,24 @@
 
         {{-- Start hiding other category if profile/view --}}
         @if (str_contains(Request::url(), 'profile/view'))
-            <a class="btn text-blue-500" id="person-data-tab" data-bs-toggle="tab" href="#person-data" role="tab" aria-controls="home" aria-selected="true">Personal Data</a>
-            <a class="btn" id="family-profile-tab" data-bs-toggle="tab" href="#family-profile" role="tab" aria-controls="family-profile" aria-selected="false">Family Profile</a>
-            <a class="btn" id="educational_attainment-tab" data-bs-toggle="tab" href="#educational_attainment" role="tab" aria-controls="educational_attainment" aria-selected="false">Educational Background / Attainment</a>
-            <a class="btn" id="examinations_taken-tab" data-bs-toggle="tab" href="#examinations_taken" role="tab" aria-controls="examinations_taken" aria-selected="false">Examinations Taken</a>
-            <a class="btn" id="languages_dialects-tab" data-bs-toggle="tab" href="#languages_dialects" role="tab" aria-controls="languages_dialects" aria-selected="false">Languages Dialects</a>
-            <a class="btn" id="eligibility_and_rank_tracker-tab" data-bs-toggle="tab" href="#eligibility_and_rank_tracker" role="tab" aria-controls="eligibility_and_rank_tracker" aria-selected="false">Eligibility and Rank Tracker</a>
-            <a class="btn" id="record_of_cespes_rating_hr-tab" data-bs-toggle="tab" href="#record_of_cespes_rating_hr" role="tab" aria-controls="record_of_cespes_rating_hr" aria-selected="false">Record of Cespes Ratings</a>
-            <a class="btn" id="work_experience-tab" data-bs-toggle="tab" href="#work_experience" role="tab" aria-controls="work_experience" aria-selected="false">Work Experience</a>
-            <a class="btn" id="field_expertise-tab" data-bs-toggle="tab" href="#field_expertise" role="tab" aria-controls="field_expertise" aria-selected="false">Field Expertise</a>
-            <a class="btn" id="ces_trainings-tab" data-bs-toggle="tab" href="#ces_trainings" role="tab" aria-controls="ces_trainings" aria-selected="false">Ces Trainings</a>
-            <a class="btn" id="other_management_trainings-tab" data-bs-toggle="tab" href="#other_management_trainings" role="tab" aria-controls="other_management_trainings" aria-selected="false">Other Trainings</a>
-            <a class="btn" id="research_and_studies-tab" data-bs-toggle="tab" href="#research_and_studies" role="tab" aria-controls="research_and_studies" aria-selected="false">Research And Studies</a>
-            <a class="btn" id="scholarships-tab" data-bs-toggle="tab" href="#scholarships" role="tab" aria-controls="scholarships" aria-selected="false">Scholarships</a>
-            <a class="btn" id="major_civic_and_professional_affiliations-tab" data-bs-toggle="tab" href="#major_civic_and_professional_affiliations" role="tab" aria-controls="major_civic_and_professional_affiliations" aria-selected="false">Major Civic and Professional Affiliations</a>
-            <a class="btn" id="award_and_citations-tab" data-bs-toggle="tab" href="#award_and_citations" role="tab" aria-controls="award_and_citations" aria-selected="false">Award And Citations</a>
-            <a class="btn" id="case_records-tab" data-bs-toggle="tab" href="#case_records" role="tab" aria-controls="case_records" aria-selected="false">Case Records</a>
-            <a class="btn" id="health_records-tab" data-bs-toggle="tab" href="#health_records" role="tab" aria-controls="health_records" aria-selected="false">Health Records</a>
-            <a class="btn" id="pdf_files-tab" data-bs-toggle="tab" href="#pdf_files" role="tab" aria-controls="pdf_files" aria-selected="false">PDF Files</a>
+            <button class="btn category-button text-blue-500" onclick="personDataTab()">Personal Data</button>
+            <button class="btn category-button" onclick="familyProfileTab()">Family Profile</button>
+            <button class="btn category-button" onclick="educationalAttainmentTab()">Educational Background / Attainment</button>
+            <button class="btn category-button" onclick="examinationsTakenTab()">Examinations Taken</button>
+            <button class="btn category-button" onclick="languagesDialectsTab()">Languages Dialects</button>
+            <button class="btn category-button" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</button>
+            <button class="btn category-button" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</button>
+            <button class="btn category-button" onclick="workExperienceTab()">Work Experience</button>
+            <button class="btn category-button" onclick="fieldExpertiseTab()">Field Expertise</button>
+            <button class="btn category-button" onclick="cesTrainingsTab()">Ces Trainings</button>
+            <button class="btn category-button" onclick="otherManagementTrainingsTab()">Other Trainings</button>
+            <button class="btn category-button" onclick="researchAndStudiesTab()">Research And Studies</button>
+            <button class="btn category-button" onclick="scholarshipsTab()">Scholarships</button>
+            <button class="btn category-button" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</button>
+            <button class="btn category-button" onclick="awardAndCitationsTab()">Award And Citations</button>
+            <button class="btn category-button" onclick="caseRecordsTab()">Case Records</button>
+            <button class="btn category-button" onclick="healthRecordsTab()">Health Records</button>
+            <button class="btn category-button" onclick="pdfFilesTab()">PDF Files</button>
         @endif
 
     </section>
@@ -86,77 +86,77 @@
 
     <div class="grid">
         {{-- Start hiding other category if profile/view --}}
-        <div class="category">
+        <div class="category personDataTab">
             @include('admin.201_profiling.partials.personal_data')
         </div>
 
         @if (str_contains(Request::url(), 'profile/view'))
 
-            <div class="category">
+            <div class="category familyProfileTab">
                 @include('admin.201_profiling.partials.family_profile')
             </div>
 
-            <div class="category">
+            <div class="category educationalAttainmentTab">
                 @include('admin.201_profiling.partials.educational_attainment')
             </div>
 
-            <div class="category">
+            <div class="category examinationsTakenTab">
                 @include('admin.201_profiling.partials.examinations_taken')
             </div>
 
-            <div class="category">
+            <div class="category languagesDialectsTab">
                 @include('admin.201_profiling.partials.languages_dialects')
             </div>
 
-            <div class="category">
+            <div class="category eligibilityAndRankTrackerTab">
                 @include('admin.201_profiling.partials.eligibility_and_rank_tracker')
             </div>
 
-            <div class="category">
+            <div class="category recordOfCespesRatingHrTab">
                 @include('admin.201_profiling.partials.record_of_cespes_rating_hr')
             </div>
 
-            <div class="category">
+            <div class="category workExperienceTab">
                 @include('admin.201_profiling.partials.work_experience')
             </div>
 
-            <div class="category">
+            <div class="category fieldExpertiseTab">
                 @include('admin.201_profiling.partials.field_expertise')
             </div>
 
-            <div class="category">
+            <div class="category cesTrainingsTab">
                 @include('admin.201_profiling.partials.ces_trainings')
             </div>
 
-            <div class="category">
+            <div class="category otherManagementTrainingsTab">
                 @include('admin.201_profiling.partials.other_management_trainings')
             </div>
 
-            <div class="category">
+            <div class="category researchAndStudiesTab">
                 @include('admin.201_profiling.partials.research_and_studies')
             </div>
 
-            <div class="category">
+            <div class="category scholarshipsTab">
                 @include('admin.201_profiling.partials.scholarships')
             </div>
 
-            <div class="category">
+            <div class="category majorCivicAndProfessionalAffiliationsTab">
                 @include('admin.201_profiling.partials.major_civic_and_professional_affiliations')
             </div>
 
-            <div class="category">
+            <div class="category awardAndCitationsTab">
                 @include('admin.201_profiling.partials.award_and_citations')
             </div>
 
-            <div class="category">
+            <div class="category caseRecordsTab">
                 @include('admin.201_profiling.partials.case_records')
             </div>
 
-            <div class="category">
+            <div class="category healthRecordsTab">
                 @include('admin.201_profiling.partials.health_records')
             </div>
 
-            <div class="category">
+            <div class="category pdfFilesTab">
                 @include('admin.201_profiling.partials.pdf_files')
             </div>
 

@@ -47,7 +47,7 @@ function setPageTitle(pageTitle, pageSubTitle = "CES function page...") {
 }
 
 $(document).ready(function(){
-    
+
     // Put checked on If (Magna Carta for Disabled Persons RA 7277) if there was selected item
     if($('#dhdTxtB option:selected').val() != ''){
         $('#dhdCheckB').attr('checked', 'checked');
@@ -60,7 +60,7 @@ $(document).ready(function(){
 
     // Set or remove "Disabled" attribute in "is PWD?" dropdown list
     $('#pwd_CheckB').click(function(){
-                
+
         if($('#pwd_CheckB').is(':checked')){
 
             $('#pwd_TxtB').removeAttr('disabled');
@@ -127,14 +127,14 @@ function setUsername(){
 
         var user_name = $('#last_name').val() + $('#role option:selected').val() + $('#role_name_no').val();
         var trim_space_in_user_name = user_name.replace(' ','');
-    
+
         $('#username').val(trim_space_in_user_name.toLowerCase());
     }
 }
 
 // Resetting birthday and age field if changing birthday
 $('#birthdate').click(function(){
-    
+
     if($('#birthdate').val() != ''){
 
         Swal.fire({
@@ -154,7 +154,7 @@ $('#birthdate').click(function(){
                     showConfirmButton: false,
                     timer: 2000
                 })
-                
+
                 // Resetting birthday and age field
                 $('#birthdate').val('');
                 $('#age').val('');
@@ -239,13 +239,13 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                 processData: false,
                 contentType: false,
                 cache: false,
-                enctype: 'multipart/form-data',           
+                enctype: 'multipart/form-data',
                 success: function(response) {
 
                     if (response === 'Successfully added'){
                         Swal.fire({
                             icon: 'success',
-                            title: 'Saved!', 
+                            title: 'Saved!',
                             html: `<center>Successfully added.</center>`
                         });
 
@@ -268,7 +268,7 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                     else if (response === 'Successfully updated'){
                         Swal.fire({
                             icon: 'success',
-                            title: 'Saved!', 
+                            title: 'Saved!',
                             html: `<center>Successfully updated.</center>`
                         });
 
@@ -289,13 +289,13 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                         }
                     }
                     else if(response == 'Restricted'){
-    
+
                         Swal.fire({
                             icon: 'error',
                             title: 'Stop',
                             text: 'Sorry you are restricted to do this action please contact the administrator.',
                         });
-                        
+
                     }
                     else{
 
@@ -326,7 +326,7 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                                 confirmButtonText: 'OK'
                             })
                         }
-                        
+
                     }
                 }
             });
@@ -665,8 +665,8 @@ function updatePersonalDataTable(){
                     if(result.UserRoleName = 'User'){
                         $('#menu_profile_picture').attr('src', rootURL + 'external-storage/Photos/201 Photos/' + element['picture']);
                     }
-                    
-                }); 
+
+                });
             }
         }
     });
@@ -693,7 +693,7 @@ function resetPersonalDataForm(option){
 
         // Hide and disabled Add or Edit Record button
         $('#personal_data_submit').attr({hidden: 'hidden', disabled: 'disabled'});
-        
+
     }
 
     Swal.fire({
@@ -735,7 +735,7 @@ function resetPersonalDataForm(option){
         $('#personal_data_submit').val('Edit Record').removeAttr('hidden disabled');
 
     }
-    
+
     $.ajax({
         url: rootURL + 'api/v1/personal-data/record/' + cesno,
         success: function (result) {
@@ -783,9 +783,9 @@ function resetPersonalDataForm(option){
                 document.getElementsByName('telno1_ma')[0].value = element['telno1_ma'];
                 document.getElementsByName('mobileno1_ma')[0].value = element['mobileno1_ma'];
                 document.getElementsByName('mobileno2_ma')[0].value = element['mobileno2_ma'];
-            });  
+            });
 
-            Swal.close();    
+            Swal.close();
         }
     });
 }
@@ -853,7 +853,7 @@ function updateSpouseRecordsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -871,7 +871,7 @@ function resetSpouseRecordsForm(id, option){
         success: function (validation) {
 
             if(id == null){
-                
+
                 if(validation == 'true'){
 
                     // Remove disabled attribute in all elements from form
@@ -897,7 +897,7 @@ function resetSpouseRecordsForm(id, option){
                     $('#spouse_records_form_submit').attr('class', 'btn btn-primary mb-1');
 
                 }
-                
+
             }
             else{
 
@@ -978,9 +978,9 @@ function resetSpouseRecordsForm(id, option){
                             document.getElementsByName('gender_sn_fp')[0].value = element['gender_sn_fp'];
                             document.getElementsByName('birthdate_sn_fp')[0].value = element['birthdate_sn_fp'];
                             document.getElementsByName('age_sn_fp')[0].value = element['age_sn_fp'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1041,7 +1041,7 @@ function updateFamilyProfileTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1057,9 +1057,9 @@ function resetFamilyProfileForm(id, option){
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Family Background Profile/Add',
         success: function (validation) {
-    
+
             if(id == null){
-                
+
                 if(validation == 'true'){
 
                     // Remove disabled in all elements from form
@@ -1082,7 +1082,7 @@ function resetFamilyProfileForm(id, option){
                     $('#family_profile_form_submit').attr('class', 'btn btn-secondary mb-1');
 
                 }
-                
+
             }
             else{
 
@@ -1102,7 +1102,7 @@ function resetFamilyProfileForm(id, option){
                     for(var i=0, family_profile_formLen = family_profile_form.length; i<family_profile_formLen; i++){
                         family_profile_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_family_profile_id').val(id);
 
@@ -1130,7 +1130,7 @@ function resetFamilyProfileForm(id, option){
 
                     // Reset form
                     $('#family_profile_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_family_profile_id').val(id);
 
@@ -1139,7 +1139,7 @@ function resetFamilyProfileForm(id, option){
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#family_profile_form_go_back_to_add_record_button').removeAttr('hidden');
-                    
+
                 }
 
                 $.ajax({
@@ -1155,9 +1155,9 @@ function resetFamilyProfileForm(id, option){
                             document.getElementsByName('mn_lastname_fp')[0].value = element['mn_lastname_fp'];
                             document.getElementsByName('mn_first_fp')[0].value = element['mn_first_fp'];
                             document.getElementsByName('mn_middlename_fp')[0].value = element['mn_middlename_fp'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1219,7 +1219,7 @@ function updateChildrenRecordsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1237,7 +1237,7 @@ function resetChildrenRecordsForm(id, option){
         success: function (validation) {
 
             if(id == null){
-                
+
                 if(validation == 'true'){
 
                     // Remove disabled attribute in all elements from form
@@ -1263,7 +1263,7 @@ function resetChildrenRecordsForm(id, option){
                     $('#children_record_form_submit').attr('class', 'btn btn-primary mb-1');
 
                 }
-                
+
             }
             else{
 
@@ -1283,7 +1283,7 @@ function resetChildrenRecordsForm(id, option){
                     for(var i=0, children_record_formLen = children_record_form.length; i<children_record_formLen; i++){
                         children_record_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_children_record_id').val(id);
 
@@ -1339,9 +1339,9 @@ function resetChildrenRecordsForm(id, option){
                             document.getElementsByName('ch_gender_fp')[0].value = element['ch_gender_fp'];
                             document.getElementsByName('ch_birthdate_fp')[0].value = element['ch_birthdate_fp'];
                             document.getElementsByName('ch_birthplace_fp')[0].value = element['ch_birthplace_fp'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1409,7 +1409,7 @@ function updateEducationalAttainmentTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1436,7 +1436,7 @@ function resetEducationalAttainmentForm(id, option){
                     for(var i=0, educational_attainment_formLen = educational_attainment_form.length; i<educational_attainment_formLen; i++){
                         educational_attainment_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#educational_attainment_form').trigger('reset');
 
@@ -1451,7 +1451,7 @@ function resetEducationalAttainmentForm(id, option){
 
                     // Set submit button button color to primary
                     $('#educational_attainment_form_submit').attr('class', 'btn btn-primary mb-1');
-                
+
                 }
             }
             else{
@@ -1472,7 +1472,7 @@ function resetEducationalAttainmentForm(id, option){
                     for(var i=0, educational_attainment_formLen = educational_attainment_form.length; i<educational_attainment_formLen; i++){
                         educational_attainment_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_educational_attainment_id').val(id);
 
@@ -1531,9 +1531,9 @@ function resetEducationalAttainmentForm(id, option){
                             document.getElementsByName('date_t_ea')[0].value = element['date_t_ea'];
                             document.getElementsByName('hlu_ea')[0].value = element['hlu_ea'];
                             document.getElementsByName('ahr_ea')[0].value = element['ahr_ea'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1589,7 +1589,7 @@ function updateExaminationsTakenTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1616,7 +1616,7 @@ function resetExaminationsTakenForm(id, option){
                     for(var i=0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i<examinations_taken_historical_record_of_examinations_taken_formLen; i++){
                         examinations_taken_historical_record_of_examinations_taken_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#examinations_taken_historical_record_of_examinations_taken_form').trigger('reset');
 
@@ -1643,7 +1643,7 @@ function resetExaminationsTakenForm(id, option){
                     showConfirmButton: false,
                     allowOutsideClick: false
                 });
-                
+
                 if(option == 'Edit'){
 
                     // Remove disabled attribute in all elements from form
@@ -1705,9 +1705,9 @@ function resetExaminationsTakenForm(id, option){
                             document.getElementsByName('rating_et')[0].value = element['rating_et'];
                             document.getElementsByName('doe_et')[0].value = element['doe_et'];
                             document.getElementsByName('poe_et')[0].value = element['poe_et'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1761,7 +1761,7 @@ function updateLicenseDetailsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1788,7 +1788,7 @@ function resetLicenseDetailsForm(id, option){
                     for(var i=0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i<examinations_taken_license_details_formLen; i++){
                         examinations_taken_license_details_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#examinations_taken_license_details_form').trigger('reset');
 
@@ -1815,7 +1815,7 @@ function resetLicenseDetailsForm(id, option){
                     showConfirmButton: false,
                     allowOutsideClick: false
                 });
-                
+
                 if(option == 'Edit'){
 
                     // Remove disabled attribute in all elements from form
@@ -1824,7 +1824,7 @@ function resetLicenseDetailsForm(id, option){
                     for(var i=0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i<examinations_taken_license_details_formLen; i++){
                         examinations_taken_license_details_form.elements[i].disabled = false;
                     }
-                    
+
                     // Set id number for hidden input id
                     $('#cesno_examinations_taken_license_details_id').val(id);
 
@@ -1839,7 +1839,7 @@ function resetLicenseDetailsForm(id, option){
 
                     // Set onsubmit attribute on form tag to edit mode
                     $('#examinations_taken_license_details_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/license-details/edit`, `examinations_taken_license_details_form`, `Update`, `updateLicenseDetailsTable`, `resetLicenseDetailsForm`, `examinations_taken_license_details_form_submit`, `None`, `None`)');
-                
+
                 }
                 else if(option == 'View'){
 
@@ -1855,7 +1855,7 @@ function resetLicenseDetailsForm(id, option){
 
                     // Reset form
                     $('#examinations_taken_license_details_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_examinations_taken_license_details_id').val(id);
 
@@ -1876,9 +1876,9 @@ function resetLicenseDetailsForm(id, option){
                             document.getElementsByName('ld_ln_et')[0].value = element['ld_ln_et'];
                             document.getElementsByName('ld_da_et')[0].value = element['ld_da_et'];
                             document.getElementsByName('ld_dov_et')[0].value = element['ld_dov_et'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -1928,7 +1928,7 @@ function updateLanguagesDialectsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -1955,7 +1955,7 @@ function resetLanguagesDialectsForm(id, option){
                     for(var i=0, languages_dialects_formLen = languages_dialects_form.length; i<languages_dialects_formLen; i++){
                         languages_dialects_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#languages_dialects_form').trigger('reset');
 
@@ -1991,7 +1991,7 @@ function resetLanguagesDialectsForm(id, option){
                     for(var i=0, languages_dialects_formLen = languages_dialects_form.length; i<languages_dialects_formLen; i++){
                         languages_dialects_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_languages_dialects_id').val(id);
 
@@ -2041,9 +2041,9 @@ function resetLanguagesDialectsForm(id, option){
                         result.forEach(element => {
 
                             document.getElementsByName('lang_languages_dialects')[0].value = element['lang_languages_dialects'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2101,7 +2101,7 @@ function updateCesWeTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -2128,7 +2128,7 @@ function resetCesWeForm(id, option){
                     for(var i=0, ceswe_hr_formLen = ceswe_hr_form.length; i<ceswe_hr_formLen; i++){
                         ceswe_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#ceswe_hr_form').trigger('reset');
 
@@ -2164,7 +2164,7 @@ function resetCesWeForm(id, option){
                     for(var i=0, ceswe_hr_formLen = ceswe_hr_form.length; i<ceswe_hr_formLen; i++){
                         ceswe_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_ceswe_hr_id').val(id);
 
@@ -2218,9 +2218,9 @@ function resetCesWeForm(id, option){
                             document.getElementsByName('rd_ces_we')[0].value = element['rd_ces_we'];
                             document.getElementsByName('poe_ces_we')[0].value = element['poe_ces_we'];
                             document.getElementsByName('tn_ces_we')[0].value = element['tn_ces_we'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2282,7 +2282,7 @@ function updateAssessmentCenterTable(){
 
                     // Update AC no. on profile details
                     $('#profile_ac_no').text(element['an_achr_ces_we']);
-                }); 
+                });
             }
         }
     });
@@ -2309,7 +2309,7 @@ function resetAssessmentCenterForm(id, option){
                     for(var i=0, assessment_center_hr_formLen = assessment_center_hr_form.length; i<assessment_center_hr_formLen; i++){
                         assessment_center_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#assessment_center_hr_form').trigger('reset');
 
@@ -2345,7 +2345,7 @@ function resetAssessmentCenterForm(id, option){
                     for(var i=0, assessment_center_hr_formLen = assessment_center_hr_form.length; i<assessment_center_hr_formLen; i++){
                         assessment_center_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_assessment_center_hr_id').val(id);
 
@@ -2376,7 +2376,7 @@ function resetAssessmentCenterForm(id, option){
 
                     // Reset form
                     $('#assessment_center_hr_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_assessment_center_hr_id').val(id);
 
@@ -2398,9 +2398,9 @@ function resetAssessmentCenterForm(id, option){
                             document.getElementsByName('ad_achr_ces_we')[0].value = element['ad_achr_ces_we'];
                             document.getElementsByName('r_achr_ces_we')[0].value = element['r_achr_ces_we'];
                             document.getElementsByName('cfd_achr_ces_we')[0].value = element['cfd_achr_ces_we'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2454,7 +2454,7 @@ function updateValidationHrTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -2481,7 +2481,7 @@ function resetValidationHrForm(id, option){
                     for(var i=0, validation_hr_formLen = validation_hr_form.length; i<validation_hr_formLen; i++){
                         validation_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#validation_hr_form').trigger('reset');
 
@@ -2517,7 +2517,7 @@ function resetValidationHrForm(id, option){
                     for(var i=0, validation_hr_formLen = validation_hr_form.length; i<validation_hr_formLen; i++){
                         validation_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_validation_hr_id').val(id);
 
@@ -2548,7 +2548,7 @@ function resetValidationHrForm(id, option){
 
                     // Reset form
                     $('#validation_hr_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_validation_hr_id').val(id);
 
@@ -2569,9 +2569,9 @@ function resetValidationHrForm(id, option){
                             document.getElementsByName('vd_vhr_ces_we')[0].value = element['vd_vhr_ces_we'];
                             document.getElementsByName('tov_vhr_ces_we')[0].value = element['tov_vhr_ces_we'];
                             document.getElementsByName('r_vhr_ces_we')[0].value = element['r_vhr_ces_we'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2616,14 +2616,14 @@ function updateBoardInterviewTable(){
                         ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/board-interview/delete/'+ element['id'] +'`, `updateBoardInterviewTable`, `resetBoardInterviewForm`, `None`, `None`)">Delete</a>' : '') +
                     '</td>'+
                     '<td>'+ ((element['bid_bi_ces_we'] == null) ? '-' : element['bid_bi_ces_we']) +'</td>'+
-                    '<td>'+ ((element['r_bi_ces_we'] == null) ? '-' : element['r_bi_ces_we']) +'</td>'+                    
+                    '<td>'+ ((element['r_bi_ces_we'] == null) ? '-' : element['r_bi_ces_we']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -2650,7 +2650,7 @@ function resetBoardInterviewForm(id, option){
                     for(var i=0, board_interview_hr_formLen = board_interview_hr_form.length; i<board_interview_hr_formLen; i++){
                         board_interview_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#board_interview_hr_form').trigger('reset');
 
@@ -2686,7 +2686,7 @@ function resetBoardInterviewForm(id, option){
                     for(var i=0, board_interview_hr_formLen = board_interview_hr_form.length; i<board_interview_hr_formLen; i++){
                         board_interview_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_board_interview_hr_id').val(id);
 
@@ -2717,7 +2717,7 @@ function resetBoardInterviewForm(id, option){
 
                     // Reset form
                     $('#board_interview_hr_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_board_interview_hr_id').val(id);
 
@@ -2737,9 +2737,9 @@ function resetBoardInterviewForm(id, option){
 
                             document.getElementsByName('bid_bi_ces_we')[0].value = element['bid_bi_ces_we'];
                             document.getElementsByName('r_bi_ces_we')[0].value = element['r_bi_ces_we'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2795,7 +2795,7 @@ function updateCesStatusTable(){
                     '<td>'+ ((element['st_cs_ces_we'] == null) ? '-' : element['st_cs_ces_we']) +'</td>'+
                     '<td>'+ ((element['aa_cs_ces_we'] == null) ? '-' : element['aa_cs_ces_we']) +'</td>'+
                     '<td>'+ ((element['rn_cs_ces_we'] == null) ? '-' : element['rn_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['da_cs_ces_we'] == null) ? '-' : element['da_cs_ces_we']) +'</td>'+                  
+                    '<td>'+ ((element['da_cs_ces_we'] == null) ? '-' : element['da_cs_ces_we']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
@@ -2805,7 +2805,7 @@ function updateCesStatusTable(){
 
                     // Update CES Status on profile details
                     $('#profile_ces_status').text(element['cs_cs_ces_we']);
-                }); 
+                });
             }
         }
     });
@@ -2832,7 +2832,7 @@ function resetCesStatusForm(id, option){
                     for(var i=0, ces_status_hr_formLen = ces_status_hr_form.length; i<ces_status_hr_formLen; i++){
                         ces_status_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#ces_status_hr_form').trigger('reset');
 
@@ -2868,7 +2868,7 @@ function resetCesStatusForm(id, option){
                     for(var i=0, ces_status_hr_formLen = ces_status_hr_form.length; i<ces_status_hr_formLen; i++){
                         ces_status_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_ces_status_hr_id').val(id);
 
@@ -2899,7 +2899,7 @@ function resetCesStatusForm(id, option){
 
                     // Reset form
                     $('#ces_status_hr_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_ces_status_hr_id').val(id);
 
@@ -2923,9 +2923,9 @@ function resetCesStatusForm(id, option){
                             document.getElementsByName('aa_cs_ces_we')[0].value = element['aa_cs_ces_we'];
                             document.getElementsByName('rn_cs_ces_we')[0].value = element['rn_cs_ces_we'];
                             document.getElementsByName('da_cs_ces_we')[0].value = element['da_cs_ces_we'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -2977,15 +2977,15 @@ function updateRecordOfCespesRatingsTable(){
                     '<td>'+ ((element['date_to_rocr'] == null) ? '-' : element['date_to_rocr']) +'</td>'+
                     '<td>'+ ((element['rating_rocr'] == null) ? '-' : element['rating_rocr']) +'</td>'+
                     '<td>'+ ((element['status_rocr'] == null) ? '-' : element['status_rocr']) +'</td>'+
-                    '<td>'+ ((element['remarks_rocr'] == null) ? '-' : element['remarks_rocr']) +'</td>'+  
-                    '<td>'+ '<a href="'+ rootURL +'external-storage/PDF Documents/201 Folder/CESPES Certificate of Rating/'+ element['pdf_rating_certificate_rocr'] +'">'+ element['pdf_rating_certificate_rocr'] +'</a>' +'</td>'+             
+                    '<td>'+ ((element['remarks_rocr'] == null) ? '-' : element['remarks_rocr']) +'</td>'+
+                    '<td>'+ '<a href="'+ rootURL +'external-storage/PDF Documents/201 Folder/CESPES Certificate of Rating/'+ element['pdf_rating_certificate_rocr'] +'">'+ element['pdf_rating_certificate_rocr'] +'</a>' +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3012,7 +3012,7 @@ function resetRecordOfCespesRatingsForm(id, option){
                     for(var i=0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i<record_of_cespes_rating_hr_formLen; i++){
                         record_of_cespes_rating_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#record_of_cespes_rating_hr_form').trigger('reset');
 
@@ -3048,7 +3048,7 @@ function resetRecordOfCespesRatingsForm(id, option){
                     for(var i=0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i<record_of_cespes_rating_hr_formLen; i++){
                         record_of_cespes_rating_hr_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_record_of_cespes_rating_hr_id').val(id);
 
@@ -3079,7 +3079,7 @@ function resetRecordOfCespesRatingsForm(id, option){
 
                     // Reset form
                     $('#record_of_cespes_rating_hr_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_record_of_cespes_rating_hr_id').val(id);
 
@@ -3102,9 +3102,9 @@ function resetRecordOfCespesRatingsForm(id, option){
                             document.getElementsByName('rating_rocr')[0].value = element['rating_rocr'];
                             document.getElementsByName('status_rocr')[0].value = element['status_rocr'];
                             document.getElementsByName('remarks_rocr')[0].value = element['remarks_rocr'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -3165,14 +3165,14 @@ function updateWorkExperienceTable(){
                     '<td>'+ ((element['status_of_appointment_work_experience'] == null) ? '-' : element['status_of_appointment_work_experience']) +'</td>'+
                     '<td>'+ ((element['government_service_work_experience'] == null) ? '-' : element['government_service_work_experience']) +'</td>'+
                     '<td>'+ ((element['department_from_work_experience'] == null) ? '-' : element['department_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['remarks_from_work_experience'] == null) ? '-' : element['remarks_from_work_experience']) +'</td>'+             
+                    '<td>'+ ((element['remarks_from_work_experience'] == null) ? '-' : element['remarks_from_work_experience']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3199,7 +3199,7 @@ function resetWorkExperienceForm(id, option){
                     for(var i=0, work_experience_formLen = work_experience_form.length; i<work_experience_formLen; i++){
                         work_experience_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#work_experience_form').trigger('reset');
 
@@ -3235,7 +3235,7 @@ function resetWorkExperienceForm(id, option){
                     for(var i=0, work_experience_formLen = work_experience_form.length; i<work_experience_formLen; i++){
                         work_experience_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_work_experience_id').val(id);
 
@@ -3250,7 +3250,7 @@ function resetWorkExperienceForm(id, option){
 
                     // Set onsubmit attribute on form tag to edit mode
                     $('#work_experience_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/work-experience/edit`, `work_experience_form`, `Update`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `work_experience_form_submit`, `None`, `None`)');
-                
+
                 }
                 else if(option == 'View'){
 
@@ -3266,7 +3266,7 @@ function resetWorkExperienceForm(id, option){
 
                     // Reset form
                     $('#work_experience_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_work_experience_id').val(id);
 
@@ -3294,9 +3294,9 @@ function resetWorkExperienceForm(id, option){
                             document.getElementsByName('government_service_work_experience')[0].value = element['government_service_work_experience'];
                             document.getElementsByName('department_from_work_experience')[0].value = element['department_from_work_experience'];
                             document.getElementsByName('remarks_from_work_experience')[0].value = element['remarks_from_work_experience'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -3341,14 +3341,14 @@ function updateFieldExpertiseTable(){
                         ((result.FieldExpertiseDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/field-expertise/delete/'+ element['id'] +'`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `None`, `None`)">Delete</a>' : '') +
                     '</td>'+
                     '<td>'+ ((element['ec_field_expertise'] == null) ? '-' : element['ec_field_expertise']) +'</td>'+
-                    '<td>'+ ((element['ss_field_expertise'] == null) ? '-' : element['ss_field_expertise']) +'</td>'+           
+                    '<td>'+ ((element['ss_field_expertise'] == null) ? '-' : element['ss_field_expertise']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3375,7 +3375,7 @@ function resetFieldExpertiseForm(id, option){
                     for(var i=0, field_expertise_formLen = field_expertise_form.length; i<field_expertise_formLen; i++){
                         field_expertise_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#field_expertise_form').trigger('reset');
 
@@ -3411,7 +3411,7 @@ function resetFieldExpertiseForm(id, option){
                     for(var i=0, field_expertise_formLen = field_expertise_form.length; i<field_expertise_formLen; i++){
                         field_expertise_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_field_expertise_id').val(id);
 
@@ -3426,7 +3426,7 @@ function resetFieldExpertiseForm(id, option){
 
                     // Set onsubmit attribute on form tag to edit mode
                     $('#field_expertise_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/field-expertise/edit`, `field_expertise_form`, `Update`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `field_expertise_form_submit`, `None`, `None`)');
-                
+
                 }
                 else if(option == 'View'){
 
@@ -3442,7 +3442,7 @@ function resetFieldExpertiseForm(id, option){
 
                     // Reset form
                     $('#field_expertise_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_field_expertise_id').val(id);
 
@@ -3462,9 +3462,9 @@ function resetFieldExpertiseForm(id, option){
 
                             document.getElementsByName('ec_field_expertise')[0].value = element['ec_field_expertise'];
                             document.getElementsByName('ss_field_expertise')[0].value = element['ss_field_expertise'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -3531,14 +3531,14 @@ function updateCesTrainingsTable(){
                     '<td>'+ ((element['training_status_ces_trainings'] == null) ? '-' : element['training_status_ces_trainings']) +'</td>'+
                     '<td>'+ ((element['remarks_ces_trainings'] == null) ? '-' : element['remarks_ces_trainings']) +'</td>'+
                     '<td>'+ ((element['date_f_ces_trainings'] == null) ? '-' : element['date_f_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['date_t_ces_trainings'] == null) ? '-' : element['date_t_ces_trainings']) +'</td>'+         
+                    '<td>'+ ((element['date_t_ces_trainings'] == null) ? '-' : element['date_t_ces_trainings']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3565,7 +3565,7 @@ function resetCesTrainingsForm(id, option){
                     for(var i=0, ces_trainings_formLen = ces_trainings_form.length; i<ces_trainings_formLen; i++){
                         ces_trainings_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#ces_trainings_form').trigger('reset');
 
@@ -3601,7 +3601,7 @@ function resetCesTrainingsForm(id, option){
                     for(var i=0, ces_trainings_formLen = ces_trainings_form.length; i<ces_trainings_formLen; i++){
                         ces_trainings_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_ces_trainings_id').val(id);
 
@@ -3632,7 +3632,7 @@ function resetCesTrainingsForm(id, option){
 
                     // Reset form
                     $('#ces_trainings_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_ces_trainings_id').val(id);
 
@@ -3663,9 +3663,9 @@ function resetCesTrainingsForm(id, option){
                             document.getElementsByName('sd_ces_trainings')[0].value = element['sd_ces_trainings'];
                             document.getElementsByName('training_status_ces_trainings')[0].value = element['training_status_ces_trainings'];
                             document.getElementsByName('remarks_ces_trainings')[0].value = element['remarks_ces_trainings'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -3722,14 +3722,14 @@ function updateOtherManagementTrainingsTable(){
                     '<td>'+ ((element['expertise_fos_onat'] == null) ? '-' : element['expertise_fos_onat']) +'</td>'+
                     '<td>'+ ((element['sponsor_tp_onat'] == null) ? '-' : element['sponsor_tp_onat']) +'</td>'+
                     '<td>'+ ((element['vanue_onat'] == null) ? '-' : element['vanue_onat']) +'</td>'+
-                    '<td>'+ ((element['no_training_hours_omt'] == null) ? '-' : element['no_training_hours_omt']) +'</td>'+       
+                    '<td>'+ ((element['no_training_hours_omt'] == null) ? '-' : element['no_training_hours_omt']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3756,7 +3756,7 @@ function resetOtherManagementTrainingsForm(id, option){
                     for(var i=0, other_management_trainings_formLen = other_management_trainings_form.length; i<other_management_trainings_formLen; i++){
                         other_management_trainings_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#other_management_trainings_form').trigger('reset');
 
@@ -3792,7 +3792,7 @@ function resetOtherManagementTrainingsForm(id, option){
                     for(var i=0, other_management_trainings_formLen = other_management_trainings_form.length; i<other_management_trainings_formLen; i++){
                         other_management_trainings_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_other_management_trainings_id').val(id);
 
@@ -3823,7 +3823,7 @@ function resetOtherManagementTrainingsForm(id, option){
 
                     // Reset form
                     $('#other_management_trainings_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_other_management_trainings_id').val(id);
 
@@ -3849,9 +3849,9 @@ function resetOtherManagementTrainingsForm(id, option){
                             document.getElementsByName('sponsor_tp_onat')[0].value = element['sponsor_tp_onat'];
                             document.getElementsByName('vanue_onat')[0].value = element['vanue_onat'];
                             document.getElementsByName('no_training_hours_omt')[0].value = element['no_training_hours_omt'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -3900,14 +3900,14 @@ function updateResearchAndStudiesTable(){
                     '<td>'+ ((element['date_f_ras'] == null) ? '-' : element['date_f_ras']) +'</td>'+
                     '<td>'+ ((element['date_t_ras'] == null) ? '-' : element['date_t_ras']) +'</td>'+
                     '<td>'+ ((element['title_ras'] == null) ? '-' : element['title_ras']) +'</td>'+
-                    '<td>'+ ((element['publisher_ras'] == null) ? '-' : element['publisher_ras']) +'</td>'+   
+                    '<td>'+ ((element['publisher_ras'] == null) ? '-' : element['publisher_ras']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -3934,7 +3934,7 @@ function resetResearchAndStudiesForm(id, option){
                     for(var i=0, research_and_studies_formLen = research_and_studies_form.length; i<research_and_studies_formLen; i++){
                         research_and_studies_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#research_and_studies_form').trigger('reset');
 
@@ -3970,7 +3970,7 @@ function resetResearchAndStudiesForm(id, option){
                     for(var i=0, research_and_studies_formLen = research_and_studies_form.length; i<research_and_studies_formLen; i++){
                         research_and_studies_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_research_and_studies_id').val(id);
 
@@ -4001,7 +4001,7 @@ function resetResearchAndStudiesForm(id, option){
 
                     // Reset form
                     $('#research_and_studies_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_research_and_studies_id').val(id);
 
@@ -4023,9 +4023,9 @@ function resetResearchAndStudiesForm(id, option){
                             document.getElementsByName('date_t_ras')[0].value = element['date_t_ras'];
                             document.getElementsByName('title_ras')[0].value = element['title_ras'];
                             document.getElementsByName('publisher_ras')[0].value = element['publisher_ras'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -4076,14 +4076,14 @@ function updateScholarshipsTable(){
                     '<td>'+ ((element['date_t_scholarships'] == null) ? '-' : element['date_t_scholarships']) +'</td>'+
                     '<td>'+ ((element['scholar_type_scholarships'] == null) ? '-' : element['scholar_type_scholarships']) +'</td>'+
                     '<td>'+ ((element['title_scholarships'] == null) ? '-' : element['title_scholarships']) +'</td>'+
-                    '<td>'+ ((element['sponsor_scholarships'] == null) ? '-' : element['sponsor_scholarships']) +'</td>'+  
+                    '<td>'+ ((element['sponsor_scholarships'] == null) ? '-' : element['sponsor_scholarships']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -4110,7 +4110,7 @@ function resetScholarshipsForm(id, option){
                     for(var i=0, scholarships_formLen = scholarships_form.length; i<scholarships_formLen; i++){
                         scholarships_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#scholarships_form').trigger('reset');
 
@@ -4146,7 +4146,7 @@ function resetScholarshipsForm(id, option){
                     for(var i=0, scholarships_formLen = scholarships_form.length; i<scholarships_formLen; i++){
                         scholarships_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_scholarships_id').val(id);
 
@@ -4161,7 +4161,7 @@ function resetScholarshipsForm(id, option){
 
                     // Set onsubmit attribute on form tag to edit mode
                     $('#scholarships_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/scholarships/edit`, `scholarships_form`, `Update`, `updateScholarshipsTable`, `resetScholarshipsForm`, `scholarships_form_submit`, `None`, `None`)');
-                
+
                 }
                 else if(option == 'View'){
 
@@ -4177,7 +4177,7 @@ function resetScholarshipsForm(id, option){
 
                     // Reset form
                     $('#scholarships_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_scholarships_id').val(id);
 
@@ -4200,9 +4200,9 @@ function resetScholarshipsForm(id, option){
                             document.getElementsByName('scholar_type_scholarships')[0].value = element['scholar_type_scholarships'];
                             document.getElementsByName('title_scholarships')[0].value = element['title_scholarships'];
                             document.getElementsByName('sponsor_scholarships')[0].value = element['sponsor_scholarships'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -4251,14 +4251,14 @@ function updateAffiliationsTable(){
                     '<td>'+ ((element['date_f_mcapa'] == null) ? '-' : element['date_f_mcapa']) +'</td>'+
                     '<td>'+ ((element['date_t_mcapa'] == null) ? '-' : element['date_t_mcapa']) +'</td>'+
                     '<td>'+ ((element['organization_mcapa'] == null) ? '-' : element['organization_mcapa']) +'</td>'+
-                    '<td>'+ ((element['position_mcapa'] == null) ? '-' : element['position_mcapa']) +'</td>'+  
+                    '<td>'+ ((element['position_mcapa'] == null) ? '-' : element['position_mcapa']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -4285,7 +4285,7 @@ function resetAffiliationsForm(id, option){
                     for(var i=0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i<major_civic_and_professional_affiliations_formLen; i++){
                         major_civic_and_professional_affiliations_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#major_civic_and_professional_affiliations_form').trigger('reset');
 
@@ -4321,7 +4321,7 @@ function resetAffiliationsForm(id, option){
                     for(var i=0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i<major_civic_and_professional_affiliations_formLen; i++){
                         major_civic_and_professional_affiliations_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_major_civic_and_professional_affiliations_id').val(id);
 
@@ -4352,7 +4352,7 @@ function resetAffiliationsForm(id, option){
 
                     // Reset form
                     $('#major_civic_and_professional_affiliations_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_major_civic_and_professional_affiliations_id').val(id);
 
@@ -4374,9 +4374,9 @@ function resetAffiliationsForm(id, option){
                             document.getElementsByName('date_t_mcapa')[0].value = element['date_t_mcapa'];
                             document.getElementsByName('organization_mcapa')[0].value = element['organization_mcapa'];
                             document.getElementsByName('position_mcapa')[0].value = element['position_mcapa'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -4423,14 +4423,14 @@ function updateAwardAndCitationsTable(){
                     '</td>'+
                     '<td>'+ ((element['date_aac'] == null) ? '-' : element['date_aac']) +'</td>'+
                     '<td>'+ ((element['title_of_award_aac'] == null) ? '-' : element['title_of_award_aac']) +'</td>'+
-                    '<td>'+ ((element['sponsor_aac'] == null) ? '-' : element['sponsor_aac']) +'</td>'+  
+                    '<td>'+ ((element['sponsor_aac'] == null) ? '-' : element['sponsor_aac']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -4457,7 +4457,7 @@ function resetAwardAndCitationsForm(id, option){
                     for(var i=0, award_and_citations_formLen = award_and_citations_form.length; i<award_and_citations_formLen; i++){
                         award_and_citations_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#award_and_citations_form').trigger('reset');
 
@@ -4493,7 +4493,7 @@ function resetAwardAndCitationsForm(id, option){
                     for(var i=0, award_and_citations_formLen = award_and_citations_form.length; i<award_and_citations_formLen; i++){
                         award_and_citations_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_award_and_citations_id').val(id);
 
@@ -4524,7 +4524,7 @@ function resetAwardAndCitationsForm(id, option){
 
                     // Reset form
                     $('#award_and_citations_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_award_and_citations_id').val(id);
 
@@ -4545,9 +4545,9 @@ function resetAwardAndCitationsForm(id, option){
                             document.getElementsByName('date_aac')[0].value = element['date_aac'];
                             document.getElementsByName('title_of_award_aac')[0].value = element['title_of_award_aac'];
                             document.getElementsByName('sponsor_aac')[0].value = element['sponsor_aac'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -4615,7 +4615,7 @@ function updateCaseRecordsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -4642,7 +4642,7 @@ function resetCaseRecordsForm(id, option){
                     for(var i=0, case_records_formLen = case_records_form.length; i<case_records_formLen; i++){
                         case_records_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#case_records_form').trigger('reset');
 
@@ -4678,7 +4678,7 @@ function resetCaseRecordsForm(id, option){
                     for(var i=0, case_records_formLen = case_records_form.length; i<case_records_formLen; i++){
                         case_records_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_case_records_id').val(id);
 
@@ -4709,7 +4709,7 @@ function resetCaseRecordsForm(id, option){
 
                     // Reset form
                     $('#case_records_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_case_records_id').val(id);
 
@@ -4737,9 +4737,9 @@ function resetCaseRecordsForm(id, option){
                             document.getElementsByName('dof_case_records')[0].value = element['dof_case_records'];
                             document.getElementsByName('decision_case_records')[0].value = element['decision_case_records'];
                             document.getElementsByName('remarks_case_records')[0].value = element['remarks_case_records'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -4793,7 +4793,7 @@ function updateHealthRecordsTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -4820,7 +4820,7 @@ function resetHealthRecordsForm(id, option){
                     for(var i=0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i<health_records_magna_carta_for_disabled_persons_formLen; i++){
                         health_records_magna_carta_for_disabled_persons_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#health_records_magna_carta_for_disabled_persons_form').trigger('reset');
 
@@ -4868,7 +4868,7 @@ function resetHealthRecordsForm(id, option){
 
                     // Set or remove "Disabled" attribute in "If (Magna Carta for Disabled Persons RA 7277)" dropdown list
                     $('#dhdCheckB').click(function(){
-                        
+
                         if($('#dhdCheckB').is(':checked')){
 
                             $('#dhdTxtB').removeAttr('disabled');
@@ -4879,12 +4879,12 @@ function resetHealthRecordsForm(id, option){
                         }
 
                     });
-                    
+
                     // Put checked on If (Magna Carta for Disabled Persons RA 7277) if there was selected item
                     if($('#dhdTxtB option:selected').val() != ''){
                         $('#dhdCheckB').attr('checked', 'checked');
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_health_records_magna_carta_for_disabled_persons_id').val(id);
 
@@ -4921,7 +4921,7 @@ function resetHealthRecordsForm(id, option){
 
                     // Uncheck check box
                     $('#dhdCheckB').removeAttr('checked');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_health_records_magna_carta_for_disabled_persons_id').val(id);
 
@@ -4944,9 +4944,9 @@ function resetHealthRecordsForm(id, option){
                             document.getElementsByName('identify_marks_hr')[0].value = element['identify_marks_hr'];
 
                             ((element['mcfdpra_hr'] == null) ? $('#dhdTxtB').attr('disabled', 'disabled') : $('#dhdTxtB').removeAttr('disabled') + $('#dhdCheckB').attr('checked', 'checked'));
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -5000,7 +5000,7 @@ function updateHistoricalRecordOfMedicalConditionTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -5027,7 +5027,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     for(var i=0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i<health_records_historical_record_of_medical_condition_formLen; i++){
                         health_records_historical_record_of_medical_condition_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#health_records_historical_record_of_medical_condition_form').trigger('reset');
 
@@ -5063,7 +5063,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     for(var i=0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i<health_records_historical_record_of_medical_condition_formLen; i++){
                         health_records_historical_record_of_medical_condition_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_health_records_historical_record_of_medical_condition_id').val(id);
 
@@ -5094,7 +5094,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
 
                     // Reset form
                     $('#health_records_historical_record_of_medical_condition_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_health_records_historical_record_of_medical_condition_id').val(id);
 
@@ -5115,9 +5115,9 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                             document.getElementsByName('date_hronc')[0].value = element['date_hronc'];
                             document.getElementsByName('mci_hronc')[0].value = element['mci_hronc'];
                             document.getElementsByName('notes_hronc')[0].value = element['notes_hronc'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -5175,7 +5175,7 @@ function updatePdfFilesTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -5202,7 +5202,7 @@ function resetPdfFilesForm(id, option){
                     for(var i=0, pdf_files_formLen = pdf_files_form.length; i<pdf_files_formLen; i++){
                         pdf_files_form.elements[i].disabled = false;
                     }
-                
+
                     // Reset form
                     $('#pdf_files_form').trigger('reset');
 
@@ -5238,7 +5238,7 @@ function resetPdfFilesForm(id, option){
                     for(var i=0, pdf_files_formLen = pdf_files_form.length; i<pdf_files_formLen; i++){
                         pdf_files_form.elements[i].disabled = false;
                     }
-                
+
                     // Set id number for hidden input id
                     $('#cesno_pdf_files_id').val(id);
 
@@ -5269,7 +5269,7 @@ function resetPdfFilesForm(id, option){
 
                     // Reset form
                     $('#pdf_files_form').trigger('reset');
-                
+
                     // Set id number for hidden input id
                     $('#cesno_pdf_files_id').val(id);
 
@@ -5289,9 +5289,9 @@ function resetPdfFilesForm(id, option){
 
                             document.getElementsByName('validated')[0].value = element['validated'];
                             document.getElementsByName('remarks_pdf_files')[0].value = element['remarks_pdf_files'];
-                        });  
+                        });
 
-                        Swal.close();    
+                        Swal.close();
                     }
                 });
             }
@@ -5334,9 +5334,9 @@ function updateCesWebAppGeneralPageAccessTable(){
                     element['ces_web_app_general_page_access'].split(',').forEach(item => {
 
                         if(item != ''){
-                            pages += '<li>'+ item +'</li>'; 
+                            pages += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     $('#CesWebAppGeneralPageAccess_tbody').append('<tr>'+
@@ -5345,7 +5345,7 @@ function updateCesWebAppGeneralPageAccessTable(){
                         '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/ces-web-app-general-page-access/delete/'+ element['id'] +'`, `updateCesWebAppGeneralPageAccessTable`, `resetCesWebAppGeneralPageAccessForm`, `None`, `None`)">Delete</a>'+
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['role_name_ces_web_app_general_page'] == null) ? '-' : element['role_name_ces_web_app_general_page']) +'</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         pages +
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
@@ -5354,7 +5354,7 @@ function updateCesWebAppGeneralPageAccessTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -5368,7 +5368,7 @@ function updateCesWebAppGeneralPageAccessTable(){
 function resetCesWebAppGeneralPageAccessForm(id){
 
     if(id == null){
-        
+
         // Reset form
         $('#ces_web_app_general_page_form').trigger('reset');
 
@@ -5393,7 +5393,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
             showConfirmButton: false,
             allowOutsideClick: false
         });
-        
+
         // Reset form
         $('#ces_web_app_general_page_form').trigger('reset');
 
@@ -5414,22 +5414,22 @@ function resetCesWebAppGeneralPageAccessForm(id){
             success: function (result) {
 
                 if(result == 'Restricted'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
                         text: 'Sorry you are restricted to do this action please contact the administrator.',
                     });
-                    
+
                 }
                 else{
 
                     result.forEach(element => {
 
                         document.getElementsByName('role_name_ces_web_app_general_page')[0].value = element['role_name_ces_web_app_general_page'];
-    
+
                         element['ces_web_app_general_page_access'].split(',').forEach(item => {
-    
+
                             if(item != ''){
                                 if(item == 'Dashboard'){
                                     document.getElementsByName('general_page_dashboard')[0].checked = true;
@@ -5450,13 +5450,13 @@ function resetCesWebAppGeneralPageAccessForm(id){
                                     document.getElementsByName('general_page_system_utility')[0].checked = true;
                                 }
                             }
-                            
+
                         });
-                    });  
-    
-                    Swal.close();  
+                    });
+
+                    Swal.close();
                 }
-                  
+
             }
         });
     }
@@ -5515,171 +5515,171 @@ function updateExecutive201RoleAccessTable(){
                     element['executive_201_page_access'].split(',').forEach(item => {
 
                         if(item != ''){
-                            executive_201_page_access += '<li>'+ item +'</li>'; 
+                            executive_201_page_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     personal_data_rights = '';
                     element['personal_data_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            personal_data_rights += '<li>'+ item +'</li>'; 
+                            personal_data_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     family_background_profile_rights = '';
                     element['family_background_profile_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            family_background_profile_rights += '<li>'+ item +'</li>'; 
+                            family_background_profile_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     educational_background_attainment_rights = '';
                     element['educational_background_attainment_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            educational_background_attainment_rights += '<li>'+ item +'</li>'; 
+                            educational_background_attainment_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     examinations_taken_rights = '';
                     element['examinations_taken_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            examinations_taken_rights += '<li>'+ item +'</li>'; 
+                            examinations_taken_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     language_dialects_rights = '';
                     element['language_dialects_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            language_dialects_rights += '<li>'+ item +'</li>'; 
+                            language_dialects_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     eligibility_and_rank_tracker_rights = '';
                     element['eligibility_and_rank_tracker_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            eligibility_and_rank_tracker_rights += '<li>'+ item +'</li>'; 
+                            eligibility_and_rank_tracker_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     record_of_cespes_ratings_rights = '';
                     element['record_of_cespes_ratings_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            record_of_cespes_ratings_rights += '<li>'+ item +'</li>'; 
+                            record_of_cespes_ratings_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     work_experience_rights = '';
                     element['work_experience_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            work_experience_rights += '<li>'+ item +'</li>'; 
+                            work_experience_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     records_of_field_of_expertise_specialization_rights = '';
                     element['records_of_field_of_expertise_specialization_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            records_of_field_of_expertise_specialization_rights += '<li>'+ item +'</li>'; 
+                            records_of_field_of_expertise_specialization_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     ces_trainings_rights = '';
                     element['ces_trainings_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            ces_trainings_rights += '<li>'+ item +'</li>'; 
+                            ces_trainings_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     other_non_ces_accredited_trainings_rights = '';
                     element['other_non_ces_accredited_trainings_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            other_non_ces_accredited_trainings_rights += '<li>'+ item +'</li>'; 
+                            other_non_ces_accredited_trainings_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     research_and_studies_rights = '';
                     element['research_and_studies_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            research_and_studies_rights += '<li>'+ item +'</li>'; 
+                            research_and_studies_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     scholarships_received_rights = '';
                     element['scholarships_received_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            scholarships_received_rights += '<li>'+ item +'</li>'; 
+                            scholarships_received_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     major_civic_and_professional_affiliations_rights = '';
                     element['major_civic_and_professional_affiliations_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            major_civic_and_professional_affiliations_rights += '<li>'+ item +'</li>'; 
+                            major_civic_and_professional_affiliations_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     awards_and_citations_received_rights = '';
                     element['awards_and_citations_received_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            awards_and_citations_received_rights += '<li>'+ item +'</li>'; 
+                            awards_and_citations_received_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     case_records_rights = '';
                     element['case_records_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            case_records_rights += '<li>'+ item +'</li>'; 
+                            case_records_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     health_record_rights = '';
                     element['health_record_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            health_record_rights += '<li>'+ item +'</li>'; 
+                            health_record_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     attached_pdf_files_rights = '';
                     element['attached_pdf_files_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            attached_pdf_files_rights += '<li>'+ item +'</li>'; 
+                            attached_pdf_files_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     $('#Executive201RoleAccess_tbody').append('<tr>'+
@@ -5688,61 +5688,61 @@ function updateExecutive201RoleAccessTable(){
                         '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/executive-201-access/delete/'+ element['id'] +'`, `updateExecutive201RoleAccessTable`, `resetExecutive201RoleAccessForm`, `None`, `None`)">Delete</a>'+
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['role_name'] == null) ? '-' : element['role_name']) +'</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         executive_201_page_access +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         personal_data_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         family_background_profile_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         educational_background_attainment_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         examinations_taken_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         language_dialects_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         eligibility_and_rank_tracker_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         record_of_cespes_ratings_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         work_experience_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         records_of_field_of_expertise_specialization_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         ces_trainings_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         other_non_ces_accredited_trainings_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         research_and_studies_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         scholarships_received_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         major_civic_and_professional_affiliations_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         awards_and_citations_received_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         case_records_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         health_record_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         attached_pdf_files_rights +
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
@@ -5751,7 +5751,7 @@ function updateExecutive201RoleAccessTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -5765,7 +5765,7 @@ function updateExecutive201RoleAccessTable(){
 function resetExecutive201RoleAccessForm(id){
 
     if(id == null){
-        
+
         // Reset form
         $('#executive_201_form').trigger('reset');
 
@@ -5790,7 +5790,7 @@ function resetExecutive201RoleAccessForm(id){
             showConfirmButton: false,
             allowOutsideClick: false
         });
-        
+
         // Reset form
         $('#executive_201_form').trigger('reset');
 
@@ -5811,13 +5811,13 @@ function resetExecutive201RoleAccessForm(id){
             success: function (result) {
 
                 if(result == 'Restricted'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
                         text: 'Sorry you are restricted to do this action please contact the administrator.',
                     });
-                    
+
                 }
                 else{
 
@@ -5882,9 +5882,9 @@ function resetExecutive201RoleAccessForm(id){
                                 else if(item == 'Attached PDF Files'){
                                     document.getElementsByName('attached_pdf_files')[0].checked = true;
                                 }
-                                
+
                             }
-                            
+
                         });
 
                         element['personal_data_rights'].split(',').forEach(item => {
@@ -5903,7 +5903,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('personal_data_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['family_background_profile_rights'].split(',').forEach(item => {
@@ -5922,7 +5922,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('family_background_profile_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['educational_background_attainment_rights'].split(',').forEach(item => {
@@ -5941,7 +5941,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('educational_background_attainment_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['examinations_taken_rights'].split(',').forEach(item => {
@@ -5960,7 +5960,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('examinations_taken_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['language_dialects_rights'].split(',').forEach(item => {
@@ -5979,7 +5979,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('language_dialects_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['eligibility_and_rank_tracker_rights'].split(',').forEach(item => {
@@ -5998,7 +5998,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('eligibility_and_rank_tracker_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['record_of_cespes_ratings_rights'].split(',').forEach(item => {
@@ -6017,7 +6017,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('record_of_cespes_ratings_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['work_experience_rights'].split(',').forEach(item => {
@@ -6036,7 +6036,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('work_experience_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['records_of_field_of_expertise_specialization_rights'].split(',').forEach(item => {
@@ -6055,7 +6055,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('records_of_field_of_expertise_specialization_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['ces_trainings_rights'].split(',').forEach(item => {
@@ -6074,7 +6074,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('ces_trainings_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['other_non_ces_accredited_trainings_rights'].split(',').forEach(item => {
@@ -6093,7 +6093,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('other_non_ces_accredited_trainings_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['research_and_studies_rights'].split(',').forEach(item => {
@@ -6112,7 +6112,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('research_and_studies_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['scholarships_received_rights'].split(',').forEach(item => {
@@ -6131,7 +6131,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('scholarships_received_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['major_civic_and_professional_affiliations_rights'].split(',').forEach(item => {
@@ -6150,7 +6150,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('major_civic_and_professional_affiliations_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['awards_and_citations_received_rights'].split(',').forEach(item => {
@@ -6169,7 +6169,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('awards_and_citations_received_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['case_records_rights'].split(',').forEach(item => {
@@ -6188,7 +6188,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('case_records_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['health_record_rights'].split(',').forEach(item => {
@@ -6207,7 +6207,7 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('health_record_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['attached_pdf_files_rights'].split(',').forEach(item => {
@@ -6226,12 +6226,12 @@ function resetExecutive201RoleAccessForm(id){
                                     document.getElementsByName('attached_pdf_files_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
-                        });
-                    });  
 
-                    Swal.close();  
-                }  
+                        });
+                    });
+
+                    Swal.close();
+                }
             }
         });
     }
@@ -6281,90 +6281,90 @@ function updatePlantillaManangementAccessTable(){
                     element['plantilla_manangement_page_access'].split(',').forEach(item => {
 
                         if(item != ''){
-                            plantilla_manangement_page_access += '<li>'+ item +'</li>'; 
+                            plantilla_manangement_page_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     plantilla_management_main_screen_rights = '';
                     element['plantilla_management_main_screen_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            plantilla_management_main_screen_rights += '<li>'+ item +'</li>'; 
+                            plantilla_management_main_screen_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     sector_manager_rights = '';
                     element['sector_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            sector_manager_rights += '<li>'+ item +'</li>'; 
+                            sector_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     department_agency_manager_rights = '';
                     element['department_agency_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            department_agency_manager_rights += '<li>'+ item +'</li>'; 
+                            department_agency_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     agency_location_manager_rights = '';
                     element['agency_location_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            agency_location_manager_rights += '<li>'+ item +'</li>'; 
+                            agency_location_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     office_manager_rights = '';
                     element['office_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            office_manager_rights += '<li>'+ item +'</li>'; 
+                            office_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     plantilla_position_manager_rights = '';
                     element['plantilla_position_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            plantilla_position_manager_rights += '<li>'+ item +'</li>'; 
+                            plantilla_position_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     plantilla_position_classification_manager_rights = '';
                     element['plantilla_position_classification_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            plantilla_position_classification_manager_rights += '<li>'+ item +'</li>'; 
+                            plantilla_position_classification_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     appointee_occupant_manager_rights = '';
                     element['appointee_occupant_manager_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            appointee_occupant_manager_rights += '<li>'+ item +'</li>'; 
+                            appointee_occupant_manager_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     plantilla_appointee_occupant_browser_rights = '';
                     element['plantilla_appointee_occupant_browser_rights'].split(',').forEach(item => {
 
                         if(item != ''){
-                            plantilla_appointee_occupant_browser_rights += '<li>'+ item +'</li>'; 
+                            plantilla_appointee_occupant_browser_rights += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     $('#PlantillaManangementAccess_tbody').append('<tr>'+
@@ -6373,34 +6373,34 @@ function updatePlantillaManangementAccessTable(){
                         '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/plantilla-manangement-access/delete/'+ element['id'] +'`, `updatePlantillaManangementAccessTable`, `resetPlantillaManangementAccessForm`, `None`, `None`)">Delete</a>'+
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['role_name_plantilla_manangement'] == null) ? '-' : element['role_name_plantilla_manangement']) +'</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         plantilla_manangement_page_access +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         plantilla_management_main_screen_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         sector_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         department_agency_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         agency_location_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         office_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         plantilla_position_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         plantilla_position_classification_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         appointee_occupant_manager_rights +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         plantilla_appointee_occupant_browser_rights +
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
@@ -6409,7 +6409,7 @@ function updatePlantillaManangementAccessTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -6423,7 +6423,7 @@ function updatePlantillaManangementAccessTable(){
 function resetPlantillaManangementAccessForm(id){
 
     if(id == null){
-        
+
         // Reset form
         $('#plantilla_manangement_form').trigger('reset');
 
@@ -6448,7 +6448,7 @@ function resetPlantillaManangementAccessForm(id){
             showConfirmButton: false,
             allowOutsideClick: false
         });
-        
+
         // Reset form
         $('#plantilla_manangement_form').trigger('reset');
 
@@ -6469,13 +6469,13 @@ function resetPlantillaManangementAccessForm(id){
             success: function (result) {
 
                 if(result == 'Restricted'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
                         text: 'Sorry you are restricted to do this action please contact the administrator.',
                     });
-                    
+
                 }
                 else{
 
@@ -6513,9 +6513,9 @@ function resetPlantillaManangementAccessForm(id){
                                 else if(item == 'Plantilla Appointee or Occupant Browser'){
                                     document.getElementsByName('plantilla_appointee_occupant_browser')[0].checked = true;
                                 }
-                                
+
                             }
-                            
+
                         });
 
                         element['plantilla_management_main_screen_rights'].split(',').forEach(item => {
@@ -6534,7 +6534,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('plantilla_management_main_screen_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['sector_manager_rights'].split(',').forEach(item => {
@@ -6553,7 +6553,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('sector_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['department_agency_manager_rights'].split(',').forEach(item => {
@@ -6572,7 +6572,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('department_agency_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['agency_location_manager_rights'].split(',').forEach(item => {
@@ -6591,7 +6591,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('agency_location_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['office_manager_rights'].split(',').forEach(item => {
@@ -6610,7 +6610,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('office_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['plantilla_position_manager_rights'].split(',').forEach(item => {
@@ -6629,7 +6629,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('plantilla_position_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['plantilla_position_classification_manager_rights'].split(',').forEach(item => {
@@ -6648,7 +6648,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('plantilla_position_classification_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['appointee_occupant_manager_rights'].split(',').forEach(item => {
@@ -6667,7 +6667,7 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('appointee_occupant_manager_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['plantilla_appointee_occupant_browser_rights'].split(',').forEach(item => {
@@ -6686,12 +6686,12 @@ function resetPlantillaManangementAccessForm(id){
                                     document.getElementsByName('plantilla_appointee_occupant_browser_rights_view_only')[0].checked = true;
                                 }
                             }
-                            
-                        });
-                    });  
 
-                    Swal.close();   
-                } 
+                        });
+                    });
+
+                    Swal.close();
+                }
             }
         });
     }
@@ -6735,36 +6735,36 @@ function updateReportGenerationAccessTable(){
                     element['rep_gen_executive_201_profile_access'].split('|').forEach(item => {
 
                         if(item != ''){
-                            rep_gen_executive_201_profile_access += '<li>'+ item +'</li>'; 
+                            rep_gen_executive_201_profile_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     rep_gen_competency_training_management_sub_module_access = '';
                     element['rep_gen_competency_training_management_sub_module_access'].split('|').forEach(item => {
 
                         if(item != ''){
-                            rep_gen_competency_training_management_sub_module_access += '<li>'+ item +'</li>'; 
+                            rep_gen_competency_training_management_sub_module_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     rep_gen_eligibility_and_rank_tracking_access = '';
                     element['rep_gen_eligibility_and_rank_tracking_access'].split('|').forEach(item => {
 
                         if(item != ''){
-                            rep_gen_eligibility_and_rank_tracking_access += '<li>'+ item +'</li>'; 
+                            rep_gen_eligibility_and_rank_tracking_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     rep_gen_plantilla_management_reports_access = '';
                     element['rep_gen_plantilla_management_reports_access'].split('|').forEach(item => {
 
                         if(item != ''){
-                            rep_gen_plantilla_management_reports_access += '<li>'+ item +'</li>'; 
+                            rep_gen_plantilla_management_reports_access += '<li>'+ item +'</li>';
                         }
-                        
+
                     });
 
                     $('#ReportGenerationAccess_tbody').append('<tr>'+
@@ -6773,16 +6773,16 @@ function updateReportGenerationAccessTable(){
                         '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/report-generation-access/delete/'+ element['id'] +'`, `updateReportGenerationAccessTable`, `resetReportGenerationAccessForm`, `None`, `None`)">Delete</a>'+
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['role_name_report_generation'] == null) ? '-' : element['role_name_report_generation']) +'</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         rep_gen_executive_201_profile_access +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         rep_gen_competency_training_management_sub_module_access +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         rep_gen_eligibility_and_rank_tracking_access +
                     '</td>'+
-                    '<td nowrap="nowrap">'+ 
+                    '<td nowrap="nowrap">'+
                         rep_gen_plantilla_management_reports_access +
                     '</td>'+
                     '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
@@ -6791,7 +6791,7 @@ function updateReportGenerationAccessTable(){
                     '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
                     '</tr>'
                     );
-                }); 
+                });
             }
         }
     });
@@ -6805,7 +6805,7 @@ function updateReportGenerationAccessTable(){
 function resetReportGenerationAccessForm(id){
 
     if(id == null){
-        
+
         // Reset form
         $('#report_generation_form').trigger('reset');
 
@@ -6830,7 +6830,7 @@ function resetReportGenerationAccessForm(id){
             showConfirmButton: false,
             allowOutsideClick: false
         });
-        
+
         // Reset form
         $('#report_generation_form').trigger('reset');
 
@@ -6851,13 +6851,13 @@ function resetReportGenerationAccessForm(id){
             success: function (result) {
 
                 if(result == 'Restricted'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
                         text: 'Sorry you are restricted to do this action please contact the administrator.',
                     });
-                    
+
                 }
                 else{
 
@@ -6902,7 +6902,7 @@ function resetReportGenerationAccessForm(id){
                                     document.getElementsByName('personal_data_sheet_based_on_201_profile_information')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['rep_gen_competency_training_management_sub_module_access'].split('|').forEach(item => {
@@ -6930,7 +6930,7 @@ function resetReportGenerationAccessForm(id){
                                     document.getElementsByName('list_of_resource_speakers_persons_by_inclusive_date')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['rep_gen_eligibility_and_rank_tracking_access'].split('|').forEach(item => {
@@ -6964,7 +6964,7 @@ function resetReportGenerationAccessForm(id){
                                     document.getElementsByName('masterlist_of_officials_who_has_taken_board_panel_interview')[0].checked = true;
                                 }
                             }
-                            
+
                         });
 
                         element['rep_gen_plantilla_management_reports_access'].split('|').forEach(item => {
@@ -7013,12 +7013,12 @@ function resetReportGenerationAccessForm(id){
                                     document.getElementsByName('list_of_officials_by_appointment_or_assumption_dates')[0].checked = true;
                                 }
                             }
-                            
-                        });
-                    });  
 
-                    Swal.close();  
-                }  
+                        });
+                    });
+
+                    Swal.close();
+                }
             }
         });
     }
@@ -7042,23 +7042,23 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
             showConfirmButton: false,
             allowOutsideClick: false
         })
-    
+
         $.ajax({
             url: action_url_without_type_and_value + '/' + type + '/' + value,
             success: function (result) {
-    
+
                 if(result == 'true'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
                         text: 'Stop ' + type + ' already exist input field will be reset',
                     });
-                    
+
                     $('#'+ field_id).val('');
                 }
                 else if(result == 'Restricted'){
-    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Stop',
@@ -7067,20 +7067,20 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
 
                 }
                 else if(result.PersonalData || result.User){
-                    
+
                     if(result.PersonalData.length){
-    
+
                         personal_data = `<div class="bg-primary text-white text-center mb-1 p-2">Result from 201 Profile</div>`;
-                    
-                        result.PersonalData.forEach(element => { 
-    
+
+                        result.PersonalData.forEach(element => {
+
                             personal_data += `<div class="input-group mb-1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                         </div>
                                         <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
                                     </div>`;
-    
+
                             personal_data += `<div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-primary border-primary text-white">Name</span>
@@ -7090,22 +7090,22 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         });
                     }
                     else{
-    
+
                         personal_data = '';
                     }
                     if(result.User.length){
-    
+
                         user_account = `<div class="bg-primary text-white text-center mb-1 p-2">Result from User Account</div>`;
-                    
-                        result.User.forEach(element => { 
-    
+
+                        result.User.forEach(element => {
+
                             user_account += `<div class="input-group mb-1">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-success border-success text-white">Role</span>
                                         </div>
                                         <input type="text" class="form-control" value="` + element['role']+ `" readonly>
                                     </div>`;
-    
+
                             user_account += `<div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-primary border-primary text-white">Name</span>
@@ -7115,10 +7115,10 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         });
                     }
                     else{
-    
+
                         user_account = '';
                     }
-    
+
                     Swal.fire({
                         title: 'Stop ' + type + ' already exist',
                         html: personal_data + user_account,
@@ -7128,9 +7128,9 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'
                     }).then((result) => {
-    
+
                         if (result.isConfirmed) {
-    
+
                             Swal.fire({
                                 icon: 'info',
                                 title: 'Resetting..',
@@ -7138,11 +7138,11 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                 showConfirmButton: false,
                                 timer: 2000
                             });
-                            
+
                             $('#'+ field_id).val('');
                         }
                     });
-    
+
                 }
                 else if(result == 'false'){
 
@@ -7160,7 +7160,7 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                     $.each(result, function( index, value ) {
                         html += '<div class="text-center text-danger mb-1">'+ value +'</div>';
                     });
-                    
+
                     Swal.fire({
                         title: 'Validation Unsuccessful!',
                         html: html,
@@ -7171,11 +7171,11 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         confirmButtonText: 'OK'
                     });
 
-                }        
+                }
             }
         });
     }
-    
+
 }
 
 // End of data if already in use
@@ -7199,26 +7199,26 @@ function validate201Profile(){
                 showConfirmButton: false,
                 allowOutsideClick: false
             })
-        
+
             $.ajax({
                 url: rootURL + 'api/v1/personal-data/validate-201-profile/' + $('#lastname').val() + '/' + $('#firstname').val() + '/' + $('#middlename').val() + '/' + $('#birthdate').val(),
                 success: function (result) {
-        
+
                     if(result.validate_by_name || result.validate_by_name_and_birthday){
-                        
+
                         if(result.validate_by_name.length){
-        
+
                             validate_by_name_result = `<div class="bg-primary text-white text-center mb-1 p-2">Result from Name only</div>`;
-                        
-                            result.validate_by_name.forEach(element => { 
-        
+
+                            result.validate_by_name.forEach(element => {
+
                                 validate_by_name_result += `<div class="input-group mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                             </div>
                                             <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
                                         </div>`;
-        
+
                                 validate_by_name_result += `<div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-primary border-primary text-white">Name</span>
@@ -7228,22 +7228,22 @@ function validate201Profile(){
                             });
                         }
                         else{
-        
+
                             validate_by_name_result = '';
                         }
                         if(result.validate_by_name_and_birthday.length){
-        
+
                             validate_by_name_and_birthday_result = `<div class="bg-primary text-white text-center mb-1 p-2">Result from Name and Birthday</div>`;
-                        
-                            result.validate_by_name_and_birthday.forEach(element => { 
-        
+
+                            result.validate_by_name_and_birthday.forEach(element => {
+
                                 validate_by_name_and_birthday_result += `<div class="input-group mb-1">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                             </div>
                                             <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
                                         </div>`;
-        
+
                                 validate_by_name_and_birthday_result += `<div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-primary border-primary text-white">Name</span>
@@ -7253,10 +7253,10 @@ function validate201Profile(){
                             });
                         }
                         else{
-        
+
                             validate_by_name_and_birthday_result = '';
                         }
-        
+
                         Swal.fire({
                             title: 'With possible duplicate below!',
                             html: validate_by_name_result + validate_by_name_and_birthday_result,
@@ -7268,13 +7268,13 @@ function validate201Profile(){
                             cancelButtonText: 'Cancel Encoding',
                             confirmButtonText: 'Proceed Encoding'
                         }).then((result) => {
-        
+
                             if (result.isConfirmed) {
-        
+
                                 Swal.close();
                             }
                             else if (result.dismiss) {
-    
+
                                 Swal.fire({
                                     icon: 'info',
                                     title: 'Reloading..',
@@ -7282,23 +7282,23 @@ function validate201Profile(){
                                     showConfirmButton: false,
                                     timer: 2000
                                 });
-    
+
                                 location.reload();
                             }
                         });
-        
+
                     }
                     else if(result == 'Restricted'){
-    
+
                         Swal.fire({
                             icon: 'error',
                             title: 'Stop',
                             text: 'Sorry you are restricted to do this action please contact the administrator.',
                         });
-                        
+
                     }
                     else{
-        
+
                         Swal.fire({
                             icon: 'success',
                             title: 'Passed',
@@ -7306,13 +7306,13 @@ function validate201Profile(){
                             showConfirmButton: false,
                             timer: 2000
                         })
-                    }        
+                    }
                 }
             });
         }
 
     }
-    
+
 }
 
 // End of validating 201 Profile if already exist
@@ -7342,10 +7342,10 @@ function deleteFunction(action_url, update_table_js_function_name, reset_form_js
                     if (response === 'Successfully deleted'){
                         Swal.fire({
                             icon: 'success',
-                            title: 'Deleted!', 
+                            title: 'Deleted!',
                             html: `<center>Successfully deleted.</center>`
                         });
-                        
+
                         if(reset_form_js_function_name != 'None'){
                             resetFormFunction(reset_form_js_function_name);
                         }
@@ -7363,13 +7363,13 @@ function deleteFunction(action_url, update_table_js_function_name, reset_form_js
                         }
                     }
                     else if(response == 'Restricted'){
-    
+
                         Swal.fire({
                             icon: 'error',
                             title: 'Stop',
                             text: 'Sorry you are restricted to do this action please contact the administrator.',
                         });
-                        
+
                     }
                     else{
                         Swal.fire('Delete Unsuccessful!', '', 'error');
@@ -7427,13 +7427,13 @@ function validateFileSize(input_file_id, max_file_size_in_mb) {
     $('#'+ input_file_id).on('change', function (e) {
 
         // Get the file
-        var files = e.currentTarget.files; 
+        var files = e.currentTarget.files;
 
         // Set required file size in mb
         var filesize = ((files[0].size/1024)/1024).toFixed(max_file_size_in_mb); // MB
-        
+
         // Validate if file size is maximum than required
-        if (filesize > max_file_size_in_mb) { 
+        if (filesize > max_file_size_in_mb) {
 
             Swal.fire(
             'Stop',
@@ -7498,7 +7498,7 @@ function submitResetPassword(){
                         $.each(response, function( index, value ) {
                             html += '<div class="text-center text-danger mb-1">'+ value +'</div>';
                         });
-                        
+
                         Swal.fire({
                             title: 'Your password was not updated!',
                             html: html,
@@ -7554,3 +7554,81 @@ function processAlert(){
 }
 
 // End of process alert function
+
+const handleCategoryClick = (category, selector) => {
+    const buttons = document.querySelectorAll('.category-button');
+    buttons.forEach((button) => {
+        button.classList.remove('text-blue-500');
+    });
+
+    const clickedButton = document.querySelector(selector);
+    clickedButton.classList.add('text-blue-500');
+
+    const categories = document.querySelectorAll('.category');
+    categories.forEach((categoryElement) => {
+        if (categoryElement.classList.contains(category)) {
+            categoryElement.style.display = 'block';
+        } else {
+            categoryElement.style.display = 'none';
+        }
+    });
+};
+
+const personDataTab = () => {
+    handleCategoryClick('personDataTab', '[onclick="personDataTab()"]');
+};
+
+const familyProfileTab = () => {
+    handleCategoryClick('familyProfileTab', '[onclick="familyProfileTab()"]');
+};
+
+const educationalAttainmentTab = () => {
+    handleCategoryClick('educationalAttainmentTab', '[onclick="educationalAttainmentTab()"]');
+};
+
+const examinationsTakenTab = () => {
+    handleCategoryClick('examinationsTakenTab', '[onclick="examinationsTakenTab()"]');
+};
+
+const languagesDialectsTab = () => {
+    handleCategoryClick('languagesDialectsTab', '[onclick="languagesDialectsTab()"]');
+};
+const eligibilityAndRankTrackerTab = () => {
+    handleCategoryClick('eligibilityAndRankTrackerTab', '[onclick="eligibilityAndRankTrackerTab()"]');
+};
+const recordOfCespesRatingHrTab = () => {
+    handleCategoryClick('recordOfCespesRatingHrTab', '[onclick="recordOfCespesRatingHrTab()"]');
+};
+const workExperienceTab = () => {
+    handleCategoryClick('workExperienceTab', '[onclick="workExperienceTab()"]');
+};
+const fieldExpertiseTab = () => {
+    handleCategoryClick('fieldExpertiseTab', '[onclick="fieldExpertiseTab()"]');
+};
+const cesTrainingsTab = () => {
+    handleCategoryClick('cesTrainingsTab', '[onclick="cesTrainingsTab()"]');
+};
+const otherManagementTrainingsTab = () => {
+    handleCategoryClick('otherManagementTrainingsTab', '[onclick="otherManagementTrainingsTab()"]');
+};
+const researchAndStudiesTab = () => {
+    handleCategoryClick('researchAndStudiesTab', '[onclick="researchAndStudiesTab()"]');
+};
+const scholarshipsTab = () => {
+    handleCategoryClick('scholarshipsTab', '[onclick="scholarshipsTab()"]');
+};
+const majorCivicAndProfessionalAffiliationsTab = () => {
+    handleCategoryClick('majorCivicAndProfessionalAffiliationsTab', '[onclick="majorCivicAndProfessionalAffiliationsTab()"]');
+};
+const awardAndCitationsTab = () => {
+    handleCategoryClick('awardAndCitationsTab', '[onclick="awardAndCitationsTab()"]');
+};
+const caseRecordsTab = () => {
+    handleCategoryClick('caseRecordsTab', '[onclick="caseRecordsTab()"]');
+};
+const healthRecordsTab = () => {
+    handleCategoryClick('healthRecordsTab', '[onclick="healthRecordsTab()"]');
+};
+const pdfFilesTab = () => {
+    handleCategoryClick('pdfFilesTab', '[onclick="pdfFilesTab()"]');
+};
