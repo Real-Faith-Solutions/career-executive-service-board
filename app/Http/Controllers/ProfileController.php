@@ -75,7 +75,7 @@ class ProfileController extends Controller
         $mainProfile = PersonalData::find($cesno);
         $familyProfile = FamilyProfile::find($mainProfile);
 
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile'));
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile',));
     }
 
 
@@ -1129,7 +1129,7 @@ class ProfileController extends Controller
                 }
 
                 $personalData = PersonalData::where('cesno','=','1')->offset(0)->limit(1)->get();
-                $SpouseRecords = SpouseRecords::where('cesno','=','1')->get();
+                $SpouseRecords = SpouseRecords::where('personal_data_cesno','=','1')->get();
                 $FamilyProfile = FamilyProfile::where('cesno','=','1')->get();
                 $ChildrenRecords = ChildrenRecords::where('cesno','=','1')->get();
                 $EducationalAttainment = EducationalAttainment::where('cesno','=','1')->get();
