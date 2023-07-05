@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddProfile201Req;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CreatedNewAccountMail;
@@ -67,17 +68,14 @@ class ProfileController extends Controller
 
     public function addProfile()
     {
-        return view('admin.201_profiling.create_profile.form');
+        if (DB::table('personal_data')->count() === 0) {
+            $cesNumber = 0;
+        } else {
+            $cesNumber = PersonalData::latest()->first()->cesno;
+        }
+
+        return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber]);
     }
-
-    public function viewProfile($cesno)
-    {
-        $mainProfile = PersonalData::find($cesno);
-        $familyProfile = FamilyProfile::find($mainProfile);
-
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile'));
-    }
-
 
     public function validateData($type, $value){
 
