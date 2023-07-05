@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
@@ -40,6 +41,7 @@ Route::get('/', function () {
 
 Route::get('family-profile{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
 Route::post('family-profile/store/{cesno}', [FamilyController::class, 'store'])->name('family-profile.store');
+Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
 Route::get('/login', [AuthController::class, 'getLoginHomePage']);
@@ -446,6 +448,8 @@ Route::group([
     Route::group(['prefix'=> 'profile',], function () {
 
         Route::get('add', [ProfileController::class, 'addProfile'])->middleware('userauth');
+        // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
+        // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
         // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
         Route::get('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
         Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');

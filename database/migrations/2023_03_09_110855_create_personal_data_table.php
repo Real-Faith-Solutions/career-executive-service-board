@@ -45,22 +45,6 @@ return new class extends Migration
             $table->string('tin')->nullable();
             $table->string('picture')->nullable();
             $table->bigInteger('cesstat_code')->nullable();
-            //homeadd
-            $table->string('fb_pa')->nullable();
-            $table->string('ns_pa')->nullable();
-            $table->string('bd_pa')->nullable();
-            $table->string('cm_pa')->nullable();
-            $table->string('zc_pa')->nullable();
-            //mailingadd
-            $table->string('fb_ma')->nullable();
-            $table->string('ns_ma')->nullable();
-            $table->string('bd_ma')->nullable();
-            $table->string('cm_ma')->nullable();
-            $table->string('zc_ma')->nullable();
-            $table->string('oea_ma')->nullable();
-            $table->string('mobileno1_ma')->nullable();
-            $table->string('telno1_ma')->nullable();
-            $table->string('mobileno2_ma')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();
