@@ -449,8 +449,9 @@ Route::group([
         Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
         Route::get('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
         Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
-        
-        Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
+
+        // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
+        Route::get('view/{cesno}', [ProfileController::class, 'viewDetails'])->middleware('userauth');
 
     });
 

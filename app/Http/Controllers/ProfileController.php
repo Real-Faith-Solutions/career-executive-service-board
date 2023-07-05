@@ -316,6 +316,16 @@ class ProfileController extends Controller
 
     }
 
+    public function viewDetails($cesno){
+        $mainProfile = PersonalData::find($cesno);
+        $familyProfile = FamilyProfile::find($mainProfile);
+
+
+
+        return view('admin.201_profiling.profile', compact('mainProfile', 'familyProfile'));
+    }
+
+
     public function view201ProfilePage($cesno, $numberOfResult = 50){
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('201 Profiling') == 'true'){
