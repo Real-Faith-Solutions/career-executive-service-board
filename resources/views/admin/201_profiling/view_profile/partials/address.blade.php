@@ -7,16 +7,22 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Level
+                    Type
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    School
+                    Floor / Bldg
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    School Type
+                    No. / Street
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Period of Attendance
+                    Brgy. / District
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    City Municipality
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Zip Code
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
@@ -34,6 +40,12 @@
                 </td>
                 <td class="px-6 py-3">
                     Local
+                </td>
+                <td class="px-6 py-3">
+                    2019
+                </td>
+                <td class="px-6 py-3">
+                    2019
                 </td>
                 <td class="px-6 py-3">
                     2019
