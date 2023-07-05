@@ -1,8 +1,14 @@
-<div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-    <h1>Personal data</h1>
-</div>
+<div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+    <div class="w-full text-left text-gray-500">
+        <div class="bg-blue-500 uppercase text-gray-700 text-white">
 
-<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <h1 class="px-6 py-3">
+                Personal Data
+            </h1>
+        </div>
+
+        <div class="border-b bg-white px-6 py-3">
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
     <div class="mb-3">
         <label for="cesno">CES Number</label>
         <input id="cesno" type="number" name="cesno" value="{{ $mainProfile->cesno }}" readonly>
@@ -11,10 +17,10 @@
 
     <div></div>
 
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label>
         <input class="mb-3 p-1" id="picture" name="picture" accept="image/png, image/jpeg" type="file" onclick="validateFileSize(`picture`, 2)" />
-    </div>
+    </div> --}}
 
 </div>
 
@@ -198,4 +204,8 @@
     </div>
 </section> {{-- end of identification card --}}
 
+        </div>
+    </div>
 </div>
+
+

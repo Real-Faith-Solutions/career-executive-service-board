@@ -2,8 +2,8 @@
 @section('title', 'Create 201 profile')
 @section('content')
 
-    <div class="grid grid-cols-4 grid-rows-7 gap-1">
-        <div  class="row-span-5">
+    <div class="grid-rows-7 grid grid-cols-4 gap-1">
+        <div class="row-span-5">
             <img src="{{ asset('images/avatar/' . ($mainProfile->avatar ?: 'placeholder.png')) }}" class="h-50 w-96" />
 
             <h1 class="text-bold text-2xl">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="col-span-3">
-            <div class="grid grid-cols-5">
+            <div class="grid lg:grid-cols-5 sm:grid-cols-1">
 
                 {{-- NAVIGATION --}}
                 <div>
