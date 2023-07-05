@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
+            ProfileData::class,
         ]);
-        
+
     }
 }
