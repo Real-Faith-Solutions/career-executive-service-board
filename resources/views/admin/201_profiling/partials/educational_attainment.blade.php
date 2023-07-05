@@ -11,39 +11,15 @@
                 <th scope="col" class="px-6 py-3">
                     Level
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     School
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Degree
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Major
-                </th>
-
                 <th scope="col" class="px-6 py-3">
                     School Type
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     Period of Attendance
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Highest Level
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Year Graduated
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Academic Honor Receive
-                </th>
-
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
@@ -53,39 +29,16 @@
 
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum dolor
+                    Elementary
                 </td>
-
                 <td class="px-6 py-3">
-                    Lorem ipsum dolor
+                    Bagong Silang High school
                 </td>
-
                 <td class="px-6 py-3">
-                    Lorem ipsum dolor
+                    Local
                 </td>
-
                 <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
+                    2019
                 </td>
 
                 <td class="px-6 py-4 text-right">

@@ -20,16 +20,12 @@
                 <th scope="col" class="px-6 py-3">
                     Firstname
                 </th>
-
                 <th scope="col" class="px-6 py-3">
                     Extension name
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Middlename
                 </th>
-
-
-
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
