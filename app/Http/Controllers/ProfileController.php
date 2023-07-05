@@ -65,6 +65,20 @@ use App\Models\ProfileLibTblRegion;
 class ProfileController extends Controller
 {
 
+    public function addProfile()
+    {
+        return view('admin.201_profiling.create_profile.form');
+    }
+
+    public function viewProfile($cesno)
+    {
+        $mainProfile = PersonalData::find($cesno);
+        $familyProfile = FamilyProfile::find($mainProfile);
+
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile'));
+    }
+
+
     public function validateData($type, $value){
 
         if(RolesController::validateUserCesWebAppGeneralPageAccess('201 Profiling') == 'true'){
@@ -314,15 +328,6 @@ class ProfileController extends Controller
             return view('restricted');
         }
 
-    }
-
-    public function viewDetails($cesno){
-        $mainProfile = PersonalData::find($cesno);
-        $familyProfile = FamilyProfile::find($mainProfile);
-
-
-
-        return view('admin.201_profiling.profile', compact('mainProfile', 'familyProfile'));
     }
 
 
@@ -1168,7 +1173,7 @@ class ProfileController extends Controller
                 $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
                 $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
 
-                return view('admin.201_profiling.table', compact('search', 'searched', 'personalData', 'SpouseRecords', 'FamilyProfile', 'ChildrenRecords', 'EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
+                return view('admin.201_profiling.view_profile.table', compact('search', 'searched', 'personalData', 'SpouseRecords', 'FamilyProfile', 'ChildrenRecords', 'EducationalAttainment','ExaminationsTaken','LicenseDetails','LanguagesDialects',
                 'CesWe','AssessmentCenter','ValidationHr','BoardInterview','CesStatus','RecordOfCespesRatings','WorkExperience','FieldExpertise','CesTrainings','OtherManagementTrainings',
                 'ResearchAndStudies','Scholarships','Affiliations','AwardAndCitations','CaseRecords','HealthRecords','HistoricalRecordOfMedicalCondition','PdfLinks','CityMunicipality','Degree','CourseMajor','School','ExaminationReference','LanguageDialects','CesStatusReference',
                 'AcquiredThru','StatusType','AppointingAuthority','ExpertiseCategory','SpecialSkill','CaseNature','CaseStatus','LocationCity','LocationProvince','LocationRegion'))->render();
