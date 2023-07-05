@@ -39,7 +39,7 @@ Route::get('/', function () {
 });
 
 Route::get('family-profile{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
-Route::post('hehehehe/{cesno}', [FamilyController::class, 'store'])->name('hehehehe.store');
+Route::post('family-profile/store/{cesno}', [FamilyController::class, 'store'])->name('family-profile.store');
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
 Route::get('/login', [AuthController::class, 'getLoginHomePage']);

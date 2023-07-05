@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('title', 'Family profile form')
 @section('content')
-    
+
 <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
     <h1>Spouse Details</h1>
 </div>
 
 {{-- ["id" => $id, "token" => $token]  ['cesno' => $cesno->cesno]--}}
 
-<form action="{{ route('hehehehe.store', ['cesno' => $cesno]) }}" method="POST">
+<form action="{{ route('family-profile.store', ['cesno' => $cesno]) }}" method="POST">
     @csrf
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -19,7 +19,7 @@
         </div>
 
         <div></div>
-    
+
         <div class="mb-3">
             <label for="first_name">First Name<sup>*</span></label>
             <input type="text" name="first_name" id="first_name">
@@ -54,7 +54,7 @@
             <label for="employer_bussiness_telephone">Employer/Bussiness Telephone No.</label>
             <input type="text" name="employer_bussiness_telephone" id="employer_bussiness_telephone">
         </div>
-    
+
     </div>
 
     <div><button type="submit" class="btn btn-primary">Submit</button></div>
