@@ -56,13 +56,13 @@ class AddProfile201 extends Controller
 
         ]);
 
-        if (DB::table('personal_data')->count() === 0) {
-            $cesNumber = 0;
-        } else {
-            $cesNumber = PersonalData::latest()->first()->cesno;
-        }
+        // if (DB::table('personal_data')->count() === 0) {
+        //     $cesNumber = 0;
+        // } else {
+        //     $cesNumber = PersonalData::latest()->first()->cesno;
+        // }
 
-        return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber]);
+        return redirect('admin/profile/add');
 
     }
 

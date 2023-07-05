@@ -38,6 +38,7 @@ Route::get('/', function () {
     }
 });
 
+// new add profile route
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');

@@ -170,15 +170,15 @@
                 <option disabled selected>Please Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                <option value="Female">Transgender</option>
-                <option value="Female">Gender neutral</option>
-                <option value="Female">Non-binary</option>
-                <option value="Female">Agender</option>
-                <option value="Female">Pangender</option>
-                <option value="Female">Genderqueer</option>
-                <option value="Female">Two-spirit</option>
-                <option value="Female">Third gender</option>
-                <option value="Female">Others</option>
+                <option value="Transgender">Transgender</option>
+                <option value="Gender neutral">Gender neutral</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Agender">Agender</option>
+                <option value="Pangender">Pangender</option>
+                <option value="Genderqueer">Genderqueer</option>
+                <option value="Two-spirit">Two-spirit</option>
+                <option value="Third gender">Third gender</option>
+                <option value="Others">Others</option>
                 <option value="Prefer not to say">Prefer not to say</option>
             
             </select>
@@ -212,11 +212,12 @@
 
         <div class="mb-3">
             <label for="height">Height (in meters)<sup>*</sup></label>
-            <input type="text" id="height" name="height" value="{{ old('height') }}">
+            <input type="number" id="height" name="height" value="{{ old('height') }}">
         </div>
+
         <div class="mb-3">
             <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-            <input type="text" id="weight" name="weight" value="{{ old('weight') }}">
+            <input type="number" id="weight" name="weight" value="{{ old('weight') }}">
         </div>
 
     </div>
@@ -334,16 +335,16 @@
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="mb-3">
                 <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                <input type="text" id="gsis" name="gsis" value="{{ old('gsis') }}">
+                <input type="number" id="gsis" name="gsis" value="{{ old('gsis') }}">
             </div>
             <div class="mb-3">
                 <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                <input type="text" id="pagibig" name="pagibig" value="{{ old('pagibig') }}">
+                <input type="number" id="pagibig" name="pagibig" value="{{ old('pagibig') }}">
             </div>
 
             <div class="mb-3">
                 <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                <input type="text" id="philhealt" name="philhealth" value="{{ old('philhealt') }}">
+                <input type="number" id="philhealth" name="philhealth" value="{{ old('philhealth') }}">
             </div>
 
         </div>
@@ -351,11 +352,11 @@
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="col-md-4">
                 <label for="sss_no">SSS ID No.</label>
-                <input type="text" id="sss_no" name="sss_no" value="{{ old('sss_no') }}">
+                <input type="number" id="sss_no" name="sss_no" value="{{ old('sss_no') }}">
             </div>
             <div class="col-md-4">
                 <label for="tin">TIN ID No.</label>
-                <input type="text" id="tin" name="tin" value="{{ old('tin') }}">
+                <input type="number" id="tin" name="tin" value="{{ old('tin') }}">
             </div>
         </div>
     </section>
