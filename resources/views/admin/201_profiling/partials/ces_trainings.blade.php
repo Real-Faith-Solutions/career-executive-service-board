@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Family profile</button>
+    <button class="btn btn-primary">Add CES Training</button>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -7,13 +7,40 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Relationship
+                    Session Title / Program
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Name
+                    Session number
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Occupation
+                    Training Category / Theme
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Expertise / Field of Specialization
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Inclusive dates
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Venue
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    No. of Training Hours
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Barrio
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Resource Speaker
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Session Director
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Training Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Remarks
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
@@ -24,13 +51,40 @@
 
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Father
+                    Lorem ipsum dolor
                 </td>
                 <td class="px-6 py-3">
                     Lorem ipsum dolor
                 </td>
                 <td class="px-6 py-3">
-                    Single Mom
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
+                </td>
+                <td class="px-6 py-3">
+                    Lorem ipsum dolor
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">

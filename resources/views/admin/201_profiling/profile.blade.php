@@ -10,7 +10,7 @@
     <a class="btn category-button" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
     <a class="btn category-button" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
     <a class="btn category-button" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
-    {{-- <a class="btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a> --}}
+    <a class="btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
     <a class="btn category-button" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
     <a class="btn category-button" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
     <a class="btn category-button" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
@@ -37,7 +37,7 @@
         <div class="category examinationsTakenTab hidden">
             @include('admin.201_profiling.partials.examinations_taken')
         </div>
-        
+
         <div class="category languagesDialectsTab hidden">
             @include('admin.201_profiling.partials.languages_dialects')
         </div>
@@ -58,9 +58,9 @@
             @include('admin.201_profiling.partials.field_expertise')
         </div>
 
-        {{-- <div class="category cesTrainingsTab hidden">
+        <div class="category cesTrainingsTab hidden">
             @include('admin.201_profiling.partials.ces_trainings')
-        </div> --}}
+        </div>
 
         <div class="category otherManagementTrainingsTab hidden">
             @include('admin.201_profiling.partials.other_management_trainings')
