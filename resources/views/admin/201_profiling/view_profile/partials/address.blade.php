@@ -31,24 +31,25 @@
         </thead>
         <tbody>
 
+            @foreach ($addressProfile as $data)
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Elementary
+                    {{ $data->type }}
                 </td>
                 <td class="px-6 py-3">
-                    Bagong Silang High school
+                    {{ $data->floor_bldg }}
                 </td>
                 <td class="px-6 py-3">
-                    Local
+                    {{ $data->no_street }}
                 </td>
                 <td class="px-6 py-3">
-                    2019
+                    {{ $data->brgy_or_district }}
                 </td>
                 <td class="px-6 py-3">
-                    2019
+                    {{ $data->city_or_municipality }}
                 </td>
                 <td class="px-6 py-3">
-                    2019
+                    {{ $data->zip_code }}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
@@ -56,6 +57,8 @@
                     <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
                 </td>
             </tr>
+
+            @endforeach
 
         </tbody>
     </table>

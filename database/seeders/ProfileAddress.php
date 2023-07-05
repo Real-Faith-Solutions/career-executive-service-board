@@ -28,5 +28,38 @@ class ProfileAddress extends Seeder
             'encoder'  => $faker->name,
             'last_updated_by' => $faker->dateTime,
         ]);
+        ModelsProfileAddress::create([
+            'cesno' => '1',
+            'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
+            'floor_bldg' => $faker->address,
+            'no_street' => $faker->address,
+            'brgy_or_district' => $faker->state,
+            'city_or_municipality' => $faker->city,
+            'zip_code' => $faker->postcode,
+            'encoder'  => $faker->name,
+            'last_updated_by' => $faker->dateTime,
+        ]);
+        ModelsProfileAddress::create([
+            'cesno' => '1',
+            'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
+            'floor_bldg' => $faker->address,
+            'no_street' => $faker->address,
+            'brgy_or_district' => $faker->state,
+            'city_or_municipality' => $faker->city,
+            'zip_code' => $faker->postcode,
+            'encoder'  => $faker->name,
+            'last_updated_by' => $faker->dateTime,
+        ]);
+        ModelsProfileAddress::create([
+            'cesno' => '1',
+            'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
+            'floor_bldg' => $faker->address,
+            'no_street' => $faker->address,
+            'brgy_or_district' => $faker->state,
+            'city_or_municipality' => $faker->city,
+            'zip_code' => $faker->postcode,
+            'encoder'  => $faker->name,
+            'last_updated_by' => $faker->dateTime,
+        ]);
     }
 }

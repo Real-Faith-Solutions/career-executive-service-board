@@ -36,6 +36,7 @@ use App\Models\RecordOfCespesRatings;
 use App\Models\HistoricalRecordOfMedicalCondition;
 use App\Models\User;
 use App\Models\PdfLinks;
+use App\Models\ProfileAddress;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,8 +75,9 @@ class ProfileController extends Controller
     {
         $mainProfile = PersonalData::find($cesno);
         $familyProfile = FamilyProfile::find($mainProfile);
+        $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
 
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile'));
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile', 'addressProfile'));
     }
 
 
