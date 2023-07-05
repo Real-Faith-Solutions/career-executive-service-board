@@ -4,29 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class PersonalData extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    protected $appends = ['age_now'];
-    protected $primaryKey = 'cesno';
 
-    public function cesstatusvalue(){
-        return $this->hasOne(profilelib_tblcesstatus::class, 'code', 'cesstat_code');
-    }
+    protected $table = "personal_data";
 
-    public function getAgeNowAttribute(){
-        return Carbon::parse($this->birthdate)->age;
-    }
+    protected $fillable = [
+        'status',
+        'title',
+        'lastname',
+        'firstname',
+        'name_extension',
+        'middlename',
+        'mi',
+        'nickname',
+        'birthdate',
+        'age',
+        'birth_place',
+        'gender',
+        'gender_by_choice',
+        'civil_status',
+        'religion',
+        'height',
+        'weight',
+        'member_of_indigenous_group',
+        'single_parent',
+        'citizenship',
+        'dual_citizenship',
+        'person_with_disability',
+        'gsis',
+        'pagibig',
+        'philhealth',
+        'sss_no',
+        'tin',
+    ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        PersonalData::creating(function($model) {
-            $model->age = Carbon::parse($model->birthdate)->age;
-        });
-    }
 }
