@@ -8,15 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalData extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-    
-    protected $table = "personal_data";
-
-=======
 
     protected $table = "personal_data";
     protected $primaryKey = 'cesno';
->>>>>>> 891364a068cb23cd58e48a5be90d9ad9e2a47147
     protected $fillable = [
         'status',
         'title',
@@ -46,10 +40,5 @@ class PersonalData extends Model
         'sss_no',
         'tin',
     ];
-<<<<<<< HEAD
-    
-}
-=======
 
 }
->>>>>>> 891364a068cb23cd58e48a5be90d9ad9e2a47147
