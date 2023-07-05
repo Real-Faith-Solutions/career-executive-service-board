@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Family profile</button>
+    <a href="{{ route('family-profile.create', ['cesno'=>$mainProfile->cesno])}}" class="btn btn-primary">Add Family profile</a>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">

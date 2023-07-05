@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PersonalData extends Model
 {
     use HasFactory;
 
     protected $table = "personal_data";
+
     protected $primaryKey = 'cesno';
+
     protected $fillable = [
         'avatar',
         'status',
@@ -41,5 +45,21 @@ class PersonalData extends Model
         'sss_no',
         'tin',
     ];
+
+    public function spouses(): HasMany
+    {
+        return $this->hasMany(SpouseRecords::class);
+    }
+
+    public function familyProfile(): HasOne
+    {
+        return $this->hasOne(FamilyProfile::class);
+    }
+
+
+    public function childrens(): HasMany
+    {
+        return $this->hasMany(ChildrenRecords::class);
+    }
 
 }
