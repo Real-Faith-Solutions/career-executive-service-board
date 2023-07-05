@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalData extends Model
 {
     use HasFactory;
-    
-    protected $table = "personal_data";
 
+    protected $table = "personal_data";
+    protected $primaryKey = 'cesno';
     protected $fillable = [
         'status',
         'title',
@@ -40,5 +40,5 @@ class PersonalData extends Model
         'sss_no',
         'tin',
     ];
-    
+
 }
