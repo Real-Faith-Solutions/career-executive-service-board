@@ -13,23 +13,13 @@ return new class extends Migration
     {
         Schema::create('personal_data', function (Blueprint $table) {
 
-            $table->id();
-            $table->bigInteger('cesno')->unique();
-            $table->string('sp')->nullable();
-            $table->string('moig')->nullable();
-            $table->string('pwd')->nullable();
-            $table->string('gsis')->nullable();
-            $table->string('pagibig')->nullable();
-            $table->string('philhealt')->nullable();
-            $table->string('sss_no')->nullable();
-            $table->string('tin')->nullable();
+            $table->id('cesno');
+            // $table->bigInteger('cesno')->unique();
             $table->string('status')->nullable();
-            $table->string('citizenship')->nullable();
-            $table->string('d_citizenship')->nullable();
-            $table->string('ne')->nullable();
             $table->string('title')->nullable();
             $table->string('lastname')->nullable();
             $table->string('firstname')->nullable();
+            $table->string('name_extension')->nullable();
             $table->string('middlename')->nullable();
             $table->string('mi')->nullable();
             $table->string('nickname')->nullable();
@@ -37,10 +27,21 @@ return new class extends Migration
             $table->string('age')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('gender')->nullable();
+            $table->string('gender_by_choice')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('religion')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
+            $table->string('member_of_indigenous_group')->nullable();
+            $table->string('single_parent')->nullable();
+            $table->string('citizenship')->nullable();
+            $table->string('dual_citizenship')->nullable();
+            $table->string('person_with_disability')->nullable();
+            $table->string('gsis')->nullable();
+            $table->string('pagibig')->nullable();
+            $table->string('philhealth')->nullable();
+            $table->string('sss_no')->nullable();
+            $table->string('tin')->nullable();
             $table->string('picture')->nullable();
             $table->bigInteger('cesstat_code')->nullable();
             //homeadd
