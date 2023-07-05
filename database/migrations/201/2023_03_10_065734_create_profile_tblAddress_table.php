@@ -15,16 +15,14 @@ return new class extends Migration
         Schema::create('profile_tblAddress', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->bigInteger('cesno')->nullable();
-            $table->string('catid')->nullable();
-            $table->string('house_bldg')->nullable();
-            $table->string('st_road')->nullable();
-            $table->string('brgy_vill')->nullable();
-            $table->string('city_code')->nullable();
-            $table->string('contactno')->nullable();
+            $table->string('type')->nullable();
+            $table->string('floor_bldg')->nullable();
+            $table->string('no_street')->nullable();
+            $table->string('brgy_or_district')->nullable();
+            $table->string('city_or_municipality')->nullable();
+            $table->string('zip_code')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->string('last_updated_by')->nullable();
             $table->timestamps();
         });
     }

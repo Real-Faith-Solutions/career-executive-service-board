@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\FamilyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -38,7 +39,8 @@ Route::get('/', function () {
     }
 });
 
-// new add profile route
+Route::get('family-profile{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
+Route::post('family-profile/store/{cesno}', [FamilyController::class, 'store'])->name('family-profile.store');
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');

@@ -15,6 +15,7 @@ return new class extends Migration
 
             $table->id('cesno');
             // $table->bigInteger('cesno')->unique();
+            $table->text('avatar')->nullable();
             $table->string('status')->nullable();
             $table->string('title')->nullable();
             $table->string('lastname')->nullable();

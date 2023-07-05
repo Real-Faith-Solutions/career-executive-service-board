@@ -37,6 +37,7 @@ use App\Models\RecordOfCespesRatings;
 use App\Models\HistoricalRecordOfMedicalCondition;
 use App\Models\User;
 use App\Models\PdfLinks;
+use App\Models\ProfileAddress;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -75,6 +76,13 @@ class ProfileController extends Controller
         }
 
         return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber]);
+    public function viewProfile($cesno)
+    {
+        $mainProfile = PersonalData::find($cesno);
+        $familyProfile = FamilyProfile::find($mainProfile);
+        $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile', 'addressProfile'));
     }
 
     public function validateData($type, $value){
@@ -1127,7 +1135,7 @@ class ProfileController extends Controller
                 }
 
                 $personalData = PersonalData::where('cesno','=','1')->offset(0)->limit(1)->get();
-                $SpouseRecords = SpouseRecords::where('cesno','=','1')->get();
+                $SpouseRecords = SpouseRecords::where('personal_data_cesno','=','1')->get();
                 $FamilyProfile = FamilyProfile::where('cesno','=','1')->get();
                 $ChildrenRecords = ChildrenRecords::where('cesno','=','1')->get();
                 $EducationalAttainment = EducationalAttainment::where('cesno','=','1')->get();
