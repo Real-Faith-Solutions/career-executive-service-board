@@ -12,6 +12,7 @@ class PersonalData extends Model
     protected $table = "personal_data";
     protected $primaryKey = 'cesno';
     protected $fillable = [
+        'avatar',
         'status',
         'title',
         'lastname',
