@@ -54,8 +54,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="ne">Name Extension</label>
-        <input name="ne" id="ne" value="{{ $mainProfile->ne }}" readonly>
+        <label for="name_extension">Name Extension</label>
+        <input name="name_extension" id="name_extension" value="{{ $mainProfile->name_extension }}" readonly>
     </div>
 
 </div>
@@ -135,18 +135,18 @@
 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
     <div class="mb-3">
-        <label for="moig">Member of Indigenous Group?<sup>*</sup></label>
-        <input name="moig" id="moig" value="{{ $mainProfile->moig }}"readonly>
+        <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
+        <input name="member_of_indigenous_group" id="member_of_indigenous_group" value="{{ $mainProfile->member_of_indigenous_group }}"readonly>
     </div>
 
-    <div class="mb-3">
-        <label for="moig_others">If others, please specify</label>
-        <input type="text" id="moig_others" name="moig_others" readonly disabled>
-    </div>
+    {{-- <div class="mb-3">
+        <label for="member_of_indigenous_group_others">If others, please specify</label>
+        <input type="text" id="member_of_indigenous_group_others" name="member_of_indigenous_group_others" readonly>
+    </div> --}}
 
     <div class="mb-3">
-        <label for="sppd_ip_TxtB">Solo Parent?<sup>*</sup></label>
-        <input name="sp" id="sppd_ip_TxtB" value="{{ $mainProfile->sppd_ip_TxtB }}" readonly>
+        <label for="single_parent">Solo Parent?<sup>*</sup></label>
+        <input name="sp" id="single_parent" value="{{ $mainProfile->single_parent }}" readonly>
     </div>
 
 </div>
@@ -158,13 +158,13 @@
     </div>
 
     <div class="mb-3">
-        <label for="inputcitizenShip">If Holder Dual Citizenship By Birth, By Naturalization</label>
-        <input type="text" name="d_citizenship" id="inputcitizenShip" value="{{ $mainProfile->d_citizenship }}" readonly>
+        <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
+        <input type="text" name="dual_citizenship" id="dual_citizenship" value="{{ $mainProfile->dual_citizenship }}" readonly>
     </div>
 
     <div class="mb-3">
-        <label for="pwd_CheckB" class="ml-2 text-sm font-medium text-gray-900">is PWD?</label>
-        <input name="pwd" id="pwd_TxtB" value="{{ $mainProfile->pwd_CheckB }}" readonly>
+        <label for="person_with_disability" class="ml-2 text-sm font-medium text-gray-900">is PWD?</label>
+        <input name="person_with_disability" id="person_with_disability" value="{{ $mainProfile->person_with_disability }}" readonly>
     </div>
 
 </div>
@@ -186,8 +186,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-            <input type="text" id="philhealt" name="philhealt" value="{{ $mainProfile->philhealt }}" readonly>
+            <label for="philhealth">PHILHEALTH ID No.<sup>*</sup></label>
+            <input type="text" id="philhealth" name="philhealth" value="{{ $mainProfile->philhealth }}" readonly>
         </div>
 
     </div>
