@@ -35,5 +35,8 @@
         span.invalid {
             @apply text-red-500 text-sm;
         }
+        sup{
+            @apply text-red-500;
+        }
     }
 </style>
