@@ -3,12 +3,12 @@
         <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/edit`, `personal_data`, `Update`, `updatePersonalDataTable`, `resetPersonalDataForm`, `personal_data_submit`, `None`, `None`)">
         @else --}}
             {{-- <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/personal-data/add`, `personal_data`, `Add`, `None`, `None`, `personal_data_submit`, `Yes`, `None`)"> --}}
-            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="{{ route('/add-profile-201') }}>
+            <form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="{{ route('/add-profile-201') }}">
     {{-- @endif --}}
 
     @csrf
 
-    <div class = "mb-3 bg-blue-500 p-2 uppercase text-white">
+     
         <h1>Personal data</h1>
     </div>
 
@@ -362,7 +362,7 @@
     </div>
 
     {{-- identification cards --}}
-    {{-- <section>
+    <section>
         <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
             <h1>Identification cards</h1>
         </div>
@@ -419,7 +419,7 @@
                 @enderror
             </div>
         </div>
-    </section>  --}}
+    </section> 
     {{-- end of identification card --}}
 
     {{-- permandent address --}}
