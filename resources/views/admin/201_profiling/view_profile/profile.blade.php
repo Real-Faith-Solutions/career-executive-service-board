@@ -35,7 +35,9 @@
                             <li>
                                 <a class="btn category-button" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
                             </li>
-
+                            <li>
+                                <a class="btn category-button" href="#addressTab" onclick="addressTab()">Address</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -155,7 +157,9 @@
                 <div class="category personDataTab">
                     @include('admin.201_profiling.view_profile.partials.personal_data')
                 </div>
-
+                <div class="category addressTab">
+                    @include('admin.201_profiling.view_profile.partials.address')
+                </div>
                 <div class="category familyProfileTab hidden">
                     @include('admin.201_profiling.view_profile.partials.family_profile')
                 </div>

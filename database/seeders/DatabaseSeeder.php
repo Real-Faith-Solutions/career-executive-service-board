@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             ProfileData::class,
+            ProfileAddress::class,
         ]);
 
     }
