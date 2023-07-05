@@ -35,19 +35,19 @@
 
                         {{-- @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Add') == 'true') --}}
                         <li>
-                            <a href="{{ env('APP_URL') }}admin/profile/add" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
+                            <a href="{{ url('admin/profile/add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
                         </li>
                         {{-- @endif
                         @if (App\Http\Controllers\ProfileController::latestCesNo() != 1) --}}
                         <li>
-                            <a href="{{ env('APP_URL') }}admin/profile/view" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
+                            <a href="{{ url('admin/profile/view') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
                         </li>
                         {{-- @endif --}}
 
                     </ul>
                 </li>
             @endif
-            
+
             @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Plantilla') == 'true')
                 <li>
                     <a href="{{ config('app.url') }}admin/online-ces-plantilla-management-system/view" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
