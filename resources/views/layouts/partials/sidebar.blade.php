@@ -40,7 +40,7 @@
                         {{-- @endif
                         @if (App\Http\Controllers\ProfileController::latestCesNo() != 1) --}}
                         <li>
-                            <a href="{{ env('APP_URL') }}admin/profile/view" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
+                            <a href="{{ url('admin/profile/view') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
                         </li>
                         {{-- @endif --}}
 
