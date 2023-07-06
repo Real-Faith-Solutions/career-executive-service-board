@@ -15,14 +15,17 @@ return new class extends Migration
         Schema::create('profile_tblChildren', function (Blueprint $table) {
             $table->id('ctrlno');
             // $table->bigInteger('cesno')->nullable();
-            $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('birthdate')->nullable();
+            $table->string('name_extension')->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('birth_place')->nullable();
             $table->string('gender')->nullable();
-            $table->date('encoder')->nullable();
+            $table->string('encoder')->nullable();
+            $table->softDeletes();
             // $table->string('encdate')->nullable();
             // $table->string('lastupd_enc')->nullable();
             // $table->string('lastupd_dt')->nullable();
@@ -37,4 +40,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('profile_tblChildren');
     }
+    
 };

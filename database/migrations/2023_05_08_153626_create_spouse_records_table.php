@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('suffix')->nullable();
+            $table->string('name_extension')->nullable();
             $table->string('occupation')->nullable();
             $table->string('employer_business_name')->nullable();
             $table->string('employer_business_address')->nullable();

@@ -21,7 +21,7 @@ class SpouseRecords extends Model
         'last_name',
         'first_name',
         'middle_name',
-        'suffix',
+        'name_extension',
         'occupation',
         'employer_business_name',
         'employer_business_address',

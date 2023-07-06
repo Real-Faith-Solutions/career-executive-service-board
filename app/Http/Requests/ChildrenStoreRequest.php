@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ChildrenStoreRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     */
+    public function rules(): array
+    {
+        return [
+     
+            'last_name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'first_name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'middle_name' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'name_extension' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'birthdate' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'birth_place' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+           
+        ];
+    }
+}

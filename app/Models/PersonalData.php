@@ -56,9 +56,9 @@ class PersonalData extends Model
         return $this->hasOne(FamilyProfile::class);
     }
 
-
     public function childrens(): HasMany
     {
         return $this->hasMany(ChildrenRecords::class);
     }
+
 }
