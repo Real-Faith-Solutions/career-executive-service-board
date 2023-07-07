@@ -158,80 +158,80 @@
 
             <div> {{-- Start hiding other category if profile/view --}}
                 <div class="category personDataTab">
-                    @include('admin.201_profiling.view_profile.partials.personal_data')
+                    @include('admin.201_profiling.view_profile.partials.personal_data.table')
                 </div>
                 <div class="category addressTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.address')
+                    @include('admin.201_profiling.view_profile.partials.address.table')
                 </div>
                 <div class="category identificationTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.identification')
+                    @include('admin.201_profiling.view_profile.partials.identification.table')
                 </div>
                 <div class="category familyProfileTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.family_profile')
+                    @include('admin.201_profiling.view_profile.partials.family_profile.table')
                 </div>
 
                 <div class="category educationalAttainmentTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.educational_attainment')
+                    @include('admin.201_profiling.view_profile.partials.educational_attainment.table')
                 </div>
 
                 <div class="category examinationsTakenTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.examinations_taken')
+                    @include('admin.201_profiling.view_profile.partials.examinations_taken.table')
                 </div>
 
                 <div class="category languagesDialectsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.languages_dialects')
+                    @include('admin.201_profiling.view_profile.partials.languages_dialects.table')
                 </div>
 
                 <div class="category eligibilityAndRankTrackerTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker')
+                    @include('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.table')
                 </div>
 
                 <div class="category recordOfCespesRatingHrTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.record_of_cespes_rating_hr')
+                    @include('admin.201_profiling.view_profile.partials.record_of_cespes_rating_hr.table')
                 </div>
 
                 <div class="category workExperienceTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.work_experience')
+                    @include('admin.201_profiling.view_profile.partials.work_experience.table')
                 </div>
 
                 <div class="category fieldExpertiseTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.field_expertise')
+                    @include('admin.201_profiling.view_profile.partials.field_expertise.table')
                 </div>
 
                 <div class="category cesTrainingsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.ces_trainings')
+                    @include('admin.201_profiling.view_profile.partials.ces_trainings.table')
                 </div>
 
                 <div class="category otherManagementTrainingsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.other_management_trainings')
+                    @include('admin.201_profiling.view_profile.partials.other_management_trainings.table')
                 </div>
 
                 <div class="category researchAndStudiesTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.research_and_studies')
+                    @include('admin.201_profiling.view_profile.partials.research_and_studies.table')
                 </div>
 
                 <div class="category scholarshipsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.scholarships')
+                    @include('admin.201_profiling.view_profile.partials.scholarships.table')
                 </div>
 
                 <div class="category majorCivicAndProfessionalAffiliationsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations')
+                    @include('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.table')
                 </div>
 
                 <div class="category awardAndCitationsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.award_and_citations')
+                    @include('admin.201_profiling.view_profile.partials.award_and_citations.table')
                 </div>
 
                 <div class="category caseRecordsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.case_records')
+                    @include('admin.201_profiling.view_profile.partials.case_records.table')
                 </div>
 
                 <div class="category healthRecordsTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.health_records')
+                    @include('admin.201_profiling.view_profile.partials.health_records.table')
                 </div>
 
                 <div class="category pdfFilesTab hidden">
-                    @include('admin.201_profiling.view_profile.partials.pdf_files')
+                    @include('admin.201_profiling.view_profile.partials.pdf_files.table')
                 </div>
 
             </div>
