@@ -4,7 +4,7 @@
 </div>
 
 <div class="form-scholarship hidden">
-    @include('admin.201_profiling.view_profile.partials.scholarship.form')
+    @include('admin.201_profiling.view_profile.partials.scholarships.form')
 </div>
 
 <div class="table-scholarship relative overflow-x-auto sm:rounded-lg shadow-lg">
