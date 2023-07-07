@@ -371,12 +371,12 @@
 
 </form>    
 
-{{-- js script for this form interaction and validation --}}
+{{-- js script for personal data interaction and validation --}}
     <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{-- end --}}
 
-{{-- toast --}}
+{{-- toast for personal data success --}}
 @if (Session::has('message'))
     
     <script>
