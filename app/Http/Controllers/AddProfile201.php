@@ -62,7 +62,9 @@ class AddProfile201 extends Controller
         //     $cesNumber = PersonalData::latest()->first()->cesno;
         // }
 
-        return redirect('admin/profile/add');
+        // return redirect('admin/profile/add');
+
+        return back()->with('message','New profile added!');
 
     }
 
