@@ -30,6 +30,7 @@ return new class extends Migration
             // $table->string('age_sn_fp')->nullable();
             $table->string('encoder')->nullable();
             // $table->string('last_updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

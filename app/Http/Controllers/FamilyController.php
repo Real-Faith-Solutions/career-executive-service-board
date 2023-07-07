@@ -145,4 +145,15 @@ class FamilyController extends Controller
 
     }
 
+    public function destroySpouse($ctrlno){
+        
+        $spouse = SpouseRecords::find($ctrlno);
+        $spouse->delete();
+
+        return redirect()->back();
+
+        // $spouse->restore(); -> to restore soft deleted data
+
+    }
+
 }

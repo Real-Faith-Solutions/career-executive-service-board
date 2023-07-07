@@ -65,14 +65,14 @@
 
         <div class="mb-3">
             <label for="lastname">Lastname<sup>*</sup></label>
-            <input type="text" id="lastname" name="lastname" value="{{ old('lastname') }}">
-            <p id="ErrorMessageLastName" class="text-red-600"></p>
+            <input type="text" id="lastname" name="lastname" value="{{ old('lastname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+            <p id="ErrorMessageLastName" class="personal_data_error text-red-600"></p>
         </div>
 
         <div class="mb-3">
             <label for="firstname">Firstname<sup>*</sup></label>
-            <input type="text" id="firstname" name="firstname" value="{{ old('firstname') }}">
-            <p id="ErrorMessageFirstname" class="text-red-600"></p>
+            <input type="text" id="firstname" name="firstname" value="{{ old('firstname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+            <p id="ErrorMessageFirstname" class="personal_data_error text-red-600"></p>
         </div>
 
         <div class="mb-3">
@@ -103,7 +103,7 @@
             <input type="text" id="middlename" name="middlename" value="{{ old('middlename') }}" readonly> --}}
 
             <label for="middlename">Middlename<sup>*</sup></label>
-            <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()">
+            <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" class="personal_data_error border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             <p id="ErrorMessageMiddlename" class="text-red-600"></p>
 
         </div>
@@ -119,7 +119,7 @@
 
         <div class="mb-3">
             <label for="nickname">Nickname</label>
-            <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}">
+            <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             <p id="ErrorMessageNickname" class="text-red-600"></p>
         </div>
     </div>
@@ -145,7 +145,7 @@
 
         <div class="mb-3">
             <label for="birth_place">Birth Place<sup>*</sup></label>
-            <input type="text" id="birth_place" name="birth_place" value="{{ old('birth_place') }}">
+            <input type="text" id="birth_place" name="birth_place" value="{{ old('birth_place') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
         </div>
 
     </div>
@@ -211,17 +211,17 @@
 
         <div class="mb-3">
             <label for="religion">Religion<sup>*</sup></label>
-            <input id="religion" name="religion" value="{{ old('religion') }}">
+            <input id="religion" name="religion" value="{{ old('religion') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
         </div>
 
         <div class="mb-3">
             <label for="height">Height (in meters)<sup>*</sup></label>
-            <input type="number" id="height" name="height" value="{{ old('height') }}">
+            <input type="number" id="height" name="height" value="{{ old('height') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
         </div>
 
         <div class="mb-3">
             <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-            <input type="number" id="weight" name="weight" value="{{ old('weight') }}">
+            <input type="number" id="weight" name="weight" value="{{ old('weight') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
         </div>
 
     </div>
@@ -266,7 +266,7 @@
 
             <div id="dependent-indigenous-field" style="display: none;">
                 <label for="dependent-indigenous-input">If others, please specify:</label>
-                <input type="text" id="dependent-indigenous-input" name="moig_others">
+                <input type="text" id="dependent-indigenous-input" name="moig_others" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
                 <br>
             </div>
 
@@ -294,7 +294,7 @@
 
             <div id="dependent-dual-citizenship-field" style="display: none;">
                 <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                <input type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country">
+                <input type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
                 <br>
             </div>
 
@@ -323,7 +323,7 @@
         <div class="mb-3">
             <div id="dependent-pwd-field" style="display: none;">
                 <label for="dependent_pwd_input">Disability:</label>
-                <input type="text" id="dependent_pwd_input" name="dependent_pwd_input" placeholder="Please indicate the disability">
+                <input type="text" id="dependent_pwd_input" name="dependent_pwd_input" placeholder="Please indicate the disability" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
                 <br>
             </div>
         </div>
@@ -339,16 +339,16 @@
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="mb-3">
                 <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                <input type="number" id="gsis" name="gsis" value="{{ old('gsis') }}">
+                <input type="text" id="gsis" name="gsis" value="{{ old('gsis') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             </div>
             <div class="mb-3">
                 <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                <input type="number" id="pagibig" name="pagibig" value="{{ old('pagibig') }}">
+                <input type="text" id="pagibig" name="pagibig" value="{{ old('pagibig') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             </div>
 
             <div class="mb-3">
                 <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                <input type="number" id="philhealth" name="philhealth" value="{{ old('philhealth') }}">
+                <input type="text" id="philhealth" name="philhealth" value="{{ old('philhealth') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             </div>
 
         </div>
@@ -356,18 +356,18 @@
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="col-md-4">
                 <label for="sss_no">SSS ID No.</label>
-                <input type="number" id="sss_no" name="sss_no" value="{{ old('sss_no') }}">
+                <input type="text" id="sss_no" name="sss_no" value="{{ old('sss_no') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             </div>
             <div class="col-md-4">
                 <label for="tin">TIN ID No.</label>
-                <input type="number" id="tin" name="tin" value="{{ old('tin') }}">
+                <input type="text" id="tin" name="tin" value="{{ old('tin') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             </div>
         </div>
     </section>
 
     </div>
 
-    <input type="submit" value="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+    <input type="submit" id="personal_data_submit" value="submit" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
 
 </form>    
 
