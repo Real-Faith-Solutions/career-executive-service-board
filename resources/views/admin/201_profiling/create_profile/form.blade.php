@@ -66,11 +66,13 @@
         <div class="mb-3">
             <label for="lastname">Lastname<sup>*</sup></label>
             <input type="text" id="lastname" name="lastname" value="{{ old('lastname') }}">
+            <p id="ErrorMessageLastName" class="text-red-600"></p>
         </div>
 
         <div class="mb-3">
             <label for="firstname">Firstname<sup>*</sup></label>
             <input type="text" id="firstname" name="firstname" value="{{ old('firstname') }}">
+            <p id="ErrorMessageFirstname" class="text-red-600"></p>
         </div>
 
         <div class="mb-3">
@@ -102,6 +104,7 @@
 
             <label for="middlename">Middlename<sup>*</sup></label>
             <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()">
+            <p id="ErrorMessageMiddlename" class="text-red-600"></p>
 
         </div>
 
@@ -117,6 +120,7 @@
         <div class="mb-3">
             <label for="nickname">Nickname</label>
             <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}">
+            <p id="ErrorMessageNickname" class="text-red-600"></p>
         </div>
     </div>
 
@@ -367,70 +371,8 @@
 
 </form>    
 
-<script>
-
-    function computeAge() {
-        var birthDate = document.getElementById('birthdate').value;
-        var today = new Date();
-        var age = today.getFullYear() - new Date(birthDate).getFullYear();
-        var monthDiff = today.getMonth() - new Date(birthDate).getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < new Date(birthDate).getDate())) {
-            age--;
-        }
-        document.getElementById('age').value = age;
-    }
-
-    function generateMiddleInitial() {
-        var middleName = document.getElementById('middlename').value;
-        var middleInitial = '';
-        if (middleName.trim() !== '') {
-            middleInitial = middleName.trim().charAt(0).toUpperCase() + '.';
-        }
-        document.getElementById('mi').value = middleInitial;
-    }
-
-    function toggleIndigenousDependentField() {
-        var selectElement = document.getElementById('member_of_indigenous_group');
-        var dependentField = document.getElementById('dependent-indigenous-field');
-        var dependentInput = document.getElementById('dependent-indigenous-input');
-    
-        if (selectElement.value === 'Others') {
-            dependentField.style.display = 'block';
-            dependentInput.required = true;
-        } else {
-            dependentField.style.display = 'none';
-            dependentInput.required = false;
-        }
-    }
-
-    function toggleCitizenshipDependentField() {
-        var selectElement = document.getElementById('citizenship');
-        var dependentField = document.getElementById('dependent-dual-citizenship-field');
-        var dependentInput = document.getElementById('dependent-dual-citizenship-input');
-    
-        if (selectElement.value === 'Dual Citizenship') {
-            dependentField.style.display = 'block';
-            dependentInput.required = true;
-        } else {
-            dependentField.style.display = 'none';
-            dependentInput.required = false;
-        }
-    }
-
-    function toggleDisabilityDependentField() {
-        var selectElement = document.getElementById('person_with_disability');
-        var dependentField = document.getElementById('dependent-pwd-field');
-        var dependentInput = document.getElementById('dependent_pwd_input');
-    
-        if (selectElement.value === 'Yes') {
-            dependentField.style.display = 'block';
-            dependentInput.required = true;
-        } else {
-            dependentField.style.display = 'none';
-            dependentInput.required = false;
-        }
-    }
-
-</script>
+{{-- js script for this form interaction and validation --}}
+    <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
+{{-- end --}}
 
 @endsection

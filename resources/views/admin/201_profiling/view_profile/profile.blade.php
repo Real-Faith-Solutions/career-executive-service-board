@@ -157,7 +157,7 @@
                 <div class="category personDataTab">
                     @include('admin.201_profiling.view_profile.partials.personal_data')
                 </div>
-                <div class="category addressTab">
+                <div class="category addressTab hidden">
                     @include('admin.201_profiling.view_profile.partials.address')
                 </div>
                 <div class="category familyProfileTab hidden">
