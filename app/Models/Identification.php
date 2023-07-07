@@ -7,35 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class EducationalAttainment extends Model
+class Identification extends Model
 {
     use HasFactory;
-    
-    protected $table = 'profile_tblEducation';
 
     protected $primaryKey = 'ctrlno';
+
+    protected $table = "identifications";
 
     use SoftDeletes;
 
     protected $fillable = [
-
+        
         'personal_data_cesno',
-        'level',
-        'school',
-        'degree',
-        'school_type',
-        'period_of_attendance_from',
-        'period_of_attendance_to',
-        'highest_level',
-        'year_graduate',
-        'academics_honor_received',
+        'type',
+        'id_number',
         'encoder',
 
     ];
 
-    public function educationalAttainmentPersonalData(): BelongsTo
+    public function identificationPersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
     }
-
 }

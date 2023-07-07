@@ -7,12 +7,13 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('educational-attainment.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
+
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="level">Level<sup>*</sup></label>
-                        <select id="level" name="type" required>
+                        <select id="level" name="level" required>
                             <option disabled selected>Select Level</option>
                             <option value="Elementary">Elementary</option>
                             <option value="Secondary">Secondary</option>
@@ -27,7 +28,6 @@
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="school">School</label>
                         <input id="school" name="school" type="text">
@@ -40,7 +40,7 @@
 
                     <div class="mb-3">
                         <label for="degree">Degree<sup>*</span></label>
-                        <input id="degree" name="degree" required type="text">
+                        <input id="degree" name="degree" type="text">
                         @error('degree')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -61,7 +61,6 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -87,7 +86,7 @@
 
                     <div class="mb-3">
                         <label for="highest_level">Highest Level / Unit earned (if not graduated)</label>
-                        <input id="highest_level" name="highest_level" required type="text">
+                        <input id="highest_level" name="highest_level" type="text">
                         @error('highest_level')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -106,19 +105,20 @@
                             </span>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="academics_honor_received">Academic Honors Received</label>
-                        <input id="academics_honor_received" name="academics_honor_received" required type="text">
+                        <input id="academics_honor_received" name="academics_honor_received" type="text">
                         @error('academics_honor_received')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
                 </div>
+
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

@@ -7577,9 +7577,11 @@ const handleCategoryClick = (category, selector) => {
 const personDataTab = () => {
     handleCategoryClick('personDataTab', '[onclick="personDataTab()"]');
 };
+
 const addressTab = () => {
     handleCategoryClick('addressTab', '[onclick="addressTab()"]');
 };
+
 const identificationTab = () => {
     handleCategoryClick('identificationTab', '[onclick="identificationTab()"]');
 };
@@ -7687,7 +7689,6 @@ const openTableIdentification = () => {
     openTable.classList.add('hidden');
 }
 
-
 const openFormEducationalAttainment = () => {
     var form = document.querySelector('.form-educational-attainment');
     var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
@@ -7705,6 +7706,126 @@ const openTableEducationalAttainment = () => {
     var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
     var table = document.querySelector('.table-educational-attainment');
     var openTable = document.querySelector('[onclick="openTableEducationalAttainment()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormExaminationsTaken = () => {
+    var form = document.querySelector('.form-examinations-taken');
+    var openForm = document.querySelector('[onclick="openFormExaminationsTaken()"]');
+    var table = document.querySelector('.table-examinations-taken');
+    var openTable = document.querySelector('[onclick="openTableExaminationsTaken()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableExaminationsTaken = () => {
+    var form = document.querySelector('.form-examinations-taken');
+    var openForm = document.querySelector('[onclick="openFormExaminationsTaken()"]');
+    var table = document.querySelector('.table-examinations-taken');
+    var openTable = document.querySelector('[onclick="openTableExaminationsTaken()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormScholarships = () => {
+    var form = document.querySelector('.form-scholarship');
+    var openForm = document.querySelector('[onclick="openFormScholarships()"]');
+    var table = document.querySelector('.table-scholarship');
+    var openTable = document.querySelector('[onclick="openTableScholarships()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableScholarships = () => {
+    var form = document.querySelector('.form-scholarship');
+    var openForm = document.querySelector('[onclick="openFormScholarships()"]');
+    var table = document.querySelector('.table-scholarship');
+    var openTable = document.querySelector('[onclick="openTableScholarships()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormResearchAndStudies = () => {
+    var form = document.querySelector('.form-research-and-studies');
+    var openForm = document.querySelector('[onclick="openFormResearchAndStudies()"]');
+    var table = document.querySelector('.table-research-and-studies');
+    var openTable = document.querySelector('[onclick="openTableResearchAndStudies()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableResearchAndStudies = () => {
+    var form = document.querySelector('.form-research-and-studies');
+    var openForm = document.querySelector('[onclick="openFormResearchAndStudies()"]');
+    var table = document.querySelector('.table-research-and-studies');
+    var openTable = document.querySelector('[onclick="openTableResearchAndStudies()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormWorkExperience = () => {
+    var form = document.querySelector('.form-work-experience');
+    var openForm = document.querySelector('[onclick="openFormWorkExperience()"]');
+    var table = document.querySelector('.table-work-experience');
+    var openTable = document.querySelector('[onclick="openTableWorkExperience()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableWorkExperience = () => {
+    var form = document.querySelector('.form-work-experience');
+    var openForm = document.querySelector('[onclick="openFormWorkExperience()"]');
+    var table = document.querySelector('.table-work-experience');
+    var openTable = document.querySelector('[onclick="openTableWorkExperience()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormFieldExpertise = () => {
+    var form = document.querySelector('.form-field-expertise');
+    var openForm = document.querySelector('[onclick="openFormFieldExpertise()"]');
+    var table = document.querySelector('.table-field-expertise');
+    var openTable = document.querySelector('[onclick="openTableFieldExpertise()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableFieldExpertise = () => {
+    var form = document.querySelector('.form-field-expertise');
+    var openForm = document.querySelector('[onclick="openFormFieldExpertise()"]');
+    var table = document.querySelector('.table-field-expertise');
+    var openTable = document.querySelector('[onclick="openTableFieldExpertise()"]');
 
     form.classList.add('hidden');
     openForm.classList.remove('hidden');

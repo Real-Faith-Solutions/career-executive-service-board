@@ -12,6 +12,8 @@ class Father extends Model
     
     // protected $guarded = [];
 
+    protected $primaryKey = 'ctrlno';
+
     protected $table = "fathers";
 
     protected $fillable = [

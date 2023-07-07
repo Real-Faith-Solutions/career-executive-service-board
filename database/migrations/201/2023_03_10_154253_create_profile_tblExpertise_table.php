@@ -14,12 +14,9 @@ return new class extends Migration
         //field_expertises
         Schema::create('profile_tblExpertise', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->string('SpeExp_Code')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->bigInteger('cesno');
+            $table->string('expertise_specialization');
+            $table->string('encoder');
             $table->timestamps();
         });
     }
