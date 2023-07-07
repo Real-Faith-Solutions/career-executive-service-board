@@ -13,6 +13,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\IdentificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -45,6 +46,9 @@ Route::post('family-profile/store/children/{cesno}', [FamilyController::class, '
 Route::post('family-profile/store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
 Route::post('family-profile/store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
 Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+
+Route::post('personal-data/store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
+Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

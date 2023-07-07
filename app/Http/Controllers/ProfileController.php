@@ -35,6 +35,7 @@ use App\Models\ValidationHr;
 use App\Models\BoardInterview;
 use App\Models\RecordOfCespesRatings;
 use App\Models\HistoricalRecordOfMedicalCondition;
+use App\Models\Identification;
 use App\Models\Mother;
 use App\Models\User;
 use App\Models\PdfLinks;
@@ -86,9 +87,11 @@ class ProfileController extends Controller
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
+        $identification = Identification::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
 
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile', 'mother'));
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile', 
+        'mother', 'identification'));
     }
 
     public function validateData($type, $value)

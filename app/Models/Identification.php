@@ -5,32 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Father extends Model
+class Identification extends Model
 {
     use HasFactory;
-    
-    // protected $guarded = [];
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table = "fathers";
+    protected $table = "identifications";
+
+    use SoftDeletes;
 
     protected $fillable = [
-
+        
         'personal_data_cesno',
-        'father_last_name',
-        'father_first_name',
-        'father_middle_name',
-        'name_extension',
+        'type',
+        'id_number',
         'encoder',
 
     ];
 
-    public function familyPersonalData(): BelongsTo
+    public function identificationPersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
     }
-
-
 }
