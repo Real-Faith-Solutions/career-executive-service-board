@@ -66,13 +66,13 @@
         <div class="mb-3">
             <label for="lastname">Lastname<sup>*</sup></label>
             <input type="text" id="lastname" name="lastname" value="{{ old('lastname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageLastName" class="text-red-600"></p>
+            <p id="ErrorMessageLastName" class="personal_data_error text-red-600"></p>
         </div>
 
         <div class="mb-3">
             <label for="firstname">Firstname<sup>*</sup></label>
             <input type="text" id="firstname" name="firstname" value="{{ old('firstname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageFirstname" class="text-red-600"></p>
+            <p id="ErrorMessageFirstname" class="personal_data_error text-red-600"></p>
         </div>
 
         <div class="mb-3">
@@ -103,7 +103,7 @@
             <input type="text" id="middlename" name="middlename" value="{{ old('middlename') }}" readonly> --}}
 
             <label for="middlename">Middlename<sup>*</sup></label>
-            <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+            <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" class="personal_data_error border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             <p id="ErrorMessageMiddlename" class="text-red-600"></p>
 
         </div>
@@ -367,7 +367,7 @@
 
     </div>
 
-    <input type="submit" value="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+    <input type="submit" id="personal_data_submit" value="submit" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
 
 </form>    
 
