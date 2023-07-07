@@ -98,6 +98,35 @@
         }
     // end
 
+    // Add click event listener to the document body
+    document.body.addEventListener('click', function(event) {
+        // Check if the clicked element is the input field
+        if (event.target !== inputFieldLastName) {
+            if(ErrorMessageLastName.textContent == 'Input must not contain numbers.'){
+                ErrorMessageLastName.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldFirstname) {
+            if(ErrorMessageFirstname.textContent == 'Input must not contain numbers.'){
+                ErrorMessageFirstname.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldMiddlename) {
+            if(ErrorMessageMiddlename.textContent == 'Input must not contain numbers.'){
+                ErrorMessageMiddlename.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldNickname) {
+            if(ErrorMessageNickname.textContent == 'Input must not contain numbers.'){
+                ErrorMessageNickname.textContent = '';
+            }
+        }
+      });
+    // end of Add click event listener to the document body
+
     // lastname validations
     function validateInputLastName() {
 
@@ -106,11 +135,24 @@
 
         if (inputValueLastName.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageLastName.textContent = 'Lastname must be at least 2 characters long.';
+            inputFieldLastName.classList.remove('focus:outline-blue-600');
+            inputFieldLastName.classList.add('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-red-500');
+            
+        }else if (inputValueLastName.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageLastName.textContent = 'Atleast 2 characters without number.';
+            inputFieldLastName.classList.remove('focus:outline-blue-600');
+            inputFieldLastName.classList.add('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-red-500');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageLastName.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageLastName.textContent = '';
+            inputFieldLastName.classList.remove('focus:outline-red-500');
+            inputFieldLastName.classList.remove('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-blue-600');
         }
 
     }
@@ -124,11 +166,24 @@
 
         if (inputValueFirstname.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageFirstname.textContent = 'Firstname must be at least 2 characters long.';
+            inputFieldFirstname.classList.remove('focus:outline-blue-600');
+            inputFieldFirstname.classList.add('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-red-500');
+            
+        }else if (inputValueFirstname.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageFirstname.textContent = 'Atleast 2 characters without number.';
+            inputFieldFirstname.classList.remove('focus:outline-blue-600');
+            inputFieldFirstname.classList.add('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-red-500');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageFirstname.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageFirstname.textContent = '';
+            inputFieldFirstname.classList.remove('focus:outline-red-500');
+            inputFieldFirstname.classList.remove('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-blue-600');
         }
 
     }
@@ -142,11 +197,24 @@
 
         if (inputValueMiddlename.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageMiddlename.textContent = 'Middlename must be at least 2 characters long.';
+            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
+            inputFieldMiddlename.classList.add('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-red-500');
+            
+        }else if (inputValueMiddlename.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageMiddlename.textContent = 'Atleast 2 characters without number.';
+            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
+            inputFieldMiddlename.classList.add('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-red-500');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageMiddlename.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageMiddlename.textContent = '';
+            inputFieldMiddlename.classList.remove('focus:outline-red-500');
+            inputFieldMiddlename.classList.remove('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-blue-600');
         }
 
     }
