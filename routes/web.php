@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\FamilyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,10 @@ Route::post('family-profile/store/children/{cesno}', [FamilyController::class, '
 Route::post('family-profile/store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
 Route::post('family-profile/store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
 Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+
+
+Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
+Route::post('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
