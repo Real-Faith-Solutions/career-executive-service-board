@@ -30,16 +30,16 @@
                     <div id="personalDataTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
                         <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a class="btn category-button text-blue-500" href="#personDataTab" onclick="personDataTab()">Personal Data</a>
+                                <a class="inline-flex btn category-button text-blue-500" href="#personDataTab" onclick="personDataTab()">Personal Data</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
+                                <a class="inline-flex btn category-button" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#addressTab" onclick="addressTab()">Address</a>
+                                <a class="inline-flex btn category-button" href="#addressTab" onclick="addressTab()">Address</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
+                                <a class="inline-flex btn category-button" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
                             </li>
                         </ul>
                     </div>
@@ -56,16 +56,16 @@
                     <div id="educationalAttainmentTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
                         <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a class="btn category-button" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
+                                <a class="inline-flex btn category-button" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
+                                <a class="inline-flex btn category-button" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
+                                <a class="inline-flex btn category-button" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
+                                <a class="inline-flex btn category-button" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
                             </li>
                         </ul>
                     </div>
@@ -82,10 +82,10 @@
                     <div id="workExperienceTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
                         <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a class="btn category-button" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
+                                <a class="inline-flex btn category-button" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
+                                <a class="inline-flex btn category-button" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
                             </li>
                         </ul>
                     </div>
@@ -102,10 +102,10 @@
                     <div id="trainingsTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
                         <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a class="btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
+                                <a class="inline-flex btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
+                                <a class="inline-flex btn category-button" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
                             </li>
                         </ul>
                     </div>
@@ -122,29 +122,29 @@
                     <div id="othersTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
                         <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
                             <li>
-                                <a class="btn category-button" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
+                                <a class="inline-flex btn category-button" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
+                                <a class="inline-flex btn category-button" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>
+                                <a class="inline-flex btn category-button" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#caseRecordsTab" onclick="caseRecordsTab()">Case Records</a>
+                                <a class="inline-flex btn category-button" href="#caseRecordsTab" onclick="caseRecordsTab()">Case Records</a>
                             </li>
 
                             <li>
-                                <a class="btn category-button" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
+                                <a class="inline-flex btn category-button" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
+                                <a class="inline-flex btn category-button" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
+                                <a class="inline-flex btn category-button" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
                             </li>
                             <li>
-                                <a class="btn category-button" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
+                                <a class="inline-flex btn category-button" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
                             </li>
                         </ul>
                     </div>

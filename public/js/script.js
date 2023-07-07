@@ -1,14 +1,14 @@
 // Set rootURL for resource link
-var rootURL = location.origin+'/';
+var rootURL = location.origin + '/';
 
 // Set rootURL for resource link when server hosted on a folder
-function changeRootURL(url){
+function changeRootURL(url) {
     rootURL = url;
 }
 
 // Populate CESno to hidden input field
 
-if($('#cesno').val()){
+if ($('#cesno').val()) {
 
     var cesno = $('#cesno').val();
 
@@ -46,34 +46,34 @@ function setPageTitle(pageTitle, pageSubTitle = "CES function page...") {
     $('#page-sub-title-h').text(pageSubTitle);
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     // Put checked on If (Magna Carta for Disabled Persons RA 7277) if there was selected item
-    if($('#dhdTxtB option:selected').val() != ''){
+    if ($('#dhdTxtB option:selected').val() != '') {
         $('#dhdCheckB').attr('checked', 'checked');
     }
 
     // Put checked on is PWD? if there was selected item
-    if($('#pwd_TxtB option:selected').val() != ''){
+    if ($('#pwd_TxtB option:selected').val() != '') {
         $('#pwd_CheckB').attr('checked', 'checked');
     }
 
     // Set or remove "Disabled" attribute in "is PWD?" dropdown list
-    $('#pwd_CheckB').click(function(){
+    $('#pwd_CheckB').click(function () {
 
-        if($('#pwd_CheckB').is(':checked')){
+        if ($('#pwd_CheckB').is(':checked')) {
 
             $('#pwd_TxtB').removeAttr('disabled');
         }
-        else{
+        else {
 
-            $('#pwd_TxtB').attr('disabled','disabled');
+            $('#pwd_TxtB').attr('disabled', 'disabled');
         }
 
     });
 
     // Disable and Enable "If Holder Dual Citizenship By Birth, By Naturalization" if Citizenship is selected as Dual Citizenship
-    $('.citizenShip').change(function(e) {
+    $('.citizenShip').change(function (e) {
         var selected_type = $(this).val();
 
         if (selected_type == 'Dual Citizenship') {
@@ -88,7 +88,7 @@ $(document).ready(function(){
 });
 
 // Eventlistener and run update function for Middle Name input
-$(".Mn").keyup(function(){
+$(".Mn").keyup(function () {
     update();
 });
 
@@ -121,21 +121,21 @@ $('#username').keypress(function (e) {
 
 // Set username for user
 
-function setUsername(){
+function setUsername() {
 
-    if($('#last_name').val() != '' && $('#role option:selected').val() != '' && $('#role_name_no').val() != ''){
+    if ($('#last_name').val() != '' && $('#role option:selected').val() != '' && $('#role_name_no').val() != '') {
 
         var user_name = $('#last_name').val() + $('#role option:selected').val() + $('#role_name_no').val();
-        var trim_space_in_user_name = user_name.replace(' ','');
+        var trim_space_in_user_name = user_name.replace(' ', '');
 
         $('#username').val(trim_space_in_user_name.toLowerCase());
     }
 }
 
 // Resetting birthday and age field if changing birthday
-$('#birthdate').click(function(){
+$('#birthdate').click(function () {
 
-    if($('#birthdate').val() != ''){
+    if ($('#birthdate').val() != '') {
 
         Swal.fire({
             icon: 'question',
@@ -145,7 +145,7 @@ $('#birthdate').click(function(){
             cancelButtonText: `No`,
         }).then((result) => {
 
-            if (result.isConfirmed){
+            if (result.isConfirmed) {
 
                 Swal.fire({
                     icon: 'info',
@@ -163,10 +163,10 @@ $('#birthdate').click(function(){
     }
 });
 
-function submitDataForms(urls, formName, modalName){
+function submitDataForms(urls, formName, modalName) {
     const url = urls;
     fetch(url, {
-        method : "POST",
+        method: "POST",
         body: new FormData(document.getElementById(formName)),
     }).then(
         response => response.text() // .json(), etc.
@@ -175,33 +175,33 @@ function submitDataForms(urls, formName, modalName){
         html => console.log(html)
     );
 
-    $('#'+modalName).modal('hide');
+    $('#' + modalName).modal('hide');
     // location.reload();
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     // Auto count age in Personal Data if Birhtday is not empty
-    if($("input.mydob").val() != ''){
+    if ($("input.mydob").val() != '') {
         $('.age').val(getAge($("input.mydob").val()));
     }
 
     // Auto count age in Personal Data
-    function getAge(dob) { return ~~((new Date()-new Date(dob))/(31556952000)) }
-        $("dob").val()
-        $("input.mydob").change(function(){
+    function getAge(dob) { return ~~((new Date() - new Date(dob)) / (31556952000)) }
+    $("dob").val()
+    $("input.mydob").change(function () {
         $('.age').val(getAge($(this).val()));
     });
 
     // Auto count age in Family Profile Spouse Name if Birhtday is not empty
-    if($("input.mydobs").val() != ''){
+    if ($("input.mydobs").val() != '') {
         $('.ages').val(getAge($("input.mydobs").val()));
     }
 
     // Auto count age in Family Profile Spouse Name
-    function getAge(dob) { return ~~((new Date()-new Date(dob))/(31556952000)) }
-        $("dob").val()
-        $("input.mydobs").change(function(){
+    function getAge(dob) { return ~~((new Date() - new Date(dob)) / (31556952000)) }
+    $("dob").val()
+    $("input.mydobs").change(function () {
         $('.ages').val(getAge($(this).val()));
     });
 
@@ -209,7 +209,7 @@ $(document).ready(function(){
 
 // Start of submit form
 
-function submitForm(action_url, form_id, action_type, update_table_js_function_name, reset_form_js_function_name, submit_button_id, reload_page_enable, assign_redirect_page_url){
+function submitForm(action_url, form_id, action_type, update_table_js_function_name, reset_form_js_function_name, submit_button_id, reload_page_enable, assign_redirect_page_url) {
 
     Swal.fire({
         icon: 'question',
@@ -229,7 +229,7 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                 allowOutsideClick: false
             });
 
-            const formElement = document.querySelector('#'+ form_id);
+            const formElement = document.querySelector('#' + form_id);
             const formData = new FormData(formElement);
 
             $.ajax({
@@ -240,55 +240,55 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                 contentType: false,
                 cache: false,
                 enctype: 'multipart/form-data',
-                success: function(response) {
+                success: function (response) {
 
-                    if (response === 'Successfully added'){
+                    if (response === 'Successfully added') {
                         Swal.fire({
                             icon: 'success',
                             title: 'Saved!',
                             html: `<center>Successfully added.</center>`
                         });
 
-                        if(reset_form_js_function_name != 'None'){
+                        if (reset_form_js_function_name != 'None') {
                             resetFormFunction(reset_form_js_function_name);
                         }
 
-                        if(update_table_js_function_name != 'None'){
+                        if (update_table_js_function_name != 'None') {
                             updateTableFunction(update_table_js_function_name);
                         }
 
-                        if(reload_page_enable == 'Yes'){
+                        if (reload_page_enable == 'Yes') {
                             location.reload();
                         }
 
-                        if(assign_redirect_page_url =! 'None'){
+                        if (assign_redirect_page_url = ! 'None') {
                             location.assign(assign_redirect_page_url);
                         }
                     }
-                    else if (response === 'Successfully updated'){
+                    else if (response === 'Successfully updated') {
                         Swal.fire({
                             icon: 'success',
                             title: 'Saved!',
                             html: `<center>Successfully updated.</center>`
                         });
 
-                        if(reset_form_js_function_name != 'None'){
+                        if (reset_form_js_function_name != 'None') {
                             resetFormFunction(reset_form_js_function_name);
                         }
 
-                        if(update_table_js_function_name != 'None'){
+                        if (update_table_js_function_name != 'None') {
                             updateTableFunction(update_table_js_function_name);
                         }
 
-                        if(reload_page_enable == 'Yes'){
+                        if (reload_page_enable == 'Yes') {
                             location.reload();
                         }
 
-                        if(assign_redirect_page_url != 'None'){
+                        if (assign_redirect_page_url != 'None') {
                             location.assign(assign_redirect_page_url);
                         }
                     }
-                    else if(response == 'Restricted'){
+                    else if (response == 'Restricted') {
 
                         Swal.fire({
                             icon: 'error',
@@ -297,14 +297,14 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                         });
 
                     }
-                    else{
+                    else {
 
                         html = '<div class="text-center mb-2">See details of error below.</div>';
-                        $.each(response, function( index, value ) {
-                            html += '<div class="text-center text-danger mb-1">'+ value +'</div>';
+                        $.each(response, function (index, value) {
+                            html += '<div class="text-center text-danger mb-1">' + value + '</div>';
                         });
 
-                        if(action_type == 'Add'){
+                        if (action_type == 'Add') {
                             Swal.fire({
                                 title: 'Add Record Unsuccessful!',
                                 html: html,
@@ -315,7 +315,7 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
                                 confirmButtonText: 'OK'
                             })
                         }
-                        else if(action_type == 'Update'){
+                        else if (action_type == 'Update') {
                             Swal.fire({
                                 title: 'Update Unsuccessful!',
                                 html: html,
@@ -342,96 +342,96 @@ function submitForm(action_url, form_id, action_type, update_table_js_function_n
 
 // Start of reset form js function name
 
-function resetFormFunction(function_name){
+function resetFormFunction(function_name) {
 
-    if(function_name == 'resetPdfFilesForm'){
+    if (function_name == 'resetPdfFilesForm') {
         resetPdfFilesForm();
     }
-    else if(function_name == 'resetPersonalDataForm'){
+    else if (function_name == 'resetPersonalDataForm') {
         resetPersonalDataForm();
     }
-    else if(function_name == 'resetSpouseRecordsForm'){
+    else if (function_name == 'resetSpouseRecordsForm') {
         resetSpouseRecordsForm();
     }
-    else if(function_name == 'resetFamilyProfileForm'){
+    else if (function_name == 'resetFamilyProfileForm') {
         resetFamilyProfileForm();
     }
-    else if(function_name == 'resetChildrenRecordsForm'){
+    else if (function_name == 'resetChildrenRecordsForm') {
         resetChildrenRecordsForm();
     }
-    else if(function_name == 'resetEducationalAttainmentForm'){
+    else if (function_name == 'resetEducationalAttainmentForm') {
         resetEducationalAttainmentForm();
     }
-    else if(function_name == 'resetExaminationsTakenForm'){
+    else if (function_name == 'resetExaminationsTakenForm') {
         resetExaminationsTakenForm();
     }
-    else if(function_name == 'resetLicenseDetailsForm'){
+    else if (function_name == 'resetLicenseDetailsForm') {
         resetLicenseDetailsForm();
     }
-    else if(function_name == 'resetLanguagesDialectsForm'){
+    else if (function_name == 'resetLanguagesDialectsForm') {
         resetLanguagesDialectsForm();
     }
-    else if(function_name == 'resetCesWeForm'){
+    else if (function_name == 'resetCesWeForm') {
         resetCesWeForm();
     }
-    else if(function_name == 'resetAssessmentCenterForm'){
+    else if (function_name == 'resetAssessmentCenterForm') {
         resetAssessmentCenterForm();
     }
-    else if(function_name == 'resetValidationHrForm'){
+    else if (function_name == 'resetValidationHrForm') {
         resetValidationHrForm();
     }
-    else if(function_name == 'resetBoardInterviewForm'){
+    else if (function_name == 'resetBoardInterviewForm') {
         resetBoardInterviewForm();
     }
-    else if(function_name == 'resetCesStatusForm'){
+    else if (function_name == 'resetCesStatusForm') {
         resetCesStatusForm();
     }
-    else if(function_name == 'resetRecordOfCespesRatingsForm'){
+    else if (function_name == 'resetRecordOfCespesRatingsForm') {
         resetRecordOfCespesRatingsForm();
     }
-    else if(function_name == 'resetWorkExperienceForm'){
+    else if (function_name == 'resetWorkExperienceForm') {
         resetWorkExperienceForm();
     }
-    else if(function_name == 'resetFieldExpertiseForm'){
+    else if (function_name == 'resetFieldExpertiseForm') {
         resetFieldExpertiseForm();
     }
-    else if(function_name == 'resetCesTrainingsForm'){
+    else if (function_name == 'resetCesTrainingsForm') {
         resetCesTrainingsForm();
     }
-    else if(function_name == 'resetOtherManagementTrainingsForm'){
+    else if (function_name == 'resetOtherManagementTrainingsForm') {
         resetOtherManagementTrainingsForm();
     }
-    else if(function_name == 'resetResearchAndStudiesForm'){
+    else if (function_name == 'resetResearchAndStudiesForm') {
         resetResearchAndStudiesForm();
     }
-    else if(function_name == 'resetScholarshipsForm'){
+    else if (function_name == 'resetScholarshipsForm') {
         resetScholarshipsForm();
     }
-    else if(function_name == 'resetAffiliationsForm'){
+    else if (function_name == 'resetAffiliationsForm') {
         resetAffiliationsForm();
     }
-    else if(function_name == 'resetAwardAndCitationsForm'){
+    else if (function_name == 'resetAwardAndCitationsForm') {
         resetAwardAndCitationsForm();
     }
-    else if(function_name == 'resetCaseRecordsForm'){
+    else if (function_name == 'resetCaseRecordsForm') {
         resetCaseRecordsForm();
     }
-    else if(function_name == 'resetHealthRecordsForm'){
+    else if (function_name == 'resetHealthRecordsForm') {
         resetHealthRecordsForm();
     }
-    else if(function_name == 'resetHistoricalRecordOfMedicalConditionForm'){
+    else if (function_name == 'resetHistoricalRecordOfMedicalConditionForm') {
         resetHistoricalRecordOfMedicalConditionForm();
     }
-    else if(function_name == 'resetCesWebAppGeneralPageAccessForm'){
+    else if (function_name == 'resetCesWebAppGeneralPageAccessForm') {
         resetCesWebAppGeneralPageAccessForm();
     }
-    else if(function_name == 'resetExecutive201RoleAccessForm'){
+    else if (function_name == 'resetExecutive201RoleAccessForm') {
         resetExecutive201RoleAccessForm();
     }
-    else if(function_name == 'resetPlantillaManangementAccessForm'){
+    else if (function_name == 'resetPlantillaManangementAccessForm') {
         resetPlantillaManangementAccessForm();
     }
-    else if(function_name == 'resetReportGenerationAccessForm'){
+    else if (function_name == 'resetReportGenerationAccessForm') {
         resetReportGenerationAccessForm();
     }
 
@@ -441,96 +441,96 @@ function resetFormFunction(function_name){
 
 // Start of update table js function name
 
-function updateTableFunction(function_name){
+function updateTableFunction(function_name) {
 
-    if(function_name == 'updatePdfFilesTable'){
+    if (function_name == 'updatePdfFilesTable') {
         updatePdfFilesTable();
     }
-    else if(function_name == 'updatePersonalDataTable'){
+    else if (function_name == 'updatePersonalDataTable') {
         updatePersonalDataTable();
     }
-    else if(function_name == 'updateSpouseRecordsTable'){
+    else if (function_name == 'updateSpouseRecordsTable') {
         updateSpouseRecordsTable();
     }
-    else if(function_name == 'updateFamilyProfileTable'){
+    else if (function_name == 'updateFamilyProfileTable') {
         updateFamilyProfileTable();
     }
-    else if(function_name == 'updateChildrenRecordsTable'){
+    else if (function_name == 'updateChildrenRecordsTable') {
         updateChildrenRecordsTable();
     }
-    else if(function_name == 'updateEducationalAttainmentTable'){
+    else if (function_name == 'updateEducationalAttainmentTable') {
         updateEducationalAttainmentTable();
     }
-    else if(function_name == 'updateExaminationsTakenTable'){
+    else if (function_name == 'updateExaminationsTakenTable') {
         updateExaminationsTakenTable();
     }
-    else if(function_name == 'updateLicenseDetailsTable'){
+    else if (function_name == 'updateLicenseDetailsTable') {
         updateLicenseDetailsTable();
     }
-    else if(function_name == 'updateLanguagesDialectsTable'){
+    else if (function_name == 'updateLanguagesDialectsTable') {
         updateLanguagesDialectsTable();
     }
-    else if(function_name == 'updateCesWeTable'){
+    else if (function_name == 'updateCesWeTable') {
         updateCesWeTable();
     }
-    else if(function_name == 'updateAssessmentCenterTable'){
+    else if (function_name == 'updateAssessmentCenterTable') {
         updateAssessmentCenterTable();
     }
-    else if(function_name == 'updateValidationHrTable'){
+    else if (function_name == 'updateValidationHrTable') {
         updateValidationHrTable();
     }
-    else if(function_name == 'updateBoardInterviewTable'){
+    else if (function_name == 'updateBoardInterviewTable') {
         updateBoardInterviewTable();
     }
-    else if(function_name == 'updateCesStatusTable'){
+    else if (function_name == 'updateCesStatusTable') {
         updateCesStatusTable();
     }
-    else if(function_name == 'updateRecordOfCespesRatingsTable'){
+    else if (function_name == 'updateRecordOfCespesRatingsTable') {
         updateRecordOfCespesRatingsTable();
     }
-    else if(function_name == 'updateWorkExperienceTable'){
+    else if (function_name == 'updateWorkExperienceTable') {
         updateWorkExperienceTable();
     }
-    else if(function_name == 'updateFieldExpertiseTable'){
+    else if (function_name == 'updateFieldExpertiseTable') {
         updateFieldExpertiseTable();
     }
-    else if(function_name == 'updateCesTrainingsTable'){
+    else if (function_name == 'updateCesTrainingsTable') {
         updateCesTrainingsTable();
     }
-    else if(function_name == 'updateOtherManagementTrainingsTable'){
+    else if (function_name == 'updateOtherManagementTrainingsTable') {
         updateOtherManagementTrainingsTable();
     }
-    else if(function_name == 'updateResearchAndStudiesTable'){
+    else if (function_name == 'updateResearchAndStudiesTable') {
         updateResearchAndStudiesTable();
     }
-    else if(function_name == 'updateScholarshipsTable'){
+    else if (function_name == 'updateScholarshipsTable') {
         updateScholarshipsTable();
     }
-    else if(function_name == 'updateAffiliationsTable'){
+    else if (function_name == 'updateAffiliationsTable') {
         updateAffiliationsTable();
     }
-    else if(function_name == 'updateAwardAndCitationsTable'){
+    else if (function_name == 'updateAwardAndCitationsTable') {
         updateAwardAndCitationsTable();
     }
-    else if(function_name == 'updateCaseRecordsTable'){
+    else if (function_name == 'updateCaseRecordsTable') {
         updateCaseRecordsTable();
     }
-    else if(function_name == 'updateHealthRecordsTable'){
+    else if (function_name == 'updateHealthRecordsTable') {
         updateHealthRecordsTable();
     }
-    else if(function_name == 'updateHistoricalRecordOfMedicalConditionTable'){
+    else if (function_name == 'updateHistoricalRecordOfMedicalConditionTable') {
         updateHistoricalRecordOfMedicalConditionTable();
     }
-    else if(function_name == 'updateCesWebAppGeneralPageAccessTable'){
+    else if (function_name == 'updateCesWebAppGeneralPageAccessTable') {
         updateCesWebAppGeneralPageAccessTable();
     }
-    else if(function_name == 'updateExecutive201RoleAccessTable'){
+    else if (function_name == 'updateExecutive201RoleAccessTable') {
         updateExecutive201RoleAccessTable();
     }
-    else if(function_name == 'updatePlantillaManangementAccessTable'){
+    else if (function_name == 'updatePlantillaManangementAccessTable') {
         updatePlantillaManangementAccessTable();
     }
-    else if(function_name == 'updateReportGenerationAccessTable'){
+    else if (function_name == 'updateReportGenerationAccessTable') {
         updateReportGenerationAccessTable();
     }
 
@@ -540,7 +540,7 @@ function updateTableFunction(function_name){
 
 // Start of updating Personal Data Table
 
-function updatePersonalDataTable(){
+function updatePersonalDataTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -549,111 +549,111 @@ function updatePersonalDataTable(){
             // Empty Personal Data Table
             $("#PersonalData_tbody").empty();
 
-            if(result.PersonalData == ''){
+            if (result.PersonalData == '') {
 
-                $('#PersonalData_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#PersonalData_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.PersonalData.forEach(element => {
-                    $('#PersonalData_tbody').append('<tr>'+
-                    '<td>'+
+                    $('#PersonalData_tbody').append('<tr>' +
+                        '<td>' +
                         ((result.PersonalDataEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPersonalDataForm(`Edit`)">Edit</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['cesno'] == null) ? '-' : element['cesno']) +'</td>'+
-                    '<td>'+ ((element['sp'] == null) ? '-' : element['sp']) +'</td>'+
-                    '<td>'+ ((element['moig'] == null) ? '-' : element['moig']) +'</td>'+
-                    '<td>'+ ((element['pwd'] == null) ? '-' : element['pwd']) +'</td>'+
-                    '<td>'+ ((element['title'] == null) ? '-' : element['title']) +'</td>'+
-                    '<td>'+ ((element['gsis'] == null) ? '-' : element['gsis']) +'</td>'+
-                    '<td>'+ ((element['pagibig'] == null) ? '-' : element['pagibig']) +'</td>'+
-                    '<td>'+ ((element['philhealt'] == null) ? '-' : element['philhealt']) +'</td>'+
-                    '<td>'+ ((element['sss_no'] == null) ? '-' : element['sss_no']) +'</td>'+
-                    '<td>'+ ((element['tin'] == null) ? '-' : element['tin']) +'</td>'+
-                    '<td>'+ ((element['status'] == null) ? '-' : element['status']) +'</td>'+
-                    '<td>'+ ((element['citizenship'] == null) ? '-' : element['citizenship']) +'</td>'+
-                    '<td>'+ ((element['d_citizenship'] == null) ? '-' : element['d_citizenship']) +'</td>'+
-                    '<td>'+ ((element['lastname'] == null) ? '-' : element['lastname']) +'</td>'+
-                    '<td>'+ ((element['firstname'] == null) ? '-' : element['firstname']) +'</td>'+
-                    '<td>'+ ((element['middlename'] == null) ? '-' : element['middlename']) +'</td>'+
-                    '<td>'+ ((element['mi'] == null) ? '-' : element['mi']) +'</td>'+
-                    '<td>'+ ((element['ne'] == null) ? '-' : element['ne']) +'</td>'+
-                    '<td>'+ ((element['nickname'] == null) ? '-' : element['nickname']) +'</td>'+
-                    '<td>'+ ((element['birthdate'] == null) ? '-' : element['birthdate']) +'</td>'+
-                    '<td>'+ ((element['age'] == null) ? '-' : element['age']) +'</td>'+
-                    '<td>'+ ((element['birth_place'] == null) ? '-' : element['birth_place']) +'</td>'+
-                    '<td>'+ ((element['gender'] == null) ? '-' : element['gender']) +'</td>'+
-                    '<td>'+ ((element['civil_status'] == null) ? '-' : element['civil_status']) +'</td>'+
-                    '<td>'+ ((element['religion'] == null) ? '-' : element['religion']) +'</td>'+
-                    '<td>'+ ((element['height'] == null) ? '-' : element['height']) +'</td>'+
-                    '<td>'+ ((element['weight'] == null) ? '-' : element['weight']) +'</td>'+
-                    '<td>'+ ((element['fb_pa'] == null) ? '-' : element['fb_pa']) +'</td>'+
-                    '<td>'+ ((element['ns_pa'] == null) ? '-' : element['ns_pa']) +'</td>'+
-                    '<td>'+ ((element['bd_pa'] == null) ? '-' : element['bd_pa']) +'</td>'+
-                    '<td>'+ ((element['cm_pa'] == null) ? '-' : element['cm_pa']) +'</td>'+
-                    '<td>'+ ((element['zc_pa'] == null) ? '-' : element['zc_pa']) +'</td>'+
-                    '<td>'+ ((element['fb_ma'] == null) ? '-' : element['fb_ma']) +'</td>'+
-                    '<td>'+ ((element['ns_ma'] == null) ? '-' : element['ns_ma']) +'</td>'+
-                    '<td>'+ ((element['bd_ma'] == null) ? '-' : element['bd_ma']) +'</td>'+
-                    '<td>'+ ((element['cm_ma'] == null) ? '-' : element['cm_ma']) +'</td>'+
-                    '<td>'+ ((element['zc_ma'] == null) ? '-' : element['zc_ma']) +'</td>'+
-                    '<td>'+ ((element['oea_ma'] == null) ? '-' : element['oea_ma']) +'</td>'+
-                    '<td>'+ ((element['telno1_ma'] == null) ? '-' : element['telno1_ma']) +'</td>'+
-                    '<td>'+ ((element['mobileno1_ma'] == null) ? '-' : element['mobileno1_ma']) +'</td>'+
-                    '<td>'+ ((element['mobileno2_ma'] == null) ? '-' : element['mobileno2_ma']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                        '</td>' +
+                        '<td>' + ((element['cesno'] == null) ? '-' : element['cesno']) + '</td>' +
+                        '<td>' + ((element['sp'] == null) ? '-' : element['sp']) + '</td>' +
+                        '<td>' + ((element['moig'] == null) ? '-' : element['moig']) + '</td>' +
+                        '<td>' + ((element['pwd'] == null) ? '-' : element['pwd']) + '</td>' +
+                        '<td>' + ((element['title'] == null) ? '-' : element['title']) + '</td>' +
+                        '<td>' + ((element['gsis'] == null) ? '-' : element['gsis']) + '</td>' +
+                        '<td>' + ((element['pagibig'] == null) ? '-' : element['pagibig']) + '</td>' +
+                        '<td>' + ((element['philhealt'] == null) ? '-' : element['philhealt']) + '</td>' +
+                        '<td>' + ((element['sss_no'] == null) ? '-' : element['sss_no']) + '</td>' +
+                        '<td>' + ((element['tin'] == null) ? '-' : element['tin']) + '</td>' +
+                        '<td>' + ((element['status'] == null) ? '-' : element['status']) + '</td>' +
+                        '<td>' + ((element['citizenship'] == null) ? '-' : element['citizenship']) + '</td>' +
+                        '<td>' + ((element['d_citizenship'] == null) ? '-' : element['d_citizenship']) + '</td>' +
+                        '<td>' + ((element['lastname'] == null) ? '-' : element['lastname']) + '</td>' +
+                        '<td>' + ((element['firstname'] == null) ? '-' : element['firstname']) + '</td>' +
+                        '<td>' + ((element['middlename'] == null) ? '-' : element['middlename']) + '</td>' +
+                        '<td>' + ((element['mi'] == null) ? '-' : element['mi']) + '</td>' +
+                        '<td>' + ((element['ne'] == null) ? '-' : element['ne']) + '</td>' +
+                        '<td>' + ((element['nickname'] == null) ? '-' : element['nickname']) + '</td>' +
+                        '<td>' + ((element['birthdate'] == null) ? '-' : element['birthdate']) + '</td>' +
+                        '<td>' + ((element['age'] == null) ? '-' : element['age']) + '</td>' +
+                        '<td>' + ((element['birth_place'] == null) ? '-' : element['birth_place']) + '</td>' +
+                        '<td>' + ((element['gender'] == null) ? '-' : element['gender']) + '</td>' +
+                        '<td>' + ((element['civil_status'] == null) ? '-' : element['civil_status']) + '</td>' +
+                        '<td>' + ((element['religion'] == null) ? '-' : element['religion']) + '</td>' +
+                        '<td>' + ((element['height'] == null) ? '-' : element['height']) + '</td>' +
+                        '<td>' + ((element['weight'] == null) ? '-' : element['weight']) + '</td>' +
+                        '<td>' + ((element['fb_pa'] == null) ? '-' : element['fb_pa']) + '</td>' +
+                        '<td>' + ((element['ns_pa'] == null) ? '-' : element['ns_pa']) + '</td>' +
+                        '<td>' + ((element['bd_pa'] == null) ? '-' : element['bd_pa']) + '</td>' +
+                        '<td>' + ((element['cm_pa'] == null) ? '-' : element['cm_pa']) + '</td>' +
+                        '<td>' + ((element['zc_pa'] == null) ? '-' : element['zc_pa']) + '</td>' +
+                        '<td>' + ((element['fb_ma'] == null) ? '-' : element['fb_ma']) + '</td>' +
+                        '<td>' + ((element['ns_ma'] == null) ? '-' : element['ns_ma']) + '</td>' +
+                        '<td>' + ((element['bd_ma'] == null) ? '-' : element['bd_ma']) + '</td>' +
+                        '<td>' + ((element['cm_ma'] == null) ? '-' : element['cm_ma']) + '</td>' +
+                        '<td>' + ((element['zc_ma'] == null) ? '-' : element['zc_ma']) + '</td>' +
+                        '<td>' + ((element['oea_ma'] == null) ? '-' : element['oea_ma']) + '</td>' +
+                        '<td>' + ((element['telno1_ma'] == null) ? '-' : element['telno1_ma']) + '</td>' +
+                        '<td>' + ((element['mobileno1_ma'] == null) ? '-' : element['mobileno1_ma']) + '</td>' +
+                        '<td>' + ((element['mobileno2_ma'] == null) ? '-' : element['mobileno2_ma']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
 
                     // Update Profile Name and Picture in profile details
@@ -662,7 +662,7 @@ function updatePersonalDataTable(){
                     $('#profile_middlename').text(element['middlename']);
                     $('#profile_picture').attr('src', rootURL + 'external-storage/Photos/201 Photos/' + element['picture']);
 
-                    if(result.UserRoleName = 'User'){
+                    if (result.UserRoleName = 'User') {
                         $('#menu_profile_picture').attr('src', rootURL + 'external-storage/Photos/201 Photos/' + element['picture']);
                     }
 
@@ -677,9 +677,9 @@ function updatePersonalDataTable(){
 
 // Start of reseting Personal Data Form
 
-function resetPersonalDataForm(option){
+function resetPersonalDataForm(option) {
 
-    if(option == null){
+    if (option == null) {
 
         // Reset form
         $('#personal_data').trigger('reset');
@@ -687,12 +687,12 @@ function resetPersonalDataForm(option){
         // Disabled all elements in form
         var personal_data_form = document.forms['personal_data'];
 
-        for(var i=0, personal_data_formLen = personal_data_form.length; i<personal_data_formLen; i++){
+        for (var i = 0, personal_data_formLen = personal_data_form.length; i < personal_data_formLen; i++) {
             personal_data_form.elements[i].disabled = true;
         }
 
         // Hide and disabled Add or Edit Record button
-        $('#personal_data_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+        $('#personal_data_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
     }
 
@@ -704,13 +704,13 @@ function resetPersonalDataForm(option){
         allowOutsideClick: false
     });
 
-    if(option == 'Edit'){
+    if (option == 'Edit') {
 
         // Disable "is PWD?" drop down list if not checked
-        $('#pwd_TxtB').attr('disabled','disabled');
+        $('#pwd_TxtB').attr('disabled', 'disabled');
 
         // Put checked on is PWD? if there was selected item
-        if($('#pwd_TxtB option:selected').val() != ''){
+        if ($('#pwd_TxtB option:selected').val() != '') {
             $('#pwd_CheckB').attr('checked', 'checked');
             $('#pwd_TxtB').removeAttr('disabled');
         }
@@ -727,7 +727,7 @@ function resetPersonalDataForm(option){
         // Removed disabled attribute in all elements from form
         var personal_data_form = document.forms['personal_data'];
 
-        for(var i=0, personal_data_formLen = personal_data_form.length; i<personal_data_formLen; i++){
+        for (var i = 0, personal_data_formLen = personal_data_form.length; i < personal_data_formLen; i++) {
             personal_data_form.elements[i].disabled = false;
         }
 
@@ -794,7 +794,7 @@ function resetPersonalDataForm(option){
 
 // Start of updating Family Profile Spouse name Table
 
-function updateSpouseRecordsTable(){
+function updateSpouseRecordsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -803,55 +803,55 @@ function updateSpouseRecordsTable(){
             // Empty Family Profile Spouse name Table
             $("#SpouseRecords_tbody").empty();
 
-            if(result.SpouseRecords == ''){
+            if (result.SpouseRecords == '') {
 
-                $('#SpouseRecords_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#SpouseRecords_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.SpouseRecords.forEach(element => {
-                    $('#SpouseRecords_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetSpouseRecordsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetSpouseRecordsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.FamilyProfileDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/spouse-records/delete/'+ element['id'] +'`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['lastname_sn_fp'] == null) ? '-' : element['lastname_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['first_sn_fp'] == null) ? '-' : element['first_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['middlename_sn_fp'] == null) ? '-' : element['middlename_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['ne_sn_fp'] == null) ? '-' : element['ne_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['occu_sn_fp'] == null) ? '-' : element['occu_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['ebn_sn_fp'] == null) ? '-' : element['ebn_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['eba_sn_fp'] == null) ? '-' : element['eba_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['etn_sn_fp'] == null) ? '-' : element['etn_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['civil_status_sn_fp'] == null) ? '-' : element['civil_status_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['gender_sn_fp'] == null) ? '-' : element['gender_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['birthdate_sn_fp'] == null) ? '-' : element['birthdate_sn_fp']) +'</td>'+
-                    '<td>'+ ((element['age_sn_fp'] == null) ? '-' : element['age_sn_fp']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#SpouseRecords_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetSpouseRecordsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetSpouseRecordsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.FamilyProfileDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/spouse-records/delete/' + element['id'] + '`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['lastname_sn_fp'] == null) ? '-' : element['lastname_sn_fp']) + '</td>' +
+                        '<td>' + ((element['first_sn_fp'] == null) ? '-' : element['first_sn_fp']) + '</td>' +
+                        '<td>' + ((element['middlename_sn_fp'] == null) ? '-' : element['middlename_sn_fp']) + '</td>' +
+                        '<td>' + ((element['ne_sn_fp'] == null) ? '-' : element['ne_sn_fp']) + '</td>' +
+                        '<td>' + ((element['occu_sn_fp'] == null) ? '-' : element['occu_sn_fp']) + '</td>' +
+                        '<td>' + ((element['ebn_sn_fp'] == null) ? '-' : element['ebn_sn_fp']) + '</td>' +
+                        '<td>' + ((element['eba_sn_fp'] == null) ? '-' : element['eba_sn_fp']) + '</td>' +
+                        '<td>' + ((element['etn_sn_fp'] == null) ? '-' : element['etn_sn_fp']) + '</td>' +
+                        '<td>' + ((element['civil_status_sn_fp'] == null) ? '-' : element['civil_status_sn_fp']) + '</td>' +
+                        '<td>' + ((element['gender_sn_fp'] == null) ? '-' : element['gender_sn_fp']) + '</td>' +
+                        '<td>' + ((element['birthdate_sn_fp'] == null) ? '-' : element['birthdate_sn_fp']) + '</td>' +
+                        '<td>' + ((element['age_sn_fp'] == null) ? '-' : element['age_sn_fp']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -864,20 +864,20 @@ function updateSpouseRecordsTable(){
 
 // Start of reseting Family Profile Spouse name Form
 
-function resetSpouseRecordsForm(id, option){
+function resetSpouseRecordsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Family Background Profile/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var spouse_records_form = document.forms['spouse_records_form'];
 
-                    for(var i=0, spouse_records_formLen = spouse_records_form.length; i<spouse_records_formLen; i++){
+                    for (var i = 0, spouse_records_formLen = spouse_records_form.length; i < spouse_records_formLen; i++) {
                         spouse_records_form.elements[i].disabled = false;
                     }
 
@@ -888,7 +888,7 @@ function resetSpouseRecordsForm(id, option){
                     $('#spouse_records_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#spouse_records_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#spouse_records_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#spouse_records_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/spouse-records/add`, `spouse_records_form`, `Add`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `spouse_records_form_submit`, `None`, `None`)');
@@ -899,7 +899,7 @@ function resetSpouseRecordsForm(id, option){
                 }
 
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -909,12 +909,12 @@ function resetSpouseRecordsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var spouse_records_form = document.forms['spouse_records_form'];
 
-                    for(var i=0, spouse_records_formLen = spouse_records_form.length; i<spouse_records_formLen; i++){
+                    for (var i = 0, spouse_records_formLen = spouse_records_form.length; i < spouse_records_formLen; i++) {
                         spouse_records_form.elements[i].disabled = false;
                     }
 
@@ -925,7 +925,7 @@ function resetSpouseRecordsForm(id, option){
                     $('#spouse_records_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#spouse_records_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#spouse_records_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#spouse_records_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -934,12 +934,12 @@ function resetSpouseRecordsForm(id, option){
                     $('#spouse_records_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/spouse-records/edit`, `spouse_records_form`, `Update`, `updateSpouseRecordsTable`, `resetSpouseRecordsForm`, `spouse_records_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var spouse_records_form = document.forms['spouse_records_form'];
 
-                    for(var i=0, spouse_records_formLen = spouse_records_form.length; i<spouse_records_formLen; i++){
+                    for (var i = 0, spouse_records_formLen = spouse_records_form.length; i < spouse_records_formLen; i++) {
                         spouse_records_form.elements[i].disabled = true;
                     }
 
@@ -953,7 +953,7 @@ function resetSpouseRecordsForm(id, option){
                     $('#cesno_spouse_records_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#spouse_records_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#spouse_records_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#spouse_records_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -993,7 +993,7 @@ function resetSpouseRecordsForm(id, option){
 
 // Start of updating Family Profile Father, Mother name Table
 
-function updateFamilyProfileTable(){
+function updateFamilyProfileTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1002,44 +1002,44 @@ function updateFamilyProfileTable(){
             // Empty Family Profile Father, Mother name Table
             $("#FamilyProfile_tbody").empty();
 
-            if(result.FamilyProfile == ''){
+            if (result.FamilyProfile == '') {
 
-                $('#FamilyProfile_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#FamilyProfile_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.FamilyProfile.forEach(element => {
-                    $('#FamilyProfile_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetFamilyProfileForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetFamilyProfileForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['fn_lastname_fp'] == null) ? '-' : element['fn_lastname_fp']) +'</td>'+
-                    '<td>'+ ((element['fn_first_fp'] == null) ? '-' : element['fn_first_fp']) +'</td>'+
-                    '<td>'+ ((element['fn_middlename_fp'] == null) ? '-' : element['fn_middlename_fp']) +'</td>'+
-                    '<td>'+ ((element['fn_ne_fp'] == null) ? '-' : element['fn_ne_fp']) +'</td>'+
-                    '<td>'+ ((element['mn_lastname_fp'] == null) ? '-' : element['mn_lastname_fp']) +'</td>'+
-                    '<td>'+ ((element['mn_first_fp'] == null) ? '-' : element['mn_first_fp']) +'</td>'+
-                    '<td>'+ ((element['mn_middlename_fp'] == null) ? '-' : element['mn_middlename_fp']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#FamilyProfile_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetFamilyProfileForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetFamilyProfileForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['fn_lastname_fp'] == null) ? '-' : element['fn_lastname_fp']) + '</td>' +
+                        '<td>' + ((element['fn_first_fp'] == null) ? '-' : element['fn_first_fp']) + '</td>' +
+                        '<td>' + ((element['fn_middlename_fp'] == null) ? '-' : element['fn_middlename_fp']) + '</td>' +
+                        '<td>' + ((element['fn_ne_fp'] == null) ? '-' : element['fn_ne_fp']) + '</td>' +
+                        '<td>' + ((element['mn_lastname_fp'] == null) ? '-' : element['mn_lastname_fp']) + '</td>' +
+                        '<td>' + ((element['mn_first_fp'] == null) ? '-' : element['mn_first_fp']) + '</td>' +
+                        '<td>' + ((element['mn_middlename_fp'] == null) ? '-' : element['mn_middlename_fp']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1052,20 +1052,20 @@ function updateFamilyProfileTable(){
 
 // Start of reseting Family Profile Father, Mother name Form
 
-function resetFamilyProfileForm(id, option){
+function resetFamilyProfileForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Family Background Profile/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled in all elements from form
                     var family_profile_form = document.forms['family_profile_form'];
 
-                    for(var i=0, family_profile_formLen = family_profile_form.length; i<family_profile_formLen; i++){
+                    for (var i = 0, family_profile_formLen = family_profile_form.length; i < family_profile_formLen; i++) {
                         family_profile_form.elements[i].disabled = false;
                     }
 
@@ -1076,7 +1076,7 @@ function resetFamilyProfileForm(id, option){
                     $('#family_profile_form_submit').val('Edit Record');
 
                     // Hide submit button name
-                    $('#family_profile_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#family_profile_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Set submit button button color to secondary
                     $('#family_profile_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1084,7 +1084,7 @@ function resetFamilyProfileForm(id, option){
                 }
 
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1094,12 +1094,12 @@ function resetFamilyProfileForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled in all elements from form
                     var family_profile_form = document.forms['family_profile_form'];
 
-                    for(var i=0, family_profile_formLen = family_profile_form.length; i<family_profile_formLen; i++){
+                    for (var i = 0, family_profile_formLen = family_profile_form.length; i < family_profile_formLen; i++) {
                         family_profile_form.elements[i].disabled = false;
                     }
 
@@ -1110,7 +1110,7 @@ function resetFamilyProfileForm(id, option){
                     $('#family_profile_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#family_profile_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#family_profile_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#family_profile_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1119,12 +1119,12 @@ function resetFamilyProfileForm(id, option){
                     $('#family_profile_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/family-profile/edit`, `family_profile_form`, `Update`, `updateFamilyProfileTable`, `resetFamilyProfileForm`, `family_profile_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var family_profile_form = document.forms['family_profile_form'];
 
-                    for(var i=0, family_profile_formLen = family_profile_form.length; i<family_profile_formLen; i++){
+                    for (var i = 0, family_profile_formLen = family_profile_form.length; i < family_profile_formLen; i++) {
                         family_profile_form.elements[i].disabled = true;
                     }
 
@@ -1135,7 +1135,7 @@ function resetFamilyProfileForm(id, option){
                     $('#cesno_family_profile_id').val(id);
 
                     // Hide and disabled Edit Record button
-                    $('#family_profile_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#family_profile_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#family_profile_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -1170,7 +1170,7 @@ function resetFamilyProfileForm(id, option){
 
 // Start of updating Family Profile Childrens Record Table
 
-function updateChildrenRecordsTable(){
+function updateChildrenRecordsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1179,45 +1179,45 @@ function updateChildrenRecordsTable(){
             // Empty Family Profile Childrens Record Table
             $("#ChildrenRecords_tbody").empty();
 
-            if(result.ChildrenRecords == ''){
+            if (result.ChildrenRecords == '') {
 
-                $('#ChildrenRecords_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#ChildrenRecords_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.ChildrenRecords.forEach(element => {
-                    $('#ChildrenRecords_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetChildrenRecordsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetChildrenRecordsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.FamilyProfileDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/children-records/delete/'+ element['id'] +'`, `updateChildrenRecordsTable`, `resetChildrenRecordsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['ch_lastname_fp'] == null) ? '-' : element['ch_lastname_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_first_fp'] == null) ? '-' : element['ch_first_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_middlename_fp'] == null) ? '-' : element['ch_middlename_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_ne_fp'] == null) ? '-' : element['ch_ne_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_gender_fp'] == null) ? '-' : element['ch_gender_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_birthdate_fp'] == null) ? '-' : element['ch_birthdate_fp']) +'</td>'+
-                    '<td>'+ ((element['ch_birthplace_fp'] == null) ? '-' : element['ch_birthplace_fp']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#ChildrenRecords_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetChildrenRecordsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.FamilyProfileEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetChildrenRecordsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.FamilyProfileDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/children-records/delete/' + element['id'] + '`, `updateChildrenRecordsTable`, `resetChildrenRecordsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['ch_lastname_fp'] == null) ? '-' : element['ch_lastname_fp']) + '</td>' +
+                        '<td>' + ((element['ch_first_fp'] == null) ? '-' : element['ch_first_fp']) + '</td>' +
+                        '<td>' + ((element['ch_middlename_fp'] == null) ? '-' : element['ch_middlename_fp']) + '</td>' +
+                        '<td>' + ((element['ch_ne_fp'] == null) ? '-' : element['ch_ne_fp']) + '</td>' +
+                        '<td>' + ((element['ch_gender_fp'] == null) ? '-' : element['ch_gender_fp']) + '</td>' +
+                        '<td>' + ((element['ch_birthdate_fp'] == null) ? '-' : element['ch_birthdate_fp']) + '</td>' +
+                        '<td>' + ((element['ch_birthplace_fp'] == null) ? '-' : element['ch_birthplace_fp']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1230,20 +1230,20 @@ function updateChildrenRecordsTable(){
 
 // Start of reseting Family Profile Childrens Record Form
 
-function resetChildrenRecordsForm(id, option){
+function resetChildrenRecordsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Family Background Profile/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var children_record_form = document.forms['children_record_form'];
 
-                    for(var i=0, children_record_formLen = children_record_form.length; i<children_record_formLen; i++){
+                    for (var i = 0, children_record_formLen = children_record_form.length; i < children_record_formLen; i++) {
                         children_record_form.elements[i].disabled = false;
                     }
 
@@ -1254,7 +1254,7 @@ function resetChildrenRecordsForm(id, option){
                     $('#children_record_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#children_record_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#children_record_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#children_record_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/children-records/add`, `children_record_form`, `Add`, `updateChildrenRecordsTable`, `resetChildrenRecordsForm`, `children_record_form_submit`, `None`, `None`)');
@@ -1265,7 +1265,7 @@ function resetChildrenRecordsForm(id, option){
                 }
 
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1275,12 +1275,12 @@ function resetChildrenRecordsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var children_record_form = document.forms['children_record_form'];
 
-                    for(var i=0, children_record_formLen = children_record_form.length; i<children_record_formLen; i++){
+                    for (var i = 0, children_record_formLen = children_record_form.length; i < children_record_formLen; i++) {
                         children_record_form.elements[i].disabled = false;
                     }
 
@@ -1291,7 +1291,7 @@ function resetChildrenRecordsForm(id, option){
                     $('#children_record_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#children_record_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#children_record_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#children_record_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1300,12 +1300,12 @@ function resetChildrenRecordsForm(id, option){
                     $('#children_record_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/children-records/edit`, `children_record_form`, `Update`, `updateChildrenRecordsTable`, `resetChildrenRecordsForm`, `children_record_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var children_record_form = document.forms['children_record_form'];
 
-                    for(var i=0, children_record_formLen = children_record_form.length; i<children_record_formLen; i++){
+                    for (var i = 0, children_record_formLen = children_record_form.length; i < children_record_formLen; i++) {
                         children_record_form.elements[i].disabled = true;
                     }
 
@@ -1319,7 +1319,7 @@ function resetChildrenRecordsForm(id, option){
                     $('#cesno_children_record_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#children_record_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#children_record_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#children_record_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -1354,7 +1354,7 @@ function resetChildrenRecordsForm(id, option){
 
 // Start of updating Educational Background or Attainment Table
 
-function updateEducationalAttainmentTable(){
+function updateEducationalAttainmentTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1363,51 +1363,51 @@ function updateEducationalAttainmentTable(){
             // Empty Educational Background or Attainment Table
             $("#EducationalAttainment_tbody").empty();
 
-            if(result.EducationalAttainment == ''){
+            if (result.EducationalAttainment == '') {
 
-                $('#EducationalAttainment_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#EducationalAttainment_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.EducationalAttainment.forEach(element => {
-                    $('#EducationalAttainment_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetEducationalAttainmentForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EducationalAttainmentEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetEducationalAttainmentForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EducationalAttainmentDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/educational-attainment/delete/'+ element['id'] +'`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['level_ea'] == null) ? '-' : element['level_ea']) +'</td>'+
-                    '<td>'+ ((element['school_ea'] == null) ? '-' : element['school_ea']) +'</td>'+
-                    '<td>'+ ((element['degree_ea'] == null) ? '-' : element['degree_ea']) +'</td>'+
-                    '<td>'+ ((element['date_grad_ea'] == null) ? '-' : element['date_grad_ea']) +'</td>'+
-                    '<td>'+ ((element['ms_ea'] == null) ? '-' : element['ms_ea']) +'</td>'+
-                    '<td>'+ ((element['school_type_ea'] == null) ? '-' : element['school_type_ea']) +'</td>'+
-                    '<td>'+ ((element['date_f_ea'] == null) ? '-' : element['date_f_ea']) +'</td>'+
-                    '<td>'+ ((element['date_t_ea'] == null) ? '-' : element['date_t_ea']) +'</td>'+
-                    '<td>'+ ((element['hlu_ea'] == null) ? '-' : element['hlu_ea']) +'</td>'+
-                    '<td>'+ ((element['ahr_ea'] == null) ? '-' : element['ahr_ea']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#EducationalAttainment_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetEducationalAttainmentForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EducationalAttainmentEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetEducationalAttainmentForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EducationalAttainmentDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/educational-attainment/delete/' + element['id'] + '`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['level_ea'] == null) ? '-' : element['level_ea']) + '</td>' +
+                        '<td>' + ((element['school_ea'] == null) ? '-' : element['school_ea']) + '</td>' +
+                        '<td>' + ((element['degree_ea'] == null) ? '-' : element['degree_ea']) + '</td>' +
+                        '<td>' + ((element['date_grad_ea'] == null) ? '-' : element['date_grad_ea']) + '</td>' +
+                        '<td>' + ((element['ms_ea'] == null) ? '-' : element['ms_ea']) + '</td>' +
+                        '<td>' + ((element['school_type_ea'] == null) ? '-' : element['school_type_ea']) + '</td>' +
+                        '<td>' + ((element['date_f_ea'] == null) ? '-' : element['date_f_ea']) + '</td>' +
+                        '<td>' + ((element['date_t_ea'] == null) ? '-' : element['date_t_ea']) + '</td>' +
+                        '<td>' + ((element['hlu_ea'] == null) ? '-' : element['hlu_ea']) + '</td>' +
+                        '<td>' + ((element['ahr_ea'] == null) ? '-' : element['ahr_ea']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1420,20 +1420,20 @@ function updateEducationalAttainmentTable(){
 
 // Start of reseting Educational Background or Attainment Form
 
-function resetEducationalAttainmentForm(id, option){
+function resetEducationalAttainmentForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Educational Background or Attainment/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var educational_attainment_form = document.forms['educational_attainment_form'];
 
-                    for(var i=0, educational_attainment_formLen = educational_attainment_form.length; i<educational_attainment_formLen; i++){
+                    for (var i = 0, educational_attainment_formLen = educational_attainment_form.length; i < educational_attainment_formLen; i++) {
                         educational_attainment_form.elements[i].disabled = false;
                     }
 
@@ -1444,7 +1444,7 @@ function resetEducationalAttainmentForm(id, option){
                     $('#educational_attainment_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#educational_attainment_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#educational_attainment_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#educational_attainment_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/educational-attainment/add`, `educational_attainment_form`, `Add`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `educational_attainment_form_submit`, `None`, `None`)');
@@ -1454,7 +1454,7 @@ function resetEducationalAttainmentForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1464,12 +1464,12 @@ function resetEducationalAttainmentForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var educational_attainment_form = document.forms['educational_attainment_form'];
 
-                    for(var i=0, educational_attainment_formLen = educational_attainment_form.length; i<educational_attainment_formLen; i++){
+                    for (var i = 0, educational_attainment_formLen = educational_attainment_form.length; i < educational_attainment_formLen; i++) {
                         educational_attainment_form.elements[i].disabled = false;
                     }
 
@@ -1480,7 +1480,7 @@ function resetEducationalAttainmentForm(id, option){
                     $('#educational_attainment_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#educational_attainment_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#educational_attainment_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#educational_attainment_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1489,12 +1489,12 @@ function resetEducationalAttainmentForm(id, option){
                     $('#educational_attainment_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/educational-attainment/edit`, `educational_attainment_form`, `Update`, `updateEducationalAttainmentTable`, `resetEducationalAttainmentForm`, `educational_attainment_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var educational_attainment_form = document.forms['educational_attainment_form'];
 
-                    for(var i=0, educational_attainment_formLen = educational_attainment_form.length; i<educational_attainment_formLen; i++){
+                    for (var i = 0, educational_attainment_formLen = educational_attainment_form.length; i < educational_attainment_formLen; i++) {
                         educational_attainment_form.elements[i].disabled = true;
                     }
 
@@ -1508,7 +1508,7 @@ function resetEducationalAttainmentForm(id, option){
                     $('#cesno_educational_attainment_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#educational_attainment_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#educational_attainment_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#educational_attainment_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -1546,7 +1546,7 @@ function resetEducationalAttainmentForm(id, option){
 
 // Start of updating Examinations Taken - Historical Records of Examinations taken Table
 
-function updateExaminationsTakenTable(){
+function updateExaminationsTakenTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1555,39 +1555,39 @@ function updateExaminationsTakenTable(){
             // Empty Examinations Taken - Historical Records of Examinations taken Table
             $("#ExaminationsTaken_tbody").empty();
 
-            if(result.ExaminationsTaken == ''){
+            if (result.ExaminationsTaken == '') {
 
-                $('#ExaminationsTaken_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#ExaminationsTaken_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.ExaminationsTaken.forEach(element => {
-                    $('#ExaminationsTaken_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetExaminationsTakenForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.ExaminationsTakenEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetExaminationsTakenForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.ExaminationsTakenDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/examination-taken/delete/'+ element['id'] +'`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['tox_et'] == null) ? '-' : element['tox_et']) +'</td>'+
-                    '<td>'+ ((element['rating_et'] == null) ? '-' : element['rating_et']) +'</td>'+
-                    '<td>'+ ((element['doe_et'] == null) ? '-' : element['doe_et']) +'</td>'+
-                    '<td>'+ ((element['poe_et'] == null) ? '-' : element['poe_et']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#ExaminationsTaken_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetExaminationsTakenForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.ExaminationsTakenEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetExaminationsTakenForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.ExaminationsTakenDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/examination-taken/delete/' + element['id'] + '`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['tox_et'] == null) ? '-' : element['tox_et']) + '</td>' +
+                        '<td>' + ((element['rating_et'] == null) ? '-' : element['rating_et']) + '</td>' +
+                        '<td>' + ((element['doe_et'] == null) ? '-' : element['doe_et']) + '</td>' +
+                        '<td>' + ((element['poe_et'] == null) ? '-' : element['poe_et']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1600,20 +1600,20 @@ function updateExaminationsTakenTable(){
 
 // Start of reseting Examinations Taken - Historical Records of Examinations taken Form
 
-function resetExaminationsTakenForm(id, option){
+function resetExaminationsTakenForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Examinations Taken/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var examinations_taken_historical_record_of_examinations_taken_form = document.forms['examinations_taken_historical_record_of_examinations_taken_form'];
 
-                    for(var i=0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i<examinations_taken_historical_record_of_examinations_taken_formLen; i++){
+                    for (var i = 0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i < examinations_taken_historical_record_of_examinations_taken_formLen; i++) {
                         examinations_taken_historical_record_of_examinations_taken_form.elements[i].disabled = false;
                     }
 
@@ -1624,7 +1624,7 @@ function resetExaminationsTakenForm(id, option){
                     $('#examinations_taken_historical_record_of_examinations_taken_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#examinations_taken_historical_record_of_examinations_taken_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#examinations_taken_historical_record_of_examinations_taken_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#examinations_taken_historical_record_of_examinations_taken_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/examination-taken/add`, `examinations_taken_historical_record_of_examinations_taken_form`, `Add`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `examinations_taken_historical_record_of_examinations_taken_form_submit`, `None`, `None`)');
@@ -1634,7 +1634,7 @@ function resetExaminationsTakenForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1644,12 +1644,12 @@ function resetExaminationsTakenForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var examinations_taken_historical_record_of_examinations_taken_form = document.forms['examinations_taken_historical_record_of_examinations_taken_form'];
 
-                    for(var i=0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i<examinations_taken_historical_record_of_examinations_taken_formLen; i++){
+                    for (var i = 0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i < examinations_taken_historical_record_of_examinations_taken_formLen; i++) {
                         examinations_taken_historical_record_of_examinations_taken_form.elements[i].disabled = false;
                     }
 
@@ -1660,7 +1660,7 @@ function resetExaminationsTakenForm(id, option){
                     $('#examinations_taken_historical_record_of_examinations_taken_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#examinations_taken_historical_record_of_examinations_taken_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#examinations_taken_historical_record_of_examinations_taken_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#examinations_taken_historical_record_of_examinations_taken_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1669,12 +1669,12 @@ function resetExaminationsTakenForm(id, option){
                     $('#examinations_taken_historical_record_of_examinations_taken_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/examination-taken/edit`, `examinations_taken_historical_record_of_examinations_taken_form`, `Update`, `updateExaminationsTakenTable`, `resetExaminationsTakenForm`, `examinations_taken_historical_record_of_examinations_taken_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var examinations_taken_historical_record_of_examinations_taken_form = document.forms['examinations_taken_historical_record_of_examinations_taken_form'];
 
-                    for(var i=0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i<examinations_taken_historical_record_of_examinations_taken_formLen; i++){
+                    for (var i = 0, examinations_taken_historical_record_of_examinations_taken_formLen = examinations_taken_historical_record_of_examinations_taken_form.length; i < examinations_taken_historical_record_of_examinations_taken_formLen; i++) {
                         examinations_taken_historical_record_of_examinations_taken_form.elements[i].disabled = true;
                     }
 
@@ -1688,7 +1688,7 @@ function resetExaminationsTakenForm(id, option){
                     $('#cesno_examinations_taken_historical_records_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#examinations_taken_historical_record_of_examinations_taken_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#examinations_taken_historical_record_of_examinations_taken_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#examinations_taken_historical_record_of_examinations_taken_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -1720,7 +1720,7 @@ function resetExaminationsTakenForm(id, option){
 
 // Start of updating Examinations Taken - License Details Table
 
-function updateLicenseDetailsTable(){
+function updateLicenseDetailsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1729,37 +1729,37 @@ function updateLicenseDetailsTable(){
             // Empty Examinations Taken - License Details Table
             $("#LicenseDetails_tbody").empty();
 
-            if(result.LicenseDetails == ''){
+            if (result.LicenseDetails == '') {
 
-                $('#LicenseDetails_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#LicenseDetails_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.LicenseDetails.forEach(element => {
-                    $('#LicenseDetails_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetLicenseDetailsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.ExaminationsTakenEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetLicenseDetailsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.ExaminationsTakenDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/license-details/delete/'+ element['id'] +'`, `updateLicenseDetailsTable`, `resetLicenseDetailsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['ld_ln_et'] == null) ? '-' : element['ld_ln_et']) +'</td>'+
-                    '<td>'+ ((element['ld_da_et'] == null) ? '-' : element['ld_da_et']) +'</td>'+
-                    '<td>'+ ((element['ld_dov_et'] == null) ? '-' : element['ld_dov_et']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#LicenseDetails_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetLicenseDetailsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.ExaminationsTakenEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetLicenseDetailsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.ExaminationsTakenDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/license-details/delete/' + element['id'] + '`, `updateLicenseDetailsTable`, `resetLicenseDetailsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['ld_ln_et'] == null) ? '-' : element['ld_ln_et']) + '</td>' +
+                        '<td>' + ((element['ld_da_et'] == null) ? '-' : element['ld_da_et']) + '</td>' +
+                        '<td>' + ((element['ld_dov_et'] == null) ? '-' : element['ld_dov_et']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1772,20 +1772,20 @@ function updateLicenseDetailsTable(){
 
 // Start of reseting Examinations Taken - License Details Form
 
-function resetLicenseDetailsForm(id, option){
+function resetLicenseDetailsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Examinations Taken/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var examinations_taken_license_details_form = document.forms['examinations_taken_license_details_form'];
 
-                    for(var i=0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i<examinations_taken_license_details_formLen; i++){
+                    for (var i = 0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i < examinations_taken_license_details_formLen; i++) {
                         examinations_taken_license_details_form.elements[i].disabled = false;
                     }
 
@@ -1796,7 +1796,7 @@ function resetLicenseDetailsForm(id, option){
                     $('#examinations_taken_license_details_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#examinations_taken_license_details_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#examinations_taken_license_details_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#examinations_taken_license_details_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/license-details/add`, `examinations_taken_license_details_form`, `Add`, `updateLicenseDetailsTable`, `resetLicenseDetailsForm`, `examinations_taken_license_details_form_submit`, `None`, `None`)');
@@ -1806,7 +1806,7 @@ function resetLicenseDetailsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1816,12 +1816,12 @@ function resetLicenseDetailsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var examinations_taken_license_details_form = document.forms['examinations_taken_license_details_form'];
 
-                    for(var i=0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i<examinations_taken_license_details_formLen; i++){
+                    for (var i = 0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i < examinations_taken_license_details_formLen; i++) {
                         examinations_taken_license_details_form.elements[i].disabled = false;
                     }
 
@@ -1832,7 +1832,7 @@ function resetLicenseDetailsForm(id, option){
                     $('#examinations_taken_license_details_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#examinations_taken_license_details_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#examinations_taken_license_details_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#examinations_taken_license_details_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -1841,12 +1841,12 @@ function resetLicenseDetailsForm(id, option){
                     $('#examinations_taken_license_details_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/license-details/edit`, `examinations_taken_license_details_form`, `Update`, `updateLicenseDetailsTable`, `resetLicenseDetailsForm`, `examinations_taken_license_details_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var examinations_taken_license_details_form = document.forms['examinations_taken_license_details_form'];
 
-                    for(var i=0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i<examinations_taken_license_details_formLen; i++){
+                    for (var i = 0, examinations_taken_license_details_formLen = examinations_taken_license_details_form.length; i < examinations_taken_license_details_formLen; i++) {
                         examinations_taken_license_details_form.elements[i].disabled = true;
                     }
 
@@ -1860,7 +1860,7 @@ function resetLicenseDetailsForm(id, option){
                     $('#cesno_examinations_taken_license_details_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#examinations_taken_license_details_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#examinations_taken_license_details_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#examinations_taken_license_details_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -1891,7 +1891,7 @@ function resetLicenseDetailsForm(id, option){
 
 // Start of updating Languages Dialects Table
 
-function updateLanguagesDialectsTable(){
+function updateLanguagesDialectsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -1900,33 +1900,33 @@ function updateLanguagesDialectsTable(){
             // Empty Languages Dialects Table
             $("#LanguagesDialects_tbody").empty();
 
-            if(result.LanguagesDialects == ''){
+            if (result.LanguagesDialects == '') {
 
-                $('#LanguagesDialects_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#LanguagesDialects_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.LanguagesDialects.forEach(element => {
-                    $('#LanguagesDialects_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetLanguagesDialectsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.LanguagesDialectsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetLanguagesDialectsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.LanguagesDialectsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/languages-dialects/delete/'+ element['id'] +'`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['lang_languages_dialects'] == null) ? '-' : element['lang_languages_dialects']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#LanguagesDialects_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetLanguagesDialectsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.LanguagesDialectsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetLanguagesDialectsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.LanguagesDialectsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/languages-dialects/delete/' + element['id'] + '`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['lang_languages_dialects'] == null) ? '-' : element['lang_languages_dialects']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -1939,20 +1939,20 @@ function updateLanguagesDialectsTable(){
 
 // Start of reseting Languages Dialects Form
 
-function resetLanguagesDialectsForm(id, option){
+function resetLanguagesDialectsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Language Dialects/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var languages_dialects_form = document.forms['languages_dialects_form'];
 
-                    for(var i=0, languages_dialects_formLen = languages_dialects_form.length; i<languages_dialects_formLen; i++){
+                    for (var i = 0, languages_dialects_formLen = languages_dialects_form.length; i < languages_dialects_formLen; i++) {
                         languages_dialects_form.elements[i].disabled = false;
                     }
 
@@ -1963,7 +1963,7 @@ function resetLanguagesDialectsForm(id, option){
                     $('#languages_dialects_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#languages_dialects_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#languages_dialects_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#languages_dialects_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/languages-dialects/add`, `languages_dialects_form`, `Add`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `languages_dialects_form_submit`, `None`, `None`)');
@@ -1973,7 +1973,7 @@ function resetLanguagesDialectsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -1983,12 +1983,12 @@ function resetLanguagesDialectsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var languages_dialects_form = document.forms['languages_dialects_form'];
 
-                    for(var i=0, languages_dialects_formLen = languages_dialects_form.length; i<languages_dialects_formLen; i++){
+                    for (var i = 0, languages_dialects_formLen = languages_dialects_form.length; i < languages_dialects_formLen; i++) {
                         languages_dialects_form.elements[i].disabled = false;
                     }
 
@@ -1999,7 +1999,7 @@ function resetLanguagesDialectsForm(id, option){
                     $('#languages_dialects_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#languages_dialects_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#languages_dialects_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#languages_dialects_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2008,12 +2008,12 @@ function resetLanguagesDialectsForm(id, option){
                     $('#languages_dialects_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/languages-dialects/edit`, `languages_dialects_form`, `Update`, `updateLanguagesDialectsTable`, `resetLanguagesDialectsForm`, `languages_dialects_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var languages_dialects_form = document.forms['languages_dialects_form'];
 
-                    for(var i=0, languages_dialects_formLen = languages_dialects_form.length; i<languages_dialects_formLen; i++){
+                    for (var i = 0, languages_dialects_formLen = languages_dialects_form.length; i < languages_dialects_formLen; i++) {
                         languages_dialects_form.elements[i].disabled = true;
                     }
 
@@ -2027,7 +2027,7 @@ function resetLanguagesDialectsForm(id, option){
                     $('#cesno_languages_dialects_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#languages_dialects_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#languages_dialects_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#languages_dialects_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2056,7 +2056,7 @@ function resetLanguagesDialectsForm(id, option){
 
 // Start of updating Ces We Table
 
-function updateCesWeTable(){
+function updateCesWeTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2065,41 +2065,41 @@ function updateCesWeTable(){
             // Empty Ces We Table
             $("#CesWe_tbody").empty();
 
-            if(result.CesWe == ''){
+            if (result.CesWe == '') {
 
-                $('#CesWe_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#CesWe_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.CesWe.forEach(element => {
-                    $('#CesWe_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesWeForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesWeForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/ces-we/delete/'+ element['id'] +'`, `updateCesWeTable`, `resetCesWeForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['ed_ces_we'] == null) ? '-' : element['ed_ces_we']) +'</td>'+
-                    '<td>'+ ((element['r_ces_we'] == null) ? '-' : element['r_ces_we']) +'</td>'+
-                    '<td>'+ ((element['rd_ces_we'] == null) ? '-' : element['rd_ces_we']) +'</td>'+
-                    '<td>'+ ((element['poe_ces_we'] == null) ? '-' : element['poe_ces_we']) +'</td>'+
-                    '<td>'+ ((element['tn_ces_we'] == null) ? '-' : element['tn_ces_we']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#CesWe_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesWeForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesWeForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/ces-we/delete/' + element['id'] + '`, `updateCesWeTable`, `resetCesWeForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['ed_ces_we'] == null) ? '-' : element['ed_ces_we']) + '</td>' +
+                        '<td>' + ((element['r_ces_we'] == null) ? '-' : element['r_ces_we']) + '</td>' +
+                        '<td>' + ((element['rd_ces_we'] == null) ? '-' : element['rd_ces_we']) + '</td>' +
+                        '<td>' + ((element['poe_ces_we'] == null) ? '-' : element['poe_ces_we']) + '</td>' +
+                        '<td>' + ((element['tn_ces_we'] == null) ? '-' : element['tn_ces_we']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -2112,20 +2112,20 @@ function updateCesWeTable(){
 
 // Start of reseting Ces We Form
 
-function resetCesWeForm(id, option){
+function resetCesWeForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Eligibility and Rank Tracker/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var ceswe_hr_form = document.forms['ceswe_hr_form'];
 
-                    for(var i=0, ceswe_hr_formLen = ceswe_hr_form.length; i<ceswe_hr_formLen; i++){
+                    for (var i = 0, ceswe_hr_formLen = ceswe_hr_form.length; i < ceswe_hr_formLen; i++) {
                         ceswe_hr_form.elements[i].disabled = false;
                     }
 
@@ -2136,7 +2136,7 @@ function resetCesWeForm(id, option){
                     $('#ceswe_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ceswe_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ceswe_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#ceswe_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-we/add`, `ceswe_hr_form`, `Add`, `updateCesWeTable`, `resetCesWeForm`, `ceswe_hr_form_submit`, `None`, `None`)');
@@ -2146,7 +2146,7 @@ function resetCesWeForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -2156,12 +2156,12 @@ function resetCesWeForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var ceswe_hr_form = document.forms['ceswe_hr_form'];
 
-                    for(var i=0, ceswe_hr_formLen = ceswe_hr_form.length; i<ceswe_hr_formLen; i++){
+                    for (var i = 0, ceswe_hr_formLen = ceswe_hr_form.length; i < ceswe_hr_formLen; i++) {
                         ceswe_hr_form.elements[i].disabled = false;
                     }
 
@@ -2172,7 +2172,7 @@ function resetCesWeForm(id, option){
                     $('#ceswe_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ceswe_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ceswe_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#ceswe_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2181,12 +2181,12 @@ function resetCesWeForm(id, option){
                     $('#ceswe_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-we/edit`, `ceswe_hr_form`, `Update`, `updateCesWeTable`, `resetCesWeForm`, `ceswe_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var ceswe_hr_form = document.forms['ceswe_hr_form'];
 
-                    for(var i=0, ceswe_hr_formLen = ceswe_hr_form.length; i<ceswe_hr_formLen; i++){
+                    for (var i = 0, ceswe_hr_formLen = ceswe_hr_form.length; i < ceswe_hr_formLen; i++) {
                         ceswe_hr_form.elements[i].disabled = true;
                     }
 
@@ -2200,7 +2200,7 @@ function resetCesWeForm(id, option){
                     $('#cesno_ceswe_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#ceswe_hr_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#ceswe_hr_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#ceswe_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2233,7 +2233,7 @@ function resetCesWeForm(id, option){
 
 // Start of updating Assessment Center Table
 
-function updateAssessmentCenterTable(){
+function updateAssessmentCenterTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2242,42 +2242,42 @@ function updateAssessmentCenterTable(){
             // Empty Assessment Center Table
             $("#AssessmentCenter_tbody").empty();
 
-            if(result.AssessmentCenter == ''){
+            if (result.AssessmentCenter == '') {
 
-                $('#AssessmentCenter_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#AssessmentCenter_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
 
                 // Update AC no. on profile details
                 $('#profile_ac_no').text('---');
             }
-            else{
+            else {
 
                 result.AssessmentCenter.forEach(element => {
-                    $('#AssessmentCenter_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAssessmentCenterForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAssessmentCenterForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/assessment-center/delete/'+ element['id'] +'`, `updateAssessmentCenterTable`, `resetAssessmentCenterForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['an_achr_ces_we'] == null) ? '-' : element['an_achr_ces_we']) +'</td>'+
-                    '<td>'+ ((element['ad_achr_ces_we'] == null) ? '-' : element['ad_achr_ces_we']) +'</td>'+
-                    '<td>'+ ((element['r_achr_ces_we'] == null) ? '-' : element['r_achr_ces_we']) +'</td>'+
-                    '<td>'+ ((element['cfd_achr_ces_we'] == null) ? '-' : element['cfd_achr_ces_we']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#AssessmentCenter_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAssessmentCenterForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAssessmentCenterForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/assessment-center/delete/' + element['id'] + '`, `updateAssessmentCenterTable`, `resetAssessmentCenterForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['an_achr_ces_we'] == null) ? '-' : element['an_achr_ces_we']) + '</td>' +
+                        '<td>' + ((element['ad_achr_ces_we'] == null) ? '-' : element['ad_achr_ces_we']) + '</td>' +
+                        '<td>' + ((element['r_achr_ces_we'] == null) ? '-' : element['r_achr_ces_we']) + '</td>' +
+                        '<td>' + ((element['cfd_achr_ces_we'] == null) ? '-' : element['cfd_achr_ces_we']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
 
                     // Update AC no. on profile details
@@ -2293,20 +2293,20 @@ function updateAssessmentCenterTable(){
 
 // Start of reseting Assessment Center Form
 
-function resetAssessmentCenterForm(id, option){
+function resetAssessmentCenterForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Eligibility and Rank Tracker/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var assessment_center_hr_form = document.forms['assessment_center_hr_form'];
 
-                    for(var i=0, assessment_center_hr_formLen = assessment_center_hr_form.length; i<assessment_center_hr_formLen; i++){
+                    for (var i = 0, assessment_center_hr_formLen = assessment_center_hr_form.length; i < assessment_center_hr_formLen; i++) {
                         assessment_center_hr_form.elements[i].disabled = false;
                     }
 
@@ -2317,7 +2317,7 @@ function resetAssessmentCenterForm(id, option){
                     $('#assessment_center_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#assessment_center_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#assessment_center_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#assessment_center_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/assessment-center/add`, `assessment_center_hr_form`, `Add`, `updateAssessmentCenterTable`, `resetAssessmentCenterForm`, `assessment_center_hr_form_submit`, `None`, `None`)');
@@ -2327,7 +2327,7 @@ function resetAssessmentCenterForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -2337,12 +2337,12 @@ function resetAssessmentCenterForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var assessment_center_hr_form = document.forms['assessment_center_hr_form'];
 
-                    for(var i=0, assessment_center_hr_formLen = assessment_center_hr_form.length; i<assessment_center_hr_formLen; i++){
+                    for (var i = 0, assessment_center_hr_formLen = assessment_center_hr_form.length; i < assessment_center_hr_formLen; i++) {
                         assessment_center_hr_form.elements[i].disabled = false;
                     }
 
@@ -2353,7 +2353,7 @@ function resetAssessmentCenterForm(id, option){
                     $('#assessment_center_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#assessment_center_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#assessment_center_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#assessment_center_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2362,12 +2362,12 @@ function resetAssessmentCenterForm(id, option){
                     $('#assessment_center_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/assessment-center/edit`, `assessment_center_hr_form`, `Update`, `updateAssessmentCenterTable`, `resetAssessmentCenterForm`, `assessment_center_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var assessment_center_hr_form = document.forms['assessment_center_hr_form'];
 
-                    for(var i=0, assessment_center_hr_formLen = assessment_center_hr_form.length; i<assessment_center_hr_formLen; i++){
+                    for (var i = 0, assessment_center_hr_formLen = assessment_center_hr_form.length; i < assessment_center_hr_formLen; i++) {
                         assessment_center_hr_form.elements[i].disabled = true;
                     }
 
@@ -2381,7 +2381,7 @@ function resetAssessmentCenterForm(id, option){
                     $('#cesno_assessment_center_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#assessment_center_hr_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#assessment_center_hr_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#assessment_center_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2413,7 +2413,7 @@ function resetAssessmentCenterForm(id, option){
 
 // Start of updating Validation Table
 
-function updateValidationHrTable(){
+function updateValidationHrTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2422,37 +2422,37 @@ function updateValidationHrTable(){
             // Empty Validation Table
             $("#ValidationHr_tbody").empty();
 
-            if(result.ValidationHr == ''){
+            if (result.ValidationHr == '') {
 
-                $('#ValidationHr_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#ValidationHr_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.ValidationHr.forEach(element => {
-                    $('#ValidationHr_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetValidationHrForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetValidationHrForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/validation-hr/delete/'+ element['id'] +'`, `updateValidationHrTable`, `resetValidationHrForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['vd_vhr_ces_we'] == null) ? '-' : element['vd_vhr_ces_we']) +'</td>'+
-                    '<td>'+ ((element['tov_vhr_ces_we'] == null) ? '-' : element['tov_vhr_ces_we']) +'</td>'+
-                    '<td>'+ ((element['r_vhr_ces_we'] == null) ? '-' : element['r_vhr_ces_we']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#ValidationHr_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetValidationHrForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetValidationHrForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/validation-hr/delete/' + element['id'] + '`, `updateValidationHrTable`, `resetValidationHrForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['vd_vhr_ces_we'] == null) ? '-' : element['vd_vhr_ces_we']) + '</td>' +
+                        '<td>' + ((element['tov_vhr_ces_we'] == null) ? '-' : element['tov_vhr_ces_we']) + '</td>' +
+                        '<td>' + ((element['r_vhr_ces_we'] == null) ? '-' : element['r_vhr_ces_we']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -2465,20 +2465,20 @@ function updateValidationHrTable(){
 
 // Start of reseting Validation Form
 
-function resetValidationHrForm(id, option){
+function resetValidationHrForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Eligibility and Rank Tracker/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var validation_hr_form = document.forms['validation_hr_form'];
 
-                    for(var i=0, validation_hr_formLen = validation_hr_form.length; i<validation_hr_formLen; i++){
+                    for (var i = 0, validation_hr_formLen = validation_hr_form.length; i < validation_hr_formLen; i++) {
                         validation_hr_form.elements[i].disabled = false;
                     }
 
@@ -2489,7 +2489,7 @@ function resetValidationHrForm(id, option){
                     $('#validation_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#validation_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#validation_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#validation_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/validation-hr/add`, `validation_hr_form`, `Add`, `updateValidationHrTable`, `resetValidationHrForm`, `validation_hr_form_submit`, `None`, `None`)');
@@ -2499,7 +2499,7 @@ function resetValidationHrForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -2509,12 +2509,12 @@ function resetValidationHrForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var validation_hr_form = document.forms['validation_hr_form'];
 
-                    for(var i=0, validation_hr_formLen = validation_hr_form.length; i<validation_hr_formLen; i++){
+                    for (var i = 0, validation_hr_formLen = validation_hr_form.length; i < validation_hr_formLen; i++) {
                         validation_hr_form.elements[i].disabled = false;
                     }
 
@@ -2525,7 +2525,7 @@ function resetValidationHrForm(id, option){
                     $('#validation_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#validation_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#validation_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#validation_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2534,12 +2534,12 @@ function resetValidationHrForm(id, option){
                     $('#validation_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/validation-hr/edit`, `validation_hr_form`, `Update`, `updateValidationHrTable`, `resetValidationHrForm`, `validation_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var validation_hr_form = document.forms['validation_hr_form'];
 
-                    for(var i=0, validation_hr_formLen = validation_hr_form.length; i<validation_hr_formLen; i++){
+                    for (var i = 0, validation_hr_formLen = validation_hr_form.length; i < validation_hr_formLen; i++) {
                         validation_hr_form.elements[i].disabled = true;
                     }
 
@@ -2553,7 +2553,7 @@ function resetValidationHrForm(id, option){
                     $('#cesno_validation_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#validation_hr_form_submit').val('Edit Record').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#validation_hr_form_submit').val('Edit Record').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#validation_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2584,7 +2584,7 @@ function resetValidationHrForm(id, option){
 
 // Start of updating Board Interview Table
 
-function updateBoardInterviewTable(){
+function updateBoardInterviewTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2593,35 +2593,35 @@ function updateBoardInterviewTable(){
             // Empty Board Interview Table
             $("#BoardInterview_tbody").empty();
 
-            if(result.BoardInterview == ''){
+            if (result.BoardInterview == '') {
 
-                $('#BoardInterview_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#BoardInterview_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.BoardInterview.forEach(element => {
-                    $('#BoardInterview_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetBoardInterviewForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetBoardInterviewForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/board-interview/delete/'+ element['id'] +'`, `updateBoardInterviewTable`, `resetBoardInterviewForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['bid_bi_ces_we'] == null) ? '-' : element['bid_bi_ces_we']) +'</td>'+
-                    '<td>'+ ((element['r_bi_ces_we'] == null) ? '-' : element['r_bi_ces_we']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#BoardInterview_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetBoardInterviewForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetBoardInterviewForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/board-interview/delete/' + element['id'] + '`, `updateBoardInterviewTable`, `resetBoardInterviewForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['bid_bi_ces_we'] == null) ? '-' : element['bid_bi_ces_we']) + '</td>' +
+                        '<td>' + ((element['r_bi_ces_we'] == null) ? '-' : element['r_bi_ces_we']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -2634,20 +2634,20 @@ function updateBoardInterviewTable(){
 
 // Start of reseting Board Interview Form
 
-function resetBoardInterviewForm(id, option){
+function resetBoardInterviewForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Eligibility and Rank Tracker/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var board_interview_hr_form = document.forms['board_interview_hr_form'];
 
-                    for(var i=0, board_interview_hr_formLen = board_interview_hr_form.length; i<board_interview_hr_formLen; i++){
+                    for (var i = 0, board_interview_hr_formLen = board_interview_hr_form.length; i < board_interview_hr_formLen; i++) {
                         board_interview_hr_form.elements[i].disabled = false;
                     }
 
@@ -2658,7 +2658,7 @@ function resetBoardInterviewForm(id, option){
                     $('#board_interview_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#board_interview_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#board_interview_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#board_interview_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/board-interview/add`, `board_interview_hr_form`, `Add`, `updateBoardInterviewTable`, `resetBoardInterviewForm`, `board_interview_hr_form_submit`, `None`, `None`)');
@@ -2668,7 +2668,7 @@ function resetBoardInterviewForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -2678,12 +2678,12 @@ function resetBoardInterviewForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var board_interview_hr_form = document.forms['board_interview_hr_form'];
 
-                    for(var i=0, board_interview_hr_formLen = board_interview_hr_form.length; i<board_interview_hr_formLen; i++){
+                    for (var i = 0, board_interview_hr_formLen = board_interview_hr_form.length; i < board_interview_hr_formLen; i++) {
                         board_interview_hr_form.elements[i].disabled = false;
                     }
 
@@ -2694,7 +2694,7 @@ function resetBoardInterviewForm(id, option){
                     $('#board_interview_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#board_interview_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#board_interview_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#board_interview_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2703,12 +2703,12 @@ function resetBoardInterviewForm(id, option){
                     $('#board_interview_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/board-interview/edit`, `board_interview_hr_form`, `Update`, `updateBoardInterviewTable`, `resetBoardInterviewForm`, `board_interview_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var board_interview_hr_form = document.forms['board_interview_hr_form'];
 
-                    for(var i=0, board_interview_hr_formLen = board_interview_hr_form.length; i<board_interview_hr_formLen; i++){
+                    for (var i = 0, board_interview_hr_formLen = board_interview_hr_form.length; i < board_interview_hr_formLen; i++) {
                         board_interview_hr_form.elements[i].disabled = true;
                     }
 
@@ -2722,7 +2722,7 @@ function resetBoardInterviewForm(id, option){
                     $('#cesno_board_interview_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#board_interview_hr_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#board_interview_hr_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#board_interview_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2752,7 +2752,7 @@ function resetBoardInterviewForm(id, option){
 
 // Start of updating Ces Status Table
 
-function updateCesStatusTable(){
+function updateCesStatusTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2761,46 +2761,46 @@ function updateCesStatusTable(){
             // Empty Ces Status Table
             $("#CesStatus_tbody").empty();
 
-            if(result.CesStatus == ''){
+            if (result.CesStatus == '') {
 
-                $('#CesStatus_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#CesStatus_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
 
                 // Update CES Status on profile details
                 $('#profile_ces_status').text('---');
             }
-            else{
+            else {
 
                 result.CesStatus.forEach(element => {
-                    $('#CesStatus_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesStatusForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesStatusForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/ces-status/delete/'+ element['id'] +'`, `updateCesStatusTable`, `resetCesStatusForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['cs_cs_ces_we'] == null) ? '-' : element['cs_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['at_cs_ces_we'] == null) ? '-' : element['at_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['st_cs_ces_we'] == null) ? '-' : element['st_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['aa_cs_ces_we'] == null) ? '-' : element['aa_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['rn_cs_ces_we'] == null) ? '-' : element['rn_cs_ces_we']) +'</td>'+
-                    '<td>'+ ((element['da_cs_ces_we'] == null) ? '-' : element['da_cs_ces_we']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#CesStatus_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesStatusForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.EligibilityAndRankTrackerEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesStatusForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.EligibilityAndRankTrackerDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/ces-status/delete/' + element['id'] + '`, `updateCesStatusTable`, `resetCesStatusForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['cs_cs_ces_we'] == null) ? '-' : element['cs_cs_ces_we']) + '</td>' +
+                        '<td>' + ((element['at_cs_ces_we'] == null) ? '-' : element['at_cs_ces_we']) + '</td>' +
+                        '<td>' + ((element['st_cs_ces_we'] == null) ? '-' : element['st_cs_ces_we']) + '</td>' +
+                        '<td>' + ((element['aa_cs_ces_we'] == null) ? '-' : element['aa_cs_ces_we']) + '</td>' +
+                        '<td>' + ((element['rn_cs_ces_we'] == null) ? '-' : element['rn_cs_ces_we']) + '</td>' +
+                        '<td>' + ((element['da_cs_ces_we'] == null) ? '-' : element['da_cs_ces_we']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
 
                     // Update CES Status on profile details
@@ -2816,20 +2816,20 @@ function updateCesStatusTable(){
 
 // Start of reseting Ces Status Form
 
-function resetCesStatusForm(id, option){
+function resetCesStatusForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Eligibility and Rank Tracker/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var ces_status_hr_form = document.forms['ces_status_hr_form'];
 
-                    for(var i=0, ces_status_hr_formLen = ces_status_hr_form.length; i<ces_status_hr_formLen; i++){
+                    for (var i = 0, ces_status_hr_formLen = ces_status_hr_form.length; i < ces_status_hr_formLen; i++) {
                         ces_status_hr_form.elements[i].disabled = false;
                     }
 
@@ -2840,7 +2840,7 @@ function resetCesStatusForm(id, option){
                     $('#ces_status_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ces_status_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ces_status_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#ces_status_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-status/add`, `ces_status_hr_form`, `Add`, `updateCesStatusTable`, `resetCesStatusForm`, `ces_status_hr_form_submit`, `None`, `None`)');
@@ -2850,7 +2850,7 @@ function resetCesStatusForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -2860,12 +2860,12 @@ function resetCesStatusForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var ces_status_hr_form = document.forms['ces_status_hr_form'];
 
-                    for(var i=0, ces_status_hr_formLen = ces_status_hr_form.length; i<ces_status_hr_formLen; i++){
+                    for (var i = 0, ces_status_hr_formLen = ces_status_hr_form.length; i < ces_status_hr_formLen; i++) {
                         ces_status_hr_form.elements[i].disabled = false;
                     }
 
@@ -2876,7 +2876,7 @@ function resetCesStatusForm(id, option){
                     $('#ces_status_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ces_status_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ces_status_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#ces_status_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -2885,12 +2885,12 @@ function resetCesStatusForm(id, option){
                     $('#ces_status_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-status/edit`, `ces_status_hr_form`, `Update`, `updateCesStatusTable`, `resetCesStatusForm`, `ces_status_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var ces_status_hr_form = document.forms['ces_status_hr_form'];
 
-                    for(var i=0, ces_status_hr_formLen = ces_status_hr_form.length; i<ces_status_hr_formLen; i++){
+                    for (var i = 0, ces_status_hr_formLen = ces_status_hr_form.length; i < ces_status_hr_formLen; i++) {
                         ces_status_hr_form.elements[i].disabled = true;
                     }
 
@@ -2904,7 +2904,7 @@ function resetCesStatusForm(id, option){
                     $('#cesno_ces_status_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#ces_status_hr_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#ces_status_hr_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#ces_status_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -2938,7 +2938,7 @@ function resetCesStatusForm(id, option){
 
 // Start of updating Record of Cespes Ratings Table
 
-function updateRecordOfCespesRatingsTable(){
+function updateRecordOfCespesRatingsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -2947,43 +2947,43 @@ function updateRecordOfCespesRatingsTable(){
             // Empty Record of Cespes Ratings Table
             $("#RecordOfCespesRatings_tbody").empty();
 
-            if(result.RecordOfCespesRatings == ''){
+            if (result.RecordOfCespesRatings == '') {
 
-                $('#RecordOfCespesRatings_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#RecordOfCespesRatings_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.RecordOfCespesRatings.forEach(element => {
-                    $('#RecordOfCespesRatings_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetRecordOfCespesRatingsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.RecordOfCespesRatingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetRecordOfCespesRatingsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.RecordOfCespesRatingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/record-of-cespes-ratings/delete/'+ element['id'] +'`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_from_rocr'] == null) ? '-' : element['date_from_rocr']) +'</td>'+
-                    '<td>'+ ((element['date_to_rocr'] == null) ? '-' : element['date_to_rocr']) +'</td>'+
-                    '<td>'+ ((element['rating_rocr'] == null) ? '-' : element['rating_rocr']) +'</td>'+
-                    '<td>'+ ((element['status_rocr'] == null) ? '-' : element['status_rocr']) +'</td>'+
-                    '<td>'+ ((element['remarks_rocr'] == null) ? '-' : element['remarks_rocr']) +'</td>'+
-                    '<td>'+ '<a href="'+ rootURL +'external-storage/PDF Documents/201 Folder/CESPES Certificate of Rating/'+ element['pdf_rating_certificate_rocr'] +'">'+ element['pdf_rating_certificate_rocr'] +'</a>' +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#RecordOfCespesRatings_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetRecordOfCespesRatingsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.RecordOfCespesRatingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetRecordOfCespesRatingsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.RecordOfCespesRatingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/record-of-cespes-ratings/delete/' + element['id'] + '`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_from_rocr'] == null) ? '-' : element['date_from_rocr']) + '</td>' +
+                        '<td>' + ((element['date_to_rocr'] == null) ? '-' : element['date_to_rocr']) + '</td>' +
+                        '<td>' + ((element['rating_rocr'] == null) ? '-' : element['rating_rocr']) + '</td>' +
+                        '<td>' + ((element['status_rocr'] == null) ? '-' : element['status_rocr']) + '</td>' +
+                        '<td>' + ((element['remarks_rocr'] == null) ? '-' : element['remarks_rocr']) + '</td>' +
+                        '<td>' + '<a href="' + rootURL + 'external-storage/PDF Documents/201 Folder/CESPES Certificate of Rating/' + element['pdf_rating_certificate_rocr'] + '">' + element['pdf_rating_certificate_rocr'] + '</a>' + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -2996,20 +2996,20 @@ function updateRecordOfCespesRatingsTable(){
 
 // Start of reseting Record of Cespes Ratings Form
 
-function resetRecordOfCespesRatingsForm(id, option){
+function resetRecordOfCespesRatingsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Record of CESPES Ratings/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var record_of_cespes_rating_hr_form = document.forms['record_of_cespes_rating_hr_form'];
 
-                    for(var i=0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i<record_of_cespes_rating_hr_formLen; i++){
+                    for (var i = 0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i < record_of_cespes_rating_hr_formLen; i++) {
                         record_of_cespes_rating_hr_form.elements[i].disabled = false;
                     }
 
@@ -3020,7 +3020,7 @@ function resetRecordOfCespesRatingsForm(id, option){
                     $('#record_of_cespes_rating_hr_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#record_of_cespes_rating_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#record_of_cespes_rating_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#record_of_cespes_rating_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/record-of-cespes-ratings/add`, `record_of_cespes_rating_hr_form`, `Add`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `record_of_cespes_rating_hr_form_submit`, `None`, `None`)');
@@ -3030,7 +3030,7 @@ function resetRecordOfCespesRatingsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3040,12 +3040,12 @@ function resetRecordOfCespesRatingsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var record_of_cespes_rating_hr_form = document.forms['record_of_cespes_rating_hr_form'];
 
-                    for(var i=0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i<record_of_cespes_rating_hr_formLen; i++){
+                    for (var i = 0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i < record_of_cespes_rating_hr_formLen; i++) {
                         record_of_cespes_rating_hr_form.elements[i].disabled = false;
                     }
 
@@ -3056,7 +3056,7 @@ function resetRecordOfCespesRatingsForm(id, option){
                     $('#record_of_cespes_rating_hr_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#record_of_cespes_rating_hr_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#record_of_cespes_rating_hr_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#record_of_cespes_rating_hr_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3065,12 +3065,12 @@ function resetRecordOfCespesRatingsForm(id, option){
                     $('#record_of_cespes_rating_hr_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/record-of-cespes-ratings/edit`, `record_of_cespes_rating_hr_form`, `Update`, `updateRecordOfCespesRatingsTable`, `resetRecordOfCespesRatingsForm`, `record_of_cespes_rating_hr_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var record_of_cespes_rating_hr_form = document.forms['record_of_cespes_rating_hr_form'];
 
-                    for(var i=0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i<record_of_cespes_rating_hr_formLen; i++){
+                    for (var i = 0, record_of_cespes_rating_hr_formLen = record_of_cespes_rating_hr_form.length; i < record_of_cespes_rating_hr_formLen; i++) {
                         record_of_cespes_rating_hr_form.elements[i].disabled = true;
                     }
 
@@ -3084,7 +3084,7 @@ function resetRecordOfCespesRatingsForm(id, option){
                     $('#cesno_record_of_cespes_rating_hr_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#record_of_cespes_rating_hr_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#record_of_cespes_rating_hr_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#record_of_cespes_rating_hr_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -3117,7 +3117,7 @@ function resetRecordOfCespesRatingsForm(id, option){
 
 // Start of updating Work Experience Table
 
-function updateWorkExperienceTable(){
+function updateWorkExperienceTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -3126,51 +3126,51 @@ function updateWorkExperienceTable(){
             // Empty Work Experience Table
             $("#WorkExperience_tbody").empty();
 
-            if(result.WorkExperience == ''){
+            if (result.WorkExperience == '') {
 
-                $('#WorkExperience_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#WorkExperience_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.WorkExperience.forEach(element => {
-                    $('#WorkExperience_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetWorkExperienceForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.WorkExperienceEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetWorkExperienceForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.WorkExperienceDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/work-experience/delete/'+ element['id'] +'`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_from_work_experience'] == null) ? '-' : element['date_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['date_to_work_experience'] == null) ? '-' : element['date_to_work_experience']) +'</td>'+
-                    '<td>'+ ((element['destination_from_work_experience'] == null) ? '-' : element['destination_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['status_from_work_experience'] == null) ? '-' : element['status_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['salary_from_work_experience'] == null) ? '-' : element['salary_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['salary_job_pay_grade_work_experience'] == null) ? '-' : element['salary_job_pay_grade_work_experience']) +'</td>'+
-                    '<td>'+ ((element['status_of_appointment_work_experience'] == null) ? '-' : element['status_of_appointment_work_experience']) +'</td>'+
-                    '<td>'+ ((element['government_service_work_experience'] == null) ? '-' : element['government_service_work_experience']) +'</td>'+
-                    '<td>'+ ((element['department_from_work_experience'] == null) ? '-' : element['department_from_work_experience']) +'</td>'+
-                    '<td>'+ ((element['remarks_from_work_experience'] == null) ? '-' : element['remarks_from_work_experience']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#WorkExperience_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetWorkExperienceForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.WorkExperienceEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetWorkExperienceForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.WorkExperienceDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/work-experience/delete/' + element['id'] + '`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_from_work_experience'] == null) ? '-' : element['date_from_work_experience']) + '</td>' +
+                        '<td>' + ((element['date_to_work_experience'] == null) ? '-' : element['date_to_work_experience']) + '</td>' +
+                        '<td>' + ((element['destination_from_work_experience'] == null) ? '-' : element['destination_from_work_experience']) + '</td>' +
+                        '<td>' + ((element['status_from_work_experience'] == null) ? '-' : element['status_from_work_experience']) + '</td>' +
+                        '<td>' + ((element['salary_from_work_experience'] == null) ? '-' : element['salary_from_work_experience']) + '</td>' +
+                        '<td>' + ((element['salary_job_pay_grade_work_experience'] == null) ? '-' : element['salary_job_pay_grade_work_experience']) + '</td>' +
+                        '<td>' + ((element['status_of_appointment_work_experience'] == null) ? '-' : element['status_of_appointment_work_experience']) + '</td>' +
+                        '<td>' + ((element['government_service_work_experience'] == null) ? '-' : element['government_service_work_experience']) + '</td>' +
+                        '<td>' + ((element['department_from_work_experience'] == null) ? '-' : element['department_from_work_experience']) + '</td>' +
+                        '<td>' + ((element['remarks_from_work_experience'] == null) ? '-' : element['remarks_from_work_experience']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -3183,20 +3183,20 @@ function updateWorkExperienceTable(){
 
 // Start of reseting Work Experience Form
 
-function resetWorkExperienceForm(id, option){
+function resetWorkExperienceForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Work Experience/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var work_experience_form = document.forms['work_experience_form'];
 
-                    for(var i=0, work_experience_formLen = work_experience_form.length; i<work_experience_formLen; i++){
+                    for (var i = 0, work_experience_formLen = work_experience_form.length; i < work_experience_formLen; i++) {
                         work_experience_form.elements[i].disabled = false;
                     }
 
@@ -3207,7 +3207,7 @@ function resetWorkExperienceForm(id, option){
                     $('#work_experience_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#work_experience_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#work_experience_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#work_experience_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/work-experience/add`, `work_experience_form`, `Add`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `work_experience_form_submit`, `None`, `None`)');
@@ -3217,7 +3217,7 @@ function resetWorkExperienceForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3227,12 +3227,12 @@ function resetWorkExperienceForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var work_experience_form = document.forms['work_experience_form'];
 
-                    for(var i=0, work_experience_formLen = work_experience_form.length; i<work_experience_formLen; i++){
+                    for (var i = 0, work_experience_formLen = work_experience_form.length; i < work_experience_formLen; i++) {
                         work_experience_form.elements[i].disabled = false;
                     }
 
@@ -3243,7 +3243,7 @@ function resetWorkExperienceForm(id, option){
                     $('#work_experience_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#work_experience_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#work_experience_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#work_experience_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3252,12 +3252,12 @@ function resetWorkExperienceForm(id, option){
                     $('#work_experience_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/work-experience/edit`, `work_experience_form`, `Update`, `updateWorkExperienceTable`, `resetWorkExperienceForm`, `work_experience_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var work_experience_form = document.forms['work_experience_form'];
 
-                    for(var i=0, work_experience_formLen = work_experience_form.length; i<work_experience_formLen; i++){
+                    for (var i = 0, work_experience_formLen = work_experience_form.length; i < work_experience_formLen; i++) {
                         work_experience_form.elements[i].disabled = true;
                     }
 
@@ -3271,7 +3271,7 @@ function resetWorkExperienceForm(id, option){
                     $('#cesno_work_experience_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#work_experience_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#work_experience_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#work_experience_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -3309,7 +3309,7 @@ function resetWorkExperienceForm(id, option){
 
 // Start of updating Field Expertise Table
 
-function updateFieldExpertiseTable(){
+function updateFieldExpertiseTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -3318,35 +3318,35 @@ function updateFieldExpertiseTable(){
             // Empty Field Expertise Table
             $("#FieldExpertise_tbody").empty();
 
-            if(result.FieldExpertise == ''){
+            if (result.FieldExpertise == '') {
 
-                $('#FieldExpertise_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#FieldExpertise_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.FieldExpertise.forEach(element => {
-                    $('#FieldExpertise_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetFieldExpertiseForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.FieldExpertiseEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetFieldExpertiseForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.FieldExpertiseDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/field-expertise/delete/'+ element['id'] +'`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['ec_field_expertise'] == null) ? '-' : element['ec_field_expertise']) +'</td>'+
-                    '<td>'+ ((element['ss_field_expertise'] == null) ? '-' : element['ss_field_expertise']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#FieldExpertise_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetFieldExpertiseForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.FieldExpertiseEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetFieldExpertiseForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.FieldExpertiseDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/field-expertise/delete/' + element['id'] + '`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['ec_field_expertise'] == null) ? '-' : element['ec_field_expertise']) + '</td>' +
+                        '<td>' + ((element['ss_field_expertise'] == null) ? '-' : element['ss_field_expertise']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -3359,20 +3359,20 @@ function updateFieldExpertiseTable(){
 
 // Start of reseting Field Expertise Form
 
-function resetFieldExpertiseForm(id, option){
+function resetFieldExpertiseForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Records of Field of Expertise or Specialization/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var field_expertise_form = document.forms['field_expertise_form'];
 
-                    for(var i=0, field_expertise_formLen = field_expertise_form.length; i<field_expertise_formLen; i++){
+                    for (var i = 0, field_expertise_formLen = field_expertise_form.length; i < field_expertise_formLen; i++) {
                         field_expertise_form.elements[i].disabled = false;
                     }
 
@@ -3383,7 +3383,7 @@ function resetFieldExpertiseForm(id, option){
                     $('#field_expertise_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#field_expertise_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#field_expertise_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#field_expertise_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/field-expertise/add`, `field_expertise_form`, `Add`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `field_expertise_form_submit`, `None`, `None`)');
@@ -3393,7 +3393,7 @@ function resetFieldExpertiseForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3403,12 +3403,12 @@ function resetFieldExpertiseForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var field_expertise_form = document.forms['field_expertise_form'];
 
-                    for(var i=0, field_expertise_formLen = field_expertise_form.length; i<field_expertise_formLen; i++){
+                    for (var i = 0, field_expertise_formLen = field_expertise_form.length; i < field_expertise_formLen; i++) {
                         field_expertise_form.elements[i].disabled = false;
                     }
 
@@ -3419,7 +3419,7 @@ function resetFieldExpertiseForm(id, option){
                     $('#field_expertise_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#field_expertise_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#field_expertise_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#field_expertise_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3428,12 +3428,12 @@ function resetFieldExpertiseForm(id, option){
                     $('#field_expertise_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/field-expertise/edit`, `field_expertise_form`, `Update`, `updateFieldExpertiseTable`, `resetFieldExpertiseForm`, `field_expertise_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var field_expertise_form = document.forms['field_expertise_form'];
 
-                    for(var i=0, field_expertise_formLen = field_expertise_form.length; i<field_expertise_formLen; i++){
+                    for (var i = 0, field_expertise_formLen = field_expertise_form.length; i < field_expertise_formLen; i++) {
                         field_expertise_form.elements[i].disabled = true;
                     }
 
@@ -3447,7 +3447,7 @@ function resetFieldExpertiseForm(id, option){
                     $('#cesno_field_expertise_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#field_expertise_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#field_expertise_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#field_expertise_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -3477,7 +3477,7 @@ function resetFieldExpertiseForm(id, option){
 
 // Start of updating Ces Trainings Table
 
-function updateCesTrainingsTable(){
+function updateCesTrainingsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -3486,57 +3486,57 @@ function updateCesTrainingsTable(){
             // Empty Ces Trainings Table
             $("#CesTrainings_tbody").empty();
 
-            if(result.CesTrainings == ''){
+            if (result.CesTrainings == '') {
 
-                $('#CesTrainings_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#CesTrainings_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.CesTrainings.forEach(element => {
-                    $('#CesTrainings_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesTrainingsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.CesTrainingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesTrainingsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.CesTrainingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/ces-trainings/delete/'+ element['id'] +'`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['s_title_ces_trainings'] == null) ? '-' : element['s_title_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['s_no_ces_trainings'] == null) ? '-' : element['s_no_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['training_category_ces_trainings'] == null) ? '-' : element['training_category_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['fos_ces_trainings'] == null) ? '-' : element['fos_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['venue_ces_trainings'] == null) ? '-' : element['venue_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['noh_ces_trainings'] == null) ? '-' : element['noh_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['barrio_ces_trainings'] == null) ? '-' : element['barrio_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['rs_ces_trainings'] == null) ? '-' : element['rs_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['sd_ces_trainings'] == null) ? '-' : element['sd_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['training_status_ces_trainings'] == null) ? '-' : element['training_status_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['remarks_ces_trainings'] == null) ? '-' : element['remarks_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['date_f_ces_trainings'] == null) ? '-' : element['date_f_ces_trainings']) +'</td>'+
-                    '<td>'+ ((element['date_t_ces_trainings'] == null) ? '-' : element['date_t_ces_trainings']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#CesTrainings_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCesTrainingsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.CesTrainingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesTrainingsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.CesTrainingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/ces-trainings/delete/' + element['id'] + '`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['s_title_ces_trainings'] == null) ? '-' : element['s_title_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['s_no_ces_trainings'] == null) ? '-' : element['s_no_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['training_category_ces_trainings'] == null) ? '-' : element['training_category_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['fos_ces_trainings'] == null) ? '-' : element['fos_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['venue_ces_trainings'] == null) ? '-' : element['venue_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['noh_ces_trainings'] == null) ? '-' : element['noh_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['barrio_ces_trainings'] == null) ? '-' : element['barrio_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['rs_ces_trainings'] == null) ? '-' : element['rs_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['sd_ces_trainings'] == null) ? '-' : element['sd_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['training_status_ces_trainings'] == null) ? '-' : element['training_status_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['remarks_ces_trainings'] == null) ? '-' : element['remarks_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['date_f_ces_trainings'] == null) ? '-' : element['date_f_ces_trainings']) + '</td>' +
+                        '<td>' + ((element['date_t_ces_trainings'] == null) ? '-' : element['date_t_ces_trainings']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -3549,20 +3549,20 @@ function updateCesTrainingsTable(){
 
 // Start of reseting Ces Trainings Form
 
-function resetCesTrainingsForm(id, option){
+function resetCesTrainingsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/CES Trainings/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var ces_trainings_form = document.forms['ces_trainings_form'];
 
-                    for(var i=0, ces_trainings_formLen = ces_trainings_form.length; i<ces_trainings_formLen; i++){
+                    for (var i = 0, ces_trainings_formLen = ces_trainings_form.length; i < ces_trainings_formLen; i++) {
                         ces_trainings_form.elements[i].disabled = false;
                     }
 
@@ -3573,7 +3573,7 @@ function resetCesTrainingsForm(id, option){
                     $('#ces_trainings_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ces_trainings_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ces_trainings_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#ces_trainings_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-trainings/add`, `ces_trainings_form`, `Add`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `ces_trainings_form_submit`, `None`, `None`)');
@@ -3583,7 +3583,7 @@ function resetCesTrainingsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3593,12 +3593,12 @@ function resetCesTrainingsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var ces_trainings_form = document.forms['ces_trainings_form'];
 
-                    for(var i=0, ces_trainings_formLen = ces_trainings_form.length; i<ces_trainings_formLen; i++){
+                    for (var i = 0, ces_trainings_formLen = ces_trainings_form.length; i < ces_trainings_formLen; i++) {
                         ces_trainings_form.elements[i].disabled = false;
                     }
 
@@ -3609,7 +3609,7 @@ function resetCesTrainingsForm(id, option){
                     $('#ces_trainings_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#ces_trainings_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#ces_trainings_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#ces_trainings_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3618,12 +3618,12 @@ function resetCesTrainingsForm(id, option){
                     $('#ces_trainings_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/ces-trainings/edit`, `ces_trainings_form`, `Update`, `updateCesTrainingsTable`, `resetCesTrainingsForm`, `ces_trainings_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var ces_trainings_form = document.forms['ces_trainings_form'];
 
-                    for(var i=0, ces_trainings_formLen = ces_trainings_form.length; i<ces_trainings_formLen; i++){
+                    for (var i = 0, ces_trainings_formLen = ces_trainings_form.length; i < ces_trainings_formLen; i++) {
                         ces_trainings_form.elements[i].disabled = true;
                     }
 
@@ -3637,7 +3637,7 @@ function resetCesTrainingsForm(id, option){
                     $('#cesno_ces_trainings_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#ces_trainings_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#ces_trainings_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#ces_trainings_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -3678,7 +3678,7 @@ function resetCesTrainingsForm(id, option){
 
 // Start of updating Other Trainings Table
 
-function updateOtherManagementTrainingsTable(){
+function updateOtherManagementTrainingsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -3687,47 +3687,47 @@ function updateOtherManagementTrainingsTable(){
             // Empty Other Trainings Table
             $("#OtherManagementTrainings_tbody").empty();
 
-            if(result.OtherManagementTrainings == ''){
+            if (result.OtherManagementTrainings == '') {
 
-                $('#OtherManagementTrainings_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#OtherManagementTrainings_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.OtherManagementTrainings.forEach(element => {
-                    $('#OtherManagementTrainings_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetOtherManagementTrainingsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.OtherManagementTrainingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetOtherManagementTrainingsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.OtherManagementTrainingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/other-management-trainings/delete/'+ element['id'] +'`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_f_onat'] == null) ? '-' : element['date_f_onat']) +'</td>'+
-                    '<td>'+ ((element['date_t_onat'] == null) ? '-' : element['date_t_onat']) +'</td>'+
-                    '<td>'+ ((element['title_traning_onat'] == null) ? '-' : element['title_traning_onat']) +'</td>'+
-                    '<td>'+ ((element['training_category_onat'] == null) ? '-' : element['training_category_onat']) +'</td>'+
-                    '<td>'+ ((element['expertise_fos_onat'] == null) ? '-' : element['expertise_fos_onat']) +'</td>'+
-                    '<td>'+ ((element['sponsor_tp_onat'] == null) ? '-' : element['sponsor_tp_onat']) +'</td>'+
-                    '<td>'+ ((element['vanue_onat'] == null) ? '-' : element['vanue_onat']) +'</td>'+
-                    '<td>'+ ((element['no_training_hours_omt'] == null) ? '-' : element['no_training_hours_omt']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#OtherManagementTrainings_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetOtherManagementTrainingsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.OtherManagementTrainingsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetOtherManagementTrainingsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.OtherManagementTrainingsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/other-management-trainings/delete/' + element['id'] + '`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_f_onat'] == null) ? '-' : element['date_f_onat']) + '</td>' +
+                        '<td>' + ((element['date_t_onat'] == null) ? '-' : element['date_t_onat']) + '</td>' +
+                        '<td>' + ((element['title_traning_onat'] == null) ? '-' : element['title_traning_onat']) + '</td>' +
+                        '<td>' + ((element['training_category_onat'] == null) ? '-' : element['training_category_onat']) + '</td>' +
+                        '<td>' + ((element['expertise_fos_onat'] == null) ? '-' : element['expertise_fos_onat']) + '</td>' +
+                        '<td>' + ((element['sponsor_tp_onat'] == null) ? '-' : element['sponsor_tp_onat']) + '</td>' +
+                        '<td>' + ((element['vanue_onat'] == null) ? '-' : element['vanue_onat']) + '</td>' +
+                        '<td>' + ((element['no_training_hours_omt'] == null) ? '-' : element['no_training_hours_omt']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -3740,20 +3740,20 @@ function updateOtherManagementTrainingsTable(){
 
 // Start of reseting Other Trainings Form
 
-function resetOtherManagementTrainingsForm(id, option){
+function resetOtherManagementTrainingsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Other Non-CES Accredited Trainings/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var other_management_trainings_form = document.forms['other_management_trainings_form'];
 
-                    for(var i=0, other_management_trainings_formLen = other_management_trainings_form.length; i<other_management_trainings_formLen; i++){
+                    for (var i = 0, other_management_trainings_formLen = other_management_trainings_form.length; i < other_management_trainings_formLen; i++) {
                         other_management_trainings_form.elements[i].disabled = false;
                     }
 
@@ -3764,7 +3764,7 @@ function resetOtherManagementTrainingsForm(id, option){
                     $('#other_management_trainings_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#other_management_trainings_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#other_management_trainings_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#other_management_trainings_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/other-management-trainings/add`, `other_management_trainings_form`, `Add`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `other_management_trainings_form_submit`, `None`, `None`)');
@@ -3774,7 +3774,7 @@ function resetOtherManagementTrainingsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3784,12 +3784,12 @@ function resetOtherManagementTrainingsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var other_management_trainings_form = document.forms['other_management_trainings_form'];
 
-                    for(var i=0, other_management_trainings_formLen = other_management_trainings_form.length; i<other_management_trainings_formLen; i++){
+                    for (var i = 0, other_management_trainings_formLen = other_management_trainings_form.length; i < other_management_trainings_formLen; i++) {
                         other_management_trainings_form.elements[i].disabled = false;
                     }
 
@@ -3800,7 +3800,7 @@ function resetOtherManagementTrainingsForm(id, option){
                     $('#other_management_trainings_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#other_management_trainings_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#other_management_trainings_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#other_management_trainings_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3809,12 +3809,12 @@ function resetOtherManagementTrainingsForm(id, option){
                     $('#other_management_trainings_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/other-management-trainings/edit`, `other_management_trainings_form`, `Update`, `updateOtherManagementTrainingsTable`, `resetOtherManagementTrainingsForm`, `other_management_trainings_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var other_management_trainings_form = document.forms['other_management_trainings_form'];
 
-                    for(var i=0, other_management_trainings_formLen = other_management_trainings_form.length; i<other_management_trainings_formLen; i++){
+                    for (var i = 0, other_management_trainings_formLen = other_management_trainings_form.length; i < other_management_trainings_formLen; i++) {
                         other_management_trainings_form.elements[i].disabled = true;
                     }
 
@@ -3828,7 +3828,7 @@ function resetOtherManagementTrainingsForm(id, option){
                     $('#cesno_other_management_trainings_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#other_management_trainings_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#other_management_trainings_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#other_management_trainings_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -3864,7 +3864,7 @@ function resetOtherManagementTrainingsForm(id, option){
 
 // Start of updating Research And Studies Table
 
-function updateResearchAndStudiesTable(){
+function updateResearchAndStudiesTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -3873,39 +3873,39 @@ function updateResearchAndStudiesTable(){
             // Empty Research And Studies Table
             $("#ResearchAndStudies_tbody").empty();
 
-            if(result.ResearchAndStudies == ''){
+            if (result.ResearchAndStudies == '') {
 
-                $('#ResearchAndStudies_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#ResearchAndStudies_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.ResearchAndStudies.forEach(element => {
-                    $('#ResearchAndStudies_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetResearchAndStudiesForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.ResearchAndStudiesEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetResearchAndStudiesForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.ResearchAndStudiesDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/research-and-studies/delete/'+ element['id'] +'`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_f_ras'] == null) ? '-' : element['date_f_ras']) +'</td>'+
-                    '<td>'+ ((element['date_t_ras'] == null) ? '-' : element['date_t_ras']) +'</td>'+
-                    '<td>'+ ((element['title_ras'] == null) ? '-' : element['title_ras']) +'</td>'+
-                    '<td>'+ ((element['publisher_ras'] == null) ? '-' : element['publisher_ras']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#ResearchAndStudies_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetResearchAndStudiesForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.ResearchAndStudiesEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetResearchAndStudiesForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.ResearchAndStudiesDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/research-and-studies/delete/' + element['id'] + '`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_f_ras'] == null) ? '-' : element['date_f_ras']) + '</td>' +
+                        '<td>' + ((element['date_t_ras'] == null) ? '-' : element['date_t_ras']) + '</td>' +
+                        '<td>' + ((element['title_ras'] == null) ? '-' : element['title_ras']) + '</td>' +
+                        '<td>' + ((element['publisher_ras'] == null) ? '-' : element['publisher_ras']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -3918,20 +3918,20 @@ function updateResearchAndStudiesTable(){
 
 // Start of reseting Research And Studies Form
 
-function resetResearchAndStudiesForm(id, option){
+function resetResearchAndStudiesForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Research and Studies/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var research_and_studies_form = document.forms['research_and_studies_form'];
 
-                    for(var i=0, research_and_studies_formLen = research_and_studies_form.length; i<research_and_studies_formLen; i++){
+                    for (var i = 0, research_and_studies_formLen = research_and_studies_form.length; i < research_and_studies_formLen; i++) {
                         research_and_studies_form.elements[i].disabled = false;
                     }
 
@@ -3942,7 +3942,7 @@ function resetResearchAndStudiesForm(id, option){
                     $('#research_and_studies_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#research_and_studies_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#research_and_studies_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#research_and_studies_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/research-and-studies/add`, `research_and_studies_form`, `Add`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `research_and_studies_form_submit`, `None`, `None`)');
@@ -3952,7 +3952,7 @@ function resetResearchAndStudiesForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -3962,12 +3962,12 @@ function resetResearchAndStudiesForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var research_and_studies_form = document.forms['research_and_studies_form'];
 
-                    for(var i=0, research_and_studies_formLen = research_and_studies_form.length; i<research_and_studies_formLen; i++){
+                    for (var i = 0, research_and_studies_formLen = research_and_studies_form.length; i < research_and_studies_formLen; i++) {
                         research_and_studies_form.elements[i].disabled = false;
                     }
 
@@ -3978,7 +3978,7 @@ function resetResearchAndStudiesForm(id, option){
                     $('#research_and_studies_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#research_and_studies_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#research_and_studies_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#research_and_studies_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -3987,12 +3987,12 @@ function resetResearchAndStudiesForm(id, option){
                     $('#research_and_studies_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/research-and-studies/edit`, `research_and_studies_form`, `Update`, `updateResearchAndStudiesTable`, `resetResearchAndStudiesForm`, `research_and_studies_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var research_and_studies_form = document.forms['research_and_studies_form'];
 
-                    for(var i=0, research_and_studies_formLen = research_and_studies_form.length; i<research_and_studies_formLen; i++){
+                    for (var i = 0, research_and_studies_formLen = research_and_studies_form.length; i < research_and_studies_formLen; i++) {
                         research_and_studies_form.elements[i].disabled = true;
                     }
 
@@ -4006,7 +4006,7 @@ function resetResearchAndStudiesForm(id, option){
                     $('#cesno_research_and_studies_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#research_and_studies_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#research_and_studies_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#research_and_studies_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4038,7 +4038,7 @@ function resetResearchAndStudiesForm(id, option){
 
 // Start of updating Scholarships Table
 
-function updateScholarshipsTable(){
+function updateScholarshipsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4047,41 +4047,41 @@ function updateScholarshipsTable(){
             // Empty Scholarships Table
             $("#Scholarships_tbody").empty();
 
-            if(result.Scholarships == ''){
+            if (result.Scholarships == '') {
 
-                $('#Scholarships_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#Scholarships_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.Scholarships.forEach(element => {
-                    $('#Scholarships_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetScholarshipsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.ScholarshipsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetScholarshipsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.ScholarshipsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/scholarships/delete/'+ element['id'] +'`, `updateScholarshipsTable`, `resetScholarshipsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_f_scholarships'] == null) ? '-' : element['date_f_scholarships']) +'</td>'+
-                    '<td>'+ ((element['date_t_scholarships'] == null) ? '-' : element['date_t_scholarships']) +'</td>'+
-                    '<td>'+ ((element['scholar_type_scholarships'] == null) ? '-' : element['scholar_type_scholarships']) +'</td>'+
-                    '<td>'+ ((element['title_scholarships'] == null) ? '-' : element['title_scholarships']) +'</td>'+
-                    '<td>'+ ((element['sponsor_scholarships'] == null) ? '-' : element['sponsor_scholarships']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#Scholarships_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetScholarshipsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.ScholarshipsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetScholarshipsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.ScholarshipsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/scholarships/delete/' + element['id'] + '`, `updateScholarshipsTable`, `resetScholarshipsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_f_scholarships'] == null) ? '-' : element['date_f_scholarships']) + '</td>' +
+                        '<td>' + ((element['date_t_scholarships'] == null) ? '-' : element['date_t_scholarships']) + '</td>' +
+                        '<td>' + ((element['scholar_type_scholarships'] == null) ? '-' : element['scholar_type_scholarships']) + '</td>' +
+                        '<td>' + ((element['title_scholarships'] == null) ? '-' : element['title_scholarships']) + '</td>' +
+                        '<td>' + ((element['sponsor_scholarships'] == null) ? '-' : element['sponsor_scholarships']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -4094,20 +4094,20 @@ function updateScholarshipsTable(){
 
 // Start of reseting Scholarships Form
 
-function resetScholarshipsForm(id, option){
+function resetScholarshipsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Scholarships Received/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var scholarships_form = document.forms['scholarships_form'];
 
-                    for(var i=0, scholarships_formLen = scholarships_form.length; i<scholarships_formLen; i++){
+                    for (var i = 0, scholarships_formLen = scholarships_form.length; i < scholarships_formLen; i++) {
                         scholarships_form.elements[i].disabled = false;
                     }
 
@@ -4118,7 +4118,7 @@ function resetScholarshipsForm(id, option){
                     $('#scholarships_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#scholarships_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#scholarships_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#scholarships_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/scholarships/add`, `scholarships_form`, `Add`, `updateScholarshipsTable`, `resetScholarshipsForm`, `scholarships_form_submit`, `None`, `None`)');
@@ -4128,7 +4128,7 @@ function resetScholarshipsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -4138,12 +4138,12 @@ function resetScholarshipsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var scholarships_form = document.forms['scholarships_form'];
 
-                    for(var i=0, scholarships_formLen = scholarships_form.length; i<scholarships_formLen; i++){
+                    for (var i = 0, scholarships_formLen = scholarships_form.length; i < scholarships_formLen; i++) {
                         scholarships_form.elements[i].disabled = false;
                     }
 
@@ -4154,7 +4154,7 @@ function resetScholarshipsForm(id, option){
                     $('#scholarships_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#scholarships_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#scholarships_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#scholarships_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -4163,12 +4163,12 @@ function resetScholarshipsForm(id, option){
                     $('#scholarships_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/scholarships/edit`, `scholarships_form`, `Update`, `updateScholarshipsTable`, `resetScholarshipsForm`, `scholarships_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var scholarships_form = document.forms['scholarships_form'];
 
-                    for(var i=0, scholarships_formLen = scholarships_form.length; i<scholarships_formLen; i++){
+                    for (var i = 0, scholarships_formLen = scholarships_form.length; i < scholarships_formLen; i++) {
                         scholarships_form.elements[i].disabled = true;
                     }
 
@@ -4182,7 +4182,7 @@ function resetScholarshipsForm(id, option){
                     $('#cesno_scholarships_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#scholarships_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#scholarships_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#scholarships_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4215,7 +4215,7 @@ function resetScholarshipsForm(id, option){
 
 // Start of updating Major Civic and Professional Affiliations Table
 
-function updateAffiliationsTable(){
+function updateAffiliationsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4224,39 +4224,39 @@ function updateAffiliationsTable(){
             // Empty Major Civic and Professional Affiliations Table
             $("#Affiliations_tbody").empty();
 
-            if(result.Affiliations == ''){
+            if (result.Affiliations == '') {
 
-                $('#Affiliations_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#Affiliations_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.Affiliations.forEach(element => {
-                    $('#Affiliations_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAffiliationsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.AffiliationsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAffiliationsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.AffiliationsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/major-civic-and-professional-affiliations/delete/'+ element['id'] +'`, `updateAffiliationsTable`, `resetAffiliationsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_f_mcapa'] == null) ? '-' : element['date_f_mcapa']) +'</td>'+
-                    '<td>'+ ((element['date_t_mcapa'] == null) ? '-' : element['date_t_mcapa']) +'</td>'+
-                    '<td>'+ ((element['organization_mcapa'] == null) ? '-' : element['organization_mcapa']) +'</td>'+
-                    '<td>'+ ((element['position_mcapa'] == null) ? '-' : element['position_mcapa']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#Affiliations_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAffiliationsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.AffiliationsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAffiliationsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.AffiliationsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/major-civic-and-professional-affiliations/delete/' + element['id'] + '`, `updateAffiliationsTable`, `resetAffiliationsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_f_mcapa'] == null) ? '-' : element['date_f_mcapa']) + '</td>' +
+                        '<td>' + ((element['date_t_mcapa'] == null) ? '-' : element['date_t_mcapa']) + '</td>' +
+                        '<td>' + ((element['organization_mcapa'] == null) ? '-' : element['organization_mcapa']) + '</td>' +
+                        '<td>' + ((element['position_mcapa'] == null) ? '-' : element['position_mcapa']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -4269,20 +4269,20 @@ function updateAffiliationsTable(){
 
 // Start of reseting Major Civic and Professional Affiliations Form
 
-function resetAffiliationsForm(id, option){
+function resetAffiliationsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Major Civic and Professional Affiliations/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var major_civic_and_professional_affiliations_form = document.forms['major_civic_and_professional_affiliations_form'];
 
-                    for(var i=0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i<major_civic_and_professional_affiliations_formLen; i++){
+                    for (var i = 0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i < major_civic_and_professional_affiliations_formLen; i++) {
                         major_civic_and_professional_affiliations_form.elements[i].disabled = false;
                     }
 
@@ -4293,7 +4293,7 @@ function resetAffiliationsForm(id, option){
                     $('#major_civic_and_professional_affiliations_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#major_civic_and_professional_affiliations_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#major_civic_and_professional_affiliations_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#major_civic_and_professional_affiliations_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/major-civic-and-professional-affiliations/add`, `major_civic_and_professional_affiliations_form`, `Add`, `updateAffiliationsTable`, `resetAffiliationsForm`, `major_civic_and_professional_affiliations_form_submit`, `None`, `None`)');
@@ -4303,7 +4303,7 @@ function resetAffiliationsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -4313,12 +4313,12 @@ function resetAffiliationsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var major_civic_and_professional_affiliations_form = document.forms['major_civic_and_professional_affiliations_form'];
 
-                    for(var i=0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i<major_civic_and_professional_affiliations_formLen; i++){
+                    for (var i = 0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i < major_civic_and_professional_affiliations_formLen; i++) {
                         major_civic_and_professional_affiliations_form.elements[i].disabled = false;
                     }
 
@@ -4329,7 +4329,7 @@ function resetAffiliationsForm(id, option){
                     $('#major_civic_and_professional_affiliations_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#major_civic_and_professional_affiliations_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#major_civic_and_professional_affiliations_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#major_civic_and_professional_affiliations_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -4338,12 +4338,12 @@ function resetAffiliationsForm(id, option){
                     $('#major_civic_and_professional_affiliations_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/major-civic-and-professional-affiliations/edit`, `major_civic_and_professional_affiliations_form`, `Update`, `updateAffiliationsTable`, `resetAffiliationsForm`, `major_civic_and_professional_affiliations_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var major_civic_and_professional_affiliations_form = document.forms['major_civic_and_professional_affiliations_form'];
 
-                    for(var i=0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i<major_civic_and_professional_affiliations_formLen; i++){
+                    for (var i = 0, major_civic_and_professional_affiliations_formLen = major_civic_and_professional_affiliations_form.length; i < major_civic_and_professional_affiliations_formLen; i++) {
                         major_civic_and_professional_affiliations_form.elements[i].disabled = true;
                     }
 
@@ -4357,7 +4357,7 @@ function resetAffiliationsForm(id, option){
                     $('#cesno_major_civic_and_professional_affiliations_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#major_civic_and_professional_affiliations_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#major_civic_and_professional_affiliations_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#major_civic_and_professional_affiliations_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4389,7 +4389,7 @@ function resetAffiliationsForm(id, option){
 
 // Start of updating Award And Citations Table
 
-function updateAwardAndCitationsTable(){
+function updateAwardAndCitationsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4398,37 +4398,37 @@ function updateAwardAndCitationsTable(){
             // Empty Award And Citations Table
             $("#AwardAndCitations_tbody").empty();
 
-            if(result.AwardAndCitations == ''){
+            if (result.AwardAndCitations == '') {
 
-                $('#AwardAndCitations_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#AwardAndCitations_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.AwardAndCitations.forEach(element => {
-                    $('#AwardAndCitations_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAwardAndCitationsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.AwardAndCitationsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAwardAndCitationsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.AwardAndCitationsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/award-and-citations/delete/'+ element['id'] +'`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['date_aac'] == null) ? '-' : element['date_aac']) +'</td>'+
-                    '<td>'+ ((element['title_of_award_aac'] == null) ? '-' : element['title_of_award_aac']) +'</td>'+
-                    '<td>'+ ((element['sponsor_aac'] == null) ? '-' : element['sponsor_aac']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#AwardAndCitations_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetAwardAndCitationsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.AwardAndCitationsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetAwardAndCitationsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.AwardAndCitationsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/award-and-citations/delete/' + element['id'] + '`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_aac'] == null) ? '-' : element['date_aac']) + '</td>' +
+                        '<td>' + ((element['title_of_award_aac'] == null) ? '-' : element['title_of_award_aac']) + '</td>' +
+                        '<td>' + ((element['sponsor_aac'] == null) ? '-' : element['sponsor_aac']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -4441,20 +4441,20 @@ function updateAwardAndCitationsTable(){
 
 // Start of reseting Award And Citations Form
 
-function resetAwardAndCitationsForm(id, option){
+function resetAwardAndCitationsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Awards and Citations Received/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var award_and_citations_form = document.forms['award_and_citations_form'];
 
-                    for(var i=0, award_and_citations_formLen = award_and_citations_form.length; i<award_and_citations_formLen; i++){
+                    for (var i = 0, award_and_citations_formLen = award_and_citations_form.length; i < award_and_citations_formLen; i++) {
                         award_and_citations_form.elements[i].disabled = false;
                     }
 
@@ -4465,7 +4465,7 @@ function resetAwardAndCitationsForm(id, option){
                     $('#award_and_citations_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#award_and_citations_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#award_and_citations_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#award_and_citations_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/award-and-citations/add`, `award_and_citations_form`, `Add`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `award_and_citations_form_submit`, `None`, `None`)');
@@ -4475,7 +4475,7 @@ function resetAwardAndCitationsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -4485,12 +4485,12 @@ function resetAwardAndCitationsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var award_and_citations_form = document.forms['award_and_citations_form'];
 
-                    for(var i=0, award_and_citations_formLen = award_and_citations_form.length; i<award_and_citations_formLen; i++){
+                    for (var i = 0, award_and_citations_formLen = award_and_citations_form.length; i < award_and_citations_formLen; i++) {
                         award_and_citations_form.elements[i].disabled = false;
                     }
 
@@ -4501,7 +4501,7 @@ function resetAwardAndCitationsForm(id, option){
                     $('#award_and_citations_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#award_and_citations_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#award_and_citations_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#award_and_citations_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -4510,12 +4510,12 @@ function resetAwardAndCitationsForm(id, option){
                     $('#award_and_citations_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/award-and-citations/edit`, `award_and_citations_form`, `Update`, `updateAwardAndCitationsTable`, `resetAwardAndCitationsForm`, `award_and_citations_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var award_and_citations_form = document.forms['award_and_citations_form'];
 
-                    for(var i=0, award_and_citations_formLen = award_and_citations_form.length; i<award_and_citations_formLen; i++){
+                    for (var i = 0, award_and_citations_formLen = award_and_citations_form.length; i < award_and_citations_formLen; i++) {
                         award_and_citations_form.elements[i].disabled = true;
                     }
 
@@ -4529,7 +4529,7 @@ function resetAwardAndCitationsForm(id, option){
                     $('#cesno_award_and_citations_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#award_and_citations_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#award_and_citations_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#award_and_citations_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4560,7 +4560,7 @@ function resetAwardAndCitationsForm(id, option){
 
 // Start of updating Case Records Table
 
-function updateCaseRecordsTable(){
+function updateCaseRecordsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4569,51 +4569,51 @@ function updateCaseRecordsTable(){
             // Empty Case Records Table
             $("#CaseRecords_tbody").empty();
 
-            if(result.CaseRecords == ''){
+            if (result.CaseRecords == '') {
 
-                $('#CaseRecords_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#CaseRecords_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.CaseRecords.forEach(element => {
-                    $('#CaseRecords_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCaseRecordsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.CaseRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCaseRecordsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.CaseRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/case-records/delete/'+ element['id'] +'`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['parties_case_records'] == null) ? '-' : element['parties_case_records']) +'</td>'+
-                    '<td>'+ ((element['offence_case_records'] == null) ? '-' : element['offence_case_records']) +'</td>'+
-                    '<td>'+ ((element['nature_case_records'] == null) ? '-' : element['nature_case_records']) +'</td>'+
-                    '<td>'+ ((element['case_no_case_records'] == null) ? '-' : element['case_no_case_records']) +'</td>'+
-                    '<td>'+ ((element['date_field_case_records'] == null) ? '-' : element['date_field_case_records']) +'</td>'+
-                    '<td>'+ ((element['vanue_case_records'] == null) ? '-' : element['vanue_case_records']) +'</td>'+
-                    '<td>'+ ((element['status_case_records'] == null) ? '-' : element['status_case_records']) +'</td>'+
-                    '<td>'+ ((element['dof_case_records'] == null) ? '-' : element['dof_case_records']) +'</td>'+
-                    '<td>'+ ((element['decision_case_records'] == null) ? '-' : element['decision_case_records']) +'</td>'+
-                    '<td>'+ ((element['remarks_case_records'] == null) ? '-' : element['remarks_case_records']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#CaseRecords_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetCaseRecordsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.CaseRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCaseRecordsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.CaseRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/case-records/delete/' + element['id'] + '`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['parties_case_records'] == null) ? '-' : element['parties_case_records']) + '</td>' +
+                        '<td>' + ((element['offence_case_records'] == null) ? '-' : element['offence_case_records']) + '</td>' +
+                        '<td>' + ((element['nature_case_records'] == null) ? '-' : element['nature_case_records']) + '</td>' +
+                        '<td>' + ((element['case_no_case_records'] == null) ? '-' : element['case_no_case_records']) + '</td>' +
+                        '<td>' + ((element['date_field_case_records'] == null) ? '-' : element['date_field_case_records']) + '</td>' +
+                        '<td>' + ((element['vanue_case_records'] == null) ? '-' : element['vanue_case_records']) + '</td>' +
+                        '<td>' + ((element['status_case_records'] == null) ? '-' : element['status_case_records']) + '</td>' +
+                        '<td>' + ((element['dof_case_records'] == null) ? '-' : element['dof_case_records']) + '</td>' +
+                        '<td>' + ((element['decision_case_records'] == null) ? '-' : element['decision_case_records']) + '</td>' +
+                        '<td>' + ((element['remarks_case_records'] == null) ? '-' : element['remarks_case_records']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -4626,20 +4626,20 @@ function updateCaseRecordsTable(){
 
 // Start of reseting Case Records Form
 
-function resetCaseRecordsForm(id, option){
+function resetCaseRecordsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Case Records/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var case_records_form = document.forms['case_records_form'];
 
-                    for(var i=0, case_records_formLen = case_records_form.length; i<case_records_formLen; i++){
+                    for (var i = 0, case_records_formLen = case_records_form.length; i < case_records_formLen; i++) {
                         case_records_form.elements[i].disabled = false;
                     }
 
@@ -4650,7 +4650,7 @@ function resetCaseRecordsForm(id, option){
                     $('#case_records_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#case_records_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#case_records_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#case_records_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/case-records/add`, `case_records_form`, `Add`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `case_records_form_submit`, `None`, `None`)');
@@ -4660,7 +4660,7 @@ function resetCaseRecordsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -4670,12 +4670,12 @@ function resetCaseRecordsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var case_records_form = document.forms['case_records_form'];
 
-                    for(var i=0, case_records_formLen = case_records_form.length; i<case_records_formLen; i++){
+                    for (var i = 0, case_records_formLen = case_records_form.length; i < case_records_formLen; i++) {
                         case_records_form.elements[i].disabled = false;
                     }
 
@@ -4686,7 +4686,7 @@ function resetCaseRecordsForm(id, option){
                     $('#case_records_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#case_records_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#case_records_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#case_records_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -4695,12 +4695,12 @@ function resetCaseRecordsForm(id, option){
                     $('#case_records_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/case-records/edit`, `case_records_form`, `Update`, `updateCaseRecordsTable`, `resetCaseRecordsForm`, `case_records_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var case_records_form = document.forms['case_records_form'];
 
-                    for(var i=0, case_records_formLen = case_records_form.length; i<case_records_formLen; i++){
+                    for (var i = 0, case_records_formLen = case_records_form.length; i < case_records_formLen; i++) {
                         case_records_form.elements[i].disabled = true;
                     }
 
@@ -4714,7 +4714,7 @@ function resetCaseRecordsForm(id, option){
                     $('#cesno_case_records_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#case_records_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#case_records_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Hide Go Back to Add Record button
                     $('#case_records_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4752,7 +4752,7 @@ function resetCaseRecordsForm(id, option){
 
 // Start of updating Health Records - Magna Carta Table
 
-function updateHealthRecordsTable(){
+function updateHealthRecordsTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4761,37 +4761,37 @@ function updateHealthRecordsTable(){
             // Empty Health Records - Magna Carta Table
             $("#HealthRecords_tbody").empty();
 
-            if(result.HealthRecords == ''){
+            if (result.HealthRecords == '') {
 
-                $('#HealthRecords_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#HealthRecords_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.HealthRecords.forEach(element => {
-                    $('#HealthRecords_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetHealthRecordsForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.HealthRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetHealthRecordsForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.HealthRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/health-records/delete/'+ element['id'] +'`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td>'+ ((element['mcfdpra_hr'] == null) ? '-' : element['mcfdpra_hr']) +'</td>'+
-                    '<td>'+ ((element['blood_type_hr'] == null) ? '-' : element['blood_type_hr']) +'</td>'+
-                    '<td>'+ ((element['identify_marks_hr'] == null) ? '-' : element['identify_marks_hr']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#HealthRecords_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetHealthRecordsForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.HealthRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetHealthRecordsForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.HealthRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/health-records/delete/' + element['id'] + '`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['mcfdpra_hr'] == null) ? '-' : element['mcfdpra_hr']) + '</td>' +
+                        '<td>' + ((element['blood_type_hr'] == null) ? '-' : element['blood_type_hr']) + '</td>' +
+                        '<td>' + ((element['identify_marks_hr'] == null) ? '-' : element['identify_marks_hr']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -4804,20 +4804,20 @@ function updateHealthRecordsTable(){
 
 // Start of reseting Health Records - Magna Carta Form
 
-function resetHealthRecordsForm(id, option){
+function resetHealthRecordsForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Health Record/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var health_records_magna_carta_for_disabled_persons_form = document.forms['health_records_magna_carta_for_disabled_persons_form'];
 
-                    for(var i=0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i<health_records_magna_carta_for_disabled_persons_formLen; i++){
+                    for (var i = 0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i < health_records_magna_carta_for_disabled_persons_formLen; i++) {
                         health_records_magna_carta_for_disabled_persons_form.elements[i].disabled = false;
                     }
 
@@ -4828,7 +4828,7 @@ function resetHealthRecordsForm(id, option){
                     $('#health_records_magna_carta_for_disabled_persons_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#health_records_magna_carta_for_disabled_persons_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#health_records_magna_carta_for_disabled_persons_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#health_records_magna_carta_for_disabled_persons_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/health-records/add`, `health_records_magna_carta_for_disabled_persons_form`, `Add`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `health_records_magna_carta_for_disabled_persons_form_submit`, `None`, `None`)');
@@ -4844,7 +4844,7 @@ function resetHealthRecordsForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -4854,34 +4854,34 @@ function resetHealthRecordsForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var health_records_magna_carta_for_disabled_persons_form = document.forms['health_records_magna_carta_for_disabled_persons_form'];
 
-                    for(var i=0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i<health_records_magna_carta_for_disabled_persons_formLen; i++){
+                    for (var i = 0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i < health_records_magna_carta_for_disabled_persons_formLen; i++) {
                         health_records_magna_carta_for_disabled_persons_form.elements[i].disabled = false;
                     }
 
                     // Disable "If (Magna Carta for Disabled Persons RA 7277)" drop down list if not checked
-                    $('#dhdTxtB').attr('disabled','disabled');
+                    $('#dhdTxtB').attr('disabled', 'disabled');
 
                     // Set or remove "Disabled" attribute in "If (Magna Carta for Disabled Persons RA 7277)" dropdown list
-                    $('#dhdCheckB').click(function(){
+                    $('#dhdCheckB').click(function () {
 
-                        if($('#dhdCheckB').is(':checked')){
+                        if ($('#dhdCheckB').is(':checked')) {
 
                             $('#dhdTxtB').removeAttr('disabled');
                         }
-                        else{
+                        else {
 
-                            $('#dhdTxtB').attr('disabled','disabled');
+                            $('#dhdTxtB').attr('disabled', 'disabled');
                         }
 
                     });
 
                     // Put checked on If (Magna Carta for Disabled Persons RA 7277) if there was selected item
-                    if($('#dhdTxtB option:selected').val() != ''){
+                    if ($('#dhdTxtB option:selected').val() != '') {
                         $('#dhdCheckB').attr('checked', 'checked');
                     }
 
@@ -4892,7 +4892,7 @@ function resetHealthRecordsForm(id, option){
                     $('#health_records_magna_carta_for_disabled_persons_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#health_records_magna_carta_for_disabled_persons_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#health_records_magna_carta_for_disabled_persons_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#health_records_magna_carta_for_disabled_persons_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -4901,12 +4901,12 @@ function resetHealthRecordsForm(id, option){
                     $('#health_records_magna_carta_for_disabled_persons_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/health-records/edit`, `health_records_magna_carta_for_disabled_persons_form`, `Update`, `updateHealthRecordsTable`, `resetHealthRecordsForm`, `health_records_magna_carta_for_disabled_persons_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var health_records_magna_carta_for_disabled_persons_form = document.forms['health_records_magna_carta_for_disabled_persons_form'];
 
-                    for(var i=0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i<health_records_magna_carta_for_disabled_persons_formLen; i++){
+                    for (var i = 0, health_records_magna_carta_for_disabled_persons_formLen = health_records_magna_carta_for_disabled_persons_form.length; i < health_records_magna_carta_for_disabled_persons_formLen; i++) {
                         health_records_magna_carta_for_disabled_persons_form.elements[i].disabled = true;
                     }
 
@@ -4926,7 +4926,7 @@ function resetHealthRecordsForm(id, option){
                     $('#cesno_health_records_magna_carta_for_disabled_persons_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#health_records_magna_carta_for_disabled_persons_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#health_records_magna_carta_for_disabled_persons_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#health_records_magna_carta_for_disabled_persons_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -4959,7 +4959,7 @@ function resetHealthRecordsForm(id, option){
 
 // Start of updating Health Records - Historical Record of Medical Condition Table
 
-function updateHistoricalRecordOfMedicalConditionTable(){
+function updateHistoricalRecordOfMedicalConditionTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -4968,37 +4968,37 @@ function updateHistoricalRecordOfMedicalConditionTable(){
             // Empty Health Records - Historical Record of Medical Condition Table
             $("#HistoricalRecordOfMedicalCondition_tbody").empty();
 
-            if(result.HistoricalRecordOfMedicalCondition == ''){
+            if (result.HistoricalRecordOfMedicalCondition == '') {
 
-                $('#HistoricalRecordOfMedicalCondition_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#HistoricalRecordOfMedicalCondition_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.HistoricalRecordOfMedicalCondition.forEach(element => {
-                    $('#HistoricalRecordOfMedicalCondition_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetHistoricalRecordOfMedicalConditionForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.HealthRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetHistoricalRecordOfMedicalConditionForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.HealthRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/historical-record-of-medical-condition/delete/'+ element['id'] +'`, `updateHistoricalRecordOfMedicalConditionTable`, `resetHistoricalRecordOfMedicalConditionForm`, `None`, `None`)">Delete</a>' : '')+
-                    '</td>'+
-                    '<td>'+ ((element['date_hronc'] == null) ? '-' : element['date_hronc']) +'</td>'+
-                    '<td>'+ ((element['mci_hronc'] == null) ? '-' : element['mci_hronc']) +'</td>'+
-                    '<td>'+ ((element['notes_hronc'] == null) ? '-' : element['notes_hronc']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() +'</td>'+
-                    '</tr>'
+                    $('#HistoricalRecordOfMedicalCondition_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetHistoricalRecordOfMedicalConditionForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.HealthRecordsEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetHistoricalRecordOfMedicalConditionForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.HealthRecordsDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/historical-record-of-medical-condition/delete/' + element['id'] + '`, `updateHistoricalRecordOfMedicalConditionTable`, `resetHistoricalRecordOfMedicalConditionForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td>' + ((element['date_hronc'] == null) ? '-' : element['date_hronc']) + '</td>' +
+                        '<td>' + ((element['mci_hronc'] == null) ? '-' : element['mci_hronc']) + '</td>' +
+                        '<td>' + ((element['notes_hronc'] == null) ? '-' : element['notes_hronc']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at'])).toLocaleString() + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -5011,20 +5011,20 @@ function updateHistoricalRecordOfMedicalConditionTable(){
 
 // Start of reseting Health Records - Historical Record of Medical Condition Form
 
-function resetHistoricalRecordOfMedicalConditionForm(id, option){
+function resetHistoricalRecordOfMedicalConditionForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Health Record/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var health_records_historical_record_of_medical_condition_form = document.forms['health_records_historical_record_of_medical_condition_form'];
 
-                    for(var i=0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i<health_records_historical_record_of_medical_condition_formLen; i++){
+                    for (var i = 0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i < health_records_historical_record_of_medical_condition_formLen; i++) {
                         health_records_historical_record_of_medical_condition_form.elements[i].disabled = false;
                     }
 
@@ -5035,7 +5035,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     $('#health_records_historical_record_of_medical_condition_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#health_records_historical_record_of_medical_condition_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#health_records_historical_record_of_medical_condition_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#health_records_historical_record_of_medical_condition_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/historical-record-of-medical-condition/add`, `health_records_historical_record_of_medical_condition_form`, `Add`, `updateHistoricalRecordOfMedicalConditionTable`, `resetHistoricalRecordOfMedicalConditionForm`, `health_records_historical_record_of_medical_condition_form_submit`, `None`, `None`)');
@@ -5045,7 +5045,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -5055,12 +5055,12 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var health_records_historical_record_of_medical_condition_form = document.forms['health_records_historical_record_of_medical_condition_form'];
 
-                    for(var i=0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i<health_records_historical_record_of_medical_condition_formLen; i++){
+                    for (var i = 0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i < health_records_historical_record_of_medical_condition_formLen; i++) {
                         health_records_historical_record_of_medical_condition_form.elements[i].disabled = false;
                     }
 
@@ -5071,7 +5071,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     $('#health_records_historical_record_of_medical_condition_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#health_records_historical_record_of_medical_condition_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#health_records_historical_record_of_medical_condition_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#health_records_historical_record_of_medical_condition_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -5080,12 +5080,12 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     $('#health_records_historical_record_of_medical_condition_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/historical-record-of-medical-condition/edit`, `health_records_historical_record_of_medical_condition_form`, `Update`, `updateHistoricalRecordOfMedicalConditionTable`, `resetHistoricalRecordOfMedicalConditionForm`, `health_records_historical_record_of_medical_condition_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var health_records_historical_record_of_medical_condition_form = document.forms['health_records_historical_record_of_medical_condition_form'];
 
-                    for(var i=0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i<health_records_historical_record_of_medical_condition_formLen; i++){
+                    for (var i = 0, health_records_historical_record_of_medical_condition_formLen = health_records_historical_record_of_medical_condition_form.length; i < health_records_historical_record_of_medical_condition_formLen; i++) {
                         health_records_historical_record_of_medical_condition_form.elements[i].disabled = true;
                     }
 
@@ -5099,7 +5099,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
                     $('#cesno_health_records_historical_record_of_medical_condition_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#health_records_historical_record_of_medical_condition_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#health_records_historical_record_of_medical_condition_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#health_records_historical_record_of_medical_condition_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -5130,7 +5130,7 @@ function resetHistoricalRecordOfMedicalConditionForm(id, option){
 
 // Start of updating PDF files Table
 
-function updatePdfFilesTable(){
+function updatePdfFilesTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/201-profile/record/' + cesno,
@@ -5139,41 +5139,41 @@ function updatePdfFilesTable(){
             // Empty PDF files Table
             $("#PDFFiles_tbody").empty();
 
-            if(result.PdfLinks == ''){
+            if (result.PdfLinks == '') {
 
-                $('#PDFFiles_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#PDFFiles_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.PdfLinks.forEach(element => {
-                    $('#PDFFiles_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetPdfFilesForm('+ element['id'] +',`View`)">View</a>'+
-                        ((result.PdfLinksEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPdfFilesForm('+ element['id'] +',`Edit`)">Edit</a>' : '') +
-                        ((result.PdfLinksDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/pdf-files/delete/'+ element['id'] +'`, `updatePdfFilesTable`, `resetPdfFilesForm`, `None`, `None`)">Delete</a>' : '') +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['relevant_path_pdf_files'] == null) ? '-' : element['relevant_path_pdf_files']) +'</td>'+
-                    '<td>'+ '<a href="'+ rootURL +'external-storage/'+ (((element['relevant_path_pdf_files'] == null) && (element['pdflink'] != null)) ? 'PDF Documents/201 Folder/' : element['relevant_path_pdf_files']) + element['pdflink'] +'">'+ element['pdflink'] +'</a>' +'</td>'+
-                    '<td>'+ ((element['validated'] == null) ? '-' : element['validated']) +'</td>'+
-                    '<td>'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleDateString()) +'</td>'+
-                    '<td>'+ ((element['remarks_pdf_files'] == null) ? '-' : element['remarks_pdf_files']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
-                    '</tr>'
+                    $('#PDFFiles_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-info" href="javascript:void(0);" onclick="resetPdfFilesForm(' + element['id'] + ',`View`)">View</a>' +
+                        ((result.PdfLinksEdit == 'true') ? '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPdfFilesForm(' + element['id'] + ',`Edit`)">Edit</a>' : '') +
+                        ((result.PdfLinksDelete == 'true') ? '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/pdf-files/delete/' + element['id'] + '`, `updatePdfFilesTable`, `resetPdfFilesForm`, `None`, `None`)">Delete</a>' : '') +
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['relevant_path_pdf_files'] == null) ? '-' : element['relevant_path_pdf_files']) + '</td>' +
+                        '<td>' + '<a href="' + rootURL + 'external-storage/' + (((element['relevant_path_pdf_files'] == null) && (element['pdflink'] != null)) ? 'PDF Documents/201 Folder/' : element['relevant_path_pdf_files']) + element['pdflink'] + '">' + element['pdflink'] + '</a>' + '</td>' +
+                        '<td>' + ((element['validated'] == null) ? '-' : element['validated']) + '</td>' +
+                        '<td>' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleDateString()) + '</td>' +
+                        '<td>' + ((element['remarks_pdf_files'] == null) ? '-' : element['remarks_pdf_files']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -5186,20 +5186,20 @@ function updatePdfFilesTable(){
 
 // Start of reseting PDF files Form
 
-function resetPdfFilesForm(id, option){
+function resetPdfFilesForm(id, option) {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/validate-user-executive-201-role-access/Attached PDF Files/Add',
         success: function (validation) {
 
-            if(id == null){
+            if (id == null) {
 
-                if(validation == 'true'){
+                if (validation == 'true') {
 
                     // Remove disabled attribute in all elements from form
                     var pdf_files_form = document.forms['pdf_files_form'];
 
-                    for(var i=0, pdf_files_formLen = pdf_files_form.length; i<pdf_files_formLen; i++){
+                    for (var i = 0, pdf_files_formLen = pdf_files_form.length; i < pdf_files_formLen; i++) {
                         pdf_files_form.elements[i].disabled = false;
                     }
 
@@ -5210,7 +5210,7 @@ function resetPdfFilesForm(id, option){
                     $('#pdf_files_form_submit').val('Add Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#pdf_files_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#pdf_files_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set onsubmit attribute on form tag to add mode
                     $('#pdf_files_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/pdf-files/add`, `pdf_files_form`, `Add`, `updatePdfFilesTable`, `resetPdfFilesForm`, `pdf_files_form_submit`, `None`, `None`)');
@@ -5220,7 +5220,7 @@ function resetPdfFilesForm(id, option){
 
                 }
             }
-            else{
+            else {
 
                 Swal.fire({
                     title: 'Populating Data...',
@@ -5230,12 +5230,12 @@ function resetPdfFilesForm(id, option){
                     allowOutsideClick: false
                 });
 
-                if(option == 'Edit'){
+                if (option == 'Edit') {
 
                     // Remove disabled attribute in all elements from form
                     var pdf_files_form = document.forms['pdf_files_form'];
 
-                    for(var i=0, pdf_files_formLen = pdf_files_form.length; i<pdf_files_formLen; i++){
+                    for (var i = 0, pdf_files_formLen = pdf_files_form.length; i < pdf_files_formLen; i++) {
                         pdf_files_form.elements[i].disabled = false;
                     }
 
@@ -5246,7 +5246,7 @@ function resetPdfFilesForm(id, option){
                     $('#pdf_files_form_submit').val('Edit Record').removeAttr('hidden disabled');
 
                     // Hide Go Back to Add Record button
-                    $('#pdf_files_form_go_back_to_add_record_button').attr('hidden','hidden');
+                    $('#pdf_files_form_go_back_to_add_record_button').attr('hidden', 'hidden');
 
                     // Set submit button button color to secondary
                     $('#pdf_files_form_submit').attr('class', 'btn btn-secondary mb-1');
@@ -5255,12 +5255,12 @@ function resetPdfFilesForm(id, option){
                     $('#pdf_files_form').attr(`onsubmit`, 'submitForm(`' + rootURL + 'api/v1/pdf-files/edit`, `pdf_files_form`, `Update`, `updatePdfFilesTable`, `resetPdfFilesForm`, `pdf_files_form_submit`, `None`, `None`)');
 
                 }
-                else if(option == 'View'){
+                else if (option == 'View') {
 
                     // Disabled all elements in form
                     var pdf_files_form = document.forms['pdf_files_form'];
 
-                    for(var i=0, pdf_files_formLen = pdf_files_form.length; i<pdf_files_formLen; i++){
+                    for (var i = 0, pdf_files_formLen = pdf_files_form.length; i < pdf_files_formLen; i++) {
                         pdf_files_form.elements[i].disabled = true;
                     }
 
@@ -5274,7 +5274,7 @@ function resetPdfFilesForm(id, option){
                     $('#cesno_pdf_files_id').val(id);
 
                     // Hide and disabled Add or Edit Record button
-                    $('#pdf_files_form_submit').attr({hidden: 'hidden', disabled: 'disabled'});
+                    $('#pdf_files_form_submit').attr({ hidden: 'hidden', disabled: 'disabled' });
 
                     // Remove hidden attribute in Go Back to Add Record button
                     $('#pdf_files_form_go_back_to_add_record_button').removeAttr('hidden');
@@ -5304,7 +5304,7 @@ function resetPdfFilesForm(id, option){
 
 // Start of updating CES Web App General Page Table
 
-function updateCesWebAppGeneralPageAccessTable(){
+function updateCesWebAppGeneralPageAccessTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/record',
@@ -5313,46 +5313,46 @@ function updateCesWebAppGeneralPageAccessTable(){
             // Empty CES Web App General Page Table
             $("#CesWebAppGeneralPageAccess_tbody").empty();
 
-            if(result.CesWebAppGeneralPageAccess == ''){
+            if (result.CesWebAppGeneralPageAccess == '') {
 
-                $('#CesWebAppGeneralPageAccess_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#CesWebAppGeneralPageAccess_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.CesWebAppGeneralPageAccess.forEach(element => {
 
                     pages = '';
                     element['ces_web_app_general_page_access'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            pages += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            pages += '<li>' + item + '</li>';
                         }
 
                     });
 
-                    $('#CesWebAppGeneralPageAccess_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesWebAppGeneralPageAccessForm('+ element['id'] +')">Edit</a>'+
-                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/ces-web-app-general-page-access/delete/'+ element['id'] +'`, `updateCesWebAppGeneralPageAccessTable`, `resetCesWebAppGeneralPageAccessForm`, `None`, `None`)">Delete</a>'+
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['role_name_ces_web_app_general_page'] == null) ? '-' : element['role_name_ces_web_app_general_page']) +'</td>'+
-                    '<td nowrap="nowrap">'+
+                    $('#CesWebAppGeneralPageAccess_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetCesWebAppGeneralPageAccessForm(' + element['id'] + ')">Edit</a>' +
+                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/ces-web-app-general-page-access/delete/' + element['id'] + '`, `updateCesWebAppGeneralPageAccessTable`, `resetCesWebAppGeneralPageAccessForm`, `None`, `None`)">Delete</a>' +
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['role_name_ces_web_app_general_page'] == null) ? '-' : element['role_name_ces_web_app_general_page']) + '</td>' +
+                        '<td nowrap="nowrap">' +
                         pages +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
-                    '</tr>'
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -5365,9 +5365,9 @@ function updateCesWebAppGeneralPageAccessTable(){
 
 // Start of reseting CES Web App General Page Form
 
-function resetCesWebAppGeneralPageAccessForm(id){
+function resetCesWebAppGeneralPageAccessForm(id) {
 
-    if(id == null){
+    if (id == null) {
 
         // Reset form
         $('#ces_web_app_general_page_form').trigger('reset');
@@ -5384,7 +5384,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
         // Set submit button button color to primary
         $('#ces_web_app_general_page_form_submit').attr('class', 'btn btn-primary mb-1');
     }
-    else{
+    else {
 
         Swal.fire({
             title: 'Populating Data...',
@@ -5398,7 +5398,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
         $('#ces_web_app_general_page_form').trigger('reset');
 
         // Disabled Rolename Dropdown list
-        $('#role_name_ces_web_app_general_page').attr('disabled','disabled');
+        $('#role_name_ces_web_app_general_page').attr('disabled', 'disabled');
 
         // Set submit button name to Edit Record
         $('#ces_web_app_general_page_form_submit').val('Edit Record');
@@ -5413,7 +5413,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
             url: rootURL + 'api/v1/ces-web-app-general-page-access/record/' + id,
             success: function (result) {
 
-                if(result == 'Restricted'){
+                if (result == 'Restricted') {
 
                     Swal.fire({
                         icon: 'error',
@@ -5422,7 +5422,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
                     });
 
                 }
-                else{
+                else {
 
                     result.forEach(element => {
 
@@ -5430,23 +5430,23 @@ function resetCesWebAppGeneralPageAccessForm(id){
 
                         element['ces_web_app_general_page_access'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Dashboard'){
+                            if (item != '') {
+                                if (item == 'Dashboard') {
                                     document.getElementsByName('general_page_dashboard')[0].checked = true;
                                 }
-                                else if(item == '201 Profiling'){
+                                else if (item == '201 Profiling') {
                                     document.getElementsByName('general_page_201_profiling')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla'){
+                                else if (item == 'Plantilla') {
                                     document.getElementsByName('general_page_plantilla')[0].checked = true;
                                 }
-                                else if(item == 'Reports'){
+                                else if (item == 'Reports') {
                                     document.getElementsByName('general_page_reports')[0].checked = true;
                                 }
-                                else if(item == 'Rights Management'){
+                                else if (item == 'Rights Management') {
                                     document.getElementsByName('general_page_rights_management')[0].checked = true;
                                 }
-                                else if(item == 'System Utility'){
+                                else if (item == 'System Utility') {
                                     document.getElementsByName('general_page_system_utility')[0].checked = true;
                                 }
                             }
@@ -5467,7 +5467,7 @@ function resetCesWebAppGeneralPageAccessForm(id){
 
 // Start of updating Executive 201 Access Table
 
-function updateExecutive201RoleAccessTable(){
+function updateExecutive201RoleAccessTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/record',
@@ -5476,46 +5476,46 @@ function updateExecutive201RoleAccessTable(){
             // Empty Executive 201 Access Table
             $("#Executive201RoleAccess_tbody").empty();
 
-            if(result.Executive201RoleAccess == ''){
+            if (result.Executive201RoleAccess == '') {
 
-                $('#Executive201RoleAccess_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#Executive201RoleAccess_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.Executive201RoleAccess.forEach(element => {
 
                     executive_201_page_access = '';
                     element['executive_201_page_access'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            executive_201_page_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            executive_201_page_access += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5523,8 +5523,8 @@ function updateExecutive201RoleAccessTable(){
                     personal_data_rights = '';
                     element['personal_data_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            personal_data_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            personal_data_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5532,8 +5532,8 @@ function updateExecutive201RoleAccessTable(){
                     family_background_profile_rights = '';
                     element['family_background_profile_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            family_background_profile_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            family_background_profile_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5541,8 +5541,8 @@ function updateExecutive201RoleAccessTable(){
                     educational_background_attainment_rights = '';
                     element['educational_background_attainment_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            educational_background_attainment_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            educational_background_attainment_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5550,8 +5550,8 @@ function updateExecutive201RoleAccessTable(){
                     examinations_taken_rights = '';
                     element['examinations_taken_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            examinations_taken_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            examinations_taken_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5559,8 +5559,8 @@ function updateExecutive201RoleAccessTable(){
                     language_dialects_rights = '';
                     element['language_dialects_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            language_dialects_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            language_dialects_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5568,8 +5568,8 @@ function updateExecutive201RoleAccessTable(){
                     eligibility_and_rank_tracker_rights = '';
                     element['eligibility_and_rank_tracker_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            eligibility_and_rank_tracker_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            eligibility_and_rank_tracker_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5577,8 +5577,8 @@ function updateExecutive201RoleAccessTable(){
                     record_of_cespes_ratings_rights = '';
                     element['record_of_cespes_ratings_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            record_of_cespes_ratings_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            record_of_cespes_ratings_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5586,8 +5586,8 @@ function updateExecutive201RoleAccessTable(){
                     work_experience_rights = '';
                     element['work_experience_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            work_experience_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            work_experience_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5595,8 +5595,8 @@ function updateExecutive201RoleAccessTable(){
                     records_of_field_of_expertise_specialization_rights = '';
                     element['records_of_field_of_expertise_specialization_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            records_of_field_of_expertise_specialization_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            records_of_field_of_expertise_specialization_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5604,8 +5604,8 @@ function updateExecutive201RoleAccessTable(){
                     ces_trainings_rights = '';
                     element['ces_trainings_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            ces_trainings_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            ces_trainings_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5613,8 +5613,8 @@ function updateExecutive201RoleAccessTable(){
                     other_non_ces_accredited_trainings_rights = '';
                     element['other_non_ces_accredited_trainings_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            other_non_ces_accredited_trainings_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            other_non_ces_accredited_trainings_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5622,8 +5622,8 @@ function updateExecutive201RoleAccessTable(){
                     research_and_studies_rights = '';
                     element['research_and_studies_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            research_and_studies_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            research_and_studies_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5631,8 +5631,8 @@ function updateExecutive201RoleAccessTable(){
                     scholarships_received_rights = '';
                     element['scholarships_received_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            scholarships_received_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            scholarships_received_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5640,8 +5640,8 @@ function updateExecutive201RoleAccessTable(){
                     major_civic_and_professional_affiliations_rights = '';
                     element['major_civic_and_professional_affiliations_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            major_civic_and_professional_affiliations_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            major_civic_and_professional_affiliations_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5649,8 +5649,8 @@ function updateExecutive201RoleAccessTable(){
                     awards_and_citations_received_rights = '';
                     element['awards_and_citations_received_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            awards_and_citations_received_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            awards_and_citations_received_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5658,8 +5658,8 @@ function updateExecutive201RoleAccessTable(){
                     case_records_rights = '';
                     element['case_records_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            case_records_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            case_records_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5667,8 +5667,8 @@ function updateExecutive201RoleAccessTable(){
                     health_record_rights = '';
                     element['health_record_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            health_record_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            health_record_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -5676,80 +5676,80 @@ function updateExecutive201RoleAccessTable(){
                     attached_pdf_files_rights = '';
                     element['attached_pdf_files_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            attached_pdf_files_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            attached_pdf_files_rights += '<li>' + item + '</li>';
                         }
 
                     });
 
-                    $('#Executive201RoleAccess_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetExecutive201RoleAccessForm('+ element['id'] +')">Edit</a>'+
-                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/executive-201-access/delete/'+ element['id'] +'`, `updateExecutive201RoleAccessTable`, `resetExecutive201RoleAccessForm`, `None`, `None`)">Delete</a>'+
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['role_name'] == null) ? '-' : element['role_name']) +'</td>'+
-                    '<td nowrap="nowrap">'+
+                    $('#Executive201RoleAccess_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetExecutive201RoleAccessForm(' + element['id'] + ')">Edit</a>' +
+                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/executive-201-access/delete/' + element['id'] + '`, `updateExecutive201RoleAccessTable`, `resetExecutive201RoleAccessForm`, `None`, `None`)">Delete</a>' +
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['role_name'] == null) ? '-' : element['role_name']) + '</td>' +
+                        '<td nowrap="nowrap">' +
                         executive_201_page_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         personal_data_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         family_background_profile_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         educational_background_attainment_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         examinations_taken_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         language_dialects_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         eligibility_and_rank_tracker_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         record_of_cespes_ratings_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         work_experience_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         records_of_field_of_expertise_specialization_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         ces_trainings_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         other_non_ces_accredited_trainings_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         research_and_studies_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         scholarships_received_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         major_civic_and_professional_affiliations_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         awards_and_citations_received_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         case_records_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         health_record_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         attached_pdf_files_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
-                    '</tr>'
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -5762,9 +5762,9 @@ function updateExecutive201RoleAccessTable(){
 
 // Start of reseting Executive 201 Access Form
 
-function resetExecutive201RoleAccessForm(id){
+function resetExecutive201RoleAccessForm(id) {
 
-    if(id == null){
+    if (id == null) {
 
         // Reset form
         $('#executive_201_form').trigger('reset');
@@ -5781,7 +5781,7 @@ function resetExecutive201RoleAccessForm(id){
         // Set submit button button color to primary
         $('#executive_201_form_submit').attr('class', 'btn btn-primary mb-1');
     }
-    else{
+    else {
 
         Swal.fire({
             title: 'Populating Data...',
@@ -5795,7 +5795,7 @@ function resetExecutive201RoleAccessForm(id){
         $('#executive_201_form').trigger('reset');
 
         // Disabled Rolename Dropdown list
-        $('#role_name').attr('disabled','disabled');
+        $('#role_name').attr('disabled', 'disabled');
 
         // Set submit button name to Edit Record
         $('#executive_201_form_submit').val('Edit Record');
@@ -5810,7 +5810,7 @@ function resetExecutive201RoleAccessForm(id){
             url: rootURL + 'api/v1/executive-201-access/record/' + id,
             success: function (result) {
 
-                if(result == 'Restricted'){
+                if (result == 'Restricted') {
 
                     Swal.fire({
                         icon: 'error',
@@ -5819,7 +5819,7 @@ function resetExecutive201RoleAccessForm(id){
                     });
 
                 }
-                else{
+                else {
 
                     result.forEach(element => {
 
@@ -5827,59 +5827,59 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['executive_201_page_access'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Personal Data'){
+                            if (item != '') {
+                                if (item == 'Personal Data') {
                                     document.getElementsByName('personal_data')[0].checked = true;
                                 }
-                                else if(item == 'Family Background Profile'){
+                                else if (item == 'Family Background Profile') {
                                     document.getElementsByName('family_background_profile')[0].checked = true;
                                 }
-                                else if(item == 'Educational Background or Attainment'){
+                                else if (item == 'Educational Background or Attainment') {
                                     document.getElementsByName('educational_background_attainment')[0].checked = true;
                                 }
-                                else if(item == 'Examinations Taken'){
+                                else if (item == 'Examinations Taken') {
                                     document.getElementsByName('examinations_taken')[0].checked = true;
                                 }
-                                else if(item == 'Language Dialects'){
+                                else if (item == 'Language Dialects') {
                                     document.getElementsByName('language_dialects')[0].checked = true;
                                 }
-                                else if(item == 'Eligibility and Rank Tracker'){
+                                else if (item == 'Eligibility and Rank Tracker') {
                                     document.getElementsByName('eligibility_and_rank_tracker')[0].checked = true;
                                 }
-                                else if(item == 'Record of CESPES Ratings'){
+                                else if (item == 'Record of CESPES Ratings') {
                                     document.getElementsByName('record_of_cespes_ratings')[0].checked = true;
                                 }
-                                else if(item == 'Work Experience'){
+                                else if (item == 'Work Experience') {
                                     document.getElementsByName('work_experience')[0].checked = true;
                                 }
-                                else if(item == 'Records of Field of Expertise or Specialization'){
+                                else if (item == 'Records of Field of Expertise or Specialization') {
                                     document.getElementsByName('records_of_field_of_expertise_specialization')[0].checked = true;
                                 }
-                                else if(item == 'CES Trainings'){
+                                else if (item == 'CES Trainings') {
                                     document.getElementsByName('ces_trainings')[0].checked = true;
                                 }
-                                else if(item == 'Other Non-CES Accredited Trainings'){
+                                else if (item == 'Other Non-CES Accredited Trainings') {
                                     document.getElementsByName('other_non_ces_accredited_trainings')[0].checked = true;
                                 }
-                                else if(item == 'Research and Studies'){
+                                else if (item == 'Research and Studies') {
                                     document.getElementsByName('research_and_studies')[0].checked = true;
                                 }
-                                else if(item == 'Scholarships Received'){
+                                else if (item == 'Scholarships Received') {
                                     document.getElementsByName('scholarships_received')[0].checked = true;
                                 }
-                                else if(item == 'Major Civic and Professional Affiliations'){
+                                else if (item == 'Major Civic and Professional Affiliations') {
                                     document.getElementsByName('major_civic_and_professional_affiliations')[0].checked = true;
                                 }
-                                else if(item == 'Awards and Citations Received'){
+                                else if (item == 'Awards and Citations Received') {
                                     document.getElementsByName('awards_and_citations_received')[0].checked = true;
                                 }
-                                else if(item == 'Case Records'){
+                                else if (item == 'Case Records') {
                                     document.getElementsByName('case_records')[0].checked = true;
                                 }
-                                else if(item == 'Health Record'){
+                                else if (item == 'Health Record') {
                                     document.getElementsByName('health_record')[0].checked = true;
                                 }
-                                else if(item == 'Attached PDF Files'){
+                                else if (item == 'Attached PDF Files') {
                                     document.getElementsByName('attached_pdf_files')[0].checked = true;
                                 }
 
@@ -5889,17 +5889,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['personal_data_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('personal_data_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('personal_data_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('personal_data_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('personal_data_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -5908,17 +5908,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['family_background_profile_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('family_background_profile_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('family_background_profile_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('family_background_profile_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('family_background_profile_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -5927,17 +5927,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['educational_background_attainment_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('educational_background_attainment_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('educational_background_attainment_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('educational_background_attainment_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('educational_background_attainment_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -5946,17 +5946,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['examinations_taken_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('examinations_taken_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('examinations_taken_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('examinations_taken_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('examinations_taken_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -5965,17 +5965,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['language_dialects_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('language_dialects_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('language_dialects_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('language_dialects_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('language_dialects_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -5984,17 +5984,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['eligibility_and_rank_tracker_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('eligibility_and_rank_tracker_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('eligibility_and_rank_tracker_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('eligibility_and_rank_tracker_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('eligibility_and_rank_tracker_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6003,17 +6003,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['record_of_cespes_ratings_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('record_of_cespes_ratings_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('record_of_cespes_ratings_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('record_of_cespes_ratings_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('record_of_cespes_ratings_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6022,17 +6022,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['work_experience_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('work_experience_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('work_experience_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('work_experience_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('work_experience_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6041,17 +6041,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['records_of_field_of_expertise_specialization_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('records_of_field_of_expertise_specialization_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('records_of_field_of_expertise_specialization_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('records_of_field_of_expertise_specialization_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('records_of_field_of_expertise_specialization_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6060,17 +6060,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['ces_trainings_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('ces_trainings_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('ces_trainings_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('ces_trainings_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('ces_trainings_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6079,17 +6079,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['other_non_ces_accredited_trainings_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('other_non_ces_accredited_trainings_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('other_non_ces_accredited_trainings_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('other_non_ces_accredited_trainings_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('other_non_ces_accredited_trainings_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6098,17 +6098,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['research_and_studies_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('research_and_studies_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('research_and_studies_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('research_and_studies_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('research_and_studies_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6117,17 +6117,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['scholarships_received_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('scholarships_received_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('scholarships_received_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('scholarships_received_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('scholarships_received_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6136,17 +6136,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['major_civic_and_professional_affiliations_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('major_civic_and_professional_affiliations_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('major_civic_and_professional_affiliations_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('major_civic_and_professional_affiliations_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('major_civic_and_professional_affiliations_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6155,17 +6155,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['awards_and_citations_received_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('awards_and_citations_received_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('awards_and_citations_received_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('awards_and_citations_received_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('awards_and_citations_received_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6174,17 +6174,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['case_records_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('case_records_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('case_records_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('case_records_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('case_records_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6193,17 +6193,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['health_record_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('health_record_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('health_record_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('health_record_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('health_record_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6212,17 +6212,17 @@ function resetExecutive201RoleAccessForm(id){
 
                         element['attached_pdf_files_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('attached_pdf_files_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('attached_pdf_files_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('attached_pdf_files_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('attached_pdf_files_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6242,7 +6242,7 @@ function resetExecutive201RoleAccessForm(id){
 
 // Start of updating Plantilla Manangement Access Table
 
-function updatePlantillaManangementAccessTable(){
+function updatePlantillaManangementAccessTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/record',
@@ -6251,37 +6251,37 @@ function updatePlantillaManangementAccessTable(){
             // Empty Plantilla Manangement Access Table
             $("#PlantillaManangementAccess_tbody").empty();
 
-            if(result.PlantillaManangementAccess == ''){
+            if (result.PlantillaManangementAccess == '') {
 
-                $('#PlantillaManangementAccess_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#PlantillaManangementAccess_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.PlantillaManangementAccess.forEach(element => {
 
                     plantilla_manangement_page_access = '';
                     element['plantilla_manangement_page_access'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            plantilla_manangement_page_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            plantilla_manangement_page_access += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6289,8 +6289,8 @@ function updatePlantillaManangementAccessTable(){
                     plantilla_management_main_screen_rights = '';
                     element['plantilla_management_main_screen_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            plantilla_management_main_screen_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            plantilla_management_main_screen_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6298,8 +6298,8 @@ function updatePlantillaManangementAccessTable(){
                     sector_manager_rights = '';
                     element['sector_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            sector_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            sector_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6307,8 +6307,8 @@ function updatePlantillaManangementAccessTable(){
                     department_agency_manager_rights = '';
                     element['department_agency_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            department_agency_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            department_agency_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6316,8 +6316,8 @@ function updatePlantillaManangementAccessTable(){
                     agency_location_manager_rights = '';
                     element['agency_location_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            agency_location_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            agency_location_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6325,8 +6325,8 @@ function updatePlantillaManangementAccessTable(){
                     office_manager_rights = '';
                     element['office_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            office_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            office_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6334,8 +6334,8 @@ function updatePlantillaManangementAccessTable(){
                     plantilla_position_manager_rights = '';
                     element['plantilla_position_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            plantilla_position_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            plantilla_position_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6343,8 +6343,8 @@ function updatePlantillaManangementAccessTable(){
                     plantilla_position_classification_manager_rights = '';
                     element['plantilla_position_classification_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            plantilla_position_classification_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            plantilla_position_classification_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6352,8 +6352,8 @@ function updatePlantillaManangementAccessTable(){
                     appointee_occupant_manager_rights = '';
                     element['appointee_occupant_manager_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            appointee_occupant_manager_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            appointee_occupant_manager_rights += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6361,53 +6361,53 @@ function updatePlantillaManangementAccessTable(){
                     plantilla_appointee_occupant_browser_rights = '';
                     element['plantilla_appointee_occupant_browser_rights'].split(',').forEach(item => {
 
-                        if(item != ''){
-                            plantilla_appointee_occupant_browser_rights += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            plantilla_appointee_occupant_browser_rights += '<li>' + item + '</li>';
                         }
 
                     });
 
-                    $('#PlantillaManangementAccess_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPlantillaManangementAccessForm('+ element['id'] +')">Edit</a>'+
-                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/plantilla-manangement-access/delete/'+ element['id'] +'`, `updatePlantillaManangementAccessTable`, `resetPlantillaManangementAccessForm`, `None`, `None`)">Delete</a>'+
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['role_name_plantilla_manangement'] == null) ? '-' : element['role_name_plantilla_manangement']) +'</td>'+
-                    '<td nowrap="nowrap">'+
+                    $('#PlantillaManangementAccess_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetPlantillaManangementAccessForm(' + element['id'] + ')">Edit</a>' +
+                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/plantilla-manangement-access/delete/' + element['id'] + '`, `updatePlantillaManangementAccessTable`, `resetPlantillaManangementAccessForm`, `None`, `None`)">Delete</a>' +
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['role_name_plantilla_manangement'] == null) ? '-' : element['role_name_plantilla_manangement']) + '</td>' +
+                        '<td nowrap="nowrap">' +
                         plantilla_manangement_page_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         plantilla_management_main_screen_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         sector_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         department_agency_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         agency_location_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         office_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         plantilla_position_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         plantilla_position_classification_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         appointee_occupant_manager_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         plantilla_appointee_occupant_browser_rights +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
-                    '</tr>'
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -6420,9 +6420,9 @@ function updatePlantillaManangementAccessTable(){
 
 // Start of reseting Plantilla Manangement Access Form
 
-function resetPlantillaManangementAccessForm(id){
+function resetPlantillaManangementAccessForm(id) {
 
-    if(id == null){
+    if (id == null) {
 
         // Reset form
         $('#plantilla_manangement_form').trigger('reset');
@@ -6439,7 +6439,7 @@ function resetPlantillaManangementAccessForm(id){
         // Set submit button button color to primary
         $('#plantilla_manangement_form_submit').attr('class', 'btn btn-primary mb-1');
     }
-    else{
+    else {
 
         Swal.fire({
             title: 'Populating Data...',
@@ -6453,7 +6453,7 @@ function resetPlantillaManangementAccessForm(id){
         $('#plantilla_manangement_form').trigger('reset');
 
         // Disabled Rolename Dropdown list
-        $('#role_name_plantilla_manangement').attr('disabled','disabled');
+        $('#role_name_plantilla_manangement').attr('disabled', 'disabled');
 
         // Set submit button name to Edit Record
         $('#plantilla_manangement_form_submit').val('Edit Record');
@@ -6468,7 +6468,7 @@ function resetPlantillaManangementAccessForm(id){
             url: rootURL + 'api/v1/plantilla-manangement-access/record/' + id,
             success: function (result) {
 
-                if(result == 'Restricted'){
+                if (result == 'Restricted') {
 
                     Swal.fire({
                         icon: 'error',
@@ -6477,7 +6477,7 @@ function resetPlantillaManangementAccessForm(id){
                     });
 
                 }
-                else{
+                else {
 
                     result.forEach(element => {
 
@@ -6485,32 +6485,32 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['plantilla_manangement_page_access'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Plantilla Management (Main Screen)'){
+                            if (item != '') {
+                                if (item == 'Plantilla Management (Main Screen)') {
                                     document.getElementsByName('plantilla_management_main_screen')[0].checked = true;
                                 }
-                                else if(item == 'Sector Manager'){
+                                else if (item == 'Sector Manager') {
                                     document.getElementsByName('sector_manager')[0].checked = true;
                                 }
-                                else if(item == 'Department or Agency Manager'){
+                                else if (item == 'Department or Agency Manager') {
                                     document.getElementsByName('department_agency_manager')[0].checked = true;
                                 }
-                                else if(item == 'Agency Location Manager'){
+                                else if (item == 'Agency Location Manager') {
                                     document.getElementsByName('agency_location_manager')[0].checked = true;
                                 }
-                                else if(item == 'Office Manager'){
+                                else if (item == 'Office Manager') {
                                     document.getElementsByName('office_manager')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Position Manager'){
+                                else if (item == 'Plantilla Position Manager') {
                                     document.getElementsByName('plantilla_position_manager')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Position Classification Manager'){
+                                else if (item == 'Plantilla Position Classification Manager') {
                                     document.getElementsByName('plantilla_position_classification_manager')[0].checked = true;
                                 }
-                                else if(item == 'Appointee - Occupant Manager'){
+                                else if (item == 'Appointee - Occupant Manager') {
                                     document.getElementsByName('appointee_occupant_manager')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Appointee or Occupant Browser'){
+                                else if (item == 'Plantilla Appointee or Occupant Browser') {
                                     document.getElementsByName('plantilla_appointee_occupant_browser')[0].checked = true;
                                 }
 
@@ -6520,17 +6520,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['plantilla_management_main_screen_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('plantilla_management_main_screen_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('plantilla_management_main_screen_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('plantilla_management_main_screen_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('plantilla_management_main_screen_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6539,17 +6539,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['sector_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('sector_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('sector_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('sector_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('sector_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6558,17 +6558,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['department_agency_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('department_agency_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('department_agency_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('department_agency_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('department_agency_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6577,17 +6577,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['agency_location_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('agency_location_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('agency_location_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('agency_location_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('agency_location_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6596,17 +6596,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['office_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('office_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('office_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('office_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('office_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6615,17 +6615,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['plantilla_position_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('plantilla_position_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('plantilla_position_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('plantilla_position_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('plantilla_position_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6634,17 +6634,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['plantilla_position_classification_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('plantilla_position_classification_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('plantilla_position_classification_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('plantilla_position_classification_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('plantilla_position_classification_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6653,17 +6653,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['appointee_occupant_manager_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('appointee_occupant_manager_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('appointee_occupant_manager_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('appointee_occupant_manager_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('appointee_occupant_manager_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6672,17 +6672,17 @@ function resetPlantillaManangementAccessForm(id){
 
                         element['plantilla_appointee_occupant_browser_rights'].split(',').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Add'){
+                            if (item != '') {
+                                if (item == 'Add') {
                                     document.getElementsByName('plantilla_appointee_occupant_browser_rights_add')[0].checked = true;
                                 }
-                                else if(item == 'Edit'){
+                                else if (item == 'Edit') {
                                     document.getElementsByName('plantilla_appointee_occupant_browser_rights_edit')[0].checked = true;
                                 }
-                                else if(item == 'Delete'){
+                                else if (item == 'Delete') {
                                     document.getElementsByName('plantilla_appointee_occupant_browser_rights_delete')[0].checked = true;
                                 }
-                                else if(item == 'View Only'){
+                                else if (item == 'View Only') {
                                     document.getElementsByName('plantilla_appointee_occupant_browser_rights_view_only')[0].checked = true;
                                 }
                             }
@@ -6702,7 +6702,7 @@ function resetPlantillaManangementAccessForm(id){
 
 // Start of updating Report Generation Access Table
 
-function updateReportGenerationAccessTable(){
+function updateReportGenerationAccessTable() {
 
     $.ajax({
         url: rootURL + 'api/v1/role-access/record',
@@ -6711,31 +6711,31 @@ function updateReportGenerationAccessTable(){
             // Empty Report Generation Access Table
             $("#ReportGenerationAccess_tbody").empty();
 
-            if(result.ReportGenerationAccess == ''){
+            if (result.ReportGenerationAccess == '') {
 
-                $('#ReportGenerationAccess_tbody').append('<tr>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '<td>-</td>'+
-                '</tr>'
+                $('#ReportGenerationAccess_tbody').append('<tr>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '<td>-</td>' +
+                    '</tr>'
                 );
             }
-            else{
+            else {
 
                 result.ReportGenerationAccess.forEach(element => {
 
                     rep_gen_executive_201_profile_access = '';
                     element['rep_gen_executive_201_profile_access'].split('|').forEach(item => {
 
-                        if(item != ''){
-                            rep_gen_executive_201_profile_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            rep_gen_executive_201_profile_access += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6743,8 +6743,8 @@ function updateReportGenerationAccessTable(){
                     rep_gen_competency_training_management_sub_module_access = '';
                     element['rep_gen_competency_training_management_sub_module_access'].split('|').forEach(item => {
 
-                        if(item != ''){
-                            rep_gen_competency_training_management_sub_module_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            rep_gen_competency_training_management_sub_module_access += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6752,8 +6752,8 @@ function updateReportGenerationAccessTable(){
                     rep_gen_eligibility_and_rank_tracking_access = '';
                     element['rep_gen_eligibility_and_rank_tracking_access'].split('|').forEach(item => {
 
-                        if(item != ''){
-                            rep_gen_eligibility_and_rank_tracking_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            rep_gen_eligibility_and_rank_tracking_access += '<li>' + item + '</li>';
                         }
 
                     });
@@ -6761,35 +6761,35 @@ function updateReportGenerationAccessTable(){
                     rep_gen_plantilla_management_reports_access = '';
                     element['rep_gen_plantilla_management_reports_access'].split('|').forEach(item => {
 
-                        if(item != ''){
-                            rep_gen_plantilla_management_reports_access += '<li>'+ item +'</li>';
+                        if (item != '') {
+                            rep_gen_plantilla_management_reports_access += '<li>' + item + '</li>';
                         }
 
                     });
 
-                    $('#ReportGenerationAccess_tbody').append('<tr>'+
-                    '<td>'+
-                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetReportGenerationAccessForm('+ element['id'] +')">Edit</a>'+
-                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`'+ rootURL +'api/v1/report-generation-access/delete/'+ element['id'] +'`, `updateReportGenerationAccessTable`, `resetReportGenerationAccessForm`, `None`, `None`)">Delete</a>'+
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['role_name_report_generation'] == null) ? '-' : element['role_name_report_generation']) +'</td>'+
-                    '<td nowrap="nowrap">'+
+                    $('#ReportGenerationAccess_tbody').append('<tr>' +
+                        '<td>' +
+                        '<a class="badge badge-pill badge-secondary" href="javascript:void(0);" onclick="resetReportGenerationAccessForm(' + element['id'] + ')">Edit</a>' +
+                        '<a class="badge badge-pill badge-danger" href="javascript:void(0);" onclick="deleteFunction(`' + rootURL + 'api/v1/report-generation-access/delete/' + element['id'] + '`, `updateReportGenerationAccessTable`, `resetReportGenerationAccessForm`, `None`, `None`)">Delete</a>' +
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['role_name_report_generation'] == null) ? '-' : element['role_name_report_generation']) + '</td>' +
+                        '<td nowrap="nowrap">' +
                         rep_gen_executive_201_profile_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         rep_gen_competency_training_management_sub_module_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         rep_gen_eligibility_and_rank_tracking_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+
+                        '</td>' +
+                        '<td nowrap="nowrap">' +
                         rep_gen_plantilla_management_reports_access +
-                    '</td>'+
-                    '<td nowrap="nowrap">'+ ((element['encoder'] == null) ? '-' : element['encoder']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) +'</td>'+
-                    '<td nowrap="nowrap">'+ ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) +'</td>'+
-                    '</tr>'
+                        '</td>' +
+                        '<td nowrap="nowrap">' + ((element['encoder'] == null) ? '-' : element['encoder']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['created_at'] == null) ? '-' : new Date(element['created_at'])).toLocaleString() + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['last_updated_by'] == null) ? '-' : element['last_updated_by']) + '</td>' +
+                        '<td nowrap="nowrap">' + ((element['updated_at'] == null) ? '-' : new Date(element['updated_at']).toLocaleString()) + '</td>' +
+                        '</tr>'
                     );
                 });
             }
@@ -6802,9 +6802,9 @@ function updateReportGenerationAccessTable(){
 
 // Start of reseting Report Generation Access Form
 
-function resetReportGenerationAccessForm(id){
+function resetReportGenerationAccessForm(id) {
 
-    if(id == null){
+    if (id == null) {
 
         // Reset form
         $('#report_generation_form').trigger('reset');
@@ -6821,7 +6821,7 @@ function resetReportGenerationAccessForm(id){
         // Set submit button button color to primary
         $('#report_generation_form_submit').attr('class', 'btn btn-primary mb-1');
     }
-    else{
+    else {
 
         Swal.fire({
             title: 'Populating Data...',
@@ -6835,7 +6835,7 @@ function resetReportGenerationAccessForm(id){
         $('#report_generation_form').trigger('reset');
 
         // Disabled Rolename Dropdown list
-        $('#role_name_report_generation').attr('disabled','disabled');
+        $('#role_name_report_generation').attr('disabled', 'disabled');
 
         // Set submit button name to Edit Record
         $('#report_generation_form_submit').val('Edit Record');
@@ -6850,7 +6850,7 @@ function resetReportGenerationAccessForm(id){
             url: rootURL + 'api/v1/report-generation-access/record/' + id,
             success: function (result) {
 
-                if(result == 'Restricted'){
+                if (result == 'Restricted') {
 
                     Swal.fire({
                         icon: 'error',
@@ -6859,7 +6859,7 @@ function resetReportGenerationAccessForm(id){
                     });
 
                 }
-                else{
+                else {
 
                     result.forEach(element => {
 
@@ -6867,38 +6867,38 @@ function resetReportGenerationAccessForm(id){
 
                         element['rep_gen_executive_201_profile_access'].split('|').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'List of Active and or or Retired CESOs, CES Eligibles and CSEEs'){
+                            if (item != '') {
+                                if (item == 'List of Active and or or Retired CESOs, CES Eligibles and CSEEs') {
                                     document.getElementsByName('list_of_active_and_or_retired_cesos_ces_eligibles_and_csees')[0].checked = true;
                                 }
-                                else if(item == 'List of Deceased CESOs, CES Eligibles and CSEEs'){
+                                else if (item == 'List of Deceased CESOs, CES Eligibles and CSEEs') {
                                     document.getElementsByName('list_of_deceased_cesos_ces_eligibles_and_csees')[0].checked = true;
                                 }
-                                else if(item == 'List of Active CESOs, CES Eligibles and CSEEs with and or or without Active Pending Cases'){
+                                else if (item == 'List of Active CESOs, CES Eligibles and CSEEs with and or or without Active Pending Cases') {
                                     document.getElementsByName('list_of_active_ces_w_or_wo_active_pending_cases')[0].checked = true;
                                 }
-                                else if(item == 'List of Active CESOs, CES Eligibles and CSEEs (defined or filtered or grouped by appointing Authority)'){
+                                else if (item == 'List of Active CESOs, CES Eligibles and CSEEs (defined or filtered or grouped by appointing Authority)') {
                                     document.getElementsByName('list_of_active_ces_by_appointing_authority')[0].checked = true;
                                 }
-                                else if(item == 'List of Active CESOs, CES Eligibles and CSEEs candidate for Retirement'){
+                                else if (item == 'List of Active CESOs, CES Eligibles and CSEEs candidate for Retirement') {
                                     document.getElementsByName('list_of_active_ces_candidate_for_retirement')[0].checked = true;
                                 }
-                                else if(item == 'Age Demographics'){
+                                else if (item == 'Age Demographics') {
                                     document.getElementsByName('age_demographics')[0].checked = true;
                                 }
-                                else if(item == 'Active vs Retired Demographics'){
+                                else if (item == 'Active vs Retired Demographics') {
                                     document.getElementsByName('active_vs_retired_demographics')[0].checked = true;
                                 }
-                                else if(item == 'Statistic Summary per Presidential Appointments'){
+                                else if (item == 'Statistic Summary per Presidential Appointments') {
                                     document.getElementsByName('statistic_summary_per_presidential_appointments')[0].checked = true;
                                 }
-                                else if(item == 'List of Active and or or Retired CESOs, CES Eligibles and CSEEs (defined by Fields or Area of Expertise andoror Degree or Major)'){
+                                else if (item == 'List of Active and or or Retired CESOs, CES Eligibles and CSEEs (defined by Fields or Area of Expertise andoror Degree or Major)') {
                                     document.getElementsByName('list_of_active_and_or_retired_ces_by_area_of_expertise_or_degree')[0].checked = true;
                                 }
-                                else if(item == 'List of Officials per birth month'){
+                                else if (item == 'List of Officials per birth month') {
                                     document.getElementsByName('list_of_officials_per_birth_month')[0].checked = true;
                                 }
-                                else if(item == 'Personal Data Sheet based on 201 Profile Information'){
+                                else if (item == 'Personal Data Sheet based on 201 Profile Information') {
                                     document.getElementsByName('personal_data_sheet_based_on_201_profile_information')[0].checked = true;
                                 }
                             }
@@ -6907,26 +6907,26 @@ function resetReportGenerationAccessForm(id){
 
                         element['rep_gen_competency_training_management_sub_module_access'].split('|').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Masterlist per Training Conducted'){
+                            if (item != '') {
+                                if (item == 'Masterlist per Training Conducted') {
                                     document.getElementsByName('masterlist_per_training_conducted')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Training Venues'){
+                                else if (item == 'Masterlist of Training Venues') {
                                     document.getElementsByName('masterlist_of_training_venues')[0].checked = true;
                                 }
-                                else if(item == 'List of Training Venues (filtered by City or Municipality)'){
+                                else if (item == 'List of Training Venues (filtered by City or Municipality)') {
                                     document.getElementsByName('list_of_training_venues_by_city')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Training Providers'){
+                                else if (item == 'Masterlist of Training Providers') {
                                     document.getElementsByName('masterlist_of_training_providers')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Resource Speaker or Persons'){
+                                else if (item == 'Masterlist of Resource Speaker or Persons') {
                                     document.getElementsByName('masterlist_of_resource_speaker_persons')[0].checked = true;
                                 }
-                                else if(item == 'List of Resource Speakers or Persons (defined by Expertise)'){
+                                else if (item == 'List of Resource Speakers or Persons (defined by Expertise)') {
                                     document.getElementsByName('list_of_resource_speakers_persons_by_expertise')[0].checked = true;
                                 }
-                                else if(item == 'List of Resource Speakers or Persons (defined by Inclusive Date)'){
+                                else if (item == 'List of Resource Speakers or Persons (defined by Inclusive Date)') {
                                     document.getElementsByName('list_of_resource_speakers_persons_by_inclusive_date')[0].checked = true;
                                 }
                             }
@@ -6935,32 +6935,32 @@ function resetReportGenerationAccessForm(id){
 
                         element['rep_gen_eligibility_and_rank_tracking_access'].split('|').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Masterlist of Officials undergoing the 4-stage Eligibility Process (on-stream)'){
+                            if (item != '') {
+                                if (item == 'Masterlist of Officials undergoing the 4-stage Eligibility Process (on-stream)') {
                                     document.getElementsByName('masterlist_of_officials_undergoing_the_4_stage_eligibility')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Examinees per examination date, location'){
+                                else if (item == 'Masterlist of Examinees per examination date, location') {
                                     document.getElementsByName('masterlist_of_examinees_per_examination_date_location')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Examinees per defined rating (Pass or failed), examination date and location (variable'){
+                                else if (item == 'Masterlist of Examinees per defined rating (Pass or failed), examination date and location (variable') {
                                     document.getElementsByName('masterlist_of_examinees_per_defined_rating_pass_or_failed')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of CES WE retakers (optional)'){
+                                else if (item == 'Masterlist of CES WE retakers (optional)') {
                                     document.getElementsByName('masterlist_of_ces_we_retakers')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of AC Takers per AC date'){
+                                else if (item == 'Masterlist of AC Takers per AC date') {
                                     document.getElementsByName('masterlist_of_ac_takers_per_ac_date')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of AC Passers per AC date'){
+                                else if (item == 'Masterlist of AC Passers per AC date') {
                                     document.getElementsByName('masterlist_of_ac_passers_per_ac_date')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of AC Retakers'){
+                                else if (item == 'Masterlist of AC Retakers') {
                                     document.getElementsByName('masterlist_of_ac_retakers')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Validated Officials per Validation Date and or or Validation Type'){
+                                else if (item == 'Masterlist of Validated Officials per Validation Date and or or Validation Type') {
                                     document.getElementsByName('masterlist_of_validated_officials_per_validation_date_or_type')[0].checked = true;
                                 }
-                                else if(item == 'Masterlist of Officials who has taken or undergone Board or Panel Interview'){
+                                else if (item == 'Masterlist of Officials who has taken or undergone Board or Panel Interview') {
                                     document.getElementsByName('masterlist_of_officials_who_has_taken_board_panel_interview')[0].checked = true;
                                 }
                             }
@@ -6969,47 +6969,47 @@ function resetReportGenerationAccessForm(id){
 
                         element['rep_gen_plantilla_management_reports_access'].split('|').forEach(item => {
 
-                            if(item != ''){
-                                if(item == 'Plantilla Statistics (All)'){
+                            if (item != '') {
+                                if (item == 'Plantilla Statistics (All)') {
                                     document.getElementsByName('plantilla_statistics_all')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Statistics (CES Only)'){
+                                else if (item == 'Plantilla Statistics (CES Only)') {
                                     document.getElementsByName('plantilla_statistics_ces_only')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Statistics (Non-CES Only)'){
+                                else if (item == 'Plantilla Statistics (Non-CES Only)') {
                                     document.getElementsByName('plantilla_statistics_non_ces_only')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Statistics by Gender (All, CES or Non-CES)'){
+                                else if (item == 'Plantilla Statistics by Gender (All, CES or Non-CES)') {
                                     document.getElementsByName('plantilla_statistics_by_gender_all_ces_or_non_ces')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Statistics Summary including Gender (by Agency or All)'){
+                                else if (item == 'Plantilla Statistics Summary including Gender (by Agency or All)') {
                                     document.getElementsByName('plantilla_statistics_summary_including_gender_by_agency')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Statistics per Department, Attached Agency and CES Positions'){
+                                else if (item == 'Plantilla Statistics per Department, Attached Agency and CES Positions') {
                                     document.getElementsByName('plantilla_statistics_per_department_attached_agency_ces_position')[0].checked = true;
                                 }
-                                else if(item == 'Occupancy Report (All)'){
+                                else if (item == 'Occupancy Report (All)') {
                                     document.getElementsByName('occupancy_report_all')[0].checked = true;
                                 }
-                                else if(item == 'Occupancy Report (CES Only)'){
+                                else if (item == 'Occupancy Report (CES Only)') {
                                     document.getElementsByName('occupancy_report_ces_only')[0].checked = true;
                                 }
-                                else if(item == 'Occupancy Report (Non-CES Only)'){
+                                else if (item == 'Occupancy Report (Non-CES Only)') {
                                     document.getElementsByName('occupancy_report_non_ces_only')[0].checked = true;
                                 }
-                                else if(item == 'Plantilla Position List (per Agency, based on classification (CES, Non-CES or All)'){
+                                else if (item == 'Plantilla Position List (per Agency, based on classification (CES, Non-CES or All)') {
                                     document.getElementsByName('plantilla_position_list_per_agency_based_on_classification')[0].checked = true;
                                 }
-                                else if(item == 'CES Bluebook'){
+                                else if (item == 'CES Bluebook') {
                                     document.getElementsByName('ces_bluebook')[0].checked = true;
                                 }
-                                else if(item == 'Mailing List per Agency (address derived from 201 Profile as stated in the mailing address and not in the office address)'){
+                                else if (item == 'Mailing List per Agency (address derived from 201 Profile as stated in the mailing address and not in the office address)') {
                                     document.getElementsByName('mailing_list_per_agency')[0].checked = true;
                                 }
-                                else if(item == 'List of Officials by Department (filtered by CES Status and Salary Grade, option to include Occupants and attached Agencies, and sorted by Name, SG, Office and Region)'){
+                                else if (item == 'List of Officials by Department (filtered by CES Status and Salary Grade, option to include Occupants and attached Agencies, and sorted by Name, SG, Office and Region)') {
                                     document.getElementsByName('list_of_officials_by_department')[0].checked = true;
                                 }
-                                else if(item == 'List of Officials by Appointment or Assumption Dates (filtered by CES status and Department or Agency)'){
+                                else if (item == 'List of Officials by Appointment or Assumption Dates (filtered by CES status and Department or Agency)') {
                                     document.getElementsByName('list_of_officials_by_appointment_or_assumption_dates')[0].checked = true;
                                 }
                             }
@@ -7029,11 +7029,11 @@ function resetReportGenerationAccessForm(id){
 
 // Start of data if already in use
 
-function validateData(type, action_url_without_type_and_value, value, field_id){
+function validateData(type, action_url_without_type_and_value, value, field_id) {
 
     // Detect empty input or space in first character then execute script if not
 
-    if(value.trim() != ''){
+    if (value.trim() != '') {
 
         Swal.fire({
             icon: 'question',
@@ -7047,7 +7047,7 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
             url: action_url_without_type_and_value + '/' + type + '/' + value,
             success: function (result) {
 
-                if(result == 'true'){
+                if (result == 'true') {
 
                     Swal.fire({
                         icon: 'error',
@@ -7055,9 +7055,9 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         text: 'Stop ' + type + ' already exist input field will be reset',
                     });
 
-                    $('#'+ field_id).val('');
+                    $('#' + field_id).val('');
                 }
-                else if(result == 'Restricted'){
+                else if (result == 'Restricted') {
 
                     Swal.fire({
                         icon: 'error',
@@ -7066,9 +7066,9 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                     });
 
                 }
-                else if(result.PersonalData || result.User){
+                else if (result.PersonalData || result.User) {
 
-                    if(result.PersonalData.length){
+                    if (result.PersonalData.length) {
 
                         personal_data = `<div class="bg-primary text-white text-center mb-1 p-2">Result from 201 Profile</div>`;
 
@@ -7078,7 +7078,7 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                         </div>
-                                        <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
+                                        <input type="text" class="form-control" value="` + element['cesno'] + `" readonly>
                                     </div>`;
 
                             personal_data += `<div class="input-group mb-3">
@@ -7089,11 +7089,11 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                     </div>`;
                         });
                     }
-                    else{
+                    else {
 
                         personal_data = '';
                     }
-                    if(result.User.length){
+                    if (result.User.length) {
 
                         user_account = `<div class="bg-primary text-white text-center mb-1 p-2">Result from User Account</div>`;
 
@@ -7103,7 +7103,7 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-success border-success text-white">Role</span>
                                         </div>
-                                        <input type="text" class="form-control" value="` + element['role']+ `" readonly>
+                                        <input type="text" class="form-control" value="` + element['role'] + `" readonly>
                                     </div>`;
 
                             user_account += `<div class="input-group mb-3">
@@ -7114,7 +7114,7 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                     </div>`;
                         });
                     }
-                    else{
+                    else {
 
                         user_account = '';
                     }
@@ -7139,12 +7139,12 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                                 timer: 2000
                             });
 
-                            $('#'+ field_id).val('');
+                            $('#' + field_id).val('');
                         }
                     });
 
                 }
-                else if(result == 'false'){
+                else if (result == 'false') {
 
                     Swal.fire({
                         icon: 'success',
@@ -7154,11 +7154,11 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
                         timer: 2000
                     });
                 }
-                else{
+                else {
 
                     html = '<div class="text-center mb-2">See details of error below.</div>';
-                    $.each(result, function( index, value ) {
-                        html += '<div class="text-center text-danger mb-1">'+ value +'</div>';
+                    $.each(result, function (index, value) {
+                        html += '<div class="text-center text-danger mb-1">' + value + '</div>';
                     });
 
                     Swal.fire({
@@ -7182,15 +7182,15 @@ function validateData(type, action_url_without_type_and_value, value, field_id){
 
 // Start of validating 201 Profile if already exist
 
-function validate201Profile(){
+function validate201Profile() {
 
-    if($('#lastname').val() != '' && $('#firstname').val() != '' && $('#middlename').val() != '' && $('#birthdate').val() != ''){
+    if ($('#lastname').val() != '' && $('#firstname').val() != '' && $('#middlename').val() != '' && $('#birthdate').val() != '') {
 
         // Get Year in Birthday
         var year_on_birthday = new Date($('#birthdate').val()).getFullYear();
 
         // Count length of string in year from birthday and execute script validation
-        if(year_on_birthday.toString().length == 4){
+        if (year_on_birthday.toString().length == 4) {
 
             Swal.fire({
                 icon: 'question',
@@ -7204,9 +7204,9 @@ function validate201Profile(){
                 url: rootURL + 'api/v1/personal-data/validate-201-profile/' + $('#lastname').val() + '/' + $('#firstname').val() + '/' + $('#middlename').val() + '/' + $('#birthdate').val(),
                 success: function (result) {
 
-                    if(result.validate_by_name || result.validate_by_name_and_birthday){
+                    if (result.validate_by_name || result.validate_by_name_and_birthday) {
 
-                        if(result.validate_by_name.length){
+                        if (result.validate_by_name.length) {
 
                             validate_by_name_result = `<div class="bg-primary text-white text-center mb-1 p-2">Result from Name only</div>`;
 
@@ -7216,7 +7216,7 @@ function validate201Profile(){
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                             </div>
-                                            <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
+                                            <input type="text" class="form-control" value="` + element['cesno'] + `" readonly>
                                         </div>`;
 
                                 validate_by_name_result += `<div class="input-group mb-3">
@@ -7227,11 +7227,11 @@ function validate201Profile(){
                                         </div>`;
                             });
                         }
-                        else{
+                        else {
 
                             validate_by_name_result = '';
                         }
-                        if(result.validate_by_name_and_birthday.length){
+                        if (result.validate_by_name_and_birthday.length) {
 
                             validate_by_name_and_birthday_result = `<div class="bg-primary text-white text-center mb-1 p-2">Result from Name and Birthday</div>`;
 
@@ -7241,7 +7241,7 @@ function validate201Profile(){
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-success border-success text-white">CES no.</span>
                                             </div>
-                                            <input type="text" class="form-control" value="` + element['cesno']+ `" readonly>
+                                            <input type="text" class="form-control" value="` + element['cesno'] + `" readonly>
                                         </div>`;
 
                                 validate_by_name_and_birthday_result += `<div class="input-group mb-3">
@@ -7252,7 +7252,7 @@ function validate201Profile(){
                                         </div>`;
                             });
                         }
-                        else{
+                        else {
 
                             validate_by_name_and_birthday_result = '';
                         }
@@ -7288,7 +7288,7 @@ function validate201Profile(){
                         });
 
                     }
-                    else if(result == 'Restricted'){
+                    else if (result == 'Restricted') {
 
                         Swal.fire({
                             icon: 'error',
@@ -7297,7 +7297,7 @@ function validate201Profile(){
                         });
 
                     }
-                    else{
+                    else {
 
                         Swal.fire({
                             icon: 'success',
@@ -7319,7 +7319,7 @@ function validate201Profile(){
 
 // Start of delete function
 
-function deleteFunction(action_url, update_table_js_function_name, reset_form_js_function_name, reload_page_enable, assign_redirect_page_url){
+function deleteFunction(action_url, update_table_js_function_name, reset_form_js_function_name, reload_page_enable, assign_redirect_page_url) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -7337,32 +7337,32 @@ function deleteFunction(action_url, update_table_js_function_name, reset_form_js
                     _method: 'delete',
                     _token: $('[name="_token"]').val(),
                 },
-                success: function(response) {
+                success: function (response) {
 
-                    if (response === 'Successfully deleted'){
+                    if (response === 'Successfully deleted') {
                         Swal.fire({
                             icon: 'success',
                             title: 'Deleted!',
                             html: `<center>Successfully deleted.</center>`
                         });
 
-                        if(reset_form_js_function_name != 'None'){
+                        if (reset_form_js_function_name != 'None') {
                             resetFormFunction(reset_form_js_function_name);
                         }
 
-                        if(update_table_js_function_name != 'None'){
+                        if (update_table_js_function_name != 'None') {
                             updateTableFunction(update_table_js_function_name);
                         }
 
-                        if(reload_page_enable == 'Yes'){
+                        if (reload_page_enable == 'Yes') {
                             location.reload();
                         }
 
-                        if(assign_redirect_page_url != 'None'){
+                        if (assign_redirect_page_url != 'None') {
                             location.assign(assign_redirect_page_url);
                         }
                     }
-                    else if(response == 'Restricted'){
+                    else if (response == 'Restricted') {
 
                         Swal.fire({
                             icon: 'error',
@@ -7371,13 +7371,13 @@ function deleteFunction(action_url, update_table_js_function_name, reset_form_js
                         });
 
                     }
-                    else{
+                    else {
                         Swal.fire('Delete Unsuccessful!', '', 'error');
                     }
                 }
             });
 
-        }else if (result.isDenied) {
+        } else if (result.isDenied) {
             Swal.fire('Changes are not saved', '', 'info')
         }
     });
@@ -7387,7 +7387,7 @@ function deleteFunction(action_url, update_table_js_function_name, reset_form_js
 
 // Start of getting Role Name no.
 
-function getRoleNameNo(role_name){
+function getRoleNameNo(role_name) {
 
     Swal.fire({
         icon: 'info',
@@ -7424,25 +7424,25 @@ function getRoleNameNo(role_name){
 
 function validateFileSize(input_file_id, max_file_size_in_mb) {
 
-    $('#'+ input_file_id).on('change', function (e) {
+    $('#' + input_file_id).on('change', function (e) {
 
         // Get the file
         var files = e.currentTarget.files;
 
         // Set required file size in mb
-        var filesize = ((files[0].size/1024)/1024).toFixed(max_file_size_in_mb); // MB
+        var filesize = ((files[0].size / 1024) / 1024).toFixed(max_file_size_in_mb); // MB
 
         // Validate if file size is maximum than required
         if (filesize > max_file_size_in_mb) {
 
             Swal.fire(
-            'Stop',
-            'File too large maximum file allowed was ' + max_file_size_in_mb + ' mb',
-            'error'
+                'Stop',
+                'File too large maximum file allowed was ' + max_file_size_in_mb + ' mb',
+                'error'
             )
 
             // Reset input file field value
-            $('#'+ input_file_id).val('');
+            $('#' + input_file_id).val('');
         }
     });
 }
@@ -7451,7 +7451,7 @@ function validateFileSize(input_file_id, max_file_size_in_mb) {
 
 // Start of submit reset password function
 
-function submitResetPassword(){
+function submitResetPassword() {
 
     Swal.fire({
         icon: 'question',
@@ -7475,28 +7475,28 @@ function submitResetPassword(){
                 type: "POST",
                 url: rootURL + 'api/v1/password/reset-password',
                 data: $("#reset_password").serialize(),
-                success: function(response) {
+                success: function (response) {
 
-                    if (response === 'Your password was successfully reset'){
+                    if (response === 'Your password was successfully reset') {
                         Swal.fire('Saved!', '<center>Your password was successfully reset.</center>', 'success');
                         location.assign(rootURL + 'login');
                     }
-                    else if (response === 'User not found please check provided email'){
+                    else if (response === 'User not found please check provided email') {
                         Swal.fire('Error!', '<center>User not found please check the provided email.</center>', 'error');
                     }
-                    else if (response === 'Token was invalid or expired, try to take another request'){
+                    else if (response === 'Token was invalid or expired, try to take another request') {
                         Swal.fire('Error!', '<center>Token was invalid or expired, try to take another request. redirecting you to forgot password page</center>', 'error');
                         location.assign(rootURL + 'forgot-password');
                     }
-                    else if (response === 'Throttled reset attempt'){
+                    else if (response === 'Throttled reset attempt') {
                         Swal.fire('Error!', '<center>Throttled reset attempt.</center>', 'error');
                         location.assign(rootURL + 'forgot-password');
                     }
-                    else{
+                    else {
 
                         html = '<div class="text-center mb-2">See details of error below.</div>';
-                        $.each(response, function( index, value ) {
-                            html += '<div class="text-center text-danger mb-1">'+ value +'</div>';
+                        $.each(response, function (index, value) {
+                            html += '<div class="text-center text-danger mb-1">' + value + '</div>';
                         });
 
                         Swal.fire({
@@ -7528,21 +7528,21 @@ function libTabs(evt, libraTabs) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(libraTabs).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+}
 
-  //
+//
 
 // Start of process alert function
 
-function processAlert(){
+function processAlert() {
 
     Swal.fire({
         title: 'Processing...',
@@ -7638,3 +7638,30 @@ const healthRecordsTab = () => {
 const pdfFilesTab = () => {
     handleCategoryClick('pdfFilesTab', '[onclick="pdfFilesTab()"]');
 };
+
+const openFormAddress = () => {
+    var form = document.querySelector('.form-address');
+    var openForm = document.querySelector('[onclick="openFormAddress()"]');
+    var table = document.querySelector('.table-address');
+    var openTable = document.querySelector('[onclick="openTableAddress()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableAddress = () => {
+    var form = document.querySelector('.form-address');
+    var openForm = document.querySelector('[onclick="openFormAddress()"]');
+    var table = document.querySelector('.table-address');
+    var openTable = document.querySelector('[onclick="openTableAddress()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+
+
