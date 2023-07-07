@@ -7688,3 +7688,26 @@ const openTableIdentification = () => {
 }
 
 
+const openFormEducationalAttainment = () => {
+    var form = document.querySelector('.form-educational-attainment');
+    var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
+    var table = document.querySelector('.table-educational-attainment');
+    var openTable = document.querySelector('[onclick="openTableEducationalAttainment()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableEducationalAttainment = () => {
+    var form = document.querySelector('.form-educational-attainment');
+    var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
+    var table = document.querySelector('.table-educational-attainment');
+    var openTable = document.querySelector('[onclick="openTableEducationalAttainment()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

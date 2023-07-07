@@ -15,18 +15,16 @@ return new class extends Migration
         Schema::create('profile_tblEducation', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->bigInteger('cesno')->nullable();
-            $table->string('degree_code')->nullable();
-            $table->string('major_code')->nullable();
-            $table->string('school_code')->nullable();
-            $table->string('degree_status')->nullable();
-            $table->string('school_status')->nullable();
-            $table->string('year_grad')->nullable();
-            $table->date('honors')->nullable();
-            $table->date('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
-            // $table->string('last_updated_by')->nullable();
+            $table->string('level');
+            $table->string('school');
+            $table->string('degree')->nullable();
+            $table->string('school_type');
+            $table->string('period_of_attendance_from');
+            $table->string('period_of_attendance_to');
+            $table->string('highest_level');
+            $table->string('year_graduate');
+            $table->string('academics_honor_received');
+            $table->string('encoder')->nullable();
             $table->timestamps();
         });
     }
