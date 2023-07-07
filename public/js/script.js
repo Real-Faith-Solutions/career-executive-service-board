@@ -7577,9 +7577,11 @@ const handleCategoryClick = (category, selector) => {
 const personDataTab = () => {
     handleCategoryClick('personDataTab', '[onclick="personDataTab()"]');
 };
+
 const addressTab = () => {
     handleCategoryClick('addressTab', '[onclick="addressTab()"]');
 };
+
 const identificationTab = () => {
     handleCategoryClick('identificationTab', '[onclick="identificationTab()"]');
 };
