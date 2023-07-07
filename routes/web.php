@@ -44,6 +44,7 @@ Route::post('family-profile/store/spouse/{cesno}', [FamilyController::class, 'st
 Route::post('family-profile/store/children/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
 Route::post('family-profile/store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
 Route::post('family-profile/store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
+Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
