@@ -9,7 +9,7 @@ use App\Mail\CreatedNewAccountMail;
 
 use App\Models\PersonalData;
 use App\Models\SpouseRecords;
-use App\Models\FamilyProfile;
+use App\Models\Father;
 use App\Models\Addresses;
 use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
@@ -35,6 +35,7 @@ use App\Models\ValidationHr;
 use App\Models\BoardInterview;
 use App\Models\RecordOfCespesRatings;
 use App\Models\HistoricalRecordOfMedicalCondition;
+use App\Models\Mother;
 use App\Models\User;
 use App\Models\PdfLinks;
 use App\Models\ProfileAddress;
@@ -81,12 +82,13 @@ class ProfileController extends Controller
     public function viewProfile($cesno)
     {
         $mainProfile = PersonalData::find($cesno);
-        $familyProfile = FamilyProfile::where('personal_data_cesno', $cesno)->get();
-        $ChildrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
+        $father = Father::where('personal_data_cesno', $cesno)->get();
+        $mother = Mother::where('personal_data_cesno', $cesno)->get();
+        $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
 
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'familyProfile', 'ChildrenRecords', 'SpouseRecords', 'addressProfile'));
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile', 'mother'));
     }
 
     public function validateData($type, $value)
@@ -331,7 +333,7 @@ class ProfileController extends Controller
                 $HomePermanentAddress = HomePermanentAddress::where('cesno', '=', $cesno)->get();
                 $MailingAddress = MailingAddress::where('cesno', '=', $cesno)->get();
                 $SpouseRecords = SpouseRecords::where('cesno', '=', $cesno)->get();
-                $FamilyProfile = FamilyProfile::where('cesno', '=', $cesno)->get();
+                $Father = Father::where('cesno', '=', $cesno)->get();
                 $ChildrenRecords = ChildrenRecords::where('cesno', '=', $cesno)->get();
                 $EducationalAttainment = EducationalAttainment::where('cesno', '=', $cesno)->get();
                 $ExaminationsTaken = ExaminationsTaken::where('cesno', '=', $cesno)->get();
@@ -383,7 +385,7 @@ class ProfileController extends Controller
                     'HomePermanentAddress',
                     'MailingAddress',
                     'SpouseRecords',
-                    'FamilyProfile',
+                    'Father',
                     'ChildrenRecords',
                     'EducationalAttainment',
                     'ExaminationsTaken',
@@ -930,7 +932,7 @@ class ProfileController extends Controller
     //         HomePermanentAddress::where('cesno','=',$personaldata_cesno)->delete();
     //         MailingAddress::where('cesno','=',$personaldata_cesno)->delete();
     //         SpouseRecords::where('cesno','=',$personaldata_cesno)->delete();
-    //         FamilyProfile::where('cesno','=',$personaldata_cesno)->delete();
+    //         Father::where('cesno','=',$personaldata_cesno)->delete();
     //         ChildrenRecords::where('cesno','=',$personaldata_cesno)->delete();
     //         EducationalAttainment::where('cesno','=',$personaldata_cesno)->delete();
     //         ExaminationsTaken::where('cesno','=',$personaldata_cesno)->delete();
@@ -983,12 +985,12 @@ class ProfileController extends Controller
 
             // Family Background Profile
             $SpouseRecords = SpouseRecords::where('cesno', '=', $request)->get();
-            $FamilyProfile = FamilyProfile::where('cesno', '=', $request)->get();
+            $Father = Father::where('cesno', '=', $request)->get();
             $ChildrenRecords = ChildrenRecords::where('cesno', '=', $request)->get();
-            $FamilyProfileAdd = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Add');
-            $FamilyProfileEdit = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Edit');
-            $FamilyProfileDelete = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Delete');
-            $FamilyProfileViewOnly = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'View Only');
+            $FatherAdd = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Add');
+            $FatherEdit = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Edit');
+            $FatherDelete = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Delete');
+            $FatherViewOnly = RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'View Only');
 
             // Educational Background or Attainment
             $EducationalAttainment = EducationalAttainment::where('cesno', '=', $request)->get();
@@ -1115,7 +1117,7 @@ class ProfileController extends Controller
                 'HomePermanentAddress',
                 'MailingAddress',
                 'SpouseRecords',
-                'FamilyProfile',
+                'Father',
                 'ChildrenRecords',
                 'EducationalAttainment',
                 'ExaminationsTaken',
@@ -1144,10 +1146,10 @@ class ProfileController extends Controller
                 'PersonalDataEdit',
                 'PersonalDataDelete',
                 'PersonalDataViewOnly',
-                'FamilyProfileAdd',
-                'FamilyProfileEdit',
-                'FamilyProfileDelete',
-                'FamilyProfileViewOnly',
+                'FatherAdd',
+                'FatherEdit',
+                'FatherDelete',
+                'FatherViewOnly',
                 'EducationalAttainmentAdd',
                 'EducationalAttainmentEdit',
                 'EducationalAttainmentDelete',
@@ -1242,7 +1244,7 @@ class ProfileController extends Controller
 
                 $personalData = PersonalData::where('cesno', '=', '1')->offset(0)->limit(1)->get();
                 $SpouseRecords = SpouseRecords::where('personal_data_cesno', '=', '1')->get();
-                $FamilyProfile = FamilyProfile::where('personal_data_cesno', '=', '1')->get();
+                $Father = Father::where('personal_data_cesno', '=', '1')->get();
                 $ChildrenRecords = ChildrenRecords::where('personal_data_cesno', '=', '1')->get();
                 $EducationalAttainment = EducationalAttainment::where('cesno', '=', '1')->get();
                 $ExaminationsTaken = ExaminationsTaken::where('cesno', '=', '1')->get();
@@ -1290,7 +1292,7 @@ class ProfileController extends Controller
                     'searched',
                     'personalData',
                     'SpouseRecords',
-                    'FamilyProfile',
+                    'Father',
                     'ChildrenRecords',
                     'EducationalAttainment',
                     'ExaminationsTaken',
@@ -1589,7 +1591,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function addFamilyProfile(Request $request)
+    public function addFather(Request $request)
     {
 
         if (RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Add') == 'true') {
@@ -1627,7 +1629,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                FamilyProfile::create([
+                Father::create([
                     'cesno' => $request->cesno,
                     'fn_lastname_fp' => Str::ucfirst($request->fn_lastname_fp),
                     'fn_first_fp' =>  Str::ucfirst($request->fn_first_fp),
@@ -1648,7 +1650,7 @@ class ProfileController extends Controller
         }
     }
 
-    public function editFamilyProfile(Request $request)
+    public function editFather(Request $request)
     {
 
         if (RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Edit') == 'true') {
@@ -1684,7 +1686,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                FamilyProfile::where('id', $request->cesno_family_profile_id)
+                Father::where('id', $request->cesno_family_profile_id)
                     ->update([
                         'fn_lastname_fp' => Str::ucfirst($request->fn_lastname_fp),
                         'fn_first_fp' =>  Str::ucfirst($request->fn_first_fp),
@@ -1704,25 +1706,25 @@ class ProfileController extends Controller
         }
     }
 
-    public function getFamilyProfile($id)
+    public function getFather($id)
     {
 
         if (RolesController::validateUserExecutive201RoleAccess('Family Background Profile', 'Category Only') == 'true') {
 
-            $familyprofile = FamilyProfile::where('id', '=', $id)->get();
+            $Father = Father::where('id', '=', $id)->get();
 
-            return $familyprofile;
+            return $Father;
         } else {
 
             return 'Restricted';
         }
     }
 
-    // public function deleteFamilyProfile($id){
+    // public function deleteFather($id){
 
     //     if(RolesController::validateUserExecutive201RoleAccess('Family Background Profile','Delete') == 'true'){
 
-    //         $familyprofile = FamilyProfile::where('id','=',$id)->delete();
+    //         $Father = Father::where('id','=',$id)->delete();
 
     //         return 'Successfully deleted';
     //     }

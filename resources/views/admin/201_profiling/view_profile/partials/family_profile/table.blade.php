@@ -61,31 +61,59 @@
             @endforeach
 
             {{-- family profile (father and mother) --}}
-            @foreach ($familyProfile as $newFamilyProfile)
+            @foreach ($father as $newFather)
                 <tr class="border-b bg-white">
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <p>Father</p>
-                        <p>Mother</p>
+                        Father
                     </td>
                 
                     <td class="px-6 py-3">
-                        <p>{{ $newFamilyProfile->father_last_name }}</p>
-                        <p>{{ $newFamilyProfile->mother_last_name }}</p>
+                        {{ $newFather->father_last_name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        <p>{{ $newFamilyProfile->father_first_name }}</p>
-                        <p>{{ $newFamilyProfile->mother_first_name }}</p>
+                        {{ $newFather->father_first_name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        <p>{{ $newFamilyProfile->name_extension }}</p>
+                        {{ $newFather->name_extension }}
                     </td>
 
                     <td class="px-6 py-3">
-                        <p>{{ $newFamilyProfile->father_middle_name }}</p>
-                        <p>{{ $newFamilyProfile->mother_middle_name }}</p>
+                        {{ $newFather->father_middle_name }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
+                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
+                    </td>
+                    
+                </tr>
+            @endforeach
+
+            {{-- mother details --}}
+            @foreach ($mother as $newMother)
+                <tr class="border-b bg-white">
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        Mother
+                    </td>
+                
+                    <td class="px-6 py-3">
+                        {{ $newMother->mother_last_name }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newMother->mother_first_name }}
+                    </td>
+
+                    <td class="px-6 py-3">
+        
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newMother->mother_middle_name }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
@@ -97,7 +125,7 @@
             @endforeach
 
             {{-- children records --}}
-            @foreach ($ChildrenRecords as $newChildrenRecords)
+            @foreach ($childrenRecords as $newChildrenRecords)
                 <tr class="border-b bg-white">
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">

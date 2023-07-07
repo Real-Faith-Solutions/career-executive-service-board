@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('family_profiles', function (Blueprint $table) {
-            $table->id();
+        //family_profiles
+        Schema::create('fathers', function (Blueprint $table) {
+            $table->id('ctrlno');
             // $table->bigInteger('cesno')->unique();
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
@@ -20,9 +21,6 @@ return new class extends Migration
             $table->string('father_first_name')->nullable();
             $table->string('father_middle_name')->nullable();
             $table->string('name_extension')->nullable();
-            $table->string('mother_last_name')->nullable();
-            $table->string('mother_first_name')->nullable();
-            $table->string('mother_middle_name')->nullable();
             $table->string('encoder')->nullable();
             // $table->string('last_updated_by')->nullable();
             $table->timestamps();
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('family_profiles');
+        Schema::dropIfExists('fathers');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FamilyProfileStoreRequest extends FormRequest
+class FatherStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,7 @@ class FamilyProfileStoreRequest extends FormRequest
             'father_first_name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'father_middle_name' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'father_name_extension' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'mother_last_name' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'mother_first_name' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'mother_middle_name' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-
+            
         ];
     }
 }
