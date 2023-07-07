@@ -7663,5 +7663,28 @@ const openTableAddress = () => {
     openTable.classList.add('hidden');
 }
 
+const openFormIdentification = () => {
+    var form = document.querySelector('.form-identification');
+    var openForm = document.querySelector('[onclick="openFormIdentification()"]');
+    var table = document.querySelector('.table-identification');
+    var openTable = document.querySelector('[onclick="openTableIdentification()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableIdentification = () => {
+    var form = document.querySelector('.form-identification');
+    var openForm = document.querySelector('[onclick="openFormIdentification()"]');
+    var table = document.querySelector('.table-identification');
+    var openTable = document.querySelector('[onclick="openTableIdentification()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
 
 
