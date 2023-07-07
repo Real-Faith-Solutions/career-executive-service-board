@@ -14,7 +14,7 @@
 
                     <div class="mb-3">
                         <label for="title">Research Title</label>
-                        <input id="title" name="title" type="text">
+                        <input id="title" name="title" type="text" required>
                         @error('title')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -38,7 +38,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)</label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" type="date">
+                        <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -48,7 +48,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)</label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" type="date">
+                        <input id="inclusive_date_to" name="inclusive_date_to" type="date" required>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
