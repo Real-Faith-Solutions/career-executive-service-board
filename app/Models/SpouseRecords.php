@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SpouseRecords extends Model
 {
@@ -16,6 +17,8 @@ class SpouseRecords extends Model
     protected $primaryKey = 'ctrlno';
 
     protected $table = "spouse_records";
+
+    use SoftDeletes;
 
     protected $fillable = [
         'last_name',

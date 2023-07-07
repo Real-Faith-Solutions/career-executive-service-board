@@ -54,13 +54,18 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
+
+                        <form action="{{ route('family-profile-spouse.delete', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form>
                     </td>
                     
                 </tr>
             @endforeach
 
-            {{-- family profile (father and mother) --}}
+            {{-- father details --}}
             @foreach ($father as $newFather)
                 <tr class="border-b bg-white">
 
@@ -86,7 +91,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
+
+                        {{-- <form action="{{ route('', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form> --}}
                     </td>
                     
                 </tr>
@@ -118,7 +128,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
+
+                        {{-- <form action="{{ route('', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form> --}}
                     </td>
                     
                 </tr>
@@ -149,7 +164,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
+                      
+                         {{-- <form action="{{ route('', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form> --}}
                     </td>
                     
                 </tr>
