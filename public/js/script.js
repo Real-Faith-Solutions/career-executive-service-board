@@ -7687,7 +7687,6 @@ const openTableIdentification = () => {
     openTable.classList.add('hidden');
 }
 
-
 const openFormEducationalAttainment = () => {
     var form = document.querySelector('.form-educational-attainment');
     var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
@@ -7705,6 +7704,30 @@ const openTableEducationalAttainment = () => {
     var openForm = document.querySelector('[onclick="openFormEducationalAttainment()"]');
     var table = document.querySelector('.table-educational-attainment');
     var openTable = document.querySelector('[onclick="openTableEducationalAttainment()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormExaminationsTaken = () => {
+    var form = document.querySelector('.form-examinations-taken');
+    var openForm = document.querySelector('[onclick="openFormExaminationsTaken()"]');
+    var table = document.querySelector('.table-examinations-taken');
+    var openTable = document.querySelector('[onclick="openTableExaminationsTaken()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableExaminationsTaken = () => {
+    var form = document.querySelector('.form-examinations-taken');
+    var openForm = document.querySelector('[onclick="openFormExaminationsTaken()"]');
+    var table = document.querySelector('.table-examinations-taken');
+    var openTable = document.querySelector('[onclick="openTableExaminationsTaken()"]');
 
     form.classList.add('hidden');
     openForm.classList.remove('hidden');

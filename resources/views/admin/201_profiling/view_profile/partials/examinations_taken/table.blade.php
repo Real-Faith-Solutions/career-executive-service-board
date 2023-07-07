@@ -1,8 +1,13 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Examinations Taken</button>
+    <button class="btn btn-primary" onclick="openFormExaminationsTaken()">Add Examination Taken</button>
+    <button class="btn btn-primary hidden" onclick="openTableExaminationsTaken()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-examinations-taken hidden">
+    @include('admin.201_profiling.view_profile.partials.examinations_taken.form')
+</div>
+
+<div class="table-examinations-taken relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
@@ -23,10 +28,6 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Date of Examination
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
@@ -35,10 +36,6 @@
 
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-3">
                     Lorem ipsum dolor
                 </td>
 
