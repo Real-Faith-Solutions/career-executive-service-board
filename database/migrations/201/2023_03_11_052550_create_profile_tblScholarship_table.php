@@ -14,16 +14,13 @@ return new class extends Migration
         //scholarships
         Schema::create('profile_tblScholarship', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->date('type')->nullable();
-            $table->date('title')->nullable();
-            $table->string('sponsor')->nullable();
-            $table->string('from_dt')->nullable();
-            $table->string('to_dt')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->bigInteger('cesno');
+            $table->string('type');
+            $table->string('title');
+            $table->string('sponsor');
+            $table->string('inclusive_date_from');
+            $table->string('inclusive_date_to');
+            $table->string('encoder');
             $table->timestamps();
         });
     }
