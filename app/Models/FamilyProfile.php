@@ -15,11 +15,11 @@ class FamilyProfile extends Model
     protected $table = "family_profiles";
 
     protected $fillable = [
-        'cesno',
+        'personal_data_cesno',
         'father_last_name',
         'father_first_name',
         'father_middle_name',
-        'suffix',
+        'name_extension',
         'mother_last_name',
         'mother_first_name',
         'mother_middle_name',
