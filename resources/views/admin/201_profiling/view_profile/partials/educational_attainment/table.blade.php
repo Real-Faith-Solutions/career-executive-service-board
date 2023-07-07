@@ -14,42 +14,57 @@
                 <th scope="col" class="px-6 py-3">
                     Level
                 </th>
+
                 <th scope="col" class="px-6 py-3">
                     School
                 </th>
+
                 <th scope="col" class="px-6 py-3">
                     School Type
                 </th>
+
                 <th scope="col" class="px-6 py-3">
                     Period of Attendance
                 </th>
+
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
+
         <tbody>
+            @foreach ($educationalAttainment as $newEducationalAttainment)
 
-            <tr class="border-b bg-white">
-                <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Elementary
-                </td>
-                <td class="px-6 py-3">
-                    Bagong Silang High school
-                </td>
-                <td class="px-6 py-3">
-                    Local
-                </td>
-                <td class="px-6 py-3">
-                    2019
-                </td>
+                <tr class="border-b bg-white">
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $newEducationalAttainment->level }}
+                    </td>
 
-                <td class="px-6 py-4 text-right uppercase">
-                    <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                </td>
-            </tr>
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->school }}
+                    </td>
 
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->school_type }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->period_of_attendance_from." ".$newEducationalAttainment->period_of_attendance_to }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
+                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                        
+                         <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+                
+            @endforeach
         </tbody>
     </table>
 </div>
