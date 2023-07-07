@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('floor_bldg')->nullable();
             $table->string('no_street')->nullable();
+            $table->string('region')->nullable();
             $table->string('brgy_or_district')->nullable();
             $table->string('city_or_municipality')->nullable();
             $table->string('zip_code')->nullable();

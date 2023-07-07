@@ -13,10 +13,12 @@ class ProfileAddress extends Model
         'type',
         'floor_bldg',
         'no_street',
-        'brgy_or_district',
+        'region',
         'city_or_municipality',
+        'brgy_or_district',
         'zip_code',
         'encoder',
         'last_updated_by',
     ];
 }
+//
