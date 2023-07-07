@@ -40,9 +40,10 @@ Route::get('/', function () {
 });
 
 Route::get('family-profile{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
-Route::post('family-profile/store/{cesno}', [FamilyController::class, 'store'])->name('family-profile.store');
+Route::post('family-profile/store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
 Route::post('family-profile/store/children/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
-Route::post('family-profile/store/father/mother/{cesno}', [FamilyController::class, 'storeFamilyProfile'])->name('family-profile-father-mother.store');
+Route::post('family-profile/store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
+Route::post('family-profile/store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
