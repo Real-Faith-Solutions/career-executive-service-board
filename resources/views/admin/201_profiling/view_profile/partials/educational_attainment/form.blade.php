@@ -87,7 +87,7 @@
 
                     <div class="mb-3">
                         <label for="highest_level">Highest Level / Unit earned (if not graduated)</label>
-                        <input id="highest_level" name="highest_level" readonly required type="text">
+                        <input id="highest_level" name="highest_level" required type="text">
                         @error('highest_level')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
