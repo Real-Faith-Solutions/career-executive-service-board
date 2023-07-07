@@ -7782,3 +7782,27 @@ const openTableResearchAndStudies = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormWorkExperience = () => {
+    var form = document.querySelector('.form-work-experience');
+    var openForm = document.querySelector('[onclick="openFormWorkExperience()"]');
+    var table = document.querySelector('.table-work-experience');
+    var openTable = document.querySelector('[onclick="openTableWorkExperience()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableWorkExperience = () => {
+    var form = document.querySelector('.form-work-experience');
+    var openForm = document.querySelector('[onclick="openFormWorkExperience()"]');
+    var table = document.querySelector('.table-work-experience');
+    var openTable = document.querySelector('[onclick="openTableWorkExperience()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
