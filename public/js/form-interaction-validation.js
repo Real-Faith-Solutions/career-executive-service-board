@@ -65,8 +65,9 @@
 
 // real-time validation
 
-    // initializing form and its inputs
-    const form = document.getElementById('personal_data');
+    // initializing personal_data_form and its inputs
+    const personal_data_form = document.getElementById('personal_data');
+    const personal_data_submit = document.getElementById('personal_data_submit');
     const inputFieldLastName = document.getElementById('lastname');
     const ErrorMessageLastName = document.getElementById('ErrorMessageLastName');
     const inputFieldFirstname = document.getElementById('firstname');
@@ -85,18 +86,49 @@
     inputFieldMiddlename.addEventListener('keypress', validateInputMiddlename);
     inputFieldNickname.addEventListener('input', validateInputNickname);
     inputFieldNickname.addEventListener('keypress', validateInputNickname);
+    // personal_data_submit.addEventListener('keypress', validateInputNickname);
 
-    // functions for disabling and enabling form submission
-        // To disable form submission
-        function preventFormSubmission(event) {
-            event.preventDefault();
-        }
+    // functions for disabling and enabling personal_data_form submission
+    let personal_data_errors = document.querySelectorAll('.personal_data_error');
 
-        // To re-enable form submission
-        function enableFormSubmission() {
-            form.removeEventListener('submit', preventFormSubmission);
+    personal_data_form.addEventListener('submit', function(event) {
+        for (let i = 0; i < personal_data_errors.length; i++) {
+            if (personal_data_errors[i].textContent != '') {
+                event.preventDefault();
+                break;
+            }
         }
+    });
     // end
+
+    // Add click event listener to the document body
+    document.body.addEventListener('click', function(event) {
+        // Check if the clicked element is the input field
+        if (event.target !== inputFieldLastName) {
+            if(ErrorMessageLastName.textContent == 'Input must not contain numbers.'){
+                ErrorMessageLastName.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldFirstname) {
+            if(ErrorMessageFirstname.textContent == 'Input must not contain numbers.'){
+                ErrorMessageFirstname.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldMiddlename) {
+            if(ErrorMessageMiddlename.textContent == 'Input must not contain numbers.'){
+                ErrorMessageMiddlename.textContent = '';
+            }
+        }
+
+        if (event.target !== inputFieldNickname) {
+            if(ErrorMessageNickname.textContent == 'Input must not contain numbers.'){
+                ErrorMessageNickname.textContent = '';
+            }
+        }
+      });
+    // end of Add click event listener to the document body
 
     // lastname validations
     function validateInputLastName() {
@@ -106,11 +138,32 @@
 
         if (inputValueLastName.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageLastName.textContent = 'Lastname must be at least 2 characters long.';
+            inputFieldLastName.classList.remove('focus:outline-blue-600');
+            inputFieldLastName.classList.add('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
+        }else if (inputValueLastName.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageLastName.textContent = 'Atleast 2 characters without number.';
+            inputFieldLastName.classList.remove('focus:outline-blue-600');
+            inputFieldLastName.classList.add('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageLastName.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageLastName.textContent = '';
+            inputFieldLastName.classList.remove('focus:outline-red-500');
+            inputFieldLastName.classList.remove('border-red-600');
+            inputFieldLastName.classList.add('focus:outline-blue-600');
+            personal_data_submit.disabled = false;
+            personal_data_submit.classList.remove('cursor-not-allowed');
+            personal_data_submit.classList.add('cursor-pointer');
         }
 
     }
@@ -124,11 +177,32 @@
 
         if (inputValueFirstname.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageFirstname.textContent = 'Firstname must be at least 2 characters long.';
+            inputFieldFirstname.classList.remove('focus:outline-blue-600');
+            inputFieldFirstname.classList.add('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
+        }else if (inputValueFirstname.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageFirstname.textContent = 'Atleast 2 characters without number.';
+            inputFieldFirstname.classList.remove('focus:outline-blue-600');
+            inputFieldFirstname.classList.add('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageFirstname.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageFirstname.textContent = '';
+            inputFieldFirstname.classList.remove('focus:outline-red-500');
+            inputFieldFirstname.classList.remove('border-red-600');
+            inputFieldFirstname.classList.add('focus:outline-blue-600');
+            personal_data_submit.disabled = false;
+            personal_data_submit.classList.remove('cursor-not-allowed');
+            personal_data_submit.classList.add('cursor-pointer');
         }
 
     }
@@ -142,11 +216,32 @@
 
         if (inputValueMiddlename.length < 2 && !(charCode >= 48 && charCode <= 57)) {
             ErrorMessageMiddlename.textContent = 'Middlename must be at least 2 characters long.';
+            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
+            inputFieldMiddlename.classList.add('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
+        }else if (inputValueMiddlename.length < 2 && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            ErrorMessageMiddlename.textContent = 'Atleast 2 characters without number.';
+            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
+            inputFieldMiddlename.classList.add('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-red-500');
+            personal_data_submit.disabled = true;
+            personal_data_submit.classList.remove('cursor-pointer');
+            personal_data_submit.classList.add('cursor-not-allowed');
         }else if (charCode >= 48 && charCode <= 57) {
             event.preventDefault();
             ErrorMessageMiddlename.textContent = 'Input must not contain numbers.';
         }else {
             ErrorMessageMiddlename.textContent = '';
+            inputFieldMiddlename.classList.remove('focus:outline-red-500');
+            inputFieldMiddlename.classList.remove('border-red-600');
+            inputFieldMiddlename.classList.add('focus:outline-blue-600');
+            personal_data_submit.disabled = false;
+            personal_data_submit.classList.remove('cursor-not-allowed');
+            personal_data_submit.classList.add('cursor-pointer');
         }
 
     }
