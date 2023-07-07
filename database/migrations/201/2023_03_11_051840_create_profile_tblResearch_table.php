@@ -14,15 +14,12 @@ return new class extends Migration
         //research_and_studies
         Schema::create('profile_tblResearch', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->date('title')->nullable();
-            $table->date('sponsor')->nullable();
-            $table->string('from_dt')->nullable();
-            $table->string('to_dt')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->bigInteger('cesno');
+            $table->string('title');
+            $table->string('publisher');
+            $table->string('inclusive_date_from');
+            $table->string('inclusive_date_to');
+            $table->string('encoder');
             $table->timestamps();
         });
     }

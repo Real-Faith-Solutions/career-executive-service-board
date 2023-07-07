@@ -7758,3 +7758,27 @@ const openTableScholarships = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormResearchAndStudies = () => {
+    var form = document.querySelector('.form-research-and-studies');
+    var openForm = document.querySelector('[onclick="openFormResearchAndStudies()"]');
+    var table = document.querySelector('.table-research-and-studies');
+    var openTable = document.querySelector('[onclick="openTableResearchAndStudies()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableResearchAndStudies = () => {
+    var form = document.querySelector('.form-research-and-studies');
+    var openForm = document.querySelector('[onclick="openFormResearchAndStudies()"]');
+    var table = document.querySelector('.table-research-and-studies');
+    var openTable = document.querySelector('[onclick="openTableResearchAndStudies()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
