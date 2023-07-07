@@ -37,7 +37,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="inclusive_date_from">Inclusive Dates (From)</label>
+                        <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
                         <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="inclusive_date_to">Inclusive Dates (To)</label>
+                        <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
                         <input id="inclusive_date_to" name="inclusive_date_to" type="date" required>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
