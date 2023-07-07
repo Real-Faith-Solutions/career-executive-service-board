@@ -7806,3 +7806,27 @@ const openTableWorkExperience = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormFieldExpertise = () => {
+    var form = document.querySelector('.form-field-expertise');
+    var openForm = document.querySelector('[onclick="openFormFieldExpertise()"]');
+    var table = document.querySelector('.table-field-expertise');
+    var openTable = document.querySelector('[onclick="openTableFieldExpertise()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableFieldExpertise = () => {
+    var form = document.querySelector('.form-field-expertise');
+    var openForm = document.querySelector('[onclick="openFormFieldExpertise()"]');
+    var table = document.querySelector('.table-field-expertise');
+    var openTable = document.querySelector('[onclick="openTableFieldExpertise()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

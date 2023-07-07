@@ -1,30 +1,22 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Field of Expertise</button>
+    <button class="btn btn-primary" onclick="openFormFieldExpertise()">Add Field Expertise</button>
+    <button class="btn btn-primary hidden" onclick="openTableFieldExpertise()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-field-expertise hidden">
+    @include('admin.201_profiling.view_profile.partials.field_expertise.form')
+</div>
+
+
+<div class="table-field-expertise relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Ces No.
-                </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Specialization
+                    Expertise / Field of Specialization
                 </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Encoder
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Created At
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Updated At
-                </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
@@ -34,22 +26,6 @@
 
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
-
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
-
-                <td class="px-6 py-3">
                     Lorem ipsum
                 </td>
 
