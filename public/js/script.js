@@ -7580,6 +7580,10 @@ const personDataTab = () => {
 const addressTab = () => {
     handleCategoryClick('addressTab', '[onclick="addressTab()"]');
 };
+const identificationTab = () => {
+    handleCategoryClick('identificationTab', '[onclick="identificationTab()"]');
+};
+
 const familyProfileTab = () => {
     handleCategoryClick('familyProfileTab', '[onclick="familyProfileTab()"]');
 };

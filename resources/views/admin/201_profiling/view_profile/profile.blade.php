@@ -38,6 +38,9 @@
                             <li>
                                 <a class="btn category-button" href="#addressTab" onclick="addressTab()">Address</a>
                             </li>
+                            <li>
+                                <a class="btn category-button" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -159,6 +162,9 @@
                 </div>
                 <div class="category addressTab hidden">
                     @include('admin.201_profiling.view_profile.partials.address')
+                </div>
+                <div class="category identificationTab hidden">
+                    @include('admin.201_profiling.view_profile.partials.identification')
                 </div>
                 <div class="category familyProfileTab hidden">
                     @include('admin.201_profiling.view_profile.partials.family_profile')

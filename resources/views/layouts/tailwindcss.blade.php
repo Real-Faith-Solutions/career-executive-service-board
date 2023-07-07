@@ -4,7 +4,7 @@
 <style type="text/tailwindcss">
     @layer utilities {
         .btn {
-            @apply inline-flex items-center py-2 px-4 uppercase tracking-widest text-sm hover:opacity-80;
+            @apply inline-flex items-center py-2 px-4 uppercase tracking-widest text-sm hover:opacity-80 rounded;
         }
         .btn-primary {
             @apply bg-blue-500 text-white;

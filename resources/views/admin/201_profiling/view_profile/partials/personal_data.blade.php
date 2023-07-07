@@ -1,230 +1,171 @@
-<div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-    <h1>Personal data</h1>
-</div>
-
-<form class="user" id="personal_data" method="POST" enctype="multipart/form-data" action="{{ route('/add-profile-201') }}">
-
-    @csrf
-    <div class="border-b bg-white px-6 py-3">
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div class="mb-3">
-                <label for="cesno">CES Number</label>
-                <input id="cesno" type="number" name="cesno" value="{{ $mainProfile->cesno }}" readonly>
-
-            </div>
-
-            <div></div>
-
-            {{-- <div class="mb-3">
-                <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label>
-                <input class="mb-3 p-1" id="picture" name="picture" accept="image/png, image/jpeg" type="file" onclick="validateFileSize(`picture`, 2)" />
-            </div> --}}
-
+<div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+    <div class="w-full text-left text-gray-500">
+        <div class="bg-blue-500 uppercase text-gray-700 text-white">
+            <h1 class="px-6 py-3">
+                Personal Data
+            </h1>
         </div>
 
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="title">Title<sup>*</sup></label>
-                <input id="title" name="title" value="{{ $mainProfile->title }}" readonly>
-
-            </div>
-            <div></div>
-
-            <div class="mb-3">
-                <label for="status">Record Status<sup>*</span></label>
-                <input name="status" id="status" value="{{ $mainProfile->status }}" readonly>
-
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="lastname">Lastname<sup>*</sup></label>
-                <input type="text" id="lastname" name="lastname" value="{{ $mainProfile->lastname }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="firstname">Firstname<sup>*</sup></label>
-                <input type="text" id="firstname" name="firstname" value="{{ $mainProfile->firstname }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="name_extension">Name Extension</label>
-                <input name="name_extension" id="name_extension" value="{{ $mainProfile->name_extension }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="middlename">Middlename<sup>*</sup></label>
-                <input type="text" id="middlename" name="middlename" value="{{ $mainProfile->middlename }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="mi">Middle initial<sup>*</sup></label>
-                <input type="text" id="mi" name="mi" value="{{ $mainProfile->mi }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="nickname">Nickname</label>
-                <input type="text" id="nickname" name="nickname" value="{{ $mainProfile->nickname }}" readonly>
-            </div>
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="birthdate">Birthdate<sup>*</sup></label>
-                <input type="date" id="birthdate" name="birthdate" value="{{ $mainProfile->birthdate }}" readonly>
-            </div>
-            <div class="mb-3">
-                <label for="age">Age<sup class="text-danger">*</sup></label>
-                <input type="number" id="age" name="age" value="{{ $mainProfile->age }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="birth_place">Birth Place<sup>*</sup></label>
-                <input type="text" id="birth_place" name="birth_place" value="{{ $mainProfile->birth_place }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div class="mb-3">
-                <label for="gender">Gender By Birth<sup>*</sup></label>
-                <input id="gender" name="gender" value="{{ $mainProfile->gender }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-                <input id="gender_by_choice" name="gender_by_choice" value="{{ $mainProfile->gender_by_choice }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="civil_status">Civil Status<sup>*</sup></label>
-                <input id="civil_status" name="civil_status" value="{{ $mainProfile->civil_status }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="religion">Religion<sup>*</sup></label>
-                <input id="religion" name="religion" value="{{ $mainProfile->religion }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="height">Height (in meters)<sup>*</sup></label>
-                <input type="text" id="height" name="height" value="{{ $mainProfile->height }}" readonly>
-            </div>
-            <div class="mb-3">
-                <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-                <input type="text" id="weight" name="weight" value="{{ $mainProfile->weight }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-            <div class="mb-3">
-                <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
-                <input name="member_of_indigenous_group" id="member_of_indigenous_group" value="{{ $mainProfile->member_of_indigenous_group }}"readonly>
-            </div>
-
-            {{-- <div class="mb-3">
-                <label for="member_of_indigenous_group_others">If others, please specify</label>
-                <input type="text" id="member_of_indigenous_group_others" name="member_of_indigenous_group_others" readonly>
-            </div> --}}
-
-            <div class="mb-3">
-                <label for="single_parent">Solo Parent?<sup>*</sup></label>
-                <input name="sp" id="single_parent" value="{{ $mainProfile->single_parent }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div class="mb-3">
-                <label for="citizenship">Citizenship<sup>*</sup></label>
-                <input name="citizenship" id="citizenship" value="{{ $mainProfile->citizenship }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
-                <input type="text" name="dual_citizenship" id="dual_citizenship" value="{{ $mainProfile->dual_citizenship }}" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="person_with_disability" class="ml-2 text-sm font-medium text-gray-900">is PWD?</label>
-                <input name="person_with_disability" id="person_with_disability" value="{{ $mainProfile->person_with_disability }}" readonly>
-            </div>
-
-        </div>
-
-        {{-- identification cards --}}
-        <section>
-            <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-                <h1>Identification cards</h1>
-            </div>
+        <div class="border-b bg-white px-6 py-3">
 
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="mb-3">
-                    <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                    <input type="text" id="gsis" name="gsis" class="form-control w-100 mb-3" value="{{ $mainProfile->gsis }}" onchange="validateData(`gsis id`,`{{ env('APP_URL') }}api/v1/personal-data/validate-data`,this.value,`gsis`)" required>
-                    @error('gsis')
-                        <span class="invalid" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                    <input type="text" id="pagibig" name="pagibig" class="form-control w-100 mb-3" value="{{ $mainProfile->pagibig }}" onchange="validateData(`pagibig id`,`{{ env('APP_URL') }}api/v1/personal-data/validate-data`,this.value,`pagibig`)" required>
-                    @error('pagibig')
-                        <span class="invalid" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <label for="cesno">CES Number</label>
+                    <input id="cesno" name="cesno" readonly type="number" value="{{ $mainProfile->cesno }}">
+
                 </div>
 
+                <div></div>
+
+                {{-- <div class="mb-3">
+                            <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label>
+                            <input accept="image/png, image/jpeg" class="mb-3 p-1" id="picture" name="picture" onclick="validateFileSize(`picture`, 2)" type="file" />
+                        </div> --}}
+
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
                 <div class="mb-3">
-                    <label for="philhealth">PHILHEALTH ID No.<sup>*</sup></label>
-                    <input type="text" id="philhealth" name="philhealth" class="form-control w-100 mb-3" value="{{ $mainProfile->philhealth }}" onchange="validateData(`philhealth id`,`{{ env('APP_URL') }}api/v1/personal-data/validate-data`,this.value,`philhealt`)" required>
-                    @error('philhealth')
-                        <span class="invalid" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <label for="title">Title<sup>*</sup></label>
+                    <input id="title" name="title" readonly value="{{ $mainProfile->title }}">
+
+                </div>
+                <div></div>
+
+                <div class="mb-3">
+                    <label for="status">Record Status<sup>*</span></label>
+                    <input id="status" name="status" readonly value="{{ $mainProfile->status }}">
+
                 </div>
 
             </div>
 
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="col-md-4">
-                    <label for="sss_no">SSS ID No.</label>
-                    <input type="text" id="sss_no" name="sss_no" class="form-control w-100 mb-3" value="{{ $mainProfile->sss_no }}" onchange="validateData(`sss id`,`{{ env('APP_URL') }}api/v1/personal-data/validate-data`,this.value,`sss_no`)">
-                    @error('sss_no')
-                        <span class="invalid" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+
+                <div class="mb-3">
+                    <label for="lastname">Lastname<sup>*</sup></label>
+                    <input id="lastname" name="lastname" readonly type="text" value="{{ $mainProfile->lastname }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="tin">TIN ID No.</label>
-                    <input type="text" id="tin" name="tin" class="form-control w-100 mb-3" value="{{ $mainProfile->tin }}" onchange="validateData(`tin id`,`{{ env('APP_URL') }}api/v1/personal-data/validate-data`,this.value,`tin`)">
-                    @error('tin')
-                        <span class="invalid" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+
+                <div class="mb-3">
+                    <label for="firstname">Firstname<sup>*</sup></label>
+                    <input id="firstname" name="firstname" readonly type="text" value="{{ $mainProfile->firstname }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="name_extension">Name Extension</label>
+                    <input id="name_extension" name="name_extension" readonly value="{{ $mainProfile->name_extension }}">
+                </div>
+
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="mb-3">
+                    <label for="middlename">Middlename<sup>*</sup></label>
+                    <input id="middlename" name="middlename" readonly type="text" value="{{ $mainProfile->middlename }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="mi">Middle initial<sup>*</sup></label>
+                    <input id="mi" name="mi" readonly type="text" value="{{ $mainProfile->mi }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="nickname">Nickname</label>
+                    <input id="nickname" name="nickname" readonly type="text" value="{{ $mainProfile->nickname }}">
                 </div>
             </div>
-        </section>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="mb-3">
+                    <label for="birthdate">Birthdate<sup>*</sup></label>
+                    <input id="birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birthdate }}">
+                </div>
+                <div class="mb-3">
+                    <label for="age">Age<sup class="text-danger">*</sup></label>
+                    <input id="age" name="age" readonly type="number" value="{{ $mainProfile->age }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="birth_place">Birth Place<sup>*</sup></label>
+                    <input id="birth_place" name="birth_place" readonly type="text" value="{{ $mainProfile->birth_place }}">
+                </div>
+
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="mb-3">
+                    <label for="gender">Gender By Birth<sup>*</sup></label>
+                    <input id="gender" name="gender" readonly value="{{ $mainProfile->gender }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
+                    <input id="gender_by_choice" name="gender_by_choice" readonly value="{{ $mainProfile->gender_by_choice }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="civil_status">Civil Status<sup>*</sup></label>
+                    <input id="civil_status" name="civil_status" readonly value="{{ $mainProfile->civil_status }}">
+                </div>
+
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="mb-3">
+                    <label for="religion">Religion<sup>*</sup></label>
+                    <input id="religion" name="religion" readonly value="{{ $mainProfile->religion }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="height">Height (in meters)<sup>*</sup></label>
+                    <input id="height" name="height" readonly type="text" value="{{ $mainProfile->height }}">
+                </div>
+                <div class="mb-3">
+                    <label for="weight">Weight (in kilograms)<sup>*</sup></label>
+                    <input id="weight" name="weight" readonly type="text" value="{{ $mainProfile->weight }}">
+                </div>
+
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                <div class="mb-3">
+                    <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
+                    <input id="member_of_indigenous_group" name="member_of_indigenous_group" value="{{ $mainProfile->member_of_indigenous_group }}"readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="member_of_indigenous_group_others">If others, please specify</label>
+                    <input id="member_of_indigenous_group_others" name="member_of_indigenous_group_others" readonly type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label for="single_parent">Solo Parent?<sup>*</sup></label>
+                    <input id="single_parent" name="sp" readonly value="{{ $mainProfile->single_parent }}">
+                </div>
+            </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="mb-3">
+                    <label for="citizenship">Citizenship<sup>*</sup></label>
+                    <input id="citizenship" name="citizenship" readonly value="{{ $mainProfile->citizenship }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
+                    <input id="dual_citizenship" name="dual_citizenship" readonly type="text" value="{{ $mainProfile->dual_citizenship }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is PWD?</label>
+                    <input id="person_with_disability" name="person_with_disability" readonly value="{{ $mainProfile->person_with_disability }}">
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</div>
