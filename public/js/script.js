@@ -7856,3 +7856,27 @@ const openTableCesTraining = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormManagementTraining = () => {
+    var form = document.querySelector('.form-management-training');
+    var openForm = document.querySelector('[onclick="openFormManagementTraining()"]');
+    var table = document.querySelector('.table-management-training');
+    var openTable = document.querySelector('[onclick="openTableManagementTraining()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableManagementTraining = () => {
+    var form = document.querySelector('.form-management-training');
+    var openForm = document.querySelector('[onclick="openFormManagementTraining()"]');
+    var table = document.querySelector('.table-management-training');
+    var openTable = document.querySelector('[onclick="openTableManagementTraining()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

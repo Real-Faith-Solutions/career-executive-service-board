@@ -1,8 +1,13 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Other Training</button>
+    <button class="btn btn-primary" onclick="openFormManagementTraining()">Add Management Training</button>
+    <button class="btn btn-primary hidden" onclick="openTableManagementTraining()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-management-training hidden">
+    @include('admin.201_profiling.view_profile.partials.other_management_trainings.form')
+</div>
+
+<div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
