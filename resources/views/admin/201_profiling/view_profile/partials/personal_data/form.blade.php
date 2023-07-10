@@ -140,13 +140,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="member_of_indigenous_group_others">If others, please specify</label>
-                    <input id="member_of_indigenous_group_others" name="member_of_indigenous_group_others" readonly type="text">
-                </div>
-
-                <div class="mb-3">
                     <label for="single_parent">Solo Parent?<sup>*</sup></label>
                     <input id="single_parent" name="sp" readonly value="{{ $mainProfile->single_parent }}">
+                </div>
+                <div class="mb-3">
+                    <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is PWD?</label>
+                    <input id="person_with_disability" name="person_with_disability" readonly value="{{ $mainProfile->person_with_disability }}">
                 </div>
             </div>
 
@@ -159,11 +158,6 @@
                 <div class="mb-3">
                     <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
                     <input id="dual_citizenship" name="dual_citizenship" readonly type="text" value="{{ $mainProfile->dual_citizenship }}">
-                </div>
-
-                <div class="mb-3">
-                    <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is PWD?</label>
-                    <input id="person_with_disability" name="person_with_disability" readonly value="{{ $mainProfile->person_with_disability }}">
                 </div>
             </div>
         </div>

@@ -9,9 +9,20 @@
             <h1 class="text-bold text-2xl">
                 {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
             </h1>
-            <p class="btn @if ($mainProfile->status === 'Active') text-green-800 bg-green-100 @endif @if ($mainProfile->status === 'Inactive') text-orange-800 bg-orange-100 @endif @if ($mainProfile->status === 'Retire') text-red-800 bg-red-100 @endif @if ($mainProfile->status === 'Deceased') text-yellow-800 bg-yellow-100 @endif">
+            <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded
+                @if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif
+                @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif
+                @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif
+                @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif">
                 {{ $mainProfile->status }}
-            </p>
+            </span>
+            {{-- <p class="btn
+                @if ($mainProfile->status === 'Active') text-green-800 bg-green-100 @endif
+                @if ($mainProfile->status === 'Inactive') text-orange-800 bg-orange-100 @endif
+                @if ($mainProfile->status === 'Retired') text-blue-800 bg-blue-100 @endif
+                @if ($mainProfile->status === 'Deceased') text-red-800 bg-red-100 @endif">
+                {{ $mainProfile->status }}
+            </p> --}}
             <p>CES number: {{ $mainProfile->cesno }}</p>
         </div>
 
