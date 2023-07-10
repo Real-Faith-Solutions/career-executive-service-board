@@ -66,6 +66,7 @@ use App\Models\ProfileLibTblCities;
 use App\Models\ProfileLibTblProvince;
 use App\Models\ProfileLibTblRegion;
 use App\Models\Country;
+use App\Models\IndigenousGroup;
 
 class ProfileController extends Controller
 {
@@ -79,8 +80,14 @@ class ProfileController extends Controller
         }
 
         $countries = Country::all();
+        $indigenousGroups = IndigenousGroup::all();
 
-        return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber , 'countries' => $countries]);
+        return view('admin.201_profiling.create_profile.form',[
+            'cesNumber' => ++$cesNumber,
+            'countries' => $countries,
+            'indigenousGroups' => $indigenousGroups,
+
+        ]);
     }
 
     public function viewProfile($cesno)

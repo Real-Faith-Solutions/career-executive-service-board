@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CesWebAppGeneralPageAccessesTableSeeder::class,
             ProfileData::class,
             ProfileAddress::class,
+            IndigenousGroup::class,
         ]);
 
     }

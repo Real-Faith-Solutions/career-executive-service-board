@@ -218,13 +218,9 @@
             <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
             <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group">
                 <datalist id="member_of_indigenous_group_choices">
-                    <option value="Not a member">Not a member</option>
-                    <option value="Igorot">Igorot</option>
-                    <option value="Lumad">Lumad</option>
-                    <option value="Mangyan">Mangyan</option>
-                    <option value="B'laan">B'laan</option>
-                    <option value="Tagbanua">Tagbanua</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
+                    @foreach ($indigenousGroups as $indigenousGroup)
+                        <option value="{{ $indigenousGroup->name }}">{{ $indigenousGroup->name }}</option>
+                    @endforeach
                 </datalist>
         </div>
 
