@@ -70,6 +70,8 @@ use App\Models\IndigenousGroup;
 use App\Models\PWD;
 use App\Models\GenderByChoice;
 use App\Models\GenderByBirth;
+use App\Models\NameExtension;
+
 
 
 class ProfileController extends Controller
@@ -88,6 +90,7 @@ class ProfileController extends Controller
         $pwds = PWD::all();
         $genderByChoices = GenderByChoice::all();
         $genderByBirths = GenderByBirth::all();
+        $nameExtensions = NameExtension::all();
 
         return view('admin.201_profiling.create_profile.form',[
             'cesNumber' => ++$cesNumber,
@@ -96,6 +99,7 @@ class ProfileController extends Controller
             'pwds' => $pwds,
             'genderByChoices' => $genderByChoices,
             'genderByBirths' => $genderByBirths,
+            'nameExtensions' => $nameExtensions,
 
         ]);
     }

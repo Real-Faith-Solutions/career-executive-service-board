@@ -74,19 +74,12 @@
         <div class="mb-3">
 
             <label for="name_extension">Name Extension</label>
-            <select name="name_extension" id="name_extension" >
-                <option disabled selected>Please Select</option>
-                <option value="">N/A</option>
-                <option value="Jr.">Jr.</option>
-                <option value="Sr.">Sr.</option>
-                <option value="I">I</option>
-                <option value="II">II</option>
-                <option value="III">III</option>
-                <option value="IV">IV</option>
-                <option value="V">V</option>
-                <option value="VI">VI</option>
-            </select>
-
+            <input type="search" list="name_extension_choices" name="name_extension" id="name_extension">
+            <datalist id="name_extension_choices">
+                @foreach ($nameExtensions as $nameExtension)
+                    <option value="{{ $nameExtension->name }}">{{ $nameExtension->name }}</option>
+                @endforeach
+            </datalist>
         </div>
 
     </div>
