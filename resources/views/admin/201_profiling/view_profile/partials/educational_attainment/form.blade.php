@@ -30,7 +30,15 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="school">School</label>
-                        <input id="school" name="school" type="text">
+                        {{-- <input id="school" name="school" type="text"> --}}
+                        <select id="school" name="school" required>
+                            <option disabled selected>Select School</option>
+                            @foreach($profileLibTblEducSchool as $profileLibTblEducSchools)
+                                <option value="{{ $profileLibTblEducSchools }}">
+                                    {{ $profileLibTblEducSchools }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('school')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -39,8 +47,34 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="specialization">Specialization<sup>*</span></label>
+                        {{-- <input id="degree" name="degree" type="text"> --}}
+                        <select id="specialization" name="specialization" required>
+                            <option disabled selected>Select Specialization</option>
+                            @foreach($profileLibTblEducMajor as $profileLibTblEducMajors)
+                                <option value="{{ $profileLibTblEducMajors }}">
+                                    {{ $profileLibTblEducMajors }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('degree')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="degree">Degree<sup>*</span></label>
-                        <input id="degree" name="degree" type="text">
+                        {{-- <input id="degree" name="degree" type="text"> --}}
+                        <select id="degree" name="degree" required>
+                            <option disabled selected>Select Degree</option>
+                            @foreach($profileLibTblEducDegree as $profileLibTblEducDegrees)
+                                <option value="{{ $profileLibTblEducDegrees }}">
+                                    {{ $profileLibTblEducDegrees }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('degree')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

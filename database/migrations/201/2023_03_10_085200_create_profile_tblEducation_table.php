@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
             $table->string('level');
+            $table->string('specialization');
             $table->string('school');
             $table->string('degree')->nullable();
             $table->string('school_type');

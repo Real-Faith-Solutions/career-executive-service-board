@@ -21,6 +21,7 @@ class EducationalAttainment extends Model
 
         'personal_data_cesno',
         'level',
+        'specialization',
         'school',
         'degree',
         'school_type',
