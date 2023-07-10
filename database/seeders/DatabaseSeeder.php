@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,
+            GenderByBirth::class,
         ]);
 
     }

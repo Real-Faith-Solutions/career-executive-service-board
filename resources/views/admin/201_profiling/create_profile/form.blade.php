@@ -136,24 +136,20 @@
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div class="mb-3">
-
             <label for="gender">Gender By Birth<sup>*</sup></label>
-            <select id="gender" name="gender" >
-                <option disabled selected>Please Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Prefer not to say">Prefer not to say</option>
+            <select id="gender" name="gender" required>
+                @foreach ($genderByBirths as $genderByBirth)
+                    <option value="{{ $genderByBirth->name }}">{{ $genderByBirth->name }}</option>
+                @endforeach
             </select>
-
         </div>
 
         <div class="mb-3">
-
             <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-            <input type="search" list="gender_by_choice_choices" id="gender_by_choice" name="gender_by_choice" >
+            <input type="search" list="gender_by_choice_choices" id="gender_by_choice" name="gender_by_choice" required>
             <datalist id="gender_by_choice_choices">
-                @foreach ($genderByChoice as $genderByChoices)
-                    <option value="{{ $genderByChoices->name }}">{{ $genderByChoices->name }}</option>
+                @foreach ($genderByChoices as $genderByChoice)
+                    <option value="{{ $genderByChoice->name }}">{{ $genderByChoice->name }}</option>
                 @endforeach
             </datalist>
         </div>
@@ -208,7 +204,7 @@
 
         <div class="mb-3">
             <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
-            <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group">
+            <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group" required>
                 <datalist id="member_of_indigenous_group_choices">
                     <option value="Not a member">Not a member</option>
                     @foreach ($indigenousGroups as $indigenousGroup)
@@ -219,7 +215,7 @@
 
         <div class="mb-3">
             <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-            <input type="search" list="person_with_disability_choices" name="person_with_disability" id="person_with_disability">
+            <input type="search" list="person_with_disability_choices" name="person_with_disability" id="person_with_disability" required>
                 <datalist id="person_with_disability_choices">
                     <option value="No">No</option>
                     @foreach ($pwds as $pwd)
@@ -244,7 +240,7 @@
         <div class="mb-3">
             <div id="dependent-dual-citizenship-field" style="display: none;">
                 <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                <input type="search" list="dependent-dual-citizenship-input_choices" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <input type="search" list="dependent-dual-citizenship-input_choices" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out" required>
                 <datalist id="dependent-dual-citizenship-input_choices">
                     @foreach ($countries as $country)
                         <option value="{{ $country->name }}">{{ $country->name }}</option>
