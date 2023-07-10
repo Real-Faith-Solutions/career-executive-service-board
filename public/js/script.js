@@ -8000,3 +8000,27 @@ const openTableLanguageDialect = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormEligibilityAndRankTracker = () => {
+    var form = document.querySelector('.form-eligibility-and-rank-tracker');
+    var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
+    var table = document.querySelector('.table-eligibility-and-rank-tracker');
+    var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableEligibilityAndRankTracker = () => {
+    var form = document.querySelector('.form-eligibility-and-rank-tracker');
+    var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
+    var table = document.querySelector('.table-eligibility-and-rank-tracker');
+    var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
