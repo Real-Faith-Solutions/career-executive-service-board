@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        \App\Models\ProfileLibTblExamRef::factory(10)->create();
+
         $this->call([
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,

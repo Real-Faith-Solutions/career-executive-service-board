@@ -7,15 +7,16 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('examination-taken.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
                 @csrf
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="type">Type of Examination<sup>*</sup></label>
                         <select id="type" name="type" required>
                             <option disabled selected>Select Type of Examination</option>
-                            <option value="Civil Service Eligibility - Pro">Civil Service Eligibility - Pro</option>
-                            <option value="Civil Service Eligibility - Sub-Pro">Civil Service Eligibility - Sub-Pro</option>
+                            @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
+                                <option value="{{ $profileLibTblExamRefs }}">{{ $profileLibTblExamRefs }}</option>
+                            @endforeach
                         </select>
                         @error('type')
                             <span class="invalid" role="alert">
@@ -49,8 +50,8 @@
 
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
-                        <input id="date_of_examination" name="date_of_examination" required type="text">
-                        @error('date_of_examination')
+                        <input id="place_of_examination" name="place_of_examination" required type="text">
+                        @error('place_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -91,7 +92,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

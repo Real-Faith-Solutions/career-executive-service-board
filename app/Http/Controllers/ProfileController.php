@@ -112,11 +112,13 @@ class ProfileController extends Controller
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $identification = Identification::where('personal_data_cesno', $cesno)->get();
+        $profileLibTblExamRef = ProfileLibTblExamRef::pluck('TITLE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+        $examinationTaken = PersonalData::find($cesno)->examinationTakens;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment'));
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblExamRef', 'examinationTaken'));
     }
 
     public function validateData($type, $value)
@@ -1275,7 +1277,7 @@ class ProfileController extends Controller
                 $Father = Father::where('personal_data_cesno', '=', '1')->get();
                 $ChildrenRecords = ChildrenRecords::where('personal_data_cesno', '=', '1')->get();
                 $EducationalAttainment = EducationalAttainment::where('personal_data_cesno', '=', '1')->get();
-                $ExaminationsTaken = ExaminationsTaken::where('cesno', '=', '1')->get();
+                $ExaminationsTaken = ExaminationsTaken::where('personal_data_cesno', '=', '1')->get();
                 $LicenseDetails = LicenseDetails::where('cesno', '=', '1')->get();
                 $LanguagesDialects = LanguagesDialects::where('cesno', '=', '1')->get();
                 $CesWe = CesWe::where('cesno', '=', '1')->get();

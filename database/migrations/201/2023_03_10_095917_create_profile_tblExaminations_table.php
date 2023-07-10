@@ -14,7 +14,9 @@ return new class extends Migration
         //examinations_takens
         Schema::create('profile_tblExaminations', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno');
+            // $table->bigInteger('cesno');
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
             $table->string('type');
             $table->string('rating')->nullable();
             $table->string('date_of_examination');
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->string('date_acquired')->nullable();
             $table->string('date_validity')->nullable();
             $table->string('encoder');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
