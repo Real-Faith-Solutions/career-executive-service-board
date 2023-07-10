@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ProfileData::class,
             ProfileAddress::class,
             IndigenousGroup::class,
+            PWD::class,
         ]);
 
     }

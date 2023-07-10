@@ -230,8 +230,10 @@
             <input type="search" list="person_with_disability_choices" name="person_with_disability" id="person_with_disability">
                 <datalist id="person_with_disability_choices">
                     <option value="No">No</option>
-                    <option value="Disability 1">Disability 1</option>
-                    <option value="Disability 2">Disability 2</option>
+                    @foreach ($pwds as $pwd)
+                        <option value="{{ $pwd->name }}">{{ $pwd->name }}</option>
+                    @endforeach
+
                 </datalist>
         </div>
     </div>
