@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EducationalAttainmentStoreRequest;
 use App\Models\EducationalAttainment;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
@@ -9,12 +10,13 @@ use Illuminate\Http\Request;
 class EducationalAttainmentController extends Controller
 {
 
-    public function storeEducationAttainment(Request $request, $cesno){
+    public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
 
         $educationalAttainment = new EducationalAttainment([
     
             'level' => $request->level,
             'school' => $request->school,
+            'specialization' => $request->specialization,
             'degree' => $request->degree,
             'school_type' => $request->school_type,
             'period_of_attendance_from' => $request->period_of_attendance_from,

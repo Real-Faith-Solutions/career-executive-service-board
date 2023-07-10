@@ -125,11 +125,14 @@ class ProfileController extends Controller
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $identification = Identification::where('personal_data_cesno', $cesno)->get();
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::pluck('degree')->toArray();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment'));
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor'));
     }
 
     public function validateData($type, $value)
