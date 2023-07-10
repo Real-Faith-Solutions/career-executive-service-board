@@ -1,290 +1,288 @@
 @extends('layouts.app')
 @section('title', 'Add profile')
 @section('content')
-<div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-    <h1>Personal data</h1>
-</div>
-
-<form id="personal_data" method="POST" enctype="multipart/form-data" action="{{ url('/add-profile-201') }}">
-
-    @csrf
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div class="mb-3">
-            <label for="cesno">CES Number</label>
-            <input id="cesno" type="number" name="cesno" value="{{ $cesNumber }}" readonly>
-
-        </div>
-
-        <div></div>
-
-        <div class="mb-3">
-            {{-- <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label> --}}
-            {{-- <input class="mb-3 p-1" id="picture" name="picture" accept="image/png, image/jpeg" type="file" onclick="validateFileSize(`picture`, 2)" /> --}}
-        </div>
-
+    <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
+        <h1>Personal data</h1>
     </div>
 
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <form action="{{ url('/add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST">
 
-        <div class="mb-3">
+        @csrf
 
-            <label for="title">Title<sup>*</sup></label>
-            <select name="title" >
-                <option disabled selected>Please Select</option>
-                <option value="Dr.">Dr.</option>
-                <option value="Atty.">Atty.</option>
-                <option value="Mrs.">Mrs.</option>
-                <option value="Ms.">Ms.</option>
-                <option value="Mr.">Mr.</option>
-            </select>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="mb-3">
+                <label for="cesno">CES Number</label>
+                <input id="cesno" name="cesno" readonly type="number" value="{{ $cesNumber }}">
 
-        </div>
-        <div></div>
+            </div>
 
-        <div class="mb-3">
+            <div></div>
 
-            <label for="status">Record Status<sup>*</span></label>
-            <select name="status" id="status" >
-                <option disabled selected>Please Select</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-                <option value="Retired">Retired</option>
-                <option value="Deceased">Deceased</option>
-            </select>
+            <div class="mb-3">
+                {{-- <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label> --}}
+                {{-- <input class="mb-3 p-1" id="picture" name="picture" accept="image/png, image/jpeg" type="file" onclick="validateFileSize(`picture`, 2)" /> --}}
+            </div>
 
         </div>
 
-    </div>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="mb-3">
 
-        <div class="mb-3">
-            <label for="lastname">Lastname<sup>*</sup></label>
-            <input type="text" id="lastname" name="lastname" value="{{ old('lastname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageLastName" class="personal_data_error text-red-600"></p>
-        </div>
+                <label for="title">Title<sup>*</sup></label>
+                <select name="title">
+                    <option disabled selected>Please Select</option>
+                    <option value="Dr.">Dr.</option>
+                    <option value="Atty.">Atty.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Ms.">Ms.</option>
+                    <option value="Mr.">Mr.</option>
+                </select>
 
-        <div class="mb-3">
-            <label for="firstname">Firstname<sup>*</sup></label>
-            <input type="text" id="firstname" name="firstname" value="{{ old('firstname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageFirstname" class="personal_data_error text-red-600"></p>
-        </div>
+            </div>
+            <div></div>
 
-        <div class="mb-3">
+            <div class="mb-3">
 
-            <label for="name_extension">Name Extension</label>
-            <input type="search" list="name_extension_choices" name="name_extension" id="name_extension">
-            <datalist id="name_extension_choices">
-                @foreach ($nameExtensions as $nameExtension)
-                    <option value="{{ $nameExtension->name }}">{{ $nameExtension->name }}</option>
-                @endforeach
-            </datalist>
-        </div>
+                <label for="status">Record Status<sup>*</span></label>
+                <select id="status" name="status">
+                    <option disabled selected>Please Select</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Deceased">Deceased</option>
+                </select>
 
-    </div>
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-        <div class="mb-3">
-            <label for="middlename">Middlename<sup>*</sup></label>
-            <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" class="personal_data_error border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageMiddlename" class="text-red-600"></p>
-        </div>
-
-        <div class="mb-3">
-
-            <label for="mi">Middle initial<sup>*</sup></label>
-            <input type="text" id="mi" name="mi" readonly>
+            </div>
 
         </div>
 
-        <div class="mb-3">
-            <label for="nickname">Nickname</label>
-            <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            <p id="ErrorMessageNickname" class="text-red-600"></p>
-        </div>
-    </div>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="mb-3">
+                <label for="lastname">Lastname<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="lastname" name="lastname" type="text" value="{{ old('lastname') }}">
+                <p class="personal_data_error text-red-600" id="ErrorMessageLastName"></p>
+            </div>
 
-        <div class="mb-3">
-            <label for="birthdate">Birthdate<sup>*</sup></label>
-            <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" required>
+            <div class="mb-3">
+                <label for="firstname">Firstname<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="firstname" name="firstname" type="text" value="{{ old('firstname') }}">
+                <p class="personal_data_error text-red-600" id="ErrorMessageFirstname"></p>
+            </div>
 
-        </div>
-        <div class="mb-3">
+            <div class="mb-3">
 
-            <label for="age">Age<sup class="text-danger">*</sup></label>
-            <input type="number" id="age" name="age" class="age form-control w-100 mb-3" readonly>
+                <label for="name_extension">Name Extension</label>
+                <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
+                <datalist id="name_extension_choices">
+                    @foreach ($nameExtensions as $nameExtension)
+                        <option value="{{ $nameExtension->name }}">{{ $nameExtension->name }}</option>
+                    @endforeach
+                </datalist>
+            </div>
 
-        </div>
-
-        <div class="mb-3">
-            <label for="birth_place">Birth Place<sup>*</sup></label>
-            <input type="text" id="birth_place" name="birth_place" value="{{ old('birth_place') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-        </div>
-
-    </div>
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div class="mb-3">
-            <label for="gender">Gender By Birth<sup>*</sup></label>
-            <select id="gender" name="gender" required>
-                @foreach ($genderByBirths as $genderByBirth)
-                    <option value="{{ $genderByBirth->name }}">{{ $genderByBirth->name }}</option>
-                @endforeach
-            </select>
         </div>
 
-        <div class="mb-3">
-            <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-            <input type="search" list="gender_by_choice_choices" id="gender_by_choice" name="gender_by_choice" required>
-            <datalist id="gender_by_choice_choices">
-                @foreach ($genderByChoices as $genderByChoice)
-                    <option value="{{ $genderByChoice->name }}">{{ $genderByChoice->name }}</option>
-                @endforeach
-            </datalist>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+            <div class="mb-3">
+                <label for="middlename">Middlename<sup>*</sup></label>
+                <input class="personal_data_error border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text">
+                <p class="text-red-600" id="ErrorMessageMiddlename"></p>
+            </div>
+
+            <div class="mb-3">
+
+                <label for="mi">Middle initial<sup>*</sup></label>
+                <input id="mi" name="mi" readonly type="text">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="nickname">Nickname</label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="nickname" name="nickname" type="text" value="{{ old('nickname') }}">
+                <p class="text-red-600" id="ErrorMessageNickname"></p>
+            </div>
         </div>
 
-        <div class="mb-3">
-            {{-- <label for="civil_status">Civil Status<sup>*</sup></label>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+            <div class="mb-3">
+                <label for="birthdate">Birthdate<sup>*</sup></label>
+                <input id="birthdate" name="birthdate" onchange="computeAge()" required type="date">
+
+            </div>
+            <div class="mb-3">
+
+                <label for="age">Age<sup class="text-danger">*</sup></label>
+                <input class="age form-control w-100 mb-3" id="age" name="age" readonly type="number">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="birth_place">Birth Place<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}">
+            </div>
+
+        </div>
+
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="mb-3">
+                <label for="gender">Gender By Birth<sup>*</sup></label>
+                <select id="gender" name="gender" required>
+                    @foreach ($genderByBirths as $genderByBirth)
+                        <option value="{{ $genderByBirth->name }}">{{ $genderByBirth->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
+                <input id="gender_by_choice" list="gender_by_choice_choices" name="gender_by_choice" required type="search">
+                <datalist id="gender_by_choice_choices">
+                    @foreach ($genderByChoices as $genderByChoice)
+                        <option value="{{ $genderByChoice->name }}">{{ $genderByChoice->name }}</option>
+                    @endforeach
+                </datalist>
+            </div>
+
+            <div class="mb-3">
+                {{-- <label for="civil_status">Civil Status<sup>*</sup></label>
             <input id="civil_status" name="civil_status" value="{{ old('civil_status') }}" readonly> --}}
 
-            <label for="civil_status">Civil Status<sup>*</sup></label>
-            <select id="civil_status" name="civil_status" aria-aria-controls='example' >
-                <option disabled selected>Please Select</option>
-                <option value="Married">Married</option>
-                <option value="Single">Single</option>
-                <option value="Divorced">Divorced</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Separated">Separated</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-        <div class="mb-3">
-            <label for="religion">Religion<sup>*</sup></label>
-            <input id="religion" name="religion" value="{{ old('religion') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <label for="civil_status">Civil Status<sup>*</sup></label>
+                <select aria-aria-controls='example' id="civil_status" name="civil_status">
+                    <option disabled selected>Please Select</option>
+                    <option value="Married">Married</option>
+                    <option value="Single">Single</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="height">Height (in meters)<sup>*</sup></label>
-            <input type="number" id="height" name="height" value="{{ old('height') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-        </div>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
-        <div class="mb-3">
-            <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-            <input type="number" id="weight" name="weight" value="{{ old('weight') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-        </div>
+            <div class="mb-3">
+                <label for="religion">Religion<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="religion" name="religion" value="{{ old('religion') }}">
+            </div>
 
-    </div>
+            <div class="mb-3">
+                <label for="height">Height (in meters)<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="height" name="height" type="number" value="{{ old('height') }}">
+            </div>
 
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-        <div class="mb-3">
-            <label for="single_parent">Solo Parent?<sup>*</sup></label>
-            <select name="single_parent" id="single_parent" class="w-100 form-control mb-3" >
-                <option disabled selected>Please Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
+            <div class="mb-3">
+                <label for="weight">Weight (in kilograms)<sup>*</sup></label>
+                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="weight" name="weight" type="number" value="{{ old('weight') }}">
+            </div>
 
         </div>
 
-        <div class="mb-3">
-            <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
-            <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group" required>
+        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+            <div class="mb-3">
+                <label for="single_parent">Solo Parent?<sup>*</sup></label>
+                <select class="w-100 form-control mb-3" id="single_parent" name="single_parent">
+                    <option disabled selected>Please Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
+                <input id="member_of_indigenous_group" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" name="member_of_indigenous_group" required type="search">
                 <datalist id="member_of_indigenous_group_choices">
-                    <option value="Not a member">Not a member</option>
                     @foreach ($indigenousGroups as $indigenousGroup)
                         <option value="{{ $indigenousGroup->name }}">{{ $indigenousGroup->name }}</option>
                     @endforeach
                 </datalist>
-        </div>
+            </div>
 
-        <div class="mb-3">
-            <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-            <input type="search" list="person_with_disability_choices" name="person_with_disability" id="person_with_disability" required>
+            <div class="mb-3">
+                <label for="person_with_disability">Is PWD?<sup>*</sup></label>
+                <input id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" required type="search">
                 <datalist id="person_with_disability_choices">
-                    <option value="No">No</option>
                     @foreach ($pwds as $pwd)
                         <option value="{{ $pwd->name }}">{{ $pwd->name }}</option>
                     @endforeach
 
                 </datalist>
-        </div>
-    </div>
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div class="mb-3">
-            <label for="citizenship">Citizenship<sup>*</sup></label>
-            <select name="citizenship" id="citizenship" class="form-control w-100 citizenShip mb-3" onchange="toggleCitizenshipDependentField()" required>
-                <option disabled selected>Please Select</option>
-                <option value="Filipino">Filipino</option>
-                <option value="Dual Citizenship">Dual Citizenship</option>
-            </select>
-
-        </div>
-
-        <div class="mb-3">
-            <div id="dependent-dual-citizenship-field" style="display: none;">
-                <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                <input type="search" list="dependent-dual-citizenship-input_choices" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out" required>
-                <datalist id="dependent-dual-citizenship-input_choices">
-                    @foreach ($countries as $country)
-                        <option value="{{ $country->name }}">{{ $country->name }}</option>
-                    @endforeach
-                </datalist>
             </div>
-        </div>
-
-    </div>
-
-    {{-- identification cards --}}
-    <section>
-        <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-            <h1>Identification cards</h1>
         </div>
 
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="mb-3">
-                <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                <input type="text" id="gsis" name="gsis" value="{{ old('gsis') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-            </div>
-            <div class="mb-3">
-                <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                <input type="text" id="pagibig" name="pagibig" value="{{ old('pagibig') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <label for="citizenship">Citizenship<sup>*</sup></label>
+                <select class="form-control w-100 citizenShip mb-3" id="citizenship" name="citizenship" onchange="toggleCitizenshipDependentField()" required>
+                    <option disabled selected>Please Select Citizenship</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Dual Citizenship">Dual Citizenship</option>
+                </select>
+
             </div>
 
             <div class="mb-3">
-                <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                <input type="text" id="philhealth" name="philhealth" value="{{ old('philhealth') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <div id="dependent-dual-citizenship-field" style="display: none;">
+                    <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="dependent-dual-citizenship-input" list="dependent-dual-citizenship-input_choices" name="dual_citizenship" placeholder="Please indicate the Country" required type="search">
+                    <datalist id="dependent-dual-citizenship-input_choices">
+                        @foreach ($countries as $country)
+                            <option value="{{ $country->name }}">{{ $country->name }}</option>
+                        @endforeach
+                    </datalist>
+                </div>
             </div>
 
         </div>
 
-        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <div class="col-md-4">
-                <label for="sss_no">SSS ID No.</label>
-                <input type="text" id="sss_no" name="sss_no" value="{{ old('sss_no') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+        {{-- identification cards --}}
+        <section>
+            <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
+                <h1>Identification cards</h1>
             </div>
-            <div class="col-md-4">
-                <label for="tin">TIN ID No.</label>
-                <input type="text" id="tin" name="tin" value="{{ old('tin') }}" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="mb-3">
+                    <label for="gsis">GSIS ID No. <sup>*</sup></label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="gsis" name="gsis" type="text" value="{{ old('gsis') }}">
+                </div>
+                <div class="mb-3">
+                    <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}">
+                </div>
+
             </div>
+
+            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="col-md-4">
+                    <label for="sss_no">SSS ID No.</label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="tin">TIN ID No.</label>
+                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="tin" name="tin" type="text" value="{{ old('tin') }}">
+                </div>
+            </div>
+        </section>
+
+
+        <div class="flex justify-end">
+                    <input class="btn btn-primary" id="personal_data_submit" type="submit" value="submit">
         </div>
-    </section>
-
-    </div>
-
-    <input type="submit" id="personal_data_submit" value="submit" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-
-</form>
 
 
+    </form>
 
 @endsection

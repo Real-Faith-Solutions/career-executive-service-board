@@ -14,6 +14,9 @@ class PWD extends Seeder
     public function run(): void
     {
         ModelsPWD::create([
+            'name' => 'Not a PWD',
+        ]);
+        ModelsPWD::create([
             'name' => 'Visual Impairment',
         ]);
         ModelsPWD::create([
