@@ -65,6 +65,7 @@ use App\Models\ProfileLibTblCaseStatus;
 use App\Models\ProfileLibTblCities;
 use App\Models\ProfileLibTblProvince;
 use App\Models\ProfileLibTblRegion;
+use App\Models\Country;
 
 class ProfileController extends Controller
 {
@@ -77,7 +78,9 @@ class ProfileController extends Controller
             $cesNumber = PersonalData::latest()->first()->cesno;
         }
 
-        return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber]);
+        $countries = Country::all();
+
+        return view('admin.201_profiling.create_profile.form', ['cesNumber' => ++$cesNumber , 'countries' => $countries]);
     }
 
     public function viewProfile($cesno)

@@ -255,10 +255,9 @@
                 <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
                 <input list="dependent-dual-citizenship-input_choices" type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
                 <datalist id="dependent-dual-citizenship-input_choices">
-                    <option value="Country 1">Country 1</option>
-                    <option value="Country 2">Country 2</option>
-                    <option value="Country 3">Country 3</option>
-                    <option value="Country 4">Country 4</option>
+                    @foreach ($countries as $country)
+                        <option value="{{ $country->name }}">{{ $country->name }}</option>
+                    @endforeach
                 </datalist>
             </div>
         </div>
