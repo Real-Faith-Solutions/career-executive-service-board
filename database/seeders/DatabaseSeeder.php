@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             NameExtension::class,
             CivilStatus::class,
             Title::class,
+            RecordStatus::class,
         ]);
 
     }

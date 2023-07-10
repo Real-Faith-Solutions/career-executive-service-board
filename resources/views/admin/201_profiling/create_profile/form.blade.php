@@ -30,8 +30,8 @@
             <div class="mb-3">
 
                 <label for="title">Title<sup>*</sup></label>
-                <select name="title">
-                    <option disabled selected>Please Select</option>
+                <select id="title" name="title" required>
+                    <option disabled selected>Please Select Title</option>
                     @foreach ($title as $data)
                         <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
@@ -43,12 +43,11 @@
             <div class="mb-3">
 
                 <label for="status">Record Status<sup>*</span></label>
-                <select id="status" name="status">
-                    <option disabled selected>Please Select</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                    <option value="Retired">Retired</option>
-                    <option value="Deceased">Deceased</option>
+                <select id="status" name="status" required>
+                    <option disabled selected>Please Select Record Status</option>
+                    @foreach ($recordStatus as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                    @endforeach
                 </select>
 
             </div>
@@ -59,13 +58,13 @@
 
             <div class="mb-3">
                 <label for="lastname">Lastname<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="lastname" name="lastname" type="text" value="{{ old('lastname') }}">
+                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}">
                 <p class="personal_data_error text-red-600" id="ErrorMessageLastName"></p>
             </div>
 
             <div class="mb-3">
                 <label for="firstname">Firstname<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="firstname" name="firstname" type="text" value="{{ old('firstname') }}">
+                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}">
                 <p class="personal_data_error text-red-600" id="ErrorMessageFirstname"></p>
             </div>
 
@@ -86,7 +85,7 @@
 
             <div class="mb-3">
                 <label for="middlename">Middlename<sup>*</sup></label>
-                <input class="personal_data_error border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text">
+                <input class="personal_data_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text">
                 <p class="text-red-600" id="ErrorMessageMiddlename"></p>
             </div>
 
@@ -99,7 +98,7 @@
 
             <div class="mb-3">
                 <label for="nickname">Nickname</label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="nickname" name="nickname" type="text" value="{{ old('nickname') }}">
+                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}">
                 <p class="text-red-600" id="ErrorMessageNickname"></p>
             </div>
         </div>
@@ -120,7 +119,7 @@
 
             <div class="mb-3">
                 <label for="birth_place">Birth Place<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}">
+                <input id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}">
             </div>
 
         </div>
@@ -160,17 +159,17 @@
 
             <div class="mb-3">
                 <label for="religion">Religion<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="religion" name="religion" value="{{ old('religion') }}">
+                <input id="religion" name="religion" value="{{ old('religion') }}">
             </div>
 
             <div class="mb-3">
                 <label for="height">Height (in meters)<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="height" name="height" type="number" value="{{ old('height') }}">
+                <input id="height" name="height" type="number" value="{{ old('height') }}">
             </div>
 
             <div class="mb-3">
                 <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-                <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="weight" name="weight" type="number" value="{{ old('weight') }}">
+                <input id="weight" name="weight" type="number" value="{{ old('weight') }}">
             </div>
 
         </div>
@@ -223,7 +222,7 @@
             <div class="mb-3">
                 <div id="dependent-dual-citizenship-field" style="display: none;">
                     <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="dependent-dual-citizenship-input" list="dependent-dual-citizenship-input_choices" name="dual_citizenship" placeholder="Please indicate the Country" required type="search">
+                    <input id="dependent-dual-citizenship-input" list="dependent-dual-citizenship-input_choices" name="dual_citizenship" placeholder="Please indicate the Country" required type="search">
                     <datalist id="dependent-dual-citizenship-input_choices">
                         @foreach ($countries as $data)
                             <option value="{{ $data->name }}">{{ $data->name }}</option>
@@ -243,16 +242,16 @@
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="mb-3">
                     <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="gsis" name="gsis" type="text" value="{{ old('gsis') }}">
+                    <input id="gsis" name="gsis" type="text" value="{{ old('gsis') }}">
                 </div>
                 <div class="mb-3">
                     <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}">
+                    <input id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}">
+                    <input id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}">
                 </div>
 
             </div>
@@ -260,11 +259,11 @@
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="col-md-4">
                     <label for="sss_no">SSS ID No.</label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}">
+                    <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}">
                 </div>
                 <div class="col-md-4">
                     <label for="tin">TIN ID No.</label>
-                    <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="tin" name="tin" type="text" value="{{ old('tin') }}">
+                    <input id="tin" name="tin" type="text" value="{{ old('tin') }}">
                 </div>
             </div>
         </section>
