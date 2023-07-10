@@ -7832,3 +7832,27 @@ const openTableFieldExpertise = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormCesTraining = () => {
+    var form = document.querySelector('.form-ces-trainings');
+    var openForm = document.querySelector('[onclick="openFormCesTraining()"]');
+    var table = document.querySelector('.table-ces-trainings');
+    var openTable = document.querySelector('[onclick="openTableCesTraining()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableCesTraining = () => {
+    var form = document.querySelector('.form-ces-trainings');
+    var openForm = document.querySelector('[onclick="openFormCesTraining()"]');
+    var table = document.querySelector('.table-ces-trainings');
+    var openTable = document.querySelector('[onclick="openTableCesTraining()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
