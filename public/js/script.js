@@ -7880,3 +7880,27 @@ const openTableManagementTraining = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormHealthRecord = () => {
+    var form = document.querySelector('.form-health-record');
+    var openForm = document.querySelector('[onclick="openFormHealthRecord()"]');
+    var table = document.querySelector('.table-health-record');
+    var openTable = document.querySelector('[onclick="openTableHealthRecord()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableHealthRecord = () => {
+    var form = document.querySelector('.form-health-record');
+    var openForm = document.querySelector('[onclick="openFormHealthRecord()"]');
+    var table = document.querySelector('.table-health-record');
+    var openTable = document.querySelector('[onclick="openTableHealthRecord()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

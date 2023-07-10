@@ -1,8 +1,13 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Health Record</button>
+    <button class="btn btn-primary" onclick="openFormHealthRecord()">Add Health Record</button>
+    <button class="btn btn-primary hidden" onclick="openTableHealthRecord()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-health-record hidden">
+    @include('admin.201_profiling.view_profile.partials.health_records.form')
+</div>
+
+<div class="table-health-record relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
