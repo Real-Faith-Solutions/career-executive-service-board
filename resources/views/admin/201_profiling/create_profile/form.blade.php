@@ -218,6 +218,7 @@
             <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
             <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group">
                 <datalist id="member_of_indigenous_group_choices">
+                    <option value="Not a member">Not a member</option>
                     @foreach ($indigenousGroups as $indigenousGroup)
                         <option value="{{ $indigenousGroup->name }}">{{ $indigenousGroup->name }}</option>
                     @endforeach
@@ -226,7 +227,7 @@
 
         <div class="mb-3">
             <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-            <input list="person_with_disability_choices" name="person_with_disability" id="person_with_disability">
+            <input type="search" list="person_with_disability_choices" name="person_with_disability" id="person_with_disability">
                 <datalist id="person_with_disability_choices">
                     <option value="No">No</option>
                     <option value="Disability 1">Disability 1</option>
@@ -249,7 +250,7 @@
         <div class="mb-3">
             <div id="dependent-dual-citizenship-field" style="display: none;">
                 <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                <input list="dependent-dual-citizenship-input_choices" type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <input type="search" list="dependent-dual-citizenship-input_choices" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
                 <datalist id="dependent-dual-citizenship-input_choices">
                     @foreach ($countries as $country)
                         <option value="{{ $country->name }}">{{ $country->name }}</option>
