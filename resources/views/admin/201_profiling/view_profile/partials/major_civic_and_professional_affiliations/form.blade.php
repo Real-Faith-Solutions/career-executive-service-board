@@ -2,7 +2,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form Award and Citation
+                Form Major Civic and Professional Affiliations
             </h1>
         </div>
 

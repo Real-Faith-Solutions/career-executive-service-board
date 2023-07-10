@@ -7928,3 +7928,27 @@ const openTableAwardAndCitation = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormMajorCivilAndProfessionalAffiliation = () => {
+    var form = document.querySelector('.form-major-civic-and-professional-affiliations');
+    var openForm = document.querySelector('[onclick="openFormMajorCivilAndProfessionalAffiliation()"]');
+    var table = document.querySelector('.table-major-civic-and-professional-affiliations');
+    var openTable = document.querySelector('[onclick="openTableMajorCivilAndProfessionalAffiliation()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableMajorCivilAndProfessionalAffiliation = () => {
+    var form = document.querySelector('.form-major-civic-and-professional-affiliations');
+    var openForm = document.querySelector('[onclick="openFormMajorCivilAndProfessionalAffiliation()"]');
+    var table = document.querySelector('.table-major-civic-and-professional-affiliations');
+    var openTable = document.querySelector('[onclick="openTableMajorCivilAndProfessionalAffiliation()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
