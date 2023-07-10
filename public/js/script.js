@@ -7952,3 +7952,27 @@ const openTableMajorCivilAndProfessionalAffiliation = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormCaseRecord = () => {
+    var form = document.querySelector('.form-case-record');
+    var openForm = document.querySelector('[onclick="openFormCaseRecord()"]');
+    var table = document.querySelector('.table-case-record');
+    var openTable = document.querySelector('[onclick="openTableCaseRecord()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableCaseRecord = () => {
+    var form = document.querySelector('.form-case-record');
+    var openForm = document.querySelector('[onclick="openFormCaseRecord()"]');
+    var table = document.querySelector('.table-case-record');
+    var openTable = document.querySelector('[onclick="openTableCaseRecord()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
