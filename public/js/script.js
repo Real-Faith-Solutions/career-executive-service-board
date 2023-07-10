@@ -7904,3 +7904,27 @@ const openTableHealthRecord = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormAwardAndCitation = () => {
+    var form = document.querySelector('.form-award-and-citation');
+    var openForm = document.querySelector('[onclick="openFormAwardAndCitation()"]');
+    var table = document.querySelector('.table-award-and-citation');
+    var openTable = document.querySelector('[onclick="openTableAwardAndCitation()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableAwardAndCitation = () => {
+    var form = document.querySelector('.form-award-and-citation');
+    var openForm = document.querySelector('[onclick="openFormAwardAndCitation()"]');
+    var table = document.querySelector('.table-award-and-citation');
+    var openTable = document.querySelector('[onclick="openTableAwardAndCitation()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
