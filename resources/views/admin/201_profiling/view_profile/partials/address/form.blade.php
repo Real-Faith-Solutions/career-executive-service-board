@@ -293,4 +293,22 @@
     </div>
 </div>
 
+<script>
+    // Fetch data from the API
+    fetch('https://psgc.gitlab.io/api/regions/')
+    .then(response => response.json())
+    .then(data => {
+        const selectElement = document.getElementById('regionsSelect');
 
+        // Iterate through the data and create options for the select input
+        data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.name;
+            option.text = region.name;
+            selectElement.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+</script>
