@@ -32,11 +32,9 @@
                 <label for="title">Title<sup>*</sup></label>
                 <select name="title">
                     <option disabled selected>Please Select</option>
-                    <option value="Dr.">Dr.</option>
-                    <option value="Atty.">Atty.</option>
-                    <option value="Mrs.">Mrs.</option>
-                    <option value="Ms.">Ms.</option>
-                    <option value="Mr.">Mr.</option>
+                    @foreach ($title as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                    @endforeach
                 </select>
 
             </div>

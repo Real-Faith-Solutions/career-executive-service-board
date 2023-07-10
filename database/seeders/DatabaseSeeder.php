@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             GenderByBirth::class,
             NameExtension::class,
             CivilStatus::class,
+            Title::class,
         ]);
 
     }
