@@ -7976,3 +7976,27 @@ const openTableCaseRecord = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormLanguageDialect = () => {
+    var form = document.querySelector('.form-language-dialect');
+    var openForm = document.querySelector('[onclick="openFormLanguageDialect()"]');
+    var table = document.querySelector('.table-language-dialect');
+    var openTable = document.querySelector('[onclick="openTableLanguageDialect()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableLanguageDialect = () => {
+    var form = document.querySelector('.form-language-dialect');
+    var openForm = document.querySelector('[onclick="openFormLanguageDialect()"]');
+    var table = document.querySelector('.table-language-dialect');
+    var openTable = document.querySelector('[onclick="openTableLanguageDialect()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

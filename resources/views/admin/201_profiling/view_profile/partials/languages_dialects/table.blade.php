@@ -1,8 +1,13 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add Language Dialects</button>
+    <button class="btn btn-primary" onclick="openFormLanguageDialect()">Add Language Dialect</button>
+    <button class="btn btn-primary hidden" onclick="openTableLanguageDialect()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-language-dialect hidden">
+    @include('admin.201_profiling.view_profile.partials.languages_dialects.form')
+</div>
+
+<div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
