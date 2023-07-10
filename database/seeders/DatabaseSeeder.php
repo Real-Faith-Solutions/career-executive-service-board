@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             CivilStatus::class,
             Title::class,
             RecordStatus::class,
+            Religion::class,
         ]);
 
     }

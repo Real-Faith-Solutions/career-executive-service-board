@@ -74,6 +74,7 @@ use App\Models\NameExtension;
 use App\Models\CivilStatus;
 use App\Models\Title;
 use App\Models\RecordStatus;
+use App\Models\Religion;
 
 
 
@@ -98,6 +99,7 @@ class ProfileController extends Controller
         $civilStatus = CivilStatus::all();
         $title = Title::all();
         $recordStatus = RecordStatus::all();
+        $religion = Religion::all();
 
         return view('admin.201_profiling.create_profile.form',[
             'cesNumber' => ++$cesNumber,
@@ -110,6 +112,7 @@ class ProfileController extends Controller
             'civilStatus' => $civilStatus,
             'title' => $title,
             'recordStatus' => $recordStatus,
+            'religion' => $religion,
 
         ]);
     }

@@ -159,7 +159,12 @@
 
             <div class="mb-3">
                 <label for="religion">Religion<sup>*</sup></label>
-                <input id="religion" name="religion" value="{{ old('religion') }}">
+                <input list="religion_choices" id="religion" name="religion" value="{{ old('religion') }}">
+                <datalist id="religion_choices">
+                    @foreach ($religion as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                    @endforeach
+                </datalist>
             </div>
 
             <div class="mb-3">
