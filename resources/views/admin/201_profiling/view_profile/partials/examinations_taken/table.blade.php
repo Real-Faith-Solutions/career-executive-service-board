@@ -33,30 +33,35 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($examinationTaken as $examinationTakens)
+                <tr class="border-b bg-white">
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $examinationTakens->type }}
+                    </td>
 
-            <tr class="border-b bg-white">
-                <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum dolor
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $examinationTakens->rating }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $examinationTakens->date_of_examination }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $examinationTakens->place_of_examination }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum dolor
-                </td>
-
-                <td class="px-6 py-4 text-right uppercase">
-                    <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                </td>
-            </tr>
-
+                    <td class="px-6 py-4 text-right uppercase">
+                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                        
+                        <form action="{{ route('examination-taken.destroy', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

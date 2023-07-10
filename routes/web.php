@@ -13,6 +13,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\EducationalAttainmentController;
+use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\IdentificationController;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,10 @@ Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationCo
 
 Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
 Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+
+Route::post('examination/taken/store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
+Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
+
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
