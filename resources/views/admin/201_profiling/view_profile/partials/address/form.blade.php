@@ -26,34 +26,24 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="region">Region<sup>*</span></label>
-                        <select id="regionsSelect">
+                        <label for="regionsSelectPermanent">Region<sup>*</span></label>
+                        <select id="regionsSelectPermanent" name="regionsSelectPermanent" required>
                             <option value="">Select a region</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label for="city_or_municipality">City or Municipality<sup>*</span></label>
-                        <select id="city_or_municipality" name="city_or_municipality" required>
-                            <option disabled selected>Select City of Municipality</option>
+                        <label for="citySelectPermanent">City or Municipality<sup>*</span></label>
+                        <select id="citySelectPermanent" name="citySelectPermanent" required>
+                            <option disabled selected>Select City or Municipality</option>
                         </select>
-                        @error('city_or_municipality')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="brgy_or_district">Barangay or District<sup>*</span></label>
-                        <select id="brgy_or_district" name="brgy_or_district" required>
-                            <option disabled selected>Select Barangay or District</option>
+                        <label for="brgySelectPermanent">Barangay<sup>*</span></label>
+                        <select id="brgySelectPermanent" name="brgySelectPermanent" required>
+                            <option disabled selected>Select a Barangay</option>
                         </select>
-                        @error('brgy_or_district')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                 </div>
@@ -122,39 +112,24 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="region">Region<sup>*</span></label>
-                        <select id="region" name="region" required>
+                        <label for="regionsSelectMailing">Region<sup>*</span></label>
+                        <select id="regionsSelectMailing" name="regionsSelectMailing" required>
                             <option disabled selected>Select Region</option>
                         </select>
-                        @error('region')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="city_or_municipality">City or Municipality<sup>*</span></label>
-                        <select id="city_or_municipality" name="city_or_municipality" required>
-                            <option disabled selected>Select City of Municipality</option>
+                        <label for="citySelectMailing">City or Municipality<sup>*</span></label>
+                        <select id="citySelectMailing" name="citySelectMailing" required>
+                            <option disabled selected>Select City or Municipality</option>
                         </select>
-                        @error('city_or_municipality')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="brgy_or_district">Barangay or District<sup>*</span></label>
-                        <select id="brgy_or_district" name="brgy_or_district" required>
-                            <option disabled selected>Select Barangay or District</option>
+                        <label for="brgySelectMailing">Barangay or District<sup>*</span></label>
+                        <select id="brgySelectMailing" name="brgySelectMailing" required>
+                            <option disabled selected>Select a Barangay</option>
                         </select>
-                        @error('brgy_or_district')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                 </div>
@@ -223,39 +198,24 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="region">Region<sup>*</span></label>
-                        <select id="region" name="region" required>
+                        <label for="regionsSelectTemporary">Region<sup>*</span></label>
+                        <select id="regionsSelectTemporary" name="regionsSelectTemporary" required>
                             <option disabled selected>Select Region</option>
                         </select>
-                        @error('region')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="city_or_municipality">City or Municipality<sup>*</span></label>
-                        <select id="city_or_municipality" name="city_or_municipality" required>
-                            <option disabled selected>Select City of Municipality</option>
+                        <label for="citySelectTemporary">City or Municipality<sup>*</span></label>
+                        <select id="citySelectTemporary" name="citySelectTemporary" required>
+                            <option disabled selected>Select City or Municipality</option>
                         </select>
-                        @error('city_or_municipality')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="brgy_or_district">Barangay or District<sup>*</span></label>
-                        <select id="brgy_or_district" name="brgy_or_district" required>
-                            <option disabled selected>Select Barangay or District</option>
+                        <label for="brgySelectTemporary">Barangay or District<sup>*</span></label>
+                        <select id="brgySelectTemporary" name="brgySelectTemporary" required>
+                            <option disabled selected>Select a Barangay</option>
                         </select>
-                        @error('brgy_or_district')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
                     </div>
 
                 </div>
@@ -294,16 +254,23 @@
 </div>
 
 <script>
-    // Fetch data from the API
+
+    // permanent address
+    const regionsSelectPermanent = document.getElementById('regionsSelectPermanent');
+    const citySelectPermanent = document.getElementById('citySelectPermanent');
+    const brgySelectPermanent = document.getElementById('brgySelectPermanent');
+
+
+    // Fetch Regions data from the API
     fetch('https://psgc.gitlab.io/api/regions/')
     .then(response => response.json())
     .then(data => {
-        const selectElement = document.getElementById('regionsSelect');
+        const selectElement = document.getElementById('regionsSelectPermanent');
 
         // Iterate through the data and create options for the select input
         data.forEach(region => {
             const option = document.createElement('option');
-            option.value = region.name;
+            option.value = region.code;
             option.text = region.name;
             selectElement.appendChild(option);
         });
@@ -311,4 +278,203 @@
     .catch(error => {
         console.error('Error:', error);
     });
+
+    // Event listener for region selection
+    regionsSelectPermanent.addEventListener('change', () => {
+        const selectedRegion = regionsSelectPermanent.value;
+
+        // Clear the provinces select input
+        citySelectPermanent.innerHTML = '<option value="">Select City or Municipality</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/regions/${selectedRegion}/cities-municipalities/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.code;
+                option.text = city.name;
+                citySelectPermanent.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
+    // Event listener for city or municipality selection
+    citySelectPermanent.addEventListener('change', () => {
+        const selectedCity = citySelectPermanent.value;
+
+        // Clear the provinces select input
+        brgySelectPermanent.innerHTML = '<option value="">Select a Barangay</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/cities-municipalities/${selectedCity}/barangays/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(brgy => {
+                const option = document.createElement('option');
+                option.value = brgy.code;
+                option.text = brgy.name;
+                brgySelectPermanent.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
+    // mailing address
+    const regionsSelectMailing = document.getElementById('regionsSelectMailing');
+    const citySelectMailing = document.getElementById('citySelectMailing');
+    const brgySelectMailing = document.getElementById('brgySelectMailing');
+
+
+    // Fetch Regions data from the API
+    fetch('https://psgc.gitlab.io/api/regions/')
+    .then(response => response.json())
+    .then(data => {
+        const selectElement = document.getElementById('regionsSelectMailing');
+
+        // Iterate through the data and create options for the select input
+        data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.code;
+            option.text = region.name;
+            selectElement.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // Event listener for region selection
+    regionsSelectMailing.addEventListener('change', () => {
+        const selectedRegion = regionsSelectMailing.value;
+
+        // Clear the provinces select input
+        citySelectMailing.innerHTML = '<option value="">Select City or Municipality</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/regions/${selectedRegion}/cities-municipalities/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.code;
+                option.text = city.name;
+                citySelectMailing.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
+    // Event listener for city or municipality selection
+    citySelectMailing.addEventListener('change', () => {
+        const selectedCity = citySelectMailing.value;
+
+        // Clear the provinces select input
+        brgySelectMailing.innerHTML = '<option value="">Select a Barangay</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/cities-municipalities/${selectedCity}/barangays/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(brgy => {
+                const option = document.createElement('option');
+                option.value = brgy.code;
+                option.text = brgy.name;
+                brgySelectMailing.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
+    // temporary address
+    const regionsSelectTemporary = document.getElementById('regionsSelectTemporary');
+    const citySelectTemporary = document.getElementById('citySelectTemporary');
+    const brgySelectTemporary = document.getElementById('brgySelectTemporary');
+
+
+    // Fetch Regions data from the API
+    fetch('https://psgc.gitlab.io/api/regions/')
+    .then(response => response.json())
+    .then(data => {
+        const selectElement = document.getElementById('regionsSelectTemporary');
+
+        // Iterate through the data and create options for the select input
+        data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.code;
+            option.text = region.name;
+            selectElement.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    // Event listener for region selection
+    regionsSelectTemporary.addEventListener('change', () => {
+        const selectedRegion = regionsSelectTemporary.value;
+
+        // Clear the provinces select input
+        citySelectTemporary.innerHTML = '<option value="">Select City or Municipality</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/regions/${selectedRegion}/cities-municipalities/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.code;
+                option.text = city.name;
+                citySelectTemporary.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
+    // Event listener for city or municipality selection
+    citySelectTemporary.addEventListener('change', () => {
+        const selectedCity = citySelectTemporary.value;
+
+        // Clear the provinces select input
+        brgySelectTemporary.innerHTML = '<option value="">Select a Barangay</option>';
+
+        // Fetch data for the selected region
+        fetch(`https://psgc.gitlab.io/api/cities-municipalities/${selectedCity}/barangays/`)
+        .then(response => response.json())
+        .then(data => {
+            // Populate the provinces select input
+            data.forEach(brgy => {
+                const option = document.createElement('option');
+                option.value = brgy.code;
+                option.text = brgy.name;
+                brgySelectTemporary.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    });
+
 </script>
