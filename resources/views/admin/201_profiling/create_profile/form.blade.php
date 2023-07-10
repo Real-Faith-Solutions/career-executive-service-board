@@ -76,8 +76,8 @@
                 <label for="name_extension">Name Extension</label>
                 <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
                 <datalist id="name_extension_choices">
-                    @foreach ($nameExtensions as $nameExtension)
-                        <option value="{{ $nameExtension->name }}">{{ $nameExtension->name }}</option>
+                    @foreach ($nameExtensions as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
                 </datalist>
             </div>
@@ -131,8 +131,8 @@
             <div class="mb-3">
                 <label for="gender">Gender By Birth<sup>*</sup></label>
                 <select id="gender" name="gender" required>
-                    @foreach ($genderByBirths as $genderByBirth)
-                        <option value="{{ $genderByBirth->name }}">{{ $genderByBirth->name }}</option>
+                    @foreach ($genderByBirths as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -141,25 +141,19 @@
                 <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
                 <input id="gender_by_choice" list="gender_by_choice_choices" name="gender_by_choice" required type="search">
                 <datalist id="gender_by_choice_choices">
-                    @foreach ($genderByChoices as $genderByChoice)
-                        <option value="{{ $genderByChoice->name }}">{{ $genderByChoice->name }}</option>
+                    @foreach ($genderByChoices as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
                 </datalist>
             </div>
 
             <div class="mb-3">
-                {{-- <label for="civil_status">Civil Status<sup>*</sup></label>
-            <input id="civil_status" name="civil_status" value="{{ old('civil_status') }}" readonly> --}}
-
                 <label for="civil_status">Civil Status<sup>*</sup></label>
-                <select aria-aria-controls='example' id="civil_status" name="civil_status">
-                    <option disabled selected>Please Select</option>
-                    <option value="Married">Married</option>
-                    <option value="Single">Single</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Widowed">Widowed</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Other">Other</option>
+                <select id="civil_status" name="civil_status" required>
+                    <option disabled selected>Please Select Civil Status</option>
+                    @foreach ($civilStatus as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -199,8 +193,8 @@
                 <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
                 <input id="member_of_indigenous_group" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" name="member_of_indigenous_group" required type="search">
                 <datalist id="member_of_indigenous_group_choices">
-                    @foreach ($indigenousGroups as $indigenousGroup)
-                        <option value="{{ $indigenousGroup->name }}">{{ $indigenousGroup->name }}</option>
+                    @foreach ($indigenousGroups as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
                 </datalist>
             </div>
@@ -209,8 +203,8 @@
                 <label for="person_with_disability">Is PWD?<sup>*</sup></label>
                 <input id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" required type="search">
                 <datalist id="person_with_disability_choices">
-                    @foreach ($pwds as $pwd)
-                        <option value="{{ $pwd->name }}">{{ $pwd->name }}</option>
+                    @foreach ($pwds as $data)
+                        <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
 
                 </datalist>
@@ -233,8 +227,8 @@
                     <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
                     <input class="border transition-colors duration-300 ease-in-out focus:outline-blue-600" id="dependent-dual-citizenship-input" list="dependent-dual-citizenship-input_choices" name="dual_citizenship" placeholder="Please indicate the Country" required type="search">
                     <datalist id="dependent-dual-citizenship-input_choices">
-                        @foreach ($countries as $country)
-                            <option value="{{ $country->name }}">{{ $country->name }}</option>
+                        @foreach ($countries as $data)
+                            <option value="{{ $data->name }}">{{ $data->name }}</option>
                         @endforeach
                     </datalist>
                 </div>
@@ -279,10 +273,8 @@
 
 
         <div class="flex justify-end">
-                    <input class="btn btn-primary" id="personal_data_submit" type="submit" value="submit">
+            <button class="btn btn-primary" id="personal_data_submit" type="submit">Submit</button>
         </div>
-
-
     </form>
 
 @endsection

@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             PWD::class,
             GenderByChoice::class,
             GenderByBirth::class,
-            NameExtension::class
+            NameExtension::class,
+            CivilStatus::class,
         ]);
 
     }
