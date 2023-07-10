@@ -158,7 +158,7 @@
 
             <div> {{-- Start hiding other category if profile/view --}}
                 <div class="category personDataTab">
-                    @include('admin.201_profiling.view_profile.partials.personal_data.table')
+                    @include('admin.201_profiling.view_profile.partials.personal_data.form')
                 </div>
                 <div class="category addressTab hidden">
                     @include('admin.201_profiling.view_profile.partials.address.table')
