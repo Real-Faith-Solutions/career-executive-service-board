@@ -306,8 +306,6 @@
 
 </form>
 
-{{-- js script for this form interaction and validation --}}
-    <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
-{{-- end --}}
+
 
 @endsection

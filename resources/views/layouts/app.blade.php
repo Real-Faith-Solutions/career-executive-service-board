@@ -14,6 +14,7 @@
 
     {{-- sweet alert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -33,6 +34,26 @@
             @yield('content')
         </div>
     </div>
+
+    {{-- js script for personal data interaction and validation --}}
+    <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- end --}}
+
+    {{-- toast for personal data success --}}
+    @if (Session::has('message'))
+        
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.success("{{ Session::get('message') }}",'Success!',{timeOut:7000});
+        </script>
+
+    @endif
+    {{-- end toast --}}
+
 </body>
 
 </html>
