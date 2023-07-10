@@ -404,7 +404,6 @@ class ProfileController extends Controller
 
                 $searched = PersonalData::offset(0)->limit($numberOfResult)->get();
 
-                $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
                 $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
                 $CourseMajor = ProfileLibTblEducMajor::orderBy('created_at', 'desc')->get();
                 $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
@@ -1328,8 +1327,7 @@ class ProfileController extends Controller
                 $CaseNature = ProfileLibTblCaseNature::orderBy('created_at', 'desc')->get();
                 $CaseStatus = ProfileLibTblCaseStatus::orderBy('created_at', 'desc')->get();
                 $LocationCity = ProfileLibTblCities::orderBy('created_at', 'desc')->get();
-                $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
-                $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
+
 
                 return view('admin.201_profiling.view_profile.table', compact(
                     'search',
@@ -1374,9 +1372,6 @@ class ProfileController extends Controller
                     'SpecialSkill',
                     'CaseNature',
                     'CaseStatus',
-                    'LocationCity',
-                    'LocationProvince',
-                    'LocationRegion'
                 ))->render();
             }
         } else {
