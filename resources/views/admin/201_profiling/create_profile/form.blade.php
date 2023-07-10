@@ -28,8 +28,6 @@
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
         <div class="mb-3">
-            {{-- <label for="title">Title<sup>*</sup></label>
-            <input id="title" name="title" value="{{ old('title') }}" readonly> --}}
 
             <label for="title">Title<sup>*</sup></label>
             <select name="title" >
@@ -45,8 +43,6 @@
         <div></div>
 
         <div class="mb-3">
-            {{-- <label for="status">Record Status<sup>*</span></label>
-            <input name="status" id="status" value="{{ old('status') }}" readonly> --}}
 
             <label for="status">Record Status<sup>*</span></label>
             <select name="status" id="status" >
@@ -76,12 +72,11 @@
         </div>
 
         <div class="mb-3">
-            {{-- <label for="ne">Name Extension</label>
-            <input name="ne" id="ne" value="{{ old('ne') }}" readonly> --}}
 
             <label for="name_extension">Name Extension</label>
             <select name="name_extension" id="name_extension" >
                 <option disabled selected>Please Select</option>
+                <option value="">N/A</option>
                 <option value="Jr.">Jr.</option>
                 <option value="Sr.">Sr.</option>
                 <option value="I">I</option>
@@ -99,18 +94,12 @@
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
         <div class="mb-3">
-            {{-- <label for="middlename">Middlename<sup>*</sup></label>
-            <input type="text" id="middlename" name="middlename" value="{{ old('middlename') }}" readonly> --}}
-
             <label for="middlename">Middlename<sup>*</sup></label>
             <input type="text" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" class="personal_data_error border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
             <p id="ErrorMessageMiddlename" class="text-red-600"></p>
-
         </div>
 
         <div class="mb-3">
-            {{-- <label for="mi">Middle initial<sup>*</sup></label>
-            <input type="text" id="mi" name="mi" value="{{ old('mi') }}" readonly> --}}
 
             <label for="mi">Middle initial<sup>*</sup></label>
             <input type="text" id="mi" name="mi" readonly>
@@ -127,16 +116,11 @@
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
         <div class="mb-3">
-            {{-- <label for="birthdate">Birthdate<sup>*</sup></label>
-            <input type="date" id="birthdate" name="birthdate" value="{{ old('birthday') }}" readonly> --}}
-
             <label for="birthdate">Birthdate<sup>*</sup></label>
             <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" required>
 
         </div>
         <div class="mb-3">
-            {{-- <label for="age">Age<sup class="text-danger">*</sup></label>
-            <input type="number" id="age" name="age" value="{{ old('age') }}" readonly> --}}
 
             <label for="age">Age<sup class="text-danger">*</sup></label>
             <input type="number" id="age" name="age" class="age form-control w-100 mb-3" readonly>
@@ -152,8 +136,6 @@
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div class="mb-3">
-            {{-- <label for="gender">Gender By Birth<sup>*</sup></label>
-            <input id="gender" name="gender" value="{{ old('gender') }}" readonly> --}}
 
             <label for="gender">Gender By Birth<sup>*</sup></label>
             <select id="gender" name="gender" >
@@ -166,9 +148,7 @@
         </div>
 
         <div class="mb-3">
-            {{-- <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-            <input id="gender_by_choice" name="gender_by_choice" value="{{ old('gender_by_choice') }}" readonly> --}}
-            
+
             <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
             <select id="gender_by_choice" name="gender_by_choice" >
                 <option disabled selected>Please Select</option>
@@ -182,9 +162,7 @@
                 <option value="Genderqueer">Genderqueer</option>
                 <option value="Two-spirit">Two-spirit</option>
                 <option value="Third gender">Third gender</option>
-                <option value="Others">Others</option>
                 <option value="Prefer not to say">Prefer not to say</option>
-            
             </select>
         </div>
 
@@ -202,9 +180,7 @@
                 <option value="Separated">Separated</option>
                 <option value="Other">Other</option>
             </select>
-
         </div>
-
     </div>
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -229,102 +205,61 @@
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
         <div class="mb-3">
-            {{-- <label for="sppd_ip_TxtB">Solo Parent?<sup>*</sup></label>
-            <input name="sp" id="sppd_ip_TxtB" value="{{ old('sppd_ip_TxtB') }}" readonly> --}}
-
             <label for="single_parent">Solo Parent?<sup>*</sup></label>
             <select name="single_parent" id="single_parent" class="w-100 form-control mb-3" >
-            <option disabled selected>Please Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-            </select>
-
-        </div>
-
-        <div class="mb-3">
-            {{-- <label for="moig">Member of Indigenous Group?<sup>*</sup></label>
-            <input name="moig" id="moig" value="{{ old('moig') }}"readonly> --}}
-
-            <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
-            <select name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group" onchange="toggleIndigenousDependentField()">
                 <option disabled selected>Please Select</option>
-                <option value="Not a member">Not a member</option>
-                <option value="Igorot">Igorot</option>
-                <option value="Lumad">Lumad</option>
-                <option value="Mangyan">Mangyan</option>
-                <option value="B'laan">B'laan</option>
-                <option value="Tagbanua">Tagbanua</option>
-                <option value="Others">Others</option>
-                <option value="Prefer not to say">Prefer not to say</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
             </select>
 
         </div>
 
         <div class="mb-3">
-            {{-- <label for="moig_others">If others, please specify</label>
-            <input type="text" id="moig_others" name="moig_others" readonly disabled> --}}
-
-            <div id="dependent-indigenous-field" style="display: none;">
-                <label for="dependent-indigenous-input">If others, please specify:</label>
-                <input type="text" id="dependent-indigenous-input" name="moig_others" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-                <br>
-            </div>
-
+            <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
+            <input type="search" list="member_of_indigenous_group_choices" name="member_of_indigenous_group" id="member_of_indigenous_group" name="member_of_indigenous_group">
+                <datalist id="member_of_indigenous_group_choices">
+                    <option value="Not a member">Not a member</option>
+                    <option value="Igorot">Igorot</option>
+                    <option value="Lumad">Lumad</option>
+                    <option value="Mangyan">Mangyan</option>
+                    <option value="B'laan">B'laan</option>
+                    <option value="Tagbanua">Tagbanua</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </datalist>
         </div>
 
+        <div class="mb-3">
+            <label for="person_with_disability">Is PWD?<sup>*</sup></label>
+            <input list="person_with_disability_choices" name="person_with_disability" id="person_with_disability">
+                <datalist id="person_with_disability_choices">
+                    <option value="No">No</option>
+                    <option value="Disability 1">Disability 1</option>
+                    <option value="Disability 2">Disability 2</option>
+                </datalist>
+        </div>
     </div>
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div class="mb-3">
-            {{-- <label for="citizenship">Citizenship<sup>*</sup></label>
-            <input name="citizenship" id="citizenship" value="{{ old('citizenship') }}" readonly> --}}
-
             <label for="citizenship">Citizenship<sup>*</sup></label>
             <select name="citizenship" id="citizenship" class="form-control w-100 citizenShip mb-3" onchange="toggleCitizenshipDependentField()" required>
-            <option disabled selected>Please Select</option>
-            <option value="Filipino">Filipino</option>
-            <option value="Dual Citizenship">Dual Citizenship</option>
+                <option disabled selected>Please Select</option>
+                <option value="Filipino">Filipino</option>
+                <option value="Dual Citizenship">Dual Citizenship</option>
             </select>
 
         </div>
 
         <div class="mb-3">
-            {{-- <label for="inputcitizenShip">If Holder Dual Citizenship By Birth, By Naturalization</label>
-            <input type="text" name="d_citizenship" id="inputcitizenShip" value="{{ old('d_citizenship') }}" readonly> --}}
-
             <div id="dependent-dual-citizenship-field" style="display: none;">
                 <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
-                <input type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-                <br>
-            </div>
-
-        </div>
-
-        <div class="mb-3">
-        </div>
-
-    </div>
-
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-        <div class="mb-3">
-            {{-- <label for="pwd_CheckB" class="ml-2 text-sm font-medium text-gray-900">is PWD?</label>
-            <input name="pwd" id="pwd_TxtB" value="{{ old('pwd_CheckB') }}" readonly> --}}
-
-            <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-            <select name="person_with_disability" id="person_with_disability" class="form-control w-100 mb-3" onchange="toggleDisabilityDependentField()">
-            <option disabled selected>Please Select</option>
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-            </select>
-
-        </div>
-
-        <div class="mb-3">
-            <div id="dependent-pwd-field" style="display: none;">
-                <label for="dependent_pwd_input">Disability:</label>
-                <input type="text" id="dependent_pwd_input" name="dependent_pwd_input" placeholder="Please indicate the disability" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
-                <br>
+                <input list="dependent-dual-citizenship-input_choices" type="text" id="dependent-dual-citizenship-input" name="dual_citizenship" placeholder="Please indicate the Country" class="border focus:outline-blue-600 transition-colors duration-300 ease-in-out">
+                <datalist id="dependent-dual-citizenship-input_choices">
+                    <option value="Country 1">Country 1</option>
+                    <option value="Country 2">Country 2</option>
+                    <option value="Country 3">Country 3</option>
+                    <option value="Country 4">Country 4</option>
+                </datalist>
             </div>
         </div>
 
@@ -369,7 +304,7 @@
 
     <input type="submit" id="personal_data_submit" value="submit" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
 
-</form>    
+</form>
 
 {{-- js script for this form interaction and validation --}}
     <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
