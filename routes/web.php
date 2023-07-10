@@ -54,7 +54,7 @@ Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationCo
 
 
 Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
-Route::post('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
 
 Route::post('examination/taken/store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
 Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');

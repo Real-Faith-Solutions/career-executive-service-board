@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class training_tblSessions extends Model
+class CivilStatus extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    protected $table = 'civil_statuses';
 }

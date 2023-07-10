@@ -14,6 +14,9 @@ class IndigenousGroup extends Seeder
     public function run(): void
     {
         ModelsIndigenousGroup::create([
+            'name' => 'Not a member',
+        ]);
+        ModelsIndigenousGroup::create([
             'name' => 'Igorot',
         ]);
         ModelsIndigenousGroup::create([

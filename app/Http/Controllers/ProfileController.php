@@ -71,6 +71,11 @@ use App\Models\PWD;
 use App\Models\GenderByChoice;
 use App\Models\GenderByBirth;
 use App\Models\NameExtension;
+use App\Models\CivilStatus;
+use App\Models\Title;
+use App\Models\RecordStatus;
+use App\Models\Religion;
+
 
 
 
@@ -91,6 +96,10 @@ class ProfileController extends Controller
         $genderByChoices = GenderByChoice::all();
         $genderByBirths = GenderByBirth::all();
         $nameExtensions = NameExtension::all();
+        $civilStatus = CivilStatus::all();
+        $title = Title::all();
+        $recordStatus = RecordStatus::all();
+        $religion = Religion::all();
 
         return view('admin.201_profiling.create_profile.form',[
             'cesNumber' => ++$cesNumber,
@@ -100,6 +109,10 @@ class ProfileController extends Controller
             'genderByChoices' => $genderByChoices,
             'genderByBirths' => $genderByBirths,
             'nameExtensions' => $nameExtensions,
+            'civilStatus' => $civilStatus,
+            'title' => $title,
+            'recordStatus' => $recordStatus,
+            'religion' => $religion,
 
         ]);
     }
@@ -113,12 +126,16 @@ class ProfileController extends Controller
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $identification = Identification::where('personal_data_cesno', $cesno)->get();
         $profileLibTblExamRef = ProfileLibTblExamRef::pluck('TITLE')->toArray();
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::pluck('degree')->toArray();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment', 'profileLibTblExamRef', 'examinationTaken'));
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 'examinationTaken'));
+
     }
 
     public function validateData($type, $value)
@@ -390,7 +407,6 @@ class ProfileController extends Controller
 
                 $searched = PersonalData::offset(0)->limit($numberOfResult)->get();
 
-                $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
                 $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
                 $CourseMajor = ProfileLibTblEducMajor::orderBy('created_at', 'desc')->get();
                 $School = ProfileLibTblEducSchool::orderBy('created_at', 'desc')->get();
@@ -1314,8 +1330,7 @@ class ProfileController extends Controller
                 $CaseNature = ProfileLibTblCaseNature::orderBy('created_at', 'desc')->get();
                 $CaseStatus = ProfileLibTblCaseStatus::orderBy('created_at', 'desc')->get();
                 $LocationCity = ProfileLibTblCities::orderBy('created_at', 'desc')->get();
-                $LocationProvince = ProfileLibTblProvince::orderBy('created_at', 'desc')->get();
-                $LocationRegion = ProfileLibTblRegion::orderBy('created_at', 'desc')->get();
+
 
                 return view('admin.201_profiling.view_profile.table', compact(
                     'search',
@@ -1360,9 +1375,6 @@ class ProfileController extends Controller
                     'SpecialSkill',
                     'CaseNature',
                     'CaseStatus',
-                    'LocationCity',
-                    'LocationProvince',
-                    'LocationRegion'
                 ))->render();
             }
         } else {
