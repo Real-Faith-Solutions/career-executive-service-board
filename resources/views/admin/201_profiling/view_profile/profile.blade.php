@@ -3,159 +3,150 @@
 @section('content')
 
     <div class="grid-rows-7 grid grid-cols-4 gap-1">
-        <div class="row-span-5">
-            <img src="{{ asset('images/avatar/' . ($mainProfile->avatar ?: 'placeholder.png')) }}" class="h-50 w-96" />
+        <div class="row-span-5 text-center">
+            <img class="h-50 w-96" src="{{ asset('images/avatar/' . ($mainProfile->avatar ?: 'placeholder.png')) }}" />
 
             <h1 class="text-bold text-2xl">
                 {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
             </h1>
-            <span class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded
-                @if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif
-                @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif
-                @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif
-                @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif">
+
+            <span class="@if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif mr-2 rounded px-2.5 py-0.5 text-xs font-medium">
                 {{ $mainProfile->status }}
             </span>
-            {{-- <p class="btn
-                @if ($mainProfile->status === 'Active') text-green-800 bg-green-100 @endif
-                @if ($mainProfile->status === 'Inactive') text-orange-800 bg-orange-100 @endif
-                @if ($mainProfile->status === 'Retired') text-blue-800 bg-blue-100 @endif
-                @if ($mainProfile->status === 'Deceased') text-red-800 bg-red-100 @endif">
-                {{ $mainProfile->status }}
-            </p> --}}
-            <p>CES number: {{ $mainProfile->cesno }}</p>
+
+            {{-- <p>CES number: {{ $mainProfile->cesno }}</p> --}}
         </div>
 
         <div class="col-span-3">
-            <div class="grid lg:grid-cols-5 sm:grid-cols-1">
+            <div class="grid sm:grid-cols-1 lg:grid-cols-5">
 
                 {{-- NAVIGATION --}}
                 <div>
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="personalDataTab" class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" type="button">
+                    <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="personalDataTab" id="dropdownDefaultButton" type="button">
                         Personal Information
-                        <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                         </svg>
                     </button>
                     <!-- personalDataTab menu -->
-                    <div id="personalDataTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                        <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
+                    <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab">
+                        <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="inline-flex btn category-button text-blue-500" href="#personDataTab" onclick="personDataTab()">Personal Data</a>
+                                <a class="btn category-button inline-flex text-blue-500" href="#personDataTab" onclick="personDataTab()">Personal Data</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
+                                <a class="btn category-button inline-flex" href="#familyProfileTab" onclick="familyProfileTab()">Family Profile</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#addressTab" onclick="addressTab()">Address</a>
+                                <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
+                                <a class="btn category-button inline-flex" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="educationalAttainmentTab" class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" type="button">
+                    <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="educationalAttainmentTab" id="dropdownDefaultButton" type="button">
                         Education
-                        <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                         </svg>
                     </button>
                     <!-- educationalAttainmentTab menu -->
-                    <div id="educationalAttainmentTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                        <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
+                    <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="educationalAttainmentTab">
+                        <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="inline-flex btn category-button" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
+                                <a class="btn category-button inline-flex" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
+                                <a class="btn category-button inline-flex" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
+                                <a class="btn category-button inline-flex" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
+                                <a class="btn category-button inline-flex" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="workExperienceTab" class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" type="button">
+                    <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="workExperienceTab" id="dropdownDefaultButton" type="button">
                         Work experience
-                        <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                         </svg>
                     </button>
                     <!-- workExperienceTab menu -->
-                    <div id="workExperienceTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                        <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
+                    <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="workExperienceTab">
+                        <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="inline-flex btn category-button" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
+                                <a class="btn category-button inline-flex" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
+                                <a class="btn category-button inline-flex" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="trainingsTab" class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" type="button">
+                    <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="trainingsTab" id="dropdownDefaultButton" type="button">
                         Trainings
-                        <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                         </svg>
                     </button>
                     <!-- trainingsTab menu -->
-                    <div id="trainingsTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                        <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
+                    <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="trainingsTab">
+                        <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="inline-flex btn category-button" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
+                                <a class="btn category-button inline-flex" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
+                                <a class="btn category-button inline-flex" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Other Trainings</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-                    <button id="dropdownDefaultButton" data-dropdown-toggle="othersTab" class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" type="button">
+                    <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="othersTab" id="dropdownDefaultButton" type="button">
                         Others
-                        <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                        <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                         </svg>
                     </button>
                     <!-- othersTab menu -->
-                    <div id="othersTab" class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700">
-                        <ul class="py-2 text-sm uppercase text-gray-700" aria-labelledby="dropdownDefaultButton">
+                    <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="othersTab">
+                        <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="inline-flex btn category-button" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
+                                <a class="btn category-button inline-flex" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
+                                <a class="btn category-button inline-flex" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>
+                                <a class="btn category-button inline-flex" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#caseRecordsTab" onclick="caseRecordsTab()">Case Records</a>
+                                <a class="btn category-button inline-flex" href="#caseRecordsTab" onclick="caseRecordsTab()">Case Records</a>
                             </li>
 
                             <li>
-                                <a class="inline-flex btn category-button" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
+                                <a class="btn category-button inline-flex" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
+                                <a class="btn category-button inline-flex" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
+                                <a class="btn category-button inline-flex" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
                             </li>
                             <li>
-                                <a class="inline-flex btn category-button" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
+                                <a class="btn category-button inline-flex" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
                             </li>
                         </ul>
                     </div>

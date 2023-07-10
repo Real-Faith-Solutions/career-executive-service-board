@@ -29,7 +29,7 @@ class ProfileAddress extends Seeder
             'last_updated_by' => $faker->dateTime,
         ]);
         ModelsProfileAddress::create([
-            'cesno' => '1',
+            'cesno' => '2',
             'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
             'floor_bldg' => $faker->address,
             'no_street' => $faker->address,
@@ -40,7 +40,7 @@ class ProfileAddress extends Seeder
             'last_updated_by' => $faker->dateTime,
         ]);
         ModelsProfileAddress::create([
-            'cesno' => '1',
+            'cesno' => '3',
             'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
             'floor_bldg' => $faker->address,
             'no_street' => $faker->address,
@@ -51,7 +51,7 @@ class ProfileAddress extends Seeder
             'last_updated_by' => $faker->dateTime,
         ]);
         ModelsProfileAddress::create([
-            'cesno' => '1',
+            'cesno' => '4',
             'type' => $faker->randomElement(['Permanent address', 'Mailing address', 'Temporary address']),
             'floor_bldg' => $faker->address,
             'no_street' => $faker->address,

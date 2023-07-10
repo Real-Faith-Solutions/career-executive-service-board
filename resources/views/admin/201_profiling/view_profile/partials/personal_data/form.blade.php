@@ -12,36 +12,19 @@
                 <div class="mb-3">
                     <label for="cesno">CES Number</label>
                     <input id="cesno" name="cesno" readonly type="number" value="{{ $mainProfile->cesno }}">
-
                 </div>
-
-                <div></div>
-
-                {{-- <div class="mb-3">
-                            <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label>
-                            <input accept="image/png, image/jpeg" class="mb-3 p-1" id="picture" name="picture" onclick="validateFileSize(`picture`, 2)" type="file" />
-                        </div> --}}
-
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-                <div class="mb-3">
-                    <label for="title">Title<sup>*</sup></label>
-                    <input id="title" name="title" readonly value="{{ $mainProfile->title }}">
-
-                </div>
-                <div></div>
 
                 <div class="mb-3">
                     <label for="status">Record Status<sup>*</span></label>
                     <input id="status" name="status" readonly value="{{ $mainProfile->status }}">
-
                 </div>
-
             </div>
 
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="mb-3">
+                    <label for="title">Title<sup>*</sup></label>
+                    <input id="title" name="title" readonly value="{{ $mainProfile->title }}">
+                </div>
 
                 <div class="mb-3">
                     <label for="lastname">Lastname<sup>*</sup></label>
@@ -54,36 +37,30 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="name_extension">Name Extension</label>
-                    <input id="name_extension" name="name_extension" readonly value="{{ $mainProfile->name_extension }}">
-                </div>
-
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
-                <div class="mb-3">
                     <label for="middlename">Middlename<sup>*</sup></label>
                     <input id="middlename" name="middlename" readonly type="text" value="{{ $mainProfile->middlename }}">
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="mi">Middle initial<sup>*</sup></label>
                     <input id="mi" name="mi" readonly type="text" value="{{ $mainProfile->mi }}">
+                </div> --}}
+
+                <div class="mb-3">
+                    <label for="name_extension">Name Extension</label>
+                    <input id="name_extension" name="name_extension" readonly value="{{ $mainProfile->name_extension }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="nickname">Nickname</label>
                     <input id="nickname" name="nickname" readonly type="text" value="{{ $mainProfile->nickname }}">
                 </div>
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                 <div class="mb-3">
                     <label for="birthdate">Birthdate<sup>*</sup></label>
                     <input id="birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birthdate }}">
                 </div>
+
                 <div class="mb-3">
                     <label for="age">Age<sup class="text-danger">*</sup></label>
                     <input id="age" name="age" readonly type="number" value="{{ $mainProfile->age }}">
@@ -94,9 +71,6 @@
                     <input id="birth_place" name="birth_place" readonly type="text" value="{{ $mainProfile->birth_place }}">
                 </div>
 
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="mb-3">
                     <label for="gender">Gender By Birth<sup>*</sup></label>
                     <input id="gender" name="gender" readonly value="{{ $mainProfile->gender }}">
@@ -112,10 +86,6 @@
                     <input id="civil_status" name="civil_status" readonly value="{{ $mainProfile->civil_status }}">
                 </div>
 
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                 <div class="mb-3">
                     <label for="religion">Religion<sup>*</sup></label>
                     <input id="religion" name="religion" readonly value="{{ $mainProfile->religion }}">
@@ -125,14 +95,11 @@
                     <label for="height">Height (in meters)<sup>*</sup></label>
                     <input id="height" name="height" readonly type="text" value="{{ $mainProfile->height }}">
                 </div>
+
                 <div class="mb-3">
                     <label for="weight">Weight (in kilograms)<sup>*</sup></label>
                     <input id="weight" name="weight" readonly type="text" value="{{ $mainProfile->weight }}">
                 </div>
-
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                 <div class="mb-3">
                     <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
@@ -143,13 +110,12 @@
                     <label for="single_parent">Solo Parent?<sup>*</sup></label>
                     <input id="single_parent" name="sp" readonly value="{{ $mainProfile->single_parent }}">
                 </div>
+
                 <div class="mb-3">
                     <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is PWD?</label>
                     <input id="person_with_disability" name="person_with_disability" readonly value="{{ $mainProfile->person_with_disability }}">
                 </div>
-            </div>
 
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="mb-3">
                     <label for="citizenship">Citizenship<sup>*</sup></label>
                     <input id="citizenship" name="citizenship" readonly value="{{ $mainProfile->citizenship }}">
