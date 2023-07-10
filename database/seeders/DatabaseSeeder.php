@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ProfileAddress::class,
             IndigenousGroup::class,
             PWD::class,
+            GenderByChoice::class,
         ]);
 
     }

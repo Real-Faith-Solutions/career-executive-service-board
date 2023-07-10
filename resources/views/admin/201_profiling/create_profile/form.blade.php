@@ -150,20 +150,12 @@
         <div class="mb-3">
 
             <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-            <select id="gender_by_choice" name="gender_by_choice" >
-                <option disabled selected>Please Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Transgender">Transgender</option>
-                <option value="Gender neutral">Gender neutral</option>
-                <option value="Non-binary">Non-binary</option>
-                <option value="Agender">Agender</option>
-                <option value="Pangender">Pangender</option>
-                <option value="Genderqueer">Genderqueer</option>
-                <option value="Two-spirit">Two-spirit</option>
-                <option value="Third gender">Third gender</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-            </select>
+            <input type="search" list="gender_by_choice_choices" id="gender_by_choice" name="gender_by_choice" >
+            <datalist id="gender_by_choice_choices">
+                @foreach ($genderByChoice as $genderByChoices)
+                    <option value="{{ $genderByChoices->name }}">{{ $genderByChoices->name }}</option>
+                @endforeach
+            </datalist>
         </div>
 
         <div class="mb-3">
