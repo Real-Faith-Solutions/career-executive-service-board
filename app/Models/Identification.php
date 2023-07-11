@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Identification extends Model
 {
+    
     use HasFactory;
 
     protected $primaryKey = 'ctrlno';
@@ -30,4 +31,5 @@ class Identification extends Model
     {
         return $this->belongsTo(PersonalData::class);
     }
+
 }

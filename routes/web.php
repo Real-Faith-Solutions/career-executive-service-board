@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
+use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -79,6 +80,8 @@ Route::delete('award-citation/{ctrlno}', [AwardAndCitationController::class, 'de
 Route::post('affiliation/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
 Route::delete('affiliation/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
 
+Route::post('case/record/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+Route::delete('case/record/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 

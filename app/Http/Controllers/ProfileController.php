@@ -138,10 +138,11 @@ class ProfileController extends Controller
         $workExperience = PersonalData::find($cesno)->workExperience;
         $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
         $affiliation = PersonalData::find($cesno)->affiliations;
+        $caseRecord = PersonalData::find($cesno)->caseRecords;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord'));
 
     }
 
@@ -407,7 +408,7 @@ class ProfileController extends Controller
                 $Scholarships = Scholarships::where('personal_data_cesno', '=', $cesno)->get();
                 $Affiliations = Affiliations::where('personal_data_cesno', '=', $cesno)->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $cesno)->get();
-                $CaseRecords = CaseRecords::where('cesno', '=', $cesno)->get();
+                $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $cesno)->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', $cesno)->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $cesno)->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', $cesno)->get();
@@ -1142,7 +1143,7 @@ class ProfileController extends Controller
             $AwardAndCitationsViewOnly = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'View Only');
 
             // Case Records
-            $CaseRecords = CaseRecords::where('cesno', '=', $request)->get();
+            $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $request)->get();
             $CaseRecordsAdd = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Add');
             $CaseRecordsEdit = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Edit');
             $CaseRecordsDelete = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Delete');
@@ -1318,7 +1319,7 @@ class ProfileController extends Controller
                 // ', '=', '1')->get();
                 $Affiliations = Affiliations::where('personal_data_cesno', '=', '1')->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', '1')->get();
-                $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
+                $CaseRecords = CaseRecords::where('personal_data_cesno', '=', '1')->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', '1')->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', '1')->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', '1')->get();
@@ -4425,7 +4426,7 @@ class ProfileController extends Controller
             } else {
 
                 CaseRecords::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'parties_case_records' => $request->parties_case_records,
                     'offence_case_records' =>  $request->offence_case_records,
                     'nature_case_records' =>  $request->nature_case_records,
@@ -4490,7 +4491,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                CaseRecords::where('id', $request->cesno_case_records_id)
+                CaseRecords::where('ctrlno', $request->cesno_case_records_id)
                     ->update([
                         'parties_case_records' => $request->parties_case_records,
                         'offence_case_records' =>  $request->offence_case_records,
@@ -4518,7 +4519,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Case Records', 'Category Only') == 'true') {
 
-            $CaseRecords = CaseRecords::where('id', '=', $id)->get();
+            $CaseRecords = CaseRecords::where('ctrlno', '=', $id)->get();
 
             return $CaseRecords;
         } else {
@@ -4532,7 +4533,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Case Records', 'Delete') == 'true') {
 
-            $CaseRecords = CaseRecords::where('id', '=', $id)->delete();
+            $CaseRecords = CaseRecords::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

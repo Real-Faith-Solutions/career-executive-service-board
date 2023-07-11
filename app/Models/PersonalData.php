@@ -107,5 +107,11 @@ class PersonalData extends Model
     {
         return $this->hasMany(Affiliations::class);
     }
+
+    public function caseRecords(): HasMany
+    {
+        return $this->hasMany(CaseRecords::class);
+    }
+
     
 }
