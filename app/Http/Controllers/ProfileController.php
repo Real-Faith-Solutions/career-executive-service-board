@@ -134,11 +134,12 @@ class ProfileController extends Controller
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
-        $researchAndStudie = PersonalData::find($cesno)->researchAndStudies;
+        $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
+        $workExperience = PersonalData::find($cesno)->workExperience;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudie'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience'));
 
     }
 
@@ -396,7 +397,7 @@ class ProfileController extends Controller
                 $BoardInterview = BoardInterview::where('cesno', '=', $cesno)->get();
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', $cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', $cesno)->get();
-                $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', $cesno)->get();
+                $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $cesno)->get();
                 $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
@@ -1083,7 +1084,7 @@ class ProfileController extends Controller
             $RecordOfCespesRatingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Record of CESPES Ratings', 'View Only');
 
             // Work Experience
-            $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', $request)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $request)->get();
             $WorkExperienceAdd = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Add');
             $WorkExperienceEdit = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Edit');
             $WorkExperienceDelete = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Delete');
@@ -1306,7 +1307,7 @@ class ProfileController extends Controller
                 $BoardInterview = BoardInterview::where('cesno', '=', '1')->get();
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', '1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', '1')->get();
-                $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', '1')->get();
+                $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', '1')->get();
                 $FieldExpertise = ProfileTblExpertise::where('cesno', '=', '1')->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
@@ -3384,7 +3385,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ProfileTblWorkExperience::where('id', $request->cesno_work_experience_id)
+                ProfileTblWorkExperience::where('ctrlno', $request->cesno_work_experience_id)
                     ->update([
                         'date_from_work_experience' => $request->date_from_work_experience,
                         'date_to_work_experience' =>  $request->date_to_work_experience,
@@ -3412,7 +3413,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Category Only') == 'true') {
 
-            $WorkExperience = ProfileTblWorkExperience::where('id', '=', $id)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('ctrl', '=', $id)->get();
 
             return $WorkExperience;
         } else {
@@ -3426,7 +3427,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Delete') == 'true') {
 
-            $WorkExperience = ProfileTblWorkExperience::where('id', '=', $id)->delete();
+            $WorkExperience = ProfileTblWorkExperience::where('ctrl', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

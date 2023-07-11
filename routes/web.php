@@ -18,6 +18,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -54,7 +55,6 @@ Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class,
 Route::post('personal-data/store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
 Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 
-
 Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
 Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
 
@@ -66,6 +66,10 @@ Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'de
 
 Route::post('research/studies/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
 Route::delete('research/studies/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+
+Route::post('work-experience/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
+Route::delete('work-experience/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

@@ -29,24 +29,24 @@
         </thead>
         <tbody>
 
-            @foreach ($researchAndStudie as $researchAndStudies)
+            @foreach ($researchAndStudies as $researchAndStudy)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $researchAndStudies->title }}
+                        {{ $researchAndStudy->title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $researchAndStudies->publisher }}
+                        {{ $researchAndStudy->publisher }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $researchAndStudies->inclusive_date_from." - ".$researchAndStudies->inclusive_date_to }}
+                        {{ $researchAndStudy->inclusive_date_from." - ".$researchAndStudy->inclusive_date_to }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
 
-                        <form action="{{ route('research-studies.destroy', ['ctrlno'=>$researchAndStudies->ctrlno]) }}" method="POST">
+                        <form action="{{ route('research-studies.destroy', ['ctrlno'=>$researchAndStudy->ctrlno]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
