@@ -102,5 +102,10 @@ class PersonalData extends Model
     {
         return $this->hasMany(AwardAndCitations::class);
     }
+
+    public function affiliations(): HasMany
+    {
+        return $this->hasMany(Affiliations::class);
+    }
     
 }

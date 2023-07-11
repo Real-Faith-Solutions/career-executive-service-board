@@ -137,10 +137,11 @@ class ProfileController extends Controller
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
         $workExperience = PersonalData::find($cesno)->workExperience;
         $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
+        $affiliation = PersonalData::find($cesno)->affiliations;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation'));
 
     }
 
@@ -403,8 +404,8 @@ class ProfileController extends Controller
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
-                $Scholarships = Scholarships::where('persondal_data_cesno', '=', $cesno)->get();
-                $Affiliations = Affiliations::where('cesno', '=', $cesno)->get();
+                $Scholarships = Scholarships::where('personal_data_cesno', '=', $cesno)->get();
+                $Affiliations = Affiliations::where('personal_data_cesno', '=', $cesno)->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $cesno)->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', $cesno)->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', $cesno)->get();
@@ -1127,7 +1128,7 @@ class ProfileController extends Controller
             $ScholarshipsViewOnly = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'View Only');
 
             // Major Civic and Professional Affiliations
-            $Affiliations = Affiliations::where('cesno', '=', $request)->get();
+            $Affiliations = Affiliations::where('personal_data_cesno', '=', $request)->get();
             $AffiliationsAdd = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Add');
             $AffiliationsEdit = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Edit');
             $AffiliationsDelete = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Delete');
@@ -1315,7 +1316,7 @@ class ProfileController extends Controller
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', '1')->get();
                 // $Scholarships = Scholarships::where('
                 // ', '=', '1')->get();
-                $Affiliations = Affiliations::where('cesno', '=', '1')->get();
+                $Affiliations = Affiliations::where('personal_data_cesno', '=', '1')->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', '1')->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', '1')->get();
@@ -4144,14 +4145,14 @@ class ProfileController extends Controller
             $validator = Validator::make(
 
                 array(
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_mcapa' => $request->date_f_mcapa,
                     'date_t_mcapa' =>  $request->date_t_mcapa,
                     'organization_mcapa' =>  $request->organization_mcapa,
                     'position_mcapa' =>  $request->position_mcapa,
                 ),
                 array(
-                    'cesno' => 'required',
+                    'personal_data_cesno' => 'required',
                     'date_f_mcapa' => 'required|date',
                     'date_t_mcapa' => 'required|date',
                     'organization_mcapa' => 'required|max:255',
@@ -4167,7 +4168,7 @@ class ProfileController extends Controller
             } else {
 
                 Affiliations::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_mcapa' => $request->date_f_mcapa,
                     'date_t_mcapa' =>  $request->date_t_mcapa,
                     'organization_mcapa' =>  $request->organization_mcapa,
@@ -4214,7 +4215,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                Affiliations::where('id', $request->cesno_major_civic_and_professional_affiliations_id)
+                Affiliations::where('ctrlno', $request->cesno_major_civic_and_professional_affiliations_id)
                     ->update([
                         'date_f_mcapa' => $request->date_f_mcapa,
                         'date_t_mcapa' =>  $request->date_t_mcapa,
@@ -4237,7 +4238,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Category Only') == 'true') {
 
-            $Affiliations = Affiliations::where('id', '=', $id)->get();
+            $Affiliations = Affiliations::where('ctrlno', '=', $id)->get();
 
             return $Affiliations;
         } else {
@@ -4251,7 +4252,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Delete') == 'true') {
 
-            $Affiliations = Affiliations::where('id', '=', $id)->delete();
+            $Affiliations = Affiliations::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

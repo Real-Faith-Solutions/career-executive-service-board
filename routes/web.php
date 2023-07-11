@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddProfile201;
+use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Models\Affiliations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -74,6 +76,8 @@ Route::delete('work-experience/{ctrlno}', [WorkExperienceController::class, 'des
 Route::post('award-citation/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
 Route::delete('award-citation/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
 
+Route::post('affiliation/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+Route::delete('affiliation/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

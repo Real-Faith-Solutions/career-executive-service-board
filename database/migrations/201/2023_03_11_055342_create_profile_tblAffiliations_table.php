@@ -14,15 +14,15 @@ return new class extends Migration
         //affiliations
         Schema::create('profile_tblAffiliations', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->date('organization')->nullable();
-            $table->date('position')->nullable();
-            $table->string('from_dt')->nullable();
-            $table->string('to_dt')->nullable();
+            // $table->bigInteger('cesno')->nullable();
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->string('organization')->nullable();
+            $table->string('position')->nullable();
+            $table->date('from_dt')->nullable();
+            $table->date('to_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
