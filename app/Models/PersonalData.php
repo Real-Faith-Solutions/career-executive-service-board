@@ -97,5 +97,10 @@ class PersonalData extends Model
     {
         return $this->hasMany(ProfileTblWorkExperience::class);
     }
+
+    public function awardsAndCitations(): HasMany
+    {
+        return $this->hasMany(AwardAndCitations::class);
+    }
     
 }

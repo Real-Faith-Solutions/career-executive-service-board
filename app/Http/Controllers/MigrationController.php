@@ -1209,7 +1209,7 @@ class MigrationController extends Controller
             foreach($profile_tblAwards as $item){
 
                 AwardAndCitations::create([
-                    'cesno' => $item->cesno,
+                    'personal_data_cesno' => $item->cesno,
                     'date_aac' => null, // Changed to null due to error migration invalid date datatype from legacy source
                     'title_of_award_aac' => $item->awards,
                     'sponsor_aac' => $item->sponsor,

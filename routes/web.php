@@ -4,6 +4,7 @@ use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -69,6 +70,9 @@ Route::delete('research/studies/{ctrlno}', [ResearchAndStudiesController::class,
 
 Route::post('work-experience/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
 Route::delete('work-experience/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+
+Route::post('award-citation/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
+Route::delete('award-citation/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
 
 
 

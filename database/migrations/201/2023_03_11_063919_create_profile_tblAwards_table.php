@@ -14,15 +14,16 @@ return new class extends Migration
         //award_and_citations
         Schema::create('profile_tblAwards', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->date('awards')->nullable();
+            // $table->bigInteger('cesno')->nullable();
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->string('awards')->nullable();
             $table->string('sponsor')->nullable();
-            $table->string('award_dt')->nullable();
-            $table->string('aw_dt')->nullable();
+            $table->date('date')->nullable();
+            // $table->string('award_dt')->nullable();
+            // $table->string('aw_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

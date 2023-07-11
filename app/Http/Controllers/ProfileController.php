@@ -136,10 +136,11 @@ class ProfileController extends Controller
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
         $workExperience = PersonalData::find($cesno)->workExperience;
+        $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation'));
 
     }
 
@@ -404,7 +405,7 @@ class ProfileController extends Controller
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
                 $Scholarships = Scholarships::where('persondal_data_cesno', '=', $cesno)->get();
                 $Affiliations = Affiliations::where('cesno', '=', $cesno)->get();
-                $AwardAndCitations = AwardAndCitations::where('cesno', '=', $cesno)->get();
+                $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $cesno)->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', $cesno)->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', $cesno)->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $cesno)->get();
@@ -1133,7 +1134,7 @@ class ProfileController extends Controller
             $AffiliationsViewOnly = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'View Only');
 
             // Awards and Citations Received
-            $AwardAndCitations = AwardAndCitations::where('cesno', '=', $request)->get();
+            $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $request)->get();
             $AwardAndCitationsAdd = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Add');
             $AwardAndCitationsEdit = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Edit');
             $AwardAndCitationsDelete = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Delete');
@@ -1315,7 +1316,7 @@ class ProfileController extends Controller
                 // $Scholarships = Scholarships::where('
                 // ', '=', '1')->get();
                 $Affiliations = Affiliations::where('cesno', '=', '1')->get();
-                $AwardAndCitations = AwardAndCitations::where('cesno', '=', '1')->get();
+                $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', '1')->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
                 $HealthRecords = HealthRecords::where('cesno', '=', '1')->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', '1')->get();
@@ -4290,7 +4291,7 @@ class ProfileController extends Controller
             } else {
 
                 AwardAndCitations::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_aac' => $request->date_aac,
                     'title_of_award_aac' =>  $request->title_of_award_aac,
                     'sponsor_aac' =>  $request->sponsor_aac,
@@ -4355,7 +4356,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Category Only') == 'true') {
 
-            $AwardAndCitations = AwardAndCitations::where('id', '=', $id)->get();
+            $AwardAndCitations = AwardAndCitations::where('ctrlno', '=', $id)->get();
 
             return $AwardAndCitations;
         } else {
@@ -4369,7 +4370,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Delete') == 'true') {
 
-            $AwardAndCitations = AwardAndCitations::where('id', '=', $id)->delete();
+            $AwardAndCitations = AwardAndCitations::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
