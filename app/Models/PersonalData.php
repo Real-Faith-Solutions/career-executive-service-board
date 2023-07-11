@@ -87,5 +87,10 @@ class PersonalData extends Model
     {
         return $this->hasMany(Scholarships::class);
     }
+
+    public function researchAndStudies(): HasMany
+    {
+        return $this->hasMany(ResearchAndStudies::class);
+    }
     
 }

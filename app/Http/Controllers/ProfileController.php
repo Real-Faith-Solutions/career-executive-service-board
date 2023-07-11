@@ -134,10 +134,11 @@ class ProfileController extends Controller
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
+        $researchAndStudie = PersonalData::find($cesno)->researchAndStudies;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship'));
+        'examinationTaken', 'scholarship', 'researchAndStudie'));
 
     }
 
@@ -399,8 +400,8 @@ class ProfileController extends Controller
                 $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
-                $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', $cesno)->get();
-                $Scholarships = Scholarships::where('cesno', '=', $cesno)->get();
+                $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
+                $Scholarships = Scholarships::where('persondal_data_cesno', '=', $cesno)->get();
                 $Affiliations = Affiliations::where('cesno', '=', $cesno)->get();
                 $AwardAndCitations = AwardAndCitations::where('cesno', '=', $cesno)->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', $cesno)->get();
@@ -1110,14 +1111,14 @@ class ProfileController extends Controller
             $OtherManagementTrainingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'View Only');
 
             // Research and Studies
-            $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', $request)->get();
+            $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $request)->get();
             $ResearchAndStudiesAdd = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Add');
             $ResearchAndStudiesEdit = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Edit');
             $ResearchAndStudiesDelete = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Delete');
             $ResearchAndStudiesViewOnly = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'View Only');
 
             // Scholarships Received
-            $Scholarships = Scholarships::where('cesno', '=', $request)->get();
+            $Scholarships = Scholarships::where('personal_data_cesno', '=', $request)->get();
             $ScholarshipsAdd = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Add');
             $ScholarshipsEdit = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Edit');
             $ScholarshipsDelete = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Delete');
@@ -1309,8 +1310,9 @@ class ProfileController extends Controller
                 $FieldExpertise = ProfileTblExpertise::where('cesno', '=', '1')->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
-                $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', '1')->get();
-                $Scholarships = Scholarships::where('personal_data_cesno', '=', '1')->get();
+                $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', '1')->get();
+                // $Scholarships = Scholarships::where('
+                // ', '=', '1')->get();
                 $Affiliations = Affiliations::where('cesno', '=', '1')->get();
                 $AwardAndCitations = AwardAndCitations::where('cesno', '=', '1')->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
@@ -1357,7 +1359,7 @@ class ProfileController extends Controller
                     'CesTrainings',
                     'OtherManagementTrainings',
                     'ResearchAndStudies',
-                    'Scholarships',
+                    // 'Scholarships',
                     'Affiliations',
                     'AwardAndCitations',
                     'CaseRecords',
@@ -3907,7 +3909,7 @@ class ProfileController extends Controller
             } else {
 
                 ResearchAndStudies::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_ras' => $request->date_f_ras,
                     'date_t_ras' =>  $request->date_t_ras,
                     'title_ras' =>  $request->title_ras,
@@ -3954,7 +3956,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ResearchAndStudies::where('id', $request->cesno_research_and_studies_id)
+                ResearchAndStudies::where('ctrlno', $request->cesno_research_and_studies_id)
                     ->update([
                         'date_f_ras' => $request->date_f_ras,
                         'date_t_ras' =>  $request->date_t_ras,
@@ -3976,7 +3978,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Category Only') == 'true') {
 
-            $ResearchAndStudies = ResearchAndStudies::where('id', '=', $id)->get();
+            $ResearchAndStudies = ResearchAndStudies::where('ctrlno', '=', $id)->get();
 
             return $ResearchAndStudies;
         } else {
@@ -4107,7 +4109,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Category Only') == 'true') {
 
-            $Scholarships = Scholarships::where('id', '=', $id)->get();
+            $Scholarships = Scholarships::where('ctrlno', '=', $id)->get();
 
             return $Scholarships;
         } else {
@@ -4121,7 +4123,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Delete') == 'true') {
 
-            $Scholarships = Scholarships::where('id', '=', $id)->delete();
+            $Scholarships = Scholarships::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

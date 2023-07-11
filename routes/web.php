@@ -16,6 +16,7 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,8 @@ Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::
 Route::post('scholarship/store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
 Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 
+Route::post('research/studies/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+Route::delete('research/studies/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
 
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
