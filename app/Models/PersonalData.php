@@ -122,5 +122,10 @@ class PersonalData extends Model
     {
         return $this->hasMany(ProfileTblExpertise::class);
     }
+
+    public function languages(): HasMany
+    {
+        return $this->hasMany(ProfileTblLanguages::class);
+    }
   
 }

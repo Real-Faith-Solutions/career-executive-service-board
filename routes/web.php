@@ -21,6 +21,7 @@ use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\WorkExperienceController;
@@ -90,6 +91,10 @@ Route::delete('health/record/{ctrlno}', [HealthRecordController::class, 'destroy
 
 Route::post('expertise/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
 Route::delete('expertise/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+
+Route::post('language/{cesno}', [LanguageController::class, 'store'])->name('language.store');
+Route::delete('language/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
+
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 

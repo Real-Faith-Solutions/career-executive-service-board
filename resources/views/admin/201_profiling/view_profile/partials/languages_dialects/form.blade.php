@@ -7,14 +7,20 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('language.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="language_dialect">Language Dialect<sup>*</sup></label>
-                        <input id="language_dialect" name="language_dialect" required type="text">
+                        <select id="language_dialect" name="language_dialect" required>
+                            <option disabled selected>Select language</option>
+                            @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
+                                <option value="{{ $profileLibTblLanguageRefs->title }}">
+                                    {{ $profileLibTblLanguageRefs->title }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('language_dialect')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -24,7 +30,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

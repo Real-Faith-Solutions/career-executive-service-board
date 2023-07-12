@@ -14,7 +14,7 @@ use App\Models\Addresses;
 use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
 use App\Models\ProfileTblCesStatus;
-use App\Models\LanguagesDialects;
+use App\Models\ProfileTblLanguages;
 use App\Models\ProfileTblWorkExperience;
 use App\Models\ProfileTblExpertise;
 use App\Models\CesTrainings;
@@ -133,6 +133,7 @@ class ProfileController extends Controller
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
@@ -142,11 +143,12 @@ class ProfileController extends Controller
         $caseRecord = PersonalData::find($cesno)->caseRecords;
         $healthRecord = PersonalData::find($cesno)->healthRecords;
         $expertise = PersonalData::find($cesno)->expertise;
+        $language = PersonalData::find($cesno)->languages;
        
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord', 
-        'profileLibTblExpertiseSpec', 'expertise'));
+        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language'));
 
     }
 
@@ -397,7 +399,7 @@ class ProfileController extends Controller
                 $EducationalAttainment = EducationalAttainment::where('cesno', '=', $cesno)->get();
                 $ExaminationsTaken = ExaminationsTaken::where('cesno', '=', $cesno)->get();
                 $LicenseDetails = LicenseDetails::where('cesno', '=', $cesno)->get();
-                $LanguagesDialects = LanguagesDialects::where('cesno', '=', $cesno)->get();
+                $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', $cesno)->get();
                 $CesWe = CesWe::where('cesno', '=', $cesno)->get();
                 $AssessmentCenter = AssessmentCenter::where('cesno', '=', $cesno)->get();
                 $ValidationHr = ValidationHr::where('cesno', '=', $cesno)->get();
@@ -448,7 +450,7 @@ class ProfileController extends Controller
                     'EducationalAttainment',
                     'ExaminationsTaken',
                     'LicenseDetails',
-                    'LanguagesDialects',
+                    'ProfileTblLanguages',
                     'CesWe',
                     'AssessmentCenter',
                     'ValidationHr',
@@ -995,7 +997,7 @@ class ProfileController extends Controller
     //         EducationalAttainment::where('cesno','=',$personaldata_cesno)->delete();
     //         ExaminationsTaken::where('cesno','=',$personaldata_cesno)->delete();
     //         LicenseDetails::where('cesno','=',$personaldata_cesno)->delete();
-    //         LanguagesDialects::where('cesno','=',$personaldata_cesno)->delete();
+    //         ProfileTblLanguages::where('cesno','=',$personaldata_cesno)->delete();
     //         CesWe::where('cesno','=',$personaldata_cesno)->delete();
     //         AssessmentCenter::where('cesno','=',$personaldata_cesno)->delete();
     //         ValidationHr::where('cesno','=',$personaldata_cesno)->delete();
@@ -1066,7 +1068,7 @@ class ProfileController extends Controller
             $ExaminationsTakenViewOnly = RolesController::validateUserExecutive201RoleAccess('Examinations Taken', 'View Only');
 
             // Language Dialects
-            $LanguagesDialects = LanguagesDialects::where('cesno', '=', $request)->get();
+            $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', $request)->get();
             $LanguagesDialectsAdd = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Add');
             $LanguagesDialectsEdit = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Edit');
             $LanguagesDialectsDelete = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Delete');
@@ -1180,7 +1182,7 @@ class ProfileController extends Controller
                 'EducationalAttainment',
                 'ExaminationsTaken',
                 'LicenseDetails',
-                'LanguagesDialects',
+                'ProfileTblLanguages',
                 'CesWe',
                 'AssessmentCenter',
                 'ValidationHr',
@@ -1307,7 +1309,7 @@ class ProfileController extends Controller
                 $EducationalAttainment = EducationalAttainment::where('personal_data_cesno', '=', '1')->get();
                 $ExaminationsTaken = ExaminationsTaken::where('personal_data_cesno', '=', '1')->get();
                 $LicenseDetails = LicenseDetails::where('cesno', '=', '1')->get();
-                $LanguagesDialects = LanguagesDialects::where('cesno', '=', '1')->get();
+                $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', '1')->get();
                 $CesWe = CesWe::where('cesno', '=', '1')->get();
                 $AssessmentCenter = AssessmentCenter::where('cesno', '=', '1')->get();
                 $ValidationHr = ValidationHr::where('cesno', '=', '1')->get();
@@ -1355,7 +1357,7 @@ class ProfileController extends Controller
                     'EducationalAttainment',
                     'ExaminationsTaken',
                     'LicenseDetails',
-                    'LanguagesDialects',
+                    'ProfileTblLanguages',
                     'CesWe',
                     'AssessmentCenter',
                     'ValidationHr',
@@ -2363,7 +2365,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                LanguagesDialects::create([
+                ProfileTblLanguages::create([
                     'cesno' => $request->cesno,
                     'lang_languages_dialects' => $request->lang_languages_dialects,
                     'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -2402,7 +2404,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                LanguagesDialects::where('id', $request->cesno_languages_dialects_id)
+                ProfileTblLanguages::where('ctrlno', $request->cesno_languages_dialects_id)
                     ->update([
                         'lang_languages_dialects' => $request->lang_languages_dialects,
                         'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -2421,9 +2423,9 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Category Only') == 'true') {
 
-            $languagesdialects = LanguagesDialects::where('id', '=', $id)->get();
+            $ProfileTblLanguages = ProfileTblLanguages::where('ctrlno', '=', $id)->get();
 
-            return $languagesdialects;
+            return $ProfileTblLanguages;
         } else {
 
             return 'Restricted';
@@ -2435,7 +2437,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Delete') == 'true') {
 
-            $languagesdialects = LanguagesDialects::where('id', '=', $id)->delete();
+            $ProfileTblLanguages = ProfileTblLanguages::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
