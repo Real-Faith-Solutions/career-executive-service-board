@@ -35,7 +35,7 @@ class AwardAndCitationController extends Controller
             
         $awardAndCitationsPersonalDataId->awardsAndCitations()->save($awardAndCitations);
             
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

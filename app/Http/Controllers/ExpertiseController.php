@@ -31,7 +31,7 @@ class ExpertiseController extends Controller
 
         $expertisePersonalDataId->expertise()->save($expertise);
             
-        return redirect()->back()->with('message-expertise', 'Sucessfully Saved');
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

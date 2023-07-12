@@ -49,7 +49,7 @@ class CaseRecordController extends Controller
 
         $caseRecordPersonalDataId->caseRecords()->save($caseRecord);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

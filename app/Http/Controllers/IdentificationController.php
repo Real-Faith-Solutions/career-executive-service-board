@@ -33,7 +33,7 @@ class IdentificationController extends Controller
 
         $identificationsPersonalDataId->identifications()->save($identification);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

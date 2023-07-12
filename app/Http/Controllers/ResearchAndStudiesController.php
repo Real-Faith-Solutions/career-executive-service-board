@@ -28,7 +28,7 @@ class ResearchAndStudiesController extends Controller
 
         $researchAndStudiesPersonalDataId->researchAndStudies()->save($researchAndStudies);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

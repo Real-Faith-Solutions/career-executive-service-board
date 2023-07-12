@@ -43,7 +43,7 @@ class ExaminationTakenController extends Controller
 
         $examinationTakenPersonalDataId->examinationTakens()->save($examinationTaken);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

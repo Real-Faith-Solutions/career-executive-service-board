@@ -30,7 +30,7 @@ class HealthRecordController extends Controller
         
         $healthRecordPersonalDataId->healthRecords()->save($healthRecord);
             
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

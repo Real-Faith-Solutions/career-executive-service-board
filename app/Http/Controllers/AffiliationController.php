@@ -37,7 +37,7 @@ class AffiliationController extends Controller
     
         $affiliationPersonalDataId->affiliations()->save($affiliation);
             
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

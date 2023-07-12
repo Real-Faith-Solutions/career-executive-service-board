@@ -47,7 +47,7 @@ class WorkExperienceController extends Controller
 
         $workExperiencePersonalDataId->workExperience()->save($workExperience);
             
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
