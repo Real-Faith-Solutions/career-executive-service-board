@@ -18,6 +18,7 @@ use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
@@ -82,6 +83,9 @@ Route::delete('affiliation/{ctrlno}', [AffiliationController::class, 'destroy'])
 
 Route::post('case/record/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
 Route::delete('case/record/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+
+Route::post('health/record/{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
+Route::delete('health/record/{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
 
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 

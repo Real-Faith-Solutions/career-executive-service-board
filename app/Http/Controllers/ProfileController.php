@@ -139,10 +139,11 @@ class ProfileController extends Controller
         $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
         $affiliation = PersonalData::find($cesno)->affiliations;
         $caseRecord = PersonalData::find($cesno)->caseRecords;
+        $healthRecord = PersonalData::find($cesno)->healthRecords;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord'));
 
     }
 
@@ -409,7 +410,7 @@ class ProfileController extends Controller
                 $Affiliations = Affiliations::where('personal_data_cesno', '=', $cesno)->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $cesno)->get();
                 $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $cesno)->get();
-                $HealthRecords = HealthRecords::where('cesno', '=', $cesno)->get();
+                $HealthRecords = HealthRecords::where('personal_data_cesno', '=', $cesno)->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $cesno)->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', $cesno)->get();
 
@@ -1150,7 +1151,7 @@ class ProfileController extends Controller
             $CaseRecordsViewOnly = RolesController::validateUserExecutive201RoleAccess('Case Records', 'View Only');
 
             // Health Record
-            $HealthRecords = HealthRecords::where('cesno', '=', $request)->get();
+            $HealthRecords = HealthRecords::where('personal_data_cesno', '=', $request)->get();
             $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $request)->get();
             $HealthRecordsAdd = RolesController::validateUserExecutive201RoleAccess('Health Record', 'Add');
             $HealthRecordsEdit = RolesController::validateUserExecutive201RoleAccess('Health Record', 'Edit');
@@ -1320,7 +1321,7 @@ class ProfileController extends Controller
                 $Affiliations = Affiliations::where('personal_data_cesno', '=', '1')->get();
                 $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', '1')->get();
                 $CaseRecords = CaseRecords::where('personal_data_cesno', '=', '1')->get();
-                $HealthRecords = HealthRecords::where('cesno', '=', '1')->get();
+                $HealthRecords = HealthRecords::where('personal_data_cesno', '=', '1')->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', '1')->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', '1')->get();
 
@@ -4573,7 +4574,7 @@ class ProfileController extends Controller
             } else {
 
                 HealthRecords::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'mcfdpra_hr' => $request->mcfdpra_hr,
                     'blood_type_hr' =>  $request->blood_type_hr,
                     'identify_marks_hr' =>  Str::ucfirst($request->identify_marks_hr),
@@ -4617,7 +4618,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                HealthRecords::where('id', $request->cesno_health_records_magna_carta_for_disabled_persons_id)
+                HealthRecords::where('ctrlno', $request->cesno_health_records_magna_carta_for_disabled_persons_id)
                     ->update([
                         'mcfdpra_hr' => $request->mcfdpra_hr,
                         'blood_type_hr' =>  $request->blood_type_hr,
@@ -4638,7 +4639,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Health Record', 'Category Only') == 'true') {
 
-            $HealthRecords = HealthRecords::where('id', '=', $id)->get();
+            $HealthRecords = HealthRecords::where('ctrlno', '=', $id)->get();
 
             return $HealthRecords;
         } else {
@@ -4652,7 +4653,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Health Record', 'Delete') == 'true') {
 
-            $HealthRecords = HealthRecords::where('id', '=', $id)->delete();
+            $HealthRecords = HealthRecords::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
