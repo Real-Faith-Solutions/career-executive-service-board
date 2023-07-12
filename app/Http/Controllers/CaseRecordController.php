@@ -27,7 +27,6 @@ class CaseRecordController extends Controller
             
         ]);
 
-
         $userLastName = Auth::user()->last_name;
 
         $caseRecord = new CaseRecords([
