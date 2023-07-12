@@ -56,6 +56,30 @@
         </script>
 
     @endif
+
+    @if (Session::has('message-address-added'))
+        
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.success("{{ Session::get('message-address-added') }}",'Success!',{timeOut:7000});
+        </script>
+
+    @endif
+
+    @if (Session::has('message-address-changed'))
+        
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.info("{{ Session::get('message-address-changed') }}",'Success!',{timeOut:7000});
+        </script>
+
+    @endif
     {{-- end toast --}}
 
 </body>

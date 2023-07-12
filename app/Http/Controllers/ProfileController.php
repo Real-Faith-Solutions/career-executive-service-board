@@ -131,7 +131,7 @@ class ProfileController extends Controller
         $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();
         $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
-        $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+        $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
 

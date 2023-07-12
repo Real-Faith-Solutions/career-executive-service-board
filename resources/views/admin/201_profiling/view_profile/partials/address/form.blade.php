@@ -7,7 +7,9 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('/add-address-permanent-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="address-permanent" method="POST">
+
+                @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -61,9 +63,9 @@
                     </div>
 
                     <div class="mb-3 col-span-2">
-                        <label for="floor_bldg">Street/Lot no./Building/Floor no.</label>
-                        <input id="floor_bldg" name="floor_bldg" type="text">
-                        @error('floor_bldg')
+                        <label for="street_lot_bldg_floor">Street/Lot no./Building/Floor no.</label>
+                        <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text">
+                        @error('street_lot_bldg_floor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -72,9 +74,7 @@
 
                 </div>
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
-                        Save changes
-                    </button>
+                    <button class="btn btn-primary" id="address-permanent-submit" type="submit">Save Changes</button>
                 </div>
             </form>
         </div>
@@ -90,7 +90,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ url('/add-address-mailing-201') }}" enctype="multipart/form-data" id="address-mailing" method="POST">
 
                 {{-- <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -126,7 +126,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="brgySelectMailing">Barangay or District<sup>*</span></label>
+                        <label for="brgySelectMailing">Barangay<sup>*</span></label>
                         <select id="brgySelectMailing" name="brgySelectMailing" required>
                             <option disabled selected>Select a Barangay</option>
                         </select>
@@ -147,9 +147,9 @@
                     </div>
 
                     <div class="mb-3 col-span-2">
-                        <label for="floor_bldg">Street/Lot no./Building/Floor no.</label>
-                        <input id="floor_bldg" name="floor_bldg" type="text">
-                        @error('floor_bldg')
+                        <label for="street_lot_bldg_floor">Street/Lot no./Building/Floor no.</label>
+                        <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text">
+                        @error('street_lot_bldg_floor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -158,9 +158,7 @@
 
                 </div>
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
-                        Save changes
-                    </button>
+                    <button class="btn btn-primary" id="address-mailing-submit" type="submit">Save Changes</button>
                 </div>
             </form>
         </div>
@@ -176,7 +174,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ url('/add-address-temporary-201') }}" enctype="multipart/form-data" id="address-temporary" method="POST">
 
                 {{-- <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -212,7 +210,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="brgySelectTemporary">Barangay or District<sup>*</span></label>
+                        <label for="brgySelectTemporary">Barangay<sup>*</span></label>
                         <select id="brgySelectTemporary" name="brgySelectTemporary" required>
                             <option disabled selected>Select a Barangay</option>
                         </select>
@@ -233,9 +231,9 @@
                     </div>
 
                     <div class="mb-3 col-span-2">
-                        <label for="floor_bldg">Street/Lot no./Building/Floor no.</label>
-                        <input id="floor_bldg" name="floor_bldg" type="text">
-                        @error('floor_bldg')
+                        <label for="street_lot_bldg_floor">Street/Lot no./Building/Floor no.</label>
+                        <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text">
+                        @error('street_lot_bldg_floor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -244,9 +242,7 @@
 
                 </div>
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
-                        Save changes
-                    </button>
+                    <button class="btn btn-primary" id="address-temporary-submit" type="submit">Save Changes</button>
                 </div>
             </form>
         </div>

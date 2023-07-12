@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             ProfileData::class,
-            ProfileAddress::class,
+            // ProfileAddress::class,
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddAddress201;
 use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
@@ -64,8 +65,12 @@ Route::post('scholarship/store/{cesno}', [ScholarshipController::class, 'store']
 Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 
 
-
+// 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
+Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('/add-address-permanent-201');
+Route::post('/add-address-mailing-201', [AddAddress201::class, 'addAddressMailing'])->name('/add-address-mailing-201');
+Route::post('/add-address-temporary-201', [AddAddress201::class, 'addAddressTemporary'])->name('/add-address-temporary-201');
+// end 201 profiling
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
 Route::get('/login', [AuthController::class, 'getLoginHomePage']);
