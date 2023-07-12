@@ -31,7 +31,7 @@ class EducationalAttainmentStoreRequest extends FormRequest
             'period_of_attendance_from' => ['required'],
             'period_of_attendance_to' => ['required'],
             'highest_level' => ['nullable','max:40', 'min:10', 'regex:/^[a-zA-Z ]*$/'],
-            'year_graduate' => ['numeric', 'nullable','max:4', 'min:4'],
+            'year_graduate' => ['nullable', 'numeric'],
             'academics_honor_received' => ['nullable','max:40', 'min:10'],
             
         ];

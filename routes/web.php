@@ -16,6 +16,7 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\ScholarshipController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -58,6 +59,9 @@ Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentC
 
 Route::post('examination/taken/store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
 Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
+
+Route::post('scholarship/store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 
 
 

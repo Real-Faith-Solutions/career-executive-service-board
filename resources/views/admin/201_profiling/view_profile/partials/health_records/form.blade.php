@@ -1,0 +1,70 @@
+<div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+    <div class="w-full text-left text-gray-500">
+        <div class="bg-blue-500 uppercase text-gray-700 text-white">
+            <h1 class="px-6 py-3">
+                Form Health Record
+            </h1>
+        </div>
+
+        <div class="bg-white px-6 py-3">
+            <form action="#">
+                @csrf
+
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                    <div class="mb-3">
+                        <label for="blood_type">Blood Type<sup>*</sup></label>
+                        <input id="blood_type" name="blood_type" required type="text">
+                        @error('blood_type')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                </div>
+
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+                    <div class="mb-3">
+                        <label for="identifying_marks">Identifying Marks<sup>*</sup></label>
+                        <input id="identifying_marks" name="identifying_marks" required type="text">
+                        @error('identifying_marks')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="disability_handicap_defects">Disability / Handicap / Defects<sup>*</sup></label>
+                        <select id="disability_handicap_defects" name="disability_handicap_defects" required>
+                            <option disabled selected>Select Disability / Handicap / Defects</option>
+                        </select>
+                        @error('disability_handicap_defects')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="disability_handicap_defects_specify">Please specify<sup>*</sup></label>
+                        <input id="disability_handicap_defects_specify" name="disability_handicap_defects_specify" required type="text">
+                        @error('disability_handicap_defects_specify')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button class="btn btn-primary">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

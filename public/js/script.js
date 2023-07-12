@@ -7832,3 +7832,195 @@ const openTableFieldExpertise = () => {
     table.classList.remove('hidden');
     openTable.classList.add('hidden');
 }
+
+const openFormCesTraining = () => {
+    var form = document.querySelector('.form-ces-trainings');
+    var openForm = document.querySelector('[onclick="openFormCesTraining()"]');
+    var table = document.querySelector('.table-ces-trainings');
+    var openTable = document.querySelector('[onclick="openTableCesTraining()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableCesTraining = () => {
+    var form = document.querySelector('.form-ces-trainings');
+    var openForm = document.querySelector('[onclick="openFormCesTraining()"]');
+    var table = document.querySelector('.table-ces-trainings');
+    var openTable = document.querySelector('[onclick="openTableCesTraining()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormManagementTraining = () => {
+    var form = document.querySelector('.form-management-training');
+    var openForm = document.querySelector('[onclick="openFormManagementTraining()"]');
+    var table = document.querySelector('.table-management-training');
+    var openTable = document.querySelector('[onclick="openTableManagementTraining()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableManagementTraining = () => {
+    var form = document.querySelector('.form-management-training');
+    var openForm = document.querySelector('[onclick="openFormManagementTraining()"]');
+    var table = document.querySelector('.table-management-training');
+    var openTable = document.querySelector('[onclick="openTableManagementTraining()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormHealthRecord = () => {
+    var form = document.querySelector('.form-health-record');
+    var openForm = document.querySelector('[onclick="openFormHealthRecord()"]');
+    var table = document.querySelector('.table-health-record');
+    var openTable = document.querySelector('[onclick="openTableHealthRecord()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableHealthRecord = () => {
+    var form = document.querySelector('.form-health-record');
+    var openForm = document.querySelector('[onclick="openFormHealthRecord()"]');
+    var table = document.querySelector('.table-health-record');
+    var openTable = document.querySelector('[onclick="openTableHealthRecord()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormAwardAndCitation = () => {
+    var form = document.querySelector('.form-award-and-citation');
+    var openForm = document.querySelector('[onclick="openFormAwardAndCitation()"]');
+    var table = document.querySelector('.table-award-and-citation');
+    var openTable = document.querySelector('[onclick="openTableAwardAndCitation()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableAwardAndCitation = () => {
+    var form = document.querySelector('.form-award-and-citation');
+    var openForm = document.querySelector('[onclick="openFormAwardAndCitation()"]');
+    var table = document.querySelector('.table-award-and-citation');
+    var openTable = document.querySelector('[onclick="openTableAwardAndCitation()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormMajorCivilAndProfessionalAffiliation = () => {
+    var form = document.querySelector('.form-major-civic-and-professional-affiliations');
+    var openForm = document.querySelector('[onclick="openFormMajorCivilAndProfessionalAffiliation()"]');
+    var table = document.querySelector('.table-major-civic-and-professional-affiliations');
+    var openTable = document.querySelector('[onclick="openTableMajorCivilAndProfessionalAffiliation()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableMajorCivilAndProfessionalAffiliation = () => {
+    var form = document.querySelector('.form-major-civic-and-professional-affiliations');
+    var openForm = document.querySelector('[onclick="openFormMajorCivilAndProfessionalAffiliation()"]');
+    var table = document.querySelector('.table-major-civic-and-professional-affiliations');
+    var openTable = document.querySelector('[onclick="openTableMajorCivilAndProfessionalAffiliation()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormCaseRecord = () => {
+    var form = document.querySelector('.form-case-record');
+    var openForm = document.querySelector('[onclick="openFormCaseRecord()"]');
+    var table = document.querySelector('.table-case-record');
+    var openTable = document.querySelector('[onclick="openTableCaseRecord()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableCaseRecord = () => {
+    var form = document.querySelector('.form-case-record');
+    var openForm = document.querySelector('[onclick="openFormCaseRecord()"]');
+    var table = document.querySelector('.table-case-record');
+    var openTable = document.querySelector('[onclick="openTableCaseRecord()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormLanguageDialect = () => {
+    var form = document.querySelector('.form-language-dialect');
+    var openForm = document.querySelector('[onclick="openFormLanguageDialect()"]');
+    var table = document.querySelector('.table-language-dialect');
+    var openTable = document.querySelector('[onclick="openTableLanguageDialect()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableLanguageDialect = () => {
+    var form = document.querySelector('.form-language-dialect');
+    var openForm = document.querySelector('[onclick="openFormLanguageDialect()"]');
+    var table = document.querySelector('.table-language-dialect');
+    var openTable = document.querySelector('[onclick="openTableLanguageDialect()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+const openFormEligibilityAndRankTracker = () => {
+    var form = document.querySelector('.form-eligibility-and-rank-tracker');
+    var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
+    var table = document.querySelector('.table-eligibility-and-rank-tracker');
+    var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableEligibilityAndRankTracker = () => {
+    var form = document.querySelector('.form-eligibility-and-rank-tracker');
+    var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
+    var table = document.querySelector('.table-eligibility-and-rank-tracker');
+    var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}

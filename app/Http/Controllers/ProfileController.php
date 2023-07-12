@@ -119,6 +119,7 @@ class ProfileController extends Controller
 
     public function viewProfile($cesno)
     {
+
         $mainProfile = PersonalData::find($cesno);
         $father = Father::where('personal_data_cesno', $cesno)->get();
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
@@ -132,9 +133,11 @@ class ProfileController extends Controller
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
+        $scholarship = PersonalData::find($cesno)->scholarships;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 'examinationTaken'));
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
+        'examinationTaken', 'scholarship'));
 
     }
 
@@ -1307,7 +1310,7 @@ class ProfileController extends Controller
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
                 $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', '1')->get();
-                $Scholarships = Scholarships::where('cesno', '=', '1')->get();
+                $Scholarships = Scholarships::where('personal_data_cesno', '=', '1')->get();
                 $Affiliations = Affiliations::where('cesno', '=', '1')->get();
                 $AwardAndCitations = AwardAndCitations::where('cesno', '=', '1')->get();
                 $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
