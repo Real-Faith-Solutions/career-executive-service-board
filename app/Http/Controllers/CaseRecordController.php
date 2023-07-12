@@ -12,6 +12,22 @@ class CaseRecordController extends Controller
     
     public function store(Request $request, $cesno){
 
+        $request->validate([
+
+            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'offence' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'nature_code' => ['required'],
+            'case_no' => ['required', '^[a-zA-Z0-9\s\p{P}]*$'],
+            'filed_date' => ['required'],
+            'venue' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'status_code' => ['required'],
+            'finality' => ['required'],
+            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            
+        ]);
+
+
         $userLastName = Auth::user()->last_name;
 
         $caseRecord = new CaseRecords([
