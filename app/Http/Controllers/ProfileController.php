@@ -132,6 +132,7 @@ class ProfileController extends Controller
         $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
@@ -140,10 +141,12 @@ class ProfileController extends Controller
         $affiliation = PersonalData::find($cesno)->affiliations;
         $caseRecord = PersonalData::find($cesno)->caseRecords;
         $healthRecord = PersonalData::find($cesno)->healthRecords;
-
+        $expertise = PersonalData::find($cesno)->expertise;
+       
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord', 
+        'profileLibTblExpertiseSpec', 'expertise'));
 
     }
 
@@ -402,7 +405,7 @@ class ProfileController extends Controller
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', $cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', $cesno)->get();
                 $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $cesno)->get();
-                $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $cesno)->get();
+                $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', $cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
@@ -1095,7 +1098,7 @@ class ProfileController extends Controller
             $WorkExperienceViewOnly = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'View Only');
 
             // Records of Field of Expertise or Specialization
-            $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $request)->get();
+            $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', $request)->get();
             $FieldExpertiseAdd = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Add');
             $FieldExpertiseEdit = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Edit');
             $FieldExpertiseDelete = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Delete');
@@ -1312,7 +1315,7 @@ class ProfileController extends Controller
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', '1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', '1')->get();
                 $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', '1')->get();
-                $FieldExpertise = ProfileTblExpertise::where('cesno', '=', '1')->get();
+                $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', '1')->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', '1')->get();
@@ -3469,7 +3472,7 @@ class ProfileController extends Controller
             } else {
 
                 ProfileTblExpertise::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'ec_field_expertise' => $request->ec_field_expertise,
                     'ss_field_expertise' =>  $request->ss_field_expertise,
                     'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -3510,7 +3513,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ProfileTblExpertise::where('id', $request->cesno_field_expertise_id)
+                ProfileTblExpertise::where('ctrlno', $request->cesno_field_expertise_id)
                     ->update([
                         'ec_field_expertise' => $request->ec_field_expertise,
                         'ss_field_expertise' =>  $request->ss_field_expertise,
@@ -3530,7 +3533,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Category Only') == 'true') {
 
-            $FieldExpertise = ProfileTblExpertise::where('id', '=', $id)->get();
+            $FieldExpertise = ProfileTblExpertise::where('ctrlno', '=', $id)->get();
 
             return $FieldExpertise;
         } else {
@@ -3544,7 +3547,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Delete') == 'true') {
 
-            $FieldExpertise = ProfileTblExpertise::where('id', '=', $id)->delete();
+            $FieldExpertise = ProfileTblExpertise::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

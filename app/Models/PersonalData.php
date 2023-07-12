@@ -117,5 +117,10 @@ class PersonalData extends Model
     {
         return $this->hasMany(HealthRecords::class);
     }
+
+    public function expertise(): HasMany
+    {
+        return $this->hasMany(ProfileTblExpertise::class);
+    }
   
 }

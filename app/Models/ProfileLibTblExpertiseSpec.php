@@ -11,6 +11,8 @@ class ProfileLibTblExpertiseSpec extends Model
 
     protected $table = "profilelib_tblExpertiseSpec";
 
+    protected $primaryKey = 'SpeExp_Code';
+
     protected $fillable = [
         'SpeExp_Code',
         'Title',
