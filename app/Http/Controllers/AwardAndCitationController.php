@@ -12,6 +12,14 @@ class AwardAndCitationController extends Controller
     
     public function store(Request $request, $cesno){
 
+        $request->validate([
+
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'date' => ['required'],
+            
+        ]);
+
         $userlastName = Auth::user()->last_name;
 
         $awardAndCitations = new AwardAndCitations([
