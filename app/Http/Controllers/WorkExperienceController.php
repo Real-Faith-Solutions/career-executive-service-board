@@ -12,6 +12,20 @@ class WorkExperienceController extends Controller
     
     public function store(Request $request, $cesno){
 
+        $request->validate([
+
+            'from_dt' => ['required'],
+            'to_dt' => ['required'],
+            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'status' => ['required'],
+            'monthly_salary' => ['required'],
+            'salary' => ['required'],
+            'department' => ['required'],
+            'government_service' => ['required'],
+            'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+
+        ]);
+
         $userLastName = Auth::user()->last_name;
 
         $workExperience = new ProfileTblWorkExperience([
