@@ -53,48 +53,77 @@ Route::get('/', function () {
     }
 });
 
-Route::get('family-profile{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
-Route::post('family-profile/store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
-Route::post('family-profile/store/children/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
-Route::post('family-profile/store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
-Route::post('family-profile/store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
-Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
 
-Route::post('personal-data/store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
-Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+Route::prefix('family-profile')->group(function () {
+    Route::get('{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
+    Route::post('store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
+    Route::post('store/children/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
+    Route::post('store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
+    Route::post('store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
+    Route::delete('delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
 
-Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
-Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+});
 
-Route::post('examination/taken/store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
-Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
+Route::prefix('personal-data')->group(function () {
+    Route::post('store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
+    Route::delete('destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+});
 
-Route::post('scholarship/store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
-Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+Route::prefix('educational-attainment')->group(function () {
+    Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
+    Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+});
 
-Route::post('research/studies/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-Route::delete('research/studies/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+Route::prefix('examination-taken')->group(function () {
+    Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
+    Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
+});
 
-Route::post('work-experience/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-Route::delete('work-experience/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+Route::prefix('scholarship-taken')->group(function () {
+    Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+});
 
-Route::post('award-citation/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
-Route::delete('award-citation/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
+Route::prefix('research-studies')->group(function () {
+    Route::post('{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+    Route::delete('{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+});
 
-Route::post('affiliation/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
-Route::delete('affiliation/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
+Route::prefix('work-experience')->group(function () {
+    Route::post('{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
+    Route::delete('{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+});
 
-Route::post('case/record/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
-Route::delete('case/record/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+Route::prefix('award-citation')->group(function () {
+    Route::post('{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
+    Route::delete('{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
+});
 
-Route::post('health/record/{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
-Route::delete('health/record/{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
+Route::prefix('affiliation')->group(function () {
+    Route::post('{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+    Route::delete('{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
+});
 
-Route::post('expertise/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
-Route::delete('expertise/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+Route::prefix('case-record')->group(function () {
+    Route::post('{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+    Route::delete('{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+});
 
-Route::post('language/{cesno}', [LanguageController::class, 'store'])->name('language.store');
-Route::delete('language/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
+Route::prefix('health-record')->group(function () {
+    Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
+    Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
+});
+
+Route::prefix('expertise')->group(function () {
+    Route::post('{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::delete('{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+});
+
+Route::prefix('language')->group(function () {
+    Route::post('{cesno}', [LanguageController::class, 'store'])->name('language.store');
+    Route::delete('{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
+});
+
 
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
@@ -536,44 +565,45 @@ Route::group([
     });
 
     Route::group([
-        'prefix'     => '201-library',
+    'prefix' => '201-library',
     ], function () {
-        Route::get('/', [LibraryController::class, 'index'])->middleware('userauth');
-        Route::post('/city-municipality/add', [LibraryController::class, 'addCityMunicipality'])->middleware('userauth');
-        Route::get('/city-municipality/record', [LibraryController::class, 'getCityMunicipality'])->middleware('userauth');
-        Route::post('/degree/add', [LibraryController::class, 'addDegree'])->middleware('userauth');
-        Route::get('/degree/record', [LibraryController::class, 'getDegree'])->middleware('userauth');
-        Route::post('/course-major/add', [LibraryController::class, 'addCourseMajor'])->middleware('userauth');
-        Route::get('/course-major/record', [LibraryController::class, 'getCourseMajor'])->middleware('userauth');
-        Route::post('/school/add', [LibraryController::class, 'addSchool'])->middleware('userauth');
-        Route::get('/school/record', [LibraryController::class, 'getSchool'])->middleware('userauth');
-        Route::post('/examination-reference/add', [LibraryController::class, 'addExaminationReference'])->middleware('userauth');
-        Route::get('/examination-reference/record', [LibraryController::class, 'getExaminationReference'])->middleware('userauth');
-        Route::post('/language-dialects/add', [LibraryController::class, 'addLanguageDialects'])->middleware('userauth');
-        Route::get('/language-dialects/record', [LibraryController::class, 'getLanguageDialects'])->middleware('userauth');
-        Route::post('/ces-status-reference/add', [LibraryController::class, 'addCesStatusReference'])->middleware('userauth');
-        Route::get('/ces-status-reference/record', [LibraryController::class, 'getCesStatusReference'])->middleware('userauth');
-        Route::post('/acquired-thru/add', [LibraryController::class, 'addAcquiredThru'])->middleware('userauth');
-        Route::get('/acquired-thru/record', [LibraryController::class, 'getAcquiredThru'])->middleware('userauth');
-        Route::post('/ces-status-type/add', [LibraryController::class, 'addStatusType'])->middleware('userauth');
-        Route::get('/ces-status-type/record', [LibraryController::class, 'getStatusType'])->middleware('userauth');
-        Route::post('/appointing-authority/add', [LibraryController::class, 'addAppointingAuthority'])->middleware('userauth');
-        Route::get('/appointing-authority/record', [LibraryController::class, 'getAppointingAuthority'])->middleware('userauth');
-        Route::post('/expertise-category/add', [LibraryController::class, 'addExpertiseCategory'])->middleware('userauth');
-        Route::get('/expertise-category/record', [LibraryController::class, 'getExpertiseCategory'])->middleware('userauth');
-        Route::post('/special-skill/add', [LibraryController::class, 'addSpecialSkill'])->middleware('userauth');
-        Route::get('/special-skill/record', [LibraryController::class, 'getSpecialSkill'])->middleware('userauth');
-        Route::post('/case-nature/add', [LibraryController::class, 'addCaseNature'])->middleware('userauth');
-        Route::get('/case-nature/record', [LibraryController::class, 'getCaseNature'])->middleware('userauth');
-        Route::post('/case-status/add', [LibraryController::class, 'addCaseStatus'])->middleware('userauth');
-        Route::get('/case-status/record', [LibraryController::class, 'getCaseStatus'])->middleware('userauth');
-        Route::post('/location-city/add', [LibraryController::class, 'addLocationCity'])->middleware('userauth');
-        Route::get('/location-city/record', [LibraryController::class, 'getLocationCity'])->middleware('userauth');
-        Route::post('/location-province/add', [LibraryController::class, 'addLocationProvince'])->middleware('userauth');
-        Route::get('/location-province/record', [LibraryController::class, 'getLocationProvince'])->middleware('userauth');
-        Route::post('/location-region/add', [LibraryController::class, 'addLocationRegion'])->middleware('userauth');
-        Route::get('/location-region/record', [LibraryController::class, 'getLocationRegion'])->middleware('userauth');
+    Route::get('/', [LibraryController::class, 'index'])->middleware('userauth');
+    Route::post('/city-municipality/add', [LibraryController::class, 'addCityMunicipality'])->middleware('userauth');
+    Route::get('/city-municipality/record', [LibraryController::class, 'getCityMunicipality'])->middleware('userauth');
+    Route::post('/degree/add', [LibraryController::class, 'addDegree'])->middleware('userauth');
+    Route::get('/degree/record', [LibraryController::class, 'getDegree'])->middleware('userauth');
+    Route::post('/course-major/add', [LibraryController::class, 'addCourseMajor'])->middleware('userauth');
+    Route::get('/course-major/record', [LibraryController::class, 'getCourseMajor'])->middleware('userauth');
+    Route::post('/school/add', [LibraryController::class, 'addSchool'])->middleware('userauth');
+    Route::get('/school/record', [LibraryController::class, 'getSchool'])->middleware('userauth');
+    Route::post('/examination-reference/add', [LibraryController::class, 'addExaminationReference'])->middleware('userauth');
+    Route::get('/examination-reference/record', [LibraryController::class, 'getExaminationReference'])->middleware('userauth');
+    Route::post('/language-dialects/add', [LibraryController::class, 'addLanguageDialects'])->middleware('userauth');
+    Route::get('/language-dialects/record', [LibraryController::class, 'getLanguageDialects'])->middleware('userauth');
+    Route::post('/ces-status-reference/add', [LibraryController::class, 'addCesStatusReference'])->middleware('userauth');
+    Route::get('/ces-status-reference/record', [LibraryController::class, 'getCesStatusReference'])->middleware('userauth');
+    Route::post('/acquired-thru/add', [LibraryController::class, 'addAcquiredThru'])->middleware('userauth');
+    Route::get('/acquired-thru/record', [LibraryController::class, 'getAcquiredThru'])->middleware('userauth');
+    Route::post('/ces-status-type/add', [LibraryController::class, 'addStatusType'])->middleware('userauth');
+    Route::get('/ces-status-type/record', [LibraryController::class, 'getStatusType'])->middleware('userauth');
+    Route::post('/appointing-authority/add', [LibraryController::class, 'addAppointingAuthority'])->middleware('userauth');
+    Route::get('/appointing-authority/record', [LibraryController::class, 'getAppointingAuthority'])->middleware('userauth');
+    Route::post('/expertise-category/add', [LibraryController::class, 'addExpertiseCategory'])->middleware('userauth');
+    Route::get('/expertise-category/record', [LibraryController::class, 'getExpertiseCategory'])->middleware('userauth');
+    Route::post('/special-skill/add', [LibraryController::class, 'addSpecialSkill'])->middleware('userauth');
+    Route::get('/special-skill/record', [LibraryController::class, 'getSpecialSkill'])->middleware('userauth');
+    Route::post('/case-nature/add', [LibraryController::class, 'addCaseNature'])->middleware('userauth');
+    Route::get('/case-nature/record', [LibraryController::class, 'getCaseNature'])->middleware('userauth');
+    Route::post('/case-status/add', [LibraryController::class, 'addCaseStatus'])->middleware('userauth');
+    Route::get('/case-status/record', [LibraryController::class, 'getCaseStatus'])->middleware('userauth');
+    Route::post('/location-city/add', [LibraryController::class, 'addLocationCity'])->middleware('userauth');
+    Route::get('/location-city/record', [LibraryController::class, 'getLocationCity'])->middleware('userauth');
+    Route::post('/location-province/add', [LibraryController::class, 'addLocationProvince'])->middleware('userauth');
+    Route::get('/location-province/record', [LibraryController::class, 'getLocationProvince'])->middleware('userauth');
+    Route::post('/location-region/add', [LibraryController::class, 'addLocationRegion'])->middleware('userauth');
+    Route::get('/location-region/record', [LibraryController::class, 'getLocationRegion'])->middleware('userauth');
     });
+
 
     Route::group([
         'prefix'     => 'rights-management',
