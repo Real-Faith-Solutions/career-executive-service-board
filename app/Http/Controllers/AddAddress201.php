@@ -7,6 +7,7 @@ use App\Models\PersonalData;
 use App\Models\ProfileAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class AddAddress201 extends Controller
 {
@@ -16,6 +17,15 @@ class AddAddress201 extends Controller
         $type = "Permanent";
         $encoder = "Encoder";
 
+        $response = Http::get("https://psgc.gitlab.io/api/regions/".$request->regionsSelectPermanent);
+        $region_name = $response->json('name');
+
+        $response = Http::get("https://psgc.gitlab.io/api/cities-municipalities/".$request->citySelectPermanent);
+        $city_or_municipality_name = $response->json('name');
+
+        $response = Http::get("https://psgc.gitlab.io/api/barangays/".$request->brgySelectPermanent);
+        $brgy_name = $response->json('name');
+
         $existingAddress = ProfileAddress::where('personal_data_cesno', $cesno)
             ->where('type', $type)
             ->first();
@@ -23,10 +33,13 @@ class AddAddress201 extends Controller
         if ($existingAddress) {
 
             $existingAddress->type = $type;
-            $existingAddress->region = $request->regionsSelectPermanent;
-            $existingAddress->city_or_municipality = $request->citySelectPermanent;
-            $existingAddress->brgy = $request->brgySelectPermanent;
-            // $existingAddress->zip_code = $request->zip_code;
+            $existingAddress->region_code = $request->regionsSelectPermanent;
+            $existingAddress->region_name = $region_name;
+            $existingAddress->city_or_municipality_code = $request->citySelectPermanent;
+            $existingAddress->city_or_municipality_name = $city_or_municipality_name;
+            $existingAddress->brgy_code = $request->brgySelectPermanent;
+            $existingAddress->brgy_name = $brgy_name;
+            $existingAddress->zip_code = $request->zip_code;
             $existingAddress->street_lot_bldg_floor = $request->street_lot_bldg_floor;
             $existingAddress->encoder = $encoder;
             $existingAddress->save();
@@ -37,13 +50,15 @@ class AddAddress201 extends Controller
         $profileAddress = new ProfileAddress([
 
             'type' => $type,
-            'region' => $request->regionsSelectPermanent,
-            'city_or_municipality' => $request->citySelectPermanent,
-            'brgy' => $request->brgySelectPermanent,
-            // 'zip_code' => $request->zip_code,
+            'region_code' => $request->regionsSelectPermanent,
+            'region_name' => $region_name,
+            'city_or_municipality_code' => $request->citySelectPermanent,
+            'city_or_municipality_name' => $city_or_municipality_name,
+            'brgy_code' => $request->brgySelectPermanent,
+            'brgy_name' => $brgy_name,
+            'zip_code' => $request->zip_code,
             'street_lot_bldg_floor' => $request->street_lot_bldg_floor,
             'encoder' => $encoder,
-            // 'last_updated_by' => $request->employer_bussiness_telephone,
             
         ]);
 

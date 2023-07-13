@@ -1,3 +1,24 @@
+@if(!is_null($addressProfilePermanent))
+    @php
+        
+        $region = $addressProfilePermanent->region_code;
+        $city = $addressProfilePermanent->city_or_municipality_code;
+        $brgy = $addressProfilePermanent->brgy_code;
+        $zip_code = $addressProfilePermanent->zip_code;
+        $street_lot_bldg_floor = $addressProfilePermanent->street_lot_bldg_floor;
+    
+    @endphp
+@else
+    @php 
+
+        $region = '';
+        $city = '';
+        $brgy = '';
+        $zip_code = '';
+        $street_lot_bldg_floor = '';
+
+    @endphp
+@endif
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -30,21 +51,21 @@
                     <div class="mb-3">
                         <label for="regionsSelectPermanent">Region<sup>*</span></label>
                         <select id="regionsSelectPermanent" name="regionsSelectPermanent" required>
-                            <option value="">Select a region</option>
+                            <option value="{{ $region }}" selected></option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="citySelectPermanent">City or Municipality<sup>*</span></label>
                         <select id="citySelectPermanent" name="citySelectPermanent" required>
-                            <option disabled selected>Select City or Municipality</option>
+                            <option value="{{ $city }}" selected></option>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="brgySelectPermanent">Barangay<sup>*</span></label>
                         <select id="brgySelectPermanent" name="brgySelectPermanent" required>
-                            <option disabled selected>Select a Barangay</option>
+                            <option value="{{ $brgy }}" selected></option>
                         </select>
                     </div>
 
@@ -54,7 +75,7 @@
 
                     <div class="mb-3">
                         <label for="zip_code">Zip code<sup>*</span></label>
-                        <input id="zip_code" name="zip_code" readonly required type="number">
+                        <input id="zip_code" name="zip_code" type="number" value="{{ $zip_code }}" required>
                         @error('zip_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -64,7 +85,7 @@
 
                     <div class="mb-3 col-span-2">
                         <label for="street_lot_bldg_floor">Street/Lot no./Building/Floor no.</label>
-                        <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text">
+                        <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text" value="{{ $street_lot_bldg_floor }}" required>
                         @error('street_lot_bldg_floor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

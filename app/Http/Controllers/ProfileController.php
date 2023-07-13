@@ -134,10 +134,11 @@ class ProfileController extends Controller
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
+        $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship'));
+        'examinationTaken', 'scholarship', 'addressProfilePermanent'));
 
     }
 

@@ -18,9 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
             $table->string('type')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city_or_municipality')->nullable();
-            $table->string('brgy')->nullable();
+            $table->string('region_code')->nullable();
+            $table->string('region_name')->nullable();
+            $table->string('city_or_municipality_code')->nullable();
+            $table->string('city_or_municipality_name')->nullable();
+            $table->string('brgy_code')->nullable();
+            $table->string('brgy_name')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('street_lot_bldg_floor')->nullable();
             $table->string('encoder')->nullable();
