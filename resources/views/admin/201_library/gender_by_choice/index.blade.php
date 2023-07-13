@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Gender By Birth - 201 Library')
+@section('title', 'Gender By Choice - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('library.gender_by_birth.form') }}">Add Gender by birth</a>
+    <a class="btn btn-primary" href="{{ route('library.gender_by_birth.form') }}">Add Gender by choice</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -26,7 +26,7 @@
             @php
                 $i = 1;
             @endphp
-            @foreach ($gender_by_birth as $data)
+            @foreach ($datas as $data)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                         {{ $i++ }}
@@ -44,6 +44,10 @@
 
         </tbody>
     </table>
+
+    <div class="m-5">
+        {{ $datas->links() }}
+    </div>
 </div>
 
 @endsection

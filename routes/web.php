@@ -20,6 +20,7 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\GenderByChoiceController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\LanguageController;
@@ -60,7 +61,7 @@ Route::prefix('201-Library')->group(function () {
         Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_birth.store');
 
     });
-
+    Route::resource('gender-by-choice', GenderByChoiceController::class);
 
 });
 
