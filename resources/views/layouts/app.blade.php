@@ -40,6 +40,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{-- end --}}
 
+    {{-- js script for location api integration --}}
+    <script src="{{ asset('js/location-api-integration.js') }}"></script>
+    {{-- end --}}
+
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
         
@@ -49,6 +53,30 @@
                 "closeButton" : true,
             }
             toastr.success("{{ Session::get('message') }}",'Success!',{timeOut:7000});
+        </script>
+
+    @endif
+
+    @if (Session::has('message-address-added'))
+        
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.success("{{ Session::get('message-address-added') }}",'Success!',{timeOut:7000});
+        </script>
+
+    @endif
+
+    @if (Session::has('message-address-changed'))
+        
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.info("{{ Session::get('message-address-changed') }}",'Success!',{timeOut:7000});
         </script>
 
     @endif

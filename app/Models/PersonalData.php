@@ -82,6 +82,11 @@ class PersonalData extends Model
     {
         return $this->hasMany(ExaminationsTaken::class);
     }
+    
+    public function profileAddress(): HasMany
+    {
+        return $this->hasMany(ProfileAddress::class);
+    }
 
     public function scholarships(): HasMany
     {
@@ -127,5 +132,5 @@ class PersonalData extends Model
     {
         return $this->hasMany(ProfileTblLanguages::class);
     }
-  
+    
 }

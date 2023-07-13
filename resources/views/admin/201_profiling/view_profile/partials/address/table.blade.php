@@ -15,22 +15,22 @@
                     Type
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Floor / Bldg
+                    Region
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    No. / Street
+                    City/Municipality
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Brgy. / District
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    City Municipality
+                    Brgy.
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Zip Code
                 </th>
+                {{-- <th class="px-6 py-3" scope="col">
+                    Street/Lot/Bldg/Floor
+                </th> --}}
                 <th class="px-6 py-3" scope="col">
-                    <span class="sr-only">Action</span>
+                    Action
                 </th>
             </tr>
         </thead>
@@ -42,23 +42,20 @@
                         {{ $data->type }}
                     </td>
                     <td class="px-6 py-3">
-                        {{ $data->floor_bldg }}
+                        {{ $data->region_name }}
                     </td>
                     <td class="px-6 py-3">
-                        {{ $data->no_street }}
+                        {{ $data->city_or_municipality_name }}
                     </td>
                     <td class="px-6 py-3">
-                        {{ $data->brgy_or_district }}
-                    </td>
-                    <td class="px-6 py-3">
-                        {{ $data->city_or_municipality }}
+                        {{ $data->brgy_name }}
                     </td>
                     <td class="px-6 py-3">
                         {{ $data->zip_code }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a>
+                        {{-- <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a> --}}
                         <a class="mx-1 font-medium text-red-600 hover:underline" href="#">Delete</a>
                     </td>
                 </tr>

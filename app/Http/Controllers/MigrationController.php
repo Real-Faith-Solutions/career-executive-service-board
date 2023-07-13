@@ -98,7 +98,7 @@ class MigrationController extends Controller
 
             foreach($vw_profile_main as $item){
 
-                $profile_tblAddress = DB::connection('sqlsrv-2')->table('profile_tblAddress')->where('cesno','=',$item->cesno)->where('catid','=','Home')->get();
+                $profile_tblAddress = DB::connection('sqlsrv-2')->table('profile_tblAddress')->where('personal_data_cesno','=',$item->cesno)->where('catid','=','Home')->get();
 
                 PersonalData::create([
 
