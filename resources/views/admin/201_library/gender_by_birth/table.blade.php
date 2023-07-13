@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('library.gender_by_choice.form') }}">Add Gender by birth</a>
+    <a class="btn btn-primary" href="{{ route('library.gender_by_birth.form') }}">Add Gender by birth</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

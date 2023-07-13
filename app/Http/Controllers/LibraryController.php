@@ -29,7 +29,7 @@ class LibraryController extends Controller
         ]);
         GenderByBirth::create($request->all());
 
-        return redirect()->route('library.gender_by_choice.table')->with('message', 'Gender by birth is successfully added');
+        return redirect()->route('library.gender_by_birth.table')->with('message', 'Gender by birth is successfully added');
 
     }
 

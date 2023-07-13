@@ -54,10 +54,10 @@ Route::get('/', function () {
 });
 
 Route::prefix('201-Library')->group(function () {
-    Route::prefix('gender-by-choices')->group(function () {
-        Route::get('table', [LibraryController::class, 'genderByBirthTable'])->name('library.gender_by_choice.table');
-        Route::get('form', [LibraryController::class, 'genderByBirthForm'])->name('library.gender_by_choice.form');
-        Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_choice.store');
+    Route::prefix('gender-by-birth')->group(function () {
+        Route::get('table', [LibraryController::class, 'genderByBirthTable'])->name('library.gender_by_birth.table');
+        Route::get('form', [LibraryController::class, 'genderByBirthForm'])->name('library.gender_by_birth.form');
+        Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_birth.store');
 
     });
 
