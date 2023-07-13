@@ -24,6 +24,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibTblEducMajor::factory(10)->create();
         \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
+        \App\Models\PersonalData::factory(50)->create();
+
+
+
+
 
 
         \App\Models\ProfileLibTblExamRef::factory(10)->create();
