@@ -14,14 +14,17 @@ class AffiliationController extends Controller
 
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'from_dt' => ['required'],
-            'to_dt' => ['required'],
+            'title_of_award' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'date_from' => ['required'],
+            'date_to' => ['required'],
 
         ]);
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $affiliation = new Affiliations([
     
@@ -29,7 +32,7 @@ class AffiliationController extends Controller
             'position' => $request->sponsor,
             'from_dt' => $request->date_from,
             'to_dt' => $request->date_to,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
              
         ]);
     
@@ -46,7 +49,7 @@ class AffiliationController extends Controller
         $affiliation = Affiliations::find($ctrlno);
         $affiliation->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 

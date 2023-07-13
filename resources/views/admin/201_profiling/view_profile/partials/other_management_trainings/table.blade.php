@@ -41,36 +41,43 @@
         </thead>
         <tbody>
 
-            <tr class="border-b bg-white">
-                <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum
-                </td>
+            @foreach ($otherTraining as $otherTrainings)
+                <tr class="border-b bg-white">
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $otherTrainings->training }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->training_category }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->field_specialization }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->sponsor }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->venue }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->no_training_hours }}
+                    </td>
 
-                <td class="px-6 py-4 text-right uppercase">
-                    <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                </td>
-            </tr>
+                    <td class="px-6 py-4 text-right uppercase">
+                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+
+                        <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
 
         </tbody>
     </table>

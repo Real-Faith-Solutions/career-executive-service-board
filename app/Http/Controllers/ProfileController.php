@@ -144,6 +144,7 @@ class ProfileController extends Controller
         $healthRecord = PersonalData::find($cesno)->healthRecords;
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
+        $otherTraining = PersonalData::find($cesno)->otherTraining;
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
@@ -151,8 +152,8 @@ class ProfileController extends Controller
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
-        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 
-        'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp'));
+        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
+        'addressProfileMailing', 'addressProfileTemp'));
 
     }
 
@@ -413,7 +414,7 @@ class ProfileController extends Controller
                 $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $cesno)->get();
                 $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', $cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
-                $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
+                // $OtherManagementTrainings = OtherManagementTrainings::where('personal_data_cesno', '=', $cesno)->get();
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
                 $Scholarships = Scholarships::where('personal_data_cesno', '=', $cesno)->get();
                 $Affiliations = Affiliations::where('personal_data_cesno', '=', $cesno)->get();
@@ -464,7 +465,7 @@ class ProfileController extends Controller
                     'WorkExperience',
                     'FieldExpertise',
                     'CesTrainings',
-                    'OtherManagementTrainings',
+                    // 'OtherManagementTrainings',
                     'ResearchAndStudies',
                     'Scholarships',
                     'Affiliations',
@@ -1118,11 +1119,11 @@ class ProfileController extends Controller
             $CesTrainingsViewOnly = RolesController::validateUserExecutive201RoleAccess('CES Trainings', 'View Only');
 
             // Other Non-CES Accredited Trainings
-            $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $request)->get();
-            $OtherManagementTrainingsAdd = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Add');
-            $OtherManagementTrainingsEdit = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Edit');
-            $OtherManagementTrainingsDelete = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Delete');
-            $OtherManagementTrainingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'View Only');
+            // $OtherManagementTrainings = OtherManagementTrainings::where('personal_data_cesno', '=', $request)->get();
+            // $OtherManagementTrainingsAdd = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Add');
+            // $OtherManagementTrainingsEdit = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Edit');
+            // $OtherManagementTrainingsDelete = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Delete');
+            // $OtherManagementTrainingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'View Only');
 
             // Research and Studies
             $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $request)->get();
@@ -1196,7 +1197,7 @@ class ProfileController extends Controller
                 'WorkExperience',
                 'FieldExpertise',
                 'CesTrainings',
-                'OtherManagementTrainings',
+                // 'OtherManagementTrainings',
                 'ResearchAndStudies',
                 'Scholarships',
                 'Affiliations',
@@ -1328,7 +1329,7 @@ class ProfileController extends Controller
                 $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', '1')->get();
                 $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', '1')->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
-                $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
+                // $OtherManagementTrainings = OtherManagementTrainings::where('personal_data_cesno', '=', '1')->get();
                 $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', '1')->get();
                 // $Scholarships = Scholarships::where('
                 // ', '=', '1')->get();
@@ -1376,7 +1377,7 @@ class ProfileController extends Controller
                     'WorkExperience',
                     'FieldExpertise',
                     'CesTrainings',
-                    'OtherManagementTrainings',
+                    // 'OtherManagementTrainings',
                     'ResearchAndStudies',
                     // 'Scholarships',
                     'Affiliations',
@@ -3746,154 +3747,154 @@ class ProfileController extends Controller
         }
     }
 
-    public function addOtherManagementTrainings(Request $request)
-    {
+    // public function addOtherManagementTrainings(Request $request)
+    // {
 
-        if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Add') == 'true') {
+    //     if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Add') == 'true') {
 
-            // Validate form
+    //         // Validate form
 
-            $validator = Validator::make(
+    //         $validator = Validator::make(
 
-                array(
-                    'cesno' => $request->cesno,
-                    'date_f_onat' => $request->date_f_onat,
-                    'date_t_onat' =>  $request->date_t_onat,
-                    'title_traning_onat' =>  $request->title_traning_onat,
-                    'training_category_onat' =>  $request->training_category_onat,
-                    'expertise_fos_onat' =>  $request->expertise_fos_onat,
-                    'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
-                    'vanue_onat' =>  $request->vanue_onat,
-                    'no_training_hours_omt' =>  $request->no_training_hours_omt,
-                ),
-                array(
-                    'cesno' => 'required',
-                    'date_f_onat' => 'required|date',
-                    'date_t_onat' => 'required|date',
-                    'title_traning_onat' => 'required|max:255',
-                    'training_category_onat' => 'required|max:255',
-                    'expertise_fos_onat' => 'required|max:255',
-                    'sponsor_tp_onat' => 'required|max:255',
-                    'vanue_onat' => 'required|max:255',
-                    'no_training_hours_omt' => 'required|max:255',
-                )
-            );
+    //             array(
+    //                 'personal_data_cesno' => $request->cesno,
+    //                 'date_f_onat' => $request->date_f_onat,
+    //                 'date_t_onat' =>  $request->date_t_onat,
+    //                 'title_traning_onat' =>  $request->title_traning_onat,
+    //                 'training_category_onat' =>  $request->training_category_onat,
+    //                 'expertise_fos_onat' =>  $request->expertise_fos_onat,
+    //                 'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
+    //                 'vanue_onat' =>  $request->vanue_onat,
+    //                 'no_training_hours_omt' =>  $request->no_training_hours_omt,
+    //             ),
+    //             array(
+    //                 'cesno' => 'required',
+    //                 'date_f_onat' => 'required|date',
+    //                 'date_t_onat' => 'required|date',
+    //                 'title_traning_onat' => 'required|max:255',
+    //                 'training_category_onat' => 'required|max:255',
+    //                 'expertise_fos_onat' => 'required|max:255',
+    //                 'sponsor_tp_onat' => 'required|max:255',
+    //                 'vanue_onat' => 'required|max:255',
+    //                 'no_training_hours_omt' => 'required|max:255',
+    //             )
+    //         );
 
-            if ($validator->fails()) {
+    //         if ($validator->fails()) {
 
-                $errors = $validator->errors();
+    //             $errors = $validator->errors();
 
-                return $errors;
-            } else {
+    //             return $errors;
+    //         } else {
 
-                OtherManagementTrainings::create([
-                    'cesno' => $request->cesno,
-                    'date_f_onat' => $request->date_f_onat,
-                    'date_t_onat' =>  $request->date_t_onat,
-                    'title_traning_onat' =>  $request->title_traning_onat,
-                    'training_category_onat' =>  $request->training_category_onat,
-                    'expertise_fos_onat' =>  $request->expertise_fos_onat,
-                    'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
-                    'vanue_onat' =>  $request->vanue_onat,
-                    'no_training_hours_omt' =>  $request->no_training_hours_omt,
-                    'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
-                    'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
-                ]);
+    //             OtherManagementTrainings::create([
+    //                 'personal_data_cesno' => $request->cesno,
+    //                 'date_f_onat' => $request->date_f_onat,
+    //                 'date_t_onat' =>  $request->date_t_onat,
+    //                 'title_traning_onat' =>  $request->title_traning_onat,
+    //                 'training_category_onat' =>  $request->training_category_onat,
+    //                 'expertise_fos_onat' =>  $request->expertise_fos_onat,
+    //                 'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
+    //                 'vanue_onat' =>  $request->vanue_onat,
+    //                 'no_training_hours_omt' =>  $request->no_training_hours_omt,
+    //                 'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
+    //                 'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
+    //             ]);
 
-                return 'Successfully added';
-            }
-        } else {
+    //             return 'Successfully added';
+    //         }
+    //     } else {
 
-            return 'Restricted';
-        }
-    }
+    //         return 'Restricted';
+    //     }
+    // }
 
-    public function editOtherManagementTrainings(Request $request)
-    {
+    // public function editOtherManagementTrainings(Request $request)
+    // {
 
-        if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Edit') == 'true') {
+    //     if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Edit') == 'true') {
 
-            // Validate form
+    //         // Validate form
 
-            $validator = Validator::make(
+    //         $validator = Validator::make(
 
-                array(
-                    'date_f_onat' => $request->date_f_onat,
-                    'date_t_onat' =>  $request->date_t_onat,
-                    'title_traning_onat' =>  $request->title_traning_onat,
-                    'training_category_onat' =>  $request->training_category_onat,
-                    'expertise_fos_onat' =>  $request->expertise_fos_onat,
-                    'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
-                    'vanue_onat' =>  $request->vanue_onat,
-                    'no_training_hours_omt' =>  $request->no_training_hours_omt,
-                ),
-                array(
-                    'date_f_onat' => 'required|date',
-                    'date_t_onat' => 'required|date',
-                    'title_traning_onat' => 'required|max:255',
-                    'training_category_onat' => 'required|max:255',
-                    'expertise_fos_onat' => 'required|max:255',
-                    'sponsor_tp_onat' => 'required|max:255',
-                    'vanue_onat' => 'required|max:255',
-                    'no_training_hours_omt' => 'required|max:255',
-                )
-            );
+    //             array(
+    //                 'date_f_onat' => $request->date_f_onat,
+    //                 'date_t_onat' =>  $request->date_t_onat,
+    //                 'title_traning_onat' =>  $request->title_traning_onat,
+    //                 'training_category_onat' =>  $request->training_category_onat,
+    //                 'expertise_fos_onat' =>  $request->expertise_fos_onat,
+    //                 'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
+    //                 'vanue_onat' =>  $request->vanue_onat,
+    //                 'no_training_hours_omt' =>  $request->no_training_hours_omt,
+    //             ),
+    //             array(
+    //                 'date_f_onat' => 'required|date',
+    //                 'date_t_onat' => 'required|date',
+    //                 'title_traning_onat' => 'required|max:255',
+    //                 'training_category_onat' => 'required|max:255',
+    //                 'expertise_fos_onat' => 'required|max:255',
+    //                 'sponsor_tp_onat' => 'required|max:255',
+    //                 'vanue_onat' => 'required|max:255',
+    //                 'no_training_hours_omt' => 'required|max:255',
+    //             )
+    //         );
 
-            if ($validator->fails()) {
+    //         if ($validator->fails()) {
 
-                $errors = $validator->errors();
+    //             $errors = $validator->errors();
 
-                return $errors;
-            } else {
+    //             return $errors;
+    //         } else {
 
-                OtherManagementTrainings::where('id', $request->cesno_other_management_trainings_id)
-                    ->update([
-                        'date_f_onat' => $request->date_f_onat,
-                        'date_t_onat' =>  $request->date_t_onat,
-                        'title_traning_onat' =>  $request->title_traning_onat,
-                        'training_category_onat' =>  $request->training_category_onat,
-                        'expertise_fos_onat' =>  $request->expertise_fos_onat,
-                        'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
-                        'vanue_onat' =>  $request->vanue_onat,
-                        'no_training_hours_omt' =>  $request->no_training_hours_omt,
-                        'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
-                    ]);
+    //             OtherManagementTrainings::where('ctrlno', $request->cesno_other_management_trainings_id)
+    //                 ->update([
+    //                     'date_f_onat' => $request->date_f_onat,
+    //                     'date_t_onat' =>  $request->date_t_onat,
+    //                     'title_traning_onat' =>  $request->title_traning_onat,
+    //                     'training_category_onat' =>  $request->training_category_onat,
+    //                     'expertise_fos_onat' =>  $request->expertise_fos_onat,
+    //                     'sponsor_tp_onat' =>  $request->sponsor_tp_onat,
+    //                     'vanue_onat' =>  $request->vanue_onat,
+    //                     'no_training_hours_omt' =>  $request->no_training_hours_omt,
+    //                     'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
+    //                 ]);
 
-                return 'Successfully updated';
-            }
-        } else {
+    //             return 'Successfully updated';
+    //         }
+    //     } else {
 
-            return 'Restricted';
-        }
-    }
+    //         return 'Restricted';
+    //     }
+    // }
 
-    public function getOtherManagementTrainings($id)
-    {
+    // public function getOtherManagementTrainings($id)
+    // {
 
-        if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Category Only') == 'true') {
+    //     if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Category Only') == 'true') {
 
-            $OtherManagementTrainings = OtherManagementTrainings::where('id', '=', $id)->get();
+    //         $OtherManagementTrainings = OtherManagementTrainings::where('ctrlno', '=', $id)->get();
 
-            return $OtherManagementTrainings;
-        } else {
+    //         return $OtherManagementTrainings;
+    //     } else {
 
-            return 'Restricted';
-        }
-    }
+    //         return 'Restricted';
+    //     }
+    // }
 
-    public function deleteOtherManagementTrainings($id)
-    {
+    // public function deleteOtherManagementTrainings($id)
+    // {
 
-        if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Delete') == 'true') {
+    //     if (RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'Delete') == 'true') {
 
-            $OtherManagementTrainings = OtherManagementTrainings::where('id', '=', $id)->delete();
+    //         $OtherManagementTrainings = OtherManagementTrainings::where('ctrlno', '=', $id)->delete();
 
-            return 'Successfully deleted';
-        } else {
+    //         return 'Successfully deleted';
+    //     } else {
 
-            return 'Restricted';
-        }
-    }
+    //         return 'Restricted';
+    //     }
+    // }
 
     public function addResearchAndStudies(Request $request)
     {

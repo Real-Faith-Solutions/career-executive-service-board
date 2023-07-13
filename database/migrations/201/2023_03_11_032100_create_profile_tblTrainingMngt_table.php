@@ -14,18 +14,19 @@ return new class extends Migration
         //other_management_trainings
         Schema::create('profile_tblTrainingMngt', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
-            $table->date('training')->nullable();
-            $table->date('subject')->nullable();
+            // $table->bigInteger('cesno');
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->string('training');
+            $table->string('training_category')->nullable();
             $table->string('sponsor')->nullable();
             $table->string('venue')->nullable();
-            $table->string('from_dt')->nullable();
-            $table->string('to_dt')->nullable();
-            $table->string('classcode')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->string('no_training_hours');
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
+            $table->string('field_specialization')->nullable();
+            $table->string('encoder');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -15,17 +15,20 @@ class IdentificationController extends Controller
         $request->validate([
 
             'type' => ['required'],
-            'id_number' => ['required', 'min:2', 'max:40'],
+            'identification_id' => ['required', 'min:2', 'max:40'],
             
         ]);
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $identification = new Identification([
 
             'type' => $request->type,
             'id_number' => $request->identification_id,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -42,7 +45,7 @@ class IdentificationController extends Controller
         $spouse = Identification::find($ctrlno);
         $spouse->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 

@@ -43,7 +43,10 @@ class FamilyController extends Controller
 
     public function storeSpouse(SpouseStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name; 
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $personalData = new SpouseRecords([
 
@@ -55,7 +58,7 @@ class FamilyController extends Controller
             'employer_business_name' => $request->employer_bussiness_name,
             'employer_business_address' => $request->employer_bussiness_address,
             'employer_business_telephone' => $request->employer_bussiness_telephone,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
             
         ]);
 
@@ -73,7 +76,10 @@ class FamilyController extends Controller
 
     public function storeChildren(ChildrenStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name; 
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $childrenRecord = new ChildrenRecords([
 
@@ -83,7 +89,7 @@ class FamilyController extends Controller
             'name_extension' => $request->name_extension,
             'birthdate' => $request->birthdate,
             'birth_place' => $request->birth_place,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -97,15 +103,18 @@ class FamilyController extends Controller
 
     public function storeFather(FatherStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name; 
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $fatherDetails = new Father([
 
             'father_last_name' => $request->father_last_name,
             'father_first_name' => $request->father_first_name,
             'father_middle_name' => $request->father_middle_name,
-            'father_name_extension' => $request->father_name_extension,
-            'encoder' => $userLastName,
+            'name_extension' => $request->father_name_extension,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -113,7 +122,7 @@ class FamilyController extends Controller
 
         if(Father::where('personal_data_cesno', $cesno)->exists()){
             
-            return "Youre Already has details in Father";
+            return redirect()->back()->with('error', 'Already Have Details');
 
         }else{
             
@@ -127,14 +136,17 @@ class FamilyController extends Controller
 
     public function storeMother(MotherStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name; 
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $motherDetails = new Mother([
 
             'mother_last_name' => $request->mother_last_name,
             'mother_first_name' => $request->mother_first_name,
             'mother_middle_name' => $request->mother_middle_name,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -142,11 +154,11 @@ class FamilyController extends Controller
 
         if(Mother::where('personal_data_cesno', $cesno)->exists()){
             
-            return "Youre Already has details in Mother";
+            return redirect()->back()->with('error', 'Already Have Details');
 
         }else{
             
-            $motherPersonalDataId->mother()->save($motherDetails);
+            $motherPersonalDataId->mother()->save($motherDetails); 
             
         }
 
@@ -159,9 +171,36 @@ class FamilyController extends Controller
         $spouse = SpouseRecords::find($ctrlno);
         $spouse->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
+
+    }
+
+    public function destroyChildren($ctrlno){
+        
+        $children = ChildrenRecords::find($ctrlno);
+        $children->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
+
+    }
+
+    public function destroyFather($ctrlno){
+        
+        $father = Father::find($ctrlno);
+        $father->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
+
+    }
+
+    public function destroyMother($ctrlno){
+        
+        $mother = Mother::find($ctrlno);
+        $mother->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
     }
 

@@ -14,19 +14,22 @@ class WorkExperienceController extends Controller
 
         $request->validate([
 
-            'from_dt' => ['required'],
-            'to_dt' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'status' => ['required'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'position_or_title' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
-            'department' => ['required'],
+            'department_or_agency' => ['required'],
             'government_service' => ['required'],
             'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
 
         ]);
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $workExperience = new ProfileTblWorkExperience([
 
@@ -39,7 +42,7 @@ class WorkExperienceController extends Controller
             'department' => $request->department_or_agency,
             'government_service' => $request->government_service,
             'remarks' => $request->remarks,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -56,7 +59,7 @@ class WorkExperienceController extends Controller
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
         $workExperience->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 
