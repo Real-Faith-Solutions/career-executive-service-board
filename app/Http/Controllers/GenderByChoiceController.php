@@ -20,14 +20,14 @@ class GenderByChoiceController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
         ]);
         GenderByChoice::create($request->all());
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully added');
     }
-
+    // gender-by-choice.edit
     public function edit($ctrlno){
-        $data = GenderByChoice::findorFail($ctrlno);
+        $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
         return view('admin.201_library.gender_by_choice.edit', compact('data'));
     }
 
@@ -36,10 +36,17 @@ class GenderByChoiceController extends Controller
             'name' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
         ]);
 
-        $data = GenderByChoice::findOrFail($ctrlno);
+        $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
         $data->update($request->all());
 
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully updated');
+    }
+
+    public function destroy($ctrlno){
+        $data = GenderByChoice::findOrFail($ctrlno);
+        $data->delete();
+
+        return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is soft deleted');
     }
 
 
