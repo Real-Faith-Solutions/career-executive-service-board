@@ -1,8 +1,14 @@
 <div class="my-5 flex justify-end">
-    <a href="{{ route('family-profile.create', ['cesno'=>$mainProfile->cesno])}}" class="btn btn-primary">Add Family profile</a>
+    <button class="btn btn-primary" onclick="openFormFamilyProfile()">Add Examination Taken</button>
+    <button class="btn btn-primary hidden" onclick="openTableFamilyProfile()">Go back</button>
 </div>
 
-<div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="form-family-profile hidden">
+    @include('admin.201_profiling.view_profile.partials.family_profile.form')
+</div>
+
+
+<div class="table-family-profile relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
@@ -34,7 +40,7 @@
                 <tr class="border-b bg-white">
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        Spouse    
+                        Spouse
                     </td>
                     <td class="px-6 py-3">
                         {{ $newSpouseRecords->last_name }}
@@ -61,7 +67,7 @@
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
                         </form>
                     </td>
-                    
+
                 </tr>
             @endforeach
 
@@ -72,7 +78,7 @@
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         Father
                     </td>
-                
+
                     <td class="px-6 py-3">
                         {{ $newFather->father_last_name }}
                     </td>
@@ -98,7 +104,7 @@
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
                         </form> --}}
                     </td>
-                    
+
                 </tr>
             @endforeach
 
@@ -109,7 +115,7 @@
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         Mother
                     </td>
-                
+
                     <td class="px-6 py-3">
                         {{ $newMother->mother_last_name }}
                     </td>
@@ -119,7 +125,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-        
+
                     </td>
 
                     <td class="px-6 py-3">
@@ -135,7 +141,7 @@
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
                         </form> --}}
                     </td>
-                    
+
                 </tr>
             @endforeach
 
@@ -144,7 +150,7 @@
                 <tr class="border-b bg-white">
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        Children    
+                        Children
                     </td>
                     <td class="px-6 py-3">
                         {{ $newChildrenRecords->last_name }}
@@ -164,17 +170,17 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                      
+
                          {{-- <form action="{{ route('', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
                         </form> --}}
                     </td>
-                    
+
                 </tr>
             @endforeach
-     
+
         </tbody>
     </table>
 </div>

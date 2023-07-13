@@ -1,8 +1,6 @@
-@extends('layouts.app')
-@section('title', 'Family profile form')
-@section('content')
 
-<form action="{{ route('family-profile-children.store', ['cesno' => $cesno]) }}" method="POST">
+
+<form action="{{ route('family-profile-children.store', ['cesno' => $mainProfile->cesno]) }}" method="POST">
     @csrf
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -54,7 +52,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="birthdate">Birthday</label>
+            <label for="birthdate">Birthday<sup>*</span></label>
             <input type="date" name="birthdate" id="birthdate" required>
 
             @error('birthdate')
@@ -65,7 +63,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="birth_place">Birthplace</label>
+            <label for="birth_place">Birthplace<sup>*</span></label>
             <input type="text" name="birth_place" id="birth_place" required>
 
             @error('birth_place')
@@ -76,7 +74,13 @@
         </div>
     </div>
 
-    <div><button type="submit" class="btn btn-primary">Save</button></div>
+    <div>
+        <div class="flex justify-end">
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </div>
 </form>
 
-@endsection
+

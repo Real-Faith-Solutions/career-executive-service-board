@@ -7641,6 +7641,64 @@ const pdfFilesTab = () => {
     handleCategoryClick('pdfFilesTab', '[onclick="pdfFilesTab()"]');
 };
 
+const openFormFamilyProfile = () => {
+    var form = document.querySelector('.form-family-profile');
+    var openForm = document.querySelector('[onclick="openFormFamilyProfile()"]');
+    var table = document.querySelector('.table-family-profile');
+    var openTable = document.querySelector('[onclick="openTableFamilyProfile()"]');
+
+    form.classList.remove('hidden');
+    openForm.classList.add('hidden');
+    table.classList.add('hidden');
+    openTable.classList.remove('hidden');
+}
+
+const openTableFamilyProfile = () => {
+    var form = document.querySelector('.form-family-profile');
+    var openForm = document.querySelector('[onclick="openFormFamilyProfile()"]');
+    var table = document.querySelector('.table-family-profile');
+    var openTable = document.querySelector('[onclick="openTableFamilyProfile()"]');
+
+    form.classList.add('hidden');
+    openForm.classList.remove('hidden');
+    table.classList.remove('hidden');
+    openTable.classList.add('hidden');
+}
+
+// family background toggle relationship
+const toggleRelationshipStatus = (val) => {
+    var children = document.querySelector('.children');
+    var father = document.querySelector('.father');
+    var mother = document.querySelector('.mother');
+    var spouse = document.querySelector('.spouse');
+    console.log(val)
+    if (val === 'Children') {
+        children.classList.remove('hidden');
+        father.classList.add('hidden');
+        mother.classList.add('hidden');
+        spouse.classList.add('hidden');
+    }
+    else if(val === 'Father') {
+        children.classList.add('hidden');
+        father.classList.remove('hidden');
+        mother.classList.add('hidden');
+        spouse.classList.add('hidden');
+    }
+    else if (val === 'Mother') {
+        children.classList.add('hidden');
+        father.classList.add('hidden');
+        mother.classList.remove('hidden');
+        spouse.classList.add('hidden');
+    }
+    else if (val === 'Spouse') {
+        children.classList.add('hidden');
+        father.classList.add('hidden');
+        mother.classList.add('hidden');
+        spouse.classList.remove('hidden');
+    }
+}
+
+
 const openFormAddress = () => {
     var form = document.querySelector('.form-address');
     var openForm = document.querySelector('[onclick="openFormAddress()"]');
