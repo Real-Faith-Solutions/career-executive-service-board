@@ -131,7 +131,10 @@ class ProfileController extends Controller
         $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();
         $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
+<<<<<<<<< Temporary merge branch 1
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
@@ -144,9 +147,19 @@ class ProfileController extends Controller
         $language = PersonalData::find($cesno)->languages;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef',
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
-        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent'));
+        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language'));
+=========
+        $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
+        $examinationTaken = PersonalData::find($cesno)->examinationTakens;
+        $scholarship = PersonalData::find($cesno)->scholarships;
+        $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
+
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
+        'examinationTaken', 'scholarship', 'addressProfilePermanent'));
+>>>>>>>>> Temporary merge branch 2
 
     }
 
