@@ -7,11 +7,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('other-training.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="training_title">Training Title<sup>*</sup></label>
                         <input id="training_title" name="training_title" required type="text">
@@ -24,9 +23,7 @@
 
                     <div class="mb-3">
                         <label for="training_category">Training Category<sup>*</sup></label>
-                        <select id="training_category" name="training_category" required>
-                            <option disabled selected>Select Training Category</option>
-                        </select>
+                        <input id="training_category" name="training_category" required type="text">
                         @error('training_category')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -37,7 +34,10 @@
                     <div class="mb-3">
                         <label for="expertise_field_of_specialization">Expertise / Field of Specialization<sup>*</sup></label>
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
-                            <option disabled selected>Select Expertise / Field of Specialization</option>
+                            <option disabled selected>Select Specialization</option>
+                            @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
+                                <option value={{ $profileLibTblExpertiseSpecs->Title }}>{{ $profileLibTblExpertiseSpecs->Title }}</option>
+                            @endforeach
                         </select>
                         @error('expertise_field_of_specialization')
                             <span class="invalid" role="alert">
@@ -45,11 +45,9 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</sup></label>
                         <input id="inclusive_date_from" name="inclusive_date_from" required type="date">
@@ -79,11 +77,9 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="venue">Venue<sup>*</sup></label>
                         <input id="venue" name="venue" required type="text">
@@ -103,11 +99,10 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

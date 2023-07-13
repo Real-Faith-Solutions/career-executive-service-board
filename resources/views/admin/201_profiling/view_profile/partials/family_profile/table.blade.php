@@ -98,11 +98,11 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
 
-                        {{-- <form action="{{ route('', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST">
+                        <form action="{{ route('family-profile-father.destroy', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
-                        </form> --}}
+                        </form>
                     </td>
 
                 </tr>
@@ -135,11 +135,11 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
 
-                        {{-- <form action="{{ route('', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST">
+                        <form action="{{ route('family-profile-mother.destroy', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
-                        </form> --}}
+                        </form>
                     </td>
 
                 </tr>
@@ -171,11 +171,11 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
 
-                         {{-- <form action="{{ route('', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST">
+                         <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
-                        </form> --}}
+                        </form>
                     </td>
 
                 </tr>

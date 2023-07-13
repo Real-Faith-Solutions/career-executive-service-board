@@ -13,7 +13,10 @@ class ScholarshipController extends Controller
 
     public function store(ScholarshipStoreRequest $request, $cesno){
 
-        $userName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $scholarship = new Scholarships([
 
@@ -22,7 +25,7 @@ class ScholarshipController extends Controller
             'sponsor' => $request->sponsor,
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
-            'encoder' => $userName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -39,7 +42,7 @@ class ScholarshipController extends Controller
         $scholarship = Scholarships::find($ctrlno);
         $scholarship->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 

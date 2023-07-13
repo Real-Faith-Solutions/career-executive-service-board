@@ -14,20 +14,23 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'date' => ['required'],
             
         ]);
 
-        $userlastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $awardAndCitations = new AwardAndCitations([
 
             'awards' => $request->title_of_award,
             'sponsor' => $request->sponsor,
             'date' => $request->date,
-            'encoder' => $userlastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -44,7 +47,7 @@ class AwardAndCitationController extends Controller
         $awardAndCitations = AwardAndCitations::find($ctrlno);
         $awardAndCitations->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 

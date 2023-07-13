@@ -19,11 +19,14 @@ class ExpertiseController extends Controller
         ]);
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $expertise = new ProfileTblExpertise([
 
             'expertise_specialization' => $request->expertise_specialization,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -40,7 +43,7 @@ class ExpertiseController extends Controller
         $expertise = ProfileTblExpertise::find($ctrlno);
         $expertise->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 

@@ -23,7 +23,7 @@
 
                     <div class="mb-3">
                         <label for="publisher">Publisher<sup>*</span></label>
-                        <input id="publisher" name="publisher" required type="month">
+                        <input id="publisher" name="publisher" required type="text">
                         @error('publisher')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

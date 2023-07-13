@@ -14,7 +14,9 @@ class EducationalAttainmentController extends Controller
     public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
 
         $userLastName = Auth::user()->last_name;
-
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
         $educationalAttainment = new EducationalAttainment([
     
             'level' => $request->level,
@@ -27,7 +29,7 @@ class EducationalAttainmentController extends Controller
             'highest_level' => $request->highest_level,
             'year_graduate' => $request->year_graduate,
             'academics_honor_received' => $request->academics_honor_received,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
                 
         ]);
     
@@ -44,7 +46,7 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 
