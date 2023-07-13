@@ -12,7 +12,7 @@ class SpouseRecords extends Model
 {
     use HasFactory;
 
-    // protected $guarded = [];
+    use SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
