@@ -41,7 +41,16 @@
                             @method('DELETE')
                             @csrf
 
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">Delete</button>
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/jmkrnisz.json"
+                                    trigger="hover"
+                                    colors="primary:#880808"
+                                    style="width:34px;height:34px">
+
+                                </lord-icon>
+                            </button>
                         </form>
 
                     </td>
