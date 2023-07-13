@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('name_extension')->nullable();
             $table->string('encoder')->nullable();
             // $table->string('last_updated_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

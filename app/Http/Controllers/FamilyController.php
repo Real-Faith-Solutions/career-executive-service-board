@@ -113,7 +113,7 @@ class FamilyController extends Controller
             'father_last_name' => $request->father_last_name,
             'father_first_name' => $request->father_first_name,
             'father_middle_name' => $request->father_middle_name,
-            'father_name_extension' => $request->father_name_extension,
+            'name_extension' => $request->father_name_extension,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
@@ -174,6 +174,33 @@ class FamilyController extends Controller
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
+
+    }
+
+    public function destroyChildren($ctrlno){
+        
+        $children = ChildrenRecords::find($ctrlno);
+        $children->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
+
+    }
+
+    public function destroyFather($ctrlno){
+        
+        $father = Father::find($ctrlno);
+        $father->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
+
+    }
+
+    public function destroyMother($ctrlno){
+        
+        $mother = Mother::find($ctrlno);
+        $mother->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
     }
 

@@ -69,12 +69,26 @@ Route::prefix('201-Library')->group(function () {
 
 Route::prefix('family-profile')->group(function () {
     Route::get('{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
-    Route::post('store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
-    Route::post('store/children/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
-    Route::post('store/father/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
-    Route::post('store/mother/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
-    Route::delete('delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
 
+    Route::prefix('spouse')->group(function () {
+        Route::post('store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
+        Route::delete('delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+    });
+
+    Route::prefix('children')->group(function () {
+        Route::post('store/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
+        Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
+    });
+
+    Route::prefix('father')->group(function () {
+        Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
+        Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy');
+    });
+
+    Route::prefix('mother')->group(function () {
+        Route::post('store/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
+        Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy');
+    });
 });
 
 Route::prefix('personal-data')->group(function () {
@@ -138,8 +152,12 @@ Route::prefix('language')->group(function () {
 });
 
 
-Route::post('non-ces-training/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
-Route::delete('non-ces-training/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+Route::prefix('non-accredited-ces-training')->group(function () {
+    Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+    Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+});
+
+
 
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

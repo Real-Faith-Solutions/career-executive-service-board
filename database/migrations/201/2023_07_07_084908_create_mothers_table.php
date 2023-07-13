@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('mother_first_name')->nullable();
             $table->string('mother_middle_name')->nullable();
             $table->string('encoder')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
