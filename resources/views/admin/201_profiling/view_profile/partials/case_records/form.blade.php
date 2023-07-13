@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('case-record.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -33,11 +33,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="date">Nature of Offense<sup>*</sup></label>
-                        <select id="date" name="date" required>
+                        <label for="nature_of_offense">Nature of Offense<sup>*</sup></label>
+                        <select id="nature_of_offense" name="nature_of_offense" required>
                             <option disabled selected>Select Nature of Offense</option>
+                            <option value="Pre-defined">Pre-defined</option>
+                            <option value="Administrative">Administrative</option>
+                            <option value="Criminal Administrative">Criminal Administrative</option>
+                            <option value="Criminal">Criminal</option>
                         </select>
-                        @error('date')
+                        @error('nature_of_offense')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -83,6 +87,8 @@
                         <label for="case_status">Case Status<sup>*</sup></label>
                         <select id="case_status" name="case_status" required>
                             <option disabled selected>Select Case Status</option>
+                            <option value="Dismissed">Dismissed</option>
+                            <option value="Acquitted">Acquitted</option>
                         </select>
                         @error('case_status')
                             <span class="invalid" role="alert">
@@ -127,7 +133,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

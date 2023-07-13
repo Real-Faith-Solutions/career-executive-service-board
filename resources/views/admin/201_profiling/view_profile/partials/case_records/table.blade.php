@@ -58,52 +58,59 @@
         </thead>
         <tbody>
 
-            <tr class="border-b bg-white">
-                <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    Lorem ipsum
-                </td>
+            @foreach ($caseRecord as $caseRecords)
+                <tr class="border-b bg-white">
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $caseRecords->parties }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->offence }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->nature_code }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->case_no }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->filed_date }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->venue }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->status_code }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->finality }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->decision }}
+                    </td>
 
-                <td class="px-6 py-3">
-                    Lorem ipsum
-                </td>
+                    <td class="px-6 py-3">
+                        {{ $caseRecords->remarks }}
+                    </td>
 
-                <td class="px-6 py-4 text-right uppercase">
-                    <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                </td>
-            </tr>
+                    <td class="px-6 py-4 text-right uppercase">
+                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+
+                        <form action="{{ route('case-record.destroy', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
 
         </tbody>
     </table>

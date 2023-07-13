@@ -7,25 +7,31 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('expertise.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="expertise_specialization">Expertise / Field of Specialization<sup>*</span></label>
-                        <input id="expertise_specialization" name="expertise_specialization" type="text" required>
+                        {{-- <input id="expertise_specialization" name="expertise_specialization" type="text" required> --}}
+                        <select id="expertise_specialization" name="expertise_specialization" required>
+                            <option disabled selected>Select Specialization</option>
+                            @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
+                                <option value="{{ $profileLibTblExpertiseSpecs->Title }}">
+                                    {{ $profileLibTblExpertiseSpecs->Title }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('expertise_specialization')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>
