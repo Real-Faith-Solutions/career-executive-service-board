@@ -30,7 +30,7 @@ class SpouseStoreRequest extends FormRequest
             'occupation' => ['nullable', 'max:40', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'employer_bussiness_name' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'employer_bussiness_address' => ['nullable', 'max:40', 'min:2'],
-            'employer_bussiness_telephone' => ['nullable', 'regex:/^[\d+\+]*$/', 'max:16', 'min:8'],
+            'employer_bussiness_telephone' => ['nullable', 'max:40', 'min:8'],
      
         ];
     }

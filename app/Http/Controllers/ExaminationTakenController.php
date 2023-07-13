@@ -25,6 +25,9 @@ class ExaminationTakenController extends Controller
         ]);
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $examinationTaken = new ExaminationsTaken([
 
@@ -35,7 +38,7 @@ class ExaminationTakenController extends Controller
             'license_number' => $request->license_number,
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
             
         ]);
 
@@ -52,7 +55,7 @@ class ExaminationTakenController extends Controller
         $examinationTaken = ExaminationsTaken::find($ctrlno);
         $examinationTaken->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
     }
 

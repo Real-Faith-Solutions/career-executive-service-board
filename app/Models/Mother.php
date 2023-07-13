@@ -29,5 +29,4 @@ class Mother extends Model
         return $this->belongsTo(PersonalData::class);
     }
 
-    
 }

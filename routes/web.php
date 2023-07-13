@@ -23,6 +23,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\WorkExperienceController;
@@ -135,6 +136,9 @@ Route::prefix('language')->group(function () {
     Route::delete('{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 
+
+Route::post('non-ces-training/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+Route::delete('non-ces-training/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
 
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

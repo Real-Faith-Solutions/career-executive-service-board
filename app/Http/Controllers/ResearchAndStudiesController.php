@@ -13,6 +13,9 @@ class ResearchAndStudiesController extends Controller
     public function store(ResearchAndStudiesStoreRequest $request, $cesno){
 
         $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $researchAndStudies = new ResearchAndStudies([
 
@@ -20,7 +23,7 @@ class ResearchAndStudiesController extends Controller
             'publisher' => $request->publisher,
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -37,7 +40,7 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
         $researchAndStudies->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
         // $spouse->restore(); -> to restore soft deleted data
 

@@ -80,6 +80,18 @@
         </script>
 
     @endif
+
+    @if (Session::has('error'))
+            
+        <script>
+            toastr.options = {
+                "progressBar" : true,
+                "closeButton" : true,
+            }
+            toastr.error("{{ Session::get('error') }}",'Error!',{timeOut:7000});
+        </script>
+
+    @endif
     {{-- end toast --}}
 
 </body>

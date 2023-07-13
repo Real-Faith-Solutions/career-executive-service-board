@@ -18,12 +18,15 @@ class LanguageController extends Controller
 
         ]);
 
-        $userLastName = Auth::user()->last_name;
+        $userLastName = Auth::user()->last_name; 
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
 
         $language = new ProfileTblLanguages([
 
             'language_description' => $request->language_dialect,
-            'encoder' => $userLastName,
+            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
 
@@ -40,7 +43,7 @@ class LanguageController extends Controller
         $language = ProfileTblLanguages::find($ctrlno);
         $language->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 
