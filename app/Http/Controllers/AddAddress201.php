@@ -44,7 +44,7 @@ class AddAddress201 extends Controller
             $existingAddress->encoder = $encoder;
             $existingAddress->save();
 
-            return back()->with('message-address-changed','Permanent Address Changed!');
+            return back()->with('info','Permanent Address Changed!');
         }
 
         $profileAddress = new ProfileAddress([
@@ -66,7 +66,7 @@ class AddAddress201 extends Controller
 
         $profileAddressId->profileAddress()->save($profileAddress);
 
-        return back()->with('message-address-added','Permanent Address Added!');
+        return back()->with('message','Permanent Address Added!');
 
     }
 
@@ -102,7 +102,7 @@ class AddAddress201 extends Controller
             $existingAddress->encoder = $encoder;
             $existingAddress->save();
 
-            return back()->with('message-address-changed','Mailing Address Changed!');
+            return back()->with('info','Mailing Address Changed!');
         }
 
         $profileAddress = new ProfileAddress([
@@ -124,7 +124,7 @@ class AddAddress201 extends Controller
 
         $profileAddressId->profileAddress()->save($profileAddress);
 
-        return back()->with('message-address-added','Mailing Address Added!');
+        return back()->with('message','Mailing Address Added!');
 
     }
 
@@ -160,7 +160,7 @@ class AddAddress201 extends Controller
             $existingAddress->encoder = $encoder;
             $existingAddress->save();
 
-            return back()->with('message-address-changed','Temporary Address Changed!');
+            return back()->with('info','Temporary Address Changed!');
         }
 
         $profileAddress = new ProfileAddress([
@@ -182,7 +182,7 @@ class AddAddress201 extends Controller
 
         $profileAddressId->profileAddress()->save($profileAddress);
 
-        return back()->with('message-address-added','Temporary Address Added!');
+        return back()->with('message','Temporary Address Added!');
 
     }
 
