@@ -144,10 +144,10 @@ class ProfileController extends Controller
         $healthRecord = PersonalData::find($cesno)->healthRecords;
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
-       
+
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord', 
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef',
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language'));
 
     }
@@ -1292,14 +1292,19 @@ class ProfileController extends Controller
             } else {
 
                 $search = $request->input('search');
-                $numberOfResult = $request->input('numberOfResult') ?? 50;
+                $numberOfResult = $request->input('numberOfResult') ?? 25;
 
                 if (is_numeric($search)) {
 
-                    $searched = PersonalData::where('cesno', '=', $search)->offset(0)->limit($numberOfResult)->get();
+                    $searched = PersonalData::where('cesno', '=', $search)->offset(0)->paginate($numberOfResult);
                 } else {
 
-                    $searched = PersonalData::where('lastname', 'LIKE', "%$search%")->orWhere('firstname', 'LIKE', "%$search%")->orWhere('middlename', 'LIKE', "%$search%")->offset(0)->limit($numberOfResult)->get();
+                    $searched = PersonalData::where('lastname', 'LIKE', "%$search%")
+                    ->orWhere('firstname', 'LIKE', "%$search%")
+                    ->orWhere('middlename', 'LIKE', "%$search%")
+                    ->orWhere('lastname', 'LIKE', "%$search%")
+                    ->orWhere('cesno', 'LIKE', "%$search%")
+                    ->offset(0)->paginate($numberOfResult);
                 }
 
                 $personalData = PersonalData::where('cesno', '=', '1')->offset(0)->limit(1)->get();
