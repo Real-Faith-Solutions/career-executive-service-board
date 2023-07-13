@@ -7698,6 +7698,33 @@ const toggleRelationshipStatus = (val) => {
     }
 }
 
+// toggle address type
+const toggleAddressType = (val) => {
+    var Permanent = document.querySelector('.Permanent');
+    var Mailing = document.querySelector('.Mailing');
+    var Temporary = document.querySelector('.Temporary');
+    const addressFormTitle = document.getElementById('address-form-title');
+    console.log(val)
+    if (val === 'Permanent') {
+        Permanent.classList.remove('hidden');
+        Mailing.classList.add('hidden');
+        Temporary.classList.add('hidden');
+        addressFormTitle.textContent = "Permanent Address";
+    }
+    else if(val === 'Mailing') {
+        Permanent.classList.add('hidden');
+        Mailing.classList.remove('hidden');
+        Temporary.classList.add('hidden');
+        addressFormTitle.textContent = "Mailing Address";
+    }
+    else if (val === 'Temporary') {
+        Permanent.classList.add('hidden');
+        Mailing.classList.add('hidden');
+        Temporary.classList.remove('hidden');
+        addressFormTitle.textContent = "Temporary Address";
+    }
+}
+
 
 const openFormAddress = () => {
     var form = document.querySelector('.form-address');

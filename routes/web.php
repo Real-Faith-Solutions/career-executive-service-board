@@ -99,8 +99,8 @@ Route::delete('language/{ctrlno}', [LanguageController::class, 'destroy'])->name
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
 Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('/add-address-permanent-201');
-Route::post('/add-address-mailing-201', [AddAddress201::class, 'addAddressMailing'])->name('/add-address-mailing-201');
-Route::post('/add-address-temporary-201', [AddAddress201::class, 'addAddressTemporary'])->name('/add-address-temporary-201');
+Route::post('/add-address-mailing-201/{cesno}', [AddAddress201::class, 'addAddressMailing'])->name('/add-address-mailing-201');
+Route::post('/add-address-temporary-201/{cesno}', [AddAddress201::class, 'addAddressTemporary'])->name('/add-address-temporary-201');
 // end 201 profiling
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');

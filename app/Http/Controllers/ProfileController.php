@@ -145,11 +145,14 @@ class ProfileController extends Controller
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
+        $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
+        $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
-        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent'));
+        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 
+        'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp'));
 
     }
 
