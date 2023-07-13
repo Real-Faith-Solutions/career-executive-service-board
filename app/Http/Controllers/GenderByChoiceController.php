@@ -11,4 +11,8 @@ class GenderByChoiceController extends Controller
         $datas = GenderByChoice::paginate(10);
         return view('admin.201_library.gender_by_choice.index', compact('datas'));
     }
+    
+    public function create(){
+        return view('admin.201_library.gender_by_choice.create');
+    }
 }
