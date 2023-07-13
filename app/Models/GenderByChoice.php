@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GenderByChoice extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'ctrlno';
     protected $table = 'gender_by_choices';
     protected $fillable = ['name'];
 }

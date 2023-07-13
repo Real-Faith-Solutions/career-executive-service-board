@@ -26,4 +26,11 @@ class GenderByChoiceController extends Controller
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully added');
     }
 
+    public function edit($ctrlno){
+
+        $data = GenderByChoice::findorFail($ctrlno);
+        return view('admin.201_library.gender_by_choice.edit', compact('data'));
+
+    }
+
 }

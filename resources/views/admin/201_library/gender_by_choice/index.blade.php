@@ -36,7 +36,7 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a>
+                        <a class="mx-1 font-medium text-blue-600 hover:underline" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}">Update</a>
                         <a class="mx-1 font-medium text-red-600 hover:underline" href="#">Delete</a>
                     </td>
                 </tr>
