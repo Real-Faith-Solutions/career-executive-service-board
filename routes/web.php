@@ -53,6 +53,17 @@ Route::get('/', function () {
     }
 });
 
+Route::prefix('201-Library')->group(function () {
+    Route::prefix('gender-by-choices')->group(function () {
+        Route::get('table', [LibraryController::class, 'genderByBirthTable'])->name('library.gender_by_choice.table');
+        Route::get('form', [LibraryController::class, 'genderByBirthForm'])->name('library.gender_by_choice.form');
+        Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_choice.store');
+
+    });
+
+
+});
+
 
 Route::prefix('family-profile')->group(function () {
     Route::get('{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
@@ -564,45 +575,45 @@ Route::group([
         Route::get('view', [ProfileController::class, 'addPersonalDataPage'])->middleware('userauth');
     });
 
-    Route::group([
-    'prefix' => '201-library',
-    ], function () {
-    Route::get('/', [LibraryController::class, 'index'])->middleware('userauth');
-    Route::post('/city-municipality/add', [LibraryController::class, 'addCityMunicipality'])->middleware('userauth');
-    Route::get('/city-municipality/record', [LibraryController::class, 'getCityMunicipality'])->middleware('userauth');
-    Route::post('/degree/add', [LibraryController::class, 'addDegree'])->middleware('userauth');
-    Route::get('/degree/record', [LibraryController::class, 'getDegree'])->middleware('userauth');
-    Route::post('/course-major/add', [LibraryController::class, 'addCourseMajor'])->middleware('userauth');
-    Route::get('/course-major/record', [LibraryController::class, 'getCourseMajor'])->middleware('userauth');
-    Route::post('/school/add', [LibraryController::class, 'addSchool'])->middleware('userauth');
-    Route::get('/school/record', [LibraryController::class, 'getSchool'])->middleware('userauth');
-    Route::post('/examination-reference/add', [LibraryController::class, 'addExaminationReference'])->middleware('userauth');
-    Route::get('/examination-reference/record', [LibraryController::class, 'getExaminationReference'])->middleware('userauth');
-    Route::post('/language-dialects/add', [LibraryController::class, 'addLanguageDialects'])->middleware('userauth');
-    Route::get('/language-dialects/record', [LibraryController::class, 'getLanguageDialects'])->middleware('userauth');
-    Route::post('/ces-status-reference/add', [LibraryController::class, 'addCesStatusReference'])->middleware('userauth');
-    Route::get('/ces-status-reference/record', [LibraryController::class, 'getCesStatusReference'])->middleware('userauth');
-    Route::post('/acquired-thru/add', [LibraryController::class, 'addAcquiredThru'])->middleware('userauth');
-    Route::get('/acquired-thru/record', [LibraryController::class, 'getAcquiredThru'])->middleware('userauth');
-    Route::post('/ces-status-type/add', [LibraryController::class, 'addStatusType'])->middleware('userauth');
-    Route::get('/ces-status-type/record', [LibraryController::class, 'getStatusType'])->middleware('userauth');
-    Route::post('/appointing-authority/add', [LibraryController::class, 'addAppointingAuthority'])->middleware('userauth');
-    Route::get('/appointing-authority/record', [LibraryController::class, 'getAppointingAuthority'])->middleware('userauth');
-    Route::post('/expertise-category/add', [LibraryController::class, 'addExpertiseCategory'])->middleware('userauth');
-    Route::get('/expertise-category/record', [LibraryController::class, 'getExpertiseCategory'])->middleware('userauth');
-    Route::post('/special-skill/add', [LibraryController::class, 'addSpecialSkill'])->middleware('userauth');
-    Route::get('/special-skill/record', [LibraryController::class, 'getSpecialSkill'])->middleware('userauth');
-    Route::post('/case-nature/add', [LibraryController::class, 'addCaseNature'])->middleware('userauth');
-    Route::get('/case-nature/record', [LibraryController::class, 'getCaseNature'])->middleware('userauth');
-    Route::post('/case-status/add', [LibraryController::class, 'addCaseStatus'])->middleware('userauth');
-    Route::get('/case-status/record', [LibraryController::class, 'getCaseStatus'])->middleware('userauth');
-    Route::post('/location-city/add', [LibraryController::class, 'addLocationCity'])->middleware('userauth');
-    Route::get('/location-city/record', [LibraryController::class, 'getLocationCity'])->middleware('userauth');
-    Route::post('/location-province/add', [LibraryController::class, 'addLocationProvince'])->middleware('userauth');
-    Route::get('/location-province/record', [LibraryController::class, 'getLocationProvince'])->middleware('userauth');
-    Route::post('/location-region/add', [LibraryController::class, 'addLocationRegion'])->middleware('userauth');
-    Route::get('/location-region/record', [LibraryController::class, 'getLocationRegion'])->middleware('userauth');
-    });
+    // Route::group([
+    // 'prefix' => '201-library',
+    // ], function () {
+    // Route::get('/', [LibraryController::class, 'index'])->middleware('userauth');
+    // Route::post('/city-municipality/add', [LibraryController::class, 'addCityMunicipality'])->middleware('userauth');
+    // Route::get('/city-municipality/record', [LibraryController::class, 'getCityMunicipality'])->middleware('userauth');
+    // Route::post('/degree/add', [LibraryController::class, 'addDegree'])->middleware('userauth');
+    // Route::get('/degree/record', [LibraryController::class, 'getDegree'])->middleware('userauth');
+    // Route::post('/course-major/add', [LibraryController::class, 'addCourseMajor'])->middleware('userauth');
+    // Route::get('/course-major/record', [LibraryController::class, 'getCourseMajor'])->middleware('userauth');
+    // Route::post('/school/add', [LibraryController::class, 'addSchool'])->middleware('userauth');
+    // Route::get('/school/record', [LibraryController::class, 'getSchool'])->middleware('userauth');
+    // Route::post('/examination-reference/add', [LibraryController::class, 'addExaminationReference'])->middleware('userauth');
+    // Route::get('/examination-reference/record', [LibraryController::class, 'getExaminationReference'])->middleware('userauth');
+    // Route::post('/language-dialects/add', [LibraryController::class, 'addLanguageDialects'])->middleware('userauth');
+    // Route::get('/language-dialects/record', [LibraryController::class, 'getLanguageDialects'])->middleware('userauth');
+    // Route::post('/ces-status-reference/add', [LibraryController::class, 'addCesStatusReference'])->middleware('userauth');
+    // Route::get('/ces-status-reference/record', [LibraryController::class, 'getCesStatusReference'])->middleware('userauth');
+    // Route::post('/acquired-thru/add', [LibraryController::class, 'addAcquiredThru'])->middleware('userauth');
+    // Route::get('/acquired-thru/record', [LibraryController::class, 'getAcquiredThru'])->middleware('userauth');
+    // Route::post('/ces-status-type/add', [LibraryController::class, 'addStatusType'])->middleware('userauth');
+    // Route::get('/ces-status-type/record', [LibraryController::class, 'getStatusType'])->middleware('userauth');
+    // Route::post('/appointing-authority/add', [LibraryController::class, 'addAppointingAuthority'])->middleware('userauth');
+    // Route::get('/appointing-authority/record', [LibraryController::class, 'getAppointingAuthority'])->middleware('userauth');
+    // Route::post('/expertise-category/add', [LibraryController::class, 'addExpertiseCategory'])->middleware('userauth');
+    // Route::get('/expertise-category/record', [LibraryController::class, 'getExpertiseCategory'])->middleware('userauth');
+    // Route::post('/special-skill/add', [LibraryController::class, 'addSpecialSkill'])->middleware('userauth');
+    // Route::get('/special-skill/record', [LibraryController::class, 'getSpecialSkill'])->middleware('userauth');
+    // Route::post('/case-nature/add', [LibraryController::class, 'addCaseNature'])->middleware('userauth');
+    // Route::get('/case-nature/record', [LibraryController::class, 'getCaseNature'])->middleware('userauth');
+    // Route::post('/case-status/add', [LibraryController::class, 'addCaseStatus'])->middleware('userauth');
+    // Route::get('/case-status/record', [LibraryController::class, 'getCaseStatus'])->middleware('userauth');
+    // Route::post('/location-city/add', [LibraryController::class, 'addLocationCity'])->middleware('userauth');
+    // Route::get('/location-city/record', [LibraryController::class, 'getLocationCity'])->middleware('userauth');
+    // Route::post('/location-province/add', [LibraryController::class, 'addLocationProvince'])->middleware('userauth');
+    // Route::get('/location-province/record', [LibraryController::class, 'getLocationProvince'])->middleware('userauth');
+    // Route::post('/location-region/add', [LibraryController::class, 'addLocationRegion'])->middleware('userauth');
+    // Route::get('/location-region/record', [LibraryController::class, 'getLocationRegion'])->middleware('userauth');
+    // });
 
 
     Route::group([

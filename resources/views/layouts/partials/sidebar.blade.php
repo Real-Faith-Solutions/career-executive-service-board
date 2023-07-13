@@ -137,14 +137,14 @@
                             <path fill-rule="evenodd" d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z" clip-rule="evenodd" />
                         </svg>
 
-                        <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>System Utility</span>
+                        <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>201 Library</span>
                         <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
                     <ul id="dropdown-system-utility" class="hidden space-y-2 py-2">
                         <li>
-                            <a href="{{ config('app.url') }}admin/201-library" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">201 Library</a>
+                            <a href="{{ route('library.gender_by_choice.table') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Gender bv birth</a>
                         </li>
                         @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true')
                             <li>
