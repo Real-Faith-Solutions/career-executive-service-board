@@ -27,10 +27,20 @@ class GenderByChoiceController extends Controller
     }
 
     public function edit($ctrlno){
-
         $data = GenderByChoice::findorFail($ctrlno);
         return view('admin.201_library.gender_by_choice.edit', compact('data'));
-
     }
+
+    public function update(Request $request, $ctrlno){
+        $request->validate([
+            'name' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+        ]);
+
+        $data = GenderByChoice::findOrFail($ctrlno);
+        $data->update($request->all());
+
+        return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully updated');
+    }
+
 
 }

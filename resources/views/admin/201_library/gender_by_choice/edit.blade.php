@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#" method="POST">
+            <form action="{{ route('gender-by-choice.update', $data->ctrlno) }}" method="POST">
                 @method('PUT')
                 @csrf
 
