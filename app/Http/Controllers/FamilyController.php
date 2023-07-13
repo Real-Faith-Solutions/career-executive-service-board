@@ -11,6 +11,7 @@ use App\Models\Father;
 use App\Models\Mother;
 use App\Models\PersonalData;
 use App\Models\SpouseRecords;
+use Illuminate\Support\Facades\Auth;
 
 class FamilyController extends Controller
 {
@@ -42,6 +43,8 @@ class FamilyController extends Controller
 
     public function storeSpouse(SpouseStoreRequest $request, $cesno){
 
+        $userLastName = Auth::user()->last_name;
+
         $personalData = new SpouseRecords([
 
             'last_name' => $request->last_name,
@@ -52,7 +55,7 @@ class FamilyController extends Controller
             'employer_business_name' => $request->employer_bussiness_name,
             'employer_business_address' => $request->employer_bussiness_address,
             'employer_business_telephone' => $request->employer_bussiness_telephone,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
             
         ]);
 
@@ -64,11 +67,13 @@ class FamilyController extends Controller
 
         // return redirect()->route('haha', ['cesno' => $cesno]);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
     public function storeChildren(ChildrenStoreRequest $request, $cesno){
+
+        $userLastName = Auth::user()->last_name;
 
         $childrenRecord = new ChildrenRecords([
 
@@ -78,7 +83,7 @@ class FamilyController extends Controller
             'name_extension' => $request->name_extension,
             'birthdate' => $request->birthdate,
             'birth_place' => $request->birth_place,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
          
         ]);
 
@@ -86,11 +91,13 @@ class FamilyController extends Controller
 
         $ChildrenPersonalDataId->childrens()->save($childrenRecord);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
     public function storeFather(FatherStoreRequest $request, $cesno){
+
+        $userLastName = Auth::user()->last_name;
 
         $fatherDetails = new Father([
 
@@ -98,7 +105,7 @@ class FamilyController extends Controller
             'father_first_name' => $request->father_first_name,
             'father_middle_name' => $request->father_middle_name,
             'father_name_extension' => $request->father_name_extension,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
          
         ]);
 
@@ -114,18 +121,20 @@ class FamilyController extends Controller
             
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
     public function storeMother(MotherStoreRequest $request, $cesno){
+
+        $userLastName = Auth::user()->last_name;
 
         $motherDetails = new Mother([
 
             'mother_last_name' => $request->mother_last_name,
             'mother_first_name' => $request->mother_first_name,
             'mother_middle_name' => $request->mother_middle_name,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
          
         ]);
 
@@ -141,7 +150,7 @@ class FamilyController extends Controller
             
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

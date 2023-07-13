@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('health-record.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -37,9 +37,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="disability_handicap_defects">Disability / Handicap / Defects<sup>*</sup></label>
+                        <label for="disability_handicap_defects">PWD<sup>*</sup></label>
                         <select id="disability_handicap_defects" name="disability_handicap_defects" required>
-                            <option disabled selected>Select Disability / Handicap / Defects</option>
+                            <option disabled selected>Select an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
                         </select>
                         @error('disability_handicap_defects')
                             <span class="invalid" role="alert">
@@ -57,10 +59,30 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="medical_condition_illness">Medical Condition/Illness</label>
+                        <input id="medical_condition_illness" name="medical_condition_illness" type="text">
+                        @error('medical_condition_illness')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="date">Date</label>
+                        <input id="date" name="date" type="date">
+                        @error('date')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

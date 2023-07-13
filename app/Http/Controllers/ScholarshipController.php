@@ -30,7 +30,7 @@ class ScholarshipController extends Controller
 
         $scholarshipPersonalDataId->scholarships()->save($scholarship);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
