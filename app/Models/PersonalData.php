@@ -87,5 +87,45 @@ class PersonalData extends Model
     {
         return $this->hasMany(Scholarships::class);
     }
-    
+
+    public function researchAndStudies(): HasMany
+    {
+        return $this->hasMany(ResearchAndStudies::class);
+    }
+
+    public function workExperience(): HasMany
+    {
+        return $this->hasMany(ProfileTblWorkExperience::class);
+    }
+
+    public function awardsAndCitations(): HasMany
+    {
+        return $this->hasMany(AwardAndCitations::class);
+    }
+
+    public function affiliations(): HasMany
+    {
+        return $this->hasMany(Affiliations::class);
+    }
+
+    public function caseRecords(): HasMany
+    {
+        return $this->hasMany(CaseRecords::class);
+    }
+
+    public function healthRecords(): HasMany
+    {
+        return $this->hasMany(HealthRecords::class);
+    }
+
+    public function expertise(): HasMany
+    {
+        return $this->hasMany(ProfileTblExpertise::class);
+    }
+
+    public function languages(): HasMany
+    {
+        return $this->hasMany(ProfileTblLanguages::class);
+    }
+  
 }

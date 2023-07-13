@@ -14,7 +14,7 @@ use App\Models\Addresses;
 use App\Models\EducationalAttainment;
 use App\Models\ExaminationsTaken;
 use App\Models\ProfileTblCesStatus;
-use App\Models\LanguagesDialects;
+use App\Models\ProfileTblLanguages;
 use App\Models\ProfileTblWorkExperience;
 use App\Models\ProfileTblExpertise;
 use App\Models\CesTrainings;
@@ -132,12 +132,23 @@ class ProfileController extends Controller
         $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
         $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
         $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
-
+        $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
+        $workExperience = PersonalData::find($cesno)->workExperience;
+        $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
+        $affiliation = PersonalData::find($cesno)->affiliations;
+        $caseRecord = PersonalData::find($cesno)->caseRecords;
+        $healthRecord = PersonalData::find($cesno)->healthRecords;
+        $expertise = PersonalData::find($cesno)->expertise;
+        $language = PersonalData::find($cesno)->languages;
+       
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
-        'examinationTaken', 'scholarship'));
+        'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord', 
+        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language'));
 
     }
 
@@ -388,23 +399,23 @@ class ProfileController extends Controller
                 $EducationalAttainment = EducationalAttainment::where('cesno', '=', $cesno)->get();
                 $ExaminationsTaken = ExaminationsTaken::where('cesno', '=', $cesno)->get();
                 $LicenseDetails = LicenseDetails::where('cesno', '=', $cesno)->get();
-                $LanguagesDialects = LanguagesDialects::where('cesno', '=', $cesno)->get();
+                $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', $cesno)->get();
                 $CesWe = CesWe::where('cesno', '=', $cesno)->get();
                 $AssessmentCenter = AssessmentCenter::where('cesno', '=', $cesno)->get();
                 $ValidationHr = ValidationHr::where('cesno', '=', $cesno)->get();
                 $BoardInterview = BoardInterview::where('cesno', '=', $cesno)->get();
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', $cesno)->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', $cesno)->get();
-                $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', $cesno)->get();
-                $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $cesno)->get();
+                $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $cesno)->get();
+                $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', $cesno)->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', $cesno)->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', $cesno)->get();
-                $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', $cesno)->get();
-                $Scholarships = Scholarships::where('cesno', '=', $cesno)->get();
-                $Affiliations = Affiliations::where('cesno', '=', $cesno)->get();
-                $AwardAndCitations = AwardAndCitations::where('cesno', '=', $cesno)->get();
-                $CaseRecords = CaseRecords::where('cesno', '=', $cesno)->get();
-                $HealthRecords = HealthRecords::where('cesno', '=', $cesno)->get();
+                $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $cesno)->get();
+                $Scholarships = Scholarships::where('personal_data_cesno', '=', $cesno)->get();
+                $Affiliations = Affiliations::where('personal_data_cesno', '=', $cesno)->get();
+                $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $cesno)->get();
+                $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $cesno)->get();
+                $HealthRecords = HealthRecords::where('personal_data_cesno', '=', $cesno)->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $cesno)->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', $cesno)->get();
 
@@ -439,7 +450,7 @@ class ProfileController extends Controller
                     'EducationalAttainment',
                     'ExaminationsTaken',
                     'LicenseDetails',
-                    'LanguagesDialects',
+                    'ProfileTblLanguages',
                     'CesWe',
                     'AssessmentCenter',
                     'ValidationHr',
@@ -986,7 +997,7 @@ class ProfileController extends Controller
     //         EducationalAttainment::where('cesno','=',$personaldata_cesno)->delete();
     //         ExaminationsTaken::where('cesno','=',$personaldata_cesno)->delete();
     //         LicenseDetails::where('cesno','=',$personaldata_cesno)->delete();
-    //         LanguagesDialects::where('cesno','=',$personaldata_cesno)->delete();
+    //         ProfileTblLanguages::where('cesno','=',$personaldata_cesno)->delete();
     //         CesWe::where('cesno','=',$personaldata_cesno)->delete();
     //         AssessmentCenter::where('cesno','=',$personaldata_cesno)->delete();
     //         ValidationHr::where('cesno','=',$personaldata_cesno)->delete();
@@ -1057,7 +1068,7 @@ class ProfileController extends Controller
             $ExaminationsTakenViewOnly = RolesController::validateUserExecutive201RoleAccess('Examinations Taken', 'View Only');
 
             // Language Dialects
-            $LanguagesDialects = LanguagesDialects::where('cesno', '=', $request)->get();
+            $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', $request)->get();
             $LanguagesDialectsAdd = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Add');
             $LanguagesDialectsEdit = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Edit');
             $LanguagesDialectsDelete = RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Delete');
@@ -1082,14 +1093,14 @@ class ProfileController extends Controller
             $RecordOfCespesRatingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Record of CESPES Ratings', 'View Only');
 
             // Work Experience
-            $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', $request)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', $request)->get();
             $WorkExperienceAdd = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Add');
             $WorkExperienceEdit = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Edit');
             $WorkExperienceDelete = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Delete');
             $WorkExperienceViewOnly = RolesController::validateUserExecutive201RoleAccess('Work Experience', 'View Only');
 
             // Records of Field of Expertise or Specialization
-            $FieldExpertise = ProfileTblExpertise::where('cesno', '=', $request)->get();
+            $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', $request)->get();
             $FieldExpertiseAdd = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Add');
             $FieldExpertiseEdit = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Edit');
             $FieldExpertiseDelete = RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Delete');
@@ -1110,42 +1121,42 @@ class ProfileController extends Controller
             $OtherManagementTrainingsViewOnly = RolesController::validateUserExecutive201RoleAccess('Other Non-CES Accredited Trainings', 'View Only');
 
             // Research and Studies
-            $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', $request)->get();
+            $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', $request)->get();
             $ResearchAndStudiesAdd = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Add');
             $ResearchAndStudiesEdit = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Edit');
             $ResearchAndStudiesDelete = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Delete');
             $ResearchAndStudiesViewOnly = RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'View Only');
 
             // Scholarships Received
-            $Scholarships = Scholarships::where('cesno', '=', $request)->get();
+            $Scholarships = Scholarships::where('personal_data_cesno', '=', $request)->get();
             $ScholarshipsAdd = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Add');
             $ScholarshipsEdit = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Edit');
             $ScholarshipsDelete = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Delete');
             $ScholarshipsViewOnly = RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'View Only');
 
             // Major Civic and Professional Affiliations
-            $Affiliations = Affiliations::where('cesno', '=', $request)->get();
+            $Affiliations = Affiliations::where('personal_data_cesno', '=', $request)->get();
             $AffiliationsAdd = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Add');
             $AffiliationsEdit = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Edit');
             $AffiliationsDelete = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Delete');
             $AffiliationsViewOnly = RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'View Only');
 
             // Awards and Citations Received
-            $AwardAndCitations = AwardAndCitations::where('cesno', '=', $request)->get();
+            $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', $request)->get();
             $AwardAndCitationsAdd = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Add');
             $AwardAndCitationsEdit = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Edit');
             $AwardAndCitationsDelete = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Delete');
             $AwardAndCitationsViewOnly = RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'View Only');
 
             // Case Records
-            $CaseRecords = CaseRecords::where('cesno', '=', $request)->get();
+            $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $request)->get();
             $CaseRecordsAdd = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Add');
             $CaseRecordsEdit = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Edit');
             $CaseRecordsDelete = RolesController::validateUserExecutive201RoleAccess('Case Records', 'Delete');
             $CaseRecordsViewOnly = RolesController::validateUserExecutive201RoleAccess('Case Records', 'View Only');
 
             // Health Record
-            $HealthRecords = HealthRecords::where('cesno', '=', $request)->get();
+            $HealthRecords = HealthRecords::where('personal_data_cesno', '=', $request)->get();
             $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $request)->get();
             $HealthRecordsAdd = RolesController::validateUserExecutive201RoleAccess('Health Record', 'Add');
             $HealthRecordsEdit = RolesController::validateUserExecutive201RoleAccess('Health Record', 'Edit');
@@ -1171,7 +1182,7 @@ class ProfileController extends Controller
                 'EducationalAttainment',
                 'ExaminationsTaken',
                 'LicenseDetails',
-                'LanguagesDialects',
+                'ProfileTblLanguages',
                 'CesWe',
                 'AssessmentCenter',
                 'ValidationHr',
@@ -1298,23 +1309,24 @@ class ProfileController extends Controller
                 $EducationalAttainment = EducationalAttainment::where('personal_data_cesno', '=', '1')->get();
                 $ExaminationsTaken = ExaminationsTaken::where('personal_data_cesno', '=', '1')->get();
                 $LicenseDetails = LicenseDetails::where('cesno', '=', '1')->get();
-                $LanguagesDialects = LanguagesDialects::where('cesno', '=', '1')->get();
+                $ProfileTblLanguages = ProfileTblLanguages::where('personal_data_cesno', '=', '1')->get();
                 $CesWe = CesWe::where('cesno', '=', '1')->get();
                 $AssessmentCenter = AssessmentCenter::where('cesno', '=', '1')->get();
                 $ValidationHr = ValidationHr::where('cesno', '=', '1')->get();
                 $BoardInterview = BoardInterview::where('cesno', '=', '1')->get();
                 $CesStatus = ProfileTblCesStatus::where('cesno', '=', '1')->get();
                 $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno', '=', '1')->get();
-                $WorkExperience = ProfileTblWorkExperience::where('cesno', '=', '1')->get();
-                $FieldExpertise = ProfileTblExpertise::where('cesno', '=', '1')->get();
+                $WorkExperience = ProfileTblWorkExperience::where('personal_data_cesno', '=', '1')->get();
+                $FieldExpertise = ProfileTblExpertise::where('personal_data_cesno', '=', '1')->get();
                 $CesTrainings = CesTrainings::where('cesno', '=', '1')->get();
                 $OtherManagementTrainings = OtherManagementTrainings::where('cesno', '=', '1')->get();
-                $ResearchAndStudies = ResearchAndStudies::where('cesno', '=', '1')->get();
-                $Scholarships = Scholarships::where('personal_data_cesno', '=', '1')->get();
-                $Affiliations = Affiliations::where('cesno', '=', '1')->get();
-                $AwardAndCitations = AwardAndCitations::where('cesno', '=', '1')->get();
-                $CaseRecords = CaseRecords::where('cesno', '=', '1')->get();
-                $HealthRecords = HealthRecords::where('cesno', '=', '1')->get();
+                $ResearchAndStudies = ResearchAndStudies::where('personal_data_cesno', '=', '1')->get();
+                // $Scholarships = Scholarships::where('
+                // ', '=', '1')->get();
+                $Affiliations = Affiliations::where('personal_data_cesno', '=', '1')->get();
+                $AwardAndCitations = AwardAndCitations::where('personal_data_cesno', '=', '1')->get();
+                $CaseRecords = CaseRecords::where('personal_data_cesno', '=', '1')->get();
+                $HealthRecords = HealthRecords::where('personal_data_cesno', '=', '1')->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', '1')->get();
                 $PdfLinks = PdfLinks::where('cesno', '=', '1')->get();
 
@@ -1345,7 +1357,7 @@ class ProfileController extends Controller
                     'EducationalAttainment',
                     'ExaminationsTaken',
                     'LicenseDetails',
-                    'LanguagesDialects',
+                    'ProfileTblLanguages',
                     'CesWe',
                     'AssessmentCenter',
                     'ValidationHr',
@@ -1357,7 +1369,7 @@ class ProfileController extends Controller
                     'CesTrainings',
                     'OtherManagementTrainings',
                     'ResearchAndStudies',
-                    'Scholarships',
+                    // 'Scholarships',
                     'Affiliations',
                     'AwardAndCitations',
                     'CaseRecords',
@@ -2353,7 +2365,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                LanguagesDialects::create([
+                ProfileTblLanguages::create([
                     'cesno' => $request->cesno,
                     'lang_languages_dialects' => $request->lang_languages_dialects,
                     'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -2392,7 +2404,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                LanguagesDialects::where('id', $request->cesno_languages_dialects_id)
+                ProfileTblLanguages::where('ctrlno', $request->cesno_languages_dialects_id)
                     ->update([
                         'lang_languages_dialects' => $request->lang_languages_dialects,
                         'last_updated_by' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -2411,9 +2423,9 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Category Only') == 'true') {
 
-            $languagesdialects = LanguagesDialects::where('id', '=', $id)->get();
+            $ProfileTblLanguages = ProfileTblLanguages::where('ctrlno', '=', $id)->get();
 
-            return $languagesdialects;
+            return $ProfileTblLanguages;
         } else {
 
             return 'Restricted';
@@ -2425,7 +2437,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Language Dialects', 'Delete') == 'true') {
 
-            $languagesdialects = LanguagesDialects::where('id', '=', $id)->delete();
+            $ProfileTblLanguages = ProfileTblLanguages::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -3382,7 +3394,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ProfileTblWorkExperience::where('id', $request->cesno_work_experience_id)
+                ProfileTblWorkExperience::where('ctrlno', $request->cesno_work_experience_id)
                     ->update([
                         'date_from_work_experience' => $request->date_from_work_experience,
                         'date_to_work_experience' =>  $request->date_to_work_experience,
@@ -3410,7 +3422,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Category Only') == 'true') {
 
-            $WorkExperience = ProfileTblWorkExperience::where('id', '=', $id)->get();
+            $WorkExperience = ProfileTblWorkExperience::where('ctrl', '=', $id)->get();
 
             return $WorkExperience;
         } else {
@@ -3424,7 +3436,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Work Experience', 'Delete') == 'true') {
 
-            $WorkExperience = ProfileTblWorkExperience::where('id', '=', $id)->delete();
+            $WorkExperience = ProfileTblWorkExperience::where('ctrl', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -3462,7 +3474,7 @@ class ProfileController extends Controller
             } else {
 
                 ProfileTblExpertise::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'ec_field_expertise' => $request->ec_field_expertise,
                     'ss_field_expertise' =>  $request->ss_field_expertise,
                     'encoder' => Auth::user()->role . ' - ' . Auth::user()->role_name_no,
@@ -3503,7 +3515,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ProfileTblExpertise::where('id', $request->cesno_field_expertise_id)
+                ProfileTblExpertise::where('ctrlno', $request->cesno_field_expertise_id)
                     ->update([
                         'ec_field_expertise' => $request->ec_field_expertise,
                         'ss_field_expertise' =>  $request->ss_field_expertise,
@@ -3523,7 +3535,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Category Only') == 'true') {
 
-            $FieldExpertise = ProfileTblExpertise::where('id', '=', $id)->get();
+            $FieldExpertise = ProfileTblExpertise::where('ctrlno', '=', $id)->get();
 
             return $FieldExpertise;
         } else {
@@ -3537,7 +3549,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Records of Field of Expertise or Specialization', 'Delete') == 'true') {
 
-            $FieldExpertise = ProfileTblExpertise::where('id', '=', $id)->delete();
+            $FieldExpertise = ProfileTblExpertise::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -3907,7 +3919,7 @@ class ProfileController extends Controller
             } else {
 
                 ResearchAndStudies::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_ras' => $request->date_f_ras,
                     'date_t_ras' =>  $request->date_t_ras,
                     'title_ras' =>  $request->title_ras,
@@ -3954,7 +3966,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                ResearchAndStudies::where('id', $request->cesno_research_and_studies_id)
+                ResearchAndStudies::where('ctrlno', $request->cesno_research_and_studies_id)
                     ->update([
                         'date_f_ras' => $request->date_f_ras,
                         'date_t_ras' =>  $request->date_t_ras,
@@ -3976,7 +3988,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Research and Studies', 'Category Only') == 'true') {
 
-            $ResearchAndStudies = ResearchAndStudies::where('id', '=', $id)->get();
+            $ResearchAndStudies = ResearchAndStudies::where('ctrlno', '=', $id)->get();
 
             return $ResearchAndStudies;
         } else {
@@ -4107,7 +4119,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Category Only') == 'true') {
 
-            $Scholarships = Scholarships::where('id', '=', $id)->get();
+            $Scholarships = Scholarships::where('ctrlno', '=', $id)->get();
 
             return $Scholarships;
         } else {
@@ -4121,7 +4133,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Scholarships Received', 'Delete') == 'true') {
 
-            $Scholarships = Scholarships::where('id', '=', $id)->delete();
+            $Scholarships = Scholarships::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -4140,14 +4152,14 @@ class ProfileController extends Controller
             $validator = Validator::make(
 
                 array(
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_mcapa' => $request->date_f_mcapa,
                     'date_t_mcapa' =>  $request->date_t_mcapa,
                     'organization_mcapa' =>  $request->organization_mcapa,
                     'position_mcapa' =>  $request->position_mcapa,
                 ),
                 array(
-                    'cesno' => 'required',
+                    'personal_data_cesno' => 'required',
                     'date_f_mcapa' => 'required|date',
                     'date_t_mcapa' => 'required|date',
                     'organization_mcapa' => 'required|max:255',
@@ -4163,7 +4175,7 @@ class ProfileController extends Controller
             } else {
 
                 Affiliations::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_f_mcapa' => $request->date_f_mcapa,
                     'date_t_mcapa' =>  $request->date_t_mcapa,
                     'organization_mcapa' =>  $request->organization_mcapa,
@@ -4210,7 +4222,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                Affiliations::where('id', $request->cesno_major_civic_and_professional_affiliations_id)
+                Affiliations::where('ctrlno', $request->cesno_major_civic_and_professional_affiliations_id)
                     ->update([
                         'date_f_mcapa' => $request->date_f_mcapa,
                         'date_t_mcapa' =>  $request->date_t_mcapa,
@@ -4233,7 +4245,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Category Only') == 'true') {
 
-            $Affiliations = Affiliations::where('id', '=', $id)->get();
+            $Affiliations = Affiliations::where('ctrlno', '=', $id)->get();
 
             return $Affiliations;
         } else {
@@ -4247,7 +4259,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Major Civic and Professional Affiliations', 'Delete') == 'true') {
 
-            $Affiliations = Affiliations::where('id', '=', $id)->delete();
+            $Affiliations = Affiliations::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -4287,7 +4299,7 @@ class ProfileController extends Controller
             } else {
 
                 AwardAndCitations::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'date_aac' => $request->date_aac,
                     'title_of_award_aac' =>  $request->title_of_award_aac,
                     'sponsor_aac' =>  $request->sponsor_aac,
@@ -4352,7 +4364,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Category Only') == 'true') {
 
-            $AwardAndCitations = AwardAndCitations::where('id', '=', $id)->get();
+            $AwardAndCitations = AwardAndCitations::where('ctrlno', '=', $id)->get();
 
             return $AwardAndCitations;
         } else {
@@ -4366,7 +4378,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Awards and Citations Received', 'Delete') == 'true') {
 
-            $AwardAndCitations = AwardAndCitations::where('id', '=', $id)->delete();
+            $AwardAndCitations = AwardAndCitations::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -4420,7 +4432,7 @@ class ProfileController extends Controller
             } else {
 
                 CaseRecords::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'parties_case_records' => $request->parties_case_records,
                     'offence_case_records' =>  $request->offence_case_records,
                     'nature_case_records' =>  $request->nature_case_records,
@@ -4485,7 +4497,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                CaseRecords::where('id', $request->cesno_case_records_id)
+                CaseRecords::where('ctrlno', $request->cesno_case_records_id)
                     ->update([
                         'parties_case_records' => $request->parties_case_records,
                         'offence_case_records' =>  $request->offence_case_records,
@@ -4513,7 +4525,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Case Records', 'Category Only') == 'true') {
 
-            $CaseRecords = CaseRecords::where('id', '=', $id)->get();
+            $CaseRecords = CaseRecords::where('ctrlno', '=', $id)->get();
 
             return $CaseRecords;
         } else {
@@ -4527,7 +4539,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Case Records', 'Delete') == 'true') {
 
-            $CaseRecords = CaseRecords::where('id', '=', $id)->delete();
+            $CaseRecords = CaseRecords::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {
@@ -4567,7 +4579,7 @@ class ProfileController extends Controller
             } else {
 
                 HealthRecords::create([
-                    'cesno' => $request->cesno,
+                    'personal_data_cesno' => $request->cesno,
                     'mcfdpra_hr' => $request->mcfdpra_hr,
                     'blood_type_hr' =>  $request->blood_type_hr,
                     'identify_marks_hr' =>  Str::ucfirst($request->identify_marks_hr),
@@ -4611,7 +4623,7 @@ class ProfileController extends Controller
                 return $errors;
             } else {
 
-                HealthRecords::where('id', $request->cesno_health_records_magna_carta_for_disabled_persons_id)
+                HealthRecords::where('ctrlno', $request->cesno_health_records_magna_carta_for_disabled_persons_id)
                     ->update([
                         'mcfdpra_hr' => $request->mcfdpra_hr,
                         'blood_type_hr' =>  $request->blood_type_hr,
@@ -4632,7 +4644,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Health Record', 'Category Only') == 'true') {
 
-            $HealthRecords = HealthRecords::where('id', '=', $id)->get();
+            $HealthRecords = HealthRecords::where('ctrlno', '=', $id)->get();
 
             return $HealthRecords;
         } else {
@@ -4646,7 +4658,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Health Record', 'Delete') == 'true') {
 
-            $HealthRecords = HealthRecords::where('id', '=', $id)->delete();
+            $HealthRecords = HealthRecords::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

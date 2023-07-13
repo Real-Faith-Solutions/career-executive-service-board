@@ -7,11 +7,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('research-studies.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="title">Research Title</label>
                         <input id="title" name="title" type="text" required>
@@ -31,11 +30,9 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
                         <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
@@ -57,7 +54,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

@@ -5,11 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\ExaminationsTaken;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExaminationTakenController extends Controller
 {
     
     public function store(Request $request, $cesno){
+
+        $request->validate([
+
+            'type' => ['required'],
+            'rating' => ['required', 'min:2', 'max:40'],
+            'date_of_examination' => ['required'],
+            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'license_number' => ['nullable', 'min:2', 'max:40'],
+            'date_acquired' => ['required'],
+            'date_validity' => ['required'],
+            
+        ]);
+
+        $userLastName = Auth::user()->last_name;
 
         $examinationTaken = new ExaminationsTaken([
 
@@ -20,7 +35,7 @@ class ExaminationTakenController extends Controller
             'license_number' => $request->license_number,
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
             
         ]);
 
@@ -28,7 +43,7 @@ class ExaminationTakenController extends Controller
 
         $examinationTakenPersonalDataId->examinationTakens()->save($examinationTaken);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 

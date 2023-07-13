@@ -7,11 +7,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('award-citation.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="title_of_award">Title of Award<sup>*</sup></label>
                         <input id="title_of_award" name="title_of_award" required type="text">
@@ -44,7 +43,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

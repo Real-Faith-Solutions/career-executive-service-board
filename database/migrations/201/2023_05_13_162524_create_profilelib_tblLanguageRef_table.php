@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblLanguageRef', function (Blueprint $table) {
             $table->id('code');
-            // $table->string('code')->unique();
-            $table->string('title')->nullable();
-            $table->timestamps();
+            $table->string('title');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

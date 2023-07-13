@@ -14,22 +14,22 @@ return new class extends Migration
         //case_records
         Schema::create('profile_tblCaseRecord', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
+            // $table->bigInteger('cesno')->nullable();
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
             $table->string('parties')->nullable();
             $table->string('offence')->nullable();
             $table->string('nature_code')->nullable();
             $table->string('case_no')->nullable();
-            $table->date('case_title')->nullable();
-            $table->string('filed_dt')->nullable();
+            $table->string('case_title')->nullable();
+            $table->date('filed_date')->nullable();
             $table->string('venue')->nullable();
-            $table->date('status_code')->nullable();
+            $table->string('status_code')->nullable();
+            $table->date('finality')->nullable();
             $table->string('decision')->nullable();
-            $table->longText('finality')->nullable();
             $table->string('remarks')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

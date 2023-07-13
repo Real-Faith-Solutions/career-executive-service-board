@@ -7,27 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Identification extends Model
+class ProfileTblLanguages extends Model
 {
-    
+
     use HasFactory;
+ 
+    use SoftDeletes;
+
+    protected $table = 'profile_tblLanguages';
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table = "identifications";
-
-    use SoftDeletes;
-
     protected $fillable = [
-        
+
         'personal_data_cesno',
-        'type',
-        'id_number',
+        'language_description',
         'encoder',
 
     ];
 
-    public function identificationPersonalData(): BelongsTo
+    public function languagePersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
     }
