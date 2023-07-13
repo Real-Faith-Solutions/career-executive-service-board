@@ -7,11 +7,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('work-experience.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
                         <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
@@ -34,7 +33,6 @@
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="position_or_title">Position Title / Designation<sup>*</span></label>
                         <input id="position_or_title" name="position_or_title" type="text" required>
@@ -64,13 +62,11 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="salary">Salary / Job / Pay Grade<sup>*</span></label>
+                        <label for="salary">Salary / Job / Pay Grade<sup>*</span></label>  
                         <input id="salary" name="salary" type="text" required>
                         @error('salary')
                             <span class="invalid" role="alert">
@@ -81,7 +77,7 @@
 
                     <div class="mb-3">
                         <label for="status_of_appointment">Status of Appointment<sup>*</span></label>
-                        <select id="type" name="type" name="status_of_appointment" required>
+                        <select id="status_of_appointment"  name="status_of_appointment" required>
                             <option disabled selected>Select Status of Appointment</option>
                             <option value="Permanent">Permanent</option>
                             <option value="Contractual">Contractual</option>
@@ -95,7 +91,7 @@
 
                     <div class="mb-3">
                         <label for="government_service">Government Service<sup>*</span></label>
-                        <select id="type" name="type" name="government_service" required>
+                        <select id="government_service" name="government_service" required>
                             <option disabled selected>Select Government Service</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
@@ -106,11 +102,9 @@
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="remarks">Remarks<sup>*</span></label>
                         <input id="remarks" name="remarks" type="text" required>
@@ -121,10 +115,8 @@
                         @enderror
                     </div>
                 </div>
-
-
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

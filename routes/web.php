@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AddAddress201;
 use App\Http\Controllers\AddProfile201;
+use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AwardAndCitationController;
+use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -15,9 +18,15 @@ use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
+use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\WorkExperienceController;
+use App\Models\Affiliations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -54,7 +63,6 @@ Route::delete('family-profile/delete/spouse/{ctrlno}', [FamilyController::class,
 Route::post('personal-data/store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
 Route::delete('personal-data/destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 
-
 Route::post('educational/attainment/store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
 Route::delete('educational/attainment/destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
 
@@ -64,6 +72,29 @@ Route::delete('examination/taken/delete/{ctrlno}', [ExaminationTakenController::
 Route::post('scholarship/store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
 Route::delete('scholarship/destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 
+Route::post('research/studies/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+Route::delete('research/studies/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+
+Route::post('work-experience/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
+Route::delete('work-experience/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+
+Route::post('award-citation/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
+Route::delete('award-citation/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
+
+Route::post('affiliation/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+Route::delete('affiliation/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
+
+Route::post('case/record/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+Route::delete('case/record/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+
+Route::post('health/record/{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
+Route::delete('health/record/{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
+
+Route::post('expertise/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+Route::delete('expertise/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+
+Route::post('language/{cesno}', [LanguageController::class, 'store'])->name('language.store');
+Route::delete('language/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
 
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');

@@ -6,11 +6,14 @@ use App\Http\Requests\EducationalAttainmentStoreRequest;
 use App\Models\EducationalAttainment;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EducationalAttainmentController extends Controller
 {
 
     public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
+
+        $userLastName = Auth::user()->last_name;
 
         $educationalAttainment = new EducationalAttainment([
     
@@ -24,7 +27,7 @@ class EducationalAttainmentController extends Controller
             'highest_level' => $request->highest_level,
             'year_graduate' => $request->year_graduate,
             'academics_honor_received' => $request->academics_honor_received,
-            'encoder' => 'sample encoder',
+            'encoder' => $userLastName,
                 
         ]);
     
@@ -32,7 +35,7 @@ class EducationalAttainmentController extends Controller
     
         $educationalAttainmentPersonalDataId->educations()->save($educationalAttainment);
     
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Successfuly Saved');
     
     }
     

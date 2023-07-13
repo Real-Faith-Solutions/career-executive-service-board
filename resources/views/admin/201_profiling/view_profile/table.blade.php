@@ -54,6 +54,9 @@
                     @endif
                 </tbody>
             </table>
+            <div class="my-5">
+                {{ $searched->links() }}
+            </div>
         </div>
 
     </section>

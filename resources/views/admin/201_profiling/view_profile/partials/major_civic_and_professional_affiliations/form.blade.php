@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('affiliation.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -33,9 +33,19 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="date">Date<sup>*</sup></label>
-                        <input id="date" name="date" required type="date">
-                        @error('date')
+                        <label for="date_from">Date from<sup>*</sup></label>
+                        <input id="date_from" name="date_from" required type="date">
+                        @error('date_from')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="date_to">Date to<sup>*</sup></label>
+                        <input id="date_to" name="date_to" required type="date">
+                        @error('date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -44,7 +54,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>
