@@ -5,8 +5,8 @@
     <div class="grid-rows-7 grid grid-cols-4 gap-1">
         <div class="row-span-5 text-center">
             
-            <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96" src="{{ asset('images/'.($mainProfile->avatar ?: 'placeholder.png')) }}" />
-            
+            <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96 border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->avatar ?: 'placeholder.png')) }}" />
+
             <h1 class="text-bold text-2xl">
                 {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
             </h1>
@@ -243,13 +243,16 @@
 
     <!-- Modal for Avatar Upload -->
     <div id="profile-avatar-modal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="modal-content bg-white p-6 rounded-md">
-            <form id="uploadFormAvatar" action="{{ route('/upload-avatar-profile-201', ['cesno'=>$mainProfile->cesno]) }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+            <form id="uploadFormAvatar" action="{{ route('/upload-avatar-profile-201', ['cesno'=>$mainProfile->cesno]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col items-center">
+                @csrf
                 <span class="close-avatar absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-                <h2 class="text-xl font-bold mb-4">Upload New Image</h2>
-                <input type="file" id="imageInputAvatar" name="imageInput" class="mb-4">
-                <button type="submit" name="submit" id="uploadButtonAvatar" class="px-4 py-2 bg-blue-500 text-white rounded-md">Upload</button>
+                <h2 class="text-2xl font-bold mb-4 text-center">Upload New Avatar</h2>
+                <input type="file" id="imageInputAvatar" name="imageInput" class="mb-4 p-2 border border-gray-300 rounded">
+                <div class="flex justify-center items-center mb-4">
+                    <img id="imagePreviewAvatar" src="#" alt="Image Preview" class="hidden w-32 h-32 rounded-full">
+                </div>
+                <button type="submit" name="submit" id="uploadButtonAvatar" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-colors duration-300">Upload</button>
             </form>
         </div>
     </div>

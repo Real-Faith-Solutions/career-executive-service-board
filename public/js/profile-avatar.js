@@ -29,3 +29,19 @@ document.getElementById('profile-avatar').addEventListener('click', function() {
     document.getElementById('uploadButtonAvatar').addEventListener('click', function() {
         document.getElementById('uploadFormAvatar').submit();
     });
+
+ // Image Preview on Avatar 
+    document.getElementById('imageInputAvatar').addEventListener('change', function(event) {
+      var input = event.target;
+      var reader = new FileReader();
+    
+      reader.onload = function(){
+        var imagePreview = document.getElementById('imagePreviewAvatar');
+        imagePreview.src = reader.result;
+        imagePreview.classList.remove('hidden');
+      };
+    
+      if (input.files && input.files[0]) {
+        reader.readAsDataURL(input.files[0]);
+      }
+    });
