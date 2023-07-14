@@ -44,6 +44,10 @@
     <script src="{{ asset('js/location-api-integration.js') }}"></script>
     {{-- end --}}
 
+    {{-- js script for uploading image --}}
+    <script src="{{ asset('js/profile-avatar.js') }}"></script>
+    {{-- end --}}
+
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
         
