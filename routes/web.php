@@ -97,7 +97,9 @@ Route::prefix('personal-data')->group(function () {
 });
 
 Route::prefix('educational-attainment')->group(function () {
+    Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
     Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
+    Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
     Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
 });
 
@@ -578,7 +580,7 @@ Route::group([
         Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
 
         // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
-        Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->middleware('userauth');
+        Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('hehe')->middleware('userauth');
 
     });
 

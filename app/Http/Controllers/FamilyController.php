@@ -66,10 +66,6 @@ class FamilyController extends Controller
 
         $PersonalDataId->spouses()->save($personalData);
 
-        // return redirect()->back()->with(['message' => 'Spouse Created Sucessfully']);
-
-        // return redirect()->route('haha', ['cesno' => $cesno]);
-
         return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
