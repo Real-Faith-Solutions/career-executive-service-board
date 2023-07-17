@@ -110,7 +110,9 @@ Route::prefix('educational-attainment')->group(function () {
 });
 
 Route::prefix('examination-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
     Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
+    Route::put('update/{ctrlno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
     Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
 });
 

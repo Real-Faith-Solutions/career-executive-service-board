@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExaminationsTaken;
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblExamRef;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,43 @@ class ExaminationTakenController extends Controller
         $examinationTakenPersonalDataId->examinationTakens()->save($examinationTaken);
 
         return redirect()->back()->with('message', 'Successfuly Saved');
+
+    }
+
+    public function edit($ctrlno){
+
+        $profileLibTblExamRef = ProfileLibTblExamRef::all();
+        $examinationTaken = ExaminationsTaken::find($ctrlno);
+
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.edit', 
+        ['examinationTaken'=>$examinationTaken, 'profileLibTblExamRef'=>$profileLibTblExamRef]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'type' => ['required'],
+            'rating' => ['required', 'min:2', 'max:40'],
+            'date_of_examination' => ['required'],
+            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'license_number' => ['nullable', 'min:2', 'max:40'],
+            'date_acquired' => ['required'],
+            'date_validity' => ['required'],
+            
+        ]);
+
+        $examinationTaken = ExaminationsTaken::find($ctrlno);
+        $examinationTaken->type = $request->type;
+        $examinationTaken->rating = $request->rating;
+        $examinationTaken->date_of_examination = $request->date_of_examination;
+        $examinationTaken->place_of_examination = $request->place_of_examination;
+        $examinationTaken->license_number = $request->license_number;
+        $examinationTaken->date_validity = $request->date_validity;
+        $examinationTaken->save();
+
+        return back()->with('message', 'Updated Sucessfully');
 
     }
 
