@@ -124,8 +124,10 @@ Route::prefix('scholarship-taken')->group(function () {
 });
 
 Route::prefix('research-studies')->group(function () {
-    Route::post('{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-    Route::delete('{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+    Route::get('edit/{ctrlno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
+    Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+    Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
+    Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
 });
 
 Route::prefix('work-experience')->group(function () {
