@@ -27,6 +27,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
@@ -108,6 +109,13 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{ctrlno}', [IndigenousGroupController::class, 'forceDelete'])->name('indigeneous-group-forceDelete');
         Route::post('recently-deleted/restore/{ctrlno}', [IndigenousGroupController::class, 'restore'])->name('indigeneous-group-restore');
         Route::resource('indigeneous-group', IndigenousGroupController::class);
+    });
+
+    Route::prefix('pwd')->group(function () {
+        Route::get('recently-deleted', [PWDController::class, 'recentlyDeleted'])->name('pwd.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [PWDController::class, 'forceDelete'])->name('pwd.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [PWDController::class, 'restore'])->name('pwd.restore');
+        Route::resource('pwd', PWDController::class);
     });
 });
 
