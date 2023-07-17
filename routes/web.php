@@ -8,6 +8,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
+use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -20,15 +21,18 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\GenderByBirthController;
 use App\Http\Controllers\GenderByChoiceController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\RecordStatusController;
+use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\TitleController;
 use App\Http\Controllers\WorkExperienceController;
-use App\Models\Affiliations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -55,17 +59,49 @@ Route::get('/', function () {
     }
 });
 
-Route::prefix('201-Library')->group(function () {
-    Route::prefix('gender-by-birth')->group(function () {
-        Route::get('table', [LibraryController::class, 'genderByBirthTable'])->name('library.gender_by_birth.table');
-        Route::get('form', [LibraryController::class, 'genderByBirthForm'])->name('library.gender_by_birth.form');
-        Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_birth.store');
+Route::prefix('201-library')->group(function () {
 
+    Route::prefix('gender-by-birth')->group(function () {
+        Route::get('recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [GenderByBirthController::class, 'restore'])->name('gender-by-birth.restore');
+        Route::resource('gender-by-birth', GenderByBirthController::class);
     });
 
+    Route::prefix('gender-by-choice')->group(function () {
+        Route::get('recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [GenderByChoiceController::class, 'restore'])->name('gender-by-choice.restore');
+        Route::resource('gender-by-choice', GenderByChoiceController::class);
+    });
 
-    Route::get('gender-by-choice/recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
-    Route::resource('gender-by-choice', GenderByChoiceController::class);
+    Route::prefix('civil-status')->group(function () {
+        Route::get('recently-deleted', [CivilStatusController::class, 'recentlyDeleted'])->name('civil-status.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [CivilStatusController::class, 'forceDelete'])->name('civil-status.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [CivilStatusController::class, 'restore'])->name('civil-status.restore');
+        Route::resource('civil-status', CivilStatusController::class);
+    });
+
+    Route::prefix('title')->group(function () {
+        Route::get('recently-deleted', [TitleController::class, 'recentlyDeleted'])->name('title.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [TitleController::class, 'forceDelete'])->name('title.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [TitleController::class, 'restore'])->name('title.restore');
+        Route::resource('title', TitleController::class);
+    });
+
+    Route::prefix('record-status')->group(function () {
+        Route::get('recently-deleted', [RecordStatusController::class, 'recentlyDeleted'])->name('record-status.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [RecordStatusController::class, 'forceDelete'])->name('record-status.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [RecordStatusController::class, 'restore'])->name('record-status.restore');
+        Route::resource('record-status', RecordStatusController::class);
+    });
+
+    Route::prefix('religion')->group(function () {
+        Route::get('recently-deleted', [ReligionController::class, 'recentlyDeleted'])->name('religion.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [ReligionController::class, 'forceDelete'])->name('religion.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [ReligionController::class, 'restore'])->name('religion.restore');
+        Route::resource('religion', ReligionController::class);
+    });
 
 
 });
@@ -108,23 +144,31 @@ Route::prefix('educational-attainment')->group(function () {
 });
 
 Route::prefix('examination-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
     Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
+    Route::put('update/{ctrlno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
     Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
 });
 
 Route::prefix('scholarship-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 });
 
 Route::prefix('research-studies')->group(function () {
-    Route::post('{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-    Route::delete('{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+    Route::get('edit/{ctrlno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
+    Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+    Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
+    Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
 });
 
 Route::prefix('work-experience')->group(function () {
-    Route::post('{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-    Route::delete('{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+    Route::get('edit/{ctrlno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
+    Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
+    Route::put('update/{ctrlno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
+    Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
 });
 
 Route::prefix('award-citation')->group(function () {

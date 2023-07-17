@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Recently Deleted - Gender By Choice - 201 Library')
+@section('title', 'Recently Deleted - Civil Status - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a class="btn btn-primary" href="{{ route('gender-by-choice.index') }}">Go back</a>
+    <a class="btn btn-primary" href="{{ route('civil-status.index') }}">Go back</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -43,7 +43,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.restore', $data->ctrlno) }}" method="POST">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('civil-status.restore', $data->ctrlno) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Restore">
                                     <lord-icon
@@ -55,7 +55,7 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.forceDelete', $data->ctrlno) }}" method="POST">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('civil-status.forceDelete', $data->ctrlno) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Delete Forever">
                                     <lord-icon

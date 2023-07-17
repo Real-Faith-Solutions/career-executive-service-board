@@ -54,6 +54,44 @@ class WorkExperienceController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $workExperience = ProfileTblWorkExperience::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.work_experience.edit', ['workExperience'=>$workExperience]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'position_or_title' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'status_of_appointment' => ['required'],
+            'monthly_salary' => ['required'],
+            'salary' => ['required'],
+            'department_or_agency' => ['required'],
+            'government_service' => ['required'],
+            'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+
+        ]);
+
+        $workExperience = ProfileTblWorkExperience::find($ctrlno);
+        $workExperience->from_dt = $request->inclusive_date_from;
+        $workExperience->to_dt = $request->inclusive_date_to;
+        $workExperience->status = $request->status_of_appointment;
+        $workExperience->monthly_salary = $request->monthly_salary;
+        $workExperience->salary = $request->salary;
+        $workExperience->department = $request->department_or_agency;
+        $workExperience->government_service = $request->government_service;
+        $workExperience->remarks = $request->remarks;
+        $workExperience->save();
+
+        return back()->with('message', 'Updated Sucessfully');
+
+    }
+
     public function destroy($ctrlno){
         
         $workExperience = ProfileTblWorkExperience::find($ctrlno);

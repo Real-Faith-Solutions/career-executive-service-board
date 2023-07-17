@@ -37,6 +37,26 @@ class ScholarshipController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $scholarship = Scholarships::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.scholarships.edit', ['scholarship'=>$scholarship]);
+
+    }
+
+    public function update(ScholarshipStoreRequest $request, $ctrlno){
+
+        $scholarship= Scholarships::find($ctrlno);
+        $scholarship->type = $request->type;
+        $scholarship->sponsor = $request->sponsor;
+        $scholarship->inclusive_date_from = $request->inclusive_date_from;
+        $scholarship->inclusive_date_to = $request->inclusive_date_to;
+        $scholarship->save();
+
+        return back()->with('message', 'Updated Sucessfully');
+
+    }
+
     public function destroy($ctrlno){
         
         $scholarship = Scholarships::find($ctrlno);

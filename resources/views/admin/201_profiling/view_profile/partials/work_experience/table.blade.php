@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormWorkExperience()">Add Research and Studies</button>
+    <button class="btn btn-primary" onclick="openFormWorkExperience()">Add Work and Experience</button>
     <button class="btn btn-primary hidden" onclick="openTableWorkExperience()">Go back</button>
 </div>
 
@@ -86,7 +86,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('work-experience.edit', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
 
                             <form action="{{ route('work-experience.destroy', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="POST">
                                 @csrf

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('civil_statuses', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->string('name');
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }
