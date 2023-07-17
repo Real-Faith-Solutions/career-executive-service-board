@@ -69,7 +69,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
 
                             <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST">
                                 @csrf

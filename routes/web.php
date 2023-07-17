@@ -205,7 +205,9 @@ Route::prefix('health-record')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
+    Route::get('edit/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::put('update/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
     Route::delete('{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
@@ -216,7 +218,9 @@ Route::prefix('language')->group(function () {
 
 
 Route::prefix('non-accredited-ces-training')->group(function () {
+    Route::get('edit/{ctrlno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
     Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+    Route::put('{ctrlno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
     Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
 });
 
