@@ -101,13 +101,23 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                        <div class="flex">
+                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
 
-                        <form action="{{ route('case-record.destroy', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">DELETE</button>
-                        </form>
+                            <form action="{{ route('case-record.destroy', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                                        trigger="hover"
+                                        colors="primary:#880808"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
