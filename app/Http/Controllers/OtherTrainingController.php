@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OtherManagementTrainings;
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +51,46 @@ class OtherTrainingController extends Controller
         $otherTrainingPersonalDataId->otherTraining()->save($otherTraining);
             
         return redirect()->back()->with('message', 'Successfuly Saved');
+
+    }
+
+    public function edit($ctrlno){
+
+        $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit',
+        ['otherManagementTraining'=>$otherManagementTraining, 'profileLibTblExpertiseSpec'=>$profileLibTblExpertiseSpec]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([ 
+
+            'training_title' => ['required'],
+            'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'venue' => ['required', 'min:2', 'max:40'],
+            'no_of_training_hours' => ['required', 'numeric'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'expertise_field_of_specialization' => ['required'],
+            
+        ]);
+
+        $trainingManagement = ProfileTblTrainingMngt::find($ctrlno);
+        $trainingManagement->training = $request->training_title;
+        $trainingManagement->training_category = $request->training_category;
+        $trainingManagement->sponsor = $request->sponsor_training_provider;
+        $trainingManagement->venue = $request->venue;
+        $trainingManagement->no_training_hours = $request->no_of_training_hours;
+        $trainingManagement->from_date = $request->inclusive_date_from;
+        $trainingManagement->to_date = $request->inclusive_date_to;
+        $trainingManagement->field_specialization = $request->expertise_field_of_specialization;
+        $trainingManagement->save();
+
+        return back()->with('message', 'Updated Sucessfully');
 
     }
 
