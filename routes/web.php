@@ -192,7 +192,9 @@ Route::prefix('award-citation')->group(function () {
 });
 
 Route::prefix('affiliation')->group(function () {
+    Route::get('{ctrlno}', [AffiliationController::class, 'edit'])->name('affiliation.edit');
     Route::post('{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+    Route::put('{ctrlno}', [AffiliationController::class, 'update'])->name('affiliation.update');
     Route::delete('{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
 });
 
