@@ -45,7 +45,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('research-studies.edit', ['ctrlno'=>$researchAndStudy->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
 
                             <form action="{{ route('research-studies.destroy', ['ctrlno'=>$researchAndStudy->ctrlno]) }}" method="POST">
                                 @csrf

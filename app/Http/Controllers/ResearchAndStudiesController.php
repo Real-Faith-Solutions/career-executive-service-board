@@ -35,6 +35,26 @@ class ResearchAndStudiesController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $researchAndStudies = ResearchAndStudies::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', ['researchAndStudies'=>$researchAndStudies]);
+
+    }
+
+    public function update(ResearchAndStudiesStoreRequest $request, $ctrlno){
+
+        $researchAndStudies = ResearchAndStudies::find($ctrlno);
+        $researchAndStudies->title = $request->title;
+        $researchAndStudies->publisher = $request->publisher;
+        $researchAndStudies->inclusive_date_from = $request->inclusive_date_from;
+        $researchAndStudies->inclusive_date_to = $request->inclusive_date_to;
+        $researchAndStudies->save();
+
+        return back()->with('message', 'Updated Sucessfully');
+
+    }
+
     public function destroy($ctrlno){
         
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
