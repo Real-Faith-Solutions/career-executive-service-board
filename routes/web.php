@@ -4,7 +4,6 @@ use App\Http\Controllers\AddAddress201;
 use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
@@ -25,6 +24,7 @@ use App\Http\Controllers\GenderByBirthController;
 use App\Http\Controllers\GenderByChoiceController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\RecordStatusController;
@@ -103,7 +103,12 @@ Route::prefix('201-library')->group(function () {
         Route::resource('religion', ReligionController::class);
     });
 
-
+    Route::prefix('indigeneous-group')->group(function () {
+        Route::get('recently-deleted', [IndigenousGroupController::class, 'recentlyDeleted'])->name('indigeneous-group-recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [IndigenousGroupController::class, 'forceDelete'])->name('indigeneous-group-forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [IndigenousGroupController::class, 'restore'])->name('indigeneous-group-restore');
+        Route::resource('indigeneous-group', IndigenousGroupController::class);
+    });
 });
 
 
