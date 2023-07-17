@@ -43,14 +43,27 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a class="hover:bg-slate-100 rounded-full" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}" title="Restore">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.restore', $data->ctrlno) }}" method="POST">
+                                {{-- @method('POST') --}}
+                                @csrf
+                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Restore">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/nxooksci.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
+                            {{-- <a class="hover:bg-slate-100 rounded-full" href="{{ route('gender-by-choice.restore', $data->ctrlno) }}" title="Restore">
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nxooksci.json"
                                     trigger="hover"
                                     colors="primary:#121331"
                                     style="width:24px;height:24px">
                                 </lord-icon>
-                            </a>
+                            </a> --}}
                             <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.forceDelete', $data->ctrlno) }}" method="POST">
                                 {{-- @method('DELETE') --}}
                                 @csrf

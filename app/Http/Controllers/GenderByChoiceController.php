@@ -21,7 +21,7 @@ class GenderByChoiceController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
         ]);
         GenderByChoice::create($request->all());
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully added');
@@ -34,7 +34,7 @@ class GenderByChoiceController extends Controller
 
     public function update(Request $request, $ctrlno){
         $request->validate([
-            'name' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
         ]);
 
         $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
@@ -43,20 +43,28 @@ class GenderByChoiceController extends Controller
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully updated');
     }
 
-    // soft delete
-    public function destroy($ctrlno){
-        $data = GenderByChoice::findOrFail($ctrlno);
-        $data->delete();
-
-        return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is soft deleted');
-    }
-
     // recently deleted
     public function recentlyDeleted(){
         $datas = GenderByChoice::onlyTrashed()
         ->orderByDesc('deleted_at')
         ->paginate(10);
         return view('admin.201_library.gender_by_choice.recently_deleted', compact('datas'));
+    }
+
+    // restore
+    public function restore($ctrlno){
+        $data = GenderByChoice::onlyTrashed()->findOrFail($ctrlno);
+        $data->restore();
+
+        return redirect()->back()->with('message', 'The item has been successfully restore!');
+    }
+
+    // soft delete
+    public function destroy($ctrlno){
+        $data = GenderByChoice::findOrFail($ctrlno);
+        $data->delete();
+
+        return redirect()->route('gender-by-choice.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // force delete

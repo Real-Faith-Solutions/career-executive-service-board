@@ -65,7 +65,8 @@ Route::prefix('201-Library')->group(function () {
 
 
     Route::get('gender-by-choice/recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
-    Route::post('gender-by-choice/recently-deleted/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
+    Route::post('gender-by-choice/recently-deleted/force-delete/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
+    Route::post('gender-by-choice/recently-deleted/restore/{ctrlno}', [GenderByChoiceController::class, 'restore'])->name('gender-by-choice.restore');
     Route::resource('gender-by-choice', GenderByChoiceController::class);
 
 
