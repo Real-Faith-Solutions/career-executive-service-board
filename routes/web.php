@@ -117,7 +117,9 @@ Route::prefix('examination-taken')->group(function () {
 });
 
 Route::prefix('scholarship-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 });
 
