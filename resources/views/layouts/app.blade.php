@@ -19,6 +19,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> {{-- lord icons --}}
 </head>
 
 <body>
@@ -50,7 +52,7 @@
 
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
-        
+
         <script>
             toastr.options = {
                 "progressBar" : true,
@@ -62,7 +64,7 @@
     @endif
 
     @if (Session::has('info'))
-        
+
         <script>
             toastr.options = {
                 "progressBar" : true,
@@ -74,7 +76,7 @@
     @endif
 
     @if (Session::has('error'))
-            
+
         <script>
             toastr.options = {
                 "progressBar" : true,

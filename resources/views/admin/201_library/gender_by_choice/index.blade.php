@@ -2,7 +2,8 @@
 @section('title', 'Gender By Choice - 201 Library')
 @section('content')
 
-<div class="my-5 flex justify-end">
+<div class="my-5 flex justify-between">
+    <a class="btn btn-danger" href="{{ route('gender-by-choice.create') }}">Recent deleted</a>
     <a class="btn btn-primary" href="{{ route('gender-by-choice.create') }}">Add Gender by choice</a>
 </div>
 
@@ -36,23 +37,29 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <a class="mx-1 font-medium text-blue-600 hover:underline" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}">Update</a>
-                        <form action="{{ route('gender-by-choice.destroy', $data->ctrlno) }}" method="POST">
-                            @method('DELETE')
-                            @csrf
+                        <div class="flex justify-end">
+                            <a class="hover:bg-slate-100 rounded-full" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                            </a>
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.destroy', $data->ctrlno) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                                        trigger="hover"
+                                        colors="primary:#DC3545"
+                                        style="width:24px;height:24px">
 
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/jmkrnisz.json"
-                                    trigger="hover"
-                                    colors="primary:#880808"
-                                    style="width:34px;height:34px">
-
-                                </lord-icon>
-                            </button>
-                        </form>
-
+                                    </lord-icon>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
