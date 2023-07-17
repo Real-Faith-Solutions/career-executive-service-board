@@ -28,6 +28,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\RecordStatusController;
+use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
@@ -93,6 +94,13 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{ctrlno}', [RecordStatusController::class, 'forceDelete'])->name('record-status.forceDelete');
         Route::post('recently-deleted/restore/{ctrlno}', [RecordStatusController::class, 'restore'])->name('record-status.restore');
         Route::resource('record-status', RecordStatusController::class);
+    });
+
+    Route::prefix('religion')->group(function () {
+        Route::get('recently-deleted', [ReligionController::class, 'recentlyDeleted'])->name('religion.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [ReligionController::class, 'forceDelete'])->name('religion.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [ReligionController::class, 'restore'])->name('religion.restore');
+        Route::resource('religion', ReligionController::class);
     });
 
 
