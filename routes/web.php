@@ -27,6 +27,7 @@ use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
@@ -85,6 +86,13 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{ctrlno}', [TitleController::class, 'forceDelete'])->name('title.forceDelete');
         Route::post('recently-deleted/restore/{ctrlno}', [TitleController::class, 'restore'])->name('title.restore');
         Route::resource('title', TitleController::class);
+    });
+
+    Route::prefix('record-status')->group(function () {
+        Route::get('recently-deleted', [RecordStatusController::class, 'recentlyDeleted'])->name('record-status.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [RecordStatusController::class, 'forceDelete'])->name('record-status.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [RecordStatusController::class, 'restore'])->name('record-status.restore');
+        Route::resource('record-status', RecordStatusController::class);
     });
 
 

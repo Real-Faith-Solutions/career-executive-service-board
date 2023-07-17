@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('record_statuses', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
