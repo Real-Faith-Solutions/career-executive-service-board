@@ -9,6 +9,7 @@ use function GuzzleHttp\Promise\all;
 
 class GenderByChoiceController extends Controller
 {
+
     public function index(){
         $datas = GenderByChoice::paginate(10);
         return view('admin.201_library.gender_by_choice.index', compact('datas'));
@@ -42,12 +43,23 @@ class GenderByChoiceController extends Controller
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully updated');
     }
 
+    // soft delete
     public function destroy($ctrlno){
         $data = GenderByChoice::findOrFail($ctrlno);
         $data->delete();
 
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is soft deleted');
     }
+
+    // recently deleted
+    public function recentlyDeleted(){
+        $datas = GenderByChoice::withTrashed()
+        ->orderByDesc('deleted_at')
+        ->paginate(10);
+        return view('admin.201_library.gender_by_choice.recently_deleted', compact('datas'));
+    }
+
+    // hard delete
 
 
 }

@@ -1,18 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Gender By Choice - 201 Library')
+@section('title', 'Recently Deleted - Gender By Choice - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="{{ route('gender-by-choice.recently-deleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-
-        </lord-icon>
-    </a>
-    <a class="btn btn-primary" href="{{ route('gender-by-choice.create') }}">Add Gender by choice</a>
+    <a class="btn btn-primary" href="{{ route('gender-by-choice.index') }}">Go back</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -24,6 +15,9 @@
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Name
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Deleted at
                 </th>
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
@@ -43,21 +37,24 @@
                     <td class="px-6 py-3">
                         {{ $data->name }}
                     </td>
+                    <td class="px-6 py-3">
+                        {{ $data->deleted_at }}
+                    </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a class="hover:bg-slate-100 rounded-full" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                        trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
+                            <a class="hover:bg-slate-100 rounded-full" href="{{ route('gender-by-choice.edit', $data->ctrlno) }}" title="Restore">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/nxooksci.json"
+                                    trigger="hover"
+                                    colors="primary:#121331"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
                             </a>
                             <form class="hover:bg-slate-100 rounded-full" action="{{ route('gender-by-choice.destroy', $data->ctrlno) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Delete Forever">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
                                         trigger="hover"

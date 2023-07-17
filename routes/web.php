@@ -62,7 +62,11 @@ Route::prefix('201-Library')->group(function () {
         Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_birth.store');
 
     });
+
+
+    Route::get('gender-by-choice/recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
     Route::resource('gender-by-choice', GenderByChoiceController::class);
+
 
 });
 
