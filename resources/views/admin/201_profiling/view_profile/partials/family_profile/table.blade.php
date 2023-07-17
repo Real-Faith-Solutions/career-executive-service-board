@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormFamilyProfile()">Add Examination Taken</button>
+    <button class="btn btn-primary" onclick="openFormFamilyProfile()">Add Family Profile</button>
     <button class="btn btn-primary hidden" onclick="openTableFamilyProfile()">Go back</button>
 </div>
 
