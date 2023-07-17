@@ -53,13 +53,18 @@ class GenderByChoiceController extends Controller
 
     // recently deleted
     public function recentlyDeleted(){
-        $datas = GenderByChoice::withTrashed()
+        $datas = GenderByChoice::onlyTrashed()
         ->orderByDesc('deleted_at')
         ->paginate(10);
         return view('admin.201_library.gender_by_choice.recently_deleted', compact('datas'));
     }
 
-    // hard delete
+    // force delete
+    public function forceDelete($ctrlno){
+        $data = GenderByChoice::onlyTrashed()->findOrFail($ctrlno);
+        $data->forceDelete();
 
+        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+    }
 
 }
