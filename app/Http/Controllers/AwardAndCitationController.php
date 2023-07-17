@@ -42,6 +42,39 @@ class AwardAndCitationController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $awardAndCitation = AwardAndCitations::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.edit', ['awardAndCitation'=>$awardAndCitation]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'date' => ['required'],
+            
+        ]);
+
+        $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
+
+        $awardAndCitation = AwardAndCitations::find($ctrlno);
+        $awardAndCitation->awards = $request->title_of_award;
+        $awardAndCitation->sponsor = $request->sponsor;
+        $awardAndCitation->date = $request->date;
+        $awardAndCitation->updated_by = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
+        $awardAndCitation->save();
+
+        return back()->with('message', 'Updated Sucessfully');
+
+    }
+
     public function destroy($ctrlno){
         
         $awardAndCitations = AwardAndCitations::find($ctrlno);

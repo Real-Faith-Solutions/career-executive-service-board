@@ -185,7 +185,9 @@ Route::prefix('work-experience')->group(function () {
 });
 
 Route::prefix('award-citation')->group(function () {
+    Route::get('{ctrlno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit');
     Route::post('{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
+    Route::put('{ctrlno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update');
     Route::delete('{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
 });
 

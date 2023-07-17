@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OtherManagementTrainings;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblTrainingMngt;

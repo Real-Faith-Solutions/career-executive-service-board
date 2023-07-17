@@ -46,7 +46,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('award-citation.edit', ['ctrlno'=>$awardsAndCitations->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
                         
                             <form action="{{ route('award-citation.destroy', ['ctrlno'=>$awardsAndCitations->ctrlno]) }}" method="POST">
                                 @csrf
