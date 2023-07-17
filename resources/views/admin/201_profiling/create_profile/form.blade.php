@@ -5,7 +5,7 @@
         <h1>Personal data</h1>
     </div>
 
-    <form action="{{ url('/add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST">
+    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST">
 
         @csrf
 

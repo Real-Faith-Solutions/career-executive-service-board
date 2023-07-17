@@ -9,7 +9,7 @@
             </svg>
          </button>
         <a href="{{ config('app.url') }}admin/dashboard" class="flex ml-2 md:mr-24">
-          <img src="{{ asset('images/alpha_logo.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
+          <img src="{{ asset('images/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">{{ config('app.name') }}</span>
         </a>
       </div>
