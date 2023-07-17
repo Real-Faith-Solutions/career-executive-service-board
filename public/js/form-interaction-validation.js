@@ -78,14 +78,16 @@
     const ErrorMessageNickname = document.getElementById('ErrorMessageNickname');
 
     // assigning event listeners on each input
-    inputFieldLastName.addEventListener('input', validateInputLastName);
-    inputFieldLastName.addEventListener('keypress', validateInputLastName);
-    inputFieldFirstname.addEventListener('input', validateInputFirstname);
-    inputFieldFirstname.addEventListener('keypress', validateInputFirstname);
-    inputFieldMiddlename.addEventListener('input', validateInputMiddlename);
-    inputFieldMiddlename.addEventListener('keypress', validateInputMiddlename);
-    inputFieldNickname.addEventListener('input', validateInputNickname);
-    inputFieldNickname.addEventListener('keypress', validateInputNickname);
+    let min1 = 2;
+    let min2 = 4;
+    inputFieldLastName.addEventListener('input', function() {validateInput(inputFieldLastName, 2);});
+    inputFieldLastName.addEventListener('keypress', function() {validateInput(inputFieldLastName, 2);});
+    inputFieldFirstname.addEventListener('input', function() {validateInput(inputFieldFirstname, 2);});
+    inputFieldFirstname.addEventListener('keypress', function() {validateInput(inputFieldFirstname, 2);});
+    inputFieldMiddlename.addEventListener('input', function() {validateInput(inputFieldMiddlename, 2);});
+    inputFieldMiddlename.addEventListener('keypress', function() {validateInput(inputFieldMiddlename, 2);});
+    inputFieldNickname.addEventListener('input', function() {validateInput(inputFieldNickname, 0);});
+    inputFieldNickname.addEventListener('keypress', function() {validateInput(inputFieldNickname, 0);});
     // personal_data_submit.addEventListener('keypress', validateInputNickname);
 
     // functions for disabling and enabling personal_data_form submission
@@ -130,138 +132,44 @@
       });
     // end of Add click event listener to the document body
 
-    // lastname validations
-    function validateInputLastName() {
-
-        const inputValueLastName = inputFieldLastName.value;
+    // last/first/middle/nickname validations
+    function validateInput(inputField, minLength) {
+        const inputValue = inputField.value;
         const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueLastName.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageLastName.textContent = 'Lastname must be at least 2 characters long.';
-            inputFieldLastName.classList.remove('focus:outline-blue-600');
-            inputFieldLastName.classList.add('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueLastName.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageLastName.textContent = 'Atleast 2 characters without number.';
-            inputFieldLastName.classList.remove('focus:outline-blue-600');
-            inputFieldLastName.classList.add('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageLastName.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageLastName.textContent = '';
-            inputFieldLastName.classList.remove('focus:outline-red-500');
-            inputFieldLastName.classList.remove('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of lastname validations
-
-    // firstname validations
-    function validateInputFirstname() {
-
-        const inputValueFirstname = inputFieldFirstname.value;
-        const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueFirstname.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageFirstname.textContent = 'Firstname must be at least 2 characters long.';
-            inputFieldFirstname.classList.remove('focus:outline-blue-600');
-            inputFieldFirstname.classList.add('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueFirstname.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageFirstname.textContent = 'Atleast 2 characters without number.';
-            inputFieldFirstname.classList.remove('focus:outline-blue-600');
-            inputFieldFirstname.classList.add('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageFirstname.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageFirstname.textContent = '';
-            inputFieldFirstname.classList.remove('focus:outline-red-500');
-            inputFieldFirstname.classList.remove('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of firstname validations
-
-    // middlename validations
-    function validateInputMiddlename() {
-
-        const inputValueMiddlename = inputFieldMiddlename.value;
-        const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueMiddlename.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageMiddlename.textContent = 'Middlename must be at least 2 characters long.';
-            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
-            inputFieldMiddlename.classList.add('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueMiddlename.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageMiddlename.textContent = 'Atleast 2 characters without number.';
-            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
-            inputFieldMiddlename.classList.add('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageMiddlename.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageMiddlename.textContent = '';
-            inputFieldMiddlename.classList.remove('focus:outline-red-500');
-            inputFieldMiddlename.classList.remove('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of middlename validations
-
-        // nickname validations
-        function validateInputNickname() {
-
-            const inputValueNickname = inputFieldNickname.value;
-            const charCode = event.which ? event.which : event.keyCode;
     
-            if (charCode >= 48 && charCode <= 57) {
-                event.preventDefault();
-                ErrorMessageNickname.textContent = 'Input must not contain numbers.';
-            }else {
-                ErrorMessageNickname.textContent = '';
-            }
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
     
+        if (inputValue.length < minLength && !(charCode >= 48 && charCode <= 57)) {
+            inputField.nextElementSibling.textContent = `At least ${minLength} characters without numbers.`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (inputValue.length < minLength && (charCode >= 48 && charCode <= 57)) {
+            event.preventDefault();
+            inputField.nextElementSibling.textContent = `At least ${minLength} characters without numbers.`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (charCode >= 48 && charCode <= 57) {
+            event.preventDefault();
+            inputField.nextElementSibling.textContent = 'Input must not contain numbers.';
+        } else {
+            inputField.nextElementSibling.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
+            submitButton.disabled = false;
+            submitButton.classList.remove('cursor-not-allowed');
+            submitButton.classList.add('cursor-pointer');
         }
-        // end of nickname validations
-
+    }
+    // last/first/middle/nickname validations
 
 // end of real-time validation
