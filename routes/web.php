@@ -205,7 +205,9 @@ Route::prefix('health-record')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
+    Route::get('edit/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::put('update/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
     Route::delete('{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
