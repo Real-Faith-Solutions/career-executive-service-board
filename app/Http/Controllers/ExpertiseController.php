@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblExpertise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,32 @@ class ExpertiseController extends Controller
         $expertisePersonalDataId->expertise()->save($expertise);
             
         return redirect()->back()->with('message', 'Successfuly Saved');
+
+    }
+
+    public function edit($ctrlno){
+        
+        $expertise = ProfileTblExpertise::find($ctrlno);
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+        
+        return view('admin.201_profiling.view_profile.partials.field_expertise.edit', 
+        ['expertise'=>$expertise, 'profileLibTblExpertiseSpec'=>$profileLibTblExpertiseSpec]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'expertise_specialization' => ['required'],
+           
+        ]);
+
+        $expertise = ProfileTblExpertise::find($ctrlno);
+        $expertise->expertise_specialization = $request->expertise_specialization;
+        $expertise->save();
+
+        return back()->with('message', 'Updated Sucessfully');
 
     }
 
