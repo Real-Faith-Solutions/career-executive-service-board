@@ -131,8 +131,10 @@ Route::prefix('research-studies')->group(function () {
 });
 
 Route::prefix('work-experience')->group(function () {
-    Route::post('{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-    Route::delete('{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+    Route::get('edit/{ctrlno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
+    Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
+    Route::put('update/{ctrlno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
+    Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
 });
 
 Route::prefix('award-citation')->group(function () {
