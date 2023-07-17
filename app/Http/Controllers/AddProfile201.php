@@ -6,6 +6,7 @@ use App\Http\Requests\AddProfile201Req;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AddProfile201 extends Controller
 {
@@ -64,10 +65,13 @@ class AddProfile201 extends Controller
     {
         $existingPerson = PersonalData::where('cesno', $cesno)->first();
 
-        // Validate the uploaded image
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'imageInput' => 'required|image|mimes:jpeg,png,jpg',
         ]);
+    
+        if ($validator->fails()) {
+            return back()->with('error','Invalid file type!');
+        }
 
         // Check if a file was uploaded
         if ($request->hasFile('imageInput')) {
