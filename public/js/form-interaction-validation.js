@@ -76,6 +76,15 @@
     const inputFieldNickname = document.getElementById('nickname');
     const ErrorMessageNickname = document.getElementById('ErrorMessageNickname');
 
+    // initializing family profile form and its inputs
+    const family_profile_children_form = document.getElementById('family-profile-children');
+    const children_last_name = document.getElementById('children_last_name');
+    const ErrorMessageChildrenLastName = document.getElementById('ErrorMessageChildrenLastName');
+    const children_first_name = document.getElementById('children_first_name');
+    const ErrorMessageChildrenFirstName = document.getElementById('ErrorMessageChildrenFirstName');
+    const children_middle_name = document.getElementById('children_middle_name');
+    const ErrorMessageChildrenMiddleName = document.getElementById('ErrorMessageChildrenMiddleName');
+
     // assigning event listeners on each input
     inputFieldLastName.addEventListener('input', function() {validateInput(inputFieldLastName, 2);});
     inputFieldLastName.addEventListener('keypress', function() {validateInput(inputFieldLastName, 2);});
@@ -85,10 +94,17 @@
     inputFieldMiddlename.addEventListener('keypress', function() {validateInput(inputFieldMiddlename, 2);});
     inputFieldNickname.addEventListener('input', function() {validateInput(inputFieldNickname, 0);});
     inputFieldNickname.addEventListener('keypress', function() {validateInput(inputFieldNickname, 0);});
-    // personal_data_submit.addEventListener('keypress', validateInputNickname);
+
+    children_last_name.addEventListener('input', function() {validateInput(children_last_name, 2);});
+    children_last_name.addEventListener('keypress', function() {validateInput(children_last_name, 2);});
+    children_first_name.addEventListener('input', function() {validateInput(children_first_name, 2);});
+    children_first_name.addEventListener('keypress', function() {validateInput(children_first_name, 2);});
+    children_middle_name.addEventListener('input', function() {validateInput(children_middle_name, 2);});
+    children_middle_name.addEventListener('keypress', function() {validateInput(children_middle_name, 2);});
 
     // functions for disabling and enabling personal_data_form submission
     let personal_data_errors = document.querySelectorAll('.personal_data_error');
+    let family_profile_children_error = document.querySelectorAll('.family_profile_children_error');
 
     personal_data_form.addEventListener('submit', function(event) {
         for (let i = 0; i < personal_data_errors.length; i++) {
@@ -98,6 +114,16 @@
             }
         }
     });
+
+    family_profile_children_form.addEventListener('submit', function(event) {
+        for (let i = 0; i < family_profile_children_error.length; i++) {
+            if (family_profile_children_error[i].textContent != '') {
+                event.preventDefault();
+                break;
+            }
+        }
+    });
+
     // end
 
     // Add click event listener to the document body
@@ -127,6 +153,7 @@
             }
         }
       });
+
     // end of Add click event listener to the document body
 
     // last/first/middle/nickname validations
