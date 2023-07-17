@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gender_by_births', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->string('name');
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
