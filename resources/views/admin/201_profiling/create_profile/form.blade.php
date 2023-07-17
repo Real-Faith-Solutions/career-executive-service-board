@@ -128,6 +128,7 @@
             <div class="mb-3">
                 <label for="gender">Gender By Birth<sup>*</sup></label>
                 <select id="gender" name="gender" required>
+                    <option disabled selected>Please Select Gender by Birth</option>
                     @foreach ($genderByBirths as $data)
                         <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
