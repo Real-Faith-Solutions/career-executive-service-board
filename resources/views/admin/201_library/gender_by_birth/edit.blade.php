@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('library.gender_by_birth.table') }}">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('gender-by-birth.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -15,14 +15,15 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('library.gender_by_birth.store') }}" method="POST">
+            <form action="{{ route('gender-by-birth.update', $data->ctrlno) }}" method="POST">
+                @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
                         <label for="name">Name</label>
-                        <input id="name" name="name" type="text" required>
+                        <input id="name" name="name" type="text" required value="{{$data->name}}">
                         @error('name')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

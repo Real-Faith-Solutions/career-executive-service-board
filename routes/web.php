@@ -20,6 +20,7 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
+use App\Http\Controllers\GenderByBirthController;
 use App\Http\Controllers\GenderByChoiceController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
@@ -56,12 +57,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('201-Library')->group(function () {
-    Route::prefix('gender-by-birth')->group(function () {
-        Route::get('table', [LibraryController::class, 'genderByBirthTable'])->name('library.gender_by_birth.table');
-        Route::get('form', [LibraryController::class, 'genderByBirthForm'])->name('library.gender_by_birth.form');
-        Route::post('store', [LibraryController::class, 'genderByBirthStore'])->name('library.gender_by_birth.store');
-
-    });
+    
+    Route::get('gender-by-birth/recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
+    Route::post('gender-by-birth/recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
+    Route::post('gender-by-birth/recently-deleted/restore/{ctrlno}', [GenderByBirthController::class, 'restore'])->name('gender-by-birth.restore');
+    Route::resource('gender-by-birth', GenderByBirthController::class);
 
 
     Route::get('gender-by-choice/recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');

@@ -144,7 +144,7 @@
                     </button>
                     <ul id="dropdown-system-utility" class="hidden space-y-2 py-2">
                         <li>
-                            <a href="{{ route('library.gender_by_birth.table') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Gender bv birth</a>
+                            <a href="{{ route('gender-by-birth.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Gender bv birth</a>
                             <a href="{{ route('gender-by-choice.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Gender bv choice</a>
                         </li>
                         @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Database Migration') == 'true')

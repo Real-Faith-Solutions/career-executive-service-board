@@ -26,7 +26,7 @@ class GenderByChoiceController extends Controller
         GenderByChoice::create($request->all());
         return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully added');
     }
-    // gender-by-choice.edit
+    // ui for edit
     public function edit($ctrlno){
         $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
         return view('admin.201_library.gender_by_choice.edit', compact('data'));
@@ -34,7 +34,7 @@ class GenderByChoiceController extends Controller
 
     public function update(Request $request, $ctrlno){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
         ]);
 
         $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
