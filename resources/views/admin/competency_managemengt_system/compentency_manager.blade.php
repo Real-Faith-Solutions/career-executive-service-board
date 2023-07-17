@@ -60,11 +60,11 @@
     <section class="content col-md-9">
         <div class="@if(Auth::user()->role == 'User') p-3 pb-5 @else p-3 pb-5 @endif bg-primary text-warning text-left">
                 @foreach ($personalData as $item)
-            <img id="profile_picture" src="{{ ($item->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/201 Photos/'. $item->picture)) }}" onerror="this.src = '{{ asset('images/person.png') }}'" class="mt-2 mr-3 rounded bg-light float-right" height="190" width="190" alt="...">
+            <img id="profile_picture" src="{{ ($item->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/201 Photos/'. $item->picture)) }}" onerror="this.src = '{{ asset('images/placeholder.png') }}'" class="mt-2 mr-3 rounded bg-light float-right" height="190" width="190" alt="...">
             <div class="p-4">
                 <div class="row text-white ml-4">
                     <div class="col-auto mt-2 mr-3 p-0">
-                        <h3 class="h6">CES No. <span class="bg-danger py-1 px-2 rounded h6">{{ $item->cesno }}</span></h3>  
+                        <h3 class="h6">CES No. <span class="bg-danger py-1 px-2 rounded h6">{{ $item->cesno }}</span></h3>
                     </div>
                 @endforeach
                     <div class="col-auto mt-2 mr-3 p-0">
@@ -104,11 +104,11 @@
                         </li>
                     </ul>
                 </div>
-            
+
                 <div class="border border-primary">
                     <div class="tab-content" id="myTabContent">
                         <!-- start ADDRESS AND CONTACT INFORMATION -->
-                        <div class="tab-pane fade show active" id="address_and_contact_info" role="tabpanel" aria-labelledby="address_and_contact_info-tab">  
+                        <div class="tab-pane fade show active" id="address_and_contact_info" role="tabpanel" aria-labelledby="address_and_contact_info-tab">
                             <div class="bg-primary">
                                 <h4 class="pl-3 py-2 text-warning font-weight-bold">ADDRESS AND CONTACT INFORMATION</h4>
                             </div>
@@ -116,7 +116,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="form-label ml-2 mb-0">Mailing Address</label>
-                        
+
                                         <textarea name="" id="" cols="30" rows="3" class="form-control mb-3" readonly></textarea>
                                     </div>
                                 </div>
@@ -335,7 +335,7 @@
                                     </div>
                                     <!-- start modal 3 -->
                                     <div class="container-fluid">
-                                        
+
                                         <!-- The Modal -->
                                         <div class="modal" id="add_training_provider">
                                             <div class="modal-dialog modal-xl">
@@ -413,7 +413,7 @@
                         </div>
                         <!-- end ADDRESS AND CONTACT INFORMATION -->
                         <!-- start CES TRAINING SESSIONS -->
-                        <div class="tab-pane fade" id="manage_training_session" role="tabpanel" aria-labelledby="manage_training_session-tab">  
+                        <div class="tab-pane fade" id="manage_training_session" role="tabpanel" aria-labelledby="manage_training_session-tab">
                             <div class="bg-primary">
                                 <h4 class="pl-3 py-2 text-warning font-weight-bold">CES TRAINING SESSIONS</h4>
                             </div>
@@ -545,7 +545,7 @@
                                         </div>
                                     </div>
                                     <!-- start modal 1 -->
-            
+
                                     <!-- The Modal -->
                                     <div class="modal" id="add_training_session">
                                         <div class="modal-dialog modal-xl">
@@ -581,7 +581,7 @@
                                                                 <label class="form-label ml-2 mb-0">Field of Specialization</label>
                                                                 <select name="" class="form-control mb-3">
                                                                     <option value="" class="">Please Select Field of Specialization</option>
-                                                                </select>                                                           
+                                                                </select>
                                                             </div>
                                                             <div class="col-md-1 mt-4">
                                                                 <button class="form-control text-white bg-primary">...</button>
@@ -621,7 +621,7 @@
                                                                 <label class="form-label ml-2 mb-0">Resource Speaker</label>
                                                                 <select name="" class="form-control mb-3">
                                                                     <option value="" class="">Please Select Resource Speaker</option>
-                                                                </select>                                                           
+                                                                </select>
                                                             </div>
                                                             <div class="col-md-1 mt-4">
                                                                 <button class="form-control text-white bg-primary">...</button>
@@ -632,7 +632,7 @@
                                                                 <label class="form-label ml-2 mb-0">Session Director</label>
                                                                 <select name="" class="form-control mb-3">
                                                                     <option value="" class="">Please Select Session Director</option>
-                                                                </select>                                                           
+                                                                </select>
                                                             </div>
                                                             <div class="col-md-1 mt-4">
                                                                 <button class="form-control text-white bg-primary">...</button>
@@ -643,7 +643,7 @@
                                                                 <label class="form-label ml-2 mb-0">Status</label>
                                                                 <select name="" class="form-control mb-3">
                                                                     <option value="" class="">Please Select Status</option>
-                                                                </select>                                                           
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -790,8 +790,8 @@
                             <!-- end CES TRAINING SESSIONS -->
                         </div>
                         <!-- Training Library -->
-                        <div class="tab-pane fade" id="training_type_library" role="tabpanel" aria-labelledby="training_type_library-tab"> 
-                            <div class="row"> 
+                        <div class="tab-pane fade" id="training_type_library" role="tabpanel" aria-labelledby="training_type_library-tab">
+                            <div class="row">
                                 <div class="col-md-3">
                                     <summary class="card m-1">
                                         <div class="card-header bg-white">
@@ -807,8 +807,8 @@
                                     </summary>
                                 </div>
                                 <!-- training library start -->
-                                <div class="col-md-9">      
-                                    <!-- training type library start -->                      
+                                <div class="col-md-9">
+                                    <!-- training type library start -->
                                     <div id="TrainingLibrary" class="collapse tabcontent"  data-bs-parent="#accordion">
                                         <div class="panel-body">
                                             <div class="card-body bg-white">
@@ -855,7 +855,7 @@
                                                                         <div class="col-md-6">
                                                                             <label class="form-label ml-2 mb-0">Training Category</label>
                                                                             <input type="text" name="" class="form-control w-100 mb-3" required>
-                                                                        </div> 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -869,20 +869,20 @@
                                                                             <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                                                         </div>
                                                                         <div class="p-1">
-                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                                                        </div> 
+                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
                                                                     </div>
-                                                                </div> 
-                                                            </div>             
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
                                                 <!-- end modal training type library -->
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <!-- training type library end -->
-                                    <!-- Field of Specialization start -->                    
+                                    <!-- Field of Specialization start -->
                                     <div id="FieldOfSpecialization" class="collapse tabcontent"  data-bs-parent="#accordion">
                                         <div class="panel-body">
                                             <div class="card-body bg-white">
@@ -929,7 +929,7 @@
                                                                         <div class="col-md-6">
                                                                             <label class="form-label ml-2 mb-0">Field of Specialization</label>
                                                                             <input type="text" name="" class="form-control w-100 mb-3" required>
-                                                                        </div> 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -943,20 +943,20 @@
                                                                             <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                                                         </div>
                                                                         <div class="p-1">
-                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                                                        </div> 
+                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
                                                                     </div>
-                                                                </div> 
-                                                            </div>             
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
                                                 <!-- end modal Field of Specialization -->
                                             </div>
                                         </div>
-                                    </div>                           
-                                <!-- Field of Specialization end -->  
-                                <!-- Training Secretariat start -->                    
+                                    </div>
+                                <!-- Field of Specialization end -->
+                                <!-- Training Secretariat start -->
                                 <div id="TrainingSecretariat" class="collapse tabcontent"  data-bs-parent="#accordion">
                                         <div class="panel-body">
                                             <div class="card-body bg-white">
@@ -1003,7 +1003,7 @@
                                                                         <div class="col-md-6">
                                                                             <label class="form-label ml-2 mb-0">Training Secretariat</label>
                                                                             <input type="text" name="" class="form-control w-100 mb-3" required>
-                                                                        </div> 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -1017,25 +1017,25 @@
                                                                             <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                                                         </div>
                                                                         <div class="p-1">
-                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                                                        </div> 
+                                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
                                                                     </div>
-                                                                </div> 
-                                                            </div>             
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
                                                 <!-- end modal Training Secretariat -->
                                             </div>
                                         </div>
-                                    </div>                           
-                                <!-- Training Secretariat end -->                          
+                                    </div>
+                                <!-- Training Secretariat end -->
                                 </div>
                             </div>
                         </div>
                         <!-- end Training Library -->
                         <!-- start TRAINING VENUE MANAGER -->
-                        <div class="tab-pane fade" id="training_venue_manager" role="tabpanel" aria-labelledby="training_venue_manager-tab">  
+                        <div class="tab-pane fade" id="training_venue_manager" role="tabpanel" aria-labelledby="training_venue_manager-tab">
                             <div class="bg-primary">
                                 <h4 class="pl-3 py-2 text-warning font-weight-bold">TRAINING VENUE MANAGER</h4>
                             </div>
@@ -1111,15 +1111,15 @@
                                             <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                         </div>
                                         <div class="p-1">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                        </div> 
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end TRAINING VENUE MANAGER -->
                         <!-- start TRAINING PROVIDER MANAGER -->
-                        <div class="tab-pane fade" id="training_provider_manager" role="tabpanel" aria-labelledby="training_provider_manager-tab">  
+                        <div class="tab-pane fade" id="training_provider_manager" role="tabpanel" aria-labelledby="training_provider_manager-tab">
                             <div class="bg-primary">
                                 <h4 class="pl-3 py-2 text-warning font-weight-bold">TRAINING PROVIDER MANAGER</h4>
                             </div>
@@ -1164,7 +1164,7 @@
                                     <div class="col-md-6">
                                         <label class="form-label  mr-0 mb-0">No./Street</label>
                                         <input type="text" id="" name="" class="form-control mb-3" value="">
-                                    </div>                                  
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -1203,14 +1203,14 @@
                                         <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                     </div>
                                     <div class="p-1">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                    </div> 
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end TRAINING PROVIDER MANAGER -->
                         <!-- start RESOURCE PERSON MANAGER -->
-                        <div class="tab-pane fade" id="resource_speakers_persons_manager" role="tabpanel" aria-labelledby="resource_speakers_persons_manager-tab">  
+                        <div class="tab-pane fade" id="resource_speakers_persons_manager" role="tabpanel" aria-labelledby="resource_speakers_persons_manager-tab">
                             <div class="bg-primary">
                                 <h4 class="pl-3 py-2 text-warning font-weight-bold">RESOURCE SPEAKER TABLE</h4>
                             </div>
@@ -1284,7 +1284,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label  mr-0 mb-0">First Name</label>
                                             <input type="text" id="" name="" class="form-control mb-3" value="">
-                                        </div>                                  
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -1346,7 +1346,7 @@
                                             <input type="date" id="" name="" class="form-control mb-3" value="">
                                         </div>
                                     </div>
-                                    <div class="row"> 
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-label ml-2 mb-0">Session Title</label>
                                             <input type="text" id="" name="" class="form-control mb-3" value="">
@@ -1371,10 +1371,10 @@
                                             <input onclick="" type="submit" class="btn btn-danger" value="Delete" >
                                         </div>
                                         <div class="p-1">
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button> 
-                                        </div> 
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-md-4">
                                     <div class="overflow-auto bg-white">
                                         <table class="table table-responsive-lg table-hover">
@@ -1400,5 +1400,5 @@
                         <!-- end RESOURCE PERSON MANAGER -->
                     </div>
                 </div>
-    </section>     
+    </section>
 @endsection

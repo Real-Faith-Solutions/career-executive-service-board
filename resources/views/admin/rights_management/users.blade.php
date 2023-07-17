@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <!-- Main content -->
     <section class="content">
-        
+
         @if (str_contains(Request::url(),'rights-management/edit-user'))
 
         <script>setPageTitle('Edit User');</script>
@@ -39,7 +39,7 @@
 
                             <form class="user" id="user_details_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/user/update/{{ $user_id_data[0]->id }}`, `user_details_form`, `Update`, `None`, `None`, `user_details_form_submit`, `None`, `{{ env('APP_URL') }}admin/rights-management/user`)">
                             @else
-                            
+
                             <form class="user" id="user_details_form" method="POST" action="javascript:void(0);" onsubmit="submitForm(`{{ env('APP_URL') }}api/v1/user/add`, `user_details_form`, `Add`, `None`, `None`, `user_details_form_submit`, `Yes`, `None`)">
                             @endif
                                 @csrf
@@ -50,8 +50,8 @@
                                     @if (str_contains(Request::url(),'rights-management/edit-user'))
 
                                     <div class="row">
-                                        <img id="profile_picture" @if($user_id_data[0]->role == 'User') src="{{ ($user_id_data[0]->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/201 Photos/'. $user_id_data[0]->picture)) }}" @else src="{{ ($user_id_data[0]->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/Staff Photos/'. $user_id_data[0]->picture)) }}" @endif onerror="this.src = '{{ asset('images/person.png') }}'" class="mt-2 ml-3 mb-3 rounded bg-light float-right" height="190" width="190" alt="...">
-                                    </div> 
+                                        <img id="profile_picture" @if($user_id_data[0]->role == 'User') src="{{ ($user_id_data[0]->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/201 Photos/'. $user_id_data[0]->picture)) }}" @else src="{{ ($user_id_data[0]->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/Staff Photos/'. $user_id_data[0]->picture)) }}" @endif onerror="this.src = '{{ asset('images/placeholder.png') }}'" class="mt-2 ml-3 mb-3 rounded bg-light float-right" height="190" width="190" alt="...">
+                                    </div>
                                     @endif
 
                                     <div class="row">
@@ -100,7 +100,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label ml-2 mb-0">Role<span class="text-danger">*</span></label>
                                             @if (str_contains(Request::url(),'rights-management/edit-user'))
-                                            
+
                                             <input type="hidden" class="p-1 mb-3" name="role" value="{{ $user_id_data[0]->role }}">
                                             <select class="form-control w-100 mb-3" id="role" name="role" disabled>
                                                 <option value="">Please Select</option>
@@ -178,7 +178,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label ml-2 mb-0">Record Status<span class="text-danger">*</span></label>
                                             @if (str_contains(Request::url(),'rights-management/edit-user'))
-                                            
+
                                             <select name="is_active" class="form-control w-100 mb-3" required>
                                                 <option value="">Please Select</option>
                                                 <option value="Active" {{ ($user_id_data[0]->is_active == 'Active') ? 'selected' : '' }}>Active</option>

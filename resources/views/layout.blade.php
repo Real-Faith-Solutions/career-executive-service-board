@@ -91,7 +91,7 @@
                         <a class="collapse-item" href="{{ env('APP_URL') }}admin/profile/view">View Profiles</a>
                         @endif
                         @endif
-                        
+
                     </div>
                 </div>
             </li>
@@ -179,7 +179,7 @@
                     </div>
                 </div>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             @endif
@@ -261,7 +261,7 @@
                                     <hr class="m-0 p-0" />
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->role ?? ""}}</span>
                                 </div>
-                                <img class="img-profile rounded-circle" @if(Auth::user()->role == 'User') id="menu_profile_picture" src="{{ (Auth::user()->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/201 Photos/' . Auth::user()->picture)) }}" @else src="{{ (Auth::user()->picture == '' ? asset('images/person.png') : asset('external-storage/Photos/Staff Photos/' . Auth::user()->picture)) }}" @endif  onerror="this.src = '{{ asset('images/person.png') }}'">
+                                <img class="img-profile rounded-circle" @if(Auth::user()->role == 'User') id="menu_profile_picture" src="{{ (Auth::user()->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/201 Photos/' . Auth::user()->picture)) }}" @else src="{{ (Auth::user()->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/Staff Photos/' . Auth::user()->picture)) }}" @endif  onerror="this.src = '{{ asset('images/placeholder.png') }}'">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -324,7 +324,7 @@
 
     <script src="{{ asset('js/migration.js') }}"></script>
     @endif
-    
+
     <script>changeRootURL('{{ env('APP_URL') }}');</script>
 
     <script>
