@@ -110,18 +110,24 @@ Route::prefix('educational-attainment')->group(function () {
 });
 
 Route::prefix('examination-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
     Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
+    Route::put('update/{ctrlno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
     Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
 });
 
 Route::prefix('scholarship-taken')->group(function () {
+    Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
 });
 
 Route::prefix('research-studies')->group(function () {
-    Route::post('{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-    Route::delete('{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+    Route::get('edit/{ctrlno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
+    Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
+    Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
+    Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
 });
 
 Route::prefix('work-experience')->group(function () {
