@@ -21,7 +21,7 @@ class GenderByBirthController extends Controller
             'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_births'],
         ]);
         GenderByBirth::create($request->all());
-        return redirect()->route('gender-by-birth.index')->with('message', 'Gender by birth is successfully added');
+        return redirect()->route('gender-by-birth.index')->with('message', 'The item has been successfully added!');
     }
 
     // ui for edit
@@ -38,7 +38,7 @@ class GenderByBirthController extends Controller
         $data = GenderByBirth::withTrashed()->findOrFail($ctrlno);
         $data->update($request->all());
 
-        return redirect()->route('gender-by-birth.index')->with('message', 'Gender by birth is successfully updated');
+        return redirect()->route('gender-by-birth.index')->with('message', 'The item has been successfully updated!');
     }
 
     // recently deleted

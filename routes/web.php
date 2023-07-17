@@ -8,6 +8,7 @@ use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
+use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -29,7 +30,6 @@ use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\WorkExperienceController;
-use App\Models\Affiliations;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -57,18 +57,24 @@ Route::get('/', function () {
 });
 
 Route::prefix('201-Library')->group(function () {
-    
+
+    // gender by birth
     Route::get('gender-by-birth/recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
     Route::post('gender-by-birth/recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
     Route::post('gender-by-birth/recently-deleted/restore/{ctrlno}', [GenderByBirthController::class, 'restore'])->name('gender-by-birth.restore');
     Route::resource('gender-by-birth', GenderByBirthController::class);
 
-
+    // gender by choice
     Route::get('gender-by-choice/recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
     Route::post('gender-by-choice/recently-deleted/force-delete/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
     Route::post('gender-by-choice/recently-deleted/restore/{ctrlno}', [GenderByChoiceController::class, 'restore'])->name('gender-by-choice.restore');
     Route::resource('gender-by-choice', GenderByChoiceController::class);
 
+    // civil status
+    Route::get('civil-status/recently-deleted', [CivilStatusController::class, 'recentlyDeleted'])->name('civil-status.recently-deleted');
+    Route::post('civil-status/recently-deleted/force-delete/{ctrlno}', [CivilStatusController::class, 'forceDelete'])->name('civil-status.forceDelete');
+    Route::post('civil-status/recently-deleted/restore/{ctrlno}', [CivilStatusController::class, 'restore'])->name('civil-status.restore');
+    Route::resource('civil-status', CivilStatusController::class);
 
 });
 

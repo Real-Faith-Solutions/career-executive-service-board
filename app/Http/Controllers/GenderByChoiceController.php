@@ -24,7 +24,7 @@ class GenderByChoiceController extends Controller
             'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
         ]);
         GenderByChoice::create($request->all());
-        return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully added');
+        return redirect()->route('gender-by-choice.index')->with('message', 'The item has been successfully added!');
     }
     // ui for edit
     public function edit($ctrlno){
@@ -40,7 +40,7 @@ class GenderByChoiceController extends Controller
         $data = GenderByChoice::withTrashed()->findOrFail($ctrlno);
         $data->update($request->all());
 
-        return redirect()->route('gender-by-choice.index')->with('message', 'Gender by birth is successfully updated');
+        return redirect()->route('gender-by-choice.index')->with('message', 'The item has been successfully updated!');
     }
 
     // recently deleted
