@@ -67,7 +67,6 @@
 
     // initializing personal_data_form and its inputs
     const personal_data_form = document.getElementById('personal_data');
-    const personal_data_submit = document.getElementById('personal_data_submit');
     const inputFieldLastName = document.getElementById('lastname');
     const ErrorMessageLastName = document.getElementById('ErrorMessageLastName');
     const inputFieldFirstname = document.getElementById('firstname');
@@ -78,8 +77,6 @@
     const ErrorMessageNickname = document.getElementById('ErrorMessageNickname');
 
     // assigning event listeners on each input
-    let min1 = 2;
-    let min2 = 4;
     inputFieldLastName.addEventListener('input', function() {validateInput(inputFieldLastName, 2);});
     inputFieldLastName.addEventListener('keypress', function() {validateInput(inputFieldLastName, 2);});
     inputFieldFirstname.addEventListener('input', function() {validateInput(inputFieldFirstname, 2);});
