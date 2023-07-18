@@ -69,7 +69,6 @@
             </div>
 
             <div class="mb-3">
-
                 <label for="name_extension">Name Extension</label>
                 <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
                 <datalist id="name_extension_choices">
@@ -119,7 +118,8 @@
 
             <div class="mb-3">
                 <label for="birth_place">Birth Place<sup>*</sup></label>
-                <input id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}">
+                <input id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}" oninput="validateInput(birth_place, 2, true)" onkeypress="validateInput(birth_place, 2, true)" onblur="checkErrorMessage(birth_place)">
+                <p class="input_error text-red-600"></p>
             </div>
 
         </div>

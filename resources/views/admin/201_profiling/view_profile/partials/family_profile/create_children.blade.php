@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label for="middle_name">Middle Name</label>
             <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 2)" onkeypress="validateInput(children_middle_name, 2)" onblur="checkErrorMessage(children_middle_name)">
-            <p class="input_error text-red-600" id="ErrorMessageChildrenMiddleName"></p>
+            <p class="input_error text-red-600"></p>
             @error('middle_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -42,13 +42,12 @@
 
         <div class="mb-3">
             <label for="name_extension">Name Extension</label>
-            <input type="text" id="children_name_extension" name="name_extension">
-
-            @error('name_extension')
-                <span class="invalid" role="alert">
-                    <p>{{ $message }}</p>
-                </span>
-            @enderror
+            <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
+            <datalist id="name_extension_choices">
+                @foreach ($nameExtensions as $data)
+                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                @endforeach
+            </datalist>
         </div>
 
         <div class="mb-3">
@@ -64,7 +63,7 @@
 
         <div class="mb-3">
             <label for="birth_place">Birthplace<sup>*</span></label>
-            <input type="text" name="birth_place" id="birth_place" required>
+            <input type="text" id="children_birth_place" name="birth_place" oninput="validateInput(children_birth_place, 2, true)" onkeypress="validateInput(children_birth_place, 2, true)" onblur="checkErrorMessage(children_birth_place)" required>
             <p class="input_error text-red-600"></p>
             @error('birth_place')
                 <span class="invalid" role="alert">

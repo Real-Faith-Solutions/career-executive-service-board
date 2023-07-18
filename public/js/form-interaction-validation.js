@@ -66,7 +66,7 @@
 // real-time validation
 
     // names input validations
-    function validateInput(inputField, minLength) {
+    function validateInput(inputField, minLength, alphaNumeric) {
         const inputValue = inputField.value;
         const charCode = event.which ? event.which : event.keyCode;
     
@@ -81,7 +81,7 @@
             submitButton.disabled = true;
             submitButton.classList.remove('cursor-pointer');
             submitButton.classList.add('cursor-not-allowed');
-        } else if (inputValue.length < minLength && (charCode >= 48 && charCode <= 57)) {
+        } else if (inputValue.length < minLength && ((charCode >= 48 && charCode <= 57) && !alphaNumeric)) {
             event.preventDefault();
             inputField.nextElementSibling.textContent = `At least ${minLength} characters without numbers.`;
             inputField.classList.remove('focus:outline-blue-600');
@@ -90,7 +90,7 @@
             submitButton.disabled = true;
             submitButton.classList.remove('cursor-pointer');
             submitButton.classList.add('cursor-not-allowed');
-        } else if (charCode >= 48 && charCode <= 57) {
+        } else if ((charCode >= 48 && charCode <= 57) && !alphaNumeric) {
             event.preventDefault();
             inputField.nextElementSibling.textContent = 'Input must not contain numbers.';
         } else {
