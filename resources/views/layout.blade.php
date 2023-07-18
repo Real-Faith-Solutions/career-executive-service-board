@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{ asset('images/alpha_logo.png') }}"/>
+    <link rel="icon" href="{{ asset('images/branding.png') }}"/>
     <title>{{ env('APP_NAME') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -41,7 +41,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion @if (str_contains(Request::url(),'profile/view')) toggled @endif" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ config('app.url') }}admin/dashboard">
                 <div class="sidebar-brand-icon">
-                    <img src={{ asset('images/alpha_logo.png') }} style="height: 50px; width: 50px;" />
+                    <img src={{ asset('images/branding.png') }} style="height: 50px; width: 50px;" />
                 </div>
                 <div class="sidebar-brand-text">
                     <span>

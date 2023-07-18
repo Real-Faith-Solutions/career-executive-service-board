@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('from_dt')->nullable();
             $table->date('to_dt')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

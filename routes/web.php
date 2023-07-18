@@ -4,7 +4,6 @@ use App\Http\Controllers\AddAddress201;
 use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
@@ -25,8 +24,10 @@ use App\Http\Controllers\GenderByBirthController;
 use App\Http\Controllers\GenderByChoiceController;
 use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
+use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
@@ -103,7 +104,19 @@ Route::prefix('201-library')->group(function () {
         Route::resource('religion', ReligionController::class);
     });
 
+    Route::prefix('indigeneous-group')->group(function () {
+        Route::get('recently-deleted', [IndigenousGroupController::class, 'recentlyDeleted'])->name('indigeneous-group-recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [IndigenousGroupController::class, 'forceDelete'])->name('indigeneous-group-forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [IndigenousGroupController::class, 'restore'])->name('indigeneous-group-restore');
+        Route::resource('indigeneous-group', IndigenousGroupController::class);
+    });
 
+    Route::prefix('pwd')->group(function () {
+        Route::get('recently-deleted', [PWDController::class, 'recentlyDeleted'])->name('pwd.recently-deleted');
+        Route::post('recently-deleted/force-delete/{ctrlno}', [PWDController::class, 'forceDelete'])->name('pwd.forceDelete');
+        Route::post('recently-deleted/restore/{ctrlno}', [PWDController::class, 'restore'])->name('pwd.restore');
+        Route::resource('pwd', PWDController::class);
+    });
 });
 
 
@@ -172,12 +185,16 @@ Route::prefix('work-experience')->group(function () {
 });
 
 Route::prefix('award-citation')->group(function () {
+    Route::get('{ctrlno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit');
     Route::post('{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
+    Route::put('{ctrlno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update');
     Route::delete('{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
 });
 
 Route::prefix('affiliation')->group(function () {
+    Route::get('{ctrlno}', [AffiliationController::class, 'edit'])->name('affiliation.edit');
     Route::post('{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+    Route::put('{ctrlno}', [AffiliationController::class, 'update'])->name('affiliation.update');
     Route::delete('{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
 });
 
@@ -192,7 +209,9 @@ Route::prefix('health-record')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
+    Route::get('edit/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::put('update/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
     Route::delete('{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
@@ -203,14 +222,16 @@ Route::prefix('language')->group(function () {
 
 
 Route::prefix('non-accredited-ces-training')->group(function () {
+    Route::get('edit/{ctrlno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
     Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+    Route::put('{ctrlno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
     Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
 });
 
 
 
 // 201 profiling routes
-Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('/add-profile-201');
+Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('add-profile-201');
 Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
 Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('/add-address-permanent-201');
 Route::post('/add-address-mailing-201/{cesno}', [AddAddress201::class, 'addAddressMailing'])->name('/add-address-mailing-201');
