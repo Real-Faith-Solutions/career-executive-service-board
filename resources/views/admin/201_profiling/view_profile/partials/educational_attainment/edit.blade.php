@@ -23,18 +23,38 @@
                             @if ($educationalAttainment->level == "Elementary")
                                 <option value="Elementary" selected>Elementary</option>
                                 <option value="Secondary">Secondary</option>
+                                <option value="College">College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
                                 <option value="Vocation/Trade Course">Vocation/Trade Course</option>    
                             @elseif ($educationalAttainment->level == "Secondary")
                                 <option value="Elementary">Elementary</option>
                                 <option value="Secondary" selected>Secondary</option>
+                                <option value="College">College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
+                                <option value="Vocation/Trade Course">Vocation/Trade Course</option>
+                            @elseif ($educationalAttainment->level == "College")
+                                <option value="Elementary">Elementary</option>
+                                <option value="Secondary">Secondary</option>
+                                <option value="College" selected>College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
+                                <option value="Vocation/Trade Course">Vocation/Trade Course</option>
+                            @elseif ($educationalAttainment->level == "Graduate Studies")
+                                <option value="Elementary">Elementary</option>
+                                <option value="Secondary">Secondary</option>
+                                <option value="College">College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
                                 <option value="Vocation/Trade Course">Vocation/Trade Course</option>
                             @elseif ($educationalAttainment->level == "Vocation/Trade Course")
                                 <option value="Elementary">Elementary</option>
                                 <option value="Secondary">Secondary</option>
+                                <option value="College">College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
                                 <option value="Vocation/Trade Course" selected>Vocation/Trade Course</option>
                             @else
                                 <option value="Elementary">Elementary</option>
                                 <option value="Secondary">Secondary</option>
+                                <option value="College">College</option>
+                                <option value="Graduate Studies">Graduate Studies</option>
                                 <option value="Vocation/Trade Course">Vocation/Trade Course</option>
                             @endif
                         </select>
@@ -195,7 +215,7 @@
 
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
-                        Save changes
+                        Update Changes
                     </button>
                 </div>
             </form>
