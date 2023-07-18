@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             Title::class,
             RecordStatus::class,
             Religion::class,
+            SectorManager::class,
         ]);
 
     }
