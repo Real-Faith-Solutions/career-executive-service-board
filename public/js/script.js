@@ -8091,10 +8091,18 @@ const openFormEligibilityAndRankTracker = () => {
     var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
     var table = document.querySelector('.table-eligibility-and-rank-tracker');
     var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+    var table1 = document.querySelector('.table-eligibility-and-rank-tracker-1');
+    var table2 = document.querySelector('.table-eligibility-and-rank-tracker-2');
+    var table3 = document.querySelector('.table-eligibility-and-rank-tracker-3');
+    var table4 = document.querySelector('.table-eligibility-and-rank-tracker-4');
 
     form.classList.remove('hidden');
     openForm.classList.add('hidden');
     table.classList.add('hidden');
+    table1.classList.add('hidden');
+    table2.classList.add('hidden');
+    table3.classList.add('hidden');
+    table4.classList.add('hidden');
     openTable.classList.remove('hidden');
 }
 
@@ -8103,9 +8111,17 @@ const openTableEligibilityAndRankTracker = () => {
     var openForm = document.querySelector('[onclick="openFormEligibilityAndRankTracker()"]');
     var table = document.querySelector('.table-eligibility-and-rank-tracker');
     var openTable = document.querySelector('[onclick="openTableEligibilityAndRankTracker()"]');
+    var table1 = document.querySelector('.table-eligibility-and-rank-tracker-1');
+    var table2 = document.querySelector('.table-eligibility-and-rank-tracker-2');
+    var table3 = document.querySelector('.table-eligibility-and-rank-tracker-3');
+    var table4 = document.querySelector('.table-eligibility-and-rank-tracker-4');
 
     form.classList.add('hidden');
     openForm.classList.remove('hidden');
     table.classList.remove('hidden');
+    table1.classList.remove('hidden');
+    table2.classList.remove('hidden');
+    table3.classList.remove('hidden');
+    table4.classList.remove('hidden');
     openTable.classList.add('hidden');
 }

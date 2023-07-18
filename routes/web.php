@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -27,11 +28,19 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
+use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
+use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
+use App\Http\Controllers\Plantilla\OfficeManagerController;
+use App\Http\Controllers\Plantilla\PlantillaManagementController;
+use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\SectorManagerController as ControllersSectorManagerController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +67,41 @@ Route::get('/', function () {
     }else{
         return Redirect::to('/admin/dashboard');
     }
+});
+
+Route::prefix('plantilla')->group(function () {
+
+    Route::prefix('plantilla-management')->group(function () {
+        Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
+    });
+
+    Route::prefix('sector-manager')->group(function () {
+        Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
+        Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
+        Route::get('{sector_id}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+        Route::post('{sector_id}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
+        Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
+    });
+
+    Route::prefix('department-agency-manager')->group(function () {
+        Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
+    });
+
+    Route::prefix('agency-location-manager')->group(function () {
+        Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
+    });
+
+    Route::prefix('office-manager')->group(function () {
+        Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+    });
+
+    Route::prefix('plantilla-position-manager')->group(function () {
+        Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+    });
+
+    Route::prefix('appointee-occupant-manager')->group(function () {
+        Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+    });
 });
 
 Route::prefix('201-library')->group(function () {
