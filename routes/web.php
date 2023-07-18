@@ -28,11 +28,13 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
+use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
+use App\Http\Controllers\SectorManagerController as ControllersSectorManagerController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\WorkExperienceController;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +67,10 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('plantilla-management')->group(function () {
         Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
+    });
+
+    Route::prefix('sector-manager')->group(function () {
+        Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
     });
 });
 
