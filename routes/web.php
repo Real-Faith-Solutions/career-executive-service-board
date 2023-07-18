@@ -28,6 +28,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
@@ -77,6 +78,10 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('department-agency-manager')->group(function () {
         Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
+    });
+
+    Route::prefix('agency-location-manager')->group(function () {
+        Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
     });
 });
 
