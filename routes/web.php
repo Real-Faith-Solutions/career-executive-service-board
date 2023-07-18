@@ -218,7 +218,9 @@ Route::prefix('expertise')->group(function () {
 });
 
 Route::prefix('language')->group(function () {
+    Route::get('{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
     Route::post('{cesno}', [LanguageController::class, 'store'])->name('language.store');
+    Route::put('{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
     Route::delete('{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 
