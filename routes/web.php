@@ -77,6 +77,7 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('sector-manager')->group(function () {
         Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
+        Route::get('show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
         Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
         Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
         Route::get('{sector_id}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
@@ -85,9 +86,6 @@ Route::prefix('plantilla')->group(function () {
         Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
         Route::post('{sector_id}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
         Route::post('{sector_id}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
-
-
-
     });
 
     Route::prefix('department-agency-manager')->group(function () {

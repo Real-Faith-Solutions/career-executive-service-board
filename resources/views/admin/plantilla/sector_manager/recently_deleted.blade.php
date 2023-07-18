@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Sector Manager')
-@section('sub', 'Sector Manager')
+@section('title', 'Sector Manager - Recently Deleted')
+@section('sub', 'Sector Manager - Recently Deleted')
 @section('content')
 @include('admin.plantilla.header')
 
@@ -54,7 +54,7 @@
                             </button>
                         </form>
                         <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.forceDelete', $data->sector_id) }}" method="POST">
-                            
+
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
                                 <lord-icon

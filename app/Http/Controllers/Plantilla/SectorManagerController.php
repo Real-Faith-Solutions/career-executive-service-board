@@ -14,6 +14,12 @@ class SectorManagerController extends Controller
         return view ('admin.plantilla.sector_manager.index', compact('datas'));
     }
 
+    public function show(){
+        $datas = SectorManager::orderBy('title', 'ASC')
+        ->paginate(10);
+        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+    }
+
     public function create(){
         return view ('admin.plantilla.sector_manager.create');
     }

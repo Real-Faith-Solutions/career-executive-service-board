@@ -51,14 +51,25 @@
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
-                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sector_id) }}">
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                    trigger="hover"
-                                    colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                    style="width:24px;height:24px">
-                                </lord-icon>
+
+                        <a class="hover:bg-slate-100 rounded-full" href="#">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/hbvgknxo.json"
+                                trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
+                                style="width:24px;height:24px">
+                            </lord-icon>
                         </a>
+
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sector_id) }}">
+                            <lord-icon
+                                src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+
                         <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $data->sector_id) }}" method="POST">
                             @method('DELETE')
                             @csrf
