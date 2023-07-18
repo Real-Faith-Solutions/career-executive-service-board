@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResearchAndStudiesStoreRequest;
 use App\Models\PersonalData;
 use App\Models\ResearchAndStudies;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ResearchAndStudiesController extends Controller
 {
     
-    public function store(ResearchAndStudiesStoreRequest $request, $cesno){
+    public function store(Request $request, $cesno){
+
+        $request->validate([
+
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
+            'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+
+        ]);
 
         $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
@@ -42,7 +53,18 @@ class ResearchAndStudiesController extends Controller
 
     }
 
-    public function update(ResearchAndStudiesStoreRequest $request, $ctrlno){
+    public function update(Request $request, $ctrlno){
+
+        $researchAndStudiesId = ResearchAndStudies::find($ctrlno);
+
+        $request->validate([
+
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch', 'title')->ignore($researchAndStudiesId)],
+            'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+
+        ]);
 
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
         $researchAndStudies->title = $request->title;
