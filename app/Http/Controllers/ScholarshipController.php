@@ -56,6 +56,7 @@ class ScholarshipController extends Controller
 
         $scholarship= Scholarships::find($ctrlno);
         $scholarship->type = $request->type;
+        $scholarship->title = $request->title;
         $scholarship->sponsor = $request->sponsor;
         $scholarship->inclusive_date_from = $request->inclusive_date_from;
         $scholarship->inclusive_date_to = $request->inclusive_date_to;

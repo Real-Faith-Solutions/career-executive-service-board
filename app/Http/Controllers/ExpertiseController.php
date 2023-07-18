@@ -7,6 +7,7 @@ use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblExpertise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ExpertiseController extends Controller
 {
@@ -15,7 +16,7 @@ class ExpertiseController extends Controller
 
         $request->validate([
 
-            'expertise_specialization' => ['required'],
+            'expertise_specialization' => ['required', Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)],
            
         ]);
 
@@ -50,6 +51,8 @@ class ExpertiseController extends Controller
     }
 
     public function update(Request $request, $ctrlno){
+
+        $expertiseId = ProfileTblExpertise::find($ctrlno);
 
         $request->validate([
 
