@@ -199,7 +199,9 @@ Route::prefix('affiliation')->group(function () {
 });
 
 Route::prefix('case-record')->group(function () {
+    Route::get('{ctrlno}', [CaseRecordController::class, 'edit'])->name('case-record.edit');
     Route::post('{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+    Route::put('{ctrlno}', [CaseRecordController::class, 'update'])->name('case-record.update');
     Route::delete('{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
 });
 
