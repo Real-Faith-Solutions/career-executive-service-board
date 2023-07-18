@@ -147,4 +147,50 @@
     }
     // end prevent submission of form if there is an error
 
+    // validate date
+    function validateDateInput(inputDate){
+
+        const inputDateByUSer = inputDate.value;
+
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+        var form = inputDate.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if (!datePattern.test(inputDateByUSer)) {
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return;
+        }
+
+        const inputDateNew = new Date(inputDateByUSer);
+        const currentDate = new Date();
+
+        if(inputDateNew > currentDate){
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return
+        }
+
+        inputDate.nextElementSibling.textContent = '';
+        inputDate.classList.remove('focus:outline-red-500');
+        inputDate.classList.remove('border-red-600');
+        inputDate.classList.add('focus:outline-blue-600');
+        submitButton.disabled = false;
+        submitButton.classList.remove('cursor-not-allowed');
+        submitButton.classList.add('cursor-pointer');
+
+    }
+    // end validate date
+
 // end of real-time validation
