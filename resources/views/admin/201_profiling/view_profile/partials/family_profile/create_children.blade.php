@@ -1,5 +1,4 @@
-
-
+{{-- children details --}}
 <form action="{{ route('family-profile-children.store', ['cesno' => $mainProfile->cesno]) }}" id="family_profile_children" method="POST" onsubmit="return checkErrorsBeforeSubmit(family_profile_children)">
     @csrf
 
@@ -8,7 +7,7 @@
         <div class="mb-3">
             <label for="last_name">Last Name<sup>*</sup></label>
             <input type="text" id="children_last_name" name="last_name" oninput="validateInput(children_last_name, 2)" onkeypress="validateInput(children_last_name, 2)" onblur="checkErrorMessage(children_last_name)" required>
-            <p class="input_error text-red-600" id="ErrorMessageChildrenLastName"></p>
+            <p class="input_error text-red-600"></p>
             @error('last_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -21,7 +20,7 @@
         <div class="mb-3">
             <label for="first_name">First Name<sup>*</span></label>
             <input type="text" id="children_first_name" name="first_name" oninput="validateInput(children_first_name, 2)" onkeypress="validateInput(children_first_name, 2)" onblur="checkErrorMessage(children_first_name)" required>
-            <p class="input_error text-red-600" id="ErrorMessageChildrenFirstName"></p>
+            <p class="input_error text-red-600"></p>
             @error('first_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -31,7 +30,7 @@
 
         <div class="mb-3">
             <label for="middle_name">Middle Name</label>
-            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 2)" onkeypress="validateInput(children_middle_name, 2)" onblur="checkErrorMessage(children_middle_name)">
+            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 0)" onkeypress="validateInput(children_middle_name, 0)" onblur="checkErrorMessage(children_middle_name)">
             <p class="input_error text-red-600"></p>
             @error('middle_name')
                 <span class="invalid" role="alert">

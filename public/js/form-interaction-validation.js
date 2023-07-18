@@ -9,6 +9,7 @@
             age--;
         }
         document.getElementById('age').value = age;
+        return age;
     }
 
     function generateMiddleInitial() {
@@ -148,7 +149,7 @@
     // end prevent submission of form if there is an error
 
     // validate date
-    function validateDateInput(inputDate){
+    function validateDateInput(inputDate, minAge = 0){
 
         const inputDateByUSer = inputDate.value;
 
@@ -172,6 +173,19 @@
         const currentDate = new Date();
 
         if(inputDateNew > currentDate){
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return
+        }
+
+        let userAge = computeAge();
+
+        if(userAge < minAge){
             inputDate.nextElementSibling.textContent = `Invalid date.`;
             inputDate.classList.remove('focus:outline-blue-600');
             inputDate.classList.add('border-red-600');

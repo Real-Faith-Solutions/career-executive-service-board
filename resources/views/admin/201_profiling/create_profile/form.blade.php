@@ -106,8 +106,8 @@
 
             <div class="mb-3">
                 <label for="birthdate">Birthdate<sup>*</sup></label>
-                <input id="birthdate" name="birthdate" onchange="computeAge()" required type="date">
-
+                <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" required>
+                <p class="input_error text-red-600"></p>
             </div>
             <div class="mb-3">
 
