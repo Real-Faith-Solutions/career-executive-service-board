@@ -50,7 +50,7 @@
                                     style="width:24px;height:24px">
                                 </lord-icon>
                         </a>
-                        <form class="hover:bg-slate-100 rounded-full" action="#" method="POST">
+                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $datas->sector_id) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
