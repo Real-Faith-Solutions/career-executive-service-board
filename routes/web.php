@@ -144,9 +144,11 @@ Route::prefix('family-profile')->group(function () {
     });
 });
 
-Route::prefix('personal-data')->group(function () {
-    Route::post('store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
-    Route::delete('destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+Route::prefix('identification/card')->group(function () {
+    Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
+    Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
+    Route::put('update/{ctrlno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
+    Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 });
 
 Route::prefix('educational-attainment')->group(function () {

@@ -38,7 +38,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a>
+                            <form action="{{ route('personal-data-identification.edit', ['ctrlno'=>$newIdentification->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
                         
                             <form action="{{ route('personal-data-identification.destroy', ['ctrlno'=>$newIdentification->ctrlno]) }}" method="POST">
                                 @csrf

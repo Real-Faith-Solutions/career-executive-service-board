@@ -40,6 +40,31 @@ class IdentificationController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $identification = Identification::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.identification.edit', ['identification'=>$identification]) ;
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'type' => ['required'],
+            'identification_id' => ['required', 'min:2', 'max:40'],
+            
+        ]);
+
+         $identification = Identification::find($ctrlno);
+         $identification->type = $request->type;
+         $identification->id_number = $request->identification_id;
+         $identification->save();
+ 
+         return back()->with('message', 'Updated Sucessfully');
+        
+    }
+
     public function destroyIdentification($ctrlno){
         
         $spouse = Identification::find($ctrlno);
