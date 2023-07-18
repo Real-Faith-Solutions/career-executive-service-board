@@ -6,6 +6,7 @@ use App\Models\PersonalData;
 use App\Models\ProfileTblWorkExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class WorkExperienceController extends Controller
 {
@@ -16,7 +17,7 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'position_or_title' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)],
             'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
@@ -35,7 +36,7 @@ class WorkExperienceController extends Controller
 
             'from_dt' => $request->inclusive_date_from,
             'to_dt' => $request->inclusive_date_to,
-            'designation' => $request->position_or_title,
+            'designation' => $request->designation,
             'status' => $request->status_of_appointment,
             'monthly_salary' => $request->monthly_salary,
             'salary' => $request->salary,
@@ -63,11 +64,13 @@ class WorkExperienceController extends Controller
 
     public function update(Request $request, $ctrlno){
 
+        $workExperienceId = ProfileTblWorkExperience::find($ctrlno);
+
         $request->validate([
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'position_or_title' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblWorkExperience', 'designation')->ignore($workExperienceId)],
             'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
@@ -81,6 +84,7 @@ class WorkExperienceController extends Controller
         $workExperience->from_dt = $request->inclusive_date_from;
         $workExperience->to_dt = $request->inclusive_date_to;
         $workExperience->status = $request->status_of_appointment;
+        $workExperience->designation = $request->designation;
         $workExperience->monthly_salary = $request->monthly_salary;
         $workExperience->salary = $request->salary;
         $workExperience->department = $request->department_or_agency;

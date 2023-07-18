@@ -16,7 +16,7 @@ class ResearchAndStudiesController extends Controller
 
         $request->validate([
 
-            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
             'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
