@@ -29,6 +29,15 @@ class ScholarshipController extends Controller
          
         ]);
 
+        if(Scholarships::where('personal_data_cesno', $cesno)
+        ->where('personal_data_cesno', $cesno)
+        ->where('title', $request->title)
+        ->exists()){
+            
+            return back()->with('error', 'Already Have Title Detail');
+
+        }
+
         $scholarshipPersonalDataId = PersonalData::find($cesno);
 
         $scholarshipPersonalDataId->scholarships()->save($scholarship);

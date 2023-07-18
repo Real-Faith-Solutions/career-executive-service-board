@@ -18,7 +18,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="type">Type of Examination<sup>*</sup></label>
-                        <select id="type" name="type" required>
+                        <input id="rating" name="rating" type="text" value="{{ $examinationTaken->type }}" readonly>
+                        {{-- <select id="type" name="type" required>
                             <option disabled selected>Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
                                 @if ($profileLibTblExamRefs->TITLE == $examinationTaken->type)
@@ -27,7 +28,7 @@
                                     <option value="{{ $profileLibTblExamRefs->TITLE }}">{{ $profileLibTblExamRefs->TITLE }}</option>s
                                 @endif
                             @endforeach
-                        </select>
+                        </select> --}}
                         @error('type')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
