@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\PWDController;
@@ -71,6 +73,10 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('sector-manager')->group(function () {
         Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
+    });
+
+    Route::prefix('department-agency-manager')->group(function () {
+        Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
     });
 });
 
