@@ -29,9 +29,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="identification_id">Identification ID</label>
-                        <input id="identification_id" name="identification_id" type="text">
-                        @error('identification_id')
+                        <label for="id_number">Identification ID</label>
+                        <input id="id_number" name="id_number" type="text">
+                        @error('id_number')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

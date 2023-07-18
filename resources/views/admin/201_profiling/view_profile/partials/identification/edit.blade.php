@@ -18,11 +18,12 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="type">Type<sup>*</sup></label>
-                        <select id="type" name="type" required>
+                        <input id="type" name="type" value="{{ $identification->type }}" type="text" readonly>
+                        {{-- <select id="type" name="type" required @readonly(true)>
                             <option disabled selected>Select type</option>
                             <option value="GSIS" {{ $identification->type == 'GSIS' ? 'selected' : '' }}>GSIS</option>
                             <option value="PAG-IBIG" {{ $identification->type == 'PAG-IBIG' ? 'selected' : '' }}>PAG-IBIG</option>
-                        </select>
+                        </select> --}}
                         @error('type')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -34,9 +35,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="identification_id">Identification ID</label>
-                        <input id="identification_id" name="identification_id" value="{{ $identification->id_number }}" type="text">
-                        @error('identification_id')
+                        <label for="id_number">Identification ID</label>
+                        <input id="id_number" name="id_number" value="{{ $identification->id_number }}" type="text">
+                        @error('id_number')
                              <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -53,6 +54,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection
