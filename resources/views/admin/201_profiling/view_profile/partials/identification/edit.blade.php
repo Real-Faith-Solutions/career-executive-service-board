@@ -1,23 +1,29 @@
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
+@section('content')
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form Identification
+              Update Form Identification
             </h1>
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('personal-data-identification.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('personal-data-identification.update', ['ctrlno'=>$identification->ctrlno]) }}" method="POST">
                 @csrf
+                @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="type">Type<sup>*</sup></label>
-                        <select id="type" name="type" required>
+                        <input id="type" name="type" value="{{ $identification->type }}" type="text" readonly>
+                        {{-- <select id="type" name="type" required @readonly(true)>
                             <option disabled selected>Select type</option>
-                            <option value="GSIS">GSIS</option>
-                            <option value="PAG-IBIG">PAG-IBIG</option>
-                        </select>
+                            <option value="GSIS" {{ $identification->type == 'GSIS' ? 'selected' : '' }}>GSIS</option>
+                            <option value="PAG-IBIG" {{ $identification->type == 'PAG-IBIG' ? 'selected' : '' }}>PAG-IBIG</option>
+                        </select> --}}
                         @error('type')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -30,9 +36,9 @@
 
                     <div class="mb-3">
                         <label for="id_number">Identification ID</label>
-                        <input id="id_number" name="id_number" type="text">
+                        <input id="id_number" name="id_number" value="{{ $identification->id_number }}" type="text">
                         @error('id_number')
-                            <span class="invalid" role="alert">
+                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
@@ -41,10 +47,12 @@
 
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
-                        Save changes
+                        Update Changes
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@endsection

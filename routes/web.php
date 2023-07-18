@@ -77,10 +77,15 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('sector-manager')->group(function () {
         Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
+        Route::get('show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
         Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
+        Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
         Route::get('{sector_id}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
         Route::post('{sector_id}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
-        Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
+        Route::delete('{sector_id}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
+        Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
+        Route::post('{sector_id}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
+        Route::post('{sector_id}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
     });
 
     Route::prefix('department-agency-manager')->group(function () {
@@ -188,9 +193,11 @@ Route::prefix('family-profile')->group(function () {
     });
 });
 
-Route::prefix('personal-data')->group(function () {
-    Route::post('store/identification/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
-    Route::delete('destroy/identification/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+Route::prefix('identification/card')->group(function () {
+    Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
+    Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
+    Route::put('update/{ctrlno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
+    Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 });
 
 Route::prefix('educational-attainment')->group(function () {
@@ -243,7 +250,9 @@ Route::prefix('affiliation')->group(function () {
 });
 
 Route::prefix('case-record')->group(function () {
+    Route::get('{ctrlno}', [CaseRecordController::class, 'edit'])->name('case-record.edit');
     Route::post('{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+    Route::put('{ctrlno}', [CaseRecordController::class, 'update'])->name('case-record.update');
     Route::delete('{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
 });
 
@@ -260,7 +269,9 @@ Route::prefix('expertise')->group(function () {
 });
 
 Route::prefix('language')->group(function () {
+    Route::get('{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
     Route::post('{cesno}', [LanguageController::class, 'store'])->name('language.store');
+    Route::put('{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
     Route::delete('{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 

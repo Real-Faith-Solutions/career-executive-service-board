@@ -6,6 +6,7 @@ use App\Models\Identification;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class IdentificationController extends Controller
 {
@@ -14,9 +15,9 @@ class IdentificationController extends Controller
 
         $request->validate([
 
-            'type' => ['required'],
-            'identification_id' => ['required', 'min:2', 'max:40'],
-            
+            'type' => ['required', Rule::unique('identifications')->where('personal_data_cesno', $cesno)],
+            'id_number' => ['required', 'unique:identifications,id_number', 'min:2', 'max:40'],
+        
         ]);
 
         $userLastName = Auth::user()->last_name;
@@ -27,7 +28,7 @@ class IdentificationController extends Controller
         $identification = new Identification([
 
             'type' => $request->type,
-            'id_number' => $request->identification_id,
+            'id_number' => $request->id_number,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
         ]);
@@ -38,6 +39,33 @@ class IdentificationController extends Controller
 
         return redirect()->back()->with('message', 'Successfuly Saved');
 
+    }
+
+    public function edit($ctrlno){
+
+        $identification = Identification::find($ctrlno);
+        return view('admin.201_profiling.view_profile.partials.identification.edit', ['identification'=>$identification]) ;
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $identifications = Identification::find($ctrlno);
+
+        $request->validate([
+
+            'type' => ['required'],
+            'id_number' => ['required', 'min:2', 'max:40',  Rule::unique('identifications', 'id_number')->ignore($identifications)],
+            
+        ]);
+
+         $identification = Identification::find($ctrlno);
+         $identification->type = $request->type;
+         $identification->id_number = $request->id_number;
+         $identification->save();
+ 
+         return back()->with('message', 'Updated Sucessfully');
+        
     }
 
     public function destroyIdentification($ctrlno){

@@ -7,6 +7,7 @@ use App\Models\PersonalData;
 use App\Models\ProfileLibTblExamRef;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ExaminationTakenController extends Controller
 {
@@ -15,7 +16,7 @@ class ExaminationTakenController extends Controller
 
         $request->validate([
 
-            'type' => ['required'],
+            'type' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)],
             'rating' => ['required', 'min:2', 'max:40'],
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],

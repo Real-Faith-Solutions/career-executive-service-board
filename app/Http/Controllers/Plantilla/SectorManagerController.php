@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 class SectorManagerController extends Controller
 {
     public function index(){
-        $data = SectorManager::orderBy('title', 'ASC')
+        $datas = SectorManager::orderBy('title', 'ASC')
         ->paginate(10);
-        return view ('admin.plantilla.sector_manager.index', compact('data'));
+        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+    }
+
+    public function show(){
+        $datas = SectorManager::orderBy('title', 'ASC')
+        ->paginate(10);
+        return view ('admin.plantilla.sector_manager.index', compact('datas'));
     }
 
     public function create(){
@@ -28,8 +34,8 @@ class SectorManagerController extends Controller
     }
     // ui for edit
     public function edit($sector_id){
-        $data = SectorManager::withTrashed()->findOrFail($sector_id);
-        return view('admin.plantilla.sector_manager.edit', compact('data'));
+        $datas = SectorManager::withTrashed()->findOrFail($sector_id);
+        return view('admin.plantilla.sector_manager.edit', compact('datas'));
     }
 
     public function update(Request $request, $sector_id){
@@ -38,8 +44,8 @@ class SectorManagerController extends Controller
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
         ]);
 
-        $data = SectorManager::withTrashed()->findOrFail($sector_id);
-        $data->update($request->all());
+        $datas = SectorManager::withTrashed()->findOrFail($sector_id);
+        $datas->update($request->all());
 
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully updated!');
     }
@@ -49,29 +55,29 @@ class SectorManagerController extends Controller
         $datas = SectorManager::onlyTrashed()
         ->orderByDesc('deleted_at')
         ->paginate(10);
-        return view('admin.201_library.title.recently_deleted', compact('datas'));
+        return view('admin.plantilla.sector_manager.recently_deleted', compact('datas'));
     }
 
     // restore
     public function restore($sector_id){
-        $data = SectorManager::onlyTrashed()->findOrFail($sector_id);
-        $data->restore();
+        $datas = SectorManager::onlyTrashed()->findOrFail($sector_id);
+        $datas->restore();
 
         return redirect()->back()->with('message', 'The item has been successfully restore!');
     }
 
     // soft delete
     public function destroy($sector_id){
-        $data = SectorManager::findOrFail($sector_id);
-        $data->delete();
+        $datas = SectorManager::findOrFail($sector_id);
+        $datas->delete();
 
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // force delete
     public function forceDelete($sector_id){
-        $data = SectorManager::onlyTrashed()->findOrFail($sector_id);
-        $data->forceDelete();
+        $datas = SectorManager::onlyTrashed()->findOrFail($sector_id);
+        $datas->forceDelete();
 
         return redirect()->back()->with('message', 'The item has been successfully deleted!');
     }

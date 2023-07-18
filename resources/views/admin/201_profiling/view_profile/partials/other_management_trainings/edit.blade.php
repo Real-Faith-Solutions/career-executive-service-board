@@ -17,9 +17,9 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="training_title">Training Title<sup>*</sup></label>
-                        <input id="training_title" name="training_title" value="{{ $otherManagementTraining->training }}" required type="text">
-                        @error('training_title')
+                        <label for="training">Training Title<sup>*</sup></label>
+                        <input id="training" name="training" value="{{ $otherManagementTraining->training }}" required type="text">
+                        @error('training')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

@@ -34,9 +34,9 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="position_or_title">Position Title / Designation<sup>*</span></label>
-                        <input id="position_or_title" name="position_or_title" type="text" required>
-                        @error('position_or_title')
+                        <label for="designation">Position Title / Designation<sup>*</span></label>
+                        <input id="designation" name="designation" type="text" required>
+                        @error('designation')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

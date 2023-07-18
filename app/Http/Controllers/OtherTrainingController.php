@@ -8,6 +8,7 @@ use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class OtherTrainingController extends Controller
 {
@@ -16,7 +17,7 @@ class OtherTrainingController extends Controller
 
         $request->validate([ 
 
-            'training_title' => ['required'],
+            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -34,7 +35,7 @@ class OtherTrainingController extends Controller
 
         $otherTraining = new ProfileTblTrainingMngt([
 
-            'training' => $request->training_title,
+            'training' => $request->training,
             'training_category' => $request->training_category,
             'sponsor' => $request->sponsor_training_provider,
             'venue' => $request->venue,
@@ -68,7 +69,7 @@ class OtherTrainingController extends Controller
 
         $request->validate([ 
 
-            'training_title' => ['required'],
+            'training' => ['required'],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -80,7 +81,7 @@ class OtherTrainingController extends Controller
         ]);
 
         $trainingManagement = ProfileTblTrainingMngt::find($ctrlno);
-        $trainingManagement->training = $request->training_title;
+        $trainingManagement->training = $request->training;
         $trainingManagement->training_category = $request->training_category;
         $trainingManagement->sponsor = $request->sponsor_training_provider;
         $trainingManagement->venue = $request->venue;

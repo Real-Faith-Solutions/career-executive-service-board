@@ -17,14 +17,14 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('sector-manager.update', $data->sector_id) }}" method="POST">
+            <form action="{{ route('sector-manager.update', $datas->sector_id) }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="encoder" value="{{ Auth::user()->last_name}} {{ Auth::user()->first_name}} {{ Auth::user()->middle_name}}" readonly>
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="title">Sector name<sup>*</span></label>
-                        <input id="title" name="title" type="text" value="{{ $data->title }}" required>
+                        <input id="title" name="title" type="text" value="{{ $datas->title }}" required>
                         @error('title')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -34,7 +34,7 @@
 
                     <div class="mb-3">
                         <label for="description">Description<sup>*</span></label>
-                            <textarea name="description" id="description" placeholder="Write your thoughts here..." required>{{ $data->description }}</textarea>
+                            <textarea name="description" id="description" placeholder="Write your thoughts here..." required>{{ $datas->description }}</textarea>
                         @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
