@@ -32,6 +32,7 @@ use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
+use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
@@ -87,6 +88,10 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('office-manager')->group(function () {
         Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+    });
+
+    Route::prefix('plantilla-position-manager')->group(function () {
+        Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
     });
 });
 
