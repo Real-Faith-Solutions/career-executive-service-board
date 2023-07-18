@@ -5,7 +5,7 @@
         <h1>Personal data</h1>
     </div>
 
-    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST">
+    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(personal_data)">
 
         @csrf
 
@@ -58,14 +58,14 @@
 
             <div class="mb-3">
                 <label for="lastname">Lastname<sup>*</sup></label>
-                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}">
-                <p class="personal_data_error text-red-600" id="ErrorMessageLastName"></p>
+                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2)" onkeypress="validateInput(lastname, 2)" onblur="checkErrorMessage(lastname)">
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
                 <label for="firstname">Firstname<sup>*</sup></label>
-                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}">
-                <p class="personal_data_error text-red-600" id="ErrorMessageFirstname"></p>
+                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}" oninput="validateInput(firstname, 2)" onkeypress="validateInput(firstname, 2)" onblur="checkErrorMessage(firstname)">
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
@@ -85,8 +85,8 @@
 
             <div class="mb-3">
                 <label for="middlename">Middlename<sup>*</sup></label>
-                <input class="personal_data_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text">
-                <p class="text-red-600" id="ErrorMessageMiddlename"></p>
+                <input class="input_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2)" onkeypress="validateInput(middlename, 2)" onblur="checkErrorMessage(middlename)">
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
@@ -98,8 +98,8 @@
 
             <div class="mb-3">
                 <label for="nickname">Nickname</label>
-                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}">
-                <p class="text-red-600" id="ErrorMessageNickname"></p>
+                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0)" onkeypress="validateInput(nickname, 0)" onblur="checkErrorMessage(nickname)">
+                <p class="input_error text-red-600""></p>
             </div>
         </div>
 

@@ -65,98 +65,7 @@
 
 // real-time validation
 
-    // initializing personal_data_form and its inputs
-    const personal_data_form = document.getElementById('personal_data');
-    const inputFieldLastName = document.getElementById('lastname');
-    const ErrorMessageLastName = document.getElementById('ErrorMessageLastName');
-    const inputFieldFirstname = document.getElementById('firstname');
-    const ErrorMessageFirstname = document.getElementById('ErrorMessageFirstname');
-    const inputFieldMiddlename = document.getElementById('middlename');
-    const ErrorMessageMiddlename = document.getElementById('ErrorMessageMiddlename');
-    const inputFieldNickname = document.getElementById('nickname');
-    const ErrorMessageNickname = document.getElementById('ErrorMessageNickname');
-
-    // initializing family profile form and its inputs
-    const family_profile_children_form = document.getElementById('family-profile-children');
-    const children_last_name = document.getElementById('children_last_name');
-    const ErrorMessageChildrenLastName = document.getElementById('ErrorMessageChildrenLastName');
-    const children_first_name = document.getElementById('children_first_name');
-    const ErrorMessageChildrenFirstName = document.getElementById('ErrorMessageChildrenFirstName');
-    const children_middle_name = document.getElementById('children_middle_name');
-    const ErrorMessageChildrenMiddleName = document.getElementById('ErrorMessageChildrenMiddleName');
-
-    // assigning event listeners on each input
-    inputFieldLastName.addEventListener('input', function() {validateInput(inputFieldLastName, 2);});
-    inputFieldLastName.addEventListener('keypress', function() {validateInput(inputFieldLastName, 2);});
-    inputFieldFirstname.addEventListener('input', function() {validateInput(inputFieldFirstname, 2);});
-    inputFieldFirstname.addEventListener('keypress', function() {validateInput(inputFieldFirstname, 2);});
-    inputFieldMiddlename.addEventListener('input', function() {validateInput(inputFieldMiddlename, 2);});
-    inputFieldMiddlename.addEventListener('keypress', function() {validateInput(inputFieldMiddlename, 2);});
-    inputFieldNickname.addEventListener('input', function() {validateInput(inputFieldNickname, 0);});
-    inputFieldNickname.addEventListener('keypress', function() {validateInput(inputFieldNickname, 0);});
-
-    children_last_name.addEventListener('input', function() {validateInput(children_last_name, 2);});
-    children_last_name.addEventListener('keypress', function() {validateInput(children_last_name, 2);});
-    children_first_name.addEventListener('input', function() {validateInput(children_first_name, 2);});
-    children_first_name.addEventListener('keypress', function() {validateInput(children_first_name, 2);});
-    children_middle_name.addEventListener('input', function() {validateInput(children_middle_name, 2);});
-    children_middle_name.addEventListener('keypress', function() {validateInput(children_middle_name, 2);});
-
-    // functions for disabling and enabling personal_data_form submission
-    let personal_data_errors = document.querySelectorAll('.personal_data_error');
-    let family_profile_children_error = document.querySelectorAll('.family_profile_children_error');
-
-    personal_data_form.addEventListener('submit', function(event) {
-        for (let i = 0; i < personal_data_errors.length; i++) {
-            if (personal_data_errors[i].textContent != '') {
-                event.preventDefault();
-                break;
-            }
-        }
-    });
-
-    family_profile_children_form.addEventListener('submit', function(event) {
-        for (let i = 0; i < family_profile_children_error.length; i++) {
-            if (family_profile_children_error[i].textContent != '') {
-                event.preventDefault();
-                break;
-            }
-        }
-    });
-
-    // end
-
-    // Add click event listener to the document body
-    document.body.addEventListener('click', function(event) {
-        // Check if the clicked element is the input field
-        if (event.target !== inputFieldLastName) {
-            if(ErrorMessageLastName.textContent == 'Input must not contain numbers.'){
-                ErrorMessageLastName.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldFirstname) {
-            if(ErrorMessageFirstname.textContent == 'Input must not contain numbers.'){
-                ErrorMessageFirstname.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldMiddlename) {
-            if(ErrorMessageMiddlename.textContent == 'Input must not contain numbers.'){
-                ErrorMessageMiddlename.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldNickname) {
-            if(ErrorMessageNickname.textContent == 'Input must not contain numbers.'){
-                ErrorMessageNickname.textContent = '';
-            }
-        }
-      });
-
-    // end of Add click event listener to the document body
-
-    // last/first/middle/nickname validations
+    // names input validations
     function validateInput(inputField, minLength) {
         const inputValue = inputField.value;
         const charCode = event.which ? event.which : event.keyCode;
@@ -189,11 +98,53 @@
             inputField.classList.remove('focus:outline-red-500');
             inputField.classList.remove('border-red-600');
             inputField.classList.add('focus:outline-blue-600');
-            submitButton.disabled = false;
-            submitButton.classList.remove('cursor-not-allowed');
-            submitButton.classList.add('cursor-pointer');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
         }
     }
-    // last/first/middle/nickname validations
+    // end names input validations
+
+    // when not focus on current input field
+    function checkErrorMessage(inputField) {
+
+        const inputValue = inputField.value;
+        let errorMessage = inputField.nextElementSibling.textContent;
+
+        if (errorMessage == 'Input must not contain numbers.') {
+            inputField.nextElementSibling.textContent = '';
+        } 
+
+    }
+    // end when not focus on current input field
+
+    // prevent submission of form if there is an error
+    function checkErrorsBeforeSubmit(currentForm){
+
+        const errorClass = currentForm.querySelectorAll('.input_error');
+        
+        for (const error of errorClass) {
+            if (error.textContent != "") {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+    // end prevent submission of form if there is an error
 
 // end of real-time validation
