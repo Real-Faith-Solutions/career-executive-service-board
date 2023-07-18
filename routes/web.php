@@ -27,6 +27,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
@@ -58,6 +59,13 @@ Route::get('/', function () {
     }else{
         return Redirect::to('/admin/dashboard');
     }
+});
+
+Route::prefix('plantilla')->group(function () {
+
+    Route::prefix('plantilla-management')->group(function () {
+        Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
+    });
 });
 
 Route::prefix('201-library')->group(function () {
