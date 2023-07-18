@@ -17,6 +17,8 @@
                             <option disabled selected>Select Level</option>
                             <option value="Elementary">Elementary</option>
                             <option value="Secondary">Secondary</option>
+                            <option value="College">College</option>
+                            <option value="Graduate Studies">Graduate Studies</option>
                             <option value="Vocation/Trade Course">Vocation/Trade Course</option>
                         </select>
                         @error('level')
