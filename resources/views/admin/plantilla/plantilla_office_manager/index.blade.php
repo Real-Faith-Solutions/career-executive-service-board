@@ -13,37 +13,46 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Office ID
+                    Plantilla ID
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office
+                    Plantilla Position
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Acronym
+                    Sallary Grade
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Website
+                    Plantilla Position Suffix
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Contact No.
+                    DBM Posstion Title
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Email Address
+                    Functional Position Title
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Status
+                    Plantilla Position DBM Item No.
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Floor / bldg.
+                    CES Position
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    No. / Street
+                    Presidential Appointee
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Brgy. / District
+                    Position Status
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    City / Municipality
+                    Remarks
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Position Classification Bases
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Position Classification Title
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Position Classification Remarks / Notes
                 </th>
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
@@ -86,7 +95,16 @@
                 <td class="px-6 py-3">
                     -
                 </td>
-                
+                <td class="px-6 py-3">
+                    -
+                </td>
+                <td class="px-6 py-3">
+                    -
+                </td>
+                <td class="px-6 py-3">
+                    -
+                </td>
+
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
