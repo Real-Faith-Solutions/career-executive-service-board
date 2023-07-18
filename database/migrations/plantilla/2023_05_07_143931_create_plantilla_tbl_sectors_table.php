@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plantilla_tbl_sectors', function (Blueprint $table) {
             $table->id('sector_id');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('encoder');
             $table->softDeletes();
             $table->timestamps();

@@ -78,6 +78,8 @@ Route::prefix('plantilla')->group(function () {
     Route::prefix('sector-manager')->group(function () {
         Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
         Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
+        Route::get('{sector_id}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+        Route::post('{sector_id}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
         Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
     });
 

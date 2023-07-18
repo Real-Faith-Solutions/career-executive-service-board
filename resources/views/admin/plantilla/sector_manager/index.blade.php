@@ -28,21 +28,21 @@
         </thead>
         <tbody>
 
-            @foreach ($datas as $data)
+            @foreach ($data as $datas)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{$data->sector_id}}
+                    {{$datas->sector_id}}
                 </td>
                 <td class="px-6 py-3">
-                    {{$data->title}}
+                    {{$datas->title}}
                 </td>
                 <td class="px-6 py-3">
-                    {{$data->description}}
+                    {{$datas->description}}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
-                        <a class="hover:bg-slate-100 rounded-full" href="#">
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $datas->sector_id) }}">
                                 <lord-icon
                                     src="https://cdn.lordicon.com/bxxnzvfm.json"
                                     trigger="hover"

@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 class SectorManagerController extends Controller
 {
     public function index(){
-        $datas = SectorManager::paginate(10);
-        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+        $data = SectorManager::orderBy('title', 'ASC')
+        ->paginate(10);
+        return view ('admin.plantilla.sector_manager.index', compact('data'));
     }
 
     public function create(){
@@ -26,17 +27,18 @@ class SectorManagerController extends Controller
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully added!');
     }
     // ui for edit
-    public function edit($ctrlno){
-        $data = SectorManager::withTrashed()->findOrFail($ctrlno);
-        return view('admin.201_library.title.edit', compact('data'));
+    public function edit($sector_id){
+        $data = SectorManager::withTrashed()->findOrFail($sector_id);
+        return view('admin.plantilla.sector_manager.edit', compact('data'));
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $sector_id){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tbl_sectors'],
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tbl_sectors'],
+            'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
         ]);
 
-        $data = SectorManager::withTrashed()->findOrFail($ctrlno);
+        $data = SectorManager::withTrashed()->findOrFail($sector_id);
         $data->update($request->all());
 
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully updated!');
@@ -51,24 +53,24 @@ class SectorManagerController extends Controller
     }
 
     // restore
-    public function restore($ctrlno){
-        $data = SectorManager::onlyTrashed()->findOrFail($ctrlno);
+    public function restore($sector_id){
+        $data = SectorManager::onlyTrashed()->findOrFail($sector_id);
         $data->restore();
 
         return redirect()->back()->with('message', 'The item has been successfully restore!');
     }
 
     // soft delete
-    public function destroy($ctrlno){
-        $data = SectorManager::findOrFail($ctrlno);
+    public function destroy($sector_id){
+        $data = SectorManager::findOrFail($sector_id);
         $data->delete();
 
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // force delete
-    public function forceDelete($ctrlno){
-        $data = SectorManager::onlyTrashed()->findOrFail($ctrlno);
+    public function forceDelete($sector_id){
+        $data = SectorManager::onlyTrashed()->findOrFail($sector_id);
         $data->forceDelete();
 
         return redirect()->back()->with('message', 'The item has been successfully deleted!');
