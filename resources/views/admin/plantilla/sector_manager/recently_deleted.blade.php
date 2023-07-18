@@ -22,6 +22,9 @@
                     Description
                 </th>
                 <th class="px-6 py-3" scope="col">
+                    Deleted at
+                </th>
+                <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
@@ -38,6 +41,9 @@
                 </td>
                 <td class="px-6 py-3">
                     {{$data->description}}
+                </td>
+                <td class="px-6 py-3">
+                    {{$data->deleted_at}}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
