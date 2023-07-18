@@ -29,6 +29,7 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
+use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
@@ -92,6 +93,10 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('plantilla-position-manager')->group(function () {
         Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+    });
+
+    Route::prefix('appointee-occupant-manager')->group(function () {
+        Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
     });
 });
 
