@@ -5,7 +5,7 @@
 @include('admin.plantilla.header')
 
 <div class="my-5 flex justify-end gap-4">
-    <a class="btn btn-primary" href="#">Add record</a>
+    <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -28,15 +28,16 @@
         </thead>
         <tbody>
 
+            @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    -
+                    {{$data->sector_id}}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{$data->title}}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{$data->description}}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
@@ -64,6 +65,8 @@
                     </div>
                 </td>
             </tr>
+
+            @endforeach
 
         </tbody>
     </table>

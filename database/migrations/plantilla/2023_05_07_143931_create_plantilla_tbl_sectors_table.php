@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_tbl_sectors', function (Blueprint $table) {
-            $table->id();
-            $table->string('sectorid')->nullable();
-            $table->string('title')->nullable();
-            $table->string('description')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_date')->nullable();
-            $table->string('encoder')->nullable();
+            $table->id('sector_id');
+            $table->string('title');
+            $table->string('description');
+            $table->string('encoder');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
