@@ -56,6 +56,48 @@ class CaseRecordController extends Controller
 
     }
 
+    public function edit($ctrlno){
+
+        $caseRecord = CaseRecords::find($ctrlno);
+
+        return view('admin.201_profiling.view_profile.partials.case_records.edit', ['caseRecord'=>$caseRecord]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'nature_of_offense' => ['required'],
+            'case_number' => ['required'],
+            'date_filed' => ['required'],
+            'venue' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'case_status' => ['required'],
+            'date_finality' => ['required'],
+            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            
+        ]);
+
+        $caseRecord = CaseRecords::find($ctrlno);
+        $caseRecord->parties = $request->parties;
+        $caseRecord->offence = $request->offense;
+        $caseRecord->nature_code = $request->nature_of_offense;
+        $caseRecord->case_no = $request->case_number;
+        $caseRecord->filed_date = $request->date_filed;
+        $caseRecord->venue = $request->venue;
+        $caseRecord->status_code = $request->case_status;
+        $caseRecord->finality = $request->date_finality;
+        $caseRecord->decision = $request->decision;
+        $caseRecord->remarks = $request->remarks;
+        $caseRecord->save();
+
+        return back()->with('message', 'Updated Sucessfully');
+
+    }
+
     public function destroy($ctrlno){
         
         $caseRecord = CaseRecords::find($ctrlno);
