@@ -30,7 +30,12 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('language.edit', ['ctrlno'=>$languages->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                   UPDATE
+                                </button>
+                            </form>
 
                             <form action="{{ route('language.destroy', ['ctrlno'=>$languages->ctrlno]) }}" method="POST">
                                 @csrf

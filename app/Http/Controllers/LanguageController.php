@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblLanguageRef;
 use App\Models\ProfileTblLanguages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,31 @@ class LanguageController extends Controller
             
         return redirect()->back()->with('message', 'Successfuly Saved');
 
+    }
+
+    public function edit($ctrlno){
+
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', 
+        ['profileTblLanguages'=>$profileTblLanguages, 'profileLibTblLanguageRef'=>$profileLibTblLanguageRef]);
+
+    }
+
+    public function update(Request $request, $ctrlno){
+
+        $request->validate([
+
+            'language_dialect' => ['required'],
+
+        ]);
+
+         $language = ProfileTblLanguages::find($ctrlno);
+         $language->language_description = $request->language_dialect;
+         $language->save();
+ 
+         return back()->with('message', 'Updated Sucessfully');
+        
     }
 
     public function destroy($ctrlno){
