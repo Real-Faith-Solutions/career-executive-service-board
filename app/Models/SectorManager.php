@@ -11,7 +11,7 @@ class SectorManager extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'plantilla_tbl_sectors';
+    protected $table = 'plantilla_tblSector';
     protected $primaryKey = 'sectorid';
     protected $fillable = [
         'title',

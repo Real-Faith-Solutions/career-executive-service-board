@@ -31,7 +31,7 @@ class SectorManagerController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tbl_sectors'],
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
         ]);
         SectorManager::create($request->all());
@@ -45,7 +45,7 @@ class SectorManagerController extends Controller
 
     public function update(Request $request, $sectorid){
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tbl_sectors'],
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
         ]);
 
