@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Plantilla;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,8 +11,8 @@ class SectorManager extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'plantilla_tbl_sectors';
-    protected $primaryKey = 'sector_id';
+    protected $table = 'plantilla_tblSector';
+    protected $primaryKey = 'sectorid';
     protected $fillable = [
         'title',
         'description',

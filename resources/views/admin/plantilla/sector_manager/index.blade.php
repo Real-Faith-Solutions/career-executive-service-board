@@ -4,17 +4,23 @@
 @section('content')
 @include('admin.plantilla.header')
 
-<div class="my-5 flex justify-end gap-4">
-    <a href="{{ route('sector-manager.recentlyDeleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
+<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-5">
+    <div class="col-start-1">
+        @include('components.search')
+    </div>
 
-        </lord-icon>
-    </a>
-    <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+    <div class="col-start-3 flex items-center justify-end">
+        <a href="{{ route('sector-manager.recentlyDeleted') }}">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+
+            </lord-icon>
+        </a>
+        <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+    </div>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -40,7 +46,7 @@
             @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{$data->sector_id}}
+                    {{$data->sectorid}}
                 </td>
                 <td class="px-6 py-3">
                     {{$data->title}}
@@ -61,7 +67,7 @@
                             </lord-icon>
                         </a>
 
-                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sector_id) }}">
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sectorid) }}">
                             <lord-icon
                                 src="https://cdn.lordicon.com/bxxnzvfm.json"
                                 trigger="hover"
@@ -70,7 +76,7 @@
                             </lord-icon>
                         </a>
 
-                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $data->sector_id) }}" method="POST">
+                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $data->sectorid) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

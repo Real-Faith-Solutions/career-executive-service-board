@@ -11,30 +11,30 @@
           </svg>
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 ">
+        <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
           <li>
-            <a href="{{ route('plantilla-management.index') }}" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Plantilla Management</a>
+            <a href="{{ route('plantilla-management.index') }}" class="{{'plantilla/plantilla-management' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0" aria-current="page">Plantilla Management</a>
           </li>
           <li>
-            <a href="{{ route('sector-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="{{'plantilla/sector-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Sector Manager</a>
           </li>
           <li>
-            <a href="{{  route('department-agency-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Department / Agency Manager</a>
+            <a href="{{  route('department-agency-manager.index') }}" class="{{'plantilla/department-agency-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Department / Agency Manager</a>
           </li>
           <li>
-            <a href="{{ route('agency-location-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Agency Location Manager</a>
+            <a href="{{ route('agency-location-manager.index') }}" class="{{'plantilla/agency-location-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Agency Location Manager</a>
           </li>
           <li>
-            <a href="{{ route('office-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Office Manager</a>
+            <a href="{{ route('office-manager.index') }}" class="{{'plantilla/office-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Office Manager</a>
           </li>
           <li>
-            <a href="{{ route('plantilla-position-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Plantilla Position Manager</a>
+            <a href="{{ route('plantilla-position-manager.index') }}" class="{{'plantilla/plantilla-position-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Plantilla Position Manager</a>
           </li>
           <li>
-            <a href="{{ route('plantilla-position-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Appointee Occupant Manager</a>
+            <a href="{{ route('appointee-occupant-manager.index') }}" class="{{'plantilla/appointee-occupant-manager' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Appointee Occupant Manager</a>
           </li>
           <li>
-            <a href="{{ route('appointee-occupant-manager.index') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Appointee Occupant Browser</a>
+            <a href="{{ route('appointee-occupant-browser.index') }}" class="{{'plantilla/appointee-occupant-browser' == request()->path() ? 'text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700' : '' }} block py-2 pl-3 pr-4  md:p-0">Appointee Occupant Browser</a>
           </li>
         </ul>
       </div>

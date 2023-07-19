@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_sectors', function (Blueprint $table) {
-            $table->id('sector_id');
+        Schema::create('plantilla_tblSector', function (Blueprint $table) {
+            $table->id('sectorid');
             $table->string('title');
             $table->text('description');
             $table->string('encoder');
@@ -21,11 +21,12 @@ return new class extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_sectors');
+        Schema::dropIfExists('plantilla_tblSector');
     }
 };

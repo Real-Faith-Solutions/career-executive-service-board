@@ -29,6 +29,7 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
+use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
@@ -80,12 +81,12 @@ Route::prefix('plantilla')->group(function () {
         Route::get('show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
         Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
         Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
-        Route::get('{sector_id}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
-        Route::post('{sector_id}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
-        Route::delete('{sector_id}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
+        Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+        Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
+        Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
         Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
-        Route::post('{sector_id}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
-        Route::post('{sector_id}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
+        Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
+        Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
     });
 
     Route::prefix('department-agency-manager')->group(function () {
@@ -106,6 +107,9 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('appointee-occupant-manager')->group(function () {
         Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+    });
+    Route::prefix('appointee-occupant-browser')->group(function () {
+        Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
     });
 });
 
