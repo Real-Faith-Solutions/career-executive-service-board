@@ -41,7 +41,7 @@
 
         <div class="mb-3">
             <label for="permanent_zip_code">Zip code<sup>*</span></label>
-            <input id="permanent_zip_code" name="zip_code" type="text" value="{{ $zip_code }}" oninput="validateInputNumber(permanent_zip_code, 4)" onkeypress="validateInputNumber(permanent_zip_code, 4)" onblur="checkErrorMessage(permanent_zip_code)" required>
+            <input id="permanent_zip_code" name="zip_code" type="text" value="{{ $zip_code }}" oninput="validateInput(permanent_zip_code, 4, 'numbers')" onkeypress="validateInput(permanent_zip_code, 4, 'numbers')" onblur="checkErrorMessage(permanent_zip_code)" required>
             <p class="input_error text-red-600"></p>
             @error('zip_code')
                 <span class="invalid" role="alert">
@@ -52,7 +52,8 @@
 
         <div class="mb-3 col-span-2">
             <label for="street_lot_bldg_floor">Street/Lot no./Building/Floor no.</label>
-            <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text" value="{{ $street_lot_bldg_floor }}" required>
+            <input id="street_lot_bldg_floor" name="street_lot_bldg_floor" type="text" value="{{ $street_lot_bldg_floor }}" oninput="validateInput(street_lot_bldg_floor, 4)" onkeypress="validateInput(street_lot_bldg_floor, 4)" onblur="checkErrorMessage(street_lot_bldg_floor)" required>
+            <p class="input_error text-red-600"></p>
             @error('street_lot_bldg_floor')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
