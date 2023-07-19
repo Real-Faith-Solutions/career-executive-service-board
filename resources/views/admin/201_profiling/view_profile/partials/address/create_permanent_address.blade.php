@@ -40,8 +40,9 @@
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
         <div class="mb-3">
-            <label for="zip_code">Zip code<sup>*</span></label>
-            <input id="zip_code" name="zip_code" type="number" value="{{ $zip_code }}" required>
+            <label for="permanent_zip_code">Zip code<sup>*</span></label>
+            <input id="permanent_zip_code" name="zip_code" type="text" value="{{ $zip_code }}" oninput="validateInputNumber(permanent_zip_code, 4)" onkeypress="validateInputNumber(permanent_zip_code, 4)" onblur="checkErrorMessage(permanent_zip_code)" required>
+            <p class="input_error text-red-600"></p>
             @error('zip_code')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>

@@ -66,35 +66,58 @@
 
 // real-time validation
 
-    // names input validations
-    function validateInput(inputField, minLength, alphaNumeric) {
+    // names input validations letters only or type
+    function validateInput(inputField, minLength, type = 'all') {
+
         const inputValue = inputField.value;
-        const charCode = event.which ? event.which : event.keyCode;
+        let currentValue = inputField.value;
+        let regexValidator = /^.*$/;
+        let errorMessage = ' characters';
+        if(type == 'all'){
+            let regexValidator = /^.*$/;
+        }else if(type == 'alphaNumeric'){
+            regexValidator = /^[a-zA-Z0-9\s]*$/;
+            errorMessage = ' numbers/letters without special characters.';
+        }else if(type == 'letters'){
+            regexValidator = /^[a-zA-Z\s]*$/;
+            errorMessage = ' letters without numbers/special characters.';
+        }else if(type == 'numbers'){
+            regexValidator = /^\d*$/;
+            errorMessage = ' digits without letters/special characters.';
+        }else if(type == 'lettersWithSpecial'){
+            regexValidator = /^[a-zA-Z\s!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
+            errorMessage = ' letters without numbers.';
+        }else if(type == 'numbersWithSpecial'){
+            regexValidator = /^[0-9!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
+            errorMessage = ' digits without letters.';
+        }
     
         var form = inputField.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
     
-        if (inputValue.length < minLength && !(charCode >= 48 && charCode <= 57)) {
-            inputField.nextElementSibling.textContent = `At least ${minLength} characters without numbers.`;
+        if (inputValue.length < minLength && regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least ${minLength} ${errorMessage}`;
             inputField.classList.remove('focus:outline-blue-600');
             inputField.classList.add('border-red-600');
             inputField.classList.add('focus:outline-red-500');
             submitButton.disabled = true;
             submitButton.classList.remove('cursor-pointer');
             submitButton.classList.add('cursor-not-allowed');
-        } else if (inputValue.length < minLength && ((charCode >= 48 && charCode <= 57) && !alphaNumeric)) {
-            event.preventDefault();
-            inputField.nextElementSibling.textContent = `At least ${minLength} characters without numbers.`;
+            this.currentValue = inputField.value;
+        } else if (inputValue.length < ++minLength && !regexValidator.test(inputValue)) {
+            inputField.value = this.currentValue;
+            inputField.nextElementSibling.textContent = `At least ${--minLength} ${errorMessage}`;
             inputField.classList.remove('focus:outline-blue-600');
             inputField.classList.add('border-red-600');
             inputField.classList.add('focus:outline-red-500');
             submitButton.disabled = true;
             submitButton.classList.remove('cursor-pointer');
             submitButton.classList.add('cursor-not-allowed');
-        } else if ((charCode >= 48 && charCode <= 57) && !alphaNumeric) {
-            event.preventDefault();
-            inputField.nextElementSibling.textContent = 'Input must not contain numbers.';
+        } else if (!regexValidator.test(inputValue)) {
+            inputField.value = this.currentValue;
+            inputField.nextElementSibling.textContent = 'Invalid input.';
         } else {
+            this.currentValue = inputField.value;
             inputField.nextElementSibling.textContent = '';
             inputField.classList.remove('focus:outline-red-500');
             inputField.classList.remove('border-red-600');
@@ -117,7 +140,7 @@
             
         }
     }
-    // end names input validations
+    // end names input validations letters only or type
 
     // when not focus on current input field
     function checkErrorMessage(inputField) {
@@ -125,7 +148,7 @@
         const inputValue = inputField.value;
         let errorMessage = inputField.nextElementSibling.textContent;
 
-        if (errorMessage == 'Input must not contain numbers.') {
+        if (errorMessage == 'Input must not contain numbers.' || errorMessage == 'Input must not contain letters.' || errorMessage == 'Invalid input.') {
             inputField.nextElementSibling.textContent = '';
         } 
 
