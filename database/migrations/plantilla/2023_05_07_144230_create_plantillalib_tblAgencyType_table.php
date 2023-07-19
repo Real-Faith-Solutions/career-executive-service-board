@@ -13,7 +13,6 @@ return new class extends Migration
     {
         // migrate from legacy
         Schema::create('plantillalib_tblAgencyType', function (Blueprint $table) {
-            $table->id();
             $table->string('agency_typeid')->nullable();
             $table->string('sectorid')->nullable();
             $table->string('title')->nullable();
