@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\SectorManager as ModelsSectorManager;
+use App\Models\Plantilla\SectorManager as ModelsSectorManager;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;

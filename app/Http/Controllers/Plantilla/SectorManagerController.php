@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
-use App\Models\SectorManager;
+use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
 class SectorManagerController extends Controller
