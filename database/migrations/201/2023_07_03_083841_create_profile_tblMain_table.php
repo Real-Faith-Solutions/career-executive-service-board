@@ -14,34 +14,38 @@ return new class extends Migration
         Schema::create('profile_tblMain', function (Blueprint $table) {
             $table->id('cesno');
             $table->integer('acno');
-            $table->string('title');
-            $table->string('lastname');
-            $table->string('firstname');
-            $table->string('middlename');
-            $table->string('middleinitial');
-            $table->string('nickname');
-            $table->string('picture');
-            $table->integer('mobileno');
-            $table->string('gender');
-            $table->date('birthdate');
-            $table->string('birthplace');
-            $table->string('emailadd');
-            $table->string('civilstatus');
-            $table->string('religion');
-            $table->string('height');
-            $table->float('weight');
-            $table->string('remarks');
-            $table->string('encoder');
-            $table->string('e_date');
-            $table->string('lastupd_dt');
-            $table->string('CESStat_code');
-            $table->string('spouse_fname');
-            $table->string('spouse_mname');
-            $table->string('spouse_lname');
-            $table->integer('telno');
-            $table->string('mailingaddr');
-            $table->string('status');
-            $table->integer('mobileno2');
+            $table->string('title')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('middlename')->nullable();
+            $table->string('middleinitial')->nullable();
+            $table->string('nickname')->nullable();
+            $table->string('picture')->nullable();
+
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->string('email')->nullable();
+            $table->string('civil_status')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('height')->nullable();
+            $table->float('weight')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('encoder')->nullable();
+
+
+            $table->string('CESStat_code')->nullable();
+
+            $table->string('status')->nullable();
+            $table->string('name_extension')->nullable();
+            $table->string('member_of_indigenous_group')->nullable();
+            $table->string('citizenship')->nullable();
+            $table->string('dual_citizenship')->nullable();
+            $table->string('person_with_disability')->nullable();
+            $table->string('single_parent')->nullable();
+            $table->string('gender_by_choice')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
