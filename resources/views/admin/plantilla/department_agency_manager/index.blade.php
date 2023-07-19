@@ -4,7 +4,16 @@
 @section('content')
 @include('admin.plantilla.header')
 
-<div class="my-5 flex justify-end gap-4">
+<div class="my-5 flex justify-end">
+    <a href="#">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+
+        </lord-icon>
+    </a>
     <a class="btn btn-primary" href="#">Add record</a>
 </div>
 
@@ -19,26 +28,27 @@
                     Mother Agency
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Agency Bureau
+                    Agency / Bureau
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Agency Bureau Acronym
+                    Agency / Bureau Acronym
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Office Type
+                    Office type
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Agency Website
+                    Agency website
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    last Submission Date
+                    Last submission date
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Submitted By
+                    Submitted by
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Remarks
                 </th>
+
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>
@@ -46,34 +56,38 @@
         </thead>
         <tbody>
 
+            @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    -
+                    {{ $data->deptid }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->mother_deptid }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->title }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->acronym }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->agency_typeid }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->website }}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->updated_at }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->submitted_by }}
                 </td>
                 <td class="px-6 py-3">
-                    -
+                    {{ $data->remarks }}
                 </td>
-                <td class="px-6 py-3">
-                    -
-                </td>
+
+
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
@@ -101,11 +115,13 @@
                 </td>
             </tr>
 
+            @endforeach
+
         </tbody>
     </table>
 
     <div class="m-5">
-        {{-- {{ $datas->links() }} --}}
+        {{ $datas->links() }}
     </div>
 </div>
 
