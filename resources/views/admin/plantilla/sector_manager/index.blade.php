@@ -46,7 +46,7 @@
             @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{$data->sector_id}}
+                    {{$data->sectorid}}
                 </td>
                 <td class="px-6 py-3">
                     {{$data->title}}
@@ -67,7 +67,7 @@
                             </lord-icon>
                         </a>
 
-                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sector_id) }}">
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.edit', $data->sectorid) }}">
                             <lord-icon
                                 src="https://cdn.lordicon.com/bxxnzvfm.json"
                                 trigger="hover"
@@ -76,7 +76,7 @@
                             </lord-icon>
                         </a>
 
-                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $data->sector_id) }}" method="POST">
+                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.destroy', $data->sectorid) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_tbl_sectors', function (Blueprint $table) {
-            $table->id('sector_id');
+            $table->id('sectorid');
             $table->string('title');
             $table->text('description');
             $table->string('encoder');

@@ -34,7 +34,7 @@
             @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{$data->sector_id}}
+                    {{$data->sectorid}}
                 </td>
                 <td class="px-6 py-3">
                     {{$data->title}}
@@ -48,7 +48,7 @@
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
-                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.restore', $data->sector_id) }}" method="POST">
+                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.restore', $data->sectorid) }}" method="POST">
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Restore">
                                 <lord-icon
@@ -59,7 +59,7 @@
                                 </lord-icon>
                             </button>
                         </form>
-                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.forceDelete', $data->sector_id) }}" method="POST">
+                        <form class="hover:bg-slate-100 rounded-full" action="{{ route('sector-manager.forceDelete', $data->sectorid) }}" method="POST">
 
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

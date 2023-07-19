@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('acronym')->nullable();
             $table->string('agency_typeid')->nullable();
             $table->string('mother_deptid')->nullable();
-            $table->string('sector_id')->nullable();
+            $table->string('sectorid')->nullable();
             $table->string('website')->nullable();
             $table->string('lastsubmit_dt')->nullable();
             $table->string('submitted_by')->nullable();

@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('sector-manager.update', $datas->sector_id) }}" method="POST">
+            <form action="{{ route('sector-manager.update', $datas->sectorid) }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="encoder" value="{{ Auth::user()->last_name}} {{ Auth::user()->first_name}} {{ Auth::user()->middle_name}}" readonly>

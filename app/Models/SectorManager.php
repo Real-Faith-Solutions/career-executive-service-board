@@ -12,7 +12,7 @@ class SectorManager extends Model
     use SoftDeletes;
 
     protected $table = 'plantilla_tbl_sectors';
-    protected $primaryKey = 'sector_id';
+    protected $primaryKey = 'sectorid';
     protected $fillable = [
         'title',
         'description',
