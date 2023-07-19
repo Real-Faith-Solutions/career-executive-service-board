@@ -4,17 +4,23 @@
 @section('content')
 @include('admin.plantilla.header')
 
-<div class="my-5 flex justify-end gap-4">
-    <a href="{{ route('sector-manager.recentlyDeleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
+<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-5">
+    <div class="col-start-1">
+        @include('components.search')
+    </div>
 
-        </lord-icon>
-    </a>
-    <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+    <div class="col-start-3 flex items-center justify-end">
+        <a href="{{ route('sector-manager.recentlyDeleted') }}">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+
+            </lord-icon>
+        </a>
+        <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+    </div>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

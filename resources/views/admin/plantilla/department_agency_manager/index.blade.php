@@ -9,7 +9,7 @@
     <div class="col-start-1">
         @include('components.search')
     </div>
-    
+
     <div class="col-start-3 flex items-center justify-end">
         <a href="#">
             <lord-icon
@@ -23,8 +23,6 @@
         <a class="btn btn-primary" href="#">Add record</a>
     </div>
 </div>
-
-
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <table class="w-full text-left text-sm text-gray-500">

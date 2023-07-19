@@ -10,7 +10,6 @@ class DepartmentAgencyManagerController extends Controller
 {
     public function index(Request $request){
         $search = $request->input('search');
-
         $datas = DepartmentAgency::orderBy('title', 'ASC')
         ->where('title', 'LIKE', "%$search%")
         ->orWhere('acronym', 'LIKE', "%$search%")

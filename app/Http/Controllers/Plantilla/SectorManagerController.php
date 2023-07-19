@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 
 class SectorManagerController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $search = $request->input('search');
         $datas = SectorManager::orderBy('title', 'ASC')
+
+        ->where('title', 'LIKE', "%$search%")
+        ->orWhere('description', 'LIKE', "%$search%")
+        ->orWhere('encoder', 'LIKE', "%$search%")
         ->paginate(10);
-        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+        return view ('admin.plantilla.sector_manager.index', compact('datas', 'search'));
     }
 
     public function show(){
