@@ -22,7 +22,7 @@ class SectorManager extends Model
 
     public function departmentAgency(): HasMany
     {
-        return $this->hasMany(DepartmentAgency::class);
+        return $this->hasMany(DepartmentAgency::class, 'plantilla_tblSector_id', 'sectorid');
     }
 
 

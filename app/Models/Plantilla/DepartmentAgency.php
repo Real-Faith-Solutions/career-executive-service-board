@@ -17,6 +17,6 @@ class DepartmentAgency extends Model
 
     public function sectorManager(): BelongsTo
     {
-        return $this->belongsTo(SectorManager::class);
+        return $this->belongsTo(SectorManager::class, 'plantilla_tblSector_id', 'sectorid');
     }
 }
