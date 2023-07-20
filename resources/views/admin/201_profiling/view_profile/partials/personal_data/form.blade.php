@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="personal_email">Email<sup>*</span></label>
-                    <input id="personal_email" name="personal_email" readonly value="{{ $mainProfile->personal_email }}">
+                    <label for="email">Email<sup>*</span></label>
+                    <input id="email" name="email" readonly value="{{ $mainProfile->email }}">
                 </div>
 
             </div>

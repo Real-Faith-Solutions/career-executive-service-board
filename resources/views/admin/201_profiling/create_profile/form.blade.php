@@ -52,8 +52,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="personal_email">Email<sup>*</sup></label>
-                <input id="personal_email" name="personal_email" type="text" value="{{ old('personal_email') }}">
+                <label for="email">Email<sup>*</sup></label>
+                <input id="email" name="email" type="text" value="{{ old('email') }}">
                 <p class="text-red-600"></p>
             </div>
 

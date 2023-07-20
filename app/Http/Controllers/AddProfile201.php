@@ -17,7 +17,7 @@ class AddProfile201 extends Controller
             
             'status' => $request->status,
             'title' => $request->title,
-            'personal_email' => $request->personal_email,
+            'email' => $request->email,
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'name_extension' => $request->name_extension,

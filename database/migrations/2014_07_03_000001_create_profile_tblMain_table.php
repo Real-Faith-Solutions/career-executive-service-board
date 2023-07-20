@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profile_tblMain', function (Blueprint $table) {
             $table->id('cesno');
             $table->text('picture')->nullable();
-            $table->string('personal_email')->nullable();
+            $table->string('email')->nullable();
             $table->string('status')->nullable();
             $table->string('title')->nullable();
             $table->string('lastname')->nullable();

@@ -18,7 +18,7 @@ class PersonalData extends Model
     protected $fillable = [
 
         'picture',
-        'personal_email',
+        'email',
         'status',
         'title',
         'lastname',
