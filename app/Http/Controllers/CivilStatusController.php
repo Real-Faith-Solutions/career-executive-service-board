@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CivilStatusController extends Controller
 {
     public function index(){
-        $datas = CivilStatus::paginate(10);
+        $datas = CivilStatus::paginate(15);
         return view('admin.201_library.civil_status.index', compact('datas'));
     }
 
@@ -45,7 +45,7 @@ class CivilStatusController extends Controller
     public function recentlyDeleted(){
         $datas = CivilStatus::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.civil_status.recently_deleted', compact('datas'));
     }
 

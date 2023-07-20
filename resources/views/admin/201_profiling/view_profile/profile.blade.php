@@ -5,7 +5,7 @@
     <div class="grid-rows-7 grid grid-cols-4 gap-1">
         <div class="row-span-5 text-center">
             
-            <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96 border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->avatar ?: 'placeholder.png')) }}" />
+            <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96 border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->picture ?: 'placeholder.png')) }}" />
 
             <h1 class="text-bold text-2xl">
                 {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}

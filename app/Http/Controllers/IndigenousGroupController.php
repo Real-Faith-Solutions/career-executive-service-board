@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class IndigenousGroupController extends Controller
 {
     public function index(){
-        $datas = IndigenousGroup::paginate(10);
+        $datas = IndigenousGroup::paginate(15);
         return view('admin.201_library.indigeneous_group.index', compact('datas'));
     }
     public function create(){
@@ -43,7 +43,7 @@ class IndigenousGroupController extends Controller
     public function recentlyDeleted(){
         $datas = IndigenousGroup::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.indigeneous_group.recently_deleted', compact('datas'));
     }
 

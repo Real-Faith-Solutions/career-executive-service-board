@@ -11,22 +11,23 @@ class PersonalData extends Model
 {
     use HasFactory;
 
-    protected $table = 'personal_data';
+    protected $table = 'profile_tblMain';
 
     protected $primaryKey = 'cesno';
 
     protected $fillable = [
 
-        'avatar',
+        'picture',
+        'email',
         'status',
         'title',
         'lastname',
         'firstname',
         'name_extension',
         'middlename',
-        'mi',
+        'middleinitial',
         'nickname',
-        'birthdate',
+        'birth_date',
         'age',
         'birth_place',
         'gender',
@@ -37,14 +38,13 @@ class PersonalData extends Model
         'weight',
         'member_of_indigenous_group',
         'single_parent',
-        'citizenship', 
-        'dual_citizenship', 
-        'person_with_disability', 
-        'gsis', 
-        'pagibig', 
-        'philhealth', 
-        'sss_no', 
-        'tin'
+        'citizenship',
+        'dual_citizenship',
+        'person_with_disability',
+        'CESStat_code',
+        'encoder',
+        'acno',
+        'remarks',
 
     ];
 

@@ -75,16 +75,14 @@ use App\Models\CivilStatus;
 use App\Models\Title;
 use App\Models\RecordStatus;
 use App\Models\Religion;
-
-
-
+use DateTime;
 
 class ProfileController extends Controller
 {
 
     public function addProfile()
     {
-        if (DB::table('personal_data')->count() === 0) {
+        if (DB::table('profile_tblMain')->count() === 0) {
             $cesNumber = 0;
         } else {
             $cesNumber = PersonalData::latest()->first()->cesno;
@@ -150,11 +148,16 @@ class ProfileController extends Controller
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
         $nameExtensions = NameExtension::all();
 
+        $birthdate = $mainProfile->birth_date;
+        $now = new DateTime();
+        $birthDate = new DateTime($birthdate);
+        $age = $now->diff($birthDate)->y;
+
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
-        'addressProfileMailing', 'addressProfileTemp', 'nameExtensions'));
+        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions'));
 
     }
 

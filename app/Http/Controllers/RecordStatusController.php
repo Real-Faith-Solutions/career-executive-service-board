@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RecordStatusController extends Controller
 {
     public function index(){
-        $datas = RecordStatus::paginate(10);
+        $datas = RecordStatus::paginate(15);
         return view('admin.201_library.record_status.index', compact('datas'));
     }
 
@@ -44,7 +44,7 @@ class RecordStatusController extends Controller
     public function recentlyDeleted(){
         $datas = RecordStatus::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.record_status.recently_deleted', compact('datas'));
     }
 

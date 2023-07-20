@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('sectorid')->nullable();
             $table->string('title')->nullable();
             $table->string('encoder')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

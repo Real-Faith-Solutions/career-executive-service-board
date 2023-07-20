@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ReligionController extends Controller
 {
     public function index(){
-        $datas = Religion::paginate(10);
+        $datas = Religion::paginate(15);
         return view('admin.201_library.religion.index', compact('datas'));
     }
 
@@ -44,7 +44,7 @@ class ReligionController extends Controller
     public function recentlyDeleted(){
         $datas = Religion::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.religion.recently_deleted', compact('datas'));
     }
 

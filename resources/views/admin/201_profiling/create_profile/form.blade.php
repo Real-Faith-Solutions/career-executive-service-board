@@ -38,7 +38,6 @@
                 </select>
 
             </div>
-            <div></div>
 
             <div class="mb-3">
 
@@ -50,6 +49,12 @@
                     @endforeach
                 </select>
 
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email<sup>*</sup></label>
+                <input id="email" name="email" type="text" value="{{ old('email') }}">
+                <p class="text-red-600"></p>
             </div>
 
         </div>
@@ -91,7 +96,7 @@
             <div class="mb-3">
 
                 <label for="mi">Middle initial<sup>*</sup></label>
-                <input id="mi" name="mi" readonly type="text">
+                <input id="mi" name="middleinitial" readonly type="text">
 
             </div>
 
@@ -242,7 +247,7 @@
         </div>
 
         {{-- identification cards --}}
-        <section>
+        {{-- <section>
             <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
                 <h1>Identification cards</h1>
             </div>
@@ -279,8 +284,8 @@
                     <p class="input_error text-red-600"></p>
                 </div>
             </div>
-        </section>
-
+        </section> --}}
+        {{-- end identification cards --}}
 
         <div class="flex justify-end">
             <button class="btn btn-primary" id="personal_data_submit" type="submit">Submit</button>

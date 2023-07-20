@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TitleController extends Controller
 {
     public function index(){
-        $datas = Title::paginate(10);
+        $datas = Title::paginate(15);
         return view('admin.201_library.title.index', compact('datas'));
     }
 
@@ -44,7 +44,7 @@ class TitleController extends Controller
     public function recentlyDeleted(){
         $datas = Title::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.title.recently_deleted', compact('datas'));
     }
 
