@@ -73,7 +73,7 @@ class AddProfile201 extends Controller
         if ($request->hasFile('imageInput')) {
 
             // Find the user's existing image, if any
-            $existingImage = $existingPerson->avatar;
+            $existingImage = $existingPerson->picture;
 
             // Delete the existing image file from the storage folder
             if ($existingImage) {
@@ -95,7 +95,7 @@ class AddProfile201 extends Controller
             $pathName = 'avatar/'.$filename;
 
             // Save the image path to the database
-            $existingPerson->avatar = $pathName;
+            $existingPerson->picture = $pathName;
             $existingPerson->save();
 
             return back()->with('message','Profile Picture Changed!');
