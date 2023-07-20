@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,11 @@ class SectorManagerController extends Controller
         return view ('admin.plantilla.sector_manager.index', compact('datas', 'search'));
     }
 
-    public function show(){
-        $datas = SectorManager::orderBy('title', 'ASC')
+    public function show($sectorid){
+        $datas = DepartmentAgency::where('plantilla_tblSector_id', $sectorid)
+        ->orderBy('title', 'ASC')
         ->paginate(15);
-        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+        return view ('admin.plantilla.department_agency_manager.index', compact('datas'));
     }
 
     public function create(){
