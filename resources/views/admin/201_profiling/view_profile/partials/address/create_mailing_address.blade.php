@@ -41,7 +41,8 @@
 
         <div class="mb-3">
             <label for="zip_code_Mailing">Zip code<sup>*</span></label>
-            <input id="zip_code_Mailing" name="zip_code_Mailing" type="number" value="{{ $zip_code_Mailing }}" required>
+            <input id="zip_code_Mailing" name="zip_code_Mailing" type="text" value="{{ $zip_code_Mailing }}" oninput="validateInput(zip_code_Mailing, 4, 'numbers')" onkeypress="validateInput(zip_code_Mailing, 4, 'numbers')" onblur="checkErrorMessage(zip_code_Mailing)" required>
+            <p class="input_error text-red-600"></p>
             @error('zip_code_Mailing')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -51,7 +52,8 @@
 
         <div class="mb-3 col-span-2">
             <label for="street_lot_bldg_floor_Mailing">Street/Lot no./Building/Floor no.</label>
-            <input id="street_lot_bldg_floor_Mailing" name="street_lot_bldg_floor_Mailing" type="text" value="{{ $street_lot_bldg_floor_Mailing }}" required>
+            <input id="street_lot_bldg_floor_Mailing" name="street_lot_bldg_floor_Mailing" type="text" value="{{ $street_lot_bldg_floor_Mailing }}" oninput="validateInput(street_lot_bldg_floor_Mailing, 4)" onkeypress="validateInput(street_lot_bldg_floor_Mailing, 4)" onblur="checkErrorMessage(street_lot_bldg_floor_Mailing)" required>
+            <p class="input_error text-red-600"></p>
             @error('street_lot_bldg_floor_Mailing')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>

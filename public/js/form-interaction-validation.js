@@ -9,6 +9,7 @@
             age--;
         }
         document.getElementById('age').value = age;
+        return age;
     }
 
     function generateMiddleInitial() {
@@ -65,203 +66,168 @@
 
 // real-time validation
 
-    // initializing personal_data_form and its inputs
-    const personal_data_form = document.getElementById('personal_data');
-    const personal_data_submit = document.getElementById('personal_data_submit');
-    const inputFieldLastName = document.getElementById('lastname');
-    const ErrorMessageLastName = document.getElementById('ErrorMessageLastName');
-    const inputFieldFirstname = document.getElementById('firstname');
-    const ErrorMessageFirstname = document.getElementById('ErrorMessageFirstname');
-    const inputFieldMiddlename = document.getElementById('middlename');
-    const ErrorMessageMiddlename = document.getElementById('ErrorMessageMiddlename');
-    const inputFieldNickname = document.getElementById('nickname');
-    const ErrorMessageNickname = document.getElementById('ErrorMessageNickname');
+    // names input validations letters only or type
+    function validateInput(inputField, minLength, type = 'all') {
 
-    // assigning event listeners on each input
-    inputFieldLastName.addEventListener('input', validateInputLastName);
-    inputFieldLastName.addEventListener('keypress', validateInputLastName);
-    inputFieldFirstname.addEventListener('input', validateInputFirstname);
-    inputFieldFirstname.addEventListener('keypress', validateInputFirstname);
-    inputFieldMiddlename.addEventListener('input', validateInputMiddlename);
-    inputFieldMiddlename.addEventListener('keypress', validateInputMiddlename);
-    inputFieldNickname.addEventListener('input', validateInputNickname);
-    inputFieldNickname.addEventListener('keypress', validateInputNickname);
-    // personal_data_submit.addEventListener('keypress', validateInputNickname);
-
-    // functions for disabling and enabling personal_data_form submission
-    let personal_data_errors = document.querySelectorAll('.personal_data_error');
-
-    personal_data_form.addEventListener('submit', function(event) {
-        for (let i = 0; i < personal_data_errors.length; i++) {
-            if (personal_data_errors[i].textContent != '') {
-                event.preventDefault();
-                break;
-            }
+        const inputValue = inputField.value;
+        let currentValue = inputField.value;
+        let regexValidator = /^.*$/;
+        let errorMessage = ' characters';
+        if(type == 'all'){
+            let regexValidator = /^.*$/;
+        }else if(type == 'alphaNumeric'){
+            regexValidator = /^[a-zA-Z0-9\s]*$/;
+            errorMessage = ' numbers/letters without special characters.';
+        }else if(type == 'letters'){
+            regexValidator = /^[a-zA-Z\s]*$/;
+            errorMessage = ' letters without numbers/special characters.';
+        }else if(type == 'numbers'){
+            regexValidator = /^\d*$/;
+            errorMessage = ' digits without letters/special characters.';
+        }else if(type == 'lettersWithSpecial'){
+            regexValidator = /^[a-zA-Z\s!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
+            errorMessage = ' letters without numbers.';
+        }else if(type == 'numbersWithSpecial'){
+            regexValidator = /^[0-9!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
+            errorMessage = ' digits without letters.';
         }
-    });
-    // end
-
-    // Add click event listener to the document body
-    document.body.addEventListener('click', function(event) {
-        // Check if the clicked element is the input field
-        if (event.target !== inputFieldLastName) {
-            if(ErrorMessageLastName.textContent == 'Input must not contain numbers.'){
-                ErrorMessageLastName.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldFirstname) {
-            if(ErrorMessageFirstname.textContent == 'Input must not contain numbers.'){
-                ErrorMessageFirstname.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldMiddlename) {
-            if(ErrorMessageMiddlename.textContent == 'Input must not contain numbers.'){
-                ErrorMessageMiddlename.textContent = '';
-            }
-        }
-
-        if (event.target !== inputFieldNickname) {
-            if(ErrorMessageNickname.textContent == 'Input must not contain numbers.'){
-                ErrorMessageNickname.textContent = '';
-            }
-        }
-      });
-    // end of Add click event listener to the document body
-
-    // lastname validations
-    function validateInputLastName() {
-
-        const inputValueLastName = inputFieldLastName.value;
-        const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueLastName.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageLastName.textContent = 'Lastname must be at least 2 characters long.';
-            inputFieldLastName.classList.remove('focus:outline-blue-600');
-            inputFieldLastName.classList.add('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueLastName.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageLastName.textContent = 'Atleast 2 characters without number.';
-            inputFieldLastName.classList.remove('focus:outline-blue-600');
-            inputFieldLastName.classList.add('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageLastName.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageLastName.textContent = '';
-            inputFieldLastName.classList.remove('focus:outline-red-500');
-            inputFieldLastName.classList.remove('border-red-600');
-            inputFieldLastName.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of lastname validations
-
-    // firstname validations
-    function validateInputFirstname() {
-
-        const inputValueFirstname = inputFieldFirstname.value;
-        const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueFirstname.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageFirstname.textContent = 'Firstname must be at least 2 characters long.';
-            inputFieldFirstname.classList.remove('focus:outline-blue-600');
-            inputFieldFirstname.classList.add('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueFirstname.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageFirstname.textContent = 'Atleast 2 characters without number.';
-            inputFieldFirstname.classList.remove('focus:outline-blue-600');
-            inputFieldFirstname.classList.add('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageFirstname.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageFirstname.textContent = '';
-            inputFieldFirstname.classList.remove('focus:outline-red-500');
-            inputFieldFirstname.classList.remove('border-red-600');
-            inputFieldFirstname.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of firstname validations
-
-    // middlename validations
-    function validateInputMiddlename() {
-
-        const inputValueMiddlename = inputFieldMiddlename.value;
-        const charCode = event.which ? event.which : event.keyCode;
-
-        if (inputValueMiddlename.length < 2 && !(charCode >= 48 && charCode <= 57)) {
-            ErrorMessageMiddlename.textContent = 'Middlename must be at least 2 characters long.';
-            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
-            inputFieldMiddlename.classList.add('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (inputValueMiddlename.length < 2 && (charCode >= 48 && charCode <= 57)) {
-            event.preventDefault();
-            ErrorMessageMiddlename.textContent = 'Atleast 2 characters without number.';
-            inputFieldMiddlename.classList.remove('focus:outline-blue-600');
-            inputFieldMiddlename.classList.add('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-red-500');
-            personal_data_submit.disabled = true;
-            personal_data_submit.classList.remove('cursor-pointer');
-            personal_data_submit.classList.add('cursor-not-allowed');
-        }else if (charCode >= 48 && charCode <= 57) {
-            event.preventDefault();
-            ErrorMessageMiddlename.textContent = 'Input must not contain numbers.';
-        }else {
-            ErrorMessageMiddlename.textContent = '';
-            inputFieldMiddlename.classList.remove('focus:outline-red-500');
-            inputFieldMiddlename.classList.remove('border-red-600');
-            inputFieldMiddlename.classList.add('focus:outline-blue-600');
-            personal_data_submit.disabled = false;
-            personal_data_submit.classList.remove('cursor-not-allowed');
-            personal_data_submit.classList.add('cursor-pointer');
-        }
-
-    }
-    // end of middlename validations
-
-        // nickname validations
-        function validateInputNickname() {
-
-            const inputValueNickname = inputFieldNickname.value;
-            const charCode = event.which ? event.which : event.keyCode;
     
-            if (charCode >= 48 && charCode <= 57) {
-                event.preventDefault();
-                ErrorMessageNickname.textContent = 'Input must not contain numbers.';
-            }else {
-                ErrorMessageNickname.textContent = '';
-            }
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
     
-        }
-        // end of nickname validations
+        if (inputValue.length < minLength && regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least ${minLength} ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            this.currentValue = inputField.value;
+        } else if (inputValue.length < ++minLength && !regexValidator.test(inputValue)) {
+            inputField.value = this.currentValue;
+            inputField.nextElementSibling.textContent = `At least ${--minLength} ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (!regexValidator.test(inputValue)) {
+            inputField.value = this.currentValue;
+            inputField.nextElementSibling.textContent = 'Invalid input.';
+        } else {
+            this.currentValue = inputField.value;
+            inputField.nextElementSibling.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
 
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
+        }
+    }
+    // end names input validations letters only or type
+
+    // when not focus on current input field
+    function checkErrorMessage(inputField) {
+
+        const inputValue = inputField.value;
+        let errorMessage = inputField.nextElementSibling.textContent;
+
+        if (errorMessage == 'Input must not contain numbers.' || errorMessage == 'Input must not contain letters.' || errorMessage == 'Invalid input.') {
+            inputField.nextElementSibling.textContent = '';
+        } 
+
+    }
+    // end when not focus on current input field
+
+    // prevent submission of form if there is an error
+    function checkErrorsBeforeSubmit(currentForm){
+
+        const errorClass = currentForm.querySelectorAll('.input_error');
+        
+        for (const error of errorClass) {
+            if (error.textContent != "") {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+    // end prevent submission of form if there is an error
+
+    // validate date
+    function validateDateInput(inputDate, minAge = 0){
+
+        const inputDateByUSer = inputDate.value;
+
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+        var form = inputDate.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if (!datePattern.test(inputDateByUSer)) {
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return;
+        }
+
+        const inputDateNew = new Date(inputDateByUSer);
+        const currentDate = new Date();
+
+        if(inputDateNew > currentDate){
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return
+        }
+
+        let userAge = computeAge();
+
+        if(userAge < minAge){
+            inputDate.nextElementSibling.textContent = `Invalid date.`;
+            inputDate.classList.remove('focus:outline-blue-600');
+            inputDate.classList.add('border-red-600');
+            inputDate.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+            return
+        }
+
+        inputDate.nextElementSibling.textContent = '';
+        inputDate.classList.remove('focus:outline-red-500');
+        inputDate.classList.remove('border-red-600');
+        inputDate.classList.add('focus:outline-blue-600');
+        submitButton.disabled = false;
+        submitButton.classList.remove('cursor-not-allowed');
+        submitButton.classList.add('cursor-pointer');
+
+    }
+    // end validate date
 
 // end of real-time validation

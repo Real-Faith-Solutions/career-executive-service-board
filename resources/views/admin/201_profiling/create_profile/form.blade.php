@@ -5,7 +5,7 @@
         <h1>Personal data</h1>
     </div>
 
-    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST">
+    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(personal_data)">
 
         @csrf
 
@@ -63,18 +63,17 @@
 
             <div class="mb-3">
                 <label for="lastname">Lastname<sup>*</sup></label>
-                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}">
-                <p class="personal_data_error text-red-600" id="ErrorMessageLastName"></p>
+                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2, 'letters')" onkeypress="validateInput(lastname, 2, 'letters')" onblur="checkErrorMessage(lastname)" required>
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
                 <label for="firstname">Firstname<sup>*</sup></label>
-                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}">
-                <p class="personal_data_error text-red-600" id="ErrorMessageFirstname"></p>
+                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}" oninput="validateInput(firstname, 2, 'letters')" onkeypress="validateInput(firstname, 2, 'letters')" onblur="checkErrorMessage(firstname)" required>
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
-
                 <label for="name_extension">Name Extension</label>
                 <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
                 <datalist id="name_extension_choices">
@@ -90,8 +89,8 @@
 
             <div class="mb-3">
                 <label for="middlename">Middlename<sup>*</sup></label>
-                <input class="personal_data_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text">
-                <p class="text-red-600" id="ErrorMessageMiddlename"></p>
+                <input class="input_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2, 'letters')" onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
@@ -103,8 +102,8 @@
 
             <div class="mb-3">
                 <label for="nickname">Nickname</label>
-                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}">
-                <p class="text-red-600" id="ErrorMessageNickname"></p>
+                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0, 'letters')" onkeypress="validateInput(nickname, 0, 'letters')" onblur="checkErrorMessage(nickname)">
+                <p class="input_error text-red-600"></p>
             </div>
         </div>
 
@@ -112,8 +111,8 @@
 
             <div class="mb-3">
                 <label for="birthdate">Birthdate<sup>*</sup></label>
-                <input id="birthdate" name="birthdate" onchange="computeAge()" required type="date">
-
+                <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" required>
+                <p class="input_error text-red-600"></p>
             </div>
             <div class="mb-3">
 
@@ -124,7 +123,8 @@
 
             <div class="mb-3">
                 <label for="birth_place">Birth Place<sup>*</sup></label>
-                <input id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}">
+                <input id="birth_place" name="birth_place" type="text" value="{{ old('birth_place') }}" oninput="validateInput(birth_place, 2)" onkeypress="validateInput(birth_place, 2)" onblur="checkErrorMessage(birth_place)">
+                <p class="input_error text-red-600"></p>
             </div>
 
         </div>
@@ -175,12 +175,14 @@
 
             <div class="mb-3">
                 <label for="height">Height (in meters)<sup>*</sup></label>
-                <input id="height" name="height" type="number" value="{{ old('height') }}">
+                <input id="profile_height" name="height" type="text" value="{{ old('height') }}" oninput="validateInput(profile_height, 2, 'numbersWithSpecial')" onkeypress="validateInput(profile_height, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(profile_height)">
+                <p class="input_error text-red-600"></p>
             </div>
 
             <div class="mb-3">
                 <label for="weight">Weight (in kilograms)<sup>*</sup></label>
-                <input id="weight" name="weight" type="number" value="{{ old('weight') }}">
+                <input id="profile_weight" name="weight" type="text" value="{{ old('weight') }}" oninput="validateInput(profile_weight, 2, 'numbersWithSpecial')" onkeypress="validateInput(profile_weight, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(profile_weight)">
+                <p class="input_error text-red-600"></p>
             </div>
 
         </div>
@@ -253,16 +255,19 @@
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="mb-3">
                     <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                    <input id="gsis" name="gsis" type="text" value="{{ old('gsis') }}">
+                    <input id="gsis" name="gsis" type="text" value="{{ old('gsis') }}" oninput="validateInput(gsis, 6, 'all')" onkeypress="validateInput(gsis, 6, 'all')" onblur="checkErrorMessage(gsis)" required>
+                    <p class="input_error text-red-600"></p>
                 </div>
                 <div class="mb-3">
                     <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                    <input id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}">
+                    <input id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}" oninput="validateInput(pagibig, 6, 'all')" onkeypress="validateInput(pagibig, 6, 'all')" onblur="checkErrorMessage(pagibig)" required>
+                    <p class="input_error text-red-600"></p>
                 </div>
 
                 <div class="mb-3">
                     <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                    <input id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}">
+                    <input id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}" oninput="validateInput(philhealth, 6, 'all')" onkeypress="validateInput(philhealth, 6, 'all')" onblur="checkErrorMessage(philhealth)" required>
+                    <p class="input_error text-red-600"></p>
                 </div>
 
             </div>
@@ -270,11 +275,13 @@
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div class="col-md-4">
                     <label for="sss_no">SSS ID No.</label>
-                    <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}">
+                    <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}" oninput="validateInput(sss_no, 6, 'all')" onkeypress="validateInput(sss_no, 6, 'all')" onblur="checkErrorMessage(sss_no)" required>
+                    <p class="input_error text-red-600"></p>
                 </div>
                 <div class="col-md-4">
                     <label for="tin">TIN ID No.</label>
-                    <input id="tin" name="tin" type="text" value="{{ old('tin') }}">
+                    <input id="tin" name="tin" type="text" value="{{ old('tin') }}" oninput="validateInput(tin, 6, 'all')" onkeypress="validateInput(tin, 6, 'all')" onblur="checkErrorMessage(tin)" required>
+                    <p class="input_error text-red-600"></p>
                 </div>
             </div>
         </section> --}}

@@ -1,7 +1,5 @@
-
-
-
-<form action="{{ route('family-profile.store', ['cesno' => $mainProfile->cesno]) }}" method="POST">
+{{-- spouse details --}}
+<form action="{{ route('family-profile.store', ['cesno' => $mainProfile->cesno]) }}" method="POST" id="family_profile_spouse" onsubmit="return checkErrorsBeforeSubmit(family_profile_spouse)">
 
     @csrf
 
@@ -9,8 +7,8 @@
 
         <div class="mb-3">
             <label for="last_name">Last Name<sup>*</sup></label>
-            <input type="text" id="last_name" name="last_name" required>
-
+            <input type="text" id="spouse_last_name" name="last_name" oninput="validateInput(spouse_last_name, 2, 'letters')" onkeypress="validateInput(spouse_last_name, 2, 'letters')" onblur="checkErrorMessage(spouse_last_name)" required>
+            <p class="input_error text-red-600"></p>
             @error('last_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -18,12 +16,10 @@
             @enderror
         </div>
 
-        {{-- <div></div> --}}
-
         <div class="mb-3">
             <label for="first_name">First Name<sup>*</span></label>
-            <input type="text" name="first_name" id="first_name" required>
-
+            <input type="text" id="spouse_first_name" name="first_name" oninput="validateInput(spouse_first_name, 2, 'letters')" onkeypress="validateInput(spouse_first_name, 2, 'letters')" onblur="checkErrorMessage(spouse_first_name)" required>
+            <p class="input_error text-red-600"></p>
             @error('first_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -33,8 +29,8 @@
 
         <div class="mb-3">
             <label for="middle_name">Middle Name</label>
-            <input type="text" name="middle_name" id="middle_name">
-
+            <input type="text" id="spouse_middle_name" name="middle_name" oninput="validateInput(spouse_middle_name, 0, 'letters')" onkeypress="validateInput(spouse_middle_name, 0, 'letters')" onblur="checkErrorMessage(spouse_middle_name)">
+            <p class="input_error text-red-600"></p>
             @error('middle_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -44,19 +40,18 @@
 
         <div class="mb-3">
             <label for="name_extension">Name Extension</label>
-            <input type="text" name="name_extension" id="name_extension">
-
-            @error('name_extension')
-                <span class="invalid" role="alert">
-                    <p>{{ $message }}</p>
-                </span>
-            @enderror
+            <input id="name_extension" list="name_extension_choices" name="name_extension" type="search">
+            <datalist id="name_extension_choices">
+                @foreach ($nameExtensions as $data)
+                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                @endforeach
+            </datalist>
         </div>
 
         <div class="mb-3">
             <label for="occupation">Occupation</label>
-            <input type="text" name="occupation" id="occupation">
-
+            <input type="text" id="spouse_occupation" name="occupation" oninput="validateInput(spouse_occupation, 0, 'letters')" onkeypress="validateInput(spouse_occupation, 0, 'letters')" onblur="checkErrorMessage(spouse_occupation)">
+            <p class="input_error text-red-600"></p>
             @error('occupation')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -66,8 +61,8 @@
 
         <div class="mb-3">
             <label for="employer_bussiness_name">Employer/Bussiness Name</label>
-            <input type="text" name="employer_bussiness_name" id="employer_bussiness_name">
-
+            <input type="text" id="spouse_employer_bussiness_name" name="employer_bussiness_name" oninput="validateInput(spouse_employer_bussiness_name, 0, 'letters')" onkeypress="validateInput(spouse_employer_bussiness_name, 0, 'letters')" onblur="checkErrorMessage(spouse_employer_bussiness_name)">
+            <p class="input_error text-red-600"></p>
             @error('employer_bussiness_name')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
@@ -77,8 +72,8 @@
 
         <div class="mb-3">
             <label for="employer_bussiness_address">Employer/Bussiness Address</label>
-            <input type="text" name="employer_bussiness_address" id="employer_bussiness_address">
-
+            <input type="text" id="spouse_employer_bussiness_address" name="employer_bussiness_address" oninput="validateInput(spouse_employer_bussiness_address, 0)" onkeypress="validateInput(spouse_employer_bussiness_address, 0)" onblur="checkErrorMessage(spouse_employer_bussiness_address)">
+            <p class="input_error text-red-600"></p>
             @error('employer_bussiness_address')
                 <span class="invalid" >
                     <p>{{ $message }}</p>
@@ -88,8 +83,8 @@
 
         <div class="mb-3">
             <label for="employer_bussiness_telephone">Employer/Bussiness Telephone No.</label>
-            <input type="text" name="employer_bussiness_telephone" id="employer_bussiness_telephone">
-
+            <input type="text" id="spouse_employer_bussiness_telephone" name="employer_bussiness_telephone" oninput="validateInput(spouse_employer_bussiness_telephone, 0, 'numbersWithSpecial')" onkeypress="validateInput(spouse_employer_bussiness_telephone, 0, 'numbersWithSpecial')" onblur="checkErrorMessage(spouse_employer_bussiness_telephone)">
+            <p class="input_error text-red-600"></p>
             @error('employer_bussiness_telephone')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>

@@ -249,6 +249,7 @@
                 <span class="close-avatar absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
                 <h2 class="text-2xl font-bold mb-4 text-center">Upload New Avatar</h2>
                 <input type="file" id="imageInputAvatar" name="imageInput" class="mb-4 p-2 border border-gray-300 rounded">
+                <p class="text-red-600" id="ErrorMessageAvatar"></p>
                 <div class="flex justify-center items-center mb-4">
                     <img id="imagePreviewAvatar" src="#" alt="Image Preview" class="hidden w-32 h-32 rounded-full">
                 </div>

@@ -147,8 +147,8 @@
                 <div class="mb-3">
                     <label for="type">Type<sup>*</span></label>
                     <select id="type" name="type" required onchange="toggleAddressType(this.value)">
-                        <option disabled selected>Select Type of Address</option>
-                        <option value="Permanent">Permanent</option>
+                        {{-- <option disabled selected>Select Type of Address</option> --}}
+                        <option value="Permanent" selected>Permanent</option>
                         <option value="Mailing">Mailing</option>
                         <option value="Temporary">Temporary</option>
                     </select>

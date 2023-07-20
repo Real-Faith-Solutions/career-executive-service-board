@@ -146,6 +146,7 @@ class ProfileController extends Controller
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
+        $nameExtensions = NameExtension::all();
 
         $birthdate = $mainProfile->birth_date;
         $now = new DateTime();
@@ -156,7 +157,7 @@ class ProfileController extends Controller
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
-        'addressProfileMailing', 'addressProfileTemp', 'age'));
+        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions'));
 
     }
 
