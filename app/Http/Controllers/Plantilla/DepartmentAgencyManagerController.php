@@ -16,7 +16,7 @@ class DepartmentAgencyManagerController extends Controller
         ->orWhere('website', 'LIKE', "%$search%")
         ->orWhere('agency_typeid', 'LIKE', "%$search%")
         ->orWhere('mother_deptid', 'LIKE', "%$search%")
-        ->paginate(10);
+        ->paginate(15);
         return view ('admin.plantilla.department_agency_manager.index', compact('datas', 'search'));
     }
 }

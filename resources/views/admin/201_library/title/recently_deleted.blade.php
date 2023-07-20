@@ -32,7 +32,7 @@
             @foreach ($datas as $data)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                        {{ $i++ }}
+                        {{ $data->ctrlno }}
                     </td>
                     <td class="px-6 py-3">
                         {{ $data->name }}

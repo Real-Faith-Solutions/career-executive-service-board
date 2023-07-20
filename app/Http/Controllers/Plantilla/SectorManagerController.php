@@ -15,13 +15,13 @@ class SectorManagerController extends Controller
         ->where('title', 'LIKE', "%$search%")
         ->orWhere('description', 'LIKE', "%$search%")
         ->orWhere('encoder', 'LIKE', "%$search%")
-        ->paginate(10);
+        ->paginate(25);
         return view ('admin.plantilla.sector_manager.index', compact('datas', 'search'));
     }
 
     public function show(){
         $datas = SectorManager::orderBy('title', 'ASC')
-        ->paginate(10);
+        ->paginate(15);
         return view ('admin.plantilla.sector_manager.index', compact('datas'));
     }
 
@@ -59,7 +59,7 @@ class SectorManagerController extends Controller
     public function recentlyDeleted(){
         $datas = SectorManager::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.plantilla.sector_manager.recently_deleted', compact('datas'));
     }
 

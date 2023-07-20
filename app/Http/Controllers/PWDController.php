@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PWDController extends Controller
 {
     public function index(){
-        $datas = PWD::paginate(10);
+        $datas = PWD::paginate(15);
         return view('admin.201_library.pwd.index', compact('datas'));
     }
 
@@ -44,7 +44,7 @@ class PWDController extends Controller
     public function recentlyDeleted(){
         $datas = PWD::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.pwd.recently_deleted', compact('datas'));
     }
 

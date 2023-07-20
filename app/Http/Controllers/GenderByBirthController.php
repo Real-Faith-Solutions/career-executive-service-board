@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class GenderByBirthController extends Controller
 {
     public function index(){
-        $datas = GenderByBirth::paginate(10);
+        $datas = GenderByBirth::paginate(15);
         return view('admin.201_library.gender_by_birth.index', compact('datas'));
     }
 
@@ -45,7 +45,7 @@ class GenderByBirthController extends Controller
     public function recentlyDeleted(){
         $datas = GenderByBirth::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.gender_by_birth.recently_deleted', compact('datas'));
     }
 
