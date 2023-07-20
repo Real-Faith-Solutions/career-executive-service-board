@@ -90,6 +90,9 @@
         }else if(type == 'numbersWithSpecial'){
             regexValidator = /^[0-9!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
             errorMessage = ' digits without letters.';
+        }else if(type == 'email'){
+            regexValidator = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            errorMessage = ' characters and has a valid email format.';
         }
     
         var form = inputField.closest('form');
@@ -141,6 +144,59 @@
         }
     }
     // end names input validations letters only or type
+
+    // email input validation
+    function validateInputEmail(inputField) {
+
+        const inputValue = inputField.value;
+        let regexValidator = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let errorMessage = ' characters and has a valid email format.';
+    
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+    
+        if (inputValue.length < 6 && regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least 6 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (inputValue.length < 7 && !regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least 6 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (!regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = 'Invalid email.';
+        } else {
+            inputField.nextElementSibling.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
+        }
+    }
+    // email input validation
 
     // when not focus on current input field
     function checkErrorMessage(inputField) {
