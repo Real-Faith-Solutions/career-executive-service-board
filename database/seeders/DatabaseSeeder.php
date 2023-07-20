@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
-            ProfileData::class,
+            // ProfileData::class,
             // ProfileAddress::class,
             IndigenousGroup::class,
             PWD::class,

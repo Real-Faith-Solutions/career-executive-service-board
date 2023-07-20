@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('ctrlno');
             // $table->bigInteger('cesno')->unique();
             $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('father_last_name')->nullable();
             $table->string('father_first_name')->nullable();
             $table->string('father_middle_name')->nullable();

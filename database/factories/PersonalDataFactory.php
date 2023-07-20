@@ -17,16 +17,19 @@ class PersonalDataFactory extends Factory
     public function definition(): array
     {
         return [
+
+            // 'picture' => 'placeholder.png',
+            'email' => $this->faker->safeEmail(),
             'status' => $this->faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $this->faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $this->faker->lastName,
             'firstname' => $this->faker->firstName,
             'name_extension' => $this->faker->randomElement(['Sr.', 'Jr.', 'III']),
             'middlename' => $this->faker->lastName,
-            'mi' => 'r',
+            'middleinitial' => 'r',
             'nickname' => $this->faker->name,
-            'birthdate' => $this->faker->date,
-            'age' => $this->faker->randomNumber(2),
+            'birth_date' => $this->faker->date,
+            // 'age' => $this->faker->randomNumber(2),
             'birth_place' => $this->faker->address,
             'gender' => $this->faker->randomElement(['Male', 'Female', 'Prefer Not to Say']),
             'gender_by_choice' => $this->faker->randomElement(['Male', 'Female', 'Prefer Not to Say']),
@@ -39,12 +42,11 @@ class PersonalDataFactory extends Factory
             'citizenship' => $this->faker->randomElement(['Filipino', 'Dual-Citizenship']),
             'dual_citizenship' => $this->faker->country(),
             'person_with_disability' => $this->faker->randomElement(['No', 'Yes']),
-            'gsis' => $this->faker->randomNumber(9),
-            'pagibig' => $this->faker->randomNumber(9),
-            'philhealth' => $this->faker->randomNumber(9),
-            'sss_no' => $this->faker->randomNumber(9),
-            'tin' => $this->faker->randomNumber(9),
-            'picture' => 'placeholder.png',
+            // 'gsis' => $this->faker->randomNumber(9),
+            // 'pagibig' => $this->faker->randomNumber(9),
+            // 'philhealth' => $this->faker->randomNumber(9),
+            // 'sss_no' => $this->faker->randomNumber(9),
+            // 'tin' => $this->faker->randomNumber(9),
 
         ];
     }
