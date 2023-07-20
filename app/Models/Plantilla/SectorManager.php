@@ -4,6 +4,7 @@ namespace App\Models\Plantilla;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SectorManager extends Model
@@ -18,6 +19,11 @@ class SectorManager extends Model
         'description',
         'encoder',
     ];
+
+    public function departmentAgency(): HasMany
+    {
+        return $this->hasMany(DepartmentAgency::class);
+    }
 
 
 }
