@@ -44,7 +44,7 @@ class PersonalDataFactory extends Factory
             // 'philhealth' => $this->faker->randomNumber(9),
             // 'sss_no' => $this->faker->randomNumber(9),
             // 'tin' => $this->faker->randomNumber(9),
-            'picture' => 'placeholder.png',
+            // 'picture' => 'placeholder.png',
 
         ];
     }
