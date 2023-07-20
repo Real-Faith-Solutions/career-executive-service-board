@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('person_with_disability')->nullable();
             $table->string('CESStat_code')->nullable();
             $table->string('encoder')->nullable();
-            $table->integer('acno');
+            $table->integer('acno')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
