@@ -78,7 +78,7 @@
                     {{ $data->acronym }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->agency_typeid }}
+                    {{ $data->departmentAgencyType->title ?? '-' }}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->website }}

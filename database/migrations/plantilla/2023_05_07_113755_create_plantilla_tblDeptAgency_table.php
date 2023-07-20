@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('plantilla_tblDeptAgency', function (Blueprint $table) {
             $table->id('deptid');
             $table->foreignId('plantilla_tblSector_id');
+            $table->foreignId('plantillalib_tblAgencyType_id');
+
+
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('agency_typeid')->nullable();
