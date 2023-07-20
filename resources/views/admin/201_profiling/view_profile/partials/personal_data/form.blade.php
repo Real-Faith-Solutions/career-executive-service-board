@@ -18,6 +18,12 @@
                     <label for="status">Record Status<sup>*</span></label>
                     <input id="status" name="status" readonly value="{{ $mainProfile->status }}">
                 </div>
+
+                <div class="mb-3">
+                    <label for="personal_email">Email<sup>*</span></label>
+                    <input id="personal_email" name="personal_email" readonly value="{{ $mainProfile->personal_email }}">
+                </div>
+
             </div>
 
             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -58,12 +64,12 @@
 
                 <div class="mb-3">
                     <label for="birthdate">Birthdate<sup>*</sup></label>
-                    <input id="birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birthdate }}">
+                    <input id="personal_birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birth_date }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="age">Age<sup class="text-danger">*</sup></label>
-                    <input id="age" name="age" readonly type="number" value="{{ $mainProfile->age }}">
+                    <input id="personal_age" name="age" readonly type="number" value="{{ $age }}">
                 </div>
 
                 <div class="mb-3">

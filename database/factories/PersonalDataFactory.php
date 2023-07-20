@@ -17,6 +17,9 @@ class PersonalDataFactory extends Factory
     public function definition(): array
     {
         return [
+
+            // 'picture' => 'placeholder.png',
+            'personal_email' => $this->faker->safeEmail(),
             'status' => $this->faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $this->faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $this->faker->lastName,
@@ -26,7 +29,7 @@ class PersonalDataFactory extends Factory
             'middleinitial' => 'r',
             'nickname' => $this->faker->name,
             'birth_date' => $this->faker->date,
-            'age' => $this->faker->randomNumber(2),
+            // 'age' => $this->faker->randomNumber(2),
             'birth_place' => $this->faker->address,
             'gender' => $this->faker->randomElement(['Male', 'Female', 'Prefer Not to Say']),
             'gender_by_choice' => $this->faker->randomElement(['Male', 'Female', 'Prefer Not to Say']),
@@ -44,7 +47,6 @@ class PersonalDataFactory extends Factory
             // 'philhealth' => $this->faker->randomNumber(9),
             // 'sss_no' => $this->faker->randomNumber(9),
             // 'tin' => $this->faker->randomNumber(9),
-            // 'picture' => 'placeholder.png',
 
         ];
     }

@@ -12,30 +12,20 @@ class AddProfile201 extends Controller
     //
     public function store(AddProfile201Req $request)
     {
-        $indigenous = $request->member_of_indigenous_group;
-
-        $pwd = $request->person_with_disability;
-
-        if($request->member_of_indigenous_group == "Others"){
-            $indigenous = $request->moig_others;
-        }
-
-        if($request->person_with_disability == "Yes"){
-            $pwd = $request->dependent_pwd_input;
-        }
 
         $newProfile = PersonalData::create([
             
             'status' => $request->status,
             'title' => $request->title,
+            'personal_email' => $request->personal_email,
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'name_extension' => $request->name_extension,
             'middlename' => $request->middlename,
-            'mi' => $request->mi,
+            'middleinitial' => $request->mi,
             'nickname' => $request->nickname,
-            'birthdate' => $request->birthdate,
-            'age' => $request->age,
+            'birth_date' => $request->birthdate,
+            // 'age' => $request->age,
             'birth_place' => $request->birth_place,
             'gender' => $request->gender,
             'gender_by_choice' => $request->gender_by_choice,
@@ -43,16 +33,16 @@ class AddProfile201 extends Controller
             'religion' => $request->religion,
             'height' => $request->height,
             'weight' => $request->weight,
-            'member_of_indigenous_group' => $indigenous,
+            'member_of_indigenous_group' => $request->member_of_indigenous_group,
             'single_parent' => $request->single_parent,
             'citizenship' => $request->citizenship,
             'dual_citizenship' => $request->dual_citizenship,
-            'person_with_disability' => $pwd,
-            'gsis' => $request->gsis,
-            'pagibig' => $request->pagibig,
-            'philhealth' => $request->philhealth,
-            'sss_no' => $request->sss_no,
-            'tin' => $request->tin,
+            'person_with_disability' => $request->person_with_disability,
+            // 'gsis' => $request->gsis,
+            // 'pagibig' => $request->pagibig,
+            // 'philhealth' => $request->philhealth,
+            // 'sss_no' => $request->sss_no,
+            // 'tin' => $request->tin,
 
         ]);
 
