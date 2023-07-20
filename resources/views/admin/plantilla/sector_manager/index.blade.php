@@ -58,7 +58,7 @@
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
 
-                        <a class="hover:bg-slate-100 rounded-full" href="#">
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('sector-manager.show', $data->sectorid) }}">
                             <lord-icon
                                 src="https://cdn.lordicon.com/hbvgknxo.json"
                                 trigger="hover"

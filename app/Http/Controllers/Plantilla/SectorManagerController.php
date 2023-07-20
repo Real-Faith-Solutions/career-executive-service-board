@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,15 @@ class SectorManagerController extends Controller
         ->where('title', 'LIKE', "%$search%")
         ->orWhere('description', 'LIKE', "%$search%")
         ->orWhere('encoder', 'LIKE', "%$search%")
-        ->paginate(10);
+        ->paginate(25);
         return view ('admin.plantilla.sector_manager.index', compact('datas', 'search'));
     }
 
-    public function show(){
-        $datas = SectorManager::orderBy('title', 'ASC')
-        ->paginate(10);
-        return view ('admin.plantilla.sector_manager.index', compact('datas'));
+    public function show($sectorid){
+        $datas = DepartmentAgency::where('plantilla_tblSector_id', $sectorid)
+        ->orderBy('title', 'ASC')
+        ->paginate(15);
+        return view ('admin.plantilla.department_agency_manager.index', compact('datas'));
     }
 
     public function create(){
@@ -59,7 +61,7 @@ class SectorManagerController extends Controller
     public function recentlyDeleted(){
         $datas = SectorManager::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.plantilla.sector_manager.recently_deleted', compact('datas'));
     }
 

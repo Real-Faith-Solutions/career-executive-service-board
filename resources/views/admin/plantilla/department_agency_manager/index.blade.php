@@ -69,7 +69,7 @@
                     {{ $data->deptid }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->mother_deptid }}
+                    {{ $data->sectorManager->title }}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->title }}

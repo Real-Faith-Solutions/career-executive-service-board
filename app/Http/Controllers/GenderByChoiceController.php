@@ -11,7 +11,7 @@ class GenderByChoiceController extends Controller
 {
 
     public function index(){
-        $datas = GenderByChoice::paginate(10);
+        $datas = GenderByChoice::paginate(15);
         return view('admin.201_library.gender_by_choice.index', compact('datas'));
     }
 
@@ -47,7 +47,7 @@ class GenderByChoiceController extends Controller
     public function recentlyDeleted(){
         $datas = GenderByChoice::onlyTrashed()
         ->orderByDesc('deleted_at')
-        ->paginate(10);
+        ->paginate(15);
         return view('admin.201_library.gender_by_choice.recently_deleted', compact('datas'));
     }
 

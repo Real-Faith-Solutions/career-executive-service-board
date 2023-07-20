@@ -78,7 +78,7 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('sector-manager')->group(function () {
         Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
-        Route::get('show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
+
         Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
         Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
         Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
@@ -91,6 +91,7 @@ Route::prefix('plantilla')->group(function () {
 
     Route::prefix('department-agency-manager')->group(function () {
         Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
+        Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
     });
 
     Route::prefix('agency-location-manager')->group(function () {
