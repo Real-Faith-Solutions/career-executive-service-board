@@ -69,29 +69,29 @@
                     {{ $data->deptid }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->sectorManager->title ?? 'deleted' }}
+                    {{ $data->sectorManager->title ?? 'N/A' }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->title }}
+                    {{ $data->title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->acronym }}
+                    {{ $data->acronym ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->departmentAgencyType->title ?? '-' }}
+                    {{ $data->departmentAgencyType->title ?? 'N/A' }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->website }}
+                    {{ $data->website ?? 'N/A'}}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->updated_at }}
+                    {{ $data->updated_at ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->submitted_by }}
+                    {{ $data->submitted_by ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->remarks }}
+                    {{ $data->remarks ?? 'N/A'}}
                 </td>
 
 
