@@ -132,6 +132,10 @@ class ProfileController extends Controller
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
+        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
         $examinationTaken = PersonalData::find($cesno)->examinationTakens;
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
@@ -143,6 +147,10 @@ class ProfileController extends Controller
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
         $otherTraining = PersonalData::find($cesno)->otherTraining;
+        $cesStatusCode = PersonalData::find($cesno)->cesStatusCode;
+        $cesStatusAccCode = PersonalData::find($cesno)->cesStatusAccCode;
+        $cesStatusTypeCode = PersonalData::find($cesno)->cesStatusTypeCode;
+        $appointingAuthority = PersonalData::find($cesno)->appointingAuthority;
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
@@ -157,7 +165,8 @@ class ProfileController extends Controller
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
-        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions'));
+        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
+        'cesStatusCode', 'cesStatusAccCode', 'cesStatusTypeCode', 'appointingAuthority'));
 
     }
 
@@ -3086,7 +3095,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Category Only') == 'true') {
 
-            $cesstatus = ProfileTblCesStatus::where('id', '=', $id)->get();
+            $cesstatus = ProfileTblCesStatus::where('ctrlno', '=', $id)->get();
 
             return $cesstatus;
         } else {
@@ -3100,7 +3109,7 @@ class ProfileController extends Controller
 
         if (RolesController::validateUserExecutive201RoleAccess('Eligibility and Rank Tracker', 'Delete') == 'true') {
 
-            $cesstatus = ProfileTblCesStatus::where('id', '=', $id)->delete();
+            $cesstatus = ProfileTblCesStatus::where('ctrlno', '=', $id)->delete();
 
             return 'Successfully deleted';
         } else {

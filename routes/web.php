@@ -18,6 +18,7 @@ use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
+use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
@@ -69,6 +70,9 @@ Route::get('/', function () {
         return Redirect::to('/admin/dashboard');
     }
 });
+
+Route::post('eligibility/rank-tracker/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
+Route::delete('eligibility/rank-tracker/{cesno}/{cesstat_code}/{acc_code}/{type_code}/{official_code}', [EligibilityAndRankTrackerController::class, 'detach'])->name('eligibility-rank-tracker.detach');
 
 Route::prefix('plantilla')->group(function () {
 
