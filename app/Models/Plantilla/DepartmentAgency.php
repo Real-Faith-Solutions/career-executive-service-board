@@ -20,7 +20,7 @@ class DepartmentAgency extends Model
         return $this->belongsTo(SectorManager::class, 'plantilla_tblSector_id', 'sectorid');
     }
 
-    public function departmentAgency(): BelongsTo
+    public function departmentAgencyType(): BelongsTo
     {
         return $this->belongsTo(DepartmentAgencyType::class, 'plantillalib_tblAgencyType_id', 'agency_typeid');
     }
