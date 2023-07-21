@@ -49,7 +49,7 @@
 
         <div class="mb-3">
             <label for="birthdate">Birthday<sup>*</span></label>
-            <input type="date" id="children_birthdate" name="birthdate" oninput="validateDateInput(children_birthdate)" required>
+            <input type="date" id="children_birthdate" name="birthdate" oninput="validateDateInput(children_birthdate)" onchange="validateDateInput(children_birthdate)" required>
             <p class="input_error text-red-600"></p>
             @error('birthdate')
                 <span class="invalid" role="alert">
