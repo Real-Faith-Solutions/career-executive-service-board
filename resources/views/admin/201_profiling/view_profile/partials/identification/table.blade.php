@@ -28,23 +28,23 @@
         <tbody>
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">GSIS</td>
-                <td class="px-6 py-3">{{ $identification->gsis ? $identification->gsis : 'None' }}</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->gsis : 'None' }}</td>
             </tr>
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">PAG-IBIG</td>
-                <td class="px-6 py-3">{{ $identification->pagibig  ? $identification->pagibig : 'None' }}</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->pagibig : 'None' }}</td>
             </tr>
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">PHILHEALTH</td>
-                <td class="px-6 py-3">{{ $identification->philhealth  ? $identification->philhealth : 'None' }}</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->philhealth : 'None' }}</td>
             </tr>
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">SSS</td>
-                <td class="px-6 py-3">{{ $identification->sss_no  ? $identification->sss_no : 'None' }}</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->sss_no : 'None' }}</td>
             </tr>
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">TIN</td>
-                <td class="px-6 py-3">{{ $identification->tin  ? $identification->tin : 'None' }}</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->tin : 'None' }}</td>
             </tr>
 
             {{-- @foreach ($identification as $newIdentification)
