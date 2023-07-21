@@ -123,7 +123,7 @@ class ProfileController extends Controller
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
-        $identification = Identification::where('personal_data_cesno', $cesno)->get();
+        $identification = Identification::where('personal_data_cesno', $cesno)->first();
         $profileLibTblExamRef = ProfileLibTblExamRef::pluck('TITLE')->toArray();
         $profileLibTblEducDegree = ProfileLibTblEducDegree::pluck('degree')->toArray();
         $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();

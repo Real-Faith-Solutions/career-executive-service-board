@@ -15,8 +15,12 @@ class IdentificationController extends Controller
 
         $request->validate([
 
-            'type' => ['required', Rule::unique('identifications')->where('personal_data_cesno', $cesno)],
-            'id_number' => ['required', 'unique:identifications,id_number', 'min:2', 'max:40'],
+            // 'type' => ['required', Rule::unique('identifications')->where('personal_data_cesno', $cesno)],
+            'gsis' => ['required', 'unique:identifications,gsis', 'min:9', 'max:40'],
+            'pagibig' => ['required', 'unique:identifications,pagibig', 'min:9', 'max:40'],
+            'philhealth' => ['required', 'unique:identifications,philhealth', 'min:9', 'max:40'],
+            'sss_no' => ['required', 'unique:identifications,sss_no', 'min:9', 'max:40'],
+            'tin' => ['required', 'unique:identifications,tin', 'min:9', 'max:40'],
         
         ]);
 
@@ -25,17 +29,37 @@ class IdentificationController extends Controller
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
 
-        $identification = new Identification([
+        // $identification = new Identification([
 
-            'type' => $request->type,
-            'id_number' => $request->id_number,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+        //     // 'type' => $request->type,
+        //     // 'id_number' => $request->id_number,
+        //     'gsis' => $request->gsis,
+        //     'pagibig' => $request->pagibig,
+        //     'philhealth' => $request->philhealth,
+        //     'sss_no' => $request->sss_no,
+        //     'tin' => $request->tin,
+        //     'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
          
-        ]);
+        // ]);
 
-        $identificationsPersonalDataId = PersonalData::find($cesno);
+        // $identificationsPersonalDataId = PersonalData::find($cesno);
 
-        $identificationsPersonalDataId->identifications()->save($identification);
+        // $identificationsPersonalDataId->identifications()->save($identification);
+
+        $personalData = PersonalData::findOrFail($cesno);
+
+        // Update or create the associated Identification record
+        $identification = $personalData->identifications()->updateOrCreate(
+            [],
+            [
+                'gsis' => $request->input('gsis'),
+                'pagibig' => $request->input('pagibig'),
+                'philhealth' => $request->input('philhealth'),
+                'sss_no' => $request->input('sss_no'),
+                'tin' => $request->input('tin'),
+                'encoder' => $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension,
+            ]
+        );
 
         return redirect()->back()->with('message', 'Successfuly Saved');
 
