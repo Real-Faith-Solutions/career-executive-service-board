@@ -9,7 +9,6 @@
             age--;
         }
         document.getElementById('age').value = age;
-        return age;
     }
 
     function generateMiddleInitial() {
@@ -262,9 +261,14 @@
             return
         }
 
-        let userAge = computeAge();
+        var today = new Date();
+        var age = today.getFullYear() - inputDateNew.getFullYear();
+        var monthDiff = today.getMonth() - inputDateNew.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < inputDateNew.getDate())) {
+            age--;
+        }
 
-        if(userAge < minAge){
+        if(age < minAge){
             inputDate.nextElementSibling.textContent = `Invalid date.`;
             inputDate.classList.remove('focus:outline-blue-600');
             inputDate.classList.add('border-red-600');
