@@ -136,7 +136,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="year_graduate">Year Graduate<sup>*</span></label>
-                        <input type="text" id="year_graduate" name="year_graduate" required oninput="validateInput(year_graduate, 4, 'numbers')" onkeypress="validateInput(year_graduate, 4, 'numbers')" onblur="checkErrorMessage(year_graduate)">
+                        <input type="text" id="year_graduate" name="year_graduate" oninput="validateInput(year_graduate, 4, 'numbers')" onkeypress="validateInput(year_graduate, 4, 'numbers')" onblur="checkErrorMessage(year_graduate)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('year_graduate')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
