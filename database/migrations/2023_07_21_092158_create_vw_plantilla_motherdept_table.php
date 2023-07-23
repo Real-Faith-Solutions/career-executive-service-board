@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // migrate from legacy
-        Schema::create('plantillalib_tblAgencyType', function (Blueprint $table) {
-            $table->id('agency_typeid');
-            $table->string('sectorid')->nullable();
-            $table->string('title')->nullable();
-            $table->string('encoder')->nullable();
+        Schema::create('vw_plantilla_motherdept', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('encoder');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tblAgencyType');
+        Schema::dropIfExists('vw_plantilla_motherdept');
     }
 };
