@@ -50,7 +50,7 @@ class IdentificationController extends Controller
 
         // Update or create the associated Identification record
         $identification = $personalData->identifications()->updateOrCreate(
-            [],
+            ['personal_data_cesno' => $cesno],
             [
                 'gsis' => $request->input('gsis'),
                 'pagibig' => $request->input('pagibig'),

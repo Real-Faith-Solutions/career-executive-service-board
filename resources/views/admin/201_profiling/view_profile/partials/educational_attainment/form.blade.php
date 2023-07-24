@@ -102,7 +102,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="period_of_attendance_from">Period of attendance (From)<sup>*</span></label>
-                        <input type="date" id="period_of_attendance_from" name="period_of_attendance_from" required oninput="validateDateInput(period_of_attendance_from)">
+                        <input type="date" id="period_of_attendance_from" name="period_of_attendance_from" oninput="validateDateInput(period_of_attendance_from)" required>
                         <p class="input_error text-red-600"></p>
                         @error('period_of_attendance_from')
                             <span class="invalid" role="alert">
@@ -113,7 +113,7 @@
 
                     <div class="mb-3">
                         <label for="period_of_attendance_to">Period of attendance (To)<sup>*</span></label>
-                        <input type="date" id="period_of_attendance_to" name="period_of_attendance_to" required oninput="validateDateInput(period_of_attendance_to)">
+                        <input type="date" id="period_of_attendance_to" name="period_of_attendance_to" oninput="validateDateInput(period_of_attendance_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('period_of_attendance_to')
                             <span class="invalid" role="alert">

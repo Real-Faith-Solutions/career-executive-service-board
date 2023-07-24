@@ -227,11 +227,11 @@
     // end prevent submission of form if there is an error
 
     // validate date
-    function validateDateInput(inputDate, minAge = 0){
+    function validateDateInput(inputDate, minAge = 0, allowFuture = false){
 
         const inputDateByUSer = inputDate.value;
 
-        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        const datePattern = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 
         var form = inputDate.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
@@ -250,7 +250,7 @@
         const inputDateNew = new Date(inputDateByUSer);
         const currentDate = new Date();
 
-        if(inputDateNew > currentDate){
+        if((inputDateNew > currentDate) && (!allowFuture)){
             inputDate.nextElementSibling.textContent = `Invalid date.`;
             inputDate.classList.remove('focus:outline-blue-600');
             inputDate.classList.add('border-red-600');
@@ -268,15 +268,17 @@
             age--;
         }
 
-        if(age < minAge){
-            inputDate.nextElementSibling.textContent = `Invalid date.`;
-            inputDate.classList.remove('focus:outline-blue-600');
-            inputDate.classList.add('border-red-600');
-            inputDate.classList.add('focus:outline-red-500');
-            submitButton.disabled = true;
-            submitButton.classList.remove('cursor-pointer');
-            submitButton.classList.add('cursor-not-allowed');
-            return
+        if(!allowFuture){
+            if(age < minAge){
+                inputDate.nextElementSibling.textContent = `Invalid date.`;
+                inputDate.classList.remove('focus:outline-blue-600');
+                inputDate.classList.add('border-red-600');
+                inputDate.classList.add('focus:outline-red-500');
+                submitButton.disabled = true;
+                submitButton.classList.remove('cursor-pointer');
+                submitButton.classList.add('cursor-not-allowed');
+                return
+            }
         }
 
         inputDate.nextElementSibling.textContent = '';
@@ -289,5 +291,49 @@
 
     }
     // end validate date
+
+    // validation of 2 dates from vs to where from should be < to
+    function validateDateFromTo(fromDate, toDate){
+
+        const inputFromDateByUSer = fromDate.value;
+        const inputToDateByUSer = toDate.value;
+
+        const inputFromDate = new Date(inputFromDateByUSer);
+        const inputToDate = new Date(inputToDateByUSer);
+
+        var form = fromDate.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if(inputFromDate && inputToDate){
+            if(inputFromDate > inputToDate){
+                fromDate.nextElementSibling.textContent = `Invalid date.`;
+                fromDate.classList.remove('focus:outline-blue-600');
+                fromDate.classList.add('border-red-600');
+                fromDate.classList.add('focus:outline-red-500');
+                toDate.nextElementSibling.textContent = `Invalid date.`;
+                toDate.classList.remove('focus:outline-blue-600');
+                toDate.classList.add('border-red-600');
+                toDate.classList.add('focus:outline-red-500');
+                submitButton.disabled = true;
+                submitButton.classList.remove('cursor-pointer');
+                submitButton.classList.add('cursor-not-allowed');
+                return
+            }
+        }
+
+        fromDate.nextElementSibling.textContent = '';
+        fromDate.classList.remove('focus:outline-red-500');
+        fromDate.classList.remove('border-red-600');
+        fromDate.classList.add('focus:outline-blue-600');
+        toDate.nextElementSibling.textContent = '';
+        toDate.classList.remove('focus:outline-red-500');
+        toDate.classList.remove('border-red-600');
+        toDate.classList.add('focus:outline-blue-600');
+        submitButton.disabled = false;
+        submitButton.classList.remove('cursor-not-allowed');
+        submitButton.classList.add('cursor-pointer');
+
+    }
+    // end validation of 2 dates from vs to where from should be < to
 
 // end of real-time validation
