@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('research-studies.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('research-studies.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST" id="research_studies_form" onsubmit="return checkErrorsBeforeSubmit(research_studies_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
