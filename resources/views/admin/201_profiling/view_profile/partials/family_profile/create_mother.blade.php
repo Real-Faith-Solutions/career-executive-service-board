@@ -1,7 +1,6 @@
-{{-- mother details --}}
 <form action="{{ route('family-profile-mother.store', ['cesno' => $mainProfile->cesno]) }}" method="POST" id="family_profile_mother" onsubmit="return checkErrorsBeforeSubmit(family_profile_mother)">
-
     @csrf
+    
     <p class="font-xsm text-grey-500">Note: Mother's maiden name</p>
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div class="mb-3">

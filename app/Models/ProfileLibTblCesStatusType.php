@@ -24,11 +24,4 @@ class ProfileLibTblCesStatusType extends Model
 
     ]; 
 
-    public function cesStatusTypeLibraryPersonalData(): BelongsToMany
-    {
-        return $this->belongsToMany(PersonalData::class, 'profile_tblCESstatus', 'type_code', 'cesno')
-        ->as('profile_tblCESstatus')
-        ->withTimestamps();
-    }
-
 }

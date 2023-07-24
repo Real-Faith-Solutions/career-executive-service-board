@@ -22,6 +22,7 @@ class EducationalAttainmentController extends Controller
         $userFirstName = Auth::user()->first_name;
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
+        
         $educationalAttainment = new EducationalAttainment([
     
             'level' => $request->level,

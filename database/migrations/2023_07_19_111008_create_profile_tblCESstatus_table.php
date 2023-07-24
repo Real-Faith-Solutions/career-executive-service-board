@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profile_tblCESstatus', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('personal_data')->onDelete('cascade');
+            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->unsignedBigInteger('cesstat_code');
             $table->foreign('cesstat_code')->references('code')->on('profilelib_tblcesstatus')->onDelete('cascade');
             $table->unsignedBigInteger('acc_code');

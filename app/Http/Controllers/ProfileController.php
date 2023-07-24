@@ -118,6 +118,11 @@ class ProfileController extends Controller
     public function viewProfile($cesno)
     {
 
+        // $personalData = PersonalData::find($cesno);
+        // $cesStatusCode = $personalData->cesStatusCode;
+        // $cesStatusAccCode = $personalData->cesStatusAccCode;
+
+
         $mainProfile = PersonalData::find($cesno);
         $father = Father::where('personal_data_cesno', $cesno)->get();
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
@@ -136,21 +141,19 @@ class ProfileController extends Controller
         $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
         $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
-        $examinationTaken = PersonalData::find($cesno)->examinationTakens;
-        $scholarship = PersonalData::find($cesno)->scholarships;
-        $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
-        $workExperience = PersonalData::find($cesno)->workExperience;
-        $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
-        $affiliation = PersonalData::find($cesno)->affiliations;
-        $caseRecord = PersonalData::find($cesno)->caseRecords;
-        $healthRecord = PersonalData::find($cesno)->healthRecords;
-        $expertise = PersonalData::find($cesno)->expertise;
-        $language = PersonalData::find($cesno)->languages;
-        $otherTraining = PersonalData::find($cesno)->otherTraining;
-        $cesStatusCode = PersonalData::find($cesno)->cesStatusCode;
-        $cesStatusAccCode = PersonalData::find($cesno)->cesStatusAccCode;
-        $cesStatusTypeCode = PersonalData::find($cesno)->cesStatusTypeCode;
-        $appointingAuthority = PersonalData::find($cesno)->appointingAuthority;
+        $personalData = PersonalData::find($cesno);
+        $profileTblCesStatus = $personalData->ProfileTblCesStatus;
+        $otherTraining = $personalData->otherTraining;
+        $language = $personalData->languages;
+        $expertise = $personalData->expertise;
+        $healthRecord = $personalData->healthRecords;
+        $caseRecord = $personalData->caseRecords;
+        $affiliation = $personalData->affiliations;
+        $awardsAndCitation = $personalData->awardsAndCitations;
+        $workExperience = $personalData->workExperience;
+        $researchAndStudies = $personalData->researchAndStudies;
+        $scholarship = $personalData->scholarships;
+        $examinationTaken = $personalData->examinationTakens;
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
@@ -166,7 +169,7 @@ class ProfileController extends Controller
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
-        'cesStatusCode', 'cesStatusAccCode', 'cesStatusTypeCode', 'appointingAuthority'));
+        'profileTblCesStatus'));
 
     }
 

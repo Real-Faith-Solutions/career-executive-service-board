@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProfileTblCesStatus extends Pivot
+class ProfileTblCesStatus extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     protected $table = "profile_tblCESstatus";
     
@@ -16,8 +20,7 @@ class ProfileTblCesStatus extends Pivot
 
     protected $fillable = [
         
-        'personal_data_cesno',
-        'profilelib_tblcesstatus_code',
+        'cesno',
         'cesstat_code',
         'acc_code',
         'type_code',
@@ -31,5 +34,25 @@ class ProfileTblCesStatus extends Pivot
         'encoder',
 
     ];
+
+    public function profileLibTblCesStatus(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatus::class, 'cesstat_code');
+    }
+
+    public function profileLibTblCesStatusAcc(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatusAcc::class, 'acc_code');
+    }
+
+    public function profileLibTblCesStatusType(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatusType::class, 'type_code');
+    }
+
+    public function profileLibTblAppAuthority(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblAppAuthority::class, 'official_code');
+    }
 
 }

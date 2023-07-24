@@ -10,7 +10,6 @@
 <div class="table-eligibility-and-rank-tracker">
     <h1 class="mx-2 text-blue-500 text-bold">CES Status</h1>
     <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
-
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
@@ -38,39 +37,42 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($personalData as $personalDatas) 
+                @foreach ($profileTblCesStatus as $profileTblCesStatuses)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $personalDatas->cesStatusCode->code ?? }}
+                            {{$profileTblCesStatuses->profileLibTblCesStatus->description}}
                         </td>
-
-                        {{-- <td class="px-6 py-3">
-                            {{ $newCesStatusCode->profile_tblCESstatus->acc_code }}
+                        
+                        <td class="px-6 py-3">
+                            {{$profileTblCesStatuses->profileLibTblCesStatusAcc->description}}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $newCesStatusCode->profile_tblCESstatus->type_code }}
+                            {{$profileTblCesStatuses->profileLibTblCesStatusType->description}}
                         </td>
 
                         <td class="px-6 py-3">
-                           {{ $newCesStatusCode->profile_tblCESstatus->official_code }}
+                            {{$profileTblCesStatuses->profileLibTblAppAuthority->description}}
                         </td>
 
                         <td class="px-6 py-3">
-                           {{ $newCesStatusCode->profile_tblCESstatus->resolution_no }}
-                       </td>
+                            {{$profileTblCesStatuses->resolution_no}}
+                        </td>
 
-                       <td class="px-6 py-3">
-                           {{ $newCesStatusCode->profile_tblCESstatus->appointed_dt }}
-                       </td>
-
+                        <td class="px-6 py-3">
+                            {{$profileTblCesStatuses->appointed_dt}}
+                        </td> 
+               
                        <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                                <form action="{{ route('eligibility-rank-tracker.edit', ['ctrlno'=>$profileTblCesStatuses->ctrlno]) }}" method="GET">
+                                    @csrf
+                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                       UPDATE
+                                    </button>
+                                </form>
                                     
-                                <form action="{{ route('eligibility-rank-tracker.detach', ['cesno'=>$newCesStatusCode->profile_tblCESstatus->cesno,
-                                'cesstat_code'=>$newCesStatusCode->profile_tblCESstatus->cesstat_code,'acc_code'=>$newCesStatusCode->profile_tblCESstatus->acc_code, 
-                                'type_code'=>$newCesStatusCode->profile_tblCESstatus->type_code, 'official_code'=>$newCesStatusCode->profile_tblCESstatus->official_code,]) }}" method="POST">
+                                <form action="{{ route('eligibility-rank-tracker.destroy', ['ctrlno'=>$profileTblCesStatuses->ctrlno]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
@@ -83,10 +85,10 @@
                                         </lord-icon>
                                     </button>
                                 </form>
-                            </div>
-                       </td> --}}
-                    </tr>                   
-                @endforeach
+                            </div>  
+                       </td>
+                    </tr>       
+                @endforeach               
             </tbody>
         </table>
     </div>

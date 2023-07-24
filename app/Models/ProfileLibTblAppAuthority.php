@@ -21,11 +21,4 @@ class ProfileLibTblAppAuthority extends Model
 
     ]; 
 
-    public function appointingAuthorityPersonalData(): BelongsToMany
-    {
-        return $this->belongsToMany(PersonalData::class, 'profile_tblCESstatus', 'official_code', 'cesno')
-        ->as('profile_tblCESstatus')
-        ->withTimestamps();
-    }
-
 }

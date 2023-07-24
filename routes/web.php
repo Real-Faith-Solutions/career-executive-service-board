@@ -71,9 +71,6 @@ Route::get('/', function () {
     }
 });
 
-Route::post('eligibility/rank-tracker/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
-Route::delete('eligibility/rank-tracker/{cesno}/{cesstat_code}/{acc_code}/{type_code}/{official_code}', [EligibilityAndRankTrackerController::class, 'detach'])->name('eligibility-rank-tracker.detach');
-
 Route::prefix('plantilla')->group(function () {
 
     Route::prefix('plantilla-management')->group(function () {
@@ -179,26 +176,32 @@ Route::prefix('201-library')->group(function () {
 
 
 Route::prefix('family-profile')->group(function () {
-    Route::get('{cesno}', [FamilyController::class, 'create'])->name('family-profile.create');
-
     Route::prefix('spouse')->group(function () {
-        Route::post('store/spouse/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
-        Route::delete('delete/spouse/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+        Route::get('{ctrlno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
+        Route::post('{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
+        Route::put('{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord');
+        Route::delete('{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
     });
 
     Route::prefix('children')->group(function () {
-        Route::post('store/{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
-        Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
+        Route::get('{ctrlno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren');
+        Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
+        Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren');
+        Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
     });
 
     Route::prefix('father')->group(function () {
+        Route::get('{ctrlno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather');
         Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
+        Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord');
         Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy');
     });
 
     Route::prefix('mother')->group(function () {
-        Route::post('store/{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
-        Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy');
+        Route::get('{ctrlno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother');
+        Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
+        Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord');
+        Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy');
     });
 });
 
@@ -284,7 +287,6 @@ Route::prefix('language')->group(function () {
     Route::delete('{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 
-
 Route::prefix('non-accredited-ces-training')->group(function () {
     Route::get('edit/{ctrlno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
     Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
@@ -292,6 +294,12 @@ Route::prefix('non-accredited-ces-training')->group(function () {
     Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
 });
 
+Route::prefix('eligibility-rank-tracker')->group(function () {
+    Route::get('{ctrlno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit');
+    Route::post('{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
+    Route::put('{ctrlno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update');
+    Route::delete('{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy');    
+});
 
 
 // 201 profiling routes

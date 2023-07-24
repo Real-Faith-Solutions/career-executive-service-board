@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Lenard\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -139,36 +140,9 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblTrainingMngt::class);
     }
 
-    public function cesStatusCode(): BelongsToMany
+    public function profileTblCesStatus(): HasMany
     {
-        return $this->belongsToMany(ProfileLibTblCesStatus::class, 'profile_tblCESstatus',  'cesno', 'cesstat_code')
-        ->as('profile_tblCESstatus')
-        ->withPivot('cesno','ctrlno','cesstat_code','acc_code','type_code','official_code','resolution_no','appointed_dt')
-        ->withTimestamps();
-    }
-
-    public function cesStatusAccCode(): BelongsToMany
-    {
-        return $this->belongsToMany(ProfileLibTblCesStatusAcc::class, 'profile_tblCESstatus',  'cesno', 'acc_code')
-        ->as('profile_tblCESstatus')
-        ->withPivot('cesno','ctrlno','cesstat_code','acc_code','type_code','official_code','resolution_no','appointed_dt')
-        ->withTimestamps();
-    }
-
-    public function cesStatusTypeCode(): BelongsToMany
-    {
-        return $this->belongsToMany(ProfileLibTblCesStatusType::class, 'profile_tblCESstatus',  'cesno', 'type_code')
-        ->as('profile_tblCESstatus')
-        ->withPivot('cesno','ctrlno','cesstat_code','acc_code','type_code','official_code','resolution_no','appointed_dt')
-        ->withTimestamps();
-    }
-
-    public function appointingAuthority(): BelongsToMany
-    {
-        return $this->belongsToMany(ProfileLibTblAppAuthority::class, 'profile_tblCESstatus',  'cesno', 'official_code')
-        ->as('profile_tblCESstatus')
-        ->withPivot('cesno','ctrlno','cesstat_code','acc_code','type_code','official_code','resolution_no','appointed_dt')
-        ->withTimestamps();
+        return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
     }
   
 }
