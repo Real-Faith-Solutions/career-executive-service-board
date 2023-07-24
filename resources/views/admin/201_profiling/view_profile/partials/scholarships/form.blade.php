@@ -63,7 +63,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)</label>
-                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(inclusive_date_to)" required>
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(inclusive_date_to, 0, true)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
