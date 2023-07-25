@@ -118,9 +118,9 @@ class PersonalData extends Model
         return $this->hasMany(CaseRecords::class);
     }
 
-    public function healthRecords(): HasMany
+    public function healthRecords(): HasOne
     {
-        return $this->hasMany(HealthRecords::class);
+        return $this->hasOne(HealthRecords::class);
     }
 
     public function expertise(): HasMany
@@ -136,6 +136,11 @@ class PersonalData extends Model
     public function otherTraining(): HasMany
     {
         return $this->hasMany(ProfileTblTrainingMngt::class);
+    }
+
+    public function medicalHistoryRecords(): HasMany
+    {
+        return $this->hasMany(MedicalHistory::class);
     }
   
 }

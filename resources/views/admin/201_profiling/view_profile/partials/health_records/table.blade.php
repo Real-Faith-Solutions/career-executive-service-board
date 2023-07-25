@@ -24,19 +24,6 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Specified Disabilities
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Medical Condition/Illness
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-
-
-                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
@@ -54,19 +41,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $healthRecords->handicap }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $healthRecords->disability_handicap_defects_specify }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $healthRecords->illness }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $healthRecords->illness_date }}
+                        {{ $healthRecords->person_with_disability }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

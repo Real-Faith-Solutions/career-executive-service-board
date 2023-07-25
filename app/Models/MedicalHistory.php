@@ -7,34 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class HealthRecords extends Model
+class MedicalHistory extends Model
 {
-
     use HasFactory;
 
     use SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table ="profile_tblHealthRecord";
+    protected $table ="medical_history";
 
     protected $fillable = [
 
         'personal_data_cesno',
-        'blood_type',
-        'marks',
-        'person_with_disability',
-        // 'disability_handicap_defects_specify',
-        // 'illness',
-        // 'illness_date',
+        'illness',
+        'illness_date',
         'encoder',
-
     ];
 
-    public function healthRecordPersonalData(): BelongsTo
+    public function medicalHistoryPersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
     }
-
 
 }

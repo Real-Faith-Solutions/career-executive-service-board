@@ -139,7 +139,7 @@ class ProfileController extends Controller
         $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
         $affiliation = PersonalData::find($cesno)->affiliations;
         $caseRecord = PersonalData::find($cesno)->caseRecords;
-        $healthRecord = PersonalData::find($cesno)->healthRecords;
+        $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->get();
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
         $otherTraining = PersonalData::find($cesno)->otherTraining;
@@ -147,6 +147,8 @@ class ProfileController extends Controller
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
         $nameExtensions = NameExtension::all();
+        $pwds = PWD::all();
+        $medicalHistory = PersonalData::find($cesno)->medicalHistoryRecords;
 
         $birthdate = $mainProfile->birth_date;
         $now = new DateTime();
@@ -157,7 +159,7 @@ class ProfileController extends Controller
         'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
-        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions'));
+        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'pwds', 'medicalHistory'));
 
     }
 

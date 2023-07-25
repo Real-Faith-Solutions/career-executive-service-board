@@ -18,10 +18,10 @@ class HealthRecordController extends Controller
 
             'blood_type' => $request->blood_type,
             'marks' => $request->identifying_marks,
-            'handicap' => $request->disability_handicap_defects, 
-            'disability_handicap_defects_specify' => $request->disability_handicap_defects_specify,
-            'illness' => $request->medical_condition_illness,
-            'illness_date' => $request->date,
+            'person_with_disability' => $request->person_with_disability, 
+            // 'disability_handicap_defects_specify' => $request->disability_handicap_defects_specify,
+            // 'illness' => $request->medical_condition_illness,
+            // 'illness_date' => $request->date,
             'encoder' => $userlastName,
          
         ]);
