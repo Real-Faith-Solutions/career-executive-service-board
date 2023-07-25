@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblExpertiseSpec', function (Blueprint $table) {
             $table->id('SpeExp_Code');
-            // $table->string('SpeExp_Code')->unique();
             $table->string('Title')->nullable();
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

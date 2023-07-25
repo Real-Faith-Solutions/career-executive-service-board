@@ -8,6 +8,7 @@ use App\Models\ProfileTblExpertise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redirect;
 
 class ExpertiseController extends Controller
 {
@@ -16,62 +17,57 @@ class ExpertiseController extends Controller
 
         $request->validate([
 
-            'expertise_specialization' => ['required', Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)],
+            'specialization_code' => [Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno), 'required'],
            
         ]);
 
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
 
-        $expertise = new ProfileTblExpertise([
-
-            'expertise_specialization' => $request->expertise_specialization,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
-        ]);
-
-        $expertisePersonalDataId = PersonalData::find($cesno);
-
-        $expertisePersonalDataId->expertise()->save($expertise);
+        $speXpCode = $request->specialization_code;
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        $expertise = PersonalData::find($cesno);
+
+        $expertiseLibrary = ProfileLibTblExpertiseSpec::find($speXpCode);
+ 
+        $expertise->expertise()->attach($expertiseLibrary,['encoder'=>$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension]);
+            
+        return redirect()->back()->with('message', 'Expertise Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
-        
-        $expertise = ProfileTblExpertise::find($ctrlno);
+    public function edit($cesno, $speXpCode){
+    
+        $personalDataId = PersonalData::find($cesno);
+        $speXpCodes = $personalDataId->expertise()->where('specialization_code', $speXpCode)->value('specialization_code');
+        // dd($speXpCodes);
+
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
-        
-        return view('admin.201_profiling.view_profile.partials.field_expertise.edit', 
-        ['expertise'=>$expertise, 'profileLibTblExpertiseSpec'=>$profileLibTblExpertiseSpec]);
+        return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'speXpCodes'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $cesno, $speXpCodes){
 
-        $expertiseId = ProfileTblExpertise::find($ctrlno);
+        $personalDataId = PersonalData::find($cesno);
 
-        $request->validate([
-
-            'expertise_specialization' => ['required'],
-           
-        ]);
-
-        $expertise = ProfileTblExpertise::find($ctrlno);
-        $expertise->expertise_specialization = $request->expertise_specialization;
-        $expertise->save();
-
-        return back()->with('message', 'Updated Sucessfully');
+        $speXpCode = ProfileLibTblExpertiseSpec::find($speXpCodes);
+ 
+        $personalDataId->expertise()->updateExistingPivot($speXpCode, 
+        ['specialization_code' => $request->specialization_code,]);
+     
+        return redirect()->route('viewProfile', ['cesno' => $personalDataId])->with('message', 'Updated Sucessfully');
 
     }
 
-    public function destroy($ctrlno){
+    public function destroy($cesno, $speXpCode){
         
-        $expertise = ProfileTblExpertise::find($ctrlno);
-        $expertise->delete();
+        $personalData = PersonalData::find($cesno);
+ 
+        $personalData->expertise()->detach($speXpCode);
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 

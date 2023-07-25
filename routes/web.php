@@ -274,10 +274,10 @@ Route::prefix('health-record')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
-    Route::get('edit/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
-    Route::post('{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
-    Route::put('update/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
-    Route::delete('{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+    Route::get('edit/{cesno}/{speXpCode}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
+    Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
+    Route::put('update/{cesno}/{speXpCodes}', [ExpertiseController::class, 'update'])->name('expertise.update');
+    Route::delete('destroy/{cesno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
 Route::prefix('language')->group(function () {
@@ -722,7 +722,7 @@ Route::group([
         Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
 
         // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
-        Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('hehe')->middleware('userauth');
+        Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('userauth');
 
     });
 
