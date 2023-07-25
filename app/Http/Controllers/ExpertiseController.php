@@ -43,9 +43,9 @@ class ExpertiseController extends Controller
     
         $personalDataId = PersonalData::find($cesno);
         $speXpCodes = $personalDataId->expertise()->where('specialization_code', $speXpCode)->value('specialization_code');
-        // dd($speXpCodes);
-
+        
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+        
         return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'speXpCodes'));
 
     }
@@ -56,8 +56,7 @@ class ExpertiseController extends Controller
 
         $speXpCode = ProfileLibTblExpertiseSpec::find($speXpCodes);
  
-        $personalDataId->expertise()->updateExistingPivot($speXpCode, 
-        ['specialization_code' => $request->specialization_code,]);
+        $personalDataId->expertise()->updateExistingPivot($speXpCode,['specialization_code' => $request->specialization_code,]);
      
         return redirect()->route('viewProfile', ['cesno' => $personalDataId])->with('message', 'Updated Sucessfully');
 

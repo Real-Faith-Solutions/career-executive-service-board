@@ -25,19 +25,24 @@
             @foreach ($language as $languages)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                       {{  $languages->language_description }}
+                       {{  $languages->title }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('language.edit', ['ctrlno'=>$languages->ctrlno]) }}" method="GET">
+                             <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                   UPDATE
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('language.destroy', ['ctrlno'=>$languages->ctrlno]) }}" method="POST">
+                            <form action="{{ route('language.destroy', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
