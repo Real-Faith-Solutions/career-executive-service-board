@@ -130,10 +130,9 @@ class ProfileController extends Controller
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $identification = Identification::where('personal_data_cesno', $cesno)->get();
         $profileLibTblExamRef = ProfileLibTblExamRef::pluck('TITLE')->toArray();
-        $profileLibTblEducDegree = ProfileLibTblEducDegree::pluck('degree')->toArray();
-        $profileLibTblEducSchool = ProfileLibTblEducSchool::pluck('SCHOOL')->toArray();
-        $profileLibTblEducMajor = ProfileLibTblEducMajor::pluck('COURSE')->toArray();
-        $educationalAttainment = EducationalAttainment::where('personal_data_cesno', $cesno)->get();
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
@@ -143,6 +142,7 @@ class ProfileController extends Controller
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
         $personalData = PersonalData::find($cesno);
         $profileTblCesStatus = $personalData->ProfileTblCesStatus;
+        $educationalAttainment = $personalData->educations;
         $otherTraining = $personalData->otherTraining;
         $language = $personalData->languages;
         $expertise = $personalData->expertise;

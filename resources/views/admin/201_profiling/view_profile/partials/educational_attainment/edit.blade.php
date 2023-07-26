@@ -42,7 +42,7 @@
                                 <option value="Elementary">Elementary</option>
                                 <option value="Secondary">Secondary</option>
                                 <option value="College">College</option>
-                                <option value="Graduate Studies">Graduate Studies</option>
+                                <option value="Graduate Studies" selected>Graduate Studies</option>
                                 <option value="Vocation/Trade Course">Vocation/Trade Course</option>
                             @elseif ($educationalAttainment->level == "Vocation/Trade Course")
                                 <option value="Elementary">Elementary</option>
@@ -68,22 +68,22 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="school">School</label>
-                        <select id="school" name="school" required>
+                        <label for="school_code">School</label>
+                        <select id="school_code" name="school_code" required>
                             <option disabled selected>Select School</option>
                             @foreach($profileLibTblEducSchool as $profileLibTblEducSchools)
-                                @if ($profileLibTblEducSchools->SCHOOL == $educationalAttainment->school)
-                                    <option value="{{ $profileLibTblEducSchools->SCHOOL }}" selected>
+                                @if ($profileLibTblEducSchools->CODE == $educationalAttainment->school_code)
+                                    <option value="{{ $profileLibTblEducSchools->CODE }}" selected>
                                         {{ $profileLibTblEducSchools->SCHOOL }}
                                     </option>    
                                 @else
-                                    <option value="{{ $profileLibTblEducSchools->SCHOOL }}">
+                                    <option value="{{ $profileLibTblEducSchools->CODE }}">
                                         {{ $profileLibTblEducSchools->SCHOOL }}
                                     </option>    
                                 @endif
                             @endforeach
                         </select>
-                        @error('school')
+                        @error('school_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -91,22 +91,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="specialization">Specialization<sup>*</span></label>
-                        <select id="specialization" name="specialization" required>
+                        <label for="major_code">Specialization<sup>*</span></label>
+                        <select id="major_code" name="major_code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblEducMajor as $profileLibTblEducMajors)
-                                @if ($profileLibTblEducMajors->COURSE == $educationalAttainment->specialization)
-                                    <option value="{{ $profileLibTblEducMajors->COURSE }}" selected>
+                                @if ($profileLibTblEducMajors->CODE == $educationalAttainment->major_code)
+                                    <option value="{{ $profileLibTblEducMajors->CODE }}" selected>
                                         {{ $profileLibTblEducMajors->COURSE }}
                                     </option>    
                                 @else
-                                    <option value="{{ $profileLibTblEducMajors->COURSE }}">
+                                    <option value="{{ $profileLibTblEducMajors->CODE }}">
                                         {{ $profileLibTblEducMajors->COURSE }}
                                     </option>
                                 @endif
                             @endforeach
                         </select>
-                        @error('degree')
+                        @error('major_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -114,22 +114,22 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="degree">Degree<sup>*</span></label>
-                        <select id="degree" name="degree" required>
+                        <label for="degree_code">Degree<sup>*</span></label>
+                        <select id="degree_code" name="degree_code" required>
                             <option disabled selected>Select Degree</option>
                             @foreach($profileLibTblEducDegree as $profileLibTblEducDegrees)
-                                @if ($profileLibTblEducDegrees->DEGREE == $educationalAttainment->degree)
-                                    <option value="{{ $profileLibTblEducDegrees->DEGREE }}" selected>
+                                @if ($profileLibTblEducDegrees->CODE == $educationalAttainment->degree_code)
+                                    <option value="{{ $profileLibTblEducDegrees->CODE }}" selected>
                                         {{ $profileLibTblEducDegrees->DEGREE }}
                                     </option>    
                                 @else
-                                    <option value="{{ $profileLibTblEducDegrees->DEGREE }}">
+                                    <option value="{{ $profileLibTblEducDegrees->CODE }}">
                                         {{ $profileLibTblEducDegrees->DEGREE }}
                                     </option>
                                 @endif
                             @endforeach
                         </select>
-                        @error('degree')
+                        @error('degree_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

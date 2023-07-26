@@ -11,8 +11,11 @@ class ProfileLibTblEducSchool extends Model
 
     protected $table = "profilelib_tblEducSchools";
 
+    protected $primaryKey = 'CODE';
+
     protected $fillable = [
         'CODE',
         'SCHOOL',
     ]; 
+    
 }

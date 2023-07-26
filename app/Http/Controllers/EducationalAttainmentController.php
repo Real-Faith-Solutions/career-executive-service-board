@@ -18,17 +18,18 @@ class EducationalAttainmentController extends Controller
 
     public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
         
         $educationalAttainment = new EducationalAttainment([
     
             'level' => $request->level,
-            'school' => $request->school,
-            'specialization' => $request->specialization,
-            'degree' => $request->degree,
+            'school_code' => $request->school_code,
+            'major_code' => $request->major_code,
+            'degree_code' => $request->degree_code,
             'school_type' => $request->school_type,
             'period_of_attendance_from' => $request->period_of_attendance_from,
             'period_of_attendance_to' => $request->period_of_attendance_to,
@@ -63,9 +64,9 @@ class EducationalAttainmentController extends Controller
 
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->level = $request->level;
-        $educationalAttainment->school = $request->school;
-        $educationalAttainment->specialization = $request->specialization;
-        $educationalAttainment->degree = $request->degree;
+        $educationalAttainment->school_code = $request->school_code;
+        $educationalAttainment->major_code = $request->major_code;
+        $educationalAttainment->degree_code = $request->degree_code;
         $educationalAttainment->school_type = $request->school_type;
         $educationalAttainment->period_of_attendance_from = $request->period_of_attendance_from;
         $educationalAttainment->period_of_attendance_to = $request->period_of_attendance_to;
