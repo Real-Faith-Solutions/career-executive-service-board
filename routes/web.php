@@ -244,6 +244,9 @@ Route::prefix('research-studies')->group(function () {
     Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
     Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
     Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
+    Route::get('{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin');
+    Route::post('{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore');
+    Route::delete('{ctrlno}', [ResearchAndStudiesController::class, 'forceDelete'])->name('research-studies.forceDelete');
 });
 
 Route::prefix('work-experience')->group(function () {
