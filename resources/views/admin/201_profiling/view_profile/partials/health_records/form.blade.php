@@ -14,7 +14,7 @@
 
                     <div class="mb-3">
                         <label for="blood_type">Blood Type<sup>*</sup></label>
-                        <input type="text" id="blood_type" name="blood_type" oninput="validateInput(blood_type, 1, 'lettersWithSpecial')" onkeypress="validateInput(blood_type, 1, 'lettersWithSpecial')" onblur="checkErrorMessage(blood_type)" required>
+                        <input type="text" id="blood_type" name="blood_type" value="{{ old('blood_type') ?? ($healthRecord->blood_type ?? '') }}" oninput="validateInput(blood_type, 1, 'lettersWithSpecial')" onkeypress="validateInput(blood_type, 1, 'lettersWithSpecial')" onblur="checkErrorMessage(blood_type)" required>
                         <p class="input_error text-red-600"></p>
                         @error('blood_type')
                             <span class="invalid" role="alert">
@@ -25,7 +25,7 @@
 
                     <div class="mb-3">
                         <label for="identifying_marks">Identifying Marks<sup>*</sup></label>
-                        <input type="text" id="identifying_marks" name="identifying_marks" oninput="validateInput(identifying_marks, 0, 'letters')" onkeypress="validateInput(identifying_marks, 0, 'letters')" onblur="checkErrorMessage(identifying_marks)" required>
+                        <input type="text" id="identifying_marks" name="identifying_marks" value="{{ old('identifying_marks') ?? ($healthRecord->marks ?? '') }}" oninput="validateInput(identifying_marks, 0, 'letters')" onkeypress="validateInput(identifying_marks, 0, 'letters')" onblur="checkErrorMessage(identifying_marks)" required>
                         <p class="input_error text-red-600"></p>
                         @error('identifying_marks')
                             <span class="invalid" role="alert">
@@ -125,7 +125,6 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-
                 <th scope="col" class="px-6 py-3">
                     Medical Condition/Illness
                 </th>
@@ -141,38 +140,45 @@
         </thead>
         <tbody>
 
-            @foreach ($medicalHistory as $histories)
+            @if (count($medicalHistory) > 0)
+                @foreach ($medicalHistory as $histories)
+                    <tr class="border-b bg-white">
+
+                        <td class="px-6 py-3">
+                            {{ $histories->illness }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $histories->illness_date }}
+                        </td>
+
+                        <td class="px-6 py-4 text-right uppercase">
+                            <div class="flex">
+                                <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            
+                                <form action="{{ route('health-record.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/jmkrnisz.json"
+                                            trigger="hover"
+                                            colors="primary:#880808"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr class="border-b bg-white">
-
-                    <td class="px-6 py-3">
-                        {{ $histories->illness }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $histories->illness_date }}
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        
-                            <form action="{{ route('health-record.destroy', ['ctrlno'=>$healthRecords->ctrlno]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                    <td colspan="3" class="px-6 py-3 text-center bg-neutral-100">No Records</td>
                 </tr>
-            @endforeach
+            @endif
+            
 
         </tbody>
     </table>

@@ -72,6 +72,7 @@ use App\Models\GenderByChoice;
 use App\Models\GenderByBirth;
 use App\Models\NameExtension;
 use App\Models\CivilStatus;
+use App\Models\MedicalHistory;
 use App\Models\Title;
 use App\Models\RecordStatus;
 use App\Models\Religion;
@@ -139,7 +140,7 @@ class ProfileController extends Controller
         $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
         $affiliation = PersonalData::find($cesno)->affiliations;
         $caseRecord = PersonalData::find($cesno)->caseRecords;
-        $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->get();
+        $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->first();
         $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
         $otherTraining = PersonalData::find($cesno)->otherTraining;
@@ -148,8 +149,7 @@ class ProfileController extends Controller
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
         $nameExtensions = NameExtension::all();
         $pwds = PWD::all();
-        $medicalHistory = PersonalData::find($cesno)->medicalHistoryRecords;
-
+        $medicalHistory = MedicalHistory::where('personal_data_cesno', $cesno)->get();
         $birthdate = $mainProfile->birth_date;
         $now = new DateTime();
         $birthDate = new DateTime($birthdate);

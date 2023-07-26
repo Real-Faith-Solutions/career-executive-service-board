@@ -22,33 +22,21 @@
                 <th scope="col" class="px-6 py-3">
                     Disabilities
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Action</span>
-                </th>
             </tr>
         </thead>
         <tbody>
+            <tr class="border-b bg-white">
+                
+                @if ($healthRecord)
+                    <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->blood_type : 'None' }}</td>
+                    <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->marks : 'None' }}</td>
+                    <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->person_with_disability : 'None' }}</td>
 
-            @foreach ($healthRecord as $healthRecords)
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                       {{ $healthRecords->blood_type }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $healthRecords->marks }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $healthRecords->person_with_disability }}
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
+                    {{-- <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
                             <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
                         
-                            <form action="{{ route('health-record.destroy', ['ctrlno'=>$healthRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('health-record.destroy', ['ctrlno'=>$healthRecord->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
@@ -62,10 +50,12 @@
                                 </button>
                             </form>
                         </div>
-                    </td>
-                </tr>
-            @endforeach
+                    </td> --}}
+                @else
+                    <td colspan="4" class="px-6 py-3 text-center bg-neutral-100">No Records</td>
+                @endif
 
+            </tr>
         </tbody>
     </table>
 </div>
