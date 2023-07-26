@@ -27,6 +27,7 @@ use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
@@ -264,6 +265,10 @@ Route::prefix('case-record')->group(function () {
 Route::prefix('health-record')->group(function () {
     Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
     Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
+});
+
+Route::prefix('medical-history')->group(function () {
+    Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store');
 });
 
 Route::prefix('expertise')->group(function () {
