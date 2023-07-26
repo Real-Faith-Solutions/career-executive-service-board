@@ -36,7 +36,7 @@
 
                     <div class="mb-3">
                         <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-                        <input type="search" id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" required>
+                        <input type="search" id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" value="{{ old('person_with_disability') ?? ($healthRecord->person_with_disability ?? '') }}" required>
                         <datalist id="person_with_disability_choices">
                             @foreach ($pwds as $data)
                                 <option value="{{ $data->name }}">{{ $data->name }}</option>
