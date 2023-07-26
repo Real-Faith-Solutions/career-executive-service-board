@@ -234,6 +234,9 @@ Route::prefix('scholarship-taken')->group(function () {
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
     Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+    Route::get('{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
+    Route::post('{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
+    Route::delete('{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete');
 });
 
 Route::prefix('research-studies')->group(function () {

@@ -73,7 +73,35 @@ class ScholarshipController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recycleBin($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $scholarshipTrashedRecord = $personalData->scholarships()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.scholarships.trashbin', compact('scholarshipTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $scholarship = Scholarships::withTrashed()->find($ctrlno);
+        $scholarship->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    public function forceDelete($ctrlno){
+
+        $Scholarships = Scholarships::withTrashed()->find($ctrlno);
+        $Scholarships->forceDelete();
+
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
     
