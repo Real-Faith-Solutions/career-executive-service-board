@@ -29,23 +29,6 @@ class IdentificationController extends Controller
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
 
-        // $identification = new Identification([
-
-        //     // 'type' => $request->type,
-        //     // 'id_number' => $request->id_number,
-        //     'gsis' => $request->gsis,
-        //     'pagibig' => $request->pagibig,
-        //     'philhealth' => $request->philhealth,
-        //     'sss_no' => $request->sss_no,
-        //     'tin' => $request->tin,
-        //     'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
-        // ]);
-
-        // $identificationsPersonalDataId = PersonalData::find($cesno);
-
-        // $identificationsPersonalDataId->identifications()->save($identification);
-
         $personalData = PersonalData::findOrFail($cesno);
 
         // Update or create the associated Identification record
