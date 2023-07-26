@@ -52,7 +52,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->field_specialization }}
+                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
                     </td>
 
                     <td class="px-6 py-3">

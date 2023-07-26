@@ -41,12 +41,12 @@
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
-                                @if ($profileLibTblExpertiseSpecs->Title == $otherManagementTraining->field_specialization )
-                                    <option value="{{ $profileLibTblExpertiseSpecs->Title }}" selected>
+                                @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $otherManagementTraining->field_specialization )
+                                    <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}" selected>
                                         {{ $profileLibTblExpertiseSpecs->Title }}
                                     </option>
                                 @else
-                                    <option value="{{ $profileLibTblExpertiseSpecs->Title }}">
+                                    <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}">
                                         {{ $profileLibTblExpertiseSpecs->Title }}
                                     </option>    
                                 @endif
