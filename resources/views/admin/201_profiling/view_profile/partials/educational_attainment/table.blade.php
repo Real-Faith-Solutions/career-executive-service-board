@@ -1,4 +1,12 @@
 <div class="my-5 flex justify-end">
+    <a href="{{ route('educational-attainment.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
     <button class="btn btn-primary" onclick="openFormEducationalAttainment()">Add Educational Attainment</button>
     <button class="btn btn-primary hidden" onclick="openTableEducationalAttainment()">Go back</button>
 </div>
@@ -35,7 +43,6 @@
 
         <tbody>
             @foreach ($educationalAttainment as $newEducationalAttainment)
-
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         {{ $newEducationalAttainment->level }}
@@ -85,7 +92,6 @@
                        
                     </td>
                 </tr>
-                
             @endforeach
         </tbody>
     </table>

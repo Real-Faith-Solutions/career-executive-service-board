@@ -217,6 +217,9 @@ Route::prefix('educational-attainment')->group(function () {
     Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
     Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
     Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+    Route::get('{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin');
+    Route::post('{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore');
+    Route::delete('{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete');
 });
 
 Route::prefix('examination-taken')->group(function () {

@@ -8,10 +8,7 @@ use App\Models\PersonalData;
 use App\Models\ProfileLibTblEducDegree;
 use App\Models\ProfileLibTblEducMajor;
 use App\Models\ProfileLibTblEducSchool;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\HttpKernel\DataCollector\RequestDataCollector;
 
 class EducationalAttainmentController extends Controller
 {
@@ -75,9 +72,6 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment->academics_honor_received = $request->academics_honor_received;
         $educationalAttainment->save();
 
-        // return Redirect::route('educational-attainment.edit', ['ctrlno' => $ctrlno])
-        // ->with('message', 'Updated successfully');
-
         return redirect()->back()->with('message', 'Updated Sucessfully');
 
     }
@@ -89,7 +83,36 @@ class EducationalAttainmentController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recycleBin($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted educations of the parent model
+        $educationAttainmentTrashedRecord = $personalData->educations()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.trashbin', compact('educationAttainmentTrashedRecord'));
+        
+    }
+
+    public function restore($ctrlno){
+
+        $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
+        $educationalAttainment->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    
+    public function forceDelete($ctrlno){
+
+        $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
+        $educationalAttainment->forceDelete();
+
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 
