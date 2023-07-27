@@ -1,24 +1,19 @@
-<div class="my-5 flex justify-end">
-    <a href="{{ route('case-record.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-    <button class="btn btn-primary" onclick="openFormCaseRecord()">Add Case Record/s</button>
-    <button class="btn btn-primary hidden" onclick="openTableCaseRecord()">Go back</button>
-</div>
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
+@section('content')
 
-<div class="form-case-record hidden">
-    @include('admin.201_profiling.view_profile.partials.case_records.form')
+<div class="mb-7">
+    <h1>CASE RECYCLE BIN</h1>
 </div>
 
 <div class="table-case-record relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Control No
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Parties
                 </th>
@@ -60,68 +55,81 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($caseRecord as $caseRecords)
+
+            @foreach ($caseRecordTrashedRecord as $caseRecordTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecords->parties }}
+                        {{ $caseRecordTrashedRecords->ctrlno }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $caseRecordTrashedRecords->parties }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->offence }}
+                        {{ $caseRecordTrashedRecords->offence }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->nature_code }}
+                        {{ $caseRecordTrashedRecords->nature_code }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->case_no }}
+                        {{ $caseRecordTrashedRecords->case_no }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_date }}
+                        {{ $caseRecordTrashedRecords->filed_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->venue }}
+                        {{ $caseRecordTrashedRecords->venue }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->status_code }}
+                        {{ $caseRecordTrashedRecords->status_code }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->finality }}
+                        {{ $caseRecordTrashedRecords->finality }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->decision }}
+                        {{ $caseRecordTrashedRecords->decision }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->remarks }}
+                        {{ $caseRecordTrashedRecords->remarks }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $caseRecordTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('case-record.edit', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('case-record.restore', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('case-record.destroy', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('case-record.forceDelete', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
@@ -138,6 +146,10 @@
                     </td>
                 </tr>
             @endforeach
+
         </tbody>
     </table>
 </div>
+
+
+@endsection

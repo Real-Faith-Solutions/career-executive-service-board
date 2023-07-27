@@ -280,10 +280,13 @@ Route::prefix('affiliation')->group(function () {
 });
 
 Route::prefix('case-record')->group(function () {
-    Route::get('{ctrlno}', [CaseRecordController::class, 'edit'])->name('case-record.edit');
-    Route::post('{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
-    Route::put('{ctrlno}', [CaseRecordController::class, 'update'])->name('case-record.update');
-    Route::delete('{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+    Route::get('edit/{ctrlno}', [CaseRecordController::class, 'edit'])->name('case-record.edit');
+    Route::post('store/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
+    Route::put('update/{ctrlno}', [CaseRecordController::class, 'update'])->name('case-record.update');
+    Route::delete('destroy/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
+    Route::get('recently-deleted/{cesno}', [CaseRecordController::class, 'recentlyDeleted'])->name('case-record.recentlyDeleted');
+    Route::post('recently-deleted/restore/{ctrlno}', [CaseRecordController::class, 'restore'])->name('case-record.restore');
+    Route::delete('recently-deleted/force-deleted/{ctrlno}', [CaseRecordController::class, 'forceDelete'])->name('case-record.forceDelete');
 });
 
 Route::prefix('health-record')->group(function () {
