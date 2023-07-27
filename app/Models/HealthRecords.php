@@ -22,7 +22,7 @@ class HealthRecords extends Model
 
         'personal_data_cesno',
         'blood_type',
-        'marks',
+        'identifying_marks',
         'person_with_disability',
         // 'disability_handicap_defects_specify',
         // 'illness',

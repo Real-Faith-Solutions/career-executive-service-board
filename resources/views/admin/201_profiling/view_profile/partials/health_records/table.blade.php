@@ -29,7 +29,7 @@
                 
                 @if ($healthRecord)
                     <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->blood_type : 'None' }}</td>
-                    <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->marks : 'None' }}</td>
+                    <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->identifying_marks : 'None' }}</td>
                     <td class="px-6 py-3">{{ $healthRecord ? $healthRecord->person_with_disability : 'None' }}</td>
 
                     {{-- <td class="px-6 py-4 text-right uppercase">

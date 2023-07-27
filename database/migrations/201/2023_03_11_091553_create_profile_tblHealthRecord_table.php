@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('blood_type');
-            $table->string('marks')->nullable();
+            $table->string('identifying_marks')->nullable();
             $table->string('person_with_disability')->nullable();
             // $table->string('disability_handicap_defects_specify')->nullable();
             // $table->string('illness')->nullable();
