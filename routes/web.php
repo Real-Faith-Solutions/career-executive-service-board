@@ -267,10 +267,13 @@ Route::prefix('award-citation')->group(function () {
 });
 
 Route::prefix('affiliation')->group(function () {
-    Route::get('{ctrlno}', [AffiliationController::class, 'edit'])->name('affiliation.edit');
-    Route::post('{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
-    Route::put('{ctrlno}', [AffiliationController::class, 'update'])->name('affiliation.update');
-    Route::delete('{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
+    Route::get('edit/{ctrlno}', [AffiliationController::class, 'edits'])->name('affiliation.edit');
+    Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
+    Route::put('update/{ctrlno}', [AffiliationController::class, 'update'])->name('affiliation.update');
+    Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
+    Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin');
+    Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore');
+    Route::delete('recently-deleted/forceDelete/{ctrlno}', [AffiliationController::class, 'forceDelete'])->name('affiliation.forceDelete');
 });
 
 Route::prefix('case-record')->group(function () {

@@ -87,7 +87,36 @@ class AffiliationController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recycleBin($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $affiliationsTrashedRecord = $personalData->affiliations()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.trashbin', compact('affiliationsTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $affiliation = Affiliations::withTrashed()->find($ctrlno);
+        $affiliation->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    
+    public function forceDelete($ctrlno){
+
+        $affiliation = Affiliations::withTrashed()->find($ctrlno);
+        $affiliation->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 
