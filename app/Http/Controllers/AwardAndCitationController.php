@@ -82,7 +82,35 @@ class AwardAndCitationController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $awardAndCitationsTrashedRecord = $personalData->awardsAndCitations()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.trashbin', compact('awardAndCitationsTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
+        $awardAndCitations->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function forceDelete($ctrlno){
+
+        $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
+        $awardAndCitations->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 
