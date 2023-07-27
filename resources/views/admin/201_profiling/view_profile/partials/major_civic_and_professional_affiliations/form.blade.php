@@ -7,14 +7,15 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('affiliation.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('affiliation.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST" id="affiliation_form" onsubmit="return checkErrorsBeforeSubmit(affiliation_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
                         <label for="organization">Organization<sup>*</sup></label>
-                        <input id="organization" name="organization" required type="text">
+                        <input type="text" id="organization" name="organization" oninput="validateInput(organization, 2, 'alphaNumeric')" onkeypress="validateInput(organization, 2, 'alphaNumeric')" onblur="checkErrorMessage(organization)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('organization')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -24,7 +25,8 @@
 
                     <div class="mb-3">
                         <label for="position">Position<sup>*</sup></label>
-                        <input id="position" name="position" required type="text">
+                        <input type="text" id="position" name="position" oninput="validateInput(position, 2, 'alphaNumeric')" onkeypress="validateInput(position, 2, 'alphaNumeric')" onblur="checkErrorMessage(position)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('position')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -33,8 +35,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="date_from">Date from<sup>*</sup></label>
-                        <input id="date_from" name="date_from" required type="date">
+                        <label for="affiliation_date_from">Date from<sup>*</sup></label>
+                        <input type="date" id="affiliation_date_from" name="date_from" oninput="validateDateInput(affiliation_date_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -43,8 +46,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="date_to">Date to<sup>*</sup></label>
-                        <input id="date_to" name="date_to" required type="date">
+                        <label for="affiliation_date_to">Date to<sup>*</sup></label>
+                        <input type="date" id="affiliation_date_to" name="date_to" oninput="validateDateInput(affiliation_date_to)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
