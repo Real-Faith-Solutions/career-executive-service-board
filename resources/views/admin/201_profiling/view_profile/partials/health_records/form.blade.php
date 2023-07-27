@@ -155,7 +155,7 @@
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
                                 {{-- <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a> --}}
-                                <form action="{{ route('health-record.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST">
+                                <form action="{{ route('medical-history.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">

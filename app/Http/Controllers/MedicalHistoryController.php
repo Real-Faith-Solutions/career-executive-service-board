@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalHistory;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class MedicalHistoryController extends Controller
 
         $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
+        $userMiddleName = Auth::user()->middle_name;
         $userNameExtension = Auth::user()->name_extension;
 
         $healthRecordPersonalDataId = PersonalData::findOrFail($cesno);
@@ -27,6 +28,15 @@ class MedicalHistoryController extends Controller
         );
             
         return redirect()->back()->with('message', 'Successfuly Saved');
+
+    }
+
+    public function destroy($ctrlno){
+        
+        $healthRecord = MedicalHistory::find($ctrlno);
+        $healthRecord->delete();
+
+        return redirect()->back();
 
     }
 

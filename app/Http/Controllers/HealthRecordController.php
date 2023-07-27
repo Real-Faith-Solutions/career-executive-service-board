@@ -40,8 +40,6 @@ class HealthRecordController extends Controller
 
         return redirect()->back();
 
-        // $spouse->restore(); -> to restore soft deleted data
-
     }
 
 }

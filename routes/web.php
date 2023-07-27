@@ -269,6 +269,7 @@ Route::prefix('health-record')->group(function () {
 
 Route::prefix('medical-history')->group(function () {
     Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store');
+    Route::delete('{ctrlno}', [MedicalHistoryController::class, 'destroy'])->name('medical-history.destroy');
 });
 
 Route::prefix('expertise')->group(function () {
