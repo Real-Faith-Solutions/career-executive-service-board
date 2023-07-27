@@ -103,7 +103,35 @@ class WorkExperienceController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recycleBin($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $workExperienceTrashedRecord = $personalData->workExperience()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.work_experience.trashbin', compact('workExperienceTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
+        $workExperience->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    public function forceDelete($ctrlno){
+
+        $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
+        $workExperience->forceDelete();
+
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 

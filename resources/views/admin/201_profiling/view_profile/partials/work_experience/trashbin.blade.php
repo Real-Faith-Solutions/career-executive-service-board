@@ -1,24 +1,19 @@
-<div class="my-5 flex justify-end">
-    <a href="{{ route('work-experience.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-    <button class="btn btn-primary" onclick="openFormWorkExperience()">Add Work and Experience</button>
-    <button class="btn btn-primary hidden" onclick="openTableWorkExperience()">Go back</button>
-</div>
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
+@section('content')
 
-<div class="form-work-experience hidden">
-    @include('admin.201_profiling.view_profile.partials.work_experience.form')
+<div class="mb-7">
+    <h1>WORK EXPERIENCE RECYLE BIN</h1>
 </div>
 
 <div class="table-work-experience relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Control No
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Inclusive Dates
                 </th>
@@ -52,61 +47,73 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach ($workExperience as $workExperiences)
+            @foreach ($workExperienceTrashedRecord as $workExperienceTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $workExperiences->from_dt." - ".$workExperiences->to_dt }}
+                        {{ $workExperienceTrashedRecords->ctrlno }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $workExperienceTrashedRecords->from_dt." - ".$workExperienceTrashedRecords->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->designation }}
+                        {{ $workExperienceTrashedRecords->designation }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->department }}
+                        {{ $workExperienceTrashedRecords->department }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->monthly_salary }}
+                        {{ $workExperienceTrashedRecords->monthly_salary }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->salary }}
+                        {{ $workExperienceTrashedRecords->salary }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->status }}
+                        {{ $workExperienceTrashedRecords->status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->government_service }}
+                        {{ $workExperienceTrashedRecords->government_service }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->remarks }}
+                        {{ $workExperienceTrashedRecords->remarks }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $workExperienceTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('work-experience.edit', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="GET">
+                            <form action="{{ route('work-experience.restore', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('work-experience.destroy', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="POST">
+                            <form action="{{ route('work-experience.forceDelete', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
@@ -127,3 +134,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection

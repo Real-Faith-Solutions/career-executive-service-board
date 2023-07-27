@@ -254,6 +254,9 @@ Route::prefix('work-experience')->group(function () {
     Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
     Route::put('update/{ctrlno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
     Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
+    Route::get('{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin');
+    Route::post('{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore');
+    Route::delete('{ctrlno}', [WorkExperienceController::class, 'forceDelete'])->name('work-experience.forceDelete');
 });
 
 Route::prefix('award-citation')->group(function () {
