@@ -80,4 +80,34 @@ class EligibilityAndRankTrackerController extends Controller
 
     }
 
+    public function recentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $profileTblCesStatusTrashedRecord = $personalData->profileTblCesStatus()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
+        $profileTblCesStatus->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function forceDelete($ctrlno){
+
+        $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
+        $profileTblCesStatus->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+
 }

@@ -1,62 +1,57 @@
-<div class="my-5 flex justify-end">
-    <a href="{{ route('case-record.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-    <button class="btn btn-primary" onclick="openFormCaseRecord()">Add Case Record/s</button>
-    <button class="btn btn-primary hidden" onclick="openTableCaseRecord()">Go back</button>
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
+@section('content')
+
+<div class="mb-7">
+    <h1>EDUCATIONAL ATTAINMENT RECYLE BIN</h1>
 </div>
 
-<div class="form-case-record hidden">
-    @include('admin.201_profiling.view_profile.partials.case_records.form')
-</div>
-
-<div class="table-case-record relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="table-educational-attainment relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Parties
+                    Control No.
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Offense
+                    Level
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Nature of Ofense
+                    Degree
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Case Number
+                    Major
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Date Filed
+                    School
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Venue
+                    School Type
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Case Status
+                    Period of Attendance
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Date of Finality
+                    Highest Level
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Decision
+                    Year Graduated
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Remarks
+                    Academic Achievements
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Deleted At
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -64,72 +59,77 @@
                 </th>
             </tr>
         </thead>
+
         <tbody>
-            @foreach ($caseRecord as $caseRecords)
+            @foreach ($educationAttainmentTrashedRecord as $educationAttainmentTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecords->parties }}
+                        {{ $educationAttainmentTrashedRecords->ctrlno }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $educationAttainmentTrashedRecords->level }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->offence }}
+                        {{ $educationAttainmentTrashedRecords->profileLibTblEducDegree->DEGREE }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->nature_code }}
+                        {{ $educationAttainmentTrashedRecords->profileLibTblEducMajor->COURSE }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->case_no }}
+                        {{ $educationAttainmentTrashedRecords->profileLibTblEducSchool->SCHOOL }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_date }}
+                        {{ $educationAttainmentTrashedRecords->school_type }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->venue }}
+                        {{ $educationAttainmentTrashedRecords->period_of_attendance_from." - ".$educationAttainmentTrashedRecords->period_of_attendance_to }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->status_code }}
+                        {{ $educationAttainmentTrashedRecords->highest_level }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->finality }}
+                        {{ $educationAttainmentTrashedRecords->year_graduate }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->decision }}
+                        {{ $educationAttainmentTrashedRecords->academics_honor_received }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->remarks }}
+                        {{ $educationAttainmentTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('case-record.edit', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('educational-attainment.restore', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
-
-                            <form action="{{ route('case-record.destroy', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="POST">
+                    
+                            <form action="{{ route('educational-attainment.forceDelete', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button   type="submit">  
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
                                         trigger="hover"
-                                        colors="primary:#880808"
+                                        colors="primary:#DC3545"
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
@@ -141,3 +141,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection

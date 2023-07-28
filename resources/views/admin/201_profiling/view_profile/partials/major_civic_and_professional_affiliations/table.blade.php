@@ -1,4 +1,12 @@
 <div class="my-5 flex justify-end">
+    <a href="{{ route('affiliations.recycleBin', ['cesno'=>$mainProfile->cesno]) }}" method="GET">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
     <button class="btn btn-primary" onclick="openFormMajorCivilAndProfessionalAffiliation()">Add Major Civic and Professional Affiliations</button>
     <button class="btn btn-primary hidden" onclick="openTableMajorCivilAndProfessionalAffiliation()">Go back</button>
 </div>

@@ -1,4 +1,12 @@
 <div class="my-5 flex justify-end">
+    <a href="{{ route('eligibility-rank-tracker.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
     <button class="btn btn-primary" onclick="openFormEligibilityAndRankTracker()">Add Eligibility and Rank Tracker</button>
     <button class="btn btn-primary hidden" onclick="openTableEligibilityAndRankTracker()">Go back</button>
 </div>
@@ -14,23 +22,33 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
+                        Control No
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         CES Status
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         Acquired Thru
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         Status Type
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         Appointing Authority
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         Resolution No.
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         Date Acquired
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Action</span>
                     </th>

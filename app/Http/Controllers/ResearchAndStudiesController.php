@@ -84,8 +84,37 @@ class ResearchAndStudiesController extends Controller
 
         return redirect()->back()->with('message', 'Successfuly Saved');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recycleBin($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $researchAndStudiesTrashedRecord = $personalData->researchAndStudies()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.trashbin', compact('researchAndStudiesTrashedRecord'));
 
     }
+
+    public function restore($ctrlno){
+
+        $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
+        $researchAndStudies->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    public function forceDelete($ctrlno){
+
+        $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
+        $researchAndStudies->forceDelete();
+
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+    
 
 }
