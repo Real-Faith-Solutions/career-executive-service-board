@@ -98,5 +98,34 @@ class ExaminationTakenController extends Controller
 
     }
 
+    public function recentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $examinationTaken = ExaminationsTaken::withTrashed()->find($ctrlno);
+        $examinationTaken->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function forceDelete($ctrlno){
+
+        $examinationTaken = ExaminationsTaken::withTrashed()->find($ctrlno);
+        $examinationTaken->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
 
 }
