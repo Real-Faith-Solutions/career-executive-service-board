@@ -23,7 +23,7 @@ class ExaminationsTaken extends Model
     protected $fillable = [
 
         'personal_data_cesno',
-        'type',
+        'exam_code',
         'rating',
         'date_of_examination',
         'place_of_examination',
@@ -34,9 +34,9 @@ class ExaminationsTaken extends Model
 
     ];
 
-    public function examinationTakenPersonalData(): BelongsTo
+    public function profileLibTblExamRefPersonalData(): BelongsTo
     {
-        return $this->belongsTo(PersonalData::class);
+        return $this->belongsTo(ProfileLibTblExamRef::class, 'exam_code');
     }
 
 }

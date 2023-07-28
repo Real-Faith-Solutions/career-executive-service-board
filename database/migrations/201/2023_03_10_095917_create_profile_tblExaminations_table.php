@@ -17,7 +17,9 @@ return new class extends Migration
             // $table->bigInteger('cesno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('type');
+            $table->unsignedBigInteger('exam_code');
+            $table->foreign('exam_code')->references('CODE')->on('profilelib_tblExamRef')->onDelete('cascade');
+            // $table->string('type');
             $table->string('rating')->nullable();
             $table->string('date_of_examination');
             $table->string('place_of_examination');

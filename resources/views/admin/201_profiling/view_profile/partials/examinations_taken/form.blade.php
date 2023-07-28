@@ -11,14 +11,14 @@
                 @csrf
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="type">Type of Examination<sup>*</sup></label>
-                        <select id="type" name="type" required>
+                        <label for="exam_code">Type of Examination<sup>*</sup></label>
+                        <select id="type" name="exam_code" required>
                             <option disabled selected>Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
-                                <option value="{{ $profileLibTblExamRefs }}">{{ $profileLibTblExamRefs }}</option>
+                                <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}</option>
                             @endforeach
                         </select>
-                        @error('type')
+                        @error('exam_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -27,7 +27,6 @@
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="rating">Rating (if applicable)</label>
                         <input id="rating" name="rating" type="text" oninput="validateInput(rating, 0, 'numbersWithSpecial')" onkeypress="validateInput(rating, 0, 'numbersWithSpecial')" onblur="checkErrorMessage(rating)">

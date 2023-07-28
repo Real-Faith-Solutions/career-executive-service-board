@@ -1,24 +1,15 @@
-<div class="my-5 flex justify-end">
-    <a href="{{ route('examination-taken.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}" method="GET">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-    <button class="btn btn-primary" onclick="openFormExaminationsTaken()">Add Examination Taken</button>
-    <button class="btn btn-primary hidden" onclick="openTableExaminationsTaken()">Go back</button>
-</div>
-
-<div class="form-examinations-taken hidden">
-    @include('admin.201_profiling.view_profile.partials.examinations_taken.form')
-</div>
+@extends('layouts.app')
+@section('title', 'Create 201 profile')
+@section('content')
 
 <div class="table-examinations-taken relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Control No
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Type of Examination
                 </th>
@@ -36,44 +27,56 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($examinationTaken as $examinationTakens)
+            @foreach ($examinationTakensTrashedRecord as $examinationTakensTrashedRecords)
                 <tr class="border-b bg-white">
+                    <td class="px-6 py-3">
+                        {{ $examinationTakensTrashedRecords->ctrlno }}
+                    </td>
+
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $examinationTakens->profileLibTblExamRefPersonalData->TITLE }}
+                        {{ $examinationTakensTrashedRecords->profileLibTblExamRefPersonalData->TITLE }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->rating }}
+                        {{ $examinationTakensTrashedRecords->rating }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->date_of_examination }}
+                        {{ $examinationTakensTrashedRecords->date_of_examination }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->place_of_examination }}
+                        {{ $examinationTakensTrashedRecords->place_of_examination }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $examinationTakensTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('examination-taken.edit', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="GET">
+                            <form action="{{ route('examination-taken.restore', ['ctrlno'=>$examinationTakensTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
                         
-                            <form action="{{ route('examination-taken.destroy', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="POST">
+                            <form action="{{ route('examination-taken.forceDelete', ['ctrlno'=>$examinationTakensTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
@@ -93,3 +96,6 @@
         </tbody>
     </table>
 </div>
+
+
+@endsection
