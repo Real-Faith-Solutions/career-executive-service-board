@@ -16,7 +16,7 @@ class ExaminationTakenController extends Controller
 
         $request->validate([
 
-            'type' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)],
+            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)],
             'rating' => ['required', 'min:2', 'max:40'],
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
@@ -33,7 +33,7 @@ class ExaminationTakenController extends Controller
 
         $examinationTaken = new ExaminationsTaken([
 
-            'type' => $request->type,
+            'exam_code' => $request->exam_code,
             'rating' => $request->rating,
             'date_of_examination' => $request->date_of_examination,
             'place_of_examination' => $request->place_of_examination,
@@ -66,7 +66,7 @@ class ExaminationTakenController extends Controller
 
         $request->validate([
 
-            'type' => ['required'],
+            'exam_code' => ['required'],
             'rating' => ['required', 'min:2', 'max:40'],
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
@@ -77,7 +77,7 @@ class ExaminationTakenController extends Controller
         ]);
 
         $examinationTaken = ExaminationsTaken::find($ctrlno);
-        $examinationTaken->type = $request->type;
+        $examinationTaken->exam_code = $request->exam_code;
         $examinationTaken->rating = $request->rating;
         $examinationTaken->date_of_examination = $request->date_of_examination;
         $examinationTaken->place_of_examination = $request->place_of_examination;
