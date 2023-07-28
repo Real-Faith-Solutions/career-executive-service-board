@@ -12,16 +12,16 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="language_dialect">Language Dialect<sup>*</sup></label>
-                        <select id="language_dialect" name="language_dialect" required>
+                        <label for="language_code">Language Dialect<sup>*</sup></label>
+                        <select id="language_code" name="language_code" required>
                             <option disabled selected>Select language</option>
                             @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
-                                <option value="{{ $profileLibTblLanguageRefs->title }}">
+                                <option value="{{ $profileLibTblLanguageRefs->code }}">
                                     {{ $profileLibTblLanguageRefs->title }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('language_dialect')
+                        @error('language_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

@@ -10,20 +10,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class EducationalAttainment extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
     
     protected $table = 'profile_tblEducation';
 
     protected $primaryKey = 'ctrlno';
 
-    use SoftDeletes;
-
     protected $fillable = [
 
         'personal_data_cesno',
         'level',
-        'specialization',
-        'school',
-        'degree',
+        'degree_code',
+        'major_code',
+        'school_code',
         'school_type',
         'period_of_attendance_from',
         'period_of_attendance_to',
@@ -34,9 +34,19 @@ class EducationalAttainment extends Model
 
     ];
 
-    public function educationalAttainmentPersonalData(): BelongsTo
+    public function profileLibTblEducDegree(): BelongsTo
     {
-        return $this->belongsTo(PersonalData::class);
+        return $this->belongsTo(ProfileLibTblEducDegree::class, 'degree_code');
+    }
+
+    public function profileLibTblEducMajor(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblEducMajor::class, 'major_code');
+    }
+
+    public function profileLibTblEducSchool(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblEducSchool::class, 'school_code');
     }
 
 }

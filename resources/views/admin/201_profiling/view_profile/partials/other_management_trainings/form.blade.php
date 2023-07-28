@@ -36,7 +36,7 @@
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
-                                <option value="{{ $profileLibTblExpertiseSpecs->Title }}">{{ $profileLibTblExpertiseSpecs->Title }}</option>
+                                <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}">{{ $profileLibTblExpertiseSpecs->Title }}</option>
                             @endforeach
                         </select>
                         @error('expertise_field_of_specialization')

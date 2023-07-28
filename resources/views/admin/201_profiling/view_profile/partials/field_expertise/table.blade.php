@@ -27,19 +27,24 @@
             @foreach ($expertise as $expertised)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $expertised->expertise_specialization }}
+                        {{ $expertised->Title}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('expertise.edit', ['ctrlno'=>$expertised->ctrlno]) }}" method="GET">
+                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->profile_tblExpertise->personal_data_cesno, 'speXpCode'=>$expertised->profile_tblExpertise->specialization_code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                   UPDATE
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
                                 </button>
                             </form>
                         
-                            <form action="{{ route('expertise.destroy', ['ctrlno'=>$expertised->ctrlno]) }}" method="POST">
+                            <form action="{{ route('expertise.destroy', ['cesno'=>$expertised->profile_tblExpertise->personal_data_cesno, 'speXpCode'=>$expertised->profile_tblExpertise->specialization_code]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">

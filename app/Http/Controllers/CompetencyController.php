@@ -79,7 +79,7 @@ class CompetencyController extends Controller
             $AssessmentCenter = AssessmentCenter::where('cesno','=','1')->get();
             $ValidationHr = ValidationHr::where('cesno','=','1')->get();
             $BoardInterview = BoardInterview::where('cesno','=','1')->get();
-            $CesStatus = ProfileTblCesStatus::where('cesno','=','1')->get();
+            $CesStatus = ProfileTblCesStatus::where('personsal_data_cesno','=','1')->get();
             $RecordOfCespesRatings = RecordOfCespesRatings::where('cesno','=','1')->get();
             $WorkExperience = ProfileTblWorkExperience::where('cesno','=','1')->get();
             $FieldExpertise = profileTblExpertise::where('cesno','=','1')->get();

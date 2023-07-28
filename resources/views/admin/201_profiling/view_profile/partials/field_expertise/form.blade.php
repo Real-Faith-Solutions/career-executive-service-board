@@ -12,17 +12,16 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="expertise_specialization">Expertise / Field of Specialization<sup>*</span></label>
-                        {{-- <input id="expertise_specialization" name="expertise_specialization" type="text" required> --}}
-                        <select id="expertise_specialization" name="expertise_specialization" required>
+                        <label for="SpeExp_Code">Expertise / Field of Specialization<sup>*</span></label>
+                        <select id="SpeExp_Code" name="specialization_code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
-                                <option value="{{ $profileLibTblExpertiseSpecs->Title }}">
+                                <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}">
                                     {{ $profileLibTblExpertiseSpecs->Title }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('expertise_specialization')
+                        @error('specialization_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

@@ -7,6 +7,7 @@ use App\Models\ProfileLibTblLanguageRef;
 use App\Models\ProfileTblLanguages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class LanguageController extends Controller
 {
@@ -15,59 +16,64 @@ class LanguageController extends Controller
 
         $request->validate([
 
-            'language_dialect' => ['required'],
+            'language_code' => [Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno), 'required'],
 
         ]);
 
-        $userLastName = Auth::user()->last_name; 
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
 
-        $language = new ProfileTblLanguages([
-
-            'language_description' => $request->language_dialect,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
-        ]);
-
+        $language_codes = $request->language_code;
+            
         $languagePersonalDataId = PersonalData::find($cesno);
 
-        $languagePersonalDataId->languages()->save($language);
+        $languageCode = ProfileLibTblLanguageRef::find($language_codes);
+ 
+        $languagePersonalDataId->languages()->attach($languageCode,['encoder'=>$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension]);
             
         return redirect()->back()->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($cesno, $language_code){
 
-        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $personalDataId = PersonalData::find($cesno);
+        $languageId = $personalDataId->languages()->where('code', $language_code)->value('code');
+
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
-        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', 
-        ['profileTblLanguages'=>$profileTblLanguages, 'profileLibTblLanguageRef'=>$profileLibTblLanguageRef]);
+
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'languageId', 'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $cesno, $language_code){
 
         $request->validate([
 
-            'language_dialect' => ['required'],
+            'language_code' => ['required'],
 
         ]);
 
-         $language = ProfileTblLanguages::find($ctrlno);
-         $language->language_description = $request->language_dialect;
-         $language->save();
+        $personalDataId = PersonalData::find($cesno);
+
+        $languageId = ProfileLibTblLanguageRef::find($language_code);
  
-         return back()->with('message', 'Updated Sucessfully');
-        
+        $personalDataId->languages()->updateExistingPivot($languageId,['language_code' => $request->language_code,]);
+     
+        return redirect()->route('viewProfile', ['cesno' => $personalDataId])->with('message', 'Updated Sucessfully');
+ 
     }
 
-    public function destroy($ctrlno){
+    public function destroy($cesno, $languageCode){
         
-        $language = ProfileTblLanguages::find($ctrlno);
-        $language->delete();
+        $personalData = PersonalData::find($cesno);
+
+        $languageId = ProfileLibTblLanguageRef::find($languageCode);
+ 
+        $personalData->languages()->detach($languageId);
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 

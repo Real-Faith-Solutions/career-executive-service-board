@@ -4,11 +4,55 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblCesStatus extends Model
 {
     use HasFactory;
 
+    use SoftDeletes;
+
     protected $table = "profile_tblCESstatus";
+    
+    protected $primaryKey = 'ctrlno';
+
+    protected $fillable = [
+        
+        'cesno',
+        'cesstat_code',
+        'acc_code',
+        'type_code',
+        'official_code',
+        'resolution_no',
+        'appointed_dt',
+        'submit_dt',
+        'return_dt',
+        'validator',
+        'remarks',
+        'encoder',
+
+    ];
+
+    public function profileLibTblCesStatus(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatus::class, 'cesstat_code');
+    }
+
+    public function profileLibTblCesStatusAcc(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatusAcc::class, 'acc_code');
+    }
+
+    public function profileLibTblCesStatusType(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatusType::class, 'type_code');
+    }
+
+    public function profileLibTblAppAuthority(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblAppAuthority::class, 'official_code');
+    }
 
 }

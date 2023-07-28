@@ -32,9 +32,8 @@ class ProfileTblTrainingMngt extends Model
 
     ];
 
-    public function otherTrainingPersonalData(): BelongsTo
+    public function trainingProfileLibTblExpertiseSpec(): BelongsTo
     {
-        return $this->belongsTo(PersonalData::class);
+        return $this->belongsTo(ProfileLibTblExpertiseSpec::class, 'field_specialization');
     }
-
 }

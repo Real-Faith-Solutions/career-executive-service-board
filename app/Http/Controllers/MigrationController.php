@@ -90,6 +90,7 @@ class MigrationController extends Controller
             DatabaseMigrations::truncate();
 
             // Reset personal_data table
+            
             PersonalData::truncate();
 
             $start = new \DateTime();
