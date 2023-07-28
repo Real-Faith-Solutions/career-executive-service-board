@@ -14,16 +14,16 @@ class CaseRecordController extends Controller
 
         $request->validate([
 
-            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_number' => ['required'],
+            'case_number' => ['required', 'min:2', 'max:40'],
             'date_filed' => ['required'],
-            'venue' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
             'date_finality' => ['required'],
-            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             
         ]);
 
@@ -68,16 +68,16 @@ class CaseRecordController extends Controller
 
         $request->validate([
 
-            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_number' => ['required'],
+            'case_number' => ['required', 'min:2', 'max:40'],
             'date_filed' => ['required'],
-            'venue' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
             'date_finality' => ['required'],
-            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'decision' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'remarks' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             
         ]);
 
