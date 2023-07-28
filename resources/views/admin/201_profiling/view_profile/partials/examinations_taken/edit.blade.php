@@ -6,7 +6,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form Examination Attainment
+                Update Form Examination Attainment
             </h1>
         </div>
 
@@ -17,19 +17,18 @@
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="type">Type of Examination<sup>*</sup></label>
-                        <input id="rating" name="rating" type="text" value="{{ $examinationTaken->type }}" readonly>
-                        {{-- <select id="type" name="type" required>
+                        <label for="exam_code">Type of Examination<sup>*</sup></label>
+                        <select id="type" name="exam_code" required>
                             <option disabled selected>Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
-                                @if ($profileLibTblExamRefs->TITLE == $examinationTaken->type)
-                                    <option value="{{ $profileLibTblExamRefs->TITLE }}" selected>{{ $profileLibTblExamRefs->TITLE }}</option>  
+                                @if ($profileLibTblExamRefs->CODE == $examinationTaken->exam_code)
+                                    <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE }}</option>  
                                 @else
-                                    <option value="{{ $profileLibTblExamRefs->TITLE }}">{{ $profileLibTblExamRefs->TITLE }}</option>s
+                                    <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}</option>s
                                 @endif
                             @endforeach
-                        </select> --}}
-                        @error('type')
+                        </select>
+                        @error('exam_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -103,7 +102,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
-                        Save changes
+                        Update Changes
                     </button>
                 </div>
             </form>
