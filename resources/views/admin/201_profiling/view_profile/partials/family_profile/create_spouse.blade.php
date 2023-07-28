@@ -1,4 +1,3 @@
-{{-- spouse details --}}
 <form action="{{ route('family-profile.store', ['cesno' => $mainProfile->cesno]) }}" method="POST" id="family_profile_spouse" onsubmit="return checkErrorsBeforeSubmit(family_profile_spouse)">
 
     @csrf

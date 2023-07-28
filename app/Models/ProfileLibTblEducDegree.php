@@ -11,8 +11,11 @@ class ProfileLibTblEducDegree extends Model
 
     protected $table = "profilelib_tblEducDegree";
 
+    protected $primaryKey = 'CODE';
+
     protected $fillable = [
         'CODE',
         'DEGREE',
     ]; 
+    
 }

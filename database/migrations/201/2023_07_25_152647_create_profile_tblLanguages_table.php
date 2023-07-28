@@ -11,22 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //educational_attainments
-        Schema::create('profile_tblEducation', function (Blueprint $table) {
+        //languages_dialects
+        Schema::create('profile_tblLanguages', function (Blueprint $table) {
             $table->id('ctrlno');
             // $table->bigInteger('cesno')->nullable();
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('level');
-            $table->string('specialization');
-            $table->string('school');
-            $table->string('degree')->nullable();
-            $table->string('school_type');
-            $table->string('period_of_attendance_from')->nullable();
-            $table->string('period_of_attendance_to')->nullable();
-            $table->string('highest_level')->nullable();
-            $table->string('year_graduate');
-            $table->string('academics_honor_received')->nullable();
+            $table->unsignedBigInteger('language_code');
+            $table->foreign('language_code')->references('code')->on('profilelib_tblLanguageRef')->onDelete('cascade');
+            // $table->string('language_description');
             $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -38,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_tblEducation');
+        Schema::dropIfExists('profile_tblLanguages');
     }
 };

@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Lenard\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PersonalData extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     protected $table = 'profile_tblMain';
 
@@ -70,7 +75,7 @@ class PersonalData extends Model
 
     public function educations(): HasMany
     {
-        return $this->hasMany(EducationalAttainment::class);
+        return $this->hasMany(EducationalAttainment::class, 'personal_data_cesno', 'cesno');
     }
 
     public function identifications(): HasOne
@@ -123,14 +128,20 @@ class PersonalData extends Model
         return $this->hasOne(HealthRecords::class);
     }
 
-    public function expertise(): HasMany
+    public function expertise(): BelongsToMany
     {
-        return $this->hasMany(ProfileTblExpertise::class);
+        return $this->belongsToMany(ProfileLibTblExpertiseSpec::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
+        ->as('profile_tblExpertise')
+        ->withPivot('ctrlno', 'encoder')
+        ->withTimestamps();
     }
 
-    public function languages(): HasMany
+    public function languages(): BelongsToMany
     {
-        return $this->hasMany(ProfileTblLanguages::class);
+        return $this->belongsToMany(ProfileLibTblLanguageRef::class, 'profile_tblLanguages', 'personal_data_cesno', 'language_code')
+        ->as('profile_tblLanguages')
+        ->withPivot('ctrlno', 'encoder')
+        ->withTimestamps();
     }
 
     public function otherTraining(): HasMany
@@ -138,6 +149,11 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblTrainingMngt::class);
     }
 
+    public function profileTblCesStatus(): HasMany
+    {
+        return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
+    }
+    
     public function medicalHistoryRecords(): HasMany
     {
         return $this->hasMany(MedicalHistory::class);

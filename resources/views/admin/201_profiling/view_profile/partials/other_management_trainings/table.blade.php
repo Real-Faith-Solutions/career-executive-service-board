@@ -52,7 +52,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->field_specialization }}
+                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -72,7 +72,12 @@
                             <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                   UPDATE
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
                                 </button>
                             </form>
 

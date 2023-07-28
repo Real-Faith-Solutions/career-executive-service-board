@@ -4,7 +4,6 @@
     @csrf
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-
         <div class="mb-3">
             <label for="father_last_name">Last name<sup>*</sup></label>
             <input type="text" id="father_last_name" name="father_last_name" oninput="validateInput(father_last_name, 2, 'letters')" onkeypress="validateInput(father_last_name, 2, 'letters')" onblur="checkErrorMessage(father_last_name)" required>
@@ -47,7 +46,6 @@
                 @endforeach
             </datalist>
         </div>
-
     </div>
 
     <div class="flex justify-end">

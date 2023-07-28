@@ -17,6 +17,8 @@ return new class extends Migration
             // $table->bigInteger('cesno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->unsignedBigInteger('field_specialization');
+            $table->foreign('field_specialization')->references('SpeExp_Code')->on('profilelib_tblExpertiseSpec')->onDelete('cascade');
             $table->string('training');
             $table->string('training_category')->nullable();
             $table->string('sponsor')->nullable();
@@ -24,7 +26,7 @@ return new class extends Migration
             $table->string('no_training_hours');
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
-            $table->string('field_specialization')->nullable();
+            // $table->string('field_specialization')->nullable();
             $table->string('encoder');
             $table->softDeletes();
             $table->timestamps();

@@ -1,4 +1,12 @@
 <div class="my-5 flex justify-end">
+    <a href="{{ route('work-experience.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
     <button class="btn btn-primary" onclick="openFormWorkExperience()">Add Work and Experience</button>
     <button class="btn btn-primary hidden" onclick="openTableWorkExperience()">Go back</button>
 </div>
@@ -89,7 +97,12 @@
                             <form action="{{ route('work-experience.edit', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                   UPDATE
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
                                 </button>
                             </form>
 

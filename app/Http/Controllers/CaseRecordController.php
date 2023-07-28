@@ -105,7 +105,35 @@ class CaseRecordController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $caseRecordTrashedRecord = $personalData->caseRecords()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
+        $caseRecord->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function forceDelete($ctrlno){
+
+        $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
+        $caseRecord->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 

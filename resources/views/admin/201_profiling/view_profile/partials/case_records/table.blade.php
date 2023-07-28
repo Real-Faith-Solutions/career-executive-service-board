@@ -1,4 +1,12 @@
 <div class="my-5 flex justify-end">
+    <a href="{{ route('case-record.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
     <button class="btn btn-primary" onclick="openFormCaseRecord()">Add Case Record/s</button>
     <button class="btn btn-primary hidden" onclick="openTableCaseRecord()">Go back</button>
 </div>
@@ -57,7 +65,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach ($caseRecord as $caseRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
@@ -105,7 +112,12 @@
                             <form action="{{ route('case-record.edit', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                   UPDATE
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
                                 </button>
                             </form>
 
@@ -126,7 +138,6 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>

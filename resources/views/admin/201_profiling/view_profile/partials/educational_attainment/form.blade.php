@@ -31,17 +31,16 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="school">School</label>
-                        {{-- <input id="school" name="school" type="text"> --}}
-                        <select id="school" name="school" required>
+                        <label for="school_code">School</label>
+                        <select id="school_code" name="school_code" required>
                             <option disabled selected>Select School</option>
                             @foreach($profileLibTblEducSchool as $profileLibTblEducSchools)
-                                <option value="{{ $profileLibTblEducSchools }}">
-                                    {{ $profileLibTblEducSchools }}
+                                <option value="{{ $profileLibTblEducSchools->CODE }}">
+                                    {{ $profileLibTblEducSchools->SCHOOL }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('school')
+                        @error('school_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -49,17 +48,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="specialization">Specialization<sup>*</span></label>
-                        {{-- <input id="degree" name="degree" type="text"> --}}
-                        <select id="specialization" name="specialization" required>
+                        <label for="major_code">major_code<sup>*</span></label>
+                        <select id="major_code" name="major_code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblEducMajor as $profileLibTblEducMajors)
-                                <option value="{{ $profileLibTblEducMajors }}">
-                                    {{ $profileLibTblEducMajors }}
+                                <option value="{{ $profileLibTblEducMajors->CODE }}">
+                                    {{ $profileLibTblEducMajors->COURSE }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('degree')
+                        @error('major_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -67,17 +65,16 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="degree">Degree<sup>*</span></label>
-                        {{-- <input id="degree" name="degree" type="text"> --}}
-                        <select id="degree" name="degree" required>
+                        <label for="degree_code">Degree<sup>*</span></label>
+                        <select id="degree_code" name="degree_code" required>
                             <option disabled selected>Select Degree</option>
                             @foreach($profileLibTblEducDegree as $profileLibTblEducDegrees)
-                                <option value="{{ $profileLibTblEducDegrees }}">
-                                    {{ $profileLibTblEducDegrees }}
+                                <option value="{{ $profileLibTblEducDegrees->CODE }}">
+                                    {{ $profileLibTblEducDegrees->DEGREE }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('degree')
+                        @error('degree_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

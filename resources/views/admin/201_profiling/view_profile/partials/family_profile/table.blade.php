@@ -55,12 +55,22 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newSpouseRecords->middle_name }}
+                        {{ $newSpouseRecords->middle_name }}`
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('family-profile.editSpouse', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
 
                             <form action="{{ route('family-profile-spouse.delete', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="POST">
                                 @csrf
@@ -107,7 +117,17 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('family-profile-father.editFather', ['ctrlno'=>$newFather->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
 
                             <form action="{{ route('family-profile-father.destroy', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST">
                                 @csrf
@@ -153,7 +173,17 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('family-profile-mother.editMother', ['ctrlno'=>$newMother->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
 
                             <form action="{{ route('family-profile-mother.destroy', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST">
                                 @csrf
@@ -198,7 +228,17 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
+                            <form action="{{ route('family-profile.editChildren', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
 
                             <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST">
                                 @csrf

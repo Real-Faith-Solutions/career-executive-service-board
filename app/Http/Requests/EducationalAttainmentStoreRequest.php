@@ -24,9 +24,9 @@ class EducationalAttainmentStoreRequest extends FormRequest
         return [
             
             'level' => ['required'],
-            'school' => ['required','max:40', 'min:2'],
-            'specialization' => ['nullable', 'max:40', 'min:2'],
-            'degree' => ['nullable', 'max:40', 'min:2'],
+            'school_code' => ['required', 'min:1'],
+            'major_code' => ['nullable', 'min:1'],
+            'degree_code' => ['nullable', 'min:1'],
             'school_type' => ['required'],
             'period_of_attendance_from' => ['required'],
             'period_of_attendance_to' => ['required'],

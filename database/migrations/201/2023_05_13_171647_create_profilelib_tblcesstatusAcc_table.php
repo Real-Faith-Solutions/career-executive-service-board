@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblcesstatusAcc', function (Blueprint $table) {
             $table->id('code');
-            // $table->string('code')->unique();
             $table->string('description')->nullable();
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

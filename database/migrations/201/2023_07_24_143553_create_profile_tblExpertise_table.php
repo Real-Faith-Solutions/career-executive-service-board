@@ -17,8 +17,10 @@ return new class extends Migration
             // $table->bigInteger('cesno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('expertise_specialization');
-            $table->string('encoder');
+            $table->unsignedBigInteger('specialization_code');
+            $table->foreign('specialization_code')->references('SpeExp_Code')->on('profilelib_tblExpertiseSpec')->onDelete('cascade');
+            // $table->string('expertise_specialization');
+            $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

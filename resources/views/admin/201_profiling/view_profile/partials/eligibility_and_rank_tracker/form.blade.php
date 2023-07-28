@@ -7,41 +7,49 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="#" method="#">
+            <form action="{{ route('eligibility-rank-tracker.store',['cesno'=>$mainProfile->cesno]) }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="#">CES Status<sup>*</sup></label>
-                        <select id="#" name="#" required type="text">
+                        <label for="cesstat_code">CES Status<sup>*</sup></label>
+                        <select id="cesstat_code" name="cesstat_code" required type="text">
                             <option disabled selected>Select CES Status</option>
+                            @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
+                                <option value="{{ $newProfileLibTblCesStatus->code }}">{{ $newProfileLibTblCesStatus->description }}</option>
+                            @endforeach
                         </select>
-                        @error('#')
+                        @error('cesstat_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
 
-                    <div class="mb-3">
-                        <label for="#">Acquired Thru<sup>*</sup></label>
-                        <select id="#" name="#" required type="text">
+                     <div class="mb-3">
+                        <label for="acc_code">Acquired Thru<sup>*</sup></label>
+                        <select id="acc_code" name="acc_code" required type="text">
                             <option disabled selected>Select Acquired Thru</option>
+                            @foreach ($profileLibTblCesStatusAcc as $newProfileLibTblCesStatusAcc)
+                                <option value="{{ $newProfileLibTblCesStatusAcc->code }}">{{ $newProfileLibTblCesStatusAcc->description }}</option>
+                            @endforeach
                         </select>
-                        @error('#')
+                        @error('acc_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
+                
                     <div class="mb-3">
-                        <label for="#">Status Type<sup>*</sup></label>
-                        <select id="#" name="#" required type="text">
+                        <label for="type_code">Status Type<sup>*</sup></label>
+                        <select id="type_code" name="type_code" required type="text">
                             <option disabled selected>Select Status Type</option>
+                            @foreach ($profileLibTblCesStatusType as $newProfileLibTblCesStatusType)
+                                <option value="{{ $newProfileLibTblCesStatusType->code }}">{{ $newProfileLibTblCesStatusType->description }}</option>
+                            @endforeach
                         </select>
-                        @error('#')
+                        @error('type_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -49,9 +57,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="#">Appointing Authority<sup>*</sup></label>
-                        <input id="#" name="#" required type="text">
-                        @error('#')
+                        <label for="official_code">Appointing Authority<sup>*</sup></label>
+                        <select id="official_code" name="official_code" required type="text">
+                            <option disabled selected>Select Appointing Authority</option>
+                            @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
+                                <option value="{{ $newProfileLibTblAppAuthority->code }}">{{ $newProfileLibTblAppAuthority->description }}</option>
+                            @endforeach
+                        </select>
+                        @error('official_code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -59,9 +72,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="#">Resolution No<sup>*</sup></label>
-                        <input id="#" name="#" required type="number">
-                        @error('#')
+                        <label for="resolution_no">Resolution No<sup>*</sup></label>
+                        <input id="resolution_no" name="resolution_no" required type="number">
+                        @error('resolution_no')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -69,18 +82,18 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="#">Date Acquired<sup>*</sup></label>
-                        <input id="#" name="#" required type="date">
-                        @error('#')
+                        <label for="appointed_dt">Date Acquired<sup>*</sup></label>
+                        <input id="appointed_dt" name="appointed_dt" required type="date">
+                        @error('appointed_dt')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-                </div>
+                </div> 
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>
