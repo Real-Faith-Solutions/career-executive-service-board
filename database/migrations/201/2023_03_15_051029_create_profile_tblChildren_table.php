@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('name_extension')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('birth_place')->nullable();
-            $table->string('gender')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
             // $table->string('encdate')->nullable();
