@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vw_plantilla_motherdept', function (Blueprint $table) {
+        Schema::create('plantilla_motherdept', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('encoder');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vw_plantilla_motherdept');
+        Schema::dropIfExists('plantilla_motherdept');
     }
 };
