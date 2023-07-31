@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
@@ -219,6 +220,19 @@ Route::prefix('identification/card')->group(function () {
     Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
     Route::put('update/{ctrlno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
     Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+});
+
+Route::prefix('contact-info')->group(function () {
+    Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
+    Route::get('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
+
+    // Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
+    // Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    // Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
+    // Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+    // Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
+    // Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
+    // Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete');
 });
 
 Route::prefix('educational-attainment')->group(function () {

@@ -42,6 +42,9 @@
                                 <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
                             </li>
                             <li>
+                                <a class="btn category-button inline-flex" href="{{ route('contact-info.show', ['cesno'=>$mainProfile->cesno]) }}">Contact Information</a>
+                            </li>
+                            <li>
                                 <a class="btn category-button inline-flex" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
                             </li>
                         </ul>
