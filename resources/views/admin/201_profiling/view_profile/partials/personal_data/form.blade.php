@@ -1,3 +1,9 @@
+@extends('layouts.app')
+@section('title', 'Personal Profile')
+@section('sub', 'Personal Profile')
+@section('content')
+@include('admin.201_profiling.view_profile.header')
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -135,3 +141,5 @@
         </div>
     </div>
 </div>
+
+@endsection
