@@ -265,4 +265,56 @@ class FamilyController extends Controller
 
     }
 
+    public function familyProfileRecentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted spouses of the parent model
+        $spousesTrashedRecord = $personalData->spouses()->onlyTrashed()->get();
+
+        // Access the soft deleted childrens of the parent model
+        $childrensTrashedRecord = $personalData->childrens()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.family_profile.trashbin', compact('spousesTrashedRecord', 'childrensTrashedRecord'));
+
+    }
+
+    public function spouseRestore($ctrlno){
+
+        $spouse = SpouseRecords::withTrashed()->find($ctrlno);
+        $spouse->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function spouseForceDelete($ctrlno){
+
+        $spouse = SpouseRecords::withTrashed()->find($ctrlno);
+        $spouse->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+
+     public function childrenRestore($ctrlno){
+
+        $children = ChildrenRecords::withTrashed()->find($ctrlno);
+        $children->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    public function childrenForceDelete($ctrlno){
+
+        $children = ChildrenRecords::withTrashed()->find($ctrlno);
+        $children->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+
+
 }

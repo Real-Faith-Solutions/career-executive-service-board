@@ -177,11 +177,15 @@ Route::prefix('201-library')->group(function () {
 
 
 Route::prefix('family-profile')->group(function () {
+    Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted');
+  
     Route::prefix('spouse')->group(function () {
-        Route::get('{ctrlno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
-        Route::post('{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
-        Route::put('{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord');
-        Route::delete('{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+        Route::get('edit/{ctrlno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
+        Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
+        Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord');
+        Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
+        Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'spouseRestore'])->name('family-profile-spouse.restore');
+        Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'spouseForceDelete'])->name('family-profile-spouse.forceDelete');
     });
 
     Route::prefix('children')->group(function () {
@@ -189,6 +193,8 @@ Route::prefix('family-profile')->group(function () {
         Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
         Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren');
         Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
+        Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'childrenRestore'])->name('family-profile-children.restore');
+        Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'childrenForceDelete'])->name('family-profile-children.forceDelete');
     });
 
     Route::prefix('father')->group(function () {
@@ -196,6 +202,8 @@ Route::prefix('family-profile')->group(function () {
         Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
         Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord');
         Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy');
+        Route::post('recently-deleted/father-restore/{ctrlno}', [FamilyController::class, 'fatherRestore'])->name('family-profile-father.fatherRestore');
+        Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'fatherForceDelete'])->name('family-profile-father.fatherForceDelete');
     });
 
     Route::prefix('mother')->group(function () {
