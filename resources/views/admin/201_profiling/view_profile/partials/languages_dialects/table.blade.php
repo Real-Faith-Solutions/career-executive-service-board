@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormLanguageDialect()">Add Language Dialect</button>
+    <button class="btn btn-primary" id='add-edit-languages-btn'>Add Language Dialect</button>
     <button class="btn btn-primary hidden" onclick="openTableLanguageDialect()">Go back</button>
 </div>
 
@@ -12,7 +12,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Title
+                    Language
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -62,4 +62,38 @@
 
         </tbody>
     </table>
+</div>
+
+<!-- Modal for Adding Language Dialect -->
+<div id="add-edit-languages-modal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+        <form action="{{ route('language.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
+            @csrf
+
+            <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-center">Add Language or Dialect</h2>
+
+            <div class="sm:gid-cols-1 mb-1 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+
+                <div class="mb-1">
+                    <label for="language_code">Language Dialect<sup>*</sup></label>
+                    <select id="language_code" name="language_code" required>
+                        <option disabled selected>Select language</option>
+                        @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
+                            <option value="{{ $profileLibTblLanguageRefs->code }}">
+                                {{ $profileLibTblLanguageRefs->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('language_code')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                    @enderror
+                </div>
+
+            </div>
+            <button type="submit" name="submit" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-colors duration-300">ADD</button>
+        </form>
+    </div>
 </div>

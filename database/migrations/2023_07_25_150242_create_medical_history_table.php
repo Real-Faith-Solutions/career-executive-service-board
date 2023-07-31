@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('identifications', function (Blueprint $table) {
+        Schema::create('medical_history', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            // $table->string('type');
-            // $table->string('id_number');
-            $table->string('gsis')->nullable();
-            $table->string('pagibig')->nullable();
-            $table->string('philhealth')->nullable();
-            $table->string('sss_no')->nullable();
-            $table->string('tin')->nullable();
+            $table->string('illness')->nullable();
+            $table->date('illness_date')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('identifications');
+        Schema::dropIfExists('medical_history');
     }
 };

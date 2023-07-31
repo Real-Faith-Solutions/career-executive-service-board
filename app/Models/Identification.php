@@ -21,8 +21,13 @@ class Identification extends Model
     protected $fillable = [
         
         'personal_data_cesno',
-        'type',
-        'id_number',
+        // 'type',
+        // 'id_number',
+        'gsis',
+        'pagibig',
+        'philhealth',
+        'sss_no',
+        'tin',
         'encoder',
 
     ];

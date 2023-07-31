@@ -50,6 +50,14 @@
     <script src="{{ asset('js/profile-avatar.js') }}"></script>
     {{-- end --}}
 
+    {{-- js script for adding medical history --}}
+    <script src="{{ asset('js/medical-history.js') }}"></script>
+    {{-- end --}}
+
+    {{-- js script for adding medical history --}}
+    <script src="{{ asset('js/languages.js') }}"></script>
+    {{-- end --}}
+
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
 

@@ -53,8 +53,8 @@
 
             <div class="mb-3">
                 <label for="email">Email<sup>*</sup></label>
-                <input id="email" name="email" type="text" value="{{ old('email') }}">
-                <p class="text-red-600"></p>
+                <input id="personal_email" name="email" type="text" value="{{ old('email') }}" oninput="validateInputEmail(personal_email)" onkeypress="validateInputEmail(personal_email)" onblur="checkErrorMessage(personal_email)" required>
+                <p class="input_error text-red-600"></p>
             </div>
 
         </div>

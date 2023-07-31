@@ -1,5 +1,5 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormIdentification()">Add Identification</button>
+    <button class="btn btn-primary" onclick="openFormIdentification()">Add Identification Card</button>
     <button class="btn btn-primary hidden" onclick="openTableIdentification()">Go back</button>
 </div>
 
@@ -12,21 +12,42 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Type
+                    ID Type
                 </th>
 
                 <th class="px-6 py-3" scope="col">
                     ID Number
                 </th>
 
-                <th class="px-6 py-3" scope="col">
+                {{-- <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
-                </th>
+                </th> --}}
             </tr>
         </thead>
 
         <tbody>
-            @foreach ($identification as $newIdentification)
+            <tr class="border-b bg-white">
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">GSIS</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->gsis : 'None' }}</td>
+            </tr>
+            <tr class="border-b bg-white">
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">PAG-IBIG</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->pagibig : 'None' }}</td>
+            </tr>
+            <tr class="border-b bg-white">
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">PHILHEALTH</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->philhealth : 'None' }}</td>
+            </tr>
+            <tr class="border-b bg-white">
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">SSS</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->sss_no : 'None' }}</td>
+            </tr>
+            <tr class="border-b bg-white">
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">TIN</td>
+                <td class="px-6 py-3">{{ $identification ? $identification->tin : 'None' }}</td>
+            </tr>
+
+            {{-- @foreach ($identification as $newIdentification)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                         {{ $newIdentification->type }}
@@ -61,7 +82,7 @@
                         </div>
                     </td>
                 </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>

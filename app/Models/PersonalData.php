@@ -78,9 +78,9 @@ class PersonalData extends Model
         return $this->hasMany(EducationalAttainment::class, 'personal_data_cesno', 'cesno');
     }
 
-    public function identifications(): HasMany
+    public function identifications(): HasOne
     {
-        return $this->hasMany(Identification::class);
+        return $this->hasOne(Identification::class);
     }
 
     public function examinationTakens(): HasMany
@@ -123,9 +123,9 @@ class PersonalData extends Model
         return $this->hasMany(CaseRecords::class);
     }
 
-    public function healthRecords(): HasMany
+    public function healthRecords(): HasOne
     {
-        return $this->hasMany(HealthRecords::class);
+        return $this->hasOne(HealthRecords::class);
     }
 
     public function expertise(): BelongsToMany
@@ -152,6 +152,11 @@ class PersonalData extends Model
     public function profileTblCesStatus(): HasMany
     {
         return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
+    }
+    
+    public function medicalHistoryRecords(): HasMany
+    {
+        return $this->hasMany(MedicalHistory::class);
     }
   
 }

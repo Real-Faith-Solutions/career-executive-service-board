@@ -14,8 +14,8 @@ class AffiliationController extends Controller
 
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],
 
@@ -56,8 +56,8 @@ class AffiliationController extends Controller
 
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],
 

@@ -7,13 +7,14 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('work-experience.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('work-experience.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST" id="work_experience_form" onsubmit="return checkErrorsBeforeSubmit(work_experience_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
+                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" oninput="validateDateInput(inclusive_date_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -23,7 +24,8 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" type="date" required>
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(inclusive_date_to)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -35,7 +37,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="designation">Position Title / Designation<sup>*</span></label>
-                        <input id="designation" name="designation" type="text" required>
+                        <input type="text" id="designation" name="designation" oninput="validateInput(designation, 4)" onkeypress="validateInput(designation, 4)" onblur="checkErrorMessage(designation)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('designation')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -45,7 +48,8 @@
 
                     <div class="mb-3">
                         <label for="department_or_agency">Department / Agency<sup>*</span></label>
-                        <input id="department_or_agency" name="department_or_agency" type="text" required>
+                        <input id="department_or_agency" name="department_or_agency" type="text" oninput="validateInput(department_or_agency, 4)" onkeypress="validateInput(department_or_agency, 4)" onblur="checkErrorMessage(department_or_agency)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('department_or_agency')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -55,7 +59,8 @@
 
                     <div class="mb-3">
                         <label for="monthly_salary">Monthly Salary<sup>*</span></label>
-                        <input id="monthly_salary" name="monthly_salary" type="text" required>
+                        <input id="monthly_salary" name="monthly_salary" type="text" oninput="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onkeypress="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onblur="checkErrorMessage(monthly_salary)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('monthly_salary')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -67,7 +72,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="salary">Salary / Job / Pay Grade<sup>*</span></label>  
-                        <input id="salary" name="salary" type="text" required>
+                        <input id="salary" name="salary" type="text" oninput="validateInput(salary, 4)" onkeypress="validateInput(salary, 4)" onblur="checkErrorMessage(salary)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('salary')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -106,8 +112,8 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="remarks">Remarks<sup>*</span></label>
-                        <input id="remarks" name="remarks" type="text" required>
+                        <label for="remarks">Remarks</label>
+                        <input id="remarks" name="remarks" type="text">
                         @error('remarks')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

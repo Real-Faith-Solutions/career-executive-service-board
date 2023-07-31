@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('educational-attainment.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('educational-attainment.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST" id="educational_attainment" onsubmit="return checkErrorsBeforeSubmit(educational_attainment)">
                 @csrf
     
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -99,7 +99,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="period_of_attendance_from">Period of attendance (From)<sup>*</span></label>
-                        <input id="period_of_attendance_from" name="period_of_attendance_from" required type="month">
+                        <input type="date" id="period_of_attendance_from" name="period_of_attendance_from" oninput="validateDateInput(period_of_attendance_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('period_of_attendance_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -109,7 +110,8 @@
 
                     <div class="mb-3">
                         <label for="period_of_attendance_to">Period of attendance (To)<sup>*</span></label>
-                        <input id="period_of_attendance_to" name="period_of_attendance_to" required type="month">
+                        <input type="date" id="period_of_attendance_to" name="period_of_attendance_to" oninput="validateDateInput(period_of_attendance_to)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('period_of_attendance_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -131,7 +133,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="year_graduate">Year Graduate<sup>*</span></label>
-                        <input id="year_graduate" name="year_graduate" required type="year">
+                        <input type="text" id="year_graduate" name="year_graduate" oninput="validateInput(year_graduate, 4, 'numbers')" onkeypress="validateInput(year_graduate, 4, 'numbers')" onblur="checkErrorMessage(year_graduate)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('year_graduate')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

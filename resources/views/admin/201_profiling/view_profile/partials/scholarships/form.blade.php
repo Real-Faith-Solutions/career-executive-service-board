@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('scholarship.store', ['cesno' => $mainProfile->cesno]) }}" method="POST">
+            <form action="{{ route('scholarship.store', ['cesno' => $mainProfile->cesno]) }}" method="POST" id="scholarship_form" onsubmit="return checkErrorsBeforeSubmit(scholarship_form)">
                 @csrf
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -27,8 +27,9 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="title">Title</label>
-                        <input id="title" name="title" type="text">
+                        <label for="title">Title<sup>*</sup></label>
+                        <input type="text" id="scholarship_title" name="title" oninput="validateInput(scholarship_title, 2)" onkeypress="validateInput(scholarship_title, 2)" onblur="checkErrorMessage(title)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('title')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -37,8 +38,9 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="sponsor">Sponsor<sup>*</span></label>
-                        <input id="sponsor" name="sponsor" required type="text">
+                        <label for="sponsor">Sponsor<sup>*</sup></span></label>
+                        <input type="text" id="sponsor" name="sponsor" oninput="validateInput(sponsor, 2)" onkeypress="validateInput(sponsor, 2)" onblur="checkErrorMessage(sponsor)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('sponsor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -50,7 +52,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)</label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" type="date">
+                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" oninput="validateDateInput(inclusive_date_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -60,7 +63,8 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)</label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" type="date">
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(inclusive_date_to, 0, true)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

@@ -9,7 +9,6 @@
             age--;
         }
         document.getElementById('age').value = age;
-        return age;
     }
 
     function generateMiddleInitial() {
@@ -90,6 +89,9 @@
         }else if(type == 'numbersWithSpecial'){
             regexValidator = /^[0-9!@#$%^&*()\-_=+[\]{}|\\;:'",.<>/?]*$/;
             errorMessage = ' digits without letters.';
+        }else if(type == 'email'){
+            regexValidator = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            errorMessage = ' characters and has a valid email format.';
         }
     
         var form = inputField.closest('form');
@@ -142,6 +144,59 @@
     }
     // end names input validations letters only or type
 
+    // email input validation
+    function validateInputEmail(inputField) {
+
+        const inputValue = inputField.value;
+        let regexValidator = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        let errorMessage = ' characters and has a valid email format.';
+    
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+    
+        if (inputValue.length < 6 && regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least 6 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (inputValue.length < 7 && !regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `At least 6 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (!regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = 'Invalid email.';
+        } else {
+            inputField.nextElementSibling.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
+        }
+    }
+    // email input validation
+
     // when not focus on current input field
     function checkErrorMessage(inputField) {
 
@@ -172,11 +227,11 @@
     // end prevent submission of form if there is an error
 
     // validate date
-    function validateDateInput(inputDate, minAge = 0){
+    function validateDateInput(inputDate, minAge = 0, allowFuture = false){
 
         const inputDateByUSer = inputDate.value;
 
-        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        const datePattern = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 
         var form = inputDate.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
@@ -195,7 +250,7 @@
         const inputDateNew = new Date(inputDateByUSer);
         const currentDate = new Date();
 
-        if(inputDateNew > currentDate){
+        if((inputDateNew > currentDate) && (!allowFuture)){
             inputDate.nextElementSibling.textContent = `Invalid date.`;
             inputDate.classList.remove('focus:outline-blue-600');
             inputDate.classList.add('border-red-600');
@@ -206,17 +261,24 @@
             return
         }
 
-        let userAge = computeAge();
+        var today = new Date();
+        var age = today.getFullYear() - inputDateNew.getFullYear();
+        var monthDiff = today.getMonth() - inputDateNew.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < inputDateNew.getDate())) {
+            age--;
+        }
 
-        if(userAge < minAge){
-            inputDate.nextElementSibling.textContent = `Invalid date.`;
-            inputDate.classList.remove('focus:outline-blue-600');
-            inputDate.classList.add('border-red-600');
-            inputDate.classList.add('focus:outline-red-500');
-            submitButton.disabled = true;
-            submitButton.classList.remove('cursor-pointer');
-            submitButton.classList.add('cursor-not-allowed');
-            return
+        if(!allowFuture){
+            if(age < minAge){
+                inputDate.nextElementSibling.textContent = `Invalid date.`;
+                inputDate.classList.remove('focus:outline-blue-600');
+                inputDate.classList.add('border-red-600');
+                inputDate.classList.add('focus:outline-red-500');
+                submitButton.disabled = true;
+                submitButton.classList.remove('cursor-pointer');
+                submitButton.classList.add('cursor-not-allowed');
+                return
+            }
         }
 
         inputDate.nextElementSibling.textContent = '';
@@ -229,5 +291,49 @@
 
     }
     // end validate date
+
+    // validation of 2 dates from vs to where from should be < to
+    function validateDateFromTo(fromDate, toDate){
+
+        const inputFromDateByUSer = fromDate.value;
+        const inputToDateByUSer = toDate.value;
+
+        const inputFromDate = new Date(inputFromDateByUSer);
+        const inputToDate = new Date(inputToDateByUSer);
+
+        var form = fromDate.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if(inputFromDate && inputToDate){
+            if(inputFromDate > inputToDate){
+                fromDate.nextElementSibling.textContent = `Invalid date.`;
+                fromDate.classList.remove('focus:outline-blue-600');
+                fromDate.classList.add('border-red-600');
+                fromDate.classList.add('focus:outline-red-500');
+                toDate.nextElementSibling.textContent = `Invalid date.`;
+                toDate.classList.remove('focus:outline-blue-600');
+                toDate.classList.add('border-red-600');
+                toDate.classList.add('focus:outline-red-500');
+                submitButton.disabled = true;
+                submitButton.classList.remove('cursor-pointer');
+                submitButton.classList.add('cursor-not-allowed');
+                return
+            }
+        }
+
+        fromDate.nextElementSibling.textContent = '';
+        fromDate.classList.remove('focus:outline-red-500');
+        fromDate.classList.remove('border-red-600');
+        fromDate.classList.add('focus:outline-blue-600');
+        toDate.nextElementSibling.textContent = '';
+        toDate.classList.remove('focus:outline-red-500');
+        toDate.classList.remove('border-red-600');
+        toDate.classList.add('focus:outline-blue-600');
+        submitButton.disabled = false;
+        submitButton.classList.remove('cursor-not-allowed');
+        submitButton.classList.add('cursor-pointer');
+
+    }
+    // end validation of 2 dates from vs to where from should be < to
 
 // end of real-time validation

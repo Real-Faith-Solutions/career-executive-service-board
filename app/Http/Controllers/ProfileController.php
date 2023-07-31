@@ -72,6 +72,7 @@ use App\Models\GenderByChoice;
 use App\Models\GenderByBirth;
 use App\Models\NameExtension;
 use App\Models\CivilStatus;
+use App\Models\MedicalHistory;
 use App\Models\Title;
 use App\Models\RecordStatus;
 use App\Models\Religion;
@@ -128,7 +129,7 @@ class ProfileController extends Controller
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
-        $identification = Identification::where('personal_data_cesno', $cesno)->get();
+        $identification = Identification::where('personal_data_cesno', $cesno)->first();
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
         $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
@@ -136,6 +137,18 @@ class ProfileController extends Controller
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
+        $examinationTaken = PersonalData::find($cesno)->examinationTakens;
+        $scholarship = PersonalData::find($cesno)->scholarships;
+        $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
+        $workExperience = PersonalData::find($cesno)->workExperience;
+        $awardsAndCitation = PersonalData::find($cesno)->awardsAndCitations;
+        $affiliation = PersonalData::find($cesno)->affiliations;
+        $caseRecord = PersonalData::find($cesno)->caseRecords;
+        $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->first();
+        $expertise = PersonalData::find($cesno)->expertise;
+        $language = PersonalData::find($cesno)->languages;
+        $otherTraining = PersonalData::find($cesno)->otherTraining;
+
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
         $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
@@ -154,11 +167,13 @@ class ProfileController extends Controller
         $researchAndStudies = $personalData->researchAndStudies;
         $scholarship = $personalData->scholarships;
         $examinationTaken = $personalData->examinationTakens;
+
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
         $nameExtensions = NameExtension::all();
-
+        $pwds = PWD::all();
+        $medicalHistory = MedicalHistory::where('personal_data_cesno', $cesno)->get();
         $birthdate = $mainProfile->birth_date;
         $now = new DateTime();
         $birthDate = new DateTime($birthdate);
@@ -169,7 +184,7 @@ class ProfileController extends Controller
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
-        'profileTblCesStatus'));
+        'profileTblCesStatus', 'pwds', 'medicalHistory'));
 
     }
 

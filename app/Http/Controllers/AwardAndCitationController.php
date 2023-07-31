@@ -14,8 +14,8 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
         ]);
@@ -53,8 +53,8 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
         ]);
