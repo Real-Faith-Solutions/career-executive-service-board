@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'FAMILY PROFILE RECYCLE BIN')
+@section('sub', 'FAMILY PROFILE RECYCLE BIN')
 @section('content')
-
-<div class="mb-7">
-    <h1>FAMILY PROFILE RECYCLE BIN</h1>
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+<div class="my-5 flex justify-end">
+    <a class="btn btn-primary" href="{{ route('family-profile.show', ['cesno' => $cesno]) }}">Go back</a>
 </div>
-
 <div class="table-family-profile relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
