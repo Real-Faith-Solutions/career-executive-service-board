@@ -180,7 +180,7 @@ class ProfileController extends Controller
         $age = $now->diff($birthDate)->y;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef', 
+        'mother', 'identification', 'educationalAttainment', 'profileLibTblEducDegree', 'profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblExamRef',
         'examinationTaken', 'scholarship', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
