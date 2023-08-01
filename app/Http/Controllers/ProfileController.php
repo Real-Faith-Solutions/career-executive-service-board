@@ -453,7 +453,7 @@ class ProfileController extends Controller
                 $CaseRecords = CaseRecords::where('personal_data_cesno', '=', $cesno)->get();
                 $HealthRecords = HealthRecords::where('personal_data_cesno', '=', $cesno)->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', $cesno)->get();
-                $PdfLinks = PdfLinks::where('cesno', '=', $cesno)->get();
+                $PdfLinks = PdfLinks::where('personal_data_cesno', '=', $cesno)->get();
 
                 $searched = PersonalData::offset(0)->limit($numberOfResult)->get();
 
@@ -1200,7 +1200,7 @@ class ProfileController extends Controller
             $HealthRecordsViewOnly = RolesController::validateUserExecutive201RoleAccess('Health Record', 'View Only');
 
             // Attached PDF Files
-            $PdfLinks = PdfLinks::where('cesno', '=', $request)->get();
+            $PdfLinks = PdfLinks::where('personal_data_cesno', '=', $request)->get();
             $PdfLinksAdd = RolesController::validateUserExecutive201RoleAccess('Attached PDF Files', 'Add');
             $PdfLinksEdit = RolesController::validateUserExecutive201RoleAccess('Attached PDF Files', 'Edit');
             $PdfLinksDelete = RolesController::validateUserExecutive201RoleAccess('Attached PDF Files', 'Delete');
@@ -1369,7 +1369,7 @@ class ProfileController extends Controller
                 $CaseRecords = CaseRecords::where('personal_data_cesno', '=', '1')->get();
                 $HealthRecords = HealthRecords::where('personal_data_cesno', '=', '1')->get();
                 $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno', '=', '1')->get();
-                $PdfLinks = PdfLinks::where('cesno', '=', '1')->get();
+                $PdfLinks = PdfLinks::where('personal_data_cesno', '=', '1')->get();
 
                 $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
                 $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();

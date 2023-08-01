@@ -1,5 +1,6 @@
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary">Add PDF file</button>
+    <a href="{{ route('show-pdf-files', ['cesno'=>$mainProfile->cesno]) }}" class="btn btn-primary">PDF File</a>
+    {{-- <button class="btn btn-primary">Add PDF file</button> --}}
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">

@@ -14,12 +14,14 @@ return new class extends Migration
         //pdf_links
         Schema::create('profile_tblmain_pdflink', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->bigInteger('cesno')->nullable();
+            // $table->bigInteger('cesno')->nullable();
+            $table->unsignedBigInteger('personal_data_cesno');
+            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('pdflink')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encdate')->nullable();
-            $table->longText('remarks')->nullable();
+            $table->string('remarks')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

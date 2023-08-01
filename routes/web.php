@@ -30,6 +30,7 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
@@ -72,6 +73,9 @@ Route::get('/', function () {
         return Redirect::to('/admin/dashboard');
     }
 });
+
+Route::get('show/{cesno}', [PDFController::class, 'show'])->name('show-pdf-files');
+Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
 
 Route::prefix('plantilla')->group(function () {
 

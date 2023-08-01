@@ -92,7 +92,7 @@ class CompetencyController extends Controller
             $CaseRecords = CaseRecords::where('cesno','=','1')->get();
             $HealthRecords = HealthRecords::where('cesno','=','1')->get();
             $HistoricalRecordOfMedicalCondition = HistoricalRecordOfMedicalCondition::where('cesno','=','1')->get();
-            $PdfLinks = PdfLinks::where('cesno','=','1')->get();
+            $PdfLinks = PdfLinks::where('personal_data_cesno','=','1')->get();
 
             $CityMunicipality = ProfileLibTblAreaCode::orderBy('created_at', 'desc')->get();
             $Degree = ProfileLibTblEducDegree::orderBy('created_at', 'desc')->get();
