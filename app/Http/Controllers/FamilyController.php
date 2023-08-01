@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Auth;
 class FamilyController extends Controller
 {
 
+    public function show($cesno){
+
+        $father = Father::where('personal_data_cesno', $cesno)->get();
+        $mother = Mother::where('personal_data_cesno', $cesno)->get();
+        $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
+        $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
+        $nameExtensions = NameExtension::all();
+
+        return view('admin.201_profiling.view_profile.partials.family_profile.table', 
+        compact('father', 'mother', 'childrenRecords', 'SpouseRecords', 'nameExtensions', 'cesno'));
+        
+    }
+
     public function storeSpouse(SpouseStoreRequest $request, $cesno){
 
         $userLastName = Auth::user()->last_name; 
@@ -46,11 +59,11 @@ class FamilyController extends Controller
 
     }
 
-    public function editSpouse($ctrlno){
+    public function editSpouse($ctrlno, $cesno){
 
         $spouseRecord = SpouseRecords::find($ctrlno);
         $nameExtensions = NameExtension::all();
-        return view('admin.201_profiling.view_profile.partials.family_profile.edit_spouse', compact('nameExtensions', 'spouseRecord'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.edit_spouse', compact('nameExtensions', 'spouseRecord', 'cesno'));
 
     }
 
@@ -107,12 +120,12 @@ class FamilyController extends Controller
 
     }
 
-    public function editChildren($ctrlno){
+    public function editChildren($ctrlno, $cesno){
 
         $nameExtensions = NameExtension::all();
         $childrenRecords = ChildrenRecords::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.family_profile.edit_children', compact('nameExtensions', 'childrenRecords'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.edit_children', compact('nameExtensions', 'childrenRecords', 'cesno'));
 
     }
 
@@ -173,12 +186,12 @@ class FamilyController extends Controller
 
     }
 
-    public function editFather($ctrlno){
+    public function editFather($ctrlno, $cesno){
 
         $nameExtensions = NameExtension::all();
         $father = Father::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.family_profile.edit_father', compact('nameExtensions', 'father'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.edit_father', compact('nameExtensions', 'father', 'cesno'));
 
     }
 
@@ -236,11 +249,11 @@ class FamilyController extends Controller
 
     }
 
-    public function editMother($ctrlno){
+    public function editMother($ctrlno, $cesno){
 
         $mother = Mother::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.family_profile.edit_mother', compact('mother'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.edit_mother', compact('mother', 'cesno'));
 
     }
 
@@ -276,7 +289,7 @@ class FamilyController extends Controller
         // Access the soft deleted childrens of the parent model
         $childrensTrashedRecord = $personalData->childrens()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.family_profile.trashbin', compact('spousesTrashedRecord', 'childrensTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.trashbin', compact('spousesTrashedRecord', 'childrensTrashedRecord', 'cesno'));
 
     }
 

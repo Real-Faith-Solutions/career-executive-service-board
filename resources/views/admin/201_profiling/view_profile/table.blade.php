@@ -45,7 +45,7 @@
                                         {{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="{{ url('admin/profile/view', ['cesno' => $item->cesno]) }}" class="font-medium">View profile</a>
+                                        <a href="{{ route('personal-data.show', ['cesno' => $item->cesno]) }}" class="font-medium">View profile</a>
                                     </td>
                                 </a>
 
