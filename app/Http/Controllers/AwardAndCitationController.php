@@ -20,10 +20,11 @@ class AwardAndCitationController extends Controller
             
         ]);
 
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
 
         $awardAndCitations = new AwardAndCitations([
 
@@ -59,10 +60,11 @@ class AwardAndCitationController extends Controller
             
         ]);
 
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
 
         $awardAndCitation = AwardAndCitations::find($ctrlno);
         $awardAndCitation->awards = $request->title_of_award;
