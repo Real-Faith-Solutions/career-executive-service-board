@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Educational Attainment Edit')
-@section('sub', 'Educational Attainment Edit')
+@section('title', 'Educational Attainment')
+@section('sub', 'Educational Attainment')
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 

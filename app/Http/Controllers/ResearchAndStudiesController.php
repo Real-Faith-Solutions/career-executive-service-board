@@ -11,6 +11,21 @@ use Illuminate\Validation\Rule;
 
 class ResearchAndStudiesController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $researchAndStudies = $personalData->researchAndStudies;
+
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.table', compact('researchAndStudies' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.form', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -43,18 +58,18 @@ class ResearchAndStudiesController extends Controller
 
         $researchAndStudiesPersonalDataId->researchAndStudies()->save($researchAndStudies);
 
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('research-studies.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', ['researchAndStudies'=>$researchAndStudies]);
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', compact('researchAndStudies' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $researchAndStudiesId = ResearchAndStudies::find($ctrlno);
 
@@ -74,7 +89,7 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies->inclusive_date_to = $request->inclusive_date_to;
         $researchAndStudies->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('research-studies.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -95,7 +110,7 @@ class ResearchAndStudiesController extends Controller
         // Access the soft deleted scholarships of the parent model
         $researchAndStudiesTrashedRecord = $personalData->researchAndStudies()->onlyTrashed()->get();
 
-        return view('admin.201_profiling.view_profile.partials.research_and_studies.trashbin', compact('researchAndStudiesTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.trashbin', compact('researchAndStudiesTrashedRecord', 'cesno'));
 
     }
 
