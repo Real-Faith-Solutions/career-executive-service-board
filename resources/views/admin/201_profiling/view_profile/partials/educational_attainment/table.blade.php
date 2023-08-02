@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Educational Attainment')
+@section('sub', 'Educational Attainment')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('educational-attainment.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('educational-attainment.recycleBin', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormEducationalAttainment()">Add Educational Attainment</button>
-    <button class="btn btn-primary hidden" onclick="openTableEducationalAttainment()">Go back</button>
-</div>
 
-<div class="form-educational-attainment hidden">
-    @include('admin.201_profiling.view_profile.partials.educational_attainment.form')
+    <a href="{{ route('educational-attainment.form', ['cesno' => $cesno]) }}" class="btn btn-primary">Add Educational Attainment</a>
 </div>
 
 <div class="table-educational-attainment relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -57,13 +59,13 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->period_of_attendance_from." ".$newEducationalAttainment->period_of_attendance_to }}
+                        {{ $newEducationalAttainment->period_of_attendance_from." - ".$newEducationalAttainment->period_of_attendance_to }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
 
                         <div class="flex">
-                            <form action="{{ route('educational-attainment.edit', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="GET">
+                            <form action="{{ route('educational-attainment.edit', ['ctrlno'=>$newEducationalAttainment->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -96,3 +98,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection

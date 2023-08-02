@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Educational Attainment Edit')
+@section('sub', 'Educational Attainment Edit')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Go Back</a>
+</div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -162,7 +168,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="period_of_attendance_from">Period of attendance (From)<sup>*</span></label>
-                        <input id="period_of_attendance_from" name="period_of_attendance_from" required value="{{ $educationalAttainment->period_of_attendance_from }}" type="month">
+                        <input id="period_of_attendance_from" name="period_of_attendance_from" required value="{{ $educationalAttainment->period_of_attendance_from }}" type="date">
                         @error('period_of_attendance_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -172,7 +178,7 @@
 
                     <div class="mb-3">
                         <label for="period_of_attendance_to">Period of attendance (To)<sup>*</span></label>
-                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->period_of_attendance_to }}" type="month">
+                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->period_of_attendance_to }}" type="date">
                         @error('period_of_attendance_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -194,7 +200,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="year_graduate">Year Graduate<sup>*</span></label>
-                        <input id="year_graduate" name="year_graduate" required value="{{ $educationalAttainment->year_graduate }}" type="year">
+                        <input id="year_graduate" name="year_graduate" required value="{{ $educationalAttainment->year_graduate }}" type="text">
                         @error('year_graduate')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

@@ -229,18 +229,12 @@ Route::prefix('identification/card')->group(function () {
 
 Route::prefix('personal-data')->group(function () {
     Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
-
-    // Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
-    // Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
-    // Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
-    // Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
-    // Route::get('recently-deleted/{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin');
-    // Route::post('recently-deleted/restore/{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore');
-    // Route::delete('recently-deleted/force-delete/{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete');
 });
 
 Route::prefix('educational-attainment')->group(function () {
-    Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
+    Route::get('show/{cesno}', [EducationalAttainmentController::class, 'showForm'])->name('educational-attainment.form');
+    Route::get('index/{cesno}', [EducationalAttainmentController::class, 'index'])->name('educational-attainment.index');
+    Route::get('edit/{ctrlno}/{cesno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
     Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
     Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
     Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');

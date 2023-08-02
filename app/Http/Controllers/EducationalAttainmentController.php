@@ -9,9 +9,30 @@ use App\Models\ProfileLibTblEducDegree;
 use App\Models\ProfileLibTblEducMajor;
 use App\Models\ProfileLibTblEducSchool;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class EducationalAttainmentController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $educationalAttainment = $personalData->educations;
+
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.table', compact('educationalAttainment', 'cesno'));
+
+    }
+
+    public function showForm($cesno){
+
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
+
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.form', 
+        compact('profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblEducDegree', 'cesno'));
+
+    }
 
     public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
 
@@ -41,11 +62,11 @@ class EducationalAttainmentController extends Controller
     
         $educationalAttainmentPersonalDataId->educations()->save($educationalAttainment);
     
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('educational-attainment.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
     
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $educationalAttainment = EducationalAttainment::find($ctrlno); 
         $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
@@ -53,7 +74,7 @@ class EducationalAttainmentController extends Controller
         $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.edit', 
-        compact('educationalAttainment','profileLibTblEducMajor','profileLibTblEducSchool','profileLibTblEducDegree'));
+        compact('educationalAttainment','profileLibTblEducMajor','profileLibTblEducSchool','profileLibTblEducDegree','cesno'));
         
     }
 
@@ -93,7 +114,7 @@ class EducationalAttainmentController extends Controller
         // Access the soft deleted educations of the parent model
         $educationAttainmentTrashedRecord = $personalData->educations()->onlyTrashed()->get();
 
-        return view('admin.201_profiling.view_profile.partials.educational_attainment.trashbin', compact('educationAttainmentTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.trashbin', compact('educationAttainmentTrashedRecord', 'cesno'));
         
     }
 

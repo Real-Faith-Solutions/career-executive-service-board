@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Educational Attainment Recycle Bin')
+@section('sub', 'Educational Attainment Recycle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>EDUCATIONAL ATTAINMENT RECYLE BIN</h1>
+<div class="flex justify-end">
+    <a href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}" class="btn btn-primary mb-7">Go Back</a>
 </div>
 
 <div class="table-educational-attainment relative overflow-x-auto sm:rounded-lg shadow-lg">
