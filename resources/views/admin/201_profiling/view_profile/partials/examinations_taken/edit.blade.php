@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Examination Taken')
+@section('sub', 'Examination Taken')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Go back</a>
+</div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -11,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('examination-taken.update', ['ctrlno'=>$examinationTaken->ctrlno]) }}" method="POST">
+            <form action="{{ route('examination-taken.update', ['ctrlno'=>$examinationTaken->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 
@@ -49,7 +55,7 @@
 
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
-                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->date_of_examination }}" required type="month">
+                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->date_of_examination }}" required type="date">
                         @error('date_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

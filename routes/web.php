@@ -244,9 +244,11 @@ Route::prefix('educational-attainment')->group(function () {
 });
 
 Route::prefix('examination-taken')->group(function () {
-    Route::get('edit/{ctrlno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
+    Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create');
+    Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index');
+    Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
     Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
-    Route::put('update/{ctrlno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
+    Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
     Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
     Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore');

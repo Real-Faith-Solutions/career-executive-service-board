@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Examination Taken Recycle Bin')
+@section('sub', 'Examination Taken Recycle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" class="btn btn-primary mb-7">Go back</a>
+</div>
 
 <div class="table-examinations-taken relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
