@@ -54,7 +54,7 @@
                             <a class="btn category-button inline-flex" href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" >Examinations Taken</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
+                            <a class="btn category-button inline-flex" href="{{ route('scholarship.index', ['cesno' => $cesno]) }}" >Scholarships</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>

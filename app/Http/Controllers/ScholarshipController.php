@@ -11,6 +11,21 @@ use Illuminate\Support\Facades\Auth;
 class ScholarshipController extends Controller
 {
 
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $scholarship = $personalData->scholarships;
+
+        return view('admin.201_profiling.view_profile.partials.scholarships.table', compact('scholarship' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.scholarships.form', compact('cesno'));
+
+    }
+
     public function store(ScholarshipStoreRequest $request, $cesno){
 
         $userFullName = Auth::user();
@@ -42,18 +57,18 @@ class ScholarshipController extends Controller
 
         $scholarshipPersonalDataId->scholarships()->save($scholarship);
 
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('scholarship.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $scholarship = Scholarships::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.scholarships.edit', ['scholarship'=>$scholarship]);
+        return view('admin.201_profiling.view_profile.partials.scholarships.edit', compact('scholarship' ,'cesno'));
 
     }
 
-    public function update(ScholarshipStoreRequest $request, $ctrlno){
+    public function update(ScholarshipStoreRequest $request, $ctrlno, $cesno){
 
         $scholarship= Scholarships::find($ctrlno);
         $scholarship->type = $request->type;
@@ -63,7 +78,7 @@ class ScholarshipController extends Controller
         $scholarship->inclusive_date_to = $request->inclusive_date_to;
         $scholarship->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('scholarship.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -84,7 +99,7 @@ class ScholarshipController extends Controller
         // Access the soft deleted scholarships of the parent model
         $scholarshipTrashedRecord = $personalData->scholarships()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.scholarships.trashbin', compact('scholarshipTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.scholarships.trashbin', compact('scholarshipTrashedRecord', 'cesno'));
 
     }
 

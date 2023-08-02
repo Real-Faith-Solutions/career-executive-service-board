@@ -256,9 +256,11 @@ Route::prefix('examination-taken')->group(function () {
 });
 
 Route::prefix('scholarship-taken')->group(function () {
-    Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
+    Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create');
+    Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index');
+    Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
-    Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
+    Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
     Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
