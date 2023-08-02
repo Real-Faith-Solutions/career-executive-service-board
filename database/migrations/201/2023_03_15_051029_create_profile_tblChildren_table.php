@@ -21,14 +21,13 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('name_extension')->nullable();
+            $table->string('gender')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('encoder')->nullable();
-            $table->softDeletes();
-            // $table->string('encdate')->nullable();
-            // $table->string('lastupd_enc')->nullable();
-            // $table->string('lastupd_dt')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -39,5 +38,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('profile_tblChildren');
     }
-    
+
 };
