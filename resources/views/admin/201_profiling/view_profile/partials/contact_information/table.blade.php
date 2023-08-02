@@ -14,9 +14,9 @@
         <div class="bg-white px-6 py-3">
 
             @if ($contacts)
-            update<form action="{{ route('contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+            <form action="{{ route('contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
             @else
-            store<form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+            <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
             @endif
                 @csrf
 
