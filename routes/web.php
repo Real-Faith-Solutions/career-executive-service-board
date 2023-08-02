@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
@@ -229,18 +230,26 @@ Route::prefix('identification/card')->group(function () {
 
 Route::prefix('personal-data')->group(function () {
     Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
+});
 
-    // Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
-    // Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
-    // Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
-    // Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
-    // Route::get('recently-deleted/{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin');
-    // Route::post('recently-deleted/restore/{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore');
-    // Route::delete('recently-deleted/force-delete/{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete');
+Route::prefix('contact-info')->group(function () {
+    Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
+    Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
+    Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
+
+    // Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
+    // Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    // Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
+    // Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+    // Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
+    // Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
+    // Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete');
 });
 
 Route::prefix('educational-attainment')->group(function () {
-    Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
+    Route::get('show/{cesno}', [EducationalAttainmentController::class, 'showForm'])->name('educational-attainment.form');
+    Route::get('index/{cesno}', [EducationalAttainmentController::class, 'index'])->name('educational-attainment.index');
+    Route::get('edit/{ctrlno}/{cesno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
     Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
     Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
     Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
@@ -250,9 +259,11 @@ Route::prefix('educational-attainment')->group(function () {
 });
 
 Route::prefix('examination-taken')->group(function () {
-    Route::get('edit/{ctrlno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
+    Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create');
+    Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index');
+    Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
     Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
-    Route::put('update/{ctrlno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
+    Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
     Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
     Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore');
@@ -260,9 +271,11 @@ Route::prefix('examination-taken')->group(function () {
 });
 
 Route::prefix('scholarship-taken')->group(function () {
-    Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
+    Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create');
+    Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index');
+    Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
-    Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
+    Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
     Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
     Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');

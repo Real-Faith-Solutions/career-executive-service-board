@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Scholarship Taken')
+@section('sub', 'Scholarship Taken')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -11,7 +13,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('scholarship.update', ['ctrlno'=>$scholarship->ctrlno]) }}" method="POST">
+            <form action="{{ route('scholarship.update', ['ctrlno'=>$scholarship->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
                 @csrf
                 @method('PUT')
 

@@ -11,6 +11,23 @@ use Illuminate\Validation\Rule;
 
 class ExaminationTakenController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $examinationTaken = $personalData->examinationTakens;
+
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.table', compact('examinationTaken', 'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        $profileLibTblExamRef = ProfileLibTblExamRef::all();
+
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -49,21 +66,21 @@ class ExaminationTakenController extends Controller
 
         $examinationTakenPersonalDataId->examinationTakens()->save($examinationTaken);
 
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('examination-taken.index', ['cesno' => $cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $examinationTaken = ExaminationsTaken::find($ctrlno);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.edit', 
-        ['examinationTaken'=>$examinationTaken, 'profileLibTblExamRef'=>$profileLibTblExamRef]);
+        compact('examinationTaken', 'profileLibTblExamRef', 'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
@@ -86,7 +103,7 @@ class ExaminationTakenController extends Controller
         $examinationTaken->date_validity = $request->date_validity;
         $examinationTaken->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('examination-taken.index', ['cesno' => $cesno])->with('message', 'Successfuly Saved');
 
     }
 
@@ -107,7 +124,7 @@ class ExaminationTakenController extends Controller
         // Access the soft deleted scholarships of the parent model
         $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord', 'cesno'));
 
     }
 

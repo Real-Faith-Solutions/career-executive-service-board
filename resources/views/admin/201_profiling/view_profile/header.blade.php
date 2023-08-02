@@ -31,6 +31,9 @@
                             <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
                         </li>
                         <li>
+                            <a class="btn category-button inline-flex" href="{{ route('contact-info.show', ['cesno'=>$cesno]) }}">Contact Information</a>
+                        </li>
+                        <li>
                             <a class="btn category-button inline-flex" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
                         </li>
                     </ul>
@@ -48,13 +51,13 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="educationalAttainmentTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
+                            <a class="btn category-button inline-flex" href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}">Educational Background / Attainment</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
+                            <a class="btn category-button inline-flex" href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" >Examinations Taken</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#scholarshipsTab" onclick="scholarshipsTab()">Scholarships</a>
+                            <a class="btn category-button inline-flex" href="{{ route('scholarship.index', ['cesno' => $cesno]) }}" >Scholarships</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>

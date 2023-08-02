@@ -1,18 +1,20 @@
+@extends('layouts.app')
+@section('title', 'Scholarship Taken')
+@section('sub', 'Scholarship Taken')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('scholarship.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('scholarship.recycleBin', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
-      </lord-icon>
+        </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormScholarships()">Add Scholarship</button>
-    <button class="btn btn-primary hidden" onclick="openTableScholarships()">Go back</button>
-</div>
 
-<div class="form-scholarship hidden">
-    @include('admin.201_profiling.view_profile.partials.scholarships.form')
+    <a href="{{ route('scholarship.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">Add Scholarship</a>
 </div>
 
 <div class="table-scholarship relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -56,12 +58,12 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarships->inclusive_date_from." ".$scholarships->inclusive_date_to }}
+                        {{ $scholarships->inclusive_date_from." - ".$scholarships->inclusive_date_to }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('scholarship.edit', ['ctrlno'=>$scholarships->ctrlno]) }}" method="GET">
+                            <form action="{{ route('scholarship.edit', ['ctrlno'=>$scholarships->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -94,3 +96,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection
