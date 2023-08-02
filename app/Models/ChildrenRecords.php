@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ChildrenRecords extends Model
 {
-    
+
     use HasFactory;
 
     use SoftDeletes;
@@ -19,18 +19,18 @@ class ChildrenRecords extends Model
     protected $table= 'profile_tblChildren';
 
     protected $fillable = [
-
-        'personal_data_cedsno',
+        'personal_data_cesno',
         'last_name',
         'first_name',
         'middle_name',
         'name_extension',
+        'gender',
         'birthdate',
         'birth_place',
         'encoder',
-
+        'updated_by',
     ];
- 
+
     public function personalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
