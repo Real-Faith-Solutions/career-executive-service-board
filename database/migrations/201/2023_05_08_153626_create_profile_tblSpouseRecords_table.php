@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spouse_records', function (Blueprint $table) {
+        Schema::create('profile_tblSpouseRecords', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('last_name')->nullable();
@@ -24,12 +23,7 @@ return new class extends Migration
             $table->string('employer_business_name')->nullable();
             $table->string('employer_business_address')->nullable();
             $table->string('employer_business_telephone')->nullable();
-            // $table->string('civil_status_sn_fp')->nullable();
-            // $table->string('gender_sn_fp')->nullable();
-            // $table->date('birthdate_sn_fp')->nullable();
-            // $table->string('age_sn_fp')->nullable();
             $table->string('encoder')->nullable();
-            // $table->string('last_updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -40,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spouse_records');
+        Schema::dropIfExists('profile_tblSpouseRecords');
     }
 };

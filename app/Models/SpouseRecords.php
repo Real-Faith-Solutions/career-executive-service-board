@@ -16,7 +16,7 @@ class SpouseRecords extends Model
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table = "spouse_records";
+    protected $table = "profile_tblSpouseRecords";
 
     use SoftDeletes;
 
