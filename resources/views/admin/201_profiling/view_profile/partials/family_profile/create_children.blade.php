@@ -48,6 +48,20 @@
         </div>
 
         <div class="mb-3">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender">
+                @foreach ($genderLibrary as $data)
+                    <option value="{{$data->name}}">{{$data->name}}</option>
+                @endforeach
+            </select>
+            @error('gender')
+                <span class="invalid" role="alert">
+                    <p>{{ $message }}</p>
+                </span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
             <label for="birthdate">Birthday<sup>*</span></label>
             <input type="date" id="children_birthdate" name="birthdate" oninput="validateDateInput(children_birthdate)" required>
             <p class="input_error text-red-600"></p>

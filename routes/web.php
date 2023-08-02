@@ -283,9 +283,11 @@ Route::prefix('scholarship-taken')->group(function () {
 });
 
 Route::prefix('research-studies')->group(function () {
-    Route::get('edit/{ctrlno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
+    Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index');
+    Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create');
+    Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
     Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-    Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
+    Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
     Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
     Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore');

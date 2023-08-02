@@ -1,3 +1,13 @@
+@extends('layouts.app')
+@section('title', 'Research and Studies')
+@section('sub', 'Research and Studies')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" class="btn btn-primary" >Go back</a>
+</div>
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -7,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('research-studies.store', ['cesno' =>$mainProfile->cesno]) }}" method="POST" id="research_studies_form" onsubmit="return checkErrorsBeforeSubmit(research_studies_form)">
+            <form action="{{ route('research-studies.store', ['cesno' =>$cesno]) }}" method="POST" id="research_studies_form" onsubmit="return checkErrorsBeforeSubmit(research_studies_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -66,3 +76,5 @@
         </div>
     </div>
 </div>
+
+@endsection

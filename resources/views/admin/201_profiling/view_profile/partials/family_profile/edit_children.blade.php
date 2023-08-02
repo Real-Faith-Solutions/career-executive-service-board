@@ -18,7 +18,7 @@
             <form action="{{ route('family-profile.updateChildren',['ctrlno'=>$childrenRecords->ctrlno]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
@@ -31,7 +31,7 @@
                             </span>
                         @enderror
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="first_name">First Name<sup>*</span></label>
                         <input type="text" id="children_first_name" name="first_name" value="{{ $childrenRecords->first_name }}" oninput="validateInput(children_first_name, 2, 'letters')" onkeypress="validateInput(children_first_name, 2, 'letters')" onblur="checkErrorMessage(children_first_name)" required>
@@ -42,7 +42,7 @@
                             </span>
                         @enderror
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="middle_name">Middle Name</label>
                         <input type="text" id="children_middle_name" name="middle_name" value="{{ $childrenRecords->middle_name }}" oninput="validateInput(children_middle_name, 0, 'letters')" onkeypress="validateInput(children_middle_name, 0, 'letters')" onblur="checkErrorMessage(children_middle_name)">
@@ -53,21 +53,40 @@
                             </span>
                         @enderror
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="name_extension">Name Extension</label>
                         <input id="name_extension" list="name_extension_choices" name="name_extension" value="{{ $childrenRecords->name_extension }}" type="search">
                         <datalist id="name_extension_choices">
                             @foreach ($nameExtensions as $data)
                                 @if ($data->name == $childrenRecords->name_extension)
-                                    <option value="{{ $data->name }}" selected>{{ $data->name }}</option>        
+                                    <option value="{{ $data->name }}" selected>{{ $data->name }}</option>
                                 @else
                                     <option value="{{ $data->name }}">{{ $data->name }}</option>
                                 @endif
                             @endforeach
                         </datalist>
                     </div>
-            
+
+                    <div class="mb-3">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            @foreach ($genderLibrary as $data)
+                                @if ($data->name == $childrenRecords->gender)
+                                    <option value="{{ $data->name }}" selected>{{ $data->name }}</option>
+                                @else
+                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                @endif
+                            @endforeach
+
+                        </select>
+                        @error('gender')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="birthdate">Birthday<sup>*</span></label>
                         <input type="date" id="children_birthdate" name="birthdate" value="{{ $childrenRecords->birthdate }}" oninput="validateDateInput(children_birthdate)" required>
@@ -78,7 +97,7 @@
                             </span>
                         @enderror
                     </div>
-            
+
                     <div class="mb-3">
                         <label for="birth_place">Birthplace<sup>*</span></label>
                         <input type="text" id="children_birth_place" name="birth_place" value="{{ $childrenRecords->birth_place }}" oninput="validateInput(children_birth_place, 2)" onkeypress="validateInput(children_birth_place, 2)" onblur="checkErrorMessage(children_birth_place)" required>
@@ -90,7 +109,7 @@
                         @enderror
                     </div>
                 </div>
-            
+
                 <div>
                     <div class="flex justify-end">
                         <button type="submit" class="btn btn-primary">

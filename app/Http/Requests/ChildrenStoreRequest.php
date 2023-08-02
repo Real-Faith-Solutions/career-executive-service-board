@@ -22,14 +22,15 @@ class ChildrenStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-     
+
             'last_name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'first_name' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'middle_name' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'gender' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'name_extension' => ['nullable', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'birthdate' => ['required','max:40', 'min:2'],
             'birth_place' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-           
+
         ];
     }
 }
