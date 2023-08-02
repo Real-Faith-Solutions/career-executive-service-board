@@ -10,16 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SpouseRecords extends Model
 {
-    use HasFactory;
-
-    use SoftDeletes;
-
-    protected $primaryKey = 'ctrlno';
+    use HasFactory, SoftDeletes;
 
     protected $table = "profile_tblSpouseRecords";
-
-    use SoftDeletes;
-
+    protected $primaryKey = 'ctrlno';
     protected $fillable = [
         'last_name',
         'first_name',
