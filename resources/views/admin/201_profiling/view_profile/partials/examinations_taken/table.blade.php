@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Examination Taken')
+@section('sub', 'Examination Taken')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('examination-taken.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}" method="GET">
+    <a href="{{ route('examination-taken.recentlyDeleted', ['cesno'=>$cesno]) }}" method="GET">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormExaminationsTaken()">Add Examination Taken</button>
-    <button class="btn btn-primary hidden" onclick="openTableExaminationsTaken()">Go back</button>
-</div>
-
-<div class="form-examinations-taken hidden">
-    @include('admin.201_profiling.view_profile.partials.examinations_taken.form')
+    
+    <a href="{{ route('examination-taken.create', ['cesno' => $cesno]) }}" class="btn btn-primary">Add Examination Taken</a>
 </div>
 
 <div class="table-examinations-taken relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -61,7 +63,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('examination-taken.edit', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="GET">
+                            <form action="{{ route('examination-taken.edit', ['ctrlno'=>$examinationTakens->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -93,3 +95,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection
