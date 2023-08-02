@@ -10,6 +10,21 @@ use Illuminate\Validation\Rule;
 
 class WorkExperienceController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $workExperience = $personalData->workExperience;
+
+        return view('admin.201_profiling.view_profile.partials.work_experience.table', compact('workExperience' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.work_experience.form', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -52,20 +67,18 @@ class WorkExperienceController extends Controller
 
         $workExperiencePersonalDataId->workExperience()->save($workExperience);
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('work-experience.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.work_experience.edit', ['workExperience'=>$workExperience]);
+        return view('admin.201_profiling.view_profile.partials.work_experience.edit', compact('workExperience' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
-
-        $workExperienceId = ProfileTblWorkExperience::find($ctrlno);
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
@@ -93,7 +106,7 @@ class WorkExperienceController extends Controller
         $workExperience->remarks = $request->remarks;
         $workExperience->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('work-experience.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -114,7 +127,7 @@ class WorkExperienceController extends Controller
         // Access the soft deleted scholarships of the parent model
         $workExperienceTrashedRecord = $personalData->workExperience()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.work_experience.trashbin', compact('workExperienceTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.work_experience.trashbin', compact('workExperienceTrashedRecord', 'cesno'));
 
     }
 

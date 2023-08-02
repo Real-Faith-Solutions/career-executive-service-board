@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Work Experience Recyle Bin')
+@section('sub', 'Work Experience Recyle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>WORK EXPERIENCE RECYLE BIN</h1>
+<div class="flex justify-end">
+    <a href="{{ route('work-experience.index', ['cesno'=>$cesno]) }}" class="btn btn-primary mb-7">Go back</a>
 </div>
 
 <div class="table-work-experience relative overflow-x-auto sm:rounded-lg shadow-lg">
