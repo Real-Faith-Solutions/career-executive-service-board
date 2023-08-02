@@ -11,7 +11,7 @@
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
-      </lord-icon>
+        </lord-icon>
     </a>
 
     <a href="{{ route('scholarship.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">Add Scholarship</a>

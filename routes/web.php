@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MigrationController;
 use App\Http\Controllers\CompetencyController;
+use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DepartmentAgencyController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
@@ -229,6 +230,20 @@ Route::prefix('identification/card')->group(function () {
 
 Route::prefix('personal-data')->group(function () {
     Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
+});
+
+Route::prefix('contact-info')->group(function () {
+    Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
+    Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
+    Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
+
+    // Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
+    // Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
+    // Route::put('update/{ctrlno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
+    // Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
+    // Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
+    // Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
+    // Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete');
 });
 
 Route::prefix('educational-attainment')->group(function () {
