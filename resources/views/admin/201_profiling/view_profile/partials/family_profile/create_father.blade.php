@@ -1,5 +1,5 @@
 {{-- father details --}}
-<form action="{{ route('family-profile-father.store', ['cesno' => $mainProfile->cesno]) }}" method="POST" id="family_profile_father" onsubmit="return checkErrorsBeforeSubmit(family_profile_father)">
+<form action="{{ route('family-profile-father.store', ['cesno' => $cesno]) }}" method="POST" id="family_profile_father" onsubmit="return checkErrorsBeforeSubmit(family_profile_father)">
 
     @csrf
 

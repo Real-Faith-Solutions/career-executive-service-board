@@ -1,5 +1,10 @@
+@extends('layouts.app')
+@section('title', 'Family Profile')
+@section('sub', 'Family Profile')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 <div class="my-5 flex justify-end">
-    <a href="{{ route('family-profile.recently-deleted', ['cesno'=>$mainProfile->cesno]) }}" method="GET">
+    <a href="{{ route('family-profile.recently-deleted', ['cesno'=>$cesno]) }}" method="GET">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -68,7 +73,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('family-profile.editSpouse', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('family-profile.editSpouse', ['ctrlno'=>$newSpouseRecords->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
                                     <lord-icon
@@ -125,7 +130,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('family-profile-father.editFather', ['ctrlno'=>$newFather->ctrlno]) }}" method="GET">
+                            <form action="{{ route('family-profile-father.editFather', ['ctrlno'=>$newFather->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
                                     <lord-icon
@@ -181,7 +186,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('family-profile-mother.editMother', ['ctrlno'=>$newMother->ctrlno]) }}" method="GET">
+                            <form action="{{ route('family-profile-mother.editMother', ['ctrlno'=>$newMother->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
                                     <lord-icon
@@ -236,7 +241,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('family-profile.editChildren', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('family-profile.editChildren', ['ctrlno'=>$newChildrenRecords->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="">
                                     <lord-icon
@@ -269,3 +274,4 @@
         </tbody>
     </table>
 </div>
+@endsection

@@ -1385,7 +1385,7 @@ class MigrationController extends Controller
             foreach($profile_tblmain_pdflink as $item){
 
                 PdfLinks::create([
-                    'cesno' => $item->cesno,
+                    'personal_data_cesno' => $item->cesno,
                     'relevant_path_pdf_files' => null,
                     'pdflink' => $item->pdflink,
                     'validated' => null,

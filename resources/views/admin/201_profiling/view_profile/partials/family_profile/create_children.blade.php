@@ -1,5 +1,5 @@
 {{-- children details --}}
-<form action="{{ route('family-profile-children.store', ['cesno' => $mainProfile->cesno]) }}"  method="POST" id="family_profile_children" onsubmit="return checkErrorsBeforeSubmit(family_profile_children)">
+<form action="{{ route('family-profile-children.store', ['cesno' => $cesno]) }}"  method="POST" id="family_profile_children" onsubmit="return checkErrorsBeforeSubmit(family_profile_children)">
     @csrf
 
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

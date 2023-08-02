@@ -33,8 +33,8 @@ class UsersTableSeeder extends Seeder
                 'role'                      => 'Super Administrator',
                 'role_name_no'              => 1,
                 'is_active'		            => 'Active',
-                'last_updated_by'           => 'System Encode',
-                'encoder'                   => 'System Encode',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
 
@@ -53,8 +53,8 @@ class UsersTableSeeder extends Seeder
                 'role'                      => 'Super Administrator',
                 'role_name_no'              => 1,
                 'is_active'		            => 'Active',
-                'last_updated_by'           => 'System Encode',
-                'encoder'                   => 'System Encode',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
         }
@@ -73,8 +73,8 @@ class UsersTableSeeder extends Seeder
                 'role'                      => 'User',
                 'role_name_no'              => 0,
                 'is_active'		            => 'Active',
-                'last_updated_by'           => 'System Encode',
-                'encoder'                   => 'System Encode',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
 
@@ -93,8 +93,8 @@ class UsersTableSeeder extends Seeder
                 'role'                      => 'User',
                 'role_name_no'              => 0,
                 'is_active'		            => 'Active',
-                'last_updated_by'           => 'System Encode',
-                'encoder'                   => 'System Encode',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
         }

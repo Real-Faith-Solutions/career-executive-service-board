@@ -31,6 +31,8 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
@@ -72,6 +74,9 @@ Route::get('/', function () {
         return Redirect::to('/admin/dashboard');
     }
 });
+
+Route::get('show/{cesno}', [PDFController::class, 'show'])->name('show-pdf-files');
+Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
 
 Route::prefix('plantilla')->group(function () {
 
@@ -178,10 +183,11 @@ Route::prefix('201-library')->group(function () {
 
 
 Route::prefix('family-profile')->group(function () {
+    Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
     Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted');
   
     Route::prefix('spouse')->group(function () {
-        Route::get('edit/{ctrlno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
+        Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
         Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
         Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord');
         Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
@@ -190,7 +196,7 @@ Route::prefix('family-profile')->group(function () {
     });
 
     Route::prefix('children')->group(function () {
-        Route::get('{ctrlno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren');
+        Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren');
         Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
         Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren');
         Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
@@ -199,7 +205,7 @@ Route::prefix('family-profile')->group(function () {
     });
 
     Route::prefix('father')->group(function () {
-        Route::get('{ctrlno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather');
+        Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather');
         Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
         Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord');
         Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy');
@@ -208,7 +214,7 @@ Route::prefix('family-profile')->group(function () {
     });
 
     Route::prefix('mother')->group(function () {
-        Route::get('{ctrlno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother');
+        Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother');
         Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
         Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord');
         Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy');
@@ -220,6 +226,18 @@ Route::prefix('identification/card')->group(function () {
     Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
     Route::put('update/{ctrlno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
     Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+});
+
+Route::prefix('personal-data')->group(function () {
+    Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
+
+    // Route::get('edit/{ctrlno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit');
+    // Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store');
+    // Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update');
+    // Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy');
+    // Route::get('recently-deleted/{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin');
+    // Route::post('recently-deleted/restore/{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore');
+    // Route::delete('recently-deleted/force-delete/{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete');
 });
 
 Route::prefix('contact-info')->group(function () {

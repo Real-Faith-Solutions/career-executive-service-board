@@ -159,6 +159,12 @@ class PersonalData extends Model
         return $this->hasMany(MedicalHistory::class);
     }
 
+    public function pdfFile(): HasMany
+    {
+        return $this->hasMany(PdfLinks::class);
+    }
+  
+
     public function contacts(): HasOne
     {
         return $this->hasOne(Contacts::class);
