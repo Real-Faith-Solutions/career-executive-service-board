@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Work Experience')
+@section('sub', 'Work Experience')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('work-experience.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('work-experience.recycleBin', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormWorkExperience()">Add Work and Experience</button>
-    <button class="btn btn-primary hidden" onclick="openTableWorkExperience()">Go back</button>
-</div>
 
-<div class="form-work-experience hidden">
-    @include('admin.201_profiling.view_profile.partials.work_experience.form')
+    <a href="{{ route('work-experience.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">Add Work and Experience</a>
 </div>
 
 <div class="table-work-experience relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -94,7 +96,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('work-experience.edit', ['ctrlno'=>$workExperiences->ctrlno]) }}" method="GET">
+                            <form action="{{ route('work-experience.edit', ['ctrlno'=>$workExperiences->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -127,3 +129,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection

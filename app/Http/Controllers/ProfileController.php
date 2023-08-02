@@ -158,7 +158,6 @@ class ProfileController extends Controller
         $caseRecord = $personalData->caseRecords;
         $affiliation = $personalData->affiliations;
         $awardsAndCitation = $personalData->awardsAndCitations;
-        $workExperience = $personalData->workExperience;
         $researchAndStudies = $personalData->researchAndStudies;
 
         $addressProfilePermanent = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Permanent')->first();
@@ -173,7 +172,7 @@ class ProfileController extends Controller
         $age = $now->diff($birthDate)->y;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'researchAndStudies', 'workExperience', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
+        'mother', 'identification', 'researchAndStudies', 'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
         'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
         'profileTblCesStatus', 'pwds', 'medicalHistory'));

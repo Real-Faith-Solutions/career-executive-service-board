@@ -293,9 +293,11 @@ Route::prefix('research-studies')->group(function () {
 });
 
 Route::prefix('work-experience')->group(function () {
-    Route::get('edit/{ctrlno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
+    Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create');
+    Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index');
+    Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
     Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-    Route::put('update/{ctrlno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
+    Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
     Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
     Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore');
