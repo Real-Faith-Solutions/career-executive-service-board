@@ -243,6 +243,7 @@ Route::prefix('personal-data')->group(function () {
 Route::prefix('contact-info')->group(function () {
     Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
     Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
+    Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
 
     // Route::get('edit/{ctrlno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
     // Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');

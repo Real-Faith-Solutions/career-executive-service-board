@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Contact Information')
+@section('sub', 'Contact Information')
 @section('content')
-
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -11,7 +12,12 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+
+            @if ($contacts)
+            update<form action="{{ route('contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+            @else
+            store<form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+            @endif
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

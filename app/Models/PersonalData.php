@@ -164,7 +164,6 @@ class PersonalData extends Model
         return $this->hasMany(PdfLinks::class);
     }
   
-
     public function contacts(): HasOne
     {
         return $this->hasOne(Contacts::class);

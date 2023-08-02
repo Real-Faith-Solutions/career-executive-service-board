@@ -54,4 +54,35 @@ class ContactInfoController extends Controller
         return redirect()->back()->with('message', 'Successfully Saved');
     }
 
+    public function update(Request $request, $ctrlno, $cesno)
+    {
+        $request->validate([
+            'official_email' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:100'],
+            'official_mobile_number1' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'official_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'personal_mobile_number1' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'personal_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+        ]);
+
+        // Retrieve encoder information
+        $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
+
+        $contact = Contacts::find($ctrlno);
+        $contact->official_email = $request->official_email;
+        $contact->official_mobile_number1 = $request->official_mobile_number1;
+        $contact->official_mobile_number2 = $request->official_mobile_number2;
+        $contact->personal_mobile_number1 = $request->personal_mobile_number1;
+        $contact->personal_mobile_number2 = $request->personal_mobile_number2;
+        $contact->office_telephone_number = $request->office_telephone_number;
+        $contact->encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+        $contact->save();
+
+        return redirect()->back()->with('message', 'Updated Successfuly');
+
+    }
+
 }
