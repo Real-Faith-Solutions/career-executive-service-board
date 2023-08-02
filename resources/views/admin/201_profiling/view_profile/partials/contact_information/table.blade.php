@@ -11,13 +11,13 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST">
+            <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="gsis">Official Email<sup>*</sup></label>
-                        <input id="official_email" name="official_email" type="text" value="{{ old('official_email') ?? ($contacts->official_email ?? '') }}" oninput="validateInput(official_email, 9, 'all')" onkeypress="validateInput(official_email, 9, 'all')" onblur="checkErrorMessage(official_email)" required>
+                        <input id="official_email" name="official_email" type="text" value="{{ old('official_email') ?? ($email ?? '') }}" readonly>
                         <p class="input_error text-red-600"></p>
                     </div>
                     <div class="mb-3">

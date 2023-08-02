@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacts;
 use App\Models\PersonalData;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,45 +13,45 @@ class ContactInfoController extends Controller
     public function show($cesno){
 
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-        return view('admin.201_profiling.view_profile.partials.contact_information.table', ['contacts'=>$contacts, 'cesno'=>$cesno]);
+        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        return view('admin.201_profiling.view_profile.partials.contact_information.table', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
 
     }
 
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
-
-            // 'type' => ['required', Rule::unique('identifications')->where('personal_data_cesno', $cesno)],
-            'gsis' => ['required', 'unique:identifications,gsis', 'min:9', 'max:40'],
-            'pagibig' => ['required', 'unique:identifications,pagibig', 'min:9', 'max:40'],
-            'philhealth' => ['required', 'unique:identifications,philhealth', 'min:9', 'max:40'],
-            'sss_no' => ['required', 'unique:identifications,sss_no', 'min:9', 'max:40'],
-            'tin' => ['required', 'unique:identifications,tin', 'min:9', 'max:40'],
-        
+            'official_email' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:100'],
+            'official_mobile_number1' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'official_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'personal_mobile_number1' => ['required', Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'personal_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
+            'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'min:10', 'max:20'],
         ]);
 
+        // Retrieve encoder information
         $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
 
+        // Find the associated PersonalData record
         $personalData = PersonalData::findOrFail($cesno);
 
-        // Update or create the associated Identification record
-        $identification = $personalData->identifications()->updateOrCreate(
-            ['personal_data_cesno' => $cesno],
+        // Update or create the associated Contact record
+        $contacts = $personalData->contacts()->Create(
             [
-                'gsis' => $request->input('gsis'),
-                'pagibig' => $request->input('pagibig'),
-                'philhealth' => $request->input('philhealth'),
-                'sss_no' => $request->input('sss_no'),
-                'tin' => $request->input('tin'),
+                'official_email' => $request->input('official_email'),
+                'official_mobile_number1' => $request->input('official_mobile_number1'),
+                'official_mobile_number2' => $request->input('official_mobile_number2'),
+                'personal_mobile_number1' => $request->input('personal_mobile_number1'),
+                'personal_mobile_number2' => $request->input('personal_mobile_number2'),
+                'office_telephone_number' => $request->input('office_telephone_number'),
                 'encoder' => $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension,
             ]
         );
 
-        return redirect()->back()->with('message', 'Successfuly Saved');
-
+        return redirect()->back()->with('message', 'Successfully Saved');
     }
 
 }
