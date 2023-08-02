@@ -19,42 +19,42 @@ class SectorManager extends Seeder
         ModelsSectorManager::create([
             'title' => 'Constitutional Offices',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Executive Branch',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Judiciary',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Legislative Branch',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Local Government Sector',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Private Sector',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'Private Universities and Colleges',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
         ModelsSectorManager::create([
             'title' => 'State Universities and Colleges',
             'description' => '-',
-            'encoder' => 'System Encode',
+            'encoder' => 'system encode',
         ]);
     }
 }
