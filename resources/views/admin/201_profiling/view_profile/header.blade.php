@@ -48,7 +48,7 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="educationalAttainmentTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#educationalAttainmentTab" onclick="educationalAttainmentTab()">Educational Background / Attainment</a>
+                            <a class="btn category-button inline-flex" href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}">Educational Background / Attainment</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="#examinationsTakenTab" onclick="examinationsTakenTab()">Examinations Taken</a>
