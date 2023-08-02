@@ -11,6 +11,15 @@ use Illuminate\Validation\Rule;
 class IdentificationController extends Controller
 {
 
+    public function show($cesno){
+
+        $identification = Identification::where('personal_data_cesno', $cesno)->get();
+
+        return view('admin.201_profiling.view_profile.partials.identification.table', 
+        compact('identification', 'cesno'));
+        
+    }
+
     public function store(Request $request, $cesno){
 
         $request->validate([
