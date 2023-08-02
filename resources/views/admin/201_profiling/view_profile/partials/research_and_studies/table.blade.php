@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Research and Studies')
+@section('sub', 'Research and Studies')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('research-studies.recycleBin', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('research-studies.recycleBin', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormResearchAndStudies()">Add Research and Studies</button>
-    <button class="btn btn-primary hidden" onclick="openTableResearchAndStudies()">Go back</button>
-</div>
 
-<div class="form-research-and-studies hidden">
-    @include('admin.201_profiling.view_profile.partials.research_and_studies.form')
+    <a href="{{ route('research-studies.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">Add Research and Studies</a>
 </div>
 
 <div class="table-research-and-studies relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -53,7 +55,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('research-studies.edit', ['ctrlno'=>$researchAndStudy->ctrlno]) }}" method="GET">
+                            <form action="{{ route('research-studies.edit', ['ctrlno'=>$researchAndStudy->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -82,7 +84,8 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>
+
+@endsection
