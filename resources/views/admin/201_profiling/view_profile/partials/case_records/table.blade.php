@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Case Records')
+@section('sub', 'Case Records')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('case-record.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('case-record.recentlyDeleted', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormCaseRecord()">Add Case Record/s</button>
-    <button class="btn btn-primary hidden" onclick="openTableCaseRecord()">Go back</button>
-</div>
 
-<div class="form-case-record hidden">
-    @include('admin.201_profiling.view_profile.partials.case_records.form')
+    <a href="{{ route('case-record.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Case Record/s</a>
 </div>
 
 <div class="table-case-record relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -109,7 +111,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('case-record.edit', ['ctrlno'=>$caseRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('case-record.edit', ['ctrlno'=>$caseRecords->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -141,3 +143,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection
