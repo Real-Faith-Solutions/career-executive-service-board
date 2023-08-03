@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Affiliation')
+@section('sub', 'Affiliation')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('affiliations.recycleBin', ['cesno'=>$mainProfile->cesno]) }}" method="GET">
+    <a href="{{ route('affiliations.recycleBin', ['cesno'=>$cesno]) }}" method="GET">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormMajorCivilAndProfessionalAffiliation()">Add Major Civic and Professional Affiliations</button>
-    <button class="btn btn-primary hidden" onclick="openTableMajorCivilAndProfessionalAffiliation()">Go back</button>
-</div>
 
-<div class="form-major-civic-and-professional-affiliations hidden">
-    @include('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.form')
+    <a href="{{ route('affiliation.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Major Civic and Professional Affiliations</a>
 </div>
 
 <div class="table-major-civic-and-professional-affiliations relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -54,7 +56,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('affiliation.edit', ['ctrlno'=>$affiliations->ctrlno]) }}" method="GET">
+                            <form action="{{ route('affiliation.edit', ['ctrlno'=>$affiliations->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -87,3 +89,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection
