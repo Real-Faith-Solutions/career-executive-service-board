@@ -22,17 +22,21 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex text-blue-500" href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
+                            <a class="btn category-button inline-flex"  href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('family-profile.show', ['cesno' => $cesno]) }}">Family Profile</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('contact-info.show', ['cesno'=>$cesno]) }}">Contact Information</a>
                         </li>
+                        
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('personal-data-identification.show', ['cesno'=>$cesno]) }}">Identification Card</a>
                         </li>
@@ -60,7 +64,7 @@
                             <a class="btn category-button inline-flex" href="{{ route('scholarship.index', ['cesno' => $cesno]) }}" >Scholarships</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#researchAndStudiesTab" onclick="researchAndStudiesTab()">Research And Studies</a>
+                            <a class="btn category-button inline-flex" href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" >Research And Studies</a>
                         </li>
                     </ul>
                 </div>
@@ -77,10 +81,10 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="workExperienceTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#workExperienceTab" onclick="workExperienceTab()">Work Experience</a>
+                            <a class="btn category-button inline-flex" href="{{ route('work-experience.index', ['cesno' => $cesno]) }}" >Work Experience</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
+                            <a class="btn category-button inline-flex" href="{{ route('expertise.index', ['cesno' => $cesno]) }}" >Field Expertise</a>
                         </li>
                     </ul>
                 </div>
@@ -100,7 +104,7 @@
                             <a class="btn category-button inline-flex" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Non-CES Accredited Training</a>
+                            <a class="btn category-button inline-flex" href="{{ route('other-training.index', ['cesno' => $cesno]) }}" >Non-CES Accredited Training</a>
                         </li>
                     </ul>
                 </div>

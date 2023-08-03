@@ -8,6 +8,7 @@ use App\Http\Requests\MotherStoreRequest;
 use App\Http\Requests\SpouseStoreRequest;
 use App\Models\ChildrenRecords;
 use App\Models\Father;
+use App\Models\GenderByBirth;
 use App\Models\Mother;
 use App\Models\NameExtension;
 use App\Models\PersonalData;
@@ -24,17 +25,18 @@ class FamilyController extends Controller
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $nameExtensions = NameExtension::all();
+        $genderLibrary = GenderByBirth::all();
 
-        return view('admin.201_profiling.view_profile.partials.family_profile.table', 
-        compact('father', 'mother', 'childrenRecords', 'SpouseRecords', 'nameExtensions', 'cesno'));
-        
+        return view('admin.201_profiling.view_profile.partials.family_profile.table',
+        compact('father', 'mother', 'childrenRecords', 'SpouseRecords', 'nameExtensions', 'cesno', 'genderLibrary'));
+
     }
 
     public function storeSpouse(SpouseStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name; 
+        $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
+        $userMiddleName = Auth::user()->middle_name;
         $userNameExtension = Auth::user()->name_extension;
 
         $personalData = new SpouseRecords([
@@ -48,7 +50,6 @@ class FamilyController extends Controller
             'employer_business_address' => $request->employer_bussiness_address,
             'employer_business_telephone' => $request->employer_bussiness_telephone,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-            
         ]);
 
         $PersonalDataId = PersonalData::find($cesno);
@@ -85,7 +86,7 @@ class FamilyController extends Controller
     }
 
     public function destroySpouse($ctrlno){
-        
+
         $spouse = SpouseRecords::find($ctrlno);
         $spouse->delete();
 
@@ -95,9 +96,9 @@ class FamilyController extends Controller
 
     public function storeChildren(ChildrenStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name; 
+        $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
+        $userMiddleName = Auth::user()->middle_name;
         $userNameExtension = Auth::user()->name_extension;
 
         $childrenRecord = new ChildrenRecords([
@@ -106,10 +107,11 @@ class FamilyController extends Controller
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'name_extension' => $request->name_extension,
+            'gender' => $request->gender,
             'birthdate' => $request->birthdate,
             'birth_place' => $request->birth_place,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
+
         ]);
 
         $ChildrenPersonalDataId = PersonalData::find($cesno);
@@ -124,8 +126,9 @@ class FamilyController extends Controller
 
         $nameExtensions = NameExtension::all();
         $childrenRecords = ChildrenRecords::find($ctrlno);
+        $genderLibrary = GenderByBirth::all();
 
-        return view('admin.201_profiling.view_profile.partials.family_profile.edit_children', compact('nameExtensions', 'childrenRecords', 'cesno'));
+        return view('admin.201_profiling.view_profile.partials.family_profile.edit_children', compact('nameExtensions', 'childrenRecords', 'cesno', 'genderLibrary'));
 
     }
 
@@ -136,6 +139,7 @@ class FamilyController extends Controller
         $childrenRecord->first_name = $request->first_name;
         $childrenRecord->middle_name = $request->middle_name;
         $childrenRecord->name_extension = $request->name_extension;
+        $childrenRecord->gender = $request->gender;
         $childrenRecord->birthdate = $request->birthdate;
         $childrenRecord->birth_place = $request->birth_place;
         $childrenRecord->save();
@@ -145,7 +149,7 @@ class FamilyController extends Controller
     }
 
     public function destroyChildren($ctrlno){
-        
+
         $children = ChildrenRecords::find($ctrlno);
         $children->delete();
 
@@ -155,9 +159,9 @@ class FamilyController extends Controller
 
     public function storeFather(FatherStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name; 
+        $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
+        $userMiddleName = Auth::user()->middle_name;
         $userNameExtension = Auth::user()->name_extension;
 
         $fatherDetails = new Father([
@@ -167,19 +171,19 @@ class FamilyController extends Controller
             'father_middle_name' => $request->father_middle_name,
             'name_extension' => $request->father_name_extension,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
+
         ]);
 
         $fatherPersonalDataId = PersonalData::find($cesno);
 
         if(Father::where('personal_data_cesno', $cesno)->exists()){
-            
+
             return redirect()->back()->with('error', 'Already Have Details');
 
         }else{
-            
+
             $fatherPersonalDataId->father()->save($fatherDetails);
-            
+
         }
 
         return redirect()->back()->with('message', 'Successfuly Saved');
@@ -209,7 +213,7 @@ class FamilyController extends Controller
     }
 
     public function destroyFather($ctrlno){
-        
+
         $father = Father::find($ctrlno);
         $father->delete();
 
@@ -219,9 +223,9 @@ class FamilyController extends Controller
 
     public function storeMother(MotherStoreRequest $request, $cesno){
 
-        $userLastName = Auth::user()->last_name; 
+        $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
+        $userMiddleName = Auth::user()->middle_name;
         $userNameExtension = Auth::user()->name_extension;
 
         $motherDetails = new Mother([
@@ -230,19 +234,19 @@ class FamilyController extends Controller
             'mother_first_name' => $request->mother_first_name,
             'mother_middle_name' => $request->mother_middle_name,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
+
         ]);
 
         $motherPersonalDataId = PersonalData::find($cesno);
 
         if(Mother::where('personal_data_cesno', $cesno)->exists()){
-            
+
             return redirect()->back()->with('error', 'Already Have Details');
 
         }else{
-            
-            $motherPersonalDataId->mother()->save($motherDetails); 
-            
+
+            $motherPersonalDataId->mother()->save($motherDetails);
+
         }
 
         return redirect()->back()->with('message', 'Successfuly Saved');
@@ -270,7 +274,7 @@ class FamilyController extends Controller
     }
 
     public function destroyMother($ctrlno){
-        
+
         $mother = Mother::find($ctrlno);
         $mother->delete();
 
@@ -288,7 +292,7 @@ class FamilyController extends Controller
 
         // Access the soft deleted childrens of the parent model
         $childrensTrashedRecord = $personalData->childrens()->onlyTrashed()->get();
- 
+
         return view('admin.201_profiling.view_profile.partials.family_profile.trashbin', compact('spousesTrashedRecord', 'childrensTrashedRecord', 'cesno'));
 
     }
@@ -301,12 +305,12 @@ class FamilyController extends Controller
         return back()->with('message', 'Data Restored Sucessfully');
 
     }
- 
+
     public function spouseForceDelete($ctrlno){
 
         $spouse = SpouseRecords::withTrashed()->find($ctrlno);
         $spouse->forceDelete();
-  
+
         return back()->with('message', 'Data Permanently Deleted');
 
     }
@@ -324,7 +328,7 @@ class FamilyController extends Controller
 
         $children = ChildrenRecords::withTrashed()->find($ctrlno);
         $children->forceDelete();
-  
+
         return back()->with('message', 'Data Permanently Deleted');
 
     }

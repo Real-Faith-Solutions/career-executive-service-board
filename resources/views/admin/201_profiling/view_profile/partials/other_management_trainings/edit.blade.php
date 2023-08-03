@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Non-Ces Accredited Training')
+@section('sub', 'Non-Ces Accredited Training')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('other-training.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
+</div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -11,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('other-training.update', ['ctrlno'=>$otherManagementTraining->ctrlno]) }}" method="POST">
+            <form action="{{ route('other-training.update', ['ctrlno'=>$otherManagementTraining->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
                 @csrf
                 @method('PUT')
 

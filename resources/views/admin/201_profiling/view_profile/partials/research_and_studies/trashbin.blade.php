@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Research and Studies Recyle Bin')
+@section('sub', 'Research and Studies Recyle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>RESEARCH AND STUDIES RECYLE BIN</h1>
+<div class="flex justify-end">
+    <a href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" class="btn btn-primary mb-7" >Go back</a>
 </div>
 
 <div class="table-research-and-studies relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -60,7 +62,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('research-studies.restore', ['ctrlno'=>$researchAndStudiesTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('research-studies.restore', ['ctrlno'=>$researchAndStudiesTrashedRecords->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon

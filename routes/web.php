@@ -185,7 +185,7 @@ Route::prefix('201-library')->group(function () {
 Route::prefix('family-profile')->group(function () {
     Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
     Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted');
-  
+
     Route::prefix('spouse')->group(function () {
         Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
         Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
@@ -233,7 +233,7 @@ Route::prefix('personal-data')->group(function () {
     Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
 });
 
-Route::prefix('contact-info')->group(function () {
+Route::prefix('contact-information')->group(function () {
     Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
     Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
     Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
@@ -284,9 +284,11 @@ Route::prefix('scholarship-taken')->group(function () {
 });
 
 Route::prefix('research-studies')->group(function () {
-    Route::get('edit/{ctrlno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
+    Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index');
+    Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create');
+    Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
     Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-    Route::put('update/{ctrlno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
+    Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
     Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
     Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore');
@@ -294,9 +296,11 @@ Route::prefix('research-studies')->group(function () {
 });
 
 Route::prefix('work-experience')->group(function () {
-    Route::get('edit/{ctrlno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
+    Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create');
+    Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index');
+    Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
     Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-    Route::put('update/{ctrlno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
+    Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
     Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
     Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin');
     Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore');
@@ -344,6 +348,8 @@ Route::prefix('medical-history')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
+    Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create');
+    Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index');
     Route::get('edit/{cesno}/{speXpCode}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
     Route::put('update/{cesno}/{speXpCodes}', [ExpertiseController::class, 'update'])->name('expertise.update');
@@ -351,27 +357,32 @@ Route::prefix('expertise')->group(function () {
 });
 
 Route::prefix('language')->group(function () {
-    Route::get('{cesno}/{languageCode}', [LanguageController::class, 'edit'])->name('language.edit');
-    Route::post('{cesno}', [LanguageController::class, 'store'])->name('language.store');
-    Route::put('{cesno}/{languageCode}', [LanguageController::class, 'update'])->name('language.update');
-    Route::delete('{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
+    Route::get('edit/{cesno}/{languageCode}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
+    Route::put('update/{cesno}/{languageCode}', [LanguageController::class, 'update'])->name('language.update');
+    Route::delete('destroy/{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 
 Route::prefix('non-accredited-ces-training')->group(function () {
-    Route::get('edit/{ctrlno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
-    Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
-    Route::put('{ctrlno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
-    Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+    Route::get('create/{cesno}', [OtherTrainingController::class, 'create'])->name('other-training.create');
+    Route::get('index/{cesno}', [OtherTrainingController::class, 'index'])->name('other-training.index');
+    Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
+    Route::post('store/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+    Route::put('update/{ctrlno}/{cesno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
+    Route::delete('destroy/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+    Route::get('recently-deleted/{cesno}', [OtherTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted');
+    Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingController::class, 'restore'])->name('other-training.restore');
+    Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete');
 });
 
 Route::prefix('eligibility-rank-tracker')->group(function () {
     Route::get('edit/{ctrlno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit');
     Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
     Route::put('update/{ctrlno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update');
-    Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy'); 
+    Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy');
     Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore');
-    Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete'); 
+    Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete');
 });
 
 
