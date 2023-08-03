@@ -47,6 +47,11 @@
                         <label for="sss_no">Official Mobile No. #2</label>
                         <input id="official_mobile_number2" name="official_mobile_number2" type="text" value="{{ old('official_mobile_number2') ?? ($contacts->official_mobile_number2 ?? '') }}" oninput="validateInput(official_mobile_number2, 9, 'all')" onkeypress="validateInput(official_mobile_number2, 9, 'all')" onblur="checkErrorMessage(official_mobile_number2)">
                         <p class="input_error text-red-600"></p>
+                        @error('official_mobile_number2')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                     </div>
@@ -57,11 +62,21 @@
                         <label for="sss_no">Personal Mobile No. #1<sup>*</sup></label>
                         <input id="personal_mobile_number1" name="personal_mobile_number1" type="text" value="{{ old('personal_mobile_number1') ?? ($contacts->personal_mobile_number1 ?? '') }}" oninput="validateInput(personal_mobile_number1, 9, 'all')" onkeypress="validateInput(personal_mobile_number1, 9, 'all')" onblur="checkErrorMessage(personal_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
+                        @error('personal_mobile_number1')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="sss_no">Personal Mobile No. #2</label>
                         <input id="personal_mobile_number2" name="personal_mobile_number2" type="text" value="{{ old('personal_mobile_number2') ?? ($contacts->personal_mobile_number2 ?? '') }}" oninput="validateInput(personal_mobile_number2, 9, 'all')" onkeypress="validateInput(personal_mobile_number2, 9, 'all')" onblur="checkErrorMessage(personal_mobile_number2)">
                         <p class="input_error text-red-600"></p>
+                        @error('personal_mobile_number2')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                     </div>
@@ -72,6 +87,11 @@
                         <label for="sss_no">Office Telephone No.<sup>*</sup></label>
                         <input id="office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(office_telephone_number, 9, 'all')" onkeypress="validateInput(office_telephone_number, 9, 'all')" onblur="checkErrorMessage(office_telephone_number)">
                         <p class="input_error text-red-600"></p>
+                        @error('office_telephone_number')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                     </div>
