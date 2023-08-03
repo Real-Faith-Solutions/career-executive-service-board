@@ -1,4 +1,4 @@
-<form action="{{ route('/add-address-temporary-201', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" id="address-temporary" method="POST">
+<form action="{{ route('add-address-temporary-201', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" id="address_temporary" onsubmit="return checkErrorsBeforeSubmit(address_temporary)" method="POST">
     @csrf
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 

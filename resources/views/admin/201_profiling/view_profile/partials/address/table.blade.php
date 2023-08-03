@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Identification Cards')
-@section('sub', 'Identification Cards')
+@section('title', 'Personal Address')
+@section('sub', 'Personal Address')
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormAddress()">Add Address</button>
+    <button class="btn btn-primary" onclick="openFormAddress()">Add/Edit Address</button>
     <button class="btn btn-primary hidden" onclick="openTableAddress()">Go back</button>
 </div>
 

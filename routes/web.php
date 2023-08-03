@@ -224,6 +224,10 @@ Route::prefix('family-profile')->group(function () {
 
 Route::prefix('address')->group(function () {
     Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show');
+    Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('add-address-permanent-201');
+    Route::post('/add-address-mailing-201/{cesno}', [AddAddress201::class, 'addAddressMailing'])->name('add-address-mailing-201');
+    Route::post('/add-address-temporary-201/{cesno}', [AddAddress201::class, 'addAddressTemporary'])->name('add-address-temporary-201');
+
     Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
     Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
     Route::get('edit/{ctrlno}', [AddressController::class, 'edit'])->name('personal-data-address.edit');
@@ -390,9 +394,6 @@ Route::prefix('eligibility-rank-tracker')->group(function () {
 // 201 profiling routes
 Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('add-profile-201');
 Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
-Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('/add-address-permanent-201');
-Route::post('/add-address-mailing-201/{cesno}', [AddAddress201::class, 'addAddressMailing'])->name('/add-address-mailing-201');
-Route::post('/add-address-temporary-201/{cesno}', [AddAddress201::class, 'addAddressTemporary'])->name('/add-address-temporary-201');
 // end 201 profiling
 
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
