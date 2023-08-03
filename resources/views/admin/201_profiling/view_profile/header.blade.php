@@ -104,7 +104,7 @@
                             <a class="btn category-button inline-flex" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#otherManagementTrainingsTab" onclick="otherManagementTrainingsTab()">Non-CES Accredited Training</a>
+                            <a class="btn category-button inline-flex" href="{{ route('other-training.index', ['cesno' => $cesno]) }}" >Non-CES Accredited Training</a>
                         </li>
                     </ul>
                 </div>

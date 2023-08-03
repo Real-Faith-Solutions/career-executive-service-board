@@ -1,26 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Non-Ces Accredited Training')
-@section('sub', 'Non-Ces Accredited Training')
+@section('title', 'Non-Ces Accredited Training Recycle Bin')
+@section('sub', 'Non-Ces Accredited Training Recycle Bin')
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('other-training.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
+    <a href="{{ route('other-training.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Control No
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Training Title
                 </th>
@@ -44,53 +39,66 @@
                 <th scope="col" class="px-6 py-3">
                     No. of Training Hours
                 </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+                
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($otherTraining as $otherTrainings)
+            @foreach ($otherTrainingTrashedRecord as $otherTrainingTrashedRecords)
                 <tr class="border-b bg-white">
+                    <td class="px-6 py-3">
+                        {{ $otherTrainingTrashedRecords->ctrlno }}
+                    </td>
+
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $otherTrainings->training }}
+                        {{ $otherTrainingTrashedRecords->training }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->training_category }}
+                        {{ $otherTrainingTrashedRecords->training_category }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
+                        {{ $otherTrainingTrashedRecords->trainingProfileLibTblExpertiseSpec->Title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->sponsor }}
+                        {{ $otherTrainingTrashedRecords->sponsor }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->venue }}
+                        {{ $otherTrainingTrashedRecords->venue }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->no_training_hours }}
+                        {{ $otherTrainingTrashedRecords->no_training_hours }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $otherTrainingTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('other-training.restore', ['ctrlno'=>$otherTrainingTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST">
+                            <form action="{{ route('other-training.forceDelete', ['ctrlno'=>$otherTrainingTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
