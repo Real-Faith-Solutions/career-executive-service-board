@@ -84,7 +84,7 @@
                             <a class="btn category-button inline-flex" href="{{ route('work-experience.index', ['cesno' => $cesno]) }}" >Work Experience</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#fieldExpertiseTab" onclick="fieldExpertiseTab()">Field Expertise</a>
+                            <a class="btn category-button inline-flex" href="{{ route('expertise.index', ['cesno' => $cesno]) }}" >Field Expertise</a>
                         </li>
                     </ul>
                 </div>

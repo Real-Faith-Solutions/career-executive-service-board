@@ -347,6 +347,8 @@ Route::prefix('medical-history')->group(function () {
 });
 
 Route::prefix('expertise')->group(function () {
+    Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create');
+    Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index');
     Route::get('edit/{cesno}/{speXpCode}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
     Route::put('update/{cesno}/{speXpCodes}', [ExpertiseController::class, 'update'])->name('expertise.update');
