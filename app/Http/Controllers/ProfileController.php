@@ -141,7 +141,6 @@ class ProfileController extends Controller
         $caseRecord = PersonalData::find($cesno)->caseRecords;
         $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->first();
         $language = PersonalData::find($cesno)->languages;
-        $otherTraining = PersonalData::find($cesno)->otherTraining;
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
@@ -149,7 +148,6 @@ class ProfileController extends Controller
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
         $personalData = PersonalData::find($cesno);
         $profileTblCesStatus = $personalData->ProfileTblCesStatus;
-        $otherTraining = $personalData->otherTraining;
         $language = $personalData->languages;
         $healthRecord = $personalData->healthRecords;
         $caseRecord = $personalData->caseRecords;
@@ -168,7 +166,7 @@ class ProfileController extends Controller
         $age = $now->diff($birthDate)->y;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification',  'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord','profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
+        'mother', 'identification',  'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord','profileLibTblLanguageRef', 'language', 'addressProfilePermanent',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
         'profileTblCesStatus', 'pwds', 'medicalHistory'));
 

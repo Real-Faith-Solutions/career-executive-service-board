@@ -356,17 +356,22 @@ Route::prefix('expertise')->group(function () {
 });
 
 Route::prefix('language')->group(function () {
-    Route::get('{cesno}/{languageCode}', [LanguageController::class, 'edit'])->name('language.edit');
-    Route::post('{cesno}', [LanguageController::class, 'store'])->name('language.store');
-    Route::put('{cesno}/{languageCode}', [LanguageController::class, 'update'])->name('language.update');
-    Route::delete('{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
+    Route::get('edit/{cesno}/{languageCode}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
+    Route::put('update/{cesno}/{languageCode}', [LanguageController::class, 'update'])->name('language.update');
+    Route::delete('destroy/{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 
 Route::prefix('non-accredited-ces-training')->group(function () {
-    Route::get('edit/{ctrlno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
-    Route::post('{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
-    Route::put('{ctrlno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
-    Route::delete('{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+    Route::get('create/{cesno}', [OtherTrainingController::class, 'create'])->name('other-training.create');
+    Route::get('index/{cesno}', [OtherTrainingController::class, 'index'])->name('other-training.index');
+    Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
+    Route::post('store/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
+    Route::put('update/{ctrlno}/{cesno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
+    Route::delete('destroy/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
+    Route::get('recently-deleted/{cesno}', [OtherTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted');
+    Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingController::class, 'restore'])->name('other-training.restore');
+    Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete');
 });
 
 Route::prefix('eligibility-rank-tracker')->group(function () {

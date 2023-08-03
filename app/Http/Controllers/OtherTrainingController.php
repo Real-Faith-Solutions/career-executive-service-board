@@ -12,6 +12,23 @@ use Illuminate\Validation\Rule;
 
 class OtherTrainingController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $otherTraining = $personalData->otherTraining;
+
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', compact('otherTraining' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.form', compact('profileLibTblExpertiseSpec' ,'cesno'));
+        
+    }
     
     public function store(Request $request, $cesno){
 
@@ -52,21 +69,20 @@ class OtherTrainingController extends Controller
 
         $otherTrainingPersonalDataId->otherTraining()->save($otherTraining);
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit',
-        ['otherManagementTraining'=>$otherManagementTraining, 'profileLibTblExpertiseSpec'=>$profileLibTblExpertiseSpec]);
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([ 
 
@@ -92,7 +108,7 @@ class OtherTrainingController extends Controller
         $trainingManagement->field_specialization = $request->expertise_field_of_specialization;
         $trainingManagement->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -103,7 +119,35 @@ class OtherTrainingController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
 
-        // $spouse->restore(); -> to restore soft deleted data
+    }
+
+    public function recentlyDeleted($cesno){
+
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $otherTrainingTrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
+ 
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'cesno'));
+
+    }
+
+    public function restore($ctrlno){
+
+        $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
+        $otherTraining->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+ 
+    public function forceDelete($ctrlno){
+
+        $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
+        $otherTraining->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
 
     }
 
