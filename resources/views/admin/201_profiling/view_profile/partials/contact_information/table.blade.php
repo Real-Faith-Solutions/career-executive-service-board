@@ -37,6 +37,11 @@
                         <label for="sss_no">Official Mobile No. #1<sup>*</sup></label>
                         <input id="official_mobile_number1" name="official_mobile_number1" type="text" value="{{ old('official_mobile_number1') ?? ($contacts->official_mobile_number1 ?? '') }}" oninput="validateInput(official_mobile_number1, 9, 'all')" onkeypress="validateInput(official_mobile_number1, 9, 'all')" onblur="checkErrorMessage(official_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
+                        @error('official_mobile_number1')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="sss_no">Official Mobile No. #2</label>

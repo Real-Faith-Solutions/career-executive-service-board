@@ -5,7 +5,7 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormIdentification()">Add Identification Card</button>
+    <button class="btn btn-primary" onclick="openFormIdentification()">Add/Edit Identification Card</button>
     <button class="btn btn-primary hidden" onclick="openTableIdentification()">Go back</button>
 </div>
 
