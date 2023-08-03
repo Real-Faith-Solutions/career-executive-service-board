@@ -1,5 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Award and Citation')
+@section('sub', 'Award and Citation')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <a href="{{ route('award-citation.recentlyDeleted', ['cesno'=>$mainProfile->cesno]) }}">
+    <a href="{{ route('award-citation.recentlyDeleted', ['cesno' => $cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -7,12 +13,8 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    <button class="btn btn-primary" onclick="openFormAwardAndCitation()">Add Award and Citation</button>
-    <button class="btn btn-primary hidden" onclick="openTableAwardAndCitation()">Go back</button>
-</div>
 
-<div class="form-award-and-citation hidden">
-    @include('admin.201_profiling.view_profile.partials.award_and_citations.form')
+    <a href="{{ route('award-citation.create', ['cesno' => $cesno]) }}" class="btn btn-primary" >Add Award and Citation</a>
 </div>
 
 <div class="table-award-and-citation relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -37,7 +39,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach ($awardsAndCitation as $awardsAndCitations)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
@@ -54,7 +55,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('award-citation.edit', ['ctrlno'=>$awardsAndCitations->ctrlno]) }}" method="GET">
+                            <form action="{{ route('award-citation.edit', ['ctrlno'=>$awardsAndCitations->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -83,7 +84,8 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>
+
+@endsection

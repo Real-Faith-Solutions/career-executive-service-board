@@ -124,7 +124,7 @@
                             <a class="btn category-button inline-flex" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#awardAndCitationsTab" onclick="awardAndCitationsTab()">Award And Citations</a>
+                            <a class="btn category-button inline-flex" href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" >Award And Citations</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="#majorCivicAndProfessionalAffiliationsTab" onclick="majorCivicAndProfessionalAffiliationsTab()">Major Civic and Professional Affiliations</a>

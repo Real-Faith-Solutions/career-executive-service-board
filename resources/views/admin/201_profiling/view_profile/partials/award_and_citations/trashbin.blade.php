@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Award and Citation Recycle Bin')
+@section('sub', 'Award and Citation Recycle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>AWARD AND CITATIONS RECYCLE BIN</h1>
+<div class="flex justify-end mb-7">
+    <a href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" class="btn btn-primary" >Go back</a>
 </div>
 
 <div class="table-award-and-citation relative overflow-x-auto sm:rounded-lg shadow-lg">

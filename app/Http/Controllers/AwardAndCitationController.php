@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AwardAndCitationController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $awardsAndCitation = $personalData->awardsAndCitations;
+
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.table', compact('awardsAndCitation' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.form', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -39,18 +54,19 @@ class AwardAndCitationController extends Controller
             
         $awardAndCitationsPersonalDataId->awardsAndCitations()->save($awardAndCitations);
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $awardAndCitation = AwardAndCitations::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.award_and_citations.edit', ['awardAndCitation'=>$awardAndCitation]);
+
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.edit', compact('awardAndCitation' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
@@ -73,7 +89,7 @@ class AwardAndCitationController extends Controller
         $awardAndCitation->updated_by = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
         $awardAndCitation->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -94,7 +110,7 @@ class AwardAndCitationController extends Controller
         // Access the soft deleted scholarships of the parent model
         $awardAndCitationsTrashedRecord = $personalData->awardsAndCitations()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.award_and_citations.trashbin', compact('awardAndCitationsTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.award_and_citations.trashbin', compact('awardAndCitationsTrashedRecord', 'cesno'));
 
     }
 
