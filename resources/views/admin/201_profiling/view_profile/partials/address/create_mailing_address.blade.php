@@ -1,4 +1,4 @@
-<form action="{{ route('/add-address-mailing-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="address-mailing" method="POST">
+<form action="{{ route('/add-address-mailing-201', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" id="address-mailing" method="POST">
     @csrf
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
