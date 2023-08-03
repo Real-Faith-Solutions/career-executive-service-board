@@ -1,6 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Affiliation')
+@section('sub', 'Affiliation')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('affiliation.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
+</div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -11,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('affiliation.update', ['ctrlno'=>$affiliation->ctrlno]) }}" method="POST" id="affiliation_edit" onsubmit="return checkErrorsBeforeSubmit(affiliation_edit)">
+            <form action="{{ route('affiliation.update', ['ctrlno'=>$affiliation->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="affiliation_edit" onsubmit="return checkErrorsBeforeSubmit(affiliation_edit)">
                 @csrf
                 @method('PUT')
 

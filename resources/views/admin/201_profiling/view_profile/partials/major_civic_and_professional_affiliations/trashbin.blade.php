@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Affiliation Recycle Bin')
+@section('sub', 'Affiliation Recycle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>MAJOR CIVIC AND PROFESSIONAL AFFILLIATIONS RECYLE BIN</h1>
+<div class="flex justify-end mb-7">
+    <a href="{{ route('affiliation.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
 </div>
 
 <div class="table-major-civic-and-professional-affiliations relative overflow-x-auto sm:rounded-lg shadow-lg">

@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Award and Citation')
+@section('sub', 'Award and Citation')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
@@ -11,7 +13,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('award-citation.update', ['ctrlno'=>$awardAndCitation->ctrlno]) }}" method="POST" id="award_and_citations_edit" onsubmit="return checkErrorsBeforeSubmit(award_and_citations_edit)">
+            <form action="{{ route('award-citation.update', ['ctrlno'=>$awardAndCitation->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="award_and_citations_edit" onsubmit="return checkErrorsBeforeSubmit(award_and_citations_edit)">
                 @csrf
                 @method('PUT')
                 
