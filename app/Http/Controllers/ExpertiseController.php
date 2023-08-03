@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Redirect;
 class ExpertiseController extends Controller
 {
 
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $expertise = $personalData->expertise;
+
+        return view('admin.201_profiling.view_profile.partials.field_expertise.table', compact('expertise' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        return view('admin.201_profiling.view_profile.partials.field_expertise.form', compact('profileLibTblExpertiseSpec' ,'cesno'));
+
+    }
+
     public function store(Request $request, $cesno){
 
         $request->validate([
@@ -35,7 +52,7 @@ class ExpertiseController extends Controller
  
         $expertise->expertise()->attach($expertiseLibrary,['encoder'=>$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension]);
             
-        return redirect()->back()->with('message', 'Expertise Successfuly Saved');
+        return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Expertise Successfuly Saved');
 
     }
 
@@ -58,7 +75,7 @@ class ExpertiseController extends Controller
  
         $personalDataId->expertise()->updateExistingPivot($speXpCode,['specialization_code' => $request->specialization_code,]);
      
-        return redirect()->route('viewProfile', ['cesno' => $personalDataId])->with('message', 'Updated Sucessfully');
+        return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 

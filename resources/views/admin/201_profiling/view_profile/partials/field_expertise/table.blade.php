@@ -1,18 +1,17 @@
+@extends('layouts.app')
+@section('title', 'Field Expertise')
+@section('sub', 'Field Expertise')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormFieldExpertise()">Add Field Expertise</button>
-    <button class="btn btn-primary hidden" onclick="openTableFieldExpertise()">Go back</button>
+    <a href="{{ route('expertise.create', ['cesno' => $cesno]) }}" class="btn btn-primary" >Add Field Expertise</a>
 </div>
 
-<div class="form-field-expertise hidden">
-    @include('admin.201_profiling.view_profile.partials.field_expertise.form')
-</div>
-
-
-<div class="table-field-expertise relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="taw-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-
                 <th scope="col" class="px-6 py-3">
                     Expertise / Field of Specialization
                 </th>
@@ -23,7 +22,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach ($expertise as $expertised)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
@@ -61,7 +59,8 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>
+
+@endsection

@@ -132,7 +132,6 @@ class ProfileController extends Controller
         $identification = Identification::where('personal_data_cesno', $cesno)->first();
         // $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
         $scholarship = PersonalData::find($cesno)->scholarships;
         $researchAndStudies = PersonalData::find($cesno)->researchAndStudies;
@@ -141,7 +140,6 @@ class ProfileController extends Controller
         $affiliation = PersonalData::find($cesno)->affiliations;
         $caseRecord = PersonalData::find($cesno)->caseRecords;
         $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->first();
-        $expertise = PersonalData::find($cesno)->expertise;
         $language = PersonalData::find($cesno)->languages;
         $otherTraining = PersonalData::find($cesno)->otherTraining;
 
@@ -153,7 +151,6 @@ class ProfileController extends Controller
         $profileTblCesStatus = $personalData->ProfileTblCesStatus;
         $otherTraining = $personalData->otherTraining;
         $language = $personalData->languages;
-        $expertise = $personalData->expertise;
         $healthRecord = $personalData->healthRecords;
         $caseRecord = $personalData->caseRecords;
         $affiliation = $personalData->affiliations;
@@ -171,8 +168,7 @@ class ProfileController extends Controller
         $age = $now->diff($birthDate)->y;
 
         return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification',  'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord',
-        'profileLibTblExpertiseSpec', 'expertise', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
+        'mother', 'identification',  'awardsAndCitation', 'affiliation', 'caseRecord', 'healthRecord','profileLibTblLanguageRef', 'language', 'addressProfilePermanent', 'otherTraining',
         'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
         'profileTblCesStatus', 'pwds', 'medicalHistory'));
 
