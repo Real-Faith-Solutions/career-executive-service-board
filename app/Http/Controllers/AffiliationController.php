@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AffiliationController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $affiliation = $personalData->affiliations;
+
+        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.table', compact('affiliation' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.form', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -41,19 +56,19 @@ class AffiliationController extends Controller
     
         $affiliationPersonalDataId->affiliations()->save($affiliation);
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('affiliation.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $affiliation = Affiliations::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.edit', ['affiliation'=>$affiliation]);
+        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.edit', compact('affiliation' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
@@ -78,7 +93,7 @@ class AffiliationController extends Controller
         $affiliation->updated_by = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
         $affiliation->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('affiliation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -99,7 +114,7 @@ class AffiliationController extends Controller
         // Access the soft deleted scholarships of the parent model
         $affiliationsTrashedRecord = $personalData->affiliations()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.trashbin', compact('affiliationsTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.trashbin', compact('affiliationsTrashedRecord', 'cesno'));
 
     }
 
