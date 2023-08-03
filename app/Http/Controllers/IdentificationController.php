@@ -11,16 +11,24 @@ use Illuminate\Validation\Rule;
 class IdentificationController extends Controller
 {
 
+    public function show($cesno){
+
+        $identification = Identification::where('personal_data_cesno', $cesno)->first();
+
+        return view('admin.201_profiling.view_profile.partials.identification.form', 
+        ['identification'=>$identification, 'cesno'=>$cesno]);
+        
+    }
+
     public function store(Request $request, $cesno){
 
         $request->validate([
 
-            // 'type' => ['required', Rule::unique('identifications')->where('personal_data_cesno', $cesno)],
-            'gsis' => ['required', 'unique:identifications,gsis', 'min:9', 'max:40'],
-            'pagibig' => ['required', 'unique:identifications,pagibig', 'min:9', 'max:40'],
-            'philhealth' => ['required', 'unique:identifications,philhealth', 'min:9', 'max:40'],
-            'sss_no' => ['required', 'unique:identifications,sss_no', 'min:9', 'max:40'],
-            'tin' => ['required', 'unique:identifications,tin', 'min:9', 'max:40'],
+            'gsis' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'pagibig' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'philhealth' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'sss_no' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'tin' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
         
         ]);
 
@@ -33,8 +41,7 @@ class IdentificationController extends Controller
         $personalData = PersonalData::findOrFail($cesno);
 
         // Update or create the associated Identification record
-        $identification = $personalData->identifications()->updateOrCreate(
-            ['personal_data_cesno' => $cesno],
+        $identification = $personalData->identifications()->Create(
             [
                 'gsis' => $request->input('gsis'),
                 'pagibig' => $request->input('pagibig'),
@@ -56,21 +63,32 @@ class IdentificationController extends Controller
 
     }
 
-    public function update(Request $request, $ctrlno){
-
-        $identifications = Identification::find($ctrlno);
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
-            'type' => ['required'],
-            'id_number' => ['required', 'min:2', 'max:40',  Rule::unique('identifications', 'id_number')->ignore($identifications)],
-            
+            'gsis' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'pagibig' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'philhealth' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'sss_no' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+            'tin' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
+        
         ]);
 
-         $identification = Identification::find($ctrlno);
-         $identification->type = $request->type;
-         $identification->id_number = $request->id_number;
-         $identification->save();
+        // Retrieve encoder information
+        $userLastName = Auth::user()->last_name;
+        $userFirstName = Auth::user()->first_name;
+        $userMiddleName = Auth::user()->middle_name; 
+        $userNameExtension = Auth::user()->name_extension;
+
+        $identification = Identification::find($ctrlno);
+        $identification->gsis = $request->gsis;
+        $identification->pagibig = $request->pagibig;
+        $identification->philhealth = $request->philhealth;
+        $identification->sss_no = $request->sss_no;
+        $identification->tin = $request->tin;
+        $identification->encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+        $identification->save();
  
          return back()->with('message', 'Updated Sucessfully');
         

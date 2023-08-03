@@ -222,9 +222,10 @@ Route::prefix('family-profile')->group(function () {
 });
 
 Route::prefix('identification/card')->group(function () {
-    Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
+    Route::get('show/{cesno}', [IdentificationController::class, 'show'])->name('personal-data-identification.show');
     Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
-    Route::put('update/{ctrlno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
+    Route::post('update/{ctrlno}/{cesno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
+    Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
     Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
 });
 

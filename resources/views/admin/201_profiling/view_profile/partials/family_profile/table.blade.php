@@ -274,4 +274,5 @@
         </tbody>
     </table>
 </div>
+
 @endsection

@@ -38,7 +38,7 @@
                         </li>
                         
                         <li>
-                            <a class="btn category-button inline-flex" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
+                            <a class="btn category-button inline-flex" href="{{ route('personal-data-identification.show', ['cesno'=>$cesno]) }}">Identification Card</a>
                         </li>
                     </ul>
                 </div>
