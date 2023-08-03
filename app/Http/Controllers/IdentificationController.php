@@ -13,10 +13,10 @@ class IdentificationController extends Controller
 
     public function show($cesno){
 
-        $identification = Identification::where('personal_data_cesno', $cesno)->get();
+        $identification = Identification::where('personal_data_cesno', $cesno)->first();
 
         return view('admin.201_profiling.view_profile.partials.identification.table', 
-        compact('identification', 'cesno'));
+        ['identification'=>$identification, 'cesno'=>$cesno]);
         
     }
 

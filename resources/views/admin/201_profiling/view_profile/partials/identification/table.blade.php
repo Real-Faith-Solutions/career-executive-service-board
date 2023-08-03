@@ -1,3 +1,9 @@
+@extends('layouts.app')
+@section('title', 'Identification Cards')
+@section('sub', 'Identification Cards')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
     <button class="btn btn-primary" onclick="openFormIdentification()">Add Identification Card</button>
     <button class="btn btn-primary hidden" onclick="openTableIdentification()">Go back</button>
@@ -7,7 +13,7 @@
     @include('admin.201_profiling.view_profile.partials.identification.form')
 </div>
 
-<div class="table-identification relative overflow-x-auto shadow-lg sm:rounded-lg">
+<div class="table-identification relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
@@ -86,3 +92,5 @@
         </tbody>
     </table>
 </div>
+
+@endsection
