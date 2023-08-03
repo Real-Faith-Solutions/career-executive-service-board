@@ -308,9 +308,11 @@ Route::prefix('work-experience')->group(function () {
 });
 
 Route::prefix('award-citation')->group(function () {
-    Route::get('edit/{ctrlno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit');
+    Route::get('index/{cesno}', [AwardAndCitationController::class, 'index'])->name('award-citation.index');
+    Route::get('create/{cesno}', [AwardAndCitationController::class, 'create'])->name('award-citation.create');
+    Route::get('edit/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit');
     Route::post('store/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
-    Route::put('update/{ctrlno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update');
+    Route::put('update/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update');
     Route::delete('delete/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
     Route::get('recently-deleted/{cesno}', [AwardAndCitationController::class, 'recentlyDeleted'])->name('award-citation.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [AwardAndCitationController::class, 'restore'])->name('award-citation.restore');
