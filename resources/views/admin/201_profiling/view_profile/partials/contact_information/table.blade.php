@@ -14,9 +14,9 @@
         <div class="bg-white px-6 py-3">
 
             @if ($contacts)
-            <form action="{{ route('contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+                <form action="{{ route('contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
             @else
-            <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
+                <form action="{{ route('contact-info.store', ['cesno'=>$cesno]) }}" method="POST" id="contact_info_form" onsubmit="return checkErrorsBeforeSubmit(contact_info_form)">
             @endif
                 @csrf
 
@@ -31,7 +31,7 @@
                     <div class="mb-3">
                     </div>
                 </div>
-    
+
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="sss_no">Official Mobile No. #1<sup>*</sup></label>

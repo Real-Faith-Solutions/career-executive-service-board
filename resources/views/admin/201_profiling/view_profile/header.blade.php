@@ -22,17 +22,21 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex text-blue-500" href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
+                            <a class="btn category-button inline-flex"  href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('family-profile.show', ['cesno' => $cesno]) }}">Family Profile</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
                         </li>
+
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('contact-info.show', ['cesno'=>$cesno]) }}">Contact Information</a>
                         </li>
+                        
                         <li>
                             <a class="btn category-button inline-flex" href="#identificationTab" onclick="identificationTab()">Identification Card</a>
                         </li>

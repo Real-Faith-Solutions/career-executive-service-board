@@ -185,7 +185,7 @@ Route::prefix('201-library')->group(function () {
 Route::prefix('family-profile')->group(function () {
     Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
     Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted');
-  
+
     Route::prefix('spouse')->group(function () {
         Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
         Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
@@ -232,7 +232,7 @@ Route::prefix('personal-data')->group(function () {
     Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
 });
 
-Route::prefix('contact-info')->group(function () {
+Route::prefix('contact-information')->group(function () {
     Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
     Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
     Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
@@ -371,10 +371,10 @@ Route::prefix('eligibility-rank-tracker')->group(function () {
     Route::get('edit/{ctrlno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit');
     Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
     Route::put('update/{ctrlno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update');
-    Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy'); 
+    Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy');
     Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore');
-    Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete'); 
+    Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete');
 });
 
 
