@@ -15,7 +15,7 @@ class IdentificationController extends Controller
 
         $identification = Identification::where('personal_data_cesno', $cesno)->first();
 
-        return view('admin.201_profiling.view_profile.partials.identification.table', 
+        return view('admin.201_profiling.view_profile.partials.identification.form', 
         ['identification'=>$identification, 'cesno'=>$cesno]);
         
     }
