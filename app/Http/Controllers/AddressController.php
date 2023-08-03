@@ -213,4 +213,13 @@ class AddressController extends Controller
 
     }
 
+    public function destroy($ctrlno){
+
+        $address = ProfileAddress::find($ctrlno);
+        $address->delete();
+
+        return redirect()->back()->with('message', 'Address Deleted Sucessfully');
+
+    }
+
 }

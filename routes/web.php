@@ -224,14 +224,15 @@ Route::prefix('family-profile')->group(function () {
 
 Route::prefix('address')->group(function () {
     Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show');
-    Route::post('/add-address-permanent-201/{cesno}', [AddAddress201::class, 'addAddressPermanent'])->name('add-address-permanent-201');
-    Route::post('/add-address-mailing-201/{cesno}', [AddAddress201::class, 'addAddressMailing'])->name('add-address-mailing-201');
-    Route::post('/add-address-temporary-201/{cesno}', [AddAddress201::class, 'addAddressTemporary'])->name('add-address-temporary-201');
+    Route::post('/add-address-permanent-201/{cesno}', [AddressController::class, 'addAddressPermanent'])->name('add-address-permanent-201');
+    Route::post('/add-address-mailing-201/{cesno}', [AddressController::class, 'addAddressMailing'])->name('add-address-mailing-201');
+    Route::post('/add-address-temporary-201/{cesno}', [AddressController::class, 'addAddressTemporary'])->name('add-address-temporary-201');
+    Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.delete');
 
-    Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
-    Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
-    Route::get('edit/{ctrlno}', [AddressController::class, 'edit'])->name('personal-data-address.edit');
-    Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.destroy');
+    // Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
+    // Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
+    // Route::get('edit/{ctrlno}', [AddressController::class, 'edit'])->name('personal-data-address.edit');
+    // Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.destroy');
 });
 
 Route::prefix('identification/card')->group(function () {
