@@ -328,9 +328,11 @@ Route::prefix('award-citation')->group(function () {
 });
 
 Route::prefix('affiliation')->group(function () {
-    Route::get('edit/{ctrlno}', [AffiliationController::class, 'edits'])->name('affiliation.edit');
+    Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index');
+    Route::get('create/{cesno}', [AffiliationController::class, 'create'])->name('affiliation.create');
+    Route::get('edit/{ctrlno}/{cesno}', [AffiliationController::class, 'edit'])->name('affiliation.edit');
     Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
-    Route::put('update/{ctrlno}', [AffiliationController::class, 'update'])->name('affiliation.update');
+    Route::put('update/{ctrlno}/{cesno}', [AffiliationController::class, 'update'])->name('affiliation.update');
     Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
     Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin');
     Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore');
