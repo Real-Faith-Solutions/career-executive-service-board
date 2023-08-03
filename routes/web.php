@@ -41,6 +41,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
+use App\Http\Controllers\ProfileLibTblEducSchoolController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
@@ -178,6 +179,13 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{ctrlno}', [PWDController::class, 'forceDelete'])->name('pwd.forceDelete');
         Route::post('recently-deleted/restore/{ctrlno}', [PWDController::class, 'restore'])->name('pwd.restore');
         Route::resource('pwd', PWDController::class);
+    });
+
+    Route::prefix('educational-schools')->group(function () {
+        Route::get('recently-deleted', [ProfileLibTblEducSchoolController::class, 'recentlyDeleted'])->name('educational-schools.recently-deleted');
+        Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducSchoolController::class, 'forceDelete'])->name('educational-schools.forceDelete');
+        Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducSchoolController::class, 'restore'])->name('educational-schools.restore');
+        Route::resource('educational-schools', ProfileLibTblEducSchoolController::class);
     });
 });
 

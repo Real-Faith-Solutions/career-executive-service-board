@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblEducSchools', function (Blueprint $table) {
             $table->id('CODE');
-            // $table->string('CODE')->unique();
             $table->string('SCHOOL')->nullable();
             $table->timestamps();
             $table->softDeletes();
