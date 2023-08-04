@@ -30,7 +30,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="#addressTab" onclick="addressTab()">Address</a>
+                            <a class="btn category-button inline-flex" href="{{ route('personal-data-address.show', ['cesno'=>$cesno]) }}">Address</a>
                         </li>
 
                         <li>

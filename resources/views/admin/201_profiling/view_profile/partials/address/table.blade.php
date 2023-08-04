@@ -1,5 +1,10 @@
+@extends('layouts.app')
+@section('title', 'Personal Address')
+@section('sub', 'Personal Address')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" onclick="openFormAddress()">Add Address</button>
+    <button class="btn btn-primary" onclick="openFormAddress()">Add/Edit Address</button>
     <button class="btn btn-primary hidden" onclick="openTableAddress()">Go back</button>
 </div>
 
@@ -56,15 +61,21 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         {{-- <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a> --}}
-                        <a class="mx-1 font-medium text-red-600 hover:underline" href="#">
-                            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                            <lord-icon
-                                src="https://cdn.lordicon.com/jmkrnisz.json"
-                                trigger="hover"
-                                colors="primary:#880808"
-                                style="width:24px;height:24px">
-                            </lord-icon>
-                        </a>
+                        <div class="flex">
+                            <form action="{{ route('personal-data-address.delete', ['ctrlno'=>$data->ctrlno]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                                        trigger="hover"
+                                        colors="primary:#880808"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -72,3 +83,4 @@
         </tbody>
     </table>
 </div>
+@endsection
