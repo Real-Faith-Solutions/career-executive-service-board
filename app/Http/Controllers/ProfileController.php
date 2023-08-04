@@ -118,31 +118,19 @@ class ProfileController extends Controller
 
     public function viewProfile($cesno)
     {
-
-        // $personalData = PersonalData::find($cesno);
-        // $cesStatusCode = $personalData->cesStatusCode;
-        // $cesStatusAccCode = $personalData->cesStatusAccCode;
-
-
         $mainProfile = PersonalData::find($cesno);
         $father = Father::where('personal_data_cesno', $cesno)->get();
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
         $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $identification = Identification::where('personal_data_cesno', $cesno)->first();
-        // $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $addressProfile = ProfileAddress::where('personal_data_cesno', $cesno)->get();
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
         $caseRecord = PersonalData::find($cesno)->caseRecords;
         $healthRecord = HealthRecords::where('personal_data_cesno', $cesno)->first();
         $language = PersonalData::find($cesno)->languages;
 
-        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
-        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
-        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
-        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
         $personalData = PersonalData::find($cesno);
-        $profileTblCesStatus = $personalData->ProfileTblCesStatus;
         $language = $personalData->languages;
         $healthRecord = $personalData->healthRecords;
         $caseRecord = $personalData->caseRecords;
@@ -158,10 +146,9 @@ class ProfileController extends Controller
         $birthDate = new DateTime($birthdate);
         $age = $now->diff($birthDate)->y;
 
-        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 'addressProfile',
-        'mother', 'identification', 'healthRecord','profileLibTblLanguageRef', 'language', 'addressProfilePermanent',
-        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority',
-        'profileTblCesStatus', 'pwds', 'medicalHistory'));
+        return view('admin.201_profiling.view_profile.profile', compact('mainProfile', 'father', 'childrenRecords', 'SpouseRecords', 
+        'addressProfile','mother', 'identification', 'healthRecord', 'profileLibTblLanguageRef', 'language', 'addressProfilePermanent',
+        'addressProfileMailing', 'addressProfileTemp', 'age', 'nameExtensions', 'pwds', 'medicalHistory'));
 
     }
 

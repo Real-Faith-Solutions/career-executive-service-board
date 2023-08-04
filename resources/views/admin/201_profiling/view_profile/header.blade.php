@@ -137,7 +137,7 @@
                             <a class="btn category-button inline-flex" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#eligibilityAndRankTrackerTab" onclick="eligibilityAndRankTrackerTab()">Eligibility and Rank Tracker</a>
+                            <a class="btn category-button inline-flex" href="{{ route('eligibility-rank-tracker.index', ['cesno' => $cesno]) }}" >Eligibility and Rank Tracker</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
