@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CaseRecordController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $caseRecord = $personalData->caseRecords;
+
+        return view('admin.201_profiling.view_profile.partials.case_records.table', compact('caseRecord' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -53,19 +68,19 @@ class CaseRecordController extends Controller
 
         $caseRecordPersonalDataId->caseRecords()->save($caseRecord);
 
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return to_route('case-record.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
         $caseRecord = CaseRecords::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.case_records.edit', ['caseRecord'=>$caseRecord]);
+        return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $request->validate([
 
@@ -95,7 +110,7 @@ class CaseRecordController extends Controller
         $caseRecord->remarks = $request->remarks;
         $caseRecord->save();
 
-        return back()->with('message', 'Updated Sucessfully');
+        return to_route('case-record.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
 
     }
 
@@ -116,7 +131,7 @@ class CaseRecordController extends Controller
         // Access the soft deleted scholarships of the parent model
         $caseRecordTrashedRecord = $personalData->caseRecords()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord' ,'cesno'));
 
     }
 

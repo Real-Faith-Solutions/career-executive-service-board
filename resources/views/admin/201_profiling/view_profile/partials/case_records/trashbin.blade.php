@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Case Records')
+@section('sub', 'Case Records')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>CASE RECYCLE BIN</h1>
+<div class="flex justify-end mb-7">
+    <a href="{{ route('case-record.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
 </div>
 
 <div class="table-case-record relative overflow-x-auto sm:rounded-lg shadow-lg">
