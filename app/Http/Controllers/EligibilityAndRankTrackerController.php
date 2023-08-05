@@ -14,6 +14,36 @@ use Illuminate\Support\Facades\Auth;
 class EligibilityAndRankTrackerController extends Controller
 {
     // const MODULE_201_PROFILING = 'admin.201_profiling';
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $profileTblCesStatus = $personalData->ProfileTblCesStatus;
+
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.table', compact('profileTblCesStatus' ,'cesno'));
+
+    }
+
+    public function create($cesno){
+
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
+        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
+
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.form', 
+        compact('profileLibTblCesStatus' ,'profileLibTblCesStatusAcc' ,'profileLibTblCesStatusType' ,'profileLibTblAppAuthority' ,'cesno'));
+
+    }
+
+    public function cesWeIndex($cesno){
+
+        // $personalData = PersonalData::find($cesno);
+        // $profileTblCesStatus = $personalData->ProfileTblCesStatus;
+
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.cesWeTable', compact('cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
         
@@ -39,11 +69,11 @@ class EligibilityAndRankTrackerController extends Controller
     
     $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
-    return back()->with('message', 'Save Sucessfully');
+    return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
 
     }
 
-    public function edit($ctrlno){
+    public function edit($ctrlno, $cesno){
 
        $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
@@ -52,11 +82,12 @@ class EligibilityAndRankTrackerController extends Controller
        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.edit', 
-       compact('profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 'profileLibTblAppAuthority', 'profileTblCesStatus'));
+       compact('profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 
+       'profileLibTblAppAuthority', 'profileTblCesStatus', 'cesno'));
 
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno, $cesno){
 
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->cesstat_code = $request->cesstat_code;
@@ -67,7 +98,7 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->appointed_dt = $request->appointed_dt;
         $profileTblCesStatus->save();
 
-        return back()->with('message', 'Update Sucessfully');
+        return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
 
     }
 
@@ -88,7 +119,7 @@ class EligibilityAndRankTrackerController extends Controller
         // Access the soft deleted scholarships of the parent model
         $profileTblCesStatusTrashedRecord = $personalData->profileTblCesStatus()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord'));
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord', 'cesno'));
 
     }
 

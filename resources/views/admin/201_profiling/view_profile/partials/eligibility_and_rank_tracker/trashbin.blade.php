@@ -1,9 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Create 201 profile')
+@section('title', 'Eligibility and Rank Tracker Recycle Bin')
+@section('sub', 'Eligibility and Rank Tracker Recycle Bin')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="mb-7">
-    <h1>ELIGIBILITY AND RANK TRACKER RECYCLE BIN</h1>
+<div class="flex justify-end mb-7">
+    <a href="{{ route('eligibility-rank-tracker.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
 </div>
 
 <div class="table-eligibility-and-rank-tracker">
