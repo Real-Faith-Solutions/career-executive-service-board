@@ -27,3 +27,10 @@ function deleteItem() {
     const form = document.getElementById(formId);
     form.submit();
 }
+
+// Close the modal when the user clicks outside the modal content
+window.addEventListener('click', function(event) {
+    if (event.target == document.getElementById('confirmationBackdrop')) {
+        closeConfirmationDialog();
+    }
+  });

@@ -2,8 +2,8 @@ let errorMessageAvatar = document.getElementById('ErrorMessageAvatar');
 let imageInputAvatar = document.getElementById('imageInputAvatar');
 let uploadButtonAvatar = document.getElementById('uploadButtonAvatar');
 
-// Open the modal when the image is clicked
-document.getElementById('profile-avatar').addEventListener('click', function() {
+  // Open the modal when the image is clicked
+  document.getElementById('profile-avatar').addEventListener('click', function() {
     showModal();
   });
   
