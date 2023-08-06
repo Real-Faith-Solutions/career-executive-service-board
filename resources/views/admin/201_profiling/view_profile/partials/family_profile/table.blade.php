@@ -85,10 +85,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('family-profile-spouse.delete', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('family-profile-spouse.delete', ['ctrlno'=>$newSpouseRecords->ctrlno]) }}" method="POST" id="delete_spouse_form{{$newSpouseRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteSpouseButton{{$newSpouseRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -142,10 +142,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('family-profile-father.destroy', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST">
+                            <form action="{{ route('family-profile-father.destroy', ['ctrlno'=>$newFather->ctrlno]) }}" method="POST" id="delete_father_form{{$newFather->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteFatherButton{{$newFather->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -198,10 +198,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('family-profile-mother.destroy', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST">
+                            <form action="{{ route('family-profile-mother.destroy', ['ctrlno'=>$newMother->ctrlno]) }}" method="POST" id="delete_mother_form{{$newMother->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteMotherButton{{$newMother->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -256,7 +256,7 @@
                             <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST" id="delete_children_form{{$newChildrenRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteButton{{$newChildrenRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteChildButton{{$newChildrenRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
