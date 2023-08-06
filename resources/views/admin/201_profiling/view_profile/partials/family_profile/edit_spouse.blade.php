@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('family-profile.updateSpouseRecord', ['ctrlno'=>$spouseRecord->ctrlno]) }}" method="POST"  id="update_spouse_form" onsubmit="return checkErrorsBeforeSubmit(update_spouse_form)">
+            <form action="{{ route('family-profile.updateSpouseRecord', ['ctrlno'=>$spouseRecord->ctrlno]) }}" method="POST" id="update_spouse_form" onsubmit="return checkErrorsBeforeSubmit(update_spouse_form)">
                 @csrf
                 @method('PUT')
                 
