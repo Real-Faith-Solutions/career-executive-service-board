@@ -253,7 +253,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST" id="delete_children_form">
+                            <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST" id="delete_children_form{{$newChildrenRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteButton{{$newChildrenRecords->ctrlno}}" onclick="openConfirmationDialog(this)">
