@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('family-profile.updateChildren',['ctrlno'=>$childrenRecords->ctrlno]) }}" method="POST">
+            <form action="{{ route('family-profile.updateChildren',['ctrlno'=>$childrenRecords->ctrlno]) }}" method="POST" id="update_children_form" onsubmit="return checkErrorsBeforeSubmit(update_children_form)">
                 @csrf
                 @method('PUT')
 
@@ -112,7 +112,7 @@
 
                 <div>
                     <div class="flex justify-end">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="updateChildButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                             Update Changes
                         </button>
                     </div>
