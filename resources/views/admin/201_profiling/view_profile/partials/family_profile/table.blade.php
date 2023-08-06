@@ -256,7 +256,7 @@
                             <form action="{{ route('family-profile-children.delete', ['ctrlno'=>$newChildrenRecords->ctrlno]) }}" method="POST" id="delete_children_form{{$newChildrenRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteButton{{$newChildrenRecords->ctrlno}}" onclick="openConfirmationDialog(this)">
+                                <button type="button" id="deleteButton{{$newChildrenRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

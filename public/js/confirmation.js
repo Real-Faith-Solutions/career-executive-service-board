@@ -1,6 +1,12 @@
-function openConfirmationDialog(buttonElement) {
+function openConfirmationDialog(buttonElement, title = 'Confirm Action', statement = 'Are you sure?') {
     const confirmationBackdrop = document.getElementById('confirmationBackdrop');
     const confirmationDialog = document.getElementById('confirmationDialog');
+
+    const confirmationDialogTitle = document.getElementById('confirmationDialogTitle');
+    const confirmationDialogStatement = document.getElementById('confirmationDialogStatement');
+
+    confirmationDialogTitle.textContent = title;
+    confirmationDialogStatement.textContent = statement;
 
     // Get the form associated with the delete button using its ID
     const form = buttonElement.closest('form');
