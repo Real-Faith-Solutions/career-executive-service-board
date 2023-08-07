@@ -144,7 +144,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('family-profile-children.restore', ['ctrlno'=>$childrensTrashedRecords->ctrlno]) }}" method="POST"  id="restore_children_form{{$childrensTrashedRecords->ctrlno}}">
+                            <form action="{{ route('family-profile-children.restore', ['ctrlno'=>$childrensTrashedRecords->ctrlno]) }}" method="POST" id="restore_children_form{{$childrensTrashedRecords->ctrlno}}">
                                 @csrf
                                 <button type="button" id="restoreChildButton{{$childrensTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
@@ -156,7 +156,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('family-profile-children.forceDelete', ['ctrlno'=>$childrensTrashedRecords->ctrlno]) }}" method="POST"  id="permanent_delete_children_form{{$childrensTrashedRecords->ctrlno}}">
+                            <form action="{{ route('family-profile-children.forceDelete', ['ctrlno'=>$childrensTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_children_form{{$childrensTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="permanentDeleteChildButton{{$childrensTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
