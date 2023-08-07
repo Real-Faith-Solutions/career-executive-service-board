@@ -77,7 +77,7 @@
                                 </button>
                             </form>
                        
-                            <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST"  id="delete_educational_attainment_form{{$newEducationalAttainment->ctrlno}}">
+                            <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST" id="delete_educational_attainment_form{{$newEducationalAttainment->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteEducAttainmentButton{{$newEducationalAttainment->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">  
