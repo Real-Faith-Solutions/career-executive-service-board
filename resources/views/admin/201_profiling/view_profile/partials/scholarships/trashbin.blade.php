@@ -71,9 +71,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('scholarship.restore', ['ctrlno'=>$scholarshipTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('scholarship.restore', ['ctrlno'=>$scholarshipTrashedRecords->ctrlno]) }}" method="POST" id="restore_scholarships_form{{$scholarshipTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreScholarshipTakenButton{{$scholarshipTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -83,10 +83,10 @@
                                 </button>
                             </form>
                         
-                            <form action="{{ route('scholarship.forceDelete', ['ctrlno'=>$scholarshipTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('scholarship.forceDelete', ['ctrlno'=>$scholarshipTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_scholarships_form{{$scholarshipTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="permanentDeleteScholarshipsTakenButton{{$scholarshipTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
