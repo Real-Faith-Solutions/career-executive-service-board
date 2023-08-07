@@ -1,21 +1,7 @@
 @extends('layouts.app')
-@section('title', 'PDF File')
+@section('title', 'Pending Files')
 @section('sub', 'PDF File')
 @section('content')
-@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
-
-<div class="my-5 flex justify-end">
-    <a href="">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('show-pdf-files.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">PDF File</a>
-</div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
@@ -42,23 +28,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Request Date
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Request By
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($approvedPdfFile as $approvedPdfFiles)
+            @foreach ($pdfFile as $pdfFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST">
+                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST">
                             @csrf
                             <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -74,44 +52,47 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $approvedPdfFiles->original_pdflink }}
+                        {{ $pdfFiles->request_unique_file_name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->created_at }}
+                        {{ $pdfFiles->created_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->remarks }}
+                        {{ $pdfFiles->remarks }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->encoder }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->request_date }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->requested_by }}
+                        {{ $pdfFiles->encoder }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="" method="POST">
+                            <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST">
                                 @csrf
-                                @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
+                                        src="https://cdn.lordicon.com/egiwmiit.json"
+                                        trigger="morph"
+                                        colors="primary:#3b82f6"
+                                        state="hover"
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
+                            
+                            <a href="">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/nhfyhmlt.json"
+                                    trigger="hover"
+                                    colors="primary:#BC0001"
+                                    state="hover-3"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -119,5 +100,6 @@
         </tbody>
     </table>
 </div>
+
 
 @endsection

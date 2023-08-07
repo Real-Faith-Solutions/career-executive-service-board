@@ -20,3 +20,4 @@ yarn-error.log
 /.vscode
 /public/images/avatar
 /public/pdf_files
+/public/request_pdf_files

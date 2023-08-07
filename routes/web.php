@@ -77,8 +77,14 @@ Route::get('/', function () {
     }
 });
 
-Route::get('show/{cesno}', [PDFController::class, 'show'])->name('show-pdf-files');
-Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
+    Route::post('download-approved-file/{ctrlno}', [PDFController::class, 'download'])->name('downloadApprovedFile');
+    Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index');
+    Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles');
+    Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create');
+    Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
+    Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles');
+    Route::post('download-pending-file/{ctrlno}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
+
 
 Route::prefix('plantilla')->group(function () {
 
@@ -704,14 +710,14 @@ Route::group([
         Route::delete('delete/{id}', [ProfileController::class, 'deleteHistoricalRecordOfMedicalCondition'])->middleware('userauth');
     });
 
-    Route::group([
-        'prefix'     => 'pdf-files',
-    ], function () {
-        Route::post('add', [ProfileController::class, 'addPdfFiles'])->middleware('userauth');
-        Route::get('record/{id}', [ProfileController::class, 'getPdfFiles'])->middleware('userauth');
-        Route::post('edit', [ProfileController::class, 'editPdfFiles'])->middleware('userauth');
-        Route::delete('delete/{id}', [ProfileController::class, 'deletePdfFiles'])->middleware('userauth');
-    });
+    // Route::group([
+    //     'prefix'     => 'pdf-files',
+    // ], function () {
+    //     Route::post('add', [ProfileController::class, 'addPdfFiles'])->middleware('userauth');
+    //     Route::get('record/{id}', [ProfileController::class, 'getPdfFiles'])->middleware('userauth');
+    //     Route::post('edit', [ProfileController::class, 'editPdfFiles'])->middleware('userauth');
+    //     Route::delete('delete/{id}', [ProfileController::class, 'deletePdfFiles'])->middleware('userauth');
+    // });
 
     Route::group([
         'prefix'     => 'executive-201-access',

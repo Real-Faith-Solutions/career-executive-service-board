@@ -7,32 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PdfLinks extends Model
+class DeclineFile extends Model
 {
-
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table ="profile_tblmain_pdflink";
+    protected $table = "decline_file";
 
     protected $fillable = [
 
         'personal_data_cesno',
-        'pdflink',
-        'original_pdflink',
-        'request_date',
-        'requested_by',
+        'pdf_path_name',
+        'pdf_unique_name',
         'remarks',
         'encoder',
 
     ];
 
-    public function pdfFilePersonalData(): BelongsTo
+    public function declineFilePersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
     }
-
 }

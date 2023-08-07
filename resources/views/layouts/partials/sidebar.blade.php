@@ -43,6 +43,9 @@
                             <a href="{{ url('admin/profile/view') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
                         </li>
                         {{-- @endif --}}
+                        <li>
+                            <a href="{{ route('show-pending-pdf-files.pendingFiles') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Pending Files</a>
+                        </li>
 
                     </ul>
                 </li>
