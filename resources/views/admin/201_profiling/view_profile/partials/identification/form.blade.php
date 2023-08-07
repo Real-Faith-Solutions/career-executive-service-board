@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="flex justify-end">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="updateIdentificationsButton" onclick="openConfirmationDialog(this, 'Confirm Identifications', 'Are you sure you want to submit/update this info?')">
                             Save changes
                         </button>
                     </div>
