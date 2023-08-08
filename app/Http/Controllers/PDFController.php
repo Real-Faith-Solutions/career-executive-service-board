@@ -182,8 +182,8 @@ class PDFController extends Controller
         $pdfFileName = PdfLinks::where('ctrlno', $ctrlno)->value('pdflink');
 
         $myFile = public_path($pdfFileName);
-        
-        return response()->download($myFile);
+
+        return response()->file($myFile);
 
     }
 
@@ -194,7 +194,7 @@ class PDFController extends Controller
 
         $pendingFile = public_path($pendingPdfFileName);
         
-        return response()->download($pendingFile);
+        return response()->file($pendingFile);
 
     }
 

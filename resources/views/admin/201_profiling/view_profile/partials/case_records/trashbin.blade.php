@@ -119,9 +119,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('case-record.restore', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('case-record.restore', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST" id="restore_case_record_form{{$caseRecordTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreCaseRecordButton{{$caseRecordTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -131,10 +131,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('case-record.forceDelete', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('case-record.forceDelete', ['ctrlno'=>$caseRecordTrashedRecords->ctrlno]) }}" method="POST" id="permanent_case_record_form{{$caseRecordTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="permanentCaseRecordButton{{$caseRecordTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
