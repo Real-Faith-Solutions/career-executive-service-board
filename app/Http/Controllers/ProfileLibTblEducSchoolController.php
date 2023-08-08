@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ProfileLibTblEducSchoolController extends Controller
 {
     public function index(){
-        $datas = ProfileLibTblEducSchool::paginate(15);
+        $datas = ProfileLibTblEducSchool::query()
+        ->orderBy('SCHOOL' , 'ASC')
+        ->paginate(15);
         return view('admin.201_library.educational_schools.index', compact('datas'));
     }
 

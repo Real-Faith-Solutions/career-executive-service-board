@@ -12,16 +12,16 @@
 
         </lord-icon>
     </a>
-    <a class="btn btn-primary" href="{{ route('educational-schools.create') }}">Add PWD Disability</a>
+    <a class="btn btn-primary" href="{{ route('educational-schools.create') }}">Add School</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th class="px-6 py-3" scope="col">
+                {{-- <th class="px-6 py-3" scope="col">
                     No.
-                </th>
+                </th> --}}
                 <th class="px-6 py-3" scope="col">
                     Name
                 </th>
@@ -38,11 +38,11 @@
             @foreach ($datas as $data)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                        {{ $data->CODE }}
-                    </td>
-                    <td class="px-6 py-3">
                         {{ $data->SCHOOL }}
                     </td>
+                    {{-- <td class="px-6 py-3">
+                        {{ $data->SCHOOL }}
+                    </td> --}}
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
