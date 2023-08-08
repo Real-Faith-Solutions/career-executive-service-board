@@ -17,7 +17,7 @@ class IndigenousGroupController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:indigenous_groups'],
         ]);
         IndigenousGroup::create($request->all());
         return redirect()->route('indigeneous-group.index')->with('message', 'The item has been successfully added!');
@@ -30,7 +30,7 @@ class IndigenousGroupController extends Controller
 
     public function update(Request $request, $ctrlno){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:indigenous_groups'],
         ]);
 
         $data = IndigenousGroup::withTrashed()->findOrFail($ctrlno);

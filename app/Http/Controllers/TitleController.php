@@ -18,7 +18,7 @@ class TitleController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:titles'],
         ]);
         Title::create($request->all());
         return redirect()->route('title.index')->with('message', 'The item has been successfully added!');
@@ -31,7 +31,7 @@ class TitleController extends Controller
 
     public function update(Request $request, $ctrlno){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:titles'],
         ]);
 
         $data = Title::withTrashed()->findOrFail($ctrlno);
