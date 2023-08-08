@@ -97,7 +97,7 @@
                                     </button>
                                 </form>
                                     
-                                <form action="{{ route('eligibility-rank-tracker.destroy', ['ctrlno'=>$profileTblCesStatuses->ctrlno]) }}" method="POST">
+                                <form action="{{ route('eligibility-rank-tracker.destroy', ['ctrlno'=>$profileTblCesStatuses->ctrlno]) }}" method="POST" id="delete_eligbility_rank_tracker_form{{$profileTblCesStatuses->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
