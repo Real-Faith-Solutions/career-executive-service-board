@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //pdf_links
-        Schema::create('profile_tblmain_pdflink', function (Blueprint $table) {
+        Schema::create('request_file', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('pdflink')->nullable();
-            $table->string('original_pdflink')->nullable();
-            $table->dateTime('request_date')->nullable();
-            $table->string('requested_by')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('remarks')->nullable();
+            $table->string('request_pdflink');
+            $table->string('request_pdflink_orignal_name');
+            $table->string('request_unique_file_name');
+            $table->string('remarks');
+            $table->string('encoder');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_tblmain_pdflink');
+        Schema::dropIfExists('request_file');
     }
 };

@@ -1,20 +1,11 @@
 @extends('layouts.app')
-@section('title', 'PDF File')
-@section('sub', 'PDF File')
+@section('title', 'PDF File Recycle Bin')
+@section('sub', 'PDF File Recycle Bin')
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('show-pdf-files.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('show-pdf-files.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">PDF File</a>
+    <a href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" class="btn btn-primary">Go Back</a>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -55,54 +46,61 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($approvedPdfFile as $approvedPdfFiles)
+            @foreach ($pdfFileTrashedRecord as $pdfFileTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST">
-                            @csrf
-                            <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/nocovwne.json"
-                                    trigger="hover"
-                                    colors="primary:#110a5c,secondary:#000000"
-                                    state="hover-2"
-                                    style="width:24px;height:24px">
-                                </lord-icon>
-                            </button>
-                        </form>
+                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                        <lord-icon
+                            src="https://cdn.lordicon.com/nocovwne.json"
+                            trigger="hover"
+                            colors="primary:#110a5c,secondary:#000000"
+                            state="hover-2"
+                            style="width:24px;height:24px">
+                        </lord-icon>
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $approvedPdfFiles->original_pdflink }}
+                        {{ $pdfFileTrashedRecords->original_pdflink }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->created_at }}
+                        {{ $pdfFileTrashedRecords->created_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->remarks }}
+                        {{ $pdfFileTrashedRecords->remarks }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->encoder }}
+                        {{ $pdfFileTrashedRecords->encoder }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->request_date }}
+                        {{ $pdfFileTrashedRecords->request_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->requested_by }}
+                        {{ $pdfFileTrashedRecords->requested_by }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('show-pdf-files.destroy', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST" id="delete_approved_pdf_file_form{{$approvedPdfFiles->ctrlno}}">
+                            <form action="{{ route('show-pdf-files.restore', ['ctrlno'=>$pdfFileTrashedRecords->ctrlno]) }}" method="POST" id="restore_approved_pdf_file_form{{$pdfFileTrashedRecords->ctrlno}}">
+                                @csrf
+                                <button type="button" id="restoreApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/nxooksci.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
+                            <form action="{{ route('show-pdf-files.forceDelete', ['ctrlno'=>$pdfFileTrashedRecords->ctrlno]) }}" method="POST" id="permanent_approved_pdf_file_form{{$pdfFileTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteApprovedPdfFileButton{{$approvedPdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
