@@ -119,7 +119,9 @@
     </div>
 </div>
 
-<div class="table-eligibility-and-rank-tracker-2">
+@endsection
+{{-- 
+ <div class="table-eligibility-and-rank-tracker-2">
     <h1 class="mx-2 text-blue-500 text-bold">Assessment Center (Historical Record)</h1>
     <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
 
@@ -160,16 +162,16 @@
                         -
                     </td>
 
-                    {{-- <td class="px-6 py-4 text-right uppercase">
+                    <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
                         <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td> --}}
+                    </td>
                 </tr>
 
             </tbody>
         </table>
     </div>
-</div>
+</div> 
 
 <div class="table-eligibility-and-rank-tracker-3">
     <h1 class="mx-2 text-blue-500 text-bold">Validation (Historical Record)</h1>
@@ -207,10 +209,10 @@
                         -
                     </td>
 
-                    {{-- <td class="px-6 py-4 text-right uppercase">
+                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
                         <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td> --}}
+                    </td> 
                 </tr>
 
             </tbody>
@@ -247,15 +249,16 @@
                         -
                     </td>
 
-                    {{-- <td class="px-6 py-4 text-right uppercase">
+                     <td class="px-6 py-4 text-right uppercase">
                         <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
                         <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td> --}}
+                    </td> 
                 </tr>
 
             </tbody>
         </table>
     </div>
-</div>
+</div>  --}}
 
-@endsection
+
+
