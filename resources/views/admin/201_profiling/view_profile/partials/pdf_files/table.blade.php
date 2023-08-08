@@ -58,9 +58,9 @@
             @foreach ($approvedPdfFile as $approvedPdfFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST">
+                        <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->original_pdflink]) }}" method="POST">
                             @csrf
-                            <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                            <button title="View File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nocovwne.json"
@@ -102,7 +102,7 @@
                             <form action="{{ route('show-pdf-files.destroy', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST" id="delete_approved_pdf_file_form{{$approvedPdfFiles->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteApprovedPdfFileButton{{$approvedPdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button title="Delete File" type="button" id="deleteApprovedPdfFileButton{{$approvedPdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

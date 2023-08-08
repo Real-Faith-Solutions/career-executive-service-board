@@ -424,14 +424,14 @@ Route::prefix('eligibility-rank-tracker')->group(function () {
 Route::prefix('pdf-file')->group(function () {
     Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles');
     Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles');
-    Route::post('download-pending-file/{ctrlno}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
+    Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
     Route::post('decline-file/{ctrlno}', [PDFController::class, 'declineFile'])->name('declineFile');
     Route::delete('declined-file-force-delete/{ctrlno}', [PDFController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete');
     Route::get('recently-decline-file', [PDFController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles');
     Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index');
     Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create');
     Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
-    Route::post('download-approved-file/{ctrlno}', [PDFController::class, 'download'])->name('downloadApprovedFile');
+    Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile');
     Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy');
     Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
