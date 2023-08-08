@@ -96,6 +96,10 @@
     
         var form = inputField.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
     
         if (inputValue.length < minLength && regexValidator.test(inputValue)) {
             inputField.nextElementSibling.textContent = `At least ${minLength} ${errorMessage}`;
@@ -235,6 +239,10 @@
 
         var form = inputDate.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
 
         if (!datePattern.test(inputDateByUSer)) {
             inputDate.nextElementSibling.textContent = `Invalid date.`;

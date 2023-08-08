@@ -358,6 +358,8 @@ Route::prefix('case-record')->group(function () {
 });
 
 Route::prefix('health-record')->group(function () {
+    Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index');
+    Route::get('index/{cesno}', [HealthRecordController::class, 'index'])->name('health-record.index');
     Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
     Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
 });
