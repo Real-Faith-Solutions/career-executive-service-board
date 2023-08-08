@@ -44,7 +44,7 @@
             @foreach ($pdfFile as $pdfFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pdfFiles->ctrlno, 'fileName'=>$pdfFiles->request_unique_file_name]) }}" method="POST">
+                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pdfFiles->ctrlno, 'fileName'=>$pdfFiles->request_unique_file_name]) }}" target="_blank" method="POST">
                             @csrf
                             <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>

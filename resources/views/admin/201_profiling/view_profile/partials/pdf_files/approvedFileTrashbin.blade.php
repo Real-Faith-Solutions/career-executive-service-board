@@ -87,7 +87,7 @@
                         <div class="flex">
                             <form action="{{ route('show-pdf-files.restore', ['ctrlno'=>$pdfFileTrashedRecords->ctrlno]) }}" method="POST" id="restore_approved_pdf_file_form{{$pdfFileTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button type="button" id="restoreApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button title="Restore File" type="button" id="restoreApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -100,7 +100,7 @@
                             <form action="{{ route('show-pdf-files.forceDelete', ['ctrlno'=>$pdfFileTrashedRecords->ctrlno]) }}" method="POST" id="permanent_approved_pdf_file_form{{$pdfFileTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="permanentDeleteApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button title="Delete File Permanently" type="button" id="permanentDeleteApprovedPdfFileButton{{$pdfFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
