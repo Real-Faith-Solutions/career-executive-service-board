@@ -23,7 +23,7 @@ class ProfileLibTblEducSchoolController extends Controller
             'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
         ]);
         ProfileLibTblEducSchool::create($request->all());
-        return redirect()->route('educational-shools.index')->with('message', 'The item has been successfully added!');
+        return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully added!');
     }
     // ui for edit
     public function edit($CODE){

@@ -42,6 +42,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
+use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
 use App\Http\Controllers\ProfileLibTblEducMajorController;
 use App\Http\Controllers\PWDController;
@@ -195,6 +196,13 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducMajorController::class, 'forceDelete'])->name('educational-major.forceDelete');
         Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducMajorController::class, 'restore'])->name('educational-major.restore');
         Route::resource('educational-major', ProfileLibTblEducMajorController::class);
+    });
+
+    Route::prefix('educational-degree')->group(function () {
+        Route::get('recently-deleted', [ProfileLibTblEducDegreeController::class, 'recentlyDeleted'])->name('educational-degree.recently-deleted');
+        Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
+        Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
+        Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
     });
 });
 
