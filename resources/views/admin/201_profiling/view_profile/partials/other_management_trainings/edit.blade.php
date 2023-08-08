@@ -17,14 +17,15 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('other-training.update', ['ctrlno'=>$otherManagementTraining->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
+            <form action="{{ route('other-training.update', ['ctrlno'=>$otherManagementTraining->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_other_training_form" onsubmit="return checkErrorsBeforeSubmit(update_other_training_form)">
                 @csrf
                 @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="training">Training Title<sup>*</sup></label>
-                        <input id="training" name="training" value="{{ $otherManagementTraining->training }}" required type="text">
+                        <input type="text" id="training" name="training" value="{{ $otherManagementTraining->training }}" oninput="validateInput(training, 2, 'letters')" onkeypress="validateInput(training, 2, 'letters')" onblur="checkErrorMessage(training)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('training')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -34,7 +35,8 @@
 
                     <div class="mb-3">
                         <label for="training_category">Training Category<sup>*</sup></label>
-                        <input id="training_category" name="training_category" value="{{ $otherManagementTraining->training_category }}" required type="text">
+                        <input type="text" id="training_category" name="training_category" value="{{ $otherManagementTraining->training_category }}" oninput="validateInput(training_category, 2, 'letters')" onkeypress="validateInput(training_category, 2, 'letters')" onblur="checkErrorMessage(training_category)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('training_category')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -70,7 +72,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</sup></label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $otherManagementTraining->from_date }}" required type="date">
+                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" value="{{ $otherManagementTraining->from_date }}" oninput="validateDateInput(inclusive_date_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -80,7 +83,8 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</sup></label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $otherManagementTraining->to_date }}" required type="date">
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" value="{{ $otherManagementTraining->to_date }}" oninput="validateDateInput(inclusive_date_to)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -90,7 +94,8 @@
 
                     <div class="mb-3">
                         <label for="sponsor_training_provider">Sponsor / Training Provider<sup>*</sup></label>
-                        <input id="sponsor_training_provider" name="sponsor_training_provider" value="{{ $otherManagementTraining->sponsor }}" required type="text">
+                        <input type="text" id="sponsor_training_provider" name="sponsor_training_provider" value="{{ $otherManagementTraining->sponsor }}" oninput="validateInput(sponsor_training_provider, 2, 'letters')" onkeypress="validateInput(sponsor_training_provider, 2, 'letters')" onblur="checkErrorMessage(sponsor_training_provider)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('sponsor_training_provider')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -102,7 +107,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="venue">Venue<sup>*</sup></label>
-                        <input id="venue" name="venue" required value="{{ $otherManagementTraining->venue }}" type="text">
+                        <input type="text" id="venue" name="venue" required value="{{ $otherManagementTraining->venue }}" oninput="validateInput(venue, 2)" onkeypress="validateInput(venue, 2)" onblur="checkErrorMessage(venue)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('venue')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -112,7 +118,8 @@
 
                     <div class="mb-3">
                         <label for="no_of_training_hours">No. of Training Hours<sup>*</sup></label>
-                        <input id="no_of_training_hours" name="no_of_training_hours" value="{{ $otherManagementTraining->no_training_hours }}" required type="number">
+                        <input type="number" id="no_of_training_hours" name="no_of_training_hours" value="{{ $otherManagementTraining->no_training_hours }}" oninput="validateInput(no_of_training_hours, 2, 'numbers')" onkeypress="validateInput(no_of_training_hours, 2, 'numbers')" onblur="checkErrorMessage(no_of_training_hours)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('no_of_training_hours')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -122,7 +129,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateOtherTrainingButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

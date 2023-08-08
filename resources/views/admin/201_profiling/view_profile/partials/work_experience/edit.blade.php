@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('work-experience.update', ['ctrlno'=>$workExperience->ctrlno, 'cesno'=>$cesno]) }}"  method="POST" id="update_work_experience_form" onsubmit="return checkErrorsBeforeSubmit(update_work_experience_form)">
+            <form action="{{ route('work-experience.update', ['ctrlno'=>$workExperience->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_work_experience_form" onsubmit="return checkErrorsBeforeSubmit(update_work_experience_form)">
                 @csrf
                 @method('PUT')
 
