@@ -373,7 +373,7 @@ Route::prefix('expertise')->group(function () {
     Route::get('edit/{cesno}/{speXpCode}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
     Route::put('update/{cesno}/{speXpCodes}', [ExpertiseController::class, 'update'])->name('expertise.update');
-    Route::delete('destroy/{cesno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+    Route::delete('destroy/{cesno}/{ctrlno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
 Route::prefix('language')->group(function () {
