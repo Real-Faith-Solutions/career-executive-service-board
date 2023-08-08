@@ -75,7 +75,7 @@
                                 </button>
                             </form>
                         
-                            <form action="{{ route('award-citation.forceDelete', ['ctrlno'=>$awardAndCitationsTrashedRecords->ctrlno]) }}" method="POST" id="permanent_award_citation__form{{$awardAndCitationsTrashedRecords->ctrlno}}">
+                            <form action="{{ route('award-citation.forceDelete', ['ctrlno'=>$awardAndCitationsTrashedRecords->ctrlno]) }}" method="POST" id="permanent_award_citation_form{{$awardAndCitationsTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="permanentDeleteAwardAndCitationButton{{$awardAndCitationsTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
