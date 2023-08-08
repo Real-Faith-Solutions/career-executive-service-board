@@ -20,7 +20,7 @@ class ProfileLibTblEducSchoolController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
+            'SCHOOL' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
         ]);
         ProfileLibTblEducSchool::create($request->all());
         return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully added!');
@@ -33,7 +33,7 @@ class ProfileLibTblEducSchoolController extends Controller
 
     public function update(Request $request, $CODE){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
+            'SCHOOL' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
         ]);
 
         $data = ProfileLibTblEducSchool::withTrashed()->findOrFail($CODE);
