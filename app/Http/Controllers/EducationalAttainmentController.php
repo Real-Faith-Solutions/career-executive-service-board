@@ -29,7 +29,7 @@ class EducationalAttainmentController extends Controller
         $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
         $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
 
-        return view('admin.201_profiling.view_profile.partials.educational_attainment.form', 
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.form',
         compact('profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblEducDegree', 'cesno'));
 
     }
@@ -41,9 +41,9 @@ class EducationalAttainmentController extends Controller
         $userFirstName = $userFullName ->first_name;
         $userMiddleName = $userFullName ->middle_name;
         $userNameExtension = $userFullName ->name_extension;
-        
+
         $educationalAttainment = new EducationalAttainment([
-    
+
             'level' => $request->level,
             'school_code' => $request->school_code,
             'major_code' => $request->major_code,
@@ -52,30 +52,29 @@ class EducationalAttainmentController extends Controller
             'period_of_attendance_from' => $request->period_of_attendance_from,
             'period_of_attendance_to' => $request->period_of_attendance_to,
             'highest_level' => $request->highest_level,
-            'year_graduate' => $request->year_graduate,
             'academics_honor_received' => $request->academics_honor_received,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-                
+
         ]);
-    
+
         $educationalAttainmentPersonalDataId = PersonalData::find($cesno);
-    
+
         $educationalAttainmentPersonalDataId->educations()->save($educationalAttainment);
-    
+
         return to_route('educational-attainment.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-    
+
     }
 
     public function edit($ctrlno, $cesno){
 
-        $educationalAttainment = EducationalAttainment::find($ctrlno); 
+        $educationalAttainment = EducationalAttainment::find($ctrlno);
         $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
         $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
         $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
 
-        return view('admin.201_profiling.view_profile.partials.educational_attainment.edit', 
+        return view('admin.201_profiling.view_profile.partials.educational_attainment.edit',
         compact('educationalAttainment','profileLibTblEducMajor','profileLibTblEducSchool','profileLibTblEducDegree','cesno'));
-        
+
     }
 
     public function update(EducationalAttainmentStoreRequest $request, $ctrlno){
@@ -89,16 +88,15 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment->period_of_attendance_from = $request->period_of_attendance_from;
         $educationalAttainment->period_of_attendance_to = $request->period_of_attendance_to;
         $educationalAttainment->highest_level = $request->highest_level;
-        $educationalAttainment->year_graduate = $request->year_graduate;
         $educationalAttainment->academics_honor_received = $request->academics_honor_received;
         $educationalAttainment->save();
 
         return redirect()->back()->with('message', 'Updated Sucessfully');
 
     }
-    
+
     public function destroyEducationalAttainment($ctrlno){
-        
+
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->delete();
 
@@ -115,7 +113,7 @@ class EducationalAttainmentController extends Controller
         $educationAttainmentTrashedRecord = $personalData->educations()->onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.trashbin', compact('educationAttainmentTrashedRecord', 'cesno'));
-        
+
     }
 
     public function restore($ctrlno){
@@ -127,7 +125,7 @@ class EducationalAttainmentController extends Controller
 
     }
 
-    
+
     public function forceDelete($ctrlno){
 
         $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);

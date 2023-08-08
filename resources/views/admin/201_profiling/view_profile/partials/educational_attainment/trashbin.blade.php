@@ -45,10 +45,6 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Year Graduated
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Academic Achievements
                 </th>
 
@@ -98,10 +94,6 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->year_graduate }}
-                    </td>
-
-                    <td class="px-6 py-3">
                         {{ $educationAttainmentTrashedRecords->academics_honor_received }}
                     </td>
 
@@ -122,11 +114,11 @@
                                     </lord-icon>
                                 </button>
                             </form>
-                    
+
                             <form action="{{ route('educational-attainment.forceDelete', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button   type="submit">  
+                                <button   type="submit">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

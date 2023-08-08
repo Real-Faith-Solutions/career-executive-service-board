@@ -12,7 +12,7 @@ class EducationalAttainment extends Model
     use HasFactory;
 
     use SoftDeletes;
-    
+
     protected $table = 'profile_tblEducation';
 
     protected $primaryKey = 'ctrlno';
@@ -28,7 +28,6 @@ class EducationalAttainment extends Model
         'period_of_attendance_from',
         'period_of_attendance_to',
         'highest_level',
-        'year_graduate',
         'academics_honor_received',
         'encoder',
 

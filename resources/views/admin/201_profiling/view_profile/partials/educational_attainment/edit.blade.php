@@ -31,7 +31,7 @@
                                 <option value="Secondary">Secondary</option>
                                 <option value="College">College</option>
                                 <option value="Graduate Studies">Graduate Studies</option>
-                                <option value="Vocation/Trade Course">Vocation/Trade Course</option>    
+                                <option value="Vocation/Trade Course">Vocation/Trade Course</option>
                             @elseif ($educationalAttainment->level == "Secondary")
                                 <option value="Elementary">Elementary</option>
                                 <option value="Secondary" selected>Secondary</option>
@@ -81,11 +81,11 @@
                                 @if ($profileLibTblEducSchools->CODE == $educationalAttainment->school_code)
                                     <option value="{{ $profileLibTblEducSchools->CODE }}" selected>
                                         {{ $profileLibTblEducSchools->SCHOOL }}
-                                    </option>    
+                                    </option>
                                 @else
                                     <option value="{{ $profileLibTblEducSchools->CODE }}">
                                         {{ $profileLibTblEducSchools->SCHOOL }}
-                                    </option>    
+                                    </option>
                                 @endif
                             @endforeach
                         </select>
@@ -104,7 +104,7 @@
                                 @if ($profileLibTblEducMajors->CODE == $educationalAttainment->major_code)
                                     <option value="{{ $profileLibTblEducMajors->CODE }}" selected>
                                         {{ $profileLibTblEducMajors->COURSE }}
-                                    </option>    
+                                    </option>
                                 @else
                                     <option value="{{ $profileLibTblEducMajors->CODE }}">
                                         {{ $profileLibTblEducMajors->COURSE }}
@@ -127,7 +127,7 @@
                                 @if ($profileLibTblEducDegrees->CODE == $educationalAttainment->degree_code)
                                     <option value="{{ $profileLibTblEducDegrees->CODE }}" selected>
                                         {{ $profileLibTblEducDegrees->DEGREE }}
-                                    </option>    
+                                    </option>
                                 @else
                                     <option value="{{ $profileLibTblEducDegrees->CODE }}">
                                         {{ $profileLibTblEducDegrees->DEGREE }}
@@ -198,15 +198,6 @@
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="mb-3">
-                        <label for="year_graduate">Year Graduate<sup>*</span></label>
-                        <input id="year_graduate" name="year_graduate" required value="{{ $educationalAttainment->year_graduate }}" type="text">
-                        @error('year_graduate')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
 
                     <div class="mb-3">
                         <label for="academics_honor_received">Academic Honors Received</label>
