@@ -174,9 +174,4 @@ class PersonalData extends Model
         return $this->hasMany(RequestFile::class);
     }
 
-    public function declineFile(): HasMany
-    {
-        return $this->hasMany(DeclineFile::class);
-    }
-
 }

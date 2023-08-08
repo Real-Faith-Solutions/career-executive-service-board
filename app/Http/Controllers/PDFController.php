@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\PdfLinks;
 use App\Models\PersonalData;
 use App\Models\RequestFile;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -138,6 +137,12 @@ class PDFController extends Controller
 
         File::copy($sourcePath, $destinationPath); // copy the source path to destination path
 
+        // try {
+        //     File::copy($sourcePath, $destinationPath);
+        // } catch (\Exception $e) {
+        //     // Handle the exception, e.g., log an error message or take appropriate action
+        // }
+
         $existingRequestedFile = $requestFile->request_pdflink;
 
         // Delete the existing file from the storage folder
@@ -163,7 +168,7 @@ class PDFController extends Controller
         $pdfFilePersonalDataId = PersonalData::find($requestFile->personal_data_cesno);
         
         // Save the file path and data to the database
-        $pdfFilePersonalDataId->pdfFile()->save($pdf);;
+        $pdfFilePersonalDataId->pdfFile()->save($pdf);
 
         //delete existing file from request_file table
         DB::table('request_file')->where('ctrlno', $requestFile->ctrlno)->delete();
@@ -193,44 +198,99 @@ class PDFController extends Controller
 
     }
 
-    // store decline file
-    // public function declineFile($ctrlno){
+    // show soft deleted approved file by user
+    public function recentlyDeleted($cesno){
 
-    //     $requestFile = RequestFile::find($ctrlno)->first(); // getting the first data 
-    //     $pdfFile = $requestFile->request_pdflink; // holds the path file name
-    //     $originalPdfFile = $requestFile->request_pdflink_orignal_name; // holds the original file name
-    //     $requestDate = $requestFile->created_at; 
-    //     $requestedBy = $requestFile->encoder; 
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
 
-    //     $databasePath = $pdfFile; // holds the pending file path
+        // Access the soft deleted pdfFile of the parent model
+        $pdfFileTrashedRecord = $personalData->pdfFile()->onlyTrashed()->get();
 
-    //     $sourcePath = public_path($databasePath); // source path
-    //     $destinationPath = public_path('decline_pdf_files/'.$pdfFileName); // destination path
+        return view('admin.201_profiling.view_profile.partials.pdf_files.approvedFileTrashbin', compact('pdfFileTrashedRecord' ,'cesno'));
 
-    //     $pdfPathName = 'pdf_files/'.$pdfFileName; // path name
+    }
 
-    //     File::copy($sourcePath, $destinationPath); // copy the source path to destination path
+    // soft deleting approved file by user
+    public function destroy($ctrlno){
 
+        $pdfFile = PdfLinks::find($ctrlno);
+        $pdfFile->delete();
 
-    //     $pdf = new PdfLinks([
+        return back()->with('message', 'Deleted Sucessfully');
     
-    //         'pdflink' => $pdfPathName,
-    //         'original_pdflink' => $pdfFileName,
-    //         'remarks' => $requestFile->remarks,
-    //         'request_date' => $requestDate,
-    //         'requested_by' => $requestedBy,
-    //         'encoder' => $userFullName,
-                 
-    //     ]);
-        
-    //     //find personal data cesno
-    //     $pdfFilePersonalDataId = PersonalData::find($requestFile->personal_data_cesno);
-        
-    //     // Save the file path and data to the database
-    //     $pdfFilePersonalDataId->pdfFile()->save($pdf);;
+    }
 
-    //     //delete existing file from request_file table
-    //     DB::table('request_file')->where('ctrlno', $requestFile->ctrlno)->delete();
+    // permanently delete approve file by user
+    public function forceDelete($ctrlno){
 
-    // }
+        $pdfFile = PdfLinks::onlyTrashed()->find($ctrlno);
+
+        $existingApprovedFile = $pdfFile->pdflink;
+
+         // Delete the existing file from the storage folder
+         if ($existingApprovedFile) {
+            $filePath = public_path($existingApprovedFile);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        $pdfFile->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+
+    // restore approved file by user
+    public function restore($ctrlno){
+
+        $pdfFile = PdfLinks::onlyTrashed()->find($ctrlno);
+        $pdfFile->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+
+    }
+
+    // decline file
+    public function declineFile($ctrlno){
+
+        $pendingFile = RequestFile::find($ctrlno);
+        $pendingFile->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    
+    }
+
+    // show soft deleted decline file
+    public function recentlyDeclineFile(){
+
+        $pendingFileTrashedRecord = RequestFile::onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.pdf_files.declineFilesTrashbin', compact('pendingFileTrashedRecord'));
+
+    }
+
+    // permanent deleting soft deleted record
+    public function declineFileForceDelete($ctrlno){
+
+        $declineFile = RequestFile::onlyTrashed()->find($ctrlno);
+
+        $existingDeclineFile = $declineFile->request_pdflink;
+
+         // Delete the existing file from the storage folder
+         if ($existingDeclineFile) {
+            $filePath = public_path($existingDeclineFile);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        $declineFile->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
+
+    }
+
 }
+

@@ -10,9 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PdfLinks extends Model
 {
 
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
