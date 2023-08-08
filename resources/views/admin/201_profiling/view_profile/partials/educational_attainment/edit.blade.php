@@ -168,7 +168,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="period_of_attendance_from">Period of attendance (From)<sup>*</span></label>
-                        <input id="period_of_attendance_from" name="period_of_attendance_from" required value="{{ $educationalAttainment->period_of_attendance_from }}" type="date">
+                        <input id="period_of_attendance_from" name="period_of_attendance_from" required value="{{ $educationalAttainment->period_of_attendance_from }}" type="text" placeholder="mm/dd/yyyy">
                         @error('period_of_attendance_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -178,7 +178,7 @@
 
                     <div class="mb-3">
                         <label for="period_of_attendance_to">Period of attendance (To)<sup>*</span></label>
-                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->period_of_attendance_to }}" type="date">
+                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->period_of_attendance_to }}" type="text" placeholder="mm/dd/yyyy">
                         @error('period_of_attendance_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

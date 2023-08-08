@@ -76,11 +76,11 @@
                                     </lord-icon>
                                 </button>
                             </form>
-                       
+
                             <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button   type="submit">  
+                                <button   type="submit">
                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                    <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -91,7 +91,7 @@
                                </button>
                             </form>
                         </div>
-                       
+
                     </td>
                 </tr>
             @endforeach

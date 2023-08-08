@@ -25,9 +25,12 @@ class EducationalAttainmentController extends Controller
 
     public function showForm($cesno){
 
-        $profileLibTblEducDegree = ProfileLibTblEducDegree::all();
-        $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
-        $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::orderBy('DEGREE', 'ASC')
+        ->get();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::orderBy('SCHOOL', 'ASC')
+        ->get();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::orderBy('COURSE', 'ASC')
+        ->get();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.form',
         compact('profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblEducDegree', 'cesno'));
