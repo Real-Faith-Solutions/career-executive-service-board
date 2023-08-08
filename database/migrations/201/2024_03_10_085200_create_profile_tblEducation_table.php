@@ -19,11 +19,11 @@ return new class extends Migration
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('level');
             $table->unsignedBigInteger('degree_code');
-            $table->foreign('degree_code')->references('CODE')->on('profilelib_tblEducDegree')->onDelete('cascade');
+            // $table->foreign('degree_code')->references('CODE')->on('profilelib_tblEducDegree')->onDelete('cascade');
             $table->unsignedBigInteger('major_code');
-            $table->foreign('major_code')->references('CODE')->on('profilelib_tblEducMajor')->onDelete('cascade');
+            // $table->foreign('major_code')->references('CODE')->on('profilelib_tblEducMajor')->onDelete('cascade');
             $table->unsignedBigInteger('school_code');
-            $table->foreign('school_code')->references('CODE')->on('profilelib_tblEducSchools')->onDelete('cascade');
+            // $table->foreign('school_code')->references('CODE')->on('profilelib_tblEducSchools')->onDelete('cascade');
             // $table->string('specialization');
             // $table->string('school');
             // $table->string('degree')->nullable();
