@@ -14,19 +14,10 @@ return new class extends Migration
         //educational_attainments
         Schema::create('profile_tblEducation', function (Blueprint $table) {
             $table->id('ctrlno');
-
-            $table->unsignedBigInteger('personal_data_cesno');
-            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-
-            $table->unsignedBigInteger('degree_code');
-            // $table->foreign('degree_code')->references('CODE')->on('profilelib_tblEducDegree')->onDelete('cascade');
-
-            $table->unsignedBigInteger('major_code');
-            // $table->foreign('major_code')->references('CODE')->on('profilelib_tblEducMajor')->onDelete('cascade');
-
-            $table->unsignedBigInteger('school_code');
-            // $table->foreign('school_code')->references('CODE')->on('profilelib_tblEducSchools')->onDelete('cascade');
-
+            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->foreignId('degree_code')->constrained('profilelib_tblEducDegree', 'CODE');
+            $table->foreignId('major_code')->constrained('profilelib_tblEducMajor', 'CODE');
+            $table->foreignId('school_code')->constrained('profilelib_tblEducSchools', 'CODE');
             $table->string('level');
             $table->string('school_type');
             $table->string('period_of_attendance_from')->nullable();
@@ -34,8 +25,9 @@ return new class extends Migration
             $table->string('highest_level')->nullable();
             $table->string('academics_honor_received')->nullable();
             $table->string('encoder')->nullable();
-            $table->softDeletes();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
