@@ -1,20 +1,14 @@
 @extends('layouts.app')
-@section('title', 'PDF File')
-@section('sub', 'PDF File')
+@section('title', 'Pending Files')
+@section('sub', 'Pending Files')
 @section('content')
-@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('show-pdf-files.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
+<div class="flex justify-between mb-7">
+    <a href="#" class="flex items-center">
+        <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">@yield('sub')</span>
     </a>
 
-    <a href="{{ route('show-pdf-files.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">PDF File</a>
+    <a href="{{ route('show-pdf-files.recentlyDeclineFiles') }}" class="btn btn-primary" >Declined Files</a>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -42,25 +36,17 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Request Date
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Request By
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($approvedPdfFile as $approvedPdfFiles)
+            @foreach ($pdfFile as $pdfFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->original_pdflink]) }}" target="_blank" method="POST">
+                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pdfFiles->ctrlno, 'fileName'=>$pdfFiles->request_unique_file_name]) }}" target="_blank" method="POST">
                             @csrf
-                            <button title="View File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                            <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nocovwne.json"
@@ -74,42 +60,48 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $approvedPdfFiles->original_pdflink }}
+                        {{ $pdfFiles->request_unique_file_name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->created_at }}
+                        {{ $pdfFiles->created_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->remarks }}
+                        {{ $pdfFiles->remarks }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->encoder }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->request_date }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->requested_by }}
+                        {{ $pdfFiles->encoder }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('show-pdf-files.destroy', ['ctrlno'=>$approvedPdfFiles->ctrlno]) }}" method="POST" id="delete_approved_pdf_file_form{{$approvedPdfFiles->ctrlno}}">
+                            <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
                                 @csrf
-                                @method('DELETE')
-                                <button title="Delete File" type="button" id="deleteApprovedPdfFileButton{{$approvedPdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Approval', 'Are you sure you want to approve this pdf?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
+                                        src="https://cdn.lordicon.com/egiwmiit.json"
+                                        trigger="morph"
+                                        colors="primary:#3b82f6"
+                                        state="hover"
                                         style="width:24px;height:24px">
                                     </lord-icon>
+                                </button>
+                            </form>
+                            
+                            <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
+                                @csrf
+                                <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/nhfyhmlt.json"
+                                    trigger="hover"
+                                    colors="primary:#BC0001"u
+                                    state="hover-3"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
                                 </button>
                             </form>
                         </div>

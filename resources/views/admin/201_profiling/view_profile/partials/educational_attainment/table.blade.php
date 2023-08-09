@@ -47,19 +47,19 @@
             @foreach ($educationalAttainment as $newEducationalAttainment)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $newEducationalAttainment->level }}
+                        {{ $newEducationalAttainment->level ?? 'N/A' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->profileLibTblEducSchool->SCHOOL }}
+                        {{ $newEducationalAttainment->profileLibTblEducSchool->SCHOOL  ?? 'N/A'}}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->school_type }}
+                        {{ $newEducationalAttainment->school_type ?? 'N/A'}}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->period_of_attendance_from." - ".$newEducationalAttainment->period_of_attendance_to }}
+                        {{ $newEducationalAttainment->period_of_attendance_from ?? 'N/A'." - ".$newEducationalAttainment->period_of_attendance_to ?? 'N/A'}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
@@ -91,7 +91,7 @@
                                </button>
                             </form>
                         </div>
-                       
+
                     </td>
                 </tr>
             @endforeach

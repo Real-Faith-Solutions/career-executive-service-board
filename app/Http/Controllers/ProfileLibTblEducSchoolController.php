@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProfileLibTblEducSchool;
-use App\Models\PWD;
 use Illuminate\Http\Request;
 
 class ProfileLibTblEducSchoolController extends Controller
 {
     public function index(){
-        $datas = ProfileLibTblEducSchool::paginate(15);
+        $datas = ProfileLibTblEducSchool::query()
+        ->orderBy('SCHOOL' , 'ASC')
+        ->paginate(15);
         return view('admin.201_library.educational_schools.index', compact('datas'));
     }
 
@@ -19,10 +20,10 @@ class ProfileLibTblEducSchoolController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'SCHOOL' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
         ]);
         ProfileLibTblEducSchool::create($request->all());
-        return redirect()->route('educational-shools.index')->with('message', 'The item has been successfully added!');
+        return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully added!');
     }
     // ui for edit
     public function edit($CODE){
@@ -32,7 +33,7 @@ class ProfileLibTblEducSchoolController extends Controller
 
     public function update(Request $request, $CODE){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'SCHOOL' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
         ]);
 
         $data = ProfileLibTblEducSchool::withTrashed()->findOrFail($CODE);

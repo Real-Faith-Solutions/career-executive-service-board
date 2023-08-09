@@ -45,10 +45,6 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Year Graduated
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Academic Achievements
                 </th>
 
@@ -95,10 +91,6 @@
 
                     <td class="px-6 py-3">
                         {{ $educationAttainmentTrashedRecords->highest_level }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->year_graduate }}
                     </td>
 
                     <td class="px-6 py-3">

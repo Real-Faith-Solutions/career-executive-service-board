@@ -143,7 +143,7 @@
                             <a class="btn category-button inline-flex" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#pdfFilesTab" onclick="pdfFilesTab()">PDF Files</a>
+                            <a class="btn category-button inline-flex" href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" >PDF Files</a>
                         </li>
                     </ul>
                 </div>

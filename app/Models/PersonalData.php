@@ -169,4 +169,9 @@ class PersonalData extends Model
         return $this->hasOne(Contacts::class);
     }
 
+    public function requestFile(): HasMany
+    {
+        return $this->hasMany(RequestFile::class);
+    }
+
 }

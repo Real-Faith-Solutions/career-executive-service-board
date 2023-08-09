@@ -18,7 +18,7 @@ class ReligionController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:religions'],
         ]);
         Religion::create($request->all());
         return redirect()->route('religion.index')->with('message', 'The item has been successfully added!');
@@ -31,7 +31,7 @@ class ReligionController extends Controller
 
     public function update(Request $request, $ctrlno){
         $request->validate([
-            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:gender_by_choices'],
+            'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:religions'],
         ]);
 
         $data = Religion::withTrashed()->findOrFail($ctrlno);

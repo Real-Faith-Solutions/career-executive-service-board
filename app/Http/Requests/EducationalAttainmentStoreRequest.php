@@ -22,7 +22,7 @@ class EducationalAttainmentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+
             'level' => ['required'],
             'school_code' => ['required', 'min:1'],
             'major_code' => ['nullable', 'min:1'],
@@ -31,9 +31,8 @@ class EducationalAttainmentStoreRequest extends FormRequest
             'period_of_attendance_from' => ['required'],
             'period_of_attendance_to' => ['required'],
             'highest_level' => ['nullable','max:40', 'min:10', 'regex:/^[a-zA-Z ]*$/'],
-            'year_graduate' => ['nullable', 'numeric'],
             'academics_honor_received' => ['nullable','max:40', 'min:10'],
-            
+
         ];
     }
 }

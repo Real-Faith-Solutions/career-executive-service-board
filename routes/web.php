@@ -42,7 +42,9 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
+use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
+use App\Http\Controllers\ProfileLibTblEducMajorController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
@@ -76,9 +78,6 @@ Route::get('/', function () {
         return Redirect::to('/admin/dashboard');
     }
 });
-
-Route::get('show/{cesno}', [PDFController::class, 'show'])->name('show-pdf-files');
-Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
 
 Route::prefix('plantilla')->group(function () {
 
@@ -187,6 +186,20 @@ Route::prefix('201-library')->group(function () {
         Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducSchoolController::class, 'forceDelete'])->name('educational-schools.forceDelete');
         Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducSchoolController::class, 'restore'])->name('educational-schools.restore');
         Route::resource('educational-schools', ProfileLibTblEducSchoolController::class);
+    });
+
+    Route::prefix('educational-major')->group(function () {
+        Route::get('recently-deleted', [ProfileLibTblEducMajorController::class, 'recentlyDeleted'])->name('educational-major.recently-deleted');
+        Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducMajorController::class, 'forceDelete'])->name('educational-major.forceDelete');
+        Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducMajorController::class, 'restore'])->name('educational-major.restore');
+        Route::resource('educational-major', ProfileLibTblEducMajorController::class);
+    });
+
+    Route::prefix('educational-degree')->group(function () {
+        Route::get('recently-deleted', [ProfileLibTblEducDegreeController::class, 'recentlyDeleted'])->name('educational-degree.recently-deleted');
+        Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
+        Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
+        Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
     });
 });
 
@@ -408,6 +421,23 @@ Route::prefix('eligibility-rank-tracker')->group(function () {
     Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted');
     Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore');
     Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete');
+});
+
+Route::prefix('pdf-file')->group(function () {
+    Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles');
+    Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles');
+    Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
+    Route::post('decline-file/{ctrlno}', [PDFController::class, 'declineFile'])->name('declineFile');
+    Route::delete('declined-file-force-delete/{ctrlno}', [PDFController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete');
+    Route::get('recently-decline-file', [PDFController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles');
+    Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index');
+    Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create');
+    Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
+    Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile');
+    Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy');
+    Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted');
+    Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
+    Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
 });
 
 
@@ -706,14 +736,14 @@ Route::group([
         Route::delete('delete/{id}', [ProfileController::class, 'deleteHistoricalRecordOfMedicalCondition'])->middleware('userauth');
     });
 
-    Route::group([
-        'prefix'     => 'pdf-files',
-    ], function () {
-        Route::post('add', [ProfileController::class, 'addPdfFiles'])->middleware('userauth');
-        Route::get('record/{id}', [ProfileController::class, 'getPdfFiles'])->middleware('userauth');
-        Route::post('edit', [ProfileController::class, 'editPdfFiles'])->middleware('userauth');
-        Route::delete('delete/{id}', [ProfileController::class, 'deletePdfFiles'])->middleware('userauth');
-    });
+    // Route::group([
+    //     'prefix'     => 'pdf-files',
+    // ], function () {
+    //     Route::post('add', [ProfileController::class, 'addPdfFiles'])->middleware('userauth');
+    //     Route::get('record/{id}', [ProfileController::class, 'getPdfFiles'])->middleware('userauth');
+    //     Route::post('edit', [ProfileController::class, 'editPdfFiles'])->middleware('userauth');
+    //     Route::delete('delete/{id}', [ProfileController::class, 'deletePdfFiles'])->middleware('userauth');
+    // });
 
     Route::group([
         'prefix'     => 'executive-201-access',
