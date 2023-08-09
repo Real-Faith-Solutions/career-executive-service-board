@@ -43,7 +43,7 @@ class HealthRecordController extends Controller
             ]
         );
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return redirect()->back()->with('info', 'Successfuly Saved');
 
     }
 

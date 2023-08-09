@@ -70,43 +70,45 @@
     </div>
     {{-- end --}}
 
-    <!-- Modal for Adding Medical History -->
-    <div id="add-medical-history-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-49 hidden">
-        <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-            <form id="addMedicalHistoryForm" action="{{ route('medical-history.store', ['cesno'=>$cesno]) }}" method="POST" class="flex flex-col items-center" onsubmit="return checkErrorsBeforeSubmit(addMedicalHistoryForm)">
-                @csrf
+    @if (isset($cesno))
+        <!-- Modal for Adding Medical History -->
+        <div id="add-medical-history-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+            <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+                <form id="addMedicalHistoryForm" action="{{ route('medical-history.store', ['cesno'=>$cesno]) }}" method="POST" class="flex flex-col items-center" onsubmit="return checkErrorsBeforeSubmit(addMedicalHistoryForm)">
+                    @csrf
 
-                <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-                <h2 class="text-2xl font-bold mb-4 text-center">Add Medical History</h2>
+                    <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+                    <h2 class="text-2xl font-bold mb-4 text-center">Add Medical History</h2>
 
-                <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                    <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
 
-                    <div class="mb-2">
-                        <input type="text" id="medical_condition_illness" name="medical_condition_illness" oninput="validateInput(medical_condition_illness, 4)" onkeypress="validateInput(medical_condition_illness, 4)" onblur="checkErrorMessage(medical_condition_illness)" required>
-                        <p class="input_error text-red-600"></p>
-                        @error('medical_condition_illness')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
+                        <div class="mb-2">
+                            <input type="text" id="medical_condition_illness" name="medical_condition_illness" oninput="validateInput(medical_condition_illness, 4)" onkeypress="validateInput(medical_condition_illness, 4)" onblur="checkErrorMessage(medical_condition_illness)" required>
+                            <p class="input_error text-red-600"></p>
+                            @error('medical_condition_illness')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-2">
+                            <input type="date" id="medical_date" name="medical_date" oninput="validateDateInput(medical_date)" required>
+                            <p class="input_error text-red-600"></p>
+                            @error('date')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>
-
-                    <div class="mb-2">
-                        <input type="date" id="medical_date" name="medical_date" oninput="validateDateInput(medical_date)" required>
-                        <p class="input_error text-red-600"></p>
-                        @error('date')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                </div>
-                <button type="button" id="addMedicalHistoryBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" onclick="openConfirmationDialog(this, 'Confirm Medical History', 'Are you sure you want to save this info?')">ADD</button>
-            </form>
+                    <button type="submit" id="addMedicalHistoryBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">ADD</button>
+                </form>
+            </div>
         </div>
-    </div>
-    {{-- end --}}
+        {{-- end --}}
+    @endif
 
     {{-- js script for personal data interaction and validation --}}
     <script src="{{ asset('js/form-interaction-validation.js') }}"></script>

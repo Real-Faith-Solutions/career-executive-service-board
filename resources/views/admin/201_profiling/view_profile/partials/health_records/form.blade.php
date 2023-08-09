@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateHealthRecordsButton" onclick="openConfirmationDialog(this, 'Confirm Health Record', 'Are you sure you want to save this changes?')">
                         Save changes
                     </button>
                 </div>
@@ -160,10 +160,10 @@
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
                                 {{-- <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a> --}}
-                                <form action="{{ route('medical-history.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST">
+                                <form action="{{ route('medical-history.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST" id="delete_medical_history_form{{$histories->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                    <button type="button" id="deleteMedicalHistoryButton{{$histories->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
