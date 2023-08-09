@@ -68,10 +68,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('affiliation.destroy', ['ctrlno'=>$affiliations->ctrlno]) }}" method="POST">
+                            <form action="{{ route('affiliation.destroy', ['ctrlno'=>$affiliations->ctrlno]) }}" method="POST" id="delete_affiliation_form{{$affiliations->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteAffiliationButton{{$affiliations->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

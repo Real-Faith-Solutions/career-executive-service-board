@@ -84,7 +84,7 @@
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="button" id="permanentDeleteDeclinePdfFileButton{{$pendingFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button title="Delete File Permanently" type="button" id="permanentDeleteDeclinePdfFileButton{{$pendingFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nhfyhmlt.json"
