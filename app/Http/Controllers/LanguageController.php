@@ -11,6 +11,16 @@ use Illuminate\Validation\Rule;
 
 class LanguageController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalDataId = PersonalData::find($cesno);
+        $language = $personalDataId->languages;
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
+
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.table', compact('profileLibTblLanguageRef', 'language', 'cesno'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -63,7 +73,7 @@ class LanguageController extends Controller
  
         $personalDataId->languages()->updateExistingPivot($languageId,['language_code' => $request->language_code,]);
      
-        return redirect()->route('viewProfile', ['cesno' => $personalDataId])->with('message', 'Updated Sucessfully');
+        return redirect()->route('language.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
  
     }
 

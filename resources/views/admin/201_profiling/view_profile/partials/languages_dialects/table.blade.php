@@ -1,10 +1,11 @@
+@extends('layouts.app')
+@section('title', 'Language Dialect')
+@section('sub', 'Language Dialect')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
 <div class="my-5 flex justify-end">
     <button class="btn btn-primary" id='add-edit-languages-btn'>Add Language Dialect</button>
-    <button class="btn btn-primary hidden" onclick="openTableLanguageDialect()">Go back</button>
-</div>
-
-<div class="form-language-dialect hidden">
-    @include('admin.201_profiling.view_profile.partials.languages_dialects.form')
 </div>
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -30,7 +31,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                             <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="GET">
+                            <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -65,15 +66,15 @@
 </div>
 
 <!-- Modal for Adding Language Dialect -->
-<div id="add-edit-languages-modal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+<div id="add-edit-languages-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-        <form action="{{ route('language.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST">
+        <form action="{{ route('language.store', ['cesno'=>$cesno]) }}" method="POST" class="flex flex-col items-center">
             @csrf
 
             <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
             <h2 class="text-2xl font-bold mb-4 text-center">Add Language or Dialect</h2>
 
-            <div class="sm:gid-cols-1 mb-1 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+            <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
 
                 <div class="mb-1">
                     <label for="language_code">Language Dialect<sup>*</sup></label>
@@ -93,7 +94,9 @@
                 </div>
 
             </div>
-            <button type="submit" name="submit" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-colors duration-300">ADD</button>
+            <button type="submit" id="addLanguagesBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">ADD</button>
         </form>
     </div>
 </div>
+
+@endsection
