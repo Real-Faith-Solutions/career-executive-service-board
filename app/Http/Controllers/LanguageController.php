@@ -85,7 +85,7 @@ class LanguageController extends Controller
  
         $personalData->languages()->detach($languageId);
 
-        return redirect()->back()->with('message', 'Deleted Sucessfully');
+        return redirect()->back()->with('info', 'Deleted Sucessfully');
 
         // $spouse->restore(); -> to restore soft deleted data
 
