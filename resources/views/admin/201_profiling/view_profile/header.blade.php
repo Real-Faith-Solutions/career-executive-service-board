@@ -121,7 +121,7 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="othersTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#healthRecordsTab" onclick="healthRecordsTab()">Health Records</a>
+                            <a class="btn category-button inline-flex" href="{{ route('health-record.index', ['cesno' => $cesno]) }}">Health Records</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" >Award And Citations</a>
@@ -134,7 +134,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="#languagesDialectsTab" onclick="languagesDialectsTab()">Languages Dialects</a>
+                            <a class="btn category-button inline-flex" href="{{ route('language.index', ['cesno'=>$cesno]) }}" >Languages Dialects</a>
                         </li>
                         <li>
                             <a class="btn category-button inline-flex" href="{{ route('eligibility-rank-tracker.index', ['cesno' => $cesno]) }}" >Eligibility and Rank Tracker</a>

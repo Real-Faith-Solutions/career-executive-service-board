@@ -3,12 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\HealthRecords;
+use App\Models\MedicalHistory;
 use App\Models\PersonalData;
+use App\Models\PWD;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HealthRecordController extends Controller
 {
+
+    public function index($cesno){
+
+        $personalData = PersonalData::find($cesno);
+        $healthRecord = $personalData->healthRecords;
+        $pwds = PWD::all();
+        $medicalHistory = MedicalHistory::where('personal_data_cesno', $cesno)->get();
+
+        return view('admin.201_profiling.view_profile.partials.health_records.form', compact('healthRecord' ,'cesno', 'pwds', 'medicalHistory'));
+
+    }
     
     public function store(Request $request, $cesno){
 
@@ -30,7 +43,7 @@ class HealthRecordController extends Controller
             ]
         );
             
-        return redirect()->back()->with('message', 'Successfuly Saved');
+        return redirect()->back()->with('info', 'Successfuly Saved');
 
     }
 

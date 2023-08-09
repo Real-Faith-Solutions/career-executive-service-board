@@ -36,7 +36,7 @@ class MedicalHistoryController extends Controller
         $healthRecord = MedicalHistory::find($ctrlno);
         $healthRecord->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info', 'Record Deleted');
 
     }
 

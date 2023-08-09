@@ -35,7 +35,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="sss_no">Official Mobile No. #1<sup>*</sup></label>
-                        <input id="official_mobile_number1" name="official_mobile_number1" type="text" value="{{ old('official_mobile_number1') ?? ($contacts->official_mobile_number1 ?? '') }}" oninput="validateInput(official_mobile_number1, 9, 'all')" onkeypress="validateInput(official_mobile_number1, 9, 'all')" onblur="checkErrorMessage(official_mobile_number1)" required>
+                        <input id="official_mobile_number1" name="official_mobile_number1" type="text" value="{{ old('official_mobile_number1') ?? ($contacts->official_mobile_number1 ?? '') }}" oninput="validateInput(official_mobile_number1, 10, 'all')" onkeypress="validateInput(official_mobile_number1, 10, 'all')" onblur="checkErrorMessage(official_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
                         @error('official_mobile_number1')
                             <span class="invalid" role="alert">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="sss_no">Official Mobile No. #2</label>
-                        <input id="official_mobile_number2" name="official_mobile_number2" type="text" value="{{ old('official_mobile_number2') ?? ($contacts->official_mobile_number2 ?? '') }}" oninput="validateInput(official_mobile_number2, 9, 'all')" onkeypress="validateInput(official_mobile_number2, 9, 'all')" onblur="checkErrorMessage(official_mobile_number2)">
+                        <input id="official_mobile_number2" name="official_mobile_number2" type="text" value="{{ old('official_mobile_number2') ?? ($contacts->official_mobile_number2 ?? '') }}" oninput="validateInput(official_mobile_number2, 0, 'all')" onkeypress="validateInput(official_mobile_number2, 0, 'all')" onblur="checkErrorMessage(official_mobile_number2)">
                         <p class="input_error text-red-600"></p>
                         @error('official_mobile_number2')
                             <span class="invalid" role="alert">
@@ -60,7 +60,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="sss_no">Personal Mobile No. #1<sup>*</sup></label>
-                        <input id="personal_mobile_number1" name="personal_mobile_number1" type="text" value="{{ old('personal_mobile_number1') ?? ($contacts->personal_mobile_number1 ?? '') }}" oninput="validateInput(personal_mobile_number1, 9, 'all')" onkeypress="validateInput(personal_mobile_number1, 9, 'all')" onblur="checkErrorMessage(personal_mobile_number1)" required>
+                        <input id="personal_mobile_number1" name="personal_mobile_number1" type="text" value="{{ old('personal_mobile_number1') ?? ($contacts->personal_mobile_number1 ?? '') }}" oninput="validateInput(personal_mobile_number1, 10, 'all')" onkeypress="validateInput(personal_mobile_number1, 10, 'all')" onblur="checkErrorMessage(personal_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
                         @error('personal_mobile_number1')
                             <span class="invalid" role="alert">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="sss_no">Personal Mobile No. #2</label>
-                        <input id="personal_mobile_number2" name="personal_mobile_number2" type="text" value="{{ old('personal_mobile_number2') ?? ($contacts->personal_mobile_number2 ?? '') }}" oninput="validateInput(personal_mobile_number2, 9, 'all')" onkeypress="validateInput(personal_mobile_number2, 9, 'all')" onblur="checkErrorMessage(personal_mobile_number2)">
+                        <input id="personal_mobile_number2" name="personal_mobile_number2" type="text" value="{{ old('personal_mobile_number2') ?? ($contacts->personal_mobile_number2 ?? '') }}" oninput="validateInput(personal_mobile_number2, 0, 'all')" onkeypress="validateInput(personal_mobile_number2, 0, 'all')" onblur="checkErrorMessage(personal_mobile_number2)">
                         <p class="input_error text-red-600"></p>
                         @error('personal_mobile_number2')
                             <span class="invalid" role="alert">
@@ -85,7 +85,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="sss_no">Office Telephone No.<sup>*</sup></label>
-                        <input id="office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(office_telephone_number, 9, 'all')" onkeypress="validateInput(office_telephone_number, 9, 'all')" onblur="checkErrorMessage(office_telephone_number)">
+                        <input id="office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(office_telephone_number, 0, 'all')" onkeypress="validateInput(office_telephone_number, 0, 'all')" onblur="checkErrorMessage(office_telephone_number)">
                         <p class="input_error text-red-600"></p>
                         @error('office_telephone_number')
                             <span class="invalid" role="alert">
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateContactsButton" onclick="openConfirmationDialog(this, 'Confirm Contacts', 'Are you sure you want to submit/update this info?')">
                         Save changes
                     </button>
                 </div>

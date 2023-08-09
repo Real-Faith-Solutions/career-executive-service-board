@@ -79,7 +79,7 @@ class ExpertiseController extends Controller
 
     }
 
-    public function destroy($cesno, $speXpCode){
+    public function destroy($cesno, $ctrlno, $speXpCode){
         
         $personalData = PersonalData::find($cesno);
  

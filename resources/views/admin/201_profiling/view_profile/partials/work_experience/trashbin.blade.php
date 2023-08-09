@@ -103,9 +103,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('work-experience.restore', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('work-experience.restore', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST" id="restore_work_experience_form{{$workExperienceTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreWorkExperienceButton{{$workExperienceTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -115,10 +115,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('work-experience.forceDelete', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('work-experience.forceDelete', ['ctrlno'=>$workExperienceTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_work_experience_form{{$workExperienceTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="permanentDeleteWorkExperienceButton{{$workExperienceTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

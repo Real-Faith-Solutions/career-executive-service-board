@@ -62,10 +62,10 @@
                     <td class="px-6 py-4 text-right uppercase">
                         {{-- <a class="mx-1 font-medium text-blue-600 hover:underline" href="#">Update</a> --}}
                         <div class="flex">
-                            <form action="{{ route('personal-data-address.delete', ['ctrlno'=>$data->ctrlno]) }}" method="POST">
+                            <form action="{{ route('personal-data-address.delete', ['ctrlno'=>$data->ctrlno]) }}" method="POST" id="delete_address_form{{$data->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteAddressButton{{$data->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

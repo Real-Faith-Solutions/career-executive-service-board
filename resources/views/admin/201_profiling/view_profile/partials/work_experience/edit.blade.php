@@ -17,14 +17,15 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('work-experience.update', ['ctrlno'=>$workExperience->ctrlno, 'cesno'=>$cesno]) }}"  method="POST">
+            <form action="{{ route('work-experience.update', ['ctrlno'=>$workExperience->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_work_experience_form" onsubmit="return checkErrorsBeforeSubmit(update_work_experience_form)">
                 @csrf
                 @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $workExperience->from_dt }}" type="date" required>
+                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" value="{{ $workExperience->from_dt }}" oninput="validateDateInput(inclusive_date_from)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -34,7 +35,8 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $workExperience->to_dt }}" type="date" required>
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" value="{{ $workExperience->to_dt }}" oninput="validateDateInput(inclusive_date_to)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -46,7 +48,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="designation">Position Title / Designation<sup>*</span></label>
-                        <input id="designation" name="designation" value="{{ $workExperience->designation }}" type="text" required>
+                        <input type="text" id="designation" name="designation" value="{{ $workExperience->designation }}" oninput="validateInput(designation, 4)" onkeypress="validateInput(designation, 4)" onblur="checkErrorMessage(designation)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('designation')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -56,7 +59,8 @@
 
                     <div class="mb-3">
                         <label for="department_or_agency">Department / Agency<sup>*</span></label>
-                        <input id="department_or_agency" name="department_or_agency" value="{{ $workExperience->department }}" type="text" required>
+                        <input type="text" id="department_or_agency" name="department_or_agency" value="{{ $workExperience->department }}" oninput="validateInput(department_or_agency, 4)" onkeypress="validateInput(department_or_agency, 4)" onblur="checkErrorMessage(department_or_agency)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('department_or_agency')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -66,7 +70,8 @@
 
                     <div class="mb-3">
                         <label for="monthly_salary">Monthly Salary<sup>*</span></label>
-                        <input id="monthly_salary" name="monthly_salary" value="{{ $workExperience->monthly_salary }}" type="text" required>
+                        <input type="text" id="monthly_salary" name="monthly_salary" value="{{ $workExperience->monthly_salary }}" oninput="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onkeypress="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onblur="checkErrorMessage(monthly_salary)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('monthly_salary')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -78,7 +83,8 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="salary">Salary / Job / Pay Grade<sup>*</span></label>  
-                        <input id="salary" name="salary" value="{{ $workExperience->salary }}" type="text" required>
+                        <input type="text" id="salary" name="salary" value="{{ $workExperience->salary }}" oninput="validateInput(salary, 4)" onkeypress="validateInput(salary, 4)" onblur="checkErrorMessage(salary)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('salary')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -143,7 +149,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateWorkExperienceButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

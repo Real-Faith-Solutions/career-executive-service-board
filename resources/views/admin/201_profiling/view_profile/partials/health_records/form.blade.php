@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title', 'Health Records')
+@section('sub', 'Health Records')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -7,7 +12,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('health-record.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST" id="health_record_form" onsubmit="return checkErrorsBeforeSubmit(health_record_form)">
+            <form action="{{ route('health-record.store', ['cesno'=>$cesno]) }}" method="POST" id="health_record_form" onsubmit="return checkErrorsBeforeSubmit(health_record_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -48,7 +53,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateHealthRecordsButton" onclick="openConfirmationDialog(this, 'Confirm Health Record', 'Are you sure you want to save this changes?')">
                         Save changes
                     </button>
                 </div>
@@ -155,10 +160,10 @@
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
                                 {{-- <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a> --}}
-                                <form action="{{ route('medical-history.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST">
+                                <form action="{{ route('medical-history.destroy', ['ctrlno'=>$histories->ctrlno]) }}" method="POST" id="delete_medical_history_form{{$histories->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                    <button type="button" id="deleteMedicalHistoryButton{{$histories->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -190,39 +195,4 @@
     
 </div>
 
-<!-- Modal for Adding Medical History -->
-<div id="add-medical-history-modal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-        <form id="addMedicalHistoryForm" action="{{ route('medical-history.store', ['cesno'=>$mainProfile->cesno]) }}" method="POST" class="flex flex-col items-center" onsubmit="return checkErrorsBeforeSubmit(addMedicalHistoryForm)">
-            @csrf
-
-            <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-            <h2 class="text-2xl font-bold mb-4 text-center">Add Medical History</h2>
-
-            <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-
-                <div class="mb-2">
-                    <input type="text" id="medical_condition_illness" name="medical_condition_illness" oninput="validateInput(medical_condition_illness, 4)" onkeypress="validateInput(medical_condition_illness, 4)" onblur="checkErrorMessage(medical_condition_illness)" required>
-                    <p class="input_error text-red-600"></p>
-                    @error('medical_condition_illness')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="mb-2">
-                    <input type="date" id="medical_date" name="medical_date" oninput="validateDateInput(medical_date)" required>
-                    <p class="input_error text-red-600"></p>
-                    @error('date')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                    @enderror
-                </div>
-
-            </div>
-            <button type="submit" name="submit" id="addMedicalHistoryBtn" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-colors duration-300">ADD</button>
-        </form>
-    </div>
-</div>
+@endsection

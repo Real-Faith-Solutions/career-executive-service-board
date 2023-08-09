@@ -32,13 +32,13 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)],
+            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)],
             'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
             'department_or_agency' => ['required'],
             'government_service' => ['required'],
-            'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['regex:/^[a-zA-Z ]*$/'],
 
         ]);
 
@@ -84,13 +84,13 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'designation' => ['required', 'min:2', 'max:40'],
             'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
             'department_or_agency' => ['required'],
             'government_service' => ['required'],
-            'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['regex:/^[a-zA-Z ]*$/'],
 
         ]);
 

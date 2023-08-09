@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('educational-attainment.update', ['ctrlno'=>$educationalAttainment->ctrlno]) }}" method="POST">
+            <form action="{{ route('educational-attainment.update', ['ctrlno'=>$educationalAttainment->ctrlno]) }}" method="POST" id="update_educational_attainment_form" onsubmit="return checkErrorsBeforeSubmit(update_educational_attainment_form)">
                 @csrf
                 @method('PUT')
 
@@ -211,7 +211,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateEducAttainmentButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

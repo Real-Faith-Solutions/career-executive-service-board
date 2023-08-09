@@ -63,6 +63,6 @@
 
     </div>
     <div class="flex justify-end">
-        <button class="btn btn-primary" id="address-temporary-submit" type="submit">Save Changes</button>
+        <button type="button" class="btn btn-primary" id="updateTemporaryAddressButton" onclick="openConfirmationDialog(this, 'Confirm Address', 'Are you sure you want to submit/update this info?')">Save Changes</button>
     </div>
 </form>

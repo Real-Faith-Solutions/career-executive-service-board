@@ -103,9 +103,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('educational-attainment.restore', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST">
+                            <form action="{{ route('educational-attainment.restore', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST" id="restore_educational_attainment_form{{$educationAttainmentTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreEducAttainmentButton{{$educationAttainmentTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -114,11 +114,11 @@
                                     </lord-icon>
                                 </button>
                             </form>
-
-                            <form action="{{ route('educational-attainment.forceDelete', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST">
+                    
+                            <form action="{{ route('educational-attainment.forceDelete', ['ctrlno'=>$educationAttainmentTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_educational_attainment_form{{$educationAttainmentTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button   type="submit">
+                                <button type="button" id="permanentDeleteEducationAttainmentButton{{$educationAttainmentTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">  
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'speXpCodes'=>$speXpCodes]) }}"  method="POST">
+            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'speXpCodes'=>$speXpCodes]) }}" method="POST" id="update_field_expertise_form">
                 @csrf
                 @method('PUT')
 
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateFieldExpertiseButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

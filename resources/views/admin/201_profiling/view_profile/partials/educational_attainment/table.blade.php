@@ -76,11 +76,11 @@
                                     </lord-icon>
                                 </button>
                             </form>
-
-                            <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST">
+                       
+                            <form action="{{ route('educational-attainment.destroy', ['ctrlno'=>$newEducationalAttainment->ctrlno]) }}" method="POST" id="delete_educational_attainment_form{{$newEducationalAttainment->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button   type="submit">
+                                <button type="button" id="deleteEducAttainmentButton{{$newEducationalAttainment->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">  
                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                    <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

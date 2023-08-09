@@ -42,10 +42,10 @@
                                 </button>
                             </form>
                         
-                            <form action="{{ route('expertise.destroy', ['cesno'=>$expertised->profile_tblExpertise->personal_data_cesno, 'speXpCode'=>$expertised->profile_tblExpertise->specialization_code]) }}" method="POST">
+                            <form action="{{ route('expertise.destroy', ['cesno'=>$cesno, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno, 'speXpCode'=>$expertised->SpeExp_Code]) }}" method="POST" id="delete_field_expertise_form{{$expertised->profile_tblExpertise->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button class="mx-1 font-medium text-red-600 hover:underline" type="submit">
+                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->profile_tblExpertise->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
