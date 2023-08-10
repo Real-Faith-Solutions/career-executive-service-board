@@ -84,7 +84,7 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40'],
+            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'status_of_appointment' => ['required'],
             'monthly_salary' => ['required'],
             'salary' => ['required'],
