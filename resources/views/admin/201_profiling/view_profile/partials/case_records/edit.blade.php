@@ -65,9 +65,9 @@
 
                     <div class="mb-3">
                         <label for="case_number_edit">Case number<sup>*</sup></label>
-                        <input type="text" id="case_number_edit" name="case_number" value="{{ $caseRecord->case_no }}" oninput="validateInput(case_number_edit, 2)" onkeypress="validateInput(case_number_edit, 2)" onblur="checkErrorMessage(case_number_edit)" required>
+                        <input type="text" id="case_number_edit" name="case_no" value="{{ $caseRecord->case_no }}" oninput="validateInput(case_number_edit, 2)" onkeypress="validateInput(case_number_edit, 2)" onblur="checkErrorMessage(case_number_edit)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('case_number')
+                        @error('case_no')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

@@ -10,9 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CaseRecords extends Model
 {
 
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = "profile_tblCaseRecord";
 
