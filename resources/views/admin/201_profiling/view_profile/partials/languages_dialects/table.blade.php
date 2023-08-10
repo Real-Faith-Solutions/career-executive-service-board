@@ -30,8 +30,8 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="GET">
+                        <div class="flex justify-end">
+                            <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code, 'ctrlno'=>$languages->profile_tblLanguages->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon

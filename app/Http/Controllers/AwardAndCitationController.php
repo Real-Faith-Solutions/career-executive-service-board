@@ -71,7 +71,7 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/',  Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
