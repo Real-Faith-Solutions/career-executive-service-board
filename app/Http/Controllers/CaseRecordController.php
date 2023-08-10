@@ -6,6 +6,7 @@ use App\Models\CaseRecords;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CaseRecordController extends Controller
 {
@@ -32,7 +33,7 @@ class CaseRecordController extends Controller
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_number' => ['required', 'min:2', 'max:40'],
+            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('personal_data_cesno', $cesno)],
             'date_filed' => ['required'],
             'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
@@ -53,7 +54,7 @@ class CaseRecordController extends Controller
             'parties' => $request->parties,
             'offence' => $request->offense,
             'nature_code' => $request->nature_of_offense,
-            'case_no' => $request->case_number,
+            'case_no' => $request->case_no,
             'filed_date' => $request->date_filed,
             'venue' => $request->venue,
             'status_code' => $request->case_status,
@@ -87,7 +88,7 @@ class CaseRecordController extends Controller
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_number' => ['required', 'min:2', 'max:40'],
+            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'date_filed' => ['required'],
             'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
@@ -101,7 +102,7 @@ class CaseRecordController extends Controller
         $caseRecord->parties = $request->parties;
         $caseRecord->offence = $request->offense;
         $caseRecord->nature_code = $request->nature_of_offense;
-        $caseRecord->case_no = $request->case_number;
+        $caseRecord->case_no = $request->case_no;
         $caseRecord->filed_date = $request->date_filed;
         $caseRecord->venue = $request->venue;
         $caseRecord->status_code = $request->case_status;

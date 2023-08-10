@@ -384,17 +384,17 @@ Route::prefix('medical-history')->group(function () {
 Route::prefix('expertise')->group(function () {
     Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create');
     Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index');
-    Route::get('edit/{cesno}/{speXpCode}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
+    Route::get('edit/{cesno}/{speXpCode}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
     Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
-    Route::put('update/{cesno}/{speXpCodes}', [ExpertiseController::class, 'update'])->name('expertise.update');
+    Route::put('update/{cesno}/{speXpCodes}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
     Route::delete('destroy/{cesno}/{ctrlno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
 });
 
 Route::prefix('language')->group(function () {
     Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index');
-    Route::get('edit/{cesno}/{languageCode}', [LanguageController::class, 'edit'])->name('language.edit');
+    Route::get('edit/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
     Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
-    Route::put('update/{cesno}/{languageCode}', [LanguageController::class, 'update'])->name('language.update');
+    Route::put('update/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
     Route::delete('destroy/{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
 });
 

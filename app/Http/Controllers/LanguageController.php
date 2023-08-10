@@ -48,22 +48,22 @@ class LanguageController extends Controller
 
     }
 
-    public function edit($cesno, $language_code){
+    public function edit($cesno, $language_code, $ctrlno){
 
         $personalDataId = PersonalData::find($cesno);
         $languageId = $personalDataId->languages()->where('code', $language_code)->value('code');
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
-        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'languageId', 'cesno'));
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'languageId', 'cesno', 'ctrlno'));
 
     }
 
-    public function update(Request $request, $cesno, $language_code){
+    public function update(Request $request, $cesno, $language_code, $ctrlno){
 
         $request->validate([
 
-            'language_code' => ['required'],
+            'language_code' => ['required', Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
 
         ]);
 

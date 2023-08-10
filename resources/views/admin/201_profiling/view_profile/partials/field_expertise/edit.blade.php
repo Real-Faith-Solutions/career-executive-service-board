@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'speXpCodes'=>$speXpCodes]) }}" method="POST" id="update_field_expertise_form">
+            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'speXpCodes'=>$speXpCodes, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_field_expertise_form">
                 @csrf
                 @method('PUT')
 

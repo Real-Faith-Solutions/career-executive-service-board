@@ -30,6 +30,10 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Sponsor
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Inclusive Dates
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -47,6 +51,10 @@
 
                     <td class="px-6 py-3">
                         {{ $researchAndStudy->publisher }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $researchAndStudy->sponsor }}
                     </td>
 
                     <td class="px-6 py-3">

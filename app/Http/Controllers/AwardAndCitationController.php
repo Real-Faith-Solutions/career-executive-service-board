@@ -6,6 +6,7 @@ use App\Models\AwardAndCitations;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AwardAndCitationController extends Controller
 {
@@ -29,7 +30,7 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
@@ -43,7 +44,7 @@ class AwardAndCitationController extends Controller
 
         $awardAndCitations = new AwardAndCitations([
 
-            'awards' => $request->title_of_award,
+            'awards' => $request->awards,
             'sponsor' => $request->sponsor,
             'date' => $request->date,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
@@ -70,7 +71,7 @@ class AwardAndCitationController extends Controller
 
         $request->validate([
 
-            'title_of_award' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
@@ -83,7 +84,7 @@ class AwardAndCitationController extends Controller
         $userNameExtension = $userFullName ->name_extension;
 
         $awardAndCitation = AwardAndCitations::find($ctrlno);
-        $awardAndCitation->awards = $request->title_of_award;
+        $awardAndCitation->awards = $request->awards;
         $awardAndCitation->sponsor = $request->sponsor;
         $awardAndCitation->date = $request->date;
         $awardAndCitation->updated_by = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;

@@ -18,14 +18,11 @@
 </div>
 
 <div class="table-eligibility-and-rank-tracker">    
-    <h1 class="mx-2 text-blue-500 text-bold">CES Status</h1>
     <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Control No
-                    </th>
+                    
 
                     <th scope="col" class="px-6 py-3">
                         CES Status

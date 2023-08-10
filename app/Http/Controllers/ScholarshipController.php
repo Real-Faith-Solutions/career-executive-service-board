@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ScholarshipStoreRequest;
 use App\Models\PersonalData;
 use App\Models\Scholarships;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+
 
 class ScholarshipController extends Controller
 {
@@ -26,7 +27,17 @@ class ScholarshipController extends Controller
 
     }
 
-    public function store(ScholarshipStoreRequest $request, $cesno){
+    public function store(Request $request, $cesno){
+
+        $request->validate([
+
+            'type' => ['required'],
+            'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            
+        ]);
 
         $userFullName = Auth::user();
         $userLastName = $userFullName ->last_name;
@@ -45,14 +56,6 @@ class ScholarshipController extends Controller
          
         ]);
 
-        //finding if title is already exist
-        if(Scholarships::where('personal_data_cesno', $cesno)->where('title', $request->title)->exists()){
-            
-            return back()->with('error', 'Already Have Title Detail');
-
-        }
-        //end
-
         $scholarshipPersonalDataId = PersonalData::find($cesno);
 
         $scholarshipPersonalDataId->scholarships()->save($scholarship);
@@ -68,7 +71,17 @@ class ScholarshipController extends Controller
 
     }
 
-    public function update(ScholarshipStoreRequest $request, $ctrlno, $cesno){
+    public function update(Request $request, $ctrlno, $cesno){
+
+        $request->validate([
+
+            'type' => ['required'],
+            'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            
+        ]);
 
         $scholarship= Scholarships::find($ctrlno);
         $scholarship->type = $request->type;
