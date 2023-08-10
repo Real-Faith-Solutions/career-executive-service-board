@@ -53,6 +53,7 @@ use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\SectorManagerController as ControllersSectorManagerController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -69,6 +70,20 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 // Homepage, login, logout and forgot password route
+
+// email preview
+Route::get('/preview-email', function () {
+    
+    $imagePath = public_path('images/branding.png');
+    $data = [
+        'email' => 'recipient@example.com',
+        'password' => 'temporary_password',
+        'imagePath' => $imagePath,
+    ];
+
+    return new TempCred201($data);
+});
+// end
 
 Route::get('/', function () {
 

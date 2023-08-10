@@ -69,9 +69,12 @@ class AddProfile201 extends Controller
         $password = str_shuffle($password);
         // end
 
+        $imagePath = public_path('images/branding.png');
+
         $data = [
             'email' => $recipientEmail,
             'password' => $password,
+            'imagePath' => $imagePath,
         ];
 
         Mail::to($recipientEmail)->send(new TempCred201($data));

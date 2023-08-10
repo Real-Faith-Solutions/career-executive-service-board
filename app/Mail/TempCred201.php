@@ -38,7 +38,7 @@ class TempCred201 extends Mailable
         return new Content(
 
             view: 'emails.tempcred201',
-            with: [ 'data' => $this->data],
+            with: [ 'data' => $this->data,],
 
         );
     }
