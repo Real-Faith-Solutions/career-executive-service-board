@@ -41,8 +41,8 @@
         <img class="logo" src="{{ $message->embed( $data['imagePath']) }}" alt="CESB Logo" width="100">
         <h1>Welcome to CESB Portal</h1>
         <h2>Use these temporary credentials to login.</h2>
-        <p>Email: {{ $data['email'] }}</p>
-        <p>Password: {{ $data['password'] }}</p>
+        <p><strong>Email:</strong> {{ $data['email'] }}</p>
+        <p><strong>Password:</strong> {{ $data['password'] }}</p>
     </div>
 </body>
 </html>
