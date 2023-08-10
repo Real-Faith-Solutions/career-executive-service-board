@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //examinations_takens
         Schema::create('profile_tblExaminations', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->unsignedBigInteger('exam_code');
-            $table->foreign('exam_code')->references('CODE')->on('profilelib_tblExamRef')->onDelete('cascade');
-            // $table->string('type');
+
+            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->foreignId('exam_code')->constrained('profilelib_tblExamRef', 'CODE');
             $table->string('rating')->nullable();
-            $table->string('date_of_examination');
-            $table->string('place_of_examination');
+            $table->string('date_of_examination')->nullable();
+            $table->string('place_of_examination')->nullable();
             $table->string('license_number')->nullable();
             $table->string('date_acquired')->nullable();
             $table->string('date_validity')->nullable();
-            $table->string('encoder');
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
