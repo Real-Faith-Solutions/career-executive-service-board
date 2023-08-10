@@ -88,7 +88,7 @@
 
                         <div class="mb-3">
                             <label for="birthdate">Birthdate<sup>*</sup></label>
-                            <input id="personal_birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birth_date }}">
+                            <input id="personal_birthdate" name="birthdate" readonly type="text" value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
                         </div>
 
                         <div class="mb-3">

@@ -22,7 +22,6 @@ class ResearchAndStudies extends Model
         'personal_data_cesno',
         'title',
         'publisher',
-        'sponsor',
         'inclusive_date_from',
         'inclusive_date_to',
         'encoder',

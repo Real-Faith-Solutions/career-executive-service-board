@@ -41,16 +41,6 @@
                             </span>
                         @enderror
                     </div>
-
-                    <div class="mb-3">
-                        <label for="sponsor">Sponsor<sup>*</span></label>
-                        <input id="sponsor" name="sponsor" value="{{ $researchAndStudies->sponsor }}" required type="text">
-                        @error('sponsor')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
