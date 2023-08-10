@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('eligibility-rank-tracker.update', ['ctrlno'=>$profileTblCesStatus->ctrlno, 'cesno'=>$cesno]) }}" method="POST">
+            <form action="{{ route('eligibility-rank-tracker.update', ['ctrlno'=>$profileTblCesStatus->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_eligibility_rank_tracker_form" onsubmit="return checkErrorsBeforeSubmit(update_eligibility_rank_tracker_form)">
                 @csrf
                 @method('PUT')
 
