@@ -42,33 +42,11 @@ class AddProfile201 extends Controller
             'citizenship' => $request->citizenship,
             'dual_citizenship' => $request->dual_citizenship,
             'person_with_disability' => $request->person_with_disability,
-            // 'gsis' => $request->gsis,
-            // 'pagibig' => $request->pagibig,
-            // 'philhealth' => $request->philhealth,
-            // 'sss_no' => $request->sss_no,
-            // 'tin' => $request->tin,
 
         ]);
 
         $recipientEmail = $request->email;
-
-        // generating random password
-        $length = 8;
-        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
-        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $numbers = '0123456789';
-        $specialChars = '!@#$%^&*()-_';
-
-        $password = Str::random(1, $lowercase) .    // Include at least one lowercase
-                    Str::random(1, $uppercase) .    // Include at least one uppercase
-                    Str::random(1, $numbers) .      // Include at least one number
-                    Str::random(1, $specialChars) . // Include at least one special character
-                    Str::random($length - 4);       // Fill the rest with random characters
-
-        // Shuffle the password to ensure randomness
-        $password = str_shuffle($password);
-        // end
-
+        $password = Str::password(8);;
         $imagePath = public_path('images/branding.png');
 
         $data = [
