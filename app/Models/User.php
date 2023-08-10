@@ -8,56 +8,45 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    use SoftDeletes;
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'ctrlno';
+
     protected $fillable = [
-        'last_name',
-        'first_name',
-        'middle_name',
+        
+        'personal_data_cesno',
         'contact_no',
         'email',
-        'employee_id',
-        'username',
+        'password',
         'role',
         'role_name_no',
-        'password',
         'is_active',
-        'picture',
-        'cesno',
-        'last_updated_by',
         'encoder',
+        'last_updated_by',
         'default_password_change',
+        'email_verified_at',
     ];
 
-    // /**
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array<int, string>
-    //  */
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    // ];
-
-    /*
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'remember_token',
     ];
 
-    /*
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function usersPersonalData(): BelongsTo
+    {
+        return $this->belongsTo(PersonalData::class);
+    }
+
 }
