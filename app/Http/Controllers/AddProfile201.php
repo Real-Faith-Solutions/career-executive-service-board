@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddProfile201Req;
+use App\Mail\TempCred201;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AddProfile201 extends Controller
 {
@@ -46,6 +49,32 @@ class AddProfile201 extends Controller
             // 'tin' => $request->tin,
 
         ]);
+
+        $recipientEmail = $request->email;
+
+        // generating random password
+        $length = 8;
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numbers = '0123456789';
+        $specialChars = '!@#$%^&*()-_';
+
+        $password = Str::random(1, $lowercase) .    // Include at least one lowercase
+                    Str::random(1, $uppercase) .    // Include at least one uppercase
+                    Str::random(1, $numbers) .      // Include at least one number
+                    Str::random(1, $specialChars) . // Include at least one special character
+                    Str::random($length - 4);       // Fill the rest with random characters
+
+        // Shuffle the password to ensure randomness
+        $password = str_shuffle($password);
+        // end
+
+        $data = [
+            'email' => $recipientEmail,
+            'password' => $password,
+        ];
+
+        Mail::to($recipientEmail)->send(new TempCred201($data));
 
         return back()->with('message','New profile added!');
 
