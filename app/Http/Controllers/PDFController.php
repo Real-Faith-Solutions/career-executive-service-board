@@ -179,7 +179,7 @@ class PDFController extends Controller
     // download approved file
     public function download($ctrlno){
 
-        $pdfFileName = PdfLinks::where('ctrlno', $ctrlno)->value('pdflink');
+        $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
 
         $myFile = public_path($pdfFileName);
 
@@ -190,7 +190,7 @@ class PDFController extends Controller
     // download pending file
     public function downloadPendingFile($ctrlno){
 
-        $pendingPdfFileName = RequestFile::where('ctrlno', $ctrlno)->value('request_pdflink');
+        $pendingPdfFileName = RequestFile::withTrashed()->where('ctrlno', $ctrlno)->value('request_pdflink');
 
         $pendingFile = public_path($pendingPdfFileName);
         
