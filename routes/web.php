@@ -457,7 +457,7 @@ Route::prefix('pdf-file')->group(function () {
 
 
 // 201 profiling routes
-Route::post('/add-profile-201', [AddProfile201::class, 'store'])->name('add-profile-201');
+Route::post('/add-profile-201/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
 Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
 // end 201 profiling
 

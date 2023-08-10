@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('contact_no');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role');
-            $table->bigInteger('role_name_no');
+            $table->string('role')->nullable();
+            $table->bigInteger('role_name_no')->nullable();
             $table->string('is_active')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
