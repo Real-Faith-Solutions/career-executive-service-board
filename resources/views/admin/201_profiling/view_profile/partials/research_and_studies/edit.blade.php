@@ -4,6 +4,10 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
+<div class="flex justify-end">
+    <a href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" class="btn btn-primary" >Go back</a>
+</div>
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -32,6 +36,16 @@
                         <label for="publisher">Publisher<sup>*</span></label>
                         <input id="publisher" name="publisher" value="{{ $researchAndStudies->publisher }}" required type="text">
                         @error('publisher')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sponsor">Sponsor<sup>*</span></label>
+                        <input id="sponsor" name="sponsor" value="{{ $researchAndStudies->sponsor }}" required type="text">
+                        @error('sponsor')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

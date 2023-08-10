@@ -42,6 +42,17 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="sponsor">Sponsor<sup>*</span></label>
+                        <input type="text" id="sponsor" name="sponsor" oninput="validateInput(sponsor, 8, 'letters')" onkeypress="validateInput(sponsor, 8, 'letters')" onblur="checkErrorMessage(sponsor)" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('sponsor')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

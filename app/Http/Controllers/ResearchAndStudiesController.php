@@ -33,6 +33,7 @@ class ResearchAndStudiesController extends Controller
 
             'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
             'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['nullable','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
 
@@ -48,6 +49,7 @@ class ResearchAndStudiesController extends Controller
 
             'title' => $request->title,
             'publisher' => $request->publisher,
+            'sponsor' => $request->sponsor,
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
@@ -71,12 +73,11 @@ class ResearchAndStudiesController extends Controller
 
     public function update(Request $request, $ctrlno, $cesno){
 
-        $researchAndStudiesId = ResearchAndStudies::find($ctrlno);
-
         $request->validate([
 
-            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch', 'title')->ignore($researchAndStudiesId)],
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor' => ['nullable','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
 
@@ -85,6 +86,7 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
         $researchAndStudies->title = $request->title;
         $researchAndStudies->publisher = $request->publisher;
+        $researchAndStudies->sponsor = $request->sponsor;
         $researchAndStudies->inclusive_date_from = $request->inclusive_date_from;
         $researchAndStudies->inclusive_date_to = $request->inclusive_date_to;
         $researchAndStudies->save();

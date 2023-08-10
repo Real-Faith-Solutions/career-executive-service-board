@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('title');
             $table->string('publisher');
+            $table->string('sponsor');
             $table->date('inclusive_date_from');
             $table->date('inclusive_date_to');
             $table->string('encoder');
