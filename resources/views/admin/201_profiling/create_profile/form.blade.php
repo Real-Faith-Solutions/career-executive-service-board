@@ -5,7 +5,7 @@
         <h1>Personal data</h1>
     </div>
 
-    <form action="{{ route('add-profile-201') }}" enctype="multipart/form-data" id="personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(personal_data)">
+    <form action="{{ route('add-profile-201', ['cesno'=>$cesNumber]) }}" enctype="multipart/form-data" id="personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(personal_data)">
 
         @csrf
 

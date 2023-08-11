@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddProfile201Req;
+use App\Mail\TempCred201;
 use App\Models\PersonalData;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AddProfile201 extends Controller
 {
     //
-    public function store(AddProfile201Req $request)
+    public function store(AddProfile201Req $request, $cesno)
     {
 
         $newProfile = PersonalData::create([
@@ -26,7 +31,6 @@ class AddProfile201 extends Controller
             'middleinitial' => $request->mi,
             'nickname' => $request->nickname,
             'birth_date' => $request->birthdate,
-            // 'age' => $request->age,
             'birth_place' => $request->birth_place,
             'gender' => $request->gender,
             'gender_by_choice' => $request->gender_by_choice,
@@ -39,13 +43,29 @@ class AddProfile201 extends Controller
             'citizenship' => $request->citizenship,
             'dual_citizenship' => $request->dual_citizenship,
             'person_with_disability' => $request->person_with_disability,
-            // 'gsis' => $request->gsis,
-            // 'pagibig' => $request->pagibig,
-            // 'philhealth' => $request->philhealth,
-            // 'sss_no' => $request->sss_no,
-            // 'tin' => $request->tin,
 
         ]);
+
+        $recipientEmail = $request->email;
+        $password = Str::password(8);
+        $hashedPassword = Hash::make($password);
+        $imagePath = public_path('images/branding.png');
+
+        $data = [
+            'email' => $recipientEmail,
+            'password' => $password,
+            'imagePath' => $imagePath,
+        ];
+
+        Mail::to($recipientEmail)->send(new TempCred201($data));
+
+        // $newUser = User::create([
+            
+        //     'personal_data_cesno' => $cesno,
+        //     'email' => $request->email,
+        //     'password' => $hashedPassword,
+
+        // ]);
 
         return back()->with('message','New profile added!');
 
