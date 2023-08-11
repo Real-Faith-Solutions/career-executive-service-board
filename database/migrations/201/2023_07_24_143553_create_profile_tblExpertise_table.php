@@ -10,17 +10,13 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        //field_expertises
+    {        
         Schema::create('profile_tblExpertise', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->unsignedBigInteger('specialization_code');
-            $table->foreign('specialization_code')->references('SpeExp_Code')->on('profilelib_tblExpertiseSpec')->onDelete('cascade');
-            // $table->string('expertise_specialization');
+            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->foreignId('specialization_code')->constrained('profilelib_tblExpertiseSpec', 'SpeExp_Code');
             $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
