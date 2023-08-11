@@ -861,13 +861,13 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPass
 Route::group([
     'prefix'     => 'admin',
 ], function () {
-    // Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
+    Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
 
-    // Route::group([
-    //     'prefix'     => 'dashboard',
-    // ], function () {
-    //     Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
-    // });
+    Route::group([
+        'prefix'     => 'dashboard',
+    ], function () {
+        Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
+    });
 
     //wag toh
     Route::group(['prefix'=> 'profile',], function () {
