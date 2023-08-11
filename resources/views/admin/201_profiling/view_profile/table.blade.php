@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($searched) === 0)
+                    {{-- @if (count($searched) === 0)
 
                         <tr>
                             <th class="text-red-500" colspan="3">
@@ -33,29 +33,29 @@
                                 </div>
                             </th>
                         </tr>
-                    @else
-                        @foreach ($searched as $item)
+                    @else --}}
+                        @foreach ($personalData as $personalDatas)
                             <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
 
-                                <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}">
+                                {{-- <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}"> --}}
                                     <th scope="col" class="px-6 py-3">
-                                        {{ $item->cesno }}
+                                        {{ $personalDatas->cesno }}
                                     </th>
                                     <td scope="col" class="px-6 py-3">
-                                        {{ $item->lastname }}, {{ $item->firstname }} {{ $item->middlename }}
+                                        {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="{{ route('personal-data.show', ['cesno' => $item->cesno]) }}" class="font-medium">View profile</a>
+                                        <a href="{{ route('personal-data.show', ['cesno' => $personalDatas->cesno]) }}" class="font-medium">View profile</a>
                                     </td>
-                                </a>
+                                {{-- </a> --}}
 
                             </tr>
                         @endforeach
-                    @endif
+                    {{-- @endif --}}
                 </tbody>
             </table>
             <div class="my-5">
-                {{ $searched->links() }}
+                {{ $personalData->links() }}
             </div>
         </div>
 
