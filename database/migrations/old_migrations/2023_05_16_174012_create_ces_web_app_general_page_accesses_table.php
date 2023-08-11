@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ces_web_app_general_page_accesses', function (Blueprint $table) {
-            $table->id();
-            $table->string('role_name_ces_web_app_general_page')->unique();
-            $table->string('ces_web_app_general_page_access')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('last_updated_by')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('ces_web_app_general_page_accesses', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('role_name_ces_web_app_general_page')->unique();
+        //     $table->string('ces_web_app_general_page_access')->nullable();
+        //     $table->string('encoder')->nullable();
+        //     $table->string('last_updated_by')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
