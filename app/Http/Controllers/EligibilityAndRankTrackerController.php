@@ -10,6 +10,7 @@ use App\Models\ProfileLibTblCesStatusType;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class EligibilityAndRankTrackerController extends Controller
 {
@@ -36,16 +37,18 @@ class EligibilityAndRankTrackerController extends Controller
 
     }
 
-    public function cesWeIndex($cesno){
-
-        // $personalData = PersonalData::find($cesno);
-        // $profileTblCesStatus = $personalData->ProfileTblCesStatus;
-
-        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.cesWeTable', compact('cesno'));
-
-    }
-    
     public function store(Request $request, $cesno){
+
+    $request->validate([
+
+        'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
+        'acc_code' => ['required'],
+        'type_code' => ['required'],
+        'official_code' => ['nullable'],
+        'resolution_no' => ['required'],
+        'appointed_dt' => ['required'],
+        
+    ]);
         
     $userFullName = Auth::user();
     $userLastName = $userFullName ->last_name;
@@ -88,6 +91,17 @@ class EligibilityAndRankTrackerController extends Controller
     }
 
     public function update(Request $request, $ctrlno, $cesno){
+
+        $request->validate([
+
+            'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'acc_code' => ['required'],
+            'type_code' => ['required'],
+            'official_code' => ['nullable'],
+            'resolution_no' => ['required'],
+            'appointed_dt' => ['required'],
+            
+        ]);
 
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->cesstat_code = $request->cesstat_code;

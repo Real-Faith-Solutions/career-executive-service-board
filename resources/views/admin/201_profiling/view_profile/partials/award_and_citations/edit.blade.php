@@ -24,9 +24,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="title_of_award_edit">Title of Award<sup>*</sup></label>
-                        <input type="text" id="title_of_award_edit" name="title_of_award" value="{{ $awardAndCitation->awards }}" oninput="validateInput(title_of_award_edit, 2, 'alphaNumeric')" onkeypress="validateInput(title_of_award_edit, 2, 'alphaNumeric')" onblur="checkErrorMessage(title_of_award_edit)" required>
+                        <input type="text" id="title_of_award_edit" name="awards" value="{{ $awardAndCitation->awards }}" oninput="validateInput(title_of_award_edit, 2, 'alphaNumeric')" onkeypress="validateInput(title_of_award_edit, 2, 'alphaNumeric')" onblur="checkErrorMessage(title_of_award_edit)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('title_of_award')
+                        @error('awards')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

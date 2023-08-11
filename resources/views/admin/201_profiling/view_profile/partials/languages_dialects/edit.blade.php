@@ -20,7 +20,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('language.update', ['cesno'=>$cesno, 'languageCode'=>$languageId]) }}" method="POST" id="update_language_form" onsubmit="return checkErrorsBeforeSubmit(update_language_form)">
+            <form action="{{ route('language.update', ['cesno'=>$cesno, 'languageCode'=>$languageId, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_language_form" onsubmit="return checkErrorsBeforeSubmit(update_language_form)">
                 @csrf
                 @method('PUT')
 

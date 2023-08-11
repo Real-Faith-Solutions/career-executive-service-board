@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ResearchAndStudies extends Model
 {
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 

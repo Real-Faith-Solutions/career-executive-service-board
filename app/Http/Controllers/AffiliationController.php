@@ -6,6 +6,7 @@ use App\Models\Affiliations;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AffiliationController extends Controller
 {
@@ -29,7 +30,7 @@ class AffiliationController extends Controller
 
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('personal_data_cesno', $cesno)],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],
@@ -72,7 +73,7 @@ class AffiliationController extends Controller
 
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],

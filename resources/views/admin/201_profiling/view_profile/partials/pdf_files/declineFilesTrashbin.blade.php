@@ -48,14 +48,19 @@
             @foreach ($pendingFileTrashedRecord as $pendingFileTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                        <lord-icon
-                            src="https://cdn.lordicon.com/nocovwne.json"
-                            trigger="hover"
-                            colors="primary:#110a5c,secondary:#000000"
-                            state="hover-2"
-                            style="width:24px;height:24px">
-                        </lord-icon>
+                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pendingFileTrashedRecords->ctrlno, 'fileName'=>$pendingFileTrashedRecords->request_unique_file_name]) }}" target="_blank" method="POST">
+                            @csrf
+                            <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/nocovwne.json"
+                                    trigger="hover"
+                                    colors="primary:#110a5c,secondary:#000000"
+                                    state="hover-2"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">

@@ -84,7 +84,7 @@ class ExaminationTakenController extends Controller
 
         $request->validate([
 
-            'exam_code' => ['required'],
+            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'rating' => ['required', 'min:2', 'max:40'],
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],

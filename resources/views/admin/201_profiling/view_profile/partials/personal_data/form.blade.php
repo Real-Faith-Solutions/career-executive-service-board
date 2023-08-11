@@ -4,9 +4,9 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
-<div class="grid-rows-7 grid grid-cols-4 gap-1">
+<div class="grid-rows-7 grid lg:grid-cols-4 sm:grid-cols-1 gap-1">
 
-    <div class="row-span-5 text-center">
+    <div class="flex flex-col items-center row-span-5 text-center">
 
         <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96 border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->picture ?: 'placeholder.png')) }}" />
 
@@ -14,7 +14,12 @@
             {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
         </h1>
 
-        <span class="@if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif mr-2 rounded px-2.5 py-0.5 text-xs font-medium">
+        <span class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
+            @if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif
+            @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif
+            @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif
+            @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif
+            ">
             {{ $mainProfile->status }}
         </span>
 
@@ -88,7 +93,7 @@
 
                         <div class="mb-3">
                             <label for="birthdate">Birthdate<sup>*</sup></label>
-                            <input id="personal_birthdate" name="birthdate" readonly type="date" value="{{ $mainProfile->birth_date }}">
+                            <input id="personal_birthdate" name="birthdate" readonly type="text" value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
                         </div>
 
                         <div class="mb-3">

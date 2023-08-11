@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('profile_tblSpouseRecords', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->string('employer_business_address')->nullable();
             $table->string('employer_business_telephone')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

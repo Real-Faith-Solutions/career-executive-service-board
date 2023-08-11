@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //research_and_studies
         Schema::create('profile_tblResearch', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('title');
-            $table->string('publisher');
-            $table->date('inclusive_date_from');
-            $table->date('inclusive_date_to');
-            $table->string('encoder');
+            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->string('title')->nullable();
+            $table->string('publisher')->nullable();
+            $table->string('inclusive_date_from')->nullable();
+            $table->string('inclusive_date_to')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
