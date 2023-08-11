@@ -59,13 +59,13 @@ class AddProfile201 extends Controller
 
         Mail::to($recipientEmail)->send(new TempCred201($data));
 
-        $newUser = User::create([
+        // $newUser = User::create([
             
-            'personal_data_cesno' => $cesno,
-            'email' => $request->email,
-            'password' => $hashedPassword,
+        //     'personal_data_cesno' => $cesno,
+        //     'email' => $request->email,
+        //     'password' => $hashedPassword,
 
-        ]);
+        // ]);
 
         return back()->with('message','New profile added!');
 

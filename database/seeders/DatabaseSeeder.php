@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
 
         $this->call([
-            // UsersTableSeeder::class,
+            UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             // ProfileData::class,
             // ProfileAddress::class,
