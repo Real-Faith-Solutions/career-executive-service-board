@@ -162,16 +162,13 @@ class DashboardController extends Controller
 
     public function getDashboardPage(){
 
-        if(RolesController::validateUserCesWebAppGeneralPageAccess('Dashboard') == 'true'){
+        
 
             $data = $this->getDashboardData();
             
             return view('admin.dashboard', compact('data'))->render();
-        }
-        else{
-
-            return view('restricted');
-        }
+        
+    
     
     }
 }

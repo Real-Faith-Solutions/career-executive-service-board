@@ -11,7 +11,7 @@
                 </a>
             </li>
 
-            @if (Auth::user()->role == 'User')
+            {{-- @if (Auth::user()->role == 'User')
                 <li>
                     <a href="{{ env('APP_URL') }}admin/profile/views/{{ Auth::user()->cesno }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@
                         <span class="ml-3">View Profile</span>
                     </a>
                 </li>
-            @else
+            @else --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard">
                         <svg aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
                         {{-- @endif
                         @if (App\Http\Controllers\ProfileController::latestCesNo() != 1) --}}
                         <li>
-                            <a href="{{ url('admin/profile/view') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
+                            <a href="{{ route('view-profile-201.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
                         </li>
                         {{-- @endif --}}
                         <li>
@@ -49,9 +49,9 @@
 
                     </ul>
                 </li>
-            @endif
+            {{-- @endif --}}
 
-            @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Plantilla') == 'true')
+            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Plantilla') == 'true') --}}
                 <li>
                     <a href="{{ route('plantilla-management.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
 
@@ -61,11 +61,11 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Plantilla</span>
                     </a>
                 </li>
-            @endif
+            {{-- @endif --}}
 
-            @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Competency') == 'true')
+
                 <li>
-                    <a href="{{ config('app.url') }}admin/competency-management-system/view" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('competency-data.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
                             <path d="M6 3a3 3 0 00-3 3v2.25a3 3 0 003 3h2.25a3 3 0 003-3V6a3 3 0 00-3-3H6zM15.75 3a3 3 0 00-3 3v2.25a3 3 0 003 3H18a3 3 0 003-3V6a3 3 0 00-3-3h-2.25zM6 12.75a3 3 0 00-3 3V18a3 3 0 003 3h2.25a3 3 0 003-3v-2.25a3 3 0 00-3-3H6zM17.625 13.5a.75.75 0 00-1.5 0v2.625H13.5a.75.75 0 000 1.5h2.625v2.625a.75.75 0 001.5 0v-2.625h2.625a.75.75 0 000-1.5h-2.625V13.5z" />
                         </svg>
@@ -73,8 +73,8 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Competency</span>
                     </a>
                 </li>
-            @endif
-            @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Reports') == 'true')
+    
+            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Reports') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -105,9 +105,9 @@
                         </li>
                     </ul>
                 </li>
-            @endif
+            {{-- @endif --}}
 
-            @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Rights Management') == 'true')
+            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Rights Management') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-rights-management" data-collapse-toggle="dropdown-rights-management">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -128,9 +128,9 @@
                         </li>
                     </ul>
                 </li>
-            @endif
+            {{-- @endif --}}
 
-            @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('System Utility') == 'true')
+            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('System Utility') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-system-utility" data-collapse-toggle="dropdown-system-utility">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -163,7 +163,7 @@
 
                     </ul>
                 </li>
-            @endif
+            {{-- @endif --}}
         </ul>
     </div>
 </aside>
