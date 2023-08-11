@@ -26,7 +26,7 @@ class ProfileTblWorkExperience extends Model
         'to_dt',
         'designation',
         'status',
-        'monthly_salary',
+        'annually_salary',
         'salary',
         'department',
         'government_service',

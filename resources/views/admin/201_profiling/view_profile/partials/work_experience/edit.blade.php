@@ -69,10 +69,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="monthly_salary">Monthly Salary<sup>*</span></label>
-                        <input type="text" id="monthly_salary" name="monthly_salary" value="{{ $workExperience->monthly_salary }}" oninput="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onkeypress="validateInput(monthly_salary, 4, 'numbersWithSpecial')" onblur="checkErrorMessage(monthly_salary)" required>
+                        <label for="annually_salary">Annually Salary<sup>*</span></label>
+                        <input type="text" id="annually_salary" name="annually_salary" value="{{ $workExperience->annually_salary }}" oninput="validateInput(annually_salary, 4, 'numbersWithSpecial')" onkeypress="validateInput(annually_salary, 4, 'numbersWithSpecial')" onblur="checkErrorMessage(annually_salary)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('monthly_salary')
+                        @error('annually_salary')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

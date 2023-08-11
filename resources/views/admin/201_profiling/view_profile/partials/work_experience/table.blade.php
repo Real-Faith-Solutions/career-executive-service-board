@@ -34,7 +34,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Monthly Salary
+                    Annualy Salary
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -63,7 +63,10 @@
             @foreach ($workExperience as $workExperiences)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $workExperiences->from_dt." - ".$workExperiences->to_dt }}
+                        
+                        {{ \Carbon\Carbon::parse($workExperiences->from_dt)->format('M d, Y') }} - 
+                        {{ \Carbon\Carbon::parse($workExperiences->to_dt)->format('M d, Y') }}
+                        
                     </td>
 
                     <td class="px-6 py-3">
@@ -75,7 +78,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->monthly_salary }}
+                        {{ $workExperiences->annually_salary }}
                     </td>
 
                     <td class="px-6 py-3">

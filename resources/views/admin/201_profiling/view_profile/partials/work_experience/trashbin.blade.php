@@ -29,7 +29,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Monthly Salary
+                    Annually Salary
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -78,7 +78,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->monthly_salary }}
+                        {{ $workExperienceTrashedRecords->annually_salary }}
                     </td>
 
                     <td class="px-6 py-3">

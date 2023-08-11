@@ -34,7 +34,7 @@ class WorkExperienceController extends Controller
             'inclusive_date_to' => ['required'],
             'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)],
             'status_of_appointment' => ['required'],
-            'monthly_salary' => ['required'],
+            'annually_salary' => ['required'],
             'salary' => ['required'],
             'department_or_agency' => ['required'],
             'government_service' => ['required'],
@@ -54,7 +54,7 @@ class WorkExperienceController extends Controller
             'to_dt' => $request->inclusive_date_to,
             'designation' => $request->designation,
             'status' => $request->status_of_appointment,
-            'monthly_salary' => $request->monthly_salary,
+            'annually_salary' => $request->annually_salary,
             'salary' => $request->salary,
             'department' => $request->department_or_agency,
             'government_service' => $request->government_service,
@@ -86,7 +86,7 @@ class WorkExperienceController extends Controller
             'inclusive_date_to' => ['required'],
             'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'status_of_appointment' => ['required'],
-            'monthly_salary' => ['required'],
+            'annually_salary' => ['required'],
             'salary' => ['required'],
             'department_or_agency' => ['required'],
             'government_service' => ['required'],
@@ -99,7 +99,7 @@ class WorkExperienceController extends Controller
         $workExperience->to_dt = $request->inclusive_date_to;
         $workExperience->status = $request->status_of_appointment;
         $workExperience->designation = $request->designation;
-        $workExperience->monthly_salary = $request->monthly_salary;
+        $workExperience->annually_salary = $request->annually_salary;
         $workExperience->salary = $request->salary;
         $workExperience->department = $request->department_or_agency;
         $workExperience->government_service = $request->government_service;
