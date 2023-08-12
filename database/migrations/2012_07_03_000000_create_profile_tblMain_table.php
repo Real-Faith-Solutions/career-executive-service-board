@@ -24,13 +24,10 @@ return new class extends Migration
             $table->string('middleinitial')->nullable();
             $table->string('nickname')->nullable();
             $table->datetime('birth_date')->nullable();
-            // $table->string('age')->nullable();
-            // $table->integer('birth_place')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('gender')->nullable();
             $table->string('gender_by_choice')->nullable();
             $table->string('civil_status')->nullable();
-            // $table->integer('religion')->nullable();
             $table->string('religion')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
