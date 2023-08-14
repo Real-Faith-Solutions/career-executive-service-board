@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <form class="user" method="POST" action="{{ env('APP_URL') }}login">
+    <form class="user" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="mb-3">

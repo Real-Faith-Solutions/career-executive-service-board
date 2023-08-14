@@ -13,6 +13,36 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
+
+    // my new auth func
+
+    public function showLoginForm()
+    {
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($credentials, $request->remember)) {
+            return redirect()->intended('/admin/dashboard');
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
+    // end my new auth func
+
     public function getLoginHomePage(Request $request){
 
         // Valdate if user already login or not
@@ -158,7 +188,6 @@ class AuthController extends Controller
         return Redirect::to('/');
     }
 
-
     public function userRegister(Request $request){
         User::create([
             'name' => $request->full_name,
@@ -168,4 +197,5 @@ class AuthController extends Controller
 
         return "Success Registration!";
     }
+
 }

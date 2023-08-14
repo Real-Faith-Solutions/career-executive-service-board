@@ -89,11 +89,16 @@ Route::get('/preview-email', function () {
 Route::get('/', function () {
 
     if(!Auth::check()){
-        return view('login');
+        return redirect()->route('login');
     }else{
         return Redirect::to('/admin/dashboard');
     }
+
 });
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
 
