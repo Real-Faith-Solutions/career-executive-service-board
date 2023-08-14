@@ -2,7 +2,7 @@
     <div class="h-full overflow-y-auto bg-white px-3 pb-4 dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="{{ config('app.url') }}admin/dashboard" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <a href="{{ url('admin/dashboard') }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -73,7 +73,7 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Competency</span>
                     </a>
                 </li>
-    
+
             {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Reports') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
@@ -89,19 +89,19 @@
                     </button>
                     <ul id="dropdown-reports" class="hidden space-y-2 py-2">
                         <li>
-                            <a href="{{ config('app.url') }}admin/report/general-reports" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Generate Reports</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Generate Reports</a>
                         </li>
                         <li>
-                            <a href="{{ config('app.url') }}admin/report/statistical-reports" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Statistical Reports</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Statistical Reports</a>
                         </li>
                         <li>
-                            <a href="{{ config('app.url') }}admin/report/sales" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reports for placement</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reports for placement</a>
                         </li>
                         <li>
-                            <a href="{{ config('app.url') }}admin/report/birthday-cards-reports" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reports for birthday cards</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reports for birthday cards</a>
                         </li>
                         <li>
-                            <a href="{{ config('app.url') }}admin/report/sales" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Data Portability Report</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Data Portability Report</a>
                         </li>
                     </ul>
                 </li>
@@ -121,10 +121,10 @@
                     </button>
                     <ul id="dropdown-rights-management" class="hidden space-y-2 py-2">
                         <li>
-                            <a href="{{ config('app.url') }}admin/rights-management/user" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Users</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Users</a>
                         </li>
                         <li>
-                            <a href="{{ config('app.url') }}admin/rights-management/roles" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Roles</a>
+                            <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Roles</a>
                         </li>
                     </ul>
                 </li>
