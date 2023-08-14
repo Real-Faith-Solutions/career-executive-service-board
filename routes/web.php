@@ -95,10 +95,12 @@ Route::get('/', function () {
     }
 });
 
-Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-
 Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
 
+Route::get('competency-view-profile/{cesno}', [CompetencyController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+Route::post('store/{cesno}', [CompetencyController::class, 'store'])->name('competency-view-profile-contact-info.store');
+Route::post('update/{ctrlno}/{cesno}', [CompetencyController::class, 'update'])->name('competency-view-profile-contact-info.update');
 
 Route::prefix('plantilla')->group(function () {
 
