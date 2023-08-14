@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '201 profiling table')
+@section('title', 'Competency 201 profiling table')
 @section('content')
 
     <section>

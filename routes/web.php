@@ -10,6 +10,7 @@ use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
+use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -97,10 +98,13 @@ Route::get('/', function () {
 
 Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
 
-Route::get('competency-view-profile/{cesno}', [CompetencyController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-Route::post('store/{cesno}', [CompetencyController::class, 'store'])->name('competency-view-profile-contact-info.store');
-Route::post('update/{ctrlno}/{cesno}', [CompetencyController::class, 'update'])->name('competency-view-profile-contact-info.update');
+Route::prefix('competency')->group(function () {
+    Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+    Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+    Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+    Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+});
+
 
 Route::prefix('plantilla')->group(function () {
 

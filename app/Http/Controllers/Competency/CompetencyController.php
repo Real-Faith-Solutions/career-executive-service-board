@@ -93,5 +93,4 @@ class CompetencyController extends Controller
         return redirect()->back()->with('message', 'Updated Successfuly');
 
     }
-
 }
