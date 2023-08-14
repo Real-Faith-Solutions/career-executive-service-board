@@ -16,7 +16,7 @@
 
         <div class="mb-3">
             <label for="password">Password</label>
-            <input type="password" name="password" value="{{ old('password') }}" required autofocus autocomplete="password">
+            <input type="password" name="password" value="{{ old('password') }}" required>
             @error('password')
                 <span class="invalid" role="alert">
                     <strong>{{ $message }}</strong>

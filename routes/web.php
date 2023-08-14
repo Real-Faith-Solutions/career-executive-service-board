@@ -857,115 +857,25 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPass
 
 
 // Page content route
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['role:admin'])->prefix('admin')->group(function () {
 
-Route::group([
-    'prefix'     => 'admin',
-], function () {
-    Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
+        Route::get('/', [DashboardController::class, 'getDashboardPage']);
 
-    Route::group([
-        'prefix'     => 'dashboard',
-    ], function () {
-        Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
-    });
+        Route::group([
+            'prefix'     => 'dashboard',
+        ], function () {
+            Route::get('/', [DashboardController::class, 'getDashboardPage']);
+        });
 
-    //wag toh
-    Route::group(['prefix'=> 'profile',], function () {
+        Route::group(['prefix'=> 'profile',], function () {
 
-        Route::get('add', [ProfileController::class, 'addProfile'])->middleware('userauth');
-        // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
-        // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
-        // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
-        Route::get('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
-        Route::post('view', [ProfileController::class, 'postSearch'])->middleware('userauth');
+            Route::get('add', [ProfileController::class, 'addProfile']);
+            Route::get('view', [ProfileController::class, 'postSearch']);
+            Route::post('view', [ProfileController::class, 'postSearch']);
+            Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile');
 
-        // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
-        Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('userauth');
+        });
 
     });
-
-    // Route::group([
-    //     'prefix'     => 'report',
-    // ], function () {
-    //     Route::get('general-reports', [ReportController::class, 'getGeneralReportsPage'])->middleware('userauth');
-    //     Route::get('birthday-cards-reports', [ReportController::class, 'getBirthdayCardsReportsPage'])->middleware('userauth');
-    //     Route::get('statistical-reports', [ReportController::class, 'getStatisticalReportsPage'])->middleware('userauth');
-    // });
-
-    // Route::group([
-    //     'prefix'     => 'personal-data',
-    // ], function () {
-    //     Route::get('add', [ProfileController::class, 'addPersonalDataPage'])->middleware('userauth');
-    //     Route::get('edit', [ProfileController::class, 'editPersonalData'])->middleware('userauth');
-    //     Route::get('view', [ProfileController::class, 'addPersonalDataPage'])->middleware('userauth');
-    // });
-
-    // Route::group([
-    // 'prefix' => '201-library',
-    // ], function () {
-    // Route::get('/', [LibraryController::class, 'index'])->middleware('userauth');
-    // Route::post('/city-municipality/add', [LibraryController::class, 'addCityMunicipality'])->middleware('userauth');
-    // Route::get('/city-municipality/record', [LibraryController::class, 'getCityMunicipality'])->middleware('userauth');
-    // Route::post('/degree/add', [LibraryController::class, 'addDegree'])->middleware('userauth');
-    // Route::get('/degree/record', [LibraryController::class, 'getDegree'])->middleware('userauth');
-    // Route::post('/course-major/add', [LibraryController::class, 'addCourseMajor'])->middleware('userauth');
-    // Route::get('/course-major/record', [LibraryController::class, 'getCourseMajor'])->middleware('userauth');
-    // Route::post('/school/add', [LibraryController::class, 'addSchool'])->middleware('userauth');
-    // Route::get('/school/record', [LibraryController::class, 'getSchool'])->middleware('userauth');
-    // Route::post('/examination-reference/add', [LibraryController::class, 'addExaminationReference'])->middleware('userauth');
-    // Route::get('/examination-reference/record', [LibraryController::class, 'getExaminationReference'])->middleware('userauth');
-    // Route::post('/language-dialects/add', [LibraryController::class, 'addLanguageDialects'])->middleware('userauth');
-    // Route::get('/language-dialects/record', [LibraryController::class, 'getLanguageDialects'])->middleware('userauth');
-    // Route::post('/ces-status-reference/add', [LibraryController::class, 'addCesStatusReference'])->middleware('userauth');
-    // Route::get('/ces-status-reference/record', [LibraryController::class, 'getCesStatusReference'])->middleware('userauth');
-    // Route::post('/acquired-thru/add', [LibraryController::class, 'addAcquiredThru'])->middleware('userauth');
-    // Route::get('/acquired-thru/record', [LibraryController::class, 'getAcquiredThru'])->middleware('userauth');
-    // Route::post('/ces-status-type/add', [LibraryController::class, 'addStatusType'])->middleware('userauth');
-    // Route::get('/ces-status-type/record', [LibraryController::class, 'getStatusType'])->middleware('userauth');
-    // Route::post('/appointing-authority/add', [LibraryController::class, 'addAppointingAuthority'])->middleware('userauth');
-    // Route::get('/appointing-authority/record', [LibraryController::class, 'getAppointingAuthority'])->middleware('userauth');
-    // Route::post('/expertise-category/add', [LibraryController::class, 'addExpertiseCategory'])->middleware('userauth');
-    // Route::get('/expertise-category/record', [LibraryController::class, 'getExpertiseCategory'])->middleware('userauth');
-    // Route::post('/special-skill/add', [LibraryController::class, 'addSpecialSkill'])->middleware('userauth');
-    // Route::get('/special-skill/record', [LibraryController::class, 'getSpecialSkill'])->middleware('userauth');
-    // Route::post('/case-nature/add', [LibraryController::class, 'addCaseNature'])->middleware('userauth');
-    // Route::get('/case-nature/record', [LibraryController::class, 'getCaseNature'])->middleware('userauth');
-    // Route::post('/case-status/add', [LibraryController::class, 'addCaseStatus'])->middleware('userauth');
-    // Route::get('/case-status/record', [LibraryController::class, 'getCaseStatus'])->middleware('userauth');
-    // Route::post('/location-city/add', [LibraryController::class, 'addLocationCity'])->middleware('userauth');
-    // Route::get('/location-city/record', [LibraryController::class, 'getLocationCity'])->middleware('userauth');
-    // Route::post('/location-province/add', [LibraryController::class, 'addLocationProvince'])->middleware('userauth');
-    // Route::get('/location-province/record', [LibraryController::class, 'getLocationProvince'])->middleware('userauth');
-    // Route::post('/location-region/add', [LibraryController::class, 'addLocationRegion'])->middleware('userauth');
-    // Route::get('/location-region/record', [LibraryController::class, 'getLocationRegion'])->middleware('userauth');
-    // });
-
-
-    // Route::group([
-    //     'prefix'     => 'rights-management',
-    // ], function () {
-    //     Route::get('/roles', [RolesController::class, 'addRolesPage'])->middleware('userauth');
-    //     Route::get('/user', [UserController::class, 'addUsersPage'])->middleware('userauth');
-    //     Route::get('/edit-user/{id}', [UserController::class, 'editUsersPage'])->middleware('userauth');
-    // });
-
-    // Route::group([
-    //     'prefix'     => 'online-ces-plantilla-management-system',
-    // ], function () {
-    //     Route::post('department-Agency/add', [DepartmentAgencyController::class, 'addPlantillaTblDeptAgency'])->middleware('userauth');
-    //     Route::get('department-Agency/record', [DepartmentAgencyController::class, 'getPlantillaTblDeptAgency'])->middleware('userauth');
-    //     Route::post('sector-manager/add', [SectorManager::class, 'addSectorManager'])->middleware('userauth');
-    //     Route::get('sector-manager/record', [SectorManager::class, 'getSectorManager'])->middleware('userauth');
-    //     Route::post('agency-location/add', [SectorManager::class, 'addPlantillaTblAgencyLocation'])->middleware('userauth');
-    //     Route::get('agency-location/record', [SectorManager::class, 'getPlantillaTblAgencyLocation'])->middleware('userauth');
-    //     Route::post('office-manager/add', [SectorManager::class, 'addPlantillaTblOffice'])->middleware('userauth');
-    //     Route::get('office-manager/record', [SectorManager::class, 'getPlantillaTblOffice'])->middleware('userauth');
-    //     Route::get('/view', [PlantillaController::class, 'viewPlantillaManagement'])->middleware('userauth');
-    // });
-
-    // Route::group([
-    //     'prefix'     => 'system-utility',
-    // ], function () {
-    //     Route::get('database-migration', [MigrationController::class, 'getMigrationSystemPage'])->middleware('userauth');
-    // });
 });
