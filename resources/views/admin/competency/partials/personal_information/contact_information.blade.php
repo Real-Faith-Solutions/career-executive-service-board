@@ -2,7 +2,7 @@
 @section('title', 'Competency Contact Information')
 @section('sub', 'Contact Information')
 @section('content')
-@include('admin.competency.view_profile.header')
+@include('admin.competency.view_profile.header', ['cesno'=>$cesno])
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
