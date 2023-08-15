@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
 
         $this->call([
-            RolesTableSeeder::class,
             PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             // ProfileData::class,

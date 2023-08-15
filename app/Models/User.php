@@ -50,29 +50,13 @@ class User extends Authenticatable
         return $this->roles->contains('role_name', $role);
     }
 
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class, 'permission_roles');
-    }
-
     public function assignRole($role)
     {
-
         if (is_string($role)) {
             $role = Role::where('role_name', $role)->firstOrFail();
         }
 
         $this->roles()->syncWithoutDetaching($role);
-
-    }
-
-    public function assignPermission($permission)
-    {
-        if (is_string($permission)) {
-            $permission = Permission::where('permission_name', $permission)->firstOrFail();
-        }
-
-        $this->permissions()->syncWithoutDetaching($permission);
     }
 
 }
