@@ -4,18 +4,18 @@
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
-{{-- <div class="my-5 flex justify-end">
-    <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
+<div class="my-5 flex justify-end">
+    {{-- <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
       </lord-icon>
-    </a>
+    </a> --}}
 
-    <a href="{{ route('other-training.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
-</div> --}}
+    <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
+</div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">

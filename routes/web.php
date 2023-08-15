@@ -92,10 +92,8 @@ Route::get('/', function () {
 Route::middleware(['userauth'])->group(function () {
     Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard');
 
-
     // 201 profile routes
     Route::prefix('201-profile')->group(function () {
-
         Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
         Route::post('create/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
         Route::get('list', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
@@ -104,7 +102,6 @@ Route::middleware(['userauth'])->group(function () {
             Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
             Route::post('upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
         });
-
 
         Route::prefix('family-profile')->group(function () {
             Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
@@ -386,18 +383,22 @@ Route::middleware(['userauth'])->group(function () {
     });
     // end of plantilla routes
 
-
     // compotency routes
     Route::prefix('competency')->group(function () {
-        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-        Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
-        Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-        Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
-        Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
-        Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
-        Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
-    });
+        Route::prefix('personal-data')->group(function () {
+            Route::get('compentency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+            Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
+            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+        });
 
+        Route::prefix('non-ces-training-accredited')->group(function () {
+            Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
+        });
+    });
     // end of competency routes
 
     // 201 Library

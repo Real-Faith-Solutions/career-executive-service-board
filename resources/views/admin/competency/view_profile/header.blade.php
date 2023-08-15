@@ -78,9 +78,34 @@
                 </div>
             </li>
 
-            {{-- <li>
+            <li>
+                <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="othersTab" id="dropdownDefaultButton" type="button">
+                    Training Type Library
+                    <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
+                    </svg>
+                </button>
+                <!-- Training Type Library Tab menu -->
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="othersTab">
+                    <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
+                        <li>
+                            <a class="btn category-button inline-flex" href="" >Training Category</a>
+                        </li>
+
+                        <li>
+                            <a class="btn category-button inline-flex" href="" >Field of Specialization</a>
+                        </li>
+
+                        <li>
+                            <a class="btn category-button inline-flex" href="" >Training Secreteriat</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
                 <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="trainingsTab" id="dropdownDefaultButton" type="button">
-                    Trainings
+                    Trainings Sub Module
                     <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                         <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                     </svg>
@@ -89,53 +114,19 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="trainingsTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('other-training.index', ['cesno' => $cesno]) }}" >Non-CES Accredited Training</a>
-                        </li>
-                    </ul>
-                </div>
-            </li> --}}
-
-            {{-- <li>
-                <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="othersTab" id="dropdownDefaultButton" type="button">
-                    Others
-                    <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
-                    </svg>
-                </button>
-                <!-- othersTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="othersTab">
-                    <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('health-record.index', ['cesno' => $cesno]) }}">Health Records</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" >Award And Citations</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('affiliation.index', ['cesno' => $cesno]) }}" >Major Civic and Professional Affiliations</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('case-record.index', ['cesno'=>$cesno]) }}" >Case Records</a>
+                            <a class="btn category-button inline-flex" href="" >Resource Speakers/Persons Manager</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('language.index', ['cesno'=>$cesno]) }}" >Languages Dialects</a>
+                            <a class="btn category-button inline-flex" href="" >Training Venue Manager</a>
                         </li>
+
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('eligibility-rank-tracker.index', ['cesno' => $cesno]) }}" >Eligibility and Rank Tracker</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
-                        </li>
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" >PDF Files</a>
+                            <a class="btn category-button inline-flex" href="" >Training Provider Manager</a>
                         </li>
                     </ul>
                 </div>
-            </li> --}}
+            </li>
         </ul>
     </div>
 </nav>
