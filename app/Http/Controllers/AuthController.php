@@ -19,10 +19,9 @@ class AuthController extends Controller
 
         if (Auth::check() === true) {
 
-            return Redirect::to('/admin/dashboard');
+            return Redirect::to('/');
         }
         else{
-
             return view('login');
         }
     }
@@ -127,7 +126,7 @@ class AuthController extends Controller
                     }
                     else{
 
-                        return Redirect::to('/admin');
+                        return Redirect::to('/');
                     }
 
                 }
@@ -155,7 +154,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 
 

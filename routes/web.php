@@ -87,10 +87,10 @@ Route::get('/', function () {
     } else {
         return Redirect::route('dashboard');
     }
+    Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard')->middleware('userauth');
 });
 
 Route::middleware(['userauth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard');
 
 
     // 201 profile routes
