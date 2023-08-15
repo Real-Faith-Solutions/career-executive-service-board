@@ -56,7 +56,7 @@
         </div>
         {{-- end --}}
     @endif
-    
+
     {{-- confirmation dialog --}}
     <div id="confirmationBackdrop" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
         <div id="confirmationDialog" class="bg-white w-1/3 p-6 rounded-lg shadow-lg hidden" data-form-id="">
@@ -133,6 +133,10 @@
 
     {{-- js script for confirmation button --}}
     <script src="{{ asset('js/confirmation.js') }}"></script>
+    {{-- end --}}
+
+    {{-- js script for currentTime and date button --}}
+    <script src="{{ asset('js/currentTime.js') }}"></script>
     {{-- end --}}
 
     {{-- toast for personal data success --}}
