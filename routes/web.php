@@ -89,146 +89,20 @@ Route::get('/', function () {
     }
 });
 
-Route::middleware(['verified', 'userauth'])->group(function () {
-
-    Route::prefix('admin')->group(function () {
-
-        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-
-        Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
-
-        Route::prefix('competency')->group(function () {
-            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
-            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
-            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
-            Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
-            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
-        });
+Route::middleware(['userauth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard');
 
 
-        Route::prefix('plantilla')->group(function () {
+    // 201 profile routes
+    Route::prefix('201-profile')->group(function () {
 
-            Route::prefix('plantilla-management')->group(function () {
-                Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
-            });
+        Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
+        Route::post('create/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
+        Route::get('list', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
 
-            Route::prefix('sector-manager')->group(function () {
-                Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
-
-                Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
-                Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
-                Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
-                Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
-                Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
-                Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
-                Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
-                Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
-            });
-
-            Route::prefix('department-agency-manager')->group(function () {
-                Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
-                Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
-            });
-
-            Route::prefix('agency-location-manager')->group(function () {
-                Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
-            });
-
-            Route::prefix('office-manager')->group(function () {
-                Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
-            });
-
-            Route::prefix('plantilla-position-manager')->group(function () {
-                Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
-            });
-
-            Route::prefix('appointee-occupant-manager')->group(function () {
-                Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
-            });
-            Route::prefix('appointee-occupant-browser')->group(function () {
-                Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
-            });
-        });
-
-        Route::prefix('201-library')->group(function () {
-
-            Route::prefix('gender-by-birth')->group(function () {
-                Route::get('recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [GenderByBirthController::class, 'restore'])->name('gender-by-birth.restore');
-                Route::resource('gender-by-birth', GenderByBirthController::class);
-            });
-
-            Route::prefix('gender-by-choice')->group(function () {
-                Route::get('recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [GenderByChoiceController::class, 'restore'])->name('gender-by-choice.restore');
-                Route::resource('gender-by-choice', GenderByChoiceController::class);
-            });
-
-            Route::prefix('civil-status')->group(function () {
-                Route::get('recently-deleted', [CivilStatusController::class, 'recentlyDeleted'])->name('civil-status.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [CivilStatusController::class, 'forceDelete'])->name('civil-status.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [CivilStatusController::class, 'restore'])->name('civil-status.restore');
-                Route::resource('civil-status', CivilStatusController::class);
-            });
-
-            Route::prefix('title')->group(function () {
-                Route::get('recently-deleted', [TitleController::class, 'recentlyDeleted'])->name('title.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [TitleController::class, 'forceDelete'])->name('title.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [TitleController::class, 'restore'])->name('title.restore');
-                Route::resource('title', TitleController::class);
-            });
-
-            Route::prefix('record-status')->group(function () {
-                Route::get('recently-deleted', [RecordStatusController::class, 'recentlyDeleted'])->name('record-status.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [RecordStatusController::class, 'forceDelete'])->name('record-status.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [RecordStatusController::class, 'restore'])->name('record-status.restore');
-                Route::resource('record-status', RecordStatusController::class);
-            });
-
-            Route::prefix('religion')->group(function () {
-                Route::get('recently-deleted', [ReligionController::class, 'recentlyDeleted'])->name('religion.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [ReligionController::class, 'forceDelete'])->name('religion.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [ReligionController::class, 'restore'])->name('religion.restore');
-                Route::resource('religion', ReligionController::class);
-            });
-
-            Route::prefix('indigeneous-group')->group(function () {
-                Route::get('recently-deleted', [IndigenousGroupController::class, 'recentlyDeleted'])->name('indigeneous-group-recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [IndigenousGroupController::class, 'forceDelete'])->name('indigeneous-group-forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [IndigenousGroupController::class, 'restore'])->name('indigeneous-group-restore');
-                Route::resource('indigeneous-group', IndigenousGroupController::class);
-            });
-
-            Route::prefix('pwd')->group(function () {
-                Route::get('recently-deleted', [PWDController::class, 'recentlyDeleted'])->name('pwd.recently-deleted');
-                Route::post('recently-deleted/force-delete/{ctrlno}', [PWDController::class, 'forceDelete'])->name('pwd.forceDelete');
-                Route::post('recently-deleted/restore/{ctrlno}', [PWDController::class, 'restore'])->name('pwd.restore');
-                Route::resource('pwd', PWDController::class);
-            });
-
-            Route::prefix('educational-schools')->group(function () {
-                Route::get('recently-deleted', [ProfileLibTblEducSchoolController::class, 'recentlyDeleted'])->name('educational-schools.recently-deleted');
-                Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducSchoolController::class, 'forceDelete'])->name('educational-schools.forceDelete');
-                Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducSchoolController::class, 'restore'])->name('educational-schools.restore');
-                Route::resource('educational-schools', ProfileLibTblEducSchoolController::class);
-            });
-
-            Route::prefix('educational-major')->group(function () {
-                Route::get('recently-deleted', [ProfileLibTblEducMajorController::class, 'recentlyDeleted'])->name('educational-major.recently-deleted');
-                Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducMajorController::class, 'forceDelete'])->name('educational-major.forceDelete');
-                Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducMajorController::class, 'restore'])->name('educational-major.restore');
-                Route::resource('educational-major', ProfileLibTblEducMajorController::class);
-            });
-
-            Route::prefix('educational-degree')->group(function () {
-                Route::get('recently-deleted', [ProfileLibTblEducDegreeController::class, 'recentlyDeleted'])->name('educational-degree.recently-deleted');
-                Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
-                Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
-                Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
-            });
+        Route::prefix('personal-data')->group(function () {
+            Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
+            Route::post('upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
         });
 
 
@@ -291,9 +165,7 @@ Route::middleware(['verified', 'userauth'])->group(function () {
             Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
             Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
         });
-        Route::prefix('personal-data')->group(function () {
-            Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
-        });
+
         Route::prefix('contact-information')->group(function () {
             Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
             Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
@@ -465,38 +337,155 @@ Route::middleware(['verified', 'userauth'])->group(function () {
             Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
         });
+    });
+    // end of 201 profile routes
 
+    // plantilla routes
+    Route::prefix('plantilla')->group(function () {
 
-        // 201 profiling routes
+        Route::prefix('plantilla-management')->group(function () {
+            Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
+        });
 
-        // end 201 profiling
+        Route::prefix('sector-manager')->group(function () {
+            Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
 
+            Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
+            Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
+            Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+            Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
+            Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
+            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
+            Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
+            Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
+        });
 
+        Route::prefix('department-agency-manager')->group(function () {
+            Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
+            Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
+        });
 
+        Route::prefix('agency-location-manager')->group(function () {
+            Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
+        });
 
+        Route::prefix('office-manager')->group(function () {
+            Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+        });
 
+        Route::prefix('plantilla-position-manager')->group(function () {
+            Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+        });
 
-        Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard')->middleware('userauth');
-
-
-
-        Route::prefix('201-profile')->group(function () {
-
-            Route::get('/add', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('userauth');
-            // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
-            // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
-            // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
-            Route::get('/view', [ProfileController::class, 'postSearch'])->middleware('userauth');
-
-            // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
-            Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('userauth');
-
-            Route::post('/add-profile-201/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
-            Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
+        Route::prefix('appointee-occupant-manager')->group(function () {
+            Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+        });
+        Route::prefix('appointee-occupant-browser')->group(function () {
+            Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
         });
     });
+    // end of plantilla routes
+
+
+    // compotency routes
+    Route::prefix('competency')->group(function () {
+        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+        Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+        Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+        Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+        Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+        Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
+        Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+    });
+
+    // end of competency routes
+
+    // 201 Library
+    Route::prefix('201-library')->group(function () {
+
+        Route::prefix('gender-by-birth')->group(function () {
+            Route::get('recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [GenderByBirthController::class, 'restore'])->name('gender-by-birth.restore');
+            Route::resource('gender-by-birth', GenderByBirthController::class);
+        });
+
+        Route::prefix('gender-by-choice')->group(function () {
+            Route::get('recently-deleted', [GenderByChoiceController::class, 'recentlyDeleted'])->name('gender-by-choice.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByChoiceController::class, 'forceDelete'])->name('gender-by-choice.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [GenderByChoiceController::class, 'restore'])->name('gender-by-choice.restore');
+            Route::resource('gender-by-choice', GenderByChoiceController::class);
+        });
+
+        Route::prefix('civil-status')->group(function () {
+            Route::get('recently-deleted', [CivilStatusController::class, 'recentlyDeleted'])->name('civil-status.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [CivilStatusController::class, 'forceDelete'])->name('civil-status.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [CivilStatusController::class, 'restore'])->name('civil-status.restore');
+            Route::resource('civil-status', CivilStatusController::class);
+        });
+
+        Route::prefix('title')->group(function () {
+            Route::get('recently-deleted', [TitleController::class, 'recentlyDeleted'])->name('title.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [TitleController::class, 'forceDelete'])->name('title.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [TitleController::class, 'restore'])->name('title.restore');
+            Route::resource('title', TitleController::class);
+        });
+
+        Route::prefix('record-status')->group(function () {
+            Route::get('recently-deleted', [RecordStatusController::class, 'recentlyDeleted'])->name('record-status.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [RecordStatusController::class, 'forceDelete'])->name('record-status.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [RecordStatusController::class, 'restore'])->name('record-status.restore');
+            Route::resource('record-status', RecordStatusController::class);
+        });
+
+        Route::prefix('religion')->group(function () {
+            Route::get('recently-deleted', [ReligionController::class, 'recentlyDeleted'])->name('religion.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [ReligionController::class, 'forceDelete'])->name('religion.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [ReligionController::class, 'restore'])->name('religion.restore');
+            Route::resource('religion', ReligionController::class);
+        });
+
+        Route::prefix('indigeneous-group')->group(function () {
+            Route::get('recently-deleted', [IndigenousGroupController::class, 'recentlyDeleted'])->name('indigeneous-group-recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [IndigenousGroupController::class, 'forceDelete'])->name('indigeneous-group-forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [IndigenousGroupController::class, 'restore'])->name('indigeneous-group-restore');
+            Route::resource('indigeneous-group', IndigenousGroupController::class);
+        });
+
+        Route::prefix('pwd')->group(function () {
+            Route::get('recently-deleted', [PWDController::class, 'recentlyDeleted'])->name('pwd.recently-deleted');
+            Route::post('recently-deleted/force-delete/{ctrlno}', [PWDController::class, 'forceDelete'])->name('pwd.forceDelete');
+            Route::post('recently-deleted/restore/{ctrlno}', [PWDController::class, 'restore'])->name('pwd.restore');
+            Route::resource('pwd', PWDController::class);
+        });
+
+        Route::prefix('educational-schools')->group(function () {
+            Route::get('recently-deleted', [ProfileLibTblEducSchoolController::class, 'recentlyDeleted'])->name('educational-schools.recently-deleted');
+            Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducSchoolController::class, 'forceDelete'])->name('educational-schools.forceDelete');
+            Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducSchoolController::class, 'restore'])->name('educational-schools.restore');
+            Route::resource('educational-schools', ProfileLibTblEducSchoolController::class);
+        });
+
+        Route::prefix('educational-major')->group(function () {
+            Route::get('recently-deleted', [ProfileLibTblEducMajorController::class, 'recentlyDeleted'])->name('educational-major.recently-deleted');
+            Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducMajorController::class, 'forceDelete'])->name('educational-major.forceDelete');
+            Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducMajorController::class, 'restore'])->name('educational-major.restore');
+            Route::resource('educational-major', ProfileLibTblEducMajorController::class);
+        });
+
+        Route::prefix('educational-degree')->group(function () {
+            Route::get('recently-deleted', [ProfileLibTblEducDegreeController::class, 'recentlyDeleted'])->name('educational-degree.recently-deleted');
+            Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
+            Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
+            Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
+        });
+    });
+    // end of 201 Library
+
 });
 
+
+// auth routes
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
 Route::get('/login', [AuthController::class, 'getLoginHomePage']);
 Route::get('/logout', [AuthController::class, 'userLogout']);
