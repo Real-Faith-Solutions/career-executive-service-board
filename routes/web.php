@@ -82,32 +82,32 @@ Route::get('/preview-email', function () {
 
 Route::get('/', function () {
 
-    if(!Auth::check()){
+    if (!Auth::check()) {
         return view('login');
-    }else{
+    } else {
         return Redirect::route('dashboard');
     }
 });
 
-Route::middleware(['verified', 'userauth'])->group(function(){
+Route::middleware(['verified', 'userauth'])->group(function () {
 
-Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
 
-    Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
 
-    Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
+        Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
 
-    Route::prefix('competency')->group(function () {
-    Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
-    Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-    Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
-    Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
-    Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
-    Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
-});
+        Route::prefix('competency')->group(function () {
+            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+            Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
+            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+        });
 
 
-    Route::prefix('plantilla')->group(function () {
+        Route::prefix('plantilla')->group(function () {
 
             Route::prefix('plantilla-management')->group(function () {
                 Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
@@ -476,34 +476,30 @@ Route::prefix('admin')->group(function () {
 
 
 
-            Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard')->middleware('userauth');
+        Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard')->middleware('userauth');
 
 
 
-            Route::prefix('201-profile')->group(function () {
+        Route::prefix('201-profile')->group(function () {
 
-                Route::get('/add', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('userauth');
-                // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
-                // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
-                // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
-                Route::get('/view', [ProfileController::class, 'postSearch'])->middleware('userauth');
+            Route::get('/add', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('userauth');
+            // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
+            // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
+            // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');
+            Route::get('/view', [ProfileController::class, 'postSearch'])->middleware('userauth');
 
-                // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
-                Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('userauth');
+            // Route::get('views/{cesno}', [ProfileController::class, 'view201ProfilePage'])->middleware('userauth');
+            Route::get('view/{cesno}', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('userauth');
 
-                Route::post('/add-profile-201/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
-                Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
-
-            });
-
-
+            Route::post('/add-profile-201/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
+            Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
+        });
     });
-
 });
 
-    Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
-    Route::get('/login', [AuthController::class, 'getLoginHomePage']);
-    Route::get('/logout', [AuthController::class, 'userLogout']);
-    Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
-    Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.email');
-    Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPasswordResetPage'])->name('password.reset');
+Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'getLoginHomePage']);
+Route::get('/logout', [AuthController::class, 'userLogout']);
+Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.email');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPasswordResetPage'])->name('password.reset');
