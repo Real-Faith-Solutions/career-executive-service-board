@@ -74,7 +74,7 @@ use Illuminate\Support\Facades\Redirect;
 
 // email preview
 Route::get('/preview-email', function () {
-    
+
     $imagePath = public_path('images/branding.png');
     $data = [
         'email' => 'recipient@example.com',
@@ -91,7 +91,7 @@ Route::get('/', function () {
     if(!Auth::check()){
         return view('login');
     }else{
-        return Redirect::to('/admin/dashboard');
+        return Redirect::route('dashboard');
     }
 });
 
@@ -858,21 +858,22 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPass
 
 // Page content route
 
-Route::group([
-    'prefix'     => 'admin',
-], function () {
-    Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
+Route::prefix('test')->group(function (){
+    Route::get('/', [DashboardController::class, 'getAllData'])->middleware('userauth');
 
-    Route::group([
-        'prefix'     => 'dashboard',
-    ], function () {
-        Route::get('/', [DashboardController::class, 'getDashboardPage'])->middleware('userauth');
-    });
+});
+
+
+
+ Route::prefix('admin')->group(function () {
+
+    Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard')->middleware('userauth');
+
 
     //wag toh
-    Route::group(['prefix'=> 'profile',], function () {
+    Route::prefix('201-profile')->group(function () {
 
-        Route::get('add', [ProfileController::class, 'addProfile'])->middleware('userauth');
+        Route::get('add', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('userauth');
         // Route::store('store', [ProfileController::class, 'store'])->middleware('userauth');
         // Route::post('addProfile201', [AddProfile201::class, 'store'])->middleware('userauth');
         // Route::get('add', [ProfileController::class, 'add201ProfilePage'])->middleware('userauth');

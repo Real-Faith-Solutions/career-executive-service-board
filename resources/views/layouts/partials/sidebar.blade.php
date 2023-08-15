@@ -2,7 +2,7 @@
     <div class="h-full overflow-y-auto bg-white px-3 pb-4 dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
-                <a href="{{ url('admin/dashboard') }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <a href="{{ route('dashboard') }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -35,7 +35,7 @@
 
                         {{-- @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Add') == 'true') --}}
                         <li>
-                            <a href="{{ url('admin/profile/add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
+                            <a href="{{ route('profile.add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
                         </li>
                         {{-- @endif
                         @if (App\Http\Controllers\ProfileController::latestCesNo() != 1) --}}

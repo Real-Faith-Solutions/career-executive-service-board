@@ -11,6 +11,13 @@ use App\Definitions\AppDefinitions;
 class DashboardController extends Controller
 {
 
+    public function getAllData(){
+        $totalActiveCESO = PersonalData::count();
+        return view('admin.dashboard', compact(
+            'totalActiveCESO',
+        ));
+    }
+
     public function getDashboardData(){
 
         $data = array();
@@ -134,7 +141,7 @@ class DashboardController extends Controller
                     ],
                     "colors" => ['dodgerblue', 'hotpink']
                 ],
-                
+
                 ////// BAR CHARTS
                 "by_profile_ces_status" => [
                     "group_headers" => "No. of Profiles per CES Status",
@@ -162,13 +169,13 @@ class DashboardController extends Controller
 
     public function getDashboardPage(){
 
-        
+
 
             $data = $this->getDashboardData();
-            
+
             return view('admin.dashboard', compact('data'))->render();
-        
-    
-    
+
+
+
     }
 }
