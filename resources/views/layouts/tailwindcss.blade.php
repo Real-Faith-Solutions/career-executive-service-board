@@ -25,7 +25,7 @@
             @apply ml-2 text-sm font-medium text-gray-900;
         }
         .card {
-            @apply overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 mb-3;
+            @apply overflow-hidden shadow-sm rounded-lg p-6 text-slate-500 mb-3;
         }
 
         input.invalid {

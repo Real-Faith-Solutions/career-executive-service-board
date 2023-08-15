@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="png" href="{{ asset('images/branding.png') }}">
-    <title>@yield('title')</title>
+    <title>@yield('title') - {{ config('app.name') }}</title>
 
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css'>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js'></script>
+
+    {{-- charts --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     {{-- sweet alert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
@@ -56,7 +60,7 @@
         </div>
         {{-- end --}}
     @endif
-    
+
     {{-- confirmation dialog --}}
     <div id="confirmationBackdrop" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
         <div id="confirmationDialog" class="bg-white w-1/3 p-6 rounded-lg shadow-lg hidden" data-form-id="">
@@ -133,6 +137,10 @@
 
     {{-- js script for confirmation button --}}
     <script src="{{ asset('js/confirmation.js') }}"></script>
+    {{-- end --}}
+
+    {{-- js script for currentTime and date button --}}
+    <script src="{{ asset('js/currentTime.js') }}"></script>
     {{-- end --}}
 
     {{-- toast for personal data success --}}
