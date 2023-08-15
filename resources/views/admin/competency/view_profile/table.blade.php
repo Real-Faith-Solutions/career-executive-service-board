@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', '201 profiling table')
+@section('title', 'Competency 201 profiling table')
 @section('content')
 
     <section>
-        {{-- <div class="grid grid-cols-3">
+        <div class="grid grid-cols-3">
             @include('components.search')
-        </div> --}}
-
+        </div>
+        
         <div class="relative my-5 overflow-x-auto sm:rounded-lg">
             <table class="w-full text-left text-sm text-gray-500">
                 <thead class="bg-gray-50 text-xs uppercase text-gray-700">
@@ -35,7 +35,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="" class="font-medium">View profile</a>
+                                <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium">View profile</a>
                             </td>
                         </tr>
                     @endforeach

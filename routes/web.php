@@ -9,6 +9,8 @@ use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
+use App\Http\Controllers\Competency\ContactInformationController;
+use App\Http\Controllers\Competency\OtherTrainingManagementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ContactInfoController;
@@ -89,10 +91,23 @@ Route::get('/', function () {
 
 Route::middleware(['verified', 'userauth'])->group(function(){
 
-    Route::prefix('admin')->group(function () {
-        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-        Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
-        Route::prefix('plantilla')->group(function () {
+Route::prefix('admin')->group(function () {
+
+    Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+
+    Route::get('201-view-profile', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
+
+    Route::prefix('competency')->group(function () {
+    Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+    Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+    Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+    Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+    Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
+    Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+});
+
+
+    Route::prefix('plantilla')->group(function () {
 
             Route::prefix('plantilla-management')->group(function () {
                 Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');

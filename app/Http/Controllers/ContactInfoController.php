@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactInfoController extends Controller
 {
+    // Competency Profile Contact Information
+    public function index($cesno){
+
+        $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
+
+    }
+
+    // 201 Profile Contact Information  
     public function show($cesno){
 
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
