@@ -9,24 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class CompetencyController extends Controller
+class ContactInformationController extends Controller
 {
-    public function index(){
-
-      $competencyData = PersonalData::paginate(25);
-
-      return view('admin.competency.view_profile.table', compact('competencyData'));
-
+    public function updateOrCreate($cesno)
+    {
+        $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
     }
-
-    public function updateOrCreate($cesno){
-
-      $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-      $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
-      return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
-
-    }
-
+  
     public function store(Request $request, $cesno)
     {
         $request->validate([
@@ -37,16 +28,16 @@ class CompetencyController extends Controller
             'personal_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
             'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
         ]);
-
+  
         // Retrieve encoder information
         $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
-
+  
         // Find the associated PersonalData record
         $personalData = PersonalData::findOrFail($cesno);
-
+  
         // Update or create the associated Contact record
         $contacts = $personalData->contacts()->Create(
             [
@@ -59,10 +50,10 @@ class CompetencyController extends Controller
                 'encoder' => $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension,
             ]
         );
-
+  
         return redirect()->back()->with('message', 'Successfully Saved');
     }
-
+  
     public function update(Request $request, $ctrlno, $cesno)
     {
         $request->validate([
@@ -73,13 +64,13 @@ class CompetencyController extends Controller
             'personal_mobile_number2' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
             'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
         ]);
-
+  
         // Retrieve encoder information
         $userLastName = Auth::user()->last_name;
         $userFirstName = Auth::user()->first_name;
         $userMiddleName = Auth::user()->middle_name; 
         $userNameExtension = Auth::user()->name_extension;
-
+  
         $contact = Contacts::find($ctrlno);
         $contact->official_email = $request->official_email;
         $contact->official_mobile_number1 = $request->official_mobile_number1;
@@ -89,8 +80,33 @@ class CompetencyController extends Controller
         $contact->office_telephone_number = $request->office_telephone_number;
         $contact->encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
         $contact->save();
-
+  
         return redirect()->back()->with('message', 'Updated Successfuly');
+  
+    }
 
+    public function updateEmail(Request $request, $cesno)
+    {
+        $request->validate([
+            'email' => ['required', Rule::unique('profile_tblMain')->ignore($cesno, 'cesno'), 'min:9', 'max:100'],
+        ]);
+  
+        // update email in personal data
+        $email = PersonalData ::find($cesno);
+        $email->email = $request->email;
+
+        if(!$email){
+            return redirect()->back()->with('error', 'Something Went Wrong');
+        }else{
+            $email->save();
+        }
+
+        // update email in contacts
+        $contact = Contacts::find($cesno);
+        $contact->official_email = $request->email;
+        $contact->save();
+  
+        return redirect()->back()->with('message', 'Email Updated Successfuly');
+  
     }
 }
