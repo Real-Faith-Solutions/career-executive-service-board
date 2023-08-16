@@ -16,6 +16,7 @@ class RolesTableSeeder extends Seeder
         $adminRole->assignPermission('create-posts');
         $adminRole->assignPermission('edit-posts');
         $adminRole->assignPermission('manage-users');
+        $adminRole->assignPermission('add-profile');
         
         $userRole->assignPermission('create-posts');
         $userRole->assignPermission('edit-posts');

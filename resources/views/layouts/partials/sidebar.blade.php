@@ -33,16 +33,16 @@
                     </button>
                     <ul id="dropdown-dashboard" class="hidden space-y-2 py-2">
 
-                        {{-- @if (App\Http\Controllers\RolesController::validateUserExecutive201RoleAccess('Personal Data', 'Add') == 'true') --}}
+                        @if($userPermissions->contains('permission_name', 'add-profile'))
                         <li>
-                            <a href="{{ url('admin/profile/add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
+                            <a href="{{ url('profile/add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
                         </li>
-                        {{-- @endif
-                        @if (App\Http\Controllers\ProfileController::latestCesNo() != 1) --}}
+                        @endif
+
                         <li>
                             <a href="{{ route('view-profile-201.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
                         </li>
-                        {{-- @endif --}}
+                        
                         <li>
                             <a href="{{ route('show-pending-pdf-files.pendingFiles') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Pending Files</a>
                         </li>

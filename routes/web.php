@@ -472,7 +472,7 @@ Route::post('/add-profile-201/{cesno}', [AddProfile201::class, 'store'])->name('
 Route::post('/upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
 // end 201 profiling
 
-Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/login', [AuthController::class, 'getLoginHomePage']);
 Route::get('/logout', [AuthController::class, 'userLogout']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
@@ -863,15 +863,9 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPass
 
 // Page content route
 Route::middleware(['auth'])->group(function () {
-    Route::middleware(['role:admin'])->prefix('admin')->group(function () {
+    Route::middleware(['role:admin,user'])->group(function () {
 
-        Route::get('/', [DashboardController::class, 'getDashboardPage']);
-
-        Route::group([
-            'prefix'     => 'dashboard',
-        ], function () {
-            Route::get('/', [DashboardController::class, 'getDashboardPage']);
-        });
+        Route::get('/dashboard', [DashboardController::class, 'getDashboardPage']);
 
         Route::group(['prefix'=> 'profile',], function () {
 

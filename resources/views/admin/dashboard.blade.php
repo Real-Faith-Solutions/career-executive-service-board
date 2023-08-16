@@ -5,6 +5,15 @@
 
 <!-- Main content -->
 <section class="content my-3">
+
+    @if($userPermissions->contains('permission_name', 'add-profile'))
+        <p>User has permission to add profile.</p>
+    @endif
+
+    @if($userPermissions->contains('permission_name', 'edit-posts'))
+        <p>User has permission to edit posts.</p>
+    @endif
+    
     <div class="container-fluid" style="color: white;">
         <!-- Small boxes (Stat box) -->
         <div class="row">
