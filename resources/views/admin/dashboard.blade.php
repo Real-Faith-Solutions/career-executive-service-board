@@ -4,14 +4,15 @@
             "Total Active CESO",
             "Total Deceased CESO",
             "Total Retired CESO",
+            "Total Inacitve"
         ];
         const data = {
             labels: labels,
             datasets: [
                 {
-                    backgroundColor: ["#ef4444", "#eab308", "#3b82f6"],
-                    borderColor: ["#ef4444", "#eab308", "#3b82f6"],
-                    data: [{{ $totalCESOActive }}, {{ $totalCESODeceased }} , {{ $totalCESORetired }}],
+                    backgroundColor: ["#1F9D55", "#C05621", "#1C64F2","#DC2626"],
+                    borderColor: ["#1F9D55", "#C05621", "#1C64F2", "#DC2626"],
+                    data: [{{ $totalCESOActive }}, {{ $totalCESODeceased }} , {{ $totalCESORetired }}, {{ $totalCESOInactive }}],
                     fill: true,
                 },
 
@@ -35,7 +36,7 @@
 
 @extends('layouts.app')
 @section('title', 'Dashboard')
-@section('content')    
+@section('content')
 
     <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500 text-2xl">
         <h1>Hello {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>
