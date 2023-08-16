@@ -28,7 +28,7 @@ class ExaminationTakenController extends Controller
         return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno'));
 
     }
-    
+
     public function store(Request $request, $cesno){
 
         $request->validate([
@@ -40,7 +40,7 @@ class ExaminationTakenController extends Controller
             'license_number' => ['nullable', 'min:2', 'max:40'],
             'date_acquired' => ['required'],
             'date_validity' => ['required'],
-            
+
         ]);
 
         $userFullName = Auth::user();
@@ -59,7 +59,7 @@ class ExaminationTakenController extends Controller
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-            
+
         ]);
 
         $examinationTakenPersonalDataId = PersonalData::find($cesno);
@@ -75,7 +75,7 @@ class ExaminationTakenController extends Controller
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $examinationTaken = ExaminationsTaken::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.examinations_taken.edit', 
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.edit',
         compact('examinationTaken', 'profileLibTblExamRef', 'cesno'));
 
     }
@@ -86,12 +86,12 @@ class ExaminationTakenController extends Controller
 
             'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'rating' => ['required', 'min:2', 'max:40'],
-            'date_of_examination' => ['required'],
+            'date_of_examination' => ['required', 'date', 'date_format:m/d/Y'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
             'date_acquired' => ['required'],
             'date_validity' => ['required'],
-            
+
         ]);
 
         $examinationTaken = ExaminationsTaken::find($ctrlno);
@@ -108,7 +108,7 @@ class ExaminationTakenController extends Controller
     }
 
     public function destroy($ctrlno){
-        
+
         $examinationTaken = ExaminationsTaken::find($ctrlno);
         $examinationTaken->delete();
 
@@ -123,7 +123,7 @@ class ExaminationTakenController extends Controller
 
         // Access the soft deleted scholarships of the parent model
         $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->get();
- 
+
         return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord', 'cesno'));
 
     }
@@ -136,12 +136,12 @@ class ExaminationTakenController extends Controller
         return back()->with('message', 'Data Restored Sucessfully');
 
     }
- 
+
     public function forceDelete($ctrlno){
 
         $examinationTaken = ExaminationsTaken::withTrashed()->find($ctrlno);
         $examinationTaken->forceDelete();
-  
+
         return back()->with('message', 'Data Permanently Deleted');
 
     }
