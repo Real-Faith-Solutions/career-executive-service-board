@@ -1,6 +1,7 @@
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white pt-20 transition-transform dark:border-gray-700 dark:bg-gray-800 sm:translate-x-0" aria-label="Sidebar">
     <div class="h-full overflow-y-auto bg-white px-3 pb-4 dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
+
             <li>
                 <a href="{{ route('dashboard') }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -11,16 +12,8 @@
                 </a>
             </li>
 
-            {{-- @if (Auth::user()->role == 'User')
-                <li>
-                    <a href="{{ env('APP_URL') }}admin/profile/views/{{ Auth::user()->cesno }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                        <svg aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="ml-3">View Profile</span>
-                    </a>
-                </li>
-            @else --}}
+            @if($userPermissions->contains('permission_name', 'add-profile'))
+
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard">
                         <svg aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -33,11 +26,11 @@
                     </button>
                     <ul id="dropdown-dashboard" class="hidden space-y-2 py-2">
 
-                        @if($userPermissions->contains('permission_name', 'add-profile'))
+                        {{-- @if($userPermissions->contains('permission_name', 'add-profile')) --}}
                         <li>
                             <a href="{{ route('profile.add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
 
                         <li>
                             <a href="{{ route('view-profile-201.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
@@ -49,9 +42,7 @@
 
                     </ul>
                 </li>
-            {{-- @endif --}}
 
-            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Plantilla') == 'true') --}}
                 <li>
                     <a href="{{ route('plantilla-management.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
 
@@ -61,8 +52,6 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Plantilla</span>
                     </a>
                 </li>
-            {{-- @endif --}}
-
 
                 <li>
                     <a href="{{ route('competency-data.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
@@ -74,7 +63,6 @@
                     </a>
                 </li>
 
-            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Reports') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -105,9 +93,7 @@
                         </li>
                     </ul>
                 </li>
-            {{-- @endif --}}
 
-            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('Rights Management') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-rights-management" data-collapse-toggle="dropdown-rights-management">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -128,9 +114,7 @@
                         </li>
                     </ul>
                 </li>
-            {{-- @endif --}}
 
-            {{-- @if (App\Http\Controllers\RolesController::validateUserCesWebAppGeneralPageAccess('System Utility') == 'true') --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-system-utility" data-collapse-toggle="dropdown-system-utility">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -163,7 +147,20 @@
 
                     </ul>
                 </li>
-            {{-- @endif --}}
+
+            @else
+
+                <li>
+                    <a href="{{ route('view-profile-201.index') }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
+                            <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="ml-3">View Profile</span>
+                    </a>
+                </li>
+
+            @endif
+
         </ul>
     </div>
 </aside>
