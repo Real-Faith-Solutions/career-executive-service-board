@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibCities::factory(10)->create();
 
         $this->call([
+            PermissionsTableSeeder::class,
+            RolesTableSeeder::class,
             UsersTableSeeder::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             // ProfileData::class,
