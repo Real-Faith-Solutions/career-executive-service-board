@@ -402,9 +402,16 @@ Route::prefix('admin')->group(function () {
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
             Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
             Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+
+            Route::prefix('non-ces-training-accredited')->group(function () {
+                Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
+            });
+            
         });
 
-        // end of competency routes
+        
+    });
+    // end of competency routes
 
         // 201 Library
         Route::prefix('201-library')->group(function () {
