@@ -42,7 +42,11 @@ class SectorManagerController extends Controller
     // ui for edit
     public function edit($sectorid){
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);
-        return view('admin.plantilla.sector_manager.edit', compact('datas'));
+
+        $subDatas = DepartmentAgency::query()
+        ->where('plantilla_tblSector_id' ,$sectorid)
+        ->paginate(10);
+        return view('admin.plantilla.sector_manager.edit', compact('datas', 'subDatas'));
     }
 
     public function update(Request $request, $sectorid){
@@ -54,7 +58,7 @@ class SectorManagerController extends Controller
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);
         $datas->update($request->all());
 
-        return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully updated!');
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 
     // recently deleted
