@@ -94,12 +94,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/', [DashboardController::class, 'getAllData'])->name('dashboard');
 
+    Route::middleware('userauth')->group(function () {
 
-
-    Route::middleware(['userauth'])->group(function () {
-
-
-        // 201 profile routes
+        // Profile routes (201)
         Route::prefix('201-profile')->group(function () {
 
             Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
@@ -344,9 +341,9 @@ Route::prefix('admin')->group(function () {
                 Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
             });
         });
-        // end of 201 profile routes
+        // End of profile routes
 
-        // plantilla routes
+        // Plantilla routes
         Route::prefix('plantilla')->group(function () {
 
             Route::prefix('plantilla-management')->group(function () {
@@ -390,10 +387,9 @@ Route::prefix('admin')->group(function () {
                 Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
             });
         });
-        // end of plantilla routes
+        // End of plantilla routes
 
-
-        // compotency routes
+        // Competency routes
         Route::prefix('competency')->group(function () {
             Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
             Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
@@ -406,14 +402,12 @@ Route::prefix('admin')->group(function () {
             Route::prefix('non-ces-training-accredited')->group(function () {
                 Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
             });
-            
+
         });
 
-        
-    });
-    // end of competency routes
+        // End of competency routes
 
-        // 201 Library
+        // Library routes (201)
         Route::prefix('201-library')->group(function () {
 
             Route::prefix('gender-by-birth')->group(function () {
@@ -493,10 +487,13 @@ Route::prefix('admin')->group(function () {
                 Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
             });
         });
-        // end of 201 Library
+
+        // End of Library routes
 
     });
+
 });
+
 
 // auth routes
 Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
