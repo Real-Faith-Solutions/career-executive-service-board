@@ -53,41 +53,49 @@
                     Contact Person
                 </th>
 
-                {{-- <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
-                </th> --}}
+                </th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($otherTraining as $otherTrainings) --}}
+            @foreach ($trainingProvider as $trainingProviders)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $otherTrainings->training }} --}}
+                        {{ $trainingProviders->provider }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $otherTrainings->training_category }} --}}
+                        {{ $trainingProviders->house_bldg }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }} --}}
+                        {{ $trainingProviders->st_road }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $otherTrainings->sponsor }} --}}
+                        {{ $trainingProviders->brgy_vill }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $otherTrainings->venue }} --}}
+                        {{ $trainingProviders->trainingProviderManager->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $otherTrainings->no_training_hours }} --}}
+                        {{ $trainingProviders->contactno }}
                     </td>
 
-                    {{-- <td class="px-6 py-4 text-right uppercase">
+                    <td class="px-6 py-3">
+                        {{ $trainingProviders->emailadd }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingProviders->contactperson }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingProviders->providerID, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -99,10 +107,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST" id="delete_other_training_form{{$otherTrainings->ctrlno}}">
+                            <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingProviders->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingProviders->providerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteOtherTrainingButton{{$otherTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingProviderManagerButton{{$trainingProviders->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -113,9 +121,9 @@
                                 </button>
                             </form>
                         </div>
-                    </td> --}}
+                    </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>

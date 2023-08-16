@@ -12,18 +12,19 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form Training Provider Manager
+                Update Form Training Provider Manager
             </h1>
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('training-provider-manager.store', ['cesno'=>$cesno]) }}" method="POST" id="training_provider_manager_form" onsubmit="return checkErrorsBeforeSubmit(training_provider_manager_form)">
+            <form action="{{ route('training-provider-manager.update', ['ctrlno'=>$trainingProvider->providerID, 'cesno'=>$cesno]) }}" method="POST" id="training_provider_manager_edit_form" onsubmit="return checkErrorsBeforeSubmit(training_provider_manager_edit_form)">
                 @csrf
+                @method('PUT')
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="provider">Training Provider<sup>*</sup></label>
-                        <input type="text" id="provider" name="provider" oninput="validateInput(provider, 2, 'letters')" onkeypress="validateInput(provider, 2, 'letters')" onblur="checkErrorMessage(provider)" required>
+                        <input type="text" id="edit_provider" name="provider" oninput="validateInput(edit_provider, 2, 'letters')" onkeypress="validateInput(edit_provider, 2, 'letters')" onblur="checkErrorMessage(edit_provider)" value="{{ $trainingProvider->provider }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('provider')
                         <span class="invalid" role="alert">
@@ -34,7 +35,7 @@
                     
                     <div class="mb-3">
                         <label for="house_building">Address Building<sup>*</sup></label>
-                        <input type="text" id="house_building" name="house_building" oninput="validateInput(house_building, 2, 'alphaNumeric')" onkeypress="validateInput(house_building, 2, 'alphaNumeric')" onblur="checkErrorMessage(house_building)" >
+                        <input type="text" id="edit_house_building" name="house_building" oninput="validateInput(edit_house_building, 2, 'alphaNumeric')" onkeypress="validateInput(edit_house_building, 2, 'alphaNumeric')" onblur="checkErrorMessage(edit_house_building)" value="{{ $trainingProvider->house_bldg }}" >
                         <p class="input_error text-red-600"></p>
                         @error('house_building')
                             <span class="invalid" role="alert">
@@ -45,7 +46,7 @@
 
                     <div class="mb-3">
                         <label for="st_road">No. Street<sup>*</sup></label>
-                        <input type="text" id="st_road" name="st_road" oninput="validateInput(st_road, 2, 'alphaNumeric')" onkeypress="validateInput(st_road, 2, 'alphaNumeric')" onblur="checkErrorMessage(st_road)" >
+                        <input type="text" id="edit_st_road" name="st_road" oninput="validateInput(edit_st_road, 2, 'alphaNumeric')" onkeypress="validateInput(edit_st_road, 2, 'alphaNumeric')" onblur="checkErrorMessage(edit_st_road)" value="{{ $trainingProvider->st_road }}">
                         <p class="input_error text-red-600"></p>
                         @error('st_road')
                             <span class="invalid" role="alert">
@@ -58,7 +59,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="brgy_vill">Barangay<sup>*</sup></label>
-                        <input type="text" id="brgy_vill" name="brgy_vill" oninput="validateInput(brgy_vill, 2, 'alphaNumeric')" onkeypress="validateInput(brgy_vill, 2, 'alphaNumeric')" onblur="checkErrorMessage(brgy_vill)" >
+                        <input type="text" id="edit_brgy_vill" name="brgy_vill" oninput="validateInput(edit_brgy_vill, 2, 'alphaNumeric')" onkeypress="validateInput(edit_brgy_vill, 2, 'alphaNumeric')" onblur="checkErrorMessage(edit_brgy_vill)" value="{{ $trainingProvider->brgy_vill }}">
                         <p class="input_error text-red-600"></p>
                         @error('brgy_vill')
                             <span class="invalid" role="alert">
@@ -72,9 +73,15 @@
                         <select id="city_code" name="city_code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblCities as $profileLibTblCity)
-                                <option value="{{ $profileLibTblCity->city_code }}">
-                                    {{ $profileLibTblCity->name. " - zipcode: " .$profileLibTblCity->zipcode }}
-                                </option>
+                                @if ($profileLibTblCity->city_code == $trainingProvider->city_code)
+                                    <option value="{{ $profileLibTblCity->city_code }}" selected>
+                                        {{ $profileLibTblCity->name. " - zipcode: " .$profileLibTblCity->zipcode }}
+                                    </option>
+                                @else
+                                    <option value="{{ $profileLibTblCity->city_code }}">
+                                        {{ $profileLibTblCity->name. " - zipcode: " .$profileLibTblCity->zipcode }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
@@ -87,7 +94,8 @@
                     
                     <div class="mb-3">
                         <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="competency_contact_no" name="contact_no" oninput="validateInput(competency_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(competency_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_contact_no)" required>
+                        <input type="text" id="edit_competency_contact_no" name="contact_no" oninput="validateInput(edit_competency_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(edit_competency_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(edit_competency_contact_no)"  
+                        value="{{ $trainingProvider->contactno }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('contact_no')
                             <span class="invalid" role="alert">
@@ -100,7 +108,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="email">Email<sup>*</sup></label>
-                        <input type="text" id="competency_email" name="email" oninput="validateInputEmail(competency_email)" onkeypress="validateInputEmail(competency_email)" onblur="checkErrorMessage(competency_email)" required>
+                        <input type="text" id="edit_competency_email" name="email" oninput="validateInputEmail(edit_competency_email)" onkeypress="validateInputEmail(edit_competency_email)" onblur="checkErrorMessage(edit_competency_email)" value="{{ $trainingProvider->emailadd }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('email')
                             <span class="invalid" role="alert">
@@ -111,7 +119,7 @@
 
                     <div class="mb-3">
                         <label for="contact_person">Contact Person<sup>*</sup></label>
-                        <input type="text" id="contact_person" name="contact_person" oninput="validateInput(contact_person, 2, 'letters')" onkeypress="validateInput(contact_person, 2, 'letters')" onblur="checkErrorMessage(contact_person)" required>
+                        <input type="text" id="edit_contact_person" name="contact_person" oninput="validateInput(edit_contact_person, 2, 'letters')" onkeypress="validateInput(edit_contact_person, 2, 'letters')" onblur="checkErrorMessage(edit_contact_person)" value="{{ $trainingProvider->contactperson }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('contact_person')
                             <span class="invalid" role="alert">
@@ -122,8 +130,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
+                    <button type="button" class="btn btn-primary" id="updateTrainingProviderManagerButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                        Update changes
                     </button>
                 </div>
             </form>
