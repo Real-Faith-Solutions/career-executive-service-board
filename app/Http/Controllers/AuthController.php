@@ -52,7 +52,6 @@ class AuthController extends Controller
             return Redirect::to('/dashboard');
         }
         else{
-
             return view('login');
         }
     }
@@ -185,7 +184,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/login');
     }
 
     // public function userRegister(Request $request){

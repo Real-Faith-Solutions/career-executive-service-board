@@ -28,8 +28,8 @@ class EducationalAttainmentStoreRequest extends FormRequest
             'major_code' => ['nullable', 'min:1'],
             'degree_code' => ['nullable', 'min:1'],
             'school_type' => ['required'],
-            'period_of_attendance_from' => ['required'],
-            'period_of_attendance_to' => ['required'],
+            'period_of_attendance_from' => ['required', 'date', 'date_format:m/d/Y'],
+            'period_of_attendance_to' => ['required', 'date', 'date_format:m/d/Y'],
             'highest_level' => ['nullable','max:40', 'min:10', 'regex:/^[a-zA-Z ]*$/'],
             'academics_honor_received' => ['nullable','max:40', 'min:10'],
 

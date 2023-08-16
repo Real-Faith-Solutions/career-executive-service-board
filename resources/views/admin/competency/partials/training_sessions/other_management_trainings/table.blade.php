@@ -1,69 +1,85 @@
 @extends('layouts.app')
-@section('title', 'Examination Taken')
-@section('sub', 'Examination Taken')
+@section('title', 'Competency Non-Ces Accredited Training')
+@section('sub', 'Competency Non-Ces Accredited Training')
 @section('content')
-@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('examination-taken.recentlyDeleted', ['cesno'=>$cesno]) }}" method="GET">
+    {{-- <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
       </lord-icon>
-    </a>
+    </a> --}}
 
-    <a href="{{ route('examination-taken.create', ['cesno' => $cesno]) }}" class="btn btn-primary">Add Examination Taken</a>
+    <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
 </div>
 
-<div class="table-examinations-taken relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Type of Examination
+                    Training Title
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Rating
+                    Training Category
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Date of Examination
+                    Expertise/Field of Specialization
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Place of Examination
+                    Sponsor/Training Provider
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Venue
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    No. of Training Hours
+                </th>
+
+                {{-- <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
-                </th>
+                </th> --}}
             </tr>
         </thead>
         <tbody>
-            @foreach ($examinationTaken as $examinationTakens)
+            @foreach ($otherTraining as $otherTrainings)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $examinationTakens->profileLibTblExamRefPersonalData->TITLE ?? 'N/A'}}
+                        {{ $otherTrainings->training }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->rating }}
+                        {{ $otherTrainings->training_category }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->date_of_examination }}
+                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->place_of_examination }}
+                        {{ $otherTrainings->sponsor }}
                     </td>
 
-                    <td class="px-6 py-4 text-right uppercase">
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->venue }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->no_training_hours }}
+                    </td>
+
+                    {{-- <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('examination-taken.edit', ['ctrlno'=>$examinationTakens->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -75,10 +91,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('examination-taken.destroy', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="POST" id="delete_examinations_taken_form{{$examinationTakens->ctrlno}}">
+                            <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST" id="delete_other_training_form{{$otherTrainings->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteExaminationsTakenButton{{$examinationTakens->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteOtherTrainingButton{{$otherTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -89,7 +105,7 @@
                                 </button>
                             </form>
                         </div>
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         </tbody>

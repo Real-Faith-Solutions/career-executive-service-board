@@ -20,7 +20,7 @@
             <form action="{{ route('examination-taken.update', ['ctrlno'=>$examinationTaken->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_examination_taken_form" onsubmit="return checkErrorsBeforeSubmit(update_examination_taken_form)">
                 @csrf
                 @method('PUT')
-                
+
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="exam_code">Type of Examination<sup>*</sup></label>
@@ -28,7 +28,7 @@
                             <option disabled selected>Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
                                 @if ($profileLibTblExamRefs->CODE == $examinationTaken->exam_code)
-                                    <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE }}</option>  
+                                    <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE }}</option>
                                 @else
                                     <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}</option>s
                                 @endif
@@ -55,7 +55,7 @@
 
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
-                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->date_of_examination }}" required type="date">
+                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->date_of_examination }}" required type="text">
                         @error('date_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

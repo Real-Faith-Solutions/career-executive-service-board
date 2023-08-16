@@ -22,12 +22,12 @@ class ScholarshipStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+
             'type' => ['required'],
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
+            'inclusive_date_from' => ['required', 'date', 'date_format:m/d/Y'],
+            'inclusive_date_to' => ['required', 'date', 'date_format:m/d/Y'],
 
         ];
     }
