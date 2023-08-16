@@ -13,7 +13,7 @@
             style="width:34px;height:34px">
       </lord-icon>
     </a>
-    
+
     <a href="{{ route('examination-taken.create', ['cesno' => $cesno]) }}" class="btn btn-primary">Add Examination Taken</a>
 </div>
 
@@ -46,7 +46,7 @@
             @foreach ($examinationTaken as $examinationTakens)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $examinationTakens->profileLibTblExamRefPersonalData->TITLE }}
+                        {{ $examinationTakens->profileLibTblExamRefPersonalData->TITLE ?? 'N/A'}}
                     </td>
 
                     <td class="px-6 py-3">
@@ -74,7 +74,7 @@
                                     </lord-icon>
                                 </button>
                             </form>
-                        
+
                             <form action="{{ route('examination-taken.destroy', ['ctrlno'=>$examinationTakens->ctrlno]) }}" method="POST" id="delete_examinations_taken_form{{$examinationTakens->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
