@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class UsersTableSeeder extends Seeder
 
         if(count($cesboard) === 0){
 
-            User::create([
+            $admin = User::create([
                 'username'                  => 'cesboard',
                 'email'                     => 'admin@ces.com',
                 'password'                  => Hash::make('12345'),
@@ -37,11 +38,12 @@ class UsersTableSeeder extends Seeder
                 'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
+            $admin->assignRole('admin');
 
         }
         else{
 
-            User::where('email','=','admin@ces.com')->update([
+            $admin = User::where('email','=','admin@ces.com')->update([
                 'username'                  => 'cesboard',
                 'email'                     => 'admin@ces.com',
                 'password'                  => Hash::make('12345'),
@@ -57,11 +59,13 @@ class UsersTableSeeder extends Seeder
                 'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
+            $admin->assignRole('admin');
+
         }
 
         if(count($username) === 0){
 
-            User::create([
+            $user = User::create([
                 'username'                  => 'username',
                 'email'                     => 'user@ces.com',
                 'password'                  => Hash::make('12345'),
@@ -77,11 +81,12 @@ class UsersTableSeeder extends Seeder
                 'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
+            $user->assignRole('user');
 
         }
         else{
 
-            User::where('email','=','user@ces.com')->update([
+            $user = User::where('email','=','user@ces.com')->update([
                 'username'                  => 'username',
                 'email'                     => 'user@ces.com',
                 'password'                  => Hash::make('12345'),
@@ -97,6 +102,7 @@ class UsersTableSeeder extends Seeder
                 'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
             ]);
+            $user->assignRole('user');
         }
     }
 }

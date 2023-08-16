@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <form class="user" method="POST" action="{{ env('APP_URL') }}login">
+    <form class="user" method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="mb-3">
@@ -16,7 +16,7 @@
 
         <div class="mb-3">
             <label for="password">Password</label>
-            <input type="password" name="password" value="{{ old('password') }}" required autofocus autocomplete="password">
+            <input type="password" name="password" value="{{ old('password') }}" required>
             @error('password')
                 <span class="invalid" role="alert">
                     <strong>{{ $message }}</strong>

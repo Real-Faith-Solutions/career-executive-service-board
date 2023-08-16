@@ -22,6 +22,9 @@ class DashboardController extends Controller
         $totalCESORetired = PersonalData::query()
             ->where('status', 'Retired')
             ->count();
+        $totalCESOInactive = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->count();
 
 
         return view('admin.dashboard', compact(
@@ -29,7 +32,8 @@ class DashboardController extends Controller
             'totalCESOActive',
             'totalCESODeceased',
             'totalCESORetired',
+            'totalCESOInactive',
         ));
     }
-    
+
 }
