@@ -122,7 +122,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="" >Training Provider Manager</a>
+                            <a class="btn category-button inline-flex" href="{{ route('training-provider-manager.index', ['cesno'=>$cesno]) }}" >Training Provider Manager</a>
                         </li>
                     </ul>
                 </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
+use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ContactInfoController;
@@ -403,6 +404,10 @@ Route::prefix('admin')->group(function () {
                 Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
             });
 
+            Route::prefix('training-provider-manager')->group(function () {
+                Route::get('index/{cesno}', [TrainingProviderManagerController::class, 'index'])->name('training-provider-manager.index');
+                Route::get('create/{cesno}', [TrainingProviderManagerController::class, 'create'])->name('training-provider-manager.create');
+            });
         });
 
         // End of competency routes

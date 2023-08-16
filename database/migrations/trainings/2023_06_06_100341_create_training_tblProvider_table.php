@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('house_bldg');
             $table->string('st_road');
             $table->string('brgy_vill');
-            $table->string('city_code');
+            $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
             $table->integer('contactno');
             $table->string('emailadd');
             $table->string('contactperson');

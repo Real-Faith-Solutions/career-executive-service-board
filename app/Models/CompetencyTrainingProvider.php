@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CompetencyTrainingProvider extends Model
 {
@@ -27,4 +28,9 @@ class CompetencyTrainingProvider extends Model
         'updated_by',
 
     ];
+
+    public function trainingProviderManager(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'city_code');
+    }
 }
