@@ -34,9 +34,9 @@ class ScholarshipController extends Controller
             'type' => ['required'],
             'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
-            
+            'inclusive_date_from' => ['required', 'date', 'date_format:m/d/Y'],
+            'inclusive_date_to' => ['required', 'date', 'date_format:m/d/Y'],
+
         ]);
 
         $userFullName = Auth::user();
@@ -53,7 +53,7 @@ class ScholarshipController extends Controller
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
             'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
-         
+
         ]);
 
         $scholarshipPersonalDataId = PersonalData::find($cesno);
@@ -78,9 +78,9 @@ class ScholarshipController extends Controller
             'type' => ['required'],
             'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
-            
+            'inclusive_date_from' => ['required', 'date', 'date_format:m/d/Y'],
+            'inclusive_date_to' => ['required', 'date', 'date_format:m/d/Y'],
+
         ]);
 
         $scholarship= Scholarships::find($ctrlno);
@@ -96,7 +96,7 @@ class ScholarshipController extends Controller
     }
 
     public function destroy($ctrlno){
-        
+
         $scholarship = Scholarships::find($ctrlno);
         $scholarship->delete();
 
@@ -111,7 +111,7 @@ class ScholarshipController extends Controller
 
         // Access the soft deleted scholarships of the parent model
         $scholarshipTrashedRecord = $personalData->scholarships()->onlyTrashed()->get();
- 
+
         return view('admin.201_profiling.view_profile.partials.scholarships.trashbin', compact('scholarshipTrashedRecord', 'cesno'));
 
     }
@@ -133,5 +133,5 @@ class ScholarshipController extends Controller
         return back()->with('message', 'Data Permanently Deleted');
 
     }
-    
+
 }

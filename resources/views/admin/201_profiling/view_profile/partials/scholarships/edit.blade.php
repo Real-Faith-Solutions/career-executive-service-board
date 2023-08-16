@@ -27,10 +27,10 @@
                                     <option value="Foreign">Foreign</option>
                                 @elseif ($scholarship->type == "Foreign")
                                     <option value="Local">Local</option>
-                                    <option value="Foreign" selected>Foreign</option>    
+                                    <option value="Foreign" selected>Foreign</option>
                                 @else
                                     <option value="Local">Local</option>
-                                    <option value="Foreign">Foreign</option>        
+                                    <option value="Foreign">Foreign</option>
                                 @endif
                         </select>
                         @error('type')
@@ -66,7 +66,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)</label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $scholarship->inclusive_date_from }}" type="date">
+                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $scholarship->inclusive_date_from }}" type="text">
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -76,7 +76,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)</label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $scholarship->inclusive_date_to }}" type="date">
+                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $scholarship->inclusive_date_to }}" type="text">
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
