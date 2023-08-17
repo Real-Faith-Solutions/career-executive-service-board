@@ -70,7 +70,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->city_code }}
+                        {{ $trainingVenueManagers->trainingVenueManager->name }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -87,7 +87,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingVenueManagers->providerID, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -99,7 +99,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingVenueManagers->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
+                            {{-- <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingVenueManagers->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteTrainingProviderManagerButton{{$trainingVenueManagers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
