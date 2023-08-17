@@ -7,6 +7,7 @@ use App\Models\CompetencyTrainingProvider;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TrainingProviderManagerController extends Controller
 {
@@ -24,6 +25,19 @@ class TrainingProviderManagerController extends Controller
 
     public function store(Request $request, $cesno)
     {
+        $request->validate([
+
+            'provider' => ['required', 'unique:training_tblProvider,provider'],
+            'house_building' => ['required'],
+            'st_road' => ['required'],
+            'brgy_vill' => ['nullable'],
+            'city_code' => ['required'],
+            'contact_no' => ['required'],
+            'email' => ['required'],
+            'contact_person' => ['required'],
+        
+        ]);
+
         $userFullName = Auth::user();
         $userLastName = $userFullName ->last_name;
         $userFirstName = $userFullName ->first_name;
@@ -49,8 +63,12 @@ class TrainingProviderManagerController extends Controller
 
         $trainingProviderCitiesCode = ProfileLibCities::find($cityCode);
 
-        $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
-
+        if(!$trainingProviderCitiesCode){
+            return redirect()->back()->with('error', 'Cant Save, Something Went Wrong');
+        }else{
+            $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
+        }
+        
         return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('message', 'Training Provider Manager Successfuly Saved');
     }
 
@@ -67,7 +85,20 @@ class TrainingProviderManagerController extends Controller
     }
 
     public function update(Request $request, $ctrlno, $cesno)
-    {    
+    {
+        $request->validate([
+
+            'provider' => [Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
+            'house_building' => ['required'],
+            'st_road' => ['required'],
+            'brgy_vill' => ['nullable'],
+            'city_code' => ['required'],
+            'contact_no' => ['required'],
+            'email' => ['required'],
+            'contact_person' => ['required'],
+        
+        ]);
+
         $userFullName = Auth::user();
         $userLastName = $userFullName ->last_name;
         $userFirstName = $userFullName ->first_name;
@@ -90,12 +121,34 @@ class TrainingProviderManagerController extends Controller
         return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('info', 'Training Provider Manager Update Sucessfully');
     }
 
-    public function destroy($ctrlno){
-
+    public function destroy($ctrlno)
+    {
         $trainingProviderManager = CompetencyTrainingProvider::find($ctrlno);
         $trainingProviderManager->delete();
 
         return redirect()->back()->with('info', 'Deleted Sucessfully');
+    }
 
+    public function recentlyDeleted($cesno)
+    {
+        $trainingProviderTrashRecord = CompetencyTrainingProvider::onlyTrashed()->get();
+
+        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.trashbin', compact('cesno', 'trainingProviderTrashRecord'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $trainingProviderTrashRecord = CompetencyTrainingProvider::onlyTrashed()->find($ctrlno);
+        $trainingProviderTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    public function forceDelete($ctrlno)
+    {
+        $trainingProviderTrashRecord = CompetencyTrainingProvider::onlyTrashed()->find($ctrlno);
+        $trainingProviderTrashRecord->forceDelete();
+  
+        return back()->with('message', 'Data Permanently Deleted');
     }
 }

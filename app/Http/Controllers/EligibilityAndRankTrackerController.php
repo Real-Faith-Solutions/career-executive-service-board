@@ -154,5 +154,4 @@ class EligibilityAndRankTrackerController extends Controller
         return back()->with('message', 'Data Permanently Deleted');
 
     }
-
 }

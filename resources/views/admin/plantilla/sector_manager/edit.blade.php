@@ -3,8 +3,33 @@
 @section('sub', 'Sector Manager')
 @section('content')
     @include('admin.plantilla.header')
+    @include('admin.plantilla.department_agency_manager.create')
 
 
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2">
+            <li>
+                <a href="{{ route('plantilla-management.index') }}" class="text-slate-500">Plantilla</a>
+            </li>
+            <li>
+                <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </li>
+            <li>
+                <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            </li>
+            <li>
+                <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </li>
+
+            <li>
+                <a href="#" class="text-blue-500">{{ $datas->title }}</a>
+            </li>
+        </ol>
+    </nav>
 
     <div class="grid lg:grid-cols-2">
         <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -57,6 +82,16 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="flex justify-between my-3">
+        @include('components.search')
+
+        <div>
+            <button class="btn btn-primary" id="agencyCreateBtn">
+                Add record
+            </button>
+        </div>
     </div>
 
     <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -121,7 +156,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->updated_at )->format('m/d/Y \a\t h:iA') }}
+                            {{ \Carbon\Carbon::parse($data->updated_at)->format('m/d/Y \a\t h:iA') }}
                         </td>
                         <td class="px-6 py-3">
                             {{ $data->submitted_by ?? 'N/A' }}

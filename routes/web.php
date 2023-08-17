@@ -366,6 +366,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
+            Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
@@ -390,7 +391,8 @@ Route::middleware('auth')->group(function () {
     // End of plantilla routes
 
     // Competency routes
-    Route::prefix('competency')->group(function () {
+    Route::prefix('competency')->group(function () 
+    {
         Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
         Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
         Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
@@ -410,6 +412,9 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'edit'])->name('training-provider-manager.edit');
                 Route::put('update/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'update'])->name('training-provider-manager.update');
                 Route::delete('destroy/{ctrlno}', [TrainingProviderManagerController::class, 'destroy'])->name('training-provider-manager.destroy');
+                Route::get('recently-deleted/{cesno}', [TrainingProviderManagerController::class, 'recentlyDeleted'])->name('training-provider-manager.recentlyDeleted');
+                Route::post('recently-deleted/restore/{ctrlno}', [TrainingProviderManagerController::class, 'restore'])->name('training-provider-manager.restore');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingProviderManagerController::class, 'forceDelete'])->name('training-provider-manager.forceDelete');
             });
 
             Route::prefix('training-venue-manager')->group(function () {

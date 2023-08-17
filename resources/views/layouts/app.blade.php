@@ -143,6 +143,10 @@
     <script src="{{ asset('js/currentTime.js') }}"></script>
     {{-- end --}}
 
+    {{-- js script for plantilla --}}
+    <script src="{{ asset('js/plantilla/add_department_agency.js') }}"></script>
+    {{-- end --}}
+
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
 

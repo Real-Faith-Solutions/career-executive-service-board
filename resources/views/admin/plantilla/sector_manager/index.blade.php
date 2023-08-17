@@ -3,20 +3,41 @@
 @section('sub', 'Sector Manager')
 @section('content')
     @include('admin.plantilla.header')
+    <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2">
+            <li>
+                <a href="{{ route('plantilla-management.index') }}" class="text-slate-500">Plantilla</a>
+            </li>
+            <li>
+                <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </li>
+            <li>
+                <a id="{{ route('sector-manager.index') }}" class="text-blue-500">Sector Manager</a>
+            </li>
 
-    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3 my-5">
-        <div class="col-start-1">
-            @include('components.search')
-        </div>
+        </ol>
+    </nav>
 
-        <div class="col-start-3 flex items-center justify-end">
-            <a href="{{ route('sector-manager.recentlyDeleted') }}">
-                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
-                    style="width:34px;height:34px">
+    <div class="lg:flex lg:justify-between my-3">
+        @include('components.search')
 
-                </lord-icon>
-            </a>
-            <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+        <div class="my-3 sm:flex sm:justify-end">
+            <div class="flex">
+                <a href="{{ route('sector-manager.recentlyDeleted') }}">
+                    <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
+                        style="width:34px;height:34px">
+
+                    </lord-icon>
+                </a>
+
+
+                <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+
+            </div>
+
+            .
         </div>
     </div>
 

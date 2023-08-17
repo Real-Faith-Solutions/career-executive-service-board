@@ -17,15 +17,10 @@ return new class extends Migration
             $table->id('deptid');
             $table->foreignId('plantilla_tblSector_id');
             $table->foreignId('plantillalib_tblAgencyType_id');
-            $table->foreignId('plantilla_motherdept_id');
-
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
-            // $table->string('agency_typeid')->nullable();
-
             $table->string('website')->nullable();
             $table->string('remarks')->nullable();
-            $table->string('lastsubmit_dt')->nullable();
             $table->string('submitted_by')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamps();
