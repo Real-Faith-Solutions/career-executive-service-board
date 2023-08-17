@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
             UsersTableSeeder::class,
+            DefaultAccounts::class,
             CesWebAppGeneralPageAccessesTableSeeder::class,
             // ProfileData::class,
             // ProfileAddress::class,
