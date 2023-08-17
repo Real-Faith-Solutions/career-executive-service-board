@@ -52,7 +52,26 @@ class DefaultAccounts extends Seeder
         ]);
 
         $user->assignRole('admin');
-        // end seeding admin 
+        // end seeding admin
+
+        // seeding users
+        $personalDataRecords = PersonalData::where('email', '!=', 'admin@ces.com')->get();
+
+        foreach ($personalDataRecords as $personalData) {
+
+            $user = $personalData->users()->Create([
+                'email' => $admin->email,
+                'password' => Hash::make('12345'),
+                'is_active'		            => 'Active',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => 'system encode',
+                'default_password_change'   => 'true',
+            ]);
+    
+            $user->assignRole('user');
+
+        }
+        // end seeding users
 
     }
 }
