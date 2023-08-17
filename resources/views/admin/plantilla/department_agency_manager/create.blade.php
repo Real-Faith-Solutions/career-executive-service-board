@@ -40,7 +40,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="acronym">Acronym</label>
-                    <input id="acronym" name="acronym" required />
+                    <input id="acronym" name="acronym" required minlength="2" maxlength="10"/>
                     @error('acronym')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -81,6 +81,6 @@
 
             </div>
         </form>
-        
+
     </div>
 </div>

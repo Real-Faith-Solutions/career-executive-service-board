@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plantilla\DepartmentAgency;
+use App\Models\Plantilla\DepartmentAgencyType;
+use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
 class DepartmentAgencyManagerController extends Controller
@@ -31,4 +33,37 @@ class DepartmentAgencyManagerController extends Controller
         DepartmentAgency::create($request->all());
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
+
+    public function showAgency($sectorid, $deptid)
+    {
+        $sector = SectorManager::find($sectorid);
+        $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
+        $departmentTypeDatas = DepartmentAgencyType::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::find($deptid);
+
+        if (!$sector) {
+            abort(404);
+        }
+
+        return view('admin.plantilla.department_agency_manager.edit', compact(
+            'sector', 'department', 'sectorDatas',
+            'departmentTypeDatas'
+        ));
+    }
+
+    public function updateAgency(Request $request, $deptid, $sectorid){
+
+        $request->validate([
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'plantillalib_tblAgencyType_id' => ['required'],
+            'website' => ['required', 'max:40', 'min:2', 'url'],
+            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['required'],
+        ]);
+        $datas = DepartmentAgency::withTrashed()->findOrFail($deptid);
+        $datas->update($request->all());
+        return redirect()->back()->with('message', 'The item has been successfully added!');
+
+    }
+
 }
