@@ -9,11 +9,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DepartmentAgency extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';
+    protected $fillable = [
+            'plantilla_tblSector_id',
+            'plantillalib_tblAgencyType_id',
+            'title',
+            'acronym',
+            'website',
+            'remarks',
+            'submitted_by',
+            'encoder',
+    ];
 
     public function sectorManager(): BelongsTo
     {

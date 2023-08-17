@@ -4,34 +4,39 @@ namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plantilla\DepartmentAgency;
+use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
 class SectorManagerController extends Controller
 {
-    public function index(Request $request){
-        $search = $request->input('search');
+    public function index(Request $request)
+    {
+        $query = $request->input('search');
         $datas = SectorManager::orderBy('title', 'ASC')
 
-        ->where('title', 'LIKE', "%$search%")
-        ->orWhere('description', 'LIKE', "%$search%")
-        ->orWhere('encoder', 'LIKE', "%$search%")
-        ->paginate(25);
-        return view ('admin.plantilla.sector_manager.index', compact('datas', 'search'));
+            ->where('title', 'LIKE', "%$query%")
+            ->orWhere('description', 'LIKE', "%$query%")
+            ->orWhere('encoder', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.sector_manager.index', compact('datas', 'query'));
     }
 
-    public function show($sectorid){
+    public function show($sectorid)
+    {
         $datas = DepartmentAgency::where('plantilla_tblSector_id', $sectorid)
-        ->orderBy('title', 'ASC')
-        ->paginate(15);
-        return view ('admin.plantilla.department_agency_manager.index', compact('datas'));
+            ->orderBy('title', 'ASC')
+            ->paginate(15);
+        return view('admin.plantilla.department_agency_manager.index', compact('datas'));
     }
 
-    public function create(){
-        return view ('admin.plantilla.sector_manager.create');
+    public function create()
+    {
+        return view('admin.plantilla.sector_manager.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
@@ -40,16 +45,31 @@ class SectorManagerController extends Controller
         return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully added!');
     }
     // ui for edit
-    public function edit($sectorid){
+    public function edit(Request $request, $sectorid)
+    {
+        $query = $request->input('search');
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);
+        $agencyType = DepartmentAgencyType::orderBy('title', 'ASC')->get();
 
         $subDatas = DepartmentAgency::query()
-        ->where('plantilla_tblSector_id' ,$sectorid)
-        ->paginate(10);
-        return view('admin.plantilla.sector_manager.edit', compact('datas', 'subDatas'));
+            ->where('plantilla_tblSector_id', $sectorid)
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'LIKE', "%$query")
+                    ->orWhere('acronym', 'LIKE', "%$query");
+            })
+            ->orderBy('title', 'ASC')
+            ->paginate(10);
+
+        return view('admin.plantilla.sector_manager.edit', compact(
+            'datas',
+            'subDatas',
+            'agencyType',
+            'query',
+        ));
     }
 
-    public function update(Request $request, $sectorid){
+    public function update(Request $request, $sectorid)
+    {
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
@@ -62,15 +82,17 @@ class SectorManagerController extends Controller
     }
 
     // recently deleted
-    public function recentlyDeleted(){
+    public function recentlyDeleted()
+    {
         $datas = SectorManager::onlyTrashed()
-        ->orderByDesc('deleted_at')
-        ->paginate(15);
+            ->orderByDesc('deleted_at')
+            ->paginate(15);
         return view('admin.plantilla.sector_manager.recently_deleted', compact('datas'));
     }
 
     // restore
-    public function restore($sectorid){
+    public function restore($sectorid)
+    {
         $datas = SectorManager::onlyTrashed()->findOrFail($sectorid);
         $datas->restore();
 
@@ -78,7 +100,8 @@ class SectorManagerController extends Controller
     }
 
     // soft delete
-    public function destroy($sectorid){
+    public function destroy($sectorid)
+    {
         $datas = SectorManager::findOrFail($sectorid);
         $datas->delete();
 
@@ -86,7 +109,8 @@ class SectorManagerController extends Controller
     }
 
     // force delete
-    public function forceDelete($sectorid){
+    public function forceDelete($sectorid)
+    {
         $datas = SectorManager::onlyTrashed()->findOrFail($sectorid);
         $datas->forceDelete();
 

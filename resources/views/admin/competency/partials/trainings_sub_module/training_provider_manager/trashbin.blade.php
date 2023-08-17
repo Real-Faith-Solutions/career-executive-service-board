@@ -1,30 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Training Provider Manager')
-@section('sub', 'Training Provider Manager')
+@section('title', 'Training Provider Manager Trash Bin')
+@section('sub', 'Training Provider Manager Trash Bin')
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <form action="{{ route('training-provider-manager.recentlyDeleted', ['cesno'=>$cesno]) }}" method="GET">
-        @csrf
-        <button title="Trash Bin" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#880808"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </button>
-    </form>
-
-    <a href="{{ route('training-provider-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Provider Manager</a>
+    <a href="{{ route('training-provider-manager.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Provider ID
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Provider
                 </th>
@@ -58,63 +49,75 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At    
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainingProvider as $trainingProviders)
+            @foreach ($trainingProviderTrashRecord as $trainingProviderTrashRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingProviders->provider }}
+                        {{ $trainingProviderTrashRecords->providerID }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $trainingProviderTrashRecords->provider }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->house_bldg }}
+                        {{ $trainingProviderTrashRecords->house_bldg }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->st_road }}
+                        {{ $trainingProviderTrashRecords->st_road }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->brgy_vill }}
+                        {{ $trainingProviderTrashRecords->brgy_vill }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->trainingProviderManager->name }}
+                        {{ $trainingProviderTrashRecords->trainingProviderManager->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->contactno }}
+                        {{ $trainingProviderTrashRecords->contactno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->emailadd }}
+                        {{ $trainingProviderTrashRecords->emailadd }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->contactperson }}
+                        {{ $trainingProviderTrashRecords->contactperson }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingProviderTrashRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingProviders->providerID, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-provider-manager.restore', ['ctrlno'=>$trainingProviderTrashRecords->providerID]) }}" method="POST" id="restore_training_provider_manager_form{{$trainingProviderTrashRecords->providerID}}">
                                 @csrf
-                                <button  class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button title="Restore" class="mx-1 font-medium text-blue-600 hover:underline" id="restoreTrainingProviderManagerButton{{$trainingProviderTrashRecords->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingProviders->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingProviders->providerID}}">
+                            <form action="{{ route('training-provider-manager.forceDelete', ['ctrlno'=>$trainingProviderTrashRecords->providerID]) }}" method="POST" id="permanent_delete_training_provider_manager_form{{$trainingProviderTrashRecords->providerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button title="Delete" type="button" id="deleteTrainingProviderManagerButton{{$trainingProviders->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button title="Delete Permanently" type="button" id="permanentDeleteTrainingProviderManagerButton{{$trainingProviderTrashRecords->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

@@ -118,7 +118,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="" >Training Venue Manager</a>
+                            <a class="btn category-button inline-flex" href="{{ route('training-venue-manager.index', ['cesno'=>$cesno]) }}" >Training Venue Manager</a>
                         </li>
 
                         <li>

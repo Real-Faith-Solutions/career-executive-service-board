@@ -1,24 +1,20 @@
 @extends('layouts.app')
-@section('title', 'Training Provider Manager')
-@section('sub', 'Training Provider Manager')
+@section('title', 'Training Venue Manager')
+@section('sub', 'Training Venue Manager')
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <form action="{{ route('training-provider-manager.recentlyDeleted', ['cesno'=>$cesno]) }}" method="GET">
-        @csrf
-        <button title="Trash Bin" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#880808"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </button>
-    </form>
+    {{-- <a href="{{ route('other-t raining.recentlyDeleted', ['cesno'=>$cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a> --}}
 
-    <a href="{{ route('training-provider-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Provider Manager</a>
+    <a href="{{ route('training-venue-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Venue Manager</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -26,11 +22,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Provider
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    House Building
+                    Venue
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -63,45 +55,41 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainingProvider as $trainingProviders)
+            @foreach ($trainingVenueManager as $trainingVenueManagers)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingProviders->provider }}
+                        {{ $trainingVenueManagers->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->house_bldg }}
+                        {{ $trainingVenueManagers->no_street }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->st_road }}
+                        {{ $trainingVenueManagers->brgy }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->brgy_vill }}
+                        {{ $trainingVenueManagers->trainingVenueManager->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->trainingProviderManager->name }}
+                        {{ $trainingVenueManagers->contactno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->contactno }}
+                        {{ $trainingVenueManagers->emailadd }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviders->emailadd }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingProviders->contactperson }}
+                        {{ $trainingVenueManagers->contactperson }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingProviders->providerID, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
-                                <button  class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/bxxnzvfm.json"
                                         trigger="hover"
@@ -111,10 +99,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingProviders->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingProviders->providerID}}">
+                            {{-- <form action="{{ route('training-provider-manager.destroy', ['ctrlno'=>$trainingVenueManagers->providerID]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button title="Delete" type="button" id="deleteTrainingProviderManagerButton{{$trainingProviders->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingProviderManagerButton{{$trainingVenueManagers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -123,7 +111,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </td>
                 </tr>
