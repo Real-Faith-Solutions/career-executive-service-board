@@ -6,14 +6,14 @@
             </h1>
         </div>
 
-
-
         <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
 
-        <form action="{{ route('department-agency-manager.store') }}" method="POST" class="flex flex-col items-center">
+        <form action="{{ route('department-agency-manager.store') }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $datas->sectorid }}" name="plantilla_tblSector_id" readonly>
-            <input type="hidden" value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }} {{ Auth::user()->name_extension }}" readonly>
+            <input type="hidden"
+                value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }} {{ Auth::user()->name_extension }}"
+                readonly>
 
             <div class="grid grid-cols-2 p-10 gap-2">
                 <div class="mb-3">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="submitted_by">Submitted by</label>
-                    <input id="submitted_by" name="submitted_by" required/>
+                    <input id="submitted_by" name="submitted_by" required />
                     @error('submitted_by')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -75,15 +75,12 @@
                     @enderror
                 </div>
 
-
+                <div class="col-start-2 flex justify-end">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
 
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
-
-
-
-
-
         </form>
+        
     </div>
 </div>

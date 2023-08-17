@@ -86,9 +86,12 @@
 
     <div class="flex justify-between my-3">
         @include('components.search')
-        <button class="btn btn-primary" id="agencyCreateBtn">
-            Add record
-        </button>
+
+        <div>
+            <button class="btn btn-primary" id="agencyCreateBtn">
+                Add record
+            </button>
+        </div>
     </div>
 
     <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
