@@ -23,8 +23,13 @@ class ProfileLibCities extends Model
 
     ];
 
-    public function trainingProviderManager(): HasMany
+    public function competencyTrainingProviderManager(): HasMany
     {
         return $this->hasMany(CompetencyTrainingProvider::class, 'city_code', 'city_code');
+    }
+
+    public function competencytrainingVenueManager(): HasMany
+    {
+        return $this->hasMany(CompetencyTrainingVenueManager::class, 'city_code', 'city_code');
     }
 }

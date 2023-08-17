@@ -66,9 +66,9 @@ class TrainingProviderManagerController extends Controller
         if(!$trainingProviderCitiesCode){
             return redirect()->back()->with('error', 'Cant Save, Something Went Wrong');
         }else{
-            $trainingProviderCitiesCode->trainingProviderManager()->save($trainingProvider);
+            $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
         }
-
+        
         return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('message', 'Training Provider Manager Successfuly Saved');
     }
 
