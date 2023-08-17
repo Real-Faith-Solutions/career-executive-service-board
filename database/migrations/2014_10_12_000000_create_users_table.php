@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id('ctrlno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('contact_no')->unique();
+            // $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('is_active')->nullable();
@@ -30,5 +30,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
-    
+
 };

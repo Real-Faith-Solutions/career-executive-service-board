@@ -60,7 +60,7 @@ class DefaultAccounts extends Seeder
         foreach ($personalDataRecords as $personalData) {
 
             $user = $personalData->users()->Create([
-                'email' => $admin->email,
+                'email' => $personalData->email,
                 'password' => Hash::make('12345'),
                 'is_active'		            => 'Active',
                 'last_updated_by'           => 'system encode',
