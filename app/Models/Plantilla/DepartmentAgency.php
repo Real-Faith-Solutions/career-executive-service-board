@@ -14,6 +14,16 @@ class DepartmentAgency extends Model
 
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';
+    protected $fillable = [
+            'plantilla_tblSector_id',
+            'plantillalib_tblAgencyType_id',
+            'title',
+            'acronym',
+            'website',
+            'remarks',
+            'submitted_by',
+            'encoder',
+    ];
 
     public function sectorManager(): BelongsTo
     {

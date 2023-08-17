@@ -365,6 +365,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
+            Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
         });
 
         Route::prefix('agency-location-manager')->group(function () {

@@ -19,4 +19,17 @@ class DepartmentAgencyManagerController extends Controller
         ->paginate(15);
         return view ('admin.plantilla.department_agency_manager.index', compact('datas', 'search'));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'plantillalib_tblAgencyType_id'=> ['required'],
+            'title'=> ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'acronym'=> ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],            
+            'remarks'=> ['required'],
+            'submitted_by'=> ['required'],
+        ]);
+        DepartmentAgency::create($request->all());
+        return redirect()->back()->with('message', 'The item has been successfully added!');
+    }
 }

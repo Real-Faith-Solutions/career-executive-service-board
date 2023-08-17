@@ -3,7 +3,7 @@
 @section('content')
 
     <section>
-        <div class="grid grid-cols-3">
+        <div class="grid lg:grid-cols-3">
             @include('components.search')
         </div>
 
