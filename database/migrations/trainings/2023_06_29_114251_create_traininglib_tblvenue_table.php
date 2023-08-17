@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('traininglib_tblvenue', function (Blueprint $table) {
             $table->id('venueid');
-            $table->string('name');
-            $table->string('no_street');
-            $table->integer('brgy');
-            $table->string('city_code');
-            $table->integer('contactno');
-            $table->string('emailadd');
-            $table->string('contactperson');
-            $table->string('encoder');
+            $table->string('name')->nullable();
+            $table->string('no_street')->nullable();
+            $table->integer('brgy')->nullable();
+            $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
+            $table->integer('contactno')->nullable();
+            $table->string('emailadd')->nullable();
+            $table->string('contactperson')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
