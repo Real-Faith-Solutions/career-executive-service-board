@@ -49,7 +49,7 @@ class TrainingProviderManagerController extends Controller
 
         $trainingProviderCitiesCode = ProfileLibCities::find($cityCode);
 
-        $trainingProviderCitiesCode->trainingProviderManager()->save($trainingProvider);
+        $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
 
         return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('message', 'Training Provider Manager Successfuly Saved');
     }

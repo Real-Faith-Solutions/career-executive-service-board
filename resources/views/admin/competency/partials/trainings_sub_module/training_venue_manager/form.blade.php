@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="training_provider_manager_form" onsubmit="return checkErrorsBeforeSubmit(training_provider_manager_form)">
+            <form action="{{ route('training-venue-manager.store', ['cesno'=>$cesno]) }}" method="POST" id="training_venue_manager_form" onsubmit="return checkErrorsBeforeSubmit(training_venue_manager_form)">
                 @csrf
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

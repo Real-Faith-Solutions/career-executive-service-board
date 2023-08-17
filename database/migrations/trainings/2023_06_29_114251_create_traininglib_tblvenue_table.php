@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('venueid');
             $table->string('name')->nullable();
             $table->string('no_street')->nullable();
-            $table->integer('brgy')->nullable();
+            $table->string('brgy')->nullable();
             $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
-            $table->integer('contactno')->nullable();
+            $table->string('contactno')->nullable();
             $table->string('emailadd')->nullable();
             $table->string('contactperson')->nullable();
             $table->string('encoder')->nullable();
