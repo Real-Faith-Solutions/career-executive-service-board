@@ -414,6 +414,7 @@ Route::middleware('auth')->group(function () {
 
             Route::prefix('training-venue-manager')->group(function () {
                 Route::get('index/{cesno}', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
+                Route::get('create/{cesno}', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
             });
         });
         // End of competency routes

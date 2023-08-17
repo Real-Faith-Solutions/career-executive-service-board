@@ -14,7 +14,7 @@
       </lord-icon>
     </a> --}}
 
-    <a href="{{ route('training-provider-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Venue Manager</a>
+    <a href="{{ route('training-venue-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Venue Manager</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
