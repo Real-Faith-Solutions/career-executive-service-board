@@ -66,4 +66,12 @@ class DepartmentAgencyManagerController extends Controller
 
     }
 
+    public function destroy($deptid)
+    {
+        $datas = DepartmentAgency::findOrFail($deptid);
+        $datas->delete();
+
+        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+    }
+
 }

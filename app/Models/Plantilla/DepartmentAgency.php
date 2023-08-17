@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DepartmentAgency extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Sector Manager')
-@section('sub', 'Sector Manager')
+@section('title', $datas->title)
+@section('sub', $datas->title)
 @section('content')
     @include('admin.plantilla.header')
     @include('admin.plantilla.department_agency_manager.create')
@@ -174,7 +174,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </a>
-                                <form class="hover:bg-slate-100 rounded-full" action="#" method="POST">
+                                <form class="hover:bg-slate-100 rounded-full" action="{{ route('department-agency-manager.destroy', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

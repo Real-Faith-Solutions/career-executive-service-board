@@ -369,6 +369,10 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
             Route::get('show/{sectorid}/agency/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
             Route::post('show/{sectorid}/agency/{deptid}/update', [DepartmentAgencyManagerController::class, 'updateAgency'])->name('department-agency-manager.updateAgency');
+            Route::delete('{deptid}/destroy', [DepartmentAgencyManagerController::class, 'destroy'])->name('department-agency-manager.destroy');
+            // Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
+            // Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
+            // Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
