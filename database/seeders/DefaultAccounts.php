@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\PersonalData;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class DefaultAccounts extends Seeder
 {
@@ -13,8 +16,9 @@ class DefaultAccounts extends Seeder
     {
         $faker = Faker::create(); // Create a Faker instance
 
-        PersonalData::create([
-            'email' => $faker->unique()->safeEmail,
+        // seeding admin 
+        $admin = PersonalData::create([
+            'email' => 'admin@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -37,5 +41,18 @@ class DefaultAccounts extends Seeder
             'dual_citizenship' => $faker->country(),
             'person_with_disability' => $faker->randomElement(['No', 'Yes']),
         ]);
+
+        $user = $admin->users()->Create([
+            'email' => $admin->email,
+            'password' => Hash::make('12345'),
+            'is_active'		            => 'Active',
+            'last_updated_by'           => 'system encode',
+            'encoder'                   => 'system encode',
+            'default_password_change'   => 'true',
+        ]);
+
+        $user->assignRole('admin');
+        // end seeding admin 
+
     }
 }

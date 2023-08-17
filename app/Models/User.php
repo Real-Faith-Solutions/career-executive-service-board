@@ -8,25 +8,27 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    use SoftDeletes;
+
+    protected $primaryKey = 'ctrlno'; // Specify the custom primary key
+
+    public function userPersonalData(): BelongsTo
+    {
+        return $this->belongsTo(PersonalData::class);
+    }
+
     protected $fillable = [
-        'last_name',
-        'first_name',
-        'middle_name',
         'contact_no',
         'email',
-        'employee_id',
-        'username',
-        'role',
-        'role_name_no',
         'password',
         'is_active',
-        'picture',
-        'cesno',
         'last_updated_by',
         'encoder',
         'default_password_change',
