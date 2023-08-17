@@ -9,16 +9,21 @@ class RolesTableSeeder extends Seeder
 {
     public function run(): void
     {
-        $adminRole = Role::create(['role_name' => 'admin']);
-        Role::create(['role_name' => 'editor']);
-        $userRole = Role::create(['role_name' => 'user']);
+        $admin = Role::create(['role_name' => 'admin']);
+        $power_user = Role::create(['role_name' => 'power_user']);
+        $rank_officer = Role::create(['role_name' => 'rank_officer']);
+        $cesb_operator = Role::create(['role_name' => 'cesb_operator']);
+        $training_officer = Role::create(['role_name' => 'training_officer']);
+        $cespes_operator = Role::create(['role_name' => 'cespes_operator']);
+        $agency_hr_operator = Role::create(['role_name' => 'agency_hr_operator']);
+        $user = Role::create(['role_name' => 'user']);
 
-        $adminRole->assignPermission('create-posts');
-        $adminRole->assignPermission('edit-posts');
-        $adminRole->assignPermission('manage-users');
-        $adminRole->assignPermission('add-profile');
+        $admin->assignPermission('create-posts');
+        $admin->assignPermission('edit-posts');
+        $admin->assignPermission('manage-users');
+        $admin->assignPermission('add-profile');
         
-        $userRole->assignPermission('create-posts');
-        $userRole->assignPermission('edit-posts');
+        $user->assignPermission('create-posts');
+        $user->assignPermission('edit-posts');
     }
 }
