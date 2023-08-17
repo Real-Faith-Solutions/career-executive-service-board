@@ -67,7 +67,7 @@
                                     @endforeach
 
                                 </select>
-                                @error('sectorid')
+                                @error('sectorTitle')
                                     <span class="invalid" role="alert">
                                         <p>{{ $message }}</p>
                                     </span>
@@ -78,13 +78,13 @@
                                 <label for="departmentTypeDatas">Office Type<sup>*</span></label>
                                 <select id="departmentTypeDatas" name="plantillalib_tblAgencyType_id" required>
                                     @foreach ($departmentTypeDatas as $data)
-                                        <option value="{{ $data->sectorid }}" {{ $data->sectorid == $department->plantillalib_tblAgencyType_id ? 'selected' : '' }}>
+                                        <option value="{{ $data->agency_typeid }}" {{ $data->agency_typeid == $department->plantillalib_tblAgencyType_id ? 'selected' : '' }}>
                                             {{ $data->title }}
                                         </option>
                                     @endforeach
 
                                 </select>
-                                @error('sectorid')
+                                @error('plantillalib_tblAgencyType_id')
                                     <span class="invalid" role="alert">
                                         <p>{{ $message }}</p>
                                     </span>
