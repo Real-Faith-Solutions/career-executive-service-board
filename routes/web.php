@@ -367,6 +367,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
             Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
+            Route::get('show/{sectorid}/agency/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
+            Route::post('show/{sectorid}/agency/{deptid}/update', [DepartmentAgencyManagerController::class, 'updateAgency'])->name('department-agency-manager.updateAgency');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
@@ -391,7 +393,7 @@ Route::middleware('auth')->group(function () {
     // End of plantilla routes
 
     // Competency routes
-    Route::prefix('competency')->group(function () 
+    Route::prefix('competency')->group(function ()
     {
         Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
         Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
