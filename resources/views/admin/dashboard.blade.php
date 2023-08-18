@@ -39,7 +39,7 @@
 @section('content')
     @auth
     <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500 text-2xl">
-        <h1>Hello {{ $userName }}</h1>
+        <h1>Hello {{ $userTitle." ".$userName." [".$userRole."]" }}</h1>
         <h1 id="currentDateTime"></h1>
     </div>
     @endauth
