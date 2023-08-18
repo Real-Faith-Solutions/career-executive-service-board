@@ -6,18 +6,23 @@ use App\Http\Requests\AddProfile201Req;
 use App\Mail\TempCred201;
 use App\Models\PersonalData;
 use App\Models\User;
+use Illuminate\Contracts\View\View as ViewView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View as FacadesView;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
 
 class AddProfile201 extends Controller
 {
     //
     public function store(AddProfile201Req $request, $cesno)
     {
+
+        $encoder = View::shared('userName');
 
         $newProfile = PersonalData::create([
             
@@ -43,6 +48,7 @@ class AddProfile201 extends Controller
             'citizenship' => $request->citizenship,
             'dual_citizenship' => $request->dual_citizenship,
             'person_with_disability' => $request->person_with_disability,
+            'encoder' => $encoder,
 
         ]);
 
@@ -59,15 +65,18 @@ class AddProfile201 extends Controller
 
         Mail::to($recipientEmail)->send(new TempCred201($data));
 
-        // $newUser = User::create([
-            
-        //     'personal_data_cesno' => $cesno,
-        //     'email' => $request->email,
-        //     'password' => $hashedPassword,
+        $user = $newProfile->users()->Create([
+            'email' => $newProfile->email,
+            'password' => $hashedPassword,
+            'is_active'		            => 'Active',
+            'last_updated_by'           => 'system encode',
+            'encoder'                   => $encoder,
+            'default_password_change'   => 'true',
+        ]);
 
-        // ]);
+        $user->assignRole('user');
 
-        return back()->with('message','New profile added!');
+        return back()->with('message','New profile added!'.$encoder);
 
     }
 
