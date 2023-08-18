@@ -42,7 +42,7 @@ class TrainingVenueManagerController extends Controller
             'contactno' => $request->contact_no,
             'emailadd' => $request->email,
             'contactperson' => $request->contact_person,
-            'encoder' => $userFullName,
+            'encoder' => $userLastName.' '.$userFirstName.''.$userMiddleName.' '.$userNameExtension,
 
         ]);
 
@@ -87,6 +87,37 @@ class TrainingVenueManagerController extends Controller
         $trainingVenueManager->updated_by = $request->$userFullName;
         $trainingVenueManager->save();
 
-        return to_route('training-venue-manager.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
+        return to_route('training-venue-manager.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
+    }
+
+    public function destroy($ctrlno)
+    {
+        $trainingVenueManager = CompetencyTrainingVenueManager::find($ctrlno);
+        $trainingVenueManager->delete();
+
+        return back()->with('info', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted($cesno)
+    {
+        $trainingVenueManagerTrashRecord = CompetencyTrainingVenueManager::onlyTrashed()->get();
+
+        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.trashbin', compact('trainingVenueManagerTrashRecord', 'cesno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $trainingVenueManagerTrashRecord = CompetencyTrainingVenueManager::onlyTrashed()->find($ctrlno);
+        $trainingVenueManagerTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    public function forceDelete($ctrlno)
+    {
+        $trainingVenueManagerTrashRecord = CompetencyTrainingVenueManager::onlyTrashed()->find($ctrlno);
+        $trainingVenueManagerTrashRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

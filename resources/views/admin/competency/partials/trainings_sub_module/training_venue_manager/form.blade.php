@@ -31,17 +31,6 @@
                         </span>
                         @enderror
                     </div>
-                    
-                    <div class="mb-3">
-                        <label for="no_street">Address: Bldg/No/Street<sup>*</sup></label>
-                        <input type="text" id="no_street" name="no_street" oninput="validateInput(no_street, 2, 'alphaNumeric')" onkeypress="validateInput(no_street, 2, 'alphaNumeric')" onblur="checkErrorMessage(no_street)" >
-                        <p class="input_error text-red-600"></p>
-                        @error('no_street')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -73,12 +62,12 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="mb-3">
-                        <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="venue_contact_no" name="contact_no" oninput="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(venue_contact_no)" required>
+                        <label for="no_street">Address: Bldg/No/Street<sup>*</sup></label>
+                        <input type="text" id="no_street" name="no_street" oninput="validateInput(no_street, 2, 'alphaNumeric')" onkeypress="validateInput(no_street, 2, 'alphaNumeric')" onblur="checkErrorMessage(no_street)" >
                         <p class="input_error text-red-600"></p>
-                        @error('contact_no')
+                        @error('no_street')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -92,6 +81,17 @@
                         <input type="text" id="venue_email" name="email" oninput="validateInputEmail(venue_email)" onkeypress="validateInputEmail(venue_email)" onblur="checkErrorMessage(venue_email)" required>
                         <p class="input_error text-red-600"></p>
                         @error('email')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contact_no">Contact No.<sup>*</sup></label>
+                        <input type="text" id="venue_contact_no" name="contact_no" oninput="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(venue_contact_no)" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('contact_no')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

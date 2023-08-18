@@ -429,6 +429,10 @@ Route::middleware('auth')->group(function () {
                 Route::post('store/{cesno}', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
                 Route::get('edit/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
                 Route::put('update/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
+                Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy');
+                Route::get('recently-deleted/{cesno}', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
+                Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete');
             });
         });
         // End of competency routes
