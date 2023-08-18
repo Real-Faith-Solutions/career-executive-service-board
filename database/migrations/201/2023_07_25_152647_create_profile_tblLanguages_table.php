@@ -14,12 +14,10 @@ return new class extends Migration
         //languages_dialects
         Schema::create('profile_tblLanguages', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->unsignedBigInteger('language_code');
             $table->foreign('language_code')->references('code')->on('profilelib_tblLanguageRef')->onDelete('cascade');
-            // $table->string('language_description');
             $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();

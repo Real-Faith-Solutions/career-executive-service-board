@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
@@ -11,14 +12,16 @@ class Role extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function permissions()
+    public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class, 'permission_roles');
+        return $this->belongsToMany(Permission::class, 'permission_roles')
+        ->withTimestamps();
     }
     
-    public function users()
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'role_users')
+        ->withTimestamps();
     }
 
     public function assignPermission($permission)

@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('role_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_ctrlno');
-            $table->unsignedBigInteger('role_id');
             $table->foreign('user_ctrlno')->references('ctrlno')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
         });
