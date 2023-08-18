@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\PersonalData;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Role;
@@ -19,7 +20,14 @@ class AdminPermissionsComposerServiceProvider extends ServiceProvider
                 if ($userRole) {
                     $userPermissions = $userRole->permissions;
 
-                    $view->with('userPermissions', $userPermissions);
+                    $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
+
+                    $view->with([
+                        'userPermissions' => $userPermissions,
+                        'userName' => $personalData ? $personalData->firstname.' '.$personalData->lastname : null,
+                        'userFirstName' => $personalData ? $personalData->firstname : null,
+                        'userLastName' => $personalData ? $personalData->lastname : null,
+                    ]);
                 }
             }
         });
