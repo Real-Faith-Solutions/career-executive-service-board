@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompetencyNonCesAccreditedTraining extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
@@ -18,6 +19,7 @@ class CompetencyNonCesAccreditedTraining extends Model
 
         'personal_data_cesno',
         'training',
+        'training_category',
         'no_hours',
         'sponsor',
         'venue',
@@ -30,7 +32,7 @@ class CompetencyNonCesAccreditedTraining extends Model
 
     ];
 
-    public function trainingProvider(): BelongsTo
+    public function nonCesTrainingProvider(): BelongsTo
     {
         return $this->belongsTo(CompetencyTrainingProvider::class, 'providerID');
     }

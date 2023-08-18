@@ -399,43 +399,52 @@ Route::middleware('auth')->group(function () {
     // Competency routes
     Route::prefix('competency')->group(function ()
     {
-        Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-        Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
-        Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-        Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
-        Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
-        Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('competency-data-other-training-management.index');
-        Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
-
+        Route::prefix('personal-data')->group(function () {
+            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
+            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
+            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
+            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+        });
+    
         Route::prefix('non-ces-training-accredited')->group(function () {
+            Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
             Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
+            Route::post('store/{cesno}', [OtherTrainingManagementController::class, 'store'])->name('non-ces-training-management.store');
+            Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit');
+            Route::put('update/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update');
+            Route::delete('destroy/{ctrlno}', [OtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy');
+            Route::get('recently-deleted/{cesno}', [OtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore');
+            Route::delete('forceDelete/{ctrlno}', [OtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete');
         });
 
-            Route::prefix('training-provider-manager')->group(function () {
-                Route::get('index/{cesno}', [TrainingProviderManagerController::class, 'index'])->name('training-provider-manager.index');
-                Route::get('create/{cesno}', [TrainingProviderManagerController::class, 'create'])->name('training-provider-manager.create');
-                Route::post('store/{cesno}', [TrainingProviderManagerController::class, 'store'])->name('training-provider-manager.store');
-                Route::get('edit/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'edit'])->name('training-provider-manager.edit');
-                Route::put('update/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'update'])->name('training-provider-manager.update');
-                Route::delete('destroy/{ctrlno}', [TrainingProviderManagerController::class, 'destroy'])->name('training-provider-manager.destroy');
-                Route::get('recently-deleted/{cesno}', [TrainingProviderManagerController::class, 'recentlyDeleted'])->name('training-provider-manager.recentlyDeleted');
-                Route::post('recently-deleted/restore/{ctrlno}', [TrainingProviderManagerController::class, 'restore'])->name('training-provider-manager.restore');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingProviderManagerController::class, 'forceDelete'])->name('training-provider-manager.forceDelete');
-            });
-
-            Route::prefix('training-venue-manager')->group(function () {
-                Route::get('index/{cesno}', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
-                Route::get('create/{cesno}', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
-                Route::post('store/{cesno}', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
-                Route::get('edit/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
-                Route::put('update/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
-                Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy');
-                Route::get('recently-deleted/{cesno}', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
-                Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete');
-            });
+        Route::prefix('training-provider-manager')->group(function () {
+            Route::get('index/{cesno}', [TrainingProviderManagerController::class, 'index'])->name('training-provider-manager.index');
+            Route::get('create/{cesno}', [TrainingProviderManagerController::class, 'create'])->name('training-provider-manager.create');
+            Route::post('store/{cesno}', [TrainingProviderManagerController::class, 'store'])->name('training-provider-manager.store');
+            Route::get('edit/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'edit'])->name('training-provider-manager.edit');
+            Route::put('update/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'update'])->name('training-provider-manager.update');
+            Route::delete('destroy/{ctrlno}', [TrainingProviderManagerController::class, 'destroy'])->name('training-provider-manager.destroy');
+            Route::get('recently-deleted/{cesno}', [TrainingProviderManagerController::class, 'recentlyDeleted'])->name('training-provider-manager.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingProviderManagerController::class, 'restore'])->name('training-provider-manager.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingProviderManagerController::class, 'forceDelete'])->name('training-provider-manager.forceDelete');
         });
-        // End of competency routes
+
+        Route::prefix('training-venue-manager')->group(function () {
+            Route::get('index/{cesno}', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
+            Route::get('create/{cesno}', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
+            Route::post('store/{cesno}', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
+            Route::get('edit/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
+            Route::put('update/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
+            Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy');
+            Route::get('recently-deleted/{cesno}', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete');
+        });
+    });
+    // End of competency routes
 
     // Library routes (201)
     Route::prefix('201-library')->group(function () {

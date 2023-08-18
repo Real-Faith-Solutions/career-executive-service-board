@@ -17,8 +17,9 @@ class OtherTrainingController extends Controller
 
         $personalData = PersonalData::find($cesno);
         $otherTraining = $personalData->otherTraining;
+        $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining;
 
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', compact('otherTraining' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', compact('otherTraining' , 'cesno', 'competencyNonCesAccreditedTraining'));
 
     }
 

@@ -14,7 +14,6 @@ return new class extends Migration
         //other_management_trainings
         Schema::create('profile_tblTrainingMngt', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno');
             $table->unsignedBigInteger('personal_data_cesno');
             $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->unsignedBigInteger('field_specialization');
@@ -26,8 +25,7 @@ return new class extends Migration
             $table->string('no_training_hours');
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
-            // $table->string('field_specialization')->nullable();
-            $table->string('encoder');
+            $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
