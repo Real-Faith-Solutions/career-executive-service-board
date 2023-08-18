@@ -23,10 +23,10 @@
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="venue_name">Venue Name<sup>*</sup></label>
-                        <input type="text" id="update_venue_name" name="venue_name" oninput="validateInput(update_venue_name, 2, 'letters')" onkeypress="validateInput(update_venue_name, 2, 'letters')" onblur="checkErrorMessage(update_venue_name)" value="{{ $trainingVenueManager->name }}" required>
+                        <label for="name">Venue Name<sup>*</sup></label>
+                        <input type="text" id="update_venue_name" name="name" oninput="validateInput(update_venue_name, 2, 'letters')" onkeypress="validateInput(update_venue_name, 2, 'letters')" onblur="checkErrorMessage(update_venue_name)" value="{{ $trainingVenueManager->name }}" required>
                         <p class="input_error text-red-600"></p>
-                        @error('venue_name')
+                        @error('name')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
                         </span>

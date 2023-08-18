@@ -7,6 +7,7 @@ use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TrainingVenueManagerController extends Controller
 {
@@ -26,6 +27,18 @@ class TrainingVenueManagerController extends Controller
 
     public function store(Request $request, $cesno)
     {
+        $request->validate([
+
+            'venue_name' => ['required', 'unique:traininglib_tblvenue,name'],
+            'no_street' => ['required'],
+            'brgy' => ['required'],
+            'city_code' => ['required'],
+            'contact_no' => ['required'],
+            'email' => ['required'],
+            'contact_person' => ['required'],
+            
+        ]);
+
         $userFullName = Auth::user();
         $userLastName = $userFullName ->last_name;
         $userFirstName = $userFullName ->first_name;
@@ -69,6 +82,18 @@ class TrainingVenueManagerController extends Controller
 
     public function update(Request $request, $ctrlno, $cesno)
     {
+        $request->validate([
+
+            'name' => ['required',Rule::unique('traininglib_tblvenue')->ignore($ctrlno, 'venueid')],
+            'no_street' => ['required'],
+            'brgy' => ['required'],
+            'city_code' => ['required'],
+            'contact_no' => ['required'],
+            'email' => ['required'],
+            'contact_person' => ['required'],
+            
+        ]);
+
         $userFullName = Auth::user();
         $userLastName = $userFullName ->last_name;
         $userFirstName = $userFullName ->first_name;
@@ -77,7 +102,7 @@ class TrainingVenueManagerController extends Controller
         $userFullName = $userLastName. ' ' .$userFirstName. ' '.$userMiddleName. ' '.$userNameExtension;
 
         $trainingVenueManager = CompetencyTrainingVenueManager::find($ctrlno);
-        $trainingVenueManager->name = $request->venue_name;
+        $trainingVenueManager->name = $request->name;
         $trainingVenueManager->no_street = $request->no_street;
         $trainingVenueManager->brgy = $request->brgy;
         $trainingVenueManager->city_code = $request->city_code;

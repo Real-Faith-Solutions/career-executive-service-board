@@ -88,7 +88,7 @@ class TrainingProviderManagerController extends Controller
     {
         $request->validate([
 
-            'provider' => [Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
+            'provider' => ['required',Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
             'house_building' => ['required'],
             'st_road' => ['required'],
             'brgy_vill' => ['nullable'],
