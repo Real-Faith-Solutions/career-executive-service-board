@@ -179,9 +179,9 @@ class PersonalData extends Model
         return $this->hasMany(CompetencyNonCesAccreditedTraining::class, 'personal_data_cesno', 'cesno');
     }
     
-    // public function users(): HasOne
-    // {
-    //     return $this->hasOne(User::class);
-    // }
+    public function users(): HasOne
+    {
+        return $this->hasOne(User::class);
+    }
 
 }

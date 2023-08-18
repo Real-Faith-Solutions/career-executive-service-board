@@ -7,9 +7,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+    
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
@@ -35,8 +33,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            CesWebAppGeneralPageAccessesTableSeeder::class,
+            // UsersTableSeeder::class,
+            DefaultAccounts::class,
+            // CesWebAppGeneralPageAccessesTableSeeder::class,
             // ProfileData::class,
             // ProfileAddress::class,
             IndigenousGroup::class,

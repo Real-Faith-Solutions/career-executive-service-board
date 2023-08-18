@@ -19,7 +19,7 @@ class PersonalDataFactory extends Factory
         return [
 
             // 'picture' => 'placeholder.png',
-            'email' => $this->faker->safeEmail(),
+            'email' => $this->faker->unique()->safeEmail(),
             'status' => $this->faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $this->faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $this->faker->lastName,
@@ -42,11 +42,6 @@ class PersonalDataFactory extends Factory
             'citizenship' => $this->faker->randomElement(['Filipino', 'Dual-Citizenship']),
             'dual_citizenship' => $this->faker->country(),
             'person_with_disability' => $this->faker->randomElement(['No', 'Yes']),
-            // 'gsis' => $this->faker->randomNumber(9),
-            // 'pagibig' => $this->faker->randomNumber(9),
-            // 'philhealth' => $this->faker->randomNumber(9),
-            // 'sss_no' => $this->faker->randomNumber(9),
-            // 'tin' => $this->faker->randomNumber(9),
 
         ];
     }

@@ -104,5 +104,6 @@ class UsersTableSeeder extends Seeder
             ]);
             $user->assignRole('user');
         }
+        
     }
 }
