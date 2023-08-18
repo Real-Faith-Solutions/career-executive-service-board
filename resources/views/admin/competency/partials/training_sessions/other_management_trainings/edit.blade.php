@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_competency_other_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_competency_other_trainings_form)">
+            <form action="{{ route('non-ces-training-management.update', ['ctrlno'=>$nonCesAccreditedTraining->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_competency_other_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_competency_other_trainings_form)">
                 @csrf
                 @method('PUT')
                 

@@ -63,4 +63,24 @@ class OtherTrainingManagementController extends Controller
 
         return view('admin.competency.partials.training_sessions.other_management_trainings.edit', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider', 'nonCesAccreditedTraining'));    
     }
+
+    public function update(Request $request, $ctrlno, $cesno)
+    {
+        $provider = $request->sponsor_training_provider;
+        $providerID = CompetencyTrainingProvider::where('provider', $provider)->value('providerID');
+        
+        $competencyNonCesAccreditedTraining = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $competencyNonCesAccreditedTraining->training = $request->training;
+        $competencyNonCesAccreditedTraining->training_category = $request->training_category;
+        $competencyNonCesAccreditedTraining->no_hours = $request->no_of_training_hours;
+        $competencyNonCesAccreditedTraining->sponsor = $request->sponsor_training_provider;
+        $competencyNonCesAccreditedTraining->venue = $request->venue;
+        $competencyNonCesAccreditedTraining->from_dt = $request->inclusive_date_from;
+        $competencyNonCesAccreditedTraining->to_dt = $request->inclusive_date_to;
+        $competencyNonCesAccreditedTraining->specialization = $request->expertise_field_of_specialization;
+        $competencyNonCesAccreditedTraining->providerID = $providerID;
+        $competencyNonCesAccreditedTraining->save();
+
+        return to_route('non-ces-training-management.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
+    }
 }
