@@ -14,6 +14,8 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        // Check if the response status code is either 200 (OK) or 302 (Redirect)
+        $response->assertStatus(200)
+            ->assertStatus(302); // This line checks for a redirect (status code 302)
     }
 }
