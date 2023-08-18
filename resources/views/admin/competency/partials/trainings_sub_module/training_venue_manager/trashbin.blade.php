@@ -1,26 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Training Venue Manager')
-@section('sub', 'Training Venue Manager')
+@section('title', 'Trash Bin Training Venue Manager')
+@section('sub', 'Trash Bin Training Venue Manager')
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-venue-manager.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('training-venue-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Venue Manager</a>
+    <a href="{{ route('training-venue-manager.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th scope="col" class="px-6 py-3">
+                    Venue ID
+                </th>
+
                 <th scope="col" class="px-6 py-3">
                     Venue
                 </th>
@@ -50,59 +45,71 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainingVenueManager as $trainingVenueManagers)
+            @foreach ($trainingVenueManagerTrashRecord as $trainingVenueManagerTrashRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingVenueManagers->name }}
+                        {{ $trainingVenueManagerTrashRecords->venueid }}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $trainingVenueManagerTrashRecords->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->no_street }}
+                        {{ $trainingVenueManagerTrashRecords->no_street }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->brgy }}
+                        {{ $trainingVenueManagerTrashRecords->brgy }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->trainingVenueManager->name }}
+                        {{ $trainingVenueManagerTrashRecords->trainingVenueManager->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->contactno }}
+                        {{ $trainingVenueManagerTrashRecords->contactno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->emailadd }}
+                        {{ $trainingVenueManagerTrashRecords->emailadd }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->contactperson }}
+                        {{ $trainingVenueManagerTrashRecords->contactperson }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingVenueManagerTrashRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-venue-manager.restore', ['ctrlno'=>$trainingVenueManagerTrashRecords->venueid]) }}" method="POST" id="restore_training_venue_manager_form{{$trainingVenueManagerTrashRecords->venueid}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="button" id="restoreTrainingVenueManagerButton{{$trainingVenueManagerTrashRecords->venueid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
+                            <form action="{{ route('training-venue-manager.forceDelete', ['ctrlno'=>$trainingVenueManagerTrashRecords->venueid]) }}" method="POST" id="permanent_training_venue_manager_form{{$trainingVenueManagerTrashRecords->venueid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$trainingVenueManagers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteTrainingVenueManagerButton{{$trainingVenueManagerTrashRecords->venueid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

@@ -32,17 +32,6 @@
                         </span>
                         @enderror
                     </div>
-                    
-                    <div class="mb-3">
-                        <label for="no_street">Address: Bldg/No/Street<sup>*</sup></label>
-                        <input type="text" id="update_no_street" name="no_street" oninput="validateInput(update_no_street, 2, 'alphaNumeric')" onkeypress="validateInput(update_no_street, 2, 'alphaNumeric')" onblur="checkErrorMessage(update_no_street)" value="{{ $trainingVenueManager->no_street }}" >
-                        <p class="input_error text-red-600"></p>
-                        @error('no_street')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -80,12 +69,12 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="mb-3">
-                        <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="update_contact_no" name="contact_no" oninput="validateInput(update_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(update_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contact_no)" value="{{ $trainingVenueManager->contactno }}" required>
+                        <label for="no_street">Address: Bldg/No/Street<sup>*</sup></label>
+                        <input type="text" id="update_no_street" name="no_street" oninput="validateInput(update_no_street, 2, 'alphaNumeric')" onkeypress="validateInput(update_no_street, 2, 'alphaNumeric')" onblur="checkErrorMessage(update_no_street)" value="{{ $trainingVenueManager->no_street }}" >
                         <p class="input_error text-red-600"></p>
-                        @error('contact_no')
+                        @error('no_street')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -99,6 +88,17 @@
                         <input type="text" id="update_email" name="email" oninput="validateInputEmail(update_email)" onkeypress="validateInputEmail(update_email)" onblur="checkErrorMessage(update_email)" value="{{ $trainingVenueManager->emailadd }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('email')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contact_no">Contact No.<sup>*</sup></label>
+                        <input type="text" id="update_contact_no" name="contact_no" oninput="validateInput(update_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(update_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contact_no)" value="{{ $trainingVenueManager->contactno }}" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('contact_no')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
