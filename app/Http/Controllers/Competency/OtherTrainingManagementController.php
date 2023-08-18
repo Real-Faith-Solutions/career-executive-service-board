@@ -54,4 +54,13 @@ class OtherTrainingManagementController extends Controller
     
         return to_route('non-ces-training-management.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($ctrlno, $cesno)
+    {
+        $nonCesAccreditedTraining = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
+        $competencyTrainingProvider = CompetencyTrainingProvider::all();
+
+        return view('admin.competency.partials.training_sessions.other_management_trainings.edit', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider', 'nonCesAccreditedTraining'));    
+    }
 }
