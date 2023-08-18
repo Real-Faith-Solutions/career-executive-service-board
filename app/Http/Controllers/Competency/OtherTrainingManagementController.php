@@ -8,6 +8,7 @@ use App\Models\CompetencyTrainingProvider;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OtherTrainingManagementController extends Controller
 {
@@ -29,6 +30,18 @@ class OtherTrainingManagementController extends Controller
 
     public function store(Request $request, $cesno)
     {
+        $request->validate([
+
+            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)],
+            'training_category' => ['required'],
+            'no_of_training_hours' => ['required'],
+            'sponsor_training_provider' => ['required'],
+            'venue' => ['required'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'expertise_field_of_specialization' => ['required'],
+            
+        ]);
 
         $provider = $request->sponsor_training_provider;
         $providerID = CompetencyTrainingProvider::where('provider', $provider)->value('providerID');
@@ -66,6 +79,19 @@ class OtherTrainingManagementController extends Controller
 
     public function update(Request $request, $ctrlno, $cesno)
     {
+        $request->validate([
+
+            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training_category' => ['required'],
+            'no_of_training_hours' => ['required'],
+            'sponsor_training_provider' => ['required'],
+            'venue' => ['required'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'expertise_field_of_specialization' => ['required'],
+            
+        ]);
+
         $provider = $request->sponsor_training_provider;
         $providerID = CompetencyTrainingProvider::where('provider', $provider)->value('providerID');
         
