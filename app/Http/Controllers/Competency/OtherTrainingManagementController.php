@@ -83,4 +83,12 @@ class OtherTrainingManagementController extends Controller
 
         return to_route('non-ces-training-management.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $competencyNonCesAccreditedTraining = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $competencyNonCesAccreditedTraining->delete();
+
+        return back()->with('info', 'Deleted Sucessfully');
+    }
 }

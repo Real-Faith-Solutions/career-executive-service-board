@@ -27,6 +27,7 @@ return new class extends Migration
             // $table->string('providerID');
             $table->foreignId('providerID')->constrained('training_tblProvider', 'providerID')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -99,10 +99,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('other-training.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST" id="delete_other_training_form{{$otherTrainings->ctrlno}}">
+                            <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$otherTrainings->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteOtherTrainingButton{{$otherTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteNonCessAccreditedTrainingButton{{$otherTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
