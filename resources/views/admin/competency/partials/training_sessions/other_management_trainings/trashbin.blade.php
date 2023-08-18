@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Trash Bin Competency Non-Ces Accredited Training')
-@section('sub', 'Competency Non-Ces Accredited Training')
+@section('title', 'Competency Non-Ces Accredited Training Recycle Bin')
+@section('sub', 'Competency Non-Ces Accredited Training Recycle Bin')
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
@@ -94,19 +94,19 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('non-ces-training-management.edit', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('non-ces-training-management.restore', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno]) }}" method="POST" id="restore_non-ces-training-management_form{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreNonCesTrainingManagementButton{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}">
+                            {{-- <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteNonCessAccreditedTrainingButton{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

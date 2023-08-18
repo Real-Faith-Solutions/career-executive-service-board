@@ -103,18 +103,18 @@ class OtherTrainingManagementController extends Controller
         return view('admin.competency.partials.training_sessions.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'cesno'));
     }
 
-    // public function restore($ctrlno)
-    // {
-    //     $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
-    //     $profileTblCesStatus->restore();
+    public function restore($ctrlno)
+    {
+        $competencyNonCesAccreditedTrainingTrashedRecord = CompetencyNonCesAccreditedTraining::onlyTrashed()->find($ctrlno);
+        $competencyNonCesAccreditedTrainingTrashedRecord->restore();
 
-    //     return back()->with('message', 'Data Restored Sucessfully');
-    // }
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
  
     // public function forceDelete($ctrlno)
     // {
-    //     $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
-    //     $profileTblCesStatus->forceDelete();
+    //     $competencyNonCesAccreditedTrainingTrashedRecord = CompetencyNonCesAccreditedTraining::withTrashed()->find($ctrlno);
+    //     $competencyNonCesAccreditedTrainingTrashedRecord->forceDelete();
   
     //     return back()->with('message', 'Data Permanently Deleted');
     // }
