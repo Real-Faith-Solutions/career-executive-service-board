@@ -111,11 +111,11 @@ class OtherTrainingManagementController extends Controller
         return back()->with('info', 'Data Restored Sucessfully');
     }
  
-    // public function forceDelete($ctrlno)
-    // {
-    //     $competencyNonCesAccreditedTrainingTrashedRecord = CompetencyNonCesAccreditedTraining::withTrashed()->find($ctrlno);
-    //     $competencyNonCesAccreditedTrainingTrashedRecord->forceDelete();
+    public function forceDelete($ctrlno)
+    {
+        $competencyNonCesAccreditedTrainingTrashedRecord = CompetencyNonCesAccreditedTraining::onlyTrashed()->find($ctrlno);
+        $competencyNonCesAccreditedTrainingTrashedRecord->forceDelete();
   
-    //     return back()->with('message', 'Data Permanently Deleted');
-    // }
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

@@ -106,10 +106,10 @@
                                 </button>
                             </form>
 
-                            {{-- <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}">
+                            <form action="{{ route('non-ces-training-management.forceDelete', ['ctrlno'=>$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno]) }}" method="POST" id="permanent_non-ces-training-management_form{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteNonCessAccreditedTrainingButton{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteNonCesTrainingManagementButton{{$competencyNonCesAccreditedTrainingTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -118,7 +118,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
