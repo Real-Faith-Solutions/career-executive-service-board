@@ -51,7 +51,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('competency-data-other-training-management.index', ['cesno'=>$cesno]) }}" >Other Non-CES Accredited Trainings</a>
+                            <a class="btn category-button inline-flex" href="{{ route('non-ces-training-management.index', ['cesno'=>$cesno]) }}" >Other Non-CES Accredited Trainings</a>
                         </li>
                     </ul>
                 </div>

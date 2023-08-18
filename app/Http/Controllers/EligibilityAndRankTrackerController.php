@@ -39,41 +39,40 @@ class EligibilityAndRankTrackerController extends Controller
 
     public function store(Request $request, $cesno){
 
-    $request->validate([
+        $request->validate([
 
-        'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
-        'acc_code' => ['required'],
-        'type_code' => ['required'],
-        'official_code' => ['nullable'],
-        'resolution_no' => ['required'],
-        'appointed_dt' => ['required'],
-        
-    ]);
-        
-    $userFullName = Auth::user();
-    $userLastName = $userFullName ->last_name;
-    $userFirstName = $userFullName ->first_name;
-    $userMiddleName = $userFullName ->middle_name;
-    $userNameExtension = $userFullName ->name_extension;
+            'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
+            'acc_code' => ['required'],
+            'type_code' => ['required'],
+            'official_code' => ['nullable'],
+            'resolution_no' => ['required'],
+            'appointed_dt' => ['required'],
+            
+        ]);
+            
+        $userFullName = Auth::user();
+        $userLastName = $userFullName ->last_name;
+        $userFirstName = $userFullName ->first_name;
+        $userMiddleName = $userFullName ->middle_name;
+        $userNameExtension = $userFullName ->name_extension;
 
-    $profileTblCesStatus = new ProfileTblCesStatus([
+        $profileTblCesStatus = new ProfileTblCesStatus([
 
-        'cesstat_code' => $request->cesstat_code,
-        'acc_code' => $request->acc_code,
-        'type_code' => $request->type_code,
-        'official_code' => $request->official_code,
-        'resolution_no' => $request->resolution_no,
-        'appointed_dt' => $request->appointed_dt,
-        'encoder' => $request->$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'cesstat_code' => $request->cesstat_code,
+            'acc_code' => $request->acc_code,
+            'type_code' => $request->type_code,
+            'official_code' => $request->official_code,
+            'resolution_no' => $request->resolution_no,
+            'appointed_dt' => $request->appointed_dt,
+            'encoder' => $request->$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
 
-    ]);
- 
-    $personalData = PersonalData::find($cesno);
+        ]);
     
-    $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
+        $personalData = PersonalData::find($cesno);
+        
+        $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
-    return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
-
+        return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
 
     public function edit($ctrlno, $cesno){

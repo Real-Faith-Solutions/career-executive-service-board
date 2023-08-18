@@ -18,6 +18,7 @@ class CompetencyNonCesAccreditedTraining extends Model
 
         'personal_data_cesno',
         'training',
+        'training_category',
         'no_hours',
         'sponsor',
         'venue',
@@ -30,7 +31,7 @@ class CompetencyNonCesAccreditedTraining extends Model
 
     ];
 
-    public function trainingProvider(): BelongsTo
+    public function nonCesTrainingProvider(): BelongsTo
     {
         return $this->belongsTo(CompetencyTrainingProvider::class, 'providerID');
     }

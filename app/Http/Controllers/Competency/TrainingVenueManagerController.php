@@ -85,7 +85,7 @@ class TrainingVenueManagerController extends Controller
         $trainingVenueManager->emailadd = $request->email;
         $trainingVenueManager->contactperson = $request->contact_person;
         $trainingVenueManager->updated_by = $request->$userFullName;
-        $trainingVenueManager->save();
+        $trainingVenueManager->update();
 
         return to_route('training-venue-manager.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
     }

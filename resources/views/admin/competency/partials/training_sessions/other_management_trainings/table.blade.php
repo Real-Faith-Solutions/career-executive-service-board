@@ -5,14 +5,14 @@
 @include('admin.competency.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    {{-- <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
+    <a href="{{ route('other-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
       </lord-icon>
-    </a> --}}
+    </a>
 
     <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
 </div>
@@ -42,12 +42,16 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Inclusive Dates
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     No. of Training Hours
                 </th>
 
-                {{-- <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
-                </th> --}}
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +66,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
+                        {{ $otherTrainings->specialization }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -74,10 +78,14 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->no_training_hours }}
+                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt }}
                     </td>
 
-                    {{-- <td class="px-6 py-4 text-right uppercase">
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->no_hours }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
                             <form action="{{ route('other-training.edit', ['ctrlno'=>$otherTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
@@ -105,7 +113,7 @@
                                 </button>
                             </form>
                         </div>
-                    </td> --}}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -42,6 +42,10 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Inclusive Dates
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     No. of Training Hours
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -70,6 +74,10 @@
 
                     <td class="px-6 py-3">
                         {{ $otherTrainings->venue }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $otherTrainings->from_date. ' - '.$otherTrainings->to_date }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -107,6 +115,70 @@
                     </td>
                 </tr>
             @endforeach
+
+            {{-- competency non-ces accredited training --}}
+            @foreach ($competencyNonCesAccreditedTraining as $competencyNonCesAccreditedTrainings)
+                <tr class="border-b bg-white">
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $competencyNonCesAccreditedTrainings->training }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->training_category }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->specialization }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->sponsor }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->venue }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->from_dt. ' - '.$competencyNonCesAccreditedTrainings->to_dt }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $competencyNonCesAccreditedTrainings->no_hours }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
+                        <div class="flex">
+                            <form action="" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
+                            <form action="" method="POST" id="delete_other_training_form{{$competencyNonCesAccreditedTrainings->ctrlno}}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" id="deleteOtherTrainingButton{{$competencyNonCesAccreditedTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                                        trigger="hover"
+                                        colors="primary:#880808"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+            {{-- end competency non-ces accredited training --}}
         </tbody>
     </table>
 </div>

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('profile_tblExaminations', function (Blueprint $table) {
             $table->id('ctrlno');
-
             $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
             $table->foreignId('exam_code')->constrained('profilelib_tblExamRef', 'CODE');
             $table->string('rating')->nullable();
