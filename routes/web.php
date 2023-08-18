@@ -415,6 +415,7 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit');
             Route::put('update/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update');
             Route::delete('destroy/{ctrlno}', [OtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy');
+            Route::get('recently-deleted/{cesno}', [OtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
         });
 
         Route::prefix('training-provider-manager')->group(function () {

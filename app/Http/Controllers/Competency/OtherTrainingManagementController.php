@@ -91,4 +91,31 @@ class OtherTrainingManagementController extends Controller
 
         return back()->with('info', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted competencyNonCesAccreditedTraining of the parent model
+        $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
+ 
+        return view('admin.competency.partials.training_sessions.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'cesno'));
+    }
+
+    // public function restore($ctrlno)
+    // {
+    //     $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
+    //     $profileTblCesStatus->restore();
+
+    //     return back()->with('message', 'Data Restored Sucessfully');
+    // }
+ 
+    // public function forceDelete($ctrlno)
+    // {
+    //     $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
+    //     $profileTblCesStatus->forceDelete();
+  
+    //     return back()->with('message', 'Data Permanently Deleted');
+    // }
 }
