@@ -25,6 +25,8 @@ class AdminPermissionsComposerServiceProvider extends ServiceProvider
                     $view->with([
                         'userPermissions' => $userPermissions,
                         'userRole' => $userRole->role_name,
+                        'user_cesno' => $personalData->cesno,
+                        'user_picture' => $personalData->picture,
                         'userName' => $personalData ? $personalData->firstname.' '.$personalData->lastname : null,
                         'userFirstName' => $personalData ? $personalData->firstname : null,
                         'userLastName' => $personalData ? $personalData->lastname : null,
