@@ -4,23 +4,23 @@ let uploadButtonAvatar = document.getElementById('uploadButtonAvatar');
 
   // Open the modal when the image is clicked
   document.getElementById('profile-avatar').addEventListener('click', function() {
-    showModal();
+    showModalAvatar();
   });
   
   // Close the modal when the close button is clicked
   document.getElementsByClassName('close-avatar')[0].addEventListener('click', function() {
-    closeModal();
+    closeModalAvatar();
   });
   
   // Close the modal when the user clicks outside the modal content
   window.addEventListener('click', function(event) {
     if (event.target == document.getElementById('profile-avatar-modal')) {
-      closeModal();
+      closeModalAvatar();
     }
   });
   
   // Show the modal
-  function showModal() {
+  function showModalAvatar() {
     document.getElementById('profile-avatar-modal').classList.remove('hidden');
     if (errorMessageAvatar.textContent != '' || imageInputAvatar.value == '') {
       uploadButtonAvatar.classList.add('cursor-not-allowed');
@@ -29,7 +29,7 @@ let uploadButtonAvatar = document.getElementById('uploadButtonAvatar');
   }
   
   // Close the modal
-  function closeModal() {
+  function closeModalAvatar() {
     document.getElementById('profile-avatar-modal').classList.add('hidden');
   }
 
