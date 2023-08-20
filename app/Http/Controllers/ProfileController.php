@@ -116,6 +116,43 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function editProfile($cesno)
+    {
+        if (DB::table('profile_tblMain')->count() === 0) {
+            $cesNumber = 0;
+        } else {
+            $cesNumber = PersonalData::latest()->first()->cesno;
+        }
+
+        $mainProfile = PersonalData::find($cesno);
+        $countries = Country::all();
+        $indigenousGroups = IndigenousGroup::all();
+        $pwds = PWD::all();
+        $genderByChoices = GenderByChoice::all();
+        $genderByBirths = GenderByBirth::all();
+        $nameExtensions = NameExtension::all();
+        $civilStatus = CivilStatus::all();
+        $title = Title::all();
+        $recordStatus = RecordStatus::all();
+        $religion = Religion::all();
+
+        return view('admin.201_profiling.view_profile.partials.personal_data.edit',[
+            'cesNumber' => $cesno,
+            'mainProfile' => $mainProfile,
+            'countries' => $countries,
+            'indigenousGroups' => $indigenousGroups,
+            'pwds' => $pwds,
+            'genderByChoices' => $genderByChoices,
+            'genderByBirths' => $genderByBirths,
+            'nameExtensions' => $nameExtensions,
+            'civilStatus' => $civilStatus,
+            'title' => $title,
+            'recordStatus' => $recordStatus,
+            'religion' => $religion,
+
+        ]);
+    }
+
     public function viewProfile($cesno)
     {
         $mainProfile = PersonalData::find($cesno);
