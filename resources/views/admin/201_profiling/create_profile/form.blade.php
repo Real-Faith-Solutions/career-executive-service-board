@@ -10,7 +10,7 @@
         @csrf
 
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            
+
             <div class="mb-3">
                 <label for="cesno">CES Number</label>
                 <input id="cesno" name="cesno" readonly type="number" value="{{ $cesNumber }}">
@@ -246,50 +246,10 @@
 
         </div>
 
-        {{-- identification cards --}}
-        {{-- <section>
-            <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-                <h1>Identification cards</h1>
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="mb-3">
-                    <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                    <input id="gsis" name="gsis" type="text" value="{{ old('gsis') }}" oninput="validateInput(gsis, 6, 'all')" onkeypress="validateInput(gsis, 6, 'all')" onblur="checkErrorMessage(gsis)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-                <div class="mb-3">
-                    <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                    <input id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}" oninput="validateInput(pagibig, 6, 'all')" onkeypress="validateInput(pagibig, 6, 'all')" onblur="checkErrorMessage(pagibig)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-
-                <div class="mb-3">
-                    <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                    <input id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}" oninput="validateInput(philhealth, 6, 'all')" onkeypress="validateInput(philhealth, 6, 'all')" onblur="checkErrorMessage(philhealth)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="col-md-4">
-                    <label for="sss_no">SSS ID No.</label>
-                    <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}" oninput="validateInput(sss_no, 6, 'all')" onkeypress="validateInput(sss_no, 6, 'all')" onblur="checkErrorMessage(sss_no)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-                <div class="col-md-4">
-                    <label for="tin">TIN ID No.</label>
-                    <input id="tin" name="tin" type="text" value="{{ old('tin') }}" oninput="validateInput(tin, 6, 'all')" onkeypress="validateInput(tin, 6, 'all')" onblur="checkErrorMessage(tin)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-            </div>
-        </section> --}}
-        {{-- end identification cards --}}
-
         <div class="flex justify-end">
             <button class="btn btn-primary" id="personal_data_submit" type="submit">Submit</button>
         </div>
+        
     </form>
 
 @endsection

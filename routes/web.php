@@ -103,6 +103,7 @@ Route::middleware('auth')->group(function () {
         Route::post('create/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
         Route::get('list', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
         Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
+        Route::post('create/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
 
         Route::prefix('personal-data')->group(function () {
             Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
