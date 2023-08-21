@@ -6,7 +6,7 @@
 
 <div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
 
-    <form action="{{ route('edit-profile-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
+    <form class="col-span-3" action="{{ route('edit-profile-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
 
         @csrf
 
