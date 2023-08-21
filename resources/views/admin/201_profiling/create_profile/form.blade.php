@@ -10,10 +10,10 @@
         @csrf
 
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            
             <div class="mb-3">
                 <label for="cesno">CES Number</label>
                 <input id="cesno" name="cesno" readonly type="number" value="{{ $cesNumber }}">
-
             </div>
 
             <div></div>

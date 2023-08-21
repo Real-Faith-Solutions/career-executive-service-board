@@ -4,36 +4,16 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
-<div class="grid-rows-7 grid lg:grid-cols-4 sm:grid-cols-1 gap-1">
-
-    <div class="flex flex-col items-center row-span-5 text-center">
-
-        <img id="profile-avatar" class="profile-avatar w-50 h-50 rounded-full border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->picture ?: 'placeholder.png')) }}" />
-
-        <h1 class="text-bold text-2xl">
-            {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
-        </h1>
-
-        <span class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
-            @if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif
-            @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif
-            @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif
-            @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif
-            ">
-            {{ $mainProfile->status }}
-        </span>
-
-        {{-- <p>CES number: {{ $mainProfile->cesno }}</p> --}}
-    </div>
+<div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
 
     <div class="col-span-3">
         <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
             <div class="w-full text-left text-gray-500">
                 <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                     <h1 class="px-6 py-3 text-left">
-                        Personal Data
+                        Edit Personal Data
                     </h1>
-                    <a href="{{ route('profile.edit', ['cesno' => $mainProfile->cesno]) }}" class="px-6 py-3 text-right">Edit</a>
+                    <a href="{{ route('personal-data.show', ['cesno' => $mainProfile->cesno]) }}" class="px-6 py-3 text-right">Back</a>
                 </div>
 
                 <div class="border-b bg-white px-6 py-3">
