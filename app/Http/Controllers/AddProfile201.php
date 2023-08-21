@@ -8,11 +8,11 @@ use App\Models\PersonalData;
 use App\Models\User;
 use Illuminate\Contracts\View\View as ViewView;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View as FacadesView;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 
@@ -22,7 +22,7 @@ class AddProfile201 extends Controller
     public function store(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = View::shared('userName');
+        $encoder = Auth::user()->first_name." ".Auth::user()->last_name;
 
         $newProfile = PersonalData::create([
             
@@ -76,7 +76,7 @@ class AddProfile201 extends Controller
 
         $user->assignRole('user');
 
-        return back()->with('message','New profile added!'.$encoder);
+        return back()->with('message','New profile added!');
 
     }
 

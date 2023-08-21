@@ -95,21 +95,20 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
 
-
     // Profile routes (201)
     Route::prefix('201-profile')->group(function () {
 
-        Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
-        Route::post('create/{cesno}', [AddProfile201::class, 'store'])->name('add-profile-201');
-        Route::get('list', [ViewProfile201Controller::class, 'index'])->name('view-profile-201.index');
-        Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
-        Route::post('create/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
-
         Route::prefix('personal-data')->group(function () {
-            Route::get('show/{cesno}', [PersonalDataController::class, 'show'])->name('personal-data.show');
-            Route::post('upload-avatar-profile-201/{cesno}', [AddProfile201::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
-        });
 
+            Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
+            Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
+            Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
+            Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');
+            Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
+            Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
+            Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
+        
+        });
 
         Route::prefix('family-profile')->group(function () {
             Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
@@ -528,7 +527,6 @@ Route::middleware('auth')->group(function () {
             Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
         });
     });
-
     // End of Library routes
 
 });
