@@ -107,6 +107,5 @@ class ContactInformationController extends Controller
         $contact->save();
   
         return redirect()->back()->with('message', 'Email Updated Successfuly');
-  
     }
 }

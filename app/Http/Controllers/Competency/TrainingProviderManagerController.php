@@ -11,19 +11,19 @@ use Illuminate\Validation\Rule;
 
 class TrainingProviderManagerController extends Controller
 {
-    public function index($cesno)
+    public function index()
     {
         $trainingProvider = CompetencyTrainingProvider::all();
-        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.table', compact('cesno', 'trainingProvider'));
+        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.table', compact('trainingProvider'));
     }
 
-    public function create($cesno)
+    public function create()
     {
         $profileLibTblCities = ProfileLibCities::all();
-        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.form', compact('cesno', 'profileLibTblCities'));
+        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.form', compact('profileLibTblCities'));
     }
 
-    public function store(Request $request, $cesno)
+    public function store(Request $request)
     {
         $request->validate([
 
@@ -69,10 +69,10 @@ class TrainingProviderManagerController extends Controller
             $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
         }
         
-        return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('message', 'Training Provider Manager Successfuly Saved');
+        return to_route('training-provider-manager.index')->with('message', 'Training Provider Manager Successfuly Saved');
     }
 
-    public function edit($ctrlno, $cesno)
+    public function edit($ctrlno)
     {
         $profileLibTblCities = ProfileLibCities::all();
         $trainingProvider = CompetencyTrainingProvider::find($ctrlno);
@@ -81,10 +81,10 @@ class TrainingProviderManagerController extends Controller
             return redirect()->back()->with('error', 'Something Went Wrong');
         }
 
-        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.edit', compact('cesno', 'profileLibTblCities', 'trainingProvider'));
+        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.edit', compact('profileLibTblCities', 'trainingProvider'));
     }
 
-    public function update(Request $request, $ctrlno, $cesno)
+    public function update(Request $request, $ctrlno)
     {
         $request->validate([
 
@@ -118,7 +118,7 @@ class TrainingProviderManagerController extends Controller
         $trainingProviderManager->updated_by = $userFullName;
         $trainingProviderManager->save();
 
-        return to_route('training-provider-manager.index', ['cesno'=>$cesno])->with('info', 'Training Provider Manager Update Sucessfully');
+        return to_route('training-provider-manager.index')->with('info', 'Training Provider Manager Update Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -129,11 +129,11 @@ class TrainingProviderManagerController extends Controller
         return redirect()->back()->with('info', 'Deleted Sucessfully');
     }
 
-    public function recentlyDeleted($cesno)
+    public function recentlyDeleted()
     {
         $trainingProviderTrashRecord = CompetencyTrainingProvider::onlyTrashed()->get();
 
-        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.trashbin', compact('cesno', 'trainingProviderTrashRecord'));
+        return view('admin.competency.partials.trainings_sub_module.training_provider_manager.trashbin', compact('trainingProviderTrashRecord'));
     }
 
     public function restore($ctrlno)

@@ -2,10 +2,10 @@
 @section('title', 'Training Venue Manager')
 @section('sub', 'Training Venue Manager')
 @section('content')
-@include('admin.competency.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-venue-manager.recentlyDeleted', ['cesno'=>$cesno]) }}">
+    <a href="{{ route('training-venue-manager.recentlyDeleted') }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -14,7 +14,7 @@
       </lord-icon>
     </a>
 
-    <a href="{{ route('training-venue-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Venue Manager</a>
+    <a href="{{ route('training-venue-manager.create') }}" class="btn btn-primary" >Add Training Venue Manager</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -87,7 +87,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon

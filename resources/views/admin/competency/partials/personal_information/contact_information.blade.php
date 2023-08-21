@@ -10,9 +10,8 @@
                 Contact Informations
             </h1>
         </div>
-
+        
         <div class="bg-white px-6 py-3">
-
             <form action="{{ route('competency-contact-email.update', ['cesno'=>$cesno]) }}" method="POST" id="competency_email_contact_info_form" onsubmit="return checkErrorsBeforeSubmit(competency_email_contact_info_form)">
                 @method('PUT')
                 @csrf
@@ -38,6 +37,9 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div class="bg-white px-6 py-3">
 
             @if ($contacts)
                 <form action="{{ route('competency-view-profile-contact-info.update', ['ctrlno'=>$contacts->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="competency_contact_info_form" onsubmit="return checkErrorsBeforeSubmit(competency_contact_info_form)">

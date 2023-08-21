@@ -11,21 +11,21 @@ use Illuminate\Validation\Rule;
 
 class TrainingVenueManagerController extends Controller
 {
-    public function index($cesno)
+    public function index()
     {    
         $trainingVenueManager = CompetencyTrainingVenueManager::all();
 
-        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.table', compact('trainingVenueManager', 'cesno'));
+        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.table', compact('trainingVenueManager'));
     }
 
-    public function create($cesno)
+    public function create()
     {
         $profileLibTblCities = ProfileLibCities::all();
 
-        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.form', compact('profileLibTblCities', 'cesno'));
+        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.form', compact('profileLibTblCities'));
     }
 
-    public function store(Request $request, $cesno)
+    public function store(Request $request)
     {
         $request->validate([
 
@@ -69,18 +69,18 @@ class TrainingVenueManagerController extends Controller
             $trainingVenueCitiesCode->competencytrainingVenueManager()->save($trainingVenueManager);
         }
 
-        return to_route('training-venue-manager.index', ['cesno'=>$cesno])->with('message', 'Training Venue Manager Successfuly Saved');
+        return to_route('training-venue-manager.index')->with('message', 'Training Venue Manager Successfuly Saved');
     }
 
-    public function edit($ctrlno, $cesno)
+    public function edit($ctrlno)
     {
         $profileLibTblCities = ProfileLibCities::all();
         $trainingVenueManager = CompetencyTrainingVenueManager::find($ctrlno);
 
-        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.edit', compact('profileLibTblCities', 'trainingVenueManager', 'cesno'));
+        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.edit', compact('profileLibTblCities', 'trainingVenueManager'));
     }
 
-    public function update(Request $request, $ctrlno, $cesno)
+    public function update(Request $request, $ctrlno)
     {
         $request->validate([
 
@@ -112,7 +112,7 @@ class TrainingVenueManagerController extends Controller
         $trainingVenueManager->updated_by = $request->$userFullName;
         $trainingVenueManager->update();
 
-        return to_route('training-venue-manager.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
+        return to_route('training-venue-manager.index')->with('info', 'Update Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -123,11 +123,11 @@ class TrainingVenueManagerController extends Controller
         return back()->with('info', 'Deleted Sucessfully');
     }
 
-    public function recentlyDeleted($cesno)
+    public function recentlyDeleted()
     {
         $trainingVenueManagerTrashRecord = CompetencyTrainingVenueManager::onlyTrashed()->get();
 
-        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.trashbin', compact('trainingVenueManagerTrashRecord', 'cesno'));
+        return view('admin.competency.partials.trainings_sub_module.training_venue_manager.trashbin', compact('trainingVenueManagerTrashRecord'));
     }
 
     public function restore($ctrlno)

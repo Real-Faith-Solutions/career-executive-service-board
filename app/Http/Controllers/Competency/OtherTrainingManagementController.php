@@ -35,7 +35,7 @@ class OtherTrainingManagementController extends Controller
             'training' => ['required',Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)],
             'training_category' => ['required'],
             'no_of_training_hours' => ['required'],
-            'sponsor_training_provider' => ['required'],
+            'sponsor_training_provider' => ['nullable'],
             'venue' => ['required'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],

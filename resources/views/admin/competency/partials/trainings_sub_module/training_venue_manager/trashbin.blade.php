@@ -2,10 +2,10 @@
 @section('title', 'Trash Bin Training Venue Manager')
 @section('sub', 'Trash Bin Training Venue Manager')
 @section('content')
-@include('admin.competency.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-venue-manager.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
+    <a href="{{ route('training-venue-manager.index') }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

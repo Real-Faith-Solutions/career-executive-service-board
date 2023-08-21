@@ -11,48 +11,50 @@
       </button>
       <div class="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
-            <li>
-                <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="personalDataTab" id="dropdownDefaultButton" type="button">
-                    Personal Information
-                    <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
-                    </svg>
-                </button>
+            {{-- <li> --}}
+                {{-- <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="personalDataTab" id="dropdownDefaultButton" type="button"> --}}
+                    {{-- Personal Information --}}
+                    {{-- <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg"> --}}
+                        {{-- <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" /> --}}
+                    {{-- </svg> --}}
+                {{-- </button> --}}
                 <!-- Personal Information -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab">
-                    <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
-                        <li>
-                            <a class="btn category-button inline-flex"  href="/#">Mailing Address</a>
-                        </li>
+                {{-- <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab"> --}}
+                    {{-- <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700"> --}}
+                        {{-- <li> --}}
+                            {{-- <a class="btn category-button inline-flex"  href="/#">Mailing Address</a> --}}
+                        {{-- </li> --}}
 
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$cesno]) }}">Contact Information</a>
-                        </li>
+                        {{-- <li> --}}
+                            {{-- {{ route('competency-view-profile.updateOrCreate', ['cesno'=>$cesno]) }} --}}
+                            {{-- <a class="btn category-button inline-flex" href="">Contact Information</a> --}}
+                        {{-- </li> --}}
 
-                        <li>
-                            <a class="btn category-button inline-flex" href="">Official Email Address</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+                        {{-- <li> --}}
+                            {{-- <a class="btn category-button inline-flex" href="">Official Email Address</a> --}}
+                        {{-- </li> --}}
+                    {{-- </ul> --}}
+                {{-- </div> --}}
+            {{-- </li> --}}
 
             <li>
-                <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="educationalAttainmentTab" id="dropdownDefaultButton" type="button">
-                    Non-CES and CES Training
+                <button class="inline-flex items-center rounded-lg px-5 py-2.5 text-center text-sm font-medium uppercase focus:outline-none focus:ring-4 focus:ring-blue-300" data-dropdown-toggle="CesTraining" id="dropdownDefaultButton" type="button">
+                    CES Training
                     <svg aria-hidden="true" class="ml-2.5 h-2.5 w-2.5" fill="none" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                         <path d="m1 1 4 4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" />
                     </svg>
                 </button>
                 <!-- Non-CES and CES Training -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="educationalAttainmentTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="CesTraining">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
                             <a class="btn category-button inline-flex" href="/#">Record of CES Trainings Attended</a>
                         </li>
 
-                        <li>
-                            <a class="btn category-button inline-flex" href="{{ route('non-ces-training-management.index', ['cesno'=>$cesno]) }}" >Other Non-CES Accredited Trainings</a>
-                        </li>
+                        {{-- <li> --}}
+                            {{-- {{ route('non-ces-training-management.index', ['cesno'=>$cesno]) }} --}}
+                            {{-- <a class="btn category-button inline-flex" href="" >Other Non-CES Accredited Trainings</a> --}}
+                        {{-- </li> --}}
                     </ul>
                 </div>
             </li>
@@ -118,11 +120,11 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('training-venue-manager.index', ['cesno'=>$cesno]) }}" >Training Venue Manager</a>
+                            <a class="btn category-button inline-flex" href="{{ route('training-venue-manager.index') }}" >Training Venue Manager</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('training-provider-manager.index', ['cesno'=>$cesno]) }}" >Training Provider Manager</a>
+                            <a class="btn category-button inline-flex" href="{{ route('training-provider-manager.index') }}" >Training Provider Manager</a>
                         </li>
                     </ul>
                 </div>

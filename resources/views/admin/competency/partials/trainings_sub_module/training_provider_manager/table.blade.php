@@ -2,10 +2,10 @@
 @section('title', 'Training Provider Manager')
 @section('sub', 'Training Provider Manager')
 @section('content')
-@include('admin.competency.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <form action="{{ route('training-provider-manager.recentlyDeleted', ['cesno'=>$cesno]) }}" method="GET">
+    <form action="{{ route('training-provider-manager.recentlyDeleted') }}" method="GET">
         @csrf
         <button title="Trash Bin" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
             <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -18,7 +18,7 @@
         </button>
     </form>
 
-    <a href="{{ route('training-provider-manager.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Training Provider Manager</a>
+    <a href="{{ route('training-provider-manager.create') }}" class="btn btn-primary" >Add Training Provider Manager</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -99,7 +99,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingProviders->providerID, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('training-provider-manager.edit', ['ctrlno'=>$trainingProviders->providerID]) }}" method="GET">
                                 @csrf
                                 <button  class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
