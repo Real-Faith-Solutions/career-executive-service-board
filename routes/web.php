@@ -477,6 +477,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [FieldSpecializationController::class, 'store'])->name('field-specialization.store');
             Route::get('edit/{ctrlno}', [FieldSpecializationController::class, 'edit'])->name('field-specialization.edit');
             Route::put('update/{ctrlno}', [FieldSpecializationController::class, 'update'])->name('field-specialization.update');
+            Route::delete('destroy/{ctrlno}', [FieldSpecializationController::class, 'destroy'])->name('field-specialization.destroy');
         });
     });
     // End of competency routes

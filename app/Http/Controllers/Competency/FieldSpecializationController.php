@@ -53,4 +53,35 @@ class FieldSpecializationController extends Controller
 
         return to_route('field-specialization.index')->with('info', 'Data Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($ctrlno);
+        $profileLibTblExpertiseGen->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
+
+    // public function recentlyDeleted()
+    // {
+    //     $profileLibTblExpertiseGenTrashedRecord = TrainingSecretariat::onlyTrashed()->paginate(20);
+
+    //     return view('admin.competency.partials.training_type_library.training_secretariat.trashbin', compact('trainingSecretariatTrashedRecord'));
+    // }
+
+    // public function restore($ctrlno)
+    // {
+    //     $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
+    //     $trainingSecretariat->restore();
+
+    //     return back()->with('info', 'Data Restored Sucessfully');
+    // }
+ 
+    // public function forceDelete($ctrlno)
+    // {
+    //     $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
+    //     $trainingSecretariat->forceDelete();
+  
+    //     return back()->with('info', 'Data Permanently Deleted');
+    // }
 }

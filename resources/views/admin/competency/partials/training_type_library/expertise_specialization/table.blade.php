@@ -59,10 +59,10 @@
                                 </button>
                             </form>
 
-                            {{-- <form action="{{ route('training-secretariat.destroy', ['ctrlno'=>$profileLibTblExpertiseGens->ctrlno]) }}" method="POST" id="delete_training_secretariat_form{{$profileLibTblExpertiseGens->ctrlno}}">
+                            <form action="{{ route('field-specialization.destroy', ['ctrlno'=>$profileLibTblExpertiseGens->GenExp_Code]) }}" method="POST" id="delete_competency_field_specialization_form{{$profileLibTblExpertiseGens->GenExp_Code}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingSecretariatButton{{$profileLibTblExpertiseGens->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteCompetencyFieldSpecializationButton{{$profileLibTblExpertiseGens->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -71,7 +71,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
