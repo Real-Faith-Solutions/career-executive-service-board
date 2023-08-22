@@ -13,6 +13,7 @@ use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
+use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -455,6 +456,18 @@ Route::middleware('auth')->group(function () {
             Route::get('recentlyDeleted', [TrainingCategoryController::class, 'recentlyDeleted'])->name('training-category.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [TrainingCategoryController::class, 'restore'])->name('training-category.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingCategoryController::class, 'forceDelete'])->name('training-category.forceDelete');
+        });
+
+        Route::prefix('training-secretariat')->group(function () {
+            Route::get('index', [TrainingSecretariatController::class, 'index'])->name('training-secretariat.index');
+            Route::get('create', [TrainingSecretariatController::class, 'create'])->name('training-secretariat.create');
+            Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store');
+            Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit');
+            Route::put('update/{ctrlno}', [TrainingSecretariatController::class, 'update'])->name('training-secretariat.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy');
+            Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete');
         });
     });
     // End of competency routes
