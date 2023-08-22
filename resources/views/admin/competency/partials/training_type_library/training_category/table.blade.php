@@ -35,19 +35,19 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trainingVenueManager as $trainingVenueManagers) --}}
+            @foreach ($trainingCategory as $trainingCategories)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $trainingVenueManagers->name }} --}}
+                        {{ $trainingCategories->ctrlno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->no_street }} --}}
+                        {{ $trainingCategories->description }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="GET">
+                            <form action="" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -57,12 +57,12 @@
                                         style="width:30px;height:30px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
 
-                            {{-- <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
+                            <form action="" method="POST" id="delete_training_provider_manager_form{{$trainingCategories->providerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$trainingVenueManagers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingVenueManagerButton{{$trainingCategories->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -71,13 +71,17 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="my-5">
+    {{ $trainingCategory->links() }}
 </div>
 
 @endsection

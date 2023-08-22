@@ -10,7 +10,9 @@ class TrainingCategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.competency.partials.training_type_library.training_category.table');
+        $trainingCategory = TrainingLibCategory::paginate(10);
+
+        return view('admin.competency.partials.training_type_library.training_category.table', compact('trainingCategory'));
     }
 
     public function create()
@@ -21,18 +23,14 @@ class TrainingCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'training_category' => ['unique:traininglib_tblcategory,description'],
-            
         ]);
 
         TrainingLibCategory::create([
-
             'description' => $request->training_category,
             'encoder' => 'sample encoder',  
-
         ]);
 
         return to_route('training-category.index')->with('message', 'Save Sucessfully');
-    }
+    } 
 }
