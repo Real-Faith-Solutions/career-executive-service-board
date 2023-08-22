@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\TrainingLibCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TrainingCategoryController extends Controller
 {
@@ -43,5 +44,18 @@ class TrainingCategoryController extends Controller
         }
 
         return view('admin.competency.partials.training_type_library.training_category.edit', compact('trainingCategory'));
+    }
+
+    public function update(Request $request, $ctrlno)
+    {
+        $request->validate([
+            'description' => ['required', Rule::unique('traininglib_tblcategory')->ignore($ctrlno, 'ctrlno')],
+        ]);
+
+        $trainingCategory = TrainingLibCategory::find($ctrlno);
+        $trainingCategory->description = $request->description;
+        $trainingCategory->save();
+
+        return to_route('training-category.index')->with('info', 'Data Update Sucessfully');
     }
 }

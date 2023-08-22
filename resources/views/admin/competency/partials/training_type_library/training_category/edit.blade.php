@@ -17,16 +17,16 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_training_category_form">
+            <form action="{{ route('training-category.update', ['ctrlno'=>$trainingCategory->ctrlno]) }}" method="POST" id="update_training_category_form">
                 @csrf
                 @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="training_category">Training Category<sup>*</sup></label>
-                        <input type="text" id="update_training_category" name="training_category" oninput="validateInput(update_training_category, 6, 'letters')" onkeypress="validateInput(update_training_category, 6, 'letters')" onblur="checkErrorMessage(update_training_category)" value="{{ $trainingCategory->description }}" required>
+                        <label for="description">Training Category<sup>*</sup></label>
+                        <input type="text" id="update_training_category" name="description" oninput="validateInput(update_training_category, 6, 'letters')" onkeypress="validateInput(update_training_category, 6, 'letters')" onblur="checkErrorMessage(update_training_category)" value="{{ $trainingCategory->description }}" required>
                         <p class="input_error text-red-600"></p>
-                        @error('training_category')
+                        @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span> 
