@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblExpertiseGen', function (Blueprint $table) {
             $table->id('GenExp_Code');
-            // $table->string('GenExp_Code')->unique();
-            $table->string('Title')->nullable();
+            $table->string('Title');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -95,7 +95,7 @@
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="" >Field of Specialization</a>
+                            <a class="btn category-button inline-flex" href="{{ route('field-specialization.index') }}" >Field of Specialization</a>
                         </li>
 
                         <li>

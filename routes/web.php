@@ -10,6 +10,7 @@ use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
+use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
@@ -468,6 +469,18 @@ Route::middleware('auth')->group(function () {
             Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete');
+        });
+
+        Route::prefix('field-specialization')->group(function () {
+            Route::get('index', [FieldSpecializationController::class, 'index'])->name('field-specialization.index');
+            Route::get('create', [FieldSpecializationController::class, 'create'])->name('field-specialization.create');
+            Route::post('store', [FieldSpecializationController::class, 'store'])->name('field-specialization.store');
+            Route::get('edit/{ctrlno}', [FieldSpecializationController::class, 'edit'])->name('field-specialization.edit');
+            Route::put('update/{ctrlno}', [FieldSpecializationController::class, 'update'])->name('field-specialization.update');
+            Route::delete('destroy/{ctrlno}', [FieldSpecializationController::class, 'destroy'])->name('field-specialization.destroy');
+            Route::get('recentlyDeleted', [FieldSpecializationController::class, 'recentlyDeleted'])->name('field-specialization.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [FieldSpecializationController::class, 'restore'])->name('field-specialization.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [FieldSpecializationController::class, 'forceDelete'])->name('field-specialization.forceDelete');
         });
     });
     // End of competency routes
