@@ -58,7 +58,7 @@
                                     </lord-icon>
                                 </a>
 
-                                <a href="">
+                                {{-- <a href="">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/zchxlapl.json"
@@ -66,7 +66,7 @@
                                         colors="primary:#020986"
                                         style="width:34px;height:34px">
                                     </lord-icon>
-                                </a>
+                                </a> --}}
                             </td>
 
                         </tr>
