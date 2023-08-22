@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('traininglib_tblcategory', function (Blueprint $table) {
-            $table->id('catid');
-            $table->integer('code');
+            $table->id('ctrlno');
+            // $table->id('catid');
+            // $table->integer('code');
             $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
