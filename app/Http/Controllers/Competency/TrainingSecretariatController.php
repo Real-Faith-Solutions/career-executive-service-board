@@ -10,7 +10,9 @@ class TrainingSecretariatController extends Controller
 {
     public function index()
     {
-        return view('admin.competency.partials.training_type_library.training_secretariat.table');
+        $trainingSecretariat = TrainingSecretariat::paginate(10);
+
+        return view('admin.competency.partials.training_type_library.training_secretariat.table', compact('trainingSecretariat'));
     }
 
     public function create()

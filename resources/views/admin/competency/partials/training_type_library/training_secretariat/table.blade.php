@@ -35,19 +35,19 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trainingCategory as $trainingCategories) --}}
+            @foreach ($trainingSecretariat as $trainingSecretariats)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $trainingCategories->ctrlno }} --}}
+                        {{ $trainingSecretariats->ctrlno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingCategories->description }} --}}
+                        {{ $trainingSecretariats->description }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-category.edit', ['ctrlno'=>$trainingCategories->ctrlno]) }}" method="GET">
+                            <form action="{{ route('training-category.edit', ['ctrlno'=>$trainingSecretariats->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -59,10 +59,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-category.destroy', ['ctrlno'=>$trainingCategories->ctrlno]) }}" method="POST" id="delete_training_category_form{{$trainingCategories->ctrlno}}">
+                            <form action="{{ route('training-category.destroy', ['ctrlno'=>$trainingSecretariats->ctrlno]) }}" method="POST" id="delete_training_category_form{{$trainingSecretariats->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingCategoryButton{{$trainingCategories->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingCategoryButton{{$trainingSecretariats->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -71,17 +71,17 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>
 
-{{-- <div class="my-5">
-    {{ $trainingCategory->links() }}
-</div> --}}
+<div class="my-5">
+    {{ $trainingSecretariat->links() }}
+</div>
 
 @endsection
