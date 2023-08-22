@@ -32,4 +32,11 @@ class FieldSpecializationController extends Controller
 
         return to_route('field-specialization.index')->with('message', 'Save Sucessfully');
     }
+
+    public function edit($ctrlno)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($ctrlno);    
+
+        return view('admin.competency.partials.training_type_library.expertise_specialization.edit', compact('profileLibTblExpertiseGen'));
+    }
 }

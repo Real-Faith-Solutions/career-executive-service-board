@@ -47,9 +47,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-secretariat.edit', ['ctrlno'=>$profileLibTblExpertiseGens->ctrlno]) }}" method="GET">
+                            <form action="{{ route('field-specialization.edit', ['ctrlno'=>$profileLibTblExpertiseGens->GenExp_Code]) }}" method="GET">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button title="Edit" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/bxxnzvfm.json"
                                         trigger="hover"
@@ -59,7 +59,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-secretariat.destroy', ['ctrlno'=>$profileLibTblExpertiseGens->ctrlno]) }}" method="POST" id="delete_training_secretariat_form{{$profileLibTblExpertiseGens->ctrlno}}">
+                            {{-- <form action="{{ route('training-secretariat.destroy', ['ctrlno'=>$profileLibTblExpertiseGens->ctrlno]) }}" method="POST" id="delete_training_secretariat_form{{$profileLibTblExpertiseGens->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteTrainingSecretariatButton{{$profileLibTblExpertiseGens->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
