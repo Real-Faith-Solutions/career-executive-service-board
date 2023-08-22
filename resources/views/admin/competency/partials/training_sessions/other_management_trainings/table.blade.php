@@ -2,7 +2,7 @@
 @section('title', 'Competency Non-Ces Accredited Training')
 @section('sub', 'Competency Non-Ces Accredited Training')
 @section('content')
-@include('admin.competency.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
     <a href="{{ route('non-ces-training-management.recentlyDeleted', ['cesno'=>$cesno]) }}">
@@ -11,9 +11,9 @@
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
-      </lord-icon>
+        </lord-icon>
     </a>
-
+    
     <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
 </div>
 

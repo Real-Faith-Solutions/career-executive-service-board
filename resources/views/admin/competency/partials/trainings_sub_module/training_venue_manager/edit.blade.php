@@ -2,10 +2,10 @@
 @section('title', 'Update Form Training Venue Manager')
 @section('sub', 'Form Training Venue Manager')
 @section('content')
-@include('admin.competency.view_profile.header',  ['cesno'=>$cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="flex justify-end">
-    <a href="{{ route('training-venue-manager.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go back</a>
+    <a href="{{ route('training-venue-manager.index') }}" class="btn btn-primary" >Go back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('training-venue-manager.update', ['ctrlno'=>$trainingVenueManager->venueid ,'cesno'=>$cesno]) }}" method="POST" id="update_training_venue_manager_form" onsubmit="return checkErrorsBeforeSubmit(update_training_venue_manager_form)">
+            <form action="{{ route('training-venue-manager.update', ['ctrlno'=>$trainingVenueManager->venueid]) }}" method="POST" id="update_training_venue_manager_form" onsubmit="return checkErrorsBeforeSubmit(update_training_venue_manager_form)">
                 @csrf
                 @method('PUT')
                 

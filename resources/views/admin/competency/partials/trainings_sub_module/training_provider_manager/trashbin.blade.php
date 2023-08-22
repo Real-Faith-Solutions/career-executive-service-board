@@ -2,10 +2,10 @@
 @section('title', 'Training Provider Manager Trash Bin')
 @section('sub', 'Training Provider Manager Trash Bin')
 @section('content')
-@include('admin.competency.view_profile.header', ['cesno' => $cesno])
+@include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-provider-manager.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
+    <a href="{{ route('training-provider-manager.index') }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

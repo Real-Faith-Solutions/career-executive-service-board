@@ -10,8 +10,11 @@ use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
+use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
+use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
+use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -422,27 +425,63 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('training-provider-manager')->group(function () {
-            Route::get('index/{cesno}', [TrainingProviderManagerController::class, 'index'])->name('training-provider-manager.index');
-            Route::get('create/{cesno}', [TrainingProviderManagerController::class, 'create'])->name('training-provider-manager.create');
-            Route::post('store/{cesno}', [TrainingProviderManagerController::class, 'store'])->name('training-provider-manager.store');
-            Route::get('edit/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'edit'])->name('training-provider-manager.edit');
-            Route::put('update/{ctrlno}/{cesno}', [TrainingProviderManagerController::class, 'update'])->name('training-provider-manager.update');
+            Route::get('index', [TrainingProviderManagerController::class, 'index'])->name('training-provider-manager.index');
+            Route::get('create', [TrainingProviderManagerController::class, 'create'])->name('training-provider-manager.create');
+            Route::post('store', [TrainingProviderManagerController::class, 'store'])->name('training-provider-manager.store');
+            Route::get('edit/{ctrlno}', [TrainingProviderManagerController::class, 'edit'])->name('training-provider-manager.edit');
+            Route::put('update/{ctrlno}', [TrainingProviderManagerController::class, 'update'])->name('training-provider-manager.update');
             Route::delete('destroy/{ctrlno}', [TrainingProviderManagerController::class, 'destroy'])->name('training-provider-manager.destroy');
-            Route::get('recently-deleted/{cesno}', [TrainingProviderManagerController::class, 'recentlyDeleted'])->name('training-provider-manager.recentlyDeleted');
+            Route::get('recently-deleted', [TrainingProviderManagerController::class, 'recentlyDeleted'])->name('training-provider-manager.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [TrainingProviderManagerController::class, 'restore'])->name('training-provider-manager.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingProviderManagerController::class, 'forceDelete'])->name('training-provider-manager.forceDelete');
         });
 
         Route::prefix('training-venue-manager')->group(function () {
-            Route::get('index/{cesno}', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
-            Route::get('create/{cesno}', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
-            Route::post('store/{cesno}', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
-            Route::get('edit/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
-            Route::put('update/{ctrlno}/{cesno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
+            Route::get('index', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
+            Route::get('create', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
+            Route::post('store', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
+            Route::get('edit/{ctrlno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
+            Route::put('update/{ctrlno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
             Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy');
-            Route::get('recently-deleted/{cesno}', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
+            Route::get('recently-deleted', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete');
+        });
+
+        Route::prefix('training-category')->group(function () {
+            Route::get('index', [TrainingCategoryController::class, 'index'])->name('training-category.index');
+            Route::get('create', [TrainingCategoryController::class, 'create'])->name('training-category.create');
+            Route::post('store', [TrainingCategoryController::class, 'store'])->name('training-category.store');
+            Route::get('edit/{ctrlno}', [TrainingCategoryController::class, 'edit'])->name('training-category.edit');
+            Route::put('update/{ctrlno}', [TrainingCategoryController::class, 'update'])->name('training-category.update');
+            Route::delete('destroy/{ctrlno}', [TrainingCategoryController::class, 'destroy'])->name('training-category.destroy');
+            Route::get('recentlyDeleted', [TrainingCategoryController::class, 'recentlyDeleted'])->name('training-category.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingCategoryController::class, 'restore'])->name('training-category.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingCategoryController::class, 'forceDelete'])->name('training-category.forceDelete');
+        });
+
+        Route::prefix('training-secretariat')->group(function () {
+            Route::get('index', [TrainingSecretariatController::class, 'index'])->name('training-secretariat.index');
+            Route::get('create', [TrainingSecretariatController::class, 'create'])->name('training-secretariat.create');
+            Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store');
+            Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit');
+            Route::put('update/{ctrlno}', [TrainingSecretariatController::class, 'update'])->name('training-secretariat.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy');
+            Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete');
+        });
+
+        Route::prefix('field-specialization')->group(function () {
+            Route::get('index', [FieldSpecializationController::class, 'index'])->name('field-specialization.index');
+            Route::get('create', [FieldSpecializationController::class, 'create'])->name('field-specialization.create');
+            Route::post('store', [FieldSpecializationController::class, 'store'])->name('field-specialization.store');
+            Route::get('edit/{ctrlno}', [FieldSpecializationController::class, 'edit'])->name('field-specialization.edit');
+            Route::put('update/{ctrlno}', [FieldSpecializationController::class, 'update'])->name('field-specialization.update');
+            Route::delete('destroy/{ctrlno}', [FieldSpecializationController::class, 'destroy'])->name('field-specialization.destroy');
+            Route::get('recentlyDeleted', [FieldSpecializationController::class, 'recentlyDeleted'])->name('field-specialization.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [FieldSpecializationController::class, 'restore'])->name('field-specialization.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [FieldSpecializationController::class, 'forceDelete'])->name('field-specialization.forceDelete');
         });
     });
     // End of competency routes

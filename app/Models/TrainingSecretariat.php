@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProfileLibTblExpertiseGen extends Model
+class TrainingSecretariat extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $primaryKey = 'GenExp_Code';
+    protected $primaryKey = 'ctrlno';
 
-    protected $table = "profilelib_tblExpertiseGen";
+    protected $table = "training_secretariat";
 
     protected $fillable = [
-        'Title',
-    ]; 
+
+        'description',
+        'encoder',
+
+    ];
 }

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('traininglib_tblcategory', function (Blueprint $table) {
+        Schema::create('training_secretariat', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->id('catid');
-            // $table->integer('code');
             $table->string('description');
-            $table->string('encoder')->nullable();
+            $table->string('encoder');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('traininglib_tblcategory');
+        Schema::dropIfExists('training_secretariat');
     }
 };

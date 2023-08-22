@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Competency 201 profiling table')
+@section('sub', 'Competency 201 profiling table')
 @section('content')
+@include('admin.competency.view_profile.header')
 
     <section>
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-3 mt-10">
             @include('components.search')
         </div>
         
@@ -14,9 +16,11 @@
                         <th scope="col" class="px-6 py-3">
                             Ces No.
                         </th>
+
                         <th scope="col" class="px-6 py-3">
                             Name
                         </th>
+                        
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Action</span>
                         </th>
@@ -35,8 +39,37 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium">View profile</a>
+                                <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium"  title="View Proile">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/hbvyhtse.json"
+                                        trigger="hover"
+                                        colors="primary:#020986"
+                                        style="width:34px;height:34px">
+                                    </lord-icon>
+                                </a>
+                                
+                                <a href="{{ route('non-ces-training-management.index', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium" title="Non-Ces Trainings">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jcsudnpn.json"
+                                        trigger="hover"
+                                        colors="primary:#020986"
+                                        style="width:34px;height:34px">
+                                    </lord-icon>
+                                </a>
+
+                                {{-- <a href="">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/zchxlapl.json"
+                                        trigger="hover"
+                                        colors="primary:#020986"
+                                        style="width:34px;height:34px">
+                                    </lord-icon>
+                                </a> --}}
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>
