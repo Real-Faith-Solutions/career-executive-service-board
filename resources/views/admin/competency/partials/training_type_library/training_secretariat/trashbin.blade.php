@@ -58,10 +58,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-secretariat.destroy', ['ctrlno'=>$trainingSecretariatTrashedRecords->ctrlno]) }}" method="POST" id="delete_training_secretariat_form{{$trainingSecretariatTrashedRecords->ctrlno}}">
+                            <form action="{{ route('training-secretariat.forceDelete', ['ctrlno'=>$trainingSecretariatTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_training_secretariat_form{{$trainingSecretariatTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button title="Delete Permanently" type="button" id="deleteTrainingSecretariatButton{{$trainingSecretariatTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button title="Delete Permanently" type="button" id="permanentTrainingSecretariatButton{{$trainingSecretariatTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

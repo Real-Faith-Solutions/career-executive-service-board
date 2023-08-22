@@ -467,6 +467,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy');
             Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete');
         });
     });
     // End of competency routes
