@@ -19,4 +19,17 @@ class FieldSpecializationController extends Controller
     {
         return view('admin.competency.partials.training_type_library.expertise_specialization.form');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'Title' => ['required','unique:profilelib_tblExpertiseGen,Title'],
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => $request->Title,
+        ]);
+
+        return to_route('field-specialization.index')->with('message', 'Save Sucessfully');
+    }
 }
