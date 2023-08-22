@@ -101,9 +101,12 @@ class ContactInformationController extends Controller
             $email->save();
         }
 
+        // user email
+        $contactEmail = $request->email;
+
         // update email in contacts
         $contact = Contacts::find($cesno);
-        $contact->official_email = $request->email;
+        $contact->official_email = $contactEmail;
         $contact->save();
   
         return redirect()->back()->with('message', 'Email Updated Successfuly');
