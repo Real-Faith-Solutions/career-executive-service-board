@@ -26,27 +26,25 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Call the computeAgeEdit() function once the page is fully loaded
         computeAgeEdit();
     });
-
+    
     function computeAgeEdit() {
-        const birthdateInput = document.getElementById('birthdateEdit');
-        const ageInput = document.getElementById('ageEdit');
+        const birthdateInputEdit = document.getElementById('birthdateEdit');
+        const ageInputEdit = document.getElementById('ageEdit');
         
-        const birthdateValue = new Date(birthdateInput.value);
-        const today = new Date();
-        const age = today.getFullYear() - birthdateValue.getFullYear();
+        const birthdateValueEdit = new Date(birthdateInputEdit.value);
+        const todayEdit = new Date();
+        let ageEdit = todayEdit.getFullYear() - birthdateValueEdit.getFullYear();
         
-        // Adjust age if the birthdate hasn't occurred yet this year
         if (
-            today.getMonth() < birthdateValue.getMonth() ||
-            (today.getMonth() === birthdateValue.getMonth() && today.getDate() < birthdateValue.getDate())
+            todayEdit.getMonth() < birthdateValueEdit.getMonth() ||
+            (todayEdit.getMonth() === birthdateValueEdit.getMonth() && todayEdit.getDate() < birthdateValueEdit.getDate())
         ) {
-            age--;
+            ageEdit--;
         }
         
-        ageInput.value = age;
+        ageInputEdit.value = ageEdit;
     }
 
     function generateMiddleInitial() {

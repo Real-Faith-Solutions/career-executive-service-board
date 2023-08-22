@@ -93,13 +93,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="birthdate">Birthdate<sup>*</sup></label>
+                            <label for="personal_birthdate">Birthdate<sup>*</sup></label>
                             <input id="personal_birthdate" name="birthdate" readonly type="text" value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age">Age<sup class="text-danger">*</sup></label>
-                            <input id="personal_age" name="age" readonly type="number">
+                            <label for="personal_age">Age<sup class="text-danger">*</sup></label>
+                            <input id="personal_age" name="age" value="{{ $age }}" readonly type="number">
                         </div>
 
                         <div class="mb-3">
@@ -157,7 +157,7 @@
                             <input id="citizenship" name="citizenship" readonly value="{{ $mainProfile->citizenship }}">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3" style="display: {{ $mainProfile->citizenship == 'Dual-Citizenship' ? 'block' : 'none' }}">
                             <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
                             <input id="dual_citizenship" name="dual_citizenship" readonly type="text" value="{{ $mainProfile->dual_citizenship }}">
                         </div>

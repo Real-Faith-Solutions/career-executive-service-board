@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\TempCred201;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -45,9 +46,14 @@ class ProfileController extends Controller
     {
 
         $mainProfile = PersonalData::find($cesno);
+        $birthdate = $mainProfile->birth_date;
+
+        $birthDate = Carbon::parse($birthdate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($birthDate);
 
         return view('admin.201_profiling.view_profile.partials.personal_data.form', 
-        compact('mainProfile', 'cesno'));
+        compact('mainProfile', 'cesno', 'age'));
         
     }
 
