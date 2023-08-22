@@ -452,6 +452,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{ctrlno}', [TrainingCategoryController::class, 'edit'])->name('training-category.edit');
             Route::put('update/{ctrlno}', [TrainingCategoryController::class, 'update'])->name('training-category.update');
             Route::delete('destroy/{ctrlno}', [TrainingCategoryController::class, 'destroy'])->name('training-category.destroy');
+            Route::get('recentlyDeleted', [TrainingCategoryController::class, 'recentlyDeleted'])->name('training-category.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingCategoryController::class, 'restore'])->name('training-category.restore');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingCategoryController::class, 'forceDelete'])->name('training-category.forceDelete');
         });
     });
     // End of competency routes

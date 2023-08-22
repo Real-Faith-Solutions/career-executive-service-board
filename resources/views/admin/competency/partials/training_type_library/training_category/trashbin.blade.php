@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Training Category')
-@section('sub', 'Training Category')
+@section('sub', 'Training Category Recyle Bin')
 @section('content')
 @include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-category.recentlyDeleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('training-category.create') }}" class="btn btn-primary" >Add Training Category</a>
+    <a href="{{ route('training-category.index') }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -30,39 +21,47 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Delete At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainingCategory as $trainingCategories)
+            @foreach ($trainingCategoryTrashedRecord as $trainingCategoryTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingCategories->ctrlno }}
+                        {{ $trainingCategoryTrashedRecords->ctrlno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingCategories->description }}
+                        {{ $trainingCategoryTrashedRecords->description }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingCategoryTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-category.edit', ['ctrlno'=>$trainingCategories->ctrlno]) }}" method="GET">
+                            <form action="{{ route('training-category.restore', ['ctrlno'=>$trainingCategoryTrashedRecords->ctrlno]) }}" method="POST" id="restore_training_category_form{{$trainingCategoryTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button title="Restore" type="button" id="restoreTrainingCategoryButton{{$trainingCategoryTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-category.destroy', ['ctrlno'=>$trainingCategories->ctrlno]) }}" method="POST" id="delete_training_category_form{{$trainingCategories->ctrlno}}">
+                            <form action="{{ route('training-category.forceDelete', ['ctrlno'=>$trainingCategoryTrashedRecords->ctrlno]) }}" method="POST" id="permanent_delete_training_category_form{{$trainingCategoryTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingCategoryButton{{$trainingCategories->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button title="Delete Permently" type="button" id="permanentDeleteTrainingCategoryButton{{$trainingCategoryTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -81,7 +80,7 @@
 </div>
 
 <div class="my-5">
-    {{ $trainingCategory->links() }}
+    {{ $trainingCategoryTrashedRecord->links() }}
 </div>
 
 @endsection

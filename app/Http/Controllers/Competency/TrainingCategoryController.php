@@ -66,4 +66,27 @@ class TrainingCategoryController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $trainingCategoryTrashedRecord = TrainingLibCategory::onlyTrashed()->paginate(5);
+ 
+        return view('admin.competency.partials.training_type_library.training_category.trashbin', compact('trainingCategoryTrashedRecord'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $trainingCategory = TrainingLibCategory::onlyTrashed()->find($ctrlno);
+        $trainingCategory->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    public function forceDelete($ctrlno)
+    {
+        $trainingCategory = TrainingLibCategory::onlyTrashed()->find($ctrlno);
+        $trainingCategory->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }
