@@ -58,4 +58,12 @@ class TrainingCategoryController extends Controller
 
         return to_route('training-category.index')->with('info', 'Data Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $trainingCategory = TrainingLibCategory::find($ctrlno);
+        $trainingCategory->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }

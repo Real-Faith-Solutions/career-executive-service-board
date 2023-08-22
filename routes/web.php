@@ -451,6 +451,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [TrainingCategoryController::class, 'store'])->name('training-category.store');
             Route::get('edit/{ctrlno}', [TrainingCategoryController::class, 'edit'])->name('training-category.edit');
             Route::put('update/{ctrlno}', [TrainingCategoryController::class, 'update'])->name('training-category.update');
+            Route::delete('destroy/{ctrlno}', [TrainingCategoryController::class, 'destroy'])->name('training-category.destroy');
         });
     });
     // End of competency routes
