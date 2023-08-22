@@ -11,4 +11,9 @@ class TrainingSecretariatController extends Controller
     {
         return view('admin.competency.partials.training_type_library.training_secretariat.table');
     }
+
+    public function create()
+    {
+        return view('admin.competency.partials.training_type_library.training_secretariat.form');
+    }
 }
