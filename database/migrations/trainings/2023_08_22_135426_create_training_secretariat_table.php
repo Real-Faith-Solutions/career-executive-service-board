@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('training_secretariat', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->string('description');
+            $table->string('encoder');
             $table->timestamps();
             $table->softDeletes();
         });
