@@ -14,4 +14,9 @@ class FieldSpecializationController extends Controller
 
         return view('admin.competency.partials.training_type_library.expertise_specialization.table', compact('profileLibTblExpertiseGen'));
     }
+
+    public function create()
+    {
+        return view('admin.competency.partials.training_type_library.expertise_specialization.form');
+    }
 }

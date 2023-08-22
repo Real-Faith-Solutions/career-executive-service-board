@@ -473,6 +473,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('field-specialization')->group(function () {
             Route::get('index', [FieldSpecializationController::class, 'index'])->name('field-specialization.index');
+            Route::get('create', [FieldSpecializationController::class, 'create'])->name('field-specialization.create');
         });
     });
     // End of competency routes

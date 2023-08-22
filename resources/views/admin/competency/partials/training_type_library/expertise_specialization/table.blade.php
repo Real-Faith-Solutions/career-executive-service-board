@@ -14,7 +14,7 @@
       </lord-icon>
     </a>
 
-    <a href="{{ route('training-secretariat.create') }}" class="btn btn-primary" >Add Specialization</a>
+    <a href="{{ route('field-specialization.create') }}" class="btn btn-primary" >Add Specialization</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
