@@ -17,8 +17,9 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_competency_field_specialization_form" onsubmit="return checkErrorsBeforeSubmit(update_competency_field_specialization_form)">
+            <form action="{{ route('field-specialization.update', ['ctrlno'=>$profileLibTblExpertiseGen->GenExp_Code]) }}" method="POST" id="update_competency_field_specialization_form" onsubmit="return checkErrorsBeforeSubmit(update_competency_field_specialization_form)">
                 @csrf
+                @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">

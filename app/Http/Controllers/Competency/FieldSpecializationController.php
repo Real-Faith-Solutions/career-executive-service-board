@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblExpertiseGen;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FieldSpecializationController extends Controller
 {
@@ -38,5 +39,18 @@ class FieldSpecializationController extends Controller
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($ctrlno);    
 
         return view('admin.competency.partials.training_type_library.expertise_specialization.edit', compact('profileLibTblExpertiseGen'));
+    }
+
+    public function update(Request $request, $ctrlno)
+    {
+        $request->validate([
+            'Title' => ['required', Rule::unique('profilelib_tblExpertiseGen')->ignore($ctrlno, 'GenExp_Code')],
+        ]);
+        
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($ctrlno);
+        $profileLibTblExpertiseGen->Title = $request->Title;
+        $profileLibTblExpertiseGen->save();
+
+        return to_route('field-specialization.index')->with('info', 'Data Update Sucessfully');
     }
 }
