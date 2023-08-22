@@ -36,4 +36,13 @@ class TrainingSecretariatController extends Controller
 
         return view('admin.competency.partials.training_type_library.training_secretariat.edit', compact('trainingSecretariat'));
     }
+
+    public function update(Request $request, $ctrlno)
+    {
+        $trainingSecretariat = TrainingSecretariat::find($ctrlno);
+        $trainingSecretariat->description = $request->description;
+        $trainingSecretariat->save();
+
+        return to_route('training-secretariat.index')->with('info', 'Data Update Sucessfully');
+    }
 }
