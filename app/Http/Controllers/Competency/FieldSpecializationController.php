@@ -77,11 +77,11 @@ class FieldSpecializationController extends Controller
         return back()->with('info', 'Data Restored Sucessfully');
     }
  
-    // public function forceDelete($ctrlno)
-    // {
-    //     $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
-    //     $trainingSecretariat->forceDelete();
+    public function forceDelete($ctrlno)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::onlyTrashed()->find($ctrlno);
+        $profileLibTblExpertiseGen->forceDelete();
   
-    //     return back()->with('info', 'Data Permanently Deleted');
-    // }
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }
