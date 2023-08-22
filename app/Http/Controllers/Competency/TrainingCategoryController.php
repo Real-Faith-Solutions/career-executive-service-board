@@ -24,7 +24,7 @@ class TrainingCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'training_category' => ['unique:traininglib_tblcategory,description'],
+            'training_category' => ['required','unique:traininglib_tblcategory,description'],
         ]);
 
         TrainingLibCategory::create([

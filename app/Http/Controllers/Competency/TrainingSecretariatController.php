@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\TrainingSecretariat;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TrainingSecretariatController extends Controller
 {
@@ -22,6 +23,10 @@ class TrainingSecretariatController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'description' => ['required','unique:training_secretariat,description'],
+        ]);
+
         TrainingSecretariat::create([
             'description' => $request->description,
             'encoder' => 'sample ni manuel',
@@ -39,6 +44,10 @@ class TrainingSecretariatController extends Controller
 
     public function update(Request $request, $ctrlno)
     {
+        $request->validate([
+            'description' => ['required', Rule::unique('training_secretariat')->ignore($ctrlno, 'ctrlno')],
+        ]);
+        
         $trainingSecretariat = TrainingSecretariat::find($ctrlno);
         $trainingSecretariat->description = $request->description;
         $trainingSecretariat->save();
