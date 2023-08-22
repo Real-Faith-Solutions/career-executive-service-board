@@ -14,7 +14,7 @@
       </lord-icon>
     </a>
 
-    <a href="{{ route('training-category.create') }}" class="btn btn-primary" >Add Training Secretariat</a>
+    <a href="{{ route('training-secretariat.create') }}" class="btn btn-primary" >Add Training Secretariat</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

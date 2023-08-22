@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Training Secretariat Form')
-@section('sub', 'Training Secretariat Form')
+@section('sub', 'Training Secretariat')
 @section('content')
 @include('admin.competency.view_profile.header')
 
@@ -22,10 +22,10 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="training_secretariat">Training Category<sup>*</sup></label>
-                        <input type="text" id="training_secretariat" name="training_secretariat" oninput="validateInput(training_secretariat, 6, 'letters')" onkeypress="validateInput(training_secretariat, 6, 'letters')" onblur="checkErrorMessage(training_secretariat)" required>
+                        <label for="description">Training Secretariat<sup>*</sup></label>
+                        <input type="text" id="training_secretariat" name="description" oninput="validateInput(training_secretariat, 6, 'letters')" onkeypress="validateInput(training_secretariat, 6, 'letters')" onblur="checkErrorMessage(training_secretariat)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('training_secretariat')
+                        @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
