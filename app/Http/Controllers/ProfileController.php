@@ -238,36 +238,50 @@ class ProfileController extends Controller
 
         $encoder = Auth::user()->first_name." ".Auth::user()->last_name;
 
-        $newProfile = PersonalData::create([
-            
-            'status' => $request->status,
-            'title' => $request->title,
-            'email' => $request->email,
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
-            'name_extension' => $request->name_extension,
-            'middlename' => $request->middlename,
-            'middleinitial' => $request->mi,
-            'nickname' => $request->nickname,
-            'birth_date' => $request->birthdate,
-            'birth_place' => $request->birth_place,
-            'gender' => $request->gender,
-            'gender_by_choice' => $request->gender_by_choice,
-            'civil_status' => $request->civil_status,
-            'religion' => $request->religion,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'member_of_indigenous_group' => $request->member_of_indigenous_group,
-            'single_parent' => $request->single_parent,
-            'citizenship' => $request->citizenship,
-            'dual_citizenship' => $request->dual_citizenship,
-            'person_with_disability' => $request->person_with_disability,
-            'encoder' => $encoder,
+        $middleName = $request->middlename;
+        $middleInitial = $this->extractMiddleInitial($middleName);
 
-        ]);
+        $personalData = PersonalData::find($cesno);
+        $personalData->status = $request->status;
+        $personalData->title = $request->title;
+        $personalData->lastname = $request->lastname;
+        $personalData->firstname = $request->firstname;
+        $personalData->name_extension = $request->name_extension;
+        $personalData->middlename = $request->middlename;
+        $personalData->middleinitial = $middleInitial;
+        $personalData->nickname = $request->nickname;
+        $personalData->birth_date = $request->birthdate;
+        $personalData->birth_place = $request->birth_place;
+        $personalData->gender = $request->gender;
+        $personalData->gender_by_choice = $request->gender_by_choice;
+        $personalData->civil_status = $request->civil_status;
+        $personalData->religion = $request->religion;
+        $personalData->height = $request->height;
+        $personalData->weight = $request->weight;
+        $personalData->member_of_indigenous_group = $request->member_of_indigenous_group;
+        $personalData->single_parent = $request->single_parent;
+        $personalData->citizenship = $request->citizenship;
+        $personalData->dual_citizenship = $request->dual_citizenship;
+        $personalData->person_with_disability = $request->person_with_disability;
+        $personalData->encoder = $encoder;
+        $personalData->save();
 
-        return back()->with('message','New profile added!');
+        return back()->with('info','Profile Updated!');
 
+    }
+
+    public function extractMiddleInitial($middleName)
+    {
+        $middleNameParts = explode(' ', $middleName);
+        
+        $middleInitial = '';
+        
+        foreach ($middleNameParts as $part) {
+            // Extract the first character of each part as the initial
+            $middleInitial .= strtoupper(substr($part, 0, 1));
+        }
+        
+        return $middleInitial;
     }
 
 }
