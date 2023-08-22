@@ -46,9 +46,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-secretariat.restore', ['ctrlno'=>$trainingSecretariatTrashedRecords->ctrlno]) }}" method="GET">
+                            <form action="{{ route('training-secretariat.restore', ['ctrlno'=>$trainingSecretariatTrashedRecords->ctrlno]) }}" method="POST" id="restore_training_secretariat_form{{$trainingSecretariatTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button title="Restore" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button title="Restore" type="button" id="restoreTrainingSecretariatButton{{$trainingSecretariatTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"

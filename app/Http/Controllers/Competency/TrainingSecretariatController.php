@@ -60,4 +60,20 @@ class TrainingSecretariatController extends Controller
 
         return view('admin.competency.partials.training_type_library.training_secretariat.trashbin', compact('trainingSecretariatTrashedRecord'));
     }
+
+    public function restore($ctrlno)
+    {
+        $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
+        $trainingSecretariat->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    // public function forceDelete($ctrlno)
+    // {
+    //     $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
+    //     $trainingSecretariat->forceDelete();
+  
+    //     return back()->with('info', 'Data Permanently Deleted');
+    // }
 }
