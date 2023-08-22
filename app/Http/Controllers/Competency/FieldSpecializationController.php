@@ -69,13 +69,13 @@ class FieldSpecializationController extends Controller
         return view('admin.competency.partials.training_type_library.expertise_specialization.trashbin', compact('profileLibTblExpertiseGenTrashedRecord'));
     }
 
-    // public function restore($ctrlno)
-    // {
-    //     $trainingSecretariat = TrainingSecretariat::onlyTrashed()->find($ctrlno);
-    //     $trainingSecretariat->restore();
+    public function restore($ctrlno)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::onlyTrashed()->find($ctrlno);
+        $profileLibTblExpertiseGen->restore();
 
-    //     return back()->with('info', 'Data Restored Sucessfully');
-    // }
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
  
     // public function forceDelete($ctrlno)
     // {
