@@ -462,6 +462,7 @@ Route::middleware('auth')->group(function () {
             Route::get('index', [TrainingSecretariatController::class, 'index'])->name('training-secretariat.index');
             Route::get('create', [TrainingSecretariatController::class, 'create'])->name('training-secretariat.create');
             Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store');
+            Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit');
         });
     });
     // End of competency routes

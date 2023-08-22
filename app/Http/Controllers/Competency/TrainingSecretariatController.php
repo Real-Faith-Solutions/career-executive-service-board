@@ -29,4 +29,11 @@ class TrainingSecretariatController extends Controller
 
         return to_route('training-secretariat.index')->with('message', 'Save Sucessfully');
     }
+
+    public function edit($ctrlno)
+    {
+        $trainingSecretariat = TrainingSecretariat::find($ctrlno);
+
+        return view('admin.competency.partials.training_type_library.training_secretariat.edit', compact('trainingSecretariat'));
+    }
 }
