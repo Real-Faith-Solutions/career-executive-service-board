@@ -32,5 +32,16 @@ class TrainingCategoryController extends Controller
         ]);
 
         return to_route('training-category.index')->with('message', 'Save Sucessfully');
-    } 
+    }
+    
+    public function edit($ctrlno)
+    {
+        $trainingCategory = TrainingLibCategory::find($ctrlno);
+
+        if(!$trainingCategory){
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+
+        return view('admin.competency.partials.training_type_library.training_category.edit', compact('trainingCategory'));
+    }
 }
