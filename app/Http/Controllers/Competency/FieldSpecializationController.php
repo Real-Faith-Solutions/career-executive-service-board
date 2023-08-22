@@ -62,12 +62,12 @@ class FieldSpecializationController extends Controller
         return back()->with('message', 'Deleted Sucessfully');
     }
 
-    // public function recentlyDeleted()
-    // {
-    //     $profileLibTblExpertiseGenTrashedRecord = TrainingSecretariat::onlyTrashed()->paginate(20);
+    public function recentlyDeleted()
+    {
+        $profileLibTblExpertiseGenTrashedRecord = ProfileLibTblExpertiseGen::onlyTrashed()->paginate(20);
 
-    //     return view('admin.competency.partials.training_type_library.training_secretariat.trashbin', compact('trainingSecretariatTrashedRecord'));
-    // }
+        return view('admin.competency.partials.training_type_library.expertise_specialization.trashbin', compact('profileLibTblExpertiseGenTrashedRecord'));
+    }
 
     // public function restore($ctrlno)
     // {
