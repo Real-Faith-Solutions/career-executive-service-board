@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Competency 201 profiling table')
+@section('sub', 'Competency 201 profiling table')
 @section('content')
 @include('admin.competency.view_profile.header')
 

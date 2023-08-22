@@ -10,6 +10,8 @@ class TrainingLibCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $timestamps = true;
+
     protected $primaryKey = 'ctrlno';
 
     protected $table = "traininglib_tblcategory";
@@ -17,6 +19,7 @@ class TrainingLibCategory extends Model
     protected $fillable = [
 
         'description',
+        'encoder',
 
     ];
 }

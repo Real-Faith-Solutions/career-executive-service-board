@@ -16,6 +16,7 @@ return new class extends Migration
             // $table->id('catid');
             // $table->integer('code');
             $table->string('description');
+            $table->string('encoder')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
