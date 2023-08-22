@@ -464,6 +464,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store');
             Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit');
             Route::put('update/{ctrlno}', [TrainingSecretariatController::class, 'update'])->name('training-secretariat.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy');
         });
     });
     // End of competency routes

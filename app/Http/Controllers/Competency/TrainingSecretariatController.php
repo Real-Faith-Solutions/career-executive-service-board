@@ -45,4 +45,12 @@ class TrainingSecretariatController extends Controller
 
         return to_route('training-secretariat.index')->with('info', 'Data Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $trainingSecretariat = TrainingSecretariat::find($ctrlno);
+        $trainingSecretariat->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }

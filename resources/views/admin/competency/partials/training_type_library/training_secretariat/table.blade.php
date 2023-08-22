@@ -59,10 +59,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-category.destroy', ['ctrlno'=>$trainingSecretariats->ctrlno]) }}" method="POST" id="delete_training_category_form{{$trainingSecretariats->ctrlno}}">
+                            <form action="{{ route('training-secretariat.destroy', ['ctrlno'=>$trainingSecretariats->ctrlno]) }}" method="POST" id="delete_training_secretariat_form{{$trainingSecretariats->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingCategoryButton{{$trainingSecretariats->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingSecretariatButton{{$trainingSecretariats->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
