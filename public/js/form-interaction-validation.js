@@ -2,7 +2,6 @@
 // Personal Data Form Interaction
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Call the computeAge() function once the page is fully loaded
         computeAge();
     });
 
@@ -12,7 +11,7 @@
         
         const birthdateValue = new Date(birthdateInput.value);
         const today = new Date();
-        const age = today.getFullYear() - birthdateValue.getFullYear();
+        let age = today.getFullYear() - birthdateValue.getFullYear();
         
         // Adjust age if the birthdate hasn't occurred yet this year
         if (
