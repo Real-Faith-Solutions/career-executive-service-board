@@ -223,7 +223,7 @@
                 <select class="form-control w-100 citizenShip mb-3" id="citizenship" name="citizenship" onchange="toggleCitizenshipDependentField()" required>
                     <option disabled selected>Please Select Citizenship</option>
                     <option value="Filipino">Filipino</option>
-                    <option value="Dual-Citizenship">Dual Citizenship</option>
+                    <option value="Dual-Citizenship">Dual-Citizenship</option>
                 </select>
             </div>
 

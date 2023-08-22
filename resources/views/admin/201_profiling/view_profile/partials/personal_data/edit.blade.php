@@ -105,13 +105,13 @@
 
                             <div class="mb-3">
                                 <label for="birthdate">Birthdate<sup>*</sup></label>
-                                <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" value="{{ $mainProfile->birth_date ? \Carbon\Carbon::parse($mainProfile->birth_date)->format('Y-m-d') : now()->format('Y-m-d') }}" required>
+                                <input type="date" id="birthdateEdit" name="birthdate" onchange="computeAgeEdit()" oninput="validateDateInput(birthdate, 18)" value="{{ $mainProfile->birth_date ? \Carbon\Carbon::parse($mainProfile->birth_date)->format('Y-m-d') : now()->format('Y-m-d') }}" required>
                                 <p class="input_error text-red-600"></p>
                             </div>
 
                             <div class="mb-3">
                                 <label for="age">Age<sup class="text-danger">*</sup></label>
-                                <input id="personal_age" name="age" readonly type="number">
+                                <input id="ageEdit" name="age" readonly type="number">
                             </div>
 
                             <div class="mb-3">
@@ -229,7 +229,7 @@
 
                             <div class="mb-3">
                                 <label for="citizenship">Citizenship<sup>*</sup></label>
-                                <select class="form-control w-100 citizenShip mb-3" id="citizenship" name="citizenship" onchange="toggleCitizenshipDependentField()" required>
+                                <select class="form-control w-100 citizenShip mb-3" id="editCitizenship" name="citizenship" onchange="toggleCitizenshipEdit()" required>
                                     @if ($mainProfile->citizenship == "Filipino")
                                         <option value="Filipino" selected>Filipino</option>
                                         <option value="Dual-Citizenship">Dual-Citizenship</option>
@@ -239,22 +239,20 @@
                                     @endif
                                 </select>
                             </div>
-
-                            @if ($mainProfile->citizenship == "Dual-Citizenship")
-                                <div class="mb-3">
-                                    <label for="dual_citizenship">If has Dual Citizenship:</label>
-                                    <input id="dual_citizenship" list="dual_citizenship_choices" name="dual_citizenship" value="{{ $mainProfile->dual_citizenship }}" type="search">
-                                    <datalist id="dual_citizenship_choices">
-                                        @foreach ($countries as $data)
-                                            @if ($data->name == $mainProfile->dual_citizenship)
-                                                <option value="{{ $data->name }}" selected>{{ $data->name }}</option>
-                                            @else
-                                                <option value="{{ $data->name }}">{{ $data->name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </datalist>
-                                </div>
-                            @endif
+                            
+                            <div class="mb-3" id="dualCitizenshipField" style="display: {{ $mainProfile->citizenship == 'Dual-Citizenship' ? 'block' : 'none' }}">
+                                <label for="dual_citizenship">If has Dual Citizenship:</label>
+                                <input id="dual_citizenship" list="dual_citizenship_choices" name="dual_citizenship" value="{{ $mainProfile->dual_citizenship }}" type="search">
+                                <datalist id="dual_citizenship_choices">
+                                    @foreach ($countries as $data)
+                                        @if ($data->name == $mainProfile->dual_citizenship)
+                                            <option value="{{ $data->name }}" selected>{{ $data->name }}</option>
+                                        @else
+                                            <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </datalist>
+                            </div>
 
                         </div>
                     </div>
