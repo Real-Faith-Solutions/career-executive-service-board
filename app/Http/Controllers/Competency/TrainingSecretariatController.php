@@ -53,4 +53,11 @@ class TrainingSecretariatController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $trainingSecretariatTrashedRecord = TrainingSecretariat::onlyTrashed()->paginate(20);
+
+        return view('admin.competency.partials.training_type_library.training_secretariat.trashbin', compact('trainingSecretariatTrashedRecord'));
+    }
 }
