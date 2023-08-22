@@ -447,6 +447,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('training-category')->group(function () {
             Route::get('index', [TrainingCategoryController::class, 'index'])->name('training-category.index');
+            Route::get('create', [TrainingCategoryController::class, 'create'])->name('training-category.create');
         });
     });
     // End of competency routes

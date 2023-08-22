@@ -11,4 +11,9 @@ class TrainingCategoryController extends Controller
     {
         return view('admin.competency.partials.training_type_library.training_category.table');
     }
+
+    public function create()
+    {
+        return view('admin.competency.partials.training_type_library.training_category.form');
+    }
 }
