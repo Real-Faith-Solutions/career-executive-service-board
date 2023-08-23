@@ -1,6 +1,50 @@
 
 // Personal Data Form Interaction
 
+    // check password if match
+    function checkPasswordMatch() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        
+        if (password !== confirmPassword) {
+            confirmPasswordError.textContent = 'Passwords do not match';
+        } else {
+            confirmPasswordError.textContent = '';
+        }
+    }
+    // end check password if match
+
+    // toggle password
+    function togglePasswordVisibility(inputElement, iconElement) {
+        if (inputElement.type === 'password') {
+            inputElement.type = 'text';
+            iconElement.classList.remove('fa-eye');
+            iconElement.classList.add('fa-eye-slash');
+        } else {
+            inputElement.type = 'password';
+            iconElement.classList.remove('fa-eye-slash');
+            iconElement.classList.add('fa-eye');
+        }
+    }
+
+    // Toggle password visibility for password field
+    const togglePasswordIcon = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(passwordInput, togglePasswordIcon);
+    });
+
+    // Toggle password visibility for confirm password field
+    const toggleConfirmPasswordIcon = document.querySelector('.toggle-confirm-password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    toggleConfirmPasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordIcon);
+    });
+    // end toggle password
+
     document.addEventListener('DOMContentLoaded', function() {
         computeAge();
     });
