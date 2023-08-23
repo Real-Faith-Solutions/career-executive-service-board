@@ -11,23 +11,21 @@ use Illuminate\Validation\Rule;
 class CaseRecordController extends Controller
 {
 
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $caseRecord = $personalData->caseRecords;
 
         return view('admin.201_profiling.view_profile.partials.case_records.table', compact('caseRecord' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno'));
-
     }
     
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
@@ -43,11 +41,9 @@ class CaseRecordController extends Controller
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $caseRecord = new CaseRecords([
 
@@ -61,7 +57,7 @@ class CaseRecordController extends Controller
             'finality' => $request->date_finality,
             'decision' => $request->decision,
             'remarks' => $request->remarks,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' =>  $encoder,
          
         ]);
 
@@ -70,19 +66,17 @@ class CaseRecordController extends Controller
         $caseRecordPersonalDataId->caseRecords()->save($caseRecord);
 
         return to_route('case-record.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $caseRecord = CaseRecords::find($ctrlno);
 
         return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno'));
-
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
@@ -112,20 +106,18 @@ class CaseRecordController extends Controller
         $caseRecord->save();
 
         return to_route('case-record.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-        
+    public function destroy($ctrlno)
+    {
         $caseRecord = CaseRecords::find($ctrlno);
         $caseRecord->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recentlyDeleted($cesno){
-
+    public function recentlyDeleted($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -133,25 +125,21 @@ class CaseRecordController extends Controller
         $caseRecordTrashedRecord = $personalData->caseRecords()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord' ,'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
         $caseRecord->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
  
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
         $caseRecord->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }
