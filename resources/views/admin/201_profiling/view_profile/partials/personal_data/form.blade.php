@@ -29,10 +29,11 @@
     <div class="col-span-3">
         <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
             <div class="w-full text-left text-gray-500">
-                <div class="bg-blue-500 uppercase text-gray-700 text-white">
-                    <h1 class="px-6 py-3">
+                <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
+                    <h1 class="px-6 py-3 text-left">
                         Personal Data
                     </h1>
+                    <a href="{{ route('profile.edit', ['cesno' => $mainProfile->cesno]) }}" class="px-6 py-3 text-right">Edit</a>
                 </div>
 
                 <div class="border-b bg-white px-6 py-3">
@@ -92,13 +93,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="birthdate">Birthdate<sup>*</sup></label>
+                            <label for="personal_birthdate">Birthdate<sup>*</sup></label>
                             <input id="personal_birthdate" name="birthdate" readonly type="text" value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="age">Age<sup class="text-danger">*</sup></label>
-                            <input id="personal_age" name="age" readonly type="number">
+                            <label for="personal_age">Age<sup class="text-danger">*</sup></label>
+                            <input id="personal_age" name="age" value="{{ $age }}" readonly type="number">
                         </div>
 
                         <div class="mb-3">
@@ -156,7 +157,7 @@
                             <input id="citizenship" name="citizenship" readonly value="{{ $mainProfile->citizenship }}">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-3" style="display: {{ $mainProfile->citizenship == 'Dual-Citizenship' ? 'block' : 'none' }}">
                             <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
                             <input id="dual_citizenship" name="dual_citizenship" readonly type="text" value="{{ $mainProfile->dual_citizenship }}">
                         </div>

@@ -1,14 +1,49 @@
 
 // Personal Data Form Interaction
+
+    document.addEventListener('DOMContentLoaded', function() {
+        computeAge();
+    });
+
     function computeAge() {
-        var birthDate = document.getElementById('birthdate').value;
-        var today = new Date();
-        var age = today.getFullYear() - new Date(birthDate).getFullYear();
-        var monthDiff = today.getMonth() - new Date(birthDate).getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < new Date(birthDate).getDate())) {
+        const birthdateInput = document.getElementById('birthdate');
+        const ageInput = document.getElementById('age');
+        
+        const birthdateValue = new Date(birthdateInput.value);
+        const today = new Date();
+        let age = today.getFullYear() - birthdateValue.getFullYear();
+        
+        // Adjust age if the birthdate hasn't occurred yet this year
+        if (
+            today.getMonth() < birthdateValue.getMonth() ||
+            (today.getMonth() === birthdateValue.getMonth() && today.getDate() < birthdateValue.getDate())
+        ) {
             age--;
         }
-        document.getElementById('age').value = age;
+        
+        ageInput.value = age;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        computeAgeEdit();
+    });
+    
+    function computeAgeEdit() {
+        const birthdateInputEdit = document.getElementById('birthdateEdit');
+        const ageInputEdit = document.getElementById('ageEdit');
+        
+        const birthdateValueEdit = new Date(birthdateInputEdit.value);
+        const todayEdit = new Date();
+        let ageEdit = todayEdit.getFullYear() - birthdateValueEdit.getFullYear();
+        
+        if (
+            todayEdit.getMonth() < birthdateValueEdit.getMonth() ||
+            (todayEdit.getMonth() === birthdateValueEdit.getMonth() && todayEdit.getDate() < birthdateValueEdit.getDate())
+        ) {
+            ageEdit--;
+        }
+        
+        ageInputEdit.value = ageEdit;
     }
 
     function generateMiddleInitial() {
@@ -39,7 +74,7 @@
         var dependentField = document.getElementById('dependent-dual-citizenship-field');
         var dependentInput = document.getElementById('dependent-dual-citizenship-input');
 
-        if (selectElement.value === 'Dual Citizenship') {
+        if (selectElement.value === 'Dual-Citizenship') {
             dependentField.style.display = 'block';
             dependentInput.required = true;
         } else {
@@ -47,6 +82,22 @@
             dependentInput.required = false;
         }
     }
+
+    toggleCitizenshipDependentField();
+
+    function toggleCitizenshipEdit() {
+        var citizenshipSelect = document.getElementById('editCitizenship');
+        var dualCitizenshipField = document.getElementById('dualCitizenshipField');
+        
+        if (citizenshipSelect.value === 'Dual-Citizenship') {
+            dualCitizenshipField.style.display = 'block';
+        } else {
+            dualCitizenshipField.style.display = 'none';
+        }
+    }
+    
+    // Call the toggle function on page load to set initial visibility
+    toggleCitizenshipEdit();
 
     function toggleDisabilityDependentField() {
         var selectElement = document.getElementById('person_with_disability');

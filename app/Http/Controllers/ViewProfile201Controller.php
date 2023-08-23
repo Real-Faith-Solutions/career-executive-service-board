@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 class ViewProfile201Controller extends Controller
 {
-    public function index(Request $request){
+
+    public function index(Request $request)
+    {
 
         $query = $request->input('search');
         $personalData = PersonalData::query()

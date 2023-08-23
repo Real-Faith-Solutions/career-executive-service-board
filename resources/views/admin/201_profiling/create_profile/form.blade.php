@@ -10,18 +10,15 @@
         @csrf
 
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
             <div class="mb-3">
                 <label for="cesno">CES Number</label>
                 <input id="cesno" name="cesno" readonly type="number" value="{{ $cesNumber }}">
-
             </div>
 
             <div></div>
 
-            <div class="mb-3">
-                {{-- <label for="picture">Upload 2x2 Photo (Min. of 300x300 px)</label> --}}
-                {{-- <input class="mb-3 p-1" id="picture" name="picture" accept="image/png, image/jpeg" type="file" onclick="validateFileSize(`picture`, 2)" /> --}}
-            </div>
+            <div></div>
 
         </div>
 
@@ -89,7 +86,7 @@
 
             <div class="mb-3">
                 <label for="middlename">Middlename<sup>*</sup></label>
-                <input class="input_error" id="middlename" name="middlename" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2, 'letters')" onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
+                <input id="middlename" name="middlename" type="text" value="{{ old('middlename') }}" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2, 'letters')" onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
                 <p class="input_error text-red-600"></p>
             </div>
 
@@ -114,11 +111,10 @@
                 <input type="date" id="birthdate" name="birthdate" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" required>
                 <p class="input_error text-red-600"></p>
             </div>
-            <div class="mb-3">
 
+            <div class="mb-3">
                 <label for="age">Age<sup class="text-danger">*</sup></label>
                 <input class="age form-control w-100 mb-3" id="age" name="age" readonly type="number">
-
             </div>
 
             <div class="mb-3">
@@ -196,7 +192,6 @@
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
-
             </div>
 
             <div class="mb-3">
@@ -216,25 +211,25 @@
                     @foreach ($pwds as $data)
                         <option value="{{ $data->name }}">{{ $data->name }}</option>
                     @endforeach
-
                 </datalist>
             </div>
+
         </div>
 
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
             <div class="mb-3">
                 <label for="citizenship">Citizenship<sup>*</sup></label>
                 <select class="form-control w-100 citizenShip mb-3" id="citizenship" name="citizenship" onchange="toggleCitizenshipDependentField()" required>
                     <option disabled selected>Please Select Citizenship</option>
                     <option value="Filipino">Filipino</option>
-                    <option value="Dual Citizenship">Dual Citizenship</option>
+                    <option value="Dual-Citizenship">Dual-Citizenship</option>
                 </select>
-
             </div>
 
             <div class="mb-3">
                 <div id="dependent-dual-citizenship-field" style="display: none;">
-                    <label for="dependent-dual-citizenship-input">If Holder has Dual Citizenship:</label>
+                    <label for="dependent-dual-citizenship-input">If has Dual Citizenship:</label>
                     <input id="dependent-dual-citizenship-input" list="dependent-dual-citizenship-input_choices" name="dual_citizenship" placeholder="Please indicate the Country" required type="search">
                     <datalist id="dependent-dual-citizenship-input_choices">
                         @foreach ($countries as $data)
@@ -246,50 +241,10 @@
 
         </div>
 
-        {{-- identification cards --}}
-        {{-- <section>
-            <div class="mb-3 bg-blue-500 p-2 uppercase text-white">
-                <h1>Identification cards</h1>
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="mb-3">
-                    <label for="gsis">GSIS ID No. <sup>*</sup></label>
-                    <input id="gsis" name="gsis" type="text" value="{{ old('gsis') }}" oninput="validateInput(gsis, 6, 'all')" onkeypress="validateInput(gsis, 6, 'all')" onblur="checkErrorMessage(gsis)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-                <div class="mb-3">
-                    <label for="pagibig">PAG-IBIG ID No.<sup>*</sup></label>
-                    <input id="pagibig" name="pagibig" type="text" value="{{ old('pagibig') }}" oninput="validateInput(pagibig, 6, 'all')" onkeypress="validateInput(pagibig, 6, 'all')" onblur="checkErrorMessage(pagibig)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-
-                <div class="mb-3">
-                    <label for="philhealt">PHILHEALTH ID No.<sup>*</sup></label>
-                    <input id="philhealth" name="philhealth" type="text" value="{{ old('philhealth') }}" oninput="validateInput(philhealth, 6, 'all')" onkeypress="validateInput(philhealth, 6, 'all')" onblur="checkErrorMessage(philhealth)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-
-            </div>
-
-            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div class="col-md-4">
-                    <label for="sss_no">SSS ID No.</label>
-                    <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') }}" oninput="validateInput(sss_no, 6, 'all')" onkeypress="validateInput(sss_no, 6, 'all')" onblur="checkErrorMessage(sss_no)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-                <div class="col-md-4">
-                    <label for="tin">TIN ID No.</label>
-                    <input id="tin" name="tin" type="text" value="{{ old('tin') }}" oninput="validateInput(tin, 6, 'all')" onkeypress="validateInput(tin, 6, 'all')" onblur="checkErrorMessage(tin)" required>
-                    <p class="input_error text-red-600"></p>
-                </div>
-            </div>
-        </section> --}}
-        {{-- end identification cards --}}
-
         <div class="flex justify-end">
             <button class="btn btn-primary" id="personal_data_submit" type="submit">Submit</button>
         </div>
+        
     </form>
 
 @endsection
