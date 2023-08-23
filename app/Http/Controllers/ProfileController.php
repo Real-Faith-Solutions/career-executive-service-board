@@ -303,11 +303,4 @@ class ProfileController extends Controller
 
     }
 
-    public function changePassword(Request $request)
-    {
-
-        echo "nice";
-
-    }
-
 }
