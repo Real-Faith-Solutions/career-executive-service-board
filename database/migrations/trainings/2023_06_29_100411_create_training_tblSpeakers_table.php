@@ -13,25 +13,24 @@ return new class extends Migration
     {
         Schema::create('training_tblSpeakers', function (Blueprint $table) {
             $table->id('speakerID');
-            $table->bigInteger('cesno');
+            $table->unsignedBigInteger('personal_data_cesno')->nullable();
+            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('lastname');
             $table->string('firstname');
             $table->string('mi');
-            $table->string('Position');
-            $table->string('Department');
-            $table->string('Office');
-            $table->string('Bldg');
-            $table->string('Street');
+            $table->string('Position')->nullable();
+            $table->string('Department')->nullable();
+            $table->string('Office')->nullable();
+            $table->string('Bldg')->nullable();
+            $table->string('Street')->nullable();
             $table->string('Brgy');
             $table->string('City');
-            $table->string('zipcode');
+            $table->foreignId('zipcode')->constrained('profilelib_tblcities', 'city_code');
             $table->integer('contactno');
             $table->string('emailadd');
-            $table->string('expertise');
-            $table->string('encoder');
-            $table->string('encdate');
-            $table->string('lastupd_enc');
-            $table->string('lastupd_dt');
+            $table->string('expertise')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

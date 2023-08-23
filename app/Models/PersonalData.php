@@ -184,4 +184,8 @@ class PersonalData extends Model
         return $this->hasOne(User::class);
     }
 
+    public function competencyResourceSpeaker(): HasMany
+    {
+        return $this->hasMany(ResourceSpeaker::class, 'personal_data_cesno', 'cesno');
+    }
 }
