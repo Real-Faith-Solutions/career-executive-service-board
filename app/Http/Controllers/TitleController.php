@@ -7,29 +7,39 @@ use Illuminate\Http\Request;
 
 class TitleController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $datas = Title::paginate(15);
+
         return view('admin.201_library.title.index', compact('datas'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.201_library.title.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:titles'],
         ]);
+
         Title::create($request->all());
+
         return redirect()->route('title.index')->with('message', 'The item has been successfully added!');
     }
+
     // ui for edit
-    public function edit($ctrlno){
+    public function edit($ctrlno)
+    {
         $data = Title::withTrashed()->findOrFail($ctrlno);
+
         return view('admin.201_library.title.edit', compact('data'));
     }
 
-    public function update(Request $request, $ctrlno){
+    public function update(Request $request, $ctrlno)
+    {
         $request->validate([
             'name' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:titles'],
         ]);
@@ -41,15 +51,18 @@ class TitleController extends Controller
     }
 
     // recently deleted
-    public function recentlyDeleted(){
+    public function recentlyDeleted()
+    {
         $datas = Title::onlyTrashed()
         ->orderByDesc('deleted_at')
         ->paginate(15);
+
         return view('admin.201_library.title.recently_deleted', compact('datas'));
     }
 
     // restore
-    public function restore($ctrlno){
+    public function restore($ctrlno)
+    {
         $data = Title::onlyTrashed()->findOrFail($ctrlno);
         $data->restore();
 
@@ -57,7 +70,8 @@ class TitleController extends Controller
     }
 
     // soft delete
-    public function destroy($ctrlno){
+    public function destroy($ctrlno)
+    {
         $data = Title::findOrFail($ctrlno);
         $data->delete();
 
@@ -65,7 +79,8 @@ class TitleController extends Controller
     }
 
     // force delete
-    public function forceDelete($ctrlno){
+    public function forceDelete($ctrlno)
+    {
         $data = Title::onlyTrashed()->findOrFail($ctrlno);
         $data->forceDelete();
 

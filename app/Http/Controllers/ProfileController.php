@@ -28,10 +28,8 @@ use Illuminate\Support\Facades\View;
 
 class ProfileController extends Controller
 {
-
     public function index(Request $request)
     {
-
         $query = $request->input('search');
         $personalData = PersonalData::query()
             ->where('lastname', "LIKE" ,"%$query%")
@@ -41,12 +39,10 @@ class ProfileController extends Controller
             ->paginate(25);
 
        return view('admin\201_profiling\view_profile\table', compact('personalData', 'query'));
-
     }
 
     public function show($cesno)
     {
-
         $mainProfile = PersonalData::find($cesno);
         $birthdate = $mainProfile->birth_date;
 
@@ -56,12 +52,12 @@ class ProfileController extends Controller
 
         return view('admin.201_profiling.view_profile.partials.personal_data.form', 
         compact('mainProfile', 'cesno', 'age'));
-        
     }
 
     public function addProfile()
     {
-        if (DB::table('profile_tblMain')->count() === 0) {
+        if (DB::table('profile_tblMain')->count() === 0) 
+        {
             $cesNumber = 0;
         } else {
             $cesNumber = PersonalData::latest()->first()->cesno;
@@ -96,7 +92,6 @@ class ProfileController extends Controller
 
     public function store(AddProfile201Req $request, $cesno)
     {
-
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
@@ -154,7 +149,6 @@ class ProfileController extends Controller
         $user->assignRole('user');
 
         return back()->with('message','New profile added!');
-
     }
 
     public function uploadAvatar(Request $request, $cesno)
@@ -165,13 +159,14 @@ class ProfileController extends Controller
             'imageInput' => 'required|image|mimes:jpeg,png,jpg',
         ]);
     
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             return back()->with('error','Invalid file type!');
         }
 
         // Check if a file was uploaded
-        if ($request->hasFile('imageInput')) {
-
+        if ($request->hasFile('imageInput')) 
+        {
             // Find the user's existing image, if any
             $existingImage = $existingPerson->picture;
 
@@ -208,7 +203,6 @@ class ProfileController extends Controller
 
     public function editProfile($cesno)
     {
-
         $mainProfile = PersonalData::find($cesno);
         $countries = Country::all();
         $indigenousGroups = IndigenousGroup::all();
@@ -240,7 +234,6 @@ class ProfileController extends Controller
 
     public function update(AddProfile201Req $request, $cesno)
     {
-
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
@@ -274,7 +267,6 @@ class ProfileController extends Controller
         $personalData->save();
 
         return back()->with('info','Profile Updated!');
-
     }
 
     public function extractMiddleInitial($middleName)
@@ -293,7 +285,6 @@ class ProfileController extends Controller
 
     public function settings($cesno)
     {
-
         $mainProfile = PersonalData::find($cesno);
         $birthdate = $mainProfile->birth_date;
 
@@ -303,7 +294,13 @@ class ProfileController extends Controller
 
         return view('admin.201_profiling.view_profile.partials.personal_data.settings', 
         compact('mainProfile', 'cesno', 'age'));
-        
+    }
+
+    public function changePassword(Request $request)
+    {
+
+        echo "nice";
+
     }
 
     public function changePassword(Request $request)

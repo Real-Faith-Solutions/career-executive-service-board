@@ -6,6 +6,7 @@ use App\Http\Requests\AddAddress201Req;
 use App\Models\PersonalData;
 use App\Models\ProfileAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -15,7 +16,10 @@ class AddAddress201 extends Controller
     public function addAddressPermanent(AddAddress201Req $request, $cesno){
 
         $type = "Permanent";
-        $encoder = "Encoder";
+       
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $response = Http::get("https://psgc.gitlab.io/api/regions/".$request->regionsSelectPermanent);
         $region_name = $response->json('name');

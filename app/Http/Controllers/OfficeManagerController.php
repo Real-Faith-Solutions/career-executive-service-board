@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class OfficeManagerController extends Controller
 {
-    public function addPlantillaTblOffice(Request $request) {
-
+    public function addPlantillaTblOffice(Request $request) 
+    {
         PlantillaTblOffice::create([
             'officeid' => $request->officeid,
             'officelocid' => $request->officelocid,
@@ -23,10 +23,10 @@ class OfficeManagerController extends Controller
         ]);
     }
 
-    public function getPlantillaTblOffice(Request $request){
+    public function getPlantillaTblOffice(Request $request)
+    {
         $PlantillaTblOffice = PlantillaTblOffice::all();
 
         return $PlantillaTblOffice;
     }
-    
 }

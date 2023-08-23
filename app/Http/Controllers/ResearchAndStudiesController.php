@@ -11,24 +11,21 @@ use Illuminate\Validation\Rule;
 
 class ResearchAndStudiesController extends Controller
 {
-
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $researchAndStudies = $personalData->researchAndStudies;
 
         return view('admin.201_profiling.view_profile.partials.research_and_studies.table', compact('researchAndStudies' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.research_and_studies.form', compact('cesno'));
-
     }
     
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
@@ -38,11 +35,9 @@ class ResearchAndStudiesController extends Controller
 
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $researchAndStudies = new ResearchAndStudies([
 
@@ -50,7 +45,7 @@ class ResearchAndStudiesController extends Controller
             'publisher' => $request->publisher,
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' =>  $encoder,
          
         ]);
 
@@ -59,18 +54,17 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudiesPersonalDataId->researchAndStudies()->save($researchAndStudies);
 
         return to_route('research-studies.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', compact('researchAndStudies' ,'cesno'));
 
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', compact('researchAndStudies' ,'cesno'));
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
@@ -88,20 +82,18 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies->save();
 
         return to_route('research-studies.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-        
+    public function destroy($ctrlno)
+    {    
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
         $researchAndStudies->delete();
 
         return redirect()->back()->with('message', 'Successfuly Saved');
-
     }
 
-    public function recycleBin($cesno){
-
+    public function recycleBin($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -109,26 +101,21 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudiesTrashedRecord = $personalData->researchAndStudies()->onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.research_and_studies.trashbin', compact('researchAndStudiesTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
         $researchAndStudies->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
 
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
         $researchAndStudies->forceDelete();
 
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-    
-
 }

@@ -7,31 +7,41 @@ use Illuminate\Http\Request;
 
 class ProfileLibTblEducDegreeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $datas = ProfileLibTblEducDegree::query()
         ->orderBy('DEGREE' , 'ASC')
         ->paginate(15);
+
         return view('admin.201_library.educational_degree.index', compact('datas'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.201_library.educational_degree.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'DEGREE' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducDegree'],
         ]);
+
         ProfileLibTblEducDegree::create($request->all());
+
         return redirect()->route('educational-degree.index')->with('message', 'The item has been successfully added!');
     }
+
     // ui for edit
-    public function edit($CODE){
+    public function edit($CODE)
+    {
         $data = ProfileLibTblEducDegree::withTrashed()->findOrFail($CODE);
+
         return view('admin.201_library.educational_degree.edit', compact('data'));
     }
 
-    public function update(Request $request, $CODE){
+    public function update(Request $request, $CODE)
+    {
         $request->validate([
             'DEGREE' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducDegree'],
         ]);
@@ -43,15 +53,18 @@ class ProfileLibTblEducDegreeController extends Controller
     }
 
     // recently deleted
-    public function recentlyDeleted(){
+    public function recentlyDeleted()
+    {
         $datas = ProfileLibTblEducDegree::onlyTrashed()
         ->orderByDesc('deleted_at')
         ->paginate(15);
+
         return view('admin.201_library.educational_degree.recently_deleted', compact('datas'));
     }
 
     // restore
-    public function restore($CODE){
+    public function restore($CODE)
+    {
         $data = ProfileLibTblEducDegree::onlyTrashed()->findOrFail($CODE);
         $data->restore();
 
@@ -59,7 +72,8 @@ class ProfileLibTblEducDegreeController extends Controller
     }
 
     // soft delete
-    public function destroy($CODE){
+    public function destroy($CODE)
+    {
         $data = ProfileLibTblEducDegree::findOrFail($CODE);
         $data->delete();
 
@@ -67,7 +81,8 @@ class ProfileLibTblEducDegreeController extends Controller
     }
 
     // force delete
-    public function forceDelete($CODE){
+    public function forceDelete($CODE)
+    {
         $data = ProfileLibTblEducDegree::onlyTrashed()->findOrFail($CODE);
         $data->forceDelete();
 

@@ -12,27 +12,25 @@ use Illuminate\Validation\Rule;
 
 class OtherTrainingController extends Controller
 {
-
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $otherTraining = $personalData->otherTraining;
         $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining;
 
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', compact('otherTraining' , 'cesno', 'competencyNonCesAccreditedTraining'));
-
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', 
+        compact('otherTraining' , 'cesno', 'competencyNonCesAccreditedTraining'));
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.form', compact('profileLibTblExpertiseSpec' ,'cesno'));
-        
     }
     
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([ 
 
             'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)],
@@ -46,11 +44,9 @@ class OtherTrainingController extends Controller
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $otherTraining = new ProfileTblTrainingMngt([
 
@@ -62,7 +58,7 @@ class OtherTrainingController extends Controller
             'from_date' => $request->inclusive_date_from,
             'to_date' => $request->inclusive_date_to,
             'field_specialization' => $request->expertise_field_of_specialization,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' => $encoder,
          
         ]);
 
@@ -71,20 +67,18 @@ class OtherTrainingController extends Controller
         $otherTrainingPersonalDataId->otherTraining()->save($otherTraining);
             
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,'cesno'));
-
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([ 
 
             'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
@@ -110,20 +104,18 @@ class OtherTrainingController extends Controller
         $trainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-        
+    public function destroy($ctrlno)
+    {
         $otherTraining = ProfileTblTrainingMngt::find($ctrlno);
         $otherTraining->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recentlyDeleted($cesno){
-
+    public function recentlyDeleted($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -131,25 +123,21 @@ class OtherTrainingController extends Controller
         $otherTrainingTrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
         $otherTraining->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
  
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
         $otherTraining->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }

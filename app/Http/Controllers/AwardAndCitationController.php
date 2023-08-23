@@ -11,23 +11,21 @@ use Illuminate\Validation\Rule;
 class AwardAndCitationController extends Controller
 {
 
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $awardsAndCitation = $personalData->awardsAndCitations;
 
         return view('admin.201_profiling.view_profile.partials.award_and_citations.table', compact('awardsAndCitation' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.award_and_citations.form', compact('cesno'));
-
     }
     
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)],
@@ -36,18 +34,16 @@ class AwardAndCitationController extends Controller
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $awardAndCitations = new AwardAndCitations([
 
             'awards' => $request->awards,
             'sponsor' => $request->sponsor,
             'date' => $request->date,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' => $encoder,
          
         ]);
 
@@ -56,19 +52,17 @@ class AwardAndCitationController extends Controller
         $awardAndCitationsPersonalDataId->awardsAndCitations()->save($awardAndCitations);
             
         return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $awardAndCitation = AwardAndCitations::find($ctrlno);
 
         return view('admin.201_profiling.view_profile.partials.award_and_citations.edit', compact('awardAndCitation' ,'cesno'));
-
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
@@ -77,34 +71,30 @@ class AwardAndCitationController extends Controller
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $awardAndCitation = AwardAndCitations::find($ctrlno);
         $awardAndCitation->awards = $request->awards;
         $awardAndCitation->sponsor = $request->sponsor;
         $awardAndCitation->date = $request->date;
-        $awardAndCitation->updated_by = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
+        $awardAndCitation->updated_by = $encoder;
         $awardAndCitation->save();
 
         return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-        
+    public function destroy($ctrlno)
+    {
         $awardAndCitations = AwardAndCitations::find($ctrlno);
         $awardAndCitations->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recentlyDeleted($cesno){
-
+    public function recentlyDeleted($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -112,25 +102,21 @@ class AwardAndCitationController extends Controller
         $awardAndCitationsTrashedRecord = $personalData->awardsAndCitations()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.award_and_citations.trashbin', compact('awardAndCitationsTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
         $awardAndCitations->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
  
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
         $awardAndCitations->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }

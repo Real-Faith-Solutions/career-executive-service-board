@@ -13,39 +13,32 @@ use Illuminate\Support\Facades\File;
 
 class PDFController extends Controller
 {
-
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $approvedPdfFile = $personalData->pdfFile;
 
         return view('admin.201_profiling.view_profile.partials.pdf_files.table', compact('approvedPdfFile', 'cesno'));
-
     }
 
-    public function pendingFiles(){
-     
+    public function pendingFiles()
+    {
         $pdfFile = RequestFile::all();
 
         return view('admin.201_profiling.view_profile.partials.pdf_files.pendingFileTable', compact('pdfFile'));
-        
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.pdf_files.form', compact('cesno'));
-
     }
 
     //store requested file 
-    public function store(Request $request, $cesno){
-
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
+    public function store(Request $request, $cesno)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $personalData = PersonalData::find($cesno);
         $lastName = $personalData->lastname;
@@ -63,8 +56,8 @@ class PDFController extends Controller
         }
 
         //check if file was uploaded
-        if ($request->hasFile('pdfFile')) {
-
+        if ($request->hasFile('pdfFile')) 
+        {
             $pdfFile = $request->file('pdfFile');
 
             // Generate a unique name for the document
@@ -84,7 +77,7 @@ class PDFController extends Controller
                 'request_pdflink_orignal_name' => $originalFileName,
                 'request_unique_file_name' => $pdfFileName,
                 'remarks' => $request->remarks,
-                'encoder' => $userFullName,
+                'encoder' => $encoder,
                  
             ]);
         
@@ -95,23 +88,18 @@ class PDFController extends Controller
             $pdfFilePersonalDataId->requestFile()->save($pdf);
 
             return to_route('show-pdf-files.index', ['cesno'=>$cesno])->with('message','Document uploaded successfully');
-
         }
 
         // Handle the case when no file was uploaded
         return back()->with('error','No file was uploaded!');
-
     }
 
     //store accepted file
-    public function acceptedFiles($ctrlno, $cesno){
-
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension;
+    public function acceptedFiles($ctrlno, $cesno)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $personalData = PersonalData::find($cesno);
         $lastName = $personalData->lastname;
@@ -160,7 +148,7 @@ class PDFController extends Controller
             'remarks' => $requestFile->remarks,
             'request_date' => $requestDate,
             'requested_by' => $requestedBy,
-            'encoder' => $userFullName,
+            'encoder' => $encoder,
                  
         ]);
         
@@ -177,30 +165,28 @@ class PDFController extends Controller
     }
 
     // download approved file
-    public function download($ctrlno){
-
+    public function download($ctrlno)
+    {
         $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
 
         $myFile = public_path($pdfFileName);
 
         return response()->file($myFile);
-
     }
 
     // download pending file
-    public function downloadPendingFile($ctrlno){
-
+    public function downloadPendingFile($ctrlno)
+    {
         $pendingPdfFileName = RequestFile::withTrashed()->where('ctrlno', $ctrlno)->value('request_pdflink');
 
         $pendingFile = public_path($pendingPdfFileName);
         
         return response()->file($pendingFile);
-
     }
 
     // show soft deleted approved file by user
-    public function recentlyDeleted($cesno){
-
+    public function recentlyDeleted($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -208,22 +194,20 @@ class PDFController extends Controller
         $pdfFileTrashedRecord = $personalData->pdfFile()->onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.pdf_files.approvedFileTrashbin', compact('pdfFileTrashedRecord' ,'cesno'));
-
     }
 
     // soft deleting approved file by user
-    public function destroy($ctrlno){
-
+    public function destroy($ctrlno)
+    {
         $pdfFile = PdfLinks::find($ctrlno);
         $pdfFile->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
-    
     }
 
     // permanently delete approve file by user
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $pdfFile = PdfLinks::onlyTrashed()->find($ctrlno);
 
         $existingApprovedFile = $pdfFile->pdflink;
@@ -239,41 +223,37 @@ class PDFController extends Controller
         $pdfFile->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
 
     // restore approved file by user
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $pdfFile = PdfLinks::onlyTrashed()->find($ctrlno);
         $pdfFile->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
 
     // decline file
-    public function declineFile($ctrlno){
-
+    public function declineFile($ctrlno)
+    {
         $pendingFile = RequestFile::find($ctrlno);
         $pendingFile->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
-    
     }
 
     // show soft deleted decline file
-    public function recentlyDeclineFile(){
-
+    public function recentlyDeclineFile()
+    {
         $pendingFileTrashedRecord = RequestFile::onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.pdf_files.declineFilesTrashbin', compact('pendingFileTrashedRecord'));
-
     }
 
     // permanent deleting soft deleted record
-    public function declineFileForceDelete($ctrlno){
-
+    public function declineFileForceDelete($ctrlno)
+    {
         $declineFile = RequestFile::onlyTrashed()->find($ctrlno);
 
         $existingDeclineFile = $declineFile->request_pdflink;
@@ -289,8 +269,6 @@ class PDFController extends Controller
         $declineFile->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }
 
