@@ -7,8 +7,8 @@ use App\Models\Plantilla;
 
 class PlantillaController extends Controller
 {
-    public function viewPlantillaManagement(Request $request) {
-
+    public function viewPlantillaManagement(Request $request) 
+    {
         if(RolesController::validateUserCesWebAppGeneralPageAccess('Plantilla') == 'true'){
 
             return view('admin.plantilla_management_system.plantilla_management_main_screen');
@@ -19,8 +19,8 @@ class PlantillaController extends Controller
         }
     }
 
-    public function addPlantillaManagementMainScreen(Request $request) {
-
+    public function addPlantillaManagementMainScreen(Request $request) 
+    {
         PlantillaManagementMainScreen::create([
             'sector' => $sector,
             'list_of_department_agency_per_sector' => $request->list_of_department_agency_per_sector,

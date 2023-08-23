@@ -22,7 +22,9 @@ class AddProfile201 extends Controller
     public function store(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = Auth::user()->first_name." ".Auth::user()->last_name;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $newProfile = PersonalData::create([
             

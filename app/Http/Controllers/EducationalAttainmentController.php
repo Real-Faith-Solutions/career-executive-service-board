@@ -14,36 +14,29 @@ use Illuminate\Support\Facades\Redirect;
 class EducationalAttainmentController extends Controller
 {
 
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $educationalAttainment = $personalData->educations;
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.table', compact('educationalAttainment', 'cesno'));
-
     }
 
-    public function showForm($cesno){
-
-        $profileLibTblEducDegree = ProfileLibTblEducDegree::orderBy('DEGREE', 'ASC')
-        ->get();
-        $profileLibTblEducSchool = ProfileLibTblEducSchool::orderBy('SCHOOL', 'ASC')
-        ->get();
-        $profileLibTblEducMajor = ProfileLibTblEducMajor::orderBy('COURSE', 'ASC')
-        ->get();
+    public function showForm($cesno)
+    {
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::orderBy('DEGREE', 'ASC')->get();
+        $profileLibTblEducSchool = ProfileLibTblEducSchool::orderBy('SCHOOL', 'ASC')->get();
+        $profileLibTblEducMajor = ProfileLibTblEducMajor::orderBy('COURSE', 'ASC')->get();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.form',
         compact('profileLibTblEducSchool', 'profileLibTblEducMajor', 'profileLibTblEducDegree', 'cesno'));
-
     }
 
-    public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno){
-
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+    public function storeEducationAttainment(EducationalAttainmentStoreRequest $request, $cesno)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $educationalAttainment = new EducationalAttainment([
 
@@ -56,7 +49,7 @@ class EducationalAttainmentController extends Controller
             'period_of_attendance_to' => $request->period_of_attendance_to,
             'highest_level' => $request->highest_level,
             'academics_honor_received' => $request->academics_honor_received,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' =>  $encoder,
 
         ]);
 
@@ -65,11 +58,10 @@ class EducationalAttainmentController extends Controller
         $educationalAttainmentPersonalDataId->educations()->save($educationalAttainment);
 
         return to_route('educational-attainment.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $profileLibTblEducMajor = ProfileLibTblEducMajor::all();
         $profileLibTblEducSchool = ProfileLibTblEducSchool::all();
@@ -77,11 +69,10 @@ class EducationalAttainmentController extends Controller
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.edit',
         compact('educationalAttainment','profileLibTblEducMajor','profileLibTblEducSchool','profileLibTblEducDegree','cesno'));
-
     }
 
-    public function update(EducationalAttainmentStoreRequest $request, $ctrlno){
-
+    public function update(EducationalAttainmentStoreRequest $request, $ctrlno)
+    {
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->level = $request->level;
         $educationalAttainment->school_code = $request->school_code;
@@ -95,20 +86,18 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment->save();
 
         return redirect()->back()->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroyEducationalAttainment($ctrlno){
-
+    public function destroyEducationalAttainment($ctrlno)
+    {
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recycleBin($cesno){
-
+    public function recycleBin($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -116,26 +105,22 @@ class EducationalAttainmentController extends Controller
         $educationAttainmentTrashedRecord = $personalData->educations()->onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.trashbin', compact('educationAttainmentTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
         $educationalAttainment->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
 
 
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
         $educationalAttainment->forceDelete();
 
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }

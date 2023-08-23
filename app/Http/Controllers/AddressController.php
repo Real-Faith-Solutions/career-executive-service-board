@@ -27,12 +27,10 @@ class AddressController extends Controller
     public function addAddressPermanent(AddAddress201Req $request, $cesno){
 
         $type = "Permanent";
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $response = Http::get("https://psgc.gitlab.io/api/regions/".$request->regionsSelectPermanent);
         $region_name = $response->json('name');
@@ -90,12 +88,10 @@ class AddressController extends Controller
     public function addAddressMailing(AddAddress201Req $request, $cesno){
 
         $type = "Mailing";
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $response = Http::get("https://psgc.gitlab.io/api/regions/".$request->regionsSelectMailing);
         $region_name = $response->json('name');
@@ -153,12 +149,10 @@ class AddressController extends Controller
     public function addAddressTemporary(AddAddress201Req $request, $cesno){
 
         $type = "Temporary";
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+       
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $response = Http::get("https://psgc.gitlab.io/api/regions/".$request->regionsSelectTemporary);
         $region_name = $response->json('name');

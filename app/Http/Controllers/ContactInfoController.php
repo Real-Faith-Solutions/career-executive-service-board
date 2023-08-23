@@ -11,21 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class ContactInfoController extends Controller
 {
     // Competency Profile Contact Information
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
         $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
         return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
-
     }
 
     // 201 Profile Contact Information  
-    public function show($cesno){
-
+    public function show($cesno)
+    {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
         $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
         return view('admin.201_profiling.view_profile.partials.contact_information.table', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
-
     }
 
     public function store(Request $request, $cesno)
@@ -39,11 +37,9 @@ class ContactInfoController extends Controller
             'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
         ]);
 
-        // Retrieve encoder information
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         // Find the associated PersonalData record
         $personalData = PersonalData::findOrFail($cesno);
@@ -57,7 +53,7 @@ class ContactInfoController extends Controller
                 'personal_mobile_number1' => $request->input('personal_mobile_number1'),
                 'personal_mobile_number2' => $request->input('personal_mobile_number2'),
                 'office_telephone_number' => $request->input('office_telephone_number'),
-                'encoder' => $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension,
+                'encoder' => $encoder,
             ]
         );
 
@@ -75,11 +71,9 @@ class ContactInfoController extends Controller
             'office_telephone_number' => [Rule::unique('profile_tblContact')->ignore($cesno, 'personal_data_cesno'), 'max:20'],
         ]);
 
-        // Retrieve encoder information
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $contact = Contacts::find($ctrlno);
         $contact->official_email = $request->official_email;
@@ -88,11 +82,9 @@ class ContactInfoController extends Controller
         $contact->personal_mobile_number1 = $request->personal_mobile_number1;
         $contact->personal_mobile_number2 = $request->personal_mobile_number2;
         $contact->office_telephone_number = $request->office_telephone_number;
-        $contact->encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+        $contact->encoder = $encoder;
         $contact->save();
 
         return redirect()->back()->with('message', 'Updated Successfuly');
-
     }
-
 }

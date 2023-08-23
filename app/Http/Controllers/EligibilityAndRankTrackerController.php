@@ -16,17 +16,16 @@ class EligibilityAndRankTrackerController extends Controller
 {
     // const MODULE_201_PROFILING = 'admin.201_profiling';
 
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $profileTblCesStatus = $personalData->ProfileTblCesStatus;
 
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.table', compact('profileTblCesStatus' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
         $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
@@ -34,11 +33,10 @@ class EligibilityAndRankTrackerController extends Controller
 
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.form', 
         compact('profileLibTblCesStatus' ,'profileLibTblCesStatusAcc' ,'profileLibTblCesStatusType' ,'profileLibTblAppAuthority' ,'cesno'));
-
     }
 
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
@@ -50,11 +48,9 @@ class EligibilityAndRankTrackerController extends Controller
             
         ]);
             
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $profileTblCesStatus = new ProfileTblCesStatus([
 
@@ -64,7 +60,7 @@ class EligibilityAndRankTrackerController extends Controller
             'official_code' => $request->official_code,
             'resolution_no' => $request->resolution_no,
             'appointed_dt' => $request->appointed_dt,
-            'encoder' => $request->$userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' =>  $encoder,
 
         ]);
     
@@ -75,8 +71,8 @@ class EligibilityAndRankTrackerController extends Controller
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
        $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
        $profileLibTblCesStatusAcc =  ProfileLibTblCesStatusAcc::all();
@@ -86,11 +82,10 @@ class EligibilityAndRankTrackerController extends Controller
        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.edit', 
        compact('profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 
        'profileLibTblAppAuthority', 'profileTblCesStatus', 'cesno'));
-
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
@@ -112,20 +107,18 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->save();
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-
+    public function destroy($ctrlno)
+    {
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recentlyDeleted($cesno){
-
+    public function recentlyDeleted($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -133,24 +126,21 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatusTrashedRecord = $personalData->profileTblCesStatus()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
  
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
-
     }
 }
