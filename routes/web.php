@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
             Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
             Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
             Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
+            Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
         
         });
 

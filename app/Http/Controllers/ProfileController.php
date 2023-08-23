@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\TempCred201;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\View;
+
 
 class ProfileController extends Controller
 {
@@ -95,7 +97,7 @@ class ProfileController extends Controller
     public function store(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = Auth::user()->first_name." ".Auth::user()->last_name;
+        $encoder = Auth::user()->userName();
 
         $newProfile = PersonalData::create([
             
@@ -204,11 +206,6 @@ class ProfileController extends Controller
 
     public function editProfile($cesno)
     {
-        if (DB::table('profile_tblMain')->count() === 0) {
-            $cesNumber = 0;
-        } else {
-            $cesNumber = PersonalData::latest()->first()->cesno;
-        }
 
         $mainProfile = PersonalData::find($cesno);
         $countries = Country::all();
@@ -242,7 +239,7 @@ class ProfileController extends Controller
     public function update(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = Auth::user()->first_name." ".Auth::user()->last_name;
+        $encoder = Auth::user()->userName();
 
         $middleName = $request->middlename;
         $middleInitial = $this->extractMiddleInitial($middleName);
@@ -288,6 +285,21 @@ class ProfileController extends Controller
         }
         
         return $middleInitial;
+    }
+
+    public function settings($cesno)
+    {
+
+        $mainProfile = PersonalData::find($cesno);
+        $birthdate = $mainProfile->birth_date;
+
+        $birthDate = Carbon::parse($birthdate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($birthDate);
+
+        return view('admin.201_profiling.view_profile.partials.personal_data.settings', 
+        compact('mainProfile', 'cesno', 'age'));
+        
     }
 
 }
