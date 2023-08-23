@@ -24,7 +24,16 @@
                         </div>
 
                         <div class="mb-3 flex items-center">
-                            <label for="password" class="w-1/4">Password<sup>*</sup></label>
+                            <label for="currentPassword" class="w-1/4">Current Password<sup>*</sup></label>
+                            <div class="relative w-3/4">
+                                <input id="currentPassword" name="currentPassword" type="password" oninput="validateInput(currentPassword, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(currentPassword, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(currentPassword), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
+                                <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-password"></i>
+                            </div>
+                        </div>
+                        <p id="currentPasswordError" class="input_error text-red-600"></p>
+
+                        <div class="mb-3 flex items-center">
+                            <label for="password" class="w-1/4">New Password<sup>*</sup></label>
                             <div class="relative w-3/4">
                                 <input id="password" name="password" type="password" oninput="validateInput(password, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(password, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(password), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-password"></i>
