@@ -5,7 +5,7 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
 <div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
-    <form class="col-span-3" action="{{ route('edit-profile-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
+    <form class="col-span-3" action="{{ route('change.password', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
         @csrf
         <div class="col-span-3">
             <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
