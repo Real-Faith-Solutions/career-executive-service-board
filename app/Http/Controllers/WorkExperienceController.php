@@ -10,24 +10,21 @@ use Illuminate\Validation\Rule;
 
 class WorkExperienceController extends Controller
 {
-
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $workExperience = $personalData->workExperience;
 
         return view('admin.201_profiling.view_profile.partials.work_experience.table', compact('workExperience' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.work_experience.form', compact('cesno'));
-
     }
     
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'inclusive_date_from' => ['required'],
@@ -42,11 +39,9 @@ class WorkExperienceController extends Controller
 
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $workExperience = new ProfileTblWorkExperience([
 
@@ -59,7 +54,7 @@ class WorkExperienceController extends Controller
             'department' => $request->department_or_agency,
             'government_service' => $request->government_service,
             'remarks' => $request->remarks,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' => $encoder,
          
         ]);
 
@@ -68,18 +63,17 @@ class WorkExperienceController extends Controller
         $workExperiencePersonalDataId->workExperience()->save($workExperience);
             
         return to_route('work-experience.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.work_experience.edit', compact('workExperience' ,'cesno'));
 
+        return view('admin.201_profiling.view_profile.partials.work_experience.edit', compact('workExperience' ,'cesno'));
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'inclusive_date_from' => ['required'],
@@ -107,20 +101,18 @@ class WorkExperienceController extends Controller
         $workExperience->save();
 
         return to_route('work-experience.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-        
+    public function destroy($ctrlno)
+    {
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
         $workExperience->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recycleBin($cesno){
-
+    public function recycleBin($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -128,25 +120,21 @@ class WorkExperienceController extends Controller
         $workExperienceTrashedRecord = $personalData->workExperience()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.work_experience.trashbin', compact('workExperienceTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
         $workExperience->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
 
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
         $workExperience->forceDelete();
 
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }

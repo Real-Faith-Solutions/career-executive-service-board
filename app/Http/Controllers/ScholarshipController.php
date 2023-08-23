@@ -11,24 +11,21 @@ use Illuminate\Validation\Rule;
 
 class ScholarshipController extends Controller
 {
-
-    public function index($cesno){
-
+    public function index($cesno)
+    {
         $personalData = PersonalData::find($cesno);
         $scholarship = $personalData->scholarships;
 
         return view('admin.201_profiling.view_profile.partials.scholarships.table', compact('scholarship' ,'cesno'));
-
     }
 
-    public function create($cesno){
-
+    public function create($cesno)
+    {
         return view('admin.201_profiling.view_profile.partials.scholarships.form', compact('cesno'));
-
     }
 
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'type' => ['required'],
@@ -39,11 +36,9 @@ class ScholarshipController extends Controller
 
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $scholarship = new Scholarships([
 
@@ -52,7 +47,7 @@ class ScholarshipController extends Controller
             'sponsor' => $request->sponsor,
             'inclusive_date_from' => $request->inclusive_date_from,
             'inclusive_date_to' => $request->inclusive_date_to,
-            'encoder' => $userLastName." ".$userFirstName." ".$userMiddleName." ".$userNameExtension,
+            'encoder' =>  $encoder ,
 
         ]);
 
@@ -61,18 +56,17 @@ class ScholarshipController extends Controller
         $scholarshipPersonalDataId->scholarships()->save($scholarship);
 
         return to_route('scholarship.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno, $cesno){
-
+    public function edit($ctrlno, $cesno)
+    {
         $scholarship = Scholarships::find($ctrlno);
-        return view('admin.201_profiling.view_profile.partials.scholarships.edit', compact('scholarship' ,'cesno'));
 
+        return view('admin.201_profiling.view_profile.partials.scholarships.edit', compact('scholarship' ,'cesno'));
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'type' => ['required'],
@@ -92,20 +86,18 @@ class ScholarshipController extends Controller
         $scholarship->save();
 
         return to_route('scholarship.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
-
     }
 
-    public function destroy($ctrlno){
-
+    public function destroy($ctrlno)
+    {
         $scholarship = Scholarships::find($ctrlno);
         $scholarship->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
     }
 
-    public function recycleBin($cesno){
-
+    public function recycleBin($cesno)
+    {
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
@@ -113,25 +105,21 @@ class ScholarshipController extends Controller
         $scholarshipTrashedRecord = $personalData->scholarships()->onlyTrashed()->get();
 
         return view('admin.201_profiling.view_profile.partials.scholarships.trashbin', compact('scholarshipTrashedRecord', 'cesno'));
-
     }
 
-    public function restore($ctrlno){
-
+    public function restore($ctrlno)
+    {
         $scholarship = Scholarships::withTrashed()->find($ctrlno);
         $scholarship->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-
     }
 
-    public function forceDelete($ctrlno){
-
+    public function forceDelete($ctrlno)
+    {
         $Scholarships = Scholarships::withTrashed()->find($ctrlno);
         $Scholarships->forceDelete();
 
         return back()->with('message', 'Data Permanently Deleted');
-
     }
-
 }
