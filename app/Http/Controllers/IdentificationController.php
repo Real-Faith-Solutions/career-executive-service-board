@@ -10,18 +10,16 @@ use Illuminate\Validation\Rule;
 
 class IdentificationController extends Controller
 {
-
-    public function show($cesno){
-
+    public function show($cesno)
+    {
         $identification = Identification::where('personal_data_cesno', $cesno)->first();
 
         return view('admin.201_profiling.view_profile.partials.identification.form', 
         ['identification'=>$identification, 'cesno'=>$cesno]);
-        
     }
 
-    public function store(Request $request, $cesno){
-
+    public function store(Request $request, $cesno)
+    {
         $request->validate([
 
             'gsis' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
@@ -32,11 +30,9 @@ class IdentificationController extends Controller
         
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $personalData = PersonalData::findOrFail($cesno);
 
@@ -48,23 +44,21 @@ class IdentificationController extends Controller
                 'philhealth' => $request->input('philhealth'),
                 'sss_no' => $request->input('sss_no'),
                 'tin' => $request->input('tin'),
-                'encoder' => $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension,
+                'encoder' => $encoder,
             ]
         );
 
         return redirect()->back()->with('message', 'Successfuly Saved');
-
     }
 
-    public function edit($ctrlno){
-
+    public function edit($ctrlno)
+    {
         $identification = Identification::find($ctrlno);
         return view('admin.201_profiling.view_profile.partials.identification.edit', ['identification'=>$identification]) ;
-
     }
 
-    public function update(Request $request, $ctrlno, $cesno){
-
+    public function update(Request $request, $ctrlno, $cesno)
+    {
         $request->validate([
 
             'gsis' => ['required', Rule::unique('identifications')->ignore($cesno, 'personal_data_cesno'), 'min:9', 'max:40'],
@@ -75,11 +69,9 @@ class IdentificationController extends Controller
         
         ]);
 
-        // Retrieve encoder information
-        $userLastName = Auth::user()->last_name;
-        $userFirstName = Auth::user()->first_name;
-        $userMiddleName = Auth::user()->middle_name; 
-        $userNameExtension = Auth::user()->name_extension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
 
         $identification = Identification::find($ctrlno);
         $identification->gsis = $request->gsis;
@@ -87,22 +79,17 @@ class IdentificationController extends Controller
         $identification->philhealth = $request->philhealth;
         $identification->sss_no = $request->sss_no;
         $identification->tin = $request->tin;
-        $identification->encoder = $userLastName . ' ' . $userFirstName . ' ' . $userMiddleName . ' ' . $userNameExtension;
+        $identification->encoder =  $encoder;
         $identification->save();
  
          return back()->with('message', 'Updated Sucessfully');
-        
     }
 
-    public function destroyIdentification($ctrlno){
-        
-        $spouse = Identification::find($ctrlno);
-        $spouse->delete();
+    public function destroyIdentification($ctrlno)
+    {
+        $identification = Identification::find($ctrlno);
+        $identification->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
-
-        // $spouse->restore(); -> to restore soft deleted data
-
     }
-
 }
