@@ -97,7 +97,9 @@ class ProfileController extends Controller
     public function store(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = Auth::user()->userName();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $newProfile = PersonalData::create([
             
@@ -239,7 +241,9 @@ class ProfileController extends Controller
     public function update(AddProfile201Req $request, $cesno)
     {
 
-        $encoder = Auth::user()->userName();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $middleName = $request->middlename;
         $middleInitial = $this->extractMiddleInitial($middleName);
