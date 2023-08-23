@@ -26,6 +26,13 @@ class User extends Authenticatable
         return $this->belongsTo(PersonalData::class);
     }
 
+    public function userName()
+    {
+        $user = auth()->user();
+        $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
+        return $personalData->firstname.' '.$personalData->lastname;
+    }
+
     protected $fillable = [
         'contact_no',
         'email',
