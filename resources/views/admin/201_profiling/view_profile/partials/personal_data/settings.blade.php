@@ -5,7 +5,7 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
 <div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
-    <form class="col-span-3" action="{{ route('change.password', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
+    <form class="col-span-3" action="{{ route('change.password', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="change_password_form" method="POST" onsubmit="return checkErrorsBeforeSubmit(change_password_form)">
         @csrf
         <div class="col-span-3">
             <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -26,7 +26,7 @@
                         <div class="mb-3 flex items-center">
                             <label for="currentPassword" class="w-1/4">Current Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="currentPassword" name="currentPassword" type="password" oninput="validateInput(currentPassword, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(currentPassword, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(currentPassword), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="currentPassword" name="currentPassword" type="password" oninput="validateInput(currentPassword, 5, 'all'), checkPasswordMatch()" onkeypress="validateInput(currentPassword, 5, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(currentPassword), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-password"></i>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                         <div class="mb-3 flex items-center">
                             <label for="password" class="w-1/4">New Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="password" name="password" type="password" oninput="validateInput(password, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(password, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(password), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="password" name="password" type="password" oninput="validateInput(password, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(password, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(password)" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-password"></i>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="mb-3 flex items-center">
                             <label for="confirmPassword" class="w-1/4">Confirm Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="confirmPassword" name="confirmPassword" type="password" oninput="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(confirmPassword), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="confirmPassword" name="confirmPassword" type="password" oninput="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(confirmPassword)" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-confirm-password"></i>
                             </div>
                         </div>
