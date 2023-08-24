@@ -29,6 +29,14 @@
     }
 
     // Toggle password visibility for password field
+    const toggleCurrentPasswordIcon = document.querySelector('.toggle-current-password');
+    const currentpasswordInput = document.getElementById('currentPassword');
+
+    toggleCurrentPasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(currentpasswordInput, toggleCurrentPasswordIcon);
+    });
+
+    // Toggle password visibility for password field
     const togglePasswordIcon = document.querySelector('.toggle-password');
     const passwordInput = document.getElementById('password');
 
