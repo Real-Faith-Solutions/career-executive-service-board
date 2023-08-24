@@ -296,10 +296,10 @@ class ProfileController extends Controller
         compact('mainProfile', 'cesno', 'age'));
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(Request $request, $cesno)
     {
 
-        echo "nice";
+        return "nice";
 
     }
 
