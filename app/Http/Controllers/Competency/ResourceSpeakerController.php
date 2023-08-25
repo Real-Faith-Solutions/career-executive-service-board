@@ -137,4 +137,11 @@ class ResourceSpeakerController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');    
     }
+
+    public function recentlyDeleted()
+    {
+        $resourceSpeakerTrashedRecord = ResourceSpeaker::onlyTrashed()->paginate(5);
+
+        return view('admin.competency.partials.trainings_sub_module.resource_speaker.trashbin', compact('resourceSpeakerTrashedRecord'));
+    }
 }
