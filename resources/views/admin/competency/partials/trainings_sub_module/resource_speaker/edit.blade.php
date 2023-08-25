@@ -17,8 +17,9 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('resource-speaker.store') }}" method="POST" id="update_resource_speakers_form" onsubmit="return checkErrorsBeforeSubmit(update_resource_speakers_form)">
+            <form action="{{ route('resource-speaker.update', ['ctrlno'=>$resourceSpeaker->speakerID]) }}" method="POST" id="update_resource_speakers_form" onsubmit="return checkErrorsBeforeSubmit(update_resource_speakers_form)">
                 @csrf
+                @method('PUT')
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -182,7 +183,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="button" class="btn btn-primary" id="updateResourceSpeakerButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">>
+                    <button type="button" class="btn btn-primary" id="updateResourceSpeakerButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Save changes
                     </button>
                 </div>
