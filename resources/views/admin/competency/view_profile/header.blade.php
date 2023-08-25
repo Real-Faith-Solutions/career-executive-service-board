@@ -116,7 +116,7 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="trainingsTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="" >Resource Speakers/Persons Manager</a>
+                            <a class="btn category-button inline-flex" href="{{ route('resource-speaker.index') }}" >Resource Speakers/Persons Manager</a>
                         </li>
 
                         <li>

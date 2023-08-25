@@ -38,15 +38,19 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Mailing Address
+                    No./Building
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Birth Date
+                    Street
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Expertise/Specialization
+                    Barangay
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    City/Province
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -54,11 +58,11 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    E-mail Address
+                    Email Address
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Inclusive Dates
+                    Expertise
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -67,39 +71,55 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trainingVenueManager as $trainingVenueManagers) --}}
+            @foreach ($resourceSpeaker as $resourceSpeakers)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $trainingVenueManagers->name }} --}}
+                        {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->no_street }} --}}
+                        {{ $resourceSpeakers->Position }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->brgy }} --}}
+                        {{ $resourceSpeakers->Department }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->trainingVenueManager->name }} --}}
+                        {{ $resourceSpeakers->Office }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->contactno }} --}}
+                        {{ $resourceSpeakers->Bldg }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->emailadd }} --}}
+                        {{ $resourceSpeakers->Street }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingVenueManagers->contactperson }} --}}
+                        {{ $resourceSpeakers->Brgy }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $resourceSpeakers->City }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $resourceSpeakers->contactno }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $resourceSpeakers->emailadd }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $resourceSpeakers->expertise }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="GET">
+                            {{-- <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -111,10 +131,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$trainingVenueManagers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$trainingVenueManagers->providerID}}">
+                            <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$resourceSpeakers->providerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$trainingVenueManagers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -127,9 +147,13 @@
                         </div>
                     </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $resourceSpeaker->links() }}
 </div>
 
 @endsection
