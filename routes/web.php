@@ -111,6 +111,7 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
             Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
+            Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
         
         });
 

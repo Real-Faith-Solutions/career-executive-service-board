@@ -1,6 +1,69 @@
 
 // Personal Data Form Interaction
 
+    // check password if match
+    function checkPasswordMatch() {
+        const passwordField = document.getElementById('password');
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        var form = passwordField.closest('form');
+
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.textContent = 'Passwords do not match';
+        } else {
+            confirmPasswordError.textContent = '';
+            submitButton.disabled = false;
+            submitButton.classList.remove('cursor-not-allowed');
+            submitButton.classList.add('cursor-pointer');
+        }
+    }
+    // end check password if match
+
+    // toggle password
+    function togglePasswordVisibility(inputElement, iconElement) {
+        if (inputElement.type === 'password') {
+            inputElement.type = 'text';
+            iconElement.classList.remove('fa-eye');
+            iconElement.classList.add('fa-eye-slash');
+        } else {
+            inputElement.type = 'password';
+            iconElement.classList.remove('fa-eye-slash');
+            iconElement.classList.add('fa-eye');
+        }
+    }
+
+    // Toggle password visibility for password field
+    const toggleCurrentPasswordIcon = document.querySelector('.toggle-current-password');
+    const currentpasswordInput = document.getElementById('currentPassword');
+
+    toggleCurrentPasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(currentpasswordInput, toggleCurrentPasswordIcon);
+    });
+
+    // Toggle password visibility for password field
+    const togglePasswordIcon = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(passwordInput, togglePasswordIcon);
+    });
+
+    // Toggle password visibility for confirm password field
+    const toggleConfirmPasswordIcon = document.querySelector('.toggle-confirm-password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    toggleConfirmPasswordIcon.addEventListener('click', function() {
+        togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordIcon);
+    });
+    // end toggle password
+
     document.addEventListener('DOMContentLoaded', function() {
         computeAge();
     });
