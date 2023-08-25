@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\TempCred201;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 
@@ -295,4 +296,29 @@ class ProfileController extends Controller
         return view('admin.201_profiling.view_profile.partials.personal_data.settings', 
         compact('mainProfile', 'cesno', 'age'));
     }
+
+    public function changePassword(Request $request, $cesno)
+    {
+
+        // Get the user based on the $cesno (assuming this is the user's identifier)
+        $user = User::where('personal_data_cesno', $cesno)->first();
+
+        // Check if the current password is correct
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->with('error','Incorrect current password!');
+        }
+
+        // Check if the new password and confirmation match
+        if ($request->password !== $request->confirmPassword) {
+            return redirect()->back()->with('error','Passwords do not match!');
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('message', 'Password changed successfully');
+
+    }
+
 }

@@ -25,6 +25,7 @@
     <script src="{{ asset('js/script.js') }}"></script>
 
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> {{-- lord icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 
 <body>
