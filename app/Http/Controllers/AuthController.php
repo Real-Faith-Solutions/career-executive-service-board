@@ -74,4 +74,20 @@ class AuthController extends Controller
         return view('forgotPassword');
     }
 
+    public function sendPassword(Request $request)
+    {
+
+        $customMessages = [
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.exists' => 'The provided email does not exist in our records.',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], $customMessages);
+
+        return back()->with('message','New temporary password sent!');
+    }
+
 }

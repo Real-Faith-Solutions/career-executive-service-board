@@ -36,5 +36,7 @@
                 Forgot your password?
             </a>
         </div>
+
     </form>
+    
 @endsection
