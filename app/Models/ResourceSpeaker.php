@@ -17,7 +17,7 @@ class ResourceSpeaker extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        // 'personal_data_cesno',
         'lastname',
         'firstname',
         'mi',
@@ -36,9 +36,4 @@ class ResourceSpeaker extends Model
         'updated_by',
 
     ];
-
-    public function resourceSpeaker(): BelongsTo
-    {
-        return $this->belongsTo(ProfileLibCities::class, 'zipcode');
-    }
 }

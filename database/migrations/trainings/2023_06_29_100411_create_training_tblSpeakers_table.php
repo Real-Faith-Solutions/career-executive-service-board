@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('training_tblSpeakers', function (Blueprint $table) {
             $table->id('speakerID');
-            $table->unsignedBigInteger('personal_data_cesno')->nullable();
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            // $table->unsignedBigInteger('personal_data_cesno')->nullable();
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('lastname');
             $table->string('firstname');
             $table->string('mi');
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('Street')->nullable();
             $table->string('Brgy');
             $table->string('City');
-            $table->foreignId('zipcode')->constrained('profilelib_tblcities', 'city_code');
-            $table->integer('contactno');
+            $table->string('zipcode');
+            $table->string('contactno');
             $table->string('emailadd');
             $table->string('expertise')->nullable();
             $table->string('encoder')->nullable();

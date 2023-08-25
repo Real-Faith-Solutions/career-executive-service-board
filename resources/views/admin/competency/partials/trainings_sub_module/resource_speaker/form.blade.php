@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="resource_speaker_form" onsubmit="return checkErrorsBeforeSubmit(resource_speaker_form)">
+            <form action="{{ route('resource-speaker.store') }}" method="POST" id="resource_speaker_form" onsubmit="return checkErrorsBeforeSubmit(resource_speaker_form)">
                 @csrf
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -79,10 +79,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="venue_contact_no" name="contact_no" oninput="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(venue_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(venue_contact_no)" required>
+                        <label for="contactNo">Contact No.<sup>*</sup></label>
+                        <input type="text" id="contactNo" name="contactNo" oninput="validateInput(contactNo, 2, 'numbersWithSpecial')" onkeypress="validateInput(contactNo, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(contactNo)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('contact_no')
+                        @error('contactNo')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -140,21 +140,10 @@
                         <select name="city" id="city">
                             <option value="">Select City</option>
                             @foreach ($profileLibCIties as $profileLibCIty)
-                                <option value="{{ $profileLibCIty->zipcode }}">{{ $profileLibCIty->name. ' :zipcode-> ' .$profileLibCIty->zipcode }}</option>                                
+                                <option value="{{ $profileLibCIty->name }}">{{ $profileLibCIty->name. ' :zipcode-> ' .$profileLibCIty->zipcode }}</option>                                
                             @endforeach
                         </select>
                         @error('city')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="contactNo">Contact No.<sup>*</sup></label>
-                        <input type="text" id="contactNo" name="contactNo" oninput="validateInput(contactNo, 10, 'numbersWithSpecial')" onkeypress="validateInput(contactNo, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(contactNo)" >
-                        <p class="input_error text-red-600"></p>
-                        @error('contactNo')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
