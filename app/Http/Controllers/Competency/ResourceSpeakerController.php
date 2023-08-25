@@ -152,4 +152,12 @@ class ResourceSpeakerController extends Controller
 
         return back()->with('info', 'Data Restored Sucessfully');
     }
+
+    public function forceDelete($ctrlno)
+    {
+        $resourceSpeaker = ResourceSpeaker::onlyTrashed()->find($ctrlno);
+        $resourceSpeaker->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

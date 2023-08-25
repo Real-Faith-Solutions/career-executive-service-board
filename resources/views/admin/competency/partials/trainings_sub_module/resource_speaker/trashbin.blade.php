@@ -138,10 +138,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('resource-speaker.destroy', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="POST" id="delete_resource_speaker_form{{$resourceSpeakerTrashedRecords->speakerID}}">
+                            <form action="{{ route('resource-speaker.forceDelete', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="POST" id="permanent_resource_speaker_form{{$resourceSpeakerTrashedRecords->speakerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakerTrashedRecords->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDResourceSpeakerButton{{$resourceSpeakerTrashedRecords->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
