@@ -183,5 +183,4 @@ class PersonalData extends Model
     {
         return $this->hasOne(User::class);
     }
-
 }
