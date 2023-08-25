@@ -493,6 +493,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [ResourceSpeakerController::class, 'store'])->name('resource-speaker.store');
             Route::get('edit/{ctrlno}', [ResourceSpeakerController::class, 'edit'])->name('resource-speaker.edit');
             Route::put('update/{ctrlno}', [ResourceSpeakerController::class, 'update'])->name('resource-speaker.update');
+            Route::delete('destroy/{ctrlno}', [ResourceSpeakerController::class, 'destroy'])->name('resource-speaker.destroy');
         });
     });
     // End of competency routes

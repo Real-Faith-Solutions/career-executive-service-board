@@ -131,10 +131,10 @@
                                 </button>
                             </form>
 
-                            {{-- <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$resourceSpeakers->providerID}}">
+                            <form action="{{ route('resource-speaker.destroy', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="POST" id="delete_resource_speaker_form{{$resourceSpeakers->speakerID}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -143,7 +143,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>

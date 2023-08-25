@@ -129,4 +129,12 @@ class ResourceSpeakerController extends Controller
 
         return to_route('resource-speaker.index')->with('info', 'Data Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $resourceSpeaker = ResourceSpeaker::find($ctrlno);
+        $resourceSpeaker->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');    
+    }
 }
