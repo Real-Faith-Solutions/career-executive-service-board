@@ -255,13 +255,17 @@
                             </div>
 
                         </div>
+
+                        <div class="flex justify-end">
+                            {{-- <button class="btn btn-primary" id="edit_profile_save" type="submit">Save</button> --}}
+                            <button type="button" class="btn btn-primary" id="edit_profile_save" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to save this changes?')">
+                                Save changes
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="flex justify-end">
-            <button class="btn btn-primary" id="personal_data_save" type="submit">Save</button>
         </div>
 
     </form>
