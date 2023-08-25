@@ -125,19 +125,24 @@ class ProfileController extends Controller
 
         ]);
 
+        // sending email to added user
         $recipientEmail = $request->email;
         $password = Str::password(8);
         $hashedPassword = Hash::make($password);
         $imagePath = public_path('images/branding.png');
+        $loginLink= config('app.url');
 
         $data = [
             'email' => $recipientEmail,
             'password' => $password,
             'imagePath' => $imagePath,
+            'loginLink' => $loginLink,
         ];
+        // end sending email to added user
 
         Mail::to($recipientEmail)->send(new TempCred201($data));
 
+        // making account credentials for user
         $user = $newProfile->users()->Create([
             'email' => $newProfile->email,
             'password' => $hashedPassword,
@@ -148,6 +153,7 @@ class ProfileController extends Controller
         ]);
 
         $user->assignRole('user');
+        // end making account credentials for user
 
         return back()->with('message','New profile added!');
     }

@@ -34,6 +34,17 @@
         .logo {
             margin-bottom: 20px;
         }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
@@ -43,6 +54,7 @@
         <h2>Use these temporary credentials to login.</h2>
         <p><strong>Email:</strong> {{ $data['email'] }}</p>
         <p><strong>Password:</strong> {{ $data['password'] }}</p>
+        <a class="button" href="{{ $data['loginLink'] }}">Go to Login Page</a>
     </div>
 </body>
 </html>
