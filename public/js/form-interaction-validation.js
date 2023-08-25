@@ -8,7 +8,12 @@
         const confirmPassword = document.getElementById('confirmPassword').value;
         const confirmPasswordError = document.getElementById('confirmPasswordError');
         var form = passwordField.closest('form');
+
         var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
 
         if (password !== confirmPassword) {
             confirmPasswordError.textContent = 'Passwords do not match';

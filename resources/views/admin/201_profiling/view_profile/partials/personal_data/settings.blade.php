@@ -51,7 +51,10 @@
                         <p id="confirmPasswordError" class="input_error text-red-600"></p>
 
                         <div class="flex justify-center mt-4">
-                            <button class="btn btn-primary w-full md:w-auto" id="personal_data_save" type="submit">Save</button>
+                            {{-- <button class="btn btn-primary w-full md:w-auto" id="personal_data_save" type="submit">Save</button> --}}
+                            <button type="button" class="btn btn-primary w-full md:w-auto" id="personal_data_save" onclick="openConfirmationDialog(this, 'Confirm Password Changes', 'Are you sure you want to save this changes?')">
+                                Save changes
+                            </button>
                         </div>
 
                     </div>
