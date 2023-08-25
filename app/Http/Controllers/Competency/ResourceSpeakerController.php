@@ -144,4 +144,12 @@ class ResourceSpeakerController extends Controller
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.trashbin', compact('resourceSpeakerTrashedRecord'));
     }
+
+    public function restore($ctrlno)
+    {
+        $resourceSpeaker = ResourceSpeaker::onlyTrashed()->find($ctrlno);
+        $resourceSpeaker->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
 }

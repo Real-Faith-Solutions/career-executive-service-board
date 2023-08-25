@@ -495,6 +495,7 @@ Route::middleware('auth')->group(function () {
             Route::put('update/{ctrlno}', [ResourceSpeakerController::class, 'update'])->name('resource-speaker.update');
             Route::delete('destroy/{ctrlno}', [ResourceSpeakerController::class, 'destroy'])->name('resource-speaker.destroy');
             Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
         });
     });
     // End of competency routes

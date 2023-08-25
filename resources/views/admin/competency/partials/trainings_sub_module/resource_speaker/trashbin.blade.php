@@ -121,14 +121,14 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->deleted_at  }}
+                        {{ $resourceSpeakerTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('resource-speaker.edit', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="GET">
+                            <form action="{{ route('resource-speaker.restore', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="POST" id="restore_resoure_speaker_form{{$resourceSpeakerTrashedRecords->speakerID}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreResourceSpeakerButton{{$resourceSpeakerTrashedRecords->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
