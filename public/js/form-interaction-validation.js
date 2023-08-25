@@ -208,6 +208,10 @@
     
         var form = inputField.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
     
         if (inputValue.length < 6 && regexValidator.test(inputValue)) {
             inputField.nextElementSibling.textContent = `At least 6 ${errorMessage}`;
@@ -354,6 +358,7 @@
     // validation of 2 dates from vs to where from should be < to
     function validateDateFromTo(fromDate, toDate){
 
+        const currentDate = new Date();
         const inputFromDateByUSer = fromDate.value;
         const inputToDateByUSer = toDate.value;
 
@@ -363,8 +368,12 @@
         var form = fromDate.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
 
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
+
         if(inputFromDate && inputToDate){
-            if(inputFromDate > inputToDate){
+            if((inputFromDate >= inputToDate) || (inputFromDate > currentDate || inputToDate > currentDate)){
                 fromDate.nextElementSibling.textContent = `Invalid date.`;
                 fromDate.classList.remove('focus:outline-blue-600');
                 fromDate.classList.add('border-red-600');
@@ -376,7 +385,20 @@
                 submitButton.disabled = true;
                 submitButton.classList.remove('cursor-pointer');
                 submitButton.classList.add('cursor-not-allowed');
-                return
+                return;
+            }else{
+                fromDate.nextElementSibling.textContent = '';
+                fromDate.classList.remove('focus:outline-red-500');
+                fromDate.classList.remove('border-red-600');
+                fromDate.classList.add('focus:outline-blue-600');
+                toDate.nextElementSibling.textContent = '';
+                toDate.classList.remove('focus:outline-red-500');
+                toDate.classList.remove('border-red-600');
+                toDate.classList.add('focus:outline-blue-600');
+                submitButton.disabled = false;
+                submitButton.classList.remove('cursor-not-allowed');
+                submitButton.classList.add('cursor-pointer');
+                return;
             }
         }
 
@@ -391,6 +413,7 @@
         submitButton.disabled = false;
         submitButton.classList.remove('cursor-not-allowed');
         submitButton.classList.add('cursor-pointer');
+        return;
 
     }
     // end validation of 2 dates from vs to where from should be < to
