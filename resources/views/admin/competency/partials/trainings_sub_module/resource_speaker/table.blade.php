@@ -14,7 +14,7 @@
       </lord-icon>
     </a>
 
-    <a href="{{ route('training-venue-manager.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
+    <a href="{{ route('resource-speaker.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

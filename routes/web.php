@@ -488,6 +488,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('resource-speaker')->group(function () {
             Route::get('index', [ResourceSpeakerController::class, 'index'])->name('resource-speaker.index');
+            Route::get('create', [ResourceSpeakerController::class, 'create'])->name('resource-speaker.create');
         });
     });
     // End of competency routes
