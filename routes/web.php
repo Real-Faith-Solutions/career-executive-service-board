@@ -63,10 +63,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/preview-email', function () {
 
     $imagePath = public_path('images/branding.png');
+    $loginLink= config('app.url');
     $data = [
         'email' => 'recipient@example.com',
         'password' => 'temporary_password',
         'imagePath' => $imagePath,
+        'loginLink' => $loginLink,
     ];
 
     return new TempCred201($data);

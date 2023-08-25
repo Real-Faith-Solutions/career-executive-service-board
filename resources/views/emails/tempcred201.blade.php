@@ -22,10 +22,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            color: #3498db;
-        }
-        h2 {
+        h1, h2 {
             color: #3498db;
         }
         p {
@@ -34,7 +31,6 @@
         .logo {
             margin-bottom: 20px;
         }
-
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -44,7 +40,18 @@
             border-radius: 5px;
             margin-top: 20px;
         }
-
+        .readonly-input-container {
+            margin-top: 10px;
+            text-align: center; /* Center the labels and input fields */
+        }
+        .readonly-input {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -52,8 +59,17 @@
         <img class="logo" src="{{ $message->embed( $data['imagePath']) }}" alt="CESB Logo" width="100">
         <h1>Welcome to CESB Portal</h1>
         <h2>Use these temporary credentials to login.</h2>
-        <p><strong>Email:</strong> {{ $data['email'] }}</p>
-        <p><strong>Password:</strong> {{ $data['password'] }}</p>
+        
+        <div class="readonly-input-container">
+            <label for="email"><strong>Email:</strong></label>
+            <input class="readonly-input" type="email" id="email" value="{{ $data['email'] }}" readonly>
+        </div>
+        
+        <div class="readonly-input-container">
+            <label for="password"><strong>Password:</strong></label>
+            <input class="readonly-input" type="text" id="password" value="{{ $data['password'] }}" readonly>
+        </div>
+        
         <a class="button" href="{{ $data['loginLink'] }}">Go to Login Page</a>
     </div>
 </body>
