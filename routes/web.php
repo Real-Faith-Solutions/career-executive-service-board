@@ -92,6 +92,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'userLogout']);
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 // end auth
 
 Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
