@@ -69,4 +69,12 @@ class ResourceSpeakerController extends Controller
 
         return to_route('resource-speaker.index')->with('message', 'Save Sucessfully');
     }
+
+    public function edit($ctrlno)
+    {
+        $resourceSpeaker = ResourceSpeaker::find($ctrlno);
+        $profileLibCIties = ProfileLibCities::all();
+
+        return view('admin.competency.partials.trainings_sub_module.resource_speaker.edit', compact('resourceSpeaker','profileLibCIties'));
+    }
 }

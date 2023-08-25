@@ -119,7 +119,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-venue-manager.edit', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="GET">
+                            <form action="{{ route('resource-speaker.edit', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -131,7 +131,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$resourceSpeakers->providerID}}">
+                            {{-- <form action="{{ route('training-venue-manager.destroy', ['ctrlno'=>$resourceSpeakers->venueid]) }}" method="POST" id="delete_training_provider_manager_form{{$resourceSpeakers->providerID}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->providerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

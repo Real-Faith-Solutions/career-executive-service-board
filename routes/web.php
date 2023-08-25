@@ -491,6 +491,7 @@ Route::middleware('auth')->group(function () {
             Route::get('index', [ResourceSpeakerController::class, 'index'])->name('resource-speaker.index');
             Route::get('create', [ResourceSpeakerController::class, 'create'])->name('resource-speaker.create');
             Route::post('store', [ResourceSpeakerController::class, 'store'])->name('resource-speaker.store');
+            Route::get('edit/{ctrlno}', [ResourceSpeakerController::class, 'edit'])->name('resource-speaker.edit');
         });
     });
     // End of competency routes
