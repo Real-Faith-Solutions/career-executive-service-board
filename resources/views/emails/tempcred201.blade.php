@@ -57,8 +57,14 @@
 <body>
     <div class="container">
         <img class="logo" src="{{ $message->embed( $data['imagePath']) }}" alt="CESB Logo" width="100">
-        <h1>Welcome to CESB Portal</h1>
-        <h2>Use these temporary credentials to login.</h2>
+        
+        @if ($data['type'] == "forgotPassword")
+            <h1>CESB Account Recovery</h1>
+            <h2>Use these new credentials to login.</h2>
+        @else
+            <h1>Welcome to CESB Portal</h1>
+            <h2>Use these temporary credentials to login.</h2>
+        @endif
         
         <div class="readonly-input-container">
             <label for="email"><strong>Email:</strong></label>

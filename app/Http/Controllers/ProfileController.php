@@ -131,8 +131,10 @@ class ProfileController extends Controller
         $hashedPassword = Hash::make($password);
         $imagePath = public_path('images/branding.png');
         $loginLink= config('app.url');
+        $type = "addProfile";
 
         $data = [
+            'type' => $type,
             'email' => $recipientEmail,
             'password' => $password,
             'imagePath' => $imagePath,
