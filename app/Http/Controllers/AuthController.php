@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -87,7 +90,39 @@ class AuthController extends Controller
             'email' => 'required|email|exists:users,email',
         ], $customMessages);
 
-        return back()->with('message','New temporary password sent!');
+        // Find the user by email
+        $user = User::where('email', $request->email)->first();
+        
+        if ($user) {
+
+            // sending email to added user
+            $recipientEmail = $request->email;
+            $password = Str::password(8);
+            $hashedPassword = Hash::make($password);
+            $imagePath = public_path('images/branding.png');
+            $loginLink= config('app.url');
+
+            $data = [
+                'email' => $recipientEmail,
+                'password' => $password,
+                'imagePath' => $imagePath,
+                'loginLink' => $loginLink,
+            ];
+            // end sending email to added user
+
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+
+            // Update the user's password with the hashed temporary password
+            $user->update([
+                'password' => $hashedPassword,
+            ]);
+
+            // Send an email or notification to the user with the new temporary password
+
+            return back()->with('message','New temporary password sent!');
+        }
+
+        return back()->with('error','User not found!');
     }
 
 }
