@@ -22,7 +22,6 @@
         <div>
             <a href="{{ url('/') }}">
                 <img src="{{ asset('images/branding.png') }}" class="h-20 fill-current text-gray-500">
-                {{-- AQUA LAB PH --}}
             </a>
         </div>
 
@@ -30,26 +29,6 @@
             @yield('content')
         </div>
     </div>
-
-    @if (isset($cesno))
-        <!-- Modal for Avatar Upload -->
-        <div id="profile-avatar-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-            <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-                <form id="uploadFormAvatar" action="{{ route('/upload-avatar-profile-201', ['cesno'=>$cesno]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col items-center">
-                    @csrf
-                    <span class="close-avatar absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-                    <h2 class="text-2xl font-bold mb-4 text-center">Upload New Avatar</h2>
-                    <input type="file" id="imageInputAvatar" name="imageInput" class="mb-4 p-2 border border-gray-300 rounded">
-                    <p class="text-red-600" id="ErrorMessageAvatar"></p>
-                    <div class="flex justify-center items-center mb-4">
-                        <img id="imagePreviewAvatar" src="#" alt="Image Preview" class="hidden w-32 h-32 rounded-full">
-                    </div>
-                    <button type="submit" name="submit" id="uploadButtonAvatar" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition-colors duration-300">Upload</button>
-                </form>
-            </div>
-        </div>
-        {{-- end --}}
-    @endif
 
     {{-- confirmation dialog --}}
     <div id="confirmationBackdrop" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
@@ -63,46 +42,6 @@
         </div>
     </div>
     {{-- end --}}
-
-    @if (isset($cesno))
-        <!-- Modal for Adding Medical History -->
-        <div id="add-medical-history-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-            <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-                <form id="addMedicalHistoryForm" action="{{ route('medical-history.store', ['cesno'=>$cesno]) }}" method="POST" class="flex flex-col items-center" onsubmit="return checkErrorsBeforeSubmit(addMedicalHistoryForm)">
-                    @csrf
-
-                    <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-                    <h2 class="text-2xl font-bold mb-4 text-center">Add Medical History</h2>
-
-                    <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-
-                        <div class="mb-2">
-                            <input type="text" id="medical_condition_illness" name="medical_condition_illness" oninput="validateInput(medical_condition_illness, 4)" onkeypress="validateInput(medical_condition_illness, 4)" onblur="checkErrorMessage(medical_condition_illness)" required>
-                            <p class="input_error text-red-600"></p>
-                            @error('medical_condition_illness')
-                                <span class="invalid" role="alert">
-                                    <p>{{ $message }}</p>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-2">
-                            <input type="date" id="medical_date" name="medical_date" oninput="validateDateInput(medical_date)" required>
-                            <p class="input_error text-red-600"></p>
-                            @error('date')
-                                <span class="invalid" role="alert">
-                                    <p>{{ $message }}</p>
-                                </span>
-                            @enderror
-                        </div>
-
-                    </div>
-                    <button type="submit" id="addMedicalHistoryBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">ADD</button>
-                </form>
-            </div>
-        </div>
-        {{-- end --}}
-    @endif
 
     {{-- js script for personal data interaction and validation --}}
     <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
