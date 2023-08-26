@@ -92,6 +92,12 @@ class AuthController extends Controller
 
         // Find the user by email
         $user = User::where('email', $request->email)->first();
+
+        // Check if the user has reset their password within the last 1 minute
+        $cooldownMinutes = 1; // Adjust as needed
+        if ($user && $user->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
+            return back()->with('error','New password already sent. Please check your email');
+        }
         
         if ($user) {
 
