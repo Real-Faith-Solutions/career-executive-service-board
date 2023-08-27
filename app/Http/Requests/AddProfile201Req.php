@@ -24,7 +24,7 @@ class AddProfile201Req extends FormRequest
         return [
             'title' => 'required',
             'status' => 'required',
-            'email' => 'required|email|exists:profile_tblMain,email',
+            'email' => 'required|email|unique:profile_tblMain,email',
             'lastname' => 'required|min:2|alpha',
             'firstname' => 'required|min:2|alpha',
             'middlename' => 'nullable|min:2|alpha',
