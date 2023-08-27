@@ -25,6 +25,15 @@ class TempCred201 extends Mailable
      */
     public function envelope(): Envelope
     {
+
+        $type = $this->data['type'];
+
+        if($type == 'forgotPassword'){
+            return new Envelope(
+                subject: 'CESB Portal Account Recovery',
+            );
+        }
+
         return new Envelope(
             subject: 'Temporary Credentials for 201 Profiling',
         );
