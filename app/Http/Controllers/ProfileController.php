@@ -253,6 +253,7 @@ class ProfileController extends Controller
         $personalData = PersonalData::find($cesno);
         $personalData->status = $request->status;
         $personalData->title = $request->title;
+        $personalData->email = $request->email;
         $personalData->lastname = $request->lastname;
         $personalData->firstname = $request->firstname;
         $personalData->name_extension = $request->name_extension;

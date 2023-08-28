@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Route; // Import the Route facade
+use Illuminate\Validation\Rule;
 class AddProfile201Req extends FormRequest
 {
     /**
@@ -21,10 +22,16 @@ class AddProfile201Req extends FormRequest
      */
     public function rules(): array
     {
+        $cesno = Route::current()->parameter('cesno'); // Get the profile ID from the route parameters
+
         return [
             'title' => 'required',
             'status' => 'required',
-            'email' => 'required|email|unique:profile_tblMain,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('profile_tblMain', 'email')->ignore($cesno, 'cesno'),
+            ],
             'lastname' => 'required|min:2',
             'firstname' => 'required|min:2',
             'middlename' => 'nullable|min:2',
