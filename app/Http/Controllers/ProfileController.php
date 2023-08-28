@@ -277,6 +277,14 @@ class ProfileController extends Controller
         $personalData->encoder = $encoder;
         $personalData->save();
 
+        // Get the user based on the $cesno
+        $user = User::where('personal_data_cesno', $cesno)->first();
+
+        // Update the user email
+        $user->email = $request->email;
+        $user->save();
+
+
         return back()->with('info','Profile Updated!');
     }
 
@@ -310,7 +318,7 @@ class ProfileController extends Controller
     public function changePassword(Request $request, $cesno)
     {
 
-        // Get the user based on the $cesno (assuming this is the user's identifier)
+        // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();
 
         // Check if the current password is correct
@@ -334,24 +342,33 @@ class ProfileController extends Controller
     public function resendEmail(Request $request, $cesno)
     {
 
-        // Get the user based on the $cesno (assuming this is the user's identifier)
+        // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();
 
-        // Check if the current password is correct
-        if (!Hash::check($request->currentPassword, $user->password)) {
-            return redirect()->back()->with('error','Incorrect current password!');
-        }
+        // sending email to added user
+        $recipientEmail = $request->email;
+        $password = Str::password(8);
+        $hashedPassword = Hash::make($password);
+        $imagePath = public_path('images/branding.png');
+        $loginLink= config('app.url');
+        $type = "forgotPassword";
 
-        // Check if the new password and confirmation match
-        if ($request->password !== $request->confirmPassword) {
-            return redirect()->back()->with('error','Passwords do not match!');
-        }
+        $data = [
+            'type' => $type,
+            'email' => $recipientEmail,
+            'password' => $password,
+            'imagePath' => $imagePath,
+            'loginLink' => $loginLink,
+        ];
+        // end sending email to added user
+
+        Mail::to($recipientEmail)->send(new TempCred201($data));
 
         // Update the user's password
-        $user->password = Hash::make($request->password);
+        $user->password = $hashedPassword;
         $user->save();
 
-        return redirect()->back()->with('message', 'Password changed successfully');
+        return redirect()->back()->with('message', 'New Credentials Email Sent');
 
     }
 
