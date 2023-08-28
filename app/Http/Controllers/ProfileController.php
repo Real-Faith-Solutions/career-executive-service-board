@@ -330,4 +330,28 @@ class ProfileController extends Controller
 
     }
 
+    public function resendEmail(Request $request, $cesno)
+    {
+
+        // Get the user based on the $cesno (assuming this is the user's identifier)
+        $user = User::where('personal_data_cesno', $cesno)->first();
+
+        // Check if the current password is correct
+        if (!Hash::check($request->currentPassword, $user->password)) {
+            return redirect()->back()->with('error','Incorrect current password!');
+        }
+
+        // Check if the new password and confirmation match
+        if ($request->password !== $request->confirmPassword) {
+            return redirect()->back()->with('error','Passwords do not match!');
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('message', 'Password changed successfully');
+
+    }
+
 }

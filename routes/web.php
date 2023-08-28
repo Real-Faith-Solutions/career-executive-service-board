@@ -117,7 +117,8 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
-        
+            Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+
         });
 
         Route::prefix('family-profile')->group(function () {
