@@ -115,6 +115,31 @@
         {{-- end --}}
     @endif
 
+    @if (isset($cesno))
+        <!-- Modal for Resend Email -->
+        <div id="resend_email_modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+            <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+                <form id="resendEmailForm" action="{{ route('resend-email', ['cesno'=>$cesno]) }}" method="POST" class="flex flex-col items-center" onsubmit="return checkErrorsBeforeSubmit(resendEmailForm)">
+                    @csrf
+
+                    <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+                    <h2 class="text-2xl font-bold mb-4 text-center">Resend New Temporary Password For This Email</h2>
+
+                    <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+
+                        <div class="mb-1">
+                            <label for="email">Email<sup>*</sup></label>
+                            <input id="email" name="email" type="text" value="{{ $mainProfile->email }}" readonly required>
+                        </div>
+
+                    </div>
+                    <button type="submit" id="resendEmailBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Resend</button>
+                </form>
+            </div>
+        </div>
+        {{-- end --}}
+    @endif
+
     {{-- js script for personal data interaction and validation --}}
     <script src="{{ asset('js/form-interaction-validation.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
