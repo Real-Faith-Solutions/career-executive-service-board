@@ -225,6 +225,7 @@ class ProfileController extends Controller
         $religion = Religion::all();
 
         return view('admin.201_profiling.view_profile.partials.personal_data.edit',[
+            'cesno' => $cesno,
             'cesNumber' => $cesno,
             'mainProfile' => $mainProfile,
             'countries' => $countries,
