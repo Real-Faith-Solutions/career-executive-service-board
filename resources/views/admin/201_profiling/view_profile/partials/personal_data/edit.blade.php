@@ -5,7 +5,7 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
 <div class="flex justify-end">
-    <button class="btn btn-primary" onclick="openFormFamilyProfile()">Resend Email</button>
+    <button class="btn btn-primary" id="resend_email">Resend Email</button>
 </div>
 
 <div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
