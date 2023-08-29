@@ -4,6 +4,10 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $mainProfile->cesno])
 
+<div class="flex justify-end">
+    <button class="btn btn-primary" id="resend_email">Resend Email</button>
+</div>
+
 <div class="grid-rows-7 grid lg:grid-cols-3 sm:grid-cols-1 gap-1">
 
     <form class="col-span-3" action="{{ route('edit-profile-201', ['cesno'=>$mainProfile->cesno]) }}" enctype="multipart/form-data" id="edit_personal_data" method="POST" onsubmit="return checkErrorsBeforeSubmit(edit_personal_data)">
@@ -43,8 +47,14 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="email">Email<sup>*</span></label>
-                                <input id="email" name="email" readonly value="{{ $mainProfile->email }}">
+                                <label for="email">Email<sup>*</sup></label>
+                                <input id="email" name="email" type="text" value="{{ $mainProfile->email }}" oninput="validateInputEmail(email)" onkeypress="validateInputEmail(email)" onblur="checkErrorMessage(email)" required>
+                                <p class="input_error text-red-600"></p>
+                                @error('email')
+                                    <span class="invalid" role="alert">
+                                        <p>{{ $message }}</p>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="mb-3">

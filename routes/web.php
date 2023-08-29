@@ -64,10 +64,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/preview-email', function () {
 
     $imagePath = public_path('images/branding.png');
+    $loginLink= config('app.url');
     $data = [
         'email' => 'recipient@example.com',
         'password' => 'temporary_password',
         'imagePath' => $imagePath,
+        'loginLink' => $loginLink,
     ];
 
     return new TempCred201($data);
@@ -91,6 +93,8 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'userLogout']);
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
+Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name('sendPassword');
 // end auth
 
 Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
@@ -113,7 +117,8 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
-        
+            Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+
         });
 
         Route::prefix('family-profile')->group(function () {

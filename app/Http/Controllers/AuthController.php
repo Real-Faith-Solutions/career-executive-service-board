@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -56,124 +59,6 @@ class AuthController extends Controller
         }
     }
 
-    // public function userChangeDefaultPasswordPage(Request $request){
-
-    //     // Login User once for changing default password
-
-    //     if (Auth::once(['email' => $request->email, 'password' => $request->input_old_password])) {
-
-    //         if(Auth::user()->default_password_change != 'true'){
-
-    //             // Validate form
-
-    //             $validator = Validator::make(
-
-    //                 array(
-    //                     'email' => $request->email,
-    //                     'old_password' =>  Hash::check($request->input_old_password, Auth::user()->password),
-    //                     'input_old_password' => true,
-    //                     'validate_old_and_new_password' => (Hash::check($request->new_password, Auth::user()->password) ? 'Same password' : 'Not Equal'),
-    //                     'input_new_password' => (Hash::check($request->new_password, Auth::user()->password) ? '' : 'false'),
-    //                     'new_password' => $request->new_password,
-    //                     'new_password_confirmation' => $request->new_password_confirmation,
-    //                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
-    //                 ),
-    //                 array(
-    //                     'email' => 'required|email',
-    //                     'old_password' =>  'required',
-    //                     'input_old_password' => 'same:old_password',
-    //                     'validate_old_and_new_password' => 'required',
-    //                     'input_new_password' => 'required_if:validate_old_and_new_password,Same password',
-    //                     'new_password' => ['required',Password::min(8)->mixedCase()->numbers()->symbols(),'confirmed'],
-    //                     'new_password_confirmation' => ['required',Password::min(8)->mixedCase()->numbers()->symbols()],
-    //                     'last_updated_by' => '',
-    //                 )
-    //             );
-
-    //             if ($validator->fails()){
-
-    //                 $errors = $validator->errors();
-
-    //                 return $errors;
-
-    //             }else{
-
-    //                 User::where('email', Auth::user()->email)
-    //                     ->update([
-    //                     'default_password_change' => 'true',
-    //                     'password' => Hash::make($request->new_password),
-    //                     'last_updated_by' => Auth::user()->role.' - '.Auth::user()->role_name_no,
-    //                 ]);
-
-    //                 if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->new_password])){
-
-    //                     $request->session()->regenerate();
-
-    //                     return 'Successfully updated';
-    //                 }
-
-    //             }
-    //         }
-    //         else{
-
-    //             if(Auth::user()->role == 'User'){
-
-    //                 return Redirect::to('/admin/profile/views/'.Auth::user()->cesno);
-    //             }
-    //             else{
-
-    //                 return Redirect::to('/admin');
-    //             }
-    //         }
-    //     }
-    //     else{
-
-    //         return view('login');
-    //     }
-    // }
-
-    // public function userLogin(Request $request){
-
-    //     // Attempt to log user once to changed default password and regenerate session to user that already changed their password
-
-    //     if (Auth::once(['email' => $request->email, 'password' => $request->password])) {
-
-    //         if(Auth::user()->default_password_change != 'true'){
-
-    //             $email = $request->email;
-
-    //             return view('change_default_password', compact('email'))->render();
-    //         }
-    //         else{
-
-    //             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
-    //                 $request->session()->regenerate();
-
-    //                 if(Auth::user()->role == 'User'){
-
-    //                     return Redirect::to('/admin/profile/views/'.Auth::user()->cesno);
-    //                 }
-    //                 else{
-
-    //                     return Redirect::to('/admin');
-    //                 }
-
-    //             }
-    //         }
-    //     }
-    //     else{
-
-    //         // Return response if invalid login credentials
-
-    //         $response = [];
-    //         $response['message'] = 'Your username or password are incorrect';
-    //         $response['link'] = 'login';
-
-    //         return view('message', compact('response'))->render();
-    //     }
-    // }
-
     public function userLogout(Request $request){
 
         // Logout user, invalidate, and regenerate token session
@@ -187,14 +72,65 @@ class AuthController extends Controller
         return Redirect::to('/login');
     }
 
-    // public function userRegister(Request $request){
-    //     User::create([
-    //         'name' => $request->full_name,
-    //         'email' => $request->email,
-    //         'password' => $request->password,
-    //     ]);
+    public function forgotPassword()
+    {
+        return view('forgotPassword');
+    }
 
-    //     return "Success Registration!";
-    // }
+    public function sendPassword(Request $request)
+    {
+
+        $customMessages = [
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.exists' => 'The provided email does not exist in our records.',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], $customMessages);
+
+        // Find the user by email
+        $user = User::where('email', $request->email)->first();
+
+        // Check if the user has reset their password within the last 1 minute
+        $cooldownMinutes = 1; // Adjust as needed
+        if ($user && $user->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
+            return back()->with('error','New password already sent. Please check your email');
+        }
+        
+        if ($user) {
+
+            // sending email to added user
+            $recipientEmail = $request->email;
+            $password = Str::password(8);
+            $hashedPassword = Hash::make($password);
+            $imagePath = public_path('images/branding.png');
+            $loginLink= config('app.url');
+            $type = "forgotPassword";
+
+            $data = [
+                'type' => $type,
+                'email' => $recipientEmail,
+                'password' => $password,
+                'imagePath' => $imagePath,
+                'loginLink' => $loginLink,
+            ];
+            // end sending email to added user
+
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+
+            // Update the user's password with the hashed temporary password
+            $user->update([
+                'password' => $hashedPassword,
+            ]);
+
+            // Send an email or notification to the user with the new temporary password
+
+            return back()->with('message','New temporary password sent!');
+        }
+
+        return back()->with('error','User not found!');
+    }
 
 }

@@ -1,6 +1,9 @@
 @extends('layouts.guest')
 
 @section('content')
+
+<h1 class="text-lg font-semibold text-center text-blue-500 mt-2">Welcome to CES Board</h1>
+
     <form class="user" method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -24,17 +27,16 @@
             @enderror
         </div>
 
-        <div class="flex justify-end">
+        <div class="flex justify-center">
             <button class="btn btn-primary">Login</button>
         </div>
 
         <div class="mt-4 flex items-center justify-end">
-            @if (Route::has('password.request'))
-                <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
+            <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('forgotPassword') }}">
+                Forgot your password?
+            </a>
         </div>
+
     </form>
+    
 @endsection

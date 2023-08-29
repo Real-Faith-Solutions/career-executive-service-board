@@ -125,19 +125,26 @@ class ProfileController extends Controller
 
         ]);
 
+        // sending email to added user
         $recipientEmail = $request->email;
         $password = Str::password(8);
         $hashedPassword = Hash::make($password);
         $imagePath = public_path('images/branding.png');
+        $loginLink= config('app.url');
+        $type = "addProfile";
 
         $data = [
+            'type' => $type,
             'email' => $recipientEmail,
             'password' => $password,
             'imagePath' => $imagePath,
+            'loginLink' => $loginLink,
         ];
+        // end sending email to added user
 
         Mail::to($recipientEmail)->send(new TempCred201($data));
 
+        // making account credentials for user
         $user = $newProfile->users()->Create([
             'email' => $newProfile->email,
             'password' => $hashedPassword,
@@ -148,6 +155,7 @@ class ProfileController extends Controller
         ]);
 
         $user->assignRole('user');
+        // end making account credentials for user
 
         return back()->with('message','New profile added!');
     }
@@ -217,6 +225,7 @@ class ProfileController extends Controller
         $religion = Religion::all();
 
         return view('admin.201_profiling.view_profile.partials.personal_data.edit',[
+            'cesno' => $cesno,
             'cesNumber' => $cesno,
             'mainProfile' => $mainProfile,
             'countries' => $countries,
@@ -245,6 +254,7 @@ class ProfileController extends Controller
         $personalData = PersonalData::find($cesno);
         $personalData->status = $request->status;
         $personalData->title = $request->title;
+        $personalData->email = $request->email;
         $personalData->lastname = $request->lastname;
         $personalData->firstname = $request->firstname;
         $personalData->name_extension = $request->name_extension;
@@ -266,6 +276,14 @@ class ProfileController extends Controller
         $personalData->person_with_disability = $request->person_with_disability;
         $personalData->encoder = $encoder;
         $personalData->save();
+
+        // Get the user based on the $cesno
+        $user = User::where('personal_data_cesno', $cesno)->first();
+
+        // Update the user email
+        $user->email = $request->email;
+        $user->save();
+
 
         return back()->with('info','Profile Updated!');
     }
@@ -300,7 +318,7 @@ class ProfileController extends Controller
     public function changePassword(Request $request, $cesno)
     {
 
-        // Get the user based on the $cesno (assuming this is the user's identifier)
+        // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();
 
         // Check if the current password is correct
@@ -318,6 +336,39 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('message', 'Password changed successfully');
+
+    }
+
+    public function resendEmail(Request $request, $cesno)
+    {
+
+        // Get the user based on the $cesno
+        $user = User::where('personal_data_cesno', $cesno)->first();
+
+        // sending email to added user
+        $recipientEmail = $request->email;
+        $password = Str::password(8);
+        $hashedPassword = Hash::make($password);
+        $imagePath = public_path('images/branding.png');
+        $loginLink= config('app.url');
+        $type = "forgotPassword";
+
+        $data = [
+            'type' => $type,
+            'email' => $recipientEmail,
+            'password' => $password,
+            'imagePath' => $imagePath,
+            'loginLink' => $loginLink,
+        ];
+        // end sending email to added user
+
+        Mail::to($recipientEmail)->send(new TempCred201($data));
+
+        // Update the user's password
+        $user->password = $hashedPassword;
+        $user->save();
+
+        return redirect()->back()->with('message', 'New Credentials Email Sent');
 
     }
 
