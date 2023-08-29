@@ -481,4 +481,61 @@
     }
     // end validation of 2 dates from vs to where from should be < to
 
+    // height input validation
+    function validateHeight(inputField) {
+
+        const inputValue = parseFloat(inputField.value);
+        let regexValidator = /^\d+(\.\d{1,2})?$/;
+        let errorMessage = ' characters and has a valid email format.';
+    
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
+    
+        if ((inputValue < 1.0 || inputValue > 4.0) && regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `Height must be between 1.00 and 4.00 meters`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if ((inputValue < 1.0 || inputValue > 4.0) && !regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `Height must be between 1.00 and 4.00 meters`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (!regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = 'Invalid heigth.';
+        } else {
+            inputField.nextElementSibling.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
+        }
+    }
+    // height input validation
+
 // end of real-time validation
