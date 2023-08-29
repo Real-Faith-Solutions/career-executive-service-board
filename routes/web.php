@@ -347,6 +347,7 @@ Route::middleware('auth')->group(function () {
             Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
             Route::get('approved-files', [PDFController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile');
+            Route::post('stream-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'streamApprovedFile'])->name('streamApprovedFile');
         });
     });
     // End of profile routes

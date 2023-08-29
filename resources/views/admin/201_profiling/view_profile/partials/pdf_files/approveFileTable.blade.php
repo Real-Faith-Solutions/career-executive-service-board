@@ -48,7 +48,7 @@
             @foreach ($approvedFile as $approvedFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="" target="_blank" method="POST">
+                        <form action="{{ route('streamApprovedFile', ['ctrlno'=>$approvedFiles->ctrlno, 'fileName'=>$approvedFiles->original_pdflink]) }}" target="_blank" method="POST">
                             @csrf
                             <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
