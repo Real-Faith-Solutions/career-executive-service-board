@@ -183,4 +183,9 @@ class PersonalData extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function approvedFile(): HasMany
+    {
+        return $this->hasMany(ApprovedFile::class);
+    }
 }

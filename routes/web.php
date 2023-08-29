@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AffiliationController;
+use App\Http\Controllers\ApprovedFileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
@@ -340,7 +341,7 @@ Route::middleware('auth')->group(function () {
             Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles');
             Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles');
             Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
-            Route::post('decline-file/{ctrlno}', [PDFController::class, 'declineFile'])->name('declineFile');
+            Route::delete('decline-file/{ctrlno}', [PDFController::class, 'declineFile'])->name('declineFile');
             Route::delete('declined-file-force-delete/{ctrlno}', [PDFController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete');
             Route::get('recently-decline-file', [PDFController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles');
             Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index');
@@ -351,6 +352,8 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
+            Route::get('approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile');
+            Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile');
         });
     });
     // End of profile routes

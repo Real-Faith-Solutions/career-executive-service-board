@@ -3,10 +3,12 @@
 @section('sub', 'Pending Files')
 @section('content')
 
-<div class="flex justify-between mb-7">
-    <a href="#" class="flex items-center">
+<div class="flex justify-end mb-7">
+    {{-- <a href="#" class="flex items-center ">
         <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">@yield('sub')</span>
-    </a>
+    </a> --}}
+
+    <a href="{{ route('show-approved-pdf-files.approvedFile') }}" class="btn btn-primary mr-5" >Approved Files</a>
 
     <a href="{{ route('show-pdf-files.recentlyDeclineFiles') }}" class="btn btn-primary" >Declined Files</a>
 </div>
@@ -32,7 +34,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Encode By
+                    Request By
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -93,6 +95,7 @@
                             
                             <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
                                 @csrf
+                                @method('DELETE')
                                 <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
