@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

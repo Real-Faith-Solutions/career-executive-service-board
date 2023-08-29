@@ -299,21 +299,5 @@ class PDFController extends Controller
   
         return back()->with('message', 'Data Permanently Deleted');
     }
-
-    public function approvedFile()
-    {
-        $approvedFile = ApprovedFile::paginate(25);
-
-        return view('admin.201_profiling.view_profile.partials.pdf_files.approveFileTable', compact('approvedFile'));
-    }
-
-    public function streamApprovedFile($ctrlno)
-    {
-        $pdfFileName = ApprovedFile::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
-
-        $myFile = public_path($pdfFileName);
-
-        return response()->file($myFile);
-    }
 }
 

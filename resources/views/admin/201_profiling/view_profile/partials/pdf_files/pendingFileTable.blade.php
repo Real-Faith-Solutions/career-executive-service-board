@@ -95,6 +95,7 @@
                             
                             <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
                                 @csrf
+                                @method('DELETE')
                                 <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon

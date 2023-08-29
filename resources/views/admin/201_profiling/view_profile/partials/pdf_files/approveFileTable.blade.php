@@ -38,10 +38,6 @@
                 <th scope="col" class="px-6 py-3">
                     Approved By
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Action</span>
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -81,38 +77,6 @@
 
                     <td class="px-6 py-3">
                         {{ $approvedFiles->encoder }}
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            {{-- <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Approval', 'Are you sure you want to approve this pdf?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/egiwmiit.json"
-                                        trigger="morph"
-                                        colors="primary:#3b82f6"
-                                        state="hover"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-                            
-                            <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/nhfyhmlt.json"
-                                    trigger="hover"
-                                    colors="primary:#BC0001"u
-                                    state="hover-3"
-                                    style="width:24px;height:24px">
-                                </lord-icon>
-                                </button>
-                            </form> --}}
-                        </div>
                     </td>
                 </tr>
             @endforeach
