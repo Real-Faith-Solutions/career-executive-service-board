@@ -346,6 +346,7 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
+            Route::get('approved-files', [PDFController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile');
         });
     });
     // End of profile routes

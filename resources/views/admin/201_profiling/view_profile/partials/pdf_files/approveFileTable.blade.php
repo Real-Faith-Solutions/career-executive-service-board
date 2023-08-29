@@ -1,16 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Pending Files')
-@section('sub', 'Pending Files')
+@section('title', 'Approved Files')
+@section('sub', 'Approved Files')
 @section('content')
 
-<div class="flex justify-end mb-7">
-    {{-- <a href="#" class="flex items-center ">
+<div class="flex justify-between mb-7">
+    <a href="#" class="flex items-center">
         <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">@yield('sub')</span>
-    </a> --}}
+    </a>
 
-    <a href="{{ route('show-approved-pdf-files.approvedFile') }}" class="btn btn-primary mr-5" >Approved Files</a>
-
-    <a href="{{ route('show-pdf-files.recentlyDeclineFiles') }}" class="btn btn-primary" >Declined Files</a>
+    <a href="{{ route('show-pending-pdf-files.pendingFiles') }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -30,11 +28,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Date Approved
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Remarks
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Request By
+                    Approved By
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -43,10 +45,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pdfFile as $pdfFiles)
+            @foreach ($approvedFile as $approvedFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pdfFiles->ctrlno, 'fileName'=>$pdfFiles->request_unique_file_name]) }}" target="_blank" method="POST">
+                        <form action="" target="_blank" method="POST">
                             @csrf
                             <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -62,24 +64,28 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $pdfFiles->request_unique_file_name }}
+                        {{ $approvedFiles->original_pdflink }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pdfFiles->created_at }}
+                        {{ $approvedFiles->request_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pdfFiles->remarks }}
+                        {{ $approvedFiles->created_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pdfFiles->encoder }}
+                        {{ $approvedFiles->remarks }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $approvedFiles->encoder }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
+                            {{-- <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
                                 @csrf
                                 <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Approval', 'Are you sure you want to approve this pdf?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -105,13 +111,17 @@
                                     style="width:24px;height:24px">
                                 </lord-icon>
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $approvedFile->links() }}
 </div>
 
 @endsection
