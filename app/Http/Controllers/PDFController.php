@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ApprovedFile;
 use App\Models\PdfLinks;
 use App\Models\PersonalData;
 use App\Models\RequestFile;
@@ -108,28 +109,36 @@ class PDFController extends Controller
         $nameExtension = $personalData->name_extension;
         $personalDataFullName = $lastName." ".$firstName." ".$mI." ".$nameExtension;
         
-        $requestFile = RequestFile::find($ctrlno)->first(); // getting the first data 
-        $pdfFile = $requestFile->request_pdflink; // holds the path file name
-        $originalPdfFile = $requestFile->request_pdflink_orignal_name; // holds the original file name
+        // getting the first data 
+        $requestFile = RequestFile::find($ctrlno)->first(); 
+
+        // holds the path file name
+        $pdfFile = $requestFile->request_pdflink; 
+
+        // holds the original file name
+        $originalPdfFile = $requestFile->request_pdflink_orignal_name; 
+
+        // getting day created and encoder
         $requestDate = $requestFile->created_at; 
         $requestedBy = $requestFile->encoder; 
 
-        $databasePath = $pdfFile; // holds the pending file path
+        // holds the pending file path
+        $databasePath = $pdfFile; 
     
-        $pdfFileName = date('m-d-y').'_'.$personalDataFullName.'_'.time().'_'.$originalPdfFile; // Generate a unique name for the document
+        // Generate a unique name for the document
+        $pdfFileName = date('m-d-y').'_'.$personalDataFullName.'_'.time().'_'.$originalPdfFile; 
 
-        $sourcePath = public_path($databasePath); // source path
-        $destinationPath = public_path('pdf_files/'.$pdfFileName); // destination path
+        // source path
+        $sourcePath = public_path($databasePath); 
 
-        $pdfPathName = 'pdf_files/'.$pdfFileName; // path name
+        // destination path
+        $destinationPath = public_path('pdf_files/'.$pdfFileName); 
 
-        File::copy($sourcePath, $destinationPath); // copy the source path to destination path
+        // path name
+        $pdfPathName = 'pdf_files/'.$pdfFileName; 
 
-        // try {
-        //     File::copy($sourcePath, $destinationPath);
-        // } catch (\Exception $e) {
-        //     // Handle the exception, e.g., log an error message or take appropriate action
-        // }
+        // copy the source path to destination path
+        File::copy($sourcePath, $destinationPath); 
 
         $existingRequestedFile = $requestFile->request_pdflink;
 
@@ -157,6 +166,24 @@ class PDFController extends Controller
         
         // Save the file path and data to the database
         $pdfFilePersonalDataId->pdfFile()->save($pdf);
+        
+        // store approve file in approved_file
+        $approvePdf = new ApprovedFile([
+            
+            'pdflink' => $pdfPathName,
+            'original_pdflink' => $pdfFileName,
+            'remarks' => $requestFile->remarks,
+            'request_date' => $requestDate,
+            'requested_by' => $requestedBy,
+            'encoder' => $encoder,
+         
+        ]);
+
+        //find personal data cesno
+        $approvedfFilePersonalDataId = PersonalData::find($requestFile->personal_data_cesno);
+        
+        // Save the approved file path and data to the approved_file
+        $approvedfFilePersonalDataId->approvedFile()->save($approvePdf);
 
         //delete existing file from request_file table
         DB::table('request_file')->where('ctrlno', $requestFile->ctrlno)->delete();
@@ -164,7 +191,7 @@ class PDFController extends Controller
         return back()->with('message','Document Approved successfully');
     }
 
-    // download approved file
+    // stream approved file
     public function download($ctrlno)
     {
         $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
@@ -174,7 +201,7 @@ class PDFController extends Controller
         return response()->file($myFile);
     }
 
-    // download pending file
+    // stream pending file
     public function downloadPendingFile($ctrlno)
     {
         $pendingPdfFileName = RequestFile::withTrashed()->where('ctrlno', $ctrlno)->value('request_pdflink');
@@ -251,15 +278,17 @@ class PDFController extends Controller
         return view('admin.201_profiling.view_profile.partials.pdf_files.declineFilesTrashbin', compact('pendingFileTrashedRecord'));
     }
 
-    // permanent deleting soft deleted record
+    // permanently deleting soft deleted declined file 
     public function declineFileForceDelete($ctrlno)
     {
         $declineFile = RequestFile::onlyTrashed()->find($ctrlno);
 
+        // getting pending file path name
         $existingDeclineFile = $declineFile->request_pdflink;
 
-         // Delete the existing file from the storage folder
-         if ($existingDeclineFile) {
+        // Delete the existing file from the storage folder
+        if ($existingDeclineFile) 
+        {
             $filePath = public_path($existingDeclineFile);
             if (file_exists($filePath)) {
                 unlink($filePath);
