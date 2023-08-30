@@ -303,6 +303,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
             Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
             Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+            Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted');
         });
 
         Route::prefix('language')->group(function () {

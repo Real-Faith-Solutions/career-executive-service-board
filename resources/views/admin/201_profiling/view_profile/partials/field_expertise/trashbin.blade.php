@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Field Expertise')
-@section('sub', 'Field Expertise')
+@section('sub', 'Field Expertise Recycle Bin')
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('expertise.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
-    <a href="{{ route('expertise.create', ['cesno' => $cesno]) }}" class="btn btn-primary" >Add Field Expertise</a>
+    <a href="{{ route('expertise.index', ['cesno' => $cesno]) }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="taw-x-auto sm:rounded-lg shadow-lg">
@@ -22,7 +13,15 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    Control No
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Expertise / Field of Specialization
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Deleted At
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -31,15 +30,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($expertise as $expertised)
+            @foreach ($profileTblExpertiseTrashedRecord as $profileTblExpertiseTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $expertised->expertisePersonalData->Title}}
+                        {{ $profileTblExpertiseTrashedRecords->ctrlno}}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $profileTblExpertiseTrashedRecords->expertisePersonalData->Title}}
+                    </td>
+
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        {{ $profileTblExpertiseTrashedRecords->deleted_at}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->personal_data_cesno, 'ctrlno'=>$expertised->ctrlno]) }}" method="GET">
+                            <form action="" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -51,10 +58,10 @@
                                 </button>
                             </form>
                         
-                            <form action="{{ route('expertise.destroy', ['ctrlno'=>$expertised->ctrlno]) }}" method="POST" id="delete_field_expertise_form{{$expertised->ctrlno}}">
+                            <form action="" id="delete_field_expertise_form{{$profileTblExpertiseTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteFieldExpertiseButton{{$profileTblExpertiseTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

@@ -80,4 +80,15 @@ class ExpertiseController extends Controller
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted expertise of the parent model
+        $profileTblExpertiseTrashedRecord = $personalData->expertise()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.field_expertise.trashbin', compact('profileTblExpertiseTrashedRecord', 'cesno'));
+    }
 }
