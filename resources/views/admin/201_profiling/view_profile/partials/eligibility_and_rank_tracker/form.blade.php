@@ -93,7 +93,8 @@
 
                     <div class="mb-3">
                         <label for="appointed_dt">Date Acquired<sup>*</sup></label>
-                        <input id="appointed_dt" name="appointed_dt" required type="date">
+                        <input id="appointed_dt" name="appointed_dt" oninput="validateDateInput(appointed_dt)" required type="date">
+                        <p class="input_error text-red-600"></p>
                         @error('appointed_dt')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

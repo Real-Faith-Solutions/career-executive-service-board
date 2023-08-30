@@ -62,7 +62,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</sup></label>
-                        <input type="date" id="other_trainings_inclusive_date_from" name="inclusive_date_from" oninput="validateDateInput(other_trainings_inclusive_date_from)" required>
+                        <input type="date" id="other_trainings_inclusive_date_from" name="inclusive_date_from" oninput="validateDateInput(other_trainings_inclusive_date_from), validateDateFromTo(other_trainings_inclusive_date_from, other_trainings_inclusive_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
@@ -73,7 +73,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</sup></label>
-                        <input type="date" id="other_trainings_inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(other_trainings_inclusive_date_to)" required>
+                        <input type="date" id="other_trainings_inclusive_date_to" name="inclusive_date_to" oninput="validateDateInput(other_trainings_inclusive_date_to), validateDateFromTo(other_trainings_inclusive_date_from, other_trainings_inclusive_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">

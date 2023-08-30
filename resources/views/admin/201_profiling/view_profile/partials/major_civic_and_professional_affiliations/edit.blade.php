@@ -47,7 +47,7 @@
 
                     <div class="mb-3">
                         <label for="affiliation_date_from_edit">Date from<sup>*</sup></label>
-                        <input type="date" id="affiliation_date_from_edit" name="date_from" value="{{ $affiliation->from_dt }}" oninput="validateDateInput(affiliation_date_from_edit)" required>
+                        <input type="date" id="affiliation_date_from_edit" name="date_from" value="{{ $affiliation->from_dt }}" oninput="validateDateInput(affiliation_date_from_edit), validateDateFromTo(affiliation_date_from_edit, affiliation_date_to_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_from')
                             <span class="invalid" role="alert">
@@ -58,7 +58,7 @@
 
                     <div class="mb-3">
                         <label for="affiliation_date_to_edit">Date to<sup>*</sup></label>
-                        <input type="date" id="affiliation_date_to_edit" name="date_to" value="{{ $affiliation->to_dt }}" oninput="validateDateInput(affiliation_date_to_edit)" required>
+                        <input type="date" id="affiliation_date_to_edit" name="date_to" value="{{ $affiliation->to_dt }}" oninput="validateDateInput(affiliation_date_to_edit), validateDateFromTo(affiliation_date_from_edit, affiliation_date_to_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_to')
                             <span class="invalid" role="alert">

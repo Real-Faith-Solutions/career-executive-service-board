@@ -45,7 +45,7 @@
 
                     <div class="mb-3">
                         <label for="affiliation_date_from">Date from<sup>*</sup></label>
-                        <input type="date" id="affiliation_date_from" name="date_from" oninput="validateDateInput(affiliation_date_from)" required>
+                        <input type="date" id="affiliation_date_from" name="date_from" oninput="validateDateInput(affiliation_date_from), validateDateFromTo(affiliation_date_from, affiliation_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_from')
                             <span class="invalid" role="alert">
@@ -56,7 +56,7 @@
 
                     <div class="mb-3">
                         <label for="affiliation_date_to">Date to<sup>*</sup></label>
-                        <input type="date" id="affiliation_date_to" name="date_to" oninput="validateDateInput(affiliation_date_to)" required>
+                        <input type="date" id="affiliation_date_to" name="date_to" oninput="validateDateInput(affiliation_date_to), validateDateFromTo(affiliation_date_from, affiliation_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_to')
                             <span class="invalid" role="alert">

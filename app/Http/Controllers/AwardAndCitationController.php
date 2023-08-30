@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 
 class AwardAndCitationController extends Controller
 {
-
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -27,8 +26,8 @@ class AwardAndCitationController extends Controller
     public function store(Request $request, $cesno)
     {
         $request->validate([
-
-            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)],
+            // , Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             
@@ -48,8 +47,24 @@ class AwardAndCitationController extends Controller
         ]);
 
         $awardAndCitationsPersonalDataId = PersonalData::find($cesno);
-            
-        $awardAndCitationsPersonalDataId->awardsAndCitations()->save($awardAndCitations);
+
+        //check if PersonalData primary key is existed
+        if(!$awardAndCitationsPersonalDataId)
+        {    
+            return redirect()->back()->with('error', 'Something Went Wrong, Saving the Data');
+        }
+
+        $awardAndCitationsIfExist = AwardAndCitations::where('awards', $request->awards)->where('date', $request->date)->exists();
+
+        //check if awards and date is existed in AwarndCitations
+        if($awardAndCitationsIfExist)
+        {
+            return redirect()->back()->with('error', 'Already Have Details');
+        }
+        else
+        {    
+            $awardAndCitationsPersonalDataId->awardsAndCitations()->save($awardAndCitations);
+        }
             
         return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Successfuly Saved');
     }
@@ -58,6 +73,12 @@ class AwardAndCitationController extends Controller
     {
         $awardAndCitation = AwardAndCitations::find($ctrlno);
 
+        //check if AwardAndCitations primary key is existed
+        if(!$awardAndCitation)
+        {    
+            return redirect()->back()->with('error', 'Something Went Wrong, Showing the Data');
+        }
+
         return view('admin.201_profiling.view_profile.partials.award_and_citations.edit', compact('awardAndCitation' ,'cesno'));
     }
 
@@ -65,7 +86,7 @@ class AwardAndCitationController extends Controller
     {
         $request->validate([
 
-            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
             

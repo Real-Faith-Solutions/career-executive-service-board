@@ -39,11 +39,11 @@ class EligibilityAndRankTrackerController extends Controller
     {
         $request->validate([
 
-            'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
+            'cesstat_code' => ['required',Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
             'acc_code' => ['required'],
             'type_code' => ['required'],
             'official_code' => ['nullable'],
-            'resolution_no' => ['required'],
+            'resolution_no' => ['required',Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)],
             'appointed_dt' => ['required'],
             
         ]);
@@ -88,11 +88,11 @@ class EligibilityAndRankTrackerController extends Controller
     {
         $request->validate([
 
-            'cesstat_code' => [Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'cesstat_code' => ['required',Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'acc_code' => ['required'],
             'type_code' => ['required'],
             'official_code' => ['nullable'],
-            'resolution_no' => ['required'],
+            'resolution_no' => ['required',Rule::unique('profile_tblCESstatus')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'appointed_dt' => ['required'],
             
         ]);
