@@ -91,4 +91,12 @@ class ExpertiseController extends Controller
 
         return view('admin.201_profiling.view_profile.partials.field_expertise.trashbin', compact('profileTblExpertiseTrashedRecord', 'cesno'));
     }
+
+    public function restore($ctrlno)
+    {
+        $profileTblExpertise = ProfileTblExpertise::onlyTrashed()->find($ctrlno);
+        $profileTblExpertise->restore();
+
+        return redirect()->back()->with('info', 'Data Restored Sucessfully');
+    }
 }

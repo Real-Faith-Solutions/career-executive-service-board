@@ -304,6 +304,7 @@ Route::middleware('auth')->group(function () {
             Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
             Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
             Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore');
         });
 
         Route::prefix('language')->group(function () {

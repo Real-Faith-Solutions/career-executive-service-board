@@ -46,14 +46,14 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="" method="GET">
+                            <form action="{{ route('expertise.restore', ['ctrlno'=>$profileTblExpertiseTrashedRecords->ctrlno]) }}" method="POST" id="restore_expertise_form{{$profileTblExpertiseTrashedRecords->ctrlno}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreExpertiseButton{{$profileTblExpertiseTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
