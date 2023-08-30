@@ -302,7 +302,7 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
             Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
             Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
-            Route::delete('destroy/{cesno}/{ctrlno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
+            Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
         });
 
         Route::prefix('language')->group(function () {

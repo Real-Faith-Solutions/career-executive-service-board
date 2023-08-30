@@ -73,11 +73,10 @@ class ExpertiseController extends Controller
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
     }
 
-    public function destroy($cesno, $ctrlno, $speXpCode)
+    public function destroy($ctrlno)
     {
-        $personalData = PersonalData::find($cesno);
- 
-        $personalData->expertise()->detach($speXpCode);
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
+        $profileTblExpertise->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
     }

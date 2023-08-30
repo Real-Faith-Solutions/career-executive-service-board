@@ -41,11 +41,11 @@
                                     </lord-icon>
                                 </button>
                             </form>
-{{--                         
-                            <form action="{{ route('expertise.destroy', ['cesno'=>$cesno, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno, 'speXpCode'=>$expertised->SpeExp_Code]) }}" method="POST" id="delete_field_expertise_form{{$expertised->profile_tblExpertise->ctrlno}}">
+                        
+                            <form action="{{ route('expertise.destroy', ['ctrlno'=>$expertised->ctrlno]) }}" method="POST" id="delete_field_expertise_form{{$expertised->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->profile_tblExpertise->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -54,7 +54,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
