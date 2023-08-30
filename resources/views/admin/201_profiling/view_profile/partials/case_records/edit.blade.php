@@ -48,7 +48,6 @@
                         <label for="nature_of_offense_edit">Nature of Offense<sup>*</sup></label>
                         <select id="nature_of_offense_edit" name="nature_of_offense" required>
                             <option disabled selected>Select Nature of Offense</option>
-                            {{-- <option value="Pre-defined" {{ $caseRecord->nature_code == 'Pre-defined' ? 'selected' : '' }}>Pre-defined</option> --}}
                             <option value="Administrative" {{ $caseRecord->nature_code == 'Administrative' ? 'selected' : '' }}>Administrative</option>
                             <option value="Criminal Administrative" {{ $caseRecord->nature_code == 'Criminal Administrative' ? 'selected' : '' }}>Criminal Administrative</option>
                             <option value="Criminal" {{ $caseRecord->nature_code == 'Criminal' ? 'selected' : '' }}>Criminal</option>
@@ -62,7 +61,6 @@
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="case_number_edit">Case number<sup>*</sup></label>
                         <input type="text" id="case_number_edit" name="case_no" value="{{ $caseRecord->case_no }}" oninput="validateInput(case_number_edit, 2)" onkeypress="validateInput(case_number_edit, 2)" onblur="checkErrorMessage(case_number_edit)" required>
@@ -76,7 +74,7 @@
 
                     <div class="mb-3">
                         <label for="date_filed_edit">Date Filed<sup>*</sup></label>
-                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_date }}" oninput="validateDateInput(date_filed_edit)" required>
+                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_date }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_filed')
                             <span class="invalid" role="alert">
@@ -114,7 +112,7 @@
 
                     <div class="mb-3">
                         <label for="date_finality_edit">Date of Finality<sup>*</sup></label>
-                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $caseRecord->finality }}" oninput="validateDateInput(date_finality_edit)" required>
+                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $caseRecord->finality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_finality')
                             <span class="invalid" role="alert">

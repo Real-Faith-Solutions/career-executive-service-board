@@ -75,7 +75,7 @@
 
                     <div class="mb-3">
                         <label for="date_filed">Date Filed<sup>*</sup></label>
-                        <input type="date" id="date_filed" name="date_filed" oninput="validateDateInput(date_filed)" required>
+                        <input type="date" id="date_filed" name="date_filed" oninput="validateDateInput(date_filed), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_filed')
                             <span class="invalid" role="alert">
@@ -113,7 +113,7 @@
 
                     <div class="mb-3">
                         <label for="date_finality">Date of Finality<sup>*</sup></label>
-                        <input type="date" id="date_finality" name="date_finality" oninput="validateDateInput(date_finality)" required>
+                        <input type="date" id="date_finality" name="date_finality" oninput="validateDateInput(date_finality), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_finality')
                             <span class="invalid" role="alert">
