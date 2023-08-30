@@ -16,7 +16,6 @@
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
                         <label for="blood_type">Blood Type<sup>*</sup></label>
                         <input type="text" id="blood_type" name="blood_type" value="{{ old('blood_type') ?? ($healthRecord->blood_type ?? '') }}" oninput="validateInput(blood_type, 1, 'lettersWithSpecial')" onkeypress="validateInput(blood_type, 1, 'lettersWithSpecial')" onblur="checkErrorMessage(blood_type)" required>
