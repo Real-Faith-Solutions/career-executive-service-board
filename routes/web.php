@@ -305,6 +305,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
             Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [ExpertiseController::class, 'forceDelete'])->name('expertise.forceDelete');
         });
 
         Route::prefix('language')->group(function () {

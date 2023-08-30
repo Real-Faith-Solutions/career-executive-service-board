@@ -58,10 +58,10 @@
                                 </button>
                             </form>
                         
-                            <form action="" id="delete_field_expertise_form{{$profileTblExpertiseTrashedRecords->ctrlno}}">
+                            <form action="{{ route('expertise.forceDelete', ['ctrlno'=>$profileTblExpertiseTrashedRecords->ctrlno]) }}" method="POST" id="permanent_expertise_form{{$profileTblExpertiseTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteFieldExpertiseButton{{$profileTblExpertiseTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteExpertiseButton{{$profileTblExpertiseTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

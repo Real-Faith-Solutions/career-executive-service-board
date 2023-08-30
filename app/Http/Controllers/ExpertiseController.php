@@ -99,4 +99,12 @@ class ExpertiseController extends Controller
 
         return redirect()->back()->with('info', 'Data Restored Sucessfully');
     }
+
+    public function forceDelete($ctrlno)
+    {
+        $profileTblExpertise = ProfileTblExpertise::onlyTrashed()->find($ctrlno);
+        $profileTblExpertise->forceDelete();
+
+        return redirect()->back()->with('message', 'Data Permanently Delete Sucessfully');
+    }
 }
