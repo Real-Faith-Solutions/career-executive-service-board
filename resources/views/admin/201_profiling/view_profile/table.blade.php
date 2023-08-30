@@ -28,7 +28,20 @@
                             </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Name
+                            <a href="{{ route('view-profile-201.index', ['sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}" class="flex items-center space-x-1">
+                                Name
+                                @if ($sortBy === 'lastname')
+                                    @if ($sortOrder === 'asc')
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                        </svg>
+                                    @endif
+                                @endif
+                            </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Action</span>
