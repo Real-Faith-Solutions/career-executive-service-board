@@ -483,64 +483,47 @@
 
     // height input validation
     function validateHeight(inputField) {
-
-        const inputValue = parseFloat(inputField.value);
-        let currentValue1 = inputField.value;
-        let regexValidator = /^\d+(\.\d{1,2})?$/;
-        let errorMessage = ' characters and has a valid email format.';
+        const inputValue = inputField.value.trim();
+        let regexValidator = /^(?:[1-3](?:\.\d{1,2})?)?$/;
     
         var form = inputField.closest('form');
         var submitButton = form.querySelector('button[type="submit"]');
-
-        if(!submitButton){
+    
+        if (!submitButton) {
             submitButton = form.querySelector('button[type="button"]');
         }
     
-        if ((inputValue < 1.0 || inputValue > 4.0) && regexValidator.test(inputValue)) {
-            inputField.nextElementSibling.textContent = `Height must be between 1.00 and 4.00 meters`;
+        if (!regexValidator.test(inputValue)) {
+            inputField.nextElementSibling.textContent = `Height must be around 1.00 - 3.99 meters only`;
             inputField.classList.remove('focus:outline-blue-600');
             inputField.classList.add('border-red-600');
             inputField.classList.add('focus:outline-red-500');
             submitButton.disabled = true;
             submitButton.classList.remove('cursor-pointer');
             submitButton.classList.add('cursor-not-allowed');
-            this.currentValue1 = inputField.value;
-        } else if ((inputValue < 1.0 || inputValue > 4.0) && !regexValidator.test(inputValue)) {
-            inputField.nextElementSibling.textContent = `Height must be between 1.00 and 4.00 meters`;
-            inputField.classList.remove('focus:outline-blue-600');
-            inputField.classList.add('border-red-600');
-            inputField.classList.add('focus:outline-red-500');
-            submitButton.disabled = true;
-            submitButton.classList.remove('cursor-pointer');
-            submitButton.classList.add('cursor-not-allowed');
-            inputField.value = this.currentValue1;
-        } else if (!regexValidator.test(inputValue)) {
-            inputField.value = this.currentValue1;
-            inputField.nextElementSibling.textContent = 'Invalid heigth.';
         } else {
-            this.currentValue1 = inputField.value;
             inputField.nextElementSibling.textContent = '';
             inputField.classList.remove('focus:outline-red-500');
             inputField.classList.remove('border-red-600');
             inputField.classList.add('focus:outline-blue-600');
-
+    
             const errorClass = form.querySelectorAll('.input_error');
-
+    
             for (const error of errorClass) {
                 if (error.textContent != "") {
                     submitButton.disabled = true;
                     submitButton.classList.remove('cursor-pointer');
                     submitButton.classList.add('cursor-not-allowed');
                     break;
-                }else{
+                } else {
                     submitButton.disabled = false;
                     submitButton.classList.remove('cursor-not-allowed');
                     submitButton.classList.add('cursor-pointer');
                 }
             }
-            
         }
     }
+    
     // height input validation
 
 // end of real-time validation

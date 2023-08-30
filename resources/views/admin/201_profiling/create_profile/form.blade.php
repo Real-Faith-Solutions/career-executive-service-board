@@ -205,7 +205,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="height">Height (in meters)<sup>*</sup></label>
+                <label for="profile_height">Height (in meters)<sup>*</sup></label>
                 <input id="profile_height" name="height" type="text" value="{{ old('height') }}" oninput="validateHeight(profile_height)" onkeypress="validateHeight(profile_height)" onblur="checkErrorMessage(profile_height)">
                 <p class="input_error text-red-600"></p>
                 @error('height')
