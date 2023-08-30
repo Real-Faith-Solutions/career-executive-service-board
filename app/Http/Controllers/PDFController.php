@@ -49,7 +49,7 @@ class PDFController extends Controller
         $personalDataFullName = $lastName." ".$firstName." ".$mI." ".$nameExtension; 
 
         $validator = Validator::make($request->all(), [
-            'pdfFile' => 'required|mimes:pdf',
+            'pdfFile' => 'required|mimes:pdf|max:50000', // 50000 kilobytes (50MB)
         ]);
     
         if ($validator->fails()) {
@@ -259,45 +259,6 @@ class PDFController extends Controller
         $pdfFile->restore();
 
         return back()->with('message', 'Data Restored Sucessfully');
-    }
-
-    // decline file
-    public function declineFile($ctrlno)
-    {
-        $pendingFile = RequestFile::find($ctrlno);
-        $pendingFile->delete();
-
-        return back()->with('message', 'Deleted Sucessfully');
-    }
-
-    // show soft deleted decline file
-    public function recentlyDeclineFile()
-    {
-        $pendingFileTrashedRecord = RequestFile::onlyTrashed()->get();
-
-        return view('admin.201_profiling.view_profile.partials.pdf_files.declineFilesTrashbin', compact('pendingFileTrashedRecord'));
-    }
-
-    // permanently deleting soft deleted declined file 
-    public function declineFileForceDelete($ctrlno)
-    {
-        $declineFile = RequestFile::onlyTrashed()->find($ctrlno);
-
-        // getting pending file path name
-        $existingDeclineFile = $declineFile->request_pdflink;
-
-        // Delete the existing file from the storage folder
-        if ($existingDeclineFile) 
-        {
-            $filePath = public_path($existingDeclineFile);
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
-        }
-
-        $declineFile->forceDelete();
-  
-        return back()->with('message', 'Data Permanently Deleted');
     }
 }
 
