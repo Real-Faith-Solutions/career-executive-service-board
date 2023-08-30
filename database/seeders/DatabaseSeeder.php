@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\ProfileLibTblEducDegree::factory(10)->create();
-        \App\Models\ProfileLibTblEducSchool::factory(10)->create();
-        \App\Models\ProfileLibTblEducMajor::factory(10)->create();
+        // \App\Models\ProfileLibTblEducDegree::factory(10)->create();
+        // \App\Models\ProfileLibTblEducSchool::factory(10)->create();
+        // \App\Models\ProfileLibTblEducMajor::factory(10)->create();
         // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
         \App\Models\PersonalData::factory(50)->create();
@@ -55,6 +55,9 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblCesStatusSeeder::class,
             ProfileLibTblAppAuthoritySeeder::class,
             ProfileLibTblExpertiseSpecSeeder::class,
+            ProfileLibTblEducSchoolSeeder::class,
+            ProfileLibTblEducMajorSeeder::class,
+            ProfileLibTblEducDegreeSeeder::class,
         ]);
 
     }
