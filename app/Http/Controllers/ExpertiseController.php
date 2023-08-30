@@ -60,17 +60,15 @@ class ExpertiseController extends Controller
         return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'profileTblExpertise'));
     }
 
-    public function update(Request $request, $cesno, $speXpCodes, $ctrlno)
+    public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
-            'specialization_code' => [Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'required'],
+            'specialization_code' => ['required', Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
-        $personalDataId = PersonalData::find($cesno);
-
-        $speXpCode = ProfileLibTblExpertiseSpec::find($speXpCodes);
-
-        $personalDataId->expertise()->updateExistingPivot($speXpCode,['specialization_code' => $request->specialization_code,]);
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
+        $profileTblExpertise->specialization_code = $request->specialization_code;
+        $profileTblExpertise->save();
      
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
     }
