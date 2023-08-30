@@ -128,13 +128,18 @@ class PersonalData extends Model
         return $this->hasOne(HealthRecords::class);
     }
 
-    public function expertise(): BelongsToMany
+    public function expertise(): HasMany
     {
-        return $this->belongsToMany(ProfileLibTblExpertiseSpec::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
-        ->as('profile_tblExpertise')
-        ->withPivot('ctrlno', 'encoder')
-        ->withTimestamps();
+        return $this->hasMany(ProfileTblExpertise::class, 'personal_data_cesno', 'cesno');
     }
+
+    // public function expertise(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(ProfileLibTblExpertiseSpec::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
+    //     ->as('profile_tblExpertise')
+    //     ->withPivot('ctrlno', 'encoder')
+    //     ->withTimestamps();
+    // }
 
     public function languages(): BelongsToMany
     {

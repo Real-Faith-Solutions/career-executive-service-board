@@ -10,10 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblExpertise extends Model
 {
-
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory,SoftDeletes;
 
     protected $primaryKey = 'ctrlno';
 
@@ -27,4 +24,8 @@ class ProfileTblExpertise extends Model
     
     ];
 
+    public function expertisePersonalData(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblExpertiseSpec::class, 'specialization_code');
+    }
 }

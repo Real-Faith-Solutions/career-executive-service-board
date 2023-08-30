@@ -25,12 +25,12 @@
             @foreach ($expertise as $expertised)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $expertised->Title}}
+                        {{ $expertised->expertisePersonalData->Title}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->profile_tblExpertise->personal_data_cesno, 'speXpCode'=>$expertised->profile_tblExpertise->specialization_code, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno]) }}" method="GET">
+                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->personal_data_cesno, 'ctrlno'=>$expertised->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -41,7 +41,7 @@
                                     </lord-icon>
                                 </button>
                             </form>
-                        
+{{--                         
                             <form action="{{ route('expertise.destroy', ['cesno'=>$cesno, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno, 'speXpCode'=>$expertised->SpeExp_Code]) }}" method="POST" id="delete_field_expertise_form{{$expertised->profile_tblExpertise->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
@@ -54,7 +54,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </td>
                 </tr>

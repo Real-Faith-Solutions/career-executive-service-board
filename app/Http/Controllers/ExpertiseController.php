@@ -37,25 +37,27 @@ class ExpertiseController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        $speXpCode = $request->specialization_code;
-            
-        $expertise = PersonalData::find($cesno);
+        $profileTblExpertise = new ProfileTblExpertise([
 
-        $expertiseLibrary = ProfileLibTblExpertiseSpec::find($speXpCode);
- 
-        $expertise->expertise()->attach($expertiseLibrary,['encoder'=>$encoder]);
+            'specialization_code' => $request->specialization_code,
+            'encoder' =>  $encoder,
+
+        ]);
+    
+        $personalData = PersonalData::find($cesno);
+        
+        $personalData->expertise()->save($profileTblExpertise);
             
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Expertise Successfuly Saved');
     }
 
-    public function edit($cesno, $speXpCode, $ctrlno)
+    public function edit($cesno,$ctrlno)
     {
-        $personalDataId = PersonalData::find($cesno);
-        $speXpCodes = $personalDataId->expertise()->where('specialization_code', $speXpCode)->value('specialization_code');
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
         
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         
-        return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'speXpCodes', 'ctrlno'));
+        return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'profileTblExpertise'));
     }
 
     public function update(Request $request, $cesno, $speXpCodes, $ctrlno)

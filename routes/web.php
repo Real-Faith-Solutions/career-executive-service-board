@@ -299,9 +299,9 @@ Route::middleware('auth')->group(function () {
         Route::prefix('expertise')->group(function () {
             Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create');
             Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index');
-            Route::get('edit/{cesno}/{speXpCode}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
+            Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
             Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
-            Route::put('update/{cesno}/{speXpCodes}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
+            Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
             Route::delete('destroy/{cesno}/{ctrlno}/{speXpCode}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
         });
 

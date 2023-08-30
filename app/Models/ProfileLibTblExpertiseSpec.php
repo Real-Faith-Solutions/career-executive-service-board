@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileLibTblExpertiseSpec extends Model
 {
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory,SoftDeletes;
 
     protected $table = "profilelib_tblExpertiseSpec";
 
@@ -22,12 +20,11 @@ class ProfileLibTblExpertiseSpec extends Model
         'Title',
     ]; 
 
-    public function expertisePersonalData(): BelongsToMany
-    {
-        return $this->belongsToMany(PersonalData::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
-        ->as('profile_tblExpertise')
-        ->withPivot('ctrlno', 'encoder')
-        ->withTimestamps();
-    }
-
+    // public function expertisePersonalData(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(PersonalData::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
+    //     ->as('profile_tblExpertise')
+    //     ->withPivot('ctrlno', 'encoder')
+    //     ->withTimestamps();
+    // }
 }
