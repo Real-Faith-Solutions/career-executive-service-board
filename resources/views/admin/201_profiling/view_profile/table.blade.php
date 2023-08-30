@@ -12,7 +12,20 @@
                 <thead class="bg-gray-50 text-xs uppercase text-gray-700">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Ces No.
+                            <a href="{{ route('view-profile-201.index', ['sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}" class="flex items-center space-x-1">
+                                Ces No.
+                                @if ($sortBy === 'cesno')
+                                    @if ($sortOrder === 'asc')
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4 text-gray-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @endif
+                                @endif
+                            </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -23,35 +36,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @if (count($searched) === 0)
-
-                        <tr>
-                            <th class="text-red-500" colspan="3">
-                                <h1 class="text-center">No result found</h1>
-                                <div class="flex justify-center">
-                                    <a class="btn btn-primary" href="{{ env('APP_URL') }}admin/profile/add">Add profile instead</a>
-                                </div>
-                            </th>
-                        </tr>
-                    @else --}}
                         @foreach ($personalData as $personalDatas)
                             <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
-
-                                {{-- <a href="{{ env('APP_URL') }}admin/profile/views/{{ $item->cesno }}"> --}}
-                                    <th scope="col" class="px-6 py-3">
-                                        {{ $personalDatas->cesno }}
-                                    </th>
-                                    <td scope="col" class="px-6 py-3">
-                                        {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        <a href="{{ route('personal-data.show', ['cesno' => $personalDatas->cesno]) }}" class="font-medium">View profile</a>
-                                    </td>
-                                {{-- </a> --}}
-
+                                <th scope="col" class="px-6 py-3">
+                                    {{ $personalDatas->cesno }}
+                                </th>
+                                <td scope="col" class="px-6 py-3">
+                                    {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <a href="{{ route('personal-data.show', ['cesno' => $personalDatas->cesno]) }}" class="font-medium">View profile</a>
+                                </td>
                             </tr>
                         @endforeach
-                    {{-- @endif --}}
                 </tbody>
             </table>
             <div class="my-5">
