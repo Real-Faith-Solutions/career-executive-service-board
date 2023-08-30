@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibTblEducDegree::factory(10)->create();
         \App\Models\ProfileLibTblEducSchool::factory(10)->create();
         \App\Models\ProfileLibTblEducMajor::factory(10)->create();
-        \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
+        // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
         \App\Models\PersonalData::factory(50)->create();
         \App\Models\ProfileLibTblExamRef::factory(10)->create();
@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblCesStatusAccSeeder::class,
             ProfileLibTblCesStatusSeeder::class,
             ProfileLibTblAppAuthoritySeeder::class,
+            ProfileLibTblExpertiseSpecSeeder::class,
         ]);
 
     }
