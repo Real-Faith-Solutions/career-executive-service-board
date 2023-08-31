@@ -26,12 +26,12 @@
             @foreach ($language as $languages)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                       {{  $languages->title }}
+                       {{  $languages->languagePersonalData->title }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="{{ route('language.edit', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code, 'ctrlno'=>$languages->profile_tblLanguages->ctrlno]) }}" method="GET">
+                            <form action="{{ route('language.edit', ['ctrlno'=>$languages->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -43,10 +43,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('language.destroy', ['cesno'=>$languages->profile_tblLanguages->personal_data_cesno, 'languageCode'=>$languages->profile_tblLanguages->language_code]) }}" method="POST" id="delete_language_form{{$languages->profile_tblLanguages->ctrlno}}">
+                            <form action="{{ route('language.destroy', ['ctrlno'=>$languages->ctrlno]) }}" method="POST" id="delete_language_form{{$languages->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteLanguageButton{{$languages->profile_tblLanguages->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteLanguageButton{{$languages->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

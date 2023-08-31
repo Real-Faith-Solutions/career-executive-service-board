@@ -25,12 +25,12 @@ class ProfileLibTblLanguageRef extends Model
 
     ];
 
-    public function languagePersonalData(): BelongsToMany
-    {
-        return $this->belongsToMany(PersonalData::class, 'profile_tblLanguages', 'language_code', 'personal_data_cesno')
-        ->as('profile_tblLanguages')
-        ->withPivot('ctrlno', 'encoder')
-        ->withTimestamps();
-    }
+    // public function languagePersonalData(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(PersonalData::class, 'profile_tblLanguages', 'language_code', 'personal_data_cesno')
+    //     ->as('profile_tblLanguages')
+    //     ->withPivot('ctrlno', 'encoder')
+    //     ->withTimestamps();
+    // }
      
 }

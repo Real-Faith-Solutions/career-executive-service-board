@@ -15,6 +15,7 @@ class LanguageController extends Controller
     {
         $personalDataId = PersonalData::find($cesno);
         $language = $personalDataId->languages;
+
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
         return view('admin.201_profiling.view_profile.partials.languages_dialects.table', compact('profileLibTblLanguageRef', 'language', 'cesno'));
@@ -30,13 +31,16 @@ class LanguageController extends Controller
         $user = Auth::user();
         $encoder = $user->userName(); 
 
-        $language_codes = $request->language_code;
-            
-        $languagePersonalDataId = PersonalData::find($cesno);
+        $profileTblLanguages = new ProfileTblLanguages([
 
-        $languageCode = ProfileLibTblLanguageRef::find($language_codes);
- 
-        $languagePersonalDataId->languages()->attach($languageCode,['encoder'=>$encoder]);
+            'language_code' => $request->language_code,
+            'encoder' =>  $encoder,
+
+        ]);
+    
+        $personalData = PersonalData::find($cesno);
+        
+        $personalData->languages()->save($profileTblLanguages);
             
         return redirect()->back()->with('message', 'Successfuly Saved');
     }

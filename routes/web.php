@@ -310,10 +310,10 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('language')->group(function () {
             Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index');
-            Route::get('edit/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
+            Route::get('edit/{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
             Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
             Route::put('update/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
-            Route::delete('destroy/{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
+            Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
