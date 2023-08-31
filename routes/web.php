@@ -310,10 +310,13 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('language')->group(function () {
             Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index');
-            Route::get('edit/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'edit'])->name('language.edit');
+            Route::get('edit/{ctrlno}/{cesno}', [LanguageController::class, 'edit'])->name('language.edit');
             Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
-            Route::put('update/{cesno}/{languageCode}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
-            Route::delete('destroy/{cesno}/{languageCode}', [LanguageController::class, 'destroy'])->name('language.destroy');
+            Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
+            Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
+            Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {

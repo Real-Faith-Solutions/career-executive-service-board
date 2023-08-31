@@ -10,10 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblLanguages extends Model
 {
-
-    use HasFactory;
- 
-    use SoftDeletes;
+    use HasFactory,SoftDeletes;
 
     protected $table = 'profile_tblLanguages';
 
@@ -22,9 +19,13 @@ class ProfileTblLanguages extends Model
     protected $fillable = [
 
         'personal_data_cesno',
-        'language_description',
+        'language_code',
         'encoder',
 
     ];
-    
+
+    public function languagePersonalData(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblLanguageRef::class, 'language_code');
+    }    
 }

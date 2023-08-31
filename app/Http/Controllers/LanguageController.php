@@ -15,6 +15,7 @@ class LanguageController extends Controller
     {
         $personalDataId = PersonalData::find($cesno);
         $language = $personalDataId->languages;
+
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
         return view('admin.201_profiling.view_profile.partials.languages_dialects.table', compact('profileLibTblLanguageRef', 'language', 'cesno'));
@@ -30,50 +31,74 @@ class LanguageController extends Controller
         $user = Auth::user();
         $encoder = $user->userName(); 
 
-        $language_codes = $request->language_code;
-            
-        $languagePersonalDataId = PersonalData::find($cesno);
+        $profileTblLanguages = new ProfileTblLanguages([
 
-        $languageCode = ProfileLibTblLanguageRef::find($language_codes);
- 
-        $languagePersonalDataId->languages()->attach($languageCode,['encoder'=>$encoder]);
+            'language_code' => $request->language_code,
+            'encoder' =>  $encoder,
+
+        ]);
+    
+        $personalData = PersonalData::find($cesno);
+        
+        $personalData->languages()->save($profileTblLanguages);
             
         return redirect()->back()->with('message', 'Successfuly Saved');
     }
 
-    public function edit($cesno, $language_code, $ctrlno)
+    public function edit($ctrlno, $cesno)
     {
-        $personalDataId = PersonalData::find($cesno);
-        $languageId = $personalDataId->languages()->where('code', $language_code)->value('code');
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
-        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'languageId', 'cesno', 'ctrlno'));
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'profileTblLanguages', 'cesno'));
     }
 
-    public function update(Request $request, $cesno, $language_code, $ctrlno)
+    public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
             'language_code' => ['required', Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
-        $personalDataId = PersonalData::find($cesno);
-
-        $languageId = ProfileLibTblLanguageRef::find($language_code);
- 
-        $personalDataId->languages()->updateExistingPivot($languageId,['language_code' => $request->language_code,]);
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $profileTblLanguages->language_code = $request->language_code;
+        $profileTblLanguages->save();
      
         return redirect()->route('language.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
-    public function destroy($cesno, $languageCode)
+    public function destroy($ctrlno)
     {
-        $personalData = PersonalData::find($cesno);
-
-        $languageId = ProfileLibTblLanguageRef::find($languageCode);
- 
-        $personalData->languages()->detach($languageId);
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno); 
+        $profileTblLanguages->delete();
 
         return redirect()->back()->with('info', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $profileTblLanguagesTrashedRecord = $personalData->languages()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.trashbin', compact('profileTblLanguagesTrashedRecord','cesno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno); 
+        $profileTblLanguages->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno);
+        $profileTblLanguages->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
