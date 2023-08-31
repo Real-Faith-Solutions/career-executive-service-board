@@ -66,7 +66,19 @@ class RolesTableSeeder extends Seeder
         foreach ($permissions_power_user as $permission) {
             $power_user->assignPermission($permission);
         }
+
+        $permissions_rank_officer = [
+            'personal_data_view', 'family_profile_view', 'educational_attainment_view', 'examinations_taken_view',
+            'scholarships_taken_view', 'research_and_studies_view', 'work_experience_view', 'field_expertise_view',
+            'ces_trainings_view', 'non_ces_trainings_view', 'health_records_view', 'awards_and_citations_view',
+            'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_add', 
+            'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
+            'cespes_ratings_view', 'pdf_files_view',
+        ];
         
+        foreach ($permissions_rank_officer as $permission) {
+            $rank_officer->assignPermission($permission);
+        }
         
     }
 }
