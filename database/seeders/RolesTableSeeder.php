@@ -103,6 +103,20 @@ class RolesTableSeeder extends Seeder
         foreach ($permissions_training_officer as $permission) {
             $training_officer->assignPermission($permission);
         }
+
+        $permissions_cespes_operator = [
+            'personal_data_view', 'family_profile_view', 'educational_attainment_view', 'examinations_taken_view',
+            'scholarships_taken_view', 'research_and_studies_view', 'work_experience_view', 'field_expertise_view',
+            'ces_trainings_view', 'non_ces_trainings_view', 'health_records_view', 'awards_and_citations_view',
+            'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_view',
+            'cespes_ratings_add', 'cespes_ratings_edit', 'cespes_ratings_delete', 'cespes_ratings_view', 'pdf_files_view',
+        ];
+        
+        foreach ($permissions_cespes_operator as $permission) {
+            $cespes_operator->assignPermission($permission);
+        }
+
+        
         
     }
 }
