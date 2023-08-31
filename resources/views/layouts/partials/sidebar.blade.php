@@ -12,7 +12,7 @@
                 </a>
             </li>
 
-            @if($userPermissions->contains('permission_name', 'add-profile'))
+            @if($userRole !== "user")
 
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard">
