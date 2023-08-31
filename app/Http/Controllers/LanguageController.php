@@ -67,13 +67,10 @@ class LanguageController extends Controller
         return redirect()->route('language.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
-    public function destroy($cesno, $languageCode)
+    public function destroy($ctrlno)
     {
-        $personalData = PersonalData::find($cesno);
-
-        $languageId = ProfileLibTblLanguageRef::find($languageCode);
- 
-        $personalData->languages()->detach($languageId);
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno); 
+        $profileTblLanguages->delete();
 
         return redirect()->back()->with('info', 'Deleted Sucessfully');
     }
