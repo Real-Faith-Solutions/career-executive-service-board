@@ -37,48 +37,74 @@ class ExpertiseController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        $speXpCode = $request->specialization_code;
-            
-        $expertise = PersonalData::find($cesno);
+        $profileTblExpertise = new ProfileTblExpertise([
 
-        $expertiseLibrary = ProfileLibTblExpertiseSpec::find($speXpCode);
- 
-        $expertise->expertise()->attach($expertiseLibrary,['encoder'=>$encoder]);
+            'specialization_code' => $request->specialization_code,
+            'encoder' =>  $encoder,
+
+        ]);
+    
+        $personalData = PersonalData::find($cesno);
+        
+        $personalData->expertise()->save($profileTblExpertise);
             
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Expertise Successfuly Saved');
     }
 
-    public function edit($cesno, $speXpCode, $ctrlno)
+    public function edit($cesno,$ctrlno)
     {
-        $personalDataId = PersonalData::find($cesno);
-        $speXpCodes = $personalDataId->expertise()->where('specialization_code', $speXpCode)->value('specialization_code');
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
         
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
         
-        return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'speXpCodes', 'ctrlno'));
+        return view('admin.201_profiling.view_profile.partials.field_expertise.edit',compact('cesno', 'profileLibTblExpertiseSpec', 'profileTblExpertise'));
     }
 
-    public function update(Request $request, $cesno, $speXpCodes, $ctrlno)
+    public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
-            'specialization_code' => [Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'required'],
+            'specialization_code' => ['required', Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
-        $personalDataId = PersonalData::find($cesno);
-
-        $speXpCode = ProfileLibTblExpertiseSpec::find($speXpCodes);
-
-        $personalDataId->expertise()->updateExistingPivot($speXpCode,['specialization_code' => $request->specialization_code,]);
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
+        $profileTblExpertise->specialization_code = $request->specialization_code;
+        $profileTblExpertise->save();
      
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
     }
 
-    public function destroy($cesno, $ctrlno, $speXpCode)
+    public function destroy($ctrlno)
     {
-        $personalData = PersonalData::find($cesno);
- 
-        $personalData->expertise()->detach($speXpCode);
+        $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
+        $profileTblExpertise->delete();
 
         return redirect()->back()->with('message', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted expertise of the parent model
+        $profileTblExpertiseTrashedRecord = $personalData->expertise()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.field_expertise.trashbin', compact('profileTblExpertiseTrashedRecord', 'cesno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $profileTblExpertise = ProfileTblExpertise::onlyTrashed()->find($ctrlno);
+        $profileTblExpertise->restore();
+
+        return redirect()->back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $profileTblExpertise = ProfileTblExpertise::onlyTrashed()->find($ctrlno);
+        $profileTblExpertise->forceDelete();
+
+        return redirect()->back()->with('message', 'Data Permanently Delete Sucessfully');
     }
 }

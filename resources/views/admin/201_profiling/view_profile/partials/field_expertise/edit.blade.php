@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'speXpCodes'=>$speXpCodes, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_field_expertise_form">
+            <form action="{{ route('expertise.update', ['cesno'=>$cesno, 'ctrlno'=>$profileTblExpertise->ctrlno]) }}" method="POST" id="update_field_expertise_form">
                 @csrf
                 @method('PUT')
 
@@ -27,7 +27,7 @@
                         <select id="expertise_specialization" name="specialization_code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
-                                @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $speXpCodes)
+                                @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $profileTblExpertise->specialization_code)
                                     <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}" selected>
                                         {{ $profileLibTblExpertiseSpecs->Title }}
                                     </option>

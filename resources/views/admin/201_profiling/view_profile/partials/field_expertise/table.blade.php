@@ -5,6 +5,15 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
+    <a href="{{ route('expertise.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
+
     <a href="{{ route('expertise.create', ['cesno' => $cesno]) }}" class="btn btn-primary" >Add Field Expertise</a>
 </div>
 
@@ -25,12 +34,12 @@
             @foreach ($expertise as $expertised)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $expertised->Title}}
+                        {{ $expertised->expertisePersonalData->Title}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->profile_tblExpertise->personal_data_cesno, 'speXpCode'=>$expertised->profile_tblExpertise->specialization_code, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno]) }}" method="GET">
+                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->personal_data_cesno, 'ctrlno'=>$expertised->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -42,10 +51,10 @@
                                 </button>
                             </form>
                         
-                            <form action="{{ route('expertise.destroy', ['cesno'=>$cesno, 'ctrlno'=>$expertised->profile_tblExpertise->ctrlno, 'speXpCode'=>$expertised->SpeExp_Code]) }}" method="POST" id="delete_field_expertise_form{{$expertised->profile_tblExpertise->ctrlno}}">
+                            <form action="{{ route('expertise.destroy', ['ctrlno'=>$expertised->ctrlno]) }}" method="POST" id="delete_field_expertise_form{{$expertised->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->profile_tblExpertise->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteFieldExpertiseButton{{$expertised->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
