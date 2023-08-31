@@ -5,6 +5,15 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
+    <a href="{{ route('language.recentlyDeleted', ['cesno'=>$cesno]) }}">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
+
     <button class="btn btn-primary" id='add-edit-languages-btn'>Add Language Dialect</button>
 </div>
 

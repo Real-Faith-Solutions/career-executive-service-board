@@ -74,4 +74,31 @@ class LanguageController extends Controller
 
         return redirect()->back()->with('info', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted scholarships of the parent model
+        $profileTblLanguagesTrashedRecord = $personalData->languages()->onlyTrashed()->get();
+
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.trashbin', compact('profileTblLanguagesTrashedRecord','cesno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno); 
+        $profileTblLanguages->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno);
+        $profileTblLanguages->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

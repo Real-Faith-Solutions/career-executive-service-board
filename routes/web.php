@@ -314,6 +314,9 @@ Route::middleware('auth')->group(function () {
             Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
             Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
             Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
+            Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
