@@ -13,8 +13,10 @@
             </li>
 
             @if($userRole !== "user")
-
+                
+                {{-- 201 profiling --}}
                 <li>
+
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard">
                         <svg aria-hidden="true" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
@@ -24,13 +26,14 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
+
                     <ul id="dropdown-dashboard" class="hidden space-y-2 py-2">
 
-                        {{-- @if($userPermissions->contains('permission_name', 'add-profile')) --}}
-                        <li>
-                            <a href="{{ route('profile.add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
-                        </li>
-                        {{-- @endif --}}
+                        @if ($userPermissions->contains('permission_name', 'personal_data_add'))
+                            <li>
+                                <a href="{{ route('profile.add') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add Profile</a>
+                            </li>
+                        @endif
 
                         <li>
                             <a href="{{ route('view-profile-201.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View Profile</a>
@@ -41,8 +44,11 @@
                         </li>
 
                     </ul>
-                </li>
 
+                </li>
+                {{-- end 201 profiling --}}
+
+                {{-- Plantilla --}}
                 <li>
                     <a href="{{ route('plantilla-management.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
 
@@ -52,7 +58,9 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Plantilla</span>
                     </a>
                 </li>
+                {{-- end Plantilla --}}
 
+                {{-- Competency --}}
                 <li>
                     <a href="{{ route('competency-data.index') }}" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -62,7 +70,9 @@
                         <span class="ml-3 flex-1 whitespace-nowrap">Competency</span>
                     </a>
                 </li>
+                {{-- end Competency --}}
 
+                {{-- reports --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-reports" data-collapse-toggle="dropdown-reports">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -93,7 +103,9 @@
                         </li>
                     </ul>
                 </li>
+                {{-- end reports --}}
 
+                {{-- rights management --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-rights-management" data-collapse-toggle="dropdown-rights-management">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -114,7 +126,9 @@
                         </li>
                     </ul>
                 </li>
+                {{-- end rights management --}}
 
+                {{-- libraries --}}
                 <li>
                     <button type="button" class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-system-utility" data-collapse-toggle="dropdown-system-utility">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -147,9 +161,11 @@
 
                     </ul>
                 </li>
+                {{-- end libraries --}}
 
             @else
 
+                {{-- single view profile for user --}}
                 <li>
                     <a href="{{ route('personal-data.show', ['cesno' => $user_cesno]) }}" class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white">
@@ -158,6 +174,7 @@
                         <span class="ml-3">View Profile</span>
                     </a>
                 </li>
+                {{-- end single view profile for user --}}
 
             @endif
 
