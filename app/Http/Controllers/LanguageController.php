@@ -45,27 +45,24 @@ class LanguageController extends Controller
         return redirect()->back()->with('message', 'Successfuly Saved');
     }
 
-    public function edit($cesno, $language_code, $ctrlno)
+    public function edit($ctrlno, $cesno)
     {
-        $personalDataId = PersonalData::find($cesno);
-        $languageId = $personalDataId->languages()->where('code', $language_code)->value('code');
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
-        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'languageId', 'cesno', 'ctrlno'));
+        return view('admin.201_profiling.view_profile.partials.languages_dialects.edit', compact('profileLibTblLanguageRef', 'profileTblLanguages', 'cesno'));
     }
 
-    public function update(Request $request, $cesno, $language_code, $ctrlno)
+    public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
             'language_code' => ['required', Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
-        $personalDataId = PersonalData::find($cesno);
-
-        $languageId = ProfileLibTblLanguageRef::find($language_code);
- 
-        $personalDataId->languages()->updateExistingPivot($languageId,['language_code' => $request->language_code,]);
+        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $profileTblLanguages->language_code = $request->language_code;
+        $profileTblLanguages->save();
      
         return redirect()->route('language.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }

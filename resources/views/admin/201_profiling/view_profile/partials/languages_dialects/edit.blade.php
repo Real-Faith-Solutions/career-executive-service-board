@@ -20,7 +20,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('language.update', ['cesno'=>$cesno, 'languageCode'=>$languageId, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_language_form" onsubmit="return checkErrorsBeforeSubmit(update_language_form)">
+            <form action="{{ route('language.update', ['cesno'=>$cesno, 'ctrlno'=>$profileTblLanguages->ctrlno]) }}" method="POST" id="update_language_form" onsubmit="return checkErrorsBeforeSubmit(update_language_form)">
                 @csrf
                 @method('PUT')
 
@@ -30,7 +30,7 @@
                         <select id="language_code" name="language_code" required>
                             <option disabled selected>Select language</option>
                             @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
-                                @if ($profileLibTblLanguageRefs->code == $languageId)
+                                @if ($profileLibTblLanguageRefs->code == $profileTblLanguages->language_code)
                                     <option value="{{ $profileLibTblLanguageRefs->code}}" selected>
                                         {{ $profileLibTblLanguageRefs->title }}
                                     </option>
