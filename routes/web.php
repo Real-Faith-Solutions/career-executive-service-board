@@ -52,6 +52,7 @@ use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\ViewProfile201Controller;
@@ -93,10 +94,10 @@ Route::get('/', function () {
 // auth
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'userLogout']);
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name('sendPassword');
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // end auth
 
 Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
@@ -515,6 +516,25 @@ Route::middleware('auth')->group(function () {
         });
     });
     // End of competency routes
+
+    // Rights management routes
+    Route::prefix('rights-management')->group(function ()
+    {
+
+        Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
+
+        // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
+        // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
+        // Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');
+        // Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
+        // Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
+        // Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
+        // Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
+        // Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
+        // Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+    
+    });
+    // End of Rights management routes
 
     // Library routes (201)
     Route::prefix('201-library')->group(function () {
