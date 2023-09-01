@@ -54,6 +54,7 @@ use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\ViewProfile201Controller;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
@@ -512,6 +513,10 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
             Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete');
+        });
+
+        Route::prefix('training-session')->group(function () {
+            Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
         });
     });
     // End of competency routes
