@@ -518,6 +518,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('training-session')->group(function () {
             Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
             Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
+            Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
         });
     });
     // End of competency routes

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('category')->nullable();
             $table->string('specialization')->nullable();
-            $table->dateTime('from_dt')->nullable();
-            $table->dateTime('to_dt')->nullable();
+            $table->date('from_dt')->nullable();
+            $table->date('to_dt')->nullable();
             $table->foreignId('venueId')->constrained('traininglib_tblvenue', 'venueid');
             $table->string('status')->nullable();
-            $table->longText('remarks')->nullable();
+            $table->string('remarks')->nullable();
             $table->string('barrio')->nullable();
             $table->integer('no_hours')->nullable();
             $table->string('session_director')->nullable();

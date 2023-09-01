@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="training_session_form" onsubmit="return checkErrorsBeforeSubmit(training_session_form)">
+            <form action="{{ route('training-session.store') }}" method="POST" id="training_session_form" onsubmit="return checkErrorsBeforeSubmit(training_session_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -49,15 +49,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="category">Specialization<sup>*</sup></label>
-                        <select name="category" id="category">
+                        <label for="specialization">Specialization<sup>*</sup></label>
+                        <select name="specialization" id="specialization">
                             <option disabled selected>Select Specialization</option>
                             @foreach ($profileLibTblExpertiseGen as $profileLibTblExpertiseGen)
                                 <option value="{{ $profileLibTblExpertiseGen->Title }}">{{ $profileLibTblExpertiseGen->Title }}</option>
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
-                        @error('category')
+                        @error('specialization')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -79,7 +79,7 @@
 
                     <div class="mb-3">
                         <label for="to_dt">Date To<sup>*</sup></label>
-                        <input type="date" id="training_session_to_dt" oninput="validateDateInput(training_session_to_dt), validateDateFromTo(training_session_from_dt, training_session_to_dt)" required>
+                        <input type="date" id="training_session_to_dt" name="to_dt" oninput="validateDateInput(training_session_to_dt), validateDateFromTo(training_session_from_dt, training_session_to_dt)" required>
                         <p class="input_error text-red-600"></p>
                         @error('to_dt')
                             <span class="invalid" role="alert">
@@ -93,7 +93,7 @@
                         <select name="venue" id="venue">
                             <option disabled selected>Select Venue</option>
                             @foreach ($competencyTrainingVenueManager as $competencyTrainingVenueManagers)
-                                <option value="{{ $competencyTrainingVenueManagers->name }}">{{ $competencyTrainingVenueManagers->name }}</option>
+                                <option value="{{ $competencyTrainingVenueManagers->venueid }}">{{ $competencyTrainingVenueManagers->name }}</option>
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
@@ -108,7 +108,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="no_hours">No of Hours<sup>*</sup></label>
-                        <input type="text" id="training_session_no_hours" name="no_hours" oninput="validateInput(training_session_no_hours, 6, 'numbers')" onkeypress="validateInput(training_session_no_hours, 6, 'numbers')" onblur="checkErrorMessage(training_session_no_hours)" required>
+                        <input type="text" id="training_session_no_hours" name="no_hours" oninput="validateInput(training_session_no_hours, 1, 'numbers')" onkeypress="validateInput(training_session_no_hours, 1, 'numbers')" onblur="checkErrorMessage(training_session_no_hours)" required>
                         <p class="input_error text-red-600"></p>
                         @error('no_hours')
                             <span class="invalid" role="alert">
@@ -151,7 +151,7 @@
                         <select name="session_director" id="session_director">
                             <option disabled selected>Select Director</option>
                             @foreach ($trainingSecretariat as $trainingSecretariats)
-                                <option value="{{ $trainingSecretariats->ctrlno }}">{{ $trainingSecretariats->description }}</option>
+                                <option value="{{ $trainingSecretariats->description }}">{{ $trainingSecretariats->description }}</option>
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
@@ -164,9 +164,15 @@
 
                     <div class="mb-3">
                         <label for="status">Status<sup>*</sup></label>  
-                        <input type="text" id="training_session_status" name="Status" oninput="validateInput(training_session_status, 6, 'alphaNumeric')" onkeypress="validateInput(training_session_status, 6, 'alphaNumeric')" onblur="checkErrorMessage(training_session_status)" >
+                        <select name="status" id="status">
+                            <option disabled selected>Select Status</option>
+                            <option value="Registration">Registration</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
                         <p class="input_error text-red-600"></p>
-                        @error('Status')
+                        @error('status')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

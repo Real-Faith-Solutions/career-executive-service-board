@@ -50,6 +50,10 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Barrio
                 </th>
 
@@ -59,10 +63,6 @@
 
                 <th scope="col" class="px-6 py-3">
                     Session Director
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Status
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -82,6 +82,10 @@
                     </td>
 
                     <td class="px-6 py-3">
+                        {{ $trainingSessions->sessionid }}
+                    </td>
+
+                    <td class="px-6 py-3">
                         {{ $trainingSessions->category }}
                     </td>
 
@@ -90,27 +94,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->from_dt }}
+                        {{ $trainingSessions->from_dt. ' - '.$trainingSessions->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->to_dt }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingSessions->venueid }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingSessions->status }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingSessions->remarks }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingSessions->barrio }}
+                        {{ $trainingSessions->venuePersonalData->name }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -118,15 +106,23 @@
                     </td>
 
                     <td class="px-6 py-3">
+                        {{ $trainingSessions->status }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessions->barrio }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessions->resourceSpeakerPersonalData->lastname.', '.$trainingSessions->resourceSpeakerPersonalData->firstname }}
+                    </td>
+
+                    <td class="px-6 py-3">
                         {{ $trainingSessions->session_director }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->training_asst }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $trainingSessions->speakerid }}
+                        {{ $trainingSessions->remarks }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TrainingSession extends Model
@@ -33,4 +34,14 @@ class TrainingSession extends Model
         'updated_by',
         
     ];
+
+    public function venuePersonalData(): BelongsTo
+    {
+        return $this->belongsTo(CompetencyTrainingVenueManager::class, 'venueId');
+    }
+
+    public function resourceSpeakerPersonalData(): BelongsTo
+    {
+        return $this->belongsTo(ResourceSpeaker::class, 'speakerid');
+    }
 }
