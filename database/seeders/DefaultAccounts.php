@@ -128,7 +128,7 @@ class DefaultAccounts extends Seeder
         ]);
 
         $user->assignRole('rank_officer');
-        // end seeding power user
+        // end seeding rank officer
 
         // seeding users
         $personalDataRecords = PersonalData::where('email', '!=', 'admin@ces.com')->get();
