@@ -283,7 +283,15 @@ class DefaultAccounts extends Seeder
         // end seeding agency hr operator
 
         // seeding users
-        $personalDataRecords = PersonalData::where('email', '!=', 'admin@ces.com')->get();
+        $personalDataRecords = PersonalData::whereNotIn('email', [
+            'admin@ces.com',
+            'power_user@ces.com',
+            'rank_officer@ces.com',
+            'cesb_operator@ces.com',
+            'training_officer@ces.com',
+            'cespes_operator@ces.com',
+            'agency_hr_operator@ces.com'
+        ])->get();
 
         foreach ($personalDataRecords as $personalData) {
 
