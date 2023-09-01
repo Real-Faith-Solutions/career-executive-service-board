@@ -14,7 +14,7 @@
         </lord-icon>
     </a>
     
-    <a href="" class="btn btn-primary" >Add New Training</a>
+    <a href="{{ route('training-session.create') }}" class="btn btn-primary" >Add New Training</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

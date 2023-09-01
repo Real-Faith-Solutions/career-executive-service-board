@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CompetencyTrainingProvider;
 use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibTblExpertiseGen;
+use App\Models\ResourceSpeaker;
 use App\Models\TrainingLibCategory;
 use App\Models\TrainingSecretariat;
 use App\Models\TrainingSession;
@@ -25,7 +26,8 @@ class TrainingSessionController extends Controller
         $competencyTrainingVenueManager = CompetencyTrainingVenueManager::all();
         $trainingSecretariat = TrainingSecretariat::all();
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
+        $resourceSpeaker = ResourceSpeaker::all();
 
-        return view('admin.competency.partials.training_sessions.ces_trainings_attended.form', compact('trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen'));
+        return view('admin.competency.partials.training_sessions.ces_trainings_attended.form', compact('trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
     }
 }
