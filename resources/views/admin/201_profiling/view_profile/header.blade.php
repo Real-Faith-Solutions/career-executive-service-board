@@ -19,26 +19,26 @@
                     </svg>
                 </button>
                 <!-- personalDataTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="personalDataTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="personalDataTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex"  href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500"  href="{{ route('personal-data.show', ['cesno' => $cesno]) }}">Personal Data</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('family-profile.show', ['cesno' => $cesno]) }}">Family Profile</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('family-profile.show', ['cesno' => $cesno]) }}">Family Profile</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('personal-data-address.show', ['cesno'=>$cesno]) }}">Address</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('personal-data-address.show', ['cesno'=>$cesno]) }}">Address</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('contact-info.show', ['cesno'=>$cesno]) }}">Contact Information</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('contact-info.show', ['cesno'=>$cesno]) }}">Contact Information</a>
                         </li>
                         
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('personal-data-identification.show', ['cesno'=>$cesno]) }}">Identification Card</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('personal-data-identification.show', ['cesno'=>$cesno]) }}">Identification Card</a>
                         </li>
                     </ul>
                 </div>
@@ -52,19 +52,19 @@
                     </svg>
                 </button>
                 <!-- educationalAttainmentTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="educationalAttainmentTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="educationalAttainmentTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}">Educational Background / Attainment</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('educational-attainment.index', ['cesno' => $cesno]) }}">Educational Background / Attainment</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" >Examinations Taken</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('examination-taken.index', ['cesno' => $cesno]) }}" >Examinations Taken</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('scholarship.index', ['cesno' => $cesno]) }}" >Scholarships</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('scholarship.index', ['cesno' => $cesno]) }}" >Scholarships</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" >Research And Studies</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('research-studies.index', ['cesno' => $cesno]) }}" >Research And Studies</a>
                         </li>
                     </ul>
                 </div>
@@ -78,13 +78,13 @@
                     </svg>
                 </button>
                 <!-- workExperienceTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="workExperienceTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="workExperienceTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('work-experience.index', ['cesno' => $cesno]) }}" >Work Experience</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('work-experience.index', ['cesno' => $cesno]) }}" >Work Experience</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('expertise.index', ['cesno' => $cesno]) }}" >Field Expertise</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('expertise.index', ['cesno' => $cesno]) }}" >Field Expertise</a>
                         </li>
                     </ul>
                 </div>
@@ -98,13 +98,13 @@
                     </svg>
                 </button>
                 <!-- trainingsTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="trainingsTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="trainingsTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="#cesTrainingsTab" onclick="cesTrainingsTab()">Ces Trainings</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('other-training.index', ['cesno' => $cesno]) }}" >Non-CES Accredited Training</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('other-training.index', ['cesno' => $cesno]) }}" >Non-CES Accredited Training</a>
                         </li>
                     </ul>
                 </div>
@@ -118,32 +118,32 @@
                     </svg>
                 </button>
                 <!-- othersTab menu -->
-                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" id="othersTab">
+                <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="othersTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('health-record.index', ['cesno' => $cesno]) }}">Health Records</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('health-record.index', ['cesno' => $cesno]) }}">Health Records</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" >Award And Citations</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('award-citation.index', ['cesno' => $cesno]) }}" >Award And Citations</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('affiliation.index', ['cesno' => $cesno]) }}" >Major Civic and Professional Affiliations</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('affiliation.index', ['cesno' => $cesno]) }}" >Major Civic and Professional Affiliations</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('case-record.index', ['cesno'=>$cesno]) }}" >Case Records</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('case-record.index', ['cesno'=>$cesno]) }}" >Case Records</a>
                         </li>
 
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('language.index', ['cesno'=>$cesno]) }}" >Languages Dialects</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('language.index', ['cesno'=>$cesno]) }}" >Languages Dialects</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('eligibility-rank-tracker.index', ['cesno' => $cesno]) }}" >Eligibility and Rank Tracker</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('eligibility-rank-tracker.index', ['cesno' => $cesno]) }}" >Eligibility and Rank Tracker</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="#recordOfCespesRatingHrTab" onclick="recordOfCespesRatingHrTab()">Record of Cespes Ratings</a>
                         </li>
                         <li>
-                            <a class="btn category-button inline-flex" href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" >PDF Files</a>
+                            <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" >PDF Files</a>
                         </li>
                     </ul>
                 </div>
@@ -151,22 +151,3 @@
         </ul>
     </div>
 </nav>
-
-{{-- <div class="grid-rows-7 grid grid-cols-4 gap-1">
-    <div class="row-span-5 text-center">
-
-        <img id="profile-avatar" class="profile-avatar rounded-full h-50 w-96 border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->picture ?: 'placeholder.png')) }}" />
-
-        <h1 class="text-bold text-2xl">
-            {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
-        </h1>
-
-        <span class="@if ($mainProfile->status === 'Active') bg-green-100 text-green-800 @endif @if ($mainProfile->status === 'Inactive') bg-orange-100 text-orange-800 @endif @if ($mainProfile->status === 'Retired') bg-blue-100 text-blue-800 @endif @if ($mainProfile->status === 'Deceased') bg-red-100 text-red-800 @endif mr-2 rounded px-2.5 py-0.5 text-xs font-medium">
-            {{ $mainProfile->status }}
-        </span>
-
-        <p>CES number: {{ $mainProfile->cesno }}</p>
-    </div>
-</div> --}}
-
-
