@@ -3,8 +3,16 @@
 @section('sub', 'User Roles')
 @section('content')
 
+<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#" class="flex items-center">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">User Roles</span>
+        </a>
+    </div>
+</nav>
+
 <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" id='add-edit-languages-btn'>Add Language Dialect</button>
+    <button class="btn btn-primary" id='add-edit-languages-btn'>Add New Role</button>
 </div>
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -76,7 +84,7 @@
 
             <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
 
-                <div class="mb-1">
+                <div class="flex flex-col items-center">
                     <label for="new_role">New Role<sup>*</sup></label>
                     <input id="new_role" name="new_role" type="text" value="{{ old('new_role') }}" oninput="validateInput(new_role, 2, 'letters')" onkeypress="validateInput(new_role, 2, 'letters')" onblur="checkErrorMessage(new_role)" required>
                     <p class="input_error text-red-600"></p>
