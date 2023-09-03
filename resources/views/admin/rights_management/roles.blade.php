@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Language Dialect')
-@section('sub', 'Language Dialect')
+@section('title', 'User Roles')
+@section('sub', 'User Roles')
 @section('content')
 
 <div class="my-5 flex justify-end">
@@ -72,7 +72,7 @@
             @csrf
 
             <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
-            <h2 class="text-2xl font-bold mb-4 text-center">Add Language or Dialect</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center">Add New Role</h2>
 
             <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
 
