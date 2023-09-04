@@ -11,21 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_agency_location', function (Blueprint $table) {
-            $table->id();
-            $table->string('officelocid')->nullable();
-            $table->string('deptid')->nullable();
+
+        Schema::create('plantilla_tblAgencyLocation', function (Blueprint $table) {
+            $table->id('officelocid');
+            $table->foreignId('deptid')->constrained('plantilla_tblDeptAgency', 'deptid');
+            $table->foreignId('agencyloc_Id')->constrained('plantillalib_tblAgencyLocation', 'agencyloc_Id');
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
-            $table->string('loctype_id')->nullable();
             $table->string('telno')->nullable();
-            $table->string('emailaddr')->nullable();
+            $table->string('email')->nullable();
             $table->string('region')->nullable();
-            $table->date('encdate')->nullable();
-            $table->date('lastupd_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->date('lastupt_enc')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_agency_location');
+        Schema::dropIfExists('plantilla_tblAgencyLocation');
     }
 };

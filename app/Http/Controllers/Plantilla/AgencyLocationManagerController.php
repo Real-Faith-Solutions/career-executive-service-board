@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 
 class AgencyLocationManagerController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.plantilla.agency_location_manager.index');
+    }
+
+    public function show()
+    {
+        return "hello";
     }
 }

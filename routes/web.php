@@ -66,7 +66,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/preview-email', function () {
 
     $imagePath = public_path('images/branding.png');
-    $loginLink= config('app.url');
+    $loginLink = config('app.url');
     $data = [
         'email' => 'recipient@example.com',
         'password' => 'temporary_password',
@@ -81,12 +81,11 @@ Route::get('/preview-email', function () {
 // login route and redirect to dashboard if authenticated
 Route::get('/', function () {
 
-    if(!Auth::check()){
+    if (!Auth::check()) {
         return redirect()->route('login');
-    }else{
+    } else {
         return Redirect::to('/dashboard');
     }
-
 });
 // end login route and redirect to dashboard if authenticated
 
@@ -120,7 +119,6 @@ Route::middleware('auth')->group(function () {
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-
         });
 
         Route::prefix('family-profile')->group(function () {
@@ -399,6 +397,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
+            Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
         });
 
         Route::prefix('office-manager')->group(function () {
@@ -419,8 +418,7 @@ Route::middleware('auth')->group(function () {
     // End of plantilla routes
 
     // Competency routes
-    Route::prefix('competency')->group(function ()
-    {
+    Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
             Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
             Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
@@ -429,7 +427,7 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
             Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
         });
-    
+
         Route::prefix('non-ces-training-accredited')->group(function () {
             Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
             Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
