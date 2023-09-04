@@ -14,25 +14,23 @@ return new class extends Migration
         //training_tbl_sessions
         Schema::create('training_tblSessions', function (Blueprint $table) {
             $table->id('sessionid');
-            // $table->bigInteger('sessionid')->unique();
             $table->string('title')->nullable();
             $table->string('category')->nullable();
             $table->string('specialization')->nullable();
             $table->date('from_dt')->nullable();
             $table->date('to_dt')->nullable();
-            $table->integer('venueid')->nullable();
+            $table->foreignId('venueId')->constrained('traininglib_tblvenue', 'venueid');
             $table->string('status')->nullable();
-            $table->longText('remarks')->nullable();
+            $table->string('remarks')->nullable();
             $table->string('barrio')->nullable();
             $table->integer('no_hours')->nullable();
             $table->string('session_director')->nullable();
             $table->string('training_asst')->nullable();
-            $table->integer('speakerid')->nullable();
+            $table->foreignId('speakerid')->constrained('training_tblSpeakers', 'speakerID');
             $table->string('encoder')->nullable();
-            $table->string('encoder_dt')->nullable();
-            $table->string('lastupd_enc')->nullable();
-            $table->string('lastupd_dt')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -54,6 +54,7 @@ use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\ViewProfile201Controller;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
@@ -512,6 +513,18 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
             Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete');
+        });
+
+        Route::prefix('training-session')->group(function () {
+            Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
+            Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
+            Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
+            Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit');
+            Route::put('update/{ctrlno}', [TrainingSessionController::class, 'update'])->name('training-session.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSessionController::class, 'destroy'])->name('training-session.destroy');
+            Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
         });
     });
     // End of competency routes
