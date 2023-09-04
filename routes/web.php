@@ -524,6 +524,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('destroy/{ctrlno}', [TrainingSessionController::class, 'destroy'])->name('training-session.destroy');
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
         });
     });
     // End of competency routes

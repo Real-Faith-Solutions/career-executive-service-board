@@ -151,11 +151,11 @@ class TrainingSessionController extends Controller
         return back()->with('info', 'Data Restored Sucessfully');
     }
  
-    // public function forceDelete($ctrlno)
-    // {
-    //     $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->find($ctrlno);
-    //     $trainingSessionTrashedRecord->forceDelete();
+    public function forceDelete($ctrlno)
+    {
+        $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->find($ctrlno);
+        $trainingSessionTrashedRecord->forceDelete();
   
-    //     return back()->with('info', 'Data Permanently Deleted');
-    // }
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

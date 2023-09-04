@@ -146,7 +146,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-session.destroy', ['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="permanent_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
+                            <form action="{{ route('training-session.forceDelete', ['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="permanent_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="permanentTrainingSessionButton{{$trainingSessionTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
@@ -165,6 +165,11 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+
+<div class="m-5">
+    {{ $trainingSessionTrashedRecord->links() }}
 </div>
 
 @endsection
