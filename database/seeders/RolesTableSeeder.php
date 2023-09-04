@@ -10,14 +10,14 @@ class RolesTableSeeder extends Seeder
     public function run(): void
     {
         // roles
-        $admin = Role::create(['role_name' => 'admin']);
-        $power_user = Role::create(['role_name' => 'power_user']);
-        $rank_officer = Role::create(['role_name' => 'rank_officer']);
-        $cesb_operator = Role::create(['role_name' => 'cesb_operator']);
-        $training_officer = Role::create(['role_name' => 'training_officer']);
-        $cespes_operator = Role::create(['role_name' => 'cespes_operator']);
-        $agency_hr_operator = Role::create(['role_name' => 'agency_hr_operator']);
-        $user = Role::create(['role_name' => 'user']);
+        $admin = Role::create(['role_name' => 'admin', 'role_title' => 'Admin']);
+        $power_user = Role::create(['role_name' => 'power_user', 'role_title' => 'Power User']);
+        $rank_officer = Role::create(['role_name' => 'rank_officer', 'role_title' => 'Rank Officer']);
+        $cesb_operator = Role::create(['role_name' => 'cesb_operator', 'role_title' => 'CESB Operator']);
+        $training_officer = Role::create(['role_name' => 'training_officer', 'role_title' => 'Training Officer']);
+        $cespes_operator = Role::create(['role_name' => 'cespes_operator', 'role_title' => 'CESPES Operator']);
+        $agency_hr_operator = Role::create(['role_name' => 'agency_hr_operator', 'role_title' => 'Agency HR Operator']);
+        $user = Role::create(['role_name' => 'user', 'role_title' => 'User']);
 
         // permissions
         $permissions_admin = [
