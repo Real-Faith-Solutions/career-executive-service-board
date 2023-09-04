@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Resource Speaker Recycle Bin')
-@section('sub', 'Resource Speaker Recycle Bin')
+@section('title', 'Training Session')
+@section('sub', 'Training Session Recycle Bin')
 @section('content')
 @include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('resource-speaker.index') }}" class="btn btn-primary" >Go Back</a>
+    <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -17,47 +17,51 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Name
+                    Session Title
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Position
+                    Session Number
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Department
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Office/Company
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    No./Building
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Street
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Barangay
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    City/Province
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Contact No.
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Email Address
+                    Training Category
                 </th>
 
                 <th scope="col" class="px-6 py-3">
                     Expertise
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Inclusive Dates
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Venue
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    No. of Training Hours
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Barrio
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Resource Speaker
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Session Director
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Remarks
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -70,65 +74,69 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($resourceSpeakerTrashedRecord as $resourceSpeakerTrashedRecords)
+            @foreach ($trainingSessionTrashedRecord as $trainingSessionTrashedRecords)
                 <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->speakerID  }}
-                    </td>
-
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->lastname. " " .$resourceSpeakerTrashedRecords->firstname. " " .$resourceSpeakerTrashedRecords->mi  }}
-                    </td>
-
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Position }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Department }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Office }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Bldg }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Street }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Brgy }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->City }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->contactno }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->emailadd }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->expertise }}
+                        {{ $trainingSessionTrashedRecords->sessionid }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->deleted_at }}
+                        {{ $trainingSessionTrashedRecords->title }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->sessionid }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->category }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->specialization }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->from_dt. ' - '.$trainingSessionTrashedRecords->to_dt }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->venuePersonalData->name }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->no_hours }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->status }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->barrio }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->resourceSpeakerPersonalData->lastname.', '.$trainingSessionTrashedRecords->resourceSpeakerPersonalData->firstname }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->session_director }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->remarks }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingSessionTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('resource-speaker.restore', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="POST" id="restore_resoure_speaker_form{{$resourceSpeakerTrashedRecords->speakerID}}">
+                            <form action="{{ route('training-session.edit',['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="restore_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
                                 @csrf
-                                <button type="button" id="restoreResourceSpeakerButton{{$resourceSpeakerTrashedRecords->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreTrainingButton{{$trainingSessionTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -138,10 +146,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('resource-speaker.forceDelete', ['ctrlno'=>$resourceSpeakerTrashedRecords->speakerID]) }}" method="POST" id="permanent_resource_speaker_form{{$resourceSpeakerTrashedRecords->speakerID}}">
+                            <form action="{{ route('training-session.destroy', ['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="permanent_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="permanentResourceSpeakerButton{{$resourceSpeakerTrashedRecords->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentTrainingSessionButton{{$trainingSessionTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -157,10 +165,6 @@
             @endforeach
         </tbody>
     </table>
-</div>
-
-<div class="m-5">
-    {{ $resourceSpeakerTrashedRecord->links() }}
 </div>
 
 @endsection
