@@ -3,7 +3,7 @@
 @section('sub', 'User Roles')
 @section('content')
 
-<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800">
+<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">User Roles</span>
@@ -11,9 +11,9 @@
     </div>
 </nav>
 
-<div class="my-5 flex justify-end">
+{{-- <div class="my-5 flex justify-end">
     <button class="btn btn-primary" id='add-edit-languages-btn'>Add New Role</button>
-</div>
+</div> --}}
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
@@ -38,32 +38,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            {{-- <form action="{{ route('language.edit', ['ctrlno'=>$languages->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
-                                @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                        trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-
-                            <form action="{{ route('language.destroy', ['ctrlno'=>$languages->ctrlno]) }}" method="POST" id="delete_language_form{{$languages->ctrlno}}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" id="deleteLanguageButton{{$languages->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form> --}}
-                            <p>sample</p>
+                            <a href="#" class="font-medium">View Role</a>
                         </div>
                     </td>
                 </tr>
@@ -74,7 +49,7 @@
 </div>
 
 <!-- Modal for Adding Language Dialect -->
-<div id="add-edit-languages-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+{{-- <div id="add-edit-languages-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
         <form action="#" method="POST" class="flex flex-col items-center" id="new_role_form" onsubmit="return checkErrorsBeforeSubmit(new_role_form)">
             @csrf
@@ -99,6 +74,6 @@
             <button type="submit" id="addLanguagesBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">ADD</button>
         </form>
     </div>
-</div>
+</div> --}}
 
 @endsection
