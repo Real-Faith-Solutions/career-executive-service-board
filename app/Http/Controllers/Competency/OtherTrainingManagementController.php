@@ -17,7 +17,7 @@ class OtherTrainingManagementController extends Controller
         $personalData = PersonalData::find($cesno);
         $otherTraining = $personalData->competencyNonCesAccreditedTraining;
 
-        return view('admin.competency.partials.training_sessions.other_management_trainings.table', compact('otherTraining' ,'cesno'));
+        return view('admin.competency.partials.other_management_trainings.table', compact('otherTraining' ,'cesno'));
     }
 
     public function create($cesno)
@@ -25,7 +25,7 @@ class OtherTrainingManagementController extends Controller
        $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
        $competencyTrainingProvider = CompetencyTrainingProvider::all();
 
-       return view('admin.competency.partials.training_sessions.other_management_trainings.form', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider'));
+       return view('admin.competency.partials.other_management_trainings.form', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider'));
     }
 
     public function store(Request $request, $cesno)
@@ -74,7 +74,7 @@ class OtherTrainingManagementController extends Controller
         $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
         $competencyTrainingProvider = CompetencyTrainingProvider::all();
 
-        return view('admin.competency.partials.training_sessions.other_management_trainings.edit', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider', 'nonCesAccreditedTraining'));    
+        return view('admin.competency.partials.other_management_trainings.edit', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider', 'nonCesAccreditedTraining'));    
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -126,7 +126,7 @@ class OtherTrainingManagementController extends Controller
         // Access the soft deleted competencyNonCesAccreditedTraining of the parent model
         $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
  
-        return view('admin.competency.partials.training_sessions.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'cesno'));
+        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'cesno'));
     }
 
     public function restore($ctrlno)

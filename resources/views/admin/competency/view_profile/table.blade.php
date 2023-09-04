@@ -59,7 +59,7 @@
                                     </lord-icon>
                                 </a>
 
-                                <a href="" title="CES Trainings">
+                                <a href="{{ route('ces-training.index') }}" title="CES Trainings">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/kipaqhoz.json"

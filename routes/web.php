@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
+use App\Http\Controllers\Competency\CESTrainingController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
@@ -523,6 +524,10 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
+        });
+
+        Route::prefix('ces-training')->group(function () {
+            Route::get('index', [CESTrainingController::class, 'index'])->name('ces-training.index');
         });
     });
     // End of competency routes
