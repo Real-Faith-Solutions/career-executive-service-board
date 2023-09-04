@@ -54,5 +54,4 @@ class ProfileTblCesStatus extends Model
     {
         return $this->belongsTo(ProfileLibTblAppAuthority::class, 'official_code');
     }
-
 }

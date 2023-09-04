@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblEducDegreeSeeder::class,
             ProfileLibTblExamRefSeeder::class,
             ProfileLibTblLanguageRefSeeder::class,
+            ProfileLibTblExpertiseGenSeeder::class,
             AgencyLocationSeeder::class,
         ]);
     }
