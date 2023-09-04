@@ -523,6 +523,7 @@ Route::middleware('auth')->group(function () {
             Route::put('update/{ctrlno}', [TrainingSessionController::class, 'update'])->name('training-session.update');
             Route::delete('destroy/{ctrlno}', [TrainingSessionController::class, 'destroy'])->name('training-session.destroy');
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
         });
     });
     // End of competency routes

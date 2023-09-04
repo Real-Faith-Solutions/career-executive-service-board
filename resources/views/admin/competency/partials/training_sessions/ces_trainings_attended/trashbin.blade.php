@@ -134,9 +134,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-session.edit',['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="restore_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
+                            <form action="{{ route('training-session.restore',['ctrlno'=>$trainingSessionTrashedRecords->sessionid]) }}" method="POST" id="restore_training_session_form{{$trainingSessionTrashedRecords->sessionid}}">
                                 @csrf
-                                <button type="button" id="restoreTrainingButton{{$trainingSessionTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreTrainingSessionButton{{$trainingSessionTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"

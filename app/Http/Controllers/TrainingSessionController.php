@@ -141,4 +141,21 @@ class TrainingSessionController extends Controller
 
         return view('admin.competency.partials.training_sessions.ces_trainings_attended.trashbin', compact('trainingSessionTrashedRecord'));
     }
+
+    
+    public function restore($ctrlno)
+    {
+        $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->find($ctrlno);
+        $trainingSessionTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    // public function forceDelete($ctrlno)
+    // {
+    //     $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->find($ctrlno);
+    //     $trainingSessionTrashedRecord->forceDelete();
+  
+    //     return back()->with('info', 'Data Permanently Deleted');
+    // }
 }
