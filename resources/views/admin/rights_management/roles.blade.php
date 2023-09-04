@@ -33,7 +33,7 @@
             @foreach ($roles as $role)
                 <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
                     <td class="px-6 py-3">
-                       {{  $role->role_name }}
+                       {{  $role->role_title }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
