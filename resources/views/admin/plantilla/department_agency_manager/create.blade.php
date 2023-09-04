@@ -2,7 +2,7 @@
     <div class="modal-content bg-white rounded shadow-lg">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="p-4">
-                Sector Manager
+                Department Agency
             </h1>
         </div>
 
@@ -20,58 +20,58 @@
                     <label for="agencyType">Agency Type</label>
                     <select id="agencyType" name="plantillalib_tblAgencyType_id" required>
                         @foreach ($agencyType as $data)
-                            <option value="{{ $data->agency_typeid }}">{{ $data->title }}</option>
+                        <option value="{{ $data->agency_typeid }}">{{ $data->title }}</option>
                         @endforeach
                     </select>
                     @error('plantillalib_tblAgencyType_id')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="title">Agency Name</label>
                     <input id="title" name="title" required />
                     @error('title')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="acronym">Acronym</label>
-                    <input id="acronym" name="acronym" required minlength="2" maxlength="10"/>
+                    <input id="acronym" name="acronym" required minlength="2" maxlength="10" />
                     @error('acronym')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="website">Website</label>
                     <input id="website" name="website" type="url" />
                     @error('website')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="remarks">Remarks</label>
                     <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea>
                     @error('remarks')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="submitted_by">Submitted by</label>
                     <input id="submitted_by" name="submitted_by" required />
                     @error('submitted_by')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
                     @enderror
                 </div>
 
