@@ -38,7 +38,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a href="{{ route('roles.show', ['role' => $role->role_name]) }}" class="font-medium">View Role</a>
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium">View Role</a>
                         </div>
                     </td>
                 </tr>

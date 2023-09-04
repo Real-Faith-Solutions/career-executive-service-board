@@ -6,14 +6,14 @@
 <nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">Users on this Role</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">{{ $role_title }}</span>
         </a>
+
+        <div class="flex justify-end">
+            <a href="{{ URL::previous() }}" class="btn btn-primary">Back</a>
+        </div>
     </div>
 </nav>
-
-{{-- <div class="my-5 flex justify-end">
-    <button class="btn btn-primary" id='add-edit-languages-btn'>Add New Role</button>
-</div> --}}
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">

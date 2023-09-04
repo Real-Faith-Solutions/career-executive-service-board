@@ -522,7 +522,7 @@ Route::middleware('auth')->group(function () {
     {
 
         Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
-        Route::get('show/{role}', [RolesController::class, 'show'])->name('roles.show');
+        Route::get('show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
         Route::get('change/{cesno}', [RolesController::class, 'change'])->name('roles.change');
 
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
