@@ -3,11 +3,28 @@
 namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plantilla\AgencyLocation;
 use Illuminate\Http\Request;
 
 class AgencyLocationManagerController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.plantilla.agency_location_manager.index');
     }
+
+    public function show()
+    {
+        return "hello";
+    }
+
+    public function destroy($deptid)
+    {
+        $datas = AgencyLocation::findOrFail($deptid);
+        $datas->delete();
+
+        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+    }
+
+    
 }

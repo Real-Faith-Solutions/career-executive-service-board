@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('traininglib_tblcategory', function (Blueprint $table) {
             $table->id('ctrlno');
             // $table->id('catid');
-            // $table->integer('code');
+            $table->integer('code')->nullable();
             $table->string('description');
             $table->string('encoder')->nullable();
             $table->timestamps();

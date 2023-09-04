@@ -55,6 +55,7 @@ use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\ViewProfile201Controller;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
@@ -67,7 +68,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/preview-email', function () {
 
     $imagePath = public_path('images/branding.png');
-    $loginLink= config('app.url');
+    $loginLink = config('app.url');
     $data = [
         'email' => 'recipient@example.com',
         'password' => 'temporary_password',
@@ -82,12 +83,11 @@ Route::get('/preview-email', function () {
 // login route and redirect to dashboard if authenticated
 Route::get('/', function () {
 
-    if(!Auth::check()){
+    if (!Auth::check()) {
         return redirect()->route('login');
-    }else{
+    } else {
         return Redirect::to('/dashboard');
     }
-
 });
 // end login route and redirect to dashboard if authenticated
 
@@ -121,7 +121,6 @@ Route::middleware('auth')->group(function () {
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-
         });
 
         Route::prefix('family-profile')->group(function () {
@@ -400,6 +399,8 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
+            Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
+            Route::delete('show/{sectorid}/agency/{deptid}/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
         });
 
         Route::prefix('office-manager')->group(function () {
@@ -420,8 +421,7 @@ Route::middleware('auth')->group(function () {
     // End of plantilla routes
 
     // Competency routes
-    Route::prefix('competency')->group(function ()
-    {
+    Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
             Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
             Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
@@ -430,7 +430,7 @@ Route::middleware('auth')->group(function () {
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
             Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
         });
-    
+
         Route::prefix('non-ces-training-accredited')->group(function () {
             Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
             Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
@@ -513,6 +513,18 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
             Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete');
+        });
+
+        Route::prefix('training-session')->group(function () {
+            Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
+            Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
+            Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
+            Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit');
+            Route::put('update/{ctrlno}', [TrainingSessionController::class, 'update'])->name('training-session.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSessionController::class, 'destroy'])->name('training-session.destroy');
+            Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
         });
     });
     // End of competency routes

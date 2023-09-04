@@ -138,14 +138,6 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblLanguages::class, 'personal_data_cesno', 'cesno');
     }
 
-    // public function languages(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(ProfileLibTblLanguageRef::class, 'profile_tblLanguages', 'personal_data_cesno', 'language_code')
-    //     ->as('profile_tblLanguages')
-    //     ->withPivot('ctrlno', 'encoder')
-    //     ->withTimestamps();
-    // }
-
     public function otherTraining(): HasMany
     {
         return $this->hasMany(ProfileTblTrainingMngt::class);

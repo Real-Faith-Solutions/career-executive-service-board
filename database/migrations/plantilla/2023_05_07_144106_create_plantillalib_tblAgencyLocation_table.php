@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tbl_agency_locations', function (Blueprint $table) {
-            $table->id();
-            $table->string('agencyloc_id')->nullable();
+        Schema::create('plantillalib_tblAgencyLocation', function (Blueprint $table) {
+            $table->id('agencyloc_Id');
             $table->string('title')->nullable();
-            $table->string('encdate')->nullable();
-            $table->string('lastupd_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tbl_agency_locations');
+        Schema::dropIfExists('plantillalib_tblAgencyLocation');
     }
 };
