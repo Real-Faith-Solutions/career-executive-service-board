@@ -39,10 +39,10 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium"  title="View Proile">
+                                <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium"  title="View Profile">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/hbvyhtse.json"
+                                        src="https://cdn.lordicon.com/bhfjfgqz.json"
                                         trigger="hover"
                                         colors="primary:#020986"
                                         style="width:34px;height:34px">
@@ -52,24 +52,23 @@
                                 <a href="{{ route('non-ces-training-management.index', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium" title="Non-Ces Trainings">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/jcsudnpn.json"
+                                        src="https://cdn.lordicon.com/usxfmtjg.json"
                                         trigger="hover"
                                         colors="primary:#020986"
                                         style="width:34px;height:34px">
                                     </lord-icon>
                                 </a>
 
-                                {{-- <a href="">
+                                <a href="" title="CES Trainings">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/zchxlapl.json"
-                                        trigger="hover"
+                                        src="https://cdn.lordicon.com/kipaqhoz.json"
+                                        trigger="morph"
                                         colors="primary:#020986"
                                         style="width:34px;height:34px">
                                     </lord-icon>
-                                </a> --}}
+                                </a>
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>

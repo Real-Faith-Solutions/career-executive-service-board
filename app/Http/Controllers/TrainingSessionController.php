@@ -19,7 +19,7 @@ class TrainingSessionController extends Controller
     {
         $trainingSession = TrainingSession::paginate(25);
 
-        return view('admin.competency.partials.training_sessions.ces_trainings_attended.table', compact('trainingSession'));
+        return view('admin.competency.partials.training_sessions.training_session.table', compact('trainingSession'));
     }
 
     public function create()
@@ -30,7 +30,7 @@ class TrainingSessionController extends Controller
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
         $resourceSpeaker = ResourceSpeaker::all();
 
-        return view('admin.competency.partials.training_sessions.ces_trainings_attended.form', compact('trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
+        return view('admin.competency.partials.training_sessions.training_session.form', compact('trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
     }
 
     public function store(Request $request)
@@ -88,7 +88,7 @@ class TrainingSessionController extends Controller
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
         $resourceSpeaker = ResourceSpeaker::all();
 
-        return view('admin.competency.partials.training_sessions.ces_trainings_attended.edit', compact('trainingSession', 'trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
+        return view('admin.competency.partials.training_sessions.training_session.edit', compact('trainingSession', 'trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
     }
 
     public function update(Request $request, $ctrlno)
@@ -139,7 +139,7 @@ class TrainingSessionController extends Controller
     {
         $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->paginate(25);
 
-        return view('admin.competency.partials.training_sessions.ces_trainings_attended.trashbin', compact('trainingSessionTrashedRecord'));
+        return view('admin.competency.partials.training_sessions.training_session.trashbin', compact('trainingSessionTrashedRecord'));
     }
 
     
