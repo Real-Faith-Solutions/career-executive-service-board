@@ -11,6 +11,7 @@ use App\Models\TrainingSecretariat;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TrainingSessionController extends Controller
 {
@@ -41,7 +42,7 @@ class TrainingSessionController extends Controller
             'from_dt' => ['required'],
             'to_dt' => ['required'],
             'venue' => ['required'],
-            'no_hours' => ['required'],
+            'no_hours' => ['required', 'numeric', 'digits_between:1,4'],
             'barrio' => ['nullable', 'max:60', 'min:2'],
             'resource_speaker' => ['required'],
             'session_director' => ['required'],
@@ -59,7 +60,7 @@ class TrainingSessionController extends Controller
             'specialization' => $request->specialization,  
             'from_dt' => $request->from_dt,  
             'to_dt' => $request->to_dt,  
-            'venueid' => $request->venue,  
+            'venueId' => $request->venue,  
             'status' => $request->status,  
             'remarks' => $request->remarks,  
             'barrio' => $request->barrio,  
@@ -88,5 +89,41 @@ class TrainingSessionController extends Controller
         $resourceSpeaker = ResourceSpeaker::all();
 
         return view('admin.competency.partials.training_sessions.ces_trainings_attended.edit', compact('trainingSession', 'trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
+    }
+
+    public function update(Request $request, $ctrlno)
+    {
+        $request->validate([
+            'title' => ['required', 'max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('training_tblSessions')->ignore($ctrlno, 'sessionid')],
+            'category' => ['required'],
+            'specialization' => ['required'],
+            'from_dt' => ['required'],
+            'to_dt' => ['required'],
+            'venue' => ['required'],
+            'no_hours' => ['required','numeric', 'digits_between:1,4'],
+            'barrio' => ['nullable', 'max:60', 'min:2'],
+            'resource_speaker' => ['required'],
+            'session_director' => ['required'],
+            'status' => ['required'],
+            'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+        ]);
+          
+
+        $trainingSession = TrainingSession::find($ctrlno);
+        $trainingSession->title = $request->title;
+        $trainingSession->category = $request->category;
+        $trainingSession->specialization = $request->specialization;
+        $trainingSession->from_dt = $request->from_dt;
+        $trainingSession->to_dt = $request->to_dt;
+        $trainingSession->venueid = $request->venue;
+        $trainingSession->status = $request->status;
+        $trainingSession->remarks = $request->remarks;
+        $trainingSession->barrio = $request->barrio;
+        $trainingSession->no_hours = $request->no_hours;
+        $trainingSession->session_director = $request->session_director;
+        $trainingSession->speakerid = $request->resource_speaker;
+        $trainingSession->save();
+
+        return to_route('training-session.index')->with('message', 'Update Sucessfully');
     }
 }

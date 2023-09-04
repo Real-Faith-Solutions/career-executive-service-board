@@ -17,8 +17,9 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_training_session_form" onsubmit="return checkErrorsBeforeSubmit(update_training_session_form)">
+            <form action="{{ route('training-session.update', ['ctrlno'=>$trainingSession->sessionid]) }}" method="POST" id="update_training_session_form" onsubmit="return checkErrorsBeforeSubmit(update_training_session_form)">
                 @csrf
+                @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
