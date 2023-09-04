@@ -22,7 +22,7 @@ class TrainingSession extends Model
         'specialization',
         'from_dt',
         'to_dt',
-        'venueid',
+        'venueId',
         'status',
         'remarks',
         'barrio',

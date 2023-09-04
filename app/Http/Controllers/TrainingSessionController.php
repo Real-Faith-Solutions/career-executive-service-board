@@ -71,4 +71,22 @@ class TrainingSessionController extends Controller
 
         return to_route('training-session.index')->with('message', 'Save Sucessfully');
     }
+
+    public function edit($ctrlno)
+    {
+        $trainingSession = TrainingSession::find($ctrlno);
+
+        if(!$trainingSession)
+        {
+            return redirect()->back()->with('error', 'Something Went Wrong');
+        }
+
+        $trainingLibCategory = TrainingLibCategory::all();
+        $competencyTrainingVenueManager = CompetencyTrainingVenueManager::all();
+        $trainingSecretariat = TrainingSecretariat::all();
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
+        $resourceSpeaker = ResourceSpeaker::all();
+
+        return view('admin.competency.partials.training_sessions.ces_trainings_attended.edit', compact('trainingSession', 'trainingLibCategory', 'competencyTrainingVenueManager', 'trainingSecretariat', 'profileLibTblExpertiseGen', 'resourceSpeaker'));
+    }
 }
