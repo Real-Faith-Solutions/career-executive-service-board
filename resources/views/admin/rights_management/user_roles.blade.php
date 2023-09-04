@@ -6,7 +6,7 @@
 <nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">User Roles</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">Users on this Role</span>
         </a>
     </div>
 </nav>
@@ -20,7 +20,11 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Roles
+                    Name
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Email
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -30,15 +34,19 @@
         </thead>
         <tbody>
 
-            @foreach ($roles as $role)
+            @foreach ($usersOnThisRole as $user)
                 <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
                     <td class="px-6 py-3">
-                       {{  $role->role_name }}
+                       {{  $user->lastname.' '.$user->firstname }}
                     </td>
+
+                    <td class="px-6 py-3">
+                        {{  $user->email }}
+                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a href="{{ route('roles.show', ['role' => $role->role_name]) }}" class="font-medium">View Role</a>
+                            <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a>
                         </div>
                     </td>
                 </tr>

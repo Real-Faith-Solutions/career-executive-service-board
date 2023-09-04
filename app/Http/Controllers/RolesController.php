@@ -13,7 +13,17 @@ class RolesController extends Controller
     {
         $roles = Role::all();
 
-        return view('admin\rights_management\roles', compact('roles'));
+        return view('admin.rights_management.roles', compact('roles'));
+    }
+
+    public function show($role)
+    {
+        $usersOnThisRole = PersonalData::whereHas('users.roles', function ($query) use ($role) {
+            $query->where('role_name', $role);
+        })->get();
+
+        return view('admin.rights_management.user_roles', 
+        compact('usersOnThisRole'));
     }
 
 }
