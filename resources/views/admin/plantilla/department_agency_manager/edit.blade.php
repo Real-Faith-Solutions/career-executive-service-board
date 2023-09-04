@@ -209,7 +209,7 @@
                                 style="width:24px;height:24px">
                             </lord-icon>
                         </a>
-                        {{-- <form class="hover:bg-slate-100 rounded-full"
+                        <form class="hover:bg-slate-100 rounded-full"
                             action="{{ route('agency-location-manager.destroy', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
                             method="POST">
                             @method('DELETE')
@@ -219,7 +219,7 @@
                                     colors="primary:#DC3545" style="width:24px;height:24px">
                                 </lord-icon>
                             </button>
-                        </form> --}}
+                        </form>
                     </div>
                 </td>
             </tr>

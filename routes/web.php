@@ -399,6 +399,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
             Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
+            Route::delete('show/{sectorid}/agency/{deptid}/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
         });
 
         Route::prefix('office-manager')->group(function () {
