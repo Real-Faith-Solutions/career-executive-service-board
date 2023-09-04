@@ -521,6 +521,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
             Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit');
             Route::put('update/{ctrlno}', [TrainingSessionController::class, 'update'])->name('training-session.update');
+            Route::delete('destroy/{ctrlno}', [TrainingSessionController::class, 'destroy'])->name('training-session.destroy');
         });
     });
     // End of competency routes

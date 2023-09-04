@@ -126,4 +126,12 @@ class TrainingSessionController extends Controller
 
         return to_route('training-session.index')->with('message', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $trainingSession = TrainingSession::find($ctrlno);
+        $trainingSession->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }
