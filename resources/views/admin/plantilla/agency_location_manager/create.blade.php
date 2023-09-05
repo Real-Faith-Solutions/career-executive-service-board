@@ -49,7 +49,6 @@
                             <select id="agencyloc_Id" name="agencyloc_Id" required>
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}">{{ $data->title }}</option>
-
                                 @endforeach
                             </select>
                             @error('agencyloc_Id')
