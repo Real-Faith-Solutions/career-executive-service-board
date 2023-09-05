@@ -12,19 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_tblOffice', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('plantilla_tblOffice_Addr_id');
-
+            $table->id('officeid');
+            $table->foreignId('officelocid')->constrained('plantilla_tblAgencyLocation', 'officelocid');
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();
-            $table->boolean('is_active')->default(true);
-
-            // required in every table
-            $table->string('updated_by')->nullable();
+            $table->boolean('isActive')->default(true);
             $table->string('encoder')->nullable();
-            $table->softDeletes();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
