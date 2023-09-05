@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ApprovedFileController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
@@ -36,7 +34,6 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
@@ -56,13 +53,11 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\TrainingSessionController;
-use App\Http\Controllers\ViewProfile201Controller;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // email preview
 Route::get('/preview-email', function () {
@@ -634,11 +629,3 @@ Route::middleware('auth')->group(function () {
     // End of Library routes
 
 });
-
-// auth routes
-// Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
-// Route::get('/login', [AuthController::class, 'getLoginHomePage']);
-// Route::get('/logout', [AuthController::class, 'userLogout']);
-// Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
-// Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.email');
-// Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPasswordResetPage'])->name('password.reset');
