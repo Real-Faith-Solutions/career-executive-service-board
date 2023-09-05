@@ -46,7 +46,8 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a>
+                            {{-- <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a> --}}
+                            <button id="changeRoleBtn" class="font-medium">Change Role</button>
                         </div>
                     </td>
                 </tr>
@@ -84,7 +85,7 @@
                 </div>
 
             </div>
-            <button type="submit" id="changeRoleBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Change</button>
+            <button type="submit" id="changeRoleSubmitBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Change</button>
         </form>
     </div>
 </div>

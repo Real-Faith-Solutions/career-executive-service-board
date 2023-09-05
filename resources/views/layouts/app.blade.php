@@ -162,6 +162,10 @@
     <script src="{{ asset('js/languages.js') }}"></script>
     {{-- end --}}
 
+    {{-- js script for adding languages --}}
+    <script src="{{ asset('js/change-role.js') }}"></script>
+    {{-- end --}}
+
     {{-- js script for confirmation button --}}
     <script src="{{ asset('js/confirmation.js') }}"></script>
     {{-- end --}}
