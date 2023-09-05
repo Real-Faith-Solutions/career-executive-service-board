@@ -6,7 +6,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-5 border-b rounded-t">
                 <h3 class="text-xl font-medium text-gray-900">
-                    Agency Location
+                    Agency Location Manager
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
@@ -24,7 +24,7 @@
                 <form action="{{ route('agency-location-manager.store', ['deptid' => $department->deptid]) }}"
                     method="POST">
                     @csrf
-                    <input id="title" name="deptid" required readonly value="{{ $department->deptid }}" />
+                    <input type="hidden" id="title" name="deptid" required readonly value="{{ $department->deptid }}" />
                     <div class="grid grid-cols-2 gap-2">
                         <div class="mb-3">
                             <label for="title">Location<sup>*</sup></label>
