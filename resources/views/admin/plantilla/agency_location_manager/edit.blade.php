@@ -202,7 +202,7 @@
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
+                            href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">

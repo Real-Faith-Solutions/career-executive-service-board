@@ -372,7 +372,7 @@ Route::middleware('auth')->group(function () {
 
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
             Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
-            Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+            Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
             Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
             Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
             Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
@@ -384,7 +384,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
             Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
-            Route::get('show/{sectorid}/agency/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
+            Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
             Route::post('show/{sectorid}/agency/{deptid}/update', [DepartmentAgencyManagerController::class, 'updateAgency'])->name('department-agency-manager.updateAgency');
             Route::delete('{deptid}/destroy', [DepartmentAgencyManagerController::class, 'destroy'])->name('department-agency-manager.destroy');
             // Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
@@ -394,7 +394,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
-            Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
+            Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
             Route::post('{officelocid}/update', [AgencyLocationManagerController::class, 'update'])->name('agency-location-manager.update');
             Route::delete('/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
             Route::post('show/store', [AgencyLocationManagerController::class, 'store'])->name('agency-location-manager.store');
@@ -402,6 +402,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
             Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
