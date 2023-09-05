@@ -50,7 +50,9 @@ class DepartmentAgencyManagerController extends Controller
         $agencyLocation = AgencyLocation::query()
             ->where('deptid', $deptid)
             ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('title', 'LIKE', "%$query");
+                $queryBuilder->where('title', 'LIKE', "%$query")
+                    ->orWhere('acronym', 'LIKE', "%$query")
+                    ->orWhere('region', 'LIKE', "%$query");
             })
             ->orderBy('title', 'ASC')
             ->paginate(10);
@@ -66,7 +68,7 @@ class DepartmentAgencyManagerController extends Controller
             'departmentTypeDatas',
             'agencyLocation',
             'agencyLocationLibrary',
-
+            'query',
         ));
     }
 
