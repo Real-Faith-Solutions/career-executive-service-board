@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plantilla\AgencyLocation;
+use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\SectorManager;
@@ -43,6 +44,8 @@ class DepartmentAgencyManagerController extends Controller
         $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
         $departmentTypeDatas = DepartmentAgencyType::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::find($deptid);
+        $agencyLocationLibrary = AgencyLocationLibrary::all();
+
 
         $agencyLocation = AgencyLocation::query()
             ->where('deptid', $deptid)
@@ -62,6 +65,7 @@ class DepartmentAgencyManagerController extends Controller
             'sectorDatas',
             'departmentTypeDatas',
             'agencyLocation',
+            'agencyLocationLibrary',
 
         ));
     }

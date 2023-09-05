@@ -400,7 +400,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
             Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
-            Route::delete('show/{sectorid}/agency/{deptid}/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
+            Route::delete('/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
+            Route::post('show/store', [AgencyLocationManagerController::class, 'store'])->name('agency-location-manager.store');
         });
 
         Route::prefix('office-manager')->group(function () {
@@ -530,8 +531,7 @@ Route::middleware('auth')->group(function () {
     // End of competency routes
 
     // Rights management routes
-    Route::prefix('rights-management')->group(function ()
-    {
+    Route::prefix('rights-management')->group(function () {
 
         Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
         Route::get('show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
@@ -546,7 +546,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
         // Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
         // Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-    
+
     });
     // End of Rights management routes
 

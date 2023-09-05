@@ -155,9 +155,10 @@
     @include('components.search')
 
     <div>
-        <button class="btn btn-primary" id="agencyCreateBtn">
+        <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
             Add record
         </button>
+        @include('admin.plantilla.agency_location_manager.create') {{-- create UI --}}
     </div>
 </div>
 
