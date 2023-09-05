@@ -47,7 +47,7 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
                             {{-- <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a> --}}
-                            <button id="changeRoleBtn" class="font-medium">Change Role</button>
+                            <button id="changeRoleBtn" class="font-medium" onclick="showModalChangeRole('{{ $user->lastname.' '.$user->firstname }}', '{{ $user->email }}', '{{ $user->cesno }}')">Change Role</button>
                         </div>
                     </td>
                 </tr>
@@ -60,7 +60,7 @@
 <!-- Modal for Change Role -->
 <div id="change_role_modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-        <form action="#" method="POST" class="flex flex-col items-center" id="change_role_form" onsubmit="return checkErrorsBeforeSubmit(change_role_form)">
+        <form action="roles.change" method="POST" class="flex flex-col items-center" id="change_role_form" onsubmit="return checkErrorsBeforeSubmit(change_role_form)">
             @csrf
 
             <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
@@ -69,6 +69,14 @@
             <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
 
                 <div class="flex flex-col items-center">
+
+                    <label for="change_role_name">Name<sup>*</sup></label>
+                    <input id="change_role_name" name="change_role_name" type="text" class="mb-2" readonly required>
+
+                    <label for="change_role_email">Email<sup>*</sup></label>
+                    <input id="change_role_email" name="change_role_email" type="text" class="mb-2" readonly required>
+
+                    <label for="new_role">Role<sup>*</sup></label>
                     <select id="new_role" name="new_role" required>
                         <option disabled selected>Select Role</option>
                         @foreach($roles as $role)
@@ -82,9 +90,12 @@
                             <p>{{ $message }}</p>
                         </span>
                     @enderror
+
+                    <input type="hidden" id="change_role_cesno" name="cesno" value="none">
                 </div>
 
             </div>
+
             <button type="submit" id="changeRoleSubmitBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Change</button>
         </form>
     </div>
