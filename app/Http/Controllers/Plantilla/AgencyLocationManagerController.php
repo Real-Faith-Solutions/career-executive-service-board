@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
+use App\Models\Plantilla\Office;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,46 +53,37 @@ class AgencyLocationManagerController extends Controller
 
         $agencyLocationLibrary = AgencyLocationLibrary::all();
 
-
-
-        // $agencyLocation = AgencyLocation::query()
-        //     ->where('deptid', $deptid)
-        //     ->where(function ($queryBuilder) use ($query) {
-        //         $queryBuilder->where('title', 'LIKE', "%$query");
-        //     })
-        //     ->orderBy('title', 'ASC')
-        //     ->paginate(10);
+        $office = Office::query()
+            ->where('officelocid', $officelocid)
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'LIKE', "%$query")
+                    ->orWhere('acronym', 'LIKE', "%$query")
+                    ->orWhere('website', 'LIKE', "%$query");
+            })
+            ->orderBy('title', 'ASC')
+            ->paginate(10);
 
         return view('admin.plantilla.agency_location_manager.edit', compact(
             'sector',
             'department',
             'departmentLocation',
             'agencyLocationLibrary',
+            'office',
+            'query',
 
         ));;
     }
 
     public function update(Request $request, $officelocid)
     {
-
-
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            // 'agencyloc_Id' => ['required'],
+            'agencyloc_Id' => ['required'],
             'region' => ['required'],
         ]);
 
         $departmentLocation = AgencyLocation::withTrashed()->findOrFail($officelocid);
-        // $departmentLocation->update($request->only(
-        //     'title',
-        //     'acronym',
-        //     'agencyloc_Id',
-        //     'telno',
-        //     'email',
-        //     'region',
-        //     'encoder',
-        // ));
         $departmentLocation->update([
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
@@ -101,7 +93,7 @@ class AgencyLocationManagerController extends Controller
             'region' => $request->input('region'),
         ]);
 
-        // dd($departmentLocation->all());
+
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 

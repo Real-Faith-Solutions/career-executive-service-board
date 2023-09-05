@@ -402,6 +402,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+            Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
