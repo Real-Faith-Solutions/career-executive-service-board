@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AddProfile201;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AffiliationController;
 use App\Http\Controllers\ApprovedFileController;
@@ -19,7 +18,6 @@ use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
@@ -36,7 +34,6 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\PDFController;
-use App\Http\Controllers\PersonalDataController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
@@ -56,13 +53,11 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
 use App\Http\Controllers\TitleController;
 use App\Http\Controllers\TrainingSessionController;
-use App\Http\Controllers\ViewProfile201Controller;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // email preview
 Route::get('/preview-email', function () {
@@ -377,7 +372,7 @@ Route::middleware('auth')->group(function () {
 
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
             Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
-            Route::get('{sectorid}/edit', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+            Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
             Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
             Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
             Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
@@ -389,7 +384,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
             Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
-            Route::get('show/{sectorid}/agency/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
+            Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
             Route::post('show/{sectorid}/agency/{deptid}/update', [DepartmentAgencyManagerController::class, 'updateAgency'])->name('department-agency-manager.updateAgency');
             Route::delete('{deptid}/destroy', [DepartmentAgencyManagerController::class, 'destroy'])->name('department-agency-manager.destroy');
             // Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
@@ -399,12 +394,16 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
-            Route::get('show/{sectorid}/agency/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
-            Route::delete('show/{sectorid}/agency/{deptid}/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
+            Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
+            Route::post('{officelocid}/update', [AgencyLocationManagerController::class, 'update'])->name('agency-location-manager.update');
+            Route::delete('/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
+            Route::post('show/store', [AgencyLocationManagerController::class, 'store'])->name('agency-location-manager.store');
         });
 
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
+            Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
@@ -530,8 +529,7 @@ Route::middleware('auth')->group(function () {
     // End of competency routes
 
     // Rights management routes
-    Route::prefix('rights-management')->group(function ()
-    {
+    Route::prefix('rights-management')->group(function () {
 
         Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
         Route::get('show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
@@ -546,7 +544,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
         // Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
         // Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-    
+
     });
     // End of Rights management routes
 
@@ -633,11 +631,3 @@ Route::middleware('auth')->group(function () {
     // End of Library routes
 
 });
-
-// auth routes
-// Route::post('/login', [AuthController::class, 'userLogin'])->name('login');
-// Route::get('/login', [AuthController::class, 'getLoginHomePage']);
-// Route::get('/logout', [AuthController::class, 'userLogout']);
-// Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.request');
-// Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordHomePage'])->name('password.email');
-// Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'getPasswordResetPage'])->name('password.reset');
