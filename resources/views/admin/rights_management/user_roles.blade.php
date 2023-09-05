@@ -10,7 +10,7 @@
         </a>
 
         <div class="flex justify-end">
-            <a href="{{ URL::previous() }}" class="btn btn-primary">Back</a>
+            <a href="{{ route('roles.index') }}" class="btn btn-primary">Back</a>
         </div>
     </div>
 </nav>
@@ -60,7 +60,7 @@
 <!-- Modal for Change Role -->
 <div id="change_role_modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-        <form action="roles.change" method="POST" class="flex flex-col items-center" id="change_role_form" onsubmit="return checkErrorsBeforeSubmit(change_role_form)">
+        <form action="{{ route('roles.change') }}" method="POST" class="flex flex-col items-center" id="change_role_form" onsubmit="return checkErrorsBeforeSubmit(change_role_form)">
             @csrf
 
             <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
@@ -91,7 +91,7 @@
                         </span>
                     @enderror
 
-                    <input type="hidden" id="change_role_cesno" name="cesno" value="none">
+                    <input type="number" id="change_role_cesno" name="change_role_cesno" value="none" class="invisible">
                 </div>
 
             </div>
