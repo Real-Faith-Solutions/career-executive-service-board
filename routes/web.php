@@ -528,7 +528,8 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('ces-training')->group(function () {
-            Route::get('index', [CESTrainingController::class, 'index'])->name('ces-training.index');
+            Route::get('index/{cesno}', [CESTrainingController::class, 'index'])->name('ces-training.index');
+            Route::get('create/{cesno}', [CESTrainingController::class, 'create'])->name('ces-training.create');
         });
     });
     // End of competency routes

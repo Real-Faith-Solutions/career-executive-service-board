@@ -17,8 +17,10 @@ class ProfileLibTblCesStatus extends Model
     protected $primaryKey = 'code';
 
     protected $fillable = [
+
         'code',
         'description',
+        
     ];
     
 }

@@ -14,7 +14,7 @@
         </lord-icon>
     </a>
     
-    <a href="" class="btn btn-primary" >Add New CES Training</a>
+    <a href="{{ route('ces-training.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add New CES Training</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -39,6 +39,10 @@
 
                 <th scope="col" class="px-6 py-3">
                     Session Id
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Session Name
                 </th>
 
                 <th scope="col" class="px-6 py-3">
