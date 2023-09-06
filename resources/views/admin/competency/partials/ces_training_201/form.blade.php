@@ -12,19 +12,35 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form CES Training/s
+                Form CES Training
             </h1>
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(ces_trainings_form)">
+            <form action="{{ route('ces-training.store', ['cesno'=>$personalData->cesno]) }}" method="POST" id="ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(ces_trainings_form)">
                 @csrf
-                
+
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="mb-3">
+                        <label for="sessionid">Training Session<sup>*</sup></label>
+                        <select name="sessionid" id="sessionid">
+                            <option disabled selected>Select Training Session</option>
+                            @foreach ($trainingSession as $trainingSessions)
+                                <option value="{{ $trainingSessions->sessionid }}" >{{ $trainingSessions->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('sessionid')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="cesno">CESNO<sup>*</sup></label>
                         <input type="text" id="cesno" name="cesno" value="{{ $personalData->cesno }}" readonly>
-                        <p class="input_error text-red-600"></p>
                         @error('cesno')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -35,7 +51,6 @@
                     <div class="mb-3">
                         <label for="name">Name<sup>*</sup></label>
                         <input type="text" id="name" name="name" value="{{ $personalData->lastname. ', '.$personalData->firstname. ', '.$personalData->name_extension. ', '.$personalData->middleinitial }}" readonly>
-                        <p class="input_error text-red-600"></p>
                         @error('training_category')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -74,7 +89,7 @@
 
                     <div class="mb-3">
                         <label for="no_of_hours">No. of Training Hours<sup>*</sup></label>
-                        <input type="number" id="no_of_hours" name="no_of_hours" oninput="validateInput(no_of_hours, 2, 'numbers')" onkeypress="validateInput(no_of_hours, 2, 'numbers')" onblur="checkErrorMessage(no_of_hours)" required>
+                        <input type="number" id="no_of_hours" name="no_of_hours" oninput="validateInput(no_of_hours, 1, 'numbers')" onkeypress="validateInput(no_of_hours, 1, 'numbers')" onblur="checkErrorMessage(no_of_hours)" required>
                         <p class="input_error text-red-600"></p>
                         @error('no_of_hours')
                             <span class="invalid" role="alert">
