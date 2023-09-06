@@ -76,6 +76,28 @@ class TrainingParticipantsController extends Controller
         return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
 
+    public function edit($ctrlno, $cesno)
+    {
+        $personalData = PersonalData::first()->find($cesno);
+
+        if ($personalData) 
+        {
+            $latestCesStatusCode = $personalData->profileTblCesStatus()->latest()->first()->cesstat_code;
+
+            $latestCesStatus = ProfileLibTblCesStatus::where('code',  $latestCesStatusCode)->value('description');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Personal Data Not Found!!');
+        }
+
+        $trainingParticipants = TrainingParticipants::find($ctrlno);
+
+        $trainingSession = TrainingSession::all();
+
+        return view('admin.competency.partials.ces_training_201.edit', compact('cesno', 'personalData', 'trainingParticipants', 'trainingSession', 'latestCesStatus'));
+    }
+
     public function destroy($ctrlno)
     {
         $trainingParticipant = TrainingParticipants::find($ctrlno);

@@ -111,7 +111,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="" method="GET">
+                            <form action="{{ route('ces-training.edit', ['ctrlno'=>$training->sessionid, 'cesno'=>$training->cesTrainingPersonalData->cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
