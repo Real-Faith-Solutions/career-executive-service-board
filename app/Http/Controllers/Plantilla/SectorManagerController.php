@@ -7,6 +7,7 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SectorManagerController extends Controller
 {
@@ -70,13 +71,21 @@ class SectorManagerController extends Controller
 
     public function update(Request $request, $sectorid)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
             'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
         ]);
 
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);
-        $datas->update($request->all());
+        $datas->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'encoder' => $encoder,
+        ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
