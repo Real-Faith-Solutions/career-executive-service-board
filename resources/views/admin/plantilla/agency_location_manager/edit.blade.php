@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', $department->title)
-@section('sub', $department->title)
+@section('title', $departmentLocation->title)
+@section('sub', $departmentLocation->title)
 @section('content')
 @include('admin.plantilla.header')
 
@@ -34,7 +34,18 @@
         </li>
 
         <li>
-            <a href="#" class="text-blue-500">{{ $department->title }}</a>
+            <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
+                class="text-blue-500">{{
+                $department->title }}</a>
+        </li>
+        <li>
+            <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </li>
+
+        <li>
+            <a href="#" class="text-blue-500">{{ $departmentLocation->title }}</a>
         </li>
     </ol>
 </nav>
@@ -44,60 +55,24 @@
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
                 <h1 class="px-6 py-3">
-                    Department / Agency Manager
+                    Agency Location Manager
                 </h1>
             </div>
 
             <div class="bg-white px-6 py-3">
                 <form
-                    action="{{ route('department-agency-manager.updateAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
+                    action="{{ route('agency-location-manager.update', ['officelocid'=>$departmentLocation->officelocid]) }}"
                     method="POST">
                     @csrf
 
-                    <input type="hidden" name="encoder"
-                        value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }}"
-                        readonly>
-
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="sectorTitle">Mother Agency<sup>*</span></label>
-                            <select id="sectorTitle" name="sectorTitle" required disabled>
-                                @foreach ($sectorDatas as $data)
-                                <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
-                                    $department->plantilla_tblSector_id ? 'selected' : '' }}>
-                                    {{ $data->title }}
-                                </option>
-                                @endforeach
-
-                            </select>
-                            @error('sectorTitle')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                            @enderror
+                            <label for="department">Department Agency</label>
+                            <input name="department" id="department" value="{{ $department->title }}" readonly>
                         </div>
-
                         <div class="mb-3">
-                            <label for="departmentTypeDatas">Office Type<sup>*</span></label>
-                            <select id="departmentTypeDatas" name="plantillalib_tblAgencyType_id" required>
-                                @foreach ($departmentTypeDatas as $data)
-                                <option value="{{ $data->agency_typeid }}" {{ $data->agency_typeid ==
-                                    $department->plantillalib_tblAgencyType_id ? 'selected' : '' }}>
-                                    {{ $data->title }}
-                                </option>
-                                @endforeach
-
-                            </select>
-                            @error('plantillalib_tblAgencyType_id')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="title">Agency / Bureau<sup>*</span></label>
-                            <input id="title" name="title" value="{{ $department->title }}" required>
+                            <label for="title">Agency Location<sup>*</sup></label>
+                            <input name="title" id="title" value="{{ $departmentLocation->title }}">
                             @error('title')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -105,9 +80,25 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="acronym">Agency / Bureau Acronym<sup>*</span></label>
-                            <input id="acronym" name="acronym" value="{{ $department->acronym }}" minlength="2"
-                                maxlength="10" required>
+                            <label for="agencyloc_Id">Location type<sup>*</sup></label>
+                            <select name="agencyloc_Id" id="agencyloc_Id">
+                                @foreach ($agencyLocationLibrary as $data)
+                                <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
+                                    agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
+                                    {{ $data->title }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('agencyloc_Id')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="acronym">Acronym<sup>*</sup></label>
+                            <input name="acronym" id="acronym" value="{{ $departmentLocation->acronym }}" minlength="2"
+                                maxlength="10">
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -115,31 +106,42 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="website">Website</label>
-                            <input id="website" name="website" type="url" value="{{ $department->website }}">
-                            @error('website')
+                            <label for="region">Region<sup>*</sup></label>
+                            <select name="region" id="region">
+                                <option value="{{ $departmentLocation->region }}">{{ $departmentLocation->region }}
+                                </option>
+                            </select>
+                            @error('region')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="remarks">Remarks</label>
-                            <textarea name="remarks" id="remarks" cols="30"
-                                rows="10">{{ $department->remarks }}</textarea>
-                            @error('remarks')
+                            <label for="telno">Telno</label>
+                            <input name="telno" id="telno" value="{{ $departmentLocation->telno }}" type="tel">
+                            @error('telno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
                         </div>
-
-
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input name="email" id="email" value="{{ $departmentLocation->email }}" type="email">
+                            @error('email')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($department->created_at)->format('F d, Y \a\t h:iA') }}
+                            Created at {{ \Carbon\Carbon::parse($departmentLocation->created_at)->format('F d, Y
+                            \a\t g:iA')
+                            }}
                         </h1>
                         <button type="submit" class="btn btn-primary">
                             Save changes
@@ -158,7 +160,7 @@
         <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
             Add record
         </button>
-        @include('admin.plantilla.agency_location_manager.create') {{-- create UI --}}
+        {{-- @include('admin.plantilla.agency_location_manager.create') create UI --}}
     </div>
 </div>
 
@@ -167,17 +169,15 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Location
+                    Office
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Location Acronym
+                    Office Acronym
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Location type
+                    Office Website
                 </th>
-                <th class="px-6 py-3" scope="col">
-                    Region
-                </th>
+
 
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
@@ -186,7 +186,7 @@
         </thead>
         <tbody>
 
-            @foreach ($agencyLocation as $data)
+            @foreach ($office as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                     {{ $data->title }}
@@ -195,23 +195,21 @@
                     {{ $data->acronym ?? 'N/A' }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
+                    {{ $data->website ?? 'N/A' }}
                 </td>
-                <td class="px-6 py-3">
-                    {{ $data->region ?? 'N/A' }}
-                </td>
+
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}">
+                            href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">
                             </lord-icon>
                         </a>
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('agency-location-manager.destroy', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                            action="{{ route('office-manager.destroy', ['officeid' => $data->officeid]) }}"
                             method="POST"
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')
@@ -231,9 +229,8 @@
     </table>
 
     <div class="m-5">
-        {{ $agencyLocation->links() }}
+        {{ $office->links() }}
     </div>
 </div>
-
 
 @endsection
