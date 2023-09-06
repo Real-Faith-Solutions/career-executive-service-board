@@ -71,4 +71,15 @@ class User extends Authenticatable
         $this->roles()->syncWithoutDetaching($role);
     }
 
+    public function changeRole($newRole)
+    {
+        $this->roles()->detach();
+
+        if (is_string($newRole)) {
+            $newRole = Role::where('role_name', $newRole)->firstOrFail();
+        }
+
+        $this->assignRole($newRole);
+    }
+
 }
