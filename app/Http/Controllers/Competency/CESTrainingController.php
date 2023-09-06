@@ -15,7 +15,10 @@ class CESTrainingController extends Controller
 {
     public function index($cesno)
     {
-        return view('admin.competency.partials.ces_training_201.table', compact('cesno'));
+        $trainingParticipant = PersonalData::find($cesno);
+        $trainings = $trainingParticipant->competencyCesTraining;
+
+        return view('admin.competency.partials.ces_training_201.table', compact('cesno', 'trainings'));
     }
 
     public function create($cesno)

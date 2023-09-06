@@ -67,47 +67,51 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trainingSession as $trainingSessions) --}}
+            @foreach ($trainings as $training)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $trainingSessions->title }} --}}
+                        {{ $training->pid }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->sessionid }} --}}
+                        {{ $training->cesno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->category }} --}}
+                        {{ $training->cesTrainingPersonalData->lastname.', '.$training->cesTrainingPersonalData->firstname.', '.$training->cesTrainingPersonalData->name_extension.', '.$training->cesTrainingPersonalData->middleinitial }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->specialization }} --}}
+                        {{-- {{ $training->specialization }} --}}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->from_dt. ' - '.$trainingSessions->to_dt }} --}}
+                        {{ $training->sessionid }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->venuePersonalData->name }} --}}
+                        {{ $training->participantTrainingSession->title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->no_hours }} --}}
+                        {{ $training->status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->status }} --}}
+                        {{ $training->no_hours }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $trainingSessions->barrio }} --}}
+                        {{ $training->payment }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $training->remarks }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            {{-- <form action="{{ route('training-session.edit',['ctrlno'=>$trainingSessions->sessionid]) }}" method="GET">
+                            <form action="" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -119,10 +123,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('training-session.destroy', ['ctrlno'=>$trainingSessions->sessionid]) }}" method="POST" id="delete_training_session_form{{$trainingSessions->sessionid}}">
+                            <form action="" method="POST" id="delete_training_session_form{{$training->sessionid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingSessionButton{{$trainingSessions->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deletetrainingessionButton{{$training->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -131,11 +135,11 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>

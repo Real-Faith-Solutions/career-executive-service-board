@@ -30,7 +30,7 @@ class TrainingParticipants extends Model
 
     public function cesTrainingPersonalData(): BelongsTo
     {
-        return $this->belongsTo(PersonalData::class);
+        return $this->belongsTo(PersonalData::class, 'cesno');
     }
 
     public function participantTrainingSession(): BelongsTo
