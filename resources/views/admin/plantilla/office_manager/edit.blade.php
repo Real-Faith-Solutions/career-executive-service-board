@@ -160,7 +160,10 @@
                             <label for="city_code">City Municipality<sup>*</sup></label>
                             <select id="city_code" name="city_code" required>
                                 <option disabled selected>Select City Municipality</option>
-                                <option value="1">Sample City</option>
+                                @foreach ($cities as $data)
+                                <option value="{{ $data->city_code }}" {{ $office->officeAddress->city_code ==
+                                    $data->city_code ? 'selected' : ''}}>{{ $data->name }}</option>
+                                @endforeach
                             </select>
                             @error('city_code')
                             <span class="invalid" role="alert">

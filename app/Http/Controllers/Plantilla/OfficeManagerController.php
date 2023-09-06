@@ -8,6 +8,7 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
 use App\Models\Plantilla\SectorManager;
+use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,7 @@ class OfficeManagerController extends Controller
         $departmentLocation = AgencyLocation::find($officelocid);
         $office = Office::find($officeid);
 
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
 
         // $office = Office::query()
@@ -45,6 +47,7 @@ class OfficeManagerController extends Controller
             'departmentLocation',
             'query',
             'office',
+            'cities',
 
         ));;
     }
@@ -100,8 +103,6 @@ class OfficeManagerController extends Controller
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
         ]);
-
-
 
         $office = Office::withTrashed()->findOrFail($officeid);
         $office->update([
