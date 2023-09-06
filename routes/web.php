@@ -532,7 +532,10 @@ Route::middleware('auth')->group(function () {
             Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
             Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
             Route::get('edit/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'edit'])->name('ces-training.edit');
+            Route::put('update/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'update'])->name('ces-training.update');
             Route::delete('destroy/{ctrlno}', [TrainingParticipantsController::class, 'destroy'])->name('ces-training.destroy');
+            Route::get('recently-deleted/{cesno}', [TrainingParticipantsController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [TrainingParticipantsController::class, 'restore'])->name('ces-training.restore');
         });
     });
     // End of competency routes

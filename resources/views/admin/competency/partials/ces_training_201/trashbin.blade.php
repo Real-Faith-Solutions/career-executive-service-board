@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', 'CES Training')
-@section('sub', 'CES Training')
+@section('sub', 'CES Training Recycle Bin ')
 @section('content')
 @include('admin.competency.view_profile.header')
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('ces-training.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-        </lord-icon>
-    </a>
-    
-    <a href="{{ route('ces-training.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add New CES Training</a>
+    <a href="{{ route('ces-training.index', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Go Back</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -67,66 +58,69 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainings as $training)
+            @foreach ($competencyCesTrainingTrashedRecord as $competencyCesTrainingTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $training->pid }}
+                        {{ $competencyCesTrainingTrashedRecords->pid }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->cesno }}
+                        {{ $competencyCesTrainingTrashedRecords->cesno }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->cesTrainingPersonalData->lastname.', '.$training->cesTrainingPersonalData->firstname.', '.$training->cesTrainingPersonalData->name_extension.', '.$training->cesTrainingPersonalData->middleinitial }}
+                        {{ 
+                            $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->lastname.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->firstname.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->name_extension.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->middleinitial 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $training->specialization }} --}}
+                        {{-- {{ $competencyCesTrainingTrashedRecords->specialization }} --}}
+                        --
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->sessionid }}
+                        {{ $competencyCesTrainingTrashedRecords->sessionid }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->participantTrainingSession->title }}
+                        {{ $competencyCesTrainingTrashedRecords->participantTrainingSession->title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->status }}
+                        {{ $competencyCesTrainingTrashedRecords->status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->no_hours }}
+                        {{ $competencyCesTrainingTrashedRecords->no_hours }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->payment }}
+                        {{ $competencyCesTrainingTrashedRecords->payment }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->remarks }}
+                        {{ $competencyCesTrainingTrashedRecords->remarks }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('ces-training.edit', ['ctrlno'=>$training->pid, 'cesno'=>$training->cesTrainingPersonalData->cesno]) }}" method="GET">
+                            <form action="{{ route('ces-training.restore', ['ctrlno'=>$competencyCesTrainingTrashedRecords->pid]) }}" method="POST" id="restore_training_participant_form{{$competencyCesTrainingTrashedRecords->sessionid}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                <button type="button" id="restoreTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-training.destroy', ['ctrlno'=>$training->sessionid]) }}" method="POST" id="delete_training_participant_form{{$training->sessionid}}">
+                            <form action="{{ route('ces-training.destroy', ['ctrlno'=>$competencyCesTrainingTrashedRecords->sessionid]) }}" method="POST" id="permament_training_participant_form{{$competencyCesTrainingTrashedRecords->sessionid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingParticipantButton{{$training->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

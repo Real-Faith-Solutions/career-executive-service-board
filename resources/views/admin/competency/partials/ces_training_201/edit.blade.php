@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_trainings_form)">
+            <form action="{{ route('ces-training.update', ['ctrlno'=>$trainingParticipants->sessionid, 'cesno'=>$cesno]) }}" method="POST" id="update_ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_trainings_form)">
                 @csrf
                 @method('PUT')
 

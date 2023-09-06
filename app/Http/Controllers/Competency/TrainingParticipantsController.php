@@ -123,7 +123,7 @@ class TrainingParticipantsController extends Controller
     {
         $request->validate([
 
-            'sessionid' => ['required',Rule::unique('training_tblparticipants')->ignore($ctrlno, 'pid')],
+            'sessionid' => ['required',Rule::unique('training_tblparticipants')->where('cesno', $cesno)->ignore($ctrlno, 'pid')],
             'status' => ['required'],
             'remarks' => ['nullable'],
             'no_of_hours' => ['required'],
@@ -153,5 +153,32 @@ class TrainingParticipantsController extends Controller
         $trainingParticipant->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted($cesno)
+    {
+        //parent model
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        // Access the soft deleted competencyCesTraining of the parent model
+        $competencyCesTrainingTrashedRecord = $personalData->competencyCesTraining()->onlyTrashed()->get();
+
+        return view('admin.competency.partials.ces_training_201.trashbin', compact('competencyCesTrainingTrashedRecord', 'cesno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $competencyCesTrainingTrashedRecord = TrainingParticipants::onlyTrashed()->find($ctrlno);
+        $competencyCesTrainingTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $competencyCesTrainingTrashedRecord = TrainingParticipants::onlyTrashed()->find($ctrlno);
+        $competencyCesTrainingTrashedRecord->delete();
+
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
