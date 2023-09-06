@@ -25,7 +25,7 @@
                     @csrf
                     <input type="hidden" id="officelocid" name="officelocid" required readonly
                         value="{{ $departmentLocation->officelocid }}" />
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="title">Office<sup>*</sup></label>
                             <input id="title" name="title" required />
@@ -74,7 +74,7 @@
                     </div>
                     <hr>
                     <h1 class="font-semibold">Office Address</h1>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
 
 
                         <div class="mb-3">
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="isActive">Office Status<sup>*</sup></label>
                             <select id="isActive" name="isActive" required>
