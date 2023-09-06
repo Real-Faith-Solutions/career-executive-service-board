@@ -8,6 +8,7 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfficeManagerController extends Controller
 {
@@ -45,6 +46,45 @@ class OfficeManagerController extends Controller
             'office',
 
         ));;
+    }
+
+    public function store(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $request->validate([
+
+            'officelocid' => ['required'],
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+
+        ]);
+        Office::create([
+            'officelocid' => $request->input('officelocid'),
+            'title' => $request->input('title'),
+            'acronym' => $request->input('acronym'),
+            'website' => $request->input('website'),
+            'isActive' => $request->input('isActive'),
+            'encoder' => $encoder,
+        ]);
+
+
+        // office address
+        // Office::create([
+        //     'officelocid' => $request->input('officelocid'),
+        //     'title' => $request->input('title'),
+        //     'acronym' => $request->input('acronym'),
+        //     'website' => $request->input('website'),
+        //     'isActive' => $request->input('isActive'),
+        //     'encoder' => $encoder,
+        // ]);
+
+
+
+
+        return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
 
