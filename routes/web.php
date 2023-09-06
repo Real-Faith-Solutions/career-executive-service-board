@@ -8,13 +8,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CivilStatusController;
-use App\Http\Controllers\Competency\CESTrainingController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
+use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
@@ -528,9 +528,9 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('ces-training')->group(function () {
-            Route::get('index/{cesno}', [CESTrainingController::class, 'index'])->name('ces-training.index');
-            Route::get('create/{cesno}', [CESTrainingController::class, 'create'])->name('ces-training.create');
-            Route::post('store/{cesno}', [CESTrainingController::class, 'store'])->name('ces-training.store');
+            Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
+            Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
+            Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
         });
     });
     // End of competency routes
