@@ -531,6 +531,7 @@ Route::middleware('auth')->group(function () {
             Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
             Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
             Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
+            Route::delete('destroy/{ctrlno}', [TrainingParticipantsController::class, 'destroy'])->name('ces-training.destroy');
         });
     });
     // End of competency routes

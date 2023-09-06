@@ -75,4 +75,12 @@ class TrainingParticipantsController extends Controller
 
         return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $trainingParticipant = TrainingParticipants::find($ctrlno);
+        $trainingParticipant->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }
