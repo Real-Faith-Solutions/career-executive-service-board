@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblCesStatus;
+use App\Models\ProfileTblCesStatus;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
@@ -25,20 +26,30 @@ class TrainingParticipantsController extends Controller
     {
         $personalData = PersonalData::first()->find($cesno);
 
+        $trainingSession = TrainingSession::all();
+
         if ($personalData) 
         {
-            $latestCesStatusCode = $personalData->profileTblCesStatus()->latest()->first()->cesstat_code;
+            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
 
-            $latestCesStatus = ProfileLibTblCesStatus::where('code',  $latestCesStatusCode)->value('description');
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
         }
         else
         {
             return redirect()->back()->with('error', 'Personal Data Not Found!!');
         }
 
-        $trainingSession = TrainingSession::all();
-
-        return view('admin.competency.partials.ces_training_201.form', compact('personalData', 'cesno', 'latestCesStatus', 'trainingSession'));
+        return view('admin.competency.partials.ces_training_201.form', compact('personalData', 'cesno', 'description', 'trainingSession'));
     }
 
     public function store(Request $request, $cesno)
@@ -82,9 +93,19 @@ class TrainingParticipantsController extends Controller
 
         if ($personalData) 
         {
-            $latestCesStatusCode = $personalData->profileTblCesStatus()->latest()->first()->cesstat_code;
+            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
 
-            $latestCesStatus = ProfileLibTblCesStatus::where('code',  $latestCesStatusCode)->value('description');
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
         }
         else
         {
@@ -95,7 +116,35 @@ class TrainingParticipantsController extends Controller
 
         $trainingSession = TrainingSession::all();
 
-        return view('admin.competency.partials.ces_training_201.edit', compact('cesno', 'personalData', 'trainingParticipants', 'trainingSession', 'latestCesStatus'));
+        return view('admin.competency.partials.ces_training_201.edit', compact('cesno', 'personalData', 'trainingParticipants', 'trainingSession', 'description'));
+    }
+
+    public function update(Request $request, $ctrlno, $cesno)
+    {
+        $request->validate([
+
+            'sessionid' => ['required',Rule::unique('training_tblparticipants')->ignore($ctrlno, 'pid')],
+            'status' => ['required'],
+            'remarks' => ['nullable'],
+            'no_of_hours' => ['required'],
+            'payment' => ['required'],
+            
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+                    
+        $trainingParticipant = TrainingParticipants::find($ctrlno);
+        $trainingParticipant->sessionid = $request->sessionid;
+        $trainingParticipant->status = $request->status;
+        $trainingParticipant->remarks = $request->remarks;
+        $trainingParticipant->no_hours = $request->no_of_hours;
+        $trainingParticipant->payment = $request->payment;
+        $trainingParticipant->updated_by = $encoder;
+        $trainingParticipant->save();
+
+        return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
     }
 
     public function destroy($ctrlno)

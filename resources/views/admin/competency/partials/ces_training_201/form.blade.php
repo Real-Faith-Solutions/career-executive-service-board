@@ -60,7 +60,7 @@
 
                     <div class="mb-3">
                         <label for="ces_status">CES Status<sup>*</sup></label>
-                        <input type="text" name="ces_status" value="{{ $latestCesStatus }}" readonly>
+                        <input type="text" name="ces_status" value="{{ $description }}" readonly>
                         @error('ces_status')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
