@@ -23,22 +23,33 @@
                     Roles
                 </th>
 
+                {{-- <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Permissions</span>
+                </th> --}}
+
                 <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Action</span>
+                    <span class="sr-only">Assignees</span>
                 </th>
             </tr>
         </thead>
         <tbody>
 
             @foreach ($roles as $role)
-                <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
+                <tr class="border-b bg-white hover:bg-slate-400 hover:text-white uppercase">
                     <td class="px-6 py-3">
                        {{  $role->role_title }}
                     </td>
 
+                    {{-- <td class="px-6 py-4 text-right uppercase">
+                        <div class="flex justify-end">
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium">Permissions</a>
+                        </div>
+                    </td> --}}
+
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium">View Role</a>
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium mr-5 hover:text-blue-300">Permissions</a>
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium hover:text-blue-300">Assignees</a>
                         </div>
                     </td>
                 </tr>
