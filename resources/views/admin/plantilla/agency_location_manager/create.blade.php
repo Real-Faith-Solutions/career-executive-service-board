@@ -79,7 +79,9 @@
                             <label for="region">Region<sup>*</sup></label>
                             <select id="region" name="region" type="region" required>
                                 <option disabled selected>Select Region</option>
-                                <option value="NCR">NCR</option>
+                                @foreach ($region as $data)
+                                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                @endforeach
                             </select>
                             @error('region')
                             <span class="invalid" role="alert">

@@ -108,8 +108,13 @@
                         <div class="mb-3">
                             <label for="region">Region<sup>*</sup></label>
                             <select name="region" id="region">
-                                <option value="{{ $departmentLocation->region }}">{{ $departmentLocation->region }}
-                                </option>
+                                <option disabled selected>Select Region</option>
+                                @foreach ($region as $data)
+                                <option value="{{ $data->name }}" {{ $data->name == $departmentLocation->region ?
+                                    'selected' : ''}}>{{
+                                    $data->name }}</option>
+                                @endforeach
+
                             </select>
                             @error('region')
                             <span class="invalid" role="alert">

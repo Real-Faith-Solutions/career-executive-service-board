@@ -9,6 +9,7 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
+use App\Models\ProfileLibTblRegion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,6 +55,7 @@ class AgencyLocationManagerController extends Controller
 
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
         $office = Office::query()
             ->where('officelocid', $officelocid)
@@ -73,6 +75,7 @@ class AgencyLocationManagerController extends Controller
             'office',
             'query',
             'cities',
+            'region',
 
         ));;
     }
