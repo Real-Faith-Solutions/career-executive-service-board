@@ -64,4 +64,12 @@ class RolesController extends Controller
         return view('admin.rights_management.permissions', compact('role_name', 'role_title'));
     }
 
+    public function showPermissionsProfiling($role_name, $role_title)
+    {
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions;
+
+        return view('admin.rights_management.role_permissions', compact('role_name', 'role_title', 'permissions'));
+    }
+
 }
