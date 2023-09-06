@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
+use App\Models\Plantilla\OfficeAddress;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +62,7 @@ class OfficeManagerController extends Controller
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
 
         ]);
-        Office::create([
+        $primaryKey = Office::create([
             'officelocid' => $request->input('officelocid'),
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
@@ -70,30 +71,22 @@ class OfficeManagerController extends Controller
             'encoder' => $encoder,
         ]);
 
-
         // office address
-        // Office::create([
-        //     'officelocid' => $request->input('officelocid'),
-        //     'title' => $request->input('title'),
-        //     'acronym' => $request->input('acronym'),
-        //     'website' => $request->input('website'),
-        //     'isActive' => $request->input('isActive'),
-        //     'encoder' => $encoder,
-        // ]);
-
-
-
+        OfficeAddress::create([
+            'officeid' => $primaryKey->officeid,
+            'floor_bldg' => $request->input('floor_bldg'),
+            'house_no_st' => $request->input('house_no_st'),
+            'brgy_dist' => $request->input('brgy_dist'),
+            'city_code' => $request->input('city_code'),
+            'contact' => $request->input('contact'),
+            'email' => $request->input('email'),
+            'isActive' => $request->input('isActive'),
+            'ofcaddrid' => $request->input('ofcaddrid'),
+            'encoder' => $encoder,
+        ]);
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
-
-
-
-
-
-
-
-
 
     public function destroy($officeid)
     {

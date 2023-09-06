@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_tblOffice_Addr', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('officeid')->primary()->constrained('plantilla_tblOffice', 'officeid');
             $table->string('floor_bldg')->nullable();
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('contact')->nullable();
             $table->string('email')->nullable();
             $table->boolean('isActive')->default(true);
+
             $table->integer('ofcaddrid')->nullable(); // need to get in migration still pending what tables
 
             // required in every table

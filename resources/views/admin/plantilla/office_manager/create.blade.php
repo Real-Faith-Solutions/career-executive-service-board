@@ -124,7 +124,7 @@
                             <select id="isActive" name="isActive" required>
                                 <option disabled selected>Select status</option>
                                 <option value="1">Active</option>
-                                <option value="2">Inactive</option>
+                                <option value="0">Inactive</option>
                             </select>
                             @error('isActive')
                             <span class="invalid" role="alert">
