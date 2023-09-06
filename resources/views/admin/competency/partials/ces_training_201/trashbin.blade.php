@@ -105,9 +105,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('ces-training.restore', ['ctrlno'=>$competencyCesTrainingTrashedRecords->pid]) }}" method="POST" id="restore_training_participant_form{{$competencyCesTrainingTrashedRecords->sessionid}}">
+                            <form action="{{ route('ces-training.restore', ['ctrlno'=>$competencyCesTrainingTrashedRecords->pid]) }}" method="POST" id="restore_training_participant_form{{$competencyCesTrainingTrashedRecords->pid}}">
                                 @csrf
-                                <button type="button" id="restoreTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->pid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -117,10 +117,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-training.destroy', ['ctrlno'=>$competencyCesTrainingTrashedRecords->sessionid]) }}" method="POST" id="permament_training_participant_form{{$competencyCesTrainingTrashedRecords->sessionid}}">
+                            <form action="{{ route('ces-training.forceDelete', ['ctrlno'=>$competencyCesTrainingTrashedRecords->pid]) }}" method="POST" id="permament_training_participant_form{{$competencyCesTrainingTrashedRecords->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="permanentDeleteTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentDeleteTrainingParticipantButton{{$competencyCesTrainingTrashedRecords->pid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

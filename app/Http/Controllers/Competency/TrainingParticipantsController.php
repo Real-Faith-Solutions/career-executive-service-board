@@ -177,7 +177,7 @@ class TrainingParticipantsController extends Controller
     public function forceDelete($ctrlno)
     {
         $competencyCesTrainingTrashedRecord = TrainingParticipants::onlyTrashed()->find($ctrlno);
-        $competencyCesTrainingTrashedRecord->delete();
+        $competencyCesTrainingTrashedRecord->forceDelete();
 
         return back()->with('info', 'Data Permanently Deleted');
     }
