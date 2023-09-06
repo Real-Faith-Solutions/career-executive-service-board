@@ -70,7 +70,7 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="#" method="POST">
+                <form action="{{ route('office-manager.update', $office->officeid) }}" method="POST">
                     @csrf
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email">Office E-mail Address</label>
-                            <input id="email" name="email" value="{{ $office->officeAddress->email }}" type="url" />
+                            <input id="email" name="email" value="{{ $office->officeAddress->email }}" type="email" />
                             @error('email')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

@@ -404,6 +404,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
             Route::post('store', [OfficeManagerController::class, 'store'])->name('office-manager.store');
+            Route::post('{officeid}/update', [OfficeManagerController::class, 'update'])->name('office-manager.update');
             Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
