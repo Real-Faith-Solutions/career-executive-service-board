@@ -85,4 +85,36 @@ class CESTraining201Controller extends Controller
 
         return to_route('ces-training-201.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($cesno, $ctrlno)
+    {
+        $personalData = PersonalData::first()->find($cesno);
+
+        $trainingSession = TrainingSession::all();
+        
+        $trainingParticipants = TrainingParticipants::find($ctrlno);
+
+        if ($personalData) 
+        {
+            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Personal Data Not Found!!');
+        }
+
+        return view('admin.201_profiling.view_profile.partials.ces_trainings.edit', compact('personalData', 'trainingSession', 'cesno', 'trainingParticipants', 'description'));
+    }
 }
