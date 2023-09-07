@@ -1,4 +1,3 @@
-  
   // Close the modal when the close button is clicked
   document.getElementsByClassName('close-md')[0].addEventListener('click', function() {
     closeModalChangeRole();
