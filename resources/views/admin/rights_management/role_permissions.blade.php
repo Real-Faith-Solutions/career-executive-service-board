@@ -96,37 +96,37 @@
             </div>
         </div>
 
-        {{-- personal data permissions --}}
+        {{-- educational attainment permissions --}}
         <div class="col-span-1">
             <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                 <div class="w-full text-gray-500">
 
                     <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
-                        <h1 class="px-6 py-3">
-                            Personal Data
+                        <h1 class="px-6 py-3 text-xm sm:text-sm sm:py-3.5">
+                            Educational Attainment
                         </h1>
                     </div>
         
                     <div class="border-b bg-white px-6 py-3">
         
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                            <input id="educational_attainment_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_add') ? 'checked' : '' }} value="educational_attainment_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="educational_attainment_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_edit') ? 'checked' : '' }} value="personal_data_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                            <input id="educational_attainment_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_edit') ? 'checked' : '' }} value="educational_attainment_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="educational_attainment_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_delete') ? 'checked' : '' }} value="personal_data_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                            <input id="educational_attainment_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_delete') ? 'checked' : '' }} value="educational_attainment_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="educational_attainment_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                            <input id="educational_attainment_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_view') ? 'checked' : '' }} value="educational_attainment_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="educational_attainment_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                         </div>
 
                     </div>
@@ -134,37 +134,37 @@
             </div>
         </div>
 
-        {{-- personal data permissions --}}
+        {{-- examinations taken permissions --}}
         <div class="col-span-1">
             <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                 <div class="w-full text-gray-500">
 
                     <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                         <h1 class="px-6 py-3">
-                            Personal Data
+                            Examinations Taken
                         </h1>
                     </div>
         
                     <div class="border-b bg-white px-6 py-3">
         
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                            <input id="examinations_taken_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_add') ? 'checked' : '' }} value="examinations_taken_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="examinations_taken_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_edit') ? 'checked' : '' }} value="personal_data_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                            <input id="examinations_taken_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_edit') ? 'checked' : '' }} value="examinations_taken_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="examinations_taken_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_delete') ? 'checked' : '' }} value="personal_data_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                            <input id="examinations_taken_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_delete') ? 'checked' : '' }} value="examinations_taken_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="examinations_taken_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                            <input id="examinations_taken_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_view') ? 'checked' : '' }} value="examinations_taken_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="examinations_taken_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                         </div>
 
                     </div>
@@ -172,37 +172,75 @@
             </div>
         </div>
 
-        {{-- personal data permissions --}}
+        {{-- scholarships taken permissions --}}
         <div class="col-span-1">
             <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                 <div class="w-full text-gray-500">
 
                     <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                         <h1 class="px-6 py-3">
-                            Personal Data
+                            Scholarships Taken
                         </h1>
                     </div>
         
                     <div class="border-b bg-white px-6 py-3">
         
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                            <input id="scholarships_taken_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_add') ? 'checked' : '' }} value="scholarships_taken_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="scholarships_taken_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_edit') ? 'checked' : '' }} value="personal_data_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                            <input id="scholarships_taken_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_edit') ? 'checked' : '' }} value="scholarships_taken_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="scholarships_taken_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_delete') ? 'checked' : '' }} value="personal_data_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                            <input id="scholarships_taken_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_delete') ? 'checked' : '' }} value="scholarships_taken_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="scholarships_taken_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                         </div>
 
                         <div class="flex items-center mb-4">
-                            <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                            <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                            <input id="scholarships_taken_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_view') ? 'checked' : '' }} value="scholarships_taken_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="scholarships_taken_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- research and studies permissions --}}
+        <div class="col-span-1">
+            <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
+                <div class="w-full text-gray-500">
+
+                    <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
+                        <h1 class="px-6 py-3">
+                            Research & Studies
+                        </h1>
+                    </div>
+        
+                    <div class="border-b bg-white px-6 py-3">
+        
+                        <div class="flex items-center mb-4">
+                            <input id="research_and_studies_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'research_and_studies_add') ? 'checked' : '' }} value="research_and_studies_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="research_and_studies_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <input id="research_and_studies_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'research_and_studies_edit') ? 'checked' : '' }} value="research_and_studies_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="research_and_studies_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <input id="research_and_studies_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'research_and_studies_delete') ? 'checked' : '' }} value="research_and_studies_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="research_and_studies_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <input id="research_and_studies_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'research_and_studies_view') ? 'checked' : '' }} value="research_and_studies_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="research_and_studies_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                         </div>
 
                     </div>
