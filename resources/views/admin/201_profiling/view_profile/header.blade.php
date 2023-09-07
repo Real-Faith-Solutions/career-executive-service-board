@@ -140,8 +140,7 @@
                     <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="trainingsTab">
                         <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                             <li>
-                                <a class="btn category-button inline-flex hover:text-blue-500" href="#cesTrainingsTab"
-                                    onclick="cesTrainingsTab()">Ces Trainings</a>
+                                <a class="btn category-button inline-flex hover:text-blue-500" href="{{ route('ces-training-201.index', ['cesno' => $cesno]) }}">Ces Trainings</a>
                             </li>
                             <li>
                                 <a class="btn category-button inline-flex hover:text-blue-500"
