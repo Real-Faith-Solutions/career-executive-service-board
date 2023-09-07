@@ -3,7 +3,7 @@
 @section('sub', 'User Roles')
 @section('content')
 
-<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-3">
+<nav class="bg-gray-200 border-gray-200 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">User Roles</span>

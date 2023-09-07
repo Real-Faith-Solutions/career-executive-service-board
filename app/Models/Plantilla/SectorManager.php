@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SectorManager extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'plantilla_tblSector';
     protected $primaryKey = 'sectorid';
@@ -24,6 +23,4 @@ class SectorManager extends Model
     {
         return $this->hasMany(DepartmentAgency::class, 'plantilla_tblSector_id', 'sectorid');
     }
-
-
 }

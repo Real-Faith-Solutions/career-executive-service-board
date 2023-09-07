@@ -14,18 +14,16 @@ return new class extends Migration
         //training_tblparticipants
         Schema::create('training_tblparticipants', function (Blueprint $table) {
             $table->id('pid');
-            // $table->bigInteger('pid')->unique();
-            $table->bigInteger('sessionid')->nullable();
-            $table->bigInteger('cesno')->nullable();
-            $table->integer('status')->nullable();
+            $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
+            $table->foreignId('sessionid')->constrained('training_tblSessions', 'sessionid');
+            $table->string('status')->nullable();
             $table->string('remarks')->nullable();
-            $table->longText('no_hours')->nullable();
-            $table->integer('payment')->nullable();
+            $table->integer('no_hours')->nullable();
+            $table->string('payment')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('encoder_dt')->nullable();
-            $table->string('lastupd_dt')->nullable();
-            $table->string('lastupd_enc')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

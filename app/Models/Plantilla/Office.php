@@ -4,6 +4,7 @@ namespace App\Models\Plantilla;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Office extends Model
@@ -20,4 +21,9 @@ class Office extends Model
         'encoder',
         'updated_by',
     ];
+
+    public function officeAddress(): HasOne
+    {
+        return $this->hasOne(OfficeAddress::class, 'officeid');
+    }
 }
