@@ -88,23 +88,11 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">    
-                            {{-- <form action="{{ route('ces-training.edit', ['ctrlno'=>$training->pid, 'cesno'=>$training->cesTrainingPersonalData->cesno]) }}" method="GET">
-                                @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                        trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-
-                            <form action="{{ route('ces-training.destroy', ['ctrlno'=>$training->pid]) }}" method="POST" id="delete_training_participant_form{{$training->pid}}">
+                        <div class="flex">                                
+                            <form action="{{ route('training-participant.destroy', ['pid'=>$trainingParticipantLists->pid]) }}" method="POST" id="delete_training_participant_form{{$trainingParticipantLists->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingParticipantButton{{$training->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingParticipantButton{{$trainingParticipantLists->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -113,7 +101,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>

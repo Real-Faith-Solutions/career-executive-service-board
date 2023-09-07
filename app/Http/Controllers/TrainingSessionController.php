@@ -167,4 +167,12 @@ class TrainingSessionController extends Controller
   
         return back()->with('info', 'Data Permanently Deleted');
     }
+
+    public function destroyParticipant($pid)
+    {
+        $trainingParticipant = TrainingParticipants::find($pid);
+        $trainingParticipant->delete();
+
+        return back()->with('message', 'Participant Record Deleted Sucessfully');
+    }
 }
