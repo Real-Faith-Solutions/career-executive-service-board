@@ -284,14 +284,14 @@
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
     
-            {{-- personal data permissions --}}
+            {{-- Work Experience permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Personal Data
+                                Work Experience
                             </h1>
                         </div>
             
@@ -322,14 +322,14 @@
                 </div>
             </div>
     
-            {{-- family permissions --}}
+            {{-- Field Expertise permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
                         
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Family Profile
+                                Field Expertise
                             </h1>
                         </div>
             
@@ -521,7 +521,7 @@
     </form>
 </div>
 
-<div id="experience_trainings_permissions" class="hidden">
+<div id="personal_others_permissions" class="hidden">
     <nav>
         <div class="flex flex-col lg:flex-row lg:justify-end">
             <div class="lg:flex lg:space-x-2">
@@ -773,6 +773,5 @@
     
     </form>
 </div>
-
 
 @endsection
