@@ -143,10 +143,10 @@
                                 </button>
                             </form>
 
-                            <form action="" method="POST" id="delete_ces_training_form{{$competencyCesTrainings->ctrlno}}">
+                            <form action="{{ route('ces-training-201.destroy', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteCesTrainingButton{{$competencyCesTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

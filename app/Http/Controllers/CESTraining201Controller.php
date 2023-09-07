@@ -145,4 +145,12 @@ class CESTraining201Controller extends Controller
 
         return to_route('ces-training-201.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');        
     }
+
+    public function destroy($ctrlno)
+    {
+        $trainingParticipant = TrainingParticipants::find($ctrlno);
+        $trainingParticipant->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }

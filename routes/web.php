@@ -322,6 +322,7 @@ Route::middleware('auth')->group(function () {
             Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store');
             Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit');
             Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update');
+            Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
