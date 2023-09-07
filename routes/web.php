@@ -371,12 +371,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
 
+            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
             Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
             Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
             Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
             Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
-            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
             Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
         });
