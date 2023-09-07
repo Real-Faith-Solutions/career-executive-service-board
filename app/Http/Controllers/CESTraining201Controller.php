@@ -117,4 +117,32 @@ class CESTraining201Controller extends Controller
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.edit', compact('personalData', 'trainingSession', 'cesno', 'trainingParticipants', 'description'));
     }
+
+    public function update(Request $request, $cesno, $ctrlno)
+    {
+        $request->validate([
+
+            'sessionid' => ['required',Rule::unique('training_tblparticipants')->where('cesno', $cesno)->ignore($ctrlno, 'pid')],
+            'status' => ['required'],
+            'remarks' => ['nullable'],
+            'no_of_hours' => ['required'],
+            'payment' => ['required'],
+            
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+                    
+        $trainingParticipant = TrainingParticipants::find($ctrlno);
+        $trainingParticipant->sessionid = $request->sessionid;
+        $trainingParticipant->status = $request->status;
+        $trainingParticipant->remarks = $request->remarks;
+        $trainingParticipant->no_hours = $request->no_of_hours;
+        $trainingParticipant->payment = $request->payment;
+        $trainingParticipant->updated_by = $encoder;
+        $trainingParticipant->save();
+
+        return to_route('ces-training-201.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');        
+    }
 }
