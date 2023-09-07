@@ -44,7 +44,7 @@
                                     <lord-icon
                                         src="https://cdn.lordicon.com/bhfjfgqz.json"
                                         trigger="hover"
-                                        colors="primary:#020986"
+                                        colors="primary:#000000"
                                         style="width:34px;height:34px">
                                     </lord-icon>
                                 </a>
@@ -54,7 +54,7 @@
                                     <lord-icon
                                         src="https://cdn.lordicon.com/usxfmtjg.json"
                                         trigger="hover"
-                                        colors="primary:#020986"
+                                        colors="primary:#000000"
                                         style="width:34px;height:34px">
                                     </lord-icon>
                                 </a>
@@ -64,7 +64,7 @@
                                     <lord-icon
                                         src="https://cdn.lordicon.com/kipaqhoz.json"
                                         trigger="morph"
-                                        colors="primary:#020986"
+                                        colors="primary:#000000"
                                         style="width:34px;height:34px">
                                     </lord-icon>
                                 </a>

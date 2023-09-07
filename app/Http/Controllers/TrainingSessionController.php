@@ -7,6 +7,7 @@ use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ResourceSpeaker;
 use App\Models\TrainingLibCategory;
+use App\Models\TrainingParticipants;
 use App\Models\TrainingSecretariat;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
@@ -20,6 +21,14 @@ class TrainingSessionController extends Controller
         $trainingSession = TrainingSession::paginate(25);
 
         return view('admin.competency.partials.training_session.table', compact('trainingSession'));
+    }
+
+    public function participantList($sessionId)
+    {
+        $trainingSession = TrainingSession::find($sessionId);
+        $trainingParticipantList = $trainingSession->trainingParticipantList;
+
+        return view('admin.competency.partials.training_session.participant_list', compact('trainingParticipantList', 'trainingSession'));
     }
 
     public function create()
@@ -157,5 +166,36 @@ class TrainingSessionController extends Controller
         $trainingSessionTrashedRecord->forceDelete();
   
         return back()->with('info', 'Data Permanently Deleted');
+    }
+
+    public function destroyParticipant($pid)
+    {
+        $trainingParticipant = TrainingParticipants::find($pid);
+        $trainingParticipant->delete();
+
+        return back()->with('message', 'Participant Record Deleted Sucessfully');
+    }
+
+    public function recentlyDeletedParticipant()
+    {
+       $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->get();
+
+       return view('admin.competency.partials.training_session.participant_trashbin', compact('trainingParticipantTrashedRecord'));
+    }
+
+    public function restoreParticipantList($pid)
+    {
+        $trainingParticipantTrashedRecord = TrainingParticipants::onlyTrashed()->find($pid);
+        $trainingParticipantTrashedRecord->restore();
+
+        return back()->with('info', 'Participant\'s Record Sucessfully');
+    }
+
+    public function forceDeleteParticipantList($pid)
+    {
+        $trainingParticipantTrashedRecord = TrainingParticipants::onlyTrashed()->find($pid);
+        $trainingParticipantTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Participant\'s Record Permanently Deleted');
     }
 }
