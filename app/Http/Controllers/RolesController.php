@@ -59,4 +59,17 @@ class RolesController extends Controller
         return redirect()->route('roles.show', compact('usersOnThisRole', 'role_name', 'role_title', 'roles'))->with('info', $userName.' assigned as '.$newRoleTitle);
     }
 
+    public function showPermissions($role_name, $role_title)
+    {
+        return view('admin.rights_management.permissions', compact('role_name', 'role_title'));
+    }
+
+    public function showPermissionsProfiling($role_name, $role_title)
+    {
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions;
+
+        return view('admin.rights_management.role_permissions', compact('role_name', 'role_title', 'permissions'));
+    }
+
 }

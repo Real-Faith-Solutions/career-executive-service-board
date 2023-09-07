@@ -547,8 +547,13 @@ Route::middleware('auth')->group(function () {
     Route::prefix('rights-management')->group(function () {
 
         Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
-        Route::get('show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
+        Route::get('roles/show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
         Route::post('change', [RolesController::class, 'change'])->name('roles.change');
+        Route::get('permissions/show/{role_name}/{role_title}', [RolesController::class, 'showPermissions'])->name('permissions.show');
+        Route::get('permissions/profiling/{role_name}/{role_title}', [RolesController::class, 'showPermissionsProfiling'])->name('permissions.profiling');
+        Route::get('permissions/plantilla/{role_name}/{role_title}', [RolesController::class, 'showPermissionsPlantilla'])->name('permissions.plantilla');
+        Route::get('permissions/competency/{role_name}/{role_title}', [RolesController::class, 'showPermissionsCompetency'])->name('permissions.competency');
+        Route::get('permissions/reports/{role_name}/{role_title}', [RolesController::class, 'showPermissionsReports'])->name('permissions.reports');
 
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
         // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
