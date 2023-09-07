@@ -1,3 +1,14 @@
+@extends('layouts.app')
+@section('title', 'CES Training')
+@section('sub', 'CES Training')
+@section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+
+<div class="flex justify-end">
+    <a href="{{ route('ces-training-201.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Go Back</a>
+</div>
+
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -5,85 +16,43 @@
                 Form CES Training
             </h1>
         </div>
-
+        
         <div class="bg-white px-6 py-3">
-            <form action="#">
+            <form action="{{ route('ces-training-201.store', ['cesno'=>$cesno]) }}" method="POST" id="ces_training_201_form" onsubmit="return checkErrorsBeforeSubmit(ces_training_201_form)">
                 @csrf
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
-                        <label for="session_title_or_program">Session Title / Program</label>
-                        <input id="session_title_or_program" name="session_title_or_program" type="text" required>
-                        @error('session_title_or_program')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="session_number">Session Number<sup>*</span></label>
-                        <input id="session_number" name="session_number" type="number" required>
-                        @error('session_number')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="training_category_or_theme">Training Category / Theme<sup>*</span></label>
-                        <select id="training_category_or_theme" name="training_category_or_theme" required>
-                            <option disabled selected>Select Training Category / Theme</option>
+                        <label for="sessionid">Training Session<sup>*</sup></label>
+                        <select name="sessionid" id="sessionid">
+                            <option disabled selected>Select Training Session</option>
+                            @foreach ($trainingSession as $trainingSessions)
+                                <option value="{{ $trainingSessions->sessionid }}" >{{ $trainingSessions->title }}</option>
+                            @endforeach
                         </select>
-                        @error('training_category_or_theme')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                </div>
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="mb-3">
-                        <label for="expertise_field_of_specialization">Expertise / Field of Specialization<sup>*</span></label>
-                        <input id="expertise_field_of_specialization" name="expertise_field_of_specialization" type="text" required>
-                        @error('expertise_field_of_specialization')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" type="date" required>
-                        @error('inclusive_date_from')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" type="date" required>
-                        @error('inclusive_date_to')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        @error('sessionid')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="venue">Venue</label>
-                        <input id="venue" name="venue" type="text" required>
-                        @error('venue')
+                        <label for="cesno">CESNO<sup>*</sup></label>
+                        <input type="text" id="cesno" name="cesno" value="{{ $personalData->cesno }}" readonly>
+                        @error('cesno')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name">Name<sup>*</sup></label>
+                        <input type="text" id="name" name="name" value="{{ $personalData->lastname. ', '.$personalData->firstname. ', '.$personalData->name_extension. ', '.$personalData->middleinitial }}" readonly>
+                        @error('training_category')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -91,69 +60,54 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="no_of_training_hours">No. of Training Hours<sup>*</span></label>
-                        <input id="no_of_training_hours" name="no_of_training_hours" type="number" required>
-                        @error('no_of_training_hours')
+                        <label for="ces_status">CES Status<sup>*</sup></label>
+                        <input type="text" name="ces_status" value="{{ $description }}" readonly>
+                        @error('ces_status')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
-                    <div class="mb-3">
-                        <label for="barrio">Barrio<sup>*</span></label>
-                        <input id="barrio" name="barrio" type="text" required>
-                        @error('barrio')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="resource_speaker">Resource Speaker</label>
-                        <input id="resource_speaker" name="resource_speaker" type="text" required>
-                        @error('resource_speaker')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="session_director">Session Director<sup>*</span></label>
-                        <input id="session_director" name="session_director" type="number" required>
-                        @error('session_director')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="training_status">Training Status<sup>*</span></label>
-                        <select id="training_status" name="training_status" required>
-                            <option disabled selected>Select Training Status</option>
+                        <label for="status">Status<sup>*</sup></label>
+                        <select name="status" id="status">
+                            <option disabled selected>Select Status</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Incomplete">Incomplete</option>
+                            <option value="Reserved">Reserved</option>
+                            <option value="Pending">Pending</option>
+                            <option value="No Show">No Show</option>
                         </select>
-                        @error('training_status')
+                        @error('status')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
-                </div>
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="remarks">Remarks<sup>*</span></label>
-                        <input id="remarks" name="remarks" type="text" required>
-                        @error('remarks')
+                        <label for="no_of_hours">No. of Training Hours<sup>*</sup></label>
+                        <input type="number" id="no_of_hours" name="no_of_hours" oninput="validateInput(no_of_hours, 1, 'numbers')" onkeypress="validateInput(no_of_hours, 1, 'numbers')" onblur="checkErrorMessage(no_of_hours)" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('no_of_hours')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="payment">Payment<sup>*</sup></label>
+                        <select id="payment" name="payment" required>
+                            <option disabled selected>Select Payment</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid">UnPaid</option>
+                            <option value="Partial">Partial</option>
+                        </select>
+                        @error('payment')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -161,9 +115,15 @@
                     </div>
                 </div>
 
+                <div >
+                    <div class="mb-3">
+                        <label for="remarks">Remarks<sup>*</sup></label>
+                        <textarea name="remarks" id="remarks" cols="10" rows="3"></textarea>
+                    </div>
+                </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>
@@ -171,3 +131,5 @@
         </div>
     </div>
 </div>
+
+@endsection

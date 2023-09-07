@@ -318,6 +318,8 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('ces-training')->group(function () {
             Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index');
+            Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create');
+            Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {

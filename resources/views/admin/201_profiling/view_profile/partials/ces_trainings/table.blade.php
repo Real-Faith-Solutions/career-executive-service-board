@@ -4,6 +4,19 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
+<div class="my-5 flex justify-end">
+    <a href="">
+        <lord-icon
+            src="https://cdn.lordicon.com/jmkrnisz.json"
+            trigger="hover"
+            colors="primary:#DC3545"
+            style="width:34px;height:34px">
+      </lord-icon>
+    </a>
+
+    <a href="{{ route('ces-training-201.create', ['cesno' => $cesno]) }}" class="btn btn-primary">Add CES Training</a>
+</div>
+
 <div class="table-ces-trainings relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
