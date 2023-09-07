@@ -182,4 +182,9 @@ class PersonalData extends Model
     {
         return $this->hasMany(ApprovedFile::class);
     }
+
+    public function competencyCesTraining(): HasMany
+    {
+        return $this->hasMany(TrainingParticipants::class, 'cesno', 'cesno');
+    }
 }

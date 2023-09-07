@@ -14,6 +14,7 @@ use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\OtherTrainingManagementController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
+use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
@@ -526,6 +527,18 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore');
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
+        });
+
+        Route::prefix('training-participants')->group(function () {
+            Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
+            Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
+            Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
+            Route::get('edit/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'edit'])->name('ces-training.edit');
+            Route::put('update/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'update'])->name('ces-training.update');
+            Route::delete('destroy/{ctrlno}', [TrainingParticipantsController::class, 'destroy'])->name('ces-training.destroy');
+            Route::get('recently-deleted/{cesno}', [TrainingParticipantsController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [TrainingParticipantsController::class, 'restore'])->name('ces-training.restore');
+            Route::delete('force-delete//recently-deleted/{ctrlno}', [TrainingParticipantsController::class, 'forceDelete'])->name('ces-training.forceDelete');
         });
     });
     // End of competency routes
