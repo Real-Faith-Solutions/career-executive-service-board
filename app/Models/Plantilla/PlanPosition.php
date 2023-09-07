@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models\Plantilla;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class PlanPosition extends Model
+{
+    use HasFactory, SoftDeletes;
+    protected $table = 'plantilla_tblPlanPositions';
+    protected $primarKey = 'plantilla_id';
+}
