@@ -522,6 +522,7 @@ Route::middleware('auth')->group(function () {
             Route::get('participant-list/{sessionId}', [TrainingSessionController::class, 'participantList'])->name('training-session.participantList');
             Route::delete('participant-destroy/{pid}', [TrainingSessionController::class, 'destroyParticipant'])->name('training-participant.destroy');
             Route::get('recently-deleted-participant-list', [TrainingSessionController::class, 'recentlyDeletedParticipant'])->name('training-session.recentlyDeletedParticipant');
+            Route::post('restore-participant-list/{pid}', [TrainingSessionController::class, 'restoreParticipantList'])->name('training-session.restoreParticipantList');
             Route::delete('force-delete-participant-list/{pid}', [TrainingSessionController::class, 'forceDeleteParticipantList'])->name('training-participant.forceDeleteParticipantList');
             Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
             Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');

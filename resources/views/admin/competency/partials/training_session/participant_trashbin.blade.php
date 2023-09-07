@@ -107,6 +107,18 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">                                
+                            <form action="{{ route('training-session.restoreParticipantList', ['pid'=>$trainingParticipantTrashedRecords->pid]) }}" method="POST" id="restore_training_participant_list_form{{$trainingParticipantTrashedRecords->pid}}">
+                                @csrf
+                                <button type="button" id="restoreTrainingParticipantListButton{{$trainingParticipantTrashedRecords->pid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/nxooksci.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
                             <form action="{{ route('training-participant.forceDeleteParticipantList', ['pid'=>$trainingParticipantTrashedRecords->pid]) }}" method="POST" id="delete_training_participant_list_form{{$trainingParticipantTrashedRecords->pid}}">
                                 @csrf
                                 @method('DELETE')

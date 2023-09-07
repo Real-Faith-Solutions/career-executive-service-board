@@ -183,11 +183,19 @@ class TrainingSessionController extends Controller
        return view('admin.competency.partials.training_session.participant_trashbin', compact('trainingParticipantTrashedRecord'));
     }
 
+    public function restoreParticipantList($pid)
+    {
+        $trainingParticipantTrashedRecord = TrainingParticipants::onlyTrashed()->find($pid);
+        $trainingParticipantTrashedRecord->restore();
+
+        return back()->with('info', 'Participant\'s Record Sucessfully');
+    }
+
     public function forceDeleteParticipantList($pid)
     {
         $trainingParticipantTrashedRecord = TrainingParticipants::onlyTrashed()->find($pid);
         $trainingParticipantTrashedRecord->forceDelete();
   
-        return back()->with('info', 'Data Permanently Deleted');
+        return back()->with('info', 'Participant\'s Record Permanently Deleted');
     }
 }
