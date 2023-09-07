@@ -3,7 +3,7 @@
 @section('sub', 'User Roles')
 @section('content')
 
-<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-3">
+<nav class="bg-gray-200 border-gray-200 dark:bg-gray-800 mb-5">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500 sm:whitespace-normal">{{ $role_title }} - 201 Profiling Permissions</span>
@@ -16,14 +16,15 @@
 </nav>
 
 <nav class="mb-3">
-    <div class="flex flex-wrap mx-auto p-4">
-        <div class="flex justify-end">
-            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="btn btn-primary mr-5">Personal & Educational Info</a>
-            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="btn btn-primary mr-5">Experiences & Trainings</a>
-            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="btn btn-primary mr-5">Others</a>
+    <div class="flex flex-col lg:flex-row lg:justify-end">
+        <div class="lg:flex lg:space-x-2">
+            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="p-2 rounded text-slate-500 bg-gray-200 disabled mb-2 lg:mb-0">Personal & Educational Info</a>
+            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="btn btn-primary mb-2 lg:mb-0">Experiences & Trainings</a>
+            <a href="{{ route('permissions.show', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="btn btn-primary">Others</a>
         </div>
     </div>
 </nav>
+
 
 <form method="POST" action="#">
     @csrf

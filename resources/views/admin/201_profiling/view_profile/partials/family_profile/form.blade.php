@@ -34,8 +34,6 @@
                 @include('admin.201_profiling.view_profile.partials.family_profile.create_spouse')
             </div>
 
-
-
         </div>
     </div>
 </div>
