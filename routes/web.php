@@ -519,6 +519,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('training-session')->group(function () {
             Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
+            Route::get('participant-list/{sessionId}', [TrainingSessionController::class, 'participantList'])->name('training-session.participantList');
             Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
             Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
             Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit');

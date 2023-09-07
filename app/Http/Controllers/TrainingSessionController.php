@@ -7,6 +7,7 @@ use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ResourceSpeaker;
 use App\Models\TrainingLibCategory;
+use App\Models\TrainingParticipants;
 use App\Models\TrainingSecretariat;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
@@ -20,6 +21,14 @@ class TrainingSessionController extends Controller
         $trainingSession = TrainingSession::paginate(25);
 
         return view('admin.competency.partials.training_session.table', compact('trainingSession'));
+    }
+
+    public function participantList($sessionId)
+    {
+        $trainingSession = TrainingSession::find($sessionId);
+        $trainingParticipantList = $trainingSession->trainingParticipantList;
+
+        return view('admin.competency.partials.training_session.participant_list', compact('trainingParticipantList', 'trainingSession'));
     }
 
     public function create()

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TrainingSession extends Model
@@ -34,6 +35,11 @@ class TrainingSession extends Model
         'updated_by',
         
     ];
+
+    public function trainingParticipantList(): HasMany
+    {
+        return $this->hasMany(TrainingParticipants::class, 'sessionid', 'sessionid');
+    }
 
     public function venuePersonalData(): BelongsTo
     {
