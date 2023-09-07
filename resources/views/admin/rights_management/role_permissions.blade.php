@@ -44,7 +44,6 @@
                 <div class="border-b bg-white px-6 py-3">
     
                     <div class="sm:grid-cols-1 grid gap-2 md:grid-cols-1 lg:grid-cols-1">
-
                         <div class="flex items-center mb-4">
                             <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                             <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
@@ -64,7 +63,6 @@
                             <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                             <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                         </div>
-
                     </div>
 
                 </div>
