@@ -127,6 +127,20 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
+                            <form action="{{ route('training-session.participantList', ['sessionId'=>$trainingSessions->sessionid]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/isugonwi.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
+
                             <form action="{{ route('training-session.edit',['ctrlno'=>$trainingSessions->sessionid]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
