@@ -32,6 +32,14 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Session Id
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Session Name
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Training Status
                 </th>
 
@@ -74,6 +82,14 @@
                     </td>
 
                     <td class="px-6 py-3">
+                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->sessionid }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->title }}
+                    </td>
+
+                    <td class="px-6 py-3">
                         {{ $trainingParticipantTrashedRecords->status }}
                     </td>
 
@@ -91,10 +107,10 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">                                
-                            <form action="{{ route('training-participant.destroy', ['pid'=>$trainingParticipantTrashedRecords->pid]) }}" method="POST" id="delete_training_participant_form{{$trainingParticipantTrashedRecords->pid}}">
+                            <form action="{{ route('training-participant.forceDeleteParticipantList', ['pid'=>$trainingParticipantTrashedRecords->pid]) }}" method="POST" id="delete_training_participant_list_form{{$trainingParticipantTrashedRecords->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingParticipantButton{{$trainingParticipantTrashedRecords->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteTrainingParticipantListButton{{$trainingParticipantTrashedRecords->pid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
