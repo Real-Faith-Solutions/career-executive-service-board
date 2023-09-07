@@ -4,7 +4,9 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-<div class="my-5 flex justify-end">
+<div class="my-5 flex justify-between">
+    <a href="{{ route('training-session.recentlyDeletedParticipant') }}" class="btn btn-primary" >Participant Trashbin</a>
+
     <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a>
 </div>
 

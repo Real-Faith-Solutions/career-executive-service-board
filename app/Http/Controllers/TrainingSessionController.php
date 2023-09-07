@@ -175,4 +175,11 @@ class TrainingSessionController extends Controller
 
         return back()->with('message', 'Participant Record Deleted Sucessfully');
     }
+
+    public function recentlyDeletedParticipant()
+    {
+       $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->get();
+
+       return view('admin.competency.partials.training_session.participant_trashbin', compact('trainingParticipantTrashedRecord'));
+    }
 }
