@@ -4,18 +4,19 @@
     <div class="h-full overflow-y-auto bg-white px-3 pb-4">
         <ul class="space-y-2 font-medium">
 
+            {{-- dashboard --}}
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100">
-                    <svg aria-hidden="true"
-                        class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" 
+                        class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                     </svg>
-                    <span class="ml-3">Dashboard</span>
+                    <span class="ml-3 flex-1 whitespace-nowrap">Dashboard</span>
                 </a>
             </li>
+            {{-- end dashboard --}}
 
             @if($userRole !== "user")
 
@@ -72,7 +73,6 @@
             <li>
                 <a href="{{ route('sector-manager.index') }}"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
-
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path fill-rule="evenodd"
@@ -152,37 +152,16 @@
 
             {{-- rights management --}}
             <li>
-
-                <button type="button"
-                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                    aria-controls="dropdown-rights-management" data-collapse-toggle="dropdown-rights-management">
+                <a href="{{ route('roles.index') }}" 
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path fill-rule="evenodd"
                             d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
                             clip-rule="evenodd" />
                     </svg>
-
-                    <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Rights Management</span>
-                    <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-
-                <ul id="dropdown-rights-management" class="hidden space-y-2 py-2">
-                    <li>
-                        <a href="{{ route('roles.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Roles</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Permissions</a>
-                    </li>
-                </ul>
-
+                    <span class="ml-3">Rights Management</span>
+                </a>
             </li>
             {{-- end rights management --}}
 

@@ -1,7 +1,3 @@
-  // Open the modal when the add button is clicked
-  // document.getElementById('changeRoleBtn').addEventListener('click', function() {
-  //   showModalChangeRole();
-  // });
   
   // Close the modal when the close button is clicked
   document.getElementsByClassName('close-md')[0].addEventListener('click', function() {
