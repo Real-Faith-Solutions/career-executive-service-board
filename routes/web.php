@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
+use App\Http\Controllers\CESTraining201Controller;
 use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
@@ -315,6 +316,18 @@ Route::middleware('auth')->group(function () {
             Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete');
         });
 
+        Route::prefix('ces-training-201')->group(function () {
+            Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index');
+            Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create');
+            Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store');
+            Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit');
+            Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update');
+            Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy');
+            Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete');
+        });
+
         Route::prefix('non-accredited-ces-training')->group(function () {
             Route::get('create/{cesno}', [OtherTrainingController::class, 'create'])->name('other-training.create');
             Route::get('index/{cesno}', [OtherTrainingController::class, 'index'])->name('other-training.index');
@@ -371,12 +384,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
 
+            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
             Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
             Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
             Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
             Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
-            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
             Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
         });
@@ -515,10 +528,16 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
             Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete');
+            Route::get('training-enagagement/{ctrlno}', [ResourceSpeakerController::class, 'trainingEnagagement'])->name('resource-speaker.trainingEnagagement');
         });
 
         Route::prefix('training-session')->group(function () {
             Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index');
+            Route::get('participant-list/{sessionId}', [TrainingSessionController::class, 'participantList'])->name('training-session.participantList');
+            Route::delete('participant-destroy/{pid}', [TrainingSessionController::class, 'destroyParticipant'])->name('training-participant.destroy');
+            Route::get('recently-deleted-participant-list', [TrainingSessionController::class, 'recentlyDeletedParticipant'])->name('training-session.recentlyDeletedParticipant');
+            Route::post('restore-participant-list/{pid}', [TrainingSessionController::class, 'restoreParticipantList'])->name('training-session.restoreParticipantList');
+            Route::delete('force-delete-participant-list/{pid}', [TrainingSessionController::class, 'forceDeleteParticipantList'])->name('training-participant.forceDeleteParticipantList');
             Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create');
             Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store');
             Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit');

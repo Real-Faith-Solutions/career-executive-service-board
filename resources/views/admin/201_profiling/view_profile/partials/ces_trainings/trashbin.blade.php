@@ -1,44 +1,35 @@
 @extends('layouts.app')
-@section('title', 'Training Session')
-@section('sub', 'Training Session')
+@section('title', 'CES Training')
+@section('sub', 'CES Training')
 @section('content')
-@include('admin.competency.view_profile.header')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="{{ route('training-session.recentlyDeleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-        </lord-icon>
-    </a>
-    
-    <a href="{{ route('training-session.create') }}" class="btn btn-primary" >Add New Training</a>
+    <a href="{{ route('ces-training-201.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Go Back</a>
 </div>
 
-<div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="table-ces-trainings relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Session Title
+                    Session Title / Program
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Session Number
+                    Session number
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Training Category
+                    Training Category / Theme
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Expertise
+                    Expertise / Field of Specialization
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Inclusive Dates
+                    Inclusive dates
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -48,11 +39,7 @@
                 <th scope="col" class="px-6 py-3">
                     No. of Training Hours
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-
+                
                 <th scope="col" class="px-6 py-3">
                     Barrio
                 </th>
@@ -66,6 +53,10 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Training Status
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
                     Remarks
                 </th>
 
@@ -75,88 +66,78 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($trainingSession as $trainingSessions)
+            @foreach ($competencyCesTraining as $competencyCesTrainings)        
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingSessions->title }}
+                        {{ $competencyCesTrainings->participantTrainingSession->title }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->sessionid }}
+                        {{ $competencyCesTrainings->participantTrainingSession->sessionid }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->category }}
+                        {{ $competencyCesTrainings->participantTrainingSession->category }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->specialization }}
+                        {{ $competencyCesTrainings->participantTrainingSession->specialization }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->from_dt. ' - '.$trainingSessions->to_dt }}
+                        {{ $competencyCesTrainings->participantTrainingSession->from_dt.' / '.$competencyCesTrainings->participantTrainingSession->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->venuePersonalData->name }}
+                        {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->no_hours }}
+                        {{ $competencyCesTrainings->participantTrainingSession->no_hours }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->status }}
+                        {{ $competencyCesTrainings->participantTrainingSession->barrio }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->barrio }}
+                        {{ 
+                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname.', '.
+                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname.', '.
+                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->resourceSpeakerPersonalData->lastname.', '.$trainingSessions->resourceSpeakerPersonalData->firstname }}
+                        {{ $competencyCesTrainings->participantTrainingSession->session_director }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->session_director }}
+                        {{ $competencyCesTrainings->participantTrainingSession->status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessions->remarks }}
+                        {{ $competencyCesTrainings->participantTrainingSession->remarks }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('training-session.participantList', ['sessionId'=>$trainingSessions->sessionid]) }}" method="GET">
+                            <form action="{{ route('ces-training-201.restore', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="restore_ces_training_201_form{{$competencyCesTrainings->pid}}">
                                 @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <button type="button" id="restoreCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
-                                        src="https://cdn.lordicon.com/isugonwi.json"
+                                        src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
                                         colors="primary:#121331"
-                                        style="width:30px;height:30px">
+                                        style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
                             </form>
 
-
-                            <form action="{{ route('training-session.edit',['ctrlno'=>$trainingSessions->sessionid]) }}" method="GET">
-                                @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                        trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-
-                            <form action="{{ route('training-session.destroy', ['ctrlno'=>$trainingSessions->sessionid]) }}" method="POST" id="delete_training_session_form{{$trainingSessions->sessionid}}">
+                            <form action="{{ route('ces-training-201.forceDelete', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingSessionButton{{$trainingSessions->sessionid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -172,6 +153,10 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $competencyCesTraining->links() }}
 </div>
 
 @endsection

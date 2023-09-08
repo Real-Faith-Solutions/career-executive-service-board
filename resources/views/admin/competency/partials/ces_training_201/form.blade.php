@@ -20,7 +20,7 @@
             <form action="{{ route('ces-training.store', ['cesno'=>$personalData->cesno]) }}" method="POST" id="ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(ces_trainings_form)">
                 @csrf
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
                         <label for="sessionid">Training Session<sup>*</sup></label>
                         <select name="sessionid" id="sessionid">

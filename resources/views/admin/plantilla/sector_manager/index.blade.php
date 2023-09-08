@@ -14,7 +14,7 @@
             </svg>
         </li>
         <li>
-            <a id="{{ route('sector-manager.index') }}" class="text-blue-500">Sector Manager</a>
+            <a href="#" class="text-blue-500">Sector Manager</a>
         </li>
 
     </ol>
