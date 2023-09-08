@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompetencyNonCesAccreditedTraining;
 use App\Models\OtherManagementTrainings;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
@@ -17,7 +18,7 @@ class OtherTrainingController extends Controller
         $personalData = PersonalData::find($cesno);
         $otherTraining = $personalData->otherTraining;
         $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining;
-
+    
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', 
         compact('otherTraining' , 'cesno', 'competencyNonCesAccreditedTraining'));
     }
@@ -119,7 +120,7 @@ class OtherTrainingController extends Controller
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
-        // Access the soft deleted scholarships of the parent model
+        // Access the soft deleted otherTraining of the parent model
         $otherTrainingTrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'cesno'));
@@ -139,5 +140,13 @@ class OtherTrainingController extends Controller
         $otherTraining->forceDelete();
   
         return back()->with('message', 'Data Permanently Deleted');
+    }
+
+    public function editCompetencyNonCesTraining($ctrlno, $cesno)
+    {
+        $otherManagementTraining = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.competency_edit', compact('otherManagementTraining', 'profileLibTblExpertiseSpec', 'cesno'));
     }
 }
