@@ -122,8 +122,11 @@ class OtherTrainingController extends Controller
 
         // Access the soft deleted otherTraining of the parent model
         $otherTrainingTrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
+
+        // Access the soft deleted competencyNonCesAccreditedTraining of the parent model
+        $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'competencyNonCesAccreditedTrainingTrashedRecord','cesno'));
     }
 
     public function restore($ctrlno)
