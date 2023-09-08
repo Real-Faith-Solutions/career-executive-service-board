@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblPlanPositions', function (Blueprint $table) {
             $table->id('plantilla_id');
-            $table->integer('officeid')->nullable();
-            $table->integer('pos_code')->nullable();
+            $table->foreignId('officeid')->constrained('plantilla_tblOffice', 'officeid');
+            $table->foreignId('pos_code')->constrained('plantillalib_tblPositionMaster', 'pos_code');
             $table->string('pos_suffix')->nullable();
             $table->string('pos_func_name')->nullable();
             $table->string('pos_default')->nullable();
@@ -33,6 +33,7 @@ return new class extends Migration
             $table->boolean('is_active')->nullable();
             $table->boolean('is_generic')->nullable();
             $table->boolean('is_head')->nullable();
+            $table->timestamps();
         });
     }
 
