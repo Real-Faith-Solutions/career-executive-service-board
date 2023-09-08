@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ResourceSpeaker extends Model
@@ -36,4 +37,9 @@ class ResourceSpeaker extends Model
         'updated_by',
 
     ];
+
+    public function trainingEnagagement(): HasMany
+    {
+        return $this->hasMany(TrainingSession::class, 'speakerid');
+    }
 }
