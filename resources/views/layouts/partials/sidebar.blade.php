@@ -4,18 +4,19 @@
     <div class="h-full overflow-y-auto bg-white px-3 pb-4">
         <ul class="space-y-2 font-medium">
 
+            {{-- dashboard --}}
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100">
-                    <svg aria-hidden="true"
-                        class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900"
-                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" 
+                        class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                     </svg>
-                    <span class="ml-3">Dashboard</span>
+                    <span class="ml-3 flex-1 whitespace-nowrap">Dashboard</span>
                 </a>
             </li>
+            {{-- end dashboard --}}
 
             @if($userRole !== "user")
 
@@ -72,7 +73,6 @@
             <li>
                 <a href="{{ route('sector-manager.index') }}"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
-
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path fill-rule="evenodd"
@@ -153,7 +153,7 @@
             {{-- rights management --}}
             <li>
                 <a href="{{ route('roles.index') }}" 
-                class="flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100">
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path fill-rule="evenodd"
