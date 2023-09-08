@@ -298,23 +298,23 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="work_experience_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'work_experience_add') ? 'checked' : '' }} value="work_experience_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="work_experience_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_edit') ? 'checked' : '' }} value="personal_data_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="work_experience_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'work_experience_edit') ? 'checked' : '' }} value="work_experience_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="work_experience_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_delete') ? 'checked' : '' }} value="personal_data_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="work_experience_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'work_experience_delete') ? 'checked' : '' }} value="work_experience_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="work_experience_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="work_experience_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'work_experience_view') ? 'checked' : '' }} value="work_experience_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="work_experience_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
