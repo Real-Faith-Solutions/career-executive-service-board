@@ -32,7 +32,7 @@ class RolesController extends Controller
     public function change(Request $request)
     {
         $cesno = $request->change_role_cesno;
-        $personalData = PersonalData::where('cesno', $cesno)->first();
+        // $personalData = PersonalData::where('cesno', $cesno)->first();
         $user = User::where('personal_data_cesno', $cesno)->first();
         $userRole = $user->roles->first();
         $role_name = $userRole->role_name;
