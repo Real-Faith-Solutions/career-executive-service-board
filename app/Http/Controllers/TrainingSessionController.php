@@ -138,6 +138,17 @@ class TrainingSessionController extends Controller
     public function destroy($ctrlno)
     {
         $trainingSession = TrainingSession::find($ctrlno);
+
+        // count the participant that already register to training session
+        $trainingParticipantList = $trainingSession->trainingParticipantList()->count();
+
+        $participantCount = 1;
+
+        if($trainingParticipantList >= $participantCount)
+        {
+            return redirect()->back()->with('error', 'This Training Session has Already Participant, Can\'t Delete !!');
+        }
+
         $trainingSession->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
@@ -178,7 +189,7 @@ class TrainingSessionController extends Controller
     public function recentlyDeletedParticipant()
     {
        $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->get();
-
+    
        return view('admin.competency.partials.training_session.participant_trashbin', compact('trainingParticipantTrashedRecord'));
     }
 
