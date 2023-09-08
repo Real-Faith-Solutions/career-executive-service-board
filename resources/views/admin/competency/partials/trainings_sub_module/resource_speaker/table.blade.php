@@ -119,6 +119,19 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
+                            <form action="{{ route('resource-speaker.trainingEnagagement', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/vufjamqa.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
                             <form action="{{ route('resource-speaker.edit', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">

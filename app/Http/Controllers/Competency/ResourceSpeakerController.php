@@ -160,4 +160,13 @@ class ResourceSpeakerController extends Controller
 
         return back()->with('info', 'Data Permanently Deleted');
     }
+
+    public function trainingEnagagement($ctrlno)
+    {
+        $resourceSpeaker = ResourceSpeaker::find($ctrlno);
+
+        $trainingEnagagement = $resourceSpeaker->trainingEnagagement()->paginate(25);
+
+        return view('admin.competency.partials.trainings_sub_module.resource_speaker.training_engagement', compact('trainingEnagagement'));
+    }
 }
