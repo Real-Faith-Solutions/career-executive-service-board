@@ -7,6 +7,7 @@ use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
+use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
@@ -30,16 +31,13 @@ class OfficeManagerController extends Controller
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
-
-        // $office = Office::query()
-        //     ->where('officelocid', $officelocid)
-        //     ->where(function ($queryBuilder) use ($query) {
-        //         $queryBuilder->where('title', 'LIKE', "%$query")
-        //         ->orWhere('acronym', 'LIKE', "%$query")
-        //         ->orWhere('website', 'LIKE', "%$query");
-        //     })
-        //     ->orderBy('title', 'ASC')
-        //     ->paginate(10);
+        $planPositions = PlanPosition::query()
+            ->where('officeid', $office->officeid)
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('pos_default', 'LIKE', "%$query");
+            })
+            ->orderBy('pos_default', 'ASC')
+            ->paginate(10);
 
         return view('admin.plantilla.office_manager.edit', compact(
             'sector',
@@ -48,6 +46,7 @@ class OfficeManagerController extends Controller
             'query',
             'office',
             'cities',
+            'planPositions',
 
         ));;
     }

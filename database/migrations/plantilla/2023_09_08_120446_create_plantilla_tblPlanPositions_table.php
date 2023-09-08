@@ -34,6 +34,7 @@ return new class extends Migration
             $table->boolean('is_generic')->nullable();
             $table->boolean('is_head')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
