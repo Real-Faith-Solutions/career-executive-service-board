@@ -17,7 +17,7 @@ class ProfileLibCitiesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->city(),
             'prov_code' => fake()->randomDigit(),
             'zipcode' => fake()->randomDigit(),
         ];
