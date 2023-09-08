@@ -412,23 +412,23 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_add') ? 'checked' : '' }} value="examinations_taken_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="non_ces_trainings_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'non_ces_trainings_add') ? 'checked' : '' }} value="non_ces_trainings_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="non_ces_trainings_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_edit') ? 'checked' : '' }} value="examinations_taken_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="non_ces_trainings_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'non_ces_trainings_edit') ? 'checked' : '' }} value="non_ces_trainings_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="non_ces_trainings_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_delete') ? 'checked' : '' }} value="examinations_taken_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="non_ces_trainings_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'non_ces_trainings_delete') ? 'checked' : '' }} value="non_ces_trainings_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="non_ces_trainings_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_view') ? 'checked' : '' }} value="examinations_taken_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="non_ces_trainings_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'non_ces_trainings_view') ? 'checked' : '' }} value="non_ces_trainings_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="non_ces_trainings_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
@@ -461,37 +461,37 @@
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
     
-            {{-- personal data permissions --}}
+            {{-- health records permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Personal Data
+                                Health Records
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_add') ? 'checked' : '' }} value="personal_data_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="health_records_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'health_records_add') ? 'checked' : '' }} value="health_records_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="health_records_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_edit') ? 'checked' : '' }} value="personal_data_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="health_records_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'health_records_edit') ? 'checked' : '' }} value="health_records_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="health_records_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_delete') ? 'checked' : '' }} value="personal_data_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="health_records_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'health_records_delete') ? 'checked' : '' }} value="health_records_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="health_records_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="personal_data_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'personal_data_view') ? 'checked' : '' }} value="personal_data_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="personal_data_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="health_records_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'health_records_view') ? 'checked' : '' }} value="health_records_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="health_records_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
@@ -499,37 +499,37 @@
                 </div>
             </div>
     
-            {{-- family permissions --}}
+            {{-- award and citations permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
                         
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Family Profile
+                                Award and Citations
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_add') ? 'checked' : '' }} value="family_profile_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="awards_and_citations_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'awards_and_citations_add') ? 'checked' : '' }} value="awards_and_citations_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="awards_and_citations_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_edit') ? 'checked' : '' }} value="family_profile_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="awards_and_citations_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'awards_and_citations_edit') ? 'checked' : '' }} value="awards_and_citations_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="awards_and_citations_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_delete') ? 'checked' : '' }} value="family_profile_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="awards_and_citations_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'awards_and_citations_delete') ? 'checked' : '' }} value="awards_and_citations_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="awards_and_citations_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_view') ? 'checked' : '' }} value="family_profile_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="awards_and_citations_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'awards_and_citations_view') ? 'checked' : '' }} value="awards_and_citations_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="awards_and_citations_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
@@ -537,75 +537,37 @@
                 </div>
             </div>
     
-            {{-- educational attainment permissions --}}
-            <div class="col-span-1">
-                <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
-                    <div class="w-full text-gray-500">
-    
-                        <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
-                            <h1 class="px-6 py-3 text-xm sm:text-sm sm:py-3.5">
-                                Educational Attainment
-                            </h1>
-                        </div>
-            
-                        <div class="border-b bg-white px-6 py-3">
-            
-                            <div class="flex items-center mb-4">
-                                <input id="educational_attainment_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_add') ? 'checked' : '' }} value="educational_attainment_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
-                            </div>
-    
-                            <div class="flex items-center mb-4">
-                                <input id="educational_attainment_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_edit') ? 'checked' : '' }} value="educational_attainment_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
-                            </div>
-    
-                            <div class="flex items-center mb-4">
-                                <input id="educational_attainment_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_delete') ? 'checked' : '' }} value="educational_attainment_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
-                            </div>
-    
-                            <div class="flex items-center mb-4">
-                                <input id="educational_attainment_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_view') ? 'checked' : '' }} value="educational_attainment_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
-                            </div>
-    
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            {{-- examinations taken permissions --}}
+            {{-- affiliations permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Examinations Taken
+                                Affiliations
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_add') ? 'checked' : '' }} value="examinations_taken_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="affiliations_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'affiliations_add') ? 'checked' : '' }} value="affiliations_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="affiliations_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_edit') ? 'checked' : '' }} value="examinations_taken_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="affiliations_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'affiliations_edit') ? 'checked' : '' }} value="affiliations_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="affiliations_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_delete') ? 'checked' : '' }} value="examinations_taken_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="affiliations_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'affiliations_delete') ? 'checked' : '' }} value="affiliations_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="affiliations_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="examinations_taken_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'examinations_taken_view') ? 'checked' : '' }} value="examinations_taken_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="examinations_taken_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="affiliations_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'affiliations_view') ? 'checked' : '' }} value="affiliations_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="affiliations_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
@@ -613,37 +575,75 @@
                 </div>
             </div>
     
-            {{-- scholarships taken permissions --}}
+            {{-- case records permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3">
-                                Scholarships Taken
+                                Case Records
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="scholarships_taken_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_add') ? 'checked' : '' }} value="scholarships_taken_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="scholarships_taken_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="case_records_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'case_records_add') ? 'checked' : '' }} value="case_records_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="case_records_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="scholarships_taken_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_edit') ? 'checked' : '' }} value="scholarships_taken_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="scholarships_taken_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="case_records_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'case_records_edit') ? 'checked' : '' }} value="case_records_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="case_records_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="scholarships_taken_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_delete') ? 'checked' : '' }} value="scholarships_taken_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="scholarships_taken_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="case_records_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'case_records_delete') ? 'checked' : '' }} value="case_records_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="case_records_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="scholarships_taken_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'scholarships_taken_view') ? 'checked' : '' }} value="scholarships_taken_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="scholarships_taken_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="case_records_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'case_records_view') ? 'checked' : '' }} value="case_records_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="case_records_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            {{-- languages & dialects permissions --}}
+            <div class="col-span-1">
+                <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
+                    <div class="w-full text-gray-500">
+    
+                        <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
+                            <h1 class="px-6 py-3">
+                                Languages & Dialects
+                            </h1>
+                        </div>
+            
+                        <div class="border-b bg-white px-6 py-3">
+            
+                            <div class="flex items-center mb-4">
+                                <input id="language_dialects_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'language_dialects_add') ? 'checked' : '' }} value="language_dialects_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="language_dialects_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="language_dialects_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'language_dialects_edit') ? 'checked' : '' }} value="language_dialects_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="language_dialects_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="language_dialects_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'language_dialects_delete') ? 'checked' : '' }} value="language_dialects_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="language_dialects_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="language_dialects_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'language_dialects_view') ? 'checked' : '' }} value="language_dialects_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="language_dialects_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
