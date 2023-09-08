@@ -38,7 +38,7 @@ class OtherTrainingController extends Controller
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
-            'no_of_training_hours' => ['required', 'numeric'],
+            'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
             'expertise_field_of_specialization' => ['required'],
@@ -86,7 +86,7 @@ class OtherTrainingController extends Controller
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
-            'no_of_training_hours' => ['required', 'numeric'],
+            'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
             'expertise_field_of_specialization' => ['required'],
@@ -148,5 +148,39 @@ class OtherTrainingController extends Controller
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.competency_edit', compact('otherManagementTraining', 'profileLibTblExpertiseSpec', 'cesno'));
+    }
+
+    public function updateCompetencyNonCesTraining(Request $request, $ctrlno, $cesno)
+    {
+        $request->validate([ 
+
+            'training' => ['required', Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+            'venue' => ['required', 'min:2', 'max:40'],
+            'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
+            'expertise_field_of_specialization' => ['required'],
+            
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
+
+        $competencyTrainingManagement = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $competencyTrainingManagement->training = $request->training;
+        $competencyTrainingManagement->training_category = $request->training_category;
+        $competencyTrainingManagement->sponsor = $request->sponsor_training_provider;
+        $competencyTrainingManagement->venue = $request->venue;
+        $competencyTrainingManagement->no_hours = $request->no_of_training_hours;
+        $competencyTrainingManagement->from_dt = $request->inclusive_date_from;
+        $competencyTrainingManagement->to_dt = $request->inclusive_date_to;
+        $competencyTrainingManagement->specialization = $request->expertise_field_of_specialization;
+        $competencyTrainingManagement->updated_by = $encoder;
+        $competencyTrainingManagement->save();
+
+        return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
     }
 }
