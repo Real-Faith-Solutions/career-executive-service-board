@@ -374,23 +374,23 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="educational_attainment_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_add') ? 'checked' : '' }} value="educational_attainment_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="ces_trainings_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'ces_trainings_add') ? 'checked' : '' }} value="ces_trainings_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="ces_trainings_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="educational_attainment_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_edit') ? 'checked' : '' }} value="educational_attainment_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="ces_trainings_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'ces_trainings_edit') ? 'checked' : '' }} value="ces_trainings_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="ces_trainings_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="educational_attainment_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_delete') ? 'checked' : '' }} value="educational_attainment_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="ces_trainings_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'ces_trainings_delete') ? 'checked' : '' }} value="ces_trainings_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="ces_trainings_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="educational_attainment_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'educational_attainment_view') ? 'checked' : '' }} value="educational_attainment_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="educational_attainment_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="ces_trainings_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'ces_trainings_view') ? 'checked' : '' }} value="ces_trainings_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="ces_trainings_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
