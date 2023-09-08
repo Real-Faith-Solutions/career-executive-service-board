@@ -336,23 +336,23 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_add') ? 'checked' : '' }} value="family_profile_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="field_expertise_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'field_expertise_add') ? 'checked' : '' }} value="field_expertise_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="field_expertise_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_edit') ? 'checked' : '' }} value="family_profile_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="field_expertise_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'field_expertise_edit') ? 'checked' : '' }} value="field_expertise_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="field_expertise_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_delete') ? 'checked' : '' }} value="family_profile_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="field_expertise_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'field_expertise_delete') ? 'checked' : '' }} value="field_expertise_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="field_expertise_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="family_profile_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'family_profile_view') ? 'checked' : '' }} value="family_profile_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="family_profile_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="field_expertise_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'field_expertise_view') ? 'checked' : '' }} value="field_expertise_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="field_expertise_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
