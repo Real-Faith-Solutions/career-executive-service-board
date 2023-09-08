@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompetencyTrainingProvider;
 use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ResourceSpeaker;

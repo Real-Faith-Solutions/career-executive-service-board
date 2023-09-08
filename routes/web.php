@@ -316,13 +316,15 @@ Route::middleware('auth')->group(function () {
             Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete');
         });
 
-        Route::prefix('ces-training')->group(function () {
+        Route::prefix('ces-training-201')->group(function () {
             Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index');
             Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create');
             Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store');
             Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit');
             Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update');
             Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy');
+            Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {

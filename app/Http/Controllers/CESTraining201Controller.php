@@ -153,4 +153,21 @@ class CESTraining201Controller extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($cesno)
+    {
+        $personalData = PersonalData::withTrashed()->find($cesno);
+
+        $competencyCesTraining = $personalData->competencyCesTraining()->onlyTrashed()->paginate(25);
+
+        return view('admin.201_profiling.view_profile.partials.ces_trainings.trashbin', compact('cesno', 'competencyCesTraining'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $trainingParticipant = TrainingParticipants::onlyTrashed()->find($ctrlno);
+        $trainingParticipant->restore();
+
+        return back()->with('message', 'Data Restored Sucessfully');
+    }
 }
