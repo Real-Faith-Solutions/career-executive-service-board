@@ -131,7 +131,7 @@ class OtherTrainingController extends Controller
         $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
         $otherTraining->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
  
     public function forceDelete($ctrlno)
@@ -139,7 +139,7 @@ class OtherTrainingController extends Controller
         $otherTraining = ProfileTblTrainingMngt::withTrashed()->find($ctrlno);
         $otherTraining->forceDelete();
   
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 
     public function editCompetencyNonCesTraining($ctrlno, $cesno)
@@ -182,5 +182,13 @@ class OtherTrainingController extends Controller
         $competencyTrainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+    }
+
+    public function destroyCompetencyNonCesTraining($ctrlno)
+    {
+        $competencyTrainingManagement = CompetencyNonCesAccreditedTraining::find($ctrlno);
+        $competencyTrainingManagement->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
     }
 }

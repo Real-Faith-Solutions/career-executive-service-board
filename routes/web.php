@@ -340,6 +340,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete');
             Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining');
             Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining');
+            Route::delete('destroy-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining');
         });
 
         Route::prefix('eligibility-rank-tracker')->group(function () {
