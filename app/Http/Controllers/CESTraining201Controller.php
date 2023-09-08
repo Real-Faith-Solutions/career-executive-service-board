@@ -168,6 +168,14 @@ class CESTraining201Controller extends Controller
         $trainingParticipant = TrainingParticipants::onlyTrashed()->find($ctrlno);
         $trainingParticipant->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $trainingParticipant = TrainingParticipants::onlyTrashed()->find($ctrlno);
+        $trainingParticipant->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

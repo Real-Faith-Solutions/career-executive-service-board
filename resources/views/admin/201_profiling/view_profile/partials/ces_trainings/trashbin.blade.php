@@ -5,15 +5,6 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-end">
-    <a href="">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
-
     <a href="{{ route('ces-training-201.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Go Back</a>
 </div>
 
@@ -143,10 +134,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-training-201.destroy', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
+                            <form action="{{ route('ces-training-201.forceDelete', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="permanentDeleteCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

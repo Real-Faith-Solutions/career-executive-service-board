@@ -325,6 +325,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy');
             Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
