@@ -279,7 +279,7 @@
         </div>
     </nav>
     
-    <form method="POST" action="#">
+    <form method="POST" action="{{ route('experienceTrainingsPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -456,7 +456,7 @@
         </div>
     </nav>
     
-    <form method="POST" action="#">
+    <form method="POST" action="{{ route('personalOthersPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
