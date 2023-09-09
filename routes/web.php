@@ -576,7 +576,9 @@ Route::middleware('auth')->group(function () {
         Route::get('permissions/reports/{role_name}/{role_title}', [RolesController::class, 'showPermissionsReports'])->name('permissions.reports');
 
         Route::post('permissions/profiling/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePersonalEducationalPermissions'])->name('personalEducationalPermissions.update');
-        
+        Route::post('permissions/profiling/update/experience_trainings/{role_name}/{role_title}', [PermissionsController::class, 'updateExperienceTrainingsPermissions'])->name('experienceTrainingsPermissions.update');
+        Route::post('permissions/profiling/update/personal_others/{role_name}/{role_title}', [PermissionsController::class, 'updatePersonalOthersPermissions'])->name('personalOthersPermissions.update');
+
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
         // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
         // Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');

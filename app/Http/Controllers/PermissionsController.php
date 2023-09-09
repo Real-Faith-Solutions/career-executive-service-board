@@ -79,7 +79,7 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
-    public function updatePersonalOtherPermissions(Request $request, $role_name, $role_title)
+    public function updatePersonalOthersPermissions(Request $request, $role_name, $role_title)
     {
         // Get the role and its current permissions
         $role = Role::where('role_name', $role_name)->first();
