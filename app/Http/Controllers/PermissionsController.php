@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -56,12 +57,14 @@ class PermissionsController extends Controller
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
         foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
             $role->permissions()->detach($permissionName);
         }
 
         // Add newly selected permissions
         $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
         foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
             $role->permissions()->attach($permissionName);
         }
 
