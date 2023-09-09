@@ -45,4 +45,38 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updateExperienceTrainingsPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
+    
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            'work_experience_add', 'work_experience_edit', 'work_experience_delete', 'work_experience_view',
+            'field_expertise_add', 'field_expertise_edit', 'field_expertise_delete', 'field_expertise_view',
+            'ces_trainings_add', 'ces_trainings_edit', 'ces_trainings_delete', 'ces_trainings_view',
+            'non_ces_trainings_add', 'non_ces_trainings_edit', 'non_ces_trainings_delete', 'non_ces_trainings_view',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->attach($permissionName);
+        }
+
+        return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
+
 }
