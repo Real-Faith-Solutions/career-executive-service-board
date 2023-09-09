@@ -79,4 +79,42 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updatePersonalOtherPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
+    
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            'health_records_add', 'health_records_edit', 'health_records_delete', 'health_records_view',
+            'awards_and_citations_add', 'awards_and_citations_edit', 'awards_and_citations_delete', 'awards_and_citations_view',
+            'affiliations_add', 'affiliations_edit', 'affiliations_delete', 'affiliations_view',
+            'case_records_add', 'case_records_edit', 'case_records_delete', 'case_records_view',
+            'language_dialects_add', 'language_dialects_edit', 'language_dialects_delete', 'language_dialects_view',
+            'eligibility_rank_tracker_add', 'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
+            'cespes_ratings_add', 'cespes_ratings_edit', 'cespes_ratings_delete', 'cespes_ratings_view',
+            'pdf_files_add', 'pdf_files_edit', 'pdf_files_delete', 'pdf_files_view',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->attach($permissionName);
+        }
+
+        return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
+
 }
