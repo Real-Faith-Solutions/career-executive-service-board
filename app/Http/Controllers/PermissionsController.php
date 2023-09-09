@@ -41,22 +41,30 @@ class PermissionsController extends Controller
             'scholarships_taken_add', 'scholarships_taken_edit', 'scholarships_taken_delete', 'scholarships_taken_view',
             'research_and_studies_add', 'research_and_studies_edit', 'research_and_studies_delete', 'research_and_studies_view',
         ];
-    
+
         // Get the submitted permissions
         $submittedPermissions = $request->input('permissions');
     
         // Delete common permissions between $permissionsArray and $permissionsInThisForm
-        $permissions = array_diff($permissions, $permissionsInThisForm);
+        // $permissions = array_diff($permissions, $permissionsInThisForm);
 
         // Add common permissions between $permissionsInThisForm and $submittedPermissions
-        $permissions = $permissions->merge(array_intersect($permissionsInThisForm, $submittedPermissions));
+        // $submittedPermissions = array_intersect($permissionsInThisForm, $submittedPermissions);
 
-        // Update the role's permissions
-        $role->permissions = $permissions;
+        // $permissions = array_merge($permissions, $submittedPermissions);
 
-        $role->save();
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $role->permissions()->detach($permissionName);
+        }
 
-    
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $role->permissions()->attach($permissionName);
+        }
+
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
