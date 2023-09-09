@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tbl_position_masters', function (Blueprint $table) {
-            $table->id();
-            $table->string('pos_code')->nullable();
+        Schema::create('plantillalib_tblPositionMaster', function (Blueprint $table) {
+            $table->id('pos_code');
+
             $table->string('dbm_title')->nullable();
-            $table->string('poslevel_code')->nullable();
-            $table->string('sg')->nullable();
+            $table->foreignId('poslevel_code')->constrained('plantillalib_tblPositionLevel', 'poslevel_code');
+            $table->integer('sg')->nullable();
             $table->string('func_title')->nullable();
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tbl_position_masters');
+        Schema::dropIfExists('plantillalib_tblPositionMaster');
     }
 };
