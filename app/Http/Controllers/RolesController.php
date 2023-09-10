@@ -20,16 +20,20 @@ class RolesController extends Controller
     public function show(Request $request, $role_name, $role_title)
     {
         $roles = Role::all();
-        $query = $request->input('search');
-        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
-        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by cesno
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
 
-        $usersOnThisRole = PersonalData::query()->whereHas('users.roles', function ($query) use ($role_name) {
-            $query->where('role_name', $role_name);})
-            ->where('lastname', "LIKE" ,"%$query%")
-            ->orWhere('firstname',  "LIKE","%$query%")
-            ->orWhere('middleinitial',  "LIKE","%$query%")
-            ->orWhere('name_extension',  "LIKE","%$query%")
+        $usersOnThisRole = PersonalData::query()
+            ->whereHas('users.roles', function ($query) use ($role_name) {
+                $query->where('role_name', $role_name);
+            })
+            ->where(function ($query) use ($search) {
+                $query->where('lastname', 'LIKE', "%$search%")
+                    ->orWhere('firstname', 'LIKE', "%$search%")
+                    ->orWhere('middleinitial', 'LIKE', "%$search%")
+                    ->orWhere('name_extension', 'LIKE', "%$search%");
+            })
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
