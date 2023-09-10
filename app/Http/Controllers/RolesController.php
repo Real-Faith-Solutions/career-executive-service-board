@@ -38,7 +38,7 @@ class RolesController extends Controller
             ->paginate(25);
 
         return view('admin.rights_management.user_roles', 
-            compact('usersOnThisRole', 'role_name', 'role_title', 'roles'));
+            compact('usersOnThisRole', 'role_name', 'role_title', 'roles', 'search', 'sortBy', 'sortOrder'));
     }
 
     public function change(Request $request)

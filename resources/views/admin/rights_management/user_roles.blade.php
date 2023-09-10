@@ -17,14 +17,40 @@
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+        <thead class="bg-blue-500 text-xs uppercase text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    CES NO.
+                    <a href="{{ route('roles.show', ['role_name' => $role_name, 'role_title' => $role_title, 'sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}" class="flex items-center space-x-1">
+                        Ces No.
+                        @if ($sortBy === 'cesno')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Name
+                    <a href="{{ route('roles.show', ['role_name' => $role_name, 'role_title' => $role_title, 'sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}" class="flex items-center space-x-1">
+                        Name
+                        @if ($sortBy === 'lastname')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
