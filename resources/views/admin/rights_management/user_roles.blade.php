@@ -55,6 +55,9 @@
 
         </tbody>
     </table>
+    <div class="m-5">
+        {{ $usersOnThisRole->links() }}
+    </div>
 </div>
 
 <!-- Modal for Change Role -->

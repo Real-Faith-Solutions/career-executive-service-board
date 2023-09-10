@@ -262,7 +262,6 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            {{-- <button type="submit" class="btn btn-primary">Save Permissions</button> --}}
             <button type="button" class="btn btn-primary" id="personal_educational_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
