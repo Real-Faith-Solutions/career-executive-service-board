@@ -39,7 +39,7 @@ class PermissionsController extends Controller
         $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
         foreach ($permissionsToAdd as $permissionName) {
             $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
-            $role->permissions()->attach($permissionName);
+            $role->permissions()->syncWithoutDetaching($permissionName);
         }
 
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
@@ -73,7 +73,7 @@ class PermissionsController extends Controller
         $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
         foreach ($permissionsToAdd as $permissionName) {
             $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
-            $role->permissions()->attach($permissionName);
+            $role->permissions()->syncWithoutDetaching($permissionName);
         }
 
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
@@ -111,7 +111,7 @@ class PermissionsController extends Controller
         $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
         foreach ($permissionsToAdd as $permissionName) {
             $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
-            $role->permissions()->attach($permissionName);
+            $role->permissions()->syncWithoutDetaching($permissionName);
         }
 
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
