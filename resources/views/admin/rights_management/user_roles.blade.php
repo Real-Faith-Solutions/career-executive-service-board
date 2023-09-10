@@ -20,6 +20,10 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
+                    CES NO.
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Name
                 </th>
 
@@ -36,6 +40,10 @@
 
             @foreach ($usersOnThisRole as $user)
                 <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
+                    <td class="px-6 py-3">
+                        {{  $user->cesno }}
+                     </td>
+
                     <td class="px-6 py-3">
                        {{  $user->lastname.' '.$user->firstname }}
                     </td>
