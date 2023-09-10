@@ -26,7 +26,7 @@
         </div>
     </nav>
     
-    <form method="POST" action="{{ route('personalEducationalPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="personal_educational_permissions_form" action="{{ route('personalEducationalPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -262,7 +262,8 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            <button type="submit" class="btn btn-primary">Save Permissions</button>
+            {{-- <button type="submit" class="btn btn-primary">Save Permissions</button> --}}
+            <button type="button" class="btn btn-primary" id="personal_educational_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
     </form>
@@ -279,7 +280,7 @@
         </div>
     </nav>
     
-    <form method="POST" action="{{ route('experienceTrainingsPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="experience_trainings_permissions_form" action="{{ route('experienceTrainingsPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -439,7 +440,7 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            <button type="submit" class="btn btn-primary">Save Permissions</button>
+            <button type="button" class="btn btn-primary" id="experience_trainings_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
     </form>
@@ -456,7 +457,7 @@
         </div>
     </nav>
     
-    <form method="POST" action="{{ route('personalOthersPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="personal_others_permissions_form" action="{{ route('personalOthersPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -768,7 +769,7 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            <button type="submit" class="btn btn-primary">Save Permissions</button>
+            <button type="button" class="btn btn-primary" id="personal_others_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
     </form>
