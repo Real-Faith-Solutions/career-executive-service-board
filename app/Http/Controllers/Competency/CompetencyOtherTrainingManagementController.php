@@ -150,9 +150,12 @@ class CompetencyOtherTrainingManagementController extends Controller
         return back()->with('info', 'Data Permanently Deleted');
     }
 
-    public function editNonCesTraining201 ()
+    public function editNonCesTraining201 ($ctrlno, $cesno)
     {
+        $nonCesTraining201 = ProfileTblTrainingMngt::find($ctrlno);
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
+        return view('admin.competency.partials.other_management_trainings.profile201_edit', compact('cesno', 'nonCesTraining201', 'profileLibTblExpertiseSpec'));
     }
 
     public function destroyNonCesTraining201($ctrlno)

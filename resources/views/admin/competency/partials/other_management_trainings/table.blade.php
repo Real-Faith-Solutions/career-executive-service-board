@@ -150,7 +150,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('non-ces-training-management.edit', ['ctrlno'=>$nonCesAccreditedTraining201s->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                                <form action="{{ route('non-ces-training-management.editNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201s->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
