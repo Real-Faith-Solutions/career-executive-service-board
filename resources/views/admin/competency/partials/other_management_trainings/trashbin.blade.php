@@ -153,9 +153,9 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('non-ces-training-management.restore', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="restore_non-ces-training-management_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
+                                <form action="{{ route('non-ces-training-management.restoreNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="restore_non_ces_training_management_201_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
                                     @csrf
-                                    <button type="button" id="restoreNonCesTrainingManagementButton{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                    <button type="button" id="restoreNonCesTrainingManagement201Button{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
                                             src="https://cdn.lordicon.com/nxooksci.json"
                                             trigger="hover"
