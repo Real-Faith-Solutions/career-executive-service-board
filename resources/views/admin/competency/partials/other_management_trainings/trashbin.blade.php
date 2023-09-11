@@ -13,10 +13,6 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Control No
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Training Title
                 </th>
 
@@ -56,10 +52,6 @@
         <tbody>
             @foreach ($competencyNonCesAccreditedTrainingTrashedRecord as $competencyNonCesAccreditedTrainingTrashedRecords)
                 <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $competencyNonCesAccreditedTrainingTrashedRecords->ctrlno }}
-                    </td>
-
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         {{ $competencyNonCesAccreditedTrainingTrashedRecords->training }}
                     </td>
@@ -123,6 +115,74 @@
                     </td>
                 </tr>
             @endforeach
+
+            {{-- non ces training 201 trash bin --}}
+                @foreach ($nonCesAccreditedTraining201TrashedRecord as $nonCesAccreditedTraining201TrashedRecords)
+                    <tr class="border-b bg-white">
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->training }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->training_category }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->trainingProfileLibTblExpertiseSpec->Title }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->sponsor }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->venue }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->from_date. ' - '.$nonCesAccreditedTraining201TrashedRecords->to_date }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->no_training_hours }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201TrashedRecords->deleted_at }}
+                        </td>
+
+                        <td class="px-6 py-4 text-right uppercase">
+                            <div class="flex">
+                                <form action="{{ route('non-ces-training-management.restoreNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="restore_non_ces_training_management_201_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
+                                    @csrf
+                                    <button type="button" id="restoreNonCesTrainingManagement201Button{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/nxooksci.json"
+                                            trigger="hover"
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+
+                                <form action="{{ route('non-ces-training-management.forceDeleteNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="permanent_non_ces_training_management_201_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" id="permanentDeleteNonCesTrainingManagement201Button{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/jmkrnisz.json"
+                                            trigger="hover"
+                                            colors="primary:#880808"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            {{-- end of non ces training 201 trash bin --}}
         </tbody>
     </table>
 </div>

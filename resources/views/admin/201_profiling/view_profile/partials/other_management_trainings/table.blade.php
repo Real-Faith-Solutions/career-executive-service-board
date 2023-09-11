@@ -149,7 +149,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="" method="GET">
+                            <form action="{{ route('other-training.editCompetencyNonCesTraining', ['ctrlno'=>$competencyNonCesAccreditedTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -161,10 +161,10 @@
                                 </button>
                             </form>
 
-                            <form action="" method="POST" id="delete_other_training_form{{$competencyNonCesAccreditedTrainings->ctrlno}}">
+                            <form action="{{ route('other-training.destroyCompetencyNonCesTraining', ['ctrlno'=>$competencyNonCesAccreditedTrainings->ctrlno]) }}" method="POST" id="delete_competency_other_training_form{{$competencyNonCesAccreditedTrainings->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteOtherTrainingButton{{$competencyNonCesAccreditedTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteCompetencyOtherTrainingButton{{$competencyNonCesAccreditedTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
