@@ -17,7 +17,7 @@
                 @method('PUT')
                 @csrf
 
-                <div class="mb-3 flex justify-between">
+                <div class="mb-3">
                     <div class="sm:gid-cols-1 mb-3  grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                         <div class="mb-3">
                             <label for="email">Official Email<sup>*</sup></label>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-6">
+                    <div class="flex justify-end">
                         <button type="button" class="btn btn-primary" id="competencyEmailUpdateContactsButton" onclick="openConfirmationDialog(this, 'Confirm Email', 'Are you sure you want to submit/update this info?')">
                             Save changes
                         </button>
@@ -60,20 +60,9 @@
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3  grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {{-- <div class="mb-3"> --}}
-                        {{-- <label for="gsis">Official Email<sup>*</sup></label> --}}
-                        <input id="official_email" name="official_email" type="text" value="{{ old('official_email') ?? ($email ?? '') }}" hidden>
-                        {{-- <p class="input_error text-red-600"></p> --}}
-                    {{-- </div>
-                    <div class="mb-3">
-                    </div>
-                    <div class="mb-3">
-                    </div> --}}
-                    
-    
                     <div class="mb-3">
                         <label for="official_mobile_number1">Official Mobile No. #1<sup>*</sup></label>
-                        <input id="competency_official_mobile_number1" name="official_mobile_number1" type="text" value="{{ old('official_mobile_number1') ?? ($contacts->official_mobile_number1 ?? '') }}" oninput="validateInput(competency_official_mobile_number1, 10, 'all')" onkeypress="validateInput(competency_official_mobile_number1, 10, 'all')" onblur="checkErrorMessage(competency_official_mobile_number1)" required>
+                        <input id="competency_official_mobile_number1" name="official_mobile_number1" type="text" value="{{ old('official_mobile_number1') ?? ($contacts->official_mobile_number1 ?? '') }}" oninput="validateInput(competency_official_mobile_number1, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_official_mobile_number1, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_official_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
                         @error('official_mobile_number1')
                             <span class="invalid" role="alert">
@@ -83,7 +72,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="official_mobile_number2">Official Mobile No. #2</label>
-                        <input id="competency_official_mobile_number2" name="official_mobile_number2" type="text" value="{{ old('official_mobile_number2') ?? ($contacts->official_mobile_number2 ?? '') }}" oninput="validateInput(competency_official_mobile_number2, 0, 'all')" onkeypress="validateInput(competency_official_mobile_number2, 0, 'all')" onblur="checkErrorMessage(competency_official_mobile_number2)">
+                        <input id="competency_official_mobile_number2" name="official_mobile_number2" type="text" value="{{ old('official_mobile_number2') ?? ($contacts->official_mobile_number2 ?? '') }}" oninput="validateInput(competency_official_mobile_number2, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_official_mobile_number2, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_official_mobile_number2)">
                         <p class="input_error text-red-600"></p>
                         @error('official_mobile_number2')
                             <span class="invalid" role="alert">
@@ -98,7 +87,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="personal_mobile_number1">Personal Mobile No. #1<sup>*</sup></label>
-                        <input id="competency_personal_mobile_number1" name="personal_mobile_number1" type="text" value="{{ old('personal_mobile_number1') ?? ($contacts->personal_mobile_number1 ?? '') }}" oninput="validateInput(competency_personal_mobile_number1, 10, 'all')" onkeypress="validateInput(competency_personal_mobile_number1, 10, 'all')" onblur="checkErrorMessage(competency_personal_mobile_number1)" required>
+                        <input id="competency_personal_mobile_number1" name="personal_mobile_number1" type="text" value="{{ old('personal_mobile_number1') ?? ($contacts->personal_mobile_number1 ?? '') }}" oninput="validateInput(competency_personal_mobile_number1, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_personal_mobile_number1, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_personal_mobile_number1)" required>
                         <p class="input_error text-red-600"></p>
                         @error('personal_mobile_number1')
                             <span class="invalid" role="alert">
@@ -108,7 +97,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="personal_mobile_number2">Personal Mobile No. #2</label>
-                        <input id="competency_personal_mobile_number2" name="personal_mobile_number2" type="text" value="{{ old('personal_mobile_number2') ?? ($contacts->personal_mobile_number2 ?? '') }}" oninput="validateInput(competency_personal_mobile_number2, 0, 'all')" onkeypress="validateInput(competency_personal_mobile_number2, 0, 'all')" onblur="checkErrorMessage(competency_personal_mobile_number2)">
+                        <input id="competency_personal_mobile_number2" name="personal_mobile_number2" type="text" value="{{ old('personal_mobile_number2') ?? ($contacts->personal_mobile_number2 ?? '') }}" oninput="validateInput(competency_personal_mobile_number2, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_personal_mobile_number2, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_personal_mobile_number2)">
                         <p class="input_error text-red-600"></p>
                         @error('personal_mobile_number2')
                             <span class="invalid" role="alert">
@@ -123,7 +112,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="office_telephone_number">Office Telephone No.<sup>*</sup></label>
-                        <input id="competency_office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(competency_office_telephone_number, 0, 'all')" onkeypress="validateInput(competency_office_telephone_number, 0, 'all')" onblur="checkErrorMessage(competency_office_telephone_number)">
+                        <input id="competency_office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(competency_office_telephone_number, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_office_telephone_number, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_office_telephone_number)">
                         <p class="input_error text-red-600"></p>
                         @error('office_telephone_number')
                             <span class="invalid" role="alert">

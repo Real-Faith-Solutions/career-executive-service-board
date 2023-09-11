@@ -445,7 +445,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
             Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
             Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
             Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
@@ -559,7 +558,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
         });
 
-        Route::prefix('training-participants')->group(function () {
+        Route::prefix('competency-ces-training')->group(function () {
             Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
             Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
             Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');

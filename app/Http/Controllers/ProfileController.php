@@ -40,6 +40,7 @@ class ProfileController extends Controller
             ->orWhere('firstname',  "LIKE","%$query%")
             ->orWhere('middlename',  "LIKE","%$query%")
             ->orWhere('name_extension',  "LIKE","%$query%")
+            ->orWhere('cesno',  "LIKE","%$query%")
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 

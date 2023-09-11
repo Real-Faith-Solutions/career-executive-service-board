@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="firstName">Firt Name<sup>*</sup></label>
+                        <label for="firstName">First Name<sup>*</sup></label>
                         <input type="text" id="update_firstName" name="firstName" oninput="validateInput(update_firstName, 2, 'letters')" onkeypress="validateInput(update_firstName, 2, 'letters')" onblur="checkErrorMessage(update_firstName)" value="{{ $resourceSpeaker->firstname }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('firstName')
@@ -81,7 +81,7 @@
 
                     <div class="mb-3">
                         <label for="contactNo">Contact No.<sup>*</sup></label>
-                        <input type="text" id="update_contactNo" name="contactNo" oninput="validateInput(update_contactNo, 2, 'numbersWithSpecial')" onkeypress="validateInput(update_contactNo, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contactNo)" value="{{ $resourceSpeaker->contactno }}" required>
+                        <input type="text" id="update_contactNo" name="contactNo" oninput="validateInput(update_contactNo, 10, 'numbersWithSpecial')" onkeypress="validateInput(update_contactNo, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contactNo)" value="{{ $resourceSpeaker->contactno }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('contactNo')
                             <span class="invalid" role="alert">

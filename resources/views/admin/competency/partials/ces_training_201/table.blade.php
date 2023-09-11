@@ -82,7 +82,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $training->specialization }} --}}
+                        {{ $description }}
                     </td>
 
                     <td class="px-6 py-3">
