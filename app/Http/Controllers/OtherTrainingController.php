@@ -202,4 +202,12 @@ class OtherTrainingController extends Controller
 
         return back()->with('info', 'Data Restored Sucessfully');
     }
+
+    public function forceDeleteCompetencyNonCesTraining($ctrlno)
+    {
+        $competencyTrainingManagement = CompetencyNonCesAccreditedTraining::onlyTrashed()->find($ctrlno);
+        $competencyTrainingManagement->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }
