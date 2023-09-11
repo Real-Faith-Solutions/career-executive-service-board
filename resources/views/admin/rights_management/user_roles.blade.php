@@ -107,7 +107,15 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
                             {{-- <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a> --}}
-                            <button id="changeRoleBtn" class="font-medium" onclick="showModalChangeRole('{{ $user->lastname.' '.$user->firstname }}', '{{ $user->email }}', '{{ $user->cesno }}')">Change Role</button>
+                            <button  title="Change Role" id="changeRoleBtn" class="font-medium" onclick="showModalChangeRole('{{ $user->lastname.' '.$user->firstname }}', '{{ $user->email }}', '{{ $user->cesno }}')">
+                                {{-- Change Role --}}
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/uiakkykh.json"
+                                    trigger="hover"
+                                    colors="primary:#000000"
+                                    style="width:34px;height:34px">
+                                </lord-icon>
+                            </button>
                         </div>
                     </td>
                 </tr>
