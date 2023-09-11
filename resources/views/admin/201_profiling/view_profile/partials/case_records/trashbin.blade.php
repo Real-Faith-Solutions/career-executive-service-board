@@ -13,10 +13,6 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Control No
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Parties
                 </th>
 
@@ -69,10 +65,6 @@
 
             @foreach ($caseRecordTrashedRecord as $caseRecordTrashedRecords)
                 <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecordTrashedRecords->ctrlno }}
-                    </td>
-
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         {{ $caseRecordTrashedRecords->parties }}
                     </td>

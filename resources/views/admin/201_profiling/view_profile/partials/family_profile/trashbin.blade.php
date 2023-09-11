@@ -15,10 +15,6 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Control No
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Lastname
                 </th>
 
@@ -51,10 +47,6 @@
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         Spouse
-                    </td>
-
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $spousesTrashedRecords->ctrlno }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -118,10 +110,6 @@
                         Children
                     </td>
 
-                    <td class="px-6 py-3">
-                        {{ $childrensTrashedRecords->ctrlno }}
-                    </td>
-                    
                     <td class="px-6 py-3">
                         {{ $childrensTrashedRecords->last_name }}
                     </td>
