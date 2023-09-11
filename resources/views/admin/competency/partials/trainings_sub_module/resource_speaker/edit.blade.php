@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="firstName">Firt Name<sup>*</sup></label>
+                        <label for="firstName">First Name<sup>*</sup></label>
                         <input type="text" id="update_firstName" name="firstName" oninput="validateInput(update_firstName, 2, 'letters')" onkeypress="validateInput(update_firstName, 2, 'letters')" onblur="checkErrorMessage(update_firstName)" value="{{ $resourceSpeaker->firstname }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('firstName')
