@@ -461,6 +461,7 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [CompetencyOtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
             Route::post('recently-deleted/restore/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore');
             Route::delete('forceDelete/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete');
+            Route::delete('destroy-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroyNonCesTraining201'])->name('non-ces-training-management.destroyNonCesTraining201');
         });
 
         Route::prefix('training-provider-manager')->group(function () {

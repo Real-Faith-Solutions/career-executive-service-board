@@ -7,6 +7,7 @@ use App\Models\CompetencyNonCesAccreditedTraining;
 use App\Models\CompetencyTrainingProvider;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
+use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,9 +16,10 @@ class CompetencyOtherTrainingManagementController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $otherTraining = $personalData->competencyNonCesAccreditedTraining;
+        $nonCesAccreditedTrainingCompetency = $personalData->competencyNonCesAccreditedTraining;
+        $nonCesAccreditedTraining201 = $personalData->otherTraining;
 
-        return view('admin.competency.partials.other_management_trainings.table', compact('otherTraining' ,'cesno'));
+        return view('admin.competency.partials.other_management_trainings.table', compact('nonCesAccreditedTrainingCompetency' , 'nonCesAccreditedTraining201', 'cesno'));
     }
 
     public function create($cesno)
@@ -125,8 +127,11 @@ class CompetencyOtherTrainingManagementController extends Controller
 
         // Access the soft deleted competencyNonCesAccreditedTraining of the parent model
         $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
+
+        // Access the soft deleted otherTraining of the parent model
+        $nonCesAccreditedTraining201 = $personalData->otherTraining()->onlyTrashed()->get();
  
-        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'cesno'));
+        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'nonCesAccreditedTraining201', 'cesno'));
     }
 
     public function restore($ctrlno)
@@ -141,6 +146,35 @@ class CompetencyOtherTrainingManagementController extends Controller
     {
         $competencyNonCesAccreditedTrainingTrashedRecord = CompetencyNonCesAccreditedTraining::onlyTrashed()->find($ctrlno);
         $competencyNonCesAccreditedTrainingTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
+
+    public function editNonCesTraining201 ()
+    {
+
+    }
+
+    public function destroyNonCesTraining201($ctrlno)
+    {
+        $nonCesTraining201 = ProfileTblTrainingMngt::find($ctrlno);
+        $nonCesTraining201->delete();
+
+        return redirect()->back()->with('message', 'Deleted Sucessfully');
+    }
+
+    public function restoreNonCesTraining201($ctrlno)
+    {
+        $nonCesTraining201 = ProfileTblTrainingMngt::onlyTrashed()->find($ctrlno);
+        $nonCesTraining201->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+ 
+    public function forceDeleteNonCesTraining201($ctrlno)
+    {
+        $nonCesTraining201 = ProfileTblTrainingMngt::onlyTrashed()->find($ctrlno);
+        $nonCesTraining201->forceDelete();
   
         return back()->with('info', 'Data Permanently Deleted');
     }
