@@ -56,7 +56,15 @@
                                     style="width:34px;height:34px">
                                 </lord-icon>
                             </a>
-                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium hover:text-blue-300">Assignees</a>
+
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium hover:text-blue-300" title="Assignees">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/bhfjfgqz.json"
+                                    trigger="hover"
+                                    colors="primary:#000000"
+                                    style="width:34px;height:34px">
+                                </lord-icon>
+                            </a>
                         </div>
                     </td>
                 </tr>
