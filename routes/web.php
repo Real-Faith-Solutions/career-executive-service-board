@@ -12,7 +12,7 @@ use App\Http\Controllers\CivilStatusController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
-use App\Http\Controllers\Competency\OtherTrainingManagementController;
+use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
@@ -451,16 +451,16 @@ Route::middleware('auth')->group(function () {
             Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
         });
 
-        Route::prefix('non-ces-training-accredited')->group(function () {
-            Route::get('index/{cesno}', [OtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
-            Route::get('create/{cesno}', [OtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
-            Route::post('store/{cesno}', [OtherTrainingManagementController::class, 'store'])->name('non-ces-training-management.store');
-            Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit');
-            Route::put('update/{ctrlno}/{cesno}', [OtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update');
-            Route::delete('destroy/{ctrlno}', [OtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy');
-            Route::get('recently-deleted/{cesno}', [OtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore');
-            Route::delete('forceDelete/{ctrlno}', [OtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete');
+        Route::prefix('competency-non-ces-training-accredited')->group(function () {
+            Route::get('index/{cesno}', [CompetencyOtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
+            Route::get('create/{cesno}', [CompetencyOtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
+            Route::post('store/{cesno}', [CompetencyOtherTrainingManagementController::class, 'store'])->name('non-ces-training-management.store');
+            Route::get('edit/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit');
+            Route::put('update/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update');
+            Route::delete('destroy/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy');
+            Route::get('recently-deleted/{cesno}', [CompetencyOtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
+            Route::post('recently-deleted/restore/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore');
+            Route::delete('forceDelete/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete');
         });
 
         Route::prefix('training-provider-manager')->group(function () {

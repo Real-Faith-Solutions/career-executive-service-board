@@ -10,7 +10,7 @@ use App\Models\ProfileLibTblExpertiseSpec;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class OtherTrainingManagementController extends Controller
+class CompetencyOtherTrainingManagementController extends Controller
 {
     public function index($cesno)
     {
