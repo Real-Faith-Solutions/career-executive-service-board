@@ -444,7 +444,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
             Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-            Route::get('index', [CompetencyController::class, 'index'])->name('competency-data.index');
             Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
             Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
