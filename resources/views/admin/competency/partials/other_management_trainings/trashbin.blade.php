@@ -165,10 +165,10 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('non-ces-training-management.forceDelete', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="permanent_non-ces-training-management_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
+                                <form action="{{ route('non-ces-training-management.forceDeleteNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201TrashedRecords->ctrlno]) }}" method="POST" id="permanent_non_ces_training_management_201_form{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="permanentDeleteNonCesTrainingManagementButton{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                    <button type="button" id="permanentDeleteNonCesTrainingManagement201Button{{$nonCesAccreditedTraining201TrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
