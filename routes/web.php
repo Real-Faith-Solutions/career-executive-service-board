@@ -36,6 +36,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\OtherTrainingController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
@@ -582,6 +583,10 @@ Route::middleware('auth')->group(function () {
         Route::get('permissions/plantilla/{role_name}/{role_title}', [RolesController::class, 'showPermissionsPlantilla'])->name('permissions.plantilla');
         Route::get('permissions/competency/{role_name}/{role_title}', [RolesController::class, 'showPermissionsCompetency'])->name('permissions.competency');
         Route::get('permissions/reports/{role_name}/{role_title}', [RolesController::class, 'showPermissionsReports'])->name('permissions.reports');
+
+        Route::post('permissions/profiling/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePersonalEducationalPermissions'])->name('personalEducationalPermissions.update');
+        Route::post('permissions/profiling/update/experience_trainings/{role_name}/{role_title}', [PermissionsController::class, 'updateExperienceTrainingsPermissions'])->name('experienceTrainingsPermissions.update');
+        Route::post('permissions/profiling/update/personal_others/{role_name}/{role_title}', [PermissionsController::class, 'updatePersonalOthersPermissions'])->name('personalOthersPermissions.update');
 
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
         // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');

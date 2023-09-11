@@ -17,16 +17,28 @@ class RolesController extends Controller
         return view('admin.rights_management.roles', compact('roles'));
     }
 
-    public function show($role_name, $role_title)
+    public function show(Request $request, $role_name, $role_title)
     {
         $roles = Role::all();
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by cesno
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
 
-        $usersOnThisRole = PersonalData::whereHas('users.roles', function ($query) use ($role_name) {
-            $query->where('role_name', $role_name);
-        })->get();
+        $usersOnThisRole = PersonalData::query()
+            ->whereHas('users.roles', function ($query) use ($role_name) {
+                $query->where('role_name', $role_name);
+            })
+            ->where(function ($query) use ($search) {
+                $query->where('lastname', 'LIKE', "%$search%")
+                    ->orWhere('firstname', 'LIKE', "%$search%")
+                    ->orWhere('middlename', 'LIKE', "%$search%")
+                    ->orWhere('name_extension', 'LIKE', "%$search%");
+            })
+            ->orderBy($sortBy, $sortOrder)
+            ->paginate(25);
 
         return view('admin.rights_management.user_roles', 
-            compact('usersOnThisRole', 'role_name', 'role_title', 'roles'));
+            compact('usersOnThisRole', 'role_name', 'role_title', 'roles', 'search', 'sortBy', 'sortOrder'));
     }
 
     public function change(Request $request)

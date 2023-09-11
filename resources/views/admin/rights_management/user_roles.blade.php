@@ -5,10 +5,36 @@
 
 <nav class="bg-gray-200 border-gray-200 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+        {{-- role title --}}
         <a href="#" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">{{ $role_title }}</span>
         </a>
 
+        {{-- search bar --}}
+        <div class="flex items-center">
+            <form>
+                <div class="w-100">
+                    <label for="default-search" class="sr-only mb-2 text-sm font-medium text-gray-900">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <button type="submit">
+                                <svg aria-hidden="true" class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <input type="search" id="default-search"
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                            placeholder="Search here..." name="search"
+                            @if (!empty($search)) value="{{ $search }}" @endif autofocus autocomplete="search">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {{-- back button --}}
         <div class="flex justify-end">
             <a href="{{ route('roles.index') }}" class="btn btn-primary">Back</a>
         </div>
@@ -17,10 +43,40 @@
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+        <thead class="bg-blue-500 text-xs uppercase text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Name
+                    <a href="{{ route('roles.show', ['role_name' => $role_name, 'role_title' => $role_title, 'sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}" class="flex items-center space-x-1">
+                        Ces No.
+                        @if ($sortBy === 'cesno')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    <a href="{{ route('roles.show', ['role_name' => $role_name, 'role_title' => $role_title, 'sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $search]) }}" class="flex items-center space-x-1">
+                        Name
+                        @if ($sortBy === 'lastname')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -37,6 +93,10 @@
             @foreach ($usersOnThisRole as $user)
                 <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
                     <td class="px-6 py-3">
+                        {{  $user->cesno }}
+                     </td>
+
+                    <td class="px-6 py-3">
                        {{  $user->lastname.' '.$user->firstname }}
                     </td>
 
@@ -47,7 +107,15 @@
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
                             {{-- <a href="{{ route('roles.change', ['cesno' => $user->cesno]) }}" class="font-medium">Change Role</a> --}}
-                            <button id="changeRoleBtn" class="font-medium" onclick="showModalChangeRole('{{ $user->lastname.' '.$user->firstname }}', '{{ $user->email }}', '{{ $user->cesno }}')">Change Role</button>
+                            <button  title="Change Role" id="changeRoleBtn" class="font-medium" onclick="showModalChangeRole('{{ $user->lastname.' '.$user->firstname }}', '{{ $user->email }}', '{{ $user->cesno }}')">
+                                {{-- Change Role --}}
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/uiakkykh.json"
+                                    trigger="hover"
+                                    colors="primary:#000000"
+                                    style="width:34px;height:34px">
+                                </lord-icon>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -55,6 +123,9 @@
 
         </tbody>
     </table>
+    <div class="m-5">
+        {{ $usersOnThisRole->links() }}
+    </div>
 </div>
 
 <!-- Modal for Change Role -->

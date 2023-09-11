@@ -17,7 +17,7 @@
 
 <div class="table-language-dialect relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+        <thead class="bg-blue-500 text-xs uppercase text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Roles
@@ -48,8 +48,23 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a href="{{ route('permissions.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium mr-5 hover:text-blue-300">Permissions</a>
-                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium hover:text-blue-300">Assignees</a>
+                            <a href="{{ route('permissions.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium mr-5 hover:text-blue-300" title="Permissions">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/dnmvmpfk.json"
+                                    trigger="hover"
+                                    colors="primary:#000000"
+                                    style="width:34px;height:34px">
+                                </lord-icon>
+                            </a>
+
+                            <a href="{{ route('roles.show', ['role_name' => $role->role_name, 'role_title' => $role->role_title]) }}" class="font-medium hover:text-blue-300" title="Assignees">
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/bhfjfgqz.json"
+                                    trigger="hover"
+                                    colors="primary:#000000"
+                                    style="width:34px;height:34px">
+                                </lord-icon>
+                            </a>
                         </div>
                     </td>
                 </tr>

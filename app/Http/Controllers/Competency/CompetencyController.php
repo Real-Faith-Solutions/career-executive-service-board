@@ -13,20 +13,19 @@ class CompetencyController extends Controller
 {
     public function index(Request $request){
 
-      $query = $request->input('search');
-      $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
-      $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by cesno
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
 
-      $competencyData = PersonalData::query()
-      ->where('lastname', "LIKE" ,"%$query%")
-      ->orWhere('firstname',  "LIKE","%$query%")
-      ->orWhere('middleinitial',  "LIKE","%$query%")
-      ->orWhere('name_extension',  "LIKE","%$query%")
-      ->orWhere('cesno',  "LIKE","%$query%")
-      ->orderBy($sortBy, $sortOrder)
-      ->paginate(25);
+        $competencyData = PersonalData::query()
+            ->where('lastname', "LIKE" ,"%$search%")
+            ->orWhere('firstname',  "LIKE","%$search%")
+            ->orWhere('middlename',  "LIKE","%$search%")
+            ->orWhere('name_extension',  "LIKE","%$search%")
+            ->orderBy($sortBy, $sortOrder)
+            ->paginate(25);
 
-      return view('admin.competency.view_profile.table', compact('competencyData', 'query', 'sortBy', 'sortOrder'));
+        return view('admin.competency.view_profile.table', compact('competencyData', 'search', 'sortBy', 'sortOrder'));
 
     }
 
