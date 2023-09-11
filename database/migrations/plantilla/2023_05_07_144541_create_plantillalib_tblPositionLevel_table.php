@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantillalib__tbl_position_levels', function (Blueprint $table) {
-            $table->id();
-            $table->string('poslevel_code')->nullable();
-            $table->string('seq')->nullable();
+        Schema::create('plantillalib_tblPositionLevel', function (Blueprint $table) {
+            $table->id('poslevel_code');
+            $table->integer('seq')->nullable();
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('sg')->nullable();
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib__tbl_position_levels');
+        Schema::dropIfExists('plantillalib_tblPositionLevel');
     }
 };
