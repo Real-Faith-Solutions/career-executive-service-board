@@ -81,7 +81,7 @@
 
                     <div class="mb-3">
                         <label for="contactNo">Contact No.<sup>*</sup></label>
-                        <input type="text" id="update_contactNo" name="contactNo" oninput="validateInput(update_contactNo, 2, 'numbersWithSpecial')" onkeypress="validateInput(update_contactNo, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contactNo)" value="{{ $resourceSpeaker->contactno }}" required>
+                        <input type="text" id="update_contactNo" name="contactNo" oninput="validateInput(update_contactNo, 10, 'numbersWithSpecial')" onkeypress="validateInput(update_contactNo, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contactNo)" value="{{ $resourceSpeaker->contactno }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('contactNo')
                             <span class="invalid" role="alert">

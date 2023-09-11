@@ -80,7 +80,7 @@
 
                     <div class="mb-3">
                         <label for="contactNo">Contact No.<sup>*</sup></label>
-                        <input type="text" id="contactNo" name="contactNo" oninput="validateInput(contactNo, 2, 'numbersWithSpecial')" onkeypress="validateInput(contactNo, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(contactNo)" required>
+                        <input type="text" id="contactNo" name="contactNo" oninput="validateInput(contactNo, 10, 'numbersWithSpecial')" onkeypress="validateInput(contactNo, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(contactNo)" required>
                         <p class="input_error text-red-600"></p>
                         @error('contactNo')
                             <span class="invalid" role="alert">

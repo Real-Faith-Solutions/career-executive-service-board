@@ -94,7 +94,7 @@
                     
                     <div class="mb-3">
                         <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="edit_competency_contact_no" name="contact_no" oninput="validateInput(edit_competency_contact_no, 2, 'numbersWithSpecial')" onkeypress="validateInput(edit_competency_contact_no, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(edit_competency_contact_no)"  
+                        <input type="text" id="edit_competency_contact_no" name="contact_no" oninput="validateInput(edit_competency_contact_no, 10, 'numbersWithSpecial')" onkeypress="validateInput(edit_competency_contact_no, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(edit_competency_contact_no)"  
                         value="{{ $trainingProvider->contactno }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('contact_no')
