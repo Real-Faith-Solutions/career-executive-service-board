@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblCesStatus;
-use App\Models\ProfileTblCesStatus;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
@@ -19,7 +18,28 @@ class TrainingParticipantsController extends Controller
         $trainingParticipant = PersonalData::find($cesno);
         $trainings = $trainingParticipant->competencyCesTraining;
 
-        return view('admin.competency.partials.ces_training_201.table', compact('cesno', 'trainings'));
+        if ($trainingParticipant) 
+        {
+            $latestCesStatus = $trainingParticipant->profileTblCesStatus()->latest()->first();
+
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Personal Data Not Found!!');
+        }
+
+        return view('admin.competency.partials.ces_training_201.table', compact('cesno', 'trainings', 'description'));
     }
 
     public function create($cesno)
@@ -163,7 +183,28 @@ class TrainingParticipantsController extends Controller
         // Access the soft deleted competencyCesTraining of the parent model
         $competencyCesTrainingTrashedRecord = $personalData->competencyCesTraining()->onlyTrashed()->get();
 
-        return view('admin.competency.partials.ces_training_201.trashbin', compact('competencyCesTrainingTrashedRecord', 'cesno'));
+        if ($personalData) 
+        {
+            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Personal Data Not Found!!');
+        }
+
+        return view('admin.competency.partials.ces_training_201.trashbin', compact('competencyCesTrainingTrashedRecord', 'cesno', 'description'));
     }
 
     public function restore($ctrlno)
