@@ -75,8 +75,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $competencyCesTrainingTrashedRecords->specialization }} --}}
-                        --
+                        {{ $description }}
                     </td>
 
                     <td class="px-6 py-3">

@@ -558,7 +558,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete');
         });
 
-        Route::prefix('training-participants')->group(function () {
+        Route::prefix('competency-ces-training')->group(function () {
             Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
             Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
             Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
