@@ -31,7 +31,7 @@ class RolesController extends Controller
             ->where(function ($query) use ($search) {
                 $query->where('lastname', 'LIKE', "%$search%")
                     ->orWhere('firstname', 'LIKE', "%$search%")
-                    ->orWhere('middleinitial', 'LIKE', "%$search%")
+                    ->orWhere('middlename', 'LIKE', "%$search%")
                     ->orWhere('name_extension', 'LIKE', "%$search%");
             })
             ->orderBy($sortBy, $sortOrder)

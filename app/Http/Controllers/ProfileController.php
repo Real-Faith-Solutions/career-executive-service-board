@@ -38,7 +38,7 @@ class ProfileController extends Controller
         $personalData = PersonalData::query()
             ->where('lastname', "LIKE" ,"%$query%")
             ->orWhere('firstname',  "LIKE","%$query%")
-            ->orWhere('middleinitial',  "LIKE","%$query%")
+            ->orWhere('middlename',  "LIKE","%$query%")
             ->orWhere('name_extension',  "LIKE","%$query%")
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);

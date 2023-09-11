@@ -11,11 +11,21 @@ use Illuminate\Validation\Rule;
 
 class CompetencyController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-      $competencyData = PersonalData::paginate(25);
+        $search = $request->input('search');
+        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by cesno
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
 
-      return view('admin.competency.view_profile.table', compact('competencyData'));
+        $competencyData = PersonalData::query()
+            ->where('lastname', "LIKE" ,"%$search%")
+            ->orWhere('firstname',  "LIKE","%$search%")
+            ->orWhere('middlename',  "LIKE","%$search%")
+            ->orWhere('name_extension',  "LIKE","%$search%")
+            ->orderBy($sortBy, $sortOrder)
+            ->paginate(25);
+
+        return view('admin.competency.view_profile.table', compact('competencyData', 'search', 'sortBy', 'sortOrder'));
 
     }
 
