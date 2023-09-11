@@ -55,39 +55,39 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($otherTraining as $otherTrainings)
+            @foreach ($nonCesAccreditedTrainingCompetency as $nonCesAccreditedTrainingCompetencies)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $otherTrainings->training }}
+                        {{ $nonCesAccreditedTrainingCompetencies->training }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->training_category }}
+                        {{ $nonCesAccreditedTrainingCompetencies->training_category }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->specialization }}
+                        {{ $nonCesAccreditedTrainingCompetencies->specialization }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->sponsor }}
+                        {{ $nonCesAccreditedTrainingCompetencies->sponsor }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->venue }}
+                        {{ $nonCesAccreditedTrainingCompetencies->venue }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt }}
+                        {{ $nonCesAccreditedTrainingCompetencies->from_dt. ' - '.$nonCesAccreditedTrainingCompetencies->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->no_hours }}
+                        {{ $nonCesAccreditedTrainingCompetencies->no_hours }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('non-ces-training-management.edit', ['ctrlno'=>$otherTrainings->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                            <form action="{{ route('non-ces-training-management.edit', ['ctrlno'=>$nonCesAccreditedTrainingCompetencies->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -99,10 +99,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$otherTrainings->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$otherTrainings->ctrlno}}">
+                            <form action="{{ route('non-ces-training-management.destroy', ['ctrlno'=>$nonCesAccreditedTrainingCompetencies->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$nonCesAccreditedTrainingCompetencies->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteNonCessAccreditedTrainingButton{{$otherTrainings->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteNonCessAccreditedTrainingButton{{$nonCesAccreditedTrainingCompetencies->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -116,6 +116,70 @@
                     </td>
                 </tr>
             @endforeach
+
+            {{-- 201 non ces accredited training --}}
+                @foreach ($nonCesAccreditedTraining201 as $nonCesAccreditedTraining201s)
+                    <tr class="border-b bg-white">
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $nonCesAccreditedTraining201s->training }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->training_category }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->trainingProfileLibTblExpertiseSpec->Title }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->sponsor }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->venue }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->from_date. ' - '.$nonCesAccreditedTraining201s->to_date }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $nonCesAccreditedTraining201s->no_training_hours }}
+                        </td>
+
+                        <td class="px-6 py-4 text-right uppercase">
+                            <div class="flex">
+                                <form action="{{ route('non-ces-training-management.editNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201s->ctrlno, 'cesno'=>$cesno]) }}" method="GET">
+                                    @csrf
+                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            trigger="hover"
+                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                            style="width:30px;height:30px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+
+                                <form action="{{ route('non-ces-training-management.destroyNonCesTraining201', ['ctrlno'=>$nonCesAccreditedTraining201s->ctrlno]) }}" method="POST" id="delete_non_ces_accredited_training_form{{$nonCesAccreditedTraining201s->ctrlno}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" id="deleteNonCesAccreditedTraining201Button{{$nonCesAccreditedTraining201s->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/jmkrnisz.json"
+                                            trigger="hover"
+                                            colors="primary:#880808"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            {{-- end of 201 non ces accredited training --}}
         </tbody>
     </table>
 </div>

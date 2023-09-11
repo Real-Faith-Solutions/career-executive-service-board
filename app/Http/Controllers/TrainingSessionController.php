@@ -140,7 +140,7 @@ class TrainingSessionController extends Controller
         $trainingSession = TrainingSession::find($ctrlno);
 
         // count the participant that already register to training session
-        $trainingParticipantList = $trainingSession->trainingParticipantList()->count();
+        $trainingParticipantList = $trainingSession->trainingParticipantList()->withTrashed()->count();
 
         $participantCount = 1;
 
@@ -161,7 +161,7 @@ class TrainingSessionController extends Controller
         return view('admin.competency.partials.training_session.trashbin', compact('trainingSessionTrashedRecord'));
     }
 
-    
+
     public function restore($ctrlno)
     {
         $trainingSessionTrashedRecord = TrainingSession::onlyTrashed()->find($ctrlno);
