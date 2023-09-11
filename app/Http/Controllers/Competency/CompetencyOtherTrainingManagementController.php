@@ -129,9 +129,9 @@ class CompetencyOtherTrainingManagementController extends Controller
         $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
 
         // Access the soft deleted otherTraining of the parent model
-        $nonCesAccreditedTraining201 = $personalData->otherTraining()->onlyTrashed()->get();
+        $nonCesAccreditedTraining201TrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
  
-        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'nonCesAccreditedTraining201', 'cesno'));
+        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'nonCesAccreditedTraining201TrashedRecord', 'cesno'));
     }
 
     public function restore($ctrlno)
