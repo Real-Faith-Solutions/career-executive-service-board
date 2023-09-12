@@ -225,9 +225,7 @@
                 <th class="px-6 py-3" scope="col">
                     Position Title
                 </th>
-                <th class="px-6 py-3" scope="col">
-                    Vacant
-                </th>
+
                 <th class="px-6 py-3" scope="col">
                     Position Level
                 </th>
@@ -235,16 +233,10 @@
                     SG Level
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Type
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    DBM Title
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Func Title
-                </th>
-                <th class="px-6 py-3" scope="col">
                     Item No.
+                </th>
+                <th class="px-6 py-3" scope="col">
+                    Vacant
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Pres. Apptee
@@ -263,7 +255,19 @@
                     {{ $data->plantilla_id }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->pos_default }}
+                    {{ $data->positionMasterLibrary->dbm_title }}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->func_title }} {{-- koy --}}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->sg }}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->item_no }}
                 </td>
                 <td class="px-6 py-3">
                     <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
@@ -271,26 +275,9 @@
                     </span>
                 </td>
                 <td class="px-6 py-3">
-                    position level
-                </td>
-                <td class="px-6 py-3">
-                    sglevel
-                </td>
-
-                <td class="px-6 py-3">
-
-                </td>
-                <td class="px-6 py-3">
-
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->pos_func_name }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->item_no }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->pres_apptee }}
+                    <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
+                        {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
+                    </span>
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
