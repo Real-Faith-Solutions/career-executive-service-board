@@ -144,28 +144,28 @@ Route::middleware('auth')->group(function () {
             });
 
             Route::prefix('father')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather');
-                Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord');
-                Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy');
-                Route::post('recently-deleted/father-restore/{ctrlno}', [FamilyController::class, 'fatherRestore'])->name('family-profile-father.fatherRestore');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'fatherForceDelete'])->name('family-profile-father.fatherForceDelete');
+                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather')->middleware('checkPermission:family_profile_edit');
+                Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store')->middleware('checkPermission:family_profile_add');
+                Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord')->middleware('checkPermission:family_profile_edit');
+                Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy')->middleware('checkPermission:family_profile_delete');
+                Route::post('recently-deleted/father-restore/{ctrlno}', [FamilyController::class, 'fatherRestore'])->name('family-profile-father.fatherRestore')->middleware('checkPermission:family_profile_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'fatherForceDelete'])->name('family-profile-father.fatherForceDelete')->middleware('checkPermission:family_profile_delete');
             });
 
             Route::prefix('mother')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother');
-                Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord');
-                Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy');
+                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother')->middleware('checkPermission:family_profile_edit');
+                Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store')->middleware('checkPermission:family_profile_add');
+                Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord')->middleware('checkPermission:family_profile_edit');
+                Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy')->middleware('checkPermission:family_profile_delete');
             });
         });
 
         Route::prefix('address')->group(function () {
-            Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show');
-            Route::post('/add-address-permanent-201/{cesno}', [AddressController::class, 'addAddressPermanent'])->name('add-address-permanent-201');
-            Route::post('/add-address-mailing-201/{cesno}', [AddressController::class, 'addAddressMailing'])->name('add-address-mailing-201');
-            Route::post('/add-address-temporary-201/{cesno}', [AddressController::class, 'addAddressTemporary'])->name('add-address-temporary-201');
-            Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.delete');
+            Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show')->middleware('checkPermission:personal_data_view');
+            Route::post('/add-address-permanent-201/{cesno}', [AddressController::class, 'addAddressPermanent'])->name('add-address-permanent-201')->middleware('checkPermission:personal_data_add');
+            Route::post('/add-address-mailing-201/{cesno}', [AddressController::class, 'addAddressMailing'])->name('add-address-mailing-201')->middleware('checkPermission:personal_data_add');
+            Route::post('/add-address-temporary-201/{cesno}', [AddressController::class, 'addAddressTemporary'])->name('add-address-temporary-201')->middleware('checkPermission:personal_data_add');
+            Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.delete')->middleware('checkPermission:personal_data_delete');
 
             // Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
             // Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
