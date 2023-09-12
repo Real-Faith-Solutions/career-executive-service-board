@@ -212,15 +212,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('scholarship-taken')->group(function () {
-            Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create');
-            Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index');
-            Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit');
-            Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store');
-            Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update');
-            Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy');
-            Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin');
-            Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete');
+            Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create')->middleware('checkPermission:scholarships_taken_add');
+            Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index')->middleware('checkPermission:scholarships_taken_view');
+            Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit')->middleware('checkPermission:scholarships_taken_edit');
+            Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store')->middleware('checkPermission:scholarships_taken_add');
+            Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update')->middleware('checkPermission:scholarships_taken_edit');
+            Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy')->middleware('checkPermission:scholarships_taken_delete');
+            Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin')->middleware('checkPermission:scholarships_taken_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore')->middleware('checkPermission:scholarships_taken_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete')->middleware('checkPermission:scholarships_taken_delete');
         });
 
         Route::prefix('research-studies')->group(function () {
