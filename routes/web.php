@@ -182,9 +182,9 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('contact-information')->group(function () {
-            Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show');
-            Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store');
-            Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update');
+            Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show')->middleware('checkPermission:personal_data_view');
+            Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store')->middleware('checkPermission:personal_data_add');
+            Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update')->middleware('checkPermission:personal_data_edit');
         });
 
         Route::prefix('educational-attainment')->group(function () {
