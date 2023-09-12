@@ -236,15 +236,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('work-experience')->group(function () {
-            Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create');
-            Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index');
-            Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit');
-            Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store');
-            Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update');
-            Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy');
-            Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin');
-            Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [WorkExperienceController::class, 'forceDelete'])->name('work-experience.forceDelete');
+            Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create')->middleware('checkPermission:work_experience_add');
+            Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index')->middleware('checkPermission:work_experience_view');
+            Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit')->middleware('checkPermission:work_experience_edit');
+            Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store')->middleware('checkPermission:work_experience_add');
+            Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update')->middleware('checkPermission:work_experience_edit');
+            Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy')->middleware('checkPermission:work_experience_delete');
+            Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin')->middleware('checkPermission:work_experience_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore')->middleware('checkPermission:work_experience_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [WorkExperienceController::class, 'forceDelete'])->name('work-experience.forceDelete')->middleware('checkPermission:work_experience_delete');
         });
 
         Route::prefix('award-citation')->group(function () {
