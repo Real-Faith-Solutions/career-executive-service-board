@@ -84,10 +84,10 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="email">Email<sup>*</sup></label>
-                        <input type="text" id="update_email" name="email" oninput="validateInputEmail(update_email)" onkeypress="validateInputEmail(update_email)" onblur="checkErrorMessage(update_email)" value="{{ $trainingVenueManager->emailadd }}" required>
+                        <label for="emailadd">Email<sup>*</sup></label>
+                        <input type="text" id="update_email" name="emailadd" oninput="validateInputEmail(update_email)" onkeypress="validateInputEmail(update_email)" onblur="checkErrorMessage(update_email)" value="{{ $trainingVenueManager->emailadd }}" required>
                         <p class="input_error text-red-600"></p>
-                        @error('email')
+                        @error('emailadd')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -95,10 +95,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="update_contact_no" name="contact_no" oninput="validateInput(update_contact_no, 10, 'numbersWithSpecial')" onkeypress="validateInput(update_contact_no, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contact_no)" value="{{ $trainingVenueManager->contactno }}" required>
+                        <label for="contactno">Contact No.<sup>*</sup></label>
+                        <input type="text" id="update_contact_no" name="contactno" oninput="validateInput(update_contact_no, 10, 'numbersWithSpecial')" onkeypress="validateInput(update_contact_no, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(update_contact_no)" value="{{ $trainingVenueManager->contactno }}" required>
                         <p class="input_error text-red-600"></p>
-                        @error('contact_no')
+                        @error('contactno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
