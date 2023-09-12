@@ -200,15 +200,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('examination-taken')->group(function () {
-            Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create');
-            Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index');
-            Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit');
-            Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store');
-            Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update');
-            Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy');
-            Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore');
-            Route::delete('recently-deleted/force-deleted/{ctrlno}', [ExaminationTakenController::class, 'forceDelete'])->name('examination-taken.forceDelete');
+            Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create')->middleware('checkPermission:examinations_taken_add');
+            Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index')->middleware('checkPermission:examinations_taken_view');
+            Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit')->middleware('checkPermission:examinations_taken_edit');
+            Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store')->middleware('checkPermission:examinations_taken_add');
+            Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update')->middleware('checkPermission:examinations_taken_edit');
+            Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy')->middleware('checkPermission:examinations_taken_delete');
+            Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted')->middleware('checkPermission:examinations_taken_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore')->middleware('checkPermission:examinations_taken_delete');
+            Route::delete('recently-deleted/force-deleted/{ctrlno}', [ExaminationTakenController::class, 'forceDelete'])->name('examination-taken.forceDelete')->middleware('checkPermission:examinations_taken_delete');
         });
 
         Route::prefix('scholarship-taken')->group(function () {
