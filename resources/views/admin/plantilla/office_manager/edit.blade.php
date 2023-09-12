@@ -220,13 +220,10 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
+                    Plantilla ID
+                </th>
+                <th class="px-6 py-3" scope="col">
                     Position Title
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Appointee
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Occupant
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Vacant
@@ -252,9 +249,6 @@
                 <th class="px-6 py-3" scope="col">
                     Pres. Apptee
                 </th>
-                <th class="px-6 py-3" scope="col">
-                    Plantilla ID
-                </th>
 
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
@@ -266,16 +260,15 @@
             @foreach ($planPositions as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                    {{ $data->plantilla_id }}
+                </td>
+                <td class="px-6 py-3">
                     {{ $data->pos_default }}
                 </td>
                 <td class="px-6 py-3">
-                    appointee
-                </td>
-                <td class="px-6 py-3">
-                    occupant
-                </td>
-                <td class="px-6 py-3">
-                    vacant
+                    <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
+                        {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                    </span>
                 </td>
                 <td class="px-6 py-3">
                     position level
@@ -298,9 +291,6 @@
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->pres_apptee }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->plantilla_id }}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
