@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\TrainingSecretariat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class TrainingSecretariatController extends Controller
@@ -27,9 +28,13 @@ class TrainingSecretariatController extends Controller
             'description' => ['required','unique:training_secretariat,description'],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         TrainingSecretariat::create([
             'description' => $request->description,
-            'encoder' => 'sample ni manuel',
+            'encoder' =>  $encoder,
         ]);
 
         return to_route('training-secretariat.index')->with('message', 'Save Sucessfully');

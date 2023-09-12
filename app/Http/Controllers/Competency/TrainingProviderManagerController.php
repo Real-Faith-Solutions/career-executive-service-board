@@ -38,12 +38,9 @@ class TrainingProviderManagerController extends Controller
         
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName. ' ' .$userFirstName. ' '.$userMiddleName. ' '.$userNameExtension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $trainingProvider = new CompetencyTrainingProvider([
 
@@ -55,7 +52,7 @@ class TrainingProviderManagerController extends Controller
             'contactno' => $request->contact_no,
             'emailadd' => $request->email,
             'contactperson' => $request->contact_person,
-            'encoder' => $userFullName,
+            'encoder' => $encoder,
 
         ]);
 
@@ -99,12 +96,9 @@ class TrainingProviderManagerController extends Controller
         
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName. ' ' .$userFirstName. ' '.$userMiddleName. ' '.$userNameExtension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $trainingProviderManager = CompetencyTrainingProvider::find($ctrlno);
         $trainingProviderManager->provider = $request->provider;
@@ -115,7 +109,7 @@ class TrainingProviderManagerController extends Controller
         $trainingProviderManager->contactno = $request->contact_no;
         $trainingProviderManager->emailadd = $request->email;
         $trainingProviderManager->contactperson = $request->contact_person;
-        $trainingProviderManager->updated_by = $userFullName;
+        $trainingProviderManager->updated_by = $encoder;
         $trainingProviderManager->save();
 
         return to_route('training-provider-manager.index')->with('info', 'Training Provider Manager Update Sucessfully');
