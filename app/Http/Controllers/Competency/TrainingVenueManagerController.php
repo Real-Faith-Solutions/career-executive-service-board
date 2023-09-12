@@ -39,12 +39,9 @@ class TrainingVenueManagerController extends Controller
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName. ' ' .$userFirstName. ' '.$userMiddleName. ' '.$userNameExtension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $trainingVenueManager = new CompetencyTrainingVenueManager([
 
@@ -55,7 +52,7 @@ class TrainingVenueManagerController extends Controller
             'contactno' => $request->contact_no,
             'emailadd' => $request->email,
             'contactperson' => $request->contact_person,
-            'encoder' => $userLastName.' '.$userFirstName.''.$userMiddleName.' '.$userNameExtension,
+            'encoder' => $encoder,
 
         ]);
 

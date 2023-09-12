@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\TrainingLibCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class TrainingCategoryController extends Controller
@@ -27,9 +28,13 @@ class TrainingCategoryController extends Controller
             'training_category' => ['required','unique:traininglib_tblcategory,description'],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+        
         TrainingLibCategory::create([
             'description' => $request->training_category,
-            'encoder' => 'sample encoder',  
+            'encoder' => $encoder,  
         ]);
 
         return to_route('training-category.index')->with('message', 'Save Sucessfully');
