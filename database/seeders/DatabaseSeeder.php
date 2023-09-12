@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibCities::factory(10)->create();
         \App\Models\TrainingLibCategory::factory(10)->create();
         \App\Models\TrainingSecretariat::factory(10)->create();
+        \App\Models\TrainingSecretariat::factory(10)->create();
+        \App\Models\Plantilla\PositionLevelLibrary::factory(65)->create();
 
         $this->call([
             PermissionsTableSeeder::class,
