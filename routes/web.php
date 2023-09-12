@@ -174,11 +174,11 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('identification/card')->group(function () {
-            Route::get('show/{cesno}', [IdentificationController::class, 'show'])->name('personal-data-identification.show');
-            Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store');
-            Route::post('update/{ctrlno}/{cesno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update');
-            Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit');
-            Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy');
+            Route::get('show/{cesno}', [IdentificationController::class, 'show'])->name('personal-data-identification.show')->middleware('checkPermission:personal_data_view');
+            Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store')->middleware('checkPermission:personal_data_add');
+            Route::post('update/{ctrlno}/{cesno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update')->middleware('checkPermission:personal_data_edit');
+            Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit')->middleware('checkPermission:personal_data_edit');
+            Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy')->middleware('checkPermission:personal_data_delete');
         });
 
         Route::prefix('contact-information')->group(function () {
