@@ -260,15 +260,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('affiliation')->group(function () {
-            Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index');
-            Route::get('create/{cesno}', [AffiliationController::class, 'create'])->name('affiliation.create');
-            Route::get('edit/{ctrlno}/{cesno}', [AffiliationController::class, 'edit'])->name('affiliation.edit');
-            Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store');
-            Route::put('update/{ctrlno}/{cesno}', [AffiliationController::class, 'update'])->name('affiliation.update');
-            Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy');
-            Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin');
-            Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [AffiliationController::class, 'forceDelete'])->name('affiliation.forceDelete');
+            Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index')->middleware('checkPermission:affiliations_view');
+            Route::get('create/{cesno}', [AffiliationController::class, 'create'])->name('affiliation.create')->middleware('checkPermission:affiliations_add');
+            Route::get('edit/{ctrlno}/{cesno}', [AffiliationController::class, 'edit'])->name('affiliation.edit')->middleware('checkPermission:affiliations_edit');
+            Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store')->middleware('checkPermission:affiliations_add');
+            Route::put('update/{ctrlno}/{cesno}', [AffiliationController::class, 'update'])->name('affiliation.update')->middleware('checkPermission:affiliations_edit');
+            Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy')->middleware('checkPermission:affiliations_delete');
+            Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin')->middleware('checkPermission:affiliations_delete');
+            Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore')->middleware('checkPermission:affiliations_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [AffiliationController::class, 'forceDelete'])->name('affiliation.forceDelete')->middleware('checkPermission:affiliations_delete');
         });
 
         Route::prefix('case-record')->group(function () {
