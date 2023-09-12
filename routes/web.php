@@ -109,38 +109,38 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('personal-data')->group(function () {
 
-            Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add');
-            Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
-            Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
+            Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('checkPermission:personal_data_add');
+            Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201')->middleware('checkPermission:personal_data_add');
+            Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index')->middleware('checkPermission:personal_data_view');
             Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');
-            Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
-            Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
-            Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
+            Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201')->middleware('checkPermission:personal_data_edit');
+            Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit')->middleware('checkPermission:personal_data_edit');
+            Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201')->middleware('checkPermission:personal_data_edit');
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
         });
 
         Route::prefix('family-profile')->group(function () {
-            Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show');
-            Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted');
+            Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show')->middleware('checkPermission:family_profile_view');
+            Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted')->middleware('checkPermission:family_profile_delete');
 
             Route::prefix('spouse')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse');
-                Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store');
-                Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord');
-                Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete');
-                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'spouseRestore'])->name('family-profile-spouse.restore');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'spouseForceDelete'])->name('family-profile-spouse.forceDelete');
+                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse')->middleware('checkPermission:family_profile_edit');
+                Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store')->middleware('checkPermission:family_profile_add');
+                Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord')->middleware('checkPermission:family_profile_edit');
+                Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete')->middleware('checkPermission:family_profile_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'spouseRestore'])->name('family-profile-spouse.restore')->middleware('checkPermission:family_profile_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'spouseForceDelete'])->name('family-profile-spouse.forceDelete')->middleware('checkPermission:family_profile_delete');
             });
 
             Route::prefix('children')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren');
-                Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren');
-                Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete');
-                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'childrenRestore'])->name('family-profile-children.restore');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'childrenForceDelete'])->name('family-profile-children.forceDelete');
+                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren')->middleware('checkPermission:family_profile_edit');
+                Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store')->middleware('checkPermission:family_profile_add');
+                Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren')->middleware('checkPermission:family_profile_edit');
+                Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete')->middleware('checkPermission:family_profile_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'childrenRestore'])->name('family-profile-children.restore')->middleware('checkPermission:family_profile_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'childrenForceDelete'])->name('family-profile-children.forceDelete')->middleware('checkPermission:family_profile_delete');
             });
 
             Route::prefix('father')->group(function () {
