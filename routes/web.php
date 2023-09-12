@@ -224,15 +224,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('research-studies')->group(function () {
-            Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index');
-            Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create');
-            Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit');
-            Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store');
-            Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update');
-            Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy');
-            Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin');
-            Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [ResearchAndStudiesController::class, 'forceDelete'])->name('research-studies.forceDelete');
+            Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index')->middleware('checkPermission:research_and_studies_view');
+            Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create')->middleware('checkPermission:research_and_studies_add');
+            Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit')->middleware('checkPermission:research_and_studies_edit');
+            Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store')->middleware('checkPermission:research_and_studies_add');
+            Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update')->middleware('checkPermission:research_and_studies_edit');
+            Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy')->middleware('checkPermission:research_and_studies_delete');
+            Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin')->middleware('checkPermission:research_and_studies_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore')->middleware('checkPermission:research_and_studies_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [ResearchAndStudiesController::class, 'forceDelete'])->name('research-studies.forceDelete')->middleware('checkPermission:research_and_studies_delete');
         });
 
         Route::prefix('work-experience')->group(function () {
