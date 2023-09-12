@@ -248,15 +248,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('award-citation')->group(function () {
-            Route::get('index/{cesno}', [AwardAndCitationController::class, 'index'])->name('award-citation.index');
-            Route::get('create/{cesno}', [AwardAndCitationController::class, 'create'])->name('award-citation.create');
-            Route::get('edit/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit');
-            Route::post('store/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store');
-            Route::put('update/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update');
-            Route::delete('delete/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy');
-            Route::get('recently-deleted/{cesno}', [AwardAndCitationController::class, 'recentlyDeleted'])->name('award-citation.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [AwardAndCitationController::class, 'restore'])->name('award-citation.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [AwardAndCitationController::class, 'forceDelete'])->name('award-citation.forceDelete');
+            Route::get('index/{cesno}', [AwardAndCitationController::class, 'index'])->name('award-citation.index')->middleware('checkPermission:awards_and_citations_view');
+            Route::get('create/{cesno}', [AwardAndCitationController::class, 'create'])->name('award-citation.create')->middleware('checkPermission:awards_and_citations_add');
+            Route::get('edit/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit')->middleware('checkPermission:awards_and_citations_edit');
+            Route::post('store/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store')->middleware('checkPermission:awards_and_citations_add');
+            Route::put('update/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update')->middleware('checkPermission:awards_and_citations_edit');
+            Route::delete('delete/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy')->middleware('checkPermission:awards_and_citations_delete');
+            Route::get('recently-deleted/{cesno}', [AwardAndCitationController::class, 'recentlyDeleted'])->name('award-citation.recentlyDeleted')->middleware('checkPermission:awards_and_citations_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [AwardAndCitationController::class, 'restore'])->name('award-citation.restore')->middleware('checkPermission:awards_and_citations_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [AwardAndCitationController::class, 'forceDelete'])->name('award-citation.forceDelete')->middleware('checkPermission:awards_and_citations_delete');
         });
 
         Route::prefix('affiliation')->group(function () {
