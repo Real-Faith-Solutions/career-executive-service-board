@@ -14,7 +14,7 @@ return new class extends Migration
         // migrate from legacy
         Schema::create('plantillalib_tblAgencyType', function (Blueprint $table) {
             $table->id('agency_typeid');
-            $table->string('sectorid')->nullable();
+            $table->foreignId('sectorid')->constrained('plantilla_tblSector', 'sectorid');
             $table->string('title')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
