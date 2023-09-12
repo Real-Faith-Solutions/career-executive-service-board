@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\Plantilla\ApptStatusSeeder;
 use Database\Seeders\Plantilla\DepartmentAgencyTypeSeeder;
 use Database\Seeders\Plantilla\SectorManagerSeeder;
 use Illuminate\Database\Seeder;
@@ -66,6 +67,7 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblExpertiseGenSeeder::class,
             AgencyLocationSeeder::class,
             DepartmentAgencyTypeSeeder::class,
+            ApptStatusSeeder::class,
         ]);
     }
 }
