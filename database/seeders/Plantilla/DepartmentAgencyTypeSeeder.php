@@ -82,7 +82,7 @@ class DepartmentAgencyTypeSeeder extends Seeder
             'title' => "State Universities and Colleges",
         ]);
         DepartmentAgencyType::create([
-            'sectorid' => 7,
+            'sectorid' => 8,
             'title' => "Private Universities and Colleges",
         ]);
     }
