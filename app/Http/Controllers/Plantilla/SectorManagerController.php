@@ -50,7 +50,9 @@ class SectorManagerController extends Controller
     {
         $query = $request->input('search');
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);
-        $agencyType = DepartmentAgencyType::orderBy('title', 'ASC')->get();
+        $agencyType = DepartmentAgencyType::query()
+            ->where('sectorid', $sectorid)
+            ->orderBy('title', 'ASC')->get();
 
         $subDatas = DepartmentAgency::query()
             ->where('plantilla_tblSector_id', $sectorid)

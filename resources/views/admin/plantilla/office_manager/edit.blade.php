@@ -220,17 +220,12 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
+                    Plantilla ID
+                </th>
+                <th class="px-6 py-3" scope="col">
                     Position Title
                 </th>
-                <th class="px-6 py-3" scope="col">
-                    Appointee
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Occupant
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Vacant
-                </th>
+
                 <th class="px-6 py-3" scope="col">
                     Position Level
                 </th>
@@ -238,22 +233,13 @@
                     SG Level
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Type
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    DBM Title
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Func Title
-                </th>
-                <th class="px-6 py-3" scope="col">
                     Item No.
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Pres. Apptee
+                    Vacant
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Plantilla ID
+                    Pres. Apptee
                 </th>
 
                 <th class="px-6 py-3" scope="col">
@@ -266,41 +252,32 @@
             @foreach ($planPositions as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->pos_default }}
+                    {{ $data->plantilla_id }}
                 </td>
                 <td class="px-6 py-3">
-                    appointee
-                </td>
-                <td class="px-6 py-3">
-                    occupant
-                </td>
-                <td class="px-6 py-3">
-                    vacant
-                </td>
-                <td class="px-6 py-3">
-                    position level
-                </td>
-                <td class="px-6 py-3">
-                    sglevel
+                    {{ $data->positionMasterLibrary->dbm_title }}
                 </td>
 
                 <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->positionLevel->title }}
+                </td>
 
-                </td>
                 <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->positionLevel->sg }}
+                </td>
 
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->pos_func_name }}
-                </td>
                 <td class="px-6 py-3">
                     {{ $data->item_no }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->pres_apptee }}
+                    <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
+                        {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                    </span>
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->plantilla_id }}
+                    <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
+                        {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
+                    </span>
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">

@@ -4,6 +4,28 @@
 @section('content')
 @include('admin.competency.view_profile.header', ['cesno'=>$cesno])
 
+@if(!is_null($addressProfileMailing))
+    @php
+        
+        $regionMailing = $addressProfileMailing->region_code;
+        $cityMailing = $addressProfileMailing->city_or_municipality_code;
+        $brgyMailing = $addressProfileMailing->brgy_code;
+        $zip_code_Mailing = $addressProfileMailing->zip_code;
+        $street_lot_bldg_floor_Mailing = $addressProfileMailing->street_lot_bldg_floor;
+    
+    @endphp
+@else
+    @php 
+
+        $regionMailing = '';
+        $cityMailing = '';
+        $brgyMailing = '';
+        $zip_code_Mailing = '';
+        $street_lot_bldg_floor_Mailing = '';
+
+    @endphp
+@endif
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -130,6 +152,85 @@
                     <button type="button" class="btn btn-primary" id="competencyUpdateContactsButton" onclick="openConfirmationDialog(this, 'Confirm Contacts', 'Are you sure you want to submit/update this info?')">
                         Save changes
                     </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+    <div class="w-full text-left text-gray-500">
+        <div class="bg-blue-500 uppercase text-gray-700 text-white">
+            <h1 class="px-6 py-3">
+                Mailing Address
+            </h1>
+        </div>
+
+        <div class="bg-white px-6 py-3">
+            <form action="{{ route('add-address-mailing-201', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" id="address_mailing" onsubmit="return checkErrorsBeforeSubmit(address_mailing)" method="POST">
+                @csrf
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            
+                    <div class="mb-3">
+                        <label for="regionsSelectMailing">Region<sup>*</span></label>
+                        <select id="regionsSelectMailing" name="regionsSelectMailing" required>
+                            @if ($regionMailing != '')
+                                <option value="{{ $regionMailing }}" selected></option>
+                            @else
+                                <option disabled selected>Select Region</option>
+                            @endif
+                        </select>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="citySelectMailing">City or Municipality<sup>*</span></label>
+                        <select id="citySelectMailing" name="citySelectMailing" required>
+                            @if ($cityMailing != '')
+                                <option value="{{ $cityMailing }}" selected></option>
+                            @else
+                                <option disabled selected>Select City or Municipality</option>
+                            @endif
+                        </select>
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="brgySelectMailing">Barangay<sup>*</span></label>
+                        <select id="brgySelectMailing" name="brgySelectMailing" required>
+                            @if ($brgyMailing != '')
+                                <option value="{{ $brgyMailing }}" selected></option>
+                            @else
+                                <option disabled selected>Select Barangay</option>
+                            @endif
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="mb-3">
+                        <label for="zip_code_Mailing">Zip code<sup>*</span></label>
+                        <input id="zip_code_Mailing" name="zip_code_Mailing" type="text" value="{{ $zip_code_Mailing }}" oninput="validateInput(zip_code_Mailing, 4, 'numbers')" onkeypress="validateInput(zip_code_Mailing, 4, 'numbers')" onblur="checkErrorMessage(zip_code_Mailing)" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('zip_code_Mailing')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+            
+                    <div class="mb-3 col-span-2">
+                        <label for="street_lot_bldg_floor_Mailing">Street/Lot no./Building/Floor no.</label>
+                        <input id="street_lot_bldg_floor_Mailing" name="street_lot_bldg_floor_Mailing" type="text" value="{{ $street_lot_bldg_floor_Mailing }}" oninput="validateInput(street_lot_bldg_floor_Mailing, 4)" onkeypress="validateInput(street_lot_bldg_floor_Mailing, 4)" onblur="checkErrorMessage(street_lot_bldg_floor_Mailing)" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('street_lot_bldg_floor_Mailing')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="button" class="btn btn-primary" id="updateMailingAddressButton" onclick="openConfirmationDialog(this, 'Confirm Address', 'Are you sure you want to submit/update this info?')">Save Changes</button>
                 </div>
             </form>
         </div>

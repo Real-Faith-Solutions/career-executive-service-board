@@ -43,7 +43,9 @@ class DepartmentAgencyManagerController extends Controller
         $query = $request->input('search');
         $sector = SectorManager::find($sectorid);
         $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
-        $departmentTypeDatas = DepartmentAgencyType::orderBy('title', 'ASC')->get();
+        $departmentTypeDatas = DepartmentAgencyType::query()
+            ->where('sectorid', $sectorid)
+            ->orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::find($deptid);
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
