@@ -78,7 +78,9 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->cesTrainingPersonalData->lastname.', '.$training->cesTrainingPersonalData->firstname.', '.$training->cesTrainingPersonalData->name_extension.', '.$training->cesTrainingPersonalData->middleinitial }}
+                        {{ 
+                            $training->cesTrainingPersonalData->lastname.', '.$training->cesTrainingPersonalData->firstname.', '.        $training->cesTrainingPersonalData->name_extension.', '.$training->cesTrainingPersonalData->middleinitial 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
