@@ -330,15 +330,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
-            Route::get('create/{cesno}', [OtherTrainingController::class, 'create'])->name('other-training.create');
-            Route::get('index/{cesno}', [OtherTrainingController::class, 'index'])->name('other-training.index');
-            Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit');
-            Route::post('store/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store');
-            Route::put('update/{ctrlno}/{cesno}', [OtherTrainingController::class, 'update'])->name('other-training.update');
-            Route::delete('destroy/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy');
-            Route::get('recently-deleted/{cesno}', [OtherTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingController::class, 'restore'])->name('other-training.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete');
+            Route::get('create/{cesno}', [OtherTrainingController::class, 'create'])->name('other-training.create')->middleware('checkPermission:non_ces_trainings_add');
+            Route::get('index/{cesno}', [OtherTrainingController::class, 'index'])->name('other-training.index')->middleware('checkPermission:non_ces_trainings_view');
+            Route::get('edit/{ctrlno}/{cesno}', [OtherTrainingController::class, 'edit'])->name('other-training.edit')->middleware('checkPermission:non_ces_trainings_edit');
+            Route::post('store/{cesno}', [OtherTrainingController::class, 'store'])->name('other-training.store')->middleware('checkPermission:non_ces_trainings_add');
+            Route::put('update/{ctrlno}/{cesno}', [OtherTrainingController::class, 'update'])->name('other-training.update')->middleware('checkPermission:non_ces_trainings_edit');
+            Route::delete('destroy/{ctrlno}', [OtherTrainingController::class, 'destroy'])->name('other-training.destroy')->middleware('checkPermission:non_ces_trainings_delete');
+            Route::get('recently-deleted/{cesno}', [OtherTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted')->middleware('checkPermission:non_ces_trainings_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingController::class, 'restore'])->name('other-training.restore')->middleware('checkPermission:non_ces_trainings_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete')->middleware('checkPermission:non_ces_trainings_delete');
             Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining');
             Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining');
             Route::delete('destroy-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining');
