@@ -431,6 +431,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+            Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {

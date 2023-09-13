@@ -64,7 +64,7 @@
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
-                <h1>
+                <h1 class="px-6 py-3">
                     Office Location Manager
                 </h1>
             </div>
@@ -281,8 +281,9 @@
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a>
-                    <form class="hover:bg-slate-100 rounded-full" action="#" method="POST"
-                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                    <form class="hover:bg-slate-100 rounded-full"
+                        action="{{ route('plantilla-position-manager.destroy', ['plantilla_id' => $data->plantilla_id]) }}"
+                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

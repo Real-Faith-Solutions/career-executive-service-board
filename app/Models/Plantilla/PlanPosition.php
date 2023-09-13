@@ -11,7 +11,7 @@ class PlanPosition extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'plantilla_tblPlanPositions';
-    protected $primarKey = 'plantilla_id';
+    protected $primaryKey = 'plantilla_id';
 
     public function positionMasterLibrary(): BelongsTo
     {
