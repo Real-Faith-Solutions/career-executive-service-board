@@ -213,28 +213,13 @@
 <table class="dataTables">
     <thead>
         <tr>
-            <th>
-                Plantilla ID
-            </th>
-            <th>
-                Position Title
-            </th>
-
-            <th>
-                Position Level
-            </th>
-            <th>
-                SG Level
-            </th>
-            <th>
-                Item No.
-            </th>
-            <th>
-                Vacant
-            </th>
-            <th>
-                Pres. Apptee
-            </th>
+            <th>Plantilla ID</th>
+            <th>Position Title</th>
+            <th>Position Level</th>
+            <th>SG Level</th>
+            <th>Item No.</th>
+            <th>Vacant</th>
+            <th>Pres. Apptee</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -244,8 +229,8 @@
     <tbody>
 
         @foreach ($planPositions as $data)
-        <tr class="border-b bg-white hover:bg-gray-100">
-            <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+        <tr>
+            <td class="font-semibold">
                 {{ $data->plantilla_id }}
             </td>
             <td>
@@ -274,7 +259,7 @@
                 </span>
             </td>
 
-            <td class="px-6 py-4 text-right uppercase">
+            <td class="text-right uppercase">
                 <div class="flex justify-end">
                     <a class="hover:bg-slate-100 rounded-full" href="#">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
