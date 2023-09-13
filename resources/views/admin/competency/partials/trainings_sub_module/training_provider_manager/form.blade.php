@@ -86,10 +86,10 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="contact_no">Contact No.<sup>*</sup></label>
-                        <input type="text" id="competency_contact_no" name="contact_no" oninput="validateInput(competency_contact_no, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_contact_no, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_contact_no)" required>
+                        <label for="contactno">Contact No.<sup>*</sup></label>
+                        <input type="text" id="competency_contact_no" name="contactno" oninput="validateInput(competency_contact_no, 10, 'numbersWithSpecial')" onkeypress="validateInput(competency_contact_no, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(competency_contact_no)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('contact_no')
+                        @error('contactno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -99,10 +99,10 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="email">Email<sup>*</sup></label>
-                        <input type="text" id="competency_email" name="email" oninput="validateInputEmail(competency_email)" onkeypress="validateInputEmail(competency_email)" onblur="checkErrorMessage(competency_email)" required>
+                        <label for="emailadd">Email<sup>*</sup></label>
+                        <input type="text" id="competency_email" name="emailadd" oninput="validateInputEmail(competency_email)" onkeypress="validateInputEmail(competency_email)" onblur="checkErrorMessage(competency_email)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('email')
+                        @error('emailadd')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
