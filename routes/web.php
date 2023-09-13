@@ -272,15 +272,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('case-record')->group(function () {
-            Route::get('index/{cesno}', [CaseRecordController::class, 'index'])->name('case-record.index');
-            Route::get('create/{cesno}', [CaseRecordController::class, 'create'])->name('case-record.create');
-            Route::get('edit/{ctrlno}/{cesno}', [CaseRecordController::class, 'edit'])->name('case-record.edit');
-            Route::post('store/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store');
-            Route::put('update/{ctrlno}/{cesno}', [CaseRecordController::class, 'update'])->name('case-record.update');
-            Route::delete('destroy/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy');
-            Route::get('recently-deleted/{cesno}', [CaseRecordController::class, 'recentlyDeleted'])->name('case-record.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [CaseRecordController::class, 'restore'])->name('case-record.restore');
-            Route::delete('recently-deleted/force-deleted/{ctrlno}', [CaseRecordController::class, 'forceDelete'])->name('case-record.forceDelete');
+            Route::get('index/{cesno}', [CaseRecordController::class, 'index'])->name('case-record.index')->middleware('checkPermission:case_records_view');
+            Route::get('create/{cesno}', [CaseRecordController::class, 'create'])->name('case-record.create')->middleware('checkPermission:case_records_add');
+            Route::get('edit/{ctrlno}/{cesno}', [CaseRecordController::class, 'edit'])->name('case-record.edit')->middleware('checkPermission:case_records_edit');
+            Route::post('store/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store')->middleware('checkPermission:case_records_add');
+            Route::put('update/{ctrlno}/{cesno}', [CaseRecordController::class, 'update'])->name('case-record.update')->middleware('checkPermission:case_records_edit');
+            Route::delete('destroy/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy')->middleware('checkPermission:case_records_delete');
+            Route::get('recently-deleted/{cesno}', [CaseRecordController::class, 'recentlyDeleted'])->name('case-record.recentlyDeleted')->middleware('checkPermission:case_records_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [CaseRecordController::class, 'restore'])->name('case-record.restore')->middleware('checkPermission:case_records_delete');
+            Route::delete('recently-deleted/force-deleted/{ctrlno}', [CaseRecordController::class, 'forceDelete'])->name('case-record.forceDelete')->middleware('checkPermission:case_records_delete');
         });
 
         Route::prefix('health-record')->group(function () {
