@@ -284,14 +284,14 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('health-record')->group(function () {
-            Route::get('index/{cesno}', [HealthRecordController::class, 'index'])->name('health-record.index');
-            Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store');
-            Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy');
+            Route::get('index/{cesno}', [HealthRecordController::class, 'index'])->name('health-record.index')->middleware('checkPermission:health_records_view');
+            Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store')->middleware('checkPermission:health_records_add');
+            Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy')->middleware('checkPermission:health_records_delete');
         });
 
         Route::prefix('medical-history')->group(function () {
-            Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store');
-            Route::delete('{ctrlno}', [MedicalHistoryController::class, 'destroy'])->name('medical-history.destroy');
+            Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store')->middleware('checkPermission:health_records_add');
+            Route::delete('{ctrlno}', [MedicalHistoryController::class, 'destroy'])->name('medical-history.destroy')->middleware('checkPermission:health_records_delete');
         });
 
         Route::prefix('expertise')->group(function () {
