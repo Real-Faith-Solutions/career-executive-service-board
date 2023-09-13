@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sg')->nullable();
             $table->string('pl_func_name')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
