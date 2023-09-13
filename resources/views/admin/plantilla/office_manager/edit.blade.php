@@ -64,7 +64,7 @@
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
-                <h1 class="px-6 py-3">
+                <h1>
                     Office Location Manager
                 </h1>
             </div>
@@ -205,113 +205,98 @@
     </div>
 </div>
 
-<div class="flex justify-between my-3">
-    @include('components.search')
-
-    <div>
-        <button class="btn btn-primary" id="agencyCreateBtn">
-            Add record
-        </button>
-    </div>
+<div class="flex justify-end">
+    <button class="btn btn-primary">
+        Add record
+    </button>
 </div>
+<table class="dataTables">
+    <thead>
+        <tr>
+            <th>
+                Plantilla ID
+            </th>
+            <th>
+                Position Title
+            </th>
 
-<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
-    <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-            <tr>
-                <th class="px-6 py-3" scope="col">
-                    Plantilla ID
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Position Title
-                </th>
+            <th>
+                Position Level
+            </th>
+            <th>
+                SG Level
+            </th>
+            <th>
+                Item No.
+            </th>
+            <th>
+                Vacant
+            </th>
+            <th>
+                Pres. Apptee
+            </th>
 
-                <th class="px-6 py-3" scope="col">
-                    Position Level
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    SG Level
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Item No.
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Vacant
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Pres. Apptee
-                </th>
+            <th>
+                <span class="sr-only">Action</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
 
-                <th class="px-6 py-3" scope="col">
-                    <span class="sr-only">Action</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+        @foreach ($planPositions as $data)
+        <tr class="border-b bg-white hover:bg-gray-100">
+            <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                {{ $data->plantilla_id }}
+            </td>
+            <td>
+                {{ $data->positionMasterLibrary->dbm_title }}
+            </td>
 
-            @foreach ($planPositions as $data)
-            <tr class="border-b bg-white">
-                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->plantilla_id }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->dbm_title }}
-                </td>
+            <td>
+                {{ $data->positionMasterLibrary->positionLevel->title }}
+            </td>
 
-                <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->positionLevel->title }}
-                </td>
+            <td>
+                {{ $data->positionMasterLibrary->positionLevel->sg }}
+            </td>
 
-                <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->positionLevel->sg }}
-                </td>
+            <td>
+                {{ $data->item_no }}
+            </td>
+            <td>
+                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
+                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                </span>
+            </td>
+            <td>
+                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
+                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
+                </span>
+            </td>
 
-                <td class="px-6 py-3">
-                    {{ $data->item_no }}
-                </td>
-                <td class="px-6 py-3">
-                    <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                        {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
-                    </span>
-                </td>
-                <td class="px-6 py-3">
-                    <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                        {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                    </span>
-                </td>
-
-                <td class="px-6 py-4 text-right uppercase">
-                    <div class="flex justify-end">
-                        {{-- <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}">
-                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
-                                style="width:24px;height:24px">
+            <td class="px-6 py-4 text-right uppercase">
+                <div class="flex justify-end">
+                    <a class="hover:bg-slate-100 rounded-full" href="#">
+                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <form class="hover:bg-slate-100 rounded-full" action="#" method="POST"
+                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
-                        </a> --}}
-                        {{-- <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('department-agency-manager.destroy', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
-                            method="POST"
-                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                    colors="primary:#DC3545" style="width:24px;height:24px">
-                                </lord-icon>
-                            </button>
-                        </form> --}}
-                    </div>
-                </td>
-            </tr>
-            @endforeach
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
 
-        </tbody>
-    </table>
-
-    <div class="m-5">
-        {{ $planPositions->links() }}
-    </div>
-</div>
+    </tbody>
+</table>
 
 @endsection
