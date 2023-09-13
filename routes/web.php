@@ -307,14 +307,14 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('language')->group(function () {
-            Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index');
-            Route::get('edit/{ctrlno}/{cesno}', [LanguageController::class, 'edit'])->name('language.edit');
-            Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store');
-            Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update');
-            Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy');
-            Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete');
+            Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index')->middleware('checkPermission:language_dialects_view');
+            Route::get('edit/{ctrlno}/{cesno}', [LanguageController::class, 'edit'])->name('language.edit')->middleware('checkPermission:language_dialects_edit');
+            Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store')->middleware('checkPermission:language_dialects_add');
+            Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update')->middleware('checkPermission:language_dialects_edit');
+            Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy')->middleware('checkPermission:language_dialects_delete');
+            Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted')->middleware('checkPermission:language_dialects_delete');
+            Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore')->middleware('checkPermission:language_dialects_delete');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete')->middleware('checkPermission:language_dialects_delete');
         });
 
         Route::prefix('ces-training-201')->group(function () {
