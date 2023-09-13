@@ -259,11 +259,11 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->func_title }} {{-- koy --}}
+                    {{ $data->positionMasterLibrary->positionLevel->title }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->sg }}
+                    {{ $data->positionMasterLibrary->positionLevel->sg }}
                 </td>
 
                 <td class="px-6 py-3">
