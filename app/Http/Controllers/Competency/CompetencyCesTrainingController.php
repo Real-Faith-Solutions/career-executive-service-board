@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class TrainingParticipantsController extends Controller
+class CompetencyCesTrainingController extends Controller
 {
     public function index($cesno)
     {

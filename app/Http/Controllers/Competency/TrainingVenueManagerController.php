@@ -30,12 +30,12 @@ class TrainingVenueManagerController extends Controller
         $request->validate([
 
             'venue_name' => ['required', 'unique:traininglib_tblvenue,name'],
-            'no_street' => ['required'],
-            'brgy' => ['required'],
+            'no_street' => ['nullable', 'max:60', 'min:2'],
+            'brgy' => ['nullable', 'max:60', 'min:2'],
             'city_code' => ['required'],
-            'contact_no' => ['required'],
-            'email' => ['required'],
-            'contact_person' => ['required'],
+            'contactno' => ['required', 'max:15', 'min:10', 'unique:traininglib_tblvenue,contactno'],
+            'emailadd' => ['required', 'unique:traininglib_tblvenue,emailadd'],
+            'contact_person' => ['required','max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             
         ]);
 
@@ -49,8 +49,8 @@ class TrainingVenueManagerController extends Controller
             'no_street' => $request->no_street,
             'brgy' => $request->brgy,
             'city_code' => $request->city_code,
-            'contactno' => $request->contact_no,
-            'emailadd' => $request->email,
+            'contactno' => $request->contactno,
+            'emailadd' => $request->emailadd,
             'contactperson' => $request->contact_person,
             'encoder' => $encoder,
 
@@ -85,28 +85,25 @@ class TrainingVenueManagerController extends Controller
             'no_street' => ['required'],
             'brgy' => ['required'],
             'city_code' => ['required'],
-            'contact_no' => ['required'],
-            'email' => ['required'],
+            'contactno' => ['required',Rule::unique('traininglib_tblvenue')->ignore($ctrlno, 'venueid')],
+            'emailadd' => ['required',Rule::unique('traininglib_tblvenue')->ignore($ctrlno, 'venueid')],
             'contact_person' => ['required'],
             
         ]);
 
-        $userFullName = Auth::user();
-        $userLastName = $userFullName ->last_name;
-        $userFirstName = $userFullName ->first_name;
-        $userMiddleName = $userFullName ->middle_name;
-        $userNameExtension = $userFullName ->name_extension;
-        $userFullName = $userLastName. ' ' .$userFirstName. ' '.$userMiddleName. ' '.$userNameExtension;
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $trainingVenueManager = CompetencyTrainingVenueManager::find($ctrlno);
         $trainingVenueManager->name = $request->name;
         $trainingVenueManager->no_street = $request->no_street;
         $trainingVenueManager->brgy = $request->brgy;
         $trainingVenueManager->city_code = $request->city_code;
-        $trainingVenueManager->contactno = $request->contact_no;
-        $trainingVenueManager->emailadd = $request->email;
+        $trainingVenueManager->contactno = $request->contactno;
+        $trainingVenueManager->emailadd = $request->emailadd;
         $trainingVenueManager->contactperson = $request->contact_person;
-        $trainingVenueManager->updated_by = $request->$userFullName;
+        $trainingVenueManager->updated_by =  $encoder;
         $trainingVenueManager->update();
 
         return to_route('training-venue-manager.index')->with('info', 'Update Sucessfully');

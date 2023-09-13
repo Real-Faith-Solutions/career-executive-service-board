@@ -33,14 +33,14 @@ class ResourceSpeakerController extends Controller
             'middleName' => ['nullable', 'max:60', 'min:1', 'regex:/^[a-zA-Z ]*$/'],
             'position' => ['required', 'max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'department' => ['nullable', 'max:60', 'min:2'],
-            'office' => ['required', 'max:60', 'min:2'],
+            'office' => ['nullable', 'max:60', 'min:2'],
             'bldg' => ['nullable', 'max:60', 'min:2'],
             'street' => ['nullable', 'max:60', 'min:2'],
             'brgy' => ['nullable', 'max:60', 'min:2'],
             'city' => ['required'],
-            'contactNo' => ['required', 'max:60', 'min:10', 'unique:training_tblSpeakers,contactno'],
+            'contactNo' => ['required', 'max:15', 'min:10', 'unique:training_tblSpeakers,contactno'],
             'emailAdd' => ['required', 'unique:training_tblSpeakers,emailadd'],
-            'expertise' => ['nullable', 'max:60', 'min:6', 'regex:/^[a-zA-Z ]*$/'],
+            'expertise' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
         ]);
 
         /** @var \App\Models\User $user */
@@ -92,14 +92,14 @@ class ResourceSpeakerController extends Controller
             'middleName' => ['nullable', 'max:60', 'min:1', 'regex:/^[a-zA-Z ]*$/'],
             'position' => ['required', 'max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'department' => ['nullable', 'max:60', 'min:2'],
-            'office' => ['required', 'max:60', 'min:2'],
+            'office' => ['nullable', 'max:60', 'min:2'],
             'bldg' => ['nullable', 'max:60', 'min:2'],
             'street' => ['nullable', 'max:60', 'min:2'],
             'brgy' => ['nullable', 'max:60', 'min:2'],
             'city' => ['required'],
-            'contactNo' => ['required', 'max:60', 'min:10', Rule::unique('training_tblSpeakers')->ignore($ctrlno, 'speakerID')],
+            'contactNo' => ['required', 'max:15', 'min:10', Rule::unique('training_tblSpeakers')->ignore($ctrlno, 'speakerID')],
             'emailAdd' => ['required', Rule::unique('training_tblSpeakers')->ignore($ctrlno, 'speakerID')],
-            'expertise' => ['nullable', 'max:60', 'min:6', 'regex:/^[a-zA-Z ]*$/'],
+            'expertise' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
         ]);
 
         /** @var \App\Models\User $user */

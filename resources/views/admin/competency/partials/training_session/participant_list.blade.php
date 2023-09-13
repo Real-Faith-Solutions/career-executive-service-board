@@ -64,7 +64,9 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->lastname.', '.$trainingParticipantLists->cesTrainingPersonalData->firstname.', '.$trainingParticipantLists->cesTrainingPersonalData->name_extension.', '.$trainingParticipantLists->cesTrainingPersonalData->middleinitial }}
+                        {{ 
+                            $trainingParticipantLists->cesTrainingPersonalData->lastname.', '.$trainingParticipantLists->cesTrainingPersonalData->firstname.', '.$trainingParticipantLists->cesTrainingPersonalData->name_extension.', '.$trainingParticipantLists->cesTrainingPersonalData->middleinitial 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">

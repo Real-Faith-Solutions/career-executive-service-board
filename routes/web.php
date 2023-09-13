@@ -9,6 +9,7 @@ use App\Http\Controllers\AwardAndCitationController;
 use App\Http\Controllers\CaseRecordController;
 use App\Http\Controllers\CESTraining201Controller;
 use App\Http\Controllers\CivilStatusController;
+use App\Http\Controllers\Competency\CompetencyCesTrainingController;
 use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
@@ -430,6 +431,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+            Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
@@ -559,15 +561,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('competency-ces-training')->group(function () {
-            Route::get('index/{cesno}', [TrainingParticipantsController::class, 'index'])->name('ces-training.index');
-            Route::get('create/{cesno}', [TrainingParticipantsController::class, 'create'])->name('ces-training.create');
-            Route::post('store/{cesno}', [TrainingParticipantsController::class, 'store'])->name('ces-training.store');
-            Route::get('edit/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'edit'])->name('ces-training.edit');
-            Route::put('update/{ctrlno}/{cesno}', [TrainingParticipantsController::class, 'update'])->name('ces-training.update');
-            Route::delete('destroy/{ctrlno}', [TrainingParticipantsController::class, 'destroy'])->name('ces-training.destroy');
-            Route::get('recently-deleted/{cesno}', [TrainingParticipantsController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [TrainingParticipantsController::class, 'restore'])->name('ces-training.restore');
-            Route::delete('force-delete//recently-deleted/{ctrlno}', [TrainingParticipantsController::class, 'forceDelete'])->name('ces-training.forceDelete');
+            Route::get('index/{cesno}', [CompetencyCesTrainingController::class, 'index'])->name('ces-training.index');
+            Route::get('create/{cesno}', [CompetencyCesTrainingController::class, 'create'])->name('ces-training.create');
+            Route::post('store/{cesno}', [CompetencyCesTrainingController::class, 'store'])->name('ces-training.store');
+            Route::get('edit/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'edit'])->name('ces-training.edit');
+            Route::put('update/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'update'])->name('ces-training.update');
+            Route::delete('destroy/{ctrlno}', [CompetencyCesTrainingController::class, 'destroy'])->name('ces-training.destroy');
+            Route::get('recently-deleted/{cesno}', [CompetencyCesTrainingController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'restore'])->name('ces-training.restore');
+            Route::delete('force-delete//recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'forceDelete'])->name('ces-training.forceDelete');
         });
     });
     // End of competency routes

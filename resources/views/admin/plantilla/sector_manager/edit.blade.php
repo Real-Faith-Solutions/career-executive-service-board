@@ -85,120 +85,79 @@
 
 </div>
 
-<div class="flex justify-between my-3">
-    @include('components.search')
-
-    <div>
-        <button class="btn btn-primary" id="agencyCreateBtn">
-            Add record
-        </button>
-    </div>
+<div class="flex justify-end">
+    <button class="btn btn-primary" id="agencyCreateBtn">
+        Add record
+    </button>
 </div>
 
-<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
-    <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-            <tr>
-                <th class="px-6 py-3" scope="col">
-                    Department ID
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Mother Agency
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Agency / Bureau
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Agency / Bureau Acronym
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Office type
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Agency website
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Last submission date
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Submitted by
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Remarks
-                </th>
 
-                <th class="px-6 py-3" scope="col">
-                    <span class="sr-only">Action</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="dataTables">
+    <thead>
+        <tr>
+            <th>Department ID</th>
+            <th>Mother Agency</th>
+            <th>Agency / Bureau</th>
+            <th>Agency / Bureau Acronym</th>
+            <th>Office type</th>
+            <th>Agency website</th>
 
-            @foreach ($subDatas as $data)
-            <tr class="border-b bg-white">
-                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->deptid }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->sectorManager->title ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->title ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->acronym ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->departmentAgencyType->title ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">{{
-                        $data->website ?? 'N/A' }}</a>
-                </td>
+            <th>
+                <span class="sr-only">Action</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
 
-                <td class="px-6 py-3">
-                    {{ \Carbon\Carbon::parse($data->updated_at)->format('m/d/Y \a\t h:iA') }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->submitted_by ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->remarks ?? 'N/A' }}
-                </td>
+        @foreach ($subDatas as $data)
+        <tr>
+            <td class="font-semibold">
+                {{ $data->deptid }}
+            </td>
+            <td>
+                {{ $data->sectorManager->title ?? 'N/A' }}
+            </td>
+            <td>
+                {{ $data->title ?? 'N/A' }}
+            </td>
+            <td>
+                {{ $data->acronym ?? 'N/A' }}
+            </td>
+            <td>
+                {{ $data->departmentAgencyType->title ?? 'N/A' }}
+            </td>
+            <td>
+                <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">{{
+                    $data->website ?? 'N/A' }}</a>
+            </td>
 
-                <td class="px-6 py-4 text-right uppercase">
-                    <div class="flex justify-end">
-                        <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}">
-                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
-                                style="width:24px;height:24px">
+            <td class="px-6 py-4 text-right uppercase">
+                <div class="flex justify-end">
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}">
+                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <form class="hover:bg-slate-100 rounded-full"
+                        action="{{ route('department-agency-manager.destroy', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
+                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
-                        </a>
-                        <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('department-agency-manager.destroy', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
-                            method="POST"
-                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                    colors="primary:#DC3545" style="width:24px;height:24px">
-                                </lord-icon>
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <div class="m-5">
-        {{ $subDatas->links() }}
-    </div>
-</div>
 
 
 @endsection

@@ -33,11 +33,7 @@ class OfficeManagerController extends Controller
 
         $planPositions = PlanPosition::query()
             ->where('officeid', $office->officeid)
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('pos_default', 'LIKE', "%$query");
-            })
-            ->orderBy('pos_default', 'ASC')
-            ->paginate(10);
+            ->get();
 
         return view('admin.plantilla.office_manager.edit', compact(
             'sector',

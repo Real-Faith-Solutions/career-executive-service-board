@@ -19,7 +19,7 @@
             @apply block mb-2 text-sm font-medium text-gray-900;
         }
         input, select, textarea {
-            @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+            @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5;
         }
         input[type="checkbox"] {
             @apply ml-2 text-sm font-medium text-gray-900;
@@ -43,6 +43,10 @@
         }
         span.danger{
             @apply bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded;
+        }
+
+        .dataTables_length select{
+            @apply w-1/5 
         }
     }
 </style>

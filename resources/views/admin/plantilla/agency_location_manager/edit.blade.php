@@ -158,84 +158,64 @@
     </div>
 </div>
 
-<div class="flex justify-between my-3">
-    @include('components.search')
-
-    <div>
-        <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
-            Add record
-        </button>
-        @include('admin.plantilla.office_manager.create')
-    </div>
+<div class="flex justify-end">
+    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
+        Add record
+    </button>
+    @include('admin.plantilla.office_manager.create')
 </div>
 
-<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
-    <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-            <tr>
-                <th class="px-6 py-3" scope="col">
-                    Office
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Office Acronym
-                </th>
-                <th class="px-6 py-3" scope="col">
-                    Office Website
-                </th>
+<table class="dataTables">
+    <thead>
+        <tr>
+            <th>Office</th>
+            <th>Office Acronym</th>
+            <th>Office Website</th>
 
+            <th>
+                <span class="sr-only">Action</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
 
-                <th class="px-6 py-3" scope="col">
-                    <span class="sr-only">Action</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+        @foreach ($office as $data)
+        <tr>
+            <td class="font-semibold">
+                {{ $data->title }}
+            </td>
+            <td>
+                {{ $data->acronym ?? 'N/A' }}
+            </td>
+            <td>
+                {{ $data->website ?? 'N/A' }}
+            </td>
 
-            @foreach ($office as $data)
-            <tr class="border-b bg-white">
-                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->title }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->acronym ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->website ?? 'N/A' }}
-                </td>
-
-
-                <td class="px-6 py-4 text-right uppercase">
-                    <div class="flex justify-end">
-                        <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
-                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
-                                style="width:24px;height:24px">
+            <td class="text-right uppercase">
+                <div class="flex justify-end">
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
+                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <form class="hover:bg-slate-100 rounded-full"
+                        action="{{ route('office-manager.destroy', ['officeid' => $data->officeid]) }}" method="POST"
+                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
-                        </a>
-                        <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('office-manager.destroy', ['officeid' => $data->officeid]) }}"
-                            method="POST"
-                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                    colors="primary:#DC3545" style="width:24px;height:24px">
-                                </lord-icon>
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
 
-        </tbody>
-    </table>
-
-    <div class="m-5">
-        {{ $office->links() }}
-    </div>
-</div>
+    </tbody>
+</table>
 
 @endsection
