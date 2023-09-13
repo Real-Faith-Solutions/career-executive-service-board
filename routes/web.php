@@ -295,15 +295,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('expertise')->group(function () {
-            Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create');
-            Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index');
-            Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit');
-            Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store');
-            Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update');
-            Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy');
-            Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [ExpertiseController::class, 'forceDelete'])->name('expertise.forceDelete');
+            Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create')->middleware('checkPermission:work_experience_add');
+            Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index')->middleware('checkPermission:work_experience_view');
+            Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit')->middleware('checkPermission:work_experience_edit');
+            Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store')->middleware('checkPermission:work_experience_add');
+            Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update')->middleware('checkPermission:work_experience_edit');
+            Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy')->middleware('checkPermission:work_experience_delete');
+            Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted')->middleware('checkPermission:work_experience_delete');
+            Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore')->middleware('checkPermission:work_experience_delete');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [ExpertiseController::class, 'forceDelete'])->name('expertise.forceDelete')->middleware('checkPermission:work_experience_delete');
         });
 
         Route::prefix('language')->group(function () {
