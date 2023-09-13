@@ -347,35 +347,35 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('eligibility-rank-tracker')->group(function () {
-            Route::get('written-exam/{cesno}', [EligibilityAndRankTrackerController::class, 'cesWeIndex'])->name('eligibility-rank-tracker.cesWeIndex');
-            Route::get('index/{cesno}', [EligibilityAndRankTrackerController::class, 'index'])->name('eligibility-rank-tracker.index');
-            Route::get('create/{cesno}', [EligibilityAndRankTrackerController::class, 'create'])->name('eligibility-rank-tracker.create');
-            Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit');
-            Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store');
-            Route::put('update/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update');
-            Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy');
-            Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete');
+            Route::get('written-exam/{cesno}', [EligibilityAndRankTrackerController::class, 'cesWeIndex'])->name('eligibility-rank-tracker.cesWeIndex')->middleware('checkPermission:eligibility_rank_tracker_view');
+            Route::get('index/{cesno}', [EligibilityAndRankTrackerController::class, 'index'])->name('eligibility-rank-tracker.index')->middleware('checkPermission:eligibility_rank_tracker_view');
+            Route::get('create/{cesno}', [EligibilityAndRankTrackerController::class, 'create'])->name('eligibility-rank-tracker.create')->middleware('checkPermission:eligibility_rank_tracker_add');
+            Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit')->middleware('checkPermission:eligibility_rank_tracker_edit');
+            Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store')->middleware('checkPermission:eligibility_rank_tracker_add');
+            Route::put('update/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update')->middleware('checkPermission:eligibility_rank_tracker_edit');
+            Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
         });
 
         Route::prefix('pdf-file')->group(function () {
-            Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles');
-            Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles');
-            Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile');
-            Route::delete('decline-file/{ctrlno}', [DeclineFileController::class, 'declineFile'])->name('declineFile');
-            Route::delete('declined-file-force-delete/{ctrlno}', [DeclineFileController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete');
-            Route::get('recently-decline-file', [DeclineFileController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles');
-            Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index');
-            Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create');
-            Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store');
-            Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile');
-            Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy');
-            Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete');
-            Route::get('approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile');
-            Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile');
+            Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles')->middleware('checkPermission:pdf_files_view');
+            Route::post('accepted-file/{ctrlno}/{cesno}', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles')->middleware('checkPermission:pdf_files_view');
+            Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile')->middleware('checkPermission:pdf_files_view');
+            Route::delete('decline-file/{ctrlno}', [DeclineFileController::class, 'declineFile'])->name('declineFile')->middleware('checkPermission:pdf_files_delete');
+            Route::delete('declined-file-force-delete/{ctrlno}', [DeclineFileController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete')->middleware('checkPermission:pdf_files_delete');
+            Route::get('recently-decline-file', [DeclineFileController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles')->middleware('checkPermission:pdf_files_delete');
+            Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
+            Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
+            Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store')->middleware('checkPermission:pdf_files_add');
+            Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile')->middleware('checkPermission:pdf_files_view');
+            Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy')->middleware('checkPermission:pdf_files_delete');
+            Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted')->middleware('checkPermission:pdf_files_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore')->middleware('checkPermission:pdf_files_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete')->middleware('checkPermission:pdf_files_delete');
+            Route::get('approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile')->middleware('checkPermission:pdf_files_view');
+            Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile')->middleware('checkPermission:pdf_files_view');
         });
     });
     // End of profile routes
