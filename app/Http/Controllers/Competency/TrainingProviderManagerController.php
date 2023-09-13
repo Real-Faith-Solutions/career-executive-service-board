@@ -28,12 +28,12 @@ class TrainingProviderManagerController extends Controller
         $request->validate([
 
             'provider' => ['required', 'unique:training_tblProvider,provider'],
-            'house_building' => ['required'],
-            'st_road' => ['required'],
+            'house_building' => ['nullable'],
+            'st_road' => ['nullable'],
             'brgy_vill' => ['nullable'],
             'city_code' => ['required'],
-            'contact_no' => ['required'],
-            'email' => ['required'],
+            'contactno' => ['required', 'unique:training_tblProvider,contactno'],
+            'emailadd' => ['required', 'unique:training_tblProvider,emailadd'],
             'contact_person' => ['required'],
         
         ]);
@@ -49,8 +49,8 @@ class TrainingProviderManagerController extends Controller
             'st_road' => $request->st_road,
             'brgy_vill' => $request->brgy_vill,
             'city_code' => $request->city_code,
-            'contactno' => $request->contact_no,
-            'emailadd' => $request->email,
+            'contactno' => $request->contactno,
+            'emailadd' => $request->emailadd,
             'contactperson' => $request->contact_person,
             'encoder' => $encoder,
 
@@ -90,8 +90,8 @@ class TrainingProviderManagerController extends Controller
             'st_road' => ['required'],
             'brgy_vill' => ['nullable'],
             'city_code' => ['required'],
-            'contact_no' => ['required'],
-            'email' => ['required'],
+            'contactno' => ['required',Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
+            'emailadd' => ['required',Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
             'contact_person' => ['required'],
         
         ]);
@@ -106,8 +106,8 @@ class TrainingProviderManagerController extends Controller
         $trainingProviderManager->st_road = $request->st_road;
         $trainingProviderManager->brgy_vill = $request->brgy_vill;
         $trainingProviderManager->city_code = $request->city_code;
-        $trainingProviderManager->contactno = $request->contact_no;
-        $trainingProviderManager->emailadd = $request->email;
+        $trainingProviderManager->contactno = $request->contactno;
+        $trainingProviderManager->emailadd = $request->emailadd;
         $trainingProviderManager->contactperson = $request->contact_person;
         $trainingProviderManager->updated_by = $encoder;
         $trainingProviderManager->save();
