@@ -318,15 +318,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('ces-training-201')->group(function () {
-            Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index');
-            Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create');
-            Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store');
-            Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit');
-            Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update');
-            Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy');
-            Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete');
+            Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index')->middleware('checkPermission:ces_trainings_view');
+            Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create')->middleware('checkPermission:ces_trainings_add');
+            Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store')->middleware('checkPermission:ces_trainings_add');
+            Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit')->middleware('checkPermission:ces_trainings_edit');
+            Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update')->middleware('checkPermission:ces_trainings_edit');
+            Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy')->middleware('checkPermission:ces_trainings_delete');
+            Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted')->middleware('checkPermission:ces_trainings_delete');
+            Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore')->middleware('checkPermission:ces_trainings_delete');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete')->middleware('checkPermission:ces_trainings_delete');
         });
 
         Route::prefix('non-accredited-ces-training')->group(function () {
