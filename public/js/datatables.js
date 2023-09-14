@@ -41,7 +41,7 @@ $.extend( DataTable.ext.classes, {
 			cell: 'px-6 py-3 text-white bg-blue-500 font-semibold text-left'
 		},
 		tbody: {
-			row: 'even:bg-gray-50',
+			row: 'even:bg-gray-50 hover:bg-gray-50',
 			cell: 'px-6 py-3'
 		},
 		tfoot: {
