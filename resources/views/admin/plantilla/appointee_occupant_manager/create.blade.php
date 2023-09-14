@@ -252,7 +252,10 @@
                             <div class="mb-3">
                                 <label for="cbasis_code">Classification Basis</label>
                                 <select id="cbasis_code" name="cbasis_code">
-                                    <option disabled selected>Classification Basis</option>
+                                    <option disabled selected>Select Classification Basis</option>
+                                    @foreach ($classBasis as $data)
+                                    <option value="{{ $data->cbasis_code }}">{{ $data->basis }}</option>
+                                    @endforeach
                                 </select>
                                 @error('cbasis_code')
                                 <span class="invalid" role="alert">

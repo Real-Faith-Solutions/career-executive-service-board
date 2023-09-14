@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_vacant')->nullable();
             $table->boolean('is_occupied')->nullable();
             $table->text('remarks')->nullable();
-            $table->integer('cbasis_code')->nullable();
+            $table->foreignId('cbasis_code')->constrained('plantillalib_tblClassBasis', 'cbasis_code');
             $table->text('cbasis_remarks')->nullable();
             $table->string('item_no')->nullable();
             $table->boolean('pres_apptee')->nullable();

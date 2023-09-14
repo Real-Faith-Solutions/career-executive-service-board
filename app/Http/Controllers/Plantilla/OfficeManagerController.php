@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plantilla\AgencyLocation;
+use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
@@ -40,6 +41,7 @@ class OfficeManagerController extends Controller
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
 
         return view('admin.plantilla.office_manager.edit', compact(
             'sector',
@@ -50,6 +52,7 @@ class OfficeManagerController extends Controller
             'planPositions',
             'planPositionLibrary',
             'positionMasterLibrary',
+            'classBasis',
 
         ));;
     }
