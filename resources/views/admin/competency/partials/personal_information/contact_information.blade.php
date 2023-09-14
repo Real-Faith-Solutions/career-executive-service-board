@@ -173,7 +173,7 @@
             
                     <div class="mb-3">
                         <label for="regionsSelectMailingCompetency">Region<sup>*</span></label>
-                        <select id="regionsSelectMailingCompetency" name="regionsSelectMailingCompetency" required>
+                        <select id="regionsSelectMailingCompetency" name="regionsSelectMailing" required>
                             @if ($regionMailingCompetency != '')
                                 <option value="{{ $regionMailingCompetency }}" selected></option>
                             @else
@@ -184,7 +184,7 @@
             
                     <div class="mb-3">
                         <label for="citySelectMailingCompetency">City or Municipality<sup>*</span></label>
-                        <select id="citySelectMailingCompetency" name="citySelectMailingCompetency" required>
+                        <select id="citySelectMailingCompetency" name="citySelectMailing" required>
                             @if ($cityMailingCompetency != '')
                                 <option value="{{ $cityMailingCompetency }}" selected></option>
                             @else
@@ -195,7 +195,7 @@
             
                     <div class="mb-3">
                         <label for="brgySelectMailingCompetency">Barangay<sup>*</span></label>
-                        <select id="brgySelectMailingCompetency" name="brgySelectMailingCompetency" required>
+                        <select id="brgySelectMailingCompetency" name="brgySelectMailing" required>
                             @if ($brgyMailingCompetency != '')
                                 <option value="{{ $brgyMailingCompetency }}" selected></option>
                             @else
@@ -208,7 +208,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="zip_code_MailingCompetency">Zip code<sup>*</span></label>
-                        <input id="zip_code_MailingCompetency" name="zip_code_MailingCompetency" type="text" value="{{ $zip_code_MailingCompetency }}" oninput="validateInput(zip_code_MailingCompetency, 4, 'numbers')" onkeypress="validateInput(zip_code_MailingCompetency, 4, 'numbers')" onblur="checkErrorMessage(zip_code_MailingCompetency)" required>
+                        <input id="zip_code_MailingCompetency" name="zip_code_Mailing" type="text" value="{{ $zip_code_MailingCompetency }}" oninput="validateInput(zip_code_MailingCompetency, 4, 'numbers')" onkeypress="validateInput(zip_code_MailingCompetency, 4, 'numbers')" onblur="checkErrorMessage(zip_code_MailingCompetency)" required>
                         <p class="input_error text-red-600"></p>
                         @error('zip_code_MailingCompetency')
                             <span class="invalid" role="alert">
@@ -219,7 +219,7 @@
             
                     <div class="mb-3 col-span-2">
                         <label for="street_lot_bldg_floor_MailingCompetency">Street/Lot no./Building/Floor no.</label>
-                        <input id="street_lot_bldg_floor_MailingCompetency" name="street_lot_bldg_floor_MailingCompetency" type="text" value="{{ $street_lot_bldg_floor_MailingCompetency }}" oninput="validateInput(street_lot_bldg_floor_MailingCompetency, 4)" onkeypress="validateInput(street_lot_bldg_floor_MailingCompetency, 4)" onblur="checkErrorMessage(street_lot_bldg_floor_MailingCompetency)" required>
+                        <input id="street_lot_bldg_floor_MailingCompetency" name="street_lot_bldg_floor_Mailing" type="text" value="{{ $street_lot_bldg_floor_MailingCompetency }}" oninput="validateInput(street_lot_bldg_floor_MailingCompetency, 4)" onkeypress="validateInput(street_lot_bldg_floor_MailingCompetency, 4)" onblur="checkErrorMessage(street_lot_bldg_floor_MailingCompetency)" required>
                         <p class="input_error text-red-600"></p>
                         @error('street_lot_bldg_floor_MailingCompetency')
                             <span class="invalid" role="alert">
