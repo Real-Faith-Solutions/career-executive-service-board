@@ -180,7 +180,7 @@
         console.error('Error:', error);
     });
 
-    // if there is existing permanent address, the api will fetch with selected city based on existing address
+    // if there is existing mailing address, the api will fetch with selected city based on existing address
     const selectedCityMailing = document.getElementById('citySelectMailing').value;
     if (selectedCityMailing != '') {
 
@@ -212,7 +212,7 @@
 
     }
 
-    // if there is existing permanent address, the api will fetch with selected brgy based on existing address
+    // if there is existing mailing address, the api will fetch with selected brgy based on existing address
     const selectedBrgyMailing = document.getElementById('brgySelectMailing').value;
     if (selectedBrgyMailing != '') {
 

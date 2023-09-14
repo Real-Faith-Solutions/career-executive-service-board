@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacts;
 use App\Models\PersonalData;
+use App\Models\ProfileAddress;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,8 @@ class ContactInfoController extends Controller
     {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
         $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
-        return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
+        $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
+        return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno, 'addressProfileMailing'=>$addressProfileMailing]);
     }
 
     // 201 Profile Contact Information  
