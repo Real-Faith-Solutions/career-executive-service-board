@@ -186,7 +186,7 @@ DataTable.ext.renderer.pageButton.tailwindcss = function ( settings, host, idx, 
 	}
 	else {
 		paginationEl = hostEl
-			.html('<div class="text-center dark:text-gray-100"/>')
+			.html('<div class="text-center"/>')
 			.children('div');
 	}
 
