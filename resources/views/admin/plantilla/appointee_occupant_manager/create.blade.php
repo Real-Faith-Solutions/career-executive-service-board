@@ -1,8 +1,6 @@
 <script>
     const classificationBasis = (val) => {
-        const classificationBasisDropdown = document.querySelector('#cbasis_code');
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
-        console.log(val)
 
         @foreach ($classBasis as $data)
         if ("{{ $data->cbasis_code }}" === val) {
