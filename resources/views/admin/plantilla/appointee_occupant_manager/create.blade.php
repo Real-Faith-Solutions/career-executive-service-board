@@ -250,9 +250,30 @@
                         <fieldset class="border p-4">
                             <legend>Classification Basis</legend>
                             <div class="mb-3">
-                                <label for="test">Functional Title<sup>*</sup></label>
-                                <input id="test" name="test" required />
-                                @error('test')
+                                <label for="cbasis_code">Classification Basis</label>
+                                <select id="cbasis_code" name="cbasis_code">
+                                    <option disabled selected>Classification Basis</option>
+                                </select>
+                                @error('cbasis_code')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="titleAndDate">Title/Date</label>
+                                <textarea name="titleAndDate" id="titleAndDate" cols="50" rows="3" readonly></textarea>
+                                @error('titleAndDate')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="cbasis_remarks">Notes</label>
+                                <textarea name="cbasis_remarks" id="cbasis_remarks" cols="50" rows="3"></textarea>
+                                @error('cbasis_remarks')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
                                 </span>
