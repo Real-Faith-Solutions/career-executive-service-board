@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblExpertiseGenSeeder::class,
             AgencyLocationSeeder::class,
             DepartmentAgencyTypeSeeder::class,
-            ApptStatusSeeder::class,
+            // ApptStatusSeeder::class,
         ]);
     }
 }

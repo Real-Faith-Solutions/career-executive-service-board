@@ -35,10 +35,7 @@
     {{-- source code --}}
     {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.tailwindcss.min.js"></script> --}}
 
-
-
-
-
+    <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script> {{-- lord icons --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
@@ -216,6 +213,10 @@
 
     {{-- js script for plantilla --}}
     <script src="{{ asset('js/permissions.js') }}"></script>
+    {{-- end --}}
+
+    {{-- competency mailing address --}}
+    <script src="{{ asset('js/competency-mailing-address.js') }}"></script>
     {{-- end --}}
 
     {{-- toast for personal data success --}}
