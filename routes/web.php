@@ -14,6 +14,7 @@ use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
+use App\Http\Controllers\Competency\CompetencyReportController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
@@ -62,6 +63,10 @@ use App\Mail\TempCred201;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
+
+
+Route::get('competency-report', [CompetencyReportController ::class, 'sampleReport']);
+
 
 // email preview
 Route::get('/preview-email', function () {
