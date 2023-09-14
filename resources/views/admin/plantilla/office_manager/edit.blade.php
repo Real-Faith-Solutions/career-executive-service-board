@@ -206,9 +206,10 @@
 </div>
 
 <div class="flex justify-end">
-    <button class="btn btn-primary">
+    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>
+    @include('admin.plantilla.appointee_occupant_manager.create')
 </div>
 <table class="dataTables">
     <thead>
@@ -242,7 +243,7 @@
             </td>
 
             <td>
-                {{ $data->positionMasterLibrary->positionLevel->sg }}
+                {{ $data->corp_sg }}
             </td>
 
             <td>

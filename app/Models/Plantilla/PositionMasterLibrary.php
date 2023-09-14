@@ -15,11 +15,11 @@ class PositionMasterLibrary extends Model
 
     public function planPosition(): HasMany
     {
-        return $this->hasMany(PlanPosition::class, 'pos_code');
+        return $this->hasMany(PlanPosition::class, 'pos_code', 'pos_code');
     }
 
     public function positionLevel(): HasOne
     {
-        return $this->hasOne(PositionLevelLibrary::class, 'poslevel_code');
+        return $this->hasOne(PositionLevelLibrary::class, 'poslevel_code', 'poslevel_code');
     }
 }

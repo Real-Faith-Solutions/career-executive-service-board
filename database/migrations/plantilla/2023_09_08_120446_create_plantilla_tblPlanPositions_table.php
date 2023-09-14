@@ -23,8 +23,6 @@ return new class extends Migration
             $table->boolean('is_ces_pos')->nullable();
             $table->boolean('is_vacant')->nullable();
             $table->boolean('is_occupied')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
             $table->text('remarks')->nullable();
             $table->integer('cbasis_code')->nullable();
             $table->text('cbasis_remarks')->nullable();
@@ -33,6 +31,8 @@ return new class extends Migration
             $table->boolean('is_active')->nullable();
             $table->boolean('is_generic')->nullable();
             $table->boolean('is_head')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
