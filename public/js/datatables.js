@@ -41,7 +41,7 @@ $.extend( DataTable.ext.classes, {
 			cell: 'px-6 py-3 text-white bg-blue-500 font-semibold text-left'
 		},
 		tbody: {
-			row: 'even:bg-gray-50',
+			row: 'even:bg-gray-50 hover:bg-gray-50',
 			cell: 'px-6 py-3'
 		},
 		tfoot: {
@@ -186,7 +186,7 @@ DataTable.ext.renderer.pageButton.tailwindcss = function ( settings, host, idx, 
 	}
 	else {
 		paginationEl = hostEl
-			.html('<div class="text-center dark:text-gray-100"/>')
+			.html('<div class="text-center"/>')
 			.children('div');
 	}
 
