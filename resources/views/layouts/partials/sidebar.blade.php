@@ -175,8 +175,8 @@
                                 </li>
 
                                 <li>
-                                    <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                                        Training Provider Report
+                                    <a href="{{ route('competency-management-sub-modules-report.trainingProviderIndexReport') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                        Training Provider Manager Report
                                     </a>
                                 </li>
 

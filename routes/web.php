@@ -64,10 +64,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 
-
-Route::get('competency-report', [CompetencyReportController ::class, 'sampleReport']);
-
-
 // email preview
 Route::get('/preview-email', function () {
 
@@ -575,6 +571,11 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [CompetencyCesTrainingController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'restore'])->name('ces-training.restore');
             Route::delete('force-delete//recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'forceDelete'])->name('ces-training.forceDelete');
+        });
+
+        Route::prefix('competency-management-sub-modules-report')->group(function () {
+            Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport');
+            Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport');
         });
     });
     // End of competency routes
