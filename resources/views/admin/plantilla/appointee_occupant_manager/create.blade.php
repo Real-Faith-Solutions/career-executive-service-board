@@ -60,7 +60,7 @@
 
 <div id="large-modal" tabindex="-1"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-4xl max-h-full">
+    <div class="relative w-full max-w-10xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow">
             <!-- Modal header -->
@@ -84,7 +84,7 @@
                 <form action="{{ route('plantilla-position-manager.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="officeid" required readonly value="{{ $office->officeid }}" />
-                    <div class="grid grid-cols-2 gap-2 mb-3">
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <fieldset class="border p-4">
                             <legend>Position Details</legend>
                             <div class="mb-3">
@@ -135,7 +135,7 @@
                                 @enderror
                             </div>
 
-                            <div class="grid grid-cols-3 gap-1 mb-3">
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -215,7 +215,7 @@
                                 @enderror
                             </div>
 
-                            <div class="grid grid-cols-2 gap-2 mb-3">
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                 <div class="mb-3">
                                     <label for="corp_sg">Grade Level<sup>*</sup></label>
                                     <input id="corp_sg" name="corp_sg" required type="number" />
