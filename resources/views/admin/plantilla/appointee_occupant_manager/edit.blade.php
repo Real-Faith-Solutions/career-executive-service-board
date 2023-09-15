@@ -4,7 +4,7 @@
 
         @foreach ($classBasis as $data)
         if ("{{ $data->cbasis_code }}" === val) {
-            titleAndDateTextArea.value = "{{ $data->basis }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
         }
         @endforeach
     }
@@ -363,7 +363,7 @@
                             <div class="mb-3">
                                 <label for="titleAndDate">Title/Date</label>
                                 <textarea name="titleAndDate" id="titleAndDate" cols="50" rows="3"
-                                    readonly>{{ $data->basis }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}</textarea>
+                                    readonly>{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}</textarea>
                                 @error('titleAndDate')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
