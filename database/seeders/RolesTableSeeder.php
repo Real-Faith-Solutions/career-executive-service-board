@@ -39,6 +39,18 @@ class RolesTableSeeder extends Seeder
             'eligibility_rank_tracker_add', 'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
             'cespes_ratings_add', 'cespes_ratings_edit', 'cespes_ratings_delete', 'cespes_ratings_view',
             'pdf_files_add', 'pdf_files_edit', 'pdf_files_delete', 'pdf_files_view',
+            'compentency_contacts_add', 'compentency_contacts_edit', 'compentency_contacts_delete', 'compentency_contacts_view',
+            'compentency_non_ces_trainings_add', 'compentency_non_ces_trainings_edit', 'compentency_non_ces_trainings_delete', 'compentency_non_ces_trainings_view',
+            'training_provider_manager_add', 'training_provider_manager_edit', 'training_provider_manager_delete', 'training_provider_manager_view',
+            'training_venue_manager_add', 'training_venue_manager_edit', 'training_venue_manager_delete', 'training_venue_manager_view',
+            'compentency_training_category_add', 'compentency_training_category_edit', 'compentency_training_category_delete', 'compentency_training_category_view',
+            'compentency_training_secretariat_add', 'compentency_training_secretariat_edit', 'compentency_training_secretariat_delete', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_add', 'compentency_field_specialization_edit', 'compentency_field_specialization_delete', 'compentency_field_specialization_view',
+            'compentency_resource_speaker_add', 'compentency_resource_speaker_edit', 'compentency_resource_speaker_delete', 'compentency_resource_speaker_view',
+            'compentency_training_session_add', 'compentency_training_session_edit', 'compentency_training_session_delete', 'compentency_training_session_view',
+            'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
+            'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
+            'competency_management_sub_modules_report_view',
         ];
 
         foreach ($permissions_admin as $permission) {
@@ -61,6 +73,10 @@ class RolesTableSeeder extends Seeder
             'case_records_add', 'case_records_edit', 'case_records_delete', 'case_records_view',
             'language_dialects_add', 'language_dialects_edit', 'language_dialects_delete', 'language_dialects_view',
             'eligibility_rank_tracker_view', 'cespes_ratings_view', 'pdf_files_add', 'pdf_files_edit', 'pdf_files_delete', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
 
         foreach ($permissions_power_user as $permission) {
@@ -74,6 +90,10 @@ class RolesTableSeeder extends Seeder
             'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_add', 
             'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
             'cespes_ratings_view', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
         
         foreach ($permissions_rank_officer as $permission) {
@@ -86,6 +106,10 @@ class RolesTableSeeder extends Seeder
             'ces_trainings_view', 'non_ces_trainings_view', 'health_records_view', 'awards_and_citations_view',
             'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_view',
             'cespes_ratings_view', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
 
         foreach ($permissions_cesb_operator as $permission) {
@@ -98,6 +122,18 @@ class RolesTableSeeder extends Seeder
             'ces_trainings_add', 'ces_trainings_edit', 'ces_trainings_delete', 'ces_trainings_view',
             'health_records_view', 'awards_and_citations_view', 'affiliations_view', 'case_records_view',
             'language_dialects_view', 'eligibility_rank_tracker_view', 'cespes_ratings_view', 'pdf_files_view',
+            'compentency_contacts_add', 'compentency_contacts_edit', 'compentency_contacts_delete', 'compentency_contacts_view',
+            'compentency_non_ces_trainings_add', 'compentency_non_ces_trainings_edit', 'compentency_non_ces_trainings_delete', 'compentency_non_ces_trainings_view',
+            'training_provider_manager_add', 'training_provider_manager_edit', 'training_provider_manager_delete', 'training_provider_manager_view',
+            'training_venue_manager_add', 'training_venue_manager_edit', 'training_venue_manager_delete', 'training_venue_manager_view',
+            'compentency_training_category_add', 'compentency_training_category_edit', 'compentency_training_category_delete', 'compentency_training_category_view',
+            'compentency_training_secretariat_add', 'compentency_training_secretariat_edit', 'compentency_training_secretariat_delete', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_add', 'compentency_field_specialization_edit', 'compentency_field_specialization_delete', 'compentency_field_specialization_view',
+            'compentency_resource_speaker_add', 'compentency_resource_speaker_edit', 'compentency_resource_speaker_delete', 'compentency_resource_speaker_view',
+            'compentency_training_session_add', 'compentency_training_session_edit', 'compentency_training_session_delete', 'compentency_training_session_view',
+            'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
+            'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
+            'competency_management_sub_modules_report_view',
         ];
         
         foreach ($permissions_training_officer as $permission) {
@@ -110,6 +146,10 @@ class RolesTableSeeder extends Seeder
             'ces_trainings_view', 'non_ces_trainings_view', 'health_records_view', 'awards_and_citations_view',
             'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_view',
             'cespes_ratings_add', 'cespes_ratings_edit', 'cespes_ratings_delete', 'cespes_ratings_view', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
         
         foreach ($permissions_cespes_operator as $permission) {
@@ -132,6 +172,10 @@ class RolesTableSeeder extends Seeder
             'case_records_add', 'case_records_edit', 'case_records_view',
             'language_dialects_add', 'language_dialects_edit', 'language_dialects_view',
             'eligibility_rank_tracker_view', 'cespes_ratings_view', 'pdf_files_add', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
         
         foreach ($permissions_agency_hr_operator as $permission) {

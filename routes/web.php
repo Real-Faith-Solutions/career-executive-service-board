@@ -341,11 +341,11 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [OtherTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted')->middleware('checkPermission:non_ces_trainings_delete');
             Route::post('recently-deleted/restore/{ctrlno}', [OtherTrainingController::class, 'restore'])->name('other-training.restore')->middleware('checkPermission:non_ces_trainings_delete');
             Route::delete('recently-deleted/force-delete/{ctrlno}', [OtherTrainingController::class, 'forceDelete'])->name('other-training.forceDelete')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining');
-            Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining');
-            Route::delete('destroy-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining');
-            Route::post('recently-deleted/restore-competency-non-ces-training/{ctrlno}', [OtherTrainingController::class, 'restoreCompetencyNonCesTraining'])->name('other-training.restoreCompetencyNonCesTraining');
-            Route::delete('recently-deleted/force-delete-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'forceDeleteCompetencyNonCesTraining'])->name('other-training.forceDeleteCompetencyNonCesTraining');
+            Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
+            Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [OtherTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
+            Route::delete('destroy-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
+            Route::post('recently-deleted/restore-competency-non-ces-training/{ctrlno}', [OtherTrainingController::class, 'restoreCompetencyNonCesTraining'])->name('other-training.restoreCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
+            Route::delete('recently-deleted/force-delete-competency-non-ces-training{ctrlno}', [OtherTrainingController::class, 'forceDeleteCompetencyNonCesTraining'])->name('other-training.forceDeleteCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
         });
 
         Route::prefix('eligibility-rank-tracker')->group(function () {
@@ -450,7 +450,7 @@ Route::middleware('auth')->group(function () {
     // Competency routes
     Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
-            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index')->middleware('checkPermission:pdf_files_view');
             Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
             Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
