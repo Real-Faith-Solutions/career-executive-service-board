@@ -90,6 +90,10 @@ class RolesTableSeeder extends Seeder
             'affiliations_view', 'case_records_view', 'language_dialects_view', 'eligibility_rank_tracker_add', 
             'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
             'cespes_ratings_view', 'pdf_files_view',
+            'compentency_contacts_view', 'compentency_non_ces_trainings_view', 'training_provider_manager_view',
+            'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
+            'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
         ];
         
         foreach ($permissions_rank_officer as $permission) {
