@@ -41,7 +41,7 @@
         const posDefaultInput = document.querySelector('#pos_default');
 
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
-        posDefaultInput.value = selectedOption.textContent;
+        posDefaultInput.value = selectedOption.text;
     }
 </script>
 
@@ -151,7 +151,8 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="{{ route('office-manager.update', $office->officeid) }}" method="POST">
+                <form action="{{ route('plantilla-position-manager.update', $planPosition->plantilla_id) }}"
+                    method="POST">
                     @csrf
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -189,8 +190,8 @@
                                 <select id="pos_code" name="pos_code" required onchange="posTitle()">
                                     <option disabled selected>Select Position Title</option>
                                     @foreach ($positionMasterLibrary as $data)
-                                    <option value="{{ $data->pos_code }}" {{ $data->poslevel_code ===
-                                        $data->poslevel_code ? 'selected' : ''}}>
+                                    <option value="{{ $data->pos_code }}" {{ $data->pos_code ===
+                                        $planPosition->pos_code ? 'selected' : ''}}>
                                         {{ $data->dbm_title }}, SG {{ $data->sg }}
                                     </option>
                                     @endforeach
@@ -330,7 +331,7 @@
                             <div class="mb-3">
                                 <label for="remarks">Remarks</label>
                                 <textarea name="remarks" id="remarks" cols="50"
-                                    rows="3">{{ $planPosition->remarks }}"</textarea>
+                                    rows="3">{{ $planPosition->remarks }}</textarea>
                                 @error('remarks')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -383,7 +384,6 @@
                         </fieldset>
 
                     </div>
-
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
