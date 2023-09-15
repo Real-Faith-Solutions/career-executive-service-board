@@ -196,4 +196,9 @@ class PersonalData extends Model
     {
         return $this->belongsTo(PlanAppointee::class, 'cesno', 'cesno');
     }
+
+    public function cesStatus(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCesStatus::class, 'CESStat_code', 'code');
+    }
 }

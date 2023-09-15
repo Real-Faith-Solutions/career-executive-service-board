@@ -445,7 +445,7 @@
                 {{ $data->apptStatus->title }}
             </td>
             <td>
-                {{ $data->CESStat_code}}
+                {{ $data->personalData->cesStatus->description}}
             </td>
             <td>
                 {{ $data->appt_date}}
