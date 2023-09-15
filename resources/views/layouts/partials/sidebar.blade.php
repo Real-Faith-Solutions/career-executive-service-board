@@ -163,7 +163,7 @@
 
                             <ul id="competency-reports" class="hidden space-y-2 py-2">
                                 <li>
-                                    <a href="#" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                    <a href="{{ route('competency-management-sub-modules-report.generalReportIndex') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                         General Report
                                     </a>
                                 </li>

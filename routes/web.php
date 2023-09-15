@@ -578,6 +578,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('competency-management-sub-modules-report')->group(function () {
             Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport');
             Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport');
+            Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex');
+            Route::post('general-report-generate-pdf/{sessionId}/{title}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf');
         });
     });
     // End of competency routes
