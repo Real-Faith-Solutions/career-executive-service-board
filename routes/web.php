@@ -449,7 +449,7 @@ Route::middleware('auth')->group(function () {
     // Competency routes
     Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
-            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
+            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index')->middleware('checkPermission:pdf_files_view');
             Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
             Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
             Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
