@@ -39,6 +39,7 @@ class RolesTableSeeder extends Seeder
             'eligibility_rank_tracker_add', 'eligibility_rank_tracker_edit', 'eligibility_rank_tracker_delete', 'eligibility_rank_tracker_view',
             'cespes_ratings_add', 'cespes_ratings_edit', 'cespes_ratings_delete', 'cespes_ratings_view',
             'pdf_files_add', 'pdf_files_edit', 'pdf_files_delete', 'pdf_files_view',
+            
         ];
 
         foreach ($permissions_admin as $permission) {
