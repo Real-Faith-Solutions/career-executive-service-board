@@ -75,7 +75,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-5 border-b rounded-t">
                 <h3 class="text-xl font-medium text-gray-900">
-                    Agency Location Manager
+                    Plantilla Position Manager
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
