@@ -413,7 +413,7 @@
             <th>CESNO</th>
             <th>Officials Name</th>
             <th>Appointee</th>
-            <th>Appointment Date</th>
+            <th>Appointment</th>
             <th>CES Status</th>
             <th>Appointment Date</th>
             <th>Encode Date</th>
@@ -431,10 +431,15 @@
                 {{ $data->cesno }}
             </td>
             <td>
-                {{ $data->cesno }}
+                {{ $data->personalData->lastname }}
+                {{ $data->personalData->firstname }}
+                {{ $data->personalData->name_extension }}
+                {{ $data->personalData->middlename }}
             </td>
             <td>
-                {{ $data->is_appointee }}
+                <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">
+                    {{ $data->is_appointee == 1 ? 'YES' : 'NO'}}
+                </span>
             </td>
             <td>
                 {{ $data->appt_stat_code }}
