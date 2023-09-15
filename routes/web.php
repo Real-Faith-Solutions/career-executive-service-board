@@ -433,12 +433,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
             Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show');
             Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
             Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
-            
         });
         Route::prefix('appointee-occupant-browser')->group(function () {
             Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
