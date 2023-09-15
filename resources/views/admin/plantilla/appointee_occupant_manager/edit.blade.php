@@ -448,10 +448,10 @@
                 {{ $data->personalData->cesStatus->description}}
             </td>
             <td>
-                {{ $data->appt_date}}
+                {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}
             </td>
             <td>
-                {{ $data->assum_date}}
+                {{ \Carbon\Carbon::parse($data->assum_date)->format('m/d/Y') }}
             </td>
 
             <td class="text-right uppercase">
