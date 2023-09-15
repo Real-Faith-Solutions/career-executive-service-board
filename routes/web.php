@@ -14,6 +14,7 @@ use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
+use App\Http\Controllers\Competency\CompetencyReportController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
@@ -431,11 +432,13 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
+            Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store');
             Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
             Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+            
         });
         Route::prefix('appointee-occupant-browser')->group(function () {
             Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
@@ -570,6 +573,11 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted/{cesno}', [CompetencyCesTrainingController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
             Route::post('restore/recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'restore'])->name('ces-training.restore');
             Route::delete('force-delete//recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'forceDelete'])->name('ces-training.forceDelete');
+        });
+
+        Route::prefix('competency-management-sub-modules-report')->group(function () {
+            Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport');
+            Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport');
         });
     });
     // End of competency routes
