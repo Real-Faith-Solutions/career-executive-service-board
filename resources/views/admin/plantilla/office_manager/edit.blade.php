@@ -191,7 +191,7 @@
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($departmentLocation->created_at)->format('F d, Y
+                            Created at {{ \Carbon\Carbon::parse($office->created_at)->format('F d, Y
                             \a\t g:iA')
                             }}
                         </h1>

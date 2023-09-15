@@ -20,7 +20,11 @@ class ProfileLibTblCesStatus extends Model
 
         'code',
         'description',
-        
+
     ];
-    
+
+    public function personalData(): HasMany
+    {
+        return $this->hasMany(PersonalData::class);
+    }
 }
