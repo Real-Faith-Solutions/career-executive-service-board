@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Models\Lenard\Test;
+use App\Models\Plantilla\PlanAppointee;
+use App\Models\Plantilla\PlanPosition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -87,7 +90,7 @@ class PersonalData extends Model
     {
         return $this->hasMany(ExaminationsTaken::class, 'personal_data_cesno', 'cesno');
     }
-    
+
     public function profileAddress(): HasMany
     {
         return $this->hasMany(ProfileAddress::class);
@@ -147,7 +150,7 @@ class PersonalData extends Model
     {
         return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
     }
-    
+
     public function medicalHistoryRecords(): HasMany
     {
         return $this->hasMany(MedicalHistory::class);
@@ -157,7 +160,7 @@ class PersonalData extends Model
     {
         return $this->hasMany(PdfLinks::class);
     }
-  
+
     public function contacts(): HasOne
     {
         return $this->hasOne(Contacts::class);
@@ -172,7 +175,7 @@ class PersonalData extends Model
     {
         return $this->hasMany(CompetencyNonCesAccreditedTraining::class, 'personal_data_cesno', 'cesno');
     }
-    
+
     public function users(): HasOne
     {
         return $this->hasOne(User::class);
@@ -186,5 +189,11 @@ class PersonalData extends Model
     public function competencyCesTraining(): HasMany
     {
         return $this->hasMany(TrainingParticipants::class, 'cesno', 'cesno');
+    }
+
+    // plantilla
+    public function planAppointee(): BelongsTo
+    {
+        return $this->belongsTo(PlanAppointee::class, 'cesno', 'cesno');
     }
 }

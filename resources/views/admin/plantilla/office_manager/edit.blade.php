@@ -262,7 +262,13 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full" href="#">
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('plantilla-position-manager.show', [
+                        'sectorid' => $sector->sectorid,
+                        'deptid' => $department->deptid,
+                        'officelocid' => $departmentLocation->officelocid,
+                        'officeid' => $office->officeid,
+                        'plantilla_id' => $data->plantilla_id
+                    ]) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>

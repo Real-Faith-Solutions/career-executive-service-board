@@ -433,12 +433,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
             Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show');
             Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
             Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
-            
         });
         Route::prefix('appointee-occupant-browser')->group(function () {
             Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
@@ -578,6 +578,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('competency-management-sub-modules-report')->group(function () {
             Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport');
             Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport');
+            Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex');
+            Route::post('general-report-generate-pdf/{sessionId}/{title}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf');
         });
     });
     // End of competency routes
