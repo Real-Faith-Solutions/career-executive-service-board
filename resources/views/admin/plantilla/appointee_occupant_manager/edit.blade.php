@@ -330,7 +330,7 @@
                             <div class="mb-3">
                                 <label for="remarks">Remarks</label>
                                 <textarea name="remarks" id="remarks" cols="50"
-                                    rows="3">value="{{ $planPosition->remarks }}"</textarea>
+                                    rows="3">{{ $planPosition->remarks }}"</textarea>
                                 @error('remarks')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -401,7 +401,7 @@
     </div>
 </div>
 
-{{-- <div class="flex justify-end">
+<div class="flex justify-end">
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>
@@ -410,13 +410,13 @@
 <table class="dataTables">
     <thead>
         <tr>
-            <th>Plantilla ID</th>
-            <th>Position Title</th>
-            <th>Position Level</th>
-            <th>SG Level</th>
-            <th>Item No.</th>
-            <th>Vacant</th>
-            <th>Pres. Apptee</th>
+            <th>CESNO</th>
+            <th>Officials Name</th>
+            <th>Appointee</th>
+            <th>Appointment Date</th>
+            <th>CES Status</th>
+            <th>Appointment Date</th>
+            <th>Encode Date</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -425,35 +425,28 @@
     </thead>
     <tbody>
 
-        @foreach ($planPositions as $data)
+        @foreach ($planAppointee as $data)
         <tr>
             <td class="font-semibold">
-                {{ $data->plantilla_id }}
+                {{ $data->cesno }}
             </td>
             <td>
-                {{ $data->positionMasterLibrary->dbm_title }}
-            </td>
-
-            <td>
-                {{ $data->positionMasterLibrary->positionLevel->title }}
-            </td>
-
-            <td>
-                {{ $data->corp_sg }}
-            </td>
-
-            <td>
-                {{ $data->item_no }}
+                {{ $data->cesno }}
             </td>
             <td>
-                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
-                </span>
+                {{ $data->is_appointee }}
             </td>
             <td>
-                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                </span>
+                {{ $data->appt_stat_code }}
+            </td>
+            <td>
+                {{ $data->CESStat_code}}
+            </td>
+            <td>
+                {{ $data->appt_date}}
+            </td>
+            <td>
+                {{ $data->assum_date}}
             </td>
 
             <td class="text-right uppercase">
@@ -480,6 +473,6 @@
         @endforeach
 
     </tbody>
-</table> --}}
+</table>
 
 @endsection

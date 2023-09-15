@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Plantilla;
 
 use App\Http\Controllers\Controller;
+use App\Models\PersonalData;
 use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
+use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
@@ -33,10 +35,9 @@ class PlantillaPositionManagerController extends Controller
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
 
-        // $planPositions = PlanPosition::query()
-        //     ->where('officeid', $office->officeid)
-        //     ->where('is_active', true)
-        //     ->get();
+        $planAppointee = PlanAppointee::query()
+            ->where('plantilla_id', $planPosition->plantilla_id)
+            ->get();
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
@@ -48,7 +49,7 @@ class PlantillaPositionManagerController extends Controller
             'departmentLocation',
             'office',
             'cities',
-            // 'planPositions',
+            'planAppointee',
             'planPositionLibrary',
             'positionMasterLibrary',
             'classBasis',
