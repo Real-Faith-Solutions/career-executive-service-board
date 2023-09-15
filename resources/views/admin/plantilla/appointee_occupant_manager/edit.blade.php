@@ -442,7 +442,7 @@
                 </span>
             </td>
             <td>
-                {{ $data->appt_stat_code }}
+                {{ $data->apptStatus->title }}
             </td>
             <td>
                 {{ $data->CESStat_code}}
