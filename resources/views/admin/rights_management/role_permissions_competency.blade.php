@@ -410,6 +410,44 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Management Sub-Modules Report permissions --}}
+            <div class="col-span-1">
+                <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
+                    <div class="w-full text-gray-500">
+    
+                        <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
+                            <h1 class="px-6 py-3 text-xm sm:text-sm sm:py-3.5">
+                                Management Sub-Modules Report
+                            </h1>
+                        </div>
+            
+                        <div class="border-b bg-white px-6 py-3">
+            
+                            <div class="flex items-center mb-4">
+                                <input id="competency_management_sub_modules_report_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'competency_management_sub_modules_report_add') ? 'checked' : '' }} value="competency_management_sub_modules_report_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="competency_management_sub_modules_report_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="competency_management_sub_modules_report_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'competency_management_sub_modules_report_edit') ? 'checked' : '' }} value="competency_management_sub_modules_report_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="competency_management_sub_modules_report_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="competency_management_sub_modules_report_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'competency_management_sub_modules_report_delete') ? 'checked' : '' }} value="competency_management_sub_modules_report_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="competency_management_sub_modules_report_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                            </div>
+    
+                            <div class="flex items-center mb-4">
+                                <input id="competency_management_sub_modules_report_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'competency_management_sub_modules_report_view') ? 'checked' : '' }} value="competency_management_sub_modules_report_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="competency_management_sub_modules_report_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
     
         </div>
     
