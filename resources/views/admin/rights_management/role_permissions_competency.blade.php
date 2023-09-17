@@ -15,7 +15,7 @@
     </div>
 </nav>
 
-<div id="personal_educational_permissions" class="">
+<div id="competency_permissions" class="">
     {{-- <nav>
         <div class="flex flex-col lg:flex-row lg:justify-end">
             <div class="lg:flex lg:space-x-2">
@@ -26,7 +26,7 @@
         </div>
     </nav> --}}
     
-    <form method="POST" id="personal_educational_permissions_form" action="{{ route('personalEducationalPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="competency_permissions_form" action="{{ route('competencyPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -452,7 +452,7 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            <button type="button" class="btn btn-primary" id="personal_educational_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
+            <button type="button" class="btn btn-primary" id="competency_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
     </form>
