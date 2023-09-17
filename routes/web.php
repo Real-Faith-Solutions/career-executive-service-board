@@ -450,11 +450,11 @@ Route::middleware('auth')->group(function () {
     // Competency routes
     Route::prefix('competency')->group(function () {
         Route::prefix('personal-data')->group(function () {
-            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index')->middleware('checkPermission:pdf_files_view');
-            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate');
-            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store');
-            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update');
-            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update');
+            Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index')->middleware('checkPermission:compentency_contacts_view');
+            Route::get('view-profile/{cesno}', [ContactInformationController::class, 'updateOrCreate'])->name('competency-view-profile.updateOrCreate')->middleware('checkPermission:compentency_contacts_edit');
+            Route::post('store/{cesno}', [ContactInformationController::class, 'store'])->name('competency-view-profile-contact-info.store')->middleware('checkPermission:compentency_contacts_add');
+            Route::post('update/{ctrlno}/{cesno}', [ContactInformationController::class, 'update'])->name('competency-view-profile-contact-info.update')->middleware('checkPermission:compentency_contacts_edit');
+            Route::put('update/{cesno}', [ContactInformationController::class, 'updateEmail'])->name('competency-contact-email.update')->middleware('checkPermission:compentency_contacts_edit');
         });
 
         Route::prefix('competency-non-ces-training-accredited')->group(function () {
