@@ -456,20 +456,20 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('competency-non-ces-training-accredited')->group(function () {
-            Route::get('index/{cesno}', [CompetencyOtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index');
-            Route::get('create/{cesno}', [CompetencyOtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create');
-            Route::post('store/{cesno}', [CompetencyOtherTrainingManagementController::class, 'store'])->name('non-ces-training-management.store');
-            Route::get('edit/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit');
-            Route::put('update/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update');
-            Route::delete('destroy/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy');
-            Route::get('recently-deleted/{cesno}', [CompetencyOtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore');
-            Route::delete('forceDelete/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete');
-            Route::get('edit-non-ces-training-201/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'editNonCesTraining201'])->name('non-ces-training-management.editNonCesTraining201');
-            Route::put('update-non-ces-training-201/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'updateNonCesTraining201'])->name('non-ces-training-management.updateNonCesTraining201');
-            Route::delete('destroy-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroyNonCesTraining201'])->name('non-ces-training-management.destroyNonCesTraining201');
-            Route::post('recently-deleted/restore-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restoreNonCesTraining201'])->name('non-ces-training-management.restoreNonCesTraining201');
-            Route::delete('recently-deleted/force-delete-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDeleteNonCesTraining201'])->name('non-ces-training-management.forceDeleteNonCesTraining201');
+            Route::get('index/{cesno}', [CompetencyOtherTrainingManagementController::class, 'index'])->name('non-ces-training-management.index')->middleware('checkPermission:compentency_non_ces_trainings_view');
+            Route::get('create/{cesno}', [CompetencyOtherTrainingManagementController::class, 'create'])->name('non-ces-training-management.create')->middleware('checkPermission:compentency_non_ces_trainings_add');
+            Route::post('store/{cesno}', [CompetencyOtherTrainingManagementController::class, 'store'])->name('non-ces-training-management.store')->middleware('checkPermission:compentency_non_ces_trainings_add');
+            Route::get('edit/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'edit'])->name('non-ces-training-management.edit')->middleware('checkPermission:compentency_non_ces_trainings_edit');
+            Route::put('update/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'update'])->name('non-ces-training-management.update')->middleware('checkPermission:compentency_non_ces_trainings_edit');
+            Route::delete('destroy/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroy'])->name('non-ces-training-management.destroy')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::get('recently-deleted/{cesno}', [CompetencyOtherTrainingManagementController::class, 'recentlyDeleted'])->name('non-ces-training-management.recentlyDeleted')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restore'])->name('non-ces-training-management.restore')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::delete('forceDelete/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDelete'])->name('non-ces-training-management.forceDelete')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::get('edit-non-ces-training-201/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'editNonCesTraining201'])->name('non-ces-training-management.editNonCesTraining201')->middleware('checkPermission:compentency_non_ces_trainings_edit');
+            Route::put('update-non-ces-training-201/{ctrlno}/{cesno}', [CompetencyOtherTrainingManagementController::class, 'updateNonCesTraining201'])->name('non-ces-training-management.updateNonCesTraining201')->middleware('checkPermission:compentency_non_ces_trainings_edit');
+            Route::delete('destroy-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'destroyNonCesTraining201'])->name('non-ces-training-management.destroyNonCesTraining201')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::post('recently-deleted/restore-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'restoreNonCesTraining201'])->name('non-ces-training-management.restoreNonCesTraining201')->middleware('checkPermission:compentency_non_ces_trainings_delete');
+            Route::delete('recently-deleted/force-delete-non-ces-training-201/{ctrlno}', [CompetencyOtherTrainingManagementController::class, 'forceDeleteNonCesTraining201'])->name('non-ces-training-management.forceDeleteNonCesTraining201')->middleware('checkPermission:compentency_non_ces_trainings_delete');
         });
 
         Route::prefix('training-provider-manager')->group(function () {
