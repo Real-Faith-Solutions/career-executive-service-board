@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\CompetencyTrainingProvider;
 use App\Models\CompetencyTrainingVenueManager;
+use App\Models\ProfileLibCities;
 use App\Models\ResourceSpeaker;
 use App\Models\TrainingSession;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -33,19 +34,26 @@ class CompetencyReportController extends Controller
     // training venue manager report
         public function trainingVenueManagerReportIndex(Request $request)
         {
-            $search = $request->input('search');
-            
-            $trainingVenueManager = CompetencyTrainingVenueManager::query()
-            ->where('name', "LIKE" ,"%$search%")
-            ->paginate(10);
+            $cityCode = $request->input('city_code');
+          
+            if($cityCode == null)
+            {
+                $trainingVenueManager = CompetencyTrainingVenueManager::paginate(10);
+            }
+            else
+            {    
+                $trainingVenueManager = CompetencyTrainingVenueManager::where('city_code', $cityCode)->paginate(10);
+            }
 
-            return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager', 'search'));
+            $profileLibTblCities = ProfileLibCities::all();
+
+            return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager', 'profileLibTblCities', 'cityCode'));
         }
 
         public function trainingVenueManagerReportGeneratePdf()
         {
-            $trainingVenueManager = CompetencyTrainingVenueManager::all();
-
+            $trainingVenueManager = CompetencyTrainingVenueManager::get();
+           
             $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('legal', 'landscape');
             return $pdf->stream('training-venue-manager-report.pdf');
         }

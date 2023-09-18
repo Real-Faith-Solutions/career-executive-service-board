@@ -14,7 +14,63 @@ class ProfileLibTblExpertiseGenSeeder extends Seeder
     public function run(): void
     {
         ProfileLibTblExpertiseGen::create([
-            'Title' => 'Sample Specialization',
+            'Title' => 'Agrarian Reform',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Agriculture',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Arts/Humanities',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Business Management',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Communication Arts',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Culture',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Economics',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Education',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Election',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Energy Development and Management',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Finance',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Foreign Affairs',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Health and Medical Science',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Human Resource Management',
+        ]);
+
+        ProfileLibTblExpertiseGen::create([
+            'Title' => 'Information Technology/MIS',
         ]);
     }
 }
