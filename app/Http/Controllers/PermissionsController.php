@@ -117,4 +117,46 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.profiling', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updateCompetencyPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
+    
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            'compentency_contacts_add', 'compentency_contacts_edit', 'compentency_contacts_delete', 'compentency_contacts_view',
+            'compentency_non_ces_trainings_add', 'compentency_non_ces_trainings_edit', 'compentency_non_ces_trainings_delete', 'compentency_non_ces_trainings_view',
+            'training_provider_manager_add', 'training_provider_manager_edit', 'training_provider_manager_delete', 'training_provider_manager_view',
+            'training_venue_manager_add', 'training_venue_manager_edit', 'training_venue_manager_delete', 'training_venue_manager_view',
+            'compentency_training_category_add', 'compentency_training_category_edit', 'compentency_training_category_delete', 'compentency_training_category_view',
+            'compentency_training_secretariat_add', 'compentency_training_secretariat_edit', 'compentency_training_secretariat_delete', 'compentency_training_secretariat_view',
+            'compentency_field_specialization_add', 'compentency_field_specialization_edit', 'compentency_field_specialization_delete', 'compentency_field_specialization_view',
+            'compentency_resource_speaker_add', 'compentency_resource_speaker_edit', 'compentency_resource_speaker_delete', 'compentency_resource_speaker_view',
+            'compentency_training_session_add', 'compentency_training_session_edit', 'compentency_training_session_delete', 'compentency_training_session_view',
+            'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
+            'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
+            'competency_management_sub_modules_report_view',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->syncWithoutDetaching($permissionName);
+        }
+
+        return redirect()->route('permissions.competency', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
+
 }
