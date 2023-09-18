@@ -521,15 +521,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('field-specialization')->group(function () {
-            Route::get('index', [FieldSpecializationController::class, 'index'])->name('field-specialization.index');
-            Route::get('create', [FieldSpecializationController::class, 'create'])->name('field-specialization.create');
-            Route::post('store', [FieldSpecializationController::class, 'store'])->name('field-specialization.store');
-            Route::get('edit/{ctrlno}', [FieldSpecializationController::class, 'edit'])->name('field-specialization.edit');
-            Route::put('update/{ctrlno}', [FieldSpecializationController::class, 'update'])->name('field-specialization.update');
-            Route::delete('destroy/{ctrlno}', [FieldSpecializationController::class, 'destroy'])->name('field-specialization.destroy');
-            Route::get('recentlyDeleted', [FieldSpecializationController::class, 'recentlyDeleted'])->name('field-specialization.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [FieldSpecializationController::class, 'restore'])->name('field-specialization.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [FieldSpecializationController::class, 'forceDelete'])->name('field-specialization.forceDelete');
+            Route::get('index', [FieldSpecializationController::class, 'index'])->name('field-specialization.index')->middleware('checkPermission:compentency_field_specialization_view');
+            Route::get('create', [FieldSpecializationController::class, 'create'])->name('field-specialization.create')->middleware('checkPermission:compentency_field_specialization_add');
+            Route::post('store', [FieldSpecializationController::class, 'store'])->name('field-specialization.store')->middleware('checkPermission:compentency_field_specialization_add');
+            Route::get('edit/{ctrlno}', [FieldSpecializationController::class, 'edit'])->name('field-specialization.edit')->middleware('checkPermission:compentency_field_specialization_edit');
+            Route::put('update/{ctrlno}', [FieldSpecializationController::class, 'update'])->name('field-specialization.update')->middleware('checkPermission:compentency_field_specialization_edit');
+            Route::delete('destroy/{ctrlno}', [FieldSpecializationController::class, 'destroy'])->name('field-specialization.destroy')->middleware('checkPermission:compentency_field_specialization_delete');
+            Route::get('recentlyDeleted', [FieldSpecializationController::class, 'recentlyDeleted'])->name('field-specialization.recentlyDeleted')->middleware('checkPermission:compentency_field_specialization_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [FieldSpecializationController::class, 'restore'])->name('field-specialization.restore')->middleware('checkPermission:compentency_field_specialization_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [FieldSpecializationController::class, 'forceDelete'])->name('field-specialization.forceDelete')->middleware('checkPermission:compentency_field_specialization_delete');
         });
 
         Route::prefix('resource-speaker')->group(function () {
