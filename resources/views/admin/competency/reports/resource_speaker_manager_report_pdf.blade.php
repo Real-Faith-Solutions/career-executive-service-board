@@ -3,11 +3,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>General Report</title>
+        <title>Resource Speaker Manager Report</title>
 
         <style>
             @page {
                 margin-top: 100px;
+                padding-bottom: 100px;
             }
 
             header{
@@ -20,31 +21,24 @@
             }
             table {
                 border-collapse: collapse;
-                padding-left: 25px;
-                padding-right: 25px;
+                padding-left: 20px;
+                padding-right: 20px;
                 width: 100%;
             }
         
-            td, th {
-                text-align: center;
-            }
-        
             td {
-                padding: 15px;
+                padding: 10px;
                 font-size: 13px;
-                text-align: center;
+                text-align: left;
             }
         
             th {
                 color: #284F87;
                 font-size: 13px;
                 text-transform: uppercase;
-                padding-bottom: 15px;
+                text-align: center;
+                padding-bottom: 5px;
                 background-color: white;
-            }
-
-            span {
-                font-size: 12px;
             }
         
             tr:nth-child(even) {
@@ -74,17 +68,17 @@
                 margin-top: -7px;
                 font-size: 15px;
             } 
-        
+
             .report_name {
                 text-transform: uppercase;
-                font-size: 20px;
+                font-size: 16px;
                 color: #284F87;
                 margin-top: 30px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 215px;
+                margin-top: 200px;
             }
         </style>
     </head>
@@ -101,13 +95,7 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">
-                    General Report
-                    <br>
-                    <span>
-                        ( {{ $trainingSession->title }})
-                    </span>
-                </p>
+                <p class="report_name">Resource Speaker Manager Report</p>
             </div>
         </header>
 
@@ -117,76 +105,76 @@
                     <div class="page-break"></div>
                     <tr>
                         <th class="thead">
-                            Particapants ID
-                        </th>
-
-                        <th class="thead">
-                            Cesno
-                        </th class="thead">
-
-                        <th class="thead">
                             Name
+                        </th>
+
+                        <th class="thead">
+                            Position
                         </th class="thead">
 
                         <th class="thead">
-                            CES Status
+                            Department
+                        </th class="thead">
+
+                        <th class="thead">
+                            Office/Company
                         </th>
 
                         <th class="thead">
-                            Training Status
+                            Address
+                        </th>
++
+                        <th class="thead">
+                            Contact No.
                         </th>
 
                         <th class="thead">
-                            Training Hours
+                            Email Address
                         </th>
 
                         <th class="thead">
-                            Payment Status
-                        </th>
-
-                        <th class="thead">
-                            Remarks
+                            Expertise
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($trainingParticipantList as $trainingParticipantLists)
-                        <tr class="border-b bg-white">
-                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ $trainingParticipantLists->pid }}
+                    @foreach ($resourceSpeaker as $resourceSpeakers)
+                        <tr>
+                            <td>
+                                {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
                             </td>
-        
-                            <td class="px-6 py-3">
-                                {{ $trainingParticipantLists->cesno }}
+
+                            <td>
+                                {{ $resourceSpeakers->Position }}
                             </td>
-        
-                            <td class="px-6 py-3">
+
+                            <td>
+                                {{ $resourceSpeakers->Department }}
+                            </td>
+
+                            <td>
+                                {{ $resourceSpeakers->Office }}
+                            </td>
+
+                            <td>
                                 {{ 
-                                    $trainingParticipantLists->cesTrainingPersonalData->lastname.', '. 
-                                    $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->middleinitial.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->name_extension
+                                    $resourceSpeakers->Bldg.', '.
+                                    $resourceSpeakers->Street.', '.
+                                    $resourceSpeakers->Brgy.', '.
+                                    $resourceSpeakers->City
                                 }}
                             </td>
-        
-                            <td class="px-6 py-3">
-                                {{-- {{ $trainingParticipantLists->specialization }} --}}
+
+                            <td>
+                                {{ $resourceSpeakers->contactno }}
                             </td>
-        
-                            <td class="px-6 py-3">
-                                {{ $trainingParticipantLists->status }}
+
+                            <td>
+                                {{ $resourceSpeakers->emailadd }}
                             </td>
-        
-                            <td class="px-6 py-3">
-                                {{ $trainingParticipantLists->no_hours}}
-                            </td>
-        
-                            <td class="px-6 py-3">
-                                {{ $trainingParticipantLists->payment }}
-                            </td>
-        
-                            <td class="px-6 py-3">
-                                {{ $trainingParticipantLists->remarks }}
+
+                            <td>
+                                {{ $resourceSpeakers->expertise }}
                             </td>
                         </tr>
                     @endforeach
