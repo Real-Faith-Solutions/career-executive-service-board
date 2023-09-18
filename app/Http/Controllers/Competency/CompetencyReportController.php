@@ -15,7 +15,7 @@ class CompetencyReportController extends Controller
     // general report
         public function generalReportIndex()
         {
-            $trainingSession = TrainingSession::all();
+            $trainingSession = TrainingSession::paginate(10);
 
             return view('admin.competency.reports.general_report', compact('trainingSession'));
         }
@@ -25,7 +25,7 @@ class CompetencyReportController extends Controller
             $trainingSession = TrainingSession::find($sessionId);
             $trainingParticipantList = $trainingSession->trainingParticipantList;
 
-            $pdf = Pdf::loadView('admin.competency.reports.general_report_pdf', compact('trainingParticipantList'))->setPaper('a4', 'landscape');
+            $pdf = Pdf::loadView('admin.competency.reports.general_report_pdf', compact('trainingParticipantList', 'trainingSession'))->setPaper('legal', 'landscape');
             return $pdf->stream('general-report.pdf');
         }
     // end of general report
@@ -34,8 +34,7 @@ class CompetencyReportController extends Controller
         public function trainingVenueManagerReportIndex(Request $request)
         {
             $search = $request->input('search');
-            // $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
-
+            
             $trainingVenueManager = CompetencyTrainingVenueManager::query()
             ->where('name', "LIKE" ,"%$search%")
             ->paginate(10);
