@@ -100,8 +100,6 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // end auth
 
-Route::get('competency-data', [CompetencyController::class, 'index'])->name('competency-data.index');
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
@@ -580,7 +578,9 @@ Route::middleware('auth')->group(function () {
             Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport');
             Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport');
             Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex');
-            Route::post('general-report-generate-pdf/{sessionId}/{title}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf');
+            Route::post('general-report-generate-pdf/{sessionId}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf');
+            Route::get('training-venue-manager-report', [CompetencyReportController::class, 'trainingVenueManagerReportIndex'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex');
+            Route::post('training-venue-manager-report-generate-pdf', [CompetencyReportController::class, 'trainingVenueManagerReportGeneratePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf');
         });
     });
     // End of competency routes

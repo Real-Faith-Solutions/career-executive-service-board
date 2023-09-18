@@ -11,8 +11,8 @@ use Illuminate\Validation\Rule;
 
 class CompetencyController extends Controller
 {
-    public function index(Request $request){
-
+    public function index(Request $request)
+    {
         $search = $request->input('search');
         $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by cesno
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order ascending
@@ -22,11 +22,11 @@ class CompetencyController extends Controller
             ->orWhere('firstname',  "LIKE","%$search%")
             ->orWhere('middlename',  "LIKE","%$search%")
             ->orWhere('name_extension',  "LIKE","%$search%")
+            ->orWhere('cesno',  "LIKE","%$search%")
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
         return view('admin.competency.view_profile.table', compact('competencyData', 'search', 'sortBy', 'sortOrder'));
-
     }
 
     // public function updateOrCreate($cesno){

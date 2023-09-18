@@ -24,8 +24,6 @@ use Illuminate\Support\Str;
 use App\Mail\TempCred201;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\View;
-
 
 class ProfileController extends Controller
 {
