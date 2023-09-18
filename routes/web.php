@@ -563,15 +563,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('competency-ces-training')->group(function () {
-            Route::get('index/{cesno}', [CompetencyCesTrainingController::class, 'index'])->name('ces-training.index');
-            Route::get('create/{cesno}', [CompetencyCesTrainingController::class, 'create'])->name('ces-training.create');
-            Route::post('store/{cesno}', [CompetencyCesTrainingController::class, 'store'])->name('ces-training.store');
-            Route::get('edit/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'edit'])->name('ces-training.edit');
-            Route::put('update/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'update'])->name('ces-training.update');
-            Route::delete('destroy/{ctrlno}', [CompetencyCesTrainingController::class, 'destroy'])->name('ces-training.destroy');
-            Route::get('recently-deleted/{cesno}', [CompetencyCesTrainingController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'restore'])->name('ces-training.restore');
-            Route::delete('force-delete//recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'forceDelete'])->name('ces-training.forceDelete');
+            Route::get('index/{cesno}', [CompetencyCesTrainingController::class, 'index'])->name('ces-training.index')->middleware('checkPermission:compentency_ces_training_view');
+            Route::get('create/{cesno}', [CompetencyCesTrainingController::class, 'create'])->name('ces-training.create')->middleware('checkPermission:compentency_ces_training_add');
+            Route::post('store/{cesno}', [CompetencyCesTrainingController::class, 'store'])->name('ces-training.store')->middleware('checkPermission:compentency_ces_training_add');
+            Route::get('edit/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'edit'])->name('ces-training.edit')->middleware('checkPermission:compentency_ces_training_edit');
+            Route::put('update/{ctrlno}/{cesno}', [CompetencyCesTrainingController::class, 'update'])->name('ces-training.update')->middleware('checkPermission:compentency_ces_training_edit');
+            Route::delete('destroy/{ctrlno}', [CompetencyCesTrainingController::class, 'destroy'])->name('ces-training.destroy')->middleware('checkPermission:compentency_ces_training_delete');
+            Route::get('recently-deleted/{cesno}', [CompetencyCesTrainingController::class, 'recentlyDeleted'])->name('ces-training.recentlyDeleted')->middleware('checkPermission:compentency_ces_training_delete');
+            Route::post('restore/recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'restore'])->name('ces-training.restore')->middleware('checkPermission:compentency_ces_training_delete');
+            Route::delete('force-delete//recently-deleted/{ctrlno}', [CompetencyCesTrainingController::class, 'forceDelete'])->name('ces-training.forceDelete')->middleware('checkPermission:compentency_ces_training_delete');
         });
 
         Route::prefix('competency-management-sub-modules-report')->group(function () {
