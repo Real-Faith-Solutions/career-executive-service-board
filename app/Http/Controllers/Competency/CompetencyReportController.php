@@ -72,9 +72,17 @@ class CompetencyReportController extends Controller
     // resource speaker manager report
         public function resourceSpeakerIndexReport()
         {
-            $resourceSpeaker = ResourceSpeaker::paginate(20);
+            $resourceSpeaker = ResourceSpeaker::paginate(10);
 
             return view('admin.competency.reports.resource_speaker_manager_report', compact('resourceSpeaker'));
+        }
+
+        public function resourceSpeakerGenerateReport()
+        {
+            $resourceSpeaker = ResourceSpeaker::get();
+
+            $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager_report_pdf', compact('resourceSpeaker'))->setPaper('legal', 'landscape');
+            return $pdf->stream('resource-speaker-manager-report.pdf');
         }
     //end of resource speaker manager report
 
