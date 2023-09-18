@@ -509,15 +509,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('training-secretariat')->group(function () {
-            Route::get('index', [TrainingSecretariatController::class, 'index'])->name('training-secretariat.index');
-            Route::get('create', [TrainingSecretariatController::class, 'create'])->name('training-secretariat.create');
-            Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store');
-            Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit');
-            Route::put('update/{ctrlno}', [TrainingSecretariatController::class, 'update'])->name('training-secretariat.update');
-            Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy');
-            Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete');
+            Route::get('index', [TrainingSecretariatController::class, 'index'])->name('training-secretariat.index')->middleware('checkPermission:compentency_training_secretariat_view');
+            Route::get('create', [TrainingSecretariatController::class, 'create'])->name('training-secretariat.create')->middleware('checkPermission:compentency_training_secretariat_add');
+            Route::post('store', [TrainingSecretariatController::class, 'store'])->name('training-secretariat.store')->middleware('checkPermission:compentency_training_secretariat_add');
+            Route::get('edit/{ctrlno}', [TrainingSecretariatController::class, 'edit'])->name('training-secretariat.edit')->middleware('checkPermission:compentency_training_secretariat_edit');
+            Route::put('update/{ctrlno}', [TrainingSecretariatController::class, 'update'])->name('training-secretariat.update')->middleware('checkPermission:compentency_training_secretariat_edit');
+            Route::delete('destroy/{ctrlno}', [TrainingSecretariatController::class, 'destroy'])->name('training-secretariat.destroy')->middleware('checkPermission:compentency_training_secretariat_delete');
+            Route::get('recentlyDeleted', [TrainingSecretariatController::class, 'recentlyDeleted'])->name('training-secretariat.recentlyDeleted')->middleware('checkPermission:compentency_training_secretariat_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingSecretariatController::class, 'restore'])->name('training-secretariat.restore')->middleware('checkPermission:compentency_training_secretariat_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingSecretariatController::class, 'forceDelete'])->name('training-secretariat.forceDelete')->middleware('checkPermission:compentency_training_secretariat_delete');
         });
 
         Route::prefix('field-specialization')->group(function () {
