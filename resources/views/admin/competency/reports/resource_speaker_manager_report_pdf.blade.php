@@ -34,7 +34,7 @@
         
             th {
                 color: #284F87;
-                font-size: 15px;
+                font-size: 13px;
                 text-transform: uppercase;
                 text-align: center;
                 padding-bottom: 5px;
@@ -68,10 +68,6 @@
                 margin-top: -7px;
                 font-size: 15px;
             } 
-        
-            .thead {
-                font-size: 13px;
-            }
 
             .report_name {
                 text-transform: uppercase;

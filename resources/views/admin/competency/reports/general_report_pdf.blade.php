@@ -8,7 +8,6 @@
         <style>
             @page {
                 margin-top: 100px;
-                padding-bottom: 100px;
             }
 
             header{
@@ -21,9 +20,13 @@
             }
             table {
                 border-collapse: collapse;
-                padding-left: 20px;
-                padding-right: 20px;
+                padding-left: 25px;
+                padding-right: 25px;
                 width: 100%;
+            }
+        
+            td, th {
+                text-align: center;
             }
         
             td {
@@ -34,9 +37,8 @@
         
             th {
                 color: #284F87;
-                font-size: 14px;
+                font-size: 13px;
                 text-transform: uppercase;
-                text-align: center;
                 padding-bottom: 15px;
                 background-color: white;
             }
@@ -75,14 +77,14 @@
         
             .report_name {
                 text-transform: uppercase;
-                font-size: 16px;
+                font-size: 20px;
                 color: #284F87;
                 margin-top: 30px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 210px;
+                margin-top: 215px;
             }
         </style>
     </head>

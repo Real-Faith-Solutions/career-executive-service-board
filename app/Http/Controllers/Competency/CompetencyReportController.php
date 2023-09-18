@@ -46,7 +46,7 @@ class CompetencyReportController extends Controller
         {
             $trainingVenueManager = CompetencyTrainingVenueManager::all();
 
-            $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('a4', 'landscape');
+            $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('legal', 'landscape');
             return $pdf->stream('training-venue-manager-report.pdf');
         }
     // end of training venue manager report
@@ -63,7 +63,7 @@ class CompetencyReportController extends Controller
         {
             $competencyTrainingProvider = CompetencyTrainingProvider::get();
 
-            $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('a4', 'landscape');
+            $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('legal', 'landscape');
             return $pdf->stream('training-provider-manager-report.pdf');
         }
     // end of training provider report

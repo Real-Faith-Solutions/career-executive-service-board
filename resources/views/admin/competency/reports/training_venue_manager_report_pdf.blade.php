@@ -8,8 +8,6 @@
         <style>
             @page {
                 margin-top: 100px;
-                /* margin-bottom: 100px; */
-                padding-bottom: 100px;
             }
 
             header{
@@ -22,31 +20,27 @@
             }
             table {
                 border-collapse: collapse;
-                padding-left: 30px;
-                padding-right: 30px;
+                padding-left: 25px;
+                padding-right: 25px;
                 width: 100%;
             }
         
-            td, th {
-                text-align: center;
-            }
-        
             td {
-                padding: 10px;
+                padding: 15px;
                 font-size: 13px;
-                text-align: left;
+                text-align: justify;
             }
         
             th {
                 color: #284F87;
-                font-size: 15px;
+                font-size: 13px;
+                text-align: center;
                 text-transform: uppercase;
-                padding-bottom: 5px;
+                padding-bottom: 15px;
                 background-color: white;
             }
         
             tr:nth-child(even) {
-                /* background-color: #6aabd1; */
                 background-color: #DCD6D0;
             }
         
@@ -74,10 +68,6 @@
                 font-size: 15px;
             } 
         
-            .thead {
-                font-size: 13px;
-            }
-
             .report_name {
                 text-transform: uppercase;
                 font-size: 16px;
@@ -113,23 +103,23 @@
                 <thead>
                     <div class="page-break"></div>
                     <tr>
-                        <th class="thead">
+                        <th>
                             Venue
                         </th>
         
-                        <th class="thead">
+                        <th>
                             Address
                         </th>
         
-                        <th class="thead">
+                        <th>
                             Contact No.
                         </th>
         
-                        <th class="thead">
+                        <th>
                             Email
                         </th>
         
-                        <th class="thead">
+                        <th>
                             Contact Person
                         </th>
                     </tr>
