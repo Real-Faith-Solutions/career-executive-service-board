@@ -37,7 +37,7 @@ class CompetencyReportController extends Controller
 
             $trainingVenueManager = CompetencyTrainingVenueManager::query()
             ->where('name', "LIKE" ,"%$search%")
-            ->get();
+            ->paginate(10);
 
             return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager', 'search'));
         }
