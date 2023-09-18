@@ -485,15 +485,15 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('training-venue-manager')->group(function () {
-            Route::get('index', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index');
-            Route::get('create', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create');
-            Route::post('store', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store');
-            Route::get('edit/{ctrlno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit');
-            Route::put('update/{ctrlno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update');
-            Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy');
-            Route::get('recently-deleted', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete');
+            Route::get('index', [TrainingVenueManagerController::class, 'index'])->name('training-venue-manager.index')->middleware('checkPermission:training_venue_manager_view');
+            Route::get('create', [TrainingVenueManagerController::class, 'create'])->name('training-venue-manager.create')->middleware('checkPermission:training_venue_manager_add');
+            Route::post('store', [TrainingVenueManagerController::class, 'store'])->name('training-venue-manager.store')->middleware('checkPermission:training_venue_manager_add');
+            Route::get('edit/{ctrlno}', [TrainingVenueManagerController::class, 'edit'])->name('training-venue-manager.edit')->middleware('checkPermission:training_venue_manager_edit');
+            Route::put('update/{ctrlno}', [TrainingVenueManagerController::class, 'update'])->name('training-venue-manager.update')->middleware('checkPermission:training_venue_manager_edit');
+            Route::delete('destroy/{ctrlno}', [TrainingVenueManagerController::class, 'destroy'])->name('training-venue-manager.destroy')->middleware('checkPermission:training_venue_manager_delete');
+            Route::get('recently-deleted', [TrainingVenueManagerController::class, 'recentlyDeleted'])->name('training-venue-manager.recentlyDeleted')->middleware('checkPermission:training_venue_manager_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [TrainingVenueManagerController::class, 'restore'])->name('training-venue-manager.restore')->middleware('checkPermission:training_venue_manager_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [TrainingVenueManagerController::class, 'forceDelete'])->name('training-venue-manager.forceDelete')->middleware('checkPermission:training_venue_manager_delete');
         });
 
         Route::prefix('training-category')->group(function () {
