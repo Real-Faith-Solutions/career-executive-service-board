@@ -54,7 +54,7 @@ class CompetencyReportController extends Controller
     // training provider report
         public function trainingProviderIndexReport()
         {
-            $competencyTrainingProvider = CompetencyTrainingProvider::get();
+            $competencyTrainingProvider = CompetencyTrainingProvider::paginate(10);
 
             return view('admin.competency.reports.training_provider_report', compact('competencyTrainingProvider'));
         }
