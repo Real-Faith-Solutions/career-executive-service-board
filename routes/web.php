@@ -533,16 +533,16 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('resource-speaker')->group(function () {
-            Route::get('index', [ResourceSpeakerController::class, 'index'])->name('resource-speaker.index');
-            Route::get('create', [ResourceSpeakerController::class, 'create'])->name('resource-speaker.create');
-            Route::post('store', [ResourceSpeakerController::class, 'store'])->name('resource-speaker.store');
-            Route::get('edit/{ctrlno}', [ResourceSpeakerController::class, 'edit'])->name('resource-speaker.edit');
-            Route::put('update/{ctrlno}', [ResourceSpeakerController::class, 'update'])->name('resource-speaker.update');
-            Route::delete('destroy/{ctrlno}', [ResourceSpeakerController::class, 'destroy'])->name('resource-speaker.destroy');
-            Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted');
-            Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore');
-            Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete');
-            Route::get('training-enagagement/{ctrlno}', [ResourceSpeakerController::class, 'trainingEnagagement'])->name('resource-speaker.trainingEnagagement');
+            Route::get('index', [ResourceSpeakerController::class, 'index'])->name('resource-speaker.index')->middleware('checkPermission:compentency_resource_speaker_view');
+            Route::get('create', [ResourceSpeakerController::class, 'create'])->name('resource-speaker.create')->middleware('checkPermission:compentency_resource_speaker_add');
+            Route::post('store', [ResourceSpeakerController::class, 'store'])->name('resource-speaker.store')->middleware('checkPermission:compentency_resource_speaker_add');
+            Route::get('edit/{ctrlno}', [ResourceSpeakerController::class, 'edit'])->name('resource-speaker.edit')->middleware('checkPermission:compentency_resource_speaker_edit');
+            Route::put('update/{ctrlno}', [ResourceSpeakerController::class, 'update'])->name('resource-speaker.update')->middleware('checkPermission:compentency_resource_speaker_edit');
+            Route::delete('destroy/{ctrlno}', [ResourceSpeakerController::class, 'destroy'])->name('resource-speaker.destroy')->middleware('checkPermission:compentency_resource_speaker_delete');
+            Route::get('recently-deleted', [ResourceSpeakerController::class, 'recentlyDeleted'])->name('resource-speaker.recentlyDeleted')->middleware('checkPermission:compentency_resource_speaker_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [ResourceSpeakerController::class, 'restore'])->name('resource-speaker.restore')->middleware('checkPermission:compentency_resource_speaker_delete');
+            Route::delete('recently-deleted/forceDelete/{ctrlno}', [ResourceSpeakerController::class, 'forceDelete'])->name('resource-speaker.forceDelete')->middleware('checkPermission:compentency_resource_speaker_delete');
+            Route::get('training-enagagement/{ctrlno}', [ResourceSpeakerController::class, 'trainingEnagagement'])->name('resource-speaker.trainingEnagagement')->middleware('checkPermission:compentency_resource_speaker_delete');
         });
 
         Route::prefix('training-session')->group(function () {
