@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\CompetencyTrainingProvider;
 use App\Models\CompetencyTrainingVenueManager;
+use App\Models\ResourceSpeaker;
 use App\Models\TrainingSession;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -67,4 +68,14 @@ class CompetencyReportController extends Controller
             return $pdf->stream('training-provider-manager-report.pdf');
         }
     // end of training provider report
+
+    // resource speaker manager report
+        public function resourceSpeakerIndexReport()
+        {
+            $resourceSpeaker = ResourceSpeaker::paginate(20);
+
+            return view('admin.competency.reports.resource_speaker_manager_report', compact('resourceSpeaker'));
+        }
+    //end of resource speaker manager report
+
 }
