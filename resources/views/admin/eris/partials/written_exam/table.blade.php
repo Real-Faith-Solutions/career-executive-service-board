@@ -17,7 +17,7 @@
     <a href="{{ route('eris-written-exam.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Written Exam</a>
 </div>
 
-<div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
+<div class="table-management-writtenExams relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
@@ -42,29 +42,27 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trainings as $training) --}}
+            @foreach ($writtenExam as $writtenExams)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{-- {{ $training->pid }} --}}
+                        {{ $writtenExams->we_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $training->cesno }} --}}
+                        {{ $writtenExams->we_location }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ 
-                            $training->cesTrainingPersonalData->lastname.', '.$training->cesTrainingPersonalData->firstname.', '.        $training->cesTrainingPersonalData->name_extension.', '.$training->cesTrainingPersonalData->middleinitial 
-                        }} --}}
+                        {{ $writtenExams->we_rating }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{-- {{ $description }} --}}
+                        {{ $writtenExams->we_remarks }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         {{-- <div class="flex">
-                            <form action="{{ route('ces-training.edit', ['ctrlno'=>$training->pid, 'cesno'=>$training->cesTrainingPersonalData->cesno]) }}" method="GET">
+                            <form action="{{ route('ces-writtenExams.edit', ['ctrlno'=>$writtenExams->pid, 'cesno'=>$writtenExams->cesTrainingPersonalData->cesno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -76,10 +74,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-training.destroy', ['ctrlno'=>$training->pid]) }}" method="POST" id="delete_training_participant_form{{$training->pid}}">
+                            <form action="{{ route('ces-writtenExams.destroy', ['ctrlno'=>$writtenExams->pid]) }}" method="POST" id="delete_writtenExams_participant_form{{$writtenExams->pid}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingParticipantButton{{$training->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteTrainingParticipantButton{{$writtenExams->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -92,7 +90,7 @@
                         </div> --}}
                     </td>
                 </tr>
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>

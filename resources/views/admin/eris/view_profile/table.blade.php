@@ -38,7 +38,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('eris-written-exam', ['acno'=>$erisTblMains->acno]) }}" class="font-medium">View profile</a>
+                                <a href="{{ route('eris-written-exam.index', ['acno'=>$erisTblMains->acno]) }}" class="font-medium">View profile</a>
                             </td>
                         </tr>
                     @endforeach

@@ -30,7 +30,7 @@ class WrittenExam extends Model
 
     public function erisTblMainWrittenExam(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class);
+        return $this->belongsTo(ErisTblMain::class, 'acno');
     }
 
 }

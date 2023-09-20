@@ -600,6 +600,7 @@ Route::middleware('auth')->group(function () {
            Route::prefix('written-exam')->group(function () {
                 Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
                 Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
+                Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store'); 
            });
 
         });

@@ -47,7 +47,7 @@ class ErisTblMain extends Model
 
     public function writtenExam(): HasMany
     {
-        return $this->hasMany(WrittenExam::class);
+        return $this->hasMany(WrittenExam::class, 'acno');
     }
 
 }

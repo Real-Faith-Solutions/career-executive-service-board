@@ -17,23 +17,24 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(ces_trainings_form)">
+            <form action="{{ route('eris-written-exam.store', ['acno'=>$acno]) }}" method="POST" id="written_exam_form" onsubmit="return checkErrorsBeforeSubmit(written_exam_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" value="" readonly>
+                        <input type="text" id="name" name="name" value="{{ $erisTblMainProfileData->lastname.', '.$erisTblMainProfileData->firstname.', '.$erisTblMainProfileData->middlename }}" readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="acno">ACNO</label>
-                        <input type="text" id="acno" name="acno" value="" readonly>
+                        <input type="text" id="acno" name="acno" value="{{ $erisTblMainProfileData->acno }}" readonly>
                     </div>
                     
                     <div class="mb-3">
                         <label for="we_date">Written Exam Date<sup>*</sup></label>
-                        <input type="date" id="we_date" name="we_date" required>
+                        <input type="date" id="we_date" name="we_date" oninput="validateDateInput(we_date)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('we_date')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -53,7 +54,8 @@
 
                     <div class="mb-3">
                         <label for="we_rating">Rating<sup>*</sup></label>
-                        <input type="text" name="we_rating">
+                        <input type="text" id="we_rating" name="we_rating" oninput="validateInput(we_rating, 2, 'numbersWithSpecial')" onkeypress="validateInput(we_rating, 2, 'numbersWithSpecial')" onblur="checkErrorMessage(we_rating)" required>
+                        <p class="input_error text-red-600"></p>
                         @error('we_rating')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -64,7 +66,7 @@
 
                 <div class="mb-3">
                     <label for="we_remarks">Remarks<sup>*</sup></label>
-                    <textarea name="we_remarks" id="we_remarks" cols="10" rows="3"></textarea>
+                    <textarea name="we_remarks" id="we_remarks" cols="10" rows="3" ></textarea>
                 </div>
 
                 <div class="flex justify-end">
