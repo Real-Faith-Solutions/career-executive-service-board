@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->boolean('isActive')->default(true);
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

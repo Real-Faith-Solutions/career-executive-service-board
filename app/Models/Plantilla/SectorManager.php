@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SectorManager extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_date';
 
     protected $table = 'plantilla_tblSector';
     protected $primaryKey = 'sectorid';

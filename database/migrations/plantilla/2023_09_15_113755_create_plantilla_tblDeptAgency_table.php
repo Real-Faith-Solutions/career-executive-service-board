@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('remarks')->nullable();
             $table->string('submitted_by')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

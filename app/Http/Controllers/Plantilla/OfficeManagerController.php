@@ -115,7 +115,7 @@ class OfficeManagerController extends Controller
             'acronym' => $request->input('acronym'),
             'website' => $request->input('website'),
             'isActive' => $request->input('isActive'),
-            'updated_by' => $encoder,
+            'lastupd_enc' => $encoder,
         ]);
 
         $officeAddress = OfficeAddress::withTrashed()->findOrFail($officeid);

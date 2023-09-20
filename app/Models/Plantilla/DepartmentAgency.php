@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DepartmentAgency extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';

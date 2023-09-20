@@ -387,9 +387,8 @@
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($planPosition->created_at)->format('F d, Y
-                            \a\t g:iA')
-                            }}
+                            Last update at {{ \Carbon\Carbon::parse($planPosition->lastupd_date)->format('m/d/Y \a\t
+                            g:iA') }}
                         </h1>
                         <button type="submit" class="btn btn-primary">
                             Save changes
