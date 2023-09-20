@@ -84,4 +84,12 @@ class WrittenExamController extends Controller
 
         return to_route('eris-written-exam.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+       $writtenExam = WrittenExam::find($ctrlno);
+       $writtenExam->delete();
+
+       return back()->with('message', 'Deleted Sucessfully');
+    }
 }

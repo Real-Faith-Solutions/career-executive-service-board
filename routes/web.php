@@ -603,6 +603,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store'); 
                 Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
                 Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update'); 
+                Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy'); 
            });
 
         });

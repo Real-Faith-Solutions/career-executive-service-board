@@ -74,10 +74,10 @@
                                 </button>
                             </form>
 
-                            {{-- <form action="{{ route('ces-writtenExams.destroy', ['ctrlno'=>$writtenExams->pid]) }}" method="POST" id="delete_writtenExams_participant_form{{$writtenExams->pid}}">
+                            <form action="{{ route('eris-written-exam.destroy', ['ctrlno'=>$writtenExams->ctrlno]) }}" method="POST" id="delete_written_exam_form{{$writtenExams->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteTrainingParticipantButton{{$writtenExams->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteWrittenExamButton{{$writtenExams->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -86,7 +86,7 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
