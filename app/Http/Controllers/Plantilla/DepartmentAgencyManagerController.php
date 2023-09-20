@@ -20,7 +20,7 @@ class DepartmentAgencyManagerController extends Controller
             ->where('title', 'LIKE', "%$query%")
             ->orWhere('acronym', 'LIKE', "%$query%")
             ->orWhere('website', 'LIKE', "%$query%")
-            ->orWhere('plantillalib_tblAgencyType_id', 'LIKE', "%$query%")
+            ->orWhere('agency_typeid', 'LIKE', "%$query%")
             ->paginate(15);
         return view('admin.plantilla.department_agency_manager.index', compact('datas', 'query'));
     }
@@ -28,7 +28,7 @@ class DepartmentAgencyManagerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'plantillalib_tblAgencyType_id' => ['required'],
+            'agency_typeid' => ['required'],
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'remarks' => ['required'],
@@ -81,7 +81,7 @@ class DepartmentAgencyManagerController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'plantillalib_tblAgencyType_id' => ['required'],
+            'agency_typeid' => ['required'],
             'website' => ['required', 'max:40', 'min:2', 'url'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'remarks' => ['required'],
@@ -90,7 +90,7 @@ class DepartmentAgencyManagerController extends Controller
         $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
         $department->update($request->only([
             'title',
-            'plantillalib_tblAgencyType_id',
+            'agency_typeid',
             'website',
             'acronym',
             'remarks'

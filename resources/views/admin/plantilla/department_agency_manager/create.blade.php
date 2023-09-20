@@ -18,12 +18,12 @@
             <div class="grid grid-cols-2 p-10 gap-2">
                 <div class="mb-3">
                     <label for="agencyType">Agency Type</label>
-                    <select id="agencyType" name="plantillalib_tblAgencyType_id" required>
+                    <select id="agencyType" name="agency_typeid" required>
                         @foreach ($agencyType as $data)
                         <option value="{{ $data->agency_typeid }}">{{ $data->title }}</option>
                         @endforeach
                     </select>
-                    @error('plantillalib_tblAgencyType_id')
+                    @error('agency_typeid')
                     <span class="invalid" role="alert">
                         <p>{{ $message }}</p>
                     </span>

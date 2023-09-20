@@ -15,7 +15,7 @@ class DepartmentAgency extends Model
     protected $primaryKey = 'deptid';
     protected $fillable = [
         'sectorid',
-        'plantillalib_tblAgencyType_id',
+        'agency_typeid',
         'title',
         'acronym',
         'website',
@@ -31,6 +31,6 @@ class DepartmentAgency extends Model
 
     public function departmentAgencyType(): BelongsTo
     {
-        return $this->belongsTo(DepartmentAgencyType::class, 'plantillalib_tblAgencyType_id', 'agency_typeid');
+        return $this->belongsTo(DepartmentAgencyType::class, 'agency_typeid', 'agency_typeid');
     }
 }

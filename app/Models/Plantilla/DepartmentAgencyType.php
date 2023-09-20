@@ -21,6 +21,6 @@ class DepartmentAgencyType extends Model
 
     public function departmentAgency(): HasMany
     {
-        return $this->hasMany(DepartmentAgency::class, 'plantillalib_tblAgencyType_id', 'agency_typeid');
+        return $this->hasMany(DepartmentAgency::class, 'agency_typeid', 'agency_typeid');
     }
 }
