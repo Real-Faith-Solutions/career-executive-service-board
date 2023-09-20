@@ -4,6 +4,7 @@ namespace App\Models\Eris;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ErisTblMain extends Model
 {
@@ -43,5 +44,10 @@ class ErisTblMain extends Model
         'maddress',
 
     ];
+
+    public function writtenExam(): HasMany
+    {
+        return $this->hasMany(WrittenExam::class);
+    }
 
 }

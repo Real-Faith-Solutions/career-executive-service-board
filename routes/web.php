@@ -27,6 +27,7 @@ use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ERIS\ErisProfileController;
+use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
@@ -594,7 +595,13 @@ Route::middleware('auth')->group(function () {
 
     //  ERIS routes
         Route::prefix('eris')->group(function () {
-            Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
+           Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
+
+           Route::prefix('written-exam')->group(function () {
+                Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
+                Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
+           });
+
         });
     //  end of ERIS routes
 

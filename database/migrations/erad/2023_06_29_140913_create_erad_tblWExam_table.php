@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('erad_tblWExam', function (Blueprint $table) {
-            $table->id('acno');
-            $table->string('we_date');
-            $table->string('we_location');
-            $table->string('we_rating');
-            $table->string('we_remarks');
-            $table->string('encoder');
-            $table->string('encdate');
-            $table->integer('ctrlno');
-            $table->timestamps();
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->date('we_date')->nullable();
+            $table->string('we_location')->nullable();
+            $table->string('we_rating')->nullable();
+            $table->string('we_remarks')->nullable();
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

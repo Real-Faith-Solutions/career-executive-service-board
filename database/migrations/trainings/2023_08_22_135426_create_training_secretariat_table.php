@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('ctrlno');
             $table->string('description');
             $table->string('encoder');
-            $table->timestamps();
+            $table->timestamp('encdate');
+            $table->timestamp('update_time');
             $table->softDeletes();
         });
     }
