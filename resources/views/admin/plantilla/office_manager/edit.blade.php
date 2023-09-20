@@ -106,7 +106,7 @@
                             <label for="contact">Office Contact No.</label>
                             <input id="contact" name="contact" value="{{ $office->officeAddress->contact }}"
                                 type="tel" />
-                            @error('contact')
+                            @error('contactno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

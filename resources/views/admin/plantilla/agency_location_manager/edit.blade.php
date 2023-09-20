@@ -132,9 +132,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input name="email" id="email" value="{{ $departmentLocation->email }}" type="email">
-                            @error('email')
+                            <label for="emailadd">emailadd</label>
+                            <input name="emailadd" id="emailadd" value="{{ $departmentLocation->emailadd }}"
+                                type="email">
+                            @error('emailadd')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

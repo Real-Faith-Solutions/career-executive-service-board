@@ -39,7 +39,7 @@ class AgencyLocationManagerController extends Controller
             'acronym' => $request->input('acronym'),
             'agencyloc_Id' => $request->input('agencyloc_Id'),
             'telno' => $request->input('telno'),
-            'email' => $request->input('email'),
+            'emailadd' => $request->input('emailadd'),
             'region' => $request->input('region'),
             'encoder' => $encoder,
         ]);
