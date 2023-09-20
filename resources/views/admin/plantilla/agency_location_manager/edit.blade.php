@@ -80,8 +80,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="agencyloc_Id">Location type<sup>*</sup></label>
-                            <select name="agencyloc_Id" id="agencyloc_Id">
+                            <label for="loctype_id">Location type<sup>*</sup></label>
+                            <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
                                     agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
@@ -89,7 +89,7 @@
                                 </option>
                                 @endforeach
                             </select>
-                            @error('agencyloc_Id')
+                            @error('loctype_id')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -132,10 +132,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="emailadd">emailadd</label>
-                            <input name="emailadd" id="emailadd" value="{{ $departmentLocation->emailadd }}"
+                            <label for="emailaddr">Email</label>
+                            <input name="emailaddr" id="emailaddr" value="{{ $departmentLocation->emailaddr }}"
                                 type="email">
-                            @error('emailadd')
+                            @error('emailaddr')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

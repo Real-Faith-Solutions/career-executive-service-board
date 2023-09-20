@@ -15,14 +15,16 @@ return new class extends Migration
         Schema::create('plantilla_tblAgencyLocation', function (Blueprint $table) {
             $table->id('officelocid');
             $table->foreignId('deptid')->constrained('plantilla_tblDeptAgency', 'deptid');
-            $table->foreignId('agencyloc_Id')->constrained('plantillalib_tblAgencyLocation', 'agencyloc_Id');
+            $table->foreignId('loctype_id')->constrained('plantillalib_tblAgencyLocation', 'agencyloc_Id');
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('telno')->nullable();
-            $table->string('email')->nullable();
+            $table->string('emailaddr')->nullable();
             $table->string('region')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }
