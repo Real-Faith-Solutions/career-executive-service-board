@@ -39,7 +39,7 @@
 @section('content')
     @auth
     <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500 text-2xl">
-        <h1>Hello {{ $userTitle." ".$userName." [".$userRoleTitle."]" }}</h1>
+        <h1>Hello {{ $userTitle." ".$userName." [".$userRoleTitle."]" }} {{ request()->cookie('email') }}</h1>
         <h1 id="currentDateTime"></h1>
     </div>
     @endauth
