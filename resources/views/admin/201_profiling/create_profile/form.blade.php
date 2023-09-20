@@ -65,7 +65,7 @@
 
             <div class="mb-3">
                 <label for="lastname">Lastname<sup>*</sup></label>
-                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2, 'letters')" onkeypress="validateInput(lastname, 2, 'letters')" onblur="checkErrorMessage(lastname)" required>
+                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(lastname, 2, 'letters')" oninput="this.value = this.value.toUpperCase();" onblur="checkErrorMessage(lastname)" required>
                 <p class="input_error text-red-600"></p>
                 @error('lastname')
                     <span class="invalid" role="alert">
