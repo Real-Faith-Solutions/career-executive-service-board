@@ -88,7 +88,7 @@ class CompetencyReportController extends Controller
         {
             $resourceSpeaker = ResourceSpeaker::get();
 
-            $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager_report_pdf', compact('resourceSpeaker'))->setPaper('legal', 'landscape');
+            $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager_report_pdf', compact('resourceSpeaker'))->setPaper('a4', 'landscape');
             return $pdf->stream('resource-speaker-manager-report.pdf');
         }
     //end of resource speaker manager report
