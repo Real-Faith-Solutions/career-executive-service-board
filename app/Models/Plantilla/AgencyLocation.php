@@ -10,21 +10,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class AgencyLocation extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
     protected $table = 'plantilla_tblAgencyLocation';
     protected $primaryKey = 'officelocid';
     protected $fillable = [
         'deptid',
         'title',
         'acronym',
-        'agencyloc_Id',
+        'loctype_id',
         'telno',
-        'email',
+        'emailaddr',
         'region',
         'encoder',
     ];
 
     public function agencyLocationLibrary(): BelongsTo
     {
-        return $this->belongsTo(AgencyLocationLibrary::class, 'agencyloc_Id', 'agencyloc_Id');
+        return $this->belongsTo(AgencyLocationLibrary::class, 'loctype_id', 'agencyloc_Id');
     }
 }

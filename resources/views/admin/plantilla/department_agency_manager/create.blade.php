@@ -10,7 +10,7 @@
 
         <form action="{{ route('department-agency-manager.store') }}" method="POST">
             @csrf
-            <input type="hidden" value="{{ $datas->sectorid }}" name="plantilla_tblSector_id" readonly>
+            <input type="hidden" value="{{ $datas->sectorid }}" name="sectorid" readonly>
             <input type="hidden"
                 value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }} {{ Auth::user()->name_extension }}"
                 readonly>
@@ -18,12 +18,12 @@
             <div class="grid grid-cols-2 p-10 gap-2">
                 <div class="mb-3">
                     <label for="agencyType">Agency Type</label>
-                    <select id="agencyType" name="plantillalib_tblAgencyType_id" required>
+                    <select id="agencyType" name="agency_typeid" required>
                         @foreach ($agencyType as $data)
                         <option value="{{ $data->agency_typeid }}">{{ $data->title }}</option>
                         @endforeach
                     </select>
-                    @error('plantillalib_tblAgencyType_id')
+                    @error('agency_typeid')
                     <span class="invalid" role="alert">
                         <p>{{ $message }}</p>
                     </span>

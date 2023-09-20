@@ -80,8 +80,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="agencyloc_Id">Location type<sup>*</sup></label>
-                            <select name="agencyloc_Id" id="agencyloc_Id">
+                            <label for="loctype_id">Location type<sup>*</sup></label>
+                            <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
                                     agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
@@ -89,7 +89,7 @@
                                 </option>
                                 @endforeach
                             </select>
-                            @error('agencyloc_Id')
+                            @error('loctype_id')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -132,9 +132,10 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email">Email</label>
-                            <input name="email" id="email" value="{{ $departmentLocation->email }}" type="email">
-                            @error('email')
+                            <label for="emailaddr">Email</label>
+                            <input name="emailaddr" id="emailaddr" value="{{ $departmentLocation->emailaddr }}"
+                                type="email">
+                            @error('emailaddr')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -144,9 +145,8 @@
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($departmentLocation->created_at)->format('F d, Y
-                            \a\t g:iA')
-                            }}
+                            Last update at {{ \Carbon\Carbon::parse($departmentLocation->lastupd_date)->format('m/d/Y
+                            \a\t g:iA') }}
                         </h1>
                         <button type="submit" class="btn btn-primary">
                             Save changes

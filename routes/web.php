@@ -26,6 +26,7 @@ use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
+use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
 use App\Http\Controllers\FamilyController;
@@ -590,6 +591,12 @@ Route::middleware('auth')->group(function () {
             });
         });
     //  end of competency report routes
+
+    //  ERIS routes
+        Route::prefix('eris')->group(function () {
+            Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
+        });
+    //  end of ERIS routes
 
     // Rights management routes
     Route::prefix('rights-management')->group(function () {

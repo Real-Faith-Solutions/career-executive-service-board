@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        // legacy migration
-        Schema::create('plantilla_tblDeptAgency', function (Blueprint $table) {
-            $table->id('deptid');
-            $table->foreignId('plantilla_tblSector_id');
-            $table->foreignId('plantillalib_tblAgencyType_id');
+        Schema::create('plantilla_tblOffice', function (Blueprint $table) {
+            $table->id('officeid');
+            $table->foreignId('officelocid')->constrained('plantilla_tblAgencyLocation', 'officelocid');
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();
-            $table->string('remarks')->nullable();
-            $table->string('submitted_by')->nullable();
+            $table->boolean('isActive')->default(true);
             $table->string('encoder')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tblDeptAgency');
+        Schema::dropIfExists('plantilla_tblOffice');
     }
 };

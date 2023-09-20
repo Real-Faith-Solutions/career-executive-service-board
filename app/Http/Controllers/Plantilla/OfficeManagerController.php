@@ -87,8 +87,8 @@ class OfficeManagerController extends Controller
             'house_no_st' => $request->input('house_no_st'),
             'brgy_dist' => $request->input('brgy_dist'),
             'city_code' => $request->input('city_code'),
-            'contact' => $request->input('contact'),
-            'email' => $request->input('email'),
+            'contactno' => $request->input('contactno'),
+            'emailadd' => $request->input('emailadd'),
             'isActive' => $request->input('isActive'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'encoder' => $encoder,
@@ -115,7 +115,7 @@ class OfficeManagerController extends Controller
             'acronym' => $request->input('acronym'),
             'website' => $request->input('website'),
             'isActive' => $request->input('isActive'),
-            'updated_by' => $encoder,
+            'lastupd_enc' => $encoder,
         ]);
 
         $officeAddress = OfficeAddress::withTrashed()->findOrFail($officeid);
@@ -124,8 +124,8 @@ class OfficeManagerController extends Controller
             'house_no_st' => $request->input('house_no_st'),
             'brgy_dist' => $request->input('brgy_dist'),
             'city_code' => $request->input('city_code'),
-            'contact' => $request->input('contact'),
-            'email' => $request->input('email'),
+            'contactno' => $request->input('contactno'),
+            'emailadd' => $request->input('emailadd'),
             'isActive' => $request->input('isActive'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'updated_by' => $encoder,

@@ -31,9 +31,10 @@ return new class extends Migration
             $table->boolean('is_active')->nullable();
             $table->boolean('is_generic')->nullable();
             $table->boolean('is_head')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('created_user')->nullable();
+            $table->string('lastupd_user')->nullable();
+            $table->timestamp('created_dt')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

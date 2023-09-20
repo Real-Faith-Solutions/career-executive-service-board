@@ -64,7 +64,7 @@
                             <select id="sectorTitle" name="sectorTitle" required disabled>
                                 @foreach ($sectorDatas as $data)
                                 <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
-                                    $department->plantilla_tblSector_id ? 'selected' : '' }}>
+                                    $department->sectorid ? 'selected' : '' }}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
@@ -79,16 +79,16 @@
 
                         <div class="mb-3">
                             <label for="departmentTypeDatas">Office Type<sup>*</span></label>
-                            <select id="departmentTypeDatas" name="plantillalib_tblAgencyType_id" required>
+                            <select id="departmentTypeDatas" name="agency_typeid" required>
                                 @foreach ($departmentTypeDatas as $data)
                                 <option value="{{ $data->agency_typeid }}" {{ $data->agency_typeid ==
-                                    $department->plantillalib_tblAgencyType_id ? 'selected' : '' }}>
+                                    $department->agency_typeid ? 'selected' : '' }}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
 
                             </select>
-                            @error('plantillalib_tblAgencyType_id')
+                            @error('agency_typeid')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -139,7 +139,8 @@
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($department->created_at)->format('F d, Y \a\t h:iA') }}
+                            Last update at {{ \Carbon\Carbon::parse($department->lastupd_dt)->format('m/d/Y \a\t
+                            g:iA') }}
                         </h1>
                         <button type="submit" class="btn btn-primary">
                             Save changes

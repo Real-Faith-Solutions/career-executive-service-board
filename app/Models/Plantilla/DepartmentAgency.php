@@ -10,27 +10,29 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DepartmentAgency extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';
     protected $fillable = [
-            'plantilla_tblSector_id',
-            'plantillalib_tblAgencyType_id',
-            'title',
-            'acronym',
-            'website',
-            'remarks',
-            'submitted_by',
-            'encoder',
+        'sectorid',
+        'agency_typeid',
+        'title',
+        'acronym',
+        'website',
+        'remarks',
+        'submitted_by',
+        'encoder',
     ];
 
     public function sectorManager(): BelongsTo
     {
-        return $this->belongsTo(SectorManager::class, 'plantilla_tblSector_id', 'sectorid');
+        return $this->belongsTo(SectorManager::class, 'sectorid', 'sectorid');
     }
 
     public function departmentAgencyType(): BelongsTo
     {
-        return $this->belongsTo(DepartmentAgencyType::class, 'plantillalib_tblAgencyType_id', 'agency_typeid');
+        return $this->belongsTo(DepartmentAgencyType::class, 'agency_typeid', 'agency_typeid');
     }
 }

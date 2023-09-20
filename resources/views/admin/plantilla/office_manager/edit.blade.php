@@ -103,19 +103,20 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="contact">Office Contact No.</label>
-                            <input id="contact" name="contact" value="{{ $office->officeAddress->contact }}"
+                            <label for="contactno">Office Contact No.</label>
+                            <input id="contactno" name="contactno" value="{{ $office->officeAddress->contactno }}"
                                 type="tel" />
-                            @error('contact')
+                            @error('contactno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email">Office E-mail Address</label>
-                            <input id="email" name="email" value="{{ $office->officeAddress->email }}" type="email" />
-                            @error('email')
+                            <label for="emailadd">Office E-mail Address</label>
+                            <input id="emailadd" name="emailadd" value="{{ $office->officeAddress->emailadd }}"
+                                type="email" />
+                            @error('emailadd')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -191,9 +192,7 @@
 
                     <div class="flex justify-between">
                         <h1 class="text-slate-400 text-sm font-semibold">
-                            Created at {{ \Carbon\Carbon::parse($office->created_at)->format('F d, Y
-                            \a\t g:iA')
-                            }}
+                            Last update at {{ \Carbon\Carbon::parse($office->lastupd_dt)->format('m/d/Y \a\t g:iA') }}
                         </h1>
                         <button type="submit" class="btn btn-primary">
                             Save changes

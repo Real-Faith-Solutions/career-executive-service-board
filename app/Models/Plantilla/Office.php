@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Office extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
     protected $table = 'plantilla_tblOffice';
     protected $primaryKey = 'officeid';
     protected $fillable = [
@@ -19,7 +21,7 @@ class Office extends Model
         'website',
         'isActive',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
     ];
 
     public function officeAddress(): HasOne

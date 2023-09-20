@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SectorManager extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_date';
 
     protected $table = 'plantilla_tblSector';
     protected $primaryKey = 'sectorid';
@@ -21,6 +23,6 @@ class SectorManager extends Model
 
     public function departmentAgency(): HasMany
     {
-        return $this->hasMany(DepartmentAgency::class, 'plantilla_tblSector_id', 'sectorid');
+        return $this->hasMany(DepartmentAgency::class, 'sectorid', 'sectorid');
     }
 }

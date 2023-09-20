@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();
             $table->integer('city_code')->nullable(); // need to get in profilelib_tblcities
-            $table->string('contact')->nullable();
-            $table->string('email')->nullable();
+            $table->string('contactno')->nullable();
+            $table->string('emailadd')->nullable();
             $table->boolean('isActive')->default(true);
 
             $table->integer('ofcaddrid')->nullable(); // need to get in migration still pending what tables
@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('updated_by')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
         });
     }
 

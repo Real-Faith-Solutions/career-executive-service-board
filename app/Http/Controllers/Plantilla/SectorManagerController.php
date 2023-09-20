@@ -25,7 +25,7 @@ class SectorManagerController extends Controller
 
     public function show($sectorid)
     {
-        $datas = DepartmentAgency::where('plantilla_tblSector_id', $sectorid)
+        $datas = DepartmentAgency::where('sectorid', $sectorid)
             ->orderBy('title', 'ASC')
             ->paginate(15);
         return view('admin.plantilla.department_agency_manager.index', compact('datas'));
@@ -55,7 +55,7 @@ class SectorManagerController extends Controller
             ->orderBy('title', 'ASC')->get();
 
         $subDatas = DepartmentAgency::query()
-            ->where('plantilla_tblSector_id', $sectorid)
+            ->where('sectorid', $sectorid)
             ->where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('title', 'LIKE', "%$query")
                     ->orWhere('acronym', 'LIKE', "%$query");

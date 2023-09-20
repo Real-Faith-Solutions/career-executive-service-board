@@ -54,18 +54,18 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="contact">Office Contact No.</label>
-                            <input id="contact" name="contact" type="tel" />
-                            @error('contact')
+                            <label for="contactno">Office Contact No.</label>
+                            <input id="contactno" name="contactno" type="tel" />
+                            @error('contactno')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="email">Office E-mail Address</label>
-                            <input id="email" name="email" type="email" />
-                            @error('email')
+                            <label for="emailadd">Office E-mail Address</label>
+                            <input id="emailadd" name="emailadd" type="email" />
+                            @error('emailadd')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
