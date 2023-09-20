@@ -14,19 +14,19 @@ class DepartmentAgency extends Model
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';
     protected $fillable = [
-            'plantilla_tblSector_id',
-            'plantillalib_tblAgencyType_id',
-            'title',
-            'acronym',
-            'website',
-            'remarks',
-            'submitted_by',
-            'encoder',
+        'sectorid',
+        'plantillalib_tblAgencyType_id',
+        'title',
+        'acronym',
+        'website',
+        'remarks',
+        'submitted_by',
+        'encoder',
     ];
 
     public function sectorManager(): BelongsTo
     {
-        return $this->belongsTo(SectorManager::class, 'plantilla_tblSector_id', 'sectorid');
+        return $this->belongsTo(SectorManager::class, 'sectorid', 'sectorid');
     }
 
     public function departmentAgencyType(): BelongsTo

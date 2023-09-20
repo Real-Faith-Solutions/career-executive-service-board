@@ -10,7 +10,7 @@
 
         <form action="{{ route('department-agency-manager.store') }}" method="POST">
             @csrf
-            <input type="hidden" value="{{ $datas->sectorid }}" name="plantilla_tblSector_id" readonly>
+            <input type="hidden" value="{{ $datas->sectorid }}" name="sectorid" readonly>
             <input type="hidden"
                 value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }} {{ Auth::user()->name_extension }}"
                 readonly>

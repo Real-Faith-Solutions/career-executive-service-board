@@ -64,7 +64,7 @@
                             <select id="sectorTitle" name="sectorTitle" required disabled>
                                 @foreach ($sectorDatas as $data)
                                 <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
-                                    $department->plantilla_tblSector_id ? 'selected' : '' }}>
+                                    $department->sectorid ? 'selected' : '' }}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
