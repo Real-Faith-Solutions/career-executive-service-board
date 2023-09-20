@@ -33,8 +33,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->remember)) {
-            // Set a cookie that expires in 30 minutes
             Cookie::queue(Cookie::make('email', $request->email, 120));
+            Cookie::queue(Cookie::make('remember', $request->remember, 120));
             return redirect()->intended('/dashboard');
         }
 
