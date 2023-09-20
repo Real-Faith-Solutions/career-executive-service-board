@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_written_exam_form" onsubmit="return checkErrorsBeforeSubmit(update_written_exam_form)">
+            <form action="{{ route('eris-written-exam.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_written_exam_form" onsubmit="return checkErrorsBeforeSubmit(update_written_exam_form)">
                 @csrf
                 @method('PUT')
 
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="updateWrittenExamButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

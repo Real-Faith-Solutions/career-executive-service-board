@@ -601,7 +601,8 @@ Route::middleware('auth')->group(function () {
                 Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
                 Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
                 Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store'); 
-                Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit'); 
+                Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
+                Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update'); 
            });
 
         });
