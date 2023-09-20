@@ -18,12 +18,13 @@ return new class extends Migration
             $table->foreignId('appt_stat_code')->constrained('plantillalib_tblApptStatus', 'appt_stat_code');
             $table->string('appt_date')->nullable();
             $table->string('assum_date')->nullable();
-            $table->string('is_appointee')->nullable();
+            $table->boolean('is_appointee')->nullable();
             $table->string('ofc_stat_code')->nullable();
             $table->string('basis')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('created_user')->nullable();
+            $table->string('lastupd_user')->nullable();
+            $table->timestamp('created_dt')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

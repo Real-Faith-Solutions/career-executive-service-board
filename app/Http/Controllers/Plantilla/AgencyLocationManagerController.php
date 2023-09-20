@@ -30,16 +30,16 @@ class AgencyLocationManagerController extends Controller
             'deptid' => ['required'],
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'agencyloc_Id' => ['required'],
+            'loctype_id' => ['required'],
             'region' => ['required'],
         ]);
         AgencyLocation::create([
             'deptid' => $request->input('deptid'),
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
-            'agencyloc_Id' => $request->input('agencyloc_Id'),
+            'loctype_id' => $request->input('loctype_id'),
             'telno' => $request->input('telno'),
-            'emailadd' => $request->input('emailadd'),
+            'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
             'encoder' => $encoder,
         ]);
@@ -85,7 +85,7 @@ class AgencyLocationManagerController extends Controller
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'agencyloc_Id' => ['required'],
+            'loctype_id' => ['required'],
             'region' => ['required'],
         ]);
 
@@ -93,9 +93,9 @@ class AgencyLocationManagerController extends Controller
         $departmentLocation->update([
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
-            'agencyloc_Id' => $request->input('agencyloc_Id'),
+            'loctype_id' => $request->input('loctype_id'),
             'telno' => $request->input('telno'),
-            'email' => $request->input('email'),
+            'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
         ]);
 
