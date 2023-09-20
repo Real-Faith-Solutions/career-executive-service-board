@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PlanAppointee extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'created_dt';
+    const UPDATED_AT = 'lastupd_dt';
     protected $table = 'plantilla_tblPlanAppointees';
     protected $primaryKey = 'appointee_id';
 
@@ -20,7 +22,8 @@ class PlanAppointee extends Model
         return $this->hasOne(PersonalData::class, 'cesno', 'cesno');
     }
 
-    public function apptStatus(): BelongsTo{
+    public function apptStatus(): BelongsTo
+    {
         return $this->belongsTo(ApptStatus::class, 'appt_stat_code', 'appt_stat_code');
     }
 }

@@ -444,7 +444,7 @@
                 {{ $data->apptStatus->title }}
             </td>
             <td>
-                {{ $data->personalData->cesStatus->description}}
+                {{ $data->personalData->cesStatus->description ?? 'N\A'}}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}

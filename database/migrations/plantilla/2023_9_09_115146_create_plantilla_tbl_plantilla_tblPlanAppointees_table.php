@@ -21,9 +21,10 @@ return new class extends Migration
             $table->string('is_appointee')->nullable();
             $table->string('ofc_stat_code')->nullable();
             $table->string('basis')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('created_user')->nullable();
+            $table->string('lastupd_user')->nullable();
+            $table->timestamp('created_dt')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }
