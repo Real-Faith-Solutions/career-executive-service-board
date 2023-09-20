@@ -16,6 +16,18 @@ class PlanAppointee extends Model
     const UPDATED_AT = 'lastupd_dt';
     protected $table = 'plantilla_tblPlanAppointees';
     protected $primaryKey = 'appointee_id';
+    protected $fillable = [
+        'plantilla_id',
+        'cesno',
+        'appt_stat_code',
+        'appt_date',
+        'assum_date',
+        'is_appointee',
+        'ofc_stat_code',
+        'basis',
+        'created_user',
+        'lastupd_user',
+    ];
 
     public function personalData(): HasOne
     {
