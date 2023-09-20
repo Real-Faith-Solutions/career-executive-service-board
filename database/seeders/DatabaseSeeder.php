@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
             DepartmentAgencyTypeSeeder::class,
             // ApptStatusSeeder::class,
             TrainingLibCategorySeeder::class,
+            ErisTblMainSeeder::class,
         ]);
     }
 }
