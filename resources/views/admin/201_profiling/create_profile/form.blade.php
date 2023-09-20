@@ -119,7 +119,7 @@
 
             <div class="mb-3">
                 <label for="nickname">Nickname</label>
-                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0, 'letters')" onkeypress="validateInput(nickname, 0, 'letters')" onblur="checkErrorMessage(nickname)">
+                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(nickname, 0, 'letters')" onblur="checkErrorMessage(nickname)">
                 <p class="input_error text-red-600"></p>
                 @error('nickname')
                     <span class="invalid" role="alert">
