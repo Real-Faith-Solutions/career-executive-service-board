@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PlanPosition extends Model
 {
     use HasFactory, SoftDeletes;
+    const CREATED_AT = 'created_dt';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $table = 'plantilla_tblPlanPositions';
     protected $primaryKey = 'plantilla_id';
     protected $fillable = [
@@ -31,8 +34,8 @@ class PlanPosition extends Model
         'is_active',
         'is_generic',
         'is_head',
-        'encoder',
-        'updated_by',
+        'created_user',
+        'lastupd_user',
     ];
 
 

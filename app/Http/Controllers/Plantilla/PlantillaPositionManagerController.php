@@ -92,7 +92,7 @@ class PlantillaPositionManagerController extends Controller
             'is_active' => $request->input('is_active'),
             'is_generic' => $request->input('is_generic'),
             'is_head' => $request->input('is_head'),
-            'encoder' => $encoder,
+            'created_user' => $encoder,
         ]);
 
 
@@ -131,7 +131,7 @@ class PlantillaPositionManagerController extends Controller
             'is_active' => $request->input('is_active'),
             'is_generic' => $request->input('is_generic'),
             'is_head' => $request->input('is_head'),
-            'updated_by' => $encoder,
+            'lastupd_user' => $encoder,
         ]);
 
 
