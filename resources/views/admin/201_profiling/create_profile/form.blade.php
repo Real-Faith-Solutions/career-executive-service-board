@@ -65,7 +65,7 @@
 
             <div class="mb-3">
                 <label for="lastname">Lastname<sup>*</sup></label>
-                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2, 'letters')" onkeypress="validateInput(lastname, 2, 'letters')" onblur="checkErrorMessage(lastname)" required>
+                <input id="lastname" name="lastname" type="text" value="{{ old('lastname') }}" oninput="validateInput(lastname, 2, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(lastname, 2, 'letters')" onblur="checkErrorMessage(lastname)" required>
                 <p class="input_error text-red-600"></p>
                 @error('lastname')
                     <span class="invalid" role="alert">
@@ -76,7 +76,7 @@
 
             <div class="mb-3">
                 <label for="firstname">Firstname<sup>*</sup></label>
-                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}" oninput="validateInput(firstname, 2, 'letters')" onkeypress="validateInput(firstname, 2, 'letters')" onblur="checkErrorMessage(firstname)" required>
+                <input id="firstname" name="firstname" type="text" value="{{ old('firstname') }}" oninput="validateInput(firstname, 2, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(firstname, 2, 'letters')" onblur="checkErrorMessage(firstname)" required>
                 <p class="input_error text-red-600"></p>
                 @error('firstname')
                     <span class="invalid" role="alert">
@@ -101,7 +101,7 @@
 
             <div class="mb-3">
                 <label for="middlename">Middlename<sup>*</sup></label>
-                <input id="middlename" name="middlename" type="text" value="{{ old('middlename') }}" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2, 'letters')" onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
+                <input id="middlename" name="middlename" type="text" value="{{ old('middlename') }}" onkeyup="generateMiddleInitial()" type="text" oninput="validateInput(middlename, 2, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
                 <p class="input_error text-red-600"></p>
                 @error('middlename')
                     <span class="invalid" role="alert">
@@ -119,7 +119,7 @@
 
             <div class="mb-3">
                 <label for="nickname">Nickname</label>
-                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0, 'letters')" onkeypress="validateInput(nickname, 0, 'letters')" onblur="checkErrorMessage(nickname)">
+                <input id="nickname" name="nickname" type="text" value="{{ old('nickname') }}" oninput="validateInput(nickname, 0, 'letters'), this.value = this.value.toUpperCase();" onkeypress="validateInput(nickname, 0, 'letters')" onblur="checkErrorMessage(nickname)">
                 <p class="input_error text-red-600"></p>
                 @error('nickname')
                     <span class="invalid" role="alert">
