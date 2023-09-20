@@ -68,4 +68,12 @@ class WrittenExamController extends Controller
 
         return to_route('eris-written-exam.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($acno, $ctrlno)
+    {
+       $erisTblMainProfileData =  ErisTblMain::find($acno);
+       $writtenExamPRofileData = WrittenExam::find($ctrlno); 
+
+       return view('admin.eris.partials.written_exam.edit', compact('acno', 'erisTblMainProfileData', 'writtenExamPRofileData')); 
+    }
 }

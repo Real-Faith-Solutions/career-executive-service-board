@@ -61,8 +61,8 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        {{-- <div class="flex">
-                            <form action="{{ route('ces-writtenExams.edit', ['ctrlno'=>$writtenExams->pid, 'cesno'=>$writtenExams->cesTrainingPersonalData->cesno]) }}" method="GET">
+                        <div class="flex">
+                            <form action="{{ route('eris-written-exam.edit', ['acno'=>$acno, 'ctrlno'=>$writtenExams->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -74,7 +74,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-writtenExams.destroy', ['ctrlno'=>$writtenExams->pid]) }}" method="POST" id="delete_writtenExams_participant_form{{$writtenExams->pid}}">
+                            {{-- <form action="{{ route('ces-writtenExams.destroy', ['ctrlno'=>$writtenExams->pid]) }}" method="POST" id="delete_writtenExams_participant_form{{$writtenExams->pid}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteTrainingParticipantButton{{$writtenExams->pid}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
@@ -86,8 +86,8 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                                 </button>
-                            </form>
-                        </div> --}}
+                            </form> --}}
+                        </div>
                     </td>
                 </tr>
             @endforeach
