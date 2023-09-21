@@ -63,7 +63,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                {{-- <form action="{{ route('eris-written-exam.edit', ['acno'=>$acno, 'ctrlno'=>$assessmentCenters->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-assessment-center.edit', ['acno'=>$acno, 'ctrlno'=>$assessmentCenters->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
@@ -74,7 +74,7 @@
                                         </lord-icon>
                                     </button>
                                 </form>
-
+                            {{-- 
                                 <form action="{{ route('eris-written-exam.destroy', ['ctrlno'=>$assessmentCenters->ctrlno]) }}" method="POST" id="delete_written_exam_form{{$assessmentCenters->ctrlno}}">
                                     @csrf
                                     @method('DELETE')

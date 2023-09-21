@@ -55,4 +55,12 @@ class AssessmentCenterController extends Controller
         
         return to_route('eris-assessment-center.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $assessmentCenterProfileData = AssessmentCenter::find($ctrlno);
+
+        return view('admin.eris.partials.assessment_center.edit', compact('acno', 'erisTblMainProfileData', 'assessmentCenterProfileData'));
+    }
 }
