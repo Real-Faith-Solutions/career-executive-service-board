@@ -10,6 +10,9 @@ class TrainingSecretariat extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'update_time';
+
     protected $primaryKey = 'ctrlno';
 
     protected $table = "training_secretariat";

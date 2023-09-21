@@ -30,15 +30,4 @@ class SpouseRecords extends Model
     {
         return $this->belongsTo(PersonalData::class);
     }
-
-
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     SpouseRecords::creating(function($model) {
-    //         $model->age_sn_fp = Carbon::parse($model->birthdate_sn_fp)->age;
-    //     });
-    // }
-
 }

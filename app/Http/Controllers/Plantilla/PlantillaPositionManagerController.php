@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Plantilla;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
 use App\Models\Plantilla\AgencyLocation;
+use App\Models\Plantilla\ApptStatus;
 use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
@@ -42,6 +43,7 @@ class PlantillaPositionManagerController extends Controller
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
         return view('admin.plantilla.appointee_occupant_manager.edit', compact(
             'sector',
@@ -54,6 +56,7 @@ class PlantillaPositionManagerController extends Controller
             'positionMasterLibrary',
             'classBasis',
             'planPosition',
+            'apptStatus',
 
         ));;
     }

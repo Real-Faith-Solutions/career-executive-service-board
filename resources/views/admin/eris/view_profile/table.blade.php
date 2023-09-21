@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '201 profiling table')
+@section('title', '')
 @section('content')
 
     <section>
@@ -26,7 +26,7 @@
                     @foreach ($erisTblMain as $erisTblMains)
                         <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
                             <th scope="col" class="px-6 py-3">
-                                {{ $erisTblMains->cesno }}
+                                {{ $erisTblMains->acno }}
                             </th>
 
                             <td scope="col" class="px-6 py-3">
@@ -38,7 +38,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="" class="font-medium">View profile</a>
+                                <a href="{{ route('eris-written-exam.index', ['acno'=>$erisTblMains->acno]) }}" class="font-medium">View profile</a>
                             </td>
                         </tr>
                     @endforeach

@@ -404,7 +404,7 @@
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>
-    @include('admin.plantilla.appointee_occupant_manager.create')
+    @include('admin.plantilla.appointee_occupant_browser.create')
 </div>
 <table class="dataTables">
     <thead>
@@ -415,7 +415,7 @@
             <th>Appointment</th>
             <th>CES Status</th>
             <th>Appointment Date</th>
-            <th>Encode Date</th>
+            <th>Assum Date</th>
 
             <th>
                 <span class="sr-only">Action</span>
