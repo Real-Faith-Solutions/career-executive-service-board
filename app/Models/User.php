@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,11 @@ class User extends Authenticatable
         }
 
         $this->assignRole($newRole);
+    }
+
+    public function deviceVerifications(): HasMany
+    {
+        return $this->hasMany(DeviceVerification::class, 'personal_data_cesno', 'personal_data_cesno');
     }
 
 }

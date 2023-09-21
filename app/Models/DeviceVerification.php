@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DeviceVerification extends Model
 {
@@ -15,5 +16,10 @@ class DeviceVerification extends Model
         'device_id', 
         'verified', 
     ];
+    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'personal_data_cesno', 'personal_data_cesno');
+    }
 
 }
