@@ -618,7 +618,8 @@ Route::middleware('auth')->group(function () {
            });
 
            Route::prefix('rapid-validation')->group(function () {
-                Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index'); 
+                Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
+                Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
            });
         });
     //  end of ERIS routes

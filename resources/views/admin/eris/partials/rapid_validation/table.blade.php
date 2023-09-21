@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New Rapid Validation</a>
+        <a href="{{ route('eris-rapid-validation.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Rapid Validation</a>
     </div>
 
     <div class="table-management-rapidValidations relative overflow-x-auto sm:rounded-lg shadow-lg">

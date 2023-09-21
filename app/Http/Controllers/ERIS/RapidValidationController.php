@@ -15,4 +15,11 @@ class RapidValidationController extends Controller
 
         return view('admin.eris.partials.rapid_validation.table', compact('acno', 'rapidValidation'));
     }
+
+    public function create($acno)
+    {
+        $erisTblMainProfileData =  ErisTblMain::find($acno);
+
+        return view('admin.eris.partials.rapid_validation.form', compact('acno', 'erisTblMainProfileData'));
+    }
 }
