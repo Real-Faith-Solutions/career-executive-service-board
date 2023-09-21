@@ -55,4 +55,8 @@ class ErisTblMain extends Model
         return $this->hasMany(AssessmentCenter::class, 'acno');
     }
 
+    public function rapidValidation(): HasMany
+    {
+        return $this->hasMany(RapidValidation::class, 'acno');
+    }
 }
