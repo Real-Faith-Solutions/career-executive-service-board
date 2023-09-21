@@ -12,7 +12,7 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Assessment Center</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-assessment-center.index', ['acno'=>$acno]) }}" >Assessment Center</a>
             </li>
 
             <li>

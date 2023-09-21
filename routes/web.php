@@ -26,6 +26,7 @@ use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
+use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
@@ -605,6 +606,10 @@ Route::middleware('auth')->group(function () {
                 Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update'); 
                 Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy'); 
            });
+
+           Route::prefix('assessment-center')->group(function () {
+            Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index'); 
+       });
 
         });
     //  end of ERIS routes
