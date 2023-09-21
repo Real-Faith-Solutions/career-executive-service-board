@@ -54,6 +54,19 @@ class RapidValidationController extends Controller
         $erisTblMainProfileData =  ErisTblMain::find($acno);
         $rapidValidation = RapidValidation::find($ctrlno);
         
-        return view('admin.eris.partials.rapid_validation.edit', compact('acno', 'erisTblMainProfileData', 'rapidValidation'));
+        return view('admin.eris.partials.rapid_validation.edit', compact('acno', 'erisTblMainProfileData', 'rapidValidation', 'ctrlno'));
+    }
+
+    public function update(Request $request, $acno, $ctrlno)
+    {
+        $rapidValidation = RapidValidation::find($ctrlno);
+        $rapidValidation->dteassign = $request->dteassign;
+        $rapidValidation->dtesubmit = $request->dtesubmit;
+        $rapidValidation->validator = $request->validator;
+        $rapidValidation->recom = $request->recom;
+        $rapidValidation->remarks = $request->remarks;
+        $rapidValidation->save();
+
+        return to_route('eris-rapid-validation.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
 }

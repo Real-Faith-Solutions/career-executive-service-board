@@ -17,7 +17,8 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('eris-rapid-validation.store', ['acno'=>$acno]) }}" method="POST" id="rapid_validation_form" onsubmit="return checkErrorsBeforeSubmit(rapid_validation_form)">
+            <form action="{{ route('eris-rapid-validation.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_rapid_validation_form" onsubmit="return checkErrorsBeforeSubmit(update_rapid_validation_form)">
+                @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -80,8 +81,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
+                    <button type="button" class="btn btn-primary" id="updateRapidValidationButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                        Update Changes
                     </button>
                 </div>
             </form>
