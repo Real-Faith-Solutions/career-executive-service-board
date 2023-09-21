@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('device_verification', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->foreign('personal_data_cesno')->references('personal_data_cesno')->on('users')->onDelete('cascade');
             $table->string('confirmation_code');
             $table->string('device_id')->unique();
             $table->boolean('verified')->default(false);
