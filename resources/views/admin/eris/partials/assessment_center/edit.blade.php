@@ -17,9 +17,9 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_assessment_center_form" onsubmit="return checkErrorsBeforeSubmit(update_assessment_center_form)">
-                @method('PUT')
+            <form action="{{ route('eris-assessment-center.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_assessment_center_form" onsubmit="return checkErrorsBeforeSubmit(update_assessment_center_form)">
                 @csrf
+                @method('PUT')
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
@@ -68,7 +68,12 @@
 
                 <div class="mb-3">
                     <label for="remarks">Remarks<sup>*</sup></label>
-                    <textarea name="remarks" id="remarks" cols="10" rows="3" >{{ $assessmentCenterProfileData->remarks }}"</textarea>
+                    <textarea name="remarks" id="remarks" cols="10" rows="3" >{{ $assessmentCenterProfileData->remarks }}</textarea>
+                    @error('remarks')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="flex justify-end">

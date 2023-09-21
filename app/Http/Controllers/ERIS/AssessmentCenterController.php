@@ -27,11 +27,12 @@ class AssessmentCenterController extends Controller
 
     public function store(Request $request, $acno)
     {
-        
         $request->validate([
+
             'acdate' => ['required'],
             'numtakes' => ['nullable', 'numeric', 'digits_between:1,4'],
             'remarks' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+
         ]);
             
         /** @var \App\Models\User $user */
@@ -61,6 +62,26 @@ class AssessmentCenterController extends Controller
         $erisTblMainProfileData = ErisTblMain::find($acno);
         $assessmentCenterProfileData = AssessmentCenter::find($ctrlno);
 
-        return view('admin.eris.partials.assessment_center.edit', compact('acno', 'erisTblMainProfileData', 'assessmentCenterProfileData'));
+        return view('admin.eris.partials.assessment_center.edit', compact('acno', 'erisTblMainProfileData', 'assessmentCenterProfileData', 'ctrlno'));
+    }
+
+    public function update(Request $request, $acno, $ctrlno)
+    {
+        $request->validate([
+            
+            'acdate' => ['required'],
+            'numtakes' => ['nullable', 'numeric', 'digits_between:1,4'],
+            'remarks' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
+
+        ]);
+        
+        $assessmentCenter = AssessmentCenter::find($ctrlno);
+        $assessmentCenter->acdate = $request->acdate;
+        $assessmentCenter->numtakes = $request->numtakes;
+        $assessmentCenter->docdate = $request->docdate;
+        $assessmentCenter->remarks = $request->remarks;
+        $assessmentCenter->save();
+
+        return to_route('eris-assessment-center.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
 }
