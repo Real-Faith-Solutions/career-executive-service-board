@@ -69,4 +69,12 @@ class RapidValidationController extends Controller
 
         return to_route('eris-rapid-validation.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $rapidValidation = RapidValidation::find($ctrlno);
+        $rapidValidation->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }
