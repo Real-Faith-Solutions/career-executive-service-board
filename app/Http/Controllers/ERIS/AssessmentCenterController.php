@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\AssessmentCenter;
 use App\Models\Eris\ErisTblMain;
 use Illuminate\Http\Request;
 
@@ -15,5 +14,12 @@ class AssessmentCenterController extends Controller
         $assessmentCenter = $erisTblMain->assessmentCenter()->paginate(20);
 
         return view('admin.eris.partials.assessment_center.table', compact('acno', 'assessmentCenter'));
+    }
+
+    public function create($acno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+
+        return view('admin.eris.partials.assessment_center.form', compact('acno','erisTblMainProfileData'));
     }
 }

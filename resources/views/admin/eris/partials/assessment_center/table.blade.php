@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New Assessment</a>
+        <a href="{{ route('eris-assessment-center.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Assessment</a>
     </div>
 
     <div class="table-management-assessmentCenters relative overflow-x-auto sm:rounded-lg shadow-lg">
