@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // rapid validation
         Schema::create('erad_tblRVP', function (Blueprint $table) {
-            $table->id('acno');
-            $table->string('dteassign');
-            $table->string('dtesubmit');
-            $table->string('validator');
-            $table->string('recom');
-            $table->string('remarks');
-            $table->string('encoder');
-            $table->string('encdate');
-            $table->integer('ctrlno');
-            $table->timestamps();
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->date('dteassign')->nullable(); // date assign
+            $table->date('dtesubmit')->nullable(); // date submnit
+            $table->string('validator')->nullable();
+            $table->string('recom')->nullable(); // recommendation
+            $table->string('remarks')->nullable();
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

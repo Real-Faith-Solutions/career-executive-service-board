@@ -16,7 +16,7 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Rapid Validation</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-rapid-validation.index', ['acno'=>$acno]) }}" >Rapid Validation</a>
             </li>
 
             <li>
