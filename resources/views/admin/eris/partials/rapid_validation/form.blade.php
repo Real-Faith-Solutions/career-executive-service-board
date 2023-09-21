@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="rapid_validation_form" onsubmit="return checkErrorsBeforeSubmit(rapid_validation_form)">
+            <form action="{{ route('eris-rapid-validation.store', ['acno'=>$acno]) }}" method="POST" id="rapid_validation_form" onsubmit="return checkErrorsBeforeSubmit(rapid_validation_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

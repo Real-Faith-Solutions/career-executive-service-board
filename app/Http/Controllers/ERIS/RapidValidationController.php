@@ -4,7 +4,9 @@ namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\RapidValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RapidValidationController extends Controller
 {
@@ -21,5 +23,29 @@ class RapidValidationController extends Controller
         $erisTblMainProfileData =  ErisTblMain::find($acno);
 
         return view('admin.eris.partials.rapid_validation.form', compact('acno', 'erisTblMainProfileData'));
+    }
+
+    public function store(Request $request, $acno)
+    {    
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $rapiValidation = new RapidValidation([
+
+            'dteassign' => $request->dteassign, // date assign
+            'dtesubmit' => $request->dtesubmit, // date submit
+            'validator' => $request->validator, 
+            'recom' => $request->recom, // recommendation
+            'remarks' => $request->remarks, 
+            'encoder' =>  $encoder,
+
+        ]);
+
+        $erisTblMain = ErisTblMain::find($request->acno);
+        
+        $erisTblMain->rapidValidation()->save($rapiValidation);
+        
+        return to_route('eris-rapid-validation.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');     
     }
 }
