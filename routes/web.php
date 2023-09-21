@@ -609,7 +609,8 @@ Route::middleware('auth')->group(function () {
 
            Route::prefix('assessment-center')->group(function () {
                 Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index'); 
-                Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create'); 
+                Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create');
+                Route::post('store/{acno}', [AssessmentCenterController::class, 'store'])->name('eris-assessment-center.store'); 
            });
 
         });
