@@ -84,4 +84,12 @@ class AssessmentCenterController extends Controller
 
         return to_route('eris-assessment-center.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+       $assessmentCenter =  AssessmentCenter::find($ctrlno);
+       $assessmentCenter->delete();
+
+       return back()->with('message', 'Deleted Sucessfully');        
+    }
 }
