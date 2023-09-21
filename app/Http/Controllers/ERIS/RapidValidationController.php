@@ -48,4 +48,12 @@ class RapidValidationController extends Controller
         
         return to_route('eris-rapid-validation.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');     
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData =  ErisTblMain::find($acno);
+        $rapidValidation = RapidValidation::find($ctrlno);
+        
+        return view('admin.eris.partials.rapid_validation.edit', compact('acno', 'erisTblMainProfileData', 'rapidValidation'));
+    }
 }

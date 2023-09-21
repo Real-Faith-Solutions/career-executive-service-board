@@ -71,7 +71,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                {{-- <form action="{{ route('eris-assessment-center.edit', ['acno'=>$acno, 'ctrlno'=>$rapidValidations->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-rapid-validation.edit', ['acno'=>$acno, 'ctrlno'=>$rapidValidations->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
@@ -83,7 +83,7 @@
                                     </button>
                                 </form>
                             
-                                <form action="{{ route('eris-assessment-center.destroy', ['ctrlno'=>$rapidValidations->ctrlno]) }}" method="POST" id="delete_assessment_center_form{{$rapidValidations->ctrlno}}">
+                                {{--  <form action="{{ route('eris-assessment-center.destroy', ['ctrlno'=>$rapidValidations->ctrlno]) }}" method="POST" id="delete_assessment_center_form{{$rapidValidations->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deleteAssessmentCenterButton{{$rapidValidations->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

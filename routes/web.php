@@ -621,6 +621,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
                 Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
                 Route::post('store/{acno}', [RapidValidationController::class, 'store'])->name('eris-rapid-validation.store');
+                Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
            });
         });
     //  end of ERIS routes
