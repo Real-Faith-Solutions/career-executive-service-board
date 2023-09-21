@@ -44,7 +44,8 @@
 
                     <div class="mb-3">
                         <label for="numtakes">No. of Takes<sup>*</sup></label>
-                        <input type="text" name="numtakes">
+                        <input type="text" id="numtakes" name="numtakes" oninput="validateInput(numtakes, 1, 'numbers')" onkeypress="validateInput(numtakes, 1, 'numbers')" onblur="checkErrorMessage(numtakes)">
+                        <p class="input_error text-red-600"></p>
                         @error('numtakes')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
