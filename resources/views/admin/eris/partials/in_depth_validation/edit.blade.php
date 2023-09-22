@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_in_depth_validation_form" onsubmit="return checkErrorsBeforeSubmit(update_in_depth_validation_form)">
+            <form action="{{ route('eris-in-depth-validation.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_in_depth_validation_form" onsubmit="return checkErrorsBeforeSubmit(update_in_depth_validation_form)">
                 @method('PUT')
                 @csrf
 

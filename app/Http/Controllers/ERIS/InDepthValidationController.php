@@ -55,6 +55,21 @@ class InDepthValidationController extends Controller
         $erisTblMainProfileData = ErisTblMain::find($acno);
         $inDepthValidation = InDepthValidation::find($ctrlno);
 
-        return view('admin.eris.partials.in_depth_validation.edit', compact('acno', 'erisTblMainProfileData', 'inDepthValidation'));
+        return view('admin.eris.partials.in_depth_validation.edit', compact('acno', 'erisTblMainProfileData', 'inDepthValidation', 'ctrlno'));
+    }
+
+    public function update(Request $request, $acno, $ctrlno)
+    {
+        
+        $inDepthValidation = InDepthValidation::find($ctrlno);
+        $inDepthValidation->dteassign = $request->dteassign;
+        $inDepthValidation->dtesubmit = $request->dtesubmit;
+        $inDepthValidation->validator = $request->validator;
+        $inDepthValidation->recom = $request->recom;
+        $inDepthValidation->remarks = $request->remarks;
+        $inDepthValidation->dtedefer = $request->dtedefer;
+        $inDepthValidation->save();
+
+        return to_route('eris-in-depth-validation.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
 }
