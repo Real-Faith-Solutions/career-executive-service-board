@@ -120,7 +120,9 @@
                     </fieldset>
 
                     <div class="">
-                        <form action="{{ route('appointee-occupant-manager.store') }}" method="POST">
+                        <form
+                            action="{{ route('appointee-occupant-manager.update', ['appointee_id' => $appointees->appointee_id]) }}"
+                            method="POST">
                             @csrf
                             <input type="hidden" name="plantilla_id" value="{{ $planPosition->plantilla_id }}">
                             <fieldset class="border p-4">
@@ -154,7 +156,8 @@
                                             </div>
 
                                             <div class="flex items-center mr-4">
-                                                <input id="is_occupant" name="is_appointee" type="radio" value="1">
+                                                <input id="is_occupant" name="is_appointee" type="radio" value="0" {{
+                                                    $appointees->is_appointee ? '' : 'checked' }}>
                                                 <label class="ml-2 text-sm font-medium text-gray-900"
                                                     for="is_occupant">Occupant</label>
                                             </div>

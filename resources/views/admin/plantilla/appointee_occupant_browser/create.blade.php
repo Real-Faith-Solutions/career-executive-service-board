@@ -106,7 +106,7 @@
                                             </div>
 
                                             <div class="flex items-center mr-4">
-                                                <input id="is_occupant" name="is_appointee" type="radio" value="1">
+                                                <input id="is_occupant" name="is_appointee" type="radio" value="0">
                                                 <label class="ml-2 text-sm font-medium text-gray-900"
                                                     for="is_occupant">Occupant</label>
                                             </div>

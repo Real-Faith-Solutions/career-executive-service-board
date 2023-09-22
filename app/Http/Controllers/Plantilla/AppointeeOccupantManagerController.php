@@ -155,4 +155,30 @@ class AppointeeOccupantManagerController extends Controller
 
         ));;
     }
+
+    public function update(Request $request, $appointee_id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $request->validate([
+            'appt_stat_code' => ['required'],
+            'appt_date' => ['required'],
+            'assum_date' => ['required'],
+        ]);
+
+        $planAppointee = PlanAppointee::withTrashed()->findOrFail($appointee_id);
+        $planAppointee->update([
+            'appt_stat_code' => $request->input('appt_stat_code'),
+            'appt_date' => $request->input('appt_date'),
+            'assum_date' => $request->input('assum_date'),
+            'is_appointee' => $request->input('is_appointee'),
+            'ofc_stat_code' => $request->input('ofc_stat_code'),
+            'basis' => $request->input('basis'),
+            'lastupd_user' => $encoder,
+        ]);
+
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
+    }
 }
