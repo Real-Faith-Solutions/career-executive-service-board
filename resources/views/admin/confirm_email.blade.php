@@ -85,7 +85,7 @@
 
         <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
             <div class="mt-8 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
-                <h1 class="text-xl font-semibold text-center text-blue-500 mt-2">Confirm code</h1>
+                <h1 class="text-xl font-semibold text-center text-blue-500 mt-2">Confirm Email</h1>
                 <h2 class="text-md font-semibold text-center text-black-500 mt-2">Please Enter Confirmation Code</h2>
 
                 <form class="user" method="POST" action="{{ route('login') }}">
