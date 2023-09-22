@@ -69,4 +69,12 @@ class PanelBoardInterviewController extends Controller
 
         return to_route('panel-board-interview.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $panelBoardInterview = PanelBoardInterview::find($ctrlno);
+        $panelBoardInterview->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');        
+    }
 }
