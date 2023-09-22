@@ -64,4 +64,9 @@ class ErisTblMain extends Model
     {
         return $this->hasMany(InDepthValidation::class, 'acno');
     }
+
+    public function panelBoardInterview(): HasMany
+    {
+        return $this->hasMany(PanelBoardInterview::class, 'acno');
+    }
 }
