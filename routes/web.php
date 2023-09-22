@@ -445,10 +445,15 @@ Route::middleware('auth')->group(function () {
             Route::match(['get', 'post'], '/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{cesno?}', [AppointeeOccupantManagerController::class, 'create'])
                 ->name('appointee-occupant-manager.create')
                 ->where('cesno', '.*');
+
+
+            Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store');
+            Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy');
         });
 
-        Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store');
-        Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy');
+        Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show');
+
+
 
 
 

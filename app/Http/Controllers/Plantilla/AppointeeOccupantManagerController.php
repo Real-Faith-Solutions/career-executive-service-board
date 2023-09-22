@@ -117,4 +117,42 @@ class AppointeeOccupantManagerController extends Controller
 
         return redirect()->back()->with('message', 'The item has been successfully deleted!');
     }
+
+
+    public function show(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id, $appointee_id)
+    {
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+        $office = Office::find($officeid);
+        $planPosition = PlanPosition::find($plantilla_id);
+        $appointees = PlanAppointee::find($appointee_id);
+
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+
+
+        $planAppointee = PlanAppointee::query()
+            ->where('plantilla_id', $planPosition->plantilla_id)
+            ->get();
+
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+        return view('admin.plantilla.appointee_occupant_browser.edit', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'office',
+            'cities',
+            'planAppointee',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+            'planPosition',
+            'apptStatus',
+            'appointees',
+
+        ));;
+    }
 }

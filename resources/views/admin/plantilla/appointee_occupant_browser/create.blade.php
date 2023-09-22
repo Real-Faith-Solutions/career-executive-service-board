@@ -175,8 +175,8 @@
 
                                     <div class="mb-3">
                                         <label for="remarks">Remarks</label>
-                                        <textarea name="remarks" id="remarks" cols="30"
-                                            rows="10">{{ $personalData->remarks ?? ''}}</textarea>
+                                        <textarea name="remarks" id="remarks" cols="30" rows="10"
+                                            readonly>{{ $personalData->remarks ?? ''}}</textarea>
                                     </div>
                                 </div>
 
