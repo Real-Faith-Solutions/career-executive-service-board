@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New Rank Tracker</a>
+        <a href="{{ route('eris-rank-tracker.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Rank Tracker</a>
     </div>
 
     <div class="table-management-rankTrackers relative overflow-x-auto sm:rounded-lg shadow-lg">

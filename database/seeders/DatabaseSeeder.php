@@ -72,6 +72,7 @@ class DatabaseSeeder extends Seeder
             // ApptStatusSeeder::class,
             TrainingLibCategorySeeder::class,
             ErisTblMainSeeder::class,
+            LibraryRankTrackerSeeder::class,
         ]);
     }
 }
