@@ -648,7 +648,8 @@ Route::middleware('auth')->group(function () {
            });
 
            Route::prefix('board-interview')->group(function () {
-                Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('board-interview.index');
+                Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('eris-board-interview.index');
+                Route::get('create/{acno}', [BoardInterviewController::class, 'create'])->name('eris-board-interview.create');
            });
         });
     //  end of ERIS routes

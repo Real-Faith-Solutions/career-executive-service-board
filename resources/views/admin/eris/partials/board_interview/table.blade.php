@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New Board Interview</a>
+        <a href="{{ route('eris-board-interview.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Board Interview</a>
     </div>
 
     <div class="table-management-boardInterviews relative overflow-x-auto sm:rounded-lg shadow-lg">
