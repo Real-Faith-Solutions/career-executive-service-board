@@ -29,6 +29,7 @@ use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
+use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
@@ -634,6 +635,10 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
                 Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
                 Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
+           });
+
+           Route::prefix('panel-board-interview')->group(function () {
+                Route::get('index/{acno}', [PanelBoardInterviewController::class, 'index'])->name('panel-board-interview.index');
            });
         });
     //  end of ERIS routes

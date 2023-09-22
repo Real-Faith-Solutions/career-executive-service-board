@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('erad_tblPBOARD', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
-            $table->date('dteassign')->nullable();
-            $table->date('dtesubmit')->nullable();
-            $table->string('intrviewer')->nullable();
-            $table->date('dteiview')->nullable();
-            $table->string('recom')->nullable();
+            $table->date('dteassign')->nullable(); // date assigned
+            $table->date('dtesubmit')->nullable(); // date submit
+            $table->string('intrviewer')->nullable(); // interviewer
+            $table->date('dteiview')->nullable(); // date interview
+            $table->string('recom')->nullable(); // recommendation
             $table->string('encoder')->nullable();  
             $table->timestamp('encdate');
             $table->timestamp('updated_at');

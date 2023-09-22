@@ -24,7 +24,7 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Panel Board Interview</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('panel-board-interview.index', ['acno'=>$acno]) }}" >Panel Board Interview</a>
             </li>
 
             <li>

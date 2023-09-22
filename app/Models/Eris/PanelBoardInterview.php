@@ -21,11 +21,11 @@ class PanelBoardInterview extends Model
     protected $fillable = [
 
         'acno',
-        'dteassign',
-        'dtesubmit',
-        'intrviewer',
-        'dteiview',
-        'recom',
+        'dteassign', // date assigned
+        'dtesubmit', // date submit
+        'intrviewer', // interviewer
+        'dteiview', // date interview
+        'recom', // recommendation
         'encoder',
 
     ];
