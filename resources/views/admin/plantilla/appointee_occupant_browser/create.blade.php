@@ -96,37 +96,109 @@
                         <fieldset class="border p-4">
                             <legend>Office information</legend>
                             <div class="mb-3">
-                                <label for="Department/Agency">Department/Agency<sup>*</sup></label>
+                                <label for="Department/Agency">Department/Agency</label>
                                 <input id="Department/Agency" value="{{ $department->title }}" readonly />
                             </div>
                             <div class="mb-3">
-                                <label for="Location">Location<sup>*</sup></label>
+                                <label for="Location">Location</label>
                                 <input id="Location" value="{{ $departmentLocation->title }}" readonly />
                             </div>
                             <div class="mb-3">
-                                <label for="Office">Office<sup>*</sup></label>
+                                <label for="Office">Office</label>
                                 <input id="Office" value="{{ $office->title }}" readonly />
                             </div>
                             <div class="mb-3">
-                                <label for="Department/Agency">CES Level<sup>*</sup></label>
-                                <input id="Department/Agency" value="{{ $office->title }}" readonly />
+                                <label for="titles">CES Level</label>
+                                <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}"
+                                    readonly />
                             </div>
                             <div class="mb-3">
-                                <label for="Department/Agency">CES Level<sup>*</sup></label>
-                                <input id="Department/Agency" value="{{ $office->title }}" readonly />
+                                <label for="sg">Salary Grade Level</label>
+                                <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
                             </div>
                         </fieldset>
 
                         <fieldset class="border p-4">
                             <legend>Occupant information</legend>
+                            <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                <div class="mb-3">
+                                    <select id="appt_stat_code" name="appt_stat_code" required>
+                                        <option disabled selected>Select Personnel Movement</option>
+                                        @foreach ($apptStatus as $data)
+                                        <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 flex">
+                                    <div class="flex">
+                                        <div class="flex items-center mr-4">
+                                            <input id="is_appointee" name="is_appointee" type="radio" value="1">
+                                            <label class="ml-2 text-sm font-medium text-gray-900"
+                                                for="is_appointee">Appointee</label>
+                                        </div>
+
+                                        <div class="flex items-center mr-4">
+                                            <input id="is_occupant" name="is_appointee" type="radio" value="1">
+                                            <label class="ml-2 text-sm font-medium text-gray-900"
+                                                for="is_occupant">Occupant</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
-                                <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
-                                <select id="appt_stat_code" name="appt_stat_code" required>
-                                    <option disabled selected>Select Personnel Movement</option>
-                                    @foreach ($apptStatus as $data)
-                                    <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="cesno">Name of officials<sup>*</sup></label>
+                                <input id="cesno" list="cesnoList" type="search" />
+                                <datalist id="cesnoList">
+                                    <option value="1">JOSHUA</option>
+                                    <option value="2">ALFARO</option>
+                                    <option value="3">VILLANUEVA</option>
+                                </datalist>
+                            </div>
+
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                <div class="mb-3">
+                                    <label for="">CES Status<sup>*</sup></label>
+                                    <input id="" readonly />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="">Assumption Date<sup>*</sup></label>
+                                    <input id="" type="date" />
+                                </div>
+                            </div>
+
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                <div class="mb-3">
+                                    <label for="">Gender<sup>*</sup></label>
+                                    <input id="" readonly />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="">Appointment Date<sup>*</sup></label>
+                                    <input id="" type="date" />
+                                </div>
+                            </div>
+
+                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                <div class="mb-3">
+                                    <label for="">Basis</label>
+                                    <textarea name="" id="" cols="30" rows="10"
+                                        readonly>{{ $planPosition->classBasis->basis }}</textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="">Remarks</label>
+                                    <textarea name="" id="" cols="30" rows="10"
+                                        readonly>{{ $planPosition->remarks }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Special Assignment</label>
+                                <textarea name="" id="" cols="30" rows="10" readonly></textarea>
                             </div>
 
                         </fieldset>
