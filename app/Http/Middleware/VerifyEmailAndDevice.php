@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Mail\ConfirmationCodeMail;
 use App\Models\DeviceVerification;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 
 class VerifyEmailAndDevice
@@ -27,6 +29,8 @@ class VerifyEmailAndDevice
 
             $device_id = uniqid();
             $confirmation_code = mt_rand(10000, 99999);
+            $recipientEmail = auth()->user()->email;
+            $imagePath = public_path('images/branding.png');
 
             DeviceVerification::create([
                 'user_ctrlno' => $ctrlno,
@@ -34,6 +38,15 @@ class VerifyEmailAndDevice
                 'device_id' => $device_id,
                 'verified' => false, // Set verified to false initially
             ]);
+
+            // sending confirmation_code email to user
+            $data = [
+                'email' => $recipientEmail,
+                'confirmation_code' => $confirmation_code,
+                'imagePath' => $imagePath,
+            ];
+    
+            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
 
             // Add the new association to the array
             $associations[] = [
