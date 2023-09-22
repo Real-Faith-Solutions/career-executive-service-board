@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New Panel Board Interview</a>
+        <a href="{{ route('panel-board-interview.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Panel Board Interview</a>
     </div>
 
     <div class="table-management-panelBoardInterviews relative overflow-x-auto sm:rounded-lg shadow-lg">

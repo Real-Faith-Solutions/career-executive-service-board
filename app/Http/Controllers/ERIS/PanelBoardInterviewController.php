@@ -15,4 +15,11 @@ class PanelBoardInterviewController extends Controller
         
         return view('admin.eris.partials.panel_board_interview.table', compact('acno', 'panelBoardInterview'));
     }
+
+    public function create($acno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+
+        return view('admin.eris.partials.panel_board_interview.form', compact('acno', 'erisTblMainProfileData'));
+    }
 }
