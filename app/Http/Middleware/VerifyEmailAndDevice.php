@@ -20,6 +20,30 @@ class VerifyEmailAndDevice
 
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
+
+            if($this->checkPendingConfirmation($associations, $ctrlno)){
+                return redirect()->route('reconfirm.email');
+            }
+
+            $device_id = uniqid();
+            $confirmation_code = mt_rand(10000, 99999);
+
+            DeviceVerification::create([
+                'user_ctrlno' => $ctrlno,
+                'confirmation_code' => $confirmation_code,
+                'device_id' => $device_id,
+                'verified' => false, // Set verified to false initially
+            ]);
+
+            // Add the new association to the array
+            $associations[] = [
+                'user_id' => $ctrlno,
+                'device_id' => $device_id,
+                'verified' => false, // Set verified to false initially
+            ];
+
+            Cookie::queue(Cookie::make('user_device_associations', json_encode($associations), 30 * 24 * 60));
+
             return redirect()->route('reconfirm.email');
         }
 
@@ -50,4 +74,16 @@ class VerifyEmailAndDevice
             ->pluck('device_id')
             ->toArray();
     }
+
+    protected function checkPendingConfirmation($associations, $ctrlno)
+    {
+        foreach ($associations as $association) {
+            if ($association['user_id'] === $ctrlno) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

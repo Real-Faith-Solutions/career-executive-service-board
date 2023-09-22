@@ -35,6 +35,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->remember)) {
             Cookie::queue(Cookie::make('email', $request->email, 120));
             Cookie::queue(Cookie::make('remember', $request->remember, 120));
+
+            // $userId = Auth::user()->ctrlno;
+            // $device_id = uniqid();
+
             return redirect()->intended('/dashboard');
         }
 
