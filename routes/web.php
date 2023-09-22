@@ -31,6 +31,7 @@ use App\Http\Controllers\ERIS\BoardInterviewController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
+use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
@@ -654,6 +655,15 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
                 Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
                 Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
+           });
+
+           Route::prefix('rank-tracker')->group(function () {
+                Route::get('index/{acno}', [RankTrackerController::class, 'index'])->name('eris-rank-tracker.index');
+                Route::get('create/{acno}', [RankTrackerController::class, 'create'])->name('eris-rank-tracker.create');
+                Route::post('store/{acno}', [RankTrackerController::class, 'store'])->name('eris-rank-tracker.store');
+                Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
+                Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
+                Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
            });
         });
     //  end of ERIS routes

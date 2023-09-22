@@ -32,7 +32,7 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Rank Tracker</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-rank-tracker.index', ['acno'=>$acno]) }}" >Rank Tracker</a>
             </li>
         </ul>
     </div>
