@@ -1,148 +1,206 @@
-<div id="large-modal" tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-4xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-5 border-b rounded-t">
-                <h3 class="text-xl font-medium text-gray-900">
+@extends('layouts.app')
+@section('title', $planPosition->positionMasterLibrary->dbm_title)
+@section('sub', $planPosition->positionMasterLibrary->dbm_title)
+@section('content')
+@include('admin.plantilla.header')
+
+<div class="my-5 flex justify-end gap-4">
+    <a class="btn btn-primary"
+        href="{{ route('plantilla-position-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id]) }}">Go
+        back</a>
+</div>
+
+<div class="grid">
+    <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+        <div class="w-full text-left text-gray-500">
+            <div class="bg-blue-500 uppercase text-gray-700 text-white">
+                <h1 class="px-6 py-3">
                     CES Position - Add Occupant
-                </h3>
-                <button type="button"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
-                    data-modal-hide="large-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
+                </h1>
             </div>
 
-            <div class="p-6 space-y-6">
-                <form action="#" method="POST">
-                    @csrf
-                    <div class="sm:gid-row-1 mb-3 grid gap-4 md:grid-row-2 lg:grid-row-2">
-                        <fieldset class="border p-4">
-                            <legend>Office information</legend>
-                            <div class="mb-3">
-                                <label for="Department/Agency">Department/Agency</label>
-                                <input id="Department/Agency" value="{{ $department->title }}" readonly />
-                            </div>
-                            <div class="mb-3">
-                                <label for="Location">Location</label>
-                                <input id="Location" value="{{ $departmentLocation->title }}" readonly />
-                            </div>
-                            <div class="mb-3">
-                                <label for="Office">Office</label>
-                                <input id="Office" value="{{ $office->title }}" readonly />
-                            </div>
-                            <div class="mb-3">
-                                <label for="titles">CES Level</label>
-                                <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}"
-                                    readonly />
-                            </div>
-                            <div class="mb-3">
-                                <label for="sg">Salary Grade Level</label>
-                                <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
-                            </div>
-                        </fieldset>
+            <div class="bg-white px-6 py-3">
 
-                        <fieldset class="border p-4">
-                            <legend>Occupant information</legend>
-                            <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
-                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                <div class="mb-3">
-                                    <select id="appt_stat_code" name="appt_stat_code" required>
-                                        <option disabled selected>Select Personnel Movement</option>
-                                        @foreach ($apptStatus as $data)
-                                        <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                    <fieldset class="border p-4">
+                        <legend>Office information</legend>
+                        <div class="mb-3">
+                            <label for="Department/Agency">Department/Agency</label>
+                            <input id="Department/Agency" value="{{ $department->title }}" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Location">Location</label>
+                            <input id="Location" value="{{ $departmentLocation->title }}" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Office">Office</label>
+                            <input id="Office" value="{{ $office->title }}" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="titles">CES Level</label>
+                            <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label for="sg">Salary Grade Level</label>
+                            <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
+                        </div>
+                    </fieldset>
+
+                    <div class="">
+
+
+                        <form>
+                            <div class="mb-3">
+                                <label for="cesnoSearch">CESNO<sup>*</sup></label>
+                                <div class="flex">
+                                    <input id="cesnoSearch" list="cesnoList" name="cesnoSearch" type="search"
+                                        value="{{ $cesno }}" required />
+
+                                    <datalist id="cesnoList">
+                                        @foreach ($personalDataList as $data)
+                                        <option value="{{ $data->cesno }}">
+                                            {{ $data->lastname }} {{ $data->firstname }} {{ $data->name_extension }}
+                                            {{ $data->middlename }}
+                                        </option>
                                         @endforeach
-                                    </select>
+                                    </datalist>
+
+                                    <button type="submit" id="checkCesno" class="btn btn-primary">Search</button>
                                 </div>
+                                @error('cesno')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+                        </form>
 
-                                <div class="mb-3 flex">
-                                    <div class="flex">
-                                        <div class="flex items-center mr-4">
-                                            <input id="is_appointee" name="is_appointee" type="radio" value="1">
-                                            <label class="ml-2 text-sm font-medium text-gray-900"
-                                                for="is_appointee">Appointee</label>
-                                        </div>
+                        <form action="{{ route('appointee-occupant-manager.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="plantilla_id" value="{{ $planPosition->plantilla_id }}">
+                            <input type="hidden" name="cesno" value="{{ $cesno }}">
+                            <fieldset class="border p-4">
+                                <legend>Occupant information</legend>
+                                <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <select id="appt_stat_code" name="appt_stat_code" required>
+                                            <option disabled selected>Select Personnel Movement</option>
+                                            @foreach ($apptStatus as $data)
+                                            <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('appt_stat_code')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
 
-                                        <div class="flex items-center mr-4">
-                                            <input id="is_occupant" name="is_appointee" type="radio" value="1">
-                                            <label class="ml-2 text-sm font-medium text-gray-900"
-                                                for="is_occupant">Occupant</label>
+                                    <div class="mb-3 flex">
+                                        <div class="flex">
+                                            <div class="flex items-center mr-4">
+                                                <input id="is_appointee" name="is_appointee" type="radio" value="1">
+                                                <label class="ml-2 text-sm font-medium text-gray-900"
+                                                    for="is_appointee">Appointee</label>
+                                            </div>
+
+                                            <div class="flex items-center mr-4">
+                                                <input id="is_occupant" name="is_appointee" type="radio" value="1">
+                                                <label class="ml-2 text-sm font-medium text-gray-900"
+                                                    for="is_occupant">Occupant</label>
+                                            </div>
                                         </div>
+                                        @error('is_appointee')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="mb-3">
-                                <label for="cesno">Name of officials<sup>*</sup></label>
-                                <input id="cesno" list="cesnoList" type="search" />
-                                <datalist id="cesnoList">
-                                    <option value="1">JOSHUA</option>
-                                    <option value="2">ALFARO</option>
-                                    <option value="3">VILLANUEVA</option>
-                                </datalist>
-                            </div>
-
-                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                <div class="mb-3">
-                                    <label for="">CES Status<sup>*</sup></label>
-                                    <input id="" readonly /> {{-- from 201 file--}}
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+                                    <div class="mb-3">
+                                        <label for="lastname">Name of Official</label>
+                                        <input id="lastname"
+                                            value="{{ $personalData->lastname ?? ''}} {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
+                                            readonly />
+                                    </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="">Assumption Date<sup>*</sup></label>
-                                    <input id="" type="date" />
+
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <label for="cesStatus">CES Status</label>
+                                        <input id="cesStatus" value="{{ $personalData->cesStatus->description ?? '' }}"
+                                            readonly />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="assum_date">Assumption Date<sup>*</sup></label>
+                                        <input id="assum_date" name="assum_date" type="date"
+                                            value="{{ old('assum_date') }}" />
+                                        @error('assum_date')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
+
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <label for="gender">Gender</label>
+                                        <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="appt_date">Appointment Date<sup>*</sup></label>
+                                        <input id="appt_date" name="appt_date" type="date"
+                                            value="{{ old('appt_date') }}" />
+                                        @error('appt_date')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <label for="basis">Basis</label>
+                                        <textarea name="basis" id="basis" cols="30" rows="10"
+                                            readonly>{{ $planPosition->classBasis->basis }}</textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="remarks">Remarks</label>
+                                        <textarea name="remarks" id="remarks" cols="30"
+                                            rows="10">{{ $personalData->remarks ?? ''}}</textarea>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="mb-3">
+                                    <label for="special_assignment">Special Assignment</label>
+                                    <textarea name="special_assignment" id="special_assignment" cols="30" rows="10"
+                                        readonly></textarea>
+                                </div> --}}
+
+                            </fieldset>
+
+                            <div class="flex justify-end">
+                                <button class="btn btn-primary" type="submit">
+                                    Submit
+                                </button>
                             </div>
-
-                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                <div class="mb-3">
-                                    <label for="">Gender<sup>*</sup></label>
-                                    <input id="" readonly /> {{-- from 201 file--}}
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="">Appointment Date<sup>*</sup></label>
-                                    <input id="" type="date" />
-                                </div>
-                            </div>
-
-                            <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                <div class="mb-3">
-                                    <label for="">Basis</label>
-                                    <textarea name="" id="" cols="30" rows="10"
-                                        readonly>{{ $planPosition->classBasis->basis }}</textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="">Remarks</label>
-                                    <textarea name="" id="" cols="30" rows="10" readonly></textarea> {{-- from 201
-                                    file--}}
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="">Special Assignment</label>
-                                <textarea name="" id="" cols="30" rows="10" readonly></textarea>
-                            </div>
-
-                        </fieldset>
+                        </form>
 
                     </div>
-                    <div class="flex justify-end">
-                        <button class="btn btn-primary" type="submit">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                </div>
+
             </div>
-
         </div>
     </div>
 </div>
+
+@endsection
