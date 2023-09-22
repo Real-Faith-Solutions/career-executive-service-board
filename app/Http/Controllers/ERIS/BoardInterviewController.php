@@ -69,4 +69,12 @@ class BoardInterviewController extends Controller
 
         return to_route('eris-board-interview.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $boardInterview = BoardInterView::find($ctrlno);
+        $boardInterview->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');        
+    }
 }

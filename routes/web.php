@@ -653,6 +653,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('store/{acno}', [BoardInterviewController::class, 'store'])->name('eris-board-interview.store');
                 Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
                 Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
+                Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
            });
         });
     //  end of ERIS routes
