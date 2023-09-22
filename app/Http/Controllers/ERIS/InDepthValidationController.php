@@ -17,8 +17,10 @@ class InDepthValidationController extends Controller
         return view('admin.eris.partials.in_depth_validation.table', compact('acno', 'inDepthValidation'));
     }
 
-    // public function create()
-    // {
-    //     return view('', compact(''));
-    // }
+    public function create($acno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+
+        return view('admin.eris.partials.in_depth_validation.form', compact('acno', 'erisTblMainProfileData'));
+    }
 }

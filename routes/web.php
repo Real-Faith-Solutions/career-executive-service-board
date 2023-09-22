@@ -629,6 +629,7 @@ Route::middleware('auth')->group(function () {
 
            Route::prefix('in-depth-validation')->group(function () {
                 Route::get('index/{acno}', [InDepthValidationController::class, 'index'])->name('eris-in-depth-validation.index');
+                Route::get('create/{acno}', [InDepthValidationController::class, 'create'])->name('eris-in-depth-validation.create');
            });
         });
     //  end of ERIS routes

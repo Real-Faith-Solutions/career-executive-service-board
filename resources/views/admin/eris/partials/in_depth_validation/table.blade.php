@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="" class="btn btn-primary" >Add New In Depth Validation</a>
+        <a href="{{ route('eris-in-depth-validation.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New In Depth Validation</a>
     </div>
 
     <div class="table-management-inDepthValidations relative overflow-x-auto sm:rounded-lg shadow-lg">
