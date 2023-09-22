@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_board_interview_form" onsubmit="return checkErrorsBeforeSubmit(update_board_interview_form)">
+            <form action="{{ route('eris-board-interview.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_board_interview_form" onsubmit="return checkErrorsBeforeSubmit(update_board_interview_form)">
                 @method('PUT')
                 @csrf
 

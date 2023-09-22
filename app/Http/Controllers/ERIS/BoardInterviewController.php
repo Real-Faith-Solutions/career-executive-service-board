@@ -56,4 +56,17 @@ class BoardInterviewController extends Controller
 
         return view('admin.eris.partials.board_interview.edit', compact('acno', 'erisTblMainProfileData', 'boardInterview', 'ctrlno'));
     }
+
+    public function update(Request $request, $acno, $ctrlno)
+    {
+        $boardInterview = BoardInterView::find($ctrlno);
+        $boardInterview->dteassign = $request->dteassign;
+        $boardInterview->dtesubmit = $request->dtesubmit;
+        $boardInterview->intrviewer = $request->intrviewer;
+        $boardInterview->dteiview = $request->dteiview;
+        $boardInterview->recom = $request->recom;
+        $boardInterview->save();
+
+        return to_route('eris-board-interview.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
+    }
 }
