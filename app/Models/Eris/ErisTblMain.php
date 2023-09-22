@@ -59,4 +59,9 @@ class ErisTblMain extends Model
     {
         return $this->hasMany(RapidValidation::class, 'acno');
     }
+
+    public function inDepthValidation(): HasMany
+    {
+        return $this->hasMany(InDepthValidation::class, 'acno');
+    }
 }
