@@ -71,7 +71,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                {{-- <form action="{{ route('panel-board-interview.edit', ['acno'=>$acno, 'ctrlno'=>$boardInterviews->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-board-interview.edit', ['acno'=>$acno, 'ctrlno'=>$boardInterviews->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
@@ -83,7 +83,7 @@
                                     </button>
                                 </form>
                             
-                                 <form action="{{ route('panel-board-interview.destroy', ['ctrlno'=>$boardInterviews->ctrlno]) }}" method="POST" id="delete_panel_board_interview_form{{$boardInterviews->ctrlno}}">
+                                 {{-- <form action="{{ route('panel-board-interview.destroy', ['ctrlno'=>$boardInterviews->ctrlno]) }}" method="POST" id="delete_panel_board_interview_form{{$boardInterviews->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deletePanelBoardInterviewButton{{$boardInterviews->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

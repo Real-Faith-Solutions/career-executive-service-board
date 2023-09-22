@@ -48,4 +48,12 @@ class BoardInterviewController extends Controller
         
         return to_route('eris-board-interview.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $boardInterview = BoardInterView::find($ctrlno);
+
+        return view('admin.eris.partials.board_interview.edit', compact('acno', 'erisTblMainProfileData', 'boardInterview', 'ctrlno'));
+    }
 }
