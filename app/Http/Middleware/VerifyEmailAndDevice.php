@@ -15,37 +15,39 @@ class VerifyEmailAndDevice
         // Retrieve associations from the cookie
         $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
 
-        // Get an array of current device identifiers
-        $deviceIdentifiers = $this->getCurrentDeviceIdentifiers();
+        $ctrlno = auth()->user()->ctrlno;
+        $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
 
         // Check if the user's email is verified for any of the current device identifiers
-        if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $request->user())) {
+        if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
             return redirect()->route('reconfirm.email');
         }
 
         return $next($request);
     }
 
-    protected function isEmailConfirmedForDevice($associations, $deviceIdentifiers, $user)
+    protected function isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)
     {
         foreach ($deviceIdentifiers as $deviceIdentifier) {
             foreach ($associations as $association) {
                 if (
                     $association['device_id'] === $deviceIdentifier &&
-                    $association['user_id'] === $user->id &&
+                    $association['user_id'] === $ctrlno &&
                     $association['verified']
                 ) {
-                    return true; // Email is confirmed for at least one device identifier
+                    return true;
                 }
             }
         }
 
-        return false; // Email is not confirmed for any of the device identifiers
+        return false;
     }
 
-    protected function getCurrentDeviceIdentifiers()
+    protected function getCurrentDeviceIdentifiers($ctrlno)
     {
-        // Implement logic to get an array of current device identifiers.
-        // Return an array of strings.
+        return DeviceVerification::where('user_ctrlno', $ctrlno)
+            ->where('verified', true)
+            ->pluck('device_id')
+            ->toArray();
     }
 }
