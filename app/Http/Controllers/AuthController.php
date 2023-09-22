@@ -140,4 +140,9 @@ class AuthController extends Controller
         return back()->with('error','User not found!');
     }
 
+    public function confirmEmail()
+    {
+        return view('login');
+    }
+
 }

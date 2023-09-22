@@ -105,6 +105,10 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 // end auth
 
 Route::middleware('auth')->group(function () {
+    Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
+});
+
+Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
 
