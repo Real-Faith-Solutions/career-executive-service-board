@@ -61,7 +61,7 @@
                         {{ $userName }}
                       </p>
                       <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                        {{ Auth::user()->email }}
+                        {{ Auth::user()->code }}
                       </p>
                     </div>
                     <ul class="py-1" role="none">
@@ -81,6 +81,32 @@
         <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500 text-2xl">
             <h1>Hello {{ $userTitle." ".$userName." [".$userRoleTitle."]" }}</h1>
             <h1 id="currentDateTime"></h1>
+        </div>
+
+        <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
+            <div class="mt-8 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+                <h1 class="text-xl font-semibold text-center text-blue-500 mt-2">Confirm code</h1>
+                <h2 class="text-md font-semibold text-center text-black-500 mt-2">Please Enter Confirmation Code</h2>
+
+                <form class="user" method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <div class="mb-3 mt-5">
+                        <label for="code">Confirmation Code</label>
+                        <input type="text" name="code" value="{{ old('code') }}" required autofocus autocomplete="code">
+                        @error('code')
+                        <span class="invalid" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button class="btn btn-primary">Login</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 
