@@ -67,10 +67,10 @@
                                     </button>
                                 </form>
                             
-                                 {{-- <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$rankTrackers->ctrlno}}">
+                                 <form action="{{ route('eris-rank-tracker.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rank_tracker_form{{$rankTrackers->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="deleteRapidValidationButton{{$rankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <button type="button" id="deleteRankTrackerButton{{$rankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -79,7 +79,7 @@
                                             style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
-                                </form>  --}}
+                                </form> 
                             </div>
                         </td>
                     </tr>

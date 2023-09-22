@@ -68,4 +68,12 @@ class RankTrackerController extends Controller
 
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $rankTracker = RankTracker::find($ctrlno);
+        $rankTracker->delete();
+
+       return back()->with('message', 'Deleted Sucessfully');        
+    }
 }
