@@ -448,6 +448,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store');
+        Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy');
 
 
 

@@ -109,4 +109,12 @@ class AppointeeOccupantManagerController extends Controller
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
+
+    public function destroy($appointee_id)
+    {
+        $datas = PlanAppointee::findOrFail($appointee_id);
+        $datas->delete();
+
+        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+    }
 }
