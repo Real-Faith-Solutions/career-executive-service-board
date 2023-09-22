@@ -446,7 +446,21 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('appointee-occupant-manager')->group(function () {
             Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+            Route::match(['get', 'post'], '/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{cesno?}', [AppointeeOccupantManagerController::class, 'create'])
+                ->name('appointee-occupant-manager.create')
+                ->where('cesno', '.*');
+
+
+            Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store');
+            Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy');
         });
+
+        Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show');
+        Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update');
+
+
+
+
         Route::prefix('appointee-occupant-browser')->group(function () {
             Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
         });
@@ -585,24 +599,33 @@ Route::middleware('auth')->group(function () {
     // End of competency routes
 
     //  competency report routes
-        Route::prefix('competency-report')->group(function () {
-            Route::prefix('management-sub-modules')->group(function () {
-                Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::post('general-report-generate-pdf/{sessionId}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::get('training-venue-manager-report', [CompetencyReportController::class, 'trainingVenueManagerReportIndex'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::post('training-venue-manager-report-generate-pdf', [CompetencyReportController::class, 'trainingVenueManagerReportGeneratePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::get('resource-speaker-manager-report', [CompetencyReportController::class, 'resourceSpeakerIndexReport'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-                Route::post('resource-speaker-manager-report-generate-pdf', [CompetencyReportController::class, 'resourceSpeakerGenerateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            });
+    Route::prefix('competency-report')->group(function () {
+        Route::prefix('management-sub-modules')->group(function () {
+            Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('general-report-generate-pdf/{sessionId}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('training-venue-manager-report', [CompetencyReportController::class, 'trainingVenueManagerReportIndex'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('training-venue-manager-report-generate-pdf', [CompetencyReportController::class, 'trainingVenueManagerReportGeneratePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('resource-speaker-manager-report', [CompetencyReportController::class, 'resourceSpeakerIndexReport'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('resource-speaker-manager-report-generate-pdf', [CompetencyReportController::class, 'resourceSpeakerGenerateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
         });
+    });
     //  end of competency report routes
 
     //  ERIS routes
-        Route::prefix('eris')->group(function () {
-           Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
+    Route::prefix('eris')->group(function () {
+        Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
 
+<<<<<<< HEAD
+        Route::prefix('written-exam')->group(function () {
+            Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index');
+            Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create');
+            Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store');
+            Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
+            Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update');
+            Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy');
+=======
            Route::prefix('written-exam')->group(function () {
                 Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
                 Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
@@ -665,7 +688,27 @@ Route::middleware('auth')->group(function () {
                 Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
                 Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
            });
+>>>>>>> f927a130550fff78339369e5295ee8a4e1998a95
         });
+
+        Route::prefix('assessment-center')->group(function () {
+            Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index');
+            Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create');
+            Route::post('store/{acno}', [AssessmentCenterController::class, 'store'])->name('eris-assessment-center.store');
+            Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit');
+            Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
+            Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy');
+        });
+
+        Route::prefix('rapid-validation')->group(function () {
+            Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
+            Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
+            Route::post('store/{acno}', [RapidValidationController::class, 'store'])->name('eris-rapid-validation.store');
+            Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
+            Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
+            Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+        });
+    });
     //  end of ERIS routes
 
     // Rights management routes

@@ -401,10 +401,10 @@
 </div>
 
 <div class="flex justify-end">
-    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
+    <a href="{{ route('appointee-occupant-manager.create',['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id] ) }}"
+        class="btn btn-primary">
         Add record
-    </button>
-    @include('admin.plantilla.appointee_occupant_browser.create')
+    </a>
 </div>
 <table class="dataTables">
     <thead>
@@ -455,13 +455,20 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full" href="#">
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
+                        'sectorid' => $sector->sectorid,
+                        'deptid' => $department->deptid,
+                        'officelocid' => $departmentLocation->officelocid,
+                        'officeid' => $office->officeid,
+                        'plantilla_id' => $planPosition->plantilla_id,
+                        'appointee_id' => $data->appointee_id,
+                    ]) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('plantilla-position-manager.destroy', ['plantilla_id' => $data->plantilla_id]) }}"
+                        action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf

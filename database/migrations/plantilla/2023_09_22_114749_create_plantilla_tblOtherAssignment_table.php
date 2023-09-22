@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_other_assignments', function (Blueprint $table) {
-            $table->id();
-            $table->string('detailed_code')->nullable();
-            $table->string('cesno')->nullable();
-            $table->string('appt_status_code')->nullable();
+        Schema::create('plantilla_tblOtherAssignment', function (Blueprint $table) {
+            $table->id('detailed_code');
+            $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
+            $table->foreignId('appt_status_code')->constrained('plantillalib_tblApptStatus', 'appt_stat_code');
             $table->string('position')->nullable();
             $table->string('office')->nullable();
             $table->string('from_dt')->nullable();
@@ -24,14 +23,13 @@ return new class extends Migration
             $table->string('house_bldg')->nullable();
             $table->string('st_road')->nullable();
             $table->string('brgy_vill')->nullable();
-            $table->string('city_code')->nullable();
+            $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
             $table->string('contactno')->nullable();
             $table->string('email_addr')->nullable();
-            $table->string('encdate')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('lastupd_dt')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
         });
     }
 
@@ -40,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_other_assignments');
+        Schema::dropIfExists('plantilla_tblOtherAssignment');
     }
 };
