@@ -641,6 +641,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('index/{acno}', [PanelBoardInterviewController::class, 'index'])->name('panel-board-interview.index');
                 Route::get('create/{acno}', [PanelBoardInterviewController::class, 'create'])->name('panel-board-interview.create');
                 Route::post('store/{acno}', [PanelBoardInterviewController::class, 'store'])->name('panel-board-interview.store');
+                Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
            });
         });
     //  end of ERIS routes

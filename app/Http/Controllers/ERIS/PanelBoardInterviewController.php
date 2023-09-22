@@ -48,4 +48,12 @@ class PanelBoardInterviewController extends Controller
         
         return to_route('panel-board-interview.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');     
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $panelBoardInterview = PanelBoardInterview::find($ctrlno);
+
+        return view('admin.eris.partials.panel_board_interview.edit', compact('acno', 'erisTblMainProfileData', 'panelBoardInterview', 'ctrlno'));
+    }
 }

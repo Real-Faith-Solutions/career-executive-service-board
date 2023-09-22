@@ -71,7 +71,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                {{-- <form action="{{ route('eris-rapid-validation.edit', ['acno'=>$acno, 'ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="GET">
+                                <form action="{{ route('panel-board-interview.edit', ['acno'=>$acno, 'ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
@@ -83,7 +83,7 @@
                                     </button>
                                 </form>
                             
-                                 <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$panelBoardInterviews->ctrlno}}">
+                                 {{-- <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$panelBoardInterviews->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deleteRapidValidationButton{{$panelBoardInterviews->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
