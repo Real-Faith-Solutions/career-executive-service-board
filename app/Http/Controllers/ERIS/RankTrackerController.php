@@ -48,4 +48,13 @@ class RankTrackerController extends Controller
         
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $libraryRankTracker = LibraryRankTracker::all();
+        $rankTracker = RankTracker::find($ctrlno);
+
+        return view('admin.eris.partials.rank_tracker.edit', compact('acno', 'erisTblMainProfileData', 'rankTracker', 'libraryRankTracker', 'ctrlno'));
+    }
 }

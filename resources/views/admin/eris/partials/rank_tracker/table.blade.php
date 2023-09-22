@@ -55,7 +55,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                {{-- <form action="{{ route('eris-rapid-validation.edit', ['acno'=>$acno, 'ctrlno'=>$rankTrackers->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-rank-tracker.edit', ['acno'=>$acno, 'ctrlno'=>$rankTrackers->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                         <lord-icon
@@ -67,7 +67,7 @@
                                     </button>
                                 </form>
                             
-                                 <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$rankTrackers->ctrlno}}">
+                                 {{-- <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$rankTrackers->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deleteRapidValidationButton{{$rankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
