@@ -31,7 +31,23 @@ class VerifyEmailAndDevice
                     return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
                 }
 
-                return redirect()->route('reconfirm.email');
+                $confirmation_code = mt_rand(10000, 99999);
+                $recipientEmail = auth()->user()->email;
+                $imagePath = public_path('images/branding.png');
+
+                // Update the confirmation code in the database
+                $deviceVerification->update(['confirmation_code' => $confirmation_code]);
+
+                // sending confirmation_code email to user
+                $data = [
+                    'email' => $recipientEmail,
+                    'confirmation_code' => $confirmation_code,
+                    'imagePath' => $imagePath,
+                ];
+        
+                Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
             }
 
             $device_id = uniqid();
