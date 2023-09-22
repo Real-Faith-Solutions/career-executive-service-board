@@ -27,6 +27,7 @@ use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ERIS\AssessmentCenterController;
+use App\Http\Controllers\ERIS\BoardInterviewController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
@@ -644,6 +645,15 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
                 Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
                 Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
+           });
+
+           Route::prefix('board-interview')->group(function () {
+                Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('eris-board-interview.index');
+                Route::get('create/{acno}', [BoardInterviewController::class, 'create'])->name('eris-board-interview.create');
+                Route::post('store/{acno}', [BoardInterviewController::class, 'store'])->name('eris-board-interview.store');
+                Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
+                Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
+                Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
            });
         });
     //  end of ERIS routes

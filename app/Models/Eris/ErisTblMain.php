@@ -69,4 +69,9 @@ class ErisTblMain extends Model
     {
         return $this->hasMany(PanelBoardInterview::class, 'acno');
     }
+
+    public function boardInterview(): HasMany
+    {
+        return $this->hasMany(BoardInterView::class, 'acno');
+    }
 }
