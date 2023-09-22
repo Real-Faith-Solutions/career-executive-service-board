@@ -74,4 +74,9 @@ class ErisTblMain extends Model
     {
         return $this->hasMany(BoardInterView::class, 'acno');
     }
+
+    public function rankTracker(): HasMany
+    {
+        return $this->hasMany(RankTracker::class, 'acno');
+    }
 }

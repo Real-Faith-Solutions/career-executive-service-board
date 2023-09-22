@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // rank tracker
         Schema::create('erad_tblranktracker', function (Blueprint $table) {
-            $table->id('acno');
-            $table->integer('r_catid');
-            $table->integer('r_ctrlno');
-            $table->string('description');
-            $table->string('remarks');
-            $table->string('submit_dt');
-            $table->string('encdate');
-            $table->string('encoder');
-            $table->integer('ctrlno');
-            $table->string('cesstatus');
-            $table->timestamps();
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->integer('r_catid')->nullable();
+            $table->integer('r_ctrlno')->nullable();
+            $table->string('description')->nullable();
+            $table->string('remarks')->nullable();
+            $table->date('submit_dt')->nullable();
+            $table->string('cesstatus')->nullable();
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 
