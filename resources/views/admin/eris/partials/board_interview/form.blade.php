@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="board_interview_form" onsubmit="return checkErrorsBeforeSubmit(board_interview_form)">
+            <form action="{{ route('eris-board-interview.store', ['acno'=>$acno]) }}" method="POST" id="board_interview_form" onsubmit="return checkErrorsBeforeSubmit(board_interview_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
