@@ -108,7 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
 
