@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\ErisTblMain;
 use App\Models\Eris\InDepthValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InDepthValidationController extends Controller
 {
@@ -22,5 +23,30 @@ class InDepthValidationController extends Controller
         $erisTblMainProfileData = ErisTblMain::find($acno);
 
         return view('admin.eris.partials.in_depth_validation.form', compact('acno', 'erisTblMainProfileData'));
+    }
+
+    public function store(Request $request, $acno)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $inDepthValidation = new InDepthValidation([
+
+            'dteassign' => $request->dteassign, // date assign
+            'dtesubmit' => $request->dtesubmit, // date submit
+            'validator' => $request->validator, 
+            'recom' => $request->recom, // recommendation
+            'remarks' => $request->remarks,
+            'dtedefer' => $request->dtedefer,  // defered date
+            'encoder' =>  $encoder,
+
+        ]);
+
+        $erisTblMain = ErisTblMain::find($request->acno);
+        
+        $erisTblMain->inDepthValidation()->save($inDepthValidation);
+        
+        return to_route('eris-in-depth-validation.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
 }
