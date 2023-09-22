@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function deviceVerifications(): HasMany
     {
-        return $this->hasMany(DeviceVerification::class, 'personal_data_cesno', 'personal_data_cesno');
+        return $this->hasMany(DeviceVerification::class, 'user_ctrlno', 'ctrlno');
     }
 
 }

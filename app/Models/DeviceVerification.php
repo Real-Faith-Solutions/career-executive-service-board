@@ -11,7 +11,7 @@ class DeviceVerification extends Model
     protected $table = 'device_verification'; // Specify the table name
 
     protected $fillable = [
-        'personal_data_cesno',
+        'user_ctrlno',
         'confirmation_code', 
         'device_id', 
         'verified', 
@@ -19,7 +19,7 @@ class DeviceVerification extends Model
     
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'personal_data_cesno', 'personal_data_cesno');
+        return $this->belongsTo(User::class, 'user_ctrlno', 'ctrlno');
     }
 
 }
