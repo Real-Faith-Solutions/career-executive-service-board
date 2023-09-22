@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_panel_board_interview_form" onsubmit="return checkErrorsBeforeSubmit(update_panel_board_interview_form)">
+            <form action="{{ route('panel-board-interview.update', ['acno'=>$acno , 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_panel_board_interview_form" onsubmit="return checkErrorsBeforeSubmit(update_panel_board_interview_form)">
                 @method('PUT')
                 @csrf
 
