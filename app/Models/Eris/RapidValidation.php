@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WrittenExam extends Model
+class RapidValidation extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,20 +16,20 @@ class WrittenExam extends Model
 
     protected $primaryKey = 'ctrlno';
 
-    protected $table = "erad_tblWExam";
+    protected $table = "erad_tblRVP";
 
     protected $fillable = [
 
-        'acno', // account number from erad_tblMain
-        'we_date', // written exam date
-        'we_location', // written exam location
-        'we_rating', // written exam rating
-        'we_remarks', // written exam remarks
+        'dteassign', // date assign
+        'dtesubmit', // date submnit
+        'validator',
+        'recom', // recommendation
+        'remarks',
         'encoder',
 
     ];
 
-    public function erisTblMainWrittenExam(): BelongsTo
+    public function erisTblMainRapidValidation(): BelongsTo
     {
         return $this->belongsTo(ErisTblMain::class, 'acno');
     }

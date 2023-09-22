@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // assessment center
         Schema::create('erad_tblAC', function (Blueprint $table) {
-            $table->id('acno');
-            $table->string('acdate');
-            $table->integer('numtakes');
-            $table->string('docdate');
-            $table->string('remarks');
-            $table->string('encoder');
-            $table->string('encdate');
-            $table->integer('ctrlno');
-            $table->timestamps();
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->date('acdate')->nullable(); // assessment center date
+            $table->integer('numtakes')->nullable(); // number of takes
+            $table->date('docdate')->nullable(); // document date
+            $table->string('remarks')->nullable();
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

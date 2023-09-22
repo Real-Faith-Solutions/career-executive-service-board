@@ -26,7 +26,9 @@ use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
+use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\ErisProfileController;
+use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -606,6 +608,23 @@ Route::middleware('auth')->group(function () {
                 Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy'); 
            });
 
+           Route::prefix('assessment-center')->group(function () {
+                Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index'); 
+                Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create');
+                Route::post('store/{acno}', [AssessmentCenterController::class, 'store'])->name('eris-assessment-center.store');
+                Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit'); 
+                Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
+                Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy'); 
+           });
+
+           Route::prefix('rapid-validation')->group(function () {
+                Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
+                Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
+                Route::post('store/{acno}', [RapidValidationController::class, 'store'])->name('eris-rapid-validation.store');
+                Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
+                Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
+                Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+           });
         });
     //  end of ERIS routes
 
