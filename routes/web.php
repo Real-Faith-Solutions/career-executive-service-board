@@ -27,6 +27,7 @@ use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ERIS\AssessmentCenterController;
+use App\Http\Controllers\ERIS\BoardInterviewController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
@@ -644,6 +645,10 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
                 Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
                 Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
+           });
+
+           Route::prefix('board-interview')->group(function () {
+                Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('board-interview.index');
            });
         });
     //  end of ERIS routes
