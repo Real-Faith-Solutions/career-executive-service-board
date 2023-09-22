@@ -15,13 +15,13 @@ return new class extends Migration
         Schema::create('erad_tblIVP', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
-            $table->date('dteassign'); // date assign
-            $table->date('dtesubmit'); // date submit
-            $table->string('validator');
-            $table->string('recom');
-            $table->string('remarks');
-            $table->date('dtedefer'); // date defer
-            $table->string('encoder');
+            $table->date('dteassign')->nullable(); // date assign
+            $table->date('dtesubmit')->nullable(); // date submit
+            $table->string('validator')->nullable();
+            $table->string('recom')->nullable(); // recommendation
+            $table->string('remarks')->nullable();
+            $table->date('dtedefer')->nullable(); // date defer
+            $table->string('encoder')->nullable();
             $table->timestamp('encdate')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\ERIS;
 use App\Http\Controllers\Controller;
 use App\Models\Eris\ErisTblMain;
 use App\Models\Eris\LibraryRankTracker;
+use App\Models\Eris\RankTracker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RankTrackerController extends Controller
 {
@@ -23,5 +25,27 @@ class RankTrackerController extends Controller
         $libraryRankTracker = LibraryRankTracker::all();
 
         return view('admin.eris.partials.rank_tracker.form', compact('acno', 'erisTblMainProfileData', 'libraryRankTracker'));
+    }
+
+    public function store(Request $request, $acno)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $rankTracker = new RankTracker([
+
+            'description' => $request->description,
+            'submit_dt' => $request->submit_dt, //  submit date
+            'remarks' => $request->remarks, 
+            'encoder' =>  $encoder,
+
+        ]);
+
+        $erisTblMain = ErisTblMain::find($request->acno);
+        
+        $erisTblMain->rankTracker()->save($rankTracker);
+        
+        return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
 }

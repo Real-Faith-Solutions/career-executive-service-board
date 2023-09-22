@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="rank_tracker_form" onsubmit="return checkErrorsBeforeSubmit(rank_tracker_form)">
+            <form action="{{ route('eris-rank-tracker.store', ['acno'=>$acno]) }}" method="POST" id="rank_tracker_form" onsubmit="return checkErrorsBeforeSubmit(rank_tracker_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -34,10 +34,10 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
-                        <label for="dtesubmit">Submit Date<sup>*</sup></label>
-                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" required>
+                        <label for="submit_dt">Submit Date<sup>*</sup></label>
+                        <input type="date" id="submit_dt" name="submit_dt" oninput="validateDateInput(submit_dt)" required>
                         <p class="input_error text-red-600"></p>
-                        @error('dtesubmit')
+                        @error('submit_dt')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -45,8 +45,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="recom">Description<sup>*</sup></label>
-                        <select name="" id="">
+                        <label for="description">Description<sup>*</sup></label>
+                        <select name="description" id="description">
                             <option disabled selected>Select Description</option>
                             @foreach ($libraryRankTracker as $libraryRankTrackers)
                                 <option value="{{ $libraryRankTrackers->description }}">
@@ -54,7 +54,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('recom')
+                        @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

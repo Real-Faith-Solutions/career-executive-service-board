@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // library rank tracker
         Schema::create('erad_libRankTracker', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->integer('catid')->nullable();
