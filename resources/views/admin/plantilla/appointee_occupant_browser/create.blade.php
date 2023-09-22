@@ -161,7 +161,7 @@
                             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                 <div class="mb-3">
                                     <label for="">CES Status<sup>*</sup></label>
-                                    <input id="" readonly />
+                                    <input id="" readonly /> {{-- from 201 file--}}
                                 </div>
 
                                 <div class="mb-3">
@@ -173,7 +173,7 @@
                             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                 <div class="mb-3">
                                     <label for="">Gender<sup>*</sup></label>
-                                    <input id="" readonly />
+                                    <input id="" readonly /> {{-- from 201 file--}}
                                 </div>
 
                                 <div class="mb-3">
@@ -191,8 +191,8 @@
 
                                 <div class="mb-3">
                                     <label for="">Remarks</label>
-                                    <textarea name="" id="" cols="30" rows="10"
-                                        readonly>{{ $planPosition->remarks }}</textarea>
+                                    <textarea name="" id="" cols="30" rows="10" readonly></textarea> {{-- from 201
+                                    file--}}
                                 </div>
                             </div>
 
