@@ -17,7 +17,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_rank_tracker_form" onsubmit="return checkErrorsBeforeSubmit(update_rank_tracker_form)">
+            <form action="{{ route('eris-rank-tracker.update', ['acno'=>$acno, 'ctrlno'=>$ctrlno]) }}" method="POST" id="update_rank_tracker_form" onsubmit="return checkErrorsBeforeSubmit(update_rank_tracker_form)">
                 @method('PUT')
                 @csrf
 

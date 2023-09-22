@@ -57,4 +57,15 @@ class RankTrackerController extends Controller
 
         return view('admin.eris.partials.rank_tracker.edit', compact('acno', 'erisTblMainProfileData', 'rankTracker', 'libraryRankTracker', 'ctrlno'));
     }
+
+    public function update(Request $request, $acno, $ctrlno)
+    {
+        $rankTracker = RankTracker::find($ctrlno);
+        $rankTracker->description = $request->description;
+        $rankTracker->submit_dt = $request->submit_dt; // submit date
+        $rankTracker->remarks = $request->remarks;
+        $rankTracker->save();
+
+        return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
+    }
 }

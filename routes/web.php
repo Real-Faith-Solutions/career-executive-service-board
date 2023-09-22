@@ -662,6 +662,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('create/{acno}', [RankTrackerController::class, 'create'])->name('eris-rank-tracker.create');
                 Route::post('store/{acno}', [RankTrackerController::class, 'store'])->name('eris-rank-tracker.store');
                 Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
+                Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
            });
         });
     //  end of ERIS routes
