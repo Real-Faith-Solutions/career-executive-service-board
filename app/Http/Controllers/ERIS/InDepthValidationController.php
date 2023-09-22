@@ -49,4 +49,12 @@ class InDepthValidationController extends Controller
         
         return to_route('eris-in-depth-validation.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
+
+    public function edit($acno, $ctrlno)
+    {
+        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $inDepthValidation = InDepthValidation::find($ctrlno);
+
+        return view('admin.eris.partials.in_depth_validation.edit', compact('acno', 'erisTblMainProfileData', 'inDepthValidation'));
+    }
 }
