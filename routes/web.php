@@ -633,6 +633,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('store/{acno}', [InDepthValidationController::class, 'store'])->name('eris-in-depth-validation.store');
                 Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
                 Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
+                Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
            });
         });
     //  end of ERIS routes

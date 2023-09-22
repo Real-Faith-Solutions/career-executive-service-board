@@ -72,4 +72,12 @@ class InDepthValidationController extends Controller
 
         return to_route('eris-in-depth-validation.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
+
+    public function destroy($ctrlno)
+    {
+        $inDepthValidation = InDepthValidation::find($ctrlno);
+        $inDepthValidation->delete();
+
+        return back()->with('message', 'Deleted Sucessfully');
+    }
 }
