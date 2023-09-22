@@ -20,7 +20,7 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >In-Depth Validation</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-in-depth-validation.index', ['acno'=>$acno]) }}" >In-Depth Validation</a>
             </li>
 
             <li>

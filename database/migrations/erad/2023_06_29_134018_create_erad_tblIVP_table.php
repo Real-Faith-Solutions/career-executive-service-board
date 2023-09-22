@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // in depth validation
         Schema::create('erad_tblIVP', function (Blueprint $table) {
-            $table->id('acno');
-            $table->string('dteassign');
-            $table->string('dtesubmit');
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->date('dteassign'); // date assign
+            $table->date('dtesubmit'); // date submit
             $table->string('validator');
             $table->string('recom');
             $table->string('remarks');
-            $table->string('dtedefer');
+            $table->date('dtedefer'); // date defer
             $table->string('encoder');
-            $table->string('encdate');
-            $table->string('ctrlno');
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->softDeletes();
         });
     }
 

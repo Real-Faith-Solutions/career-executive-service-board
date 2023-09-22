@@ -28,6 +28,7 @@ use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
 use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\ErisProfileController;
+use App\Http\Controllers\ERIS\InDepthValidationController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
@@ -624,6 +625,15 @@ Route::middleware('auth')->group(function () {
                 Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
                 Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
                 Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+           });
+
+           Route::prefix('in-depth-validation')->group(function () {
+                Route::get('index/{acno}', [InDepthValidationController::class, 'index'])->name('eris-in-depth-validation.index');
+                Route::get('create/{acno}', [InDepthValidationController::class, 'create'])->name('eris-in-depth-validation.create');
+                Route::post('store/{acno}', [InDepthValidationController::class, 'store'])->name('eris-in-depth-validation.store');
+                Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
+                Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
+                Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
            });
         });
     //  end of ERIS routes
