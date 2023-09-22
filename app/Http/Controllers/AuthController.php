@@ -142,7 +142,7 @@ class AuthController extends Controller
 
     public function confirmEmail()
     {
-        return view('login');
+        return view('admin.confirm_email');
     }
 
 }
