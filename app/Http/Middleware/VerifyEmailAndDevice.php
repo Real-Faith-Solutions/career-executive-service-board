@@ -19,11 +19,12 @@ class VerifyEmailAndDevice
 
         $ctrlno = auth()->user()->ctrlno;
         $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
+        $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
 
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
 
-            if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $deviceIdentifiers, $ctrlno)){
+            if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
                 $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $pendingDeviceIdentifiers)->first();
                 $cooldownMinutes = 1; // Adjust as needed
@@ -111,16 +112,23 @@ class VerifyEmailAndDevice
             ->toArray();
     }
 
-    protected function checkPendingConfirmation($associations, $deviceIdentifiers, $ctrlno)
+    protected function getPendingDeviceIdentifiers($ctrlno)
     {
-        foreach ($deviceIdentifiers as $deviceIdentifier) {
+        return DeviceVerification::where('user_ctrlno', $ctrlno)
+            ->where('verified', false)
+            ->pluck('device_id')
+            ->toArray();
+    }
+
+    protected function checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)
+    {
+        foreach ($pendingIdentifiers as $pendingIdentifier) {
             foreach ($associations as $association) {
                 if (
-                    $association['device_id'] === $deviceIdentifier &&
-                    $association['user_id'] === $ctrlno &&
-                    $association['verified'] == false
+                    $association['device_id'] === $pendingIdentifier &&
+                    $association['user_id'] === $ctrlno
                 ) {
-                    return true;
+                    return $association['device_id'];
                 }
             }
         }
