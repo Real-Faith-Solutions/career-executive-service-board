@@ -9,6 +9,7 @@ use App\Models\Plantilla\ApptStatus;
 use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
+use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
@@ -49,14 +50,11 @@ class AppointeeOccupantManagerController extends Controller
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
-
-            // You can handle the case when no matching PersonalData is found here
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
             }
         } else {
-            // Handle the case when cesno is not provided or is null
-            $personalData = null; // Set it to null or handle it as needed
+            $personalData = null;
         }
 
         return view('admin.plantilla.appointee_occupant_browser.create', compact(
@@ -127,9 +125,7 @@ class AppointeeOccupantManagerController extends Controller
         $office = Office::find($officeid);
         $planPosition = PlanPosition::find($plantilla_id);
         $appointees = PlanAppointee::find($appointee_id);
-
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-
 
         $planAppointee = PlanAppointee::query()
             ->where('plantilla_id', $planPosition->plantilla_id)
@@ -139,6 +135,8 @@ class AppointeeOccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+        $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->get();
+
         return view('admin.plantilla.appointee_occupant_browser.edit', compact(
             'sector',
             'department',
@@ -152,6 +150,7 @@ class AppointeeOccupantManagerController extends Controller
             'planPosition',
             'apptStatus',
             'appointees',
+            'otherAssignment',
 
         ));;
     }
