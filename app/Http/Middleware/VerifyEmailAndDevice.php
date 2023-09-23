@@ -23,7 +23,7 @@ class VerifyEmailAndDevice
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
 
-            if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $ctrlno)){
+            if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $deviceIdentifiers, $ctrlno)){
                 
                 $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $pendingDeviceIdentifiers)->first();
                 $cooldownMinutes = 1; // Adjust as needed
@@ -111,11 +111,17 @@ class VerifyEmailAndDevice
             ->toArray();
     }
 
-    protected function checkPendingConfirmation($associations, $ctrlno)
+    protected function checkPendingConfirmation($associations, $deviceIdentifiers, $ctrlno)
     {
-        foreach ($associations as $association) {
-            if ($association['user_id'] === $ctrlno && $association['verified'] === false) {
-                return $association['device_id'];
+        foreach ($deviceIdentifiers as $deviceIdentifier) {
+            foreach ($associations as $association) {
+                if (
+                    $association['device_id'] === $deviceIdentifier &&
+                    $association['user_id'] === $ctrlno &&
+                    $association['verified'] == false
+                ) {
+                    return true;
+                }
             }
         }
 
