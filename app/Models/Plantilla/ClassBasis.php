@@ -11,4 +11,9 @@ class ClassBasis extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'plantillalib_tblClassBasis';
     protected $primaryKey = 'cbasis_code';
+
+    public function planPosition()
+    {
+        return $this->hasMany(PlanPosition::class, 'cbasis_code');
+    }
 }

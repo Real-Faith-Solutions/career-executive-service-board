@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // panel board interview
         Schema::create('erad_tblPBOARD', function (Blueprint $table) {
-            $table->id('acno');
-            $table->string('dteassign');
-            $table->string('dtesubmit');
-            $table->string('intrviewer');
-            $table->string('dteiview');
-            $table->string('recom');
-            $table->string('encoder');  
-            $table->string('encdate');
-            $table->integer('ctrlno');
-            $table->timestamps();
+            $table->id('ctrlno');
+            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->date('dteassign')->nullable(); // date assigned
+            $table->date('dtesubmit')->nullable(); // date submit
+            $table->string('intrviewer')->nullable(); // interviewer
+            $table->date('dteiview')->nullable(); // date interview
+            $table->string('recom')->nullable(); // recommendation
+            $table->string('encoder')->nullable();  
+            $table->timestamp('encdate');
+            $table->timestamp('updated_at');
+            $table->softDeletes();
         });
     }
 

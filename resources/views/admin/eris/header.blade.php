@@ -20,19 +20,19 @@
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >In-Depth Validation</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-in-depth-validation.index', ['acno'=>$acno]) }}" >In-Depth Validation</a>
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Panel Board Interview</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('panel-board-interview.index', ['acno'=>$acno]) }}" >Panel Board Interview</a>
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Board Interview</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-board-interview.index', ['acno'=>$acno]) }}" >Board Interview</a>
             </li>
 
             <li>
-                <a class="btn category-button inline-flex text-xs" href="" >Rank Tracker</a>
+                <a class="btn category-button inline-flex text-xs" href="{{ route('eris-rank-tracker.index', ['acno'=>$acno]) }}" >Rank Tracker</a>
             </li>
         </ul>
     </div>
