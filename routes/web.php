@@ -621,78 +621,67 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     Route::prefix('eris')->group(function () {
         Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
 
-<<<<<<< HEAD
         Route::prefix('written-exam')->group(function () {
-            Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index');
-            Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create');
-            Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store');
+            Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
+            Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
+            Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store'); 
             Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
-            Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update');
-            Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy');
-=======
-           Route::prefix('written-exam')->group(function () {
-                Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
-                Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 
-                Route::post('store/{acno}', [WrittenExamController::class, 'store'])->name('eris-written-exam.store'); 
-                Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
-                Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update'); 
-                Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy'); 
-           });
+            Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update'); 
+            Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy'); 
+        });
 
-           Route::prefix('assessment-center')->group(function () {
-                Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index'); 
-                Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create');
-                Route::post('store/{acno}', [AssessmentCenterController::class, 'store'])->name('eris-assessment-center.store');
-                Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit'); 
-                Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
-                Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy'); 
-           });
+        Route::prefix('assessment-center')->group(function () {
+            Route::get('index/{acno}', [AssessmentCenterController::class, 'index'])->name('eris-assessment-center.index'); 
+            Route::get('create/{acno}', [AssessmentCenterController::class, 'create'])->name('eris-assessment-center.create');
+            Route::post('store/{acno}', [AssessmentCenterController::class, 'store'])->name('eris-assessment-center.store');
+            Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit'); 
+            Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
+            Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy'); 
+        });
 
-           Route::prefix('rapid-validation')->group(function () {
-                Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
-                Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
-                Route::post('store/{acno}', [RapidValidationController::class, 'store'])->name('eris-rapid-validation.store');
-                Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
-                Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
-                Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
-           });
+        Route::prefix('rapid-validation')->group(function () {
+            Route::get('index/{acno}', [RapidValidationController::class, 'index'])->name('eris-rapid-validation.index');
+            Route::get('create/{acno}', [RapidValidationController::class, 'create'])->name('eris-rapid-validation.create');
+            Route::post('store/{acno}', [RapidValidationController::class, 'store'])->name('eris-rapid-validation.store');
+            Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
+            Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
+            Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+        });
 
-           Route::prefix('in-depth-validation')->group(function () {
-                Route::get('index/{acno}', [InDepthValidationController::class, 'index'])->name('eris-in-depth-validation.index');
-                Route::get('create/{acno}', [InDepthValidationController::class, 'create'])->name('eris-in-depth-validation.create');
-                Route::post('store/{acno}', [InDepthValidationController::class, 'store'])->name('eris-in-depth-validation.store');
-                Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
-                Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
-                Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
-           });
+        Route::prefix('in-depth-validation')->group(function () {
+            Route::get('index/{acno}', [InDepthValidationController::class, 'index'])->name('eris-in-depth-validation.index');
+            Route::get('create/{acno}', [InDepthValidationController::class, 'create'])->name('eris-in-depth-validation.create');
+            Route::post('store/{acno}', [InDepthValidationController::class, 'store'])->name('eris-in-depth-validation.store');
+            Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
+            Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
+            Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
+        });
 
-           Route::prefix('panel-board-interview')->group(function () {
-                Route::get('index/{acno}', [PanelBoardInterviewController::class, 'index'])->name('panel-board-interview.index');
-                Route::get('create/{acno}', [PanelBoardInterviewController::class, 'create'])->name('panel-board-interview.create');
-                Route::post('store/{acno}', [PanelBoardInterviewController::class, 'store'])->name('panel-board-interview.store');
-                Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
-                Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
-                Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
-           });
+        Route::prefix('panel-board-interview')->group(function () {
+            Route::get('index/{acno}', [PanelBoardInterviewController::class, 'index'])->name('panel-board-interview.index');
+            Route::get('create/{acno}', [PanelBoardInterviewController::class, 'create'])->name('panel-board-interview.create');
+            Route::post('store/{acno}', [PanelBoardInterviewController::class, 'store'])->name('panel-board-interview.store');
+            Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
+            Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
+            Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
+        });
 
-           Route::prefix('board-interview')->group(function () {
-                Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('eris-board-interview.index');
-                Route::get('create/{acno}', [BoardInterviewController::class, 'create'])->name('eris-board-interview.create');
-                Route::post('store/{acno}', [BoardInterviewController::class, 'store'])->name('eris-board-interview.store');
-                Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
-                Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
-                Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
-           });
+        Route::prefix('board-interview')->group(function () {
+            Route::get('index/{acno}', [BoardInterviewController::class, 'index'])->name('eris-board-interview.index');
+            Route::get('create/{acno}', [BoardInterviewController::class, 'create'])->name('eris-board-interview.create');
+            Route::post('store/{acno}', [BoardInterviewController::class, 'store'])->name('eris-board-interview.store');
+            Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
+            Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
+            Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
+        });
 
-           Route::prefix('rank-tracker')->group(function () {
-                Route::get('index/{acno}', [RankTrackerController::class, 'index'])->name('eris-rank-tracker.index');
-                Route::get('create/{acno}', [RankTrackerController::class, 'create'])->name('eris-rank-tracker.create');
-                Route::post('store/{acno}', [RankTrackerController::class, 'store'])->name('eris-rank-tracker.store');
-                Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
-                Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
-                Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
-           });
->>>>>>> f927a130550fff78339369e5295ee8a4e1998a95
+        Route::prefix('rank-tracker')->group(function () {
+            Route::get('index/{acno}', [RankTrackerController::class, 'index'])->name('eris-rank-tracker.index');
+            Route::get('create/{acno}', [RankTrackerController::class, 'create'])->name('eris-rank-tracker.create');
+            Route::post('store/{acno}', [RankTrackerController::class, 'store'])->name('eris-rank-tracker.store');
+            Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
+            Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
+            Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
         });
 
         Route::prefix('assessment-center')->group(function () {
