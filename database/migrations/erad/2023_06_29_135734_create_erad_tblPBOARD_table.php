@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('intrviewer')->nullable(); // interviewer
             $table->date('dteiview')->nullable(); // date interview
             $table->string('recom')->nullable(); // recommendation
-            $table->string('encoder')->nullable();  
-            $table->timestamp('encdate');
-            $table->timestamp('updated_at');
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
         });
     }
