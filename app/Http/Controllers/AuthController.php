@@ -147,7 +147,9 @@ class AuthController extends Controller
 
     public function submitConfirmationEmail(Request $request)
     {
-        return view('admin.confirm_email');
+        return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
+
+        return Redirect::to('/dashboard')->with('message','Account Verified!');
     }
 
 }
