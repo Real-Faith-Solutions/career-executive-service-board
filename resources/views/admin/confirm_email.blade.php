@@ -88,12 +88,12 @@
                 <h1 class="text-xl font-semibold text-center text-blue-500 mt-2">Confirm Email</h1>
                 <h2 class="text-md font-semibold text-center text-black-500 mt-2">Please Enter Confirmation Code</h2>
 
-                <form class="user" method="POST" action="{{ route('login') }}">
+                <form class="user" method="POST" action="{{ route('reconfirm.submit') }}">
                     @csrf
 
                     <div class="mb-3 mt-5">
                         <label for="code">Confirmation Code</label>
-                        <input type="text" name="code" value="{{ old('code') }}" required autofocus autocomplete="code">
+                        <input type="text" name="code" value="{{ old('code') }}" required autofocus>
                         @error('code')
                         <span class="invalid" role="alert">
                             <strong>{{ $message }}</strong>
