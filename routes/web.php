@@ -108,8 +108,10 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // end auth
 
+// two factor authentication
 Route::middleware('auth')->group(function () {
     Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
+    Route::post('/submit-confirmation-code', [AuthController::class, 'submitConfirmationEmail'])->name('reconfirm.submit');
 });
 
 Route::middleware('auth', 'verify.email.and.device')->group(function () {

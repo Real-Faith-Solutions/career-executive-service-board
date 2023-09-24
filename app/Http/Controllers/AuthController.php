@@ -145,4 +145,9 @@ class AuthController extends Controller
         return view('admin.confirm_email');
     }
 
+    public function submitConfirmationEmail()
+    {
+        return view('admin.confirm_email');
+    }
+
 }
