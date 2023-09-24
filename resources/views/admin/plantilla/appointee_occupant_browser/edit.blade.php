@@ -265,13 +265,19 @@
 <table class="dataTables">
     <thead>
         <tr>
+            <th>Detailed ID</th>
+            <th>Status</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Remarks</th>
+            <th>From - To</th>
+            <th>Flr / Bldg</th>
+            <th>Street</th>
+            <th>Barangay</th>
+            <th>City</th>
+            <th>Contact number</th>
+            <th>Email</th>
             <th>CESNO</th>
-            <th>Officials Name</th>
-            <th>Appointee</th>
-            <th>Appointment</th>
-            <th>CES Status</th>
-            <th>Appointment Date</th>
-            <th>Assum Date</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -280,34 +286,26 @@
     </thead>
     <tbody>
 
-        @foreach ($planAppointee as $data)
+        @foreach ($otherAssignment as $data)
+
+
         <tr>
             <td class="font-semibold">
-                {{ $data->cesno }}
+                {{ $data->detailed_code }}
             </td>
-            <td>
-                {{ $data->personalData->lastname }}
-                {{ $data->personalData->firstname }}
-                {{ $data->personalData->name_extension }}
-                {{ $data->personalData->middlename }}
-            </td>
-            <td>
-                <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_appointee == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td>
-            <td>
-                {{ $data->apptStatus->title }}
-            </td>
-            <td>
-                {{ $data->personalData->cesStatus->description ?? 'N\A'}}
-            </td>
-            <td>
-                {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}
-            </td>
-            <td>
-                {{ \Carbon\Carbon::parse($data->assum_date)->format('m/d/Y') }}
-            </td>
+
+            <td>{{ $data->appt_status_code }}</td>
+            <td>{{ $data->position }}</td>
+            <td>{{ $data->office }}</td>
+            <td>{{ $data->remarks }}</td>
+            <td>{{ $data->from_dt }} - {{ $data->to_dt }}</td>
+            <td>{{ $data->house_bldg }}</td>
+            <td>{{ $data->st_road }}</td>
+            <td>{{ $data->brgy_vill }}</td>
+            <td>{{ $data->city_code }}</td>
+            <td>{{ $data->contactno }}</td>
+            <td>{{ $data->email_addr }}</td>
+            <td>{{ $data->cesno }}</td>
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
@@ -337,6 +335,7 @@
             </td>
         </tr>
         @endforeach
+        {{-- @endforeach --}}
 
     </tbody>
 </table>

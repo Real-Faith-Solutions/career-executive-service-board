@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('training_secretariat', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->string('description');
-            $table->string('encoder');
-            $table->timestamp('encdate');
-            $table->timestamp('update_time');
+            $table->string('description')->nullable();
+            $table->string('encoder')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('update_time')->useCurrent();
             $table->softDeletes();
         });
     }
