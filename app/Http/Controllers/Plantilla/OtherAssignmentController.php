@@ -32,6 +32,10 @@ class OtherAssignmentController extends Controller
             'appt_status_code' => ['required'],
             'from_dt' => ['required'],
             'to_dt' => ['required'],
+        ], [
+            'appt_status_code.required' => 'This Status field is required.',
+            'from_dt.required' => 'This From date field is required.',
+            'to_dt.required' => 'This To date field is required.',
         ]);
 
         $data = $request->all();
