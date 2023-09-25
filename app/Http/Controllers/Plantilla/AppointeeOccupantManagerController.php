@@ -88,7 +88,8 @@ class AppointeeOccupantManagerController extends Controller
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
-
+        ], [
+            'cesno.unique' => 'This official is already appointed to another position'
         ]);
 
         PlanAppointee::create([
