@@ -25,6 +25,7 @@ class WrittenExam extends Model
         'we_location', // written exam location
         'we_rating', // written exam rating
         'we_remarks', // written exam remarks
+        'numtakes', // written exam number of takes
         'encoder',
 
     ];
