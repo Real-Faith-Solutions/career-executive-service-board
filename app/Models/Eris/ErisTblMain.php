@@ -14,33 +14,33 @@ class ErisTblMain extends Model
 
     protected $table = "erad_tblMain";
 
-    protected $fillables = [
+    protected $fillable = [
 
         'acbatchno',
-        'lastname',
-        'firstname',
-        'middlename',
-        'position',
-        'position_remarks',
-        'department',
-        'office',
-        'c_status',
-        'c_date',
-        'c_resno',
+        'lastname', // identified
+        'firstname', // identified
+        'middlename', // identified
+        'position', // identified
+        'position_remarks', // identified
+        'department', // department/agency and identified
+        'office', // bureau office and identified
+        'c_status', // conferment status and identified
+        'c_date', // date conferred
+        'c_resno', // resolution no and identified
         'we_date',
         'wlocation',
         'werating',
         'we_remarks',
-        'encoder',
+        'encoder', // identified
         'e_date',
-        'picture',
-        'contactno',
-        'faxno',
-        'mobileno',
-        'gender',
-        'birthdate',
-        'emailadd',
-        'cesno',
+        'picture', // identified
+        'contactno', // telephone no and identified
+        'faxno', // identified
+        'mobileno', // identified
+        'gender', // identified
+        'birthdate', // identified
+        'emailadd',  // identified
+        'cesno', // identified
         'maddress',
 
     ];

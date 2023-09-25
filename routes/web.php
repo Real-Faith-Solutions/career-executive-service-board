@@ -613,6 +613,8 @@ Route::middleware('auth')->group(function () {
     //  ERIS routes
         Route::prefix('eris')->group(function () {
             Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
+            Route::get('eris-create', [ErisProfileController::class, 'create'])->name('eris.create');
+            Route::post('eris-store', [ErisProfileController::class, 'store'])->name('eris.store');
 
             Route::prefix('written-exam')->group(function () {
                 Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
