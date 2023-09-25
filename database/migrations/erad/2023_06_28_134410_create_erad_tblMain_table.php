@@ -31,9 +31,9 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->date('e_date')->nullable();
             $table->string('picture')->nullable();
-            $table->integer('contactno')->nullable();
-            $table->integer('faxno')->nullable();
-            $table->integer('mobileno')->nullable();
+            $table->string('contactno')->nullable();
+            $table->string('faxno')->nullable();
+            $table->string('mobileno')->nullable();
             $table->string('gender')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('emailadd')->nullable();
