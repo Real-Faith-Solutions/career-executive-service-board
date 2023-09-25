@@ -355,7 +355,6 @@ Route::middleware('auth')->group(function () {
             });
 
             Route::prefix('eligibility-rank-tracker')->group(function () {
-                Route::get('written-exam/{cesno}', [EligibilityAndRankTrackerController::class, 'cesWeIndex'])->name('eligibility-rank-tracker.cesWeIndex')->middleware('checkPermission:eligibility_rank_tracker_view');
                 Route::get('index/{cesno}', [EligibilityAndRankTrackerController::class, 'index'])->name('eligibility-rank-tracker.index')->middleware('checkPermission:eligibility_rank_tracker_view');
                 Route::get('create/{cesno}', [EligibilityAndRankTrackerController::class, 'create'])->name('eligibility-rank-tracker.create')->middleware('checkPermission:eligibility_rank_tracker_add');
                 Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit')->middleware('checkPermission:eligibility_rank_tracker_edit');
@@ -365,6 +364,11 @@ Route::middleware('auth')->group(function () {
                 Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted')->middleware('checkPermission:eligibility_rank_tracker_delete');
                 Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
                 Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
+
+                Route::prefix('eligibility-rank-tracker-erad')->group(function () {
+                    Route::get('navigate/{cesno}', [EligibilityAndRankTrackerController::class, 'navigate'])->name('eligibility-rank-tracker.navigate');
+                });
+
             });
 
             Route::prefix('pdf-file')->group(function () {

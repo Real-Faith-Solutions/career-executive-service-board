@@ -4,17 +4,38 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('eligibility-rank-tracker.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
+<div class="my-5 flex justify-between">
+    <div class="flex">
+        <form action="{{ route('eligibility-rank-tracker.navigate', ['cesno'=>$cesno]) }}" method="GET">
+            <div class="grid grid-cols-2 justify-center item-center gap-3 w-full">
+                <div>
+                    <select class="w-66" name="page" id="">
+                        <option value="Written Exam">Written Exam (Historical Record)</option>
+                        <option value="Assessment Center">Assessment Center (Historical Record)</option>
+                        <option value="Validation">Validation (Historical Record)</option>
+                        <option value="Board Interview">Board Interview</option>
+                    </select>    
+                </div>
+    
+                <div>   
+                    <button class="h-11 btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+    <div class="flex">
+        <a href="{{ route('eligibility-rank-tracker.recentlyDeleted', ['cesno'=>$cesno]) }}">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+          </lord-icon>
+        </a>
+    
+        <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+    </div>
 </div>
 
 <div class="table-eligibility-and-rank-tracker">    

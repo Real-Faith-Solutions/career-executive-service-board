@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\WrittenExam;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileLibTblCesStatus;
@@ -22,6 +24,24 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = $personalData->profileTblCesStatus;
 
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.table', compact('profileTblCesStatus' ,'cesno'));
+    }
+
+    public function navigate(Request $request, $cesno)
+    {
+        $selectedPage = $request->input('page');
+
+        switch ($selectedPage) {
+            case 'Written Exam':
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $writtenExam = WrittenExam::where('acno', $erisPersonalDataAcno)->get(['we_date', 'we_rating', 'we_remarks', 'we_location', 'numtakes']);
+
+                return view('admin/201_profiling/view_profile/partials/eligibility_and_rank_tracker/written_exam_tabe', compact('cesno', 'writtenExam'));
+            case 'page2':
+                return redirect()->route('page2');
+            // Add more cases for other pages as needed
+            default:
+                return redirect()->route('default'); // Handle an invalid selection
+        }
     }
 
     public function create($cesno)

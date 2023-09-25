@@ -45,6 +45,7 @@ class WrittenExamController extends Controller
             'we_location' => $request->we_location, // written exam location
             'we_rating' => $request->we_rating, // written exam rating
             'we_remarks' => $request->we_remarks, // written exam remarks
+            'numtakes' => $request->numtakes, // written exam number of takes
             'encoder' =>  $encoder,
 
         ]);

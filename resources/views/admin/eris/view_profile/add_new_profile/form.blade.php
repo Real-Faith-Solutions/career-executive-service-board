@@ -33,17 +33,15 @@
         <div class="bg-white px-6 py-3">
             <form action="{{ route('eris.store') }}" method="POST" id="add_new_profile_form" onsubmit="return checkErrorsBeforeSubmit(add_new_profile_form)">
                 @csrf
-                
-        
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                         <div class="mb-3">
                             <label for="cesno">CESNO<sup>*</sup></label>
                             <input type="text" id="cesno" name="cesno" value="{{ $personalDataSearchResult->cesno ?? '' }}" readonly>
                             @error('cesno')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
-                        @enderror
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
@@ -103,22 +101,42 @@
                             <label for="emailadd">Email<sup>*</sup></label>
                             <input type="text" id="emailadd" name="emailadd" oninput="validateInputEmail(emailadd)" onkeypress="validateInputEmail(emailadd)" onblur="checkErrorMessage(emailadd)">
                             <p class="input_error text-red-600"></p>
+                            @error('emailadd')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="contactno">Telephone No<sup>*</sup></label>
                             <input type="tel" id="contactno" name="contactno" >
+                            @error('contactno')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="mobileno">Mobile No</label>
                             <input type="text" id="mobileno" name="mobileno" oninput="validateInput(mobileno, 10, 'numbersWithSpecial')" onkeypress="validateInput(mobileno, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(mobileno)">
                             <p class="input_error text-red-600"></p>
+                            @error('mobileno')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="faxno">Fax No</label>
                             <input type="text" id="faxno" name="faxno" >
+                            @error('faxno')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
