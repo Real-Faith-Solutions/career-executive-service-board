@@ -312,17 +312,19 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
-                    {{-- <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('other-assignment.show', [
                         'sectorid' => $sector->sectorid,
                         'deptid' => $department->deptid,
                         'officelocid' => $departmentLocation->officelocid,
                         'officeid' => $office->officeid,
-                        'plantilla_id' => $data->plantilla_id
+                        'plantilla_id' => $planPosition->plantilla_id,
+                        'appointee_id' => $appointees->appointee_id,
+                        'detailed_code' => $data->detailed_code,
                     ]) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
-                    </a> --}}
+                    </a>
                     <form class="hover:bg-slate-100 rounded-full"
                         action="{{ route('other-assignment.destroy', ['detailed_code' => $data->detailed_code]) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
