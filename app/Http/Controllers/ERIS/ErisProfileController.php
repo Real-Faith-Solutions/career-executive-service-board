@@ -62,6 +62,12 @@ class ErisProfileController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+
+            'cesno' => ['required', 'unique:erad_tblMain,cesno'],
+        
+        ]);
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
@@ -88,5 +94,36 @@ class ErisProfileController extends Controller
          ]);
 
         return to_route('eris-index')->with('message', 'Save Sucessfully');
+    }
+
+    public function edit($acno)
+    {
+        $erisTblMainPersonalData = ErisTblMain::find($acno);
+
+        return view('admin.eris.view_profile.add_new_profile.edit', compact('acno','erisTblMainPersonalData'));
+    }
+
+    public function update(Request $request, $acno)
+    { 
+        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain->lastname = $request->lastname;
+        $erisTblMain->firstname = $request->firstname;
+        $erisTblMain->middlename = $request->middlename;
+        $erisTblMain->birthdate = $request->birthdate;
+        $erisTblMain->gender = $request->gender;
+        $erisTblMain->emailadd = $request->emailadd;
+        $erisTblMain->contactno = $request->contactno;
+        $erisTblMain->mobileno =  $request->mobileno;
+        $erisTblMain->faxno =  $request->faxno;
+        $erisTblMain->position =  $request->position;
+        $erisTblMain->position_remarks =  $request->position_remarks;
+        $erisTblMain->office =  $request->office;
+        $erisTblMain->department =  $request->department;
+        $erisTblMain->c_status =  $request->c_status;
+        $erisTblMain->c_resno =  $request->c_resno;
+        $erisTblMain->c_date =  $request->c_date;
+        $erisTblMain->update();
+ 
+         return to_route('eris.edit', ['acno' => $acno])->with('info', 'Update Sucessfully');
     }
 }

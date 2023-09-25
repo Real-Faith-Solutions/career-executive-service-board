@@ -612,10 +612,14 @@ Route::middleware('auth')->group(function () {
 
     //  ERIS routes
         Route::prefix('eris')->group(function () {
-            Route::get('eris-index', [ErisProfileController::class, 'index'])->name('eris-index');
-            Route::get('eris-create', [ErisProfileController::class, 'create'])->name('eris.create');
-            Route::post('eris-store', [ErisProfileController::class, 'store'])->name('eris.store');
-
+            Route::prefix('profile-data')->group(function () {
+                Route::get('index', [ErisProfileController::class, 'index'])->name('eris-index');
+                Route::get('create', [ErisProfileController::class, 'create'])->name('eris.create');
+                Route::post('store', [ErisProfileController::class, 'store'])->name('eris.store');
+                Route::get('edit/{acno}', [ErisProfileController::class, 'edit'])->name('eris.edit'); 
+                Route::put('update/{acno}', [ErisProfileController::class, 'update'])->name('eris.update'); 
+            });
+            
             Route::prefix('written-exam')->group(function () {
                 Route::get('index/{acno}', [WrittenExamController::class, 'index'])->name('eris-written-exam.index'); 
                 Route::get('create/{acno}', [WrittenExamController::class, 'create'])->name('eris-written-exam.create'); 

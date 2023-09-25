@@ -39,6 +39,11 @@
                         <div class="mb-3">
                             <label for="cesno">CESNO<sup>*</sup></label>
                             <input type="text" id="cesno" name="cesno" value="{{ $personalDataSearchResult->cesno ?? '' }}" readonly>
+                            @error('cesno')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
                         </div>
 
                         <div class="mb-3">
@@ -107,7 +112,8 @@
 
                         <div class="mb-3">
                             <label for="mobileno">Mobile No</label>
-                            <input type="text" id="mobileno" name="mobileno" >
+                            <input type="text" id="mobileno" name="mobileno" oninput="validateInput(mobileno, 10, 'numbersWithSpecial')" onkeypress="validateInput(mobileno, 10, 'numbersWithSpecial')" onblur="checkErrorMessage(mobileno)">
+                            <p class="input_error text-red-600"></p>
                         </div>
 
                         <div class="mb-3">
@@ -151,7 +157,8 @@
 
                         <div class="mb-3">
                             <label for="c_date">Date Conferred</label>
-                            <input type="date" id="c_date" name="c_date">
+                            <input type="date" id="c_date" name="c_date" oninput="validateDateInput(c_date)">
+                            <p class="input_error text-red-600"></p>
                         </div>
                     </div>
 
