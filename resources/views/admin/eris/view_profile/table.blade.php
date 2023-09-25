@@ -3,14 +3,13 @@
 @section('content')
 
     <section>
-    
         <div class="flex justify-between">
             <div class="grid lg:grid-cols-3">
                 @include('components.search')
             </div>
 
             <div class="mt-5">
-                <a href="" class="btn btn-primary" >Add New Profile</a>
+                <a href="{{ route('eris.create') }}" class="btn btn-primary" >Add New Profile</a>
             </div>
         </div>
 
