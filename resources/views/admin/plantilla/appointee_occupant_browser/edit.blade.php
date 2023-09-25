@@ -323,8 +323,8 @@
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a> --}}
-                    {{-- <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
+                    <form class="hover:bg-slate-100 rounded-full"
+                        action="{{ route('other-assignment.destroy', ['detailed_code' => $data->detailed_code]) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
@@ -333,7 +333,7 @@
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
                         </button>
-                    </form> --}}
+                    </form>
                 </div>
             </td>
         </tr>

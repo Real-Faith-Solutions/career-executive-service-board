@@ -46,4 +46,12 @@ class OtherAssignmentController extends Controller
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
+
+    public function destroy($detailed_code)
+    {
+        $datas = OtherAssignment::findOrFail($detailed_code);
+        $datas->delete();
+
+        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+    }
 }
