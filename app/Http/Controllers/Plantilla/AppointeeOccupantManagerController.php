@@ -89,7 +89,10 @@ class AppointeeOccupantManagerController extends Controller
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ], [
-            'cesno.unique' => 'This official is already appointed to another position'
+            'cesno.unique' => 'This official is already appointed to another position.',
+            'appt_stat_code.required' => 'The Personnel Movement field is required.',
+            'assum_date.required' => 'The Assumption Date field is required.',
+            'appt_date.required' => 'The Appointment Date field is required.',
         ]);
 
         PlanAppointee::create([
