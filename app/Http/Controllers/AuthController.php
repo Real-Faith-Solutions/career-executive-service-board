@@ -148,17 +148,39 @@ class AuthController extends Controller
 
     public function submitConfirmationEmail(Request $request)
     {
+        // Retrieve device associations from the cookie
+        $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
 
         // getting deviceIdentifiers for this user
         $ctrlno = auth()->user()->ctrlno;
         $deviceIdentifiers = DeviceVerification::where('user_ctrlno', $ctrlno)
-                                ->where('verified', false)
-                                ->pluck('device_id')
-                                ->toArray();
+                            ->where('verified', false)
+                            ->get();
+
+        // 
+        foreach ($deviceIdentifiers as $deviceIdentifier) {
+            foreach ($associations as $association) {
+                if (
+                    $association['device_id'] == $deviceIdentifier->device_id &&
+                    $association['user_id'] == $ctrlno
+                ) {
+
+                    if($deviceIdentifier->confirmation_code == $request->code){
+
+                        $association['verified'] = true;
+                        $cookieValue = json_encode($associations);
+                        Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
+                        $deviceIdentifier->update(['verified' => true]);
+                        return Redirect::to('/dashboard')->with('message','Account Verified!');
+
+                    }
+
+                }
+            }
+        }
 
         return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
 
-        return Redirect::to('/dashboard')->with('message','Account Verified!');
     }
 
 }
