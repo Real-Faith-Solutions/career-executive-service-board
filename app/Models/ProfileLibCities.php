@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Plantilla\OtherAssignment;
+use App\Models\Plantilla\PlanPosition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,12 +18,15 @@ class ProfileLibCities extends Model
     protected $table = "profilelib_tblcities";
 
     protected $fillable = [
-
         'prov_code',
         'name',
         'zipcode',
-
     ];
+
+    public function cities()
+    {
+        return $this->hasManyThrough(OtherAssignment::class, 'city_code');
+    }
 
     public function competencyTrainingProviderManager(): HasMany
     {

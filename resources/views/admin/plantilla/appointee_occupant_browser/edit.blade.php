@@ -305,7 +305,7 @@
             <td>{{ $data->house_bldg }}</td>
             <td>{{ $data->st_road }}</td>
             <td>{{ $data->brgy_vill }}</td>
-            <td>{{ $data->city_code }}</td>
+            <td>{{ $data->cities->name }}</td>
             <td>{{ $data->contactno }}</td>
             <td>{{ $data->email_addr }}</td>
             <td>{{ $data->cesno }}</td>

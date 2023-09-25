@@ -2,6 +2,7 @@
 
 namespace App\Models\Plantilla;
 
+use App\Models\ProfileLibCities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,4 +31,9 @@ class OtherAssignment extends Model
         'encoder',
         'lastupd_enc',
     ];
+
+    public function cities()
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'city_code', 'city_code');
+    }
 }
