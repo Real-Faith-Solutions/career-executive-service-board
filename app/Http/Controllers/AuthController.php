@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TempCred201;
+use App\Models\DeviceVerification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -147,6 +148,14 @@ class AuthController extends Controller
 
     public function submitConfirmationEmail(Request $request)
     {
+
+        // getting deviceIdentifiers for this user
+        $ctrlno = auth()->user()->ctrlno;
+        $deviceIdentifiers = DeviceVerification::where('user_ctrlno', $ctrlno)
+                                ->where('verified', false)
+                                ->pluck('device_id')
+                                ->toArray();
+
         return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
 
         return Redirect::to('/dashboard')->with('message','Account Verified!');
