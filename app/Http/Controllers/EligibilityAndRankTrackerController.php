@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Eris\AssessmentCenter;
 use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\InDepthValidation;
+use App\Models\Eris\RapidValidation;
 use App\Models\Eris\WrittenExam;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblAppAuthority;
@@ -47,13 +49,13 @@ class EligibilityAndRankTrackerController extends Controller
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
                 'selectedPage'));
 
-            // case 'Validation':
+            case 'Validation':
             
-            //     $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
-            //     $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes']);
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $rapidValidation = RapidValidation::where('acno', $erisPersonalDataAcno)->get(['dteassign', 'dtesubmit', 'remarks']);
+                $inDepthValidation = InDepthValidation::where('acno', $erisPersonalDataAcno)->get(['dteassign', 'dtesubmit', 'remarks']);
 
-            //     return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
-            //     'selectedPage'));
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.validation_table', compact('cesno', 'rapidValidation', 'inDepthValidation', 'selectedPage'));
 
             default:
                 return redirect()->route('default'); // Handle an invalid selection
