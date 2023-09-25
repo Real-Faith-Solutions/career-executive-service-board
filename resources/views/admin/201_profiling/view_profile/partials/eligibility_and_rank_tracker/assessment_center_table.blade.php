@@ -10,6 +10,7 @@
             <div class="grid grid-cols-2 justify-center item-center gap-3 w-full">
                 <div>
                     <select class="w-66" name="page" id="">
+                        <option>Eligibility and Rank Tracker</option>
                         <option value="Written Exam">Written Exam (Historical Record)</option>
                         <option value="Assessment Center" {{ $selectedPage == 'Assessment Center' ? 'selected' : '' }}>Assessment Center (Historical Record)</option>
                         <option value="Validation">Validation (Historical Record)</option>

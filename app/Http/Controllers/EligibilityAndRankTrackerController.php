@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eris\AssessmentCenter;
+use App\Models\Eris\BoardInterView;
 use App\Models\Eris\ErisTblMain;
 use App\Models\Eris\InDepthValidation;
+use App\Models\Eris\PanelBoardInterview;
 use App\Models\Eris\RapidValidation;
 use App\Models\Eris\WrittenExam;
 use App\Models\PersonalData;
@@ -57,8 +59,16 @@ class EligibilityAndRankTrackerController extends Controller
 
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.validation_table', compact('cesno', 'rapidValidation', 'inDepthValidation', 'selectedPage'));
 
+            case 'Board Interview':
+
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $panelBoardInterview = PanelBoardInterview::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
+                $boardInterview = BoardInterView::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
+            
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 'boardInterview', 'selectedPage'));
+
             default:
-                return redirect()->route('default'); // Handle an invalid selection
+                return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]); // Handle an invalid selection
         }
     }
 
