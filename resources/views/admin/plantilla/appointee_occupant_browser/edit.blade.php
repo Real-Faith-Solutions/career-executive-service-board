@@ -257,10 +257,10 @@
 </div>
 
 <div class="flex justify-end">
-    <a href="{{ route('appointee-occupant-manager.create',['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id] ) }}"
-        class="btn btn-primary">
+    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
-    </a>
+    </button>
+    @include('admin.plantilla.other_assignment.create')
 </div>
 <table class="dataTables">
     <thead>
