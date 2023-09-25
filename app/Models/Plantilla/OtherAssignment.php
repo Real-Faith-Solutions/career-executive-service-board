@@ -13,4 +13,21 @@ class OtherAssignment extends Model
 
     protected $table = 'plantilla_tblOtherAssignment';
     protected $primaryKey = 'detailed_code';
+    protected $fillable = [
+        'cesno',
+        'appt_status_code',
+        'position',
+        'office',
+        'from_dt',
+        'to_dt',
+        'remarks',
+        'house_bldg',
+        'st_road',
+        'brgy_vill',
+        'city_code',
+        'contactno',
+        'email_addr',
+        'encoder',
+        'lastupd_enc',
+    ];
 }

@@ -9,6 +9,7 @@ use App\Models\Plantilla\ApptStatus;
 use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
+use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
@@ -16,41 +17,29 @@ use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OtherAssignmentController extends Controller
 {
 
-    public function create(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
+    public function store(Request $request)
     {
-        $sector = SectorManager::find($sectorid);
-        $department = DepartmentAgency::find($deptid);
-        $departmentLocation = AgencyLocation::find($officelocid);
-        $office = Office::find($officeid);
-        $planPosition = PlanPosition::find($plantilla_id);
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
-        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+        $request->validate([
+            'appt_status_code' => ['required'],
+            'from_dt' => ['required'],
+            'to_dt' => ['required'],
+        ]);
 
-        $planAppointee = PlanAppointee::query()
-            ->where('plantilla_id', $planPosition->plantilla_id)
-            ->get();
+        $data = $request->all();
+        $data['encoder'] = $encoder;
+        $data['lastupd_enc'] = $encoder;
 
-        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
-        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
-        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+        OtherAssignment::create($data);
 
-        return view('admin.plantilla.other_assignment.create', compact(
-            'sector',
-            'department',
-            'departmentLocation',
-            'office',
-            'cities',
-            'planAppointee',
-            'planPositionLibrary',
-            'positionMasterLibrary',
-            'planPosition',
-            'apptStatus',
-            'personalData',
-
-        ));;
+        return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 }

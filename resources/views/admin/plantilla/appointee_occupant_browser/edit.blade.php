@@ -191,7 +191,7 @@
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
-                                            value="{{ $appointees->assum_date }}" />
+                                            value="{{ $appointees->assum_date }}" required />
                                         @error('assum_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -210,7 +210,7 @@
                                     <div class="mb-3">
                                         <label for="appt_date">Appointment Date<sup>*</sup></label>
                                         <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ $appointees->appt_date }}" />
+                                            value="{{ $appointees->appt_date }}" required />
                                         @error('appt_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -298,7 +298,10 @@
             <td>{{ $data->position }}</td>
             <td>{{ $data->office }}</td>
             <td>{{ $data->remarks }}</td>
-            <td>{{ $data->from_dt }} - {{ $data->to_dt }}</td>
+            <td>
+                {{ \Carbon\Carbon::parse($data->from_dt)->format('m/d/Y') }} -
+                {{ \Carbon\Carbon::parse($data->to_dt)->format('m/d/Y') }}
+            </td>
             <td>{{ $data->house_bldg }}</td>
             <td>{{ $data->st_road }}</td>
             <td>{{ $data->brgy_vill }}</td>
