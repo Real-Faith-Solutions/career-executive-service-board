@@ -6,7 +6,7 @@
 
 <div class="my-5 flex justify-between">
     <div class="flex">
-        <form action="{{ route('eligibility-rank-tracker.index', ['cesno'=>$cesno]) }}" method="GET">
+        <form action="{{ route('eligibility-rank-tracker.navigate', ['cesno'=>$cesno]) }}" method="GET">
             <div class="grid grid-cols-2 justify-center item-center gap-3 w-full">
                 <div>
                     <select class="w-66" name="page" id="">
