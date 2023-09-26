@@ -127,8 +127,9 @@
                 {{ $data->departmentAgencyType->title ?? 'N/A' }}
             </td>
             <td>
-                <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">{{
-                    $data->website ?? 'N/A' }}</a>
+                <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">
+                    {{ $data->website ?? 'N/A' }}
+                </a>
             </td>
 
             <td class="px-6 py-4 text-right uppercase">
