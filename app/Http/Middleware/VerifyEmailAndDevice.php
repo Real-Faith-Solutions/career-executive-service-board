@@ -83,7 +83,7 @@ class VerifyEmailAndDevice
 
             Cookie::queue(Cookie::make('user_device_associations', json_encode($associations), 30 * 24 * 60));
 
-            return redirect()->route('reconfirm.email');
+            return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
         }
 
         return $next($request);

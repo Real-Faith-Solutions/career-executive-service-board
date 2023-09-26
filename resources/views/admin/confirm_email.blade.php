@@ -142,7 +142,7 @@
                 "progressBar" : true,
                 "closeButton" : true,
             }
-            toastr.info("{{ Session::get('info') }}",'Success!',{timeOut:7000});
+            toastr.info("{{ Session::get('info') }}",'Notice!',{timeOut:7000});
     </script>
 
     @endif
