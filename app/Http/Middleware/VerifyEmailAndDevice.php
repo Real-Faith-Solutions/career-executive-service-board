@@ -28,17 +28,18 @@ class VerifyEmailAndDevice
             if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
                 $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $pendingDeviceIdentifiers)->first();
-                $cooldownMinutes = 1; // Adjust as needed
+                $cooldownMinutes = 60; // Adjust as needed
                 if ($deviceVerification && $deviceVerification->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
                     return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
                 }
 
                 $confirmation_code = mt_rand(10000, 99999);
+                $hashed_confirmation_code = Hash::make($confirmation_code);
                 $recipientEmail = auth()->user()->email;
                 $imagePath = public_path('images/branding.png');
 
                 // Update the confirmation code in the database
-                $deviceVerification->update(['confirmation_code' => $confirmation_code]);
+                $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
 
                 // sending confirmation_code email to user
                 $data = [
