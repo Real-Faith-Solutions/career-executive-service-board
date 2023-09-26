@@ -61,7 +61,7 @@
                         {{ $userName }}
                       </p>
                       <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                        {{ Auth::user()->code }}
+                        {{ Auth::user()->ctrlno }}
                       </p>
                     </div>
                     <ul class="py-1" role="none">
@@ -111,7 +111,7 @@
                     </div>
 
                     <div class="mt-2 flex items-center justify-end">
-                        <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('login') }}">
+                        <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('resend.code', ['ctrlno' => Auth::user()->ctrlno]) }}">
                             Resend Code
                         </a>
                     </div>
