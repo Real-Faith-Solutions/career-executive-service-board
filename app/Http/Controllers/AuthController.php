@@ -165,7 +165,7 @@ class AuthController extends Controller
                     $association['device_id'] == $deviceIdentifier->device_id &&
                     $association['user_id'] == $ctrlno
                 ) {
-                    if (Hash::check($deviceIdentifier->confirmation_code, $request->code)) {
+                    if (Hash::check($request->code, $deviceIdentifier->confirmation_code)) {
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);

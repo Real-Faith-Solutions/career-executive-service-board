@@ -54,7 +54,7 @@ class VerifyEmailAndDevice
 
             $device_id = uniqid();
             $confirmation_code = mt_rand(10000, 99999);
-            $hashed_confirmation_code = Hash::make($confirmation_code);;
+            $hashed_confirmation_code = Hash::make($confirmation_code);
             $recipientEmail = auth()->user()->email;
             $imagePath = public_path('images/branding.png');
 
