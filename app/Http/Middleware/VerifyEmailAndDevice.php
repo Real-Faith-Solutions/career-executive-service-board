@@ -15,6 +15,10 @@ class VerifyEmailAndDevice
 {
     public function handle($request, Closure $next)
     {
+        if(!auth()->user()->two_factor){
+            return $next($request);
+        }
+
         // Retrieve associations from the cookie
         $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
 

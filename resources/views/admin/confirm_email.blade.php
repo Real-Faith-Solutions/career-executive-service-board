@@ -61,7 +61,7 @@
                         {{ $userName }}
                       </p>
                       <p class="text-sm font-medium text-gray-900 truncate" role="none">
-                        {{ Auth::user()->ctrlno }}
+                        {{ $userRoleTitle }}
                       </p>
                     </div>
                     <ul class="py-1" role="none">
