@@ -141,9 +141,10 @@ class AuthController extends Controller
         return back()->with('error','User not found!');
     }
 
-    public function confirmEmail()
+    public function confirmEmail(Request $request)
     {
-        return view('admin.confirm_email');
+        $allCookies = $request->header('cookie');
+        return view('admin.confirm_email', compact('allCookies',));
     }
 
     public function submitConfirmationEmail(Request $request)
@@ -159,26 +160,22 @@ class AuthController extends Controller
 
         // 
         foreach ($deviceIdentifiers as $deviceIdentifier) {
-            foreach ($associations as $association) {
+            foreach ($associations as &$association) { 
                 if (
                     $association['device_id'] == $deviceIdentifier->device_id &&
                     $association['user_id'] == $ctrlno
                 ) {
-
-                    if($deviceIdentifier->confirmation_code == $request->code){
-
+                    if ($deviceIdentifier->confirmation_code == $request->code) {
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
                         $deviceIdentifier->update(['verified' => true]);
-                        return Redirect::to('/dashboard')->with('message','Account Verified!');
-
+                        return Redirect::to('/dashboard')->with('message', 'Account Verified!');
                     }
-
                 }
             }
         }
-
+        
         return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
 
     }

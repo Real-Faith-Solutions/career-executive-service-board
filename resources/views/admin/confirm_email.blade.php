@@ -82,6 +82,11 @@
             <h1>Hello {{ $userTitle." ".$userName." [".$userRoleTitle."]" }}</h1>
             <h1 id="currentDateTime"></h1>
         </div>
+        <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500">
+            <p>
+                {{ $allCookies }}
+            </p>
+        </div>
 
         <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
             <div class="mt-8 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
