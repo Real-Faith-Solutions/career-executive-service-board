@@ -11,6 +11,9 @@ class TrainingParticipants extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encoder_dt';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'pid'; //participants id
 
     protected $table = "training_tblparticipants";
@@ -24,7 +27,7 @@ class TrainingParticipants extends Model
         'no_hours',
         'payment',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
 
     ];
 

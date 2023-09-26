@@ -8,7 +8,9 @@
 <div class="my-5 flex justify-between">
     <h1 class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-400">{{ $trainingSession->title }}</h1>
 
-    <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a>
+    {{-- <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a> --}}
+
+    <a href="{{ route('training-session.addParticipant') }}" class="btn btn-primary" >Add Participant</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

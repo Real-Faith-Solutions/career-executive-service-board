@@ -45,7 +45,7 @@ class ErisProfileController extends Controller
             // Query the database to find the corresponding personal data
             $personalDataSearchResult = PersonalData::where('cesno', $search)->first();
 
-            if (!$personalDataSearchResult || !is_numeric($search)) 
+            if (!$personalDataSearchResult) 
             {
                 // Handle the case where the data does not exist
                 return redirect()->route('eris.create')->with('error', 'Data not found in the database.');
