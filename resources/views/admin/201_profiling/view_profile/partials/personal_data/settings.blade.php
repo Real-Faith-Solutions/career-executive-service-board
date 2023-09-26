@@ -15,7 +15,7 @@
                             Change Password
                         </h1>
                         <div class="flex items-center px-6 py-3 text-left">
-                            <input id="two_factor" type="checkbox" name="two_factor" value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
+                            <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
                             <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-white">Two-factor authentication</label>
                         </div>
                     </div>

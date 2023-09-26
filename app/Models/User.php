@@ -38,6 +38,7 @@ class User extends Authenticatable
         'contact_no',
         'email',
         'password',
+        'two_factor',
         'is_active',
         'last_updated_by',
         'encoder',

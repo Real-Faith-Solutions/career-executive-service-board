@@ -378,7 +378,20 @@ class ProfileController extends Controller
     public function switchTwoFactor()
     {
 
-        return redirect()->back()->with('message', 'ok naman sya, gumagana.');
+        $ctrlno = auth()->user()->ctrlno;
+
+        $user = User::where('ctrlno', $ctrlno)->first();
+
+        if ($user) {
+            // Toggle the 'two_factor' column value
+            $user->update([
+                'two_factor' => !$user->two_factor,
+            ]);
+
+            return redirect()->back()->with('success', 'Two-Factor Authentication toggled successfully.');
+        }
+
+        return redirect()->back()->with('error', 'User not found.');
 
     }
 
