@@ -21,8 +21,9 @@
             </div>
 
             <div class="p-6 space-y-6">
-                <form action="#" method="POST">
+                <form action="{{ route('other-assignment.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="cesno" value="{{ $appointees->personalData->cesno }}">
                     <div class="grid grid-cols-2 gap-2">
                         <div class="mb-3">
                             <label for="name">Name</label>

@@ -191,7 +191,7 @@
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
-                                            value="{{ $appointees->assum_date }}" />
+                                            value="{{ $appointees->assum_date }}" required />
                                         @error('assum_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -210,7 +210,7 @@
                                     <div class="mb-3">
                                         <label for="appt_date">Appointment Date<sup>*</sup></label>
                                         <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ $appointees->appt_date }}" />
+                                            value="{{ $appointees->appt_date }}" required />
                                         @error('appt_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -298,30 +298,35 @@
             <td>{{ $data->position }}</td>
             <td>{{ $data->office }}</td>
             <td>{{ $data->remarks }}</td>
-            <td>{{ $data->from_dt }} - {{ $data->to_dt }}</td>
+            <td>
+                {{ \Carbon\Carbon::parse($data->from_dt)->format('m/d/Y') }} -
+                {{ \Carbon\Carbon::parse($data->to_dt)->format('m/d/Y') }}
+            </td>
             <td>{{ $data->house_bldg }}</td>
             <td>{{ $data->st_road }}</td>
             <td>{{ $data->brgy_vill }}</td>
-            <td>{{ $data->city_code }}</td>
+            <td>{{ $data->cities->name }}</td>
             <td>{{ $data->contactno }}</td>
             <td>{{ $data->email_addr }}</td>
             <td>{{ $data->cesno }}</td>
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
-                    {{-- <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('other-assignment.show', [
                         'sectorid' => $sector->sectorid,
                         'deptid' => $department->deptid,
                         'officelocid' => $departmentLocation->officelocid,
                         'officeid' => $office->officeid,
-                        'plantilla_id' => $data->plantilla_id
+                        'plantilla_id' => $planPosition->plantilla_id,
+                        'appointee_id' => $appointees->appointee_id,
+                        'detailed_code' => $data->detailed_code,
                     ]) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
-                    </a> --}}
-                    {{-- <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
+                    </a>
+                    <form class="hover:bg-slate-100 rounded-full"
+                        action="{{ route('other-assignment.destroy', ['detailed_code' => $data->detailed_code]) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
@@ -330,7 +335,7 @@
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
                         </button>
-                    </form> --}}
+                    </form>
                 </div>
             </td>
         </tr>

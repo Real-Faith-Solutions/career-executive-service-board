@@ -67,11 +67,7 @@
 
                                     <button type="submit" id="checkCesno" class="btn btn-primary">Search</button>
                                 </div>
-                                @error('cesno')
-                                <span class="invalid" role="alert">
-                                    <p>{{ $message }}</p>
-                                </span>
-                                @enderror
+
                             </div>
                         </form>
 
@@ -125,6 +121,11 @@
                                         <input id="lastname"
                                             value="{{ $personalData->lastname ?? ''}} {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
                                             readonly />
+                                        @error('cesno')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
 

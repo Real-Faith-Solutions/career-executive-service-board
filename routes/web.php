@@ -52,6 +52,7 @@ use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
+use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
@@ -465,6 +466,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show');
             Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update');
+            Route::post('store', [OtherAssignmentController::class, 'store'])->name('other-assignment.store');
+            Route::delete('/{detailed_code}/destroy', [OtherAssignmentController::class, 'destroy'])->name('other-assignment.destroy');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}/{detailed_code}', [OtherAssignmentController::class, 'show'])->name('other-assignment.show');
+            Route::post('/other-assignment/{detailed_code}/update', [OtherAssignmentController::class, 'update'])->name('other-assignment.update');
         });
 
         Route::prefix('appointee-occupant-browser')->group(function () {

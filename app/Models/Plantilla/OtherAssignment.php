@@ -2,6 +2,7 @@
 
 namespace App\Models\Plantilla;
 
+use App\Models\ProfileLibCities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,4 +14,26 @@ class OtherAssignment extends Model
 
     protected $table = 'plantilla_tblOtherAssignment';
     protected $primaryKey = 'detailed_code';
+    protected $fillable = [
+        'cesno',
+        'appt_status_code',
+        'position',
+        'office',
+        'from_dt',
+        'to_dt',
+        'remarks',
+        'house_bldg',
+        'st_road',
+        'brgy_vill',
+        'city_code',
+        'contactno',
+        'email_addr',
+        'encoder',
+        'lastupd_enc',
+    ];
+
+    public function cities()
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'city_code', 'city_code');
+    }
 }
