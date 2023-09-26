@@ -90,7 +90,7 @@
 
         <div class="flex flex-col items-center pt-6 sm:justify-center sm:pt-0">
             <div class="mt-8 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
-                <h1 class="text-xl font-semibold text-center text-blue-500 mt-2">Confirm Email</h1>
+                <h1 class="text-2xl font-semibold text-center text-blue-500 mt-2">Confirm Email</h1>
                 <h2 class="text-md font-semibold text-center text-black-500 mt-2">Please Enter Confirmation Code</h2>
 
                 <form class="user" method="POST" action="{{ route('reconfirm.submit') }}">
@@ -106,8 +106,14 @@
                         @enderror
                     </div>
 
-                    <div class="flex justify-end">
-                        <button class="btn btn-primary">Login</button>
+                    <div class="flex justify-center">
+                        <button class="btn btn-primary">Confirm</button>
+                    </div>
+
+                    <div class="mt-2 flex items-center justify-end">
+                        <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('login') }}">
+                            Resend Code
+                        </a>
                     </div>
 
                 </form>
