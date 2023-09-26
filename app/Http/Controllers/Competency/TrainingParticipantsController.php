@@ -22,6 +22,8 @@ class TrainingParticipantsController extends Controller
 
     public function addParticipant(Request $request, $sessionId)
     {
+        $trainingSessionDescription = TrainingSession::where('sessionid', $sessionId)->value('title');
+
         $search = $request->input('search');
 
         // search query for personal data
@@ -77,7 +79,7 @@ class TrainingParticipantsController extends Controller
         // end of retrieving personal data latest ces status    
         
         return view('admin.competency.partials.training_session.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
-        $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId]);
+        $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId, 'trainingSessionDescription' => $trainingSessionDescription]);
     }
 
     public function storeParticipant(Request $request, $sessionId)
