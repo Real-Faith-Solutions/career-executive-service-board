@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmationCodeMail;
 use App\Mail\TempCred201;
 use App\Models\DeviceVerification;
 use Illuminate\Support\Facades\Session;
@@ -180,7 +181,7 @@ class AuthController extends Controller
 
     }
 
-    public function resendConfirmationEmail(Request $request)
+    public function resendConfirmationEmail()
     {
         // Retrieve device associations from the cookie
         $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
@@ -196,20 +197,40 @@ class AuthController extends Controller
             foreach ($associations as &$association) { 
                 if (
                     $association['device_id'] == $deviceIdentifier->device_id &&
-                    $association['user_id'] == $ctrlno
+                    $association['user_id'] == $ctrlno &&
+                    !$association['verified']
                 ) {
-                    if (Hash::check($request->code, $deviceIdentifier->confirmation_code)) {
-                        $association['verified'] = true;
-                        $cookieValue = json_encode($associations);
-                        Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
-                        $deviceIdentifier->update(['verified' => true]);
-                        return Redirect::to('/dashboard')->with('message', 'Account Verified!');
+
+                    $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
+                    $cooldownMinutes = 1; // Adjust as needed
+                    if ($deviceVerification && $deviceVerification->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
+                        return redirect()->route('reconfirm.email')->with('info','Confirmation Code Already Sent. Please check your email and spam');
                     }
+
+                    $confirmation_code = mt_rand(10000, 99999);
+                    $hashed_confirmation_code = Hash::make($confirmation_code);
+                    $recipientEmail = auth()->user()->email;
+                    $imagePath = public_path('images/branding.png');
+
+                    // Update the confirmation code in the database
+                    $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                    // sending confirmation_code email to user
+                    $data = [
+                        'email' => $recipientEmail,
+                        'confirmation_code' => $confirmation_code,
+                        'imagePath' => $imagePath,
+                    ];
+            
+                    Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                    return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+
                 }
             }
         }
         
-        return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
+        return redirect()->route('reconfirm.email')->with('error','Something went wrong. Please check confirmation code sent to your email');
 
     }
 

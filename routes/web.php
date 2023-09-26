@@ -113,7 +113,7 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 Route::middleware('auth')->group(function () {
     Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
     Route::post('/submit-confirmation-code', [AuthController::class, 'submitConfirmationEmail'])->name('reconfirm.submit');
-    Route::get('/resend-confirmation-code/{ctrlno}', [AuthController::class, 'resendConfirmationEmail'])->name('resend.code');
+    Route::get('/resend-confirmation-code', [AuthController::class, 'resendConfirmationEmail'])->name('resend.code');
 });
 
 Route::middleware('auth', 'verify.email.and.device')->group(function () {
