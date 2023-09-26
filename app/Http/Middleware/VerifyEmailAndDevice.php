@@ -7,6 +7,7 @@ use App\Models\DeviceVerification;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -53,12 +54,13 @@ class VerifyEmailAndDevice
 
             $device_id = uniqid();
             $confirmation_code = mt_rand(10000, 99999);
+            $hashed_confirmation_code = Hash::make($confirmation_code);;
             $recipientEmail = auth()->user()->email;
             $imagePath = public_path('images/branding.png');
 
             DeviceVerification::create([
                 'user_ctrlno' => $ctrlno,
-                'confirmation_code' => $confirmation_code,
+                'confirmation_code' => $hashed_confirmation_code,
                 'device_id' => $device_id,
                 'verified' => false, // Set verified to false initially
             ]);
