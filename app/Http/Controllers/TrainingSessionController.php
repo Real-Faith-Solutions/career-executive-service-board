@@ -25,14 +25,6 @@ class TrainingSessionController extends Controller
             return view('admin.competency.partials.training_session.table', compact('trainingSession'));
         }
 
-        public function participantList($sessionId)
-        {
-            $trainingSession = TrainingSession::find($sessionId);
-            $trainingParticipantList = $trainingSession->trainingParticipantList;
-
-            return view('admin.competency.partials.training_session.participant_list', compact('trainingParticipantList', 'trainingSession'));
-        }
-
         public function create()
         {
             $trainingLibCategory = TrainingLibCategory::all();
@@ -183,7 +175,15 @@ class TrainingSessionController extends Controller
     // end of  training session methods
 
     // training session participant methods
-        public function addParticipant(Request $request)
+        public function participantList($sessionId)
+        {
+            $trainingSession = TrainingSession::find($sessionId);
+            $trainingParticipantList = $trainingSession->trainingParticipantList;
+
+            return view('admin.competency.partials.training_session.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
+        }
+
+        public function addParticipant(Request $request, $sessionId)
         {
             $search = $request->input('search');
 
@@ -240,12 +240,41 @@ class TrainingSessionController extends Controller
             // end of retrieving personal data latest ces status    
             
             return view('admin.competency.partials.training_session.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
-            $personalDataSearchResult, 'search' => $search, 'description' => $description]);
+            $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId]);
         }
 
-        public function storeParticipant()
+        public function storeParticipant(Request $request, $sessionId)
         {
+            $request->validate([
+
+                'status' => ['required'],
+                'remarks' => ['nullable'],
+                'no_of_hours' => ['required'],
+                'payment' => ['required'],
+                
+            ]);
+    
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $encoder = $user->userName();
+    
+            $trainingParticipant = new TrainingParticipants([
+    
+                'cesno' => $request->cesno,
+                'sessionid' => $sessionId,
+                'status' => $request->status,
+                'remarks' => $request->remarks,
+                'no_hours' => $request->no_of_hours,
+                'payment' => $request->payment,
+                'encoder' =>  $encoder,
+    
+            ]);
+    
+            $personalData = PersonalData::find($request->cesno);
             
+            $personalData->competencyCesTraining()->save($trainingParticipant);
+
+            return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('message', 'Save Sucessfully');
         }
 
         public function destroyParticipant($pid)

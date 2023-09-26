@@ -10,7 +10,7 @@
 
     {{-- <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a> --}}
 
-    <a href="{{ route('training-session.addParticipant') }}" class="btn btn-primary" >Add Participant</a>
+    <a href="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" class="btn btn-primary" >Add Participant</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

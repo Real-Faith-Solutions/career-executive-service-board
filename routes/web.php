@@ -591,7 +591,8 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted')->middleware('checkPermission:compentency_training_session_delete');
             Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore')->middleware('checkPermission:compentency_training_session_delete');
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete')->middleware('checkPermission:compentency_training_session_delete');
-            Route::get('add-participant', [TrainingSessionController::class, 'addParticipant'])->name('training-session.addParticipant');
+            Route::get('add-participant/{sessionId}', [TrainingSessionController::class, 'addParticipant'])->name('training-session.addParticipant');
+            Route::post('store-participant/{sessionId}', [TrainingSessionController::class, 'storeParticipant'])->name('training-session.storeParticipant');
         });
 
         Route::prefix('competency-ces-training')->group(function () {

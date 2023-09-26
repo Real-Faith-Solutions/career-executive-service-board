@@ -6,7 +6,7 @@
 
 <div class="flex justify-between mt-7">
     <div class="flex items-center">
-        <form action="{{ route('training-session.addParticipant') }}" method="GET">
+        <form action="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" method="GET">
             <div class="flex gap-4">
                 <input type="text" name="search" id="search" list="searchResults" placeholder="Search..." value="{{  $search }}">
                 <datalist id="searchResults">
@@ -19,7 +19,9 @@
         </form>
     </div>
 
-    <a href="" class="btn btn-primary" >Go back</a>
+    <div class="flex justify-center items-center">
+        <a href="{{ route('training-session.participantList', ['sessionId'=>$sessionId]) }}" class="btn btn-primary" >Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -31,7 +33,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(ces_trainings_form)">
+            <form action="{{ route('training-session.storeParticipant', ['sessionId'=>$sessionId]) }}" method="POST" id="participant_training_form" onsubmit="return checkErrorsBeforeSubmit(participant_training_form)">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
