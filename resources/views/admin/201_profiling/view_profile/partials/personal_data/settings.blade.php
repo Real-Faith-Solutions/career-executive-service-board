@@ -10,10 +10,14 @@
         <div class="col-span-3">
             <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
                 <div class="w-full text-left text-gray-500">
-                    <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
-                        <h1 class="px-6 py-3 text-left">
+                    <div class="bg-blue-500 uppercase text-white flex justify-between">
+                        <h1 class=" mt-2 px-6 py-3 text-left">
                             Change Password
                         </h1>
+                        <div class="flex items-center px-6 py-3 text-left">
+                            <input id="compentency_contacts_add" type="checkbox" name="permissions[]" value="compentency_contacts_add" class="w-4 h-4 text-blue-600 accent-green-600">
+                            <label for="compentency_contacts_add" class="ml-2 mt-2 text-sm font-medium text-white">Two-factor authentication</label>
+                        </div>
                     </div>
 
                     <div class="border-b bg-white px-6 py-3">

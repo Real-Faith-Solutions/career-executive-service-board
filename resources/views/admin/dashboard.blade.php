@@ -42,11 +42,6 @@
         <h1>Hello {{ $userTitle." ".$userName." [".$userRoleTitle."]" }}</h1>
         <h1 id="currentDateTime"></h1>
     </div>
-    <div class="card bg-slate-50 lg:flex lg:justify-between text-slate-500">
-        <p>
-            {{ $allCookies }}
-        </p>
-    </div>
     @endauth
     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <div class="card bg-slate-50">
