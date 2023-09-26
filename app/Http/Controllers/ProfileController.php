@@ -375,4 +375,11 @@ class ProfileController extends Controller
 
     }
 
+    public function switchTwoFactor()
+    {
+
+        return redirect()->back()->with('message', 'ok naman sya, gumagana.');
+
+    }
+
 }

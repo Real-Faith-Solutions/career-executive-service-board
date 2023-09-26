@@ -1,6 +1,17 @@
 
 // Personal Data Form Interaction
 
+    // two-factor authentication checkbox
+    document.addEventListener('DOMContentLoaded', function () {
+        const myCheckbox = document.getElementById('two_factor');
+        
+        if (myCheckbox) {
+            myCheckbox.addEventListener('change', function () {
+                window.location.href = "/201-profile/personal-data/switch/two-factor"; // Replace with your desired route
+            });
+        }
+    });
+
     // check password if match
     function checkPasswordMatch() {
         const passwordField = document.getElementById('password');

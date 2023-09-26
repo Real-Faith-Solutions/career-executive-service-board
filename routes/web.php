@@ -135,6 +135,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+            Route::get('switch/two-factor', [ProfileController::class, 'switchTwoFactor'])->name('two-factor.switch');
         });
 
         Route::prefix('family-profile')->group(function () {
