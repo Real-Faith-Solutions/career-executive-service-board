@@ -578,11 +578,6 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('training-session')->group(function () {
             Route::get('index', [TrainingSessionController::class, 'index'])->name('training-session.index')->middleware('checkPermission:compentency_training_session_view');
-            Route::get('participant-list/{sessionId}', [TrainingSessionController::class, 'participantList'])->name('training-session.participantList')->middleware('checkPermission:compentency_training_session_view');
-            Route::delete('participant-destroy/{pid}', [TrainingSessionController::class, 'destroyParticipant'])->name('training-participant.destroy')->middleware('checkPermission:compentency_training_session_delete');
-            Route::get('recently-deleted-participant-list', [TrainingSessionController::class, 'recentlyDeletedParticipant'])->name('training-session.recentlyDeletedParticipant')->middleware('checkPermission:compentency_training_session_delete');
-            Route::post('restore-participant-list/{pid}', [TrainingSessionController::class, 'restoreParticipantList'])->name('training-session.restoreParticipantList')->middleware('checkPermission:compentency_training_session_delete');
-            Route::delete('force-delete-participant-list/{pid}', [TrainingSessionController::class, 'forceDeleteParticipantList'])->name('training-participant.forceDeleteParticipantList')->middleware('checkPermission:compentency_training_session_delete');
             Route::get('create', [TrainingSessionController::class, 'create'])->name('training-session.create')->middleware('checkPermission:compentency_training_session_add');
             Route::post('store', [TrainingSessionController::class, 'store'])->name('training-session.store')->middleware('checkPermission:compentency_training_session_add');
             Route::get('edit/{ctrlno}', [TrainingSessionController::class, 'edit'])->name('training-session.edit')->middleware('checkPermission:compentency_training_session_edit');
@@ -591,9 +586,19 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [TrainingSessionController::class, 'recentlyDeleted'])->name('training-session.recentlyDeleted')->middleware('checkPermission:compentency_training_session_delete');
             Route::post('restore/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'restore'])->name('training-session.restore')->middleware('checkPermission:compentency_training_session_delete');
             Route::delete('force-delete/recently-deleted/{ctrlno}', [TrainingSessionController::class, 'forceDelete'])->name('training-session.forceDelete')->middleware('checkPermission:compentency_training_session_delete');
-            Route::get('add-participant/{sessionId}', [TrainingSessionController::class, 'addParticipant'])->name('training-session.addParticipant');
-            Route::post('store-participant/{sessionId}', [TrainingSessionController::class, 'storeParticipant'])->name('training-session.storeParticipant');
+            
         });
+
+        Route::prefix('training-session-participant')->group(function () {
+            Route::get('participant-list/{sessionId}', [TrainingParticipantsController::class, 'participantList'])->name('training-session.participantList')->middleware('checkPermission:compentency_training_session_view');
+            Route::get('add-participant/{sessionId}', [TrainingParticipantsController::class, 'addParticipant'])->name('training-session.addParticipant');
+            Route::post('store-participant/{sessionId}', [TrainingParticipantsController::class, 'storeParticipant'])->name('training-session.storeParticipant');
+            Route::delete('participant-destroy/{pid}', [TrainingParticipantsController::class, 'destroyParticipant'])->name('training-participant.destroy')->middleware('checkPermission:compentency_training_session_delete');
+            Route::get('recently-deleted-participant-list', [TrainingParticipantsController::class, 'recentlyDeletedParticipant'])->name('training-session.recentlyDeletedParticipant')->middleware('checkPermission:compentency_training_session_delete');
+            Route::post('restore-participant-list/{pid}', [TrainingParticipantsController::class, 'restoreParticipantList'])->name('training-session.restoreParticipantList')->middleware('checkPermission:compentency_training_session_delete');
+            Route::delete('force-delete-participant-list/{pid}', [TrainingParticipantsController::class, 'forceDeleteParticipantList'])->name('training-participant.forceDeleteParticipantList')->middleware('checkPermission:compentency_training_session_delete');
+        });
+
 
         Route::prefix('competency-ces-training')->group(function () {
             Route::get('index/{cesno}', [CompetencyCesTrainingController::class, 'index'])->name('ces-training.index')->middleware('checkPermission:compentency_ces_training_view');
