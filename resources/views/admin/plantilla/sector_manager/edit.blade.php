@@ -41,9 +41,9 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="{{ route('sector-manager.update', $datas->sectorid) }}" method="POST">
+                <form action="{{ route('library-sector.update', $datas->sectorid) }}" method="POST">
                     @csrf
-
+                    @method('put')
                     <input type="hidden" name="encoder"
                         value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }}"
                         readonly>

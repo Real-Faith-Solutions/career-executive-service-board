@@ -35,16 +35,6 @@ class SectorManagerController extends Controller
     {
         return view('admin.plantilla.sector_manager.create');
     }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
-            'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
-        ]);
-        SectorManager::create($request->all());
-        return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully added!');
-    }
     // ui for edit
     public function edit(Request $request, $sectorid)
     {
@@ -90,41 +80,5 @@ class SectorManagerController extends Controller
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
-    }
-
-    // recently deleted
-    public function recentlyDeleted()
-    {
-        $datas = SectorManager::onlyTrashed()
-            ->orderByDesc('deleted_at')
-            ->paginate(15);
-        return view('admin.plantilla.sector_manager.recently_deleted', compact('datas'));
-    }
-
-    // restore
-    public function restore($sectorid)
-    {
-        $datas = SectorManager::onlyTrashed()->findOrFail($sectorid);
-        $datas->restore();
-
-        return redirect()->back()->with('message', 'The item has been successfully restore!');
-    }
-
-    // soft delete
-    public function destroy($sectorid)
-    {
-        $datas = SectorManager::findOrFail($sectorid);
-        $datas->delete();
-
-        return redirect()->route('sector-manager.index')->with('message', 'The item has been successfully deleted!');
-    }
-
-    // force delete
-    public function forceDelete($sectorid)
-    {
-        $datas = SectorManager::onlyTrashed()->findOrFail($sectorid);
-        $datas->forceDelete();
-
-        return redirect()->back()->with('message', 'The item has been successfully deleted!');
     }
 }

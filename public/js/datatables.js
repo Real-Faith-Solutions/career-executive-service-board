@@ -34,7 +34,7 @@ $.extend(DataTable.ext.classes, {
     tailwindcss: {
         paging: {
             active: "font-semibold bg-blue-500 text-white",
-            notActive: "bg-white",
+            notActive: "bg-white text-gray-300",
             button: "relative inline-flex justify-center items-center space-x-2 border px-4 py-2 -mr-px leading-6 hover:z-10 focus:z-10 active:z-10 border-gray-200 active:border-gray-200 active:shadow-none",
             first: "rounded-l-lg",
             last: "rounded-r-lg",

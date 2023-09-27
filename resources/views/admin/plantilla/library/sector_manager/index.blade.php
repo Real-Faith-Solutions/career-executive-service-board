@@ -1,29 +1,20 @@
 @extends('layouts.app')
 @section('title', 'Sector Manager')
-@section('sub', 'Sector Manager')
 @section('content')
 @include('admin.plantilla.header')
-<nav class="flex" aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2">
-        <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Plantilla</a>
-        </li>
-        <li>
-            <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </li>
-        <li>
-            <a href="#" class="text-blue-500">Sector Manager</a>
-        </li>
 
-    </ol>
-</nav>
+<div class="lg:flex lg:justify-between my-3">
+    <a href="#" class="text-blue-500 uppercase text-2xl">
+        @yield('title')
+    </a>
+    <div class="flex">
+        <a href="{{ route('library-sector.trash') }}">
+            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
+                style="width:34px;height:34px">
+            </lord-icon>
+        </a>
 
-<div class="lg:flex lg:justify-end my-3">
-
-    <div class="my-3 sm:flex sm:justify-end">
-        <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+        <a class="btn btn-primary" href="{{ route('library-sector.create') }}">Add record</a>
     </div>
 </div>
 
@@ -58,7 +49,7 @@
                 <div class="flex justify-end">
 
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('sector-manager.edit', $data->sectorid) }}">
+                        href="{{ route('library-sector.edit', $data->sectorid) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
