@@ -12,36 +12,15 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Update Form CES Training
+               Update Form CES {{ $trainingParticipants->participantTrainingSession->title }} Training
             </h1>
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('ces-training.update', ['ctrlno'=>$trainingParticipants->sessionid, 'cesno'=>$cesno]) }}" method="POST" id="update_ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_trainings_form)">
-                @csrf
+            <form action="{{ route('ces-training.update', ['ctrlno'=>$trainingParticipants->pid, 'cesno'=>$cesno]) }}" method="POST" id="update_ces_trainings_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_trainings_form)">
                 @method('PUT')
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="mb-3">
-                        <label for="sessionid">Training Session<sup>*</sup></label>
-                        <select name="sessionid" id="sessionid">
-                            <option disabled selected>Select Training Session</option>
-                            @foreach ($trainingSession as $trainingSessions)
-                                @if ($trainingSessions->sessionid == $trainingParticipants->sessionid )
-                                    <option value="{{ $trainingSessions->sessionid }}" selected>{{ $trainingSessions->title }}</option>
-                                @else
-                                    <option value="{{ $trainingSessions->sessionid }}" >{{ $trainingSessions->title }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sessionid')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
+                @csrf
+                
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="cesno">CESNO<sup>*</sup></label>

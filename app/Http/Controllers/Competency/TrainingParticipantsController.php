@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Competency;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LatestCesStatusController;
 use App\Models\PersonalData;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
@@ -40,7 +41,7 @@ class TrainingParticipantsController extends Controller
         }
 
         // validating if $search is not equal to null and the value is numeric
-        if ($search !== null && trim($search) !== '' && is_numeric($search)) 
+        if ($search !== null && is_numeric($search)) 
         {
             // Query the database to find the corresponding personal data
             $personalDataSearchResult = PersonalData::where('cesno', $search)->first();
@@ -54,25 +55,11 @@ class TrainingParticipantsController extends Controller
             // retrieving personal data latest ces status
                 $personalData = PersonalData::first()->find($search);
 
-                if ($personalData) 
-                {
-                    $latestCesStatus = $personalData->cesStatus()->first();
-
-                    if ($latestCesStatus !== null) 
-                    {
-                        $description = $latestCesStatus->description;
-                    } 
-                    else 
-                    {
-                        // Handle the case where $latestCesStatus is null
-                        $description = null; // or provide a default value if needed
-                    }
-                }      
-                else 
-                {
-                    // Handle the case where $personalData is null
-                    $description = null; // or provide a default value if needed
-                }
+                // retrieve latest ces status from LatestCesStatusController
+                    $cesStatusController = new LatestCesStatusController();
+                    $description = $cesStatusController->latestCesStatus($personalData);
+                // end of retrieve latest ces status from LatestCesStatusController
+                
             // end of retrieving personal data latest ces status     
         }
         else
@@ -135,24 +122,10 @@ class TrainingParticipantsController extends Controller
 
         $personalData = PersonalData::first()->find($trainingParticipant->cesno);
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->cesStatus()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $description = $latestCesStatus->description;
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }      
-        else 
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.training_participant.participant_edit', compact('trainingParticipant', 'sessionId', 'personalData', 'description', 'pid'));
     }

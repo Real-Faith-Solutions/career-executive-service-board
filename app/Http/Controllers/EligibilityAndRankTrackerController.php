@@ -166,13 +166,31 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->appointed_dt = $request->appointed_dt;
         $profileTblCesStatus->update();
 
+        // retrieving latest ces status thru date appointed_dt
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        ->value('cesstat_code');
+
+        // update CESStat_code based on $latestCestatusCode
+        DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $latestCestatusCode]);
+
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
     }
 
-    public function destroy($ctrlno)
+    public function destroy($ctrlno, $cesno)
     {
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->delete();
+
+        // retrieving latest ces status thru date appointed_dt
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        ->value('cesstat_code');
+   
+        // update CESStat_code based on $latestCestatusCode
+        DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $latestCestatusCode]);
 
         return back()->with('message', 'Deleted Sucessfully');
     }
@@ -188,18 +206,36 @@ class EligibilityAndRankTrackerController extends Controller
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord', 'cesno'));
     }
 
-    public function restore($ctrlno)
+    public function restore($ctrlno, $cesno)
     {
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->restore();
 
+        // retrieving latest ces status thru date appointed_dt
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        ->value('cesstat_code');
+   
+        // update CESStat_code based on $latestCestatusCode
+        DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $latestCestatusCode]);
+
         return back()->with('message', 'Data Restored Sucessfully');
     }
  
-    public function forceDelete($ctrlno)
+    public function forceDelete($ctrlno, $cesno)
     {
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->forceDelete();
+
+        // retrieving latest ces status thru date appointed_dt
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        ->value('cesstat_code');
+   
+        // update CESStat_code based on $latestCestatusCode
+        DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $latestCestatusCode]);
   
         return back()->with('message', 'Data Permanently Deleted');
     }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Competency;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LatestCesStatusController;
 use App\Models\PersonalData;
-use App\Models\ProfileLibTblCesStatus;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
@@ -18,24 +18,10 @@ class CompetencyCesTrainingController extends Controller
         $personalData = PersonalData::find($cesno);
         $trainings = $personalData->competencyCesTraining;
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->cesStatus()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $description = $latestCesStatus->description;
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }      
-        else 
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.table', compact('cesno', 'trainings', 'description'));
     }
@@ -46,24 +32,10 @@ class CompetencyCesTrainingController extends Controller
 
         $trainingSession = TrainingSession::all();
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->cesStatus()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $description = $latestCesStatus->description;
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }      
-        else 
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.form', compact('personalData', 'cesno', 'description', 'trainingSession'));
     }
@@ -105,30 +77,16 @@ class CompetencyCesTrainingController extends Controller
 
     public function edit($ctrlno, $cesno)
     {
-        $personalData = PersonalData::first()->find($cesno);
-
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->cesStatus()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $description = $latestCesStatus->description;
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }      
-        else 
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
-
         $trainingParticipants = TrainingParticipants::find($ctrlno);
 
         $trainingSession = TrainingSession::all();
+        
+        $personalData = PersonalData::first()->find($cesno);
+
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.edit', compact('cesno', 'personalData', 'trainingParticipants', 'trainingSession', 'description'));
     }
@@ -137,7 +95,6 @@ class CompetencyCesTrainingController extends Controller
     {
         $request->validate([
 
-            'sessionid' => ['required',Rule::unique('training_tblparticipants')->where('cesno', $cesno)->ignore($ctrlno, 'pid')],
             'status' => ['required'],
             'remarks' => ['nullable'],
             'no_of_hours' => ['required'],
@@ -150,15 +107,22 @@ class CompetencyCesTrainingController extends Controller
         $encoder = $user->userName();
                     
         $trainingParticipant = TrainingParticipants::find($ctrlno);
-        $trainingParticipant->sessionid = $request->sessionid;
-        $trainingParticipant->status = $request->status;
-        $trainingParticipant->remarks = $request->remarks;
-        $trainingParticipant->no_hours = $request->no_of_hours;
-        $trainingParticipant->payment = $request->payment;
-        $trainingParticipant->lastupd_enc = $encoder;
-        $trainingParticipant->save();
 
-        return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
+        if ($trainingParticipant) {
+
+            // Object exists, update its properties
+            $trainingParticipant->status = $request->status;
+            $trainingParticipant->remarks = $request->remarks;
+            $trainingParticipant->no_hours = $request->no_of_hours;
+            $trainingParticipant->payment = $request->payment;
+            $trainingParticipant->lastupd_enc = $encoder;
+            $trainingParticipant->save();
+
+            return redirect()->route('ces-training.index', ['cesno' => $cesno])->with('message', 'Update Successfully');
+        } else {
+            // Handle the case where $trainingParticipant is null
+            return redirect()->back()->with('error', 'Training participant not found');
+        }
     }
 
     public function destroy($ctrlno)
@@ -177,26 +141,10 @@ class CompetencyCesTrainingController extends Controller
         // Access the soft deleted competencyCesTraining of the parent model
         $competencyCesTrainingTrashedRecord = $personalData->competencyCesTraining()->onlyTrashed()->get();
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }
-        else
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.trashbin', compact('competencyCesTrainingTrashedRecord', 'cesno', 'description'));
     }

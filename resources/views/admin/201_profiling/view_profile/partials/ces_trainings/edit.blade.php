@@ -12,7 +12,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-               Update Form CES Training
+               {{ $trainingParticipants->participantTrainingSession->title }}Update Form CES Training
             </h1>
         </div>
         
@@ -20,27 +20,6 @@
             <form action="{{ route('ces-training-201.update', ['cesno'=>$cesno, 'ctrlno'=>$trainingParticipants->pid]) }}" method="POST" id="update_ces_training_201_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_training_201_form)">
                 @csrf
                 @method('PUT')
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="mb-3">
-                        <label for="sessionid">Training Session<sup>*</sup></label>
-                        <select name="sessionid" id="sessionid">
-                            <option disabled selected>Select Training Session</option>
-                            @foreach ($trainingSession as $trainingSessions)
-                                @if ($trainingSessions->sessionid == $trainingParticipants->sessionid )
-                                    <option value="{{ $trainingSessions->sessionid }}" selected>{{ $trainingSessions->title }}</option>
-                                @else
-                                    <option value="{{ $trainingSessions->sessionid }}" >{{ $trainingSessions->title }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('sessionid')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
