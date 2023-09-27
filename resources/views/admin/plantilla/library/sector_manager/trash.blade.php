@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Sector Manager - Trash')
 @section('content')
-@include('admin.plantilla.header')
 
 <div class="my-5 flex justify-between gap-4">
     <a href="#" class="text-blue-500 uppercase text-2xl">
@@ -78,10 +77,6 @@
 
         </tbody>
     </table>
-
-    <div class="m-5">
-        {{-- {{ $datas->links() }} --}}
-    </div>
 </div>
 
 @endsection
