@@ -17,6 +17,7 @@ use App\Models\ProfileLibTblCesStatusType;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class EligibilityAndRankTrackerController extends Controller
@@ -118,6 +119,15 @@ class EligibilityAndRankTrackerController extends Controller
         
         $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
+        // retrieving latest ces status thru date appointed_dt
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        ->value('cesstat_code');
+
+        // update CESStat_code based on $latestCestatusCode
+        DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $latestCestatusCode]);
+
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
 
@@ -154,7 +164,7 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->official_code = $request->official_code;
         $profileTblCesStatus->resolution_no = $request->resolution_no;
         $profileTblCesStatus->appointed_dt = $request->appointed_dt;
-        $profileTblCesStatus->save();
+        $profileTblCesStatus->update();
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
     }
