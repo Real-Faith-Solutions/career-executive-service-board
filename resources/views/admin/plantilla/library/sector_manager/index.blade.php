@@ -8,7 +8,7 @@
         @yield('title')
     </a>
     <div class="flex">
-        <a href="{{ route('library-sector.recentlyDeleted') }}">
+        <a href="{{ route('library-sector.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
             </lord-icon>

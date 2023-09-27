@@ -65,7 +65,7 @@
                     </a>
 
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('sector-manager.destroy', $data->sectorid) }}" method="POST"
+                        action="{{ route('library-sector.destroy', $data->sectorid) }}" method="POST"
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf

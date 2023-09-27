@@ -17,7 +17,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('sector-manager.store') }}" method="POST">
+            <form action="{{ route('library-sector.store') }}" method="POST">
                 @csrf
 
                 <input type="hidden" name="encoder" value="{{ $userName }}" readonly>

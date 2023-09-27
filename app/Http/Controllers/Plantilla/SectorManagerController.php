@@ -35,16 +35,6 @@ class SectorManagerController extends Controller
     {
         return view('admin.plantilla.sector_manager.create');
     }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
-            'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
-        ]);
-        SectorManager::create($request->all());
-        return redirect()->back()->with('message', 'The item has been successfully added!');
-    }
     // ui for edit
     public function edit(Request $request, $sectorid)
     {
