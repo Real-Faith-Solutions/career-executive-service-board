@@ -7,10 +7,45 @@
         
         if (myCheckbox) {
             myCheckbox.addEventListener('change', function () {
-                window.location.href = "/201-profile/personal-data/switch/two-factor"; // Replace with your desired route
+                opentwoFactorConfirmationDialog();
             });
         }
     });
+
+    function opentwoFactorConfirmationDialog(title = 'Activate Two-Factor Authentication?', statement = 'Confirmation code will be sent to your email everytime you login.') {
+        const twoFactorConfirmationBackdrop = document.getElementById('twoFactorConfirmationBackdrop');
+        const twoFactorConfirmationDialog = document.getElementById('twoFactorConfirmationDialog');
+    
+        const twoFactorConfirmationDialogTitle = document.getElementById('twoFactorConfirmationDialogTitle');
+        const twoFactorConfirmationDialogStatement = document.getElementById('twoFactorConfirmationDialogStatement');
+    
+        twoFactorConfirmationDialogTitle.textContent = title;
+        twoFactorConfirmationDialogStatement.textContent = statement;
+    
+        twoFactorConfirmationBackdrop.classList.remove('hidden');
+        twoFactorConfirmationDialog.classList.remove('hidden');
+    }
+    
+    function closetwoFactorConfirmationDialog() {
+        const twoFactorConfirmationBackdrop = document.getElementById('twoFactorConfirmationBackdrop');
+        const twoFactorConfirmationDialog = document.getElementById('twoFactorConfirmationDialog');
+    
+        twoFactorConfirmationBackdrop.classList.add('hidden');
+        twoFactorConfirmationDialog.classList.add('hidden');
+    }
+    
+    function confirmTwoFactorConfirmationDialog() {
+        window.location.href = "/201-profile/personal-data/switch/two-factor";
+    }
+    
+    // Close the modal when the user clicks outside the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('twoFactorConfirmationBackdrop')) {
+            closetwoFactorConfirmationDialog();
+        }
+    });
+
+    // two-factor authentication checkbox
 
     // check password if match
     function checkPasswordMatch() {

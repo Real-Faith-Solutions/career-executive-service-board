@@ -95,6 +95,22 @@
     </div>
     {{-- end --}}
 
+    {{-- two-factor authentication confirmation dialog --}}
+    <div id="twoFactorConfirmationBackdrop"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+        <div id="twoFactorConfirmationDialog" class="bg-white w-1/3 p-6 rounded-lg shadow-lg hidden">
+            <h2 class="text-lg font-bold mb-4" id="twoFactorConfirmationDialogTitle"></h2>
+            <p class="mb-4" id="twoFactorConfirmationDialogStatement"></p>
+            <div class="text-right">
+                <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg mr-2 hover:bg-gray-400"
+                    onclick="closetwoFactorConfirmationDialog()">No</button>
+                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    onclick="confirmTwoFactorConfirmationDialog()">Yes</button>
+            </div>
+        </div>
+    </div>
+    {{-- end --}}
+
     @if (isset($cesno))
     <!-- Modal for Adding Medical History -->
     <div id="add-medical-history-modal"
