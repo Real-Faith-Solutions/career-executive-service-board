@@ -15,26 +15,24 @@ class CompetencyCesTrainingController extends Controller
 {
     public function index($cesno)
     {
-        $trainingParticipant = PersonalData::find($cesno);
-        $trainings = $trainingParticipant->competencyCesTraining;
+        $personalData = PersonalData::find($cesno);
+        $trainings = $personalData->competencyCesTraining;
 
-        if ($trainingParticipant) 
+        if ($personalData) 
         {
-            $latestCesStatus = $trainingParticipant->profileTblCesStatus()->latest()->first();
+            $latestCesStatus = $personalData->cesStatus()->first();
 
             if ($latestCesStatus !== null) 
             {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                $description = $latestCesStatus->description;
             } 
             else 
             {
                 // Handle the case where $latestCesStatus is null
                 $description = null; // or provide a default value if needed
             }
-        }
-        else
+        }      
+        else 
         {
             return redirect()->back()->with('error', 'Personal Data Not Found!!');
         }
@@ -50,21 +48,19 @@ class CompetencyCesTrainingController extends Controller
 
         if ($personalData) 
         {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+            $latestCesStatus = $personalData->cesStatus()->first();
 
             if ($latestCesStatus !== null) 
             {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                $description = $latestCesStatus->description;
             } 
             else 
             {
                 // Handle the case where $latestCesStatus is null
                 $description = null; // or provide a default value if needed
             }
-        }
-        else
+        }      
+        else 
         {
             return redirect()->back()->with('error', 'Personal Data Not Found!!');
         }
@@ -113,21 +109,19 @@ class CompetencyCesTrainingController extends Controller
 
         if ($personalData) 
         {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+            $latestCesStatus = $personalData->cesStatus()->first();
 
             if ($latestCesStatus !== null) 
             {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                $description = $latestCesStatus->description;
             } 
             else 
             {
                 // Handle the case where $latestCesStatus is null
                 $description = null; // or provide a default value if needed
             }
-        }
-        else
+        }      
+        else 
         {
             return redirect()->back()->with('error', 'Personal Data Not Found!!');
         }
@@ -161,7 +155,7 @@ class CompetencyCesTrainingController extends Controller
         $trainingParticipant->remarks = $request->remarks;
         $trainingParticipant->no_hours = $request->no_of_hours;
         $trainingParticipant->payment = $request->payment;
-        $trainingParticipant->updated_by = $encoder;
+        $trainingParticipant->lastupd_enc = $encoder;
         $trainingParticipant->save();
 
         return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
