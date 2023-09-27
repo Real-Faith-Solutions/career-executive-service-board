@@ -16,6 +16,7 @@ return new class extends Migration
             // $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('two_factor')->default(false);
             $table->string('is_active')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();

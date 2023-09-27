@@ -111,7 +111,14 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // end auth
 
+// two factor authentication
 Route::middleware('auth')->group(function () {
+    Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
+    Route::post('/submit-confirmation-code', [AuthController::class, 'submitConfirmationEmail'])->name('reconfirm.submit');
+    Route::get('/resend-confirmation-code', [AuthController::class, 'resendConfirmationEmail'])->name('resend.code');
+});
+
+Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
 
@@ -130,6 +137,7 @@ Route::middleware('auth')->group(function () {
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+            Route::get('switch/two-factor', [ProfileController::class, 'switchTwoFactor'])->name('two-factor.switch');
         });
 
         Route::prefix('family-profile')->group(function () {
@@ -639,6 +647,7 @@ Route::middleware('auth')->group(function () {
 
     //  ERIS routes
     Route::prefix('eris')->group(function () {
+        
         Route::prefix('profile-data')->group(function () {
             Route::get('index', [ErisProfileController::class, 'index'])->name('eris-index');
             Route::get('create', [ErisProfileController::class, 'create'])->name('eris.create');

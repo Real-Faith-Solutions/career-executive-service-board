@@ -1,6 +1,64 @@
 
 // Personal Data Form Interaction
 
+    // two-factor authentication checkbox
+    const myCheckbox = document.getElementById('two_factor');
+    let originalValue = myCheckbox.checked; // Store the original checkbox value
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const myCheckbox = document.getElementById('two_factor');
+        
+        if (myCheckbox) {
+            myCheckbox.addEventListener('change', function () {
+                opentwoFactorConfirmationDialog();
+            });
+        }
+    });
+
+    function opentwoFactorConfirmationDialog(title = 'Activate Two-Factor Authentication?', statement = 'Confirmation code will be sent to your email everytime you login.') {
+        const twoFactorConfirmationBackdrop = document.getElementById('twoFactorConfirmationBackdrop');
+        const twoFactorConfirmationDialog = document.getElementById('twoFactorConfirmationDialog');
+    
+        const twoFactorConfirmationDialogTitle = document.getElementById('twoFactorConfirmationDialogTitle');
+        const twoFactorConfirmationDialogStatement = document.getElementById('twoFactorConfirmationDialogStatement');
+
+        let currentCheckboxValue = myCheckbox.checked;
+        if(!currentCheckboxValue){
+            title = 'Deactivate Two-Factor Authentication?';
+            statement = 'Confirmation code will not require everytime you login.';
+        }
+    
+        twoFactorConfirmationBackdrop.classList.remove('hidden');
+        twoFactorConfirmationDialog.classList.remove('hidden');
+
+        twoFactorConfirmationDialogTitle.textContent = title;
+        twoFactorConfirmationDialogStatement.textContent = statement;
+    }
+    
+    function closetwoFactorConfirmationDialog() {
+        const twoFactorConfirmationBackdrop = document.getElementById('twoFactorConfirmationBackdrop');
+        const twoFactorConfirmationDialog = document.getElementById('twoFactorConfirmationDialog');
+    
+        const myCheckbox = document.getElementById('two_factor');
+        myCheckbox.checked = originalValue;
+
+        twoFactorConfirmationBackdrop.classList.add('hidden');
+        twoFactorConfirmationDialog.classList.add('hidden');
+    }
+    
+    function confirmTwoFactorConfirmationDialog() {
+        window.location.href = "/201-profile/personal-data/switch/two-factor";
+    }
+    
+    // Close the modal when the user clicks outside the modal content
+    window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('twoFactorConfirmationBackdrop')) {
+            closetwoFactorConfirmationDialog();
+        }
+    });
+
+    // two-factor authentication checkbox
+
     // check password if match
     function checkPasswordMatch() {
         const passwordField = document.getElementById('password');

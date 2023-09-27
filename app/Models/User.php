@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +38,7 @@ class User extends Authenticatable
         'contact_no',
         'email',
         'password',
+        'two_factor',
         'is_active',
         'last_updated_by',
         'encoder',
@@ -80,6 +82,11 @@ class User extends Authenticatable
         }
 
         $this->assignRole($newRole);
+    }
+
+    public function deviceVerifications(): HasMany
+    {
+        return $this->hasMany(DeviceVerification::class, 'user_ctrlno', 'ctrlno');
     }
 
 }

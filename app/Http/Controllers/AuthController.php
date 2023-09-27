@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmationCodeMail;
 use App\Mail\TempCred201;
+use App\Models\DeviceVerification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -32,6 +35,12 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials, $request->remember)) {
+            Cookie::queue(Cookie::make('email', $request->email, 120));
+            Cookie::queue(Cookie::make('remember', $request->remember, 120));
+
+            // $userId = Auth::user()->ctrlno;
+            // $device_id = uniqid();
+
             return redirect()->intended('/dashboard');
         }
 
@@ -131,6 +140,98 @@ class AuthController extends Controller
         }
 
         return back()->with('error','User not found!');
+    }
+
+    public function confirmEmail(Request $request)
+    {
+        $allCookies = $request->header('cookie');
+        return view('admin.confirm_email', compact('allCookies',));
+    }
+
+    public function submitConfirmationEmail(Request $request)
+    {
+        // Retrieve device associations from the cookie
+        $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
+
+        // getting deviceIdentifiers for this user
+        $ctrlno = auth()->user()->ctrlno;
+        $deviceIdentifiers = DeviceVerification::where('user_ctrlno', $ctrlno)
+                            ->where('verified', false)
+                            ->get();
+
+        // 
+        foreach ($deviceIdentifiers as $deviceIdentifier) {
+            foreach ($associations as &$association) { 
+                if (
+                    $association['device_id'] == $deviceIdentifier->device_id &&
+                    $association['user_id'] == $ctrlno
+                ) {
+                    if (Hash::check($request->code, $deviceIdentifier->confirmation_code)) {
+                        $association['verified'] = true;
+                        $cookieValue = json_encode($associations);
+                        Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
+                        $deviceIdentifier->update(['verified' => true]);
+                        return Redirect::to('/dashboard')->with('message', 'Account Verified!');
+                    }
+                }
+            }
+        }
+        
+        return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
+
+    }
+
+    public function resendConfirmationEmail()
+    {
+        // Retrieve device associations from the cookie
+        $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
+
+        // getting deviceIdentifiers for this user
+        $ctrlno = auth()->user()->ctrlno;
+        $deviceIdentifiers = DeviceVerification::where('user_ctrlno', $ctrlno)
+                            ->where('verified', false)
+                            ->get();
+
+        // 
+        foreach ($deviceIdentifiers as $deviceIdentifier) {
+            foreach ($associations as &$association) { 
+                if (
+                    $association['device_id'] == $deviceIdentifier->device_id &&
+                    $association['user_id'] == $ctrlno &&
+                    !$association['verified']
+                ) {
+
+                    $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
+                    $cooldownMinutes = 1; // Adjust as needed
+                    if ($deviceVerification && $deviceVerification->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
+                        return redirect()->route('reconfirm.email')->with('info','Confirmation Code Already Sent. Please check your email and spam');
+                    }
+
+                    $confirmation_code = mt_rand(10000, 99999);
+                    $hashed_confirmation_code = Hash::make($confirmation_code);
+                    $recipientEmail = auth()->user()->email;
+                    $imagePath = public_path('images/branding.png');
+
+                    // Update the confirmation code in the database
+                    $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                    // sending confirmation_code email to user
+                    $data = [
+                        'email' => $recipientEmail,
+                        'confirmation_code' => $confirmation_code,
+                        'imagePath' => $imagePath,
+                    ];
+            
+                    Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                    return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+
+                }
+            }
+        }
+        
+        return redirect()->route('reconfirm.email')->with('error','Something went wrong. Please check confirmation code sent to your email');
+
     }
 
 }
