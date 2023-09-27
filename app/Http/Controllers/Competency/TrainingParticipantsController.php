@@ -106,21 +106,29 @@ class TrainingParticipantsController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        $trainingParticipant = new TrainingParticipants([
+        $trainingParticipantsExisted = TrainingParticipants::where('sessionid', $sessionId)->where('cesno', $request->cesno)->exists();
 
-            'cesno' => $request->cesno,
-            'sessionid' => $sessionId,
-            'status' => $request->status,
-            'remarks' => $request->remarks,
-            'no_hours' => $request->no_of_hours,
-            'payment' => $request->payment,
-            'encoder' =>  $encoder,
+        if($trainingParticipantsExisted)
+        {
+            return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'The Participant is already registered');
+        }
+        else
+        {
+            $trainingParticipant = new TrainingParticipants([
 
-        ]);
+                'cesno' => $request->cesno,
+                'status' => $request->status,
+                'remarks' => $request->remarks,
+                'no_hours' => $request->no_of_hours,
+                'payment' => $request->payment,
+                'encoder' =>  $encoder,
 
-        $personalData = PersonalData::find($request->cesno);
-        
-        $personalData->competencyCesTraining()->save($trainingParticipant);
+            ]);
+
+            $trainingSession = TrainingSession::find($sessionId);
+
+            $trainingSession->trainingParticipantList()->save($trainingParticipant);
+        }
 
         return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('message', 'Save Sucessfully');
     }
@@ -151,7 +159,6 @@ class TrainingParticipantsController extends Controller
         {
             return redirect()->back()->with('error', 'Personal Data Not Found!!');
         }
-
 
         return view('admin.competency.partials.training_participant.participant_edit', compact('trainingParticipant', 'sessionId', 'personalData', 'description', 'pid'));
     }
