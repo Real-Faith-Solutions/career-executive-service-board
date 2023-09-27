@@ -39,7 +39,7 @@ $.extend(DataTable.ext.classes, {
             first: "rounded-l-lg",
             last: "rounded-r-lg",
             enabled:
-                "text-gray-800 hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
+                "text-white hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
             notEnabled: "text-gray-300",
         },
         table: "dataTable min-w-full text-sm align-middle whitespace-nowrap",
