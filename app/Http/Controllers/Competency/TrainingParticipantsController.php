@@ -35,48 +35,56 @@ class TrainingParticipantsController extends Controller
             ->orWhere('name_extension',  "LIKE","%$search%")
             ->get();
 
+        if ($search !== null && !is_numeric($search)) 
+        {
+            return redirect()->route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'Invalid Search Criteria.');
+        }
+
         // validating if $search is not equal to null and the value is numeric
         if ($search !== null && trim($search) !== '' && is_numeric($search)) 
         {
             // Query the database to find the corresponding personal data
             $personalDataSearchResult = PersonalData::where('cesno', $search)->first();
 
-            if (!$personalDataSearchResult || !is_numeric($search)) 
+            if (!$personalDataSearchResult) 
             {
                 // Handle the case where the data does not exist
-                return redirect()->route('training-session.createParticipant')->with('error', 'Data not found in the database.');
+                return redirect()->route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'Data not found in the database.');
             }
+
+            // retrieving personal data latest ces status
+                $personalData = PersonalData::first()->find($search);
+
+                if ($personalData) 
+                {
+                    $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+
+                    if ($latestCesStatus !== null) 
+                    {
+                        $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                            
+                        $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                    } 
+                    else 
+                    {
+                        // Handle the case where $latestCesStatus is null
+                        $description = null; // or provide a default value if needed
+                    }
+                }      
+                else 
+                {
+                    // Handle the case where $personalData is null
+                    $description = null; // or provide a default value if needed
+                }
+            // end of retrieving personal data latest ces status     
         }
         else
         {
-            $personalDataSearchResult = null;
+            // Handle the case where $search is null and not numeric
+                $personalDataSearchResult = null;
+                $description = null;
+            // end of Handle the case where $search is null and not numeric
         }
-
-        // retrieving personal data latest ces status
-            $personalData = PersonalData::first()->find($search);
-
-            if ($personalData) 
-            {
-                $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
-
-                if ($latestCesStatus !== null) 
-                {
-                    $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                        
-                    $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
-                } 
-                else 
-                {
-                    // Handle the case where $latestCesStatus is null
-                    $description = null; // or provide a default value if needed
-                }
-            }      
-            else 
-            {
-                // Handle the case where $personalData is null
-                $description = null; // or provide a default value if needed
-            }
-        // end of retrieving personal data latest ces status    
         
         return view('admin.competency.partials.training_session.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
         $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId, 'trainingSessionDescription' => $trainingSessionDescription]);

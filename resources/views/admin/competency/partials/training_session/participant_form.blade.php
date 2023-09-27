@@ -8,7 +8,7 @@
     <div class="flex items-center">
         <form action="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" method="GET">
             <div class="flex gap-4">
-                <input type="text" name="search" id="search" list="searchResults" placeholder="Search..." value="{{  $search }}">
+                <input type="text" name="search" id="search" list="searchResults" placeholder="Search..." value="{{ $search }}">
                 <datalist id="searchResults">
                     @foreach($personalData as $personalDatas)
                         <option value="{{ $personalDatas->cesno }}">{{ $personalDatas->lastname }} {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}<option>

@@ -40,6 +40,11 @@ class ErisProfileController extends Controller
             ->orWhere('name_extension',  "LIKE","%$search%")
             ->get();
 
+        if ($search !== null && !is_numeric($search)) 
+        {
+            return redirect()->route('eris.create')->with('error', 'Invalid Search Criteria.');
+        }
+
         if ($search !== null && trim($search) !== '' && is_numeric($search)) 
         {
             // Query the database to find the corresponding personal data
