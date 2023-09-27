@@ -641,6 +641,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     //  ERIS routes
     Route::prefix('eris')->group(function () {
+        
         Route::prefix('profile-data')->group(function () {
             Route::get('index', [ErisProfileController::class, 'index'])->name('eris-index');
             Route::get('create', [ErisProfileController::class, 'create'])->name('eris.create');
@@ -716,7 +717,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     // Rights management routes
         Route::prefix('rights-management')->group(function () {
-        Route::prefix('rights-management')->group(function () {
 
             Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
             Route::get('roles/show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
@@ -758,7 +758,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // End of Rights management routes
 
     // Library routes (201)
-        Route::prefix('201-library')->group(function () {
         Route::prefix('201-library')->group(function () {
 
             Route::prefix('gender-by-birth')->group(function () {
@@ -897,7 +896,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                 Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
                 Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
             });
-        });
+
             Route::prefix('educational-degree')->group(function () {
                 Route::get('recently-deleted', [ProfileLibTblEducDegreeController::class, 'recentlyDeleted'])->name('educational-degree.recently-deleted');
                 Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
