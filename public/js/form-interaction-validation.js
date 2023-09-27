@@ -2,6 +2,9 @@
 // Personal Data Form Interaction
 
     // two-factor authentication checkbox
+    const myCheckbox = document.getElementById('two_factor');
+    let originalValue = myCheckbox.checked; // Store the original checkbox value
+
     document.addEventListener('DOMContentLoaded', function () {
         const myCheckbox = document.getElementById('two_factor');
         
@@ -19,17 +22,20 @@
         const twoFactorConfirmationDialogTitle = document.getElementById('twoFactorConfirmationDialogTitle');
         const twoFactorConfirmationDialogStatement = document.getElementById('twoFactorConfirmationDialogStatement');
     
-        twoFactorConfirmationDialogTitle.textContent = title;
-        twoFactorConfirmationDialogStatement.textContent = statement;
-    
         twoFactorConfirmationBackdrop.classList.remove('hidden');
         twoFactorConfirmationDialog.classList.remove('hidden');
+
+        twoFactorConfirmationDialogTitle.textContent = title;
+        twoFactorConfirmationDialogStatement.textContent = statement;
     }
     
     function closetwoFactorConfirmationDialog() {
         const twoFactorConfirmationBackdrop = document.getElementById('twoFactorConfirmationBackdrop');
         const twoFactorConfirmationDialog = document.getElementById('twoFactorConfirmationDialog');
     
+        const myCheckbox = document.getElementById('two_factor');
+        myCheckbox.checked = originalValue;
+
         twoFactorConfirmationBackdrop.classList.add('hidden');
         twoFactorConfirmationDialog.classList.add('hidden');
     }
