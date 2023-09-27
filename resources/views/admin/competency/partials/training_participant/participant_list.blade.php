@@ -90,7 +90,19 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">                                
+                        <div class="flex">
+                            <form action="{{ route('training-session.editParticipant', ['pid'=>$trainingParticipantLists->pid, 'sessionId'=>$sessionId]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+                            
                             <form action="{{ route('training-participant.destroy', ['pid'=>$trainingParticipantLists->pid]) }}" method="POST" id="delete_training_participant_form{{$trainingParticipantLists->pid}}">
                                 @csrf
                                 @method('DELETE')

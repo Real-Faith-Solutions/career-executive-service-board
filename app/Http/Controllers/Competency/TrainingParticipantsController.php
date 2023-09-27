@@ -17,7 +17,7 @@ class TrainingParticipantsController extends Controller
         $trainingSession = TrainingSession::find($sessionId);
         $trainingParticipantList = $trainingSession->trainingParticipantList;
 
-        return view('admin.competency.partials.training_session.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
+        return view('admin.competency.partials.training_participant.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
     }
 
     public function addParticipant(Request $request, $sessionId)
@@ -86,7 +86,7 @@ class TrainingParticipantsController extends Controller
             // end of Handle the case where $search is null and not numeric
         }
         
-        return view('admin.competency.partials.training_session.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
+        return view('admin.competency.partials.training_participant.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
         $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId, 'trainingSessionDescription' => $trainingSessionDescription]);
     }
 
@@ -124,6 +124,37 @@ class TrainingParticipantsController extends Controller
         return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('message', 'Save Sucessfully');
     }
 
+    public function editParticipant($pid, $sessionId)
+    {
+        $trainingParticipant = TrainingParticipants::find($pid);
+
+        $personalData = PersonalData::first()->find($trainingParticipant->cesno);
+
+        if ($personalData) 
+        {
+            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+
+            if ($latestCesStatus !== null) 
+            {
+                $latestCesStatusCode = $latestCesStatus->cesstat_code;
+                    
+                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+            } 
+            else 
+            {
+                // Handle the case where $latestCesStatus is null
+                $description = null; // or provide a default value if needed
+            }
+        }      
+        else 
+        {
+            return redirect()->back()->with('error', 'Personal Data Not Found!!');
+        }
+
+
+        return view('admin.competency.partials.training_participant.participant_edit', compact('trainingParticipant', 'sessionId', 'personalData', 'description'));
+    }
+
     public function destroyParticipant($pid)
     {
         $trainingParticipant = TrainingParticipants::find($pid);
@@ -136,7 +167,7 @@ class TrainingParticipantsController extends Controller
     {
         $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->get();
     
-        return view('admin.competency.partials.training_session.participant_trashbin', compact('trainingParticipantTrashedRecord'));
+        return view('admin.competency.partials.training_participant.participant_trashbin', compact('trainingParticipantTrashedRecord'));
     }
 
     public function restoreParticipantList($pid)
