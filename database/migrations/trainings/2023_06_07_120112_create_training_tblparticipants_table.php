@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('remarks')->nullable();
             $table->integer('no_hours')->nullable();
             $table->string('payment')->nullable();
-            $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('encoder')->nullable(); // encode by (first)
+            $table->string('lastupd_enc')->nullable(); // updated by (latest)
+            $table->timestamp('encoder_dt'); // created at
+            $table->timestamp('lastupd_dt'); // updated at
             $table->softDeletes();
         });
     }
