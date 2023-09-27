@@ -141,7 +141,7 @@ class TrainingSessionController extends Controller
 
             if($trainingParticipantList >= $participantCount)
             {
-                return redirect()->back()->with('error', 'This Training Session has Already Participant, Can\'t Delete !!');
+                return redirect()->back()->with('error', 'The training session already has participants, so it cannot be deleted !!');
             }
 
             $trainingSession->delete();

@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Competency;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
-use App\Models\ProfileLibTblCesStatus;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class TrainingParticipantsController extends Controller
 {
@@ -58,13 +56,11 @@ class TrainingParticipantsController extends Controller
 
                 if ($personalData) 
                 {
-                    $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+                    $latestCesStatus = $personalData->cesStatus()->first();
 
                     if ($latestCesStatus !== null) 
                     {
-                        $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                            
-                        $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                        $description = $latestCesStatus->description;
                     } 
                     else 
                     {
@@ -141,13 +137,11 @@ class TrainingParticipantsController extends Controller
 
         if ($personalData) 
         {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
+            $latestCesStatus = $personalData->cesStatus()->first();
 
             if ($latestCesStatus !== null) 
             {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                    
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
+                $description = $latestCesStatus->description;
             } 
             else 
             {
