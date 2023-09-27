@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
-use App\Models\ProfileLibTblCesStatus;
 use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\LatestCesStatusController;
 
 class CESTraining201Controller extends Controller
 {
     public function index($cesno)
     {
-        $personalData = PersonalData::find($cesno);
-        $competencyCesTraining = $personalData->competencyCesTraining()->paginate(25);
+        $competencyCesTraining = PersonalData::find($cesno)->competencyCesTraining()
+        ->where('status', 'Completed')
+        ->orWhere('status', 'Incomplete')
+        ->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.table', compact('cesno', 'competencyCesTraining'));
     }
@@ -26,27 +28,11 @@ class CESTraining201Controller extends Controller
 
         $trainingSession = TrainingSession::all();
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }
-        else
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
-
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
+        
         return view('admin\201_profiling\view_profile\partials\ces_trainings\form', compact('personalData', 'cesno', 'trainingSession', 'description'));
     }
 
@@ -94,26 +80,10 @@ class CESTraining201Controller extends Controller
         
         $trainingParticipants = TrainingParticipants::find($ctrlno);
 
-        if ($personalData) 
-        {
-            $latestCesStatus = $personalData->profileTblCesStatus()->latest()->first();
-
-            if ($latestCesStatus !== null) 
-            {
-                $latestCesStatusCode = $latestCesStatus->cesstat_code;
-                
-                $description = ProfileLibTblCesStatus::where('code', $latestCesStatusCode)->value('description');
-            } 
-            else 
-            {
-                // Handle the case where $latestCesStatus is null
-                $description = null; // or provide a default value if needed
-            }
-        }
-        else
-        {
-            return redirect()->back()->with('error', 'Personal Data Not Found!!');
-        }
+        // retrieve latest ces status from LatestCesStatusController
+            $cesStatusController = new LatestCesStatusController();
+            $description = $cesStatusController->latestCesStatus($personalData);
+        // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.edit', compact('personalData', 'trainingSession', 'cesno', 'trainingParticipants', 'description'));
     }
@@ -122,7 +92,6 @@ class CESTraining201Controller extends Controller
     {
         $request->validate([
 
-            'sessionid' => ['required',Rule::unique('training_tblparticipants')->where('cesno', $cesno)->ignore($ctrlno, 'pid')],
             'status' => ['required'],
             'remarks' => ['nullable'],
             'no_of_hours' => ['required'],
@@ -135,7 +104,6 @@ class CESTraining201Controller extends Controller
         $encoder = $user->userName();
                     
         $trainingParticipant = TrainingParticipants::find($ctrlno);
-        $trainingParticipant->sessionid = $request->sessionid;
         $trainingParticipant->status = $request->status;
         $trainingParticipant->remarks = $request->remarks;
         $trainingParticipant->no_hours = $request->no_of_hours;
