@@ -21,6 +21,12 @@
     
         const twoFactorConfirmationDialogTitle = document.getElementById('twoFactorConfirmationDialogTitle');
         const twoFactorConfirmationDialogStatement = document.getElementById('twoFactorConfirmationDialogStatement');
+
+        let currentCheckboxValue = myCheckbox.checked;
+        if(!currentCheckboxValue){
+            title = 'Deactivate Two-Factor Authentication?';
+            statement = 'Confirmation code will not require everytime you login.';
+        }
     
         twoFactorConfirmationBackdrop.classList.remove('hidden');
         twoFactorConfirmationDialog.classList.remove('hidden');
