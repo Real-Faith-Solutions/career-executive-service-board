@@ -51,6 +51,7 @@ use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
+use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
@@ -398,15 +399,11 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
-
-            Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
             Route::post('store', [SectorManagerController::class, 'store'])->name('sector-manager.store');
             Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
             Route::post('{sectorid}/update', [SectorManagerController::class, 'update'])->name('sector-manager.update');
             Route::delete('{sectorid}/destroy', [SectorManagerController::class, 'destroy'])->name('sector-manager.destroy');
-            Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
-            Route::post('{sectorid}/force-delete', [SectorManagerController::class, 'forceDelete'])->name('sector-manager.forceDelete');
         });
 
         Route::prefix('department-agency-manager')->group(function () {
@@ -469,6 +466,12 @@ Route::middleware('auth')->group(function () {
         Route::prefix('appointee-occupant-browser')->group(function () {
             Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
         });
+
+
+        Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'recentlyDeleted'])->name('library-sector.recentlyDeleted');
+        Route::post('library-sector/{sectorid}/force-delete', [LibrarySectorManagerController::class, 'forceDelete'])->name('library-sector.forceDelete');
+        Route::post('library-sector/{sectorid}/restore', [LibrarySectorManagerController::class, 'restore'])->name('library-sector.restore');
+        Route::resource('library-sector', LibrarySectorManagerController::class);
     });
     // End of plantilla routes
 
