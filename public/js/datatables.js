@@ -8,16 +8,15 @@
 // Set the defaults for DataTables initialisation
 $.extend(true, DataTable.defaults, {
     dom:
-        "<'grid grid-cols-1 md:grid-cols-2'" +
+        "<'grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1'" +
         "<'self-center'l>" +
-        "<'self-center place-self-end'f>" +
+        "<'self-center lg:place-self-end'f>" +
         ">" +
         "<'relative overflow-x-auto sm:rounded-lg'" +
         "<'my-2 col-span-2 rounded min-w-full bg-white'tr>" +
         // "<'flex justify-between' i p>" +
         // "<'self-center'i>" +
         // "<'self-center place-self-end'p>" +
-
         ">" +
         "<'flex justify-between 'i p>",
 
@@ -28,29 +27,29 @@ $.extend(true, DataTable.defaults, {
 $.extend(DataTable.ext.classes, {
     sWrapper: "dataTables_wrapper dt-tailwindcss",
     sFilterInput:
-        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5",
+        "border placeholder-gray-500 ml-2 px-3 py-2 rounded-lg border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50",
     sLengthSelect:
         "border px-3 py-2 rounded-lg border-gray-200 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50",
     sProcessing: "dt-processing uk-panel",
     tailwindcss: {
         paging: {
-            active: "font-semibold bg-blue-500 text-slate-300",
+            active: "font-semibold bg-blue-500 text-white",
             notActive: "bg-white",
             button: "relative inline-flex justify-center items-center space-x-2 border px-4 py-2 -mr-px leading-6 hover:z-10 focus:z-10 active:z-10 border-gray-200 active:border-gray-200 active:shadow-none",
             first: "rounded-l-lg",
             last: "rounded-r-lg",
             enabled:
-                "text-gray-800 hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
+                "text-white hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
             notEnabled: "text-gray-300",
         },
-        table: "w-full text-left text-sm text-gray-500",
+        table: "dataTable min-w-full text-sm align-middle whitespace-nowrap",
         thead: {
             row: "border-b border-gray-100",
-            cell: "px-6 py-3 text-white bg-blue-500 font-semibold text-left",
+            cell: "px-3 py-4 text-gray-900 bg-blue-500 font-semibold text-left text-white",
         },
         tbody: {
             row: "even:bg-gray-50 hover:bg-gray-50",
-            cell: "px-6 py-3",
+            cell: "p-3",
         },
         tfoot: {
             row: "even:bg-gray-50",
@@ -207,7 +206,7 @@ DataTable.ext.renderer.pageButton.tailwindcss = function (
         paginationEl.empty();
     } else {
         paginationEl = hostEl
-            .html('<div class="text-center"/>')
+            .html('<div class="text-center dark:text-gray-100"/>')
             .children("div");
     }
 

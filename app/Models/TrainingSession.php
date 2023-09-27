@@ -36,18 +36,6 @@ class TrainingSession extends Model
         
     ];
 
-    // public function trainingParticipantList(): HasManyThrough
-    // {
-    //     return $this->hasManyThrough(
-    //         TrainingParticipants::class, 
-    //         PersonalData::class,
-    //         'sessionid',
-    //         'cesno',
-    //         'pid',
-    //         'sessionid',
-    //     );
-    // }
-
     public function trainingParticipantList(): HasMany
     {
         return $this->hasMany(TrainingParticipants::class, 'sessionid', 'sessionid');

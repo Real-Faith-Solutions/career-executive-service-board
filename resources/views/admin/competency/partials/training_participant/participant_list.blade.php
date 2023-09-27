@@ -6,9 +6,9 @@
 
 
 <div class="my-5 flex justify-between">
-    <h1 class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-400">{{ $trainingSession->title }}</h1>
+    <h1 class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-400"><a href="{{ route('training-session.index') }}">{{ $trainingSession->title }}</a></h1>
 
-    <a href="{{ route('training-session.index') }}" class="btn btn-primary" >Go Back</a>
+    <a href="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" class="btn btn-primary" >Add Participant</a>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -90,7 +90,19 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">                                
+                        <div class="flex">
+                            <form action="{{ route('training-session.editParticipant', ['pid'=>$trainingParticipantLists->pid, 'sessionId'=>$sessionId]) }}" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                        trigger="hover"
+                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+                            
                             <form action="{{ route('training-participant.destroy', ['pid'=>$trainingParticipantLists->pid]) }}" method="POST" id="delete_training_participant_form{{$trainingParticipantLists->pid}}">
                                 @csrf
                                 @method('DELETE')

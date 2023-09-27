@@ -161,7 +161,7 @@ class CompetencyCesTrainingController extends Controller
         $trainingParticipant->remarks = $request->remarks;
         $trainingParticipant->no_hours = $request->no_of_hours;
         $trainingParticipant->payment = $request->payment;
-        $trainingParticipant->updated_by = $encoder;
+        $trainingParticipant->lastupd_enc = $encoder;
         $trainingParticipant->save();
 
         return to_route('ces-training.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
