@@ -594,6 +594,7 @@ Route::middleware('auth')->group(function () {
             Route::get('add-participant/{sessionId}', [TrainingParticipantsController::class, 'addParticipant'])->name('training-session.addParticipant');
             Route::post('store-participant/{sessionId}', [TrainingParticipantsController::class, 'storeParticipant'])->name('training-session.storeParticipant');
             Route::get('edit-participant/{pid}/{sessionId}', [TrainingParticipantsController::class, 'editParticipant'])->name('training-session.editParticipant');
+            Route::put('update-participant/{pid}/{sessionId}', [TrainingParticipantsController::class, 'updateParticipant'])->name('training-session.updateParticipant');
             Route::delete('participant-destroy/{pid}', [TrainingParticipantsController::class, 'destroyParticipant'])->name('training-participant.destroy')->middleware('checkPermission:compentency_training_session_delete');
             Route::get('recently-deleted-participant-list', [TrainingParticipantsController::class, 'recentlyDeletedParticipant'])->name('training-session.recentlyDeletedParticipant')->middleware('checkPermission:compentency_training_session_delete');
             Route::post('restore-participant-list/{pid}', [TrainingParticipantsController::class, 'restoreParticipantList'])->name('training-session.restoreParticipantList')->middleware('checkPermission:compentency_training_session_delete');

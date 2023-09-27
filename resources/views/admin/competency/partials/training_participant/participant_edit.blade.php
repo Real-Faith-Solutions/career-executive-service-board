@@ -19,7 +19,7 @@
         </div>
         
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_participant_training_form" onsubmit="return checkErrorsBeforeSubmit(update_participant_training_form)">
+            <form action="{{ route('training-session.updateParticipant', ['pid'=>$pid, 'sessionId'=>$sessionId]) }}" method="POST" id="update_participant_training_form" onsubmit="return checkErrorsBeforeSubmit(update_participant_training_form)">
                 @method('PUT')
                 @csrf
 

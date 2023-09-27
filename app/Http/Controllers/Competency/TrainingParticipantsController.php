@@ -9,6 +9,7 @@ use App\Models\TrainingParticipants;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class TrainingParticipantsController extends Controller
 {
@@ -152,7 +153,33 @@ class TrainingParticipantsController extends Controller
         }
 
 
-        return view('admin.competency.partials.training_participant.participant_edit', compact('trainingParticipant', 'sessionId', 'personalData', 'description'));
+        return view('admin.competency.partials.training_participant.participant_edit', compact('trainingParticipant', 'sessionId', 'personalData', 'description', 'pid'));
+    }
+
+    public function updateParticipant(Request $request, $pid, $sessionId)
+    {
+        $request->validate([
+
+            'status' => ['required'],
+            'remarks' => ['nullable'],
+            'no_of_hours' => ['required'],
+            'payment' => ['required'],
+            
+        ]);
+        
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+                    
+        $trainingParticipant = TrainingParticipants::find($pid);
+        $trainingParticipant->status = $request->status;
+        $trainingParticipant->remarks = $request->remarks;
+        $trainingParticipant->no_hours = $request->no_of_hours;
+        $trainingParticipant->payment = $request->payment;
+        $trainingParticipant->lastupd_enc = $encoder;
+        $trainingParticipant->save();
+
+        return to_route('training-session.participantList', ['sessionId'=>$sessionId])->with('info', 'Update Sucessfully');     
     }
 
     public function destroyParticipant($pid)

@@ -27,7 +27,7 @@ class TrainingParticipants extends Model
         'no_hours',
         'payment',
         'encoder',
-        'lastupd_enc',
+        'lastupd_enc', // updated by
 
     ];
 
