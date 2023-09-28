@@ -200,7 +200,7 @@
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('office-manager.destroy', ['officeid' => $data->officeid]) }}" method="POST"
+                        action="{{ route('library-office-manager.destroy', $data->officeid) }}" method="POST"
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
