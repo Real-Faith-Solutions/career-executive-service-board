@@ -48,3 +48,7 @@ compentency_resource_speaker_view
 compentency_training_session_view
 compentency_ces_training_view
 competency_management_sub_modules_report_view
+
+//plantilla
+
+plantilla_management_view

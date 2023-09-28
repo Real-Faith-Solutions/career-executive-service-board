@@ -89,3 +89,7 @@ competency_management_sub_modules_report_add
 competency_management_sub_modules_report_edit
 competency_management_sub_modules_report_delete
 competency_management_sub_modules_report_view
+
+//plantilla
+
+plantilla_management_view
