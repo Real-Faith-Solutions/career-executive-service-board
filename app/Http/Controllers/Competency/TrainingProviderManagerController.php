@@ -61,7 +61,7 @@ class TrainingProviderManagerController extends Controller
         $trainingProviderCitiesCode = ProfileLibCities::find($cityCode);
 
         if(!$trainingProviderCitiesCode){
-            return redirect()->back()->with('error', 'Cant Save, Something Went Wrong');
+            return redirect()->back()->with('error', 'Something Went Wrong');
         }else{
             $trainingProviderCitiesCode->competencyTrainingProviderManager()->save($trainingProvider);
         }
@@ -109,7 +109,7 @@ class TrainingProviderManagerController extends Controller
         $trainingProviderManager->contactno = $request->contactno;
         $trainingProviderManager->emailadd = $request->emailadd;
         $trainingProviderManager->contactperson = $request->contact_person;
-        $trainingProviderManager->updated_by = $encoder;
+        $trainingProviderManager->lastupd_enc = $encoder;
         $trainingProviderManager->save();
 
         return to_route('training-provider-manager.index')->with('info', 'Training Provider Manager Update Sucessfully');

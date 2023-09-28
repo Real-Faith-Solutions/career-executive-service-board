@@ -11,6 +11,9 @@ class CompetencyTrainingProvider extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'providerID';
 
     protected $table = 'training_tblProvider';
