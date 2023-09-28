@@ -98,37 +98,37 @@
                 </div>
             </div>
     
-            {{-- Training Provider Manager permissions --}}
+            {{-- Department Manager permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3 text-xm sm:text-sm sm:py-3.5">
-                                Training Provider Manager
+                                Department Manager
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="training_provider_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'training_provider_manager_add') ? 'checked' : '' }} value="training_provider_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="training_provider_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="plantilla_department_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_add') ? 'checked' : '' }} value="plantilla_department_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="plantilla_department_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="training_provider_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'training_provider_manager_edit') ? 'checked' : '' }} value="training_provider_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="training_provider_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="plantilla_department_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_edit') ? 'checked' : '' }} value="plantilla_department_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="plantilla_department_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="training_provider_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'training_provider_manager_delete') ? 'checked' : '' }} value="training_provider_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="training_provider_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="plantilla_department_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_delete') ? 'checked' : '' }} value="plantilla_department_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="plantilla_department_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="training_provider_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'training_provider_manager_view') ? 'checked' : '' }} value="training_provider_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="training_provider_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="plantilla_department_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_view') ? 'checked' : '' }} value="plantilla_department_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="plantilla_department_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
                         </div>
