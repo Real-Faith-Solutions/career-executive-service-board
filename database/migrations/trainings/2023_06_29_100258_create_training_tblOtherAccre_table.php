@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('training_tblOtherAccre', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
-            $table->string('training');
+            $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
+            $table->string('training')->nullable();
             $table->string('training_category')->nullable();
-            $table->string('no_hours');
-            $table->string('sponsor');
+            $table->string('no_hours')->nullable();
+            $table->string('sponsor')->nullable();
             $table->string('venue')->nullable();
-            $table->date('from_dt');
-            $table->date('to_dt');
-            $table->string('specialization');
+            $table->date('from_dt')->nullable();
+            $table->date('to_dt')->nullable();
+            $table->string('specialization')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            // $table->string('providerID');
+            $table->string('lastupd_enc')->nullable();
             $table->foreignId('providerID')->constrained('training_tblProvider', 'providerID')->nullable();
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

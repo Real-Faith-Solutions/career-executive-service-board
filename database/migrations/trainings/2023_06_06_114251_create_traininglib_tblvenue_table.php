@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('emailadd')->nullable();
             $table->string('contactperson')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encoder_dt');
+            $table->timestamp('lastupd_dt');
             $table->softDeletes();
         });
     }

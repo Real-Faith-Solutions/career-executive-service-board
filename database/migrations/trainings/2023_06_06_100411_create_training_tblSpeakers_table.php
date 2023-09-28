@@ -13,25 +13,25 @@ return new class extends Migration
     {
         Schema::create('training_tblSpeakers', function (Blueprint $table) {
             $table->id('speakerID');
-            // $table->unsignedBigInteger('personal_data_cesno')->nullable();
-            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('lastname');
-            $table->string('firstname');
-            $table->string('mi');
+            $table->integer('cesno')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('mi')->nullable();
             $table->string('Position')->nullable();
             $table->string('Department')->nullable();
             $table->string('Office')->nullable();
             $table->string('Bldg')->nullable();
             $table->string('Street')->nullable();
-            $table->string('Brgy');
-            $table->string('City');
-            $table->string('zipcode');
-            $table->string('contactno');
-            $table->string('emailadd');
+            $table->string('Brgy')->nullable();
+            $table->string('City')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('contactno')->nullable();
+            $table->string('emailadd')->nullable();
             $table->string('expertise')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable(); 
+            $table->timestamp('encdate')->useCurrent(); 
+            $table->timestamp('lastupd_dt')->useCurrent(); 
             $table->softDeletes();
         });
     }
