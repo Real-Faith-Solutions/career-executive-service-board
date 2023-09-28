@@ -111,6 +111,9 @@ class TrainingSessionController extends Controller
                 'remarks' => ['required', 'regex:/^[a-zA-Z ]*$/'],
             ]);
             
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $encoder = $user->userName();
 
             $trainingSession = TrainingSession::find($ctrlno);
             $trainingSession->title = $request->title;
@@ -125,7 +128,8 @@ class TrainingSessionController extends Controller
             $trainingSession->no_hours = $request->no_hours;
             $trainingSession->session_director = $request->session_director;
             $trainingSession->speakerid = $request->resource_speaker;
-            $trainingSession->save();
+            $trainingSession->lastupd_enc = $encoder;
+            $trainingSession->update();
 
             return to_route('training-session.index')->with('message', 'Update Sucessfully');
         }

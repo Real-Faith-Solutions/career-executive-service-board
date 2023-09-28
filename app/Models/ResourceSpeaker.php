@@ -12,13 +12,16 @@ class ResourceSpeaker extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'speakerID';
 
     protected $table = "training_tblSpeakers";
 
     protected $fillable = [
 
-        // 'personal_data_cesno',
+        'cesno',
         'lastname',
         'firstname',
         'mi',
@@ -34,7 +37,7 @@ class ResourceSpeaker extends Model
         'emailadd',
         'expertise',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
 
     ];
 
