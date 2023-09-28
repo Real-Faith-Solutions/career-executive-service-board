@@ -173,7 +173,7 @@ class PersonalData extends Model
 
     public function competencyNonCesAccreditedTraining(): HasMany
     {
-        return $this->hasMany(CompetencyNonCesAccreditedTraining::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(CompetencyNonCesAccreditedTraining::class, 'cesno', 'cesno');
     }
 
     public function users(): HasOne

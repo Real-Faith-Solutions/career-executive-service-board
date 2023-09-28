@@ -11,13 +11,16 @@ class CompetencyNonCesAccreditedTraining extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'ctrlno';
 
     protected $table = "training_tblOtherAccre";
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'training',
         'training_category',
         'no_hours',
@@ -27,7 +30,7 @@ class CompetencyNonCesAccreditedTraining extends Model
         'to_dt',
         'specialization',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
         'providerID',
 
     ];

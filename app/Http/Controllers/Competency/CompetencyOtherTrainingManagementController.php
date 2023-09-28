@@ -9,6 +9,7 @@ use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class CompetencyOtherTrainingManagementController extends Controller
@@ -34,7 +35,7 @@ class CompetencyOtherTrainingManagementController extends Controller
     {
         $request->validate([
 
-            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)],
+            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('cesno', $cesno)],
             'training_category' => ['required'],
             'no_of_training_hours' => ['required'],
             'sponsor_training_provider' => ['nullable'],
@@ -45,12 +46,16 @@ class CompetencyOtherTrainingManagementController extends Controller
             
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $provider = $request->sponsor_training_provider;
         $providerID = CompetencyTrainingProvider::where('provider', $provider)->value('providerID');
 
         $competencyNonCesAccreditedTraining = new CompetencyNonCesAccreditedTraining([
 
-            'personal_data_cesno' => $cesno,
+            'cesno' => $cesno,
             'training' => $request->training,
             'training_category' => $request->training_category,
             'no_hours' => $request->no_of_training_hours,
@@ -59,7 +64,8 @@ class CompetencyOtherTrainingManagementController extends Controller
             'from_dt' => $request->inclusive_date_from,    
             'to_dt' => $request->inclusive_date_to,    
             'specialization' => $request->expertise_field_of_specialization,    
-            'providerID' => $providerID,    
+            'providerID' => $providerID,
+            'encoder' => $encoder,
 
         ]);
      
@@ -83,7 +89,7 @@ class CompetencyOtherTrainingManagementController extends Controller
     {
         $request->validate([
 
-            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training' => ['required',Rule::unique('training_tblOtherAccre')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'training_category' => ['required'],
             'no_of_training_hours' => ['required'],
             'sponsor_training_provider' => ['required'],
@@ -93,6 +99,10 @@ class CompetencyOtherTrainingManagementController extends Controller
             'expertise_field_of_specialization' => ['required'],
             
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $provider = $request->sponsor_training_provider;
         $providerID = CompetencyTrainingProvider::where('provider', $provider)->value('providerID');
@@ -107,8 +117,9 @@ class CompetencyOtherTrainingManagementController extends Controller
         $competencyNonCesAccreditedTraining->to_dt = $request->inclusive_date_to;
         $competencyNonCesAccreditedTraining->specialization = $request->expertise_field_of_specialization;
         $competencyNonCesAccreditedTraining->providerID = $providerID;
+        $competencyNonCesAccreditedTraining->lastupd_enc = $encoder;
         $competencyNonCesAccreditedTraining->save();
-
+        
         return to_route('non-ces-training-management.index', ['cesno'=>$cesno])->with('info', 'Update Sucessfully');
     }
 
@@ -150,6 +161,7 @@ class CompetencyOtherTrainingManagementController extends Controller
         return back()->with('info', 'Data Permanently Deleted');
     }
 
+    // non-ces training 201
     public function editNonCesTraining201 ($ctrlno, $cesno)
     {
         $nonCesTraining201 = ProfileTblTrainingMngt::find($ctrlno);
@@ -210,4 +222,5 @@ class CompetencyOtherTrainingManagementController extends Controller
   
         return back()->with('info', 'Data Permanently Deleted');
     }
+    // end of non-ces training 201
 }
