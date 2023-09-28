@@ -167,18 +167,42 @@ class PermissionsController extends Controller
     
         // Define the permissions in this form
         $permissionsInThisForm = [
-            'compentency_contacts_add', 'compentency_contacts_edit', 'compentency_contacts_delete', 'compentency_contacts_view',
-            'compentency_non_ces_trainings_add', 'compentency_non_ces_trainings_edit', 'compentency_non_ces_trainings_delete', 'compentency_non_ces_trainings_view',
-            'training_provider_manager_add', 'training_provider_manager_edit', 'training_provider_manager_delete', 'training_provider_manager_view',
-            'training_venue_manager_add', 'training_venue_manager_edit', 'training_venue_manager_delete', 'training_venue_manager_view',
-            'compentency_training_category_add', 'compentency_training_category_edit', 'compentency_training_category_delete', 'compentency_training_category_view',
-            'compentency_training_secretariat_add', 'compentency_training_secretariat_edit', 'compentency_training_secretariat_delete', 'compentency_training_secretariat_view',
-            'compentency_field_specialization_add', 'compentency_field_specialization_edit', 'compentency_field_specialization_delete', 'compentency_field_specialization_view',
-            'compentency_resource_speaker_add', 'compentency_resource_speaker_edit', 'compentency_resource_speaker_delete', 'compentency_resource_speaker_view',
-            'compentency_training_session_add', 'compentency_training_session_edit', 'compentency_training_session_delete', 'compentency_training_session_view',
-            'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
-            'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
-            'competency_management_sub_modules_report_view',
+            'plantilla_management_add',
+            'plantilla_management_edit',
+            'plantilla_management_delete',
+            'plantilla_management_view',
+            'plantilla_sector_manager_add',
+            'plantilla_sector_manager_edit',
+            'plantilla_sector_manager_delete',
+            'plantilla_sector_manager_view',
+            'plantilla_department_manager_add',
+            'plantilla_department_manager_edit',
+            'plantilla_department_manager_delete',
+            'plantilla_department_manager_view',
+            'plantilla_agency_location_manager_add',
+            'plantilla_agency_location_manager_edit',
+            'plantilla_agency_location_manager_delete',
+            'plantilla_agency_location_manager_view',
+            'plantilla_office_manager_edit',
+            'plantilla_office_manager_add',
+            'plantilla_office_manager_delete',
+            'plantilla_office_manager_view',
+            'plantilla_position_manager_add',
+            'plantilla_position_manager_edit',
+            'plantilla_position_manager_delete',
+            'plantilla_position_manager_view',
+            'plantilla_position_classification_manager_add',
+            'plantilla_position_classification_manager_edit',
+            'plantilla_position_classification_manager_delete',
+            'plantilla_position_classification_manager_view',
+            'plantilla_appointee_occupant_manager_add',
+            'plantilla_appointee_occupant_manager_edit',
+            'plantilla_appointee_occupant_manager_delete',
+            'plantilla_appointee_occupant_manager_view',
+            'plantilla_appointee_occupant_browser_add',
+            'plantilla_appointee_occupant_browser_edit',
+            'plantilla_appointee_occupant_browser_delete',
+            'plantilla_appointee_occupant_browser_view',
         ];
 
         // Get the submitted permissions
@@ -198,7 +222,7 @@ class PermissionsController extends Controller
             $role->permissions()->syncWithoutDetaching($permissionName);
         }
 
-        return redirect()->route('permissions.competency', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+        return redirect()->route('permissions.plantilla', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
 }
