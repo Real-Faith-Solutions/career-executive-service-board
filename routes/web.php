@@ -401,25 +401,25 @@ Route::middleware('auth')->group(function () {
     Route::prefix('plantilla')->group(function () {
 
         Route::prefix('plantilla-management')->group(function () {
-            Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index');
+            Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index')->middleware('checkPermission:plantilla_management_view');
         });
 
         Route::prefix('sector-manager')->group(function () {
-            Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index');
-            Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create');
-            Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit');
+            Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index')->middleware('checkPermission:plantilla_sector_manager_view');
+            Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create')->middleware('checkPermission:plantilla_sector_manager_add');
+            Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit')->middleware('checkPermission:plantilla_sector_manager_edit');
         });
 
         Route::prefix('department-agency-manager')->group(function () {
-            Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index');
-            Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
-            Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
-            Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
+            Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
+            Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_view');
+            Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store')->middleware('checkPermission:plantilla_department_manager_add');
+            Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
-            Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
-            Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
+            Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index')->middleware('checkPermission:plantilla_agency_location_manager_view');
+            Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show')->middleware('checkPermission:plantilla_agency_location_manager_view');
         });
 
         Route::prefix('office-manager')->group(function () {
@@ -431,36 +431,36 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
-            Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index');
-            Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store');
-            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show');
-            Route::post('{plantilla_id}/update', [PlantillaPositionManagerController::class, 'update'])->name('plantilla-position-manager.update');
-            Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy');
+            Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index')->middleware('checkPermission:plantilla_position_manager_view');
+            Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show')->middleware('checkPermission:plantilla_position_manager_view');
+            Route::post('{plantilla_id}/update', [PlantillaPositionManagerController::class, 'update'])->name('plantilla-position-manager.update')->middleware('checkPermission:plantilla_position_manager_edit');
+            Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy')->middleware('checkPermission:plantilla_position_manager_delete');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
-            Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index');
+            Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
             Route::match(['get', 'post'], '/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{cesno?}', [AppointeeOccupantManagerController::class, 'create'])
                 ->name('appointee-occupant-manager.create')
                 ->where('cesno', '.*');
 
 
-            Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store');
-            Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy');
+            Route::post('store', [AppointeeOccupantManagerController::class, 'store'])->name('appointee-occupant-manager.store')->middleware('checkPermission:plantilla_appointee_occupant_manager_add');
+            Route::delete('/{appointee_id}/destroy', [AppointeeOccupantManagerController::class, 'destroy'])->name('appointee-occupant-manager.destroy')->middleware('checkPermission:plantilla_appointee_occupant_manager_delete');
         });
 
         Route::prefix('appointee')->group(function () {
 
-            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show');
-            Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update');
-            Route::post('store', [OtherAssignmentController::class, 'store'])->name('other-assignment.store');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
+            Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update')->middleware('checkPermission:plantilla_appointee_occupant_manager_edit');
+            Route::post('store', [OtherAssignmentController::class, 'store'])->name('other-assignment.store')->middleware('checkPermission:plantilla_appointee_occupant_manager_add');
             Route::delete('/{detailed_code}/destroy', [OtherAssignmentController::class, 'destroy'])->name('other-assignment.destroy');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}/{detailed_code}', [OtherAssignmentController::class, 'show'])->name('other-assignment.show');
             Route::post('/other-assignment/{detailed_code}/update', [OtherAssignmentController::class, 'update'])->name('other-assignment.update');
         });
 
         Route::prefix('appointee-occupant-browser')->group(function () {
-            Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index');
+            Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index')->middleware('checkPermission:plantilla_appointee_occupant_browser_view');
         });
 
         // sector manager
@@ -734,6 +734,7 @@ Route::middleware('auth')->group(function () {
         Route::post('permissions/profiling/update/experience_trainings/{role_name}/{role_title}', [PermissionsController::class, 'updateExperienceTrainingsPermissions'])->name('experienceTrainingsPermissions.update');
         Route::post('permissions/profiling/update/personal_others/{role_name}/{role_title}', [PermissionsController::class, 'updatePersonalOthersPermissions'])->name('personalOthersPermissions.update');
         Route::post('permissions/competency/update/{role_name}/{role_title}', [PermissionsController::class, 'updateCompetencyPermissions'])->name('competencyPermissions.update');
+        Route::post('permissions/plantilla/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePlantillaPermissions'])->name('plantillaPermissions.update');
 
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
         // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');

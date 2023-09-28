@@ -159,4 +159,70 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.competency', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updatePlantillaPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
+    
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            'plantilla_management_add',
+            'plantilla_management_edit',
+            'plantilla_management_delete',
+            'plantilla_management_view',
+            'plantilla_sector_manager_add',
+            'plantilla_sector_manager_edit',
+            'plantilla_sector_manager_delete',
+            'plantilla_sector_manager_view',
+            'plantilla_department_manager_add',
+            'plantilla_department_manager_edit',
+            'plantilla_department_manager_delete',
+            'plantilla_department_manager_view',
+            'plantilla_agency_location_manager_add',
+            'plantilla_agency_location_manager_edit',
+            'plantilla_agency_location_manager_delete',
+            'plantilla_agency_location_manager_view',
+            'plantilla_office_manager_edit',
+            'plantilla_office_manager_add',
+            'plantilla_office_manager_delete',
+            'plantilla_office_manager_view',
+            'plantilla_position_manager_add',
+            'plantilla_position_manager_edit',
+            'plantilla_position_manager_delete',
+            'plantilla_position_manager_view',
+            'plantilla_position_classification_manager_add',
+            'plantilla_position_classification_manager_edit',
+            'plantilla_position_classification_manager_delete',
+            'plantilla_position_classification_manager_view',
+            'plantilla_appointee_occupant_manager_add',
+            'plantilla_appointee_occupant_manager_edit',
+            'plantilla_appointee_occupant_manager_delete',
+            'plantilla_appointee_occupant_manager_view',
+            'plantilla_appointee_occupant_browser_add',
+            'plantilla_appointee_occupant_browser_edit',
+            'plantilla_appointee_occupant_browser_delete',
+            'plantilla_appointee_occupant_browser_view',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->syncWithoutDetaching($permissionName);
+        }
+
+        return redirect()->route('permissions.plantilla', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
+
 }

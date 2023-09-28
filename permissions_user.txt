@@ -75,3 +75,7 @@ cespes_ratings_view
 
 pdf_files_add
 pdf_files_view
+
+//plantilla
+
+plantilla_management_view
