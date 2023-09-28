@@ -77,29 +77,6 @@ class DepartmentAgencyManagerController extends Controller
         ));
     }
 
-    public function updateAgency(Request $request, $sectorid, $deptid)
-    {
-        $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'agency_typeid' => ['required'],
-            'website' => ['required', 'max:40', 'min:2', 'url'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'remarks' => ['required'],
-        ]);
-
-        $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
-        $department->update($request->only([
-            'title',
-            'agency_typeid',
-            'website',
-            'acronym',
-            'remarks'
-        ]));
-
-        return redirect()->back()->with('message', 'The item has been successfully updated!');
-    }
-
-
     public function destroy($deptid)
     {
         $datas = DepartmentAgency::findOrFail($deptid);

@@ -60,7 +60,8 @@
 
             <td class="px-6 py-4 text-right uppercase">
                 <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full" href="#">
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('library-department-manager.edit', $data->deptid) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>

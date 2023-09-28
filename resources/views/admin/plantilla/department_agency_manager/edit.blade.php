@@ -49,10 +49,9 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form
-                    action="{{ route('department-agency-manager.updateAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                    method="POST">
+                <form action="{{ route('library-department-manager.update', $department->deptid) }}" method="POST">
                     @csrf
+                    @method('put')
 
                     <input type="hidden" name="encoder"
                         value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }}"

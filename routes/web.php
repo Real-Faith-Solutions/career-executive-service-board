@@ -111,14 +111,7 @@ Route::post('/send-new-password', [AuthController::class, 'sendPassword'])->name
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // end auth
 
-// two factor authentication
 Route::middleware('auth')->group(function () {
-    Route::get('/two-factor-authentication', [AuthController::class, 'confirmEmail'])->name('reconfirm.email');
-    Route::post('/submit-confirmation-code', [AuthController::class, 'submitConfirmationEmail'])->name('reconfirm.submit');
-    Route::get('/resend-confirmation-code', [AuthController::class, 'resendConfirmationEmail'])->name('resend.code');
-});
-
-Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'getAllData'])->name('dashboard');
 
@@ -137,7 +130,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
             Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
             Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-            Route::get('switch/two-factor', [ProfileController::class, 'switchTwoFactor'])->name('two-factor.switch');
         });
 
         Route::prefix('family-profile')->group(function () {
@@ -371,10 +363,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit')->middleware('checkPermission:eligibility_rank_tracker_edit');
             Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store')->middleware('checkPermission:eligibility_rank_tracker_add');
             Route::put('update/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update')->middleware('checkPermission:eligibility_rank_tracker_edit');
-            Route::delete('destroy/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::delete('destroy/{ctrlno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy')->middleware('checkPermission:eligibility_rank_tracker_delete');
             Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted')->middleware('checkPermission:eligibility_rank_tracker_delete');
-            Route::post('recently-deleted/restore/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::post('recently-deleted/restore/{ctrlno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
+            Route::delete('recently-deleted/force-delete/{ctrlno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
 
             Route::prefix('eligibility-rank-tracker-erad')->group(function () {
                 Route::get('navigate/{cesno}', [EligibilityAndRankTrackerController::class, 'navigate'])->name('eligibility-rank-tracker.navigate');
@@ -421,7 +413,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show');
             Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency');
-            // Route::post('show/{sectorid}/agency/{deptid}/update', [DepartmentAgencyManagerController::class, 'updateAgency'])->name('department-agency-manager.updateAgency');
             // Route::delete('{deptid}/destroy', [DepartmentAgencyManagerController::class, 'destroy'])->name('department-agency-manager.destroy');
             // Route::get('recently_deleted', [SectorManagerController::class, 'recentlyDeleted'])->name('sector-manager.recentlyDeleted');
             // Route::post('{sectorid}/restore', [SectorManagerController::class, 'restore'])->name('sector-manager.restore');
@@ -647,7 +638,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     //  ERIS routes
     Route::prefix('eris')->group(function () {
-        
         Route::prefix('profile-data')->group(function () {
             Route::get('index', [ErisProfileController::class, 'index'])->name('eris-index');
             Route::get('create', [ErisProfileController::class, 'create'])->name('eris.create');

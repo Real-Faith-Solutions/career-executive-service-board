@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Plantilla\Library;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plantilla\AgencyLocation;
+use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\SectorManager;
+use App\Models\ProfileLibTblRegion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -59,17 +62,44 @@ class DepartmentAgencyManagerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, $deptid)
     {
-        //
+        $department = DepartmentAgency::find($deptid);
+        $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
+        $departmentTypeDatas = DepartmentAgencyType::query()
+            ->where('sectorid', $department->sectorid)
+            ->orderBy('title', 'ASC')->get();
+
+        return view('admin.plantilla.library.department_agency_manager.edit', compact(
+            'departmentTypeDatas',
+            'department',
+            'sectorDatas',
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $deptid)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'agency_typeid' => ['required'],
+            'website' => ['required', 'max:40', 'min:2', 'url'],
+            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['required'],
+        ]);
+
+        $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
+        $department->update($request->only([
+            'title',
+            'agency_typeid',
+            'website',
+            'acronym',
+            'remarks'
+        ]));
+
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 
     /**
