@@ -51,6 +51,42 @@ class RolesTableSeeder extends Seeder
             'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
             'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
             'competency_management_sub_modules_report_view',
+            'plantilla_management_add',
+            'plantilla_management_edit',
+            'plantilla_management_delete',
+            'plantilla_management_view',
+            'plantilla_sector_manager_add',
+            'plantilla_sector_manager_edit',
+            'plantilla_sector_manager_delete',
+            'plantilla_sector_manager_view',
+            'plantilla_department_manager_add',
+            'plantilla_department_manager_edit',
+            'plantilla_department_manager_delete',
+            'plantilla_department_manager_view',
+            'plantilla_agency_location_manager_add',
+            'plantilla_agency_location_manager_edit',
+            'plantilla_agency_location_manager_delete',
+            'plantilla_agency_location_manager_view',
+            'plantilla_office_manager_edit',
+            'plantilla_office_manager_add',
+            'plantilla_office_manager_delete',
+            'plantilla_office_manager_view',
+            'plantilla_position_manager_add',
+            'plantilla_position_manager_edit',
+            'plantilla_position_manager_delete',
+            'plantilla_position_manager_view',
+            'plantilla_position_classification_manager_add',
+            'plantilla_position_classification_manager_edit',
+            'plantilla_position_classification_manager_delete',
+            'plantilla_position_classification_manager_view',
+            'plantilla_appointee_occupant_manager_add',
+            'plantilla_appointee_occupant_manager_edit',
+            'plantilla_appointee_occupant_manager_delete',
+            'plantilla_appointee_occupant_manager_view',
+            'plantilla_appointee_occupant_browser_add',
+            'plantilla_appointee_occupant_browser_edit',
+            'plantilla_appointee_occupant_browser_delete',
+            'plantilla_appointee_occupant_browser_view',
         ];
 
         foreach ($permissions_admin as $permission) {
@@ -77,6 +113,42 @@ class RolesTableSeeder extends Seeder
             'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
+            'plantilla_management_add',
+            'plantilla_management_edit',
+            'plantilla_management_delete',
+            'plantilla_management_view',
+            'plantilla_sector_manager_add',
+            'plantilla_sector_manager_edit',
+            'plantilla_sector_manager_delete',
+            'plantilla_sector_manager_view',
+            'plantilla_department_manager_add',
+            'plantilla_department_manager_edit',
+            'plantilla_department_manager_delete',
+            'plantilla_department_manager_view',
+            'plantilla_agency_location_manager_add',
+            'plantilla_agency_location_manager_edit',
+            'plantilla_agency_location_manager_delete',
+            'plantilla_agency_location_manager_view',
+            'plantilla_office_manager_edit',
+            'plantilla_office_manager_add',
+            'plantilla_office_manager_delete',
+            'plantilla_office_manager_view',
+            'plantilla_position_manager_add',
+            'plantilla_position_manager_edit',
+            'plantilla_position_manager_delete',
+            'plantilla_position_manager_view',
+            'plantilla_position_classification_manager_add',
+            'plantilla_position_classification_manager_edit',
+            'plantilla_position_classification_manager_delete',
+            'plantilla_position_classification_manager_view',
+            'plantilla_appointee_occupant_manager_add',
+            'plantilla_appointee_occupant_manager_edit',
+            'plantilla_appointee_occupant_manager_delete',
+            'plantilla_appointee_occupant_manager_view',
+            'plantilla_appointee_occupant_browser_add',
+            'plantilla_appointee_occupant_browser_edit',
+            'plantilla_appointee_occupant_browser_delete',
+            'plantilla_appointee_occupant_browser_view',
         ];
 
         foreach ($permissions_power_user as $permission) {
@@ -94,6 +166,7 @@ class RolesTableSeeder extends Seeder
             'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
+            'plantilla_management_view',
         ];
         
         foreach ($permissions_rank_officer as $permission) {
@@ -110,6 +183,7 @@ class RolesTableSeeder extends Seeder
             'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
+            'plantilla_management_view',
         ];
 
         foreach ($permissions_cesb_operator as $permission) {
@@ -134,6 +208,7 @@ class RolesTableSeeder extends Seeder
             'compentency_ces_training_add', 'compentency_ces_training_edit', 'compentency_ces_training_delete', 'compentency_ces_training_view',
             'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
             'competency_management_sub_modules_report_view',
+            'plantilla_management_view',
         ];
         
         foreach ($permissions_training_officer as $permission) {
@@ -150,6 +225,7 @@ class RolesTableSeeder extends Seeder
             'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
+            'plantilla_management_view',
         ];
         
         foreach ($permissions_cespes_operator as $permission) {
@@ -176,6 +252,27 @@ class RolesTableSeeder extends Seeder
             'training_venue_manager_view', 'compentency_training_category_view', 'compentency_training_secretariat_view',
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
+            'plantilla_management_view',
+            'plantilla_sector_manager_edit',
+            'plantilla_sector_manager_view',
+            'plantilla_department_manager_edit',
+            'plantilla_department_manager_view',
+            'plantilla_agency_location_manager_add',
+            'plantilla_agency_location_manager_edit',
+            'plantilla_agency_location_manager_view',
+            'plantilla_office_manager_edit',
+            'plantilla_office_manager_add',
+            'plantilla_office_manager_delete',
+            'plantilla_office_manager_view',
+            'plantilla_position_manager_add',
+            'plantilla_position_manager_edit',
+            'plantilla_position_manager_delete',
+            'plantilla_position_manager_view',
+            'plantilla_appointee_occupant_manager_add',
+            'plantilla_appointee_occupant_manager_edit',
+            'plantilla_appointee_occupant_manager_delete',
+            'plantilla_appointee_occupant_manager_view',
+            'plantilla_appointee_occupant_browser_view',
         ];
         
         foreach ($permissions_agency_hr_operator as $permission) {
@@ -198,6 +295,7 @@ class RolesTableSeeder extends Seeder
             'case_records_add', 'case_records_edit', 'case_records_delete', 'case_records_view',
             'language_dialects_add', 'language_dialects_edit', 'language_dialects_delete', 'language_dialects_view',
             'eligibility_rank_tracker_view', 'cespes_ratings_view', 'pdf_files_add', 'pdf_files_view',
+            'plantilla_management_view',
         ];
         
         foreach ($permissions_user as $permission) {
