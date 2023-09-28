@@ -413,7 +413,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_view');
-            Route::post('store', [DepartmentAgencyManagerController::class, 'store'])->name('department-agency-manager.store')->middleware('checkPermission:plantilla_department_manager_add');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
@@ -425,9 +424,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
-            // Route::post('store', [OfficeManagerController::class, 'store'])->name('office-manager.store');
-            // Route::post('{officeid}/update', [OfficeManagerController::class, 'update'])->name('office-manager.update');
-            // Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {

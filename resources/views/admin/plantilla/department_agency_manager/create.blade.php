@@ -8,7 +8,7 @@
 
         <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
 
-        <form action="{{ route('department-agency-manager.store') }}" method="POST">
+        <form action="{{ route('library-department-manager.store') }}" method="POST">
             @csrf
             <input type="hidden" value="{{ $datas->sectorid }}" name="sectorid" readonly>
             <input type="hidden"
