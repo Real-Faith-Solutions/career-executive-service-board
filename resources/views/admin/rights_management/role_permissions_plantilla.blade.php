@@ -17,7 +17,7 @@
 
 <div id="plantilla_permissions" class="">
     
-    <form method="POST" id="plantilla_permissions_form" action="{{ route('competencyPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="plantilla_permissions_form" action="{{ route('plantillaPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
