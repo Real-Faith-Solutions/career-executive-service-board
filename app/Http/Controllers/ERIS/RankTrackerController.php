@@ -33,8 +33,13 @@ class RankTrackerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        $r_catid = LibraryRankTracker::where('description', $request->description)->value('catid');
+        $r_ctrlno = LibraryRankTracker::where('description', $request->description)->value('ctrlno');
+
         $rankTracker = new RankTracker([
 
+            'r_catid' => $r_catid,
+            'r_ctrlno' => $r_ctrlno,
             'description' => $request->description,
             'submit_dt' => $request->submit_dt, //  submit date
             'remarks' => $request->remarks, 
