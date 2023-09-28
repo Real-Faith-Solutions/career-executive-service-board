@@ -28,8 +28,9 @@ return new class extends Migration
             $table->string('training_asst')->nullable();
             $table->foreignId('speakerid')->constrained('training_tblSpeakers', 'speakerID');
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encoder_dt')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

@@ -12,6 +12,9 @@ class TrainingSession extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encoder_dt';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'sessionid';
 
     protected $table = "training_tblSessions";
@@ -32,7 +35,7 @@ class TrainingSession extends Model
         'training_asst',
         'speakerid',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
         
     ];
 
