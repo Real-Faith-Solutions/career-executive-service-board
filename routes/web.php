@@ -51,6 +51,7 @@ use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
+use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
@@ -418,7 +419,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
-            Route::post('{officelocid}/update', [AgencyLocationManagerController::class, 'update'])->name('agency-location-manager.update');
+            // Route::post('{officelocid}/update', [AgencyLocationManagerController::class, 'update'])->name('agency-location-manager.update');
             Route::delete('/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
             Route::post('store', [AgencyLocationManagerController::class, 'store'])->name('agency-location-manager.store');
         });
@@ -475,6 +476,12 @@ Route::middleware('auth')->group(function () {
         Route::post('library-department-manager/{deptid}/force-delete', [LibraryDepartmentAgencyManagerController::class, 'forceDelete'])->name('library-department-manager.forceDelete');
         Route::post('library-department-manager/{deptid}/restore', [LibraryDepartmentAgencyManagerController::class, 'restore'])->name('library-department-manager.restore');
         Route::resource('library-department-manager', LibraryDepartmentAgencyManagerController::class);
+
+        // agency location manager
+        Route::get('library-agency-location-manager/trash', [LibraryAgencyLocationManagerController::class, 'trash'])->name('library-agency-location-manager.trash');
+        Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
+        Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
+        Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
     });
     // End of plantilla routes
 

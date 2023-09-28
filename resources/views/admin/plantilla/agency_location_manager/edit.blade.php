@@ -60,11 +60,11 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form
-                    action="{{ route('agency-location-manager.update', ['officelocid'=>$departmentLocation->officelocid]) }}"
+                <form action="{{ route('library-agency-location-manager.update', $departmentLocation->officelocid) }}"
                     method="POST">
                     @csrf
-
+                    @method('put')
+                    <input name="deptid" type="hidden" value="{{ $department->deptid }}" readonly>
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="department">Department Agency</label>

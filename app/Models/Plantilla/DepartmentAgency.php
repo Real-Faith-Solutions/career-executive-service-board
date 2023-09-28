@@ -5,6 +5,7 @@ namespace App\Models\Plantilla;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DepartmentAgency extends Model
@@ -34,5 +35,10 @@ class DepartmentAgency extends Model
     public function departmentAgencyType(): BelongsTo
     {
         return $this->belongsTo(DepartmentAgencyType::class, 'agency_typeid', 'agency_typeid');
+    }
+
+    public function agencyLocation(): HasMany
+    {
+        return $this->hasMany(AgencyLocation::class, 'deptid');
     }
 }
