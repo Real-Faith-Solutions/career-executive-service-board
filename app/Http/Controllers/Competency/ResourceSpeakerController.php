@@ -124,7 +124,7 @@ class ResourceSpeakerController extends Controller
         $resourceSpeaker->contactno = $request->contactNo;
         $resourceSpeaker->emailadd = $request->emailAdd;
         $resourceSpeaker->expertise = $request->expertise;
-        $resourceSpeaker->updated_by = $encoder;
+        $resourceSpeaker->lastupd_enc = $encoder;
         $resourceSpeaker->save();
 
         return to_route('resource-speaker.index')->with('info', 'Data Update Sucessfully');
