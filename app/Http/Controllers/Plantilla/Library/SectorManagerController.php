@@ -70,7 +70,7 @@ class SectorManagerController extends Controller
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 
-    public function recentlyDeleted()
+    public function trash()
     {
         $datas = SectorManager::onlyTrashed()
             ->get();

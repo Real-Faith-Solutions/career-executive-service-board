@@ -49,10 +49,9 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form
-                    action="{{ route('department-agency-manager.updateAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                    method="POST">
+                <form action="{{ route('library-department-manager.update', $department->deptid) }}" method="POST">
                     @csrf
+                    @method('put')
 
                     <input type="hidden" name="encoder"
                         value="{{ Auth::user()->last_name }} {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }}"
@@ -199,7 +198,7 @@
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('agency-location-manager.destroy', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf

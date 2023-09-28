@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Plantilla\Library;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plantilla\AgencyLocation;
+use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\SectorManager;
+use App\Models\ProfileLibTblRegion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -59,17 +62,44 @@ class DepartmentAgencyManagerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, $deptid)
     {
-        //
+        $department = DepartmentAgency::find($deptid);
+        $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
+        $departmentTypeDatas = DepartmentAgencyType::query()
+            ->where('sectorid', $department->sectorid)
+            ->orderBy('title', 'ASC')->get();
+
+        return view('admin.plantilla.library.department_agency_manager.edit', compact(
+            'departmentTypeDatas',
+            'department',
+            'sectorDatas',
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $deptid)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'agency_typeid' => ['required'],
+            'website' => ['required', 'max:40', 'min:2', 'url'],
+            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'remarks' => ['required'],
+        ]);
+
+        $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
+        $department->update($request->only([
+            'title',
+            'agency_typeid',
+            'website',
+            'acronym',
+            'remarks'
+        ]));
+
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 
     /**
@@ -77,9 +107,66 @@ class DepartmentAgencyManagerController extends Controller
      */
     public function destroy($deptid)
     {
-        $datas = DepartmentAgency::findOrFail($deptid);
-        $datas->delete();
+        $data = DepartmentAgency::findOrFail($deptid);
 
-        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+        if ($data->departmentAgencyType()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        }
+        if ($data->sectorManager()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        }
+
+        try {
+            $data->delete();
+
+            if ($data->trashed()) {
+                return redirect()->back()->with('message', 'The item has been successfully deleted!');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return redirect()->back()->with('error', 'Record not found!');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+    }
+
+    public function trash()
+    {
+        $datas = DepartmentAgency::onlyTrashed()
+            ->get();
+        return view('admin.plantilla.library.department_agency_manager.trash', compact('datas'));
+    }
+
+    public function restore($deptid)
+    {
+        $datas = DepartmentAgency::onlyTrashed()->findOrFail($deptid);
+        $datas->restore();
+
+        return redirect()->back()->with('message', 'The item has been successfully restore!');
+    }
+
+    public function forceDelete($deptid)
+    {
+        try {
+            // Find the soft-deleted record by its ID
+            $data = DepartmentAgency::onlyTrashed()->findOrFail($deptid);
+
+            // Permanently delete the record
+            $data->forceDelete();
+
+            // Check if the delete operation was successful
+            if ($data) {
+                return redirect()->back()->with('message', 'The item has been successfully deleted!');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            // Handle the case where the record is not found
+            return redirect()->back()->with('error', 'Record not found!');
+        } catch (\Exception $exception) {
+            // Handle other exceptions if they occur
+            return redirect()->back()->with('error', 'An error occurred!');
+        }
     }
 }

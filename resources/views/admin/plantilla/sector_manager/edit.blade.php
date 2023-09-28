@@ -141,8 +141,8 @@
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('department-agency-manager.destroy', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
-                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                        action="{{ route('library-department-manager.destroy', $data->deptid )}}" method="POST"
+                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

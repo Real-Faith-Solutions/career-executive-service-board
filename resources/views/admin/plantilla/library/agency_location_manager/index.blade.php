@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Department Agency Manager')
+@section('title', 'Agency Location Manager')
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
@@ -7,13 +7,13 @@
         @yield('title')
     </a>
     <div class="flex">
-        <a href="{{ route('library-department-manager.trash') }}">
+        <a href="{{ route('library-agency-location-manager.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
             </lord-icon>
         </a>
 
-        <a class="btn btn-primary" href="{{ route('library-department-manager.create') }}">Add record</a>
+        <a class="btn btn-primary" href="{{ route('library-agency-location-manager.create') }}">Add record</a>
     </div>
 </div>
 
@@ -21,12 +21,11 @@
 <table class="dataTables">
     <thead>
         <tr>
-            <th>Department ID</th>
-            <th>Mother Agency</th>
-            <th>Agency / Bureau</th>
-            <th>Agency / Bureau Acronym</th>
-            <th>Office type</th>
-            <th>Agency website</th>
+            <th>Department Agency</th>
+            <th>Location</th>
+            <th>Location Acronym</th>
+            <th>Location type</th>
+            <th>Region</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -35,40 +34,35 @@
     </thead>
     <tbody>
 
-        @foreach ($datas as $data)
+        @foreach ($agencyLocation as $data)
         <tr>
             <td class="font-semibold">
-                {{ $data->deptid }}
+                {{ $data->departmentAgency->title }}
             </td>
             <td>
-                {{ $data->sectorManager->title ?? 'N/A' }}
-            </td>
-            <td>
-                {{ $data->title ?? 'N/A' }}
+                {{ $data->title }}
             </td>
             <td>
                 {{ $data->acronym ?? 'N/A' }}
             </td>
             <td>
-                {{ $data->departmentAgencyType->title ?? 'N/A' }}
+                {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
             </td>
             <td>
-                <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">
-                    {{ $data->website ?? 'N/A' }}
-                </a>
+                {{ $data->region ?? 'N/A' }}
             </td>
 
-            <td class="px-6 py-4 text-right uppercase">
+            <td class="text-right uppercase">
                 <div class="flex justify-end">
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('library-department-manager.edit', $data->deptid) }}">
+                        href="{{ route('library-agency-location-manager.edit', $data->officelocid) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-department-manager.destroy', $data->deptid) }}" method="POST"
-                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}"
+                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">

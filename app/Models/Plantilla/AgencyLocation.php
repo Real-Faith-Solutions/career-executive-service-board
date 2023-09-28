@@ -29,4 +29,9 @@ class AgencyLocation extends Model
     {
         return $this->belongsTo(AgencyLocationLibrary::class, 'loctype_id', 'agencyloc_Id');
     }
+
+    public function departmentAgency(): BelongsTo
+    {
+        return $this->belongsTo(DepartmentAgency::class, 'deptid', 'deptid');
+    }
 }
