@@ -21,7 +21,7 @@
             </div>
 
             <div class="p-6 space-y-6">
-                <form action="{{ route('office-manager.store')}}" method="POST">
+                <form action="{{ route('library-office-manager.store')}}" method="POST">
                     @csrf
                     <input type="hidden" id="officelocid" name="officelocid" required readonly
                         value="{{ $departmentLocation->officelocid }}" />

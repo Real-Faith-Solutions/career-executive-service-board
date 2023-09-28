@@ -53,6 +53,7 @@ use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
+use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
@@ -422,11 +423,11 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('office-manager')->group(function () {
-            Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index')->middleware('checkPermission:plantilla_office_manager_view');
-            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show')->middleware('checkPermission:plantilla_office_manager_view');
-            Route::post('store', [OfficeManagerController::class, 'store'])->name('office-manager.store')->middleware('checkPermission:plantilla_office_manager_add');
-            Route::post('{officeid}/update', [OfficeManagerController::class, 'update'])->name('office-manager.update')->middleware('checkPermission:plantilla_office_manager_edit');
-            Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy')->middleware('checkPermission:plantilla_office_manager_delete');
+            Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
+            Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
+            // Route::post('store', [OfficeManagerController::class, 'store'])->name('office-manager.store');
+            // Route::post('{officeid}/update', [OfficeManagerController::class, 'update'])->name('office-manager.update');
+            // Route::delete('/{officeid}/destroy', [OfficeManagerController::class, 'destroy'])->name('office-manager.destroy');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
@@ -479,6 +480,12 @@ Route::middleware('auth')->group(function () {
         Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
         Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
         Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
+
+        // office manager
+        Route::get('library-office-manager/trash', [LibraryOfficeManagerController::class, 'trash'])->name('library-office-manager.trash');
+        Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
+        Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
+        Route::resource('library-office-manager', LibraryOfficeManagerController::class);
     });
     // End of plantilla routes
 

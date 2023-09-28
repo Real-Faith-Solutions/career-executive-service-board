@@ -70,9 +70,10 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="{{ route('office-manager.update', $office->officeid) }}" method="POST">
+                <form action="{{ route('library-office-manager.update', $office->officeid) }}" method="POST">
                     @csrf
-
+                    @method('put')
+                    <input name="officelocid" type="hidden" value="{{ $office->officelocid }}">
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="title">Office<sup>*</sup></label>
