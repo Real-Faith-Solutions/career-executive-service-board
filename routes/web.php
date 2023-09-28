@@ -419,9 +419,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show');
-            // Route::post('{officelocid}/update', [AgencyLocationManagerController::class, 'update'])->name('agency-location-manager.update');
-            Route::delete('/{officelocid}/destroy', [AgencyLocationManagerController::class, 'destroy'])->name('agency-location-manager.destroy');
-            Route::post('store', [AgencyLocationManagerController::class, 'store'])->name('agency-location-manager.store');
         });
 
         Route::prefix('office-manager')->group(function () {

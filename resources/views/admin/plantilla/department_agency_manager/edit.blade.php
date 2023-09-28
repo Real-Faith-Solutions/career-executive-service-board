@@ -198,7 +198,7 @@
                         </lord-icon>
                     </a>
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('agency-location-manager.destroy', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}) }}"
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
