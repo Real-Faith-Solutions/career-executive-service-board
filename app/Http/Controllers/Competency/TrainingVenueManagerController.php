@@ -103,7 +103,7 @@ class TrainingVenueManagerController extends Controller
         $trainingVenueManager->contactno = $request->contactno;
         $trainingVenueManager->emailadd = $request->emailadd;
         $trainingVenueManager->contactperson = $request->contact_person;
-        $trainingVenueManager->updated_by =  $encoder;
+        $trainingVenueManager->lastupd_enc =  $encoder;
         $trainingVenueManager->update();
 
         return to_route('training-venue-manager.index')->with('info', 'Update Sucessfully');

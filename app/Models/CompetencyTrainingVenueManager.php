@@ -12,6 +12,9 @@ class CompetencyTrainingVenueManager extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encoder_dt';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'venueid';
 
     protected $table = "traininglib_tblvenue";
@@ -26,7 +29,7 @@ class CompetencyTrainingVenueManager extends Model
         'emailadd',
         'contactperson',
         'encoder',
-        'updated_by',
+        'lastupd_enc',
 
     ];
 
