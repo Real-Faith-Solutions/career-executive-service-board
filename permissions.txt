@@ -169,8 +169,8 @@ plantilla_agency_location_manager_edit
 plantilla_agency_location_manager_delete
 plantilla_agency_location_manager_view
 
-plantilla_office_manager_edit
 plantilla_office_manager_add
+plantilla_office_manager_edit
 plantilla_office_manager_delete
 plantilla_office_manager_view
 
