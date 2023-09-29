@@ -2,13 +2,17 @@
 @section('title', '')
 @section('content')
 
+    <div class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-700">
+        Erad Recruitment Information System - (ERIS)
+    </div>
+
     <section>
-        <div class="flex justify-between">
-            <div class="grid lg:grid-cols-3">
+        <div class="flex justify-between mt-10">
+            <div class="grid lg:grid-cols-2">
                 @include('components.search')
             </div>
 
-            <div class="mt-5">
+            <div class="flex items-center">
                 <a href="{{ route('eris.create') }}" class="btn btn-primary" >Add New Profile</a>
             </div>
         </div>
@@ -44,7 +48,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('eris-written-exam.index', ['acno'=>$erisTblMains->acno]) }}" class="font-medium">View profile</a>
+                                <a href="{{ route('eris.edit', ['acno'=>$erisTblMains->acno]) }}" class="font-medium">View profile</a>
                             </td>
                         </tr>
                     @endforeach
