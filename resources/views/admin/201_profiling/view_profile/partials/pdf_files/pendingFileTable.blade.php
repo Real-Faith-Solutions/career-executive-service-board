@@ -79,19 +79,16 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Approval', 'Are you sure you want to approve this pdf?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/egiwmiit.json"
-                                        trigger="morph"
-                                        colors="primary:#3b82f6"
-                                        state="hover"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
+                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf(this, '{{ $pdfFiles->ctrlno }}', '{{ $pdfFiles->personal_data_cesno }}')">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/egiwmiit.json"
+                                    trigger="morph"
+                                    colors="primary:#3b82f6"
+                                    state="hover"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
                             
                             <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
                                 @csrf
@@ -114,5 +111,54 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal for ApprovePendingPdfFile -->
+<div id="approve-pending-pdf-modal"
+class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+<div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+    <form id="approvePendingPdfForm" action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}"
+        method="POST" class="flex flex-col items-center"
+        onsubmit="return checkErrorsBeforeSubmit(approvePendingPdfForm)">
+        @csrf
+
+        <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+        <h2 class="text-2xl font-bold mb-4 text-center">Approve PDF File</h2>
+
+        <input type="hidden" id="approve_file_ctrlno" name="ctrlno">
+        <input type="hidden" id="approve_file_personal_data_cesno" name="personal_data_cesno">
+
+        <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+
+            <div class="mb-2">
+                <input type="text" id="medical_condition_illness" name="medical_condition_illness"
+                    oninput="validateInput(medical_condition_illness, 4)"
+                    onkeypress="validateInput(medical_condition_illness, 4)"
+                    onblur="checkErrorMessage(medical_condition_illness)" required>
+                <p class="input_error text-red-600"></p>
+                @error('medical_condition_illness')
+                <span class="invalid" role="alert">
+                    <p>{{ $message }}</p>
+                </span>
+                @enderror
+            </div>
+
+            <div class="mb-2">
+                <input type="date" id="medical_date" name="medical_date"
+                    oninput="validateDateInput(medical_date)" required>
+                <p class="input_error text-red-600"></p>
+                @error('date')
+                <span class="invalid" role="alert">
+                    <p>{{ $message }}</p>
+                </span>
+                @enderror
+            </div>
+
+        </div>
+        <button type="submit" id="approvePendingPdfBtn"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Approve</button>
+    </form>
+</div>
+</div>
+{{-- end --}}
 
 @endsection
