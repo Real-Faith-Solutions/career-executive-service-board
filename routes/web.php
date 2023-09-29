@@ -704,6 +704,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
             Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
             Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
+            Route::get('recently-deleted/{acno}', [PanelBoardInterviewController::class, 'recentlyDeleted'])->name('panel-board-interview.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [PanelBoardInterviewController::class, 'restore'])->name('panel-board-interview.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [PanelBoardInterviewController::class, 'forceDelete'])->name('panel-board-interview.forceDelete');
         });
 
         Route::prefix('board-interview')->group(function () {

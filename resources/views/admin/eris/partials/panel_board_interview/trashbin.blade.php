@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Panel Board Interview')
-@section('sub', 'Panel Board Interview')
+@section('sub', 'Panel Board Interview Trash Bin')
 @section('content')
 @include('admin.eris.header', ['acno'=>$acno])
 
     <div class="my-5 flex justify-end">
-        <a href="{{ route('panel-board-interview.recentlyDeleted', ['acno'=>$acno]) }}">
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </a>
-        
-        <a href="{{ route('panel-board-interview.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Panel Board Interview</a>
+        <a href="{{ route('panel-board-interview.index', ['acno'=>$acno]) }}" class="btn btn-primary" >Go Back</a>
     </div>
 
     <div class="table-management-panelBoardInterviews relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -47,46 +38,46 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($panelBoardInterview as $panelBoardInterviews) 
+                @foreach ($panelBoardInterviewTrashedRecord as $panelBoardInterviewTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $panelBoardInterviews->dteassign }} 
+                            {{ $panelBoardInterviewTrashedRecords->dteassign }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviews->dtesubmit }} 
+                            {{ $panelBoardInterviewTrashedRecords->dtesubmit }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviews->intrviewer }} 
+                            {{ $panelBoardInterviewTrashedRecords->intrviewer }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviews->dteiview }} 
+                            {{ $panelBoardInterviewTrashedRecords->dteiview }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviews->recom }} 
+                            {{ $panelBoardInterviewTrashedRecords->recom }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('panel-board-interview.edit', ['acno'=>$acno, 'ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="GET">
+                                <form action="{{ route('panel-board-interview.restore', ['ctrlno'=>$panelBoardInterviewTrashedRecords->ctrlno]) }}" method="POST" id="restore_panel_board_interview_form{{$panelBoardInterviewTrashedRecords->ctrlno}}">
                                     @csrf
-                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <button type="button" id="restorePanelBoardInterviewButton{{$panelBoardInterviewTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
-                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            src="https://cdn.lordicon.com/nxooksci.json"
                                             trigger="hover"
-                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                            style="width:30px;height:30px">
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
                                 </form>
-                            
-                                 <form action="{{ route('panel-board-interview.destroy', ['ctrlno'=>$panelBoardInterviews->ctrlno]) }}" method="POST" id="delete_panel_board_interview_form{{$panelBoardInterviews->ctrlno}}">
+    
+                                <form action="{{ route('panel-board-interview.forceDelete', ['ctrlno'=>$panelBoardInterviewTrashedRecords->ctrlno]) }}" method="POST" id="permanent_panel_board_interview_form{{$panelBoardInterviewTrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="deletePanelBoardInterviewButton{{$panelBoardInterviews->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <button type="button" id="permanentPanelBoardInterviewButton{{$panelBoardInterviewTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -95,7 +86,7 @@
                                             style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
-                                </form> 
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -105,7 +96,7 @@
     </div>
 
     <div class="m-5">
-        {{ $panelBoardInterview->links() }}
+        {{ $panelBoardInterviewTrashedRecord->links() }}
     </div>
 
 @endsection
