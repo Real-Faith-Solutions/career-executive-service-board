@@ -42,7 +42,7 @@
                             {{-- age auto compute --}}
                                 <div class="mb-3">
                                     <label for="age">Age<sup>*</sup></label>
-                                    <input type="number" id="age" name="age" value="{{ old('age') }}" readonly>
+                                    <input type="number" id="age" name="age" value="{{ $age }}" value="{{ old('age') }}" readonly>
                                 </div>
                             {{-- age auto compute --}}
                     
