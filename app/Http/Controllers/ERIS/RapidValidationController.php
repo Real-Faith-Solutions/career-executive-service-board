@@ -77,4 +77,31 @@ class RapidValidationController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted rapidValidation of the parent model
+        $rapidValidationTrashedRecord = $erisTblMainData->rapidValidation()->onlyTrashed()->paginate(20);
+
+        return view('admin.eris.partials.rapid_validation.trashbin', compact('rapidValidationTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $rapidValidationTrashedRecord = RapidValidation::onlyTrashed()->find($ctrlno);
+        $rapidValidationTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $rapidValidationTrashedRecord = RapidValidation::onlyTrashed()->find($ctrlno);
+        $rapidValidationTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

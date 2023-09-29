@@ -677,6 +677,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
             Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
             Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+            Route::get('recently-deleted/{acno}', [RapidValidationController::class, 'recentlyDeleted'])->name('eris-rapid-validation.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [RapidValidationController::class, 'restore'])->name('eris-rapid-validation.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [RapidValidationController::class, 'forceDelete'])->name('eris-rapid-validation.forceDelete');
         });
 
         Route::prefix('in-depth-validation')->group(function () {
