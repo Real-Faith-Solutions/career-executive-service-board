@@ -713,6 +713,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
             Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
             Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
+            Route::get('recently-deleted/{acno}', [BoardInterviewController::class, 'recentlyDeleted'])->name('eris-board-interview.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [BoardInterviewController::class, 'restore'])->name('eris-board-interview.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [BoardInterviewController::class, 'forceDelete'])->name('eris-board-interview.forceDelete');
         });
 
         Route::prefix('rank-tracker')->group(function () {

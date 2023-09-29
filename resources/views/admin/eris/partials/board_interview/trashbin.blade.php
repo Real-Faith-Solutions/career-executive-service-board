@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', ' Board Interview')
-@section('sub', ' Board Interview')
+@section('sub', ' Board Interview Trash Bin')
 @section('content')
 @include('admin.eris.header', ['acno'=>$acno])
 
-    <div class="my-5 flex justify-end">
-        <a href="{{ route('eris-board-interview.recentlyDeleted', ['acno'=>$acno]) }}">
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </a>
-        
-        <a href="{{ route('eris-board-interview.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Board Interview</a>
+    <div class="my-5 flex justify-end">   
+        <a href="{{ route('eris-board-interview.index', ['acno'=>$acno]) }}" class="btn btn-primary" >Go Back</a>
     </div>
 
     <div class="table-management-boardInterviews relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -47,46 +38,46 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($boardInterview as $boardInterviews) 
+                @foreach ($boardInterViewTrashedRecord as $boardInterViewTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $boardInterviews->dteassign }} 
+                            {{ $boardInterViewTrashedRecords->dteassign }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->dtesubmit }} 
+                            {{ $boardInterViewTrashedRecords->dtesubmit }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->intrviewer }} 
+                            {{ $boardInterViewTrashedRecords->intrviewer }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->dteiview }} 
+                            {{ $boardInterViewTrashedRecords->dteiview }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->recom }} 
+                            {{ $boardInterViewTrashedRecords->recom }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('eris-board-interview.edit', ['acno'=>$acno, 'ctrlno'=>$boardInterviews->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-board-interview.restore', ['ctrlno'=>$boardInterViewTrashedRecords->ctrlno]) }}" method="POST" id="restore_board_interview_form{{$boardInterViewTrashedRecords->ctrlno}}">
                                     @csrf
-                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <button type="button" id="restoreBoardInterviewButton{{$boardInterViewTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
-                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            src="https://cdn.lordicon.com/nxooksci.json"
                                             trigger="hover"
-                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                            style="width:30px;height:30px">
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
                                 </form>
-                            
-                                 <form action="{{ route('eris-board-interview.destroy', ['ctrlno'=>$boardInterviews->ctrlno]) }}" method="POST" id="delete_board_interview_form{{$boardInterviews->ctrlno}}">
+    
+                                <form action="{{ route('eris-board-interview.forceDelete', ['ctrlno'=>$boardInterViewTrashedRecords->ctrlno]) }}" method="POST" id="permanent_board_interview_form{{$boardInterViewTrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="deleteBoardInterviewButton{{$boardInterviews->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <button type="button" id="permanentBoardInterviewButton{{$boardInterViewTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -95,7 +86,7 @@
                                             style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
-                                </form> 
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -105,7 +96,7 @@
     </div>
 
     <div class="m-5">
-        {{ $boardInterview->links() }}
+        {{ $boardInterViewTrashedRecord->links() }}
     </div>
 
 @endsection

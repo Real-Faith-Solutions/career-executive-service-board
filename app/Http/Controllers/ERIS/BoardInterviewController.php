@@ -65,7 +65,7 @@ class BoardInterviewController extends Controller
         $boardInterview->intrviewer = $request->intrviewer;
         $boardInterview->dteiview = $request->dteiview;
         $boardInterview->recom = $request->recom;
-        $boardInterview->save();
+        $boardInterview->update();
 
         return to_route('eris-board-interview.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
@@ -76,5 +76,32 @@ class BoardInterviewController extends Controller
         $boardInterview->delete();
 
         return back()->with('message', 'Deleted Sucessfully');        
+    }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted boardInterview of the parent model
+        $boardInterViewTrashedRecord = $erisTblMainData->boardInterview()->onlyTrashed()->paginate(20);
+ 
+        return view('admin.eris.partials.board_interview.trashbin', compact('boardInterViewTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $boardInterViewTrashedRecord = BoardInterView::onlyTrashed()->find($ctrlno);
+        $boardInterViewTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $boardInterViewTrashedRecord = BoardInterView::onlyTrashed()->find($ctrlno);
+        $boardInterViewTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
