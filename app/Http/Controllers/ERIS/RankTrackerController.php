@@ -106,4 +106,31 @@ class RankTrackerController extends Controller
 
        return back()->with('message', 'Deleted Sucessfully');        
     }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted rankTracker of the parent model
+        $rankTrackerTrashedRecord = $erisTblMainData->rankTracker()->onlyTrashed()->paginate(20);
+ 
+        return view('admin.eris.partials.rank_tracker.trashbin', compact('rankTrackerTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
+        $rankTrackerTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
+        $rankTrackerTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

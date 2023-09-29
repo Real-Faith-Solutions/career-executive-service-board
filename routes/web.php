@@ -728,6 +728,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
             Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
             Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
+            Route::get('recently-deleted/{acno}', [RankTrackerController::class, 'recentlyDeleted'])->name('eris-rank-tracker.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [RankTrackerController::class, 'restore'])->name('eris-rank-tracker.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [RankTrackerController::class, 'forceDelete'])->name('eris-rank-tracker.forceDelete');
         });
     });
     //  end of ERIS routes
