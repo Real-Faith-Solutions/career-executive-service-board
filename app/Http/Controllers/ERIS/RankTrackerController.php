@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\ErisTblMain;
 use App\Models\Eris\LibraryRankTracker;
 use App\Models\Eris\RankTracker;
+use App\Models\PersonalData;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RankTrackerController extends Controller
 {
@@ -33,8 +36,24 @@ class RankTrackerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        // retrieving r_catid rank tracker catid
         $r_catid = LibraryRankTracker::where('description', $request->description)->value('catid');
+
+        // retrieving r_ctrlno rank tracker ctrlno
         $r_ctrlno = LibraryRankTracker::where('description', $request->description)->value('ctrlno');
+
+        $cesno = ErisTblMain::where('acno', $acno)->value('cesno');
+
+        $latestCestatusCode = PersonalData::find($cesno);
+        
+        if($latestCestatusCode->cesStatus != null)
+        {
+            $latestCestatusDescription = $latestCestatusCode->cesStatus->description;
+        }
+        else
+        {
+            $latestCestatusDescription = null;
+        }
 
         $rankTracker = new RankTracker([
 
@@ -43,13 +62,19 @@ class RankTrackerController extends Controller
             'description' => $request->description,
             'submit_dt' => $request->submit_dt, //  submit date
             'remarks' => $request->remarks, 
+            'cesstatus' => $latestCestatusDescription,
             'encoder' =>  $encoder,
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
-        
+        $erisTblMain = ErisTblMain::find($request->acno);        
+
         $erisTblMain->rankTracker()->save($rankTracker);
+   
+        // update ces status based on $latestCestatusDescription
+        DB::table('erad_tblranktracker')
+        ->where('acno', $acno)
+        ->update(['cesstatus' => $latestCestatusDescription]);
         
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
