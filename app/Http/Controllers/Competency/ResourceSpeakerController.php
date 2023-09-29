@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Competency;
 
 use App\Http\Controllers\Controller;
+use App\Models\PersonalData;
 use App\Models\ProfileLibCities;
 use App\Models\ResourceSpeaker;
 use Illuminate\Http\Request;
@@ -18,11 +19,44 @@ class ResourceSpeakerController extends Controller
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.table', compact('resourceSpeaker'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $profileLibCIties = ProfileLibCities::all();
 
-        return view('admin.competency.partials.trainings_sub_module.resource_speaker.form', compact('profileLibCIties'));
+        $search = $request->input('search');
+
+        // Perform your search query here, e.g., using Eloquent 
+        $personalData = PersonalData::query()
+            ->where('cesno', "LIKE" ,"%$search%")
+            ->orWhere('lastname',  "LIKE","%$search%")
+            ->orWhere('firstname',  "LIKE","%$search%")
+            ->orWhere('middlename',  "LIKE","%$search%")
+            ->orWhere('name_extension',  "LIKE","%$search%")
+            ->get();
+
+        if ($search !== null && !is_numeric($search)) 
+        {
+            return redirect()->route('eris.create')->with('error', 'Invalid Search Criteria.');
+        }
+
+        if ($search !== null && trim($search) !== '' && is_numeric($search)) 
+        {
+            // Query the database to find the corresponding personal data
+            $personalDataSearchResult = PersonalData::where('cesno', $search)->first();
+
+            if (!$personalDataSearchResult) 
+            {
+                // Handle the case where the data does not exist
+                return redirect()->route('eris.create')->with('error', 'Data not found in the database.');
+            }
+        }
+        else
+        {
+            $personalDataSearchResult = null;
+        }
+
+        return view('admin.competency.partials.trainings_sub_module.resource_speaker.form', compact('profileLibCIties', 'search', 'personalDataSearchResult',
+         'personalData'));
     }
 
     public function store(Request $request)
@@ -51,6 +85,7 @@ class ResourceSpeakerController extends Controller
         $zipCode = ProfileLibCities::where('name', $cityName)->value('zipcode');
 
         ResourceSpeaker::create([
+            'cesno' => $request->cesno,
             'lastname' => $request->lastName,
             'firstname' => $request->firstName,  
             'mi' => $request->middleName,  
