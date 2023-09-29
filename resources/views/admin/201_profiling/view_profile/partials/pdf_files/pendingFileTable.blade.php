@@ -127,26 +127,15 @@ class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-5
         <input type="hidden" id="approve_file_ctrlno" name="ctrlno">
         <input type="hidden" id="approve_file_personal_data_cesno" name="personal_data_cesno">
 
-        <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+        <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
 
             <div class="mb-2">
-                <input type="text" id="medical_condition_illness" name="medical_condition_illness"
-                    oninput="validateInput(medical_condition_illness, 4)"
-                    onkeypress="validateInput(medical_condition_illness, 4)"
-                    onblur="checkErrorMessage(medical_condition_illness)" required>
+                <input type="text" id="approve_file_reason" name="approve_file_reason"
+                    oninput="validateInput(approve_file_reason, 4)"
+                    onkeypress="validateInput(approve_file_reason, 4)"
+                    onblur="checkErrorMessage(approve_file_reason)" required>
                 <p class="input_error text-red-600"></p>
-                @error('medical_condition_illness')
-                <span class="invalid" role="alert">
-                    <p>{{ $message }}</p>
-                </span>
-                @enderror
-            </div>
-
-            <div class="mb-2">
-                <input type="date" id="medical_date" name="medical_date"
-                    oninput="validateDateInput(medical_date)" required>
-                <p class="input_error text-red-600"></p>
-                @error('date')
+                @error('approve_file_reason')
                 <span class="invalid" role="alert">
                     <p>{{ $message }}</p>
                 </span>
