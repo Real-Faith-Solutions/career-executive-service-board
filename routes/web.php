@@ -668,6 +668,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit');
             Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
             Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy');
+            Route::get('recently-deleted/{acno}', [AssessmentCenterController::class, 'recentlyDeleted'])->name('eris-assessment-center.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [AssessmentCenterController::class, 'restore'])->name('eris-assessment-center.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [AssessmentCenterController::class, 'forceDelete'])->name('eris-assessment-center.forceDelete');
         });
 
         Route::prefix('rapid-validation')->group(function () {

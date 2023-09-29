@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('title', 'Assessment Center')
-@section('sub', 'Assessment Center')
+@section('sub', 'Assessment Center Trash Bin')
 @section('content')
 @include('admin.eris.header', ['acno'=>$acno])
 
-    <div class="my-5 flex justify-end">
-        <a href="{{ route('eris-assessment-center.recentlyDeleted', ['acno'=>$acno]) }}">
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </a>
-        
-        <a href="{{ route('eris-assessment-center.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Assessment</a>
+    <div class="my-5 flex justify-end">   
+        <a href="{{ route('eris-assessment-center.index', ['acno'=>$acno]) }}" class="btn btn-primary" >Go Back</a>
     </div>
 
     <div class="table-management-assessmentCenters relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -43,42 +34,42 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($assessmentCenter as $assessmentCenters) 
+                @foreach ($assessmentCenterTrashedRecord as $assessmentCenterTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $assessmentCenters->acdate }} 
+                            {{ $assessmentCenterTrashedRecords->acdate }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->numtakes }} 
+                            {{ $assessmentCenterTrashedRecords->numtakes }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->docdate }} 
+                            {{ $assessmentCenterTrashedRecords->docdate }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->remarks }} 
+                            {{ $assessmentCenterTrashedRecords->remarks }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('eris-assessment-center.edit', ['acno'=>$acno, 'ctrlno'=>$assessmentCenters->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-assessment-center.restore', ['ctrlno'=>$assessmentCenterTrashedRecords->ctrlno]) }}" method="POST" id="restore_assessment_center_form{{$assessmentCenterTrashedRecords->ctrlno}}">
                                     @csrf
-                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <button type="button" id="restoreAssessmentCenterButton{{$assessmentCenterTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
-                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            src="https://cdn.lordicon.com/nxooksci.json"
                                             trigger="hover"
-                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                            style="width:30px;height:30px">
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
                                 </form>
-                            
-                                <form action="{{ route('eris-assessment-center.destroy', ['ctrlno'=>$assessmentCenters->ctrlno]) }}" method="POST" id="delete_assessment_center_form{{$assessmentCenters->ctrlno}}">
+    
+                                <form action="{{ route('eris-assessment-center.forceDelete', ['ctrlno'=>$assessmentCenterTrashedRecords->ctrlno]) }}" method="POST" id="permanent_assessment_center_form{{$assessmentCenterTrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="deleteAssessmentCenterButton{{$assessmentCenters->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <button type="button" id="permanentAssessmentCenterButton{{$assessmentCenterTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -87,7 +78,7 @@
                                             style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
-                                </form> 
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -97,7 +88,7 @@
     </div>
 
     <div class="m-5">
-        {{ $assessmentCenter->links() }}
+        {{ $assessmentCenterTrashedRecord->links() }}
     </div>
 
 @endsection

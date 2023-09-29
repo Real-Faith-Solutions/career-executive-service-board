@@ -92,4 +92,31 @@ class AssessmentCenterController extends Controller
 
        return back()->with('message', 'Deleted Sucessfully');        
     }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted assessmentCenter of the parent model
+        $assessmentCenterTrashedRecord = $erisTblMainData->assessmentCenter()->onlyTrashed()->paginate(20);
+ 
+        return view('admin.eris.partials.assessment_center.trashbin', compact('assessmentCenterTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $assessmentCenterTrashedRecord = AssessmentCenter::onlyTrashed()->find($ctrlno);
+        $assessmentCenterTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $assessmentCenterTrashedRecord = AssessmentCenter::onlyTrashed()->find($ctrlno);
+        $assessmentCenterTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }
