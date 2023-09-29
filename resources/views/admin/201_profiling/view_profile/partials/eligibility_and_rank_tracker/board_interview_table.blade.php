@@ -19,7 +19,7 @@
                 </div>
     
                 <div>   
-                    <button class="h-11 btn btn-primary" type="submit">Search</button>
+                    <button class="h-11 btn btn-primary" type="submit">Go</button>
                 </div>
             </div>
         </form>
