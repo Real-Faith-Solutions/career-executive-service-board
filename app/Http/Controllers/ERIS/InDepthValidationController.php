@@ -87,9 +87,9 @@ class InDepthValidationController extends Controller
         $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted inDepthValidation of the parent model
-        $inDepthValidationTrashedRecord = $erisTblMainData->inDepthValidation()->onlyTrashed()->get();
+        $inDepthValidationTrashedRecord = $erisTblMainData->inDepthValidation()->onlyTrashed()->paginate(20);
  
-        return view('admin.eris.partials.written_exam.trashbin', compact('inDepthValidationTrashedRecord', 'acno'));
+        return view('admin.eris.partials.in_depth_validation.trashbin', compact('inDepthValidationTrashedRecord', 'acno'));
     }
 
     public function restore($ctrlno)
