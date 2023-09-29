@@ -656,6 +656,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
             Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update');
             Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy');
+            Route::get('recently-deleted/{acno}', [WrittenExamController::class, 'recentlyDeleted'])->name('eris-written-exam.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [WrittenExamController::class, 'restore'])->name('eris-written-exam.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [WrittenExamController::class, 'forceDelete'])->name('eris-written-exam.forceDelete');
         });
 
         Route::prefix('assessment-center')->group(function () {
