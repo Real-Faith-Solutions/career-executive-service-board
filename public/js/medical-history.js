@@ -1,5 +1,5 @@
-// Open the modal when the add button is clicked
-document.getElementById('add_medical_history').addEventListener('click', function() {
+  // Open the modal when the add button is clicked
+  document.getElementById('add_medical_history').addEventListener('click', function() {
     showModalMH();
   });
   
