@@ -8,6 +8,8 @@ use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class ErisProfileController extends Controller
 {
@@ -123,8 +125,13 @@ class ErisProfileController extends Controller
     public function edit($acno)
     {
         $erisTblMainPersonalData = ErisTblMain::find($acno);
+        $birthdate = $erisTblMainPersonalData->birthdate;
 
-        return view('admin.eris.view_profile.add_new_profile.edit', compact('acno','erisTblMainPersonalData'));
+        $birthDate = Carbon::parse($birthdate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($birthDate);
+
+        return view('admin.eris.view_profile.add_new_profile.edit', compact('acno','erisTblMainPersonalData', 'age'));
     }
 
     public function update(Request $request, $acno)
@@ -148,6 +155,6 @@ class ErisProfileController extends Controller
         $erisTblMain->c_date =  $request->c_date;
         $erisTblMain->update();
  
-         return to_route('eris.edit', ['acno' => $acno])->with('info', 'Update Sucessfully');
+        return to_route('eris.edit', ['acno' => $acno])->with('info', 'Update Sucessfully');
     }
 }

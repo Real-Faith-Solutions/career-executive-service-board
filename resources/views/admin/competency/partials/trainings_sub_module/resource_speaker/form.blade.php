@@ -4,8 +4,24 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-<div class="flex justify-end">
-    <a href="{{ route('resource-speaker.index') }}" class="btn btn-primary" >Go back</a>
+<div class="flex justify-between mt-8">
+    <div class="flex items-center">
+        <form action="{{ route('resource-speaker.create') }}" method="GET">
+            <div class="flex gap-4">
+                <input type="text" name="search" id="search" list="searchResults" placeholder="Search..." value="{{ $search }}">
+                <datalist id="searchResults">
+                    @foreach($personalData as $personalDatas)
+                        <option value="{{ $personalDatas->cesno }}">{{ $personalDatas->lastname }} {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}<option>
+                    @endforeach
+                </datalist>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="flex justify-center items-center">
+        <a href="{{ route('resource-speaker.index') }}" class="btn btn-primary" >Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -21,9 +37,11 @@
                 @csrf
                 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <input type="text" id="cesno" name="cesno" value="{{ $personalDataSearchResult->cesno ?? '' }}" hidden>
+
                     <div class="mb-3">
                         <label for="lastName">Last Name<sup>*</sup></label>
-                        <input type="text" id="lastName" name="lastName" oninput="validateInput(lastName, 2, 'letters')" onkeypress="validateInput(lastName, 2, 'letters')" onblur="checkErrorMessage(lastName)" required>
+                        <input type="text" id="lastName" name="lastName" value="{{ $personalDataSearchResult->lastname ?? '' }}" oninput="validateInput(lastName, 2, 'letters')" onkeypress="validateInput(lastName, 2, 'letters')" onblur="checkErrorMessage(lastName)" required>
                         <p class="input_error text-red-600"></p>
                         @error('lastName')
                         <span class="invalid" role="alert">
@@ -34,7 +52,7 @@
 
                     <div class="mb-3">
                         <label for="firstName">First Name<sup>*</sup></label>
-                        <input type="text" id="firstName" name="firstName" oninput="validateInput(firstName, 2, 'letters')" onkeypress="validateInput(firstName, 2, 'letters')" onblur="checkErrorMessage(firstName)" >
+                        <input type="text" id="firstName" name="firstName" value="{{ $personalDataSearchResult->firstname ?? '' }}" oninput="validateInput(firstName, 2, 'letters')" onkeypress="validateInput(firstName, 2, 'letters')" onblur="checkErrorMessage(firstName)" >
                         <p class="input_error text-red-600"></p>
                         @error('firstName')
                             <span class="invalid" role="alert">
@@ -45,7 +63,7 @@
 
                     <div class="mb-3">
                         <label for="middleName">Middle Name<sup>*</sup></label>
-                        <input type="text" id="middleName" name="middleName" oninput="validateInput(middleName, 1, 'letters')" onkeypress="validateInput(middleName, 1, 'letters')" onblur="checkErrorMessage(middleName)" >
+                        <input type="text" id="middleName" name="middleName" value="{{ $personalDataSearchResult->middlename?? '' }}" oninput="validateInput(middleName, 1, 'letters')" onkeypress="validateInput(middleName, 1, 'letters')" onblur="checkErrorMessage(middleName)" >
                         <p class="input_error text-red-600"></p>
                         @error('middleName')
                             <span class="invalid" role="alert">
