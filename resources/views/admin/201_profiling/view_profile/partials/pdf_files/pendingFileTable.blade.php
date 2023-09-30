@@ -116,7 +116,7 @@
 <div id="approve-pending-pdf-modal"
 class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
 <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
-    <form id="approvePendingPdfForm" action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}"
+    <form id="approvePendingPdfForm" action="{{ route('show-pdf-files.acceptedFiles') }}"
         method="POST" class="flex flex-col items-center"
         onsubmit="return checkErrorsBeforeSubmit(approvePendingPdfForm)">
         @csrf
@@ -124,8 +124,8 @@ class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-5
         <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
         <h2 class="text-2xl font-bold mb-4 text-center">Approve PDF File</h2>
 
-        <input type="hidden" id="approve_file_ctrlno" name="ctrlno">
-        <input type="hidden" id="approve_file_personal_data_cesno" name="personal_data_cesno">
+        <input type="hidden" id="approve_file_ctrlno" name="approve_file_ctrlno">
+        <input type="hidden" id="approve_file_personal_data_cesno" name="approve_file_personal_data_cesno">
 
         <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
 
