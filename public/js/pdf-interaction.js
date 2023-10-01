@@ -1,12 +1,12 @@
   // Close the modal when the close button is clicked
   document.getElementsByClassName('close-md')[0].addEventListener('click', function() {
-    closeModalMH();
+    closeConfirmationDialogApprovePendingPdf();
   });
   
   // Close the modal when the user clicks outside the modal content
   window.addEventListener('click', function(event) {
     if (event.target == document.getElementById('approve-pending-pdf-modal')) {
-      closeModalMH();
+      closeConfirmationDialogApprovePendingPdf();
     }
   });
   
@@ -16,6 +16,6 @@
   }
   
   // Close the modal
-  function closeModalMH() {
+  function closeConfirmationDialogApprovePendingPdf() {
     document.getElementById('approve-pending-pdf-modal').classList.add('hidden');
   }

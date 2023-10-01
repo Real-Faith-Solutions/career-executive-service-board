@@ -236,6 +236,10 @@
     <script src="{{ asset('js/competency-mailing-address.js') }}"></script>
     {{-- end --}}
 
+    {{-- pdf-interaction --}}
+    <script src="{{ asset('js/pdf-interaction.js') }}"></script>
+    {{-- end --}}
+
     {{-- toast for personal data success --}}
     @if (Session::has('message'))
 
