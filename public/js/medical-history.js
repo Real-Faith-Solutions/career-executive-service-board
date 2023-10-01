@@ -24,3 +24,5 @@
   function closeModalMH() {
     document.getElementById('add-medical-history-modal').classList.add('hidden');
   }
+
+  

@@ -79,7 +79,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf(this, '{{ $pdfFiles->ctrlno }}', '{{ $pdfFiles->personal_data_cesno }}')">
+                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf({{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/egiwmiit.json"
@@ -113,7 +113,7 @@
 </div>
 
 <!-- Modal for ApprovePendingPdfFile -->
-<div id="approve-pending-pdf-modal"
+<div id="approve_pending_pdf_modal"
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
         <form id="approvePendingPdfForm" action="{{ route('show-pdf-files.acceptedFiles') }}"
