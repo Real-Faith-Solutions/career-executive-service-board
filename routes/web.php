@@ -656,6 +656,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [WrittenExamController::class, 'edit'])->name('eris-written-exam.edit');
             Route::put('update/{acno}/{ctrlno}', [WrittenExamController::class, 'update'])->name('eris-written-exam.update');
             Route::delete('destroy/{ctrlno}', [WrittenExamController::class, 'destroy'])->name('eris-written-exam.destroy');
+            Route::get('recently-deleted/{acno}', [WrittenExamController::class, 'recentlyDeleted'])->name('eris-written-exam.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [WrittenExamController::class, 'restore'])->name('eris-written-exam.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [WrittenExamController::class, 'forceDelete'])->name('eris-written-exam.forceDelete');
         });
 
         Route::prefix('assessment-center')->group(function () {
@@ -665,6 +668,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [AssessmentCenterController::class, 'edit'])->name('eris-assessment-center.edit');
             Route::put('update/{acno}/{ctrlno}', [AssessmentCenterController::class, 'update'])->name('eris-assessment-center.update');
             Route::delete('destroy/{ctrlno}', [AssessmentCenterController::class, 'destroy'])->name('eris-assessment-center.destroy');
+            Route::get('recently-deleted/{acno}', [AssessmentCenterController::class, 'recentlyDeleted'])->name('eris-assessment-center.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [AssessmentCenterController::class, 'restore'])->name('eris-assessment-center.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [AssessmentCenterController::class, 'forceDelete'])->name('eris-assessment-center.forceDelete');
         });
 
         Route::prefix('rapid-validation')->group(function () {
@@ -674,6 +680,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [RapidValidationController::class, 'edit'])->name('eris-rapid-validation.edit');
             Route::put('update/{acno}/{ctrlno}', [RapidValidationController::class, 'update'])->name('eris-rapid-validation.update');
             Route::delete('destroy/{ctrlno}', [RapidValidationController::class, 'destroy'])->name('eris-rapid-validation.destroy');
+            Route::get('recently-deleted/{acno}', [RapidValidationController::class, 'recentlyDeleted'])->name('eris-rapid-validation.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [RapidValidationController::class, 'restore'])->name('eris-rapid-validation.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [RapidValidationController::class, 'forceDelete'])->name('eris-rapid-validation.forceDelete');
         });
 
         Route::prefix('in-depth-validation')->group(function () {
@@ -683,6 +692,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [InDepthValidationController::class, 'edit'])->name('eris-in-depth-validation.edit');
             Route::put('update/{acno}/{ctrlno}', [InDepthValidationController::class, 'update'])->name('eris-in-depth-validation.update');
             Route::delete('destroy/{ctrlno}', [InDepthValidationController::class, 'destroy'])->name('eris-in-depth-validation.destroy');
+            Route::get('recently-deleted/{acno}', [InDepthValidationController::class, 'recentlyDeleted'])->name('eris-in-depth-validation.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [InDepthValidationController::class, 'restore'])->name('eris-in-depth-validation.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [InDepthValidationController::class, 'forceDelete'])->name('eris-in-depth-validation.forceDelete');
         });
 
         Route::prefix('panel-board-interview')->group(function () {
@@ -692,6 +704,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'edit'])->name('panel-board-interview.edit');
             Route::put('update/{acno}/{ctrlno}', [PanelBoardInterviewController::class, 'update'])->name('panel-board-interview.update');
             Route::delete('destroy/{ctrlno}', [PanelBoardInterviewController::class, 'destroy'])->name('panel-board-interview.destroy');
+            Route::get('recently-deleted/{acno}', [PanelBoardInterviewController::class, 'recentlyDeleted'])->name('panel-board-interview.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [PanelBoardInterviewController::class, 'restore'])->name('panel-board-interview.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [PanelBoardInterviewController::class, 'forceDelete'])->name('panel-board-interview.forceDelete');
         });
 
         Route::prefix('board-interview')->group(function () {
@@ -701,6 +716,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [BoardInterviewController::class, 'edit'])->name('eris-board-interview.edit');
             Route::put('update/{acno}/{ctrlno}', [BoardInterviewController::class, 'update'])->name('eris-board-interview.update');
             Route::delete('destroy/{ctrlno}', [BoardInterviewController::class, 'destroy'])->name('eris-board-interview.destroy');
+            Route::get('recently-deleted/{acno}', [BoardInterviewController::class, 'recentlyDeleted'])->name('eris-board-interview.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [BoardInterviewController::class, 'restore'])->name('eris-board-interview.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [BoardInterviewController::class, 'forceDelete'])->name('eris-board-interview.forceDelete');
         });
 
         Route::prefix('rank-tracker')->group(function () {
@@ -710,6 +728,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
             Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
             Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
+            Route::get('recently-deleted/{acno}', [RankTrackerController::class, 'recentlyDeleted'])->name('eris-rank-tracker.recentlyDeleted');
+            Route::post('restore/recently-deleted/{ctrlno}', [RankTrackerController::class, 'restore'])->name('eris-rank-tracker.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}', [RankTrackerController::class, 'forceDelete'])->name('eris-rank-tracker.forceDelete');
         });
     });
     //  end of ERIS routes

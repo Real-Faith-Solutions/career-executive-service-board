@@ -200,7 +200,7 @@ class EligibilityAndRankTrackerController extends Controller
         //parent model
         $personalData = PersonalData::withTrashed()->find($cesno);
 
-        // Access the soft deleted scholarships of the parent model
+        // Access the soft deleted profileTblCesStatus of the parent model
         $profileTblCesStatusTrashedRecord = $personalData->profileTblCesStatus()->onlyTrashed()->get();
  
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.trashbin', compact('profileTblCesStatusTrashedRecord', 'cesno'));

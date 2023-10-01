@@ -6,7 +6,7 @@
 
     <section>
         {{-- search bar --}}
-        <div class="flex items-center">
+        <div class="flex items-center mt-10">
             <form>
                 <div class="w-100">
                     <label for="default-search" class="sr-only mb-2 text-sm font-medium text-gray-900">Search</label>

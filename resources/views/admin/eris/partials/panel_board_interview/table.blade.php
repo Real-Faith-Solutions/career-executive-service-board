@@ -5,7 +5,7 @@
 @include('admin.eris.header', ['acno'=>$acno])
 
     <div class="my-5 flex justify-end">
-        <a href="">
+        <a href="{{ route('panel-board-interview.recentlyDeleted', ['acno'=>$acno]) }}">
             <lord-icon
                 src="https://cdn.lordicon.com/jmkrnisz.json"
                 trigger="hover"

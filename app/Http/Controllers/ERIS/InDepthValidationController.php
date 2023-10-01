@@ -80,4 +80,31 @@ class InDepthValidationController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');
     }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted inDepthValidation of the parent model
+        $inDepthValidationTrashedRecord = $erisTblMainData->inDepthValidation()->onlyTrashed()->paginate(20);
+ 
+        return view('admin.eris.partials.in_depth_validation.trashbin', compact('inDepthValidationTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $inDepthValidationTrashedRecord = InDepthValidation::onlyTrashed()->find($ctrlno);
+        $inDepthValidationTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $inDepthValidationTrashedRecord = InDepthValidation::onlyTrashed()->find($ctrlno);
+        $inDepthValidationTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

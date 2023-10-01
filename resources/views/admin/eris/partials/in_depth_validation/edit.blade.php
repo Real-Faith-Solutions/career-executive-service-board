@@ -80,15 +80,17 @@
                     <textarea name="remarks" id="remarks" cols="10" rows="3" >{{ $inDepthValidation->remarks }}</textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="dtedefer">Defered Date<sup>*</sup></label>
-                    <input type="date" id="dtedefer" name="dtedefer" oninput="validateDateInput(dtedefer)"  value="{{ $inDepthValidation->dtedefer }}">
-                    <p class="input_error text-red-600"></p>
-                    @error('dtedefer')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                    @enderror
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="mb-3">
+                        <label for="dtedefer">Defered Date<sup>*</sup></label>
+                        <input type="date" id="dtedefer" name="dtedefer" oninput="validateDateInput(dtedefer)"  value="{{ $inDepthValidation->dtedefer }}">
+                        <p class="input_error text-red-600"></p>
+                        @error('dtedefer')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="flex justify-end">

@@ -40,7 +40,6 @@ class TrainingParticipantsController extends Controller
             return redirect()->route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'Invalid Search Criteria.');
         }
 
-        // validating if $search is not equal to null and the value is numeric
         if ($search !== null && is_numeric($search)) 
         {
             // Query the database to find the corresponding personal data
@@ -64,10 +63,8 @@ class TrainingParticipantsController extends Controller
         }
         else
         {
-            // Handle the case where $search is null and not numeric
-                $personalDataSearchResult = null;
-                $description = null;
-            // end of Handle the case where $search is null and not numeric
+            $personalDataSearchResult = null;
+            $description = null;
         }
         
         return view('admin.competency.partials.training_participant.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 

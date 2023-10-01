@@ -1,40 +1,27 @@
 @extends('layouts.app')
-@section('title', 'Rapid Validation')
-@section('sub', 'Rapid Validation')
+@section('title', 'Rank Tracker')
+@section('sub', 'Rank Tracker Trash Bin')
 @section('content')
 @include('admin.eris.header', ['acno'=>$acno])
 
     <div class="my-5 flex justify-end">
-        <a href="{{ route('eris-rapid-validation.recentlyDeleted', ['acno'=>$acno]) }}">
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
-        </a>
-        
-        <a href="{{ route('eris-rapid-validation.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Rapid Validation</a>
+        <a href="{{ route('eris-rank-tracker.index', ['acno'=>$acno]) }}" class="btn btn-primary" >Go Back</a>
     </div>
 
-    <div class="table-management-rapidValidations relative overflow-x-auto sm:rounded-lg shadow-lg">
+    <div class="table-management-rankTrackers relative overflow-x-auto sm:rounded-lg shadow-lg">
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Rapid Validation Date
+                        Control No.
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Submittion of Document
+                        Submit Date
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Validator
-                    </th>
-
-                    <th scope="col" class="px-6 py-3">
-                        Recommendation
+                        Description
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -47,46 +34,42 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($rapidValidation as $rapidValidations) 
+                @foreach ($rankTrackerTrashedRecord as $rankTrackerTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rapidValidations->dteassign }} 
+                            {{ $rankTrackerTrashedRecords->ctrlno }} 
+                        </td>
+
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $rankTrackerTrashedRecords->submit_dt }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->dtesubmit }} 
+                            {{ $rankTrackerTrashedRecords->description }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->validator }} 
-                        </td>
-
-                        <td class="px-6 py-3">
-                            {{ $rapidValidations->recom }} 
-                        </td>
-
-                        <td class="px-6 py-3">
-                            {{ $rapidValidations->remarks }} 
+                            {{ $rankTrackerTrashedRecords->remarks }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('eris-rapid-validation.edit', ['acno'=>$acno, 'ctrlno'=>$rapidValidations->ctrlno]) }}" method="GET">
+                                <form action="{{ route('eris-rank-tracker.restore', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno]) }}" method="POST" id="restore_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
                                     @csrf
-                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                    <button type="button" id="restoreRankTrackerButton{{$rankTrackerTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
-                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            src="https://cdn.lordicon.com/nxooksci.json"
                                             trigger="hover"
-                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                            style="width:30px;height:30px">
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
                                         </lord-icon>
                                     </button>
                                 </form>
-                            
-                                 <form action="{{ route('eris-rapid-validation.destroy', ['ctrlno'=>$rapidValidations->ctrlno]) }}" method="POST" id="delete_rapid_validation_form{{$rapidValidations->ctrlno}}">
+    
+                                <form action="{{ route('eris-rank-tracker.forceDelete', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno]) }}" method="POST" id="permanent_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" id="deleteRapidValidationButton{{$rapidValidations->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <button type="button" id="permanentRankTrackerButton{{$rankTrackerTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                         <lord-icon
                                             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -105,7 +88,7 @@
     </div>
 
     <div class="m-5">
-        {{ $rapidValidation->links() }}
+        {{ $rankTrackerTrashedRecord->links() }}
     </div>
 
 @endsection

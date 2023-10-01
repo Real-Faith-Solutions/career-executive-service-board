@@ -5,7 +5,7 @@
 @include('admin.eris.header', ['acno'=>$acno])
 
     <div class="my-5 flex justify-end">
-        <a href="">
+        <a href="{{ route('eris-rank-tracker.recentlyDeleted', ['acno'=>$acno]) }}">
             <lord-icon
                 src="https://cdn.lordicon.com/jmkrnisz.json"
                 trigger="hover"
@@ -21,6 +21,10 @@
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Control No.
+                    </th>
+
                     <th scope="col" class="px-6 py-3">
                         Submit Date
                     </th>
@@ -41,6 +45,10 @@
             <tbody>
                 @foreach ($rankTracker as $rankTrackers) 
                     <tr class="border-b bg-white">
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $rankTrackers->ctrlno }} 
+                        </td>
+
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                             {{ $rankTrackers->submit_dt }} 
                         </td>

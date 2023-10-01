@@ -40,6 +40,7 @@ return new class extends Migration
             $table->integer('cesno')->nullable();
             $table->string('maddress')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

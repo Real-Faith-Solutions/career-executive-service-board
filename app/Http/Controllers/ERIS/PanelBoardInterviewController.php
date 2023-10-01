@@ -77,4 +77,31 @@ class PanelBoardInterviewController extends Controller
 
         return back()->with('message', 'Deleted Sucessfully');        
     }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted panelBoardInterview of the parent model
+        $panelBoardInterviewTrashedRecord = $erisTblMainData->panelBoardInterview()->onlyTrashed()->paginate(20);
+ 
+        return view('admin.eris.partials.panel_board_interview.trashbin', compact('panelBoardInterviewTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $panelBoardInterviewTrashedRecord = PanelBoardInterview::onlyTrashed()->find($ctrlno);
+        $panelBoardInterviewTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $panelBoardInterviewTrashedRecord = PanelBoardInterview::onlyTrashed()->find($ctrlno);
+        $panelBoardInterviewTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

@@ -81,7 +81,7 @@ class WrittenExamController extends Controller
         $writtenExam->we_location = $request->we_location;
         $writtenExam->we_rating = $request->we_rating;
         $writtenExam->we_remarks = $request->we_remarks;
-        $writtenExam->save();
+        $writtenExam->update();
 
         return to_route('eris-written-exam.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
@@ -92,5 +92,32 @@ class WrittenExamController extends Controller
        $writtenExam->delete();
 
        return back()->with('message', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted($acno)
+    {
+        //parent model
+        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+
+        // Access the soft deleted writtenExam of the parent model
+        $writtenExamTrashedRecord = $erisTblMainData->writtenExam()->onlyTrashed()->get();
+ 
+        return view('admin.eris.partials.written_exam.trashbin', compact('writtenExamTrashedRecord', 'acno'));
+    }
+
+    public function restore($ctrlno)
+    {
+        $writtenExamTrashedRecord = WrittenExam::onlyTrashed()->find($ctrlno);
+        $writtenExamTrashedRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($ctrlno)
+    {
+        $writtenExamTrashedRecord = WrittenExam::onlyTrashed()->find($ctrlno);
+        $writtenExamTrashedRecord->forceDelete();
+  
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
