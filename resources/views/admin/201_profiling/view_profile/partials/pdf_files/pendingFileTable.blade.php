@@ -129,7 +129,8 @@
 
             <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
 
-                <div class="mb-2">
+                <div class="flex flex-col items-center mb-2">
+                    <label for="approve_file_reason" class="mb-2">Reason for approval<sup>*</sup></label>
                     <input type="text" id="approve_file_reason" name="approve_file_reason"
                         oninput="validateInput(approve_file_reason, 4)"
                         onkeypress="validateInput(approve_file_reason, 4)"
