@@ -43,7 +43,7 @@
                 padding-left: 10px;
                 padding-bottom: 5px;
                 font-size: 11px;
-                text-align: center;
+                text-align: left;
             }
         
             th {
@@ -88,10 +88,16 @@
                 color: #284F87;
                 margin-top: 15px;
             }
+
+            .city_name {
+                margin-top: -12px;
+                font-size: 16px;
+                color: #284F87;
+            }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 190px;
             }
 
             .pagenum:before {
@@ -113,6 +119,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Training Venue Manager Report</p>
+                <p class="city_name">{{ "( $search City )" }}</p>
             </div>
 
             <footer>
@@ -157,34 +164,34 @@
                         $rowNumber = 1;
                     @endphp
 
-                    @foreach ($trainingVenueManager as $trainingVenueManagers)
+                    @foreach ($trainingVenueManagerByCity as $trainingVenueManagerByCities)
                         <tr>
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
 
                             <td>
-                                {{ $trainingVenueManagers->name }}
+                                {{ $trainingVenueManagerByCities->name }}
                             </td>
         
                             <td >
                                 {{ 
-                                    $trainingVenueManagers->no_street.', '.
-                                    $trainingVenueManagers->brgy.', '. 
-                                    $trainingVenueManagers->trainingVenueManager->name
+                                    $trainingVenueManagerByCities->no_street.', '.
+                                    $trainingVenueManagerByCities->brgy.', '. 
+                                    $trainingVenueManagerByCities->trainingVenueManager->name
                                 }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagers->contactno }}
+                                {{ $trainingVenueManagerByCities->contactno }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagers->emailadd }}
+                                {{ $trainingVenueManagerByCities->emailadd }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagers->contactperson }}
+                                {{ $trainingVenueManagerByCities->contactperson }}
                             </td>
                         </tr>
                     @endforeach
