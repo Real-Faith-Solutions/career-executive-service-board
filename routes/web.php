@@ -19,6 +19,7 @@ use App\Http\Controllers\Competency\ResourceSpeakerController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
+use App\Http\Controllers\Competency\TrainingProviderReport;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\DashboardController;
@@ -632,8 +633,8 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('training-provider')->group(function () {
-            Route::get('index', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('generate-pdf', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('index', [TrainingProviderReport::class, 'index'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf', [TrainingProviderReport::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
         });
 
         Route::prefix('training-venue-manager')->group(function () {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Competency;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompetencyTrainingProvider;
 use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibCities;
 use App\Models\ResourceSpeaker;
@@ -94,25 +93,6 @@ class CompetencyReportController extends Controller
         return $pdf->stream('training-venue-manager-report-by-city.pdf');
     }
     // end of training venue manager report
-
-    // training provider report
-    public function trainingProviderIndexReport()
-    {
-        $competencyTrainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
-        'emailadd', 'contactperson')->orderBy('providerID', 'desc')->paginate(5);
-
-        return view('admin.competency.reports.training_provider_report', compact('competencyTrainingProvider'));
-    }
-
-    public function trainingProviderGenerateReport()
-    {
-        $competencyTrainingProvider = CompetencyTrainingProvider::all(['providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
-        'emailadd', 'contactperson']);
-
-        $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('a4', 'landscape');
-        return $pdf->stream('training-provider-manager-report.pdf');
-    }
-    // end of training provider report
 
     // resource speaker manager report
     public function resourceSpeakerIndexReport()
