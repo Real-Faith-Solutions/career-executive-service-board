@@ -25,4 +25,9 @@ class SectorManager extends Model
     {
         return $this->hasMany(DepartmentAgency::class, 'sectorid', 'sectorid');
     }
+
+    public function officeType(): HasMany
+    {
+        return $this->hasMany(DepartmentAgencyType::class, 'sectorid');
+    }
 }

@@ -23,4 +23,9 @@ class DepartmentAgencyType extends Model
     {
         return $this->hasMany(DepartmentAgency::class, 'agency_typeid', 'agency_typeid');
     }
+
+    public function sector()
+    {
+        return $this->belongsTo(SectorManager::class, 'sectorid', 'sectorid');
+    }
 }

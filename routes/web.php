@@ -54,6 +54,7 @@ use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
+use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
@@ -482,6 +483,12 @@ Route::middleware('auth')->group(function () {
         Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
         Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
         Route::resource('library-office-manager', LibraryOfficeManagerController::class);
+
+        // office type
+        Route::get('library-office-type/trash', [OfficeTypeController::class, 'trash'])->name('library-office-type.trash');
+        Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
+        Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
+        Route::resource('library-office-type', OfficeTypeController::class);
     });
     // End of plantilla routes
 
