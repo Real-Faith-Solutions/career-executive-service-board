@@ -171,27 +171,27 @@
                             </td>
 
                             <td>
-                                {{ $trainingVenueManagerByCities->name }}
+                                {{ $trainingVenueManagerByCities->name ?? '' }}
                             </td>
         
                             <td >
                                 {{ 
                                     $trainingVenueManagerByCities->no_street.', '.
                                     $trainingVenueManagerByCities->brgy.', '. 
-                                    $trainingVenueManagerByCities->trainingVenueManager->name
+                                    $trainingVenueManagerByCities->trainingVenueManager->name ?? ''
                                 }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagerByCities->contactno }}
+                                {{ $trainingVenueManagerByCities->contactno ?? '' }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagerByCities->emailadd }}
+                                {{ $trainingVenueManagerByCities->emailadd ?? '' }}
                             </td>
         
                             <td >
-                                {{ $trainingVenueManagerByCities->contactperson }}
+                                {{ $trainingVenueManagerByCities->contactperson ?? ''}}
                             </td>
                         </tr>
                     @endforeach

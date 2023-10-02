@@ -80,9 +80,16 @@ class CompetencyReportController extends Controller
 
         $profileLibCitiesSearchResult = ProfileLibCities::where('name', $search)->first();
 
-        $trainingVenueManagerByCity = CompetencyTrainingVenueManager::where('city_code', $profileLibCitiesSearchResult->city_code)
-        ->get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
-           
+        if($profileLibCitiesSearchResult != null)
+        {
+            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::where('city_code', $profileLibCitiesSearchResult->city_code)
+            ->get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
+        }
+        else
+        {
+            return back()->with('error', 'Please Select City Before Proceeding to Make Report.');
+        }
+               
         $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf_city', compact('trainingVenueManagerByCity', 'search'))->setPaper('a4', 'landscape');
         return $pdf->stream('training-venue-manager-report-by-city.pdf');
     }
