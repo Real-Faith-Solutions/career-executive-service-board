@@ -4,169 +4,169 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('resource-speaker.recentlyDeleted') }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
+    <div class="my-5 flex justify-end">
+        <a href="{{ route('resource-speaker.recentlyDeleted') }}">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+        </lord-icon>
+        </a>
 
-    <a href="{{ route('resource-speaker.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
-</div>
+        <a href="{{ route('resource-speaker.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
+    </div>
 
-<div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
-    <table class="w-full text-left text-sm text-gray-500">
-        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
+    <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
+        <table class="w-full text-left text-sm text-gray-500">
+            <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Position
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Position
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Department
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Department
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Office/Company
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Office/Company
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    No./Building
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        No./Building
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Street
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Street
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Barangay
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Barangay
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    City/Province
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        City/Province
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Contact No.
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Contact No.
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Email Address
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Email Address
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    Expertise
-                </th>
+                    <th scope="col" class="px-6 py-3">
+                        Expertise
+                    </th>
 
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Action</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($resourceSpeaker as $resourceSpeakers)
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Position }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Department }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Office }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Bldg }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Street }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->Brgy }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->City }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->contactno }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->emailadd }}
-                    </td>
-
-                    <td class="px-6 py-3">
-                        {{ $resourceSpeakers->expertise }}
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            <form action="{{ route('resource-speaker.trainingEnagagement', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
-                                @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/vufjamqa.json"
-                                        trigger="hover"
-                                        colors="primary:#121331"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-
-                            <form action="{{ route('resource-speaker.edit', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
-                                @csrf
-                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/bxxnzvfm.json"
-                                        trigger="hover"
-                                        colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:30px;height:30px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-
-                            <form action="{{ route('resource-speaker.destroy', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="POST" id="delete_resource_speaker_form{{$resourceSpeakers->speakerID}}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Action</span>
+                    </th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach ($resourceSpeaker as $resourceSpeakers)
+                    <tr class="border-b bg-white">
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
+                        </td>
 
-<div class="m-5">
-    {{ $resourceSpeaker->links() }}
-</div>
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Position }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Department }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Office }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Bldg }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Street }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->Brgy }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->City }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->contactno }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->emailadd }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $resourceSpeakers->expertise }}
+                        </td>
+
+                        <td class="px-6 py-4 text-right uppercase">
+                            <div class="flex">
+                                <form action="{{ route('resource-speaker.trainingEnagagement', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
+                                    @csrf
+                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/vufjamqa.json"
+                                            trigger="hover"
+                                            colors="primary:#121331"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+
+                                <form action="{{ route('resource-speaker.edit', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="GET">
+                                    @csrf
+                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/bxxnzvfm.json"
+                                            trigger="hover"
+                                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                            style="width:30px;height:30px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+
+                                <form action="{{ route('resource-speaker.destroy', ['ctrlno'=>$resourceSpeakers->speakerID]) }}" method="POST" id="delete_resource_speaker_form{{$resourceSpeakers->speakerID}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" id="deleteTrainingVenueManagerButton{{$resourceSpeakers->speakerID}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/jmkrnisz.json"
+                                            trigger="hover"
+                                            colors="primary:#880808"
+                                            style="width:24px;height:24px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="m-5">
+        {{ $resourceSpeaker->links() }}
+    </div>
 
 @endsection
