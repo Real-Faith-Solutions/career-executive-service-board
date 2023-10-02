@@ -6,8 +6,9 @@
         <title>General Report</title>
 
         <style>
-            @page {
-                margin-top: 100px;
+           @page {
+                margin-top: 75px;
+                padding-bottom: 100px;
             }
 
             header{
@@ -18,37 +19,56 @@
                 margin-top: -60px;
                 text-align: center;
             }
+
+            footer {
+                position: fixed;
+                bottom: -20px;
+                right: 20px;
+                text-align: right;
+                font-size: 10px;
+                color: #333;
+            }
+
             table {
                 border-collapse: collapse;
-                padding-left: 25px;
-                padding-right: 25px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-family: Arial;
                 width: 100%;
             }
         
-            td, th {
-                text-align: center;
-            }
-        
             td {
-                padding: 15px;
-                font-size: 13px;
-                text-align: center;
+                padding-top: 5px;
+                padding-right: 10px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+                font-size: 11px;
+                text-align: left;
             }
         
             th {
                 color: #284F87;
-                font-size: 13px;
+                font-size: 12px;
                 text-transform: uppercase;
-                padding-bottom: 15px;
+                text-align: center;
                 background-color: white;
             }
+        
 
             span {
+                font-size: 10px;
+            }
+        
+            th {
+                color: #284F87;
                 font-size: 12px;
+                text-transform: uppercase;
+                text-align: center;
+                background-color: white;
             }
         
             tr:nth-child(even) {
-                background-color: #DCD6D0;
+                background-color: #3b83f6b2;
             }
         
             .container {
@@ -74,17 +94,21 @@
                 margin-top: -7px;
                 font-size: 15px;
             } 
-        
+
             .report_name {
                 text-transform: uppercase;
-                font-size: 20px;
+                font-size: 16px;
                 color: #284F87;
-                margin-top: 30px;
+                margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 215px;
+                margin-top: 190px;
+            }
+
+            .pagenum:before {
+                content: counter(page);
             }
         </style>
     </head>
@@ -105,9 +129,15 @@
                     General Report
                     <br>
                     <span>
-                        ( {{ $trainingSession->title }})
+                         {{ $trainingSession->title }}
                     </span>
                 </p>
+
+                <footer>
+                    <div class="flex-container">
+                        <div class="">Page <span class="pagenum"></span></div>
+                    </div>
+                </footer>
             </div>
         </header>
 
@@ -116,6 +146,10 @@
                 <thead >
                     <div class="page-break"></div>
                     <tr>
+                        <th class="thead">
+                            
+                        </th>
+
                         <th class="thead">
                             Particapants ID
                         </th>
@@ -150,17 +184,25 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $rowNumber = 1;
+                    @endphp
+                
                     @foreach ($trainingParticipantList as $trainingParticipantLists)
-                        <tr class="border-b bg-white">
-                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                        <tr>
+                            <td>
+                                {{ $rowNumber++ }}
+                            </td>
+
+                            <td>
                                 {{ $trainingParticipantLists->pid }}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ $trainingParticipantLists->cesno }}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ 
                                     $trainingParticipantLists->cesTrainingPersonalData->lastname.', '. 
                                     $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
@@ -169,23 +211,23 @@
                                 }}
                             </td>
         
-                            <td class="px-6 py-3">
-                                {{-- {{ $trainingParticipantLists->specialization }} --}}
+                            <td>
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->cesStatus->description ?? '' }}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ $trainingParticipantLists->status }}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ $trainingParticipantLists->no_hours}}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ $trainingParticipantLists->payment }}
                             </td>
         
-                            <td class="px-6 py-3">
+                            <td>
                                 {{ $trainingParticipantLists->remarks }}
                             </td>
                         </tr>
