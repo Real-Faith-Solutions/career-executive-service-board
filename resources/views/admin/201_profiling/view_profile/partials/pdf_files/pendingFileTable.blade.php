@@ -90,20 +90,17 @@
                                 </lord-icon>
                             </button>
                             
-                            <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                @method('DELETE')
-                                <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            
+                            <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogDeclinePendingPdf({{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nhfyhmlt.json"
                                     trigger="hover"
-                                    colors="primary:#BC0001"u
+                                    colors="primary:#BC0001"
                                     state="hover-3"
                                     style="width:24px;height:24px">
                                 </lord-icon>
-                                </button>
-                            </form>
+                            </button>
                         </div>
                     </td>
                 </tr>
