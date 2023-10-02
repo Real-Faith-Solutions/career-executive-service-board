@@ -55,6 +55,7 @@ use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as Li
 use App\Http\Controllers\Plantilla\Library\ClassBasisController;
 use App\Http\Controllers\Plantilla\Library\DBMPositionTitleController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
+use App\Http\Controllers\Plantilla\Library\LocationTypeController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
 use App\Http\Controllers\Plantilla\Library\PersonnelMovementController;
@@ -509,6 +510,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('library-personnel-movement', PersonnelMovementController::class);
 
 
+        Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
+        Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
+        Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
+        Route::resource('library-location-type', LocationTypeController::class);
     });
     // End of plantilla routes
 

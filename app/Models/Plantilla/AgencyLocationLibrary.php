@@ -19,6 +19,6 @@ class AgencyLocationLibrary extends Model
 
     public function agencyLocation(): HasMany
     {
-        return $this->hasMany(AgencyLocation::class);
+        return $this->hasMany(AgencyLocation::class, 'officelocid');
     }
 }
