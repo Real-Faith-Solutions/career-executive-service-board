@@ -79,7 +79,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf({{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
+                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf('{{ $pdfFiles->request_unique_file_name }}', {{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/egiwmiit.json"
@@ -91,7 +91,7 @@
                             </button>
                             
                             
-                            <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogDeclinePendingPdf({{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
+                            <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogDeclinePendingPdf('{{ $pdfFiles->request_unique_file_name }}', {{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nhfyhmlt.json"
