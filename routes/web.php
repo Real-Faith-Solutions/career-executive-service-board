@@ -15,12 +15,18 @@ use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
 use App\Http\Controllers\Competency\CompetencyReportController;
+use App\Http\Controllers\Competency\GeneralReportController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
+use App\Http\Controllers\Competency\ResourceSpeakerManagerReport;
+use App\Http\Controllers\Competency\ResourceSpeakerManagerReportController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
+use App\Http\Controllers\Competency\TrainingProviderManagerReportController;
+use App\Http\Controllers\Competency\TrainingProviderReport;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
+use App\Http\Controllers\Competency\TrainingVenueManagerReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\DeclineFileController;
@@ -658,15 +664,25 @@ Route::middleware('auth')->group(function () {
 
     //  competency report routes
     Route::prefix('competency-report')->group(function () {
-        Route::prefix('management-sub-modules')->group(function () {
-            Route::get('training-provider-report', [CompetencyReportController::class, 'trainingProviderIndexReport'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('training-provider-generate-report', [CompetencyReportController::class, 'trainingProviderGenerateReport'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::get('general-report', [CompetencyReportController::class, 'generalReportIndex'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('general-report-generate-pdf/{sessionId}', [CompetencyReportController::class, 'generalReportGeneratePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::get('training-venue-manager-report', [CompetencyReportController::class, 'trainingVenueManagerReportIndex'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('training-venue-manager-report-generate-pdf', [CompetencyReportController::class, 'trainingVenueManagerReportGeneratePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::get('resource-speaker-manager-report', [CompetencyReportController::class, 'resourceSpeakerIndexReport'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('resource-speaker-manager-report-generate-pdf', [CompetencyReportController::class, 'resourceSpeakerGenerateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+        Route::prefix('general-report')->group(function () {
+            Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
+        });
+
+        Route::prefix('training-provider')->group(function () {
+            Route::get('index', [TrainingProviderManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+        });
+
+        Route::prefix('training-venue-manager')->group(function () {
+            Route::get('report', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdfByCity'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdfByCity')->middleware('checkPermission:competency_management_sub_modules_report_view');
+        });
+
+        Route::prefix('resource-speaker-manager')->group(function () {
+            Route::get('report', [ResourceSpeakerManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('report-generate-pdf', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
         });
     });
     //  end of competency report routes

@@ -7,7 +7,8 @@
 
         <style>
             @page {
-                margin-top: 100px;
+                margin-top: 75px;
+                padding-bottom: 100px;
             }
 
             header{
@@ -18,30 +19,43 @@
                 margin-top: -60px;
                 text-align: center;
             }
+
+            footer {
+                position: fixed;
+                bottom: -20px;
+                right: 20px;
+                text-align: right;
+                font-size: 10px;
+                color: #333;
+            }
+            
             table {
                 border-collapse: collapse;
-                padding-left: 25px;
-                padding-right: 25px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-family: Arial;
                 width: 100%;
             }
         
             td {
-                padding: 15px;
-                font-size: 13px;
-                text-align: justify;
+                padding-top: 5px;
+                padding-right: 10px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+                font-size: 11px;
+                text-align: center;
             }
         
             th {
                 color: #284F87;
-                font-size: 13px;
-                text-align: center;
+                font-size: 12px;
                 text-transform: uppercase;
-                padding-bottom: 15px;
+                text-align: center;
                 background-color: white;
             }
         
             tr:nth-child(even) {
-                background-color: #DCD6D0;
+                background-color: #3b83f6b2;
             }
         
             .container {
@@ -67,17 +81,21 @@
                 margin-top: -7px;
                 font-size: 15px;
             } 
-        
+
             .report_name {
                 text-transform: uppercase;
                 font-size: 16px;
                 color: #284F87;
-                margin-top: 30px;
+                margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 200px;
+                margin-top: 160px;
+            }
+
+            .pagenum:before {
+                content: counter(page);
             }
         </style>
     </head>
@@ -96,6 +114,12 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Training Venue Manager Report</p>
             </div>
+
+            <footer>
+                <div class="flex-container">
+                    <div class="">Page <span class="pagenum"></span></div>
+                </div>
+            </footer>
         </header>
 
         <div>
@@ -103,6 +127,10 @@
                 <thead>
                     <div class="page-break"></div>
                     <tr>
+                        <th>
+                            
+                        </th>
+
                         <th>
                             Venue
                         </th>
@@ -125,9 +153,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $rowNumber = 1;
+                    @endphp
+
                     @foreach ($trainingVenueManager as $trainingVenueManagers)
                         <tr>
-                            <td class="first_row">
+                            <td>
+                                {{ $rowNumber++ }}
+                            </td>
+
+                            <td>
                                 {{ $trainingVenueManagers->name }}
                             </td>
         

@@ -13,14 +13,15 @@ class TrainingVenueManagerController extends Controller
 {
     public function index()
     {    
-        $trainingVenueManager = CompetencyTrainingVenueManager::all();
+        $trainingVenueManager = CompetencyTrainingVenueManager::select('venueid', 'name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')->orderBy('venueid', 'desc')
+        ->paginate(5);
 
         return view('admin.competency.partials.trainings_sub_module.training_venue_manager.table', compact('trainingVenueManager'));
     }
 
     public function create()
     {
-        $profileLibTblCities = ProfileLibCities::all();
+        $profileLibTblCities = ProfileLibCities::all(['city_code', 'name']);
 
         return view('admin.competency.partials.trainings_sub_module.training_venue_manager.form', compact('profileLibTblCities'));
     }
@@ -71,7 +72,7 @@ class TrainingVenueManagerController extends Controller
 
     public function edit($ctrlno)
     {
-        $profileLibTblCities = ProfileLibCities::all();
+        $profileLibTblCities = ProfileLibCities::all(['city_code', 'name']);
         $trainingVenueManager = CompetencyTrainingVenueManager::find($ctrlno);
 
         return view('admin.competency.partials.trainings_sub_module.training_venue_manager.edit', compact('profileLibTblCities', 'trainingVenueManager'));

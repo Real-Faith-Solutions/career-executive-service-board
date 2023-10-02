@@ -14,7 +14,7 @@ class ResourceSpeakerController extends Controller
 {
     public function index()
     {
-        $resourceSpeaker = ResourceSpeaker::paginate(20);
+        $resourceSpeaker = ResourceSpeaker::paginate(5);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.table', compact('resourceSpeaker'));
     }
@@ -36,7 +36,7 @@ class ResourceSpeakerController extends Controller
 
         if ($search !== null && !is_numeric($search)) 
         {
-            return redirect()->route('eris.create')->with('error', 'Invalid Search Criteria.');
+            return redirect()->route('resource-speaker.create')->with('error', 'Invalid Search Criteria.');
         }
 
         if ($search !== null && trim($search) !== '' && is_numeric($search)) 
@@ -47,7 +47,7 @@ class ResourceSpeakerController extends Controller
             if (!$personalDataSearchResult) 
             {
                 // Handle the case where the data does not exist
-                return redirect()->route('eris.create')->with('error', 'Data not found in the database.');
+                return redirect()->route('resource-speaker.create')->with('error', 'Data not found in the database.');
             }
         }
         else
