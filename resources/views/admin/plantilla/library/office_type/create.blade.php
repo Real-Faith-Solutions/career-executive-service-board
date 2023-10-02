@@ -25,7 +25,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="sectorid">Sector name<sup>*</span></label>
-                        <select id="sectorid" name="sectorid" value="{{ old('sectorid') }}" required>
+                        <select id="sectorid" name="sectorid" required>
                             @foreach ($sectors as $data)
                             <option value="{{ $data->sectorid }}">
                                 {{ $data->title }}

@@ -52,6 +52,7 @@ use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
+use App\Http\Controllers\Plantilla\Library\DBMPositionTitleController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
@@ -489,6 +490,12 @@ Route::middleware('auth')->group(function () {
         Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
         Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
         Route::resource('library-office-type', OfficeTypeController::class);
+        
+        // office type
+        Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
+        Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
+        Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
+        Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
     });
     // End of plantilla routes
 
