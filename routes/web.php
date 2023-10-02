@@ -16,6 +16,7 @@ use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
 use App\Http\Controllers\Competency\CompetencyReportController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
+use App\Http\Controllers\Competency\ResourceSpeakerManagerReport;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
@@ -645,8 +646,8 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::prefix('resource-speaker-manager')->group(function () {
-            Route::get('report', [CompetencyReportController::class, 'resourceSpeakerIndexReport'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('report-generate-pdf', [CompetencyReportController::class, 'resourceSpeakerGenerateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('report', [ResourceSpeakerManagerReport::class, 'index'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('report-generate-pdf', [ResourceSpeakerManagerReport::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_management_sub_modules_report_view');
         });
     });
     //  end of competency report routes
