@@ -166,7 +166,7 @@
                 </thead>
                 <tbody>
                     @php
-                    $rowNumber = 1;
+                        $rowNumber = 1;
                     @endphp
                 
                     @foreach ($resourceSpeaker as $resourceSpeakers)

@@ -14,83 +14,85 @@ use Illuminate\Http\Request;
 class CompetencyReportController extends Controller
 {
     // general report
-        public function generalReportIndex()
-        {
-            $trainingSession = TrainingSession::paginate(10);
+    public function generalReportIndex()
+    {
+        $trainingSession = TrainingSession::paginate(10);
 
-            return view('admin.competency.reports.general_report', compact('trainingSession'));
-        }
+        return view('admin.competency.reports.general_report', compact('trainingSession'));
+    }
 
-        public function generalReportGeneratePdf($sessionId)
-        {
-            $trainingSession = TrainingSession::find($sessionId);
-            $trainingParticipantList = $trainingSession->trainingParticipantList;
+    public function generalReportGeneratePdf($sessionId)
+    {
+        $trainingSession = TrainingSession::find($sessionId);
+        $trainingParticipantList = $trainingSession->trainingParticipantList;
 
-            $pdf = Pdf::loadView('admin.competency.reports.general_report_pdf', compact('trainingParticipantList', 'trainingSession'))->setPaper('legal', 'landscape');
-            return $pdf->stream('general-report.pdf');
-        }
+        $pdf = Pdf::loadView('admin.competency.reports.general_report_pdf', compact('trainingParticipantList', 'trainingSession'))->setPaper('legal', 'landscape');
+        return $pdf->stream('general-report.pdf');
+    }
     // end of general report
 
     // training venue manager report
-        public function trainingVenueManagerReportIndex(Request $request)
-        {
-            $cityCode = $request->input('city_code');
+    public function trainingVenueManagerReportIndex(Request $request)
+    {
+        $cityCode = $request->input('city_code');
           
-            if($cityCode == null)
-            {
-                $trainingVenueManager = CompetencyTrainingVenueManager::paginate(10);
-            }
-            else
-            {    
-                $trainingVenueManager = CompetencyTrainingVenueManager::where('city_code', $cityCode)->paginate(10);
-            }
-
-            $profileLibTblCities = ProfileLibCities::all();
-
-            return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager', 'profileLibTblCities', 'cityCode'));
-        }
-
-        public function trainingVenueManagerReportGeneratePdf()
+        if($cityCode == null)
         {
-            $trainingVenueManager = CompetencyTrainingVenueManager::get();
-           
-            $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('legal', 'landscape');
-            return $pdf->stream('training-venue-manager-report.pdf');
+            $trainingVenueManager = CompetencyTrainingVenueManager::paginate(10);
         }
+        else
+        {    
+            $trainingVenueManager = CompetencyTrainingVenueManager::where('city_code', $cityCode)->paginate(10);
+        }
+
+        $profileLibTblCities = ProfileLibCities::all();
+
+        return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager', 'profileLibTblCities', 'cityCode'));
+    }
+
+    public function trainingVenueManagerReportGeneratePdf()
+    {
+        $trainingVenueManager = CompetencyTrainingVenueManager::get();
+           
+        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('legal', 'landscape');
+        return $pdf->stream('training-venue-manager-report.pdf');
+    }
     // end of training venue manager report
 
     // training provider report
-        public function trainingProviderIndexReport()
-        {
-            $competencyTrainingProvider = CompetencyTrainingProvider::paginate(10);
+    public function trainingProviderIndexReport()
+    {
+        $competencyTrainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
+        'emailadd', 'contactperson')->orderBy('providerID', 'desc')->paginate(5);
 
-            return view('admin.competency.reports.training_provider_report', compact('competencyTrainingProvider'));
-        }
+        return view('admin.competency.reports.training_provider_report', compact('competencyTrainingProvider'));
+    }
 
-        public function trainingProviderGenerateReport()
-        {
-            $competencyTrainingProvider = CompetencyTrainingProvider::get();
+    public function trainingProviderGenerateReport()
+    {
+        $competencyTrainingProvider = CompetencyTrainingProvider::all(['providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
+        'emailadd', 'contactperson']);
 
-            $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('legal', 'landscape');
-            return $pdf->stream('training-provider-manager-report.pdf');
-        }
+        $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('a4', 'landscape');
+        return $pdf->stream('training-provider-manager-report.pdf');
+    }
     // end of training provider report
 
     // resource speaker manager report
-        public function resourceSpeakerIndexReport()
-        {
-            $resourceSpeaker = ResourceSpeaker::paginate(10);
+    public function resourceSpeakerIndexReport()
+    {
+        $resourceSpeaker = ResourceSpeaker::paginate(10);
 
-            return view('admin.competency.reports.resource_speaker_manager_report', compact('resourceSpeaker'));
-        }
+        return view('admin.competency.reports.resource_speaker_manager_report', compact('resourceSpeaker'));
+    }
 
-        public function resourceSpeakerGenerateReport()
-        {
-            $resourceSpeaker = ResourceSpeaker::get();
+    public function resourceSpeakerGenerateReport()
+    {
+        $resourceSpeaker = ResourceSpeaker::get();
 
-            $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager_report_pdf', compact('resourceSpeaker'))->setPaper('a4', 'landscape');
-            return $pdf->stream('resource-speaker-manager-report.pdf');
-        }
+        $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager_report_pdf', compact('resourceSpeaker'))->setPaper('a4', 'landscape');
+        return $pdf->stream('resource-speaker-manager-report.pdf');
+    }
     //end of resource speaker manager report
 
 }
