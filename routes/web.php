@@ -57,6 +57,7 @@ use App\Http\Controllers\Plantilla\Library\DBMPositionTitleController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
+use App\Http\Controllers\Plantilla\Library\PersonnelMovementController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
@@ -501,6 +502,11 @@ Route::middleware('auth')->group(function () {
         Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
         Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
         Route::resource('library-class-basis', ClassBasisController::class);
+        
+        Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
+        Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
+        Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
+        Route::resource('library-personnel-movement', PersonnelMovementController::class);
 
 
     });
