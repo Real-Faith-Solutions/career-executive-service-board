@@ -7,7 +7,7 @@
 
         <style>
             @page {
-                margin-top: 100px;
+                margin-top: 75px;
                 padding-bottom: 100px;
             }
 
@@ -19,30 +19,43 @@
                 margin-top: -60px;
                 text-align: center;
             }
+
+            footer {
+                position: fixed;
+                bottom: -20px;
+                right: 20px;
+                text-align: right;
+                font-size: 10px;
+                color: #333;
+            }
+
             table {
                 border-collapse: collapse;
-                padding-left: 20px;
-                padding-right: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-family: Arial;
                 width: 100%;
             }
         
             td {
-                padding: 10px;
-                font-size: 13px;
-                text-align: left;
+                padding-top: 5px;
+                padding-right: 10px;
+                padding-left: 10px;
+                padding-bottom: 5px;
+                font-size: 11px;
+                text-align: center;
             }
         
             th {
                 color: #284F87;
-                font-size: 13px;
+                font-size: 12px;
                 text-transform: uppercase;
                 text-align: center;
-                padding-bottom: 5px;
                 background-color: white;
             }
         
             tr:nth-child(even) {
-                background-color: #DCD6D0;
+                background-color: #3b83f6b2;
             }
         
             .container {
@@ -73,12 +86,16 @@
                 text-transform: uppercase;
                 font-size: 16px;
                 color: #284F87;
-                margin-top: 30px;
+                margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 200px;
+                margin-top: 160px;
+            }
+
+            .pagenum:before {
+                content: counter(page);
             }
         </style>
     </head>
@@ -96,7 +113,13 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Resource Speaker Manager Report</p>
-            </div>
+            </div> 
+
+            <footer>
+                <div class="flex-container">
+                    <div class="">Page <span class="pagenum"></span></div>
+                </div>
+            </footer>
         </header>
 
         <div>
@@ -104,6 +127,10 @@
                 <thead >
                     <div class="page-break"></div>
                     <tr>
+                        <th >
+                            
+                        </th>
+
                         <th class="thead">
                             Name
                         </th>
@@ -117,13 +144,13 @@
                         </th class="thead">
 
                         <th class="thead">
-                            Office/Company
+                            Office
                         </th>
 
                         <th class="thead">
                             Address
                         </th>
-+
+
                         <th class="thead">
                             Contact No.
                         </th>
@@ -138,8 +165,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $rowNumber = 1;
+                    @endphp
+                
                     @foreach ($resourceSpeaker as $resourceSpeakers)
                         <tr>
+                            <td>
+                                {{ $rowNumber++ }}
+                            </td>
+
                             <td>
                                 {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
                             </td>
@@ -180,6 +215,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </div>    
+        
     </body>
 </html>
