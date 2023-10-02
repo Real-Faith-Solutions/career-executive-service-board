@@ -161,7 +161,7 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Mother Agency
                         </a>
-                        <a href="#"
+                        <a href="{{ route('library-office-type.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Office type
                         </a>
@@ -169,15 +169,15 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Location type
                         </a>
-                        <a href="#"
+                        <a href="{{ route('library-dbm-position-title.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             DBM Position Title
                         </a>
-                        <a href="#"
+                        <a href="{{ route('library-class-basis.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Position Classification Basis
                         </a>
-                        <a href="#"
+                        <a href="{{ route('library-personnel-movement.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Personnel Movement
                         </a>

@@ -11,6 +11,13 @@ class ClassBasis extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'plantillalib_tblClassBasis';
     protected $primaryKey = 'cbasis_code';
+    protected $fillable = [
+        'basis',
+        'title',
+        'classdate',
+        'encoder',
+        'updated_by',
+    ];
 
     public function planPosition()
     {

@@ -6,12 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PositionMasterLibrary extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $table = 'plantillalib_tblPositionMaster';
     protected $primaryKey = 'pos_code';
+    protected $fillable = [
+        'dbm_title',
+        'poslevel_code',
+        'sg',
+        'func_title',
+    ];
 
     public function planPosition(): HasMany
     {

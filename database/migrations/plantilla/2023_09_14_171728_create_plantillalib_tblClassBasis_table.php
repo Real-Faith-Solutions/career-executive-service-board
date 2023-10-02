@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('plantillalib_tblClassBasis', function (Blueprint $table) {
             $table->id('cbasis_code');
             $table->string('basis');
-            $table->string('title');
+            $table->text('title');
             $table->string('classdate')->nullable();
-            $table->string('encoder');
-            $table->string('updated_by');
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
