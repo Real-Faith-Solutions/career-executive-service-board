@@ -7,7 +7,7 @@ use App\Models\CompetencyTrainingProvider;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class TrainingProviderReport extends Controller
+class TrainingProviderManagerReportController extends Controller
 {
     public function index()
     {

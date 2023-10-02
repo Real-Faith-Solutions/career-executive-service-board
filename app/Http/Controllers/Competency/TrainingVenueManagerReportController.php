@@ -8,7 +8,7 @@ use App\Models\ProfileLibCities;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class TrainingVenueManagerReport extends Controller
+class TrainingVenueManagerReportController extends Controller
 {
     public function index(Request $request)
     {

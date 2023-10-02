@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ResourceSpeaker;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class ResourceSpeakerManagerReport extends Controller
+class ResourceSpeakerManagerReportController extends Controller
 {
     public function index()
     {

@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\TrainingSession;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class CompetencyReportController extends Controller
+class GeneralReportController extends Controller
 {
-    public function generalReportIndex()
+    public function index()
     {
         $trainingSession = TrainingSession::paginate(10);
 
         return view('admin.competency.reports.general_report', compact('trainingSession'));
     }
 
-    public function generalReportGeneratePdf($sessionId)
+    public function generatePdf($sessionId)
     {
         $trainingSession = TrainingSession::find($sessionId);
         $trainingParticipantList = $trainingSession->trainingParticipantList;
