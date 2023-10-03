@@ -17,6 +17,7 @@ class DepartmentAgency extends Model
     protected $table = 'plantilla_tblDeptAgency';
     protected $primaryKey = 'deptid';
     protected $fillable = [
+        'mother_deptid',
         'sectorid',
         'agency_typeid',
         'title',
@@ -40,5 +41,10 @@ class DepartmentAgency extends Model
     public function agencyLocation(): HasMany
     {
         return $this->hasMany(AgencyLocation::class, 'deptid');
+    }
+
+    public function motherDepartment()
+    {
+        return $this->belongsTo(MotherDept::class, 'mother_deptid', 'deptid');
     }
 }

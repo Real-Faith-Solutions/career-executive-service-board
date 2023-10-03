@@ -46,6 +46,21 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="mother_deptid">Mother Department<sup>*</sup></label>
+                        <select id="mother_deptid" name="mother_deptid" required>
+                            @foreach ($motherDepartment as $data)
+                            <option value="{{ $data->deptid }}" {{ $data->deptid === $department->mother_deptid ?
+                                'selected' : ''}}>{{ $data->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('mother_deptid')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="departmentTypeDatas">Office Type<sup>*</span></label>
                         <select id="departmentTypeDatas" name="agency_typeid" required>
                             @foreach ($departmentTypeDatas as $data)

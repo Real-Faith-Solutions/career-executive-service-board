@@ -22,6 +22,7 @@
     <thead>
         <tr>
             <th>Department ID</th>
+            <th>Sector</th>
             <th>Mother Agency</th>
             <th>Agency / Bureau</th>
             <th>Agency / Bureau Acronym</th>
@@ -44,10 +45,13 @@
                 {{ $data->sectorManager->title ?? 'N/A' }}
             </td>
             <td>
-                {{ $data->title ?? 'N/A' }}
+                {{ $data->motherDepartment->title ?? 'N/A'}}
             </td>
             <td>
-                {{ $data->acronym ?? 'N/A' }}
+                {{ $data->title }}
+            </td>
+            <td>
+                {{ $data->acronym }}
             </td>
             <td>
                 {{ $data->departmentAgencyType->title ?? 'N/A' }}

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('deptid');
             $table->foreignId('sectorid')->constrained('plantilla_tblSector', 'sectorid');
             $table->foreignId('agency_typeid')->constrained('plantillalib_tblAgencyType', 'agency_typeid');
+            $table->foreignId('mother_deptid')->constrained('plantilla_motherdept', 'deptid');
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();

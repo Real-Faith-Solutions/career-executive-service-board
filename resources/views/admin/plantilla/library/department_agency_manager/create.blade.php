@@ -67,6 +67,19 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for="mother_deptid">Agency Name<sup>*</sup></label>
+                        <select id="mother_deptid" name="mother_deptid" required>
+                            @foreach ($motherDepartment as $data)
+                            <option value="{{ $data->deptid }}">{{ $data->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('mother_deptid')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="title">Agency Name<sup>*</sup></label>
                         <input id="title" name="title" required value="{{ old('title') }}" />
                         @error('title')

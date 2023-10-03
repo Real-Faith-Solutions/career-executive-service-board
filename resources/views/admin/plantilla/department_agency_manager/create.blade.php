@@ -17,6 +17,19 @@
 
             <div class="grid grid-cols-2 p-10 gap-2">
                 <div class="mb-3">
+                    <label for="mother_deptid">Agency Name<sup>*</sup></label>
+                    <select id="mother_deptid" name="mother_deptid" required>
+                        @foreach ($motherDepartment as $data)
+                        <option value="{{ $data->deptid }}">{{ $data->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('mother_deptid')
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="agencyType">Agency Type</label>
                     <select id="agencyType" name="agency_typeid" required>
                         @foreach ($agencyType as $data)
@@ -57,15 +70,6 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="remarks">Remarks</label>
-                    <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea>
-                    @error('remarks')
-                    <span class="invalid" role="alert">
-                        <p>{{ $message }}</p>
-                    </span>
-                    @enderror
-                </div>
-                <div class="mb-3">
                     <label for="submitted_by">Submitted by</label>
                     <input id="submitted_by" name="submitted_by" required />
                     @error('submitted_by')
@@ -74,11 +78,18 @@
                     </span>
                     @enderror
                 </div>
-
-                <div class="col-start-2 flex justify-end">
+                <div class="mb-3">
+                    <label for="remarks">Remarks</label>
+                    <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea>
+                    @error('remarks')
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
+                    @enderror
+                </div>
+                <div class="flex justify-end items-end">
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
-
             </div>
         </form>
 

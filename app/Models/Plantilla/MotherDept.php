@@ -16,4 +16,9 @@ class MotherDept extends Model
         'encoder',
         'updated_by',
     ];
+
+    public function deptAgency()
+    {
+        return $this->hasMany(DepartmentAgency::class, 'deptid');
+    }
 }

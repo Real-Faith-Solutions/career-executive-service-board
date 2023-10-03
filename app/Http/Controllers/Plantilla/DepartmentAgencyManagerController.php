@@ -7,6 +7,7 @@ use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
+use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibTblRegion;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class DepartmentAgencyManagerController extends Controller
         $department = DepartmentAgency::find($deptid);
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
-
+        $motherDepartment = MotherDept::all();
 
         $agencyLocation = AgencyLocation::query()
             ->where('deptid', $deptid)
@@ -74,6 +75,7 @@ class DepartmentAgencyManagerController extends Controller
             'agencyLocationLibrary',
             'query',
             'region',
+            'motherDepartment',
         ));
     }
 

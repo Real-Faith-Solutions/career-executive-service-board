@@ -115,7 +115,7 @@
                 {{ $data->deptid }}
             </td>
             <td>
-                {{ $data->sectorManager->title ?? 'N/A' }}
+                {{ $data->motherDepartment->title ?? 'N/A'}}
             </td>
             <td>
                 {{ $data->title ?? 'N/A' }}

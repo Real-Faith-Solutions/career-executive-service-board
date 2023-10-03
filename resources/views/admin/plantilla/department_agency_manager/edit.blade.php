@@ -59,17 +59,16 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="sectorTitle">Mother Agency<sup>*</span></label>
-                            <select id="sectorTitle" name="sectorTitle" required disabled>
-                                @foreach ($sectorDatas as $data)
-                                <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
-                                    $department->sectorid ? 'selected' : '' }}>
+                            <label for="mother_deptid">Agency Name<sup>*</sup></label>
+                            <select id="mother_deptid" name="mother_deptid" required>
+                                @foreach ($motherDepartment as $data)
+                                <option value="{{ $data->deptid }}" {{ $data->deptid === $department->mother_deptid ?
+                                    'selected' : ''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
-
                             </select>
-                            @error('sectorTitle')
+                            @error('mother_deptid')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

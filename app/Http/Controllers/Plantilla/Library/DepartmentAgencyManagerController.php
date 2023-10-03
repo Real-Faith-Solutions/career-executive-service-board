@@ -7,6 +7,7 @@ use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\AgencyLocationLibrary;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
+use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibTblRegion;
 use Illuminate\Http\Request;
@@ -30,7 +31,12 @@ class DepartmentAgencyManagerController extends Controller
     {
         $sectorManagers = SectorManager::all();
         $agencyTypes = DepartmentAgencyType::all();
-        return view('admin.plantilla.library.department_agency_manager.create', compact('sectorManagers', 'agencyTypes'));
+        $motherDepartment = MotherDept::all();
+        return view('admin.plantilla.library.department_agency_manager.create', compact(
+            'sectorManagers',
+            'agencyTypes',
+            'motherDepartment',
+        ));
     }
 
 
@@ -44,6 +50,7 @@ class DepartmentAgencyManagerController extends Controller
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblDeptAgency'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'remarks' => ['required'],
+            'mother_deptid' => ['required'],
             'submitted_by' => ['required'],
         ]);
         // dd($request->all());
@@ -66,6 +73,8 @@ class DepartmentAgencyManagerController extends Controller
     {
         $department = DepartmentAgency::find($deptid);
         $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
+        $motherDepartment = MotherDept::all();
+
         $departmentTypeDatas = DepartmentAgencyType::query()
             ->where('sectorid', $department->sectorid)
             ->orderBy('title', 'ASC')->get();
@@ -74,6 +83,7 @@ class DepartmentAgencyManagerController extends Controller
             'departmentTypeDatas',
             'department',
             'sectorDatas',
+            'motherDepartment',
         ));
     }
 
@@ -88,6 +98,7 @@ class DepartmentAgencyManagerController extends Controller
             'website' => ['required', 'max:40', 'min:2', 'url'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'remarks' => ['required'],
+            'mother_deptid' => ['required'],
         ]);
 
         $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
@@ -96,7 +107,8 @@ class DepartmentAgencyManagerController extends Controller
             'agency_typeid',
             'website',
             'acronym',
-            'remarks'
+            'remarks',
+            'mother_deptid',
         ]));
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Plantilla;
 use App\Http\Controllers\Controller;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\DepartmentAgencyType;
+use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,12 +53,15 @@ class SectorManagerController extends Controller
             })
             ->orderBy('title', 'ASC')
             ->paginate(10);
+        $motherDepartment = MotherDept::all();
+
 
         return view('admin.plantilla.sector_manager.edit', compact(
             'datas',
             'subDatas',
             'agencyType',
             'query',
+            'motherDepartment',
         ));
     }
 
