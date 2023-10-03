@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblLanguages extends Model
 {
     use HasFactory,SoftDeletes;
+
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = 'profile_tblLanguages';
 
@@ -18,14 +20,15 @@ class ProfileTblLanguages extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
-        'language_code',
+        'cesno',
+        'lang_code',
         'encoder',
+        'lastupd_enc',
 
     ];
 
     public function languagePersonalData(): BelongsTo
     {
-        return $this->belongsTo(ProfileLibTblLanguageRef::class, 'language_code');
+        return $this->belongsTo(ProfileLibTblLanguageRef::class, 'lang_code');
     }    
 }

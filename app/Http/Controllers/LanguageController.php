@@ -24,7 +24,7 @@ class LanguageController extends Controller
     public function store(Request $request, $cesno)
     {
         $request->validate([
-            'language_code' => [Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno), 'required'],
+            'lang_code' => [Rule::unique('profile_tblLanguages')->where('cesno', $cesno), 'required'],
         ]);
 
         /** @var \App\Models\User $user */
@@ -33,7 +33,7 @@ class LanguageController extends Controller
 
         $profileTblLanguages = new ProfileTblLanguages([
 
-            'language_code' => $request->language_code,
+            'lang_code' => $request->lang_code,
             'encoder' =>  $encoder,
 
         ]);
@@ -57,11 +57,16 @@ class LanguageController extends Controller
     public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
-            'language_code' => ['required', Rule::unique('profile_tblLanguages')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'lang_code' => ['required', Rule::unique('profile_tblLanguages')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
+
         $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
-        $profileTblLanguages->language_code = $request->language_code;
+        $profileTblLanguages->lang_code = $request->lang_code;
+        $profileTblLanguages->lastupd_enc = $encoder;
         $profileTblLanguages->save();
      
         return redirect()->route('language.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
