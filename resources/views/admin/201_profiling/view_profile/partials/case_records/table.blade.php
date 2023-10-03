@@ -86,7 +86,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_date }}
+                        {{ $caseRecords->filed_dt }}
                     </td>
 
                     <td class="px-6 py-3">

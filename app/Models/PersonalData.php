@@ -123,7 +123,7 @@ class PersonalData extends Model
 
     public function caseRecords(): HasMany
     {
-        return $this->hasMany(CaseRecords::class);
+        return $this->hasMany(CaseRecords::class, 'cesno', 'cesno');
     }
 
     public function healthRecords(): HasOne
