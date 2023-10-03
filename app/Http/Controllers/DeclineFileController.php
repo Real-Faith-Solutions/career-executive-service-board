@@ -16,8 +16,11 @@ class DeclineFileController extends Controller
     }
 
     // decline file
-    public function declineFile($ctrlno)
+    public function declineFile(Request $request)
     {
+        $ctrlno = $request->decline_file_ctrlno;
+        $cesno = $request->decline_file_personal_data_cesno;
+        $reason = $request->decline_file_reason;
         $pendingFile = RequestFile::find($ctrlno);
         $pendingFile->delete();
 
