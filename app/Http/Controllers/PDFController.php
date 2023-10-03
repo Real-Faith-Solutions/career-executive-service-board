@@ -96,8 +96,13 @@ class PDFController extends Controller
     }
 
     //store accepted file
-    public function acceptedFiles(Request $request, $ctrlno, $cesno)
+    public function acceptedFiles(Request $request)
     {
+
+        $ctrlno = $request->approve_file_ctrlno;
+        $cesno = $request->approve_file_personal_data_cesno;
+        $reason = $request->approve_file_reason;
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName(); 
