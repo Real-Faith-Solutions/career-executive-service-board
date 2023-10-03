@@ -54,7 +54,7 @@ class OfficeManagerController extends Controller
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
             'website' => $request->input('website'),
-            'isActive' => $request->input('isActive'),
+            // 'isActive' => $request->input('isActive'),
             'encoder' => $encoder,
         ]);
 
@@ -67,7 +67,7 @@ class OfficeManagerController extends Controller
             'city_code' => $request->input('city_code'),
             'contactno' => $request->input('contactno'),
             'emailadd' => $request->input('emailadd'),
-            'isActive' => $request->input('isActive'),
+            // 'isActive' => $request->input('isActive'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'encoder' => $encoder,
         ]);
@@ -111,7 +111,7 @@ class OfficeManagerController extends Controller
             'title' => $request->input('title'),
             'acronym' => $request->input('acronym'),
             'website' => $request->input('website'),
-            'isActive' => $request->input('isActive'),
+            'is_active' => $request->input('is_active'),
             'lastupd_enc' => $encoder,
         ]);
 

@@ -67,8 +67,8 @@
             </td>
 
             <td>
-                <span class="{{ $data->isActive == 1 ? 'success' : 'danger'}}">
-                    {{ $data->isActive == 1 ? 'ACTIVE' : 'INACTIVE'}}
+                <span class="{{ $data->is_active == 1 ? 'success' : 'danger'}}">
+                    {{ $data->is_active == 1 ? 'ACTIVE' : 'INACTIVE'}}
                 </span>
             </td>
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();
-            $table->boolean('isActive')->default(true);
+            $table->boolean('is_active')->default(true)->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
             $table->timestamp('encdate')->useCurrent();

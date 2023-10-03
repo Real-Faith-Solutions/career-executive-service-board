@@ -121,19 +121,19 @@
                     </div>
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                        <div class="mb-3">
-                            <label for="isActive">Office Status<sup>*</sup></label>
-                            <select id="isActive" name="isActive" required>
+                        {{-- <div class="mb-3">
+                            <label for="is_active">Office Status<sup>*</sup></label>
+                            <select id="is_active" name="is_active" required>
                                 <option disabled selected>Select status</option>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                             </select>
-                            @error('isActive')
+                            @error('is_active')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="flex justify-end">

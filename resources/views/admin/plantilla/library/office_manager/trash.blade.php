@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Department Agency Manager - Trash')
+@section('title', 'Office Manager - Trash')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">
@@ -56,8 +56,8 @@
                     </a>
                 </td>
                 <td class="px-6 py-3">
-                    <span class="{{ $data->isActive == 1 ? 'success' : 'danger'}}">
-                        {{ $data->isActive == 1 ? 'ACTIVE' : 'INACTIVE'}}
+                    <span class="{{ $data->is_active == 1 ? 'success' : 'danger'}}">
+                        {{ $data->is_active == 1 ? 'ACTIVE' : 'INACTIVE'}}
                     </span>
                 </td>
                 <td>

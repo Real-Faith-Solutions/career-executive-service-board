@@ -137,7 +137,7 @@
                     </div>
                 </div>
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                {{-- <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
                         <label for="isActive">Office Status<sup>*</sup></label>
                         <select id="isActive" name="isActive" required>
@@ -151,7 +151,7 @@
                         </span>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
