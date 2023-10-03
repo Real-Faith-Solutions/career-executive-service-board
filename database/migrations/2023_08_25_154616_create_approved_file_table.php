@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('original_pdflink')->nullable();
             $table->dateTime('request_date')->nullable();
             $table->string('requested_by')->nullable();
-            $table->string('encoder')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('reason')->nullable();
+            $table->string('encoder')->nullable();
             $table->timestamps();
         });
     }

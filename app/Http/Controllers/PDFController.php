@@ -180,6 +180,7 @@ class PDFController extends Controller
             'remarks' => $requestFile->remarks,
             'request_date' => $requestDate,
             'requested_by' => $requestedBy,
+            'reason' => $reason,
             'encoder' => $encoder,
          
         ]);

@@ -24,6 +24,7 @@ class ApprovedFile extends Model
         'request_date',
         'requested_by',
         'remarks',
+        'reason',
         'encoder',
 
     ];
