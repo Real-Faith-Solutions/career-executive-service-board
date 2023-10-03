@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('cbasis_remarks')->nullable();
             $table->string('item_no')->nullable();
             $table->boolean('pres_apptee')->nullable();
-            $table->boolean('is_active')->nullable();
+            $table->boolean('is_active')->default(true)->nullable();
             $table->boolean('is_generic')->nullable();
             $table->boolean('is_head')->nullable();
             $table->string('created_user')->nullable();
