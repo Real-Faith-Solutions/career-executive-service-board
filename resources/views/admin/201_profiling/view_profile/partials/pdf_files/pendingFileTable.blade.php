@@ -129,7 +129,7 @@
                 <div class="flex flex-col items-center mb-2">
                     <label for="approve_file_reason" class="mb-2">Reason for approval<sup>*</sup></label>
                     <label class="mb-2" id="approve_file_name"></label>
-                    <input type="text" id="approve_file_reason" name="approve_file_reason"
+                    <input type="text" id="approve_file_reason" name="approve_file_reason" placeholder="Please state a reason..."
                         oninput="validateInput(approve_file_reason, 4)"
                         onkeypress="validateInput(approve_file_reason, 4)"
                         onblur="checkErrorMessage(approve_file_reason)" required>
@@ -169,7 +169,7 @@
                 <div class="flex flex-col items-center mb-2">
                     <label for="decline_file_reason" class="mb-2">Reason for declining<sup>*</sup></label>
                     <label class="mb-2" id="decline_file_name"></label>
-                    <input type="text" id="decline_file_reason" name="decline_file_reason"
+                    <input type="text" id="decline_file_reason" name="decline_file_reason" placeholder="Please state a reason..."
                         oninput="validateInput(decline_file_reason, 4)"
                         onkeypress="validateInput(decline_file_reason, 4)"
                         onblur="checkErrorMessage(decline_file_reason)" required>
