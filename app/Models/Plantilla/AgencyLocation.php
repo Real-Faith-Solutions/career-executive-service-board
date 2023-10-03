@@ -24,6 +24,7 @@ class AgencyLocation extends Model
         'emailaddr',
         'region',
         'encoder',
+        'lastupd_enc',
     ];
 
     public function agencyLocationLibrary(): BelongsTo

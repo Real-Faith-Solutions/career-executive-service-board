@@ -42,6 +42,7 @@ class AgencyLocationManagerController extends Controller
             'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
             'encoder' => $encoder,
+            'lastupd_enc' => $encoder,
         ]);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
@@ -82,6 +83,9 @@ class AgencyLocationManagerController extends Controller
 
     public function update(Request $request, $officelocid)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
@@ -97,6 +101,7 @@ class AgencyLocationManagerController extends Controller
             'telno' => $request->input('telno'),
             'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
+            'lastupd_enc' => $encoder,
         ]);
 
 
