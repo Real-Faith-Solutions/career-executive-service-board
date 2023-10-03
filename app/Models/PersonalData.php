@@ -113,7 +113,7 @@ class PersonalData extends Model
 
     public function awardsAndCitations(): HasMany
     {
-        return $this->hasMany(AwardAndCitations::class);
+        return $this->hasMany(AwardAndCitations::class, 'cesno', 'cesno');
     }
 
     public function affiliations(): HasMany

@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AwardAndCitations extends Model
 {
+    use HasFactory, SoftDeletes;
 
-    use HasFactory;
-    
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
     
     protected $table = "profile_tblAwards";
 
@@ -23,8 +23,9 @@ class AwardAndCitations extends Model
         'personal_data_cesno',
         'awards',
         'sponsor',
-        'date',
+        'award_dt',
         'encoder',
+        'lastupd_enc',
 
     ];
 
@@ -32,5 +33,4 @@ class AwardAndCitations extends Model
     {
         return $this->belongsTo(PersonalData::class);
     }
-
 }
