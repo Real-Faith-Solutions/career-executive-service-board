@@ -38,6 +38,10 @@
                 <th scope="col" class="px-6 py-3">
                     Approved By
                 </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Reason
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -77,6 +81,10 @@
 
                     <td class="px-6 py-3">
                         {{ $approvedFiles->encoder }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $approvedFiles->reason }}
                     </td>
                 </tr>
             @endforeach

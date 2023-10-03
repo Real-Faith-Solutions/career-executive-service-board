@@ -22,6 +22,7 @@ class RequestFile extends Model
         'request_pdflink_orignal_name',
         'request_unique_file_name',
         'remarks',
+        'reason',
         'encoder',
 
     ];

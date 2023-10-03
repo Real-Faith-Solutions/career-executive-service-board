@@ -1,5 +1,5 @@
-// Open the modal when the add button is clicked
-document.getElementById('add_medical_history').addEventListener('click', function() {
+  // Open the modal when the add button is clicked
+  document.getElementById('add_medical_history').addEventListener('click', function() {
     showModalMH();
   });
   
@@ -24,3 +24,5 @@ document.getElementById('add_medical_history').addEventListener('click', functio
   function closeModalMH() {
     document.getElementById('add-medical-history-modal').classList.add('hidden');
   }
+
+  
