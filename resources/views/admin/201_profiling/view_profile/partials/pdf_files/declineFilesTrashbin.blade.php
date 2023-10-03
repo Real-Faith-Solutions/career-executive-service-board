@@ -36,7 +36,11 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Decline By
+                    Declined By
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Reason
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -81,6 +85,10 @@
 
                     <td class="px-6 py-3">
                         {{ $pendingFileTrashedRecords->encoder }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $pendingFileTrashedRecords->reason }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
