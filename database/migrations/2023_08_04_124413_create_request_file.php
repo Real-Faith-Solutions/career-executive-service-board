@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('request_pdflink_orignal_name');
             $table->string('request_unique_file_name');
             $table->string('remarks');
+            $table->string('reason')->nullable();
             $table->string('encoder');
             $table->timestamps();
             $table->softDeletes();

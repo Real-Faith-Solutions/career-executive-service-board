@@ -79,34 +79,28 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('show-pdf-files.acceptedFiles', ['ctrlno'=>$pdfFiles->ctrlno, 'cesno'=>$pdfFiles->personal_data_cesno]) }}" method="POST" id="approve_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Approval', 'Are you sure you want to approve this pdf?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/egiwmiit.json"
-                                        trigger="morph"
-                                        colors="primary:#3b82f6"
-                                        state="hover"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
+                            <button title="Approve File" type="button" id="ApprovePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogApprovePendingPdf('{{ $pdfFiles->request_unique_file_name }}', {{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/egiwmiit.json"
+                                    trigger="morph"
+                                    colors="primary:#3b82f6"
+                                    state="hover"
+                                    style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
                             
-                            <form action="{{ route('declineFile', ['ctrlno'=>$pdfFiles->ctrlno]) }}" method="POST" id="decline_pending_pdf_file_form{{$pdfFiles->ctrlno}}">
-                                @csrf
-                                @method('DELETE')
-                                <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Decline', 'Are you sure you want to decline this pdf?')" >
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                            
+                            <button title="Decline File" type="button" id="DeclinePendingPdfFileButton{{$pdfFiles->ctrlno}}" onclick="openConfirmationDialogDeclinePendingPdf('{{ $pdfFiles->request_unique_file_name }}', {{ $pdfFiles->ctrlno }}, {{ $pdfFiles->personal_data_cesno }})">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com/nhfyhmlt.json"
                                     trigger="hover"
-                                    colors="primary:#BC0001"u
+                                    colors="primary:#BC0001"
                                     state="hover-3"
                                     style="width:24px;height:24px">
                                 </lord-icon>
-                                </button>
-                            </form>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -114,5 +108,85 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal for ApprovePendingPdfFile -->
+<div id="approve_pending_pdf_modal"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+        <form id="approvePendingPdfForm" action="{{ route('show-pdf-files.acceptedFiles') }}"
+            method="POST" class="flex flex-col items-center"
+            onsubmit="return checkErrorsBeforeSubmit(approvePendingPdfForm)">
+            @csrf
+
+            <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-center">Approve PDF File</h2>
+
+            <input type="hidden" id="approve_file_ctrlno" name="approve_file_ctrlno">
+            <input type="hidden" id="approve_file_personal_data_cesno" name="approve_file_personal_data_cesno">
+
+            <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+
+                <div class="flex flex-col items-center mb-2">
+                    <label for="approve_file_reason" class="mb-2">Reason for approval<sup>*</sup></label>
+                    <label class="mb-2" id="approve_file_name"></label>
+                    <input type="text" id="approve_file_reason" name="approve_file_reason" placeholder="Please state a reason..."
+                        oninput="validateInput(approve_file_reason, 4)"
+                        onkeypress="validateInput(approve_file_reason, 4)"
+                        onblur="checkErrorMessage(approve_file_reason)" required>
+                    <p class="input_error text-red-600"></p>
+                    @error('approve_file_reason')
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
+                    @enderror
+                </div>
+
+            </div>
+            <button type="submit" id="approvePendingPdfBtn"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Approve</button>
+        </form>
+    </div>
+</div>
+{{-- end --}}
+
+<!-- Modal for DeclinePendingPdfFile -->
+<div id="decline_pending_pdf_modal"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+        <form id="declinePendingPdfForm" action="{{ route('declineFile') }}"
+            method="POST" class="flex flex-col items-center"
+            onsubmit="return checkErrorsBeforeSubmit(declinePendingPdfForm)">
+            @csrf
+
+            <span class="close-md absolute top-2 right-2 text-gray-600 cursor-pointer">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-center">Decline PDF File</h2>
+
+            <input type="hidden" id="decline_file_ctrlno" name="decline_file_ctrlno">
+            <input type="hidden" id="decline_file_personal_data_cesno" name="decline_file_personal_data_cesno">
+
+            <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+
+                <div class="flex flex-col items-center mb-2">
+                    <label for="decline_file_reason" class="mb-2">Reason for declining<sup>*</sup></label>
+                    <label class="mb-2" id="decline_file_name"></label>
+                    <input type="text" id="decline_file_reason" name="decline_file_reason" placeholder="Please state a reason..."
+                        oninput="validateInput(decline_file_reason, 4)"
+                        onkeypress="validateInput(decline_file_reason, 4)"
+                        onblur="checkErrorMessage(decline_file_reason)" required>
+                    <p class="input_error text-red-600"></p>
+                    @error('decline_file_reason')
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
+                    @enderror
+                </div>
+
+            </div>
+            <button type="submit" id="declinePendingPdfBtn"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Decline</button>
+        </form>
+    </div>
+</div>
+{{-- end --}}
 
 @endsection
