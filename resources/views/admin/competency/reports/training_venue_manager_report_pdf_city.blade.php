@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Resource Speaker Manager Report</title>
+        <title>Training Venue Manager Report</title>
 
         <style>
             @page {
@@ -28,7 +28,7 @@
                 font-size: 10px;
                 color: #333;
             }
-
+            
             table {
                 border-collapse: collapse;
                 padding-left: 10px;
@@ -43,7 +43,7 @@
                 padding-left: 10px;
                 padding-bottom: 5px;
                 font-size: 11px;
-                text-align: center;
+                text-align: left;
             }
         
             th {
@@ -88,10 +88,16 @@
                 color: #284F87;
                 margin-top: 15px;
             }
+
+            .city_name {
+                margin-top: -12px;
+                font-size: 16px;
+                color: #284F87;
+            }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 190px;
             }
 
             .pagenum:before {
@@ -100,7 +106,7 @@
         </style>
     </head>
 
-    <body>
+    <body> 
         <header>
             <div class="container">
                 <div class="logo">
@@ -112,8 +118,9 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">Resource Speaker Manager Report</p>
-            </div> 
+                <p class="report_name">Training Venue Manager Report</p>
+                <p class="city_name">{{ "( $search City )" }}</p>
+            </div>
 
             <footer>
                 <div class="flex-container">
@@ -124,43 +131,31 @@
 
         <div>
             <table>
-                <thead >
+                <thead>
                     <div class="page-break"></div>
                     <tr>
-                        <th >
+                        <th>
                             
                         </th>
 
-                        <th class="thead">
-                            Name
+                        <th>
+                            Venue
                         </th>
-
-                        <th class="thead">
-                            Position
-                        </th class="thead">
-
-                        <th class="thead">
-                            Department
-                        </th class="thead">
-
-                        <th class="thead">
-                            Office
-                        </th>
-
-                        <th class="thead">
+        
+                        <th>
                             Address
                         </th>
-
-                        <th class="thead">
+        
+                        <th>
                             Contact No.
                         </th>
-
-                        <th class="thead">
-                            Email Address
+        
+                        <th>
+                            Email
                         </th>
-
-                        <th class="thead">
-                            Expertise
+        
+                        <th>
+                            Contact Person
                         </th>
                     </tr>
                 </thead>
@@ -168,54 +163,40 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                
-                    @foreach ($resourceSpeaker as $resourceSpeakers)
+
+                    @foreach ($trainingVenueManagerByCity as $trainingVenueManagerByCities)
                         <tr>
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
 
                             <td>
-                                {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
+                                {{ $trainingVenueManagerByCities->name ?? '' }}
                             </td>
-
-                            <td>
-                                {{ $resourceSpeakers->Position }}
-                            </td>
-
-                            <td>
-                                {{ $resourceSpeakers->Department }}
-                            </td>
-
-                            <td>
-                                {{ $resourceSpeakers->Office }}
-                            </td>
-
-                            <td>
+        
+                            <td >
                                 {{ 
-                                    $resourceSpeakers->Bldg.', '.
-                                    $resourceSpeakers->Street.', '.
-                                    $resourceSpeakers->Brgy.', '.
-                                    $resourceSpeakers->City
+                                    $trainingVenueManagerByCities->no_street.', '.
+                                    $trainingVenueManagerByCities->brgy.', '. 
+                                    $trainingVenueManagerByCities->trainingVenueManager->name ?? ''
                                 }}
                             </td>
-
-                            <td>
-                                {{ $resourceSpeakers->contactno }}
+        
+                            <td >
+                                {{ $trainingVenueManagerByCities->contactno ?? '' }}
                             </td>
-
-                            <td>
-                                {{ $resourceSpeakers->emailadd }}
+        
+                            <td >
+                                {{ $trainingVenueManagerByCities->emailadd ?? '' }}
                             </td>
-
-                            <td>
-                                {{ $resourceSpeakers->expertise }}
+        
+                            <td >
+                                {{ $trainingVenueManagerByCities->contactperson ?? ''}}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>    
-        
+        </div>
     </body>
 </html>

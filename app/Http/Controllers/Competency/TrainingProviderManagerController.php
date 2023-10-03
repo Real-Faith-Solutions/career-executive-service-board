@@ -13,13 +13,16 @@ class TrainingProviderManagerController extends Controller
 {
     public function index()
     {
-        $trainingProvider = CompetencyTrainingProvider::all();
+        $trainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 'emailadd', 
+        'contactperson')->orderBy('providerID', 'desc')->paginate(5);
+
         return view('admin.competency.partials.trainings_sub_module.training_provider_manager.table', compact('trainingProvider'));
     }
 
     public function create()
     {
-        $profileLibTblCities = ProfileLibCities::all();
+        $profileLibTblCities = ProfileLibCities::all(['city_code', 'name', 'zipcode']);
+
         return view('admin.competency.partials.trainings_sub_module.training_provider_manager.form', compact('profileLibTblCities'));
     }
 
@@ -71,7 +74,7 @@ class TrainingProviderManagerController extends Controller
 
     public function edit($ctrlno)
     {
-        $profileLibTblCities = ProfileLibCities::all();
+        $profileLibTblCities = ProfileLibCities::all(['city_code', 'name', 'zipcode']);
         $trainingProvider = CompetencyTrainingProvider::find($ctrlno);
 
         if(!$trainingProvider){

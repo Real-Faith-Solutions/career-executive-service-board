@@ -12,6 +12,9 @@ class ApptStatus extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'plantillalib_tblApptStatus';
     protected $primaryKey = 'appt_stat_code';
+    protected $fillable = [
+        'title',
+    ];
 
     public function apptStatus(): HasMany
     {

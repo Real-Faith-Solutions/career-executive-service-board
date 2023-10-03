@@ -7,22 +7,29 @@
 
     <div class="my-5 flex justify-between">
         {{-- search bar --}}
-            <div class="flex items-center">
-                <form class="flex gap-3">
-                    <select id="city_code" name="city_code">
-                        <option value="">Select All</option>
-                        @foreach($profileLibTblCities as $profileLibTblCity)
-                            <option value="{{ $profileLibTblCity->city_code }}" {{ $cityCode == $profileLibTblCity->city_code ? 'selected' : '' }}>
-                                {{ $profileLibTblCity->name  }}
-                            </option>
+        <div class="flex items-center">
+            <form action="" method="GET">
+                <div class="flex gap-4">
+                    <input type="text" name="search" id="search" list="searchResults" placeholder="Search..." value="{{ $search }}">
+                    <datalist id="searchResults">
+                        @foreach($searchProfileLibCities as $searchProfileLibCity)
+                            <option value="{{ $searchProfileLibCity->name }}">{{ $searchProfileLibCity->name }}<option>
                         @endforeach
-                    </select>
-                    <button class="btn btn-primary" type="submit">Filter</button>
-                </form>
-            </div>
-        {{-- end of search bar --}}
+                    </datalist>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
 
-        <div class="flex">
+        <div class="flex items-center">
+            <form action="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdfByCity') }}" target="_blank" method="POST">
+                @csrf
+                <input type="hidden" name="search" value="{{ $search }}">
+                <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
+                    Generate PDF Report By City
+                </button>
+            </form>
+
             <form action="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf') }}" target="_blank" method="POST">
                 @csrf
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
