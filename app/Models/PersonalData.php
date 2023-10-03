@@ -118,7 +118,7 @@ class PersonalData extends Model
 
     public function affiliations(): HasMany
     {
-        return $this->hasMany(Affiliations::class);
+        return $this->hasMany(Affiliations::class, 'cesno', 'cesno');
     }
 
     public function caseRecords(): HasMany

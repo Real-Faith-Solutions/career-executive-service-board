@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 
 class AffiliationController extends Controller
 {
-
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -28,7 +27,7 @@ class AffiliationController extends Controller
     {
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('personal_data_cesno', $cesno)],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('cesno', $cesno)],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],
@@ -67,7 +66,7 @@ class AffiliationController extends Controller
     {
         $request->validate([
 
-            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date_from' => ['required'],
             'date_to' => ['required'],
@@ -83,10 +82,10 @@ class AffiliationController extends Controller
         $affiliation->position = $request->position;
         $affiliation->from_dt = $request->date_from;
         $affiliation->to_dt = $request->date_to;
-        $affiliation->updated_by = $encoder;
+        $affiliation->lastupd_enc = $encoder;
         $affiliation->save();
 
-        return to_route('affiliation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+        return to_route('affiliation.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -113,7 +112,7 @@ class AffiliationController extends Controller
         $affiliation = Affiliations::withTrashed()->find($ctrlno);
         $affiliation->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
     
@@ -122,7 +121,6 @@ class AffiliationController extends Controller
         $affiliation = Affiliations::withTrashed()->find($ctrlno);
         $affiliation->forceDelete();
   
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
-
 }

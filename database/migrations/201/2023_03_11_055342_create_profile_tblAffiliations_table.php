@@ -14,17 +14,17 @@ return new class extends Migration
         //affiliations
         Schema::create('profile_tblAffiliations', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->unsignedBigInteger('cesno');
+            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('organization')->nullable();
             $table->string('position')->nullable();
             $table->date('from_dt')->nullable();
             $table->date('to_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 
