@@ -62,6 +62,7 @@ use App\Http\Controllers\Plantilla\Library\ClassBasisController;
 use App\Http\Controllers\Plantilla\Library\DBMPositionTitleController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\LocationTypeController;
+use App\Http\Controllers\Plantilla\Library\MotherDeptController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
 use App\Http\Controllers\Plantilla\Library\PersonnelMovementController;
@@ -520,6 +521,11 @@ Route::middleware('auth')->group(function () {
         Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
         Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
         Route::resource('library-location-type', LocationTypeController::class);
+        
+        Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
+        Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
+        Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');
+        Route::resource('library-mother-dept', MotherDeptController::class);
     });
     // End of plantilla routes
 

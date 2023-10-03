@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_motherdept', function (Blueprint $table) {
-            $table->id();
+            $table->id('deptid');
             $table->string('title');
             $table->string('encoder');
+            $table->string('updated_by');
             $table->softDeletes();
             $table->timestamps();
         });
