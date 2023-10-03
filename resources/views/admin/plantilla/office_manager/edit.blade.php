@@ -205,7 +205,10 @@
     </div>
 </div>
 
-<div class="flex justify-end">
+<div class="flex justify-between">
+    <a href="#" class="text-blue-500 uppercase text-2xl">
+        Plantilla Position Manager
+    </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>

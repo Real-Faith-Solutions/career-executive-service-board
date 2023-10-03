@@ -20,11 +20,12 @@
     </ol>
 </nav>
 
-<div class="lg:flex lg:justify-end my-3">
-
-    <div class="my-3 sm:flex sm:justify-end">
-        <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
-    </div>
+<div class="my-3 sm:flex sm:justify-between">
+    <a href="#" class="text-blue-500 uppercase text-2xl">
+        Sector Manager
+    </a>
+    <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
+</div>
 </div>
 
 

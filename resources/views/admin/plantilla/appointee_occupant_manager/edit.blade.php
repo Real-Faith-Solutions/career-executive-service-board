@@ -400,7 +400,10 @@
     </div>
 </div>
 
-<div class="flex justify-end">
+<div class="flex justify-between">
+    <a href="#" class="text-blue-500 uppercase text-2xl">
+        Appointee Occupant
+    </a>
     <a href="{{ route('appointee-occupant-manager.create',['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id] ) }}"
         class="btn btn-primary">
         Add record
