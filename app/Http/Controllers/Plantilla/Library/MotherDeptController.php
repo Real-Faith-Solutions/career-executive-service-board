@@ -81,9 +81,9 @@ class MotherDeptController extends Controller
     {
         $data = MotherDept::findOrFail($deptid);
 
-        // if ($data->departmentAgency()->exists()) {
-        //     return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
-        // }
+        if ($data->deptAgency()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        }
 
         try {
             $data->delete();
