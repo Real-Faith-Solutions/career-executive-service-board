@@ -187,7 +187,7 @@ class EligibilityAndRankTrackerController extends Controller
         $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
         ->value('cesstat_code');
    
-        // update CESStat_code based on $latestCestatusCode
+        // update CESStat_code based on $latestCestatusCode in profile_tblMain table
         DB::table('profile_tblMain')
         ->where('cesno', $cesno)
         ->update(['CESStat_code' => $latestCestatusCode]);

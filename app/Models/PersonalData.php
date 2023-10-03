@@ -128,7 +128,7 @@ class PersonalData extends Model
 
     public function healthRecords(): HasOne
     {
-        return $this->hasOne(HealthRecords::class);
+        return $this->hasOne(HealthRecords::class, 'cesno', 'cesno');
     }
 
     public function expertise(): HasMany

@@ -71,7 +71,7 @@ class RankTrackerController extends Controller
 
         $erisTblMain->rankTracker()->save($rankTracker);
    
-        // update ces status based on $latestCestatusDescription
+        // update ces status based on $latestCestatusDescription in erad_tblranktracker table
         DB::table('erad_tblranktracker')
         ->where('acno', $acno)
         ->update(['cesstatus' => $latestCestatusDescription]);

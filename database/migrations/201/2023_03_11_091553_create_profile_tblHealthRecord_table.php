@@ -14,18 +14,16 @@ return new class extends Migration
         //health_records
         Schema::create('profile_tblHealthRecord', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('blood_type');
-            $table->string('identifying_marks')->nullable();
-            $table->string('person_with_disability')->nullable();
-            // $table->string('disability_handicap_defects_specify')->nullable();
-            // $table->string('illness')->nullable();
-            // $table->date('illness_date')->nullable();
+            $table->unsignedBigInteger('cesno');
+            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->string('blood_type')->nullable();
+            $table->string('marks')->nullable();
+            $table->string('handicap')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate');
+            $table->timestamp('lastupd_dt');
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 
