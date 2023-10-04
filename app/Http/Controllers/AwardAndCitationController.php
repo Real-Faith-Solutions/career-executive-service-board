@@ -26,7 +26,6 @@ class AwardAndCitationController extends Controller
     public function store(Request $request, $cesno)
     {
         $request->validate([
-            // , Rule::unique('profile_tblAwards')->where('personal_data_cesno', $cesno)
             'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'date' => ['required'],
@@ -41,7 +40,7 @@ class AwardAndCitationController extends Controller
 
             'awards' => $request->awards,
             'sponsor' => $request->sponsor,
-            'date' => $request->date,
+            'award_dt' => $request->date,
             'encoder' => $encoder,
          
         ]);
@@ -51,10 +50,10 @@ class AwardAndCitationController extends Controller
         //check if PersonalData primary key is existed
         if(!$awardAndCitationsPersonalDataId)
         {    
-            return redirect()->back()->with('error', 'Something Went Wrong, Saving the Data');
+            return redirect()->back()->with('error', 'Data Not Found');
         }
 
-        $awardAndCitationsIfExist = AwardAndCitations::where('awards', $request->awards)->where('date', $request->date)->exists();
+        $awardAndCitationsIfExist = AwardAndCitations::where('awards', $request->awards)->where('award_dt', $request->date)->exists();
 
         //check if awards and date is existed in AwarndCitations
         if($awardAndCitationsIfExist)
@@ -99,8 +98,8 @@ class AwardAndCitationController extends Controller
         $awardAndCitation = AwardAndCitations::find($ctrlno);
         $awardAndCitation->awards = $request->awards;
         $awardAndCitation->sponsor = $request->sponsor;
-        $awardAndCitation->date = $request->date;
-        $awardAndCitation->updated_by = $encoder;
+        $awardAndCitation->award_dt = $request->date;
+        $awardAndCitation->lastupd_enc = $encoder;
         $awardAndCitation->save();
 
         return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
@@ -130,7 +129,7 @@ class AwardAndCitationController extends Controller
         $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
         $awardAndCitations->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
  
     public function forceDelete($ctrlno)
@@ -138,6 +137,6 @@ class AwardAndCitationController extends Controller
         $awardAndCitations = AwardAndCitations::withTrashed()->find($ctrlno);
         $awardAndCitations->forceDelete();
   
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

@@ -34,7 +34,7 @@ class OtherTrainingController extends Controller
     {
         $request->validate([ 
 
-            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)],
+            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -56,8 +56,8 @@ class OtherTrainingController extends Controller
             'sponsor' => $request->sponsor_training_provider,
             'venue' => $request->venue,
             'no_training_hours' => $request->no_of_training_hours,
-            'from_date' => $request->inclusive_date_from,
-            'to_date' => $request->inclusive_date_to,
+            'from_dt' => $request->inclusive_date_from,
+            'to_dt' => $request->inclusive_date_to,
             'field_specialization' => $request->expertise_field_of_specialization,
             'encoder' => $encoder,
          
@@ -82,7 +82,7 @@ class OtherTrainingController extends Controller
     {
         $request->validate([ 
 
-            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -93,15 +93,20 @@ class OtherTrainingController extends Controller
             
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $trainingManagement = ProfileTblTrainingMngt::find($ctrlno);
         $trainingManagement->training = $request->training;
         $trainingManagement->training_category = $request->training_category;
         $trainingManagement->sponsor = $request->sponsor_training_provider;
         $trainingManagement->venue = $request->venue;
         $trainingManagement->no_training_hours = $request->no_of_training_hours;
-        $trainingManagement->from_date = $request->inclusive_date_from;
-        $trainingManagement->to_date = $request->inclusive_date_to;
+        $trainingManagement->from_dt = $request->inclusive_date_from;
+        $trainingManagement->to_dt = $request->inclusive_date_to;
         $trainingManagement->field_specialization = $request->expertise_field_of_specialization;
+        $trainingManagement->lastupd_enc = $encoder;
         $trainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');

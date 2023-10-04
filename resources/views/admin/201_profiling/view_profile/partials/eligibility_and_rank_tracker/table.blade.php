@@ -35,7 +35,9 @@
           </lord-icon>
         </a>
     
-        <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+        <div class="flex items-center">
+            <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+        </div>
     </div>
 </div>
 
@@ -44,8 +46,6 @@
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
-                    
-
                     <th scope="col" class="px-6 py-3">
                         CES Status
                     </th>

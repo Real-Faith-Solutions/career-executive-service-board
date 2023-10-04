@@ -46,7 +46,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardAndCitationsTrashedRecords->date }}
+                        {{ $awardAndCitationsTrashedRecords->award_dt }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">

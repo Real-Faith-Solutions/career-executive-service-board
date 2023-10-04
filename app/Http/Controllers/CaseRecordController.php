@@ -14,7 +14,9 @@ class CaseRecordController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $caseRecord = $personalData->caseRecords;
+        $caseRecord = $personalData->caseRecords()
+        ->orderBy('encdate', 'desc')
+        ->paginate(10);
 
         return view('admin.201_profiling.view_profile.partials.case_records.table', compact('caseRecord' ,'cesno'));
     }
@@ -31,7 +33,7 @@ class CaseRecordController extends Controller
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('personal_data_cesno', $cesno)],
+            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('cesno', $cesno)],
             'date_filed' => ['required'],
             'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
@@ -51,7 +53,7 @@ class CaseRecordController extends Controller
             'offence' => $request->offense,
             'nature_code' => $request->nature_of_offense,
             'case_no' => $request->case_no,
-            'filed_date' => $request->date_filed,
+            'filed_dt' => $request->date_filed,
             'venue' => $request->venue,
             'status_code' => $request->case_status,
             'finality' => $request->date_finality,
@@ -82,7 +84,7 @@ class CaseRecordController extends Controller
             'parties' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'offense' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'nature_of_offense' => ['required'],
-            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'case_no' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblCaseRecord')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'date_filed' => ['required'],
             'venue' => ['required', 'min:2', 'max:40'],
             'case_status' => ['required'],
@@ -92,20 +94,25 @@ class CaseRecordController extends Controller
             
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $caseRecord = CaseRecords::find($ctrlno);
         $caseRecord->parties = $request->parties;
         $caseRecord->offence = $request->offense;
         $caseRecord->nature_code = $request->nature_of_offense;
         $caseRecord->case_no = $request->case_no;
-        $caseRecord->filed_date = $request->date_filed;
+        $caseRecord->filed_dt = $request->date_filed;
         $caseRecord->venue = $request->venue;
         $caseRecord->status_code = $request->case_status;
         $caseRecord->finality = $request->date_finality;
         $caseRecord->decision = $request->decision;
         $caseRecord->remarks = $request->remarks;
+        $caseRecord->lastupd_enc = $encoder;
         $caseRecord->save();
 
-        return to_route('case-record.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+        return to_route('case-record.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -122,7 +129,10 @@ class CaseRecordController extends Controller
         $personalData = PersonalData::withTrashed()->find($cesno);
 
         // Access the soft deleted scholarships of the parent model
-        $caseRecordTrashedRecord = $personalData->caseRecords()->onlyTrashed()->get();
+        $caseRecordTrashedRecord = $personalData->caseRecords()
+        ->onlyTrashed()
+        ->orderBy('deleted_at', 'desc')
+        ->paginate(10);
  
         return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord' ,'cesno'));
     }
@@ -132,7 +142,7 @@ class CaseRecordController extends Controller
         $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
         $caseRecord->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
  
     public function forceDelete($ctrlno)
@@ -140,6 +150,6 @@ class CaseRecordController extends Controller
         $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
         $caseRecord->forceDelete();
   
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

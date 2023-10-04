@@ -10,11 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ExaminationsTaken extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
-
-    protected $guarded = [];
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = 'profile_tblExaminations';
 
@@ -22,15 +21,16 @@ class ExaminationsTaken extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'exam_code',
-        'rating',
-        'date_of_examination',
-        'place_of_examination',
+        'rate',
+        'exam_date',
+        'exam_place',
         'license_number',
         'date_acquired',
         'date_validity',
         'encoder',
+        'lastupd_enc',
 
     ];
 

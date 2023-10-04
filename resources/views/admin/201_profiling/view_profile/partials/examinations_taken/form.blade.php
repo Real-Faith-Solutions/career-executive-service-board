@@ -85,7 +85,7 @@
 
                     <div class="mb-3">
                         <label for="date_acquired">Date Acquired</label>
-                        <input type="date" id="date_acquired" name="date_acquired" oninput="validateDateInput(date_acquired)" required>
+                        <input type="date" id="date_acquired" name="date_acquired" oninput="validateDateInput(date_acquired)">
                         <p class="input_error text-red-600"></p>
                         @error('date_acquired')
                             <span class="invalid" role="alert">

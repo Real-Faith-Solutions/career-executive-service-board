@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EducationalAttainment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = 'profile_tblEducation';
 
@@ -19,17 +20,18 @@ class EducationalAttainment extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'level',
         'degree_code',
         'major_code',
         'school_code',
-        'school_type',
+        'school_status',
         'period_of_attendance_from',
-        'period_of_attendance_to',
-        'highest_level',
-        'academics_honor_received',
+        'year_grad',
+        'degree_status',
+        'honors',
         'encoder',
+        'lastupd_enc',
 
     ];
 

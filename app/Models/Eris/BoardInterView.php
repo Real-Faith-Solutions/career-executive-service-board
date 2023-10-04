@@ -20,7 +20,7 @@ class BoardInterView extends Model
 
     protected $fillable = [
         
-        'acno', // foreign key, reference on erad_TblMain, in Model ErisTblMain
+        'acno', // foreign key, reference on erad_TblMain, in Model EradTblMain
         'dteassign', // date assigned
         'dtesubmit', // date submit
         'intrviewer', // interviewer
@@ -32,6 +32,6 @@ class BoardInterView extends Model
 
     public function erisTblMainBoardInterview(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

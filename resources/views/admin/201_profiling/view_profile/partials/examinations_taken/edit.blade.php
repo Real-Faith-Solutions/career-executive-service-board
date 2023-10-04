@@ -45,7 +45,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="rating">Rating (if applicable)</label>
-                        <input id="rating" name="rating" type="text" value="{{ $examinationTaken->rating }}">
+                        <input id="rating" name="rating" type="text" value="{{ $examinationTaken->rate }}">
                         @error('rating')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -55,7 +55,7 @@
 
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
-                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->date_of_examination }}" required type="text">
+                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->exam_date }}" required type="text">
                         @error('date_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -65,7 +65,7 @@
 
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
-                        <input id="place_of_examination" name="place_of_examination" value="{{ $examinationTaken->place_of_examination }}" required type="text">
+                        <input id="place_of_examination" name="place_of_examination" value="{{ $examinationTaken->exam_place }}" required type="text">
                         @error('place_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

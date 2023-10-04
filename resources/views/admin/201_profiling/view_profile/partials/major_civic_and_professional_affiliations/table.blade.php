@@ -14,7 +14,7 @@
       </lord-icon>
     </a>
 
-    <a href="{{ route('affiliation.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Major Civic and Professional Affiliations</a>
+    <a href="{{ route('affiliation.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Affiliations</a>
 </div>
 
 <div class="table-major-civic-and-professional-affiliations relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -88,6 +88,10 @@
 
         </tbody>
     </table>
+</div>
+
+<div class="my-5">
+    {{ $affiliation->links() }}
 </div>
 
 @endsection

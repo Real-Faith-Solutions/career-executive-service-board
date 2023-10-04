@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('profile_tblResearch', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->integer('cesno');
+            // $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
             $table->string('title')->nullable();
-            $table->string('publisher')->nullable();
-            $table->string('inclusive_date_from')->nullable();
-            $table->string('inclusive_date_to')->nullable();
+            $table->string('sponsor')->nullable();
+            $table->string('from_dt')->nullable();
+            $table->string('to_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

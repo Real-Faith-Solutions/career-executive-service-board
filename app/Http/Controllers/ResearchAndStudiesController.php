@@ -28,7 +28,7 @@ class ResearchAndStudiesController extends Controller
     {
         $request->validate([
 
-            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)],
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profile_tblResearch')->where('cesno', $cesno)],
             'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
@@ -42,9 +42,9 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies = new ResearchAndStudies([
 
             'title' => $request->title,
-            'publisher' => $request->publisher,
-            'inclusive_date_from' => $request->inclusive_date_from,
-            'inclusive_date_to' => $request->inclusive_date_to,
+            'sponsor' => $request->publisher,
+            'from_dt' => $request->inclusive_date_from,
+            'to_dt' => $request->inclusive_date_to,
             'encoder' =>  $encoder,
          
         ]);
@@ -67,21 +67,26 @@ class ResearchAndStudiesController extends Controller
     {
         $request->validate([
 
-            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'title' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/',  Rule::unique('profile_tblResearch')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'publisher' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
 
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
+
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
         $researchAndStudies->title = $request->title;
-        $researchAndStudies->publisher = $request->publisher;
-        $researchAndStudies->inclusive_date_from = $request->inclusive_date_from;
-        $researchAndStudies->inclusive_date_to = $request->inclusive_date_to;
+        $researchAndStudies->sponsor = $request->publisher;
+        $researchAndStudies->from_dt = $request->inclusive_date_from;
+        $researchAndStudies->to_dt = $request->inclusive_date_to;
+        $researchAndStudies->lastupd_enc = $encoder;
         $researchAndStudies->save();
 
-        return to_route('research-studies.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+        return to_route('research-studies.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -108,7 +113,7 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
         $researchAndStudies->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
     public function forceDelete($ctrlno)
@@ -116,6 +121,6 @@ class ResearchAndStudiesController extends Controller
         $researchAndStudies = ResearchAndStudies::withTrashed()->find($ctrlno);
         $researchAndStudies->forceDelete();
 
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

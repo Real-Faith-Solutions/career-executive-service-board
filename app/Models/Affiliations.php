@@ -11,18 +11,22 @@ class Affiliations extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $table = "profile_tblAffiliations";
 
     protected $primaryKey = 'ctrlno';
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'organization',
         'position',
         'from_dt',
         'to_dt',
         'encoder',
+        'lastupd_enc',
 
     ];
 

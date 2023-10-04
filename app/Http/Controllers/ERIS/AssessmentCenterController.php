@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eris\AssessmentCenter;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class AssessmentCenterController extends Controller
 {
     public function index($acno)
     {
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $assessmentCenter = $erisTblMain->assessmentCenter()->paginate(20);
 
         return view('admin.eris.partials.assessment_center.table', compact('acno', 'assessmentCenter'));
@@ -20,7 +20,7 @@ class AssessmentCenterController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
 
         return view('admin.eris.partials.assessment_center.form', compact('acno','erisTblMainProfileData'));
     }
@@ -50,7 +50,7 @@ class AssessmentCenterController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
+        $erisTblMain = EradTblMain::find($request->acno);
         
         $erisTblMain->assessmentCenter()->save($assessmentCenter);
         
@@ -59,7 +59,7 @@ class AssessmentCenterController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $assessmentCenterProfileData = AssessmentCenter::find($ctrlno);
 
         return view('admin.eris.partials.assessment_center.edit', compact('acno', 'erisTblMainProfileData', 'assessmentCenterProfileData', 'ctrlno'));
@@ -96,7 +96,7 @@ class AssessmentCenterController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted assessmentCenter of the parent model
         $assessmentCenterTrashedRecord = $erisTblMainData->assessmentCenter()->onlyTrashed()->paginate(20);

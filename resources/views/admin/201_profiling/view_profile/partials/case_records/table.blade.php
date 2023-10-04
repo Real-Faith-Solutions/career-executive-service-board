@@ -86,7 +86,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_date }}
+                        {{ $caseRecords->filed_dt }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -142,6 +142,10 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="my-5">
+    {{ $caseRecord->links() }}
 </div>
 
 @endsection

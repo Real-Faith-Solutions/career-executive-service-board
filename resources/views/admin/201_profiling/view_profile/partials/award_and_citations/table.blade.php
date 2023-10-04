@@ -50,7 +50,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardsAndCitations->date }}
+                        {{ $awardsAndCitations->award_dt }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

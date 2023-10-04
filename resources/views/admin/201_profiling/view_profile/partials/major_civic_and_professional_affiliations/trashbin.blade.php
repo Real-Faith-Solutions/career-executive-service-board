@@ -87,4 +87,8 @@
     </table>
 </div>
 
+<div class="my-5">
+    {{ $affiliationsTrashedRecord->links() }}
+</div>
+
 @endsection

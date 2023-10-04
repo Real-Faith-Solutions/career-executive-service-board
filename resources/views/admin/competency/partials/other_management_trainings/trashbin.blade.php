@@ -140,7 +140,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $nonCesAccreditedTraining201TrashedRecords->from_date. ' - '.$nonCesAccreditedTraining201TrashedRecords->to_date }}
+                            {{ $nonCesAccreditedTraining201TrashedRecords->from_dt.' - '.$nonCesAccreditedTraining201TrashedRecords->to_dt }}
                         </td>
 
                         <td class="px-6 py-3">

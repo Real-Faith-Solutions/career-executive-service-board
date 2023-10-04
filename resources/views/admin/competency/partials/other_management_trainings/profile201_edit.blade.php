@@ -72,7 +72,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</sup></label>
-                        <input type="date" id="inclusive_date_from_201" name="inclusive_date_from" value="{{ $nonCesTraining201->from_date }}" oninput="validateDateInput(inclusive_date_from_201), validateDateFromTo(inclusive_date_from_201, inclusive_date_to_201)" required>
+                        <input type="date" id="inclusive_date_from_201" name="inclusive_date_from" value="{{ $nonCesTraining201->from_dt }}" oninput="validateDateInput(inclusive_date_from_201), validateDateFromTo(inclusive_date_from_201, inclusive_date_to_201)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
@@ -83,7 +83,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</sup></label>
-                        <input type="date" id="inclusive_date_to_201" name="inclusive_date_to" value="{{ $nonCesTraining201->to_date }}" oninput="validateDateInput(inclusive_date_to_201), validateDateFromTo(inclusive_date_from_201, inclusive_date_to_201)" required>
+                        <input type="date" id="inclusive_date_to_201" name="inclusive_date_to" value="{{ $nonCesTraining201->to_dt }}" oninput="validateDateInput(inclusive_date_to_201), validateDateFromTo(inclusive_date_from_201, inclusive_date_to_201)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">

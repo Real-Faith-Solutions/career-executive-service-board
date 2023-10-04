@@ -17,6 +17,10 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Deleted At
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
@@ -28,6 +32,10 @@
                     <td class="px-6 py-3">
                        {{  $profileTblLanguagesTrashedRecords->languagePersonalData->title }}
                     </td>
+
+                    <td class="px-6 py-3">
+                        {{  $profileTblLanguagesTrashedRecords->deleted_at }}
+                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
@@ -60,9 +68,12 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
+</div>
+
+<div class="my-5">
+    {{ $profileTblLanguagesTrashedRecord->links() }}
 </div>
 
 @endsection
