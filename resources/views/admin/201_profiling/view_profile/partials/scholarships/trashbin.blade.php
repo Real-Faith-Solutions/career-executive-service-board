@@ -54,7 +54,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarshipTrashedRecords->inclusive_date_from." - ".$scholarshipTrashedRecords->inclusive_date_to }}
+                        {{ $scholarshipTrashedRecords->from_dt." - ".$scholarshipTrashedRecords->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">
