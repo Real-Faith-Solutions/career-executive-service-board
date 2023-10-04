@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Office Manager')
+@section('title', 'Position Manager')
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
@@ -7,13 +7,13 @@
         @yield('title')
     </a>
     <div class="flex">
-        <a href="{{ route('library-office-manager.trash') }}">
+        <a href="{{ route('library-position-manager.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
             </lord-icon>
         </a>
 
-        <a class="btn btn-primary" href="{{ route('library-office-manager.create') }}">Add record</a>
+        <a class="btn btn-primary" href="{{ route('library-position-manager.create') }}">Add record</a>
     </div>
 </div>
 
@@ -21,14 +21,13 @@
 <table class="dataTables">
     <thead>
         <tr>
-            <th>Agency Location</th>
-            <th>Office</th>
-            <th>Office Acronym</th>
-            <th>Office Website</th>
-            <th>Office Contact no.</th>
-            <th>Office Email address</th>
-            <th>Status</th>
-
+            <th>Plantilla ID</th>
+            <th>Position Title</th>
+            <th>Position Level</th>
+            <th>Salary Grade Level</th>
+            <th>Item No.</th>
+            <th>Vacant</th>
+            <th>Pres Appointee</th>
             <th>
                 <span class="sr-only">Action</span>
             </th>
@@ -39,50 +38,46 @@
         @foreach ($datas as $data)
         <tr>
             <td class="font-semibold">
-                {{ $data->agencyLocation->title }}
+                {{ $data->plantilla_id }}
             </td>
             <td>
-                {{ $data->title }}
-            </td>
-            <td>
-                {{ $data->acronym }}
-            </td>
-            <td>
-                <a href="{{ $data->website ?? 'N/A' }}" target="_blank" class="hover:text-blue-500">
-                    {{ $data->website ?? 'N/A' }}
-                </a>
-            </td>
-            <td>
-                <a href="tel:{{ $data->officeAddress->contactno ?? 'N/A' }}" target="_blank"
-                    class="hover:text-blue-500">
-                    {{ $data->officeAddress->contactno ?? 'N/A' }}
-                </a>
+                {{ $data->positionMasterLibrary->dbm_title }}
             </td>
 
             <td>
-                <a href="Mailto:{{ $data->officeAddress->emailadd ?? 'N/A' }}" target="_blank"
-                    class="hover:text-blue-500">
-                    {{ $data->officeAddress->emailadd ?? 'N/A' }}
-                </a>
+                {{ $data->positionMasterLibrary->positionLevel->title }}
             </td>
 
             <td>
-                <span class="{{ $data->is_active == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_active == 1 ? 'ACTIVE' : 'INACTIVE'}}
+                {{ $data->corp_sg }}
+            </td>
+
+            <td>
+                {{ $data->item_no }}
+            </td>
+            <td>
+                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
+                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                </span>
+            </td>
+            <td>
+                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
+                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
                 </span>
             </td>
 
-
-            <td class="px-6 py-4 text-right uppercase">
+            <td class="text-right uppercase">
                 <div class="flex justify-end">
+
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('library-office-manager.edit', $data->officeid) }}">
+                        href="{{ route('library-position-manager.edit', $data->plantilla_id) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a>
+
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-office-manager.destroy', $data->officeid) }}" method="POST"
+                        action="{{ route('library-position-manager.destroy', $data->plantilla_id) }}" method="POST"
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf

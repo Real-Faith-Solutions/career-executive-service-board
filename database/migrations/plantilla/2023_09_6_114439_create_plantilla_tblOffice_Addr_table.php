@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('city_code')->nullable(); // need to get in profilelib_tblcities
             $table->string('contactno')->nullable();
             $table->string('emailadd')->nullable();
-            $table->boolean('isActive')->default(true);
+            $table->boolean('isActive')->default(true)->nullable();
 
             $table->integer('ofcaddrid')->nullable(); // need to get in migration still pending what tables
 

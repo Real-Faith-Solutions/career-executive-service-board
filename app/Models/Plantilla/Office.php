@@ -20,7 +20,7 @@ class Office extends Model
         'title',
         'acronym',
         'website',
-        'isActive',
+        'is_active',
         'encoder',
         'lastupd_enc',
     ];

@@ -85,7 +85,10 @@
 
 </div>
 
-<div class="flex justify-end">
+<div class="flex justify-between">
+    <a href="#" class="text-blue-500 uppercase text-2xl">
+        Department Agency
+    </a>
     <button class="btn btn-primary" id="agencyCreateBtn">
         Add record
     </button>
