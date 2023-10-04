@@ -14,8 +14,8 @@ return new class extends Migration
         //health_records
         Schema::create('profile_tblHealthRecord', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('cesno');
+            // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('blood_type')->nullable();
             $table->string('marks')->nullable();
             $table->string('handicap')->nullable();
