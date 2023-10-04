@@ -14,7 +14,10 @@ class LanguageController extends Controller
     public function index($cesno)
     {
         $personalDataId = PersonalData::find($cesno);
-        $language = $personalDataId->languages;
+        $language = $personalDataId->languages()
+        ->select('ctrlno', 'lang_code')
+        ->orderBy('encdate', 'desc')
+        ->paginate(10);
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
@@ -86,7 +89,11 @@ class LanguageController extends Controller
         $personalData = PersonalData::withTrashed()->find($cesno);
 
         // Access the soft deleted scholarships of the parent model
-        $profileTblLanguagesTrashedRecord = $personalData->languages()->onlyTrashed()->get();
+        $profileTblLanguagesTrashedRecord = $personalData->languages()
+        ->onlyTrashed()
+        ->select('ctrlno', 'lang_code', 'deleted_at')
+        ->orderBy('deleted_at', 'desc')
+        ->paginate(10);
 
         return view('admin.201_profiling.view_profile.partials.languages_dialects.trashbin', compact('profileTblLanguagesTrashedRecord','cesno'));
     }

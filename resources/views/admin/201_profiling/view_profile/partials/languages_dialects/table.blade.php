@@ -74,6 +74,10 @@
     </table>
 </div>
 
+<div class="my-5">
+    {{ $language->links() }}
+</div>
+
 <!-- Modal for Adding Language Dialect -->
 <div id="add-edit-languages-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
