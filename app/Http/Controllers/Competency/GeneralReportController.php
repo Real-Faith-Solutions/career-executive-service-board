@@ -12,7 +12,7 @@ class GeneralReportController extends Controller
     {
         $trainingSession = TrainingSession::paginate(5);
 
-        return view('admin.competency.reports.general_report', compact('trainingSession'));
+        return view('admin.competency.reports.general_report.training_participants', compact('trainingSession'));
     }
 
     public function generatePdf($sessionId)
@@ -20,7 +20,7 @@ class GeneralReportController extends Controller
         $trainingSession = TrainingSession::find($sessionId);
         $trainingParticipantList = $trainingSession->trainingParticipantList;
 
-        $pdf = Pdf::loadView('admin.competency.reports.general_report_pdf', compact('trainingParticipantList', 'trainingSession'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('admin.competency.reports.general_report.training_participants_pdf', compact('trainingParticipantList', 'trainingSession'))->setPaper('a4', 'landscape');
         return $pdf->stream('general-report.pdf');
     }
 }

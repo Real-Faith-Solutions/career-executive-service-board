@@ -49,22 +49,15 @@
             th {
                 color: #284F87;
                 font-size: 12px;
+                padding-right: 10px;
+                padding-left: 10px;
                 text-transform: uppercase;
-                text-align: center;
+                text-align: left;
                 background-color: white;
             }
         
-
             span {
                 font-size: 10px;
-            }
-        
-            th {
-                color: #284F87;
-                font-size: 12px;
-                text-transform: uppercase;
-                text-align: center;
-                background-color: white;
             }
         
             tr:nth-child(even) {
