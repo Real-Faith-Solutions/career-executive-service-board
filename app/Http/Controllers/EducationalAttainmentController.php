@@ -17,7 +17,9 @@ class EducationalAttainmentController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $educationalAttainment = $personalData->educations;
+        $educationalAttainment = $personalData->educations()
+        ->orderBy('ctrlno', 'desc')
+        ->get();
 
         return view('admin.201_profiling.view_profile.partials.educational_attainment.table', compact('educationalAttainment', 'cesno'));
     }
@@ -44,11 +46,11 @@ class EducationalAttainmentController extends Controller
             'school_code' => $request->school_code,
             'major_code' => $request->major_code,
             'degree_code' => $request->degree_code,
-            'school_type' => $request->school_type,
+            'school_status' => $request->school_type,
             'period_of_attendance_from' => $request->period_of_attendance_from,
-            'period_of_attendance_to' => $request->period_of_attendance_to,
-            'highest_level' => $request->highest_level,
-            'academics_honor_received' => $request->academics_honor_received,
+            'year_grad' => $request->period_of_attendance_to,
+            'degree_status' => $request->highest_level,
+            'honors' => $request->academics_honor_received,
             'encoder' =>  $encoder,
 
         ]);
@@ -73,19 +75,24 @@ class EducationalAttainmentController extends Controller
 
     public function update(EducationalAttainmentStoreRequest $request, $ctrlno)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $educationalAttainment = EducationalAttainment::find($ctrlno);
         $educationalAttainment->level = $request->level;
         $educationalAttainment->school_code = $request->school_code;
         $educationalAttainment->major_code = $request->major_code;
         $educationalAttainment->degree_code = $request->degree_code;
-        $educationalAttainment->school_type = $request->school_type;
+        $educationalAttainment->school_status = $request->school_type;
         $educationalAttainment->period_of_attendance_from = $request->period_of_attendance_from;
-        $educationalAttainment->period_of_attendance_to = $request->period_of_attendance_to;
-        $educationalAttainment->highest_level = $request->highest_level;
-        $educationalAttainment->academics_honor_received = $request->academics_honor_received;
+        $educationalAttainment->year_grad = $request->period_of_attendance_to;
+        $educationalAttainment->degree_status = $request->highest_level;
+        $educationalAttainment->honors = $request->academics_honor_received;
+        $educationalAttainment->lastupd_enc = $encoder;
         $educationalAttainment->save();
 
-        return redirect()->back()->with('message', 'Updated Sucessfully');
+        return redirect()->back()->with('info', 'Updated Sucessfully');
     }
 
     public function destroyEducationalAttainment($ctrlno)
@@ -112,7 +119,7 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
         $educationalAttainment->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
 
@@ -121,6 +128,6 @@ class EducationalAttainmentController extends Controller
         $educationalAttainment = EducationalAttainment::withTrashed()->find($ctrlno);
         $educationalAttainment->forceDelete();
 
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

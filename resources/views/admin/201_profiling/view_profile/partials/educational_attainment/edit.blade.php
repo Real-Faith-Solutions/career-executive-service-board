@@ -146,10 +146,10 @@
                         <label for="school_type">School type<sup>*</span></label>
                         <select id="school_type" name="school_type" required>
                             <option disabled selected>Select School type</option>
-                            @if ($educationalAttainment->school_type == "Local")
+                            @if ($educationalAttainment->school_status == "Local")
                                 <option value="Local" selected>Local</option>
                                 <option value="Foreign">Foreign</option>
-                            @elseif ($educationalAttainment->school_type == "Foreign")
+                            @elseif ($educationalAttainment->school_status == "Foreign")
                                 <option value="Local">Local</option>
                                 <option value="Foreign" selected>Foreign</option>
                             @else
@@ -178,7 +178,7 @@
 
                     <div class="mb-3">
                         <label for="period_of_attendance_to">Period of attendance (To)<sup>*</span></label>
-                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->period_of_attendance_to }}" type="text" placeholder="mm/dd/yyyy">
+                        <input id="period_of_attendance_to" name="period_of_attendance_to" required value="{{ $educationalAttainment->year_grad }}" type="text" placeholder="mm/dd/yyyy">
                         @error('period_of_attendance_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -188,7 +188,7 @@
 
                     <div class="mb-3">
                         <label for="highest_level">Highest Level / Unit earned (if not graduated)</label>
-                        <input id="highest_level" name="highest_level" value="{{ $educationalAttainment->highest_level }}" type="text">
+                        <input id="highest_level" name="highest_level" value="{{ $educationalAttainment->degree_status }}" type="text">
                         @error('highest_level')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -201,7 +201,7 @@
 
                     <div class="mb-3">
                         <label for="academics_honor_received">Academic Honors Received</label>
-                        <input id="academics_honor_received" name="academics_honor_received" value="{{ $educationalAttainment->academics_honor_received }}" type="text">
+                        <input id="academics_honor_received" name="academics_honor_received" value="{{ $educationalAttainment->honors }}" type="text">
                         @error('academics_honor_received')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
