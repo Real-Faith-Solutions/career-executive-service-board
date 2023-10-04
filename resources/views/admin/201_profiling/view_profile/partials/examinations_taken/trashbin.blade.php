@@ -45,15 +45,15 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->rating }}
+                        {{ $examinationTakensTrashedRecords->rate }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->date_of_examination }}
+                        {{ $examinationTakensTrashedRecords->exam_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->place_of_examination }}
+                        {{ $examinationTakensTrashedRecords->exam_place }}
                     </td>
 
                     <td class="px-6 py-3">

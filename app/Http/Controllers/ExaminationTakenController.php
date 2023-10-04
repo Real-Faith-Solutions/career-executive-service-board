@@ -22,7 +22,7 @@ class ExaminationTakenController extends Controller
 
     public function create($cesno)
     {
-        $profileLibTblExamRef = ProfileLibTblExamRef::all();
+        $profileLibTblExamRef = ProfileLibTblExamRef::all(['CODE', 'TITLE']);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno'));
     }
@@ -31,7 +31,7 @@ class ExaminationTakenController extends Controller
     {
         $request->validate([
 
-            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)],
+            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)],
             'rating' => ['nullable', 'max:40'],
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
@@ -48,9 +48,9 @@ class ExaminationTakenController extends Controller
         $examinationTaken = new ExaminationsTaken([
 
             'exam_code' => $request->exam_code,
-            'rating' => $request->rating,
-            'date_of_examination' => $request->date_of_examination,
-            'place_of_examination' => $request->place_of_examination,
+            'rate' => $request->rating,
+            'exam_date' => $request->date_of_examination,
+            'exam_place' => $request->place_of_examination,
             'license_number' => $request->license_number,
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
@@ -78,8 +78,8 @@ class ExaminationTakenController extends Controller
     {
         $request->validate([
 
-            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
-            'rating' => ['required', 'min:2', 'max:40'],
+            'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'rating' => ['nullable', 'min:2', 'max:40'],
             'date_of_examination' => ['required', 'date', 'date_format:m/d/Y'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
@@ -88,16 +88,22 @@ class ExaminationTakenController extends Controller
 
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $examinationTaken = ExaminationsTaken::find($ctrlno);
         $examinationTaken->exam_code = $request->exam_code;
-        $examinationTaken->rating = $request->rating;
-        $examinationTaken->date_of_examination = $request->date_of_examination;
-        $examinationTaken->place_of_examination = $request->place_of_examination;
+        $examinationTaken->rate = $request->rating;
+        $examinationTaken->exam_date = $request->date_of_examination;
+        $examinationTaken->exam_place = $request->place_of_examination;
         $examinationTaken->license_number = $request->license_number;
+        $examinationTaken->date_acquired = $request->date_acquired;
         $examinationTaken->date_validity = $request->date_validity;
+        $examinationTaken->lastupd_enc = $encoder;
         $examinationTaken->save();
 
-        return to_route('examination-taken.index', ['cesno' => $cesno])->with('message', 'Successfuly Saved');
+        return to_route('examination-taken.index', ['cesno' => $cesno])->with('info', 'Successfuly Saved');
     }
 
     public function destroy($ctrlno)
@@ -124,7 +130,7 @@ class ExaminationTakenController extends Controller
         $examinationTaken = ExaminationsTaken::withTrashed()->find($ctrlno);
         $examinationTaken->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
     public function forceDelete($ctrlno)
@@ -132,6 +138,6 @@ class ExaminationTakenController extends Controller
         $examinationTaken = ExaminationsTaken::withTrashed()->find($ctrlno);
         $examinationTaken->forceDelete();
 
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

@@ -50,15 +50,15 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->rating }}
+                        {{ $examinationTakens->rate }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->date_of_examination }}
+                        {{ $examinationTakens->exam_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->place_of_examination }}
+                        {{ $examinationTakens->exam_place }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
