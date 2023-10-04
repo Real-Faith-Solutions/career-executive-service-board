@@ -14,8 +14,8 @@ return new class extends Migration
         //award_and_citations
         Schema::create('profile_tblAwards', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('cesno');
+            // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('awards')->nullable();
             $table->string('sponsor')->nullable();
             $table->date('award_dt')->nullable(); // date
