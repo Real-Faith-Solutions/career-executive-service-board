@@ -105,6 +105,7 @@ class AppointeeOccupantManagerController extends Controller
             'ofc_stat_code' => $request->input('ofc_stat_code'),
             'basis' => $request->input('basis'),
             'created_user' => $encoder,
+            'lastupd_user' => $encoder,
         ]);
 
 

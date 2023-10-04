@@ -220,10 +220,10 @@
             <th>Plantilla ID</th>
             <th>Position Title</th>
             <th>Position Level</th>
-            <th>SG Level</th>
+            <th>Salary Grade Level</th>
             <th>Item No.</th>
             <th>Vacant</th>
-            <th>Pres. Apptee</th>
+            <th>Pres. Appointee</th>
 
             <th>
                 <span class="sr-only">Action</span>
