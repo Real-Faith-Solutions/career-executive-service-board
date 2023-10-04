@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblLanguageRef;
-use App\Models\ProfileTblLanguages;
+use App\Models\ProfileTblLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -31,7 +31,7 @@ class LanguageController extends Controller
         $user = Auth::user();
         $encoder = $user->userName(); 
 
-        $profileTblLanguages = new ProfileTblLanguages([
+        $profileTblLanguages = new ProfileTblLanguage([
 
             'lang_code' => $request->lang_code,
             'encoder' =>  $encoder,
@@ -47,7 +47,7 @@ class LanguageController extends Controller
 
     public function edit($ctrlno, $cesno)
     {
-        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $profileTblLanguages = ProfileTblLanguage::find($ctrlno);
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
@@ -64,7 +64,7 @@ class LanguageController extends Controller
         $user = Auth::user();
         $encoder = $user->userName(); 
 
-        $profileTblLanguages = ProfileTblLanguages::find($ctrlno);
+        $profileTblLanguages = ProfileTblLanguage::find($ctrlno);
         $profileTblLanguages->lang_code = $request->lang_code;
         $profileTblLanguages->lastupd_enc = $encoder;
         $profileTblLanguages->save();
@@ -74,7 +74,7 @@ class LanguageController extends Controller
 
     public function destroy($ctrlno)
     {
-        $profileTblLanguages = ProfileTblLanguages::find($ctrlno); 
+        $profileTblLanguages = ProfileTblLanguage::find($ctrlno); 
         $profileTblLanguages->delete();
 
         return redirect()->back()->with('info', 'Deleted Sucessfully');
@@ -93,7 +93,7 @@ class LanguageController extends Controller
 
     public function restore($ctrlno)
     {
-        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno); 
+        $profileTblLanguages = ProfileTblLanguage::onlyTrashed()->find($ctrlno); 
         $profileTblLanguages->restore();
 
         return back()->with('info', 'Data Restored Sucessfully');
@@ -101,7 +101,7 @@ class LanguageController extends Controller
 
     public function forceDelete($ctrlno)
     {
-        $profileTblLanguages = ProfileTblLanguages::onlyTrashed()->find($ctrlno);
+        $profileTblLanguages = ProfileTblLanguage::onlyTrashed()->find($ctrlno);
         $profileTblLanguages->forceDelete();
   
         return back()->with('info', 'Data Permanently Deleted');

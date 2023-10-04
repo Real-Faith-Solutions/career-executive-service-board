@@ -138,7 +138,7 @@ class PersonalData extends Model
 
     public function languages(): HasMany
     {
-        return $this->hasMany(ProfileTblLanguages::class, 'cesno', 'cesno');
+        return $this->hasMany(ProfileTblLanguage::class, 'cesno', 'cesno');
     }
 
     public function otherTraining(): HasMany

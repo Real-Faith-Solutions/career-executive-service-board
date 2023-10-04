@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProfileTblLanguages extends Model
+class ProfileTblLanguage extends Model
 {
     use HasFactory,SoftDeletes;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Eris;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use App\Models\Eris\WrittenExam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class WrittenExamController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData =  ErisTblMain::find($acno);
+        $erisTblMainProfileData =  EradTblMain::find($acno);
 
         return view('admin.eris.partials.written_exam.form', compact('acno', 'erisTblMainProfileData'));
     }
@@ -50,7 +50,7 @@ class WrittenExamController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
+        $erisTblMain = EradTblMain::find($request->acno);
         
         $erisTblMain->writtenExam()->save($writtenExam);
         
@@ -59,7 +59,7 @@ class WrittenExamController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-       $erisTblMainProfileData =  ErisTblMain::find($acno);
+       $erisTblMainProfileData =  EradTblMain::find($acno);
        $writtenExamPRofileData = WrittenExam::find($ctrlno); 
 
        return view('admin.eris.partials.written_exam.edit', compact('acno', 'erisTblMainProfileData', 'writtenExamPRofileData', 'ctrlno')); 
@@ -97,7 +97,7 @@ class WrittenExamController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted writtenExam of the parent model
         $writtenExamTrashedRecord = $erisTblMainData->writtenExam()->onlyTrashed()->get();

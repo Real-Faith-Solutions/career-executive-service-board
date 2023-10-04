@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
@@ -18,7 +18,7 @@ class ErisTblMainSeeder extends Seeder
 
         // Use a loop to create and insert records
         for ($i = 1; $i <= 10 ; $i++) {
-            ErisTblMain::create([
+            EradTblMain::create([
                 'acbatchno' => $faker->randomDigit(),
                 'lastname' => $faker->firstName(),
                 'firstname' => $faker->firstName(),
