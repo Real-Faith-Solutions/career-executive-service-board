@@ -29,10 +29,10 @@ class ScholarshipController extends Controller
         $request->validate([
 
             'type' => ['required'],
-            'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', Rule::unique('profile_tblScholarship')->where('cesno', $cesno), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required', 'date', 'date_format:m/d/Y'],
-            'inclusive_date_to' => ['required', 'date', 'date_format:m/d/Y'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
 
         ]);
 
@@ -45,8 +45,8 @@ class ScholarshipController extends Controller
             'type' => $request->type,
             'title' => $request->title,
             'sponsor' => $request->sponsor,
-            'inclusive_date_from' => $request->inclusive_date_from,
-            'inclusive_date_to' => $request->inclusive_date_to,
+            'from_dt' => $request->inclusive_date_from,
+            'to_dt' => $request->inclusive_date_to,
             'encoder' =>  $encoder ,
 
         ]);
@@ -70,22 +70,27 @@ class ScholarshipController extends Controller
         $request->validate([
 
             'type' => ['required'],
-            'title' => ['required', Rule::unique('profile_tblScholarship')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', Rule::unique('profile_tblScholarship')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required', 'date', 'date_format:m/d/Y'],
-            'inclusive_date_to' => ['required', 'date', 'date_format:m/d/Y'],
+            'inclusive_date_from' => ['required'],
+            'inclusive_date_to' => ['required'],
 
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $scholarship= Scholarships::find($ctrlno);
         $scholarship->type = $request->type;
         $scholarship->title = $request->title;
         $scholarship->sponsor = $request->sponsor;
-        $scholarship->inclusive_date_from = $request->inclusive_date_from;
-        $scholarship->inclusive_date_to = $request->inclusive_date_to;
+        $scholarship->from_dt = $request->inclusive_date_from;
+        $scholarship->to_dt = $request->inclusive_date_to;
+        $scholarship->lastupd_enc = $encoder;
         $scholarship->save();
 
-        return to_route('scholarship.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+        return to_route('scholarship.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -112,7 +117,7 @@ class ScholarshipController extends Controller
         $scholarship = Scholarships::withTrashed()->find($ctrlno);
         $scholarship->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
     public function forceDelete($ctrlno)
@@ -120,6 +125,6 @@ class ScholarshipController extends Controller
         $Scholarships = Scholarships::withTrashed()->find($ctrlno);
         $Scholarships->forceDelete();
 
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
