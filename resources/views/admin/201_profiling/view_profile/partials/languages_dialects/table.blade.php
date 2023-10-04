@@ -74,6 +74,10 @@
     </table>
 </div>
 
+<div class="my-5">
+    {{ $language->links() }}
+</div>
+
 <!-- Modal for Adding Language Dialect -->
 <div id="add-edit-languages-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
     <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
@@ -87,7 +91,7 @@
 
                 <div class="mb-1">
                     <label for="language_code">Language Dialect<sup>*</sup></label>
-                    <select id="language_code" name="language_code" required>
+                    <select id="language_code" name="lang_code" required>
                         <option disabled selected>Select language</option>
                         @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
                             <option value="{{ $profileLibTblLanguageRefs->code }}">
@@ -95,7 +99,7 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('language_code')
+                    @error('lang_code')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
                         </span>

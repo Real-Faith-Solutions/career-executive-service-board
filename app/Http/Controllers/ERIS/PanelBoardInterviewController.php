@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use App\Models\Eris\PanelBoardInterview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class PanelBoardInterviewController extends Controller
 {
     public function index($acno)
     {
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $panelBoardInterview = $erisTblMain->panelBoardInterview()->paginate(20);
         
         return view('admin.eris.partials.panel_board_interview.table', compact('acno', 'panelBoardInterview'));
@@ -20,7 +20,7 @@ class PanelBoardInterviewController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
 
         return view('admin.eris.partials.panel_board_interview.form', compact('acno', 'erisTblMainProfileData'));
     }
@@ -42,7 +42,7 @@ class PanelBoardInterviewController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
+        $erisTblMain = EradTblMain::find($request->acno);
         
         $erisTblMain->panelBoardInterview()->save($panelBoardInterview);
         
@@ -51,7 +51,7 @@ class PanelBoardInterviewController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $panelBoardInterview = PanelBoardInterview::find($ctrlno);
 
         return view('admin.eris.partials.panel_board_interview.edit', compact('acno', 'erisTblMainProfileData', 'panelBoardInterview', 'ctrlno'));
@@ -81,7 +81,7 @@ class PanelBoardInterviewController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted panelBoardInterview of the parent model
         $panelBoardInterviewTrashedRecord = $erisTblMainData->panelBoardInterview()->onlyTrashed()->paginate(20);

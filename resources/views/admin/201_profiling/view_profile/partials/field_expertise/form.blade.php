@@ -23,7 +23,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="SpeExp_Code">Expertise / Field of Specialization<sup>*</span></label>
-                        <select id="SpeExp_Code" name="specialization_code" required>
+                        <select id="SpeExp_Code" name="SpeExp_Code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
                                 <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}">
@@ -31,7 +31,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        @error('specialization_code')
+                        @error('SpeExp_Code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

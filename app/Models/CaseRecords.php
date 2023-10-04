@@ -9,8 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CaseRecords extends Model
 {
-
     use HasFactory, SoftDeletes;
+    
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = "profile_tblCaseRecord";
 
@@ -18,18 +20,19 @@ class CaseRecords extends Model
 
     protected $fillable = [
         
-        'personal_data_cesno',
+        'cesno',
         'parties',
         'offence',
         'nature_code',
         'case_no',
-        'filed_date',
+        'filed_dt',
         'venue',
         'status_code',
         'finality',
         'decision',
         'remarks',
         'encoder',
+        'lastupd_enc',
 
     ];
 

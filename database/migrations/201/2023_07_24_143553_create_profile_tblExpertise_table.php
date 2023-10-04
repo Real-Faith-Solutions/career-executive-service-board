@@ -13,12 +13,15 @@ return new class extends Migration
     {        
         Schema::create('profile_tblExpertise', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
-            $table->foreignId('specialization_code')->constrained('profilelib_tblExpertiseSpec', 'SpeExp_Code');
+            $table->integer('cesno');
+            // $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->integer('SpeExp_Code');
+            // $table->foreignId('specialization_code')->constrained('profilelib_tblExpertiseSpec', 'SpeExp_Code');
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ class ErisProfileController extends Controller
 {
     public function index()
     {
-       $erisTblMain = ErisTblMain::paginate(25);
+       $erisTblMain = EradTblMain::paginate(25);
 
        return view('admin.eris.view_profile.table', compact('erisTblMain'));
     }
@@ -27,8 +27,8 @@ class ErisProfileController extends Controller
             $acno = 0;
             $acbatchno = 0;
         } else {
-            $acno = ErisTblMain::latest()->first()->acno;
-            $acbatchno = ErisTblMain::latest()->first()->acbatchno;
+            $acno = EradTblMain::latest()->first()->acno;
+            $acbatchno = EradTblMain::latest()->first()->acbatchno;
         }
 
         $search = $request->input('search');
@@ -98,7 +98,7 @@ class ErisProfileController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
             
-        ErisTblMain::create([
+        EradTblMain::create([
             'cesno' => $request->cesno,
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
@@ -124,7 +124,7 @@ class ErisProfileController extends Controller
 
     public function edit($acno)
     {
-        $erisTblMainPersonalData = ErisTblMain::find($acno);
+        $erisTblMainPersonalData = EradTblMain::find($acno);
         $birthdate = $erisTblMainPersonalData->birthdate;
 
         $birthDate = Carbon::parse($birthdate);
@@ -136,7 +136,7 @@ class ErisProfileController extends Controller
 
     public function update(Request $request, $acno)
     { 
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $erisTblMain->lastname = $request->lastname;
         $erisTblMain->firstname = $request->firstname;
         $erisTblMain->middlename = $request->middlename;

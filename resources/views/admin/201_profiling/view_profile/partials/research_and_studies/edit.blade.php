@@ -34,7 +34,7 @@
 
                     <div class="mb-3">
                         <label for="publisher">Publisher<sup>*</span></label>
-                        <input id="publisher" name="publisher" value="{{ $researchAndStudies->publisher }}" required type="text">
+                        <input id="publisher" name="publisher" value="{{ $researchAndStudies->sponsor }}" required type="text">
                         @error('publisher')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -46,7 +46,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $researchAndStudies->inclusive_date_from }}" type="date" required>
+                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $researchAndStudies->from_dt }}" type="date" required>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -56,7 +56,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $researchAndStudies->inclusive_date_to }}" type="date" required>
+                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $researchAndStudies->to_dt }}" type="date" required>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

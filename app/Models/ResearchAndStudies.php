@@ -11,7 +11,8 @@ class ResearchAndStudies extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $primaryKey = 'ctrlno';
 
@@ -19,12 +20,13 @@ class ResearchAndStudies extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'title',
-        'publisher',
-        'inclusive_date_from',
-        'inclusive_date_to',
+        'sponsor',
+        'from_dt',
+        'to_dt',
         'encoder',
+        'lastupd_enc',
 
     ];
 

@@ -29,6 +29,18 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    License Details
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Date Acquired
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Date Validity
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Deleted At
                 </th>
 
@@ -45,15 +57,27 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->rating }}
+                        {{ $examinationTakensTrashedRecords->rate ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->date_of_examination }}
+                        {{ $examinationTakensTrashedRecords->exam_date }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->place_of_examination }}
+                        {{ $examinationTakensTrashedRecords->exam_place }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $examinationTakensTrashedRecords->license_number ?? 'No Record' }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $examinationTakensTrashedRecords->date_acquired ?? 'No Record' }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $examinationTakensTrashedRecords->date_validity ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">

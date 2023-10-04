@@ -30,11 +30,27 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Course
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Degree
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     School Type
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Degree Status
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Period of Attendance
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Academic Honor Received
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -55,11 +71,27 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->school_type ?? 'N/A'}}
+                        {{ $newEducationalAttainment->profileLibTblEducMajor->COURSE  ?? 'N/A'}}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newEducationalAttainment->period_of_attendance_from ?? 'N/A'." - ".$newEducationalAttainment->period_of_attendance_to ?? 'N/A'}}
+                        {{ $newEducationalAttainment->profileLibTblEducDegree->DEGREE  ?? 'N/A'}}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->school_status ?? 'N/A'}}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->degree_status ?? 'N/A'}}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->period_of_attendance_from.' - '.$newEducationalAttainment->year_grad ?? ''}}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $newEducationalAttainment->honors}}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

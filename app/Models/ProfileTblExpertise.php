@@ -12,20 +12,24 @@ class ProfileTblExpertise extends Model
 {
     use HasFactory,SoftDeletes;
 
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
+
     protected $primaryKey = 'ctrlno';
 
     protected $table = "profile_tblExpertise";
 
     protected $fillable = [
 
-        'personal_data_cesno',
-        'specialization_code',
+        'cesno',
+        'SpeExp_Code',
         'encoder',
+        'lastupd_enc',
     
     ];
 
     public function expertisePersonalData(): BelongsTo
     {
-        return $this->belongsTo(ProfileLibTblExpertiseSpec::class, 'specialization_code');
+        return $this->belongsTo(ProfileLibTblExpertiseSpec::class, 'SpeExp_Code');
     }
 }

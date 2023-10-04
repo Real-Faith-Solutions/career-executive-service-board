@@ -31,6 +31,6 @@ class AssessmentCenter extends Model
 
     public function erisTblMainAssessmentCenter(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

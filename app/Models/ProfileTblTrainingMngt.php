@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblTrainingMngt extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = "profile_tblTrainingMngt";
 
@@ -19,16 +20,17 @@ class ProfileTblTrainingMngt extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'training',
         'training_category', 
         'sponsor',
         'venue',
         'no_training_hours',
-        'from_date',
-        'to_date',
+        'from_dt',
+        'to_dt',
         'field_specialization',
         'encoder',
+        'lastupd_enc',
 
     ];
 

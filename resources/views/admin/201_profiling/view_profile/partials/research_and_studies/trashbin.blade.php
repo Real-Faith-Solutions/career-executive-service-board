@@ -41,11 +41,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $researchAndStudiesTrashedRecords->publisher }}
+                        {{ $researchAndStudiesTrashedRecords->sponsor }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $researchAndStudiesTrashedRecords->inclusive_date_from." - ".$researchAndStudiesTrashedRecords->inclusive_date_to }}
+                        {{ $researchAndStudiesTrashedRecords->from_dt." - ".$researchAndStudiesTrashedRecords->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">

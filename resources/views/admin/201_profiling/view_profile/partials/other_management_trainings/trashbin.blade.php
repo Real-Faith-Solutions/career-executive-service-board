@@ -21,7 +21,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Expertise/Field of Specialization
+                    Specialization
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -30,6 +30,10 @@
 
                 <th scope="col" class="px-6 py-3">
                     Venue
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Inclusive Dates
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -66,6 +70,10 @@
 
                     <td class="px-6 py-3">
                         {{ $otherTrainingTrashedRecords->venue }}
+                    </td>
+
+                    <td class="px-6 py-3">
+                        {{ $otherTrainingTrashedRecords->from_dt.' - '.$otherTrainingTrashedRecords->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">

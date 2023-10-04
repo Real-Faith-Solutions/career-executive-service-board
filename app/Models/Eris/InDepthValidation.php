@@ -33,6 +33,6 @@ class InDepthValidation extends Model
 
     public function erisTblMainInDepthValidation(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

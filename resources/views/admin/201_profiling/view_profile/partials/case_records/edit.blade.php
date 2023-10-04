@@ -74,7 +74,7 @@
 
                     <div class="mb-3">
                         <label for="date_filed_edit">Date Filed<sup>*</sup></label>
-                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_date }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed, date_finality)" required>
+                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_dt }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_filed')
                             <span class="invalid" role="alert">

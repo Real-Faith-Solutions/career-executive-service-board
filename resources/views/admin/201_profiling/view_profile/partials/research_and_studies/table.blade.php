@@ -45,11 +45,11 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $researchAndStudy->publisher }}
+                            {{ $researchAndStudy->sponsor }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $researchAndStudy->inclusive_date_from . ' - ' . $researchAndStudy->inclusive_date_to }}
+                            {{ $researchAndStudy->from_dt . ' - ' . $researchAndStudy->to_dt }}
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">

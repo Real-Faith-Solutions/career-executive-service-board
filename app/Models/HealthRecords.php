@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HealthRecords extends Model
 {
+    use HasFactory, SoftDeletes;
 
-    use HasFactory;
-
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $primaryKey = 'ctrlno';
 
@@ -20,14 +20,12 @@ class HealthRecords extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'blood_type',
-        'identifying_marks',
-        'person_with_disability',
-        // 'disability_handicap_defects_specify',
-        // 'illness',
-        // 'illness_date',
+        'marks', // 'identifying_marks',
+        'handicap', // 'person_with_disability',  
         'encoder',
+        'lastupd_enc',
 
     ];
 
@@ -35,6 +33,4 @@ class HealthRecords extends Model
     {
         return $this->belongsTo(PersonalData::class);
     }
-
-
 }

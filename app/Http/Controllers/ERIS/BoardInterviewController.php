@@ -4,7 +4,7 @@ namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eris\BoardInterView;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class BoardInterviewController extends Controller
 {
     public function index($acno)
     {
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $boardInterview = $erisTblMain->boardInterview()->paginate(20);
 
         return view('admin.eris.partials.board_interview.table', compact('acno', 'boardInterview'));
@@ -20,7 +20,7 @@ class BoardInterviewController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
 
         return view('admin.eris.partials.board_interview.form', compact('acno', 'erisTblMainProfileData'));
     }
@@ -42,7 +42,7 @@ class BoardInterviewController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
+        $erisTblMain = EradTblMain::find($request->acno);
         
         $erisTblMain->boardInterview()->save($boardInterview);
         
@@ -51,7 +51,7 @@ class BoardInterviewController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $boardInterview = BoardInterView::find($ctrlno);
 
         return view('admin.eris.partials.board_interview.edit', compact('acno', 'erisTblMainProfileData', 'boardInterview', 'ctrlno'));
@@ -81,7 +81,7 @@ class BoardInterviewController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted boardInterview of the parent model
         $boardInterViewTrashedRecord = $erisTblMainData->boardInterview()->onlyTrashed()->paginate(20);

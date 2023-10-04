@@ -32,6 +32,6 @@ class PanelBoardInterview extends Model
 
     public function erisTblMainPanelBoardInterview(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

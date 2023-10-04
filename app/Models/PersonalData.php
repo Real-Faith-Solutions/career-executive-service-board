@@ -78,7 +78,7 @@ class PersonalData extends Model
 
     public function educations(): HasMany
     {
-        return $this->hasMany(EducationalAttainment::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(EducationalAttainment::class, 'cesno', 'cesno');
     }
 
     public function identifications(): HasOne
@@ -88,7 +88,7 @@ class PersonalData extends Model
 
     public function examinationTakens(): HasMany
     {
-        return $this->hasMany(ExaminationsTaken::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(ExaminationsTaken::class, 'cesno', 'cesno');
     }
 
     public function profileAddress(): HasMany
@@ -98,52 +98,52 @@ class PersonalData extends Model
 
     public function scholarships(): HasMany
     {
-        return $this->hasMany(Scholarships::class);
+        return $this->hasMany(Scholarships::class, 'cesno', 'cesno');
     }
 
     public function researchAndStudies(): HasMany
     {
-        return $this->hasMany(ResearchAndStudies::class);
+        return $this->hasMany(ResearchAndStudies::class, 'cesno', 'cesno');
     }
 
     public function workExperience(): HasMany
     {
-        return $this->hasMany(ProfileTblWorkExperience::class);
+        return $this->hasMany(ProfileTblWorkExperience::class, 'cesno', 'cesno');
     }
 
     public function awardsAndCitations(): HasMany
     {
-        return $this->hasMany(AwardAndCitations::class);
+        return $this->hasMany(AwardAndCitations::class, 'cesno', 'cesno');
     }
 
     public function affiliations(): HasMany
     {
-        return $this->hasMany(Affiliations::class);
+        return $this->hasMany(Affiliations::class, 'cesno', 'cesno');
     }
 
     public function caseRecords(): HasMany
     {
-        return $this->hasMany(CaseRecords::class);
+        return $this->hasMany(CaseRecords::class, 'cesno', 'cesno');
     }
 
     public function healthRecords(): HasOne
     {
-        return $this->hasOne(HealthRecords::class);
+        return $this->hasOne(HealthRecords::class, 'cesno', 'cesno');
     }
 
     public function expertise(): HasMany
     {
-        return $this->hasMany(ProfileTblExpertise::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(ProfileTblExpertise::class, 'cesno', 'cesno');
     }
 
     public function languages(): HasMany
     {
-        return $this->hasMany(ProfileTblLanguages::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(ProfileTblLanguage::class, 'cesno', 'cesno');
     }
 
     public function otherTraining(): HasMany
     {
-        return $this->hasMany(ProfileTblTrainingMngt::class);
+        return $this->hasMany(ProfileTblTrainingMngt::class, 'cesno', 'cesno');
     }
 
     public function profileTblCesStatus(): HasMany

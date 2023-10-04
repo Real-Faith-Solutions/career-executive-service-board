@@ -46,7 +46,7 @@
 
                     <div class="mb-3">
                         <label for="award_edit_date">Date<sup>*</sup></label>
-                        <input type="date" id="award_edit_date" name="date" value="{{ $awardAndCitation->date }}" oninput="validateDateInput(award_edit_date)" required>
+                        <input type="date" id="award_edit_date" name="date" value="{{ $awardAndCitation->award_dt }}" oninput="validateDateInput(award_edit_date)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date')
                             <span class="invalid" role="alert">

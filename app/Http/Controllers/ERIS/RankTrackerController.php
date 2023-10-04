@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use App\Models\Eris\LibraryRankTracker;
 use App\Models\Eris\RankTracker;
 use App\Models\PersonalData;
@@ -16,7 +16,7 @@ class RankTrackerController extends Controller
 {
     public function index($acno)
     {
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $rankTracker = $erisTblMain->rankTracker()->paginate(20);
 
         return view('admin.eris.partials.rank_tracker.table', compact('acno', 'rankTracker'));
@@ -24,7 +24,7 @@ class RankTrackerController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $libraryRankTracker = LibraryRankTracker::all();
 
         return view('admin.eris.partials.rank_tracker.form', compact('acno', 'erisTblMainProfileData', 'libraryRankTracker'));
@@ -42,7 +42,7 @@ class RankTrackerController extends Controller
         // retrieving r_ctrlno rank tracker ctrlno
         $r_ctrlno = LibraryRankTracker::where('description', $request->description)->value('ctrlno');
 
-        $cesno = ErisTblMain::where('acno', $acno)->value('cesno');
+        $cesno = EradTblMain::where('acno', $acno)->value('cesno');
 
         $latestCestatusCode = PersonalData::find($cesno);
         
@@ -67,11 +67,11 @@ class RankTrackerController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);        
+        $erisTblMain = EradTblMain::find($request->acno);        
 
         $erisTblMain->rankTracker()->save($rankTracker);
    
-        // update ces status based on $latestCestatusDescription
+        // update ces status based on $latestCestatusDescription in erad_tblranktracker table
         DB::table('erad_tblranktracker')
         ->where('acno', $acno)
         ->update(['cesstatus' => $latestCestatusDescription]);
@@ -81,7 +81,7 @@ class RankTrackerController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $libraryRankTracker = LibraryRankTracker::all();
         $rankTracker = RankTracker::find($ctrlno);
 
@@ -110,7 +110,7 @@ class RankTrackerController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted rankTracker of the parent model
         $rankTrackerTrashedRecord = $erisTblMainData->rankTracker()->onlyTrashed()->paginate(20);

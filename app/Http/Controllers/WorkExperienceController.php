@@ -29,7 +29,7 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)],
+            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('cesno', $cesno)],
             'status_of_appointment' => ['required'],
             'annually_salary' => ['required'],
             'salary' => ['required'],
@@ -78,7 +78,7 @@ class WorkExperienceController extends Controller
 
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
-            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'designation' => ['required', 'min:2', 'max:40', Rule::unique('profile_tblWorkExperience')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'status_of_appointment' => ['required'],
             'annually_salary' => ['required'],
             'salary' => ['required'],
@@ -87,6 +87,10 @@ class WorkExperienceController extends Controller
             'remarks' => ['regex:/^[a-zA-Z ]*$/'],
 
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
 
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
         $workExperience->from_dt = $request->inclusive_date_from;
@@ -98,9 +102,10 @@ class WorkExperienceController extends Controller
         $workExperience->department = $request->department_or_agency;
         $workExperience->government_service = $request->government_service;
         $workExperience->remarks = $request->remarks;
+        $workExperience->lastupd_enc = $encoder;
         $workExperience->save();
 
-        return to_route('work-experience.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
+        return to_route('work-experience.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
     }
 
     public function destroy($ctrlno)
@@ -127,7 +132,7 @@ class WorkExperienceController extends Controller
         $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
         $workExperience->restore();
 
-        return back()->with('message', 'Data Restored Sucessfully');
+        return back()->with('info', 'Data Restored Sucessfully');
     }
 
     public function forceDelete($ctrlno)
@@ -135,6 +140,6 @@ class WorkExperienceController extends Controller
         $workExperience = ProfileTblWorkExperience::withTrashed()->find($ctrlno);
         $workExperience->forceDelete();
 
-        return back()->with('message', 'Data Permanently Deleted');
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }

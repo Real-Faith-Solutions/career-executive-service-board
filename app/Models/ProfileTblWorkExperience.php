@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblWorkExperience extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
-
-    protected $guarded = [];
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = "profile_tblWorkExperience";
 
@@ -21,7 +20,7 @@ class ProfileTblWorkExperience extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'from_dt',
         'to_dt',
         'designation',
@@ -32,6 +31,7 @@ class ProfileTblWorkExperience extends Model
         'government_service',
         'remarks',
         'encoder',
+        'lastupd_enc',
 
     ];
     

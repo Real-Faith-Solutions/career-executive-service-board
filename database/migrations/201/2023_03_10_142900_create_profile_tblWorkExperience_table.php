@@ -14,7 +14,8 @@ return new class extends Migration
         //work_experiences
         Schema::create('profile_tblWorkExperience', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->integer('cesno');
+            // $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
             $table->string('from_dt')->nullable();
             $table->string('to_dt')->nullable();
             $table->string('designation')->nullable();
@@ -25,9 +26,10 @@ return new class extends Migration
             $table->string('government_service')->nullable();
             $table->string('remarks')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

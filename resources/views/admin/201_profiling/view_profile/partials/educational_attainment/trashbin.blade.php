@@ -17,15 +17,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Degree
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Major
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     School
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Course
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Degree
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -33,15 +33,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
+                    Degree Status
+                </th>
+
+                <th scope="col" class="px-6 py-3">
                     Period of Attendance
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Highest Level
-                </th>
-
-                <th scope="col" class="px-6 py-3">
-                    Academic Achievements
+                    Academic Honor Received
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -62,31 +62,31 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->profileLibTblEducDegree->DEGREE }}
+                        {{ $educationAttainmentTrashedRecords->profileLibTblEducSchool->SCHOOL }}
                     </td>
-
+                    
                     <td class="px-6 py-3">
                         {{ $educationAttainmentTrashedRecords->profileLibTblEducMajor->COURSE }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->profileLibTblEducSchool->SCHOOL }}
+                        {{ $educationAttainmentTrashedRecords->profileLibTblEducDegree->DEGREE }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->school_type }}
+                        {{ $educationAttainmentTrashedRecords->school_status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->period_of_attendance_from." - ".$educationAttainmentTrashedRecords->period_of_attendance_to }}
+                        {{ $educationAttainmentTrashedRecords->degree_status }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->highest_level }}
+                        {{ $educationAttainmentTrashedRecords->period_of_attendance_from." - ".$educationAttainmentTrashedRecords->year_grad }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $educationAttainmentTrashedRecords->academics_honor_received }}
+                        {{ $educationAttainmentTrashedRecords->honors }}
                     </td>
 
                     <td class="px-6 py-3">

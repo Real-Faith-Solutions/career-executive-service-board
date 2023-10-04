@@ -31,6 +31,6 @@ class RapidValidation extends Model
 
     public function erisTblMainRapidValidation(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

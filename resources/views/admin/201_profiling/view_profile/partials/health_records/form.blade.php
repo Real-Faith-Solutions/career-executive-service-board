@@ -29,7 +29,7 @@
 
                     <div class="mb-3">
                         <label for="identifying_marks">Identifying Marks<sup>*</sup></label>
-                        <input type="text" id="identifying_marks" name="identifying_marks" value="{{ old('identifying_marks') ?? ($healthRecord->identifying_marks ?? '') }}" oninput="validateInput(identifying_marks, 0, 'letters')" onkeypress="validateInput(identifying_marks, 0, 'letters')" onblur="checkErrorMessage(identifying_marks)" required>
+                        <input type="text" id="identifying_marks" name="identifying_marks" value="{{ old('marks') ?? ($healthRecord->marks ?? '') }}" oninput="validateInput(identifying_marks, 0, 'letters')" onkeypress="validateInput(identifying_marks, 0, 'letters')" onblur="checkErrorMessage(identifying_marks)" required>
                         <p class="input_error text-red-600"></p>
                         @error('identifying_marks')
                             <span class="invalid" role="alert">
@@ -40,7 +40,7 @@
 
                     <div class="mb-3">
                         <label for="person_with_disability">Is PWD?<sup>*</sup></label>
-                        <input type="search" id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" value="{{ old('person_with_disability') ?? ($healthRecord->person_with_disability ?? '') }}" required>
+                        <input type="search" id="person_with_disability" list="person_with_disability_choices" name="person_with_disability" value="{{ old('person_with_disability') ?? ($healthRecord->handicap ?? '') }}" required>
                         <datalist id="person_with_disability_choices">
                             @foreach ($pwds as $data)
                                 <option value="{{ $data->name }}">{{ $data->name }}</option>

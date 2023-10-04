@@ -33,6 +33,6 @@ class RankTracker extends Model
 
     public function erisTblMainRankTracker(): BelongsTo
     {
-        return $this->belongsTo(ErisTblMain::class, 'acno');
+        return $this->belongsTo(EradTblMain::class, 'acno');
     }
 }

@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileTblCesStatus extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table = "profile_tblCESstatus";
     
@@ -32,6 +33,7 @@ class ProfileTblCesStatus extends Model
         'validator',
         'remarks',
         'encoder',
+        'lastupd_enc',
 
     ];
 

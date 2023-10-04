@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eris\ErisTblMain;
+use App\Models\Eris\EradTblMain;
 use App\Models\Eris\InDepthValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class InDepthValidationController extends Controller
 {
     public function index($acno )
     {
-        $erisTblMain = ErisTblMain::find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $inDepthValidation = $erisTblMain->inDepthValidation()->paginate(20);
         
         return view('admin.eris.partials.in_depth_validation.table', compact('acno', 'inDepthValidation'));
@@ -20,7 +20,7 @@ class InDepthValidationController extends Controller
 
     public function create($acno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
 
         return view('admin.eris.partials.in_depth_validation.form', compact('acno', 'erisTblMainProfileData'));
     }
@@ -43,7 +43,7 @@ class InDepthValidationController extends Controller
 
         ]);
 
-        $erisTblMain = ErisTblMain::find($request->acno);
+        $erisTblMain = EradTblMain::find($request->acno);
         
         $erisTblMain->inDepthValidation()->save($inDepthValidation);
         
@@ -52,7 +52,7 @@ class InDepthValidationController extends Controller
 
     public function edit($acno, $ctrlno)
     {
-        $erisTblMainProfileData = ErisTblMain::find($acno);
+        $erisTblMainProfileData = EradTblMain::find($acno);
         $inDepthValidation = InDepthValidation::find($ctrlno);
 
         return view('admin.eris.partials.in_depth_validation.edit', compact('acno', 'erisTblMainProfileData', 'inDepthValidation', 'ctrlno'));
@@ -84,7 +84,7 @@ class InDepthValidationController extends Controller
     public function recentlyDeleted($acno)
     {
         //parent model
-        $erisTblMainData = ErisTblMain::withTrashed()->find($acno);
+        $erisTblMainData = EradTblMain::withTrashed()->find($acno);
 
         // Access the soft deleted inDepthValidation of the parent model
         $inDepthValidationTrashedRecord = $erisTblMainData->inDepthValidation()->onlyTrashed()->paginate(20);

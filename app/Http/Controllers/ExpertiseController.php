@@ -30,7 +30,7 @@ class ExpertiseController extends Controller
     public function store(Request $request, $cesno)
     {
         $request->validate([
-            'specialization_code' => [Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno), 'required'],
+            'SpeExp_Code' => [Rule::unique('profile_tblExpertise')->where('cesno', $cesno), 'required'],
         ]);
 
         /** @var \App\Models\User $user */
@@ -39,7 +39,7 @@ class ExpertiseController extends Controller
 
         $profileTblExpertise = new ProfileTblExpertise([
 
-            'specialization_code' => $request->specialization_code,
+            'SpeExp_Code' => $request->SpeExp_Code,
             'encoder' =>  $encoder,
 
         ]);
@@ -63,11 +63,11 @@ class ExpertiseController extends Controller
     public function update(Request $request, $cesno, $ctrlno)
     {
         $request->validate([
-            'specialization_code' => ['required', Rule::unique('profile_tblExpertise')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'SpeExp_Code' => ['required', Rule::unique('profile_tblExpertise')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
         ]);
 
         $profileTblExpertise = ProfileTblExpertise::find($ctrlno);
-        $profileTblExpertise->specialization_code = $request->specialization_code;
+        $profileTblExpertise->SpeExp_Code = $request->SpeExp_Code;
         $profileTblExpertise->save();
      
         return to_route('expertise.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');

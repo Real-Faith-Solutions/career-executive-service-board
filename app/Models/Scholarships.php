@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Scholarships extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    use SoftDeletes;
-
-    protected $guarded = [];
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $table ="profile_tblScholarship";
 
@@ -21,19 +20,19 @@ class Scholarships extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'type',
         'title',
         'sponsor',
-        'inclusive_date_from',
-        'inclusive_date_to',
+        'from_dt',
+        'to_dt',
         'encoder',
+        'lastupd_enc',
 
     ];
 
     public function scholarshipsPersonalData(): BelongsTo
     {
         return $this->belongsTo(PersonalData::class);
-    }
-    
+    }    
 }

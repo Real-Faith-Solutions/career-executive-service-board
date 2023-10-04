@@ -30,11 +30,11 @@ class HealthRecordController extends Controller
         $healthRecordPersonalDataId = PersonalData::findOrFail($cesno);
 
         $healthRecords = $healthRecordPersonalDataId->healthRecords()->updateOrCreate(
-            ['personal_data_cesno' => $cesno],
+            ['cesno' => $cesno],
             [
                 'blood_type' => $request->input('blood_type'),
-                'identifying_marks' => $request->input('identifying_marks'),
-                'person_with_disability' => $request->input('person_with_disability'),
+                'marks' => $request->input('identifying_marks'),
+                'handicap' => $request->input('person_with_disability'),
                 'encoder' =>  $encoder,
             ]
         );
