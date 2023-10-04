@@ -103,7 +103,7 @@ class PersonalData extends Model
 
     public function researchAndStudies(): HasMany
     {
-        return $this->hasMany(ResearchAndStudies::class);
+        return $this->hasMany(ResearchAndStudies::class, 'cesno', 'cesno');
     }
 
     public function workExperience(): HasMany
