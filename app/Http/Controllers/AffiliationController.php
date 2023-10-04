@@ -13,7 +13,9 @@ class AffiliationController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $affiliation = $personalData->affiliations;
+        $affiliation = $personalData->affiliations()
+        ->select('ctrlno', 'organization', 'position', 'from_dt', 'to_dt')
+        ->paginate(10);
 
         return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.table', compact('affiliation' ,'cesno'));
     }
@@ -102,7 +104,10 @@ class AffiliationController extends Controller
         $personalData = PersonalData::withTrashed()->find($cesno);
 
         // Access the soft deleted scholarships of the parent model
-        $affiliationsTrashedRecord = $personalData->affiliations()->onlyTrashed()->get();
+        $affiliationsTrashedRecord = $personalData->affiliations()
+        ->onlyTrashed()
+        ->select('ctrlno', 'organization', 'position', 'from_dt', 'to_dt', 'deleted_at')
+        ->paginate(10);;
  
         return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.trashbin', compact('affiliationsTrashedRecord', 'cesno'));
     }

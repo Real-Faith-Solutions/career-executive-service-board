@@ -14,8 +14,8 @@ return new class extends Migration
         //affiliations
         Schema::create('profile_tblAffiliations', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('cesno');
+            // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('organization')->nullable();
             $table->string('position')->nullable();
             $table->date('from_dt')->nullable();

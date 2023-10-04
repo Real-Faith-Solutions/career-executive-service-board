@@ -90,4 +90,8 @@
     </table>
 </div>
 
+<div class="my-5">
+    {{ $affiliation->links() }}
+</div>
+
 @endsection
