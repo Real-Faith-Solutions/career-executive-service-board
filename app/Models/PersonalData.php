@@ -143,7 +143,7 @@ class PersonalData extends Model
 
     public function otherTraining(): HasMany
     {
-        return $this->hasMany(ProfileTblTrainingMngt::class);
+        return $this->hasMany(ProfileTblTrainingMngt::class, 'cesno', 'cesno');
     }
 
     public function profileTblCesStatus(): HasMany

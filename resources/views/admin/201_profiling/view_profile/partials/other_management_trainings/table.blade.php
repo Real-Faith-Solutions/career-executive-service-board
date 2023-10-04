@@ -77,7 +77,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->from_date. ' - '.$otherTrainings->to_date }}
+                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt }}
                     </td>
 
                     <td class="px-6 py-3">

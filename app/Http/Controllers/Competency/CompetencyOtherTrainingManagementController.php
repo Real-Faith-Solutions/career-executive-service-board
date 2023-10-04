@@ -174,7 +174,7 @@ class CompetencyOtherTrainingManagementController extends Controller
     {
         $request->validate([ 
 
-            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -185,15 +185,20 @@ class CompetencyOtherTrainingManagementController extends Controller
             
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $trainingManagement = ProfileTblTrainingMngt::find($ctrlno);
         $trainingManagement->training = $request->training;
         $trainingManagement->training_category = $request->training_category;
         $trainingManagement->sponsor = $request->sponsor_training_provider;
         $trainingManagement->venue = $request->venue;
         $trainingManagement->no_training_hours = $request->no_of_training_hours;
-        $trainingManagement->from_date = $request->inclusive_date_from;
-        $trainingManagement->to_date = $request->inclusive_date_to;
+        $trainingManagement->from_dt = $request->inclusive_date_from;
+        $trainingManagement->to_dt = $request->inclusive_date_to;
         $trainingManagement->field_specialization = $request->expertise_field_of_specialization;
+        $trainingManagement->lastupd_enc = $encoder;
         $trainingManagement->save();
 
         return to_route('non-ces-training-management.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
