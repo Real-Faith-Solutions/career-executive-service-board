@@ -144,4 +144,8 @@
     </table>
 </div>
 
+<div class="my-5">
+    {{ $caseRecord->links() }}
+</div>
+
 @endsection
