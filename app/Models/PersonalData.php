@@ -133,7 +133,7 @@ class PersonalData extends Model
 
     public function expertise(): HasMany
     {
-        return $this->hasMany(ProfileTblExpertise::class, 'personal_data_cesno', 'cesno');
+        return $this->hasMany(ProfileTblExpertise::class, 'cesno', 'cesno');
     }
 
     public function languages(): HasMany

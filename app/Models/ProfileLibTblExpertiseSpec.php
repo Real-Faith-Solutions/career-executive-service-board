@@ -19,12 +19,4 @@ class ProfileLibTblExpertiseSpec extends Model
         'SpeExp_Code',
         'Title',
     ]; 
-
-    // public function expertisePersonalData(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(PersonalData::class, 'profile_tblExpertise', 'personal_data_cesno', 'specialization_code')
-    //     ->as('profile_tblExpertise')
-    //     ->withPivot('ctrlno', 'encoder')
-    //     ->withTimestamps();
-    // }
 }

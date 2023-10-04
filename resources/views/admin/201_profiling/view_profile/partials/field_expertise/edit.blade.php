@@ -24,10 +24,10 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="expertise_specialization">Expertise / Field of Specialization<sup>*</span></label>
-                        <select id="expertise_specialization" name="specialization_code" required>
+                        <select id="expertise_specialization" name="SpeExp_Code" required>
                             <option disabled selected>Select Specialization</option>
                             @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
-                                @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $profileTblExpertise->specialization_code)
+                                @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $profileTblExpertise->SpeExp_Code)
                                     <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}" selected>
                                         {{ $profileLibTblExpertiseSpecs->Title }}
                                     </option>
@@ -38,7 +38,7 @@
                                 @endif
                             @endforeach
                         </select>
-                        @error('specialization_code')
+                        @error('SpeExp_Code')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

@@ -39,7 +39,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex">
-                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->personal_data_cesno, 'ctrlno'=>$expertised->ctrlno]) }}" method="GET">
+                            <form action="{{ route('expertise.edit', ['cesno'=>$expertised->cesno, 'ctrlno'=>$expertised->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
