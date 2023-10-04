@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('profile_tblCESstatus', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('cesno');
-            $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->unsignedBigInteger('cesstat_code');
-            $table->foreign('cesstat_code')->references('code')->on('profilelib_tblcesstatus')->onDelete('cascade');
-            $table->unsignedBigInteger('acc_code');
-            $table->foreign('acc_code')->references('code')->on('profilelib_tblcesstatusAcc')->onDelete('cascade');
-            $table->unsignedBigInteger('type_code');
-            $table->foreign('type_code')->references('code')->on('profilelib_tblcesstatustype')->onDelete('cascade');
-            $table->unsignedBigInteger('official_code');
-            $table->foreign('official_code')->references('code')->on('profilelib_tblappAuthority')->onDelete('cascade');
+            $table->integer('cesno');
+            // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('cesstat_code');
+            // $table->foreign('cesstat_code')->references('code')->on('profilelib_tblcesstatus')->onDelete('cascade');
+            $table->integer('acc_code');
+            // $table->foreign('acc_code')->references('code')->on('profilelib_tblcesstatusAcc')->onDelete('cascade');
+            $table->integer('type_code');
+            // $table->foreign('type_code')->references('code')->on('profilelib_tblcesstatustype')->onDelete('cascade');
+            $table->integer('official_code');
+            // $table->foreign('official_code')->references('code')->on('profilelib_tblappAuthority')->onDelete('cascade');
             $table->integer('resolution_no')->nullable();
             $table->date('appointed_dt')->nullable();
             $table->timestamp('submit_dt')->nullable();
@@ -30,8 +30,10 @@ return new class extends Migration
             $table->string('validator')->nullable();
             $table->string('remarks')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 

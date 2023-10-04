@@ -33,24 +33,25 @@ class EligibilityAndRankTrackerController extends Controller
     }
 
     // navigate eris pages, written exam, assessment center, validation, board interview
-        public function navigate(Request $request, $cesno)
+    public function navigate(Request $request, $cesno)
+    {
+        $selectedPage = $request->input('page');
+
+        switch ($selectedPage) 
         {
-            $selectedPage = $request->input('page');
+            case 'Written Exam':
 
-            switch ($selectedPage) {
-                case 'Written Exam':
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $writtenExam = WrittenExam::where('acno', $erisPersonalDataAcno)->get(['we_date', 'we_rating', 'we_remarks', 'we_location', 'numtakes']);
 
-                    $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
-                    $writtenExam = WrittenExam::where('acno', $erisPersonalDataAcno)->get(['we_date', 'we_rating', 'we_remarks', 'we_location', 'numtakes']);
-
-                    return view('admin/201_profiling/view_profile/partials/eligibility_and_rank_tracker/written_exam_tabe', compact('cesno', 'writtenExam', 'selectedPage'));
+                return view('admin/201_profiling/view_profile/partials/eligibility_and_rank_tracker/written_exam_tabe', compact('cesno', 'writtenExam', 'selectedPage'));
                     
-                case 'Assessment Center':
+            case 'Assessment Center':
 
-                    $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
-                    $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes']);
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes']);
 
-                    return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
                     'selectedPage'));
 
                 case 'Validation':
@@ -59,20 +60,20 @@ class EligibilityAndRankTrackerController extends Controller
                     $rapidValidation = RapidValidation::where('acno', $erisPersonalDataAcno)->get(['dteassign', 'dtesubmit', 'remarks']);
                     $inDepthValidation = InDepthValidation::where('acno', $erisPersonalDataAcno)->get(['dteassign', 'dtesubmit', 'remarks']);
 
-                    return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.validation_table', compact('cesno', 'rapidValidation', 'inDepthValidation', 'selectedPage'));
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.validation_table', compact('cesno', 'rapidValidation', 'inDepthValidation', 'selectedPage'));
 
-                case 'Board Interview':
+            case 'Board Interview':
 
-                    $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
-                    $panelBoardInterview = PanelBoardInterview::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
-                    $boardInterview = BoardInterView::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
+                $erisPersonalDataAcno = ErisTblMain::where('cesno', $cesno)->value('acno');
+                $panelBoardInterview = PanelBoardInterview::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
+                $boardInterview = BoardInterView::where('acno', $erisPersonalDataAcno)->get(['dteiview', 'recom']);
                 
-                    return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 'boardInterview', 'selectedPage'));
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 'boardInterview', 'selectedPage'));
 
-                default:
-                    return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]); // Handle an invalid selection
-            }
+            default:
+                return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]); // Handle an invalid selection
         }
+    }
     // end of navigate eris pages, written exam, assessment center, validation, board interview
     
     public function create($cesno)
@@ -157,6 +158,10 @@ class EligibilityAndRankTrackerController extends Controller
             
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->cesstat_code = $request->cesstat_code;
         $profileTblCesStatus->acc_code = $request->acc_code;
@@ -164,6 +169,7 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->official_code = $request->official_code;
         $profileTblCesStatus->resolution_no = $request->resolution_no;
         $profileTblCesStatus->appointed_dt = $request->appointed_dt;
+        $profileTblCesStatus->lastupd_enc = $encoder;
         $profileTblCesStatus->update();
 
         // retrieving latest ces status thru date appointed_dt
