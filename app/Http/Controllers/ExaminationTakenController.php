@@ -36,9 +36,6 @@ class ExaminationTakenController extends Controller
             'date_of_examination' => ['required'],
             'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
-            'date_acquired' => ['required'],
-            'date_validity' => ['required'],
-
         ]);
 
         /** @var \App\Models\User $user */
