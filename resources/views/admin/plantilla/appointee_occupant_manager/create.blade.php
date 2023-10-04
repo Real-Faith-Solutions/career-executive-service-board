@@ -90,7 +90,7 @@
             </div>
 
             <div class="p-6 space-y-6">
-                <form action="{{ route('plantilla-position-manager.store') }}" method="POST">
+                <form action="{{ route('library-position-manager.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="officeid" required readonly value="{{ $office->officeid }}" />
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -171,14 +171,14 @@
                                         Use Func Title
                                     </label>
                                 </div>
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_active" name="is_active" type="checkbox" value="1">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_active">
                                         Active
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -195,14 +195,14 @@
                                         Generic
                                     </label>
                                 </div>
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_vacant" name="is_vacant" type="checkbox" value="1">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_vacant">
                                         Vacant
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -226,7 +226,7 @@
 
                             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                 <div class="mb-3">
-                                    <label for="corp_sg">Grade Level<sup>*</sup></label>
+                                    <label for="corp_sg">Salary Grade Level<sup>*</sup></label>
                                     <input id="corp_sg" name="corp_sg" required type="number" />
                                     @error('corp_sg')
                                     <span class="invalid" role="alert">

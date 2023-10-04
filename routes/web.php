@@ -441,10 +441,10 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index')->middleware('checkPermission:plantilla_position_manager_view');
-            Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
+            // Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show')->middleware('checkPermission:plantilla_position_manager_view');
             Route::post('{plantilla_id}/update', [PlantillaPositionManagerController::class, 'update'])->name('plantilla-position-manager.update')->middleware('checkPermission:plantilla_position_manager_edit');
-            Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy')->middleware('checkPermission:plantilla_position_manager_delete');
+            // Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy')->middleware('checkPermission:plantilla_position_manager_delete');
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
@@ -506,12 +506,12 @@ Route::middleware('auth')->group(function () {
         Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
         Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
         Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
-        
+
         Route::get('library-class-basis/trash', [ClassBasisController::class, 'trash'])->name('library-class-basis.trash');
         Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
         Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
         Route::resource('library-class-basis', ClassBasisController::class);
-        
+
         Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
         Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
         Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
@@ -522,7 +522,7 @@ Route::middleware('auth')->group(function () {
         Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
         Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
         Route::resource('library-location-type', LocationTypeController::class);
-        
+
         Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
         Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
         Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');

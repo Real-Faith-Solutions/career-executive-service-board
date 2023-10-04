@@ -28,8 +28,6 @@ class PositionManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        // dd($request->all());
-
         $request->validate([
             'officeid' => ['required'],
             'pos_code' => ['required'],
@@ -46,7 +44,7 @@ class PositionManagerController extends Controller
             'corp_sg' => $request->input('corp_sg'),
             // 'pos_sequence' => $request->input('pos_sequence'),
             'is_ces_pos' => $request->input('is_ces_pos'),
-            'is_vacant' => $request->input('is_vacant'),
+            // 'is_vacant' => $request->input('is_vacant'),
             'is_occupied' => $request->input('is_occupied'),
             'remarks' => $request->input('remarks'),
             'cbasis_code' => $request->input('cbasis_code'),
@@ -83,30 +81,63 @@ class PositionManagerController extends Controller
             'agencyLocation',
         ));
     }
-    public function edit($appt_stat_code)
+    public function edit($plantilla_id)
     {
-        $datas = PlanPosition::withTrashed()->findOrFail($appt_stat_code);
+        $datas = PlanPosition::findOrFail($plantilla_id);
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $office = Office::orderBy('title', 'ASC')->get();
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        $agencyLocation = AgencyLocation::orderBy('title', 'ASC')->get();
         return view('admin.plantilla.library.position_manager.edit', compact(
             'datas',
+            'planPositionLibrary',
+            'classBasis',
+            'positionMasterLibrary',
+            'office',
+            'sector',
+            'department',
+            'agencyLocation',
         ));
     }
 
-    public function update(Request $request, $appt_stat_code)
+    public function update(Request $request, $plantilla_id)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantillalib_tblapptstatus'],
-
+            // 'pos_code' => ['required'],
+            'corp_sg' => ['required', 'integer'],
+            'item_no' => ['required'],
         ]);
 
-        $datas = PlanPosition::withTrashed()->findOrFail($appt_stat_code);
-        $datas->update([
-            'title' => $request->input('title'),
-            'encoder' => $encoder,
+        $planPosition = PlanPosition::withTrashed()->findOrFail($plantilla_id);
+        $planPosition->update([
+            // 'pos_code' => $request->input('pos_code'),
+            'pos_suffix' => $request->input('pos_suffix'),
+            'pos_func_name' => $request->input('pos_func_name'),
+            'pos_default' => $request->input('pos_default'),
+            'corp_sg' => $request->input('corp_sg'),
+            // 'pos_sequence' => $request->input('pos_sequence'),
+            'is_ces_pos' => $request->input('is_ces_pos'),
+            'is_vacant' => $request->input('is_vacant'),
+            'is_occupied' => $request->input('is_occupied'),
+            'remarks' => $request->input('remarks'),
+            'cbasis_code' => $request->input('cbasis_code'),
+            'cbasis_remarks' => $request->input('cbasis_remarks'),
+            'item_no' => $request->input('item_no'),
+            'pres_apptee' => $request->input('pres_apptee'),
+            'is_active' => $request->input('is_active'),
+            'is_generic' => $request->input('is_generic'),
+            'is_head' => $request->input('is_head'),
+            'lastupd_user' => $encoder,
         ]);
+
+
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }

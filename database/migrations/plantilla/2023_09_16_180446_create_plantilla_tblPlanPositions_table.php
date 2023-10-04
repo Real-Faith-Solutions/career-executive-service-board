@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('corp_sg')->nullable();
             $table->integer('pos_sequence')->default(1);
             $table->boolean('is_ces_pos')->nullable();
-            $table->boolean('is_vacant')->nullable();
+            $table->boolean('is_vacant')->default(true)->nullable();
             $table->boolean('is_occupied')->nullable();
             $table->text('remarks')->nullable();
             $table->foreignId('cbasis_code')->constrained('plantillalib_tblClassBasis', 'cbasis_code');
