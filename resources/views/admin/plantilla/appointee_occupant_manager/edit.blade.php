@@ -151,10 +151,10 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="{{ route('plantilla-position-manager.update', $planPosition->plantilla_id) }}"
+                <form action="{{ route('library-position-manager.update', $planPosition->plantilla_id) }}"
                     method="POST">
                     @csrf
-
+                    @method('PUT')
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <fieldset class="border p-4">
                             <legend>Position Details</legend>
@@ -170,11 +170,11 @@
                             <div class="mb-3">
                                 <label for="ces_equivalent">CES Equivalent<sup>*</sup></label>
                                 <select id="ces_equivalent" name="ces_equivalent" required
-                                    onchange="posCode(this.value)">
+                                    onchange="posCode(this.value)" disabled>
                                     <option disabled selected>Select Position Level</option>
                                     @foreach ($planPositionLibrary as $data)
                                     <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code ===
-                                        $planPosition->plantilla_id ? 'selected' : '' }}>
+                                        $planPosition->positionMasterLibrary->poslevel_code ? 'selected' : '' }}>
                                         {{ $data->title }}, SG {{ $data->sg }}
                                     </option>
                                     @endforeach
@@ -187,7 +187,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="pos_code">Position Title<sup>*</sup></label>
-                                <select id="pos_code" name="pos_code" required onchange="posTitle()">
+                                <select id="pos_code" name="pos_code" required onchange="posTitle()" disabled>
                                     <option disabled selected>Select Position Title</option>
                                     @foreach ($positionMasterLibrary as $data)
                                     <option value="{{ $data->pos_code }}" {{ $data->pos_code ===
@@ -308,7 +308,7 @@
 
                             <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                 <div class="mb-3">
-                                    <label for="corp_sg">Grade Level<sup>*</sup></label>
+                                    <label for="corp_sg">Salary Grade Level<sup>*</sup></label>
                                     <input id="corp_sg" name="corp_sg" required type="number"
                                         value="{{ $planPosition->corp_sg }}" />
                                     @error('corp_sg')

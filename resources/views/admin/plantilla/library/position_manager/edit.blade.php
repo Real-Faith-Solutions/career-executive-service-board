@@ -1,3 +1,69 @@
+<script>
+    const classificationBasis = (val) => {
+        const titleAndDateTextArea = document.querySelector('#titleAndDate');
+
+        @foreach ($classBasis as $data)
+        if ("{{ $data->cbasis_code }}" === val) {
+            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+        }
+        @endforeach
+    }
+    const posCode = (val) => {
+        // Get the second dropdown element
+        const positionTitleDropdown = document.querySelector("#pos_code");
+        const posDefaultInput = document.querySelector('#pos_default');
+
+        // Clear existing options in the second dropdown
+        positionTitleDropdown.innerHTML = "";
+        posDefaultInput.value = "";
+
+        // Add a default "Select Position Title" option
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Position Title";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        positionTitleDropdown.appendChild(defaultOption);
+
+        @foreach ($planPositionLibrary as $data)
+            if ("{{ $data->poslevel_code }}" === val) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->pos_code }}";
+                option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+                positionTitleDropdown.appendChild(option);
+            }
+        @endforeach
+        
+    }
+
+    const posTitle = () => {
+        const positionTitleDropdown = document.querySelector("#pos_code");
+        const posDefaultInput = document.querySelector('#pos_default');
+
+        const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
+        posDefaultInput.value = selectedOption.textContent;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+            const checkBox = document.getElementById("use_func_title");
+            const input = document.getElementById("pos_func_name");
+            const posDefaultInput = document.getElementById("pos_default");
+            
+            checkBox.addEventListener("change", function () {
+                if (checkBox.checked) {
+                    input.removeAttribute("readonly");
+
+                    posDefaultInput.setAttribute("disabled", "true");
+                    // posDefaultInput.value = "";
+                } else {
+                    input.setAttribute("readonly", "true");
+                    input.value = "";
+                    posDefaultInput.removeAttribute("disabled");
+
+                }
+            });
+        });
+</script>
+
 @extends('layouts.app')
 @section('title', 'Position Manager - Edit')
 @section('content')
@@ -21,27 +87,233 @@
             <form action="{{ route('library-position-manager.update', $datas->plantilla_id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    <div class="mb-3">
-                        <label for="title">Sector name<sup>*</span></label>
-                        <input id="title" name="title" type="text" value="{{ $datas->title }}" required>
-                        @error('title')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                    <fieldset class="border p-4">
+                        <legend>Position Details</legend>
+                        <div class="mb-3">
+                            <label for="pos_suffix">Position Suffix<sup>*</sup></label>
+                            <input id="pos_suffix" name="pos_suffix" value="{{ $datas->pos_suffix }}" />
+                            @error('pos_suffix')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="ces_equivalent">CES Equivalent<sup>*</sup></label>
+                            <select id="ces_equivalent" name="ces_equivalent" required onchange="posCode(this.value)"
+                                disabled>
+                                <option disabled selected>Select Position Level</option>
+                                @foreach ($planPositionLibrary as $data)
+                                <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code ===
+                                    $datas->positionMasterLibrary->poslevel_code ? 'selected' : '' }}>
+                                    {{ $data->title }}, SG {{ $data->sg }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('ces_equivalent')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="pos_code">Position Title<sup>*</sup></label>
+                            <select id="pos_code" name="pos_code" required onchange="posTitle()" disabled>
+                                <option disabled selected>Select Position Title</option>
+                                @foreach ($positionMasterLibrary as $data)
+                                <option value="{{ $data->pos_code }}" {{ $data->pos_code ===
+                                    $datas->pos_code ? 'selected' : ''}}>
+                                    {{ $data->dbm_title }}, SG {{ $data->sg }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('pos_code')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="description">Description<sup>*</span></label>
-                        <textarea name="description" id="description" placeholder="Write your thoughts here..."
-                            required>{{ $datas->description }}</textarea>
-                        @error('description')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
+                        <div class="mb-3">
+                            <label for="pos_func_name">Functional Title<sup>*</sup></label>
+                            <input id="pos_func_name" name="pos_func_name" required readonly
+                                value="{{ $datas->pos_func_name }}" />
+                            @error('pos_func_name')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_ces_pos" name="is_ces_pos" type="checkbox" value="1" {{ $datas->is_ces_pos
+                                === 1 ?
+                                'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_ces_pos">
+                                    CES Position
+                                </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="pres_apptee" name="pres_apptee" type="checkbox" value="1" {{ $datas->pres_apptee
+                                === 1 ?
+                                'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
+                                    Pres Appointee
+                                </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="use_func_title" name="use_func_title" type="checkbox" value="1" {{
+                                    $datas->pos_func_name
+                                === NULL ? '' : 'checked' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="use_func_title">
+                                    Use Func Title
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_active" name="is_active" type="checkbox" value="1" {{ $datas->is_active === 1
+                                ?
+                                'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_active">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_head" name="is_head" type="checkbox" value="1" {{ $datas->is_head
+                                === 1 ? 'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_head">
+                                    Head of Agency
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_generic" name="is_generic" type="checkbox" value="1" {{ $datas->is_generic
+                                === 1 ? 'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_generic">
+                                    Generic
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_vacant" name="is_vacant" type="checkbox" value="1" {{ $datas->is_vacant
+                                === 1 ? 'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_vacant">
+                                    Vacant
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    id="is_occupied" name="is_occupied" type="checkbox" value="1" {{ $datas->is_occupied
+                                === 1 ? 'checked' : '' }}>
+                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_occupied">
+                                    Occupied
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="pos_default">Default Title<sup>*</sup></label>
+                            <input id="pos_default" name="pos_default" required value="{{ $datas->pos_default }}" />
+                            @error('pos_default')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                            <div class="mb-3">
+                                <label for="corp_sg">Salary Grade Level<sup>*</sup></label>
+                                <input id="corp_sg" name="corp_sg" required type="number"
+                                    value="{{ $datas->corp_sg }}" />
+                                @error('corp_sg')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="item_no">Item No.<sup>*</sup></label>
+                                <input id="item_no" name="item_no" required value="{{ $datas->item_no }}" />
+                                @error('item_no')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="remarks">Remarks</label>
+                            <textarea name="remarks" id="remarks" cols="50" rows="3">{{ $datas->remarks }}</textarea>
+                            @error('remarks')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="border p-4">
+                        <legend>Classification Basis</legend>
+                        <div class="mb-3">
+                            <label for="cbasis_code">Classification Basis</label>
+                            <select id="cbasis_code" name="cbasis_code" onchange="classificationBasis(this.value)">
+                                <option disabled selected>Select Classification Basis</option>
+                                @foreach ($classBasis as $data)
+                                <option value="{{ $data->cbasis_code }}" {{ $data->cbasis_code ===
+                                    $datas->cbasis_code ? 'selected': ''}}>
+                                    {{ $data->basis }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('cbasis_code')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="titleAndDate">Title/Date</label>
+                            <textarea name="titleAndDate" id="titleAndDate" cols="50" rows="3"
+                                readonly>{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}</textarea>
+                            @error('titleAndDate')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="cbasis_remarks">Notes</label>
+                            <textarea name="cbasis_remarks" id="cbasis_remarks" cols="50"
+                                rows="3">{{ $datas->cbasis_remarks }}</textarea>
+                            @error('cbasis_remarks')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+
+                    </fieldset>
+
                 </div>
 
                 <div class="flex justify-between">
