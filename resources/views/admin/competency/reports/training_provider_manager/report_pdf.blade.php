@@ -43,14 +43,16 @@
                 padding-left: 10px;
                 padding-bottom: 5px;
                 font-size: 11px;
-                text-align: center;
+                text-align: left;
             }
         
             th {
                 color: #284F87;
+                padding-right: 10px;
+                padding-left: 10px;
                 font-size: 12px;
                 text-transform: uppercase;
-                text-align: center;
+                text-align: left;
                 background-color: white;
             }
         

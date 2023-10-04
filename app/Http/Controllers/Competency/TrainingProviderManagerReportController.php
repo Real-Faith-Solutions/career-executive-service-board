@@ -14,7 +14,7 @@ class TrainingProviderManagerReportController extends Controller
         $competencyTrainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
         'emailadd', 'contactperson')->orderBy('providerID', 'desc')->paginate(5);
 
-        return view('admin.competency.reports.training_provider_report', compact('competencyTrainingProvider'));
+        return view('admin.competency.reports.training_provider_manager.report', compact('competencyTrainingProvider'));
     }
 
     public function generatePDF()
@@ -22,7 +22,7 @@ class TrainingProviderManagerReportController extends Controller
         $competencyTrainingProvider = CompetencyTrainingProvider::all(['providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
         'emailadd', 'contactperson']);
 
-        $pdf = Pdf::loadView('admin.competency.reports.training_provider_report_pdf', compact('competencyTrainingProvider'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('admin.competency.reports.training_provider_manager.report_pdf', compact('competencyTrainingProvider'))->setPaper('a4', 'landscape');
         return $pdf->stream('training-provider-manager-report.pdf');
     }
 }
