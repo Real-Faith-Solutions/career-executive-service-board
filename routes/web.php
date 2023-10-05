@@ -82,6 +82,7 @@ use App\Http\Controllers\ProfileLibTblEducMajorController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
@@ -822,6 +823,18 @@ Route::middleware('auth')->group(function () {
         });
     });
     //  end of ERIS routes
+
+    // Reports routes
+    Route::prefix('reports')->group(function () {
+
+        Route::prefix('executive-201-profile ')->group(function () {
+
+            Route::get('general-reports', [Reports201Controller::class, 'index'])->name('general-reports.index');
+        
+        });
+
+    });
+    // End of Reports routes
 
     // Rights management routes
     Route::prefix('rights-management')->group(function () {
