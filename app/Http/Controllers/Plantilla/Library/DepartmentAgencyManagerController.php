@@ -18,11 +18,25 @@ class DepartmentAgencyManagerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $datas = DepartmentAgency::all();
-        return view('admin.plantilla.library.department_agency_manager.index', compact('datas'));
+        $sectorToggle = $request->input('sectorToggle');
+        $query = DepartmentAgency::query();
+
+        if ($sectorToggle) {
+            $query->where('sectorid', $sectorToggle);
+        }
+
+        $datas = $query->get();
+        $sector = SectorManager::all();
+
+        return view('admin.plantilla.library.department_agency_manager.index', compact(
+            'datas',
+            'sector',
+            'sectorToggle',
+        ));
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -38,4 +38,9 @@ class PlanAppointee extends Model
     {
         return $this->belongsTo(ApptStatus::class, 'appt_stat_code', 'appt_stat_code');
     }
+
+    public function planPosition(): BelongsTo
+    {
+        return $this->belongsTo(PlanPosition::class, 'plantilla_id', 'plantilla_id');
+    }
 }

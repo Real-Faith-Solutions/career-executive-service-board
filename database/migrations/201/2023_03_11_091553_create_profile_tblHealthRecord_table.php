@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('handicap')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate');
-            $table->timestamp('lastupd_dt');
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

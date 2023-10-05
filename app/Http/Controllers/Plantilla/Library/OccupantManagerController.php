@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Plantilla;
+namespace App\Http\Controllers\Plantilla\Library;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
@@ -9,37 +9,46 @@ use App\Models\Plantilla\ApptStatus;
 use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
-use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
-use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AppointeeOccupantManagerController extends Controller
+class OccupantManagerController extends Controller
 {
     public function index()
     {
-        return view('admin.plantilla.appointee_occupant_manager.index');
+        $datas = PlanAppointee::all();
+        // $sector = SectorManager::orderBy('title', 'ASC')->get();
+        // $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        // $departmentLocation = AgencyLocation::orderBy('title', 'ASC')->get();
+        // $office = Office::orderBy('title', 'ASC')->get();
+
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+
+        return view('admin.plantilla.library.occupant_manager.index', compact(
+            'datas',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+            'apptStatus',
+
+        ));;
     }
 
-    public function create(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
+    public function create(Request $request)
     {
-        $sector = SectorManager::find($sectorid);
-        $department = DepartmentAgency::find($deptid);
-        $departmentLocation = AgencyLocation::find($officelocid);
-        $office = Office::find($officeid);
-        $planPosition = PlanPosition::find($plantilla_id);
-
-        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-
-
-        $planAppointee = PlanAppointee::query()
-            ->where('plantilla_id', $planPosition->plantilla_id)
-            ->get();
+        $planPositions = PlanPosition::all();
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        $agencyLocation = AgencyLocation::orderBy('title', 'ASC')->get();
+        $office = Office::orderBy('title', 'ASC')->get();
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
@@ -57,21 +66,19 @@ class AppointeeOccupantManagerController extends Controller
             $personalData = null;
         }
 
-        return view('admin.plantilla.appointee_occupant_browser.create', compact(
+        return view('admin.plantilla.library.occupant_manager.create', compact(
+            'planPositions',
             'sector',
             'department',
-            'departmentLocation',
+            'agencyLocation',
             'office',
-            'cities',
-            'planAppointee',
             'planPositionLibrary',
             'positionMasterLibrary',
             'classBasis',
-            'planPosition',
             'apptStatus',
-            'personalData',
-            'cesno',
             'personalDataList',
+            'cesno',
+            'personalData',
 
         ));;
     }
@@ -89,6 +96,7 @@ class AppointeeOccupantManagerController extends Controller
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ], [
+            'plantilla_id.required' => 'The Position field is required.',
             'cesno.unique' => 'This official is already appointed to another position.',
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
@@ -115,47 +123,93 @@ class AppointeeOccupantManagerController extends Controller
 
     public function destroy($appointee_id)
     {
-        $datas = PlanAppointee::findOrFail($appointee_id);
-        $datas->delete();
+        $data = PlanAppointee::findOrFail($appointee_id);
 
-        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+        if ($data->personalData()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        }
+        if ($data->apptStatus()->exists()) {
+            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        }
+
+        try {
+            $data->delete();
+
+            if ($data->trashed()) {
+                return redirect()->back()->with('message', 'The item has been successfully deleted!');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return redirect()->back()->with('error', 'Record not found!');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
     }
 
-
-    public function show(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id, $appointee_id)
+    public function trash()
     {
-        $sector = SectorManager::find($sectorid);
-        $department = DepartmentAgency::find($deptid);
-        $departmentLocation = AgencyLocation::find($officelocid);
-        $office = Office::find($officeid);
-        $planPosition = PlanPosition::find($plantilla_id);
-        $appointees = PlanAppointee::find($appointee_id);
-        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-
-        $planAppointee = PlanAppointee::query()
-            ->where('plantilla_id', $planPosition->plantilla_id)
+        $datas = PlanAppointee::onlyTrashed()
             ->get();
+        return view('admin.plantilla.library.occupant_manager.trash', compact('datas'));
+    }
+
+    public function restore($appointee_id)
+    {
+        $datas = PlanAppointee::onlyTrashed()->findOrFail($appointee_id);
+        $datas->restore();
+
+        return redirect()->back()->with('message', 'The item has been successfully restore!');
+    }
+
+    public function forceDelete($appointee_id)
+    {
+        try {
+            // Find the soft-deleted record by its ID
+            $data = PlanAppointee::onlyTrashed()->findOrFail($appointee_id);
+
+            // Permanently delete the record
+            $data->forceDelete();
+
+            // Check if the delete operation was successful
+            if ($data) {
+                return redirect()->back()->with('message', 'The item has been successfully deleted!');
+            } else {
+                return redirect()->back()->with('error', 'Something went wrong!');
+            }
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            // Handle the case where the record is not found
+            return redirect()->back()->with('error', 'Record not found!');
+        } catch (\Exception $exception) {
+            // Handle other exceptions if they occur
+            return redirect()->back()->with('error', 'An error occurred!');
+        }
+    }
+
+    public function edit($appointee_id)
+    {
+        $datas = PlanAppointee::find($appointee_id);
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        $agencyLocation = AgencyLocation::orderBy('title', 'ASC')->get();
+        $office = Office::orderBy('title', 'ASC')->get();
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->get();
 
-        return view('admin.plantilla.appointee_occupant_browser.edit', compact(
+
+        return view('admin.plantilla.library.occupant_manager.edit', compact(
+            'datas',
             'sector',
             'department',
-            'departmentLocation',
+            'agencyLocation',
             'office',
-            'cities',
-            'planAppointee',
             'planPositionLibrary',
             'positionMasterLibrary',
             'classBasis',
-            'planPosition',
             'apptStatus',
-            'appointees',
-            'otherAssignment',
 
         ));;
     }

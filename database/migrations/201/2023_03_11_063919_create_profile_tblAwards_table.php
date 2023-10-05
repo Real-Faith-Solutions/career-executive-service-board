@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('aw_dt')->nullable(); // i dont know
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate');
-            $table->timestamp('lastupd_dt');
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->softDeletes();
         });
     }

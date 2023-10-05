@@ -2,6 +2,29 @@
 @section('title', 'Department Agency Manager')
 @section('content')
 
+<fieldset class="border p-4 bg-gray-50">
+    <legend>View Filter</legend>
+    <form class="sm:gid-cols-3 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
+
+        <div class="mb-3">
+            <label for="sectorToggle">Sector</label>
+            <select id="sectorToggle" name="sectorToggle">
+                <option value="">Select Sector</option>
+                @foreach ($sector as $data)
+                <option value="{{ $data->sectorid }}" {{ $data->sectorid == $sectorToggle ? 'selected' : ''}}>
+                    {{ $data->title }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="flex items-center mt-3 gap-2">
+            <button class="btn btn-primary" type="submit">Search</button>
+            <a class="btn btn-secondary" href="{{ route('library-department-manager.index') }}">Reset</a>
+        </div>
+    </form>
+</fieldset>
+
 <div class="lg:flex lg:justify-between my-3">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')

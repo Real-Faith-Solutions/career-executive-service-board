@@ -418,7 +418,7 @@
             <th>Appointment</th>
             <th>CES Status</th>
             <th>Appointment Date</th>
-            <th>Assum Date</th>
+            <th>Assumption Date</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -447,7 +447,7 @@
                 {{ $data->apptStatus->title }}
             </td>
             <td>
-                {{ $data->personalData->cesStatus->description ?? 'N\A'}}
+                {{ $data->personalData->cesStatus->description ?? 'N/A'}}
             </td>
             <td>
                 {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}

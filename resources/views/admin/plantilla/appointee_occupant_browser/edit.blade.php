@@ -297,7 +297,7 @@
                 {{ $data->detailed_code }}
             </td>
 
-            <td>{{ $data->appt_status_code }}</td>
+            <td>{{ $data->apptStatus->title }}</td>
             <td>{{ $data->position }}</td>
             <td>{{ $data->office }}</td>
             <td>{{ $data->remarks }}</td>

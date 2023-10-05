@@ -63,8 +63,11 @@ use App\Http\Controllers\Plantilla\Library\DBMPositionTitleController;
 use App\Http\Controllers\Plantilla\Library\DepartmentAgencyManagerController as LibraryDepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\LocationTypeController;
 use App\Http\Controllers\Plantilla\Library\MotherDeptController;
+use App\Http\Controllers\Plantilla\Library\OccupantBrowserController;
+use App\Http\Controllers\Plantilla\Library\OccupantManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeManagerController as LibraryOfficeManagerController;
 use App\Http\Controllers\Plantilla\Library\OfficeTypeController;
+use App\Http\Controllers\Plantilla\Library\OtherAssignmentController as LibraryOtherAssignmentController;
 use App\Http\Controllers\Plantilla\Library\PersonnelMovementController;
 use App\Http\Controllers\Plantilla\Library\PositionManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
@@ -79,6 +82,7 @@ use App\Http\Controllers\ProfileLibTblEducMajorController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\ScholarshipController;
@@ -86,6 +90,7 @@ use App\Http\Controllers\TitleController;
 use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
+use App\Models\Plantilla\OtherAssignment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -532,6 +537,30 @@ Route::middleware('auth')->group(function () {
         Route::post('library-position-manager/{officeid}/force-delete', [PositionManagerController::class, 'forceDelete'])->name('library-position-manager.forceDelete');
         Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
         Route::resource('library-position-manager', PositionManagerController::class);
+
+        Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
+        Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
+        Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
+        Route::resource('library-occupant-browser', OccupantBrowserController::class);
+
+        Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
+        Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
+        Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
+        Route::resource('library-occupant-manager', OccupantManagerController::class);
+
+
+        Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
+        Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
+        Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
+
+
+        Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
+        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+        Route::get('library-other-assignment/{library_occupant_manager}/create', [LibraryOtherAssignmentController::class, 'create'])->name('library-other-assignment.create');
+        Route::post('library-other-assignment/store', [LibraryOtherAssignmentController::class, 'store'])->name('library-other-assignment.store');
+        Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
+        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+        Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
     });
     // End of plantilla routes
 
@@ -794,6 +823,18 @@ Route::middleware('auth')->group(function () {
         });
     });
     //  end of ERIS routes
+
+    // Reports routes
+    Route::prefix('reports')->group(function () {
+
+        Route::prefix('executive-201-profile ')->group(function () {
+
+            Route::get('general-reports', [Reports201Controller::class, 'index'])->name('general-reports.index');
+        
+        });
+
+    });
+    // End of Reports routes
 
     // Rights management routes
     Route::prefix('rights-management')->group(function () {
