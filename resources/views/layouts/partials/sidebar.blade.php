@@ -232,14 +232,7 @@
                         <button type="button"
                             class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
                             aria-controls="competency-reports" data-collapse-toggle="competency-reports">
-                            {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
-                                <path
-                                    d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
-                                <path
-                                    d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                            </svg> --}}
-
+                            
                             <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Competency
                                 Reports</span>
 
@@ -282,39 +275,89 @@
                         </ul>
                     </li>
 
-                    {{-- <li>
+                    <li>
                         <a href="#"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Generate Reports
-                        </a>
-                    </li> --}}
-
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Statistical
-                            Reports</a>
+                            Statistical Reports</a>
                     </li>
 
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Reports
-                            for placement</a>
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Reports for placement</a>
                     </li>
 
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Reports
-                            for birthday cards</a>
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Reports for birthday cards</a>
                     </li>
 
                     <li>
                         <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Data
-                            Portability Report</a>
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Data Portability Report</a>
                     </li>
                 </ul>
             </li>
             {{-- end reports --}}
+
+            {{-- 201 reports --}}
+            <li>
+                <button type="button"
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
+                    aria-controls="dropdown-201-reports" data-collapse-toggle="dropdown-201-reports">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                        <path
+                            d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+                        <path
+                            d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+                    </svg>
+
+                    <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>201 Reports</span>
+
+                    <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <ul id="dropdown-201-reports" class="hidden space-y-2 py-2">
+                    <li>
+                        <a href="#"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            General Reports</a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Statistical Reports</a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Reports for Placement</a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Reports for Birthday Cards</a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Data Portability Report</a>
+                    </li>
+                </ul>
+            </li>
+            {{-- end 201 reports --}}
 
             {{-- rights management --}}
             <li>
