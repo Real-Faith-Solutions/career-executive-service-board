@@ -17,7 +17,7 @@ use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class OccupantBrowserController extends Controller
+class OccupantManagerController extends Controller
 {
     public function index()
     {
@@ -32,7 +32,7 @@ class OccupantBrowserController extends Controller
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
-        return view('admin.plantilla.library.occupant_browser.index', compact(
+        return view('admin.plantilla.library.occupant_manager.index', compact(
             'datas',
             'planPositionLibrary',
             'positionMasterLibrary',
@@ -66,7 +66,7 @@ class OccupantBrowserController extends Controller
             $personalData = null;
         }
 
-        return view('admin.plantilla.library.occupant_browser.create', compact(
+        return view('admin.plantilla.library.occupant_manager.create', compact(
             'planPositions',
             'sector',
             'department',
@@ -151,7 +151,7 @@ class OccupantBrowserController extends Controller
     {
         $datas = PlanAppointee::onlyTrashed()
             ->get();
-        return view('admin.plantilla.library.occupant_browser.trash', compact('datas'));
+        return view('admin.plantilla.library.occupant_manager.trash', compact('datas'));
     }
 
     public function restore($appointee_id)
@@ -200,7 +200,7 @@ class OccupantBrowserController extends Controller
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
 
-        return view('admin.plantilla.library.occupant_browser.edit', compact(
+        return view('admin.plantilla.library.occupant_manager.edit', compact(
             'datas',
             'sector',
             'department',
@@ -212,5 +212,31 @@ class OccupantBrowserController extends Controller
             'apptStatus',
 
         ));;
+    }
+
+    public function update(Request $request, $appointee_id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $request->validate([
+            'appt_stat_code' => ['required'],
+            'appt_date' => ['required'],
+            'assum_date' => ['required'],
+        ]);
+
+        $planAppointee = PlanAppointee::withTrashed()->findOrFail($appointee_id);
+        $planAppointee->update([
+            'appt_stat_code' => $request->input('appt_stat_code'),
+            'appt_date' => $request->input('appt_date'),
+            'assum_date' => $request->input('assum_date'),
+            'is_appointee' => $request->input('is_appointee'),
+            'ofc_stat_code' => $request->input('ofc_stat_code'),
+            'basis' => $request->input('basis'),
+            'lastupd_user' => $encoder,
+        ]);
+
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
     }
 }

@@ -34,4 +34,9 @@ class Office extends Model
     {
         return $this->belongsTo(AgencyLocation::class, 'officelocid', 'officelocid');
     }
+
+    public function planPosition()
+    {
+        return $this->hasMany(PlanPosition::class, 'officeid');
+    }
 }

@@ -22,7 +22,7 @@
         if ("{{ $data->sectorid }}" === val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
-            option.text = "{{ $data->title }}";
+            option.text = "{{ $data->title }} - {{ $data->motherDepartment->title }}";
             departmentDropdown.appendChild(option);
         }
         @endforeach
@@ -102,7 +102,7 @@
         if ("{{ $data->plantilla_id }}" === val) {
             const option = document.createElement("option");
             option.value = "{{ $data->plantilla_id }}";
-            option.text = "{{ $data->positionMasterLibrary->dbm_title }}";
+            option.text = "{{ $data->positionMasterLibrary->dbm_title }} - SG {{ $data->positionMasterLibrary->sg }}";
             positionDropdown.appendChild(option);
         }
         @endforeach
@@ -127,21 +127,21 @@
 </script>
 
 @extends('layouts.app')
-@section('title', 'Appointee Occupant Browser - Create')
+@section('title', 'Appointee Occupant Manager - Create')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-occupant-browser.index') }}">Go back</a>
+    <a class="btn btn-primary" href="{{ route('library-occupant-manager.index') }}">Go back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Appointee Occupant Browser
+                Appointee Occupant Manager
             </h1>
         </div>
 
@@ -171,7 +171,7 @@
                         </div>
                     </form>
 
-                    <form action="{{ route('library-occupant-browser.store') }}" method="POST">
+                    <form action="{{ route('library-occupant-manager.store') }}" method="POST">
                         @csrf
                         {{-- @method('put') --}}
                         <input type="hidden" name="cesno" value="{{ $cesno }}">
@@ -307,6 +307,7 @@
                         <label for="department">Department/Agency</label>
                         <select id="department" name="department" required onchange="departmentToggle(this.value)">
                         </select>
+                        <span class="text-slate-400 text-sm italic">Note: after agency is mother agency</span>
                     </div>
                     <div class="mb-3">
                         <label for="agencyLocation">Agency Location</label>
