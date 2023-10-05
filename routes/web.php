@@ -802,6 +802,18 @@ Route::middleware('auth')->group(function () {
     });
     //  end of ERIS routes
 
+    // Reports routes
+    Route::prefix('reports')->group(function () {
+
+        Route::prefix('executive-201-profile ')->group(function () {
+
+            Route::get('general-reports', [ProfileController::class, 'index'])->name('general-reports.index');
+        
+        });
+
+    });
+    // End of Reports routes
+
     // Rights management routes
     Route::prefix('rights-management')->group(function () {
 
