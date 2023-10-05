@@ -22,7 +22,7 @@
         if ("{{ $data->sectorid }}" === val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
-            option.text = "{{ $data->title }}";
+            option.text = "{{ $data->title }} - {{ $data->motherDepartment->title }}";
             departmentDropdown.appendChild(option);
         }
         @endforeach
@@ -307,6 +307,7 @@
                         <label for="department">Department/Agency</label>
                         <select id="department" name="department" required onchange="departmentToggle(this.value)">
                         </select>
+                        <span class="text-slate-400 text-sm italic">Note: after agency is mother agency</span>
                     </div>
                     <div class="mb-3">
                         <label for="agencyLocation">Agency Location</label>
