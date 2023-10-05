@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Appointee Occupant Browser - Trash')
+@section('title', 'Appointee Occupant Manager - Trash')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-occupant-browser.index') }}">Go back</a>
+    <a class="btn btn-primary" href="{{ route('library-occupant-manager.index') }}">Go back</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -80,7 +80,7 @@
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('library-occupant-browser.restore', $data->appointee_id) }}" method="POST"
+                            action="{{ route('library-occupant-manager.restore', $data->appointee_id) }}" method="POST"
                             onsubmit="return window.confirm('Are you sure you want to restore this item?')">
                             @csrf
                             <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Restore">
@@ -90,7 +90,7 @@
                             </button>
                         </form>
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('library-occupant-browser.forceDelete', $data->appointee_id) }}"
+                            action="{{ route('library-occupant-manager.forceDelete', $data->appointee_id) }}"
                             method="POST"
                             onsubmit="return window.confirm('Are you sure you want to delete this item permanently?')">
 

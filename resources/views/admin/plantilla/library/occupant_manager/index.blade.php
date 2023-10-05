@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Appointee Occupant Browser')
+@section('title', 'Appointee Occupant Manager')
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
@@ -7,13 +7,13 @@
         @yield('title')
     </a>
     <div class="flex">
-        <a href="{{ route('library-occupant-browser.trash') }}">
+        <a href="{{ route('library-occupant-manager.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
             </lord-icon>
         </a>
 
-        <a class="btn btn-primary" href="{{ route('library-occupant-browser.create') }}">Add record</a>
+        <a class="btn btn-primary" href="{{ route('library-occupant-manager.create') }}">Add record</a>
     </div>
 </div>
 
@@ -69,14 +69,14 @@
                 <div class="flex justify-end">
 
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('library-occupant-browser.edit', $data->appointee_id) }}">
+                        href="{{ route('library-occupant-manager.edit', $data->appointee_id) }}">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
                     </a>
 
                     <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-occupant-browser.destroy', $data->appointee_id) }}" method="POST"
+                        action="{{ route('library-occupant-manager.destroy', $data->appointee_id) }}" method="POST"
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
