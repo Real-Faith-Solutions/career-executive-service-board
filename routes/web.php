@@ -535,10 +535,15 @@ Route::middleware('auth')->group(function () {
         Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
         Route::resource('library-position-manager', PositionManagerController::class);
 
+        Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
+        Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
+        Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
+        Route::resource('library-occupant-browser', OccupantBrowserController::class);
+
         Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
         Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
         Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
-        Route::resource('library-occupant-manager', OccupantManagerController::class);
+        Route::resource('library-occupant-manager', OccupantManagerController::class);        
     });
     // End of plantilla routes
 

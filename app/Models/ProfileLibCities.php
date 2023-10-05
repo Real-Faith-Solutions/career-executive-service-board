@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Plantilla\OfficeAddress;
 use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanPosition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ class ProfileLibCities extends Model
 
     public function cities()
     {
-        return $this->hasManyThrough(OtherAssignment::class, 'city_code');
+        return $this->hasManyThrough(OtherAssignment::class, 'city_code', OfficeAddress::class, 'city_code');
     }
 
     public function competencyTrainingProviderManager(): HasMany

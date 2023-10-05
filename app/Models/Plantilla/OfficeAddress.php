@@ -2,6 +2,7 @@
 
 namespace App\Models\Plantilla;
 
+use App\Models\ProfileLibCities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,5 +32,10 @@ class OfficeAddress extends Model
     public function Office(): BelongsTo
     {
         return $this->belongsTo(Office::class, 'officeid', 'officeid');
+    }
+
+    public function cities()
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'city_code', 'city_code');
     }
 }
