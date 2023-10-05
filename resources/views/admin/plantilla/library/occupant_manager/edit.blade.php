@@ -6,7 +6,16 @@
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-occupant-manager.index') }}">Go back</a>
+    <div>
+        @if($datas->is_appointee === 1)
+        <a class="btn btn-primary mx-1"
+            href="{{ route('library-other-assignment.index', ['library_occupant_manager' => $datas->appointee_id]) }}">
+            Other Assignment
+        </a>
+        @endif
+
+        <a class="btn btn-primary" href="{{ route('library-occupant-manager.index') }}">Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">

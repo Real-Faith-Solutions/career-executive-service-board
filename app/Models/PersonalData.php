@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Lenard\Test;
+use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -200,5 +201,10 @@ class PersonalData extends Model
     public function cesStatus(): BelongsTo
     {
         return $this->belongsTo(ProfileLibTblCesStatus::class, 'CESStat_code', 'code');
+    }
+
+    public function otherAssignment(): HasMany
+    {
+        return $this->hasMany(OtherAssignment::class, 'cesno');
     }
 }
