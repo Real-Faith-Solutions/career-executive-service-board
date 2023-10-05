@@ -21,103 +21,123 @@
             <form action="{{ route('library-occupant-browser.update', $datas->appointee_id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <div class="mb-3">
-                        <select id="appt_stat_code" name="appt_stat_code" required>
-                            <option disabled selected value="">Select Personnel Movement</option>
-                            @foreach ($apptStatus as $data)
-                            <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
-                            @endforeach
-                        </select>
-                        @error('appt_stat_code')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
 
-                    <div class="mb-3 flex">
-                        <div class="flex">
-                            <div class="flex items-center mr-4">
-                                <input id="is_appointee" name="is_appointee" type="radio" value="1" required>
-                                <label class="ml-2 text-sm font-medium text-gray-900"
-                                    for="is_appointee">Appointee</label>
-                            </div>
-
-                            <div class="flex items-center mr-4">
-                                <input id="is_occupant" name="is_appointee" type="radio" value="0" required>
-                                <label class="ml-2 text-sm font-medium text-gray-900" for="is_occupant">Occupant</label>
-                            </div>
+                <fieldset class="border p-4">
+                    <legend>Occupant information</legend>
+                    <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <select id="appt_stat_code" name="appt_stat_code" required>
+                                <option disabled selected>Select Personnel Movement</option>
+                                @foreach ($apptStatus as $data)
+                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                    $datas->appt_stat_code ? 'selected' : '' }}>
+                                    {{ $data->title }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('appt_stat_code')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
                         </div>
-                        @error('is_appointee')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
-                    <div class="mb-3">
-                        <label for="lastname">Name of Official</label>
-                        <input id="lastname"
-                            value="{{ $personalData->lastname ?? ''}} {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
-                            readonly required />
-                        @error('cesno')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
+                        <div class="mb-3 flex">
+                            <div class="flex">
+                                <div class="flex items-center mr-4">
+                                    <input id="is_appointee" name="is_appointee" type="radio" value="1" {{
+                                        $datas->is_appointee ?
+                                    'checked' : '' }}>
+                                    <label class="ml-2 text-sm font-medium text-gray-900"
+                                        for="is_appointee">Appointee</label>
+                                </div>
 
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <div class="mb-3">
-                        <label for="cesStatus">CES Status</label>
-                        <input id="cesStatus" value="{{ $personalData->cesStatus->description ?? '' }}" readonly />
+                                <div class="flex items-center mr-4">
+                                    <input id="is_occupant" name="is_appointee" type="radio" value="0" {{
+                                        $datas->is_appointee ? ''
+                                    : 'checked' }}>
+                                    <label class="ml-2 text-sm font-medium text-gray-900"
+                                        for="is_occupant">Occupant</label>
+                                </div>
+                            </div>
+                            @error('is_appointee')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="assum_date">Assumption Date<sup>*</sup></label>
-                        <input id="assum_date" name="assum_date" type="date" value="{{ old('assum_date') }}" required />
-                        @error('assum_date')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <div class="mb-3">
-                        <label for="gender">Gender</label>
-                        <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+                        <div class="mb-3">
+                            <label for="lastname">Name of Official</label>
+                            <input id="lastname"
+                                value="{{ $datas->personalData->lastname }} {{ $datas->personalData->firstname }} {{ $datas->personalData->name_extension }} {{ $datas->personalData->middlename }}"
+                                readonly />
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="appt_date">Appointment Date<sup>*</sup></label>
-                        <input id="appt_date" name="appt_date" type="date" value="{{ old('appt_date') }}" required />
-                        @error('appt_date')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <div class="mb-3">
-                        <label for="basis">Basis</label>
-                        <textarea name="basis" id="basis" cols="30" rows="10" readonly></textarea>
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="cesStatus">CES Status</label>
+                            <input id="cesStatus" value="{{ $datas->personalData->cesStatus->description ?? '' }}"
+                                readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="assum_date">Assumption Date<sup>*</sup></label>
+                            <input id="assum_date" name="assum_date" type="date" value="{{ $datas->assum_date }}"
+                                required />
+                            @error('assum_date')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="remarks">Remarks</label>
-                        <textarea name="remarks" id="remarks" cols="30" rows="10"
-                            readonly>{{ $personalData->remarks ?? ''}}</textarea>
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="gender">Gender</label>
+                            <input id="gender" value="{{ $datas->personalData->gender ?? ''}}" readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="appt_date">Appointment Date<sup>*</sup></label>
+                            <input id="appt_date" name="appt_date" type="date" value="{{ $datas->appt_date }}"
+                                required />
+                            @error('appt_date')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
+
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="basis">Basis</label>
+                            <textarea name="basis" id="basis" cols="30" rows="10"
+                                readonly>{{ $datas->basis }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="remarks">Remarks</label>
+                            <textarea name="remarks" id="remarks" cols="30" rows="10"
+                                readonly>{{ $datas->personalData->remarks ?? ''}}</textarea>
+                        </div>
+                    </div>
+
+                    {{-- <div class="mb-3">
+                        <label for="special_assignment">Special Assignment</label>
+                        <textarea name="special_assignment" id="special_assignment" cols="30" rows="10"
+                            readonly></textarea>
+                    </div> --}}
+
+                </fieldset>
+
 
                 <div class="flex justify-between">
                     <h1 class="text-slate-400 text-sm font-semibold">
