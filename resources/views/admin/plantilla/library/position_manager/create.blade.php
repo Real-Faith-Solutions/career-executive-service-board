@@ -40,10 +40,12 @@
         const sectorDropdown = document.querySelector("#sector");
         const departmentDropdown = document.querySelector('#department');
         const agencyDropdown = document.querySelector('#agency');
+        const officeDropdown = document.querySelector('#officeid');
 
         departmentDropdown.innerHTML = "";
         agencyDropdown.innerHTML = "";
-        
+        officeDropdown.innerHTML = "";
+
         const defaultOption = document.createElement("option");
         defaultOption.text = "Select Department / Agency";
         defaultOption.disabled = true;

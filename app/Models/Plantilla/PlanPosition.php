@@ -50,4 +50,14 @@ class PlanPosition extends Model
     {
         return $this->belongsTo(ClassBasis::class, 'cbasis_code', 'cbasis_code');
     }
+
+    public function office(): BelongsTo
+    {
+        return $this->belongsTo(Office::class, 'officeid', 'officeid');
+    }
+
+    public function planAppointee()
+    {
+        return $this->hasMany(PlanAppointee::class, 'plantilla_id');
+    }
 }

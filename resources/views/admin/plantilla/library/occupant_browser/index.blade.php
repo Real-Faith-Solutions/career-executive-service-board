@@ -24,7 +24,7 @@
             <th>CESNO</th>
             <th>Officials Name</th>
             <th>Appointee</th>
-            <th>Appointment</th>
+            <th>Personnel Movement</th>
             <th>CES Status</th>
             <th>Appointment Date</th>
             <th>Assumption Date</th>

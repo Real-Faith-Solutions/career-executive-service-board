@@ -24,8 +24,17 @@
 
                 <fieldset class="border p-4">
                     <legend>Occupant information</legend>
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="office">Office</label>
+                            <input id="office" value="{{ $datas->planPosition->office->title }}" readonly />
+                        </div>
+                    </div>
+
                     <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+
+
                         <div class="mb-3">
                             <select id="appt_stat_code" name="appt_stat_code" required>
                                 <option disabled selected>Select Personnel Movement</option>
