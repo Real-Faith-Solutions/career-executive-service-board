@@ -10,7 +10,7 @@ class GeneralReportController extends Controller
 {
     public function index()
     {
-        $trainingSession = TrainingSession::paginate(5);
+        $trainingSession = TrainingSession::paginate(25);
 
         return view('admin.competency.reports.general_report.training_participants', compact('trainingSession'));
     }

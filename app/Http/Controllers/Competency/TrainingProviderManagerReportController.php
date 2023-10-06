@@ -12,7 +12,7 @@ class TrainingProviderManagerReportController extends Controller
     public function index()
     {
         $competencyTrainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 
-        'emailadd', 'contactperson')->orderBy('providerID', 'desc')->paginate(5);
+        'emailadd', 'contactperson')->orderBy('providerID', 'desc')->paginate(25);
 
         return view('admin.competency.reports.training_provider_manager.report', compact('competencyTrainingProvider'));
     }

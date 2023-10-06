@@ -34,12 +34,12 @@ class TrainingVenueManagerReportController extends Controller
 
             $trainingVenueManager = CompetencyTrainingVenueManager::select('name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')
             ->where('city_code', $profileLibCitiesSearchResult->city_code)
-            ->paginate(5);  
+            ->paginate(25);  
         }
         else
         {
             $trainingVenueManager = CompetencyTrainingVenueManager::select('name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')
-            ->paginate(5);
+            ->paginate(25);
         }
 
         return view('admin.competency.reports.training_venue_manager.report', compact('trainingVenueManager','searchProfileLibCities', 'search'));

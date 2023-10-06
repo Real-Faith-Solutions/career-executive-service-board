@@ -18,11 +18,11 @@ class ResourceSpeakerManagerReportController extends Controller
 
         if($search == 'all')
         {
-            $resourceSpeaker = ResourceSpeaker::paginate(5);
+            $resourceSpeaker = ResourceSpeaker::paginate(25);
         }
         else
         {
-            $resourceSpeaker = ResourceSpeaker::where('expertise', $search)->paginate(5);
+            $resourceSpeaker = ResourceSpeaker::where('expertise', $search)->paginate(25);
         }
 
         return view('admin.competency.reports.resource_speaker_manager.report', compact('resourceSpeaker', 'expertise', 'search'));
