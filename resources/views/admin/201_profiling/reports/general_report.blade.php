@@ -44,7 +44,7 @@
                             </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Action</span>
+                            <span class="">CES Status</span>
                         </th>
                     </tr>
                 </thead>
@@ -57,15 +57,15 @@
                                 <td scope="col" class="px-6 py-3">
                                     {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                 </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('personal-data.show', ['cesno' => $personalDatas->cesno]) }}" class="font-medium">View profile</a>
+                                <td scope="col" class="px-6 py-3">
+                                    {{ $personalDatas->cesstatus->description ?? '' }}
                                 </td>
                             </tr>
                         @endforeach
                 </tbody>
             </table>
             <div class="my-5">
-                {{ $personalData->links() }}
+                {{-- {{ $personalData->links() }} --}}
             </div>
         </div>
 

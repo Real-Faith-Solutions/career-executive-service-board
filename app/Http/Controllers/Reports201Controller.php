@@ -13,7 +13,7 @@ class Reports201Controller extends Controller
         $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
-        $personalData = PersonalData::query()
+        $personalData = PersonalData::with('cesstatus')
             ->where('lastname', "LIKE" ,"%$query%")
             ->orWhere('firstname',  "LIKE","%$query%")
             ->orWhere('middlename',  "LIKE","%$query%")
