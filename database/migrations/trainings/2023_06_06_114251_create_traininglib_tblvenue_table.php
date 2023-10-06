@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('no_street')->nullable();
             $table->string('brgy')->nullable();
-            $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
+            $table->integer('city_code')->nullable();
+            // $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
             $table->string('contactno')->nullable();
             $table->string('emailadd')->nullable();
             $table->string('contactperson')->nullable();
