@@ -1,39 +1,54 @@
 @extends('layouts.app')
-@section('title', '201 profiling table')
+@section('title', 'General Reports')
+@section('sub', 'General Reports')
 @section('content')
+
+<nav class="bg-gray-200 border-gray-200 mb-3">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#" class="flex items-center">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">201 PROFILE - GENERAL REPORTS</span>
+        </a>
+    </div>
+</nav>
 
     <section>
 
-        <div class="flex">
-            <div class="">
-                @include('components.search')
-            </div>
-    
-            <div class="flex items-center px-6 py-3 text-left">
-                <input id="filter_active" type="checkbox" name="filter_active" {{ $filter_active == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="filter_active" class="ml-2 mt-2 text-sm font-medium text-gray-700">Active</label>
-            </div>
-    
-            <div class="flex items-center px-6 py-3 text-left">
-                <input id="filter_inactive" type="checkbox" name="filter_inactive" {{ $filter_inactive == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="filter_inactive" class="ml-2 mt-2 text-sm font-medium text-gray-700">Inactive</label>
-            </div>
+        <form action="{{ route('general-reports.index') }}">
+            <div class="flex">
+                {{-- <div class="">
+                    @include('components.search')
+                </div> --}}
+        
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_active" type="checkbox" name="filter_active" {{ $filter_active == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_active" class="ml-2 mt-2 text-sm font-medium text-gray-700">Active</label>
+                </div>
+        
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_inactive" type="checkbox" name="filter_inactive" {{ $filter_inactive == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_inactive" class="ml-2 mt-2 text-sm font-medium text-gray-700">Inactive</label>
+                </div>
 
-            <div class="flex items-center px-6 py-3 text-left">
-                <input id="filter_retired" type="checkbox" name="filter_retired" {{ $filter_retired == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="filter_retired" class="ml-2 mt-2 text-sm font-medium text-gray-700">Retired</label>
-            </div>
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_retired" type="checkbox" name="filter_retired" {{ $filter_retired == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_retired" class="ml-2 mt-2 text-sm font-medium text-gray-700">Retired</label>
+                </div>
 
-            <div class="flex items-center px-6 py-3 text-left">
-                <input id="filter_deceased" type="checkbox" name="filter_deceased" {{ $filter_deceased == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="filter_deceased" class="ml-2 mt-2 text-sm font-medium text-gray-700">Deceased</label>
-            </div>
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_deceased" type="checkbox" name="filter_deceased" {{ $filter_deceased == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_deceased" class="ml-2 mt-2 text-sm font-medium text-gray-700">Deceased</label>
+                </div>
 
-            <div class="flex items-center px-6 py-3 text-left">
-                <input id="filter_retirement" type="checkbox" name="filter_retirement" {{ $filter_retirement == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_retirement" type="checkbox" name="filter_retirement" {{ $filter_retirement == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
+                </div>
+
+                <div class="my-5 flex justify-end">
+                    <button class="btn btn-primary" type="submit">Apply Filter</button>
+                </div>
             </div>
-        </div>
+        </form>
 
         <div class="relative my-5 overflow-x-auto sm:rounded-lg">
             <table class="w-full text-left text-sm text-gray-500">
