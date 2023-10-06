@@ -40,7 +40,7 @@ class ResourceSpeaker extends Model
 
     ];
 
-    public function trainingEnagagement(): HasMany
+    public function trainingEngagement(): HasMany
     {
         return $this->hasMany(TrainingSession::class, 'speakerid');
     }
