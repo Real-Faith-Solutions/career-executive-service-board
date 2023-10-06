@@ -10,23 +10,28 @@
             </div>
     
             <div class="flex items-center px-6 py-3 text-left">
-                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Active</label>
+                <input id="filter_active" type="checkbox" name="filter_active" {{ $filter_active ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="filter_active" class="ml-2 mt-2 text-sm font-medium text-gray-700">Active</label>
             </div>
     
             <div class="flex items-center px-6 py-3 text-left">
-                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Inactive</label>
+                <input id="filter_inactive" type="checkbox" name="filter_inactive" {{ $filter_inactive ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="filter_inactive" class="ml-2 mt-2 text-sm font-medium text-gray-700">Inactive</label>
             </div>
 
             <div class="flex items-center px-6 py-3 text-left">
-                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Retired</label>
+                <input id="filter_retired" type="checkbox" name="filter_retired" {{ $filter_retired ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="filter_retired" class="ml-2 mt-2 text-sm font-medium text-gray-700">Retired</label>
             </div>
 
             <div class="flex items-center px-6 py-3 text-left">
-                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
-                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Deceased</label>
+                <input id="filter_deceased" type="checkbox" name="filter_deceased" {{ $filter_deceased ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="filter_deceased" class="ml-2 mt-2 text-sm font-medium text-gray-700">Deceased</label>
+            </div>
+
+            <div class="flex items-center px-6 py-3 text-left">
+                <input id="filter_retirement" type="checkbox" name="filter_retirement" {{ $filter_retirement ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
             </div>
         </div>
 
