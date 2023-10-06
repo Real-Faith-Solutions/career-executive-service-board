@@ -20,6 +20,7 @@ class TrainingLibCategory extends Model
 
         'description',
         'encoder',
+        'updated_by',
 
     ];
 }
