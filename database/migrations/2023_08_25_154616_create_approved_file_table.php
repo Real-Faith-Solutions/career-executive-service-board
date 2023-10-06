@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('approved_file', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno');
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('pdflink')->nullable();
             $table->string('original_pdflink')->nullable();
             $table->dateTime('request_date')->nullable();
