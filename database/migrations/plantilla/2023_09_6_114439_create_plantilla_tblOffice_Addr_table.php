@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('floor_bldg')->nullable();
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();
-            $table->integer('city_code')->nullable(); // need to get in profilelib_tblcities
+            $table->integer('city_code'); // FK
             $table->string('contactno')->nullable();
             $table->string('emailadd')->nullable();
             $table->boolean('isActive')->default(true)->nullable();

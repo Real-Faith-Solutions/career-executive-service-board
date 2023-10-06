@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('encoder');
             $table->softDeletes();
-            // $table->timestamps();
             $table->timestamp('encdate')->useCurrent();
             $table->timestamp('lastupd_date')->useCurrent();
         });

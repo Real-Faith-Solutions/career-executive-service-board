@@ -55,6 +55,7 @@ class PositionManagerController extends Controller
             'is_generic' => $request->input('is_generic'),
             'is_head' => $request->input('is_head'),
             'created_user' => $encoder,
+            'lastupd_user' => $encoder,
         ]);
 
 

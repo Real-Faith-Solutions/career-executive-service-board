@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('acronym')->nullable();
             $table->string('sg')->nullable();
             $table->string('pl_func_name')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

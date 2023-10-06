@@ -26,11 +26,18 @@ class OfficeTypeController extends Controller
 
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         $request->validate([
             'title' => ['required', 'max:40', 'min:2'],
             'sectorid' => ['required'],
         ]);
-        DepartmentAgencyType::create($request->all());
+
+        $data = $request->all();
+        $data['encoder'] = $encoder;
+        $data['updated_by'] = $encoder;
+        DepartmentAgencyType::create($data);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
@@ -87,6 +94,7 @@ class OfficeTypeController extends Controller
             'title' => $request->input('title'),
             'sectorid' => $request->input('sectorid'),
             'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');

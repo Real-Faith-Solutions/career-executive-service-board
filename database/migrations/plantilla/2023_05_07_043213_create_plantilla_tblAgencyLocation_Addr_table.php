@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_agency_location_addr', function (Blueprint $table) {
-            $table->id();
-            $table->string('officelocid')->nullable();
+        Schema::create('plantilla_tblAgencyLocation_Addr', function (Blueprint $table) {
+            $table->id('officelocid');
             $table->string('floor_bldg')->nullable();
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();
-            $table->string('city_code')->nullable();
-            $table->string('isActive')->nullable();
-            $table->date('encdate')->nullable();
-            $table->date('lastupd_dt')->nullable();
+            $table->integer('city_code'); // FK
+            $table->boolean('isActive')->nullable()->default(true);
+            $table->timestamp('encdate')->useCurrent();
+            $table->timestamp('lastupd_dt')->useCurrent();
             $table->string('encoder')->nullable();
-            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantilla_tbl_agency_location_addr');
+        Schema::dropIfExists('plantilla_tblAgencyLocation_Addr');
     }
 };

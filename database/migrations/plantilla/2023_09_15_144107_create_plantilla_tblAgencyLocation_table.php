@@ -14,8 +14,8 @@ return new class extends Migration
 
         Schema::create('plantilla_tblAgencyLocation', function (Blueprint $table) {
             $table->id('officelocid');
-            $table->foreignId('deptid')->constrained('plantilla_tblDeptAgency', 'deptid');
-            $table->foreignId('loctype_id')->constrained('plantillalib_tblAgencyLocation', 'agencyloc_Id');
+            $table->integer('deptid'); // FK
+            $table->integer('loctype_id'); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('telno')->nullable();

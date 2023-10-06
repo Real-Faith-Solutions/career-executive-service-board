@@ -15,14 +15,15 @@ return new class extends Migration
         // legacy migration
         Schema::create('plantilla_tblDeptAgency', function (Blueprint $table) {
             $table->id('deptid');
-            $table->foreignId('sectorid')->constrained('plantilla_tblSector', 'sectorid');
-            $table->foreignId('agency_typeid')->constrained('plantillalib_tblAgencyType', 'agency_typeid');
-            $table->foreignId('mother_deptid')->constrained('plantilla_motherdept', 'deptid');
+            $table->integer('sectorid'); // FK
+            $table->integer('agency_typeid'); // FK
+            $table->integer('mother_deptid'); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();
             $table->string('remarks')->nullable();
             $table->string('submitted_by')->nullable();
+            $table->string('lastsubmit_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamp('encdate')->useCurrent();
             $table->timestamp('lastupd_dt')->useCurrent();

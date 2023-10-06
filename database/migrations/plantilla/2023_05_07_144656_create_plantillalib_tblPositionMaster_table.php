@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id('pos_code');
 
             $table->string('dbm_title')->nullable();
-            $table->foreignId('poslevel_code')->constrained('plantillalib_tblPositionLevel', 'poslevel_code');
+            $table->integer('poslevel_code'); // FK
             $table->integer('sg')->nullable();
             $table->string('func_title')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

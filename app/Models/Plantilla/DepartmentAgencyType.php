@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DepartmentAgencyType extends Model
 {
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
     use HasFactory, SoftDeletes;
 
     protected $table = 'plantillalib_tblAgencyType';
@@ -17,6 +19,7 @@ class DepartmentAgencyType extends Model
         'sectorid',
         'title',
         'encoder',
+        'updated_by',
     ];
 
     public function departmentAgency(): HasMany
