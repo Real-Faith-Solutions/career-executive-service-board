@@ -41,13 +41,13 @@
             @foreach ($datas as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->planPosition->positionMasterLibrary->dbm_title }}
+                    {{ $data->planPosition->positionMasterLibrary->dbm_title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->planPosition->corp_sg }}
+                    {{ $data->planPosition->corp_sg ?? ''}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->planPosition->item_no }}
+                    {{ $data->planPosition->item_no ?? ''}}
                 </td>
                 <td class="px-6 py-3">
                     @if ($data->is_appointee == 1)
