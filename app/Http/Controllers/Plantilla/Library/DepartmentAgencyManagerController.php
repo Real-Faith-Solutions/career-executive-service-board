@@ -21,10 +21,16 @@ class DepartmentAgencyManagerController extends Controller
     public function index(Request $request)
     {
         $sectorToggle = $request->input('sectorToggle');
+        $query = $request->input('search');
         $filterDropdown = DepartmentAgency::query();
 
         if ($sectorToggle) {
             $filterDropdown->where('sectorid', $sectorToggle);
+        }
+
+        if ($query) {
+            $filterDropdown->orWhere('title', 'LIKE', "%$query%")
+                ->orWhere('acronym', 'LIKE', "%$query%");
         }
 
         $datas = $filterDropdown->paginate(25);
@@ -34,6 +40,7 @@ class DepartmentAgencyManagerController extends Controller
             'datas',
             'sector',
             'sectorToggle',
+            'query',
         ));
     }
 
