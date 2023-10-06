@@ -22,16 +22,9 @@
         </div>
 
         <div class="flex items-center">
-            <form action="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdfByCity') }}" target="_blank" method="POST">
-                @csrf
-                <input type="hidden" name="search" value="{{ $search }}">
-                <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
-                    Generate PDF Report By City
-                </button>
-            </form>
-
             <form action="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf') }}" target="_blank" method="POST">
                 @csrf
+                <input type="hidden" name="search" value="{{ $search }}">
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
                 </button>

@@ -28,31 +28,24 @@ class TrainingVenueManagerReportController extends Controller
             if (!$profileLibCitiesSearchResult) 
             {
                 // Handle the case where the data does not exist
-                return redirect()->route('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->with('error', 'Data not found in the database.');
+                return redirect()->route('competency-management-sub-modules-report.trainingVenueManagerReportIndex')
+                ->with('error', 'Data not found in the database.');
             }
 
             $trainingVenueManager = CompetencyTrainingVenueManager::select('name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')
             ->where('city_code', $profileLibCitiesSearchResult->city_code)
-            ->paginate(5);  
+            ->paginate(25);  
         }
         else
         {
             $trainingVenueManager = CompetencyTrainingVenueManager::select('name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')
-            ->paginate(5);
+            ->paginate(25);
         }
 
-        return view('admin.competency.reports.training_venue_manager_report', compact('trainingVenueManager','searchProfileLibCities', 'search'));
+        return view('admin.competency.reports.training_venue_manager.report', compact('trainingVenueManager','searchProfileLibCities', 'search'));
     }
 
-    public function generatePdf()
-    {
-        $trainingVenueManager = CompetencyTrainingVenueManager::get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
-           
-        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf', compact('trainingVenueManager'))->setPaper('a4', 'landscape');
-        return $pdf->stream('training-venue-manager-report.pdf');
-    }
-
-    public function generatePdfByCity(Request $request)
+    public function generatePdf(Request $request)
     {
         $search = $request->input('search');
 
@@ -65,10 +58,11 @@ class TrainingVenueManagerReportController extends Controller
         }
         else
         {
-            return back()->with('error', 'Please Select City Before Proceeding to Make Report.');
+            // get all venues
+            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
         }
                
-        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager_report_pdf_city', compact('trainingVenueManagerByCity', 'search'))->setPaper('a4', 'landscape');
+        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager.report_pdf_city', compact('trainingVenueManagerByCity', 'search'))->setPaper('a4', 'landscape');
         return $pdf->stream('training-venue-manager-report-by-city.pdf');
     }
 }

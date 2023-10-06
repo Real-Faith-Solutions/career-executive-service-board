@@ -13,7 +13,7 @@ class WrittenExamController extends Controller
 {
     public function index($acno)
     {
-        $writtenExam = WrittenExam::where('acno', $acno)->paginate(10);
+        $writtenExam = WrittenExam::where('acno', $acno)->paginate(25);
 
         return view('admin.eris.partials.written_exam.table', compact('acno', 'writtenExam'));
     }

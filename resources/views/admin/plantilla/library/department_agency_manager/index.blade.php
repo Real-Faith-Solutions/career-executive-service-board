@@ -49,10 +49,10 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">Department ID</th>
-                <th class="px-6 py-3" scope="col">Sector</th>
-                <th class="px-6 py-3" scope="col">Mother Agency</th>
+                {{-- <th class="px-6 py-3" scope="col">Sector</th> --}}
                 <th class="px-6 py-3" scope="col">Agency / Bureau</th>
                 <th class="px-6 py-3" scope="col">Agency / Bureau Acronym</th>
+                <th class="px-6 py-3" scope="col">Mother Agency</th>
                 <th class="px-6 py-3" scope="col">Office type</th>
                 <th class="px-6 py-3" scope="col">Agency website</th>
 
@@ -68,17 +68,18 @@
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                     {{ $data->deptid }}
                 </td>
-                <td class="px-6 py-3">
+                {{-- <td class="px-6 py-3">
                     {{ $data->sectorManager->title ?? 'N/A' }}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->motherDepartment->title ?? 'N/A'}}
-                </td>
+                </td> --}}
+
                 <td class="px-6 py-3">
                     {{ $data->title }}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->acronym }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->motherDepartment->title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->departmentAgencyType->title ?? 'N/A' }}

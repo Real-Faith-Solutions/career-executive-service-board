@@ -14,7 +14,7 @@ class ResourceSpeakerController extends Controller
 {
     public function index()
     {
-        $resourceSpeaker = ResourceSpeaker::paginate(5);
+        $resourceSpeaker = ResourceSpeaker::paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.table', compact('resourceSpeaker'));
     }
@@ -175,7 +175,7 @@ class ResourceSpeakerController extends Controller
 
     public function recentlyDeleted()
     {
-        $resourceSpeakerTrashedRecord = ResourceSpeaker::onlyTrashed()->paginate(5);
+        $resourceSpeakerTrashedRecord = ResourceSpeaker::onlyTrashed()->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.trashbin', compact('resourceSpeakerTrashedRecord'));
     }
@@ -200,7 +200,7 @@ class ResourceSpeakerController extends Controller
     {
         $resourceSpeaker = ResourceSpeaker::find($ctrlno);
 
-        $trainingEnagagement = $resourceSpeaker->trainingEnagagement()->paginate(25);
+        $trainingEnagagement = $resourceSpeaker->trainingEngagement()->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.training_engagement', compact('trainingEnagagement'));
     }

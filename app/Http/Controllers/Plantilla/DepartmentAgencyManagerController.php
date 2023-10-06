@@ -60,7 +60,7 @@ class DepartmentAgencyManagerController extends Controller
                     ->orWhere('region', 'LIKE', "%$query");
             })
             ->orderBy('title', 'ASC')
-            ->paginate(10);
+            ->paginate(25);
 
         if (!$sector) {
             abort(404);

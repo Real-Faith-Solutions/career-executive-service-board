@@ -11,7 +11,7 @@ class FieldSpecializationController extends Controller
 {
     public function index()
     {
-        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::paginate(10);    
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::paginate(25);    
 
         return view('admin.competency.partials.training_type_library.expertise_specialization.table', compact('profileLibTblExpertiseGen'));
     }
