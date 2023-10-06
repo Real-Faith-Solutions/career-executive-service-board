@@ -13,6 +13,12 @@ class Reports201Controller extends Controller
         $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
+        $filter_active = $request->input('filter_active', 'false');
+        $filter_inactive = $request->input('filter_inactive', 'false');
+        $filter_retired = $request->input('filter_retired', 'false');
+        $filter_deceased = $request->input('filter_deceased', 'false');
+        $filter_retirement = $request->input('filter_retirement', 'false');
+
         $personalData = PersonalData::with('cesstatus')
             ->where('lastname', "LIKE" ,"%$query%")
             ->orWhere('firstname',  "LIKE","%$query%")
@@ -22,6 +28,7 @@ class Reports201Controller extends Controller
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
-        return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder'));
+        return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
+                        'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',));
     }
 }
