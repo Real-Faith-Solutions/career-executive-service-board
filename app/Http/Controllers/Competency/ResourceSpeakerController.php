@@ -84,37 +84,24 @@ class ResourceSpeakerController extends Controller
         $cityName = $request->city;
         $zipCode = ProfileLibCities::where('name', $cityName)->value('zipcode');
 
-        // checking if speaker full name is existing
-        $speakerExist = ResourceSpeaker::where('lastname', $request->lastName)
-        ->where('firstname', $request->firstName)
-        ->where('mi', $request->middleName)
-        ->exists();
-
-        if(!$speakerExist)
-        {
-            ResourceSpeaker::create([
-                'cesno' => $request->cesno,
-                'lastname' => $request->lastName,
-                'firstname' => $request->firstName,  
-                'mi' => $request->middleName,  
-                'Position' => $request->position,  
-                'Department' => $request->department,  
-                'Office' => $request->office,  
-                'Bldg' => $request->bldg,  
-                'Street' => $request->street,  
-                'Brgy' => $request->brgy,  
-                'City' => $request->city,  
-                'zipcode' => $zipCode,  
-                'contactno' => $request->contactNo,  
-                'emailadd' => $request->emailAdd,  
-                'expertise' => $request->expertise,  
-                'encoder' => $encoder,  
-            ]);
-        }
-        else
-        {
-            return back()->with('error', 'Speaker Record Already Exists');
-        }
+        ResourceSpeaker::create([
+            'cesno' => $request->cesno,
+            'lastname' => $request->lastName,
+            'firstname' => $request->firstName,  
+            'mi' => $request->middleName,  
+            'Position' => $request->position,  
+            'Department' => $request->department,  
+            'Office' => $request->office,  
+            'Bldg' => $request->bldg,  
+            'Street' => $request->street,  
+            'Brgy' => $request->brgy,  
+            'City' => $request->city,  
+            'zipcode' => $zipCode,  
+            'contactno' => $request->contactNo,  
+            'emailadd' => $request->emailAdd,  
+            'expertise' => $request->expertise,  
+            'encoder' => $encoder,  
+        ]);
 
         return to_route('resource-speaker.index')->with('message', 'Save Sucessfully');
     }

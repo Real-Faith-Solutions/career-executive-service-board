@@ -10,6 +10,7 @@
             <form action="" method="GET">
                 @csrf
                 <select name="expertise" id="expertise" onchange="this.form.submit()">
+                    <option disabled selected>Select Expertise</option>
                     <option value="all">All</option>
                     @foreach ($expertise as $resourceSpeakers)
                         @if ($resourceSpeakers->expertise == $search)
@@ -37,10 +38,6 @@
         <table class="w-full text-left text-sm text-gray-500">
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Training Session
-                    </th>
-
                     <th scope="col" class="px-6 py-3">
                         Name
                     </th>
@@ -89,10 +86,6 @@
             <tbody>
                 @foreach ($resourceSpeaker as $resourceSpeakers)
                     <tr class="border-b bg-white">
-                        <td class="px-6 py-3">
-                            {{ $resourceSpeakers->trainingEngagement->title ?? '' }}
-                        </td>
-
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                             {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
                         </td>
