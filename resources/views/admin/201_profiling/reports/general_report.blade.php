@@ -3,8 +3,31 @@
 @section('content')
 
     <section>
-        <div class="grid lg:grid-cols-3">
-            @include('components.search')
+
+        <div class="flex">
+            <div class="">
+                @include('components.search')
+            </div>
+    
+            <div class="flex items-center px-6 py-3 text-left">
+                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Active</label>
+            </div>
+    
+            <div class="flex items-center px-6 py-3 text-left">
+                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Inactive</label>
+            </div>
+
+            <div class="flex items-center px-6 py-3 text-left">
+                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Retired</label>
+            </div>
+
+            <div class="flex items-center px-6 py-3 text-left">
+                <input id="two_factor" type="checkbox" name="two_factor" {{ Auth::user()->two_factor ? 'checked' : '' }} value="two_factor" class="w-4 h-4 text-blue-600 accent-green-600">
+                <label for="two_factor" class="ml-2 mt-2 text-sm font-medium text-gray-700">Deceased</label>
+            </div>
         </div>
 
         <div class="relative my-5 overflow-x-auto sm:rounded-lg">
