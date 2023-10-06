@@ -14,9 +14,9 @@ return new class extends Migration
         //children_records
         Schema::create('profile_tblChildren', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno')->nullable();
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
