@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblPlanPositions', function (Blueprint $table) {
             $table->id('plantilla_id');
-            $table->integer('officeid'); // FK
-            $table->integer('pos_code'); // FK
+            $table->integer('officeid')->nullable(); // FK
+            $table->integer('pos_code')->nullable(); // FK
             $table->string('pos_suffix')->nullable();
             $table->string('pos_func_name')->nullable();
             $table->string('pos_default')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_vacant')->default(true)->nullable();
             $table->boolean('is_occupied')->nullable();
             $table->text('remarks')->nullable();
-            $table->integer('cbasis_code'); // FK
+            $table->integer('cbasis_code')->nullable(); // FK
             $table->text('cbasis_remarks')->nullable();
             $table->string('item_no')->nullable();
             $table->boolean('pres_apptee')->nullable();

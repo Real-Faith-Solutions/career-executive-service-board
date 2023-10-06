@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblPlanAppointees', function (Blueprint $table) {
             $table->id('appointee_id');
-            $table->integer('plantilla_id'); // FK
-            $table->integer('cesno'); // FK
-            $table->integer('appt_stat_code'); // FK
+            $table->integer('plantilla_id')->nullable(); // FK
+            $table->integer('cesno')->nullable(); // FK
+            $table->integer('appt_stat_code')->nullable(); // FK
             $table->string('appt_date')->nullable();
             $table->string('assum_date')->nullable();
             $table->boolean('is_appointee')->nullable();

@@ -15,9 +15,9 @@ return new class extends Migration
         // legacy migration
         Schema::create('plantilla_tblDeptAgency', function (Blueprint $table) {
             $table->id('deptid');
-            $table->integer('sectorid'); // FK
-            $table->integer('agency_typeid'); // FK
-            $table->integer('mother_deptid'); // FK
+            $table->integer('sectorid')->nullable(); // FK
+            $table->integer('agency_typeid')->nullable(); // FK
+            $table->integer('mother_deptid')->nullable(); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();

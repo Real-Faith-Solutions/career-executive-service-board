@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblSector', function (Blueprint $table) {
             $table->id('sectorid');
-            $table->string('title');
-            $table->text('description');
-            $table->string('encoder');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamp('encdate')->useCurrent();
             $table->timestamp('lastupd_date')->useCurrent();

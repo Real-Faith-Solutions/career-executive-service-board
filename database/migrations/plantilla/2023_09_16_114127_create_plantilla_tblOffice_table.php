@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblOffice', function (Blueprint $table) {
             $table->id('officeid');
-            $table->integer('officelocid'); // FK
+            $table->integer('officelocid')->nullable(); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();

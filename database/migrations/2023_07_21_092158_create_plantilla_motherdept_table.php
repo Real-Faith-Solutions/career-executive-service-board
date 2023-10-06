@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('plantilla_motherdept', function (Blueprint $table) {
             $table->id('deptid');
-            $table->string('title');
-            $table->string('encoder');
-            $table->string('updated_by');
+            $table->string('title')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

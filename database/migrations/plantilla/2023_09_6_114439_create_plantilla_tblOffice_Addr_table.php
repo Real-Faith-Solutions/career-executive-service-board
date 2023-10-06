@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plantilla_tblOffice_Addr', function (Blueprint $table) {
-            $table->foreignId('officeid')->primary()->constrained('plantilla_tblOffice', 'officeid');
+            // $table->foreignId('officeid')->primary()->constrained('plantilla_tblOffice', 'officeid');
+            $table->foreignId('officeid')->primary();
             $table->string('floor_bldg')->nullable();
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();

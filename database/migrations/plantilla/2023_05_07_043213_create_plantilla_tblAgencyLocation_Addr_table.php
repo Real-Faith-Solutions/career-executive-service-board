@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('floor_bldg')->nullable();
             $table->string('house_no_st')->nullable();
             $table->string('brgy_dist')->nullable();
-            $table->integer('city_code'); // FK
+            $table->integer('city_code')->nullable(); // FK
             $table->boolean('isActive')->nullable()->default(true);
             $table->timestamp('encdate')->useCurrent();
             $table->timestamp('lastupd_dt')->useCurrent();
