@@ -9,10 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonnelMovementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = ApptStatus::all();
-        return view('admin.plantilla.library.personnel_movement.index', compact('datas'));
+        $query = $request->input('search');
+
+        $datas = ApptStatus::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.personnel_movement.index', compact(
+            'datas',
+            'query',
+        ));
     }
 
     public function store(Request $request)

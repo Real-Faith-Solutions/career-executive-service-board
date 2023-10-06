@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 
 class OccupantBrowserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = PlanAppointee::all();
+        $query = $request->input('search');
+
+        $datas = PlanAppointee::query()
+            ->where('appointee_id', 'LIKE', "%$query%")
+
+            ->paginate(25);
 
         return view('admin.plantilla.library.occupant_browser.index', compact(
             'datas',
+            'query',
         ));;
     }
 

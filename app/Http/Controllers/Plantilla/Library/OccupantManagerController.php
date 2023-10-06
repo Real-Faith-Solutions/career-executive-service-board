@@ -19,14 +19,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OccupantManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = PlanAppointee::all();
-        // $sector = SectorManager::orderBy('title', 'ASC')->get();
-        // $department = DepartmentAgency::orderBy('title', 'ASC')->get();
-        // $departmentLocation = AgencyLocation::orderBy('title', 'ASC')->get();
-        // $office = Office::orderBy('title', 'ASC')->get();
-
+        $query = $request->input('search');
+        $datas = PlanAppointee::query()
+            ->where('appointee_id', 'LIKE', "%$query%")
+            ->paginate(25);
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
@@ -38,6 +36,7 @@ class OccupantManagerController extends Controller
             'positionMasterLibrary',
             'classBasis',
             'apptStatus',
+            'query',
 
         ));;
     }

@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ClassBasisController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = ClassBasis::all();
-        return view('admin.plantilla.library.classification_basis.index', compact('datas'));
+        $query = $request->input('search');
+
+        $datas = ClassBasis::query()
+            ->where('basis', 'LIKE', "%$query%")
+            ->orWhere('title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.classification_basis.index', compact(
+            'datas',
+            'query',
+        ));
     }
 
     public function create()

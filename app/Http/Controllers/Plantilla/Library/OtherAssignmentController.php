@@ -17,7 +17,7 @@ class OtherAssignmentController extends Controller
     public function index($appointee_id)
     {
         $appointee = PlanAppointee::find($appointee_id);
-        $datas = OtherAssignment::where('cesno', $appointee->cesno)->get();
+        $datas = OtherAssignment::where('cesno', $appointee->cesno)->paginate(25);
         return view('admin.plantilla.library.other_assignment.index', compact(
             'datas',
             'appointee',

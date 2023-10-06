@@ -10,10 +10,16 @@ use Illuminate\Validation\Rule;
 
 class SectorManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = SectorManager::all();
-        return view('admin.plantilla.library.sector_manager.index', compact('datas'));
+        $query = $request->input('search');
+        $datas = SectorManager::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.sector_manager.index', compact(
+            'datas',
+            'query',
+        ));
     }
 
     public function store(Request $request)

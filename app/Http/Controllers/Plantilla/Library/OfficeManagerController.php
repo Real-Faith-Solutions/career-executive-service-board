@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = Office::all();
+        $query = $request->input('search');
+        $datas = Office::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
 
         return view('admin.plantilla.library.office_manager.index', compact(
-            'datas'
+            'datas',
+            'query',
         ));
     }
 

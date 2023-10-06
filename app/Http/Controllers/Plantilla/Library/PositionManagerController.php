@@ -18,7 +18,7 @@ class PositionManagerController extends Controller
 {
     public function index()
     {
-        $datas = PlanPosition::all();
+        $datas = PlanPosition::paginate(25);
         return view('admin.plantilla.library.position_manager.index', compact('datas'));
     }
 

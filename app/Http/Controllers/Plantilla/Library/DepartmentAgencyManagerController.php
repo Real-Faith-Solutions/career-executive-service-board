@@ -21,13 +21,13 @@ class DepartmentAgencyManagerController extends Controller
     public function index(Request $request)
     {
         $sectorToggle = $request->input('sectorToggle');
-        $query = DepartmentAgency::query();
+        $filterDropdown = DepartmentAgency::query();
 
         if ($sectorToggle) {
-            $query->where('sectorid', $sectorToggle);
+            $filterDropdown->where('sectorid', $sectorToggle);
         }
 
-        $datas = $query->get();
+        $datas = $filterDropdown->paginate(25);
         $sector = SectorManager::all();
 
         return view('admin.plantilla.library.department_agency_manager.index', compact(

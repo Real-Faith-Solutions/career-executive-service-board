@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MotherDeptController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = MotherDept::all();
-        return view('admin.plantilla.library.mother_department.index', compact('datas'));
+        $query = $request->input('search');
+        $datas = MotherDept::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.mother_department.index', compact(
+            'datas',
+            'query',
+        ));
     }
 
     public function store(Request $request)

@@ -12,7 +12,7 @@ class OfficeTypeController extends Controller
 {
     public function index()
     {
-        $datas = DepartmentAgencyType::all();
+        $datas = DepartmentAgencyType::paginate(25);
         return view('admin.plantilla.library.office_type.index', compact('datas'));
     }
 

@@ -16,9 +16,13 @@ class AgencyLocationManagerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $agencyLocation = AgencyLocation::all();
+        $query = $request->input('search');
+        $agencyLocation = AgencyLocation::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->orWhere('acronym', 'LIKE', "%$query%")
+            ->paginate(25);
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
@@ -26,6 +30,7 @@ class AgencyLocationManagerController extends Controller
             'agencyLocation',
             'agencyLocationLibrary',
             'region',
+            'query',
         ));
     }
 
