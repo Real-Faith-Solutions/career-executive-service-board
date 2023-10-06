@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id('ctrlno');
             $table->integer('catid')->nullable();
             $table->integer('code')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
