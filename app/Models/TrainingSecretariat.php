@@ -21,6 +21,7 @@ class TrainingSecretariat extends Model
 
         'description',
         'encoder',
+        'updated_by',
 
     ];
 }
