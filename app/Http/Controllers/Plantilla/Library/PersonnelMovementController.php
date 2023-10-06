@@ -17,10 +17,17 @@ class PersonnelMovementController extends Controller
 
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $request->validate([
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantillalib_tblapptstatus'],
         ]);
-        ApptStatus::create($request->all());
+        $data = $request->all();
+        $data['encoder'] = $encoder;
+        $data['updated_by'] = $encoder;
+        ApptStatus::create($data);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
@@ -50,7 +57,7 @@ class PersonnelMovementController extends Controller
         $datas = ApptStatus::withTrashed()->findOrFail($appt_stat_code);
         $datas->update([
             'title' => $request->input('title'),
-            'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');

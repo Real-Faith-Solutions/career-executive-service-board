@@ -18,6 +18,8 @@ class PositionMasterLibrary extends Model
         'poslevel_code',
         'sg',
         'func_title',
+        'encoder',
+        'updated_by',
     ];
 
     public function planPosition(): HasMany

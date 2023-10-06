@@ -20,8 +20,8 @@ return new class extends Migration
             // $table->foreign('lang_code')->references('code')->on('profilelib_tblLanguageRef')->onDelete('cascade');
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

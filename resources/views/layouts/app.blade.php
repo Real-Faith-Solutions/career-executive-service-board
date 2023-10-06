@@ -279,7 +279,12 @@
     {{-- end toast --}}
 
     <script>
-        new DataTable('.dataTables');
+        // new DataTable('.dataTables');
+        $(document).ready(function(){
+            var table = $('.dataTables').DataTable({
+                "deferRender": true
+            });
+        });
     </script>
 
 </body>

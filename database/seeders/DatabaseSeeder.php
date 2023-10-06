@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\TrainingLibCategory::factory(10)->create();
         \App\Models\TrainingSecretariat::factory(10)->create();
         \App\Models\TrainingSecretariat::factory(10)->create();
-        \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
+        // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
             PermissionsTableSeeder::class,

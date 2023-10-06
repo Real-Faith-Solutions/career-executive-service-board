@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('contactperson')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encoder_dt')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encoder_dt')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

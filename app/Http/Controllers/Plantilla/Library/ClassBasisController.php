@@ -22,12 +22,18 @@ class ClassBasisController extends Controller
 
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         $request->validate([
             'basis' => ['required', 'max:40', 'min:2', 'unique:plantillalib_tblclassbasis'],
             'title' => ['required', 'max:40', 'min:2'],
             'classdate' => ['required'],
         ]);
-        ClassBasis::create($request->all());
+        $data = $request->all();
+        $data['encoder'] = $encoder;
+        $data['updated_by'] = $encoder;
+        ClassBasis::create($data);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
@@ -56,7 +62,7 @@ class ClassBasisController extends Controller
             'basis' => $request->input('basis'),
             'title' => $request->input('title'),
             'classdate' => $request->input('classdate'),
-            'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');

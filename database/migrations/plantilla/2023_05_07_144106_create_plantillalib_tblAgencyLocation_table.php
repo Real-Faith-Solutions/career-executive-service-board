@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id('agencyloc_Id');
             $table->string('title')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamps();
+            $table->string('updated_by')->nullable();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

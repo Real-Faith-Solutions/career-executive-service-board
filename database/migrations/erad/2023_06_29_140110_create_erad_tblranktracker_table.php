@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('submit_dt')->nullable();
             $table->string('cesstatus')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

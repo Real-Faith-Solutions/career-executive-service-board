@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblPlanAppointees', function (Blueprint $table) {
             $table->id('appointee_id');
-            $table->foreignId('plantilla_id')->constrained('plantilla_tblPlanPositions', 'plantilla_id');
-            $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
-            $table->foreignId('appt_stat_code')->constrained('plantillalib_tblApptStatus', 'appt_stat_code');
+            $table->integer('plantilla_id')->nullable(); // FK
+            $table->integer('cesno')->nullable(); // FK
+            $table->integer('appt_stat_code')->nullable(); // FK
             $table->string('appt_date')->nullable();
             $table->string('assum_date')->nullable();
             $table->boolean('is_appointee')->nullable();
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('basis')->nullable();
             $table->string('created_user')->nullable();
             $table->string('lastupd_user')->nullable();
-            $table->timestamp('created_dt')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('created_dt')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

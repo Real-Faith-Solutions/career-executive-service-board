@@ -56,6 +56,7 @@ class OfficeManagerController extends Controller
             'website' => $request->input('website'),
             // 'isActive' => $request->input('isActive'),
             'encoder' => $encoder,
+            'lastupd_enc' => $encoder,
         ]);
 
         // office address
@@ -70,6 +71,7 @@ class OfficeManagerController extends Controller
             // 'isActive' => $request->input('isActive'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
