@@ -94,7 +94,7 @@ class DepartmentAgencyManagerController extends Controller
     {
         $department = DepartmentAgency::find($deptid);
         $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
-        $motherDepartment = MotherDept::all();
+        $motherDepartment = MotherDept::orderBy('title', 'ASC')->get();
 
         $departmentTypeDatas = DepartmentAgencyType::query()
             ->where('sectorid', $department->sectorid)
