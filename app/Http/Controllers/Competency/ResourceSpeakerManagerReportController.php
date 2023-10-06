@@ -5,20 +5,42 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\ResourceSpeaker;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+
 
 class ResourceSpeakerManagerReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $resourceSpeaker = ResourceSpeaker::paginate(5);
+        $search = $request->input('expertise');
 
-        return view('admin.competency.reports.resource_speaker_manager.report', compact('resourceSpeaker'));
+        $expertise = ResourceSpeaker::get(['expertise']);
+
+        if($search == 'all')
+        {
+            $resourceSpeaker = ResourceSpeaker::paginate(5);
+        }
+        else
+        {
+            $resourceSpeaker = ResourceSpeaker::where('expertise', $search)->paginate(5);
+        }
+
+        return view('admin.competency.reports.resource_speaker_manager.report', compact('resourceSpeaker', 'expertise', 'search'));
     }
 
-    public function generateReport()
+    public function generateReport(Request $request)
     {
-        $resourceSpeaker = ResourceSpeaker::get();
+        $expertise = $request->input('expertise');
 
+        if($expertise == 'all')
+        {
+            $resourceSpeaker = ResourceSpeaker::get();
+        }
+        else
+        {
+            $resourceSpeaker = ResourceSpeaker::where('expertise', $expertise)->get();
+        }
+   
         $pdf = Pdf::loadView('admin.competency.reports.resource_speaker_manager.report_pdf', compact('resourceSpeaker'))->setPaper('a4', 'landscape');
         return $pdf->stream('resource-speaker-manager-report.pdf');
     }

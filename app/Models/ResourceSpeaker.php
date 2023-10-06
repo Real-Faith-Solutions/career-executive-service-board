@@ -43,6 +43,6 @@ class ResourceSpeaker extends Model
 
     public function trainingEnagagement(): HasMany
     {
-        return $this->hasMany(TrainingSession::class, 'speakerid');
+        return $this->hasMany(TrainingSession::class, 'speakerID', 'spearkerid');
     }
 }

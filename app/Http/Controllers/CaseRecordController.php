@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 
 class CaseRecordController extends Controller
 {
-
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
