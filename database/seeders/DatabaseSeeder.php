@@ -26,16 +26,15 @@ class DatabaseSeeder extends Seeder
         // \App\Models\ProfileLibTblEducMajor::factory(10)->create();
         // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         // \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
-        \App\Models\PersonalData::factory(50)->create();
+        // \App\Models\PersonalData::factory(50)->create();
         // \App\Models\ProfileLibTblExamRef::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatus::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusAcc::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusType::factory(10)->create();
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
-        \App\Models\ProfileLibCities::factory(10)->create();
+        // \App\Models\ProfileLibCities::factory(10)->create();
         // \App\Models\TrainingLibCategory::factory(10)->create();
-        \App\Models\TrainingSecretariat::factory(10)->create();
-        \App\Models\TrainingSecretariat::factory(10)->create();
+        // \App\Models\TrainingSecretariat::factory(10)->create();
         // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
@@ -55,24 +54,26 @@ class DatabaseSeeder extends Seeder
             Title::class,
             RecordStatus::class,
             Religion::class,
-            SectorManagerSeeder::class,
-            ProfileLibTblCesStatusTypeSeeder::class,
-            ProfileLibTblCesStatusAccSeeder::class,
-            ProfileLibTblCesStatusSeeder::class,
-            ProfileLibTblAppAuthoritySeeder::class,
-            ProfileLibTblExpertiseSpecSeeder::class,
-            ProfileLibTblEducSchoolSeeder::class,
-            ProfileLibTblEducMajorSeeder::class,
-            ProfileLibTblEducDegreeSeeder::class,
-            ProfileLibTblExamRefSeeder::class,
-            ProfileLibTblLanguageRefSeeder::class,
-            ProfileLibTblExpertiseGenSeeder::class,
-            AgencyLocationSeeder::class,
-            DepartmentAgencyTypeSeeder::class,
-            // ApptStatusSeeder::class,
-            TrainingLibCategorySeeder::class,
+            // ProfileLibTblCesStatusTypeSeeder::class,
+            // ProfileLibTblCesStatusAccSeeder::class,
+            // ProfileLibTblCesStatusSeeder::class,
+            // ProfileLibTblAppAuthoritySeeder::class,
+            // ProfileLibTblExpertiseSpecSeeder::class,
+            // ProfileLibTblEducSchoolSeeder::class,
+            // ProfileLibTblEducMajorSeeder::class,
+            // ProfileLibTblEducDegreeSeeder::class,
+            // ProfileLibTblExamRefSeeder::class,
+            // ProfileLibTblLanguageRefSeeder::class,
+            // ProfileLibTblExpertiseGenSeeder::class,
+            // TrainingLibCategorySeeder::class,
+            // LibraryRankTrackerSeeder::class,
             // ErisTblMainSeeder::class,
-            LibraryRankTrackerSeeder::class,
+
+            // plantilla
+            // SectorManagerSeeder::class,
+            // AgencyLocationSeeder::class,
+            // DepartmentAgencyTypeSeeder::class,
+            // ApptStatusSeeder::class,
         ]);
     }
 }
