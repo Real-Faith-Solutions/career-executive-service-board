@@ -14,9 +14,9 @@ return new class extends Migration
         //addresses
         Schema::create('profile_tblAddress', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->nullable();
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno')->nullable();
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('type')->nullable();
             $table->string('region_code')->nullable();
             $table->string('region_name')->nullable();
