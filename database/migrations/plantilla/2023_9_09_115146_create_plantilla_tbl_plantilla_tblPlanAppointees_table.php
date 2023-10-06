@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('basis')->nullable();
             $table->string('created_user')->nullable();
             $table->string('lastupd_user')->nullable();
-            $table->timestamp('created_dt')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('created_dt')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

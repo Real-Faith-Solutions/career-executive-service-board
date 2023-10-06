@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('payment')->nullable();
             $table->string('encoder')->nullable(); // encode by (first)
             $table->string('lastupd_enc')->nullable(); // updated by (latest)
-            $table->timestamp('encoder_dt')->useCurrent(); // created at
-            $table->timestamp('lastupd_dt')->useCurrent(); // updated at
+            $table->timestamp('encoder_dt')->nullable()->useCurrent(); // created at
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent(); // updated at
             $table->softDeletes();
         });
     }

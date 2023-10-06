@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('brgy_dist')->nullable();
             $table->integer('city_code')->nullable(); // FK
             $table->boolean('isActive')->nullable()->default(true);
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->string('encoder')->nullable();
             $table->softDeletes();
         });

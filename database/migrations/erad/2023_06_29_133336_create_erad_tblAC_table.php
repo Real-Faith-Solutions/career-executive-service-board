@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('docdate')->nullable(); // document date
             $table->string('remarks')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

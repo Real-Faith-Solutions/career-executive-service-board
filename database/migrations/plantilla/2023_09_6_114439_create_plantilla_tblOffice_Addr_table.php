@@ -28,8 +28,8 @@ return new class extends Migration
             $table->string('updated_by')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
         });
     }
 

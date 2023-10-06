@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('submitted_by')->nullable();
             $table->string('lastsubmit_dt')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }
