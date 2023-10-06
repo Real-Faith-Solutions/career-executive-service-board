@@ -51,13 +51,13 @@
 
             <div class="flex">
                 <div class="flex items-center px-6 py-3 text-left">
-                    <input type="radio" id="withPendingCase" name="pendingCase" value="with" class="w-4 h-4 text-blue-600 accent-green-600">
-                    <label for="withPendingCase" class="ml-2 mt-2 text-sm font-medium text-gray-700">With Pending Case</label>
+                    <input id="with_pending_case" type="checkbox" name="with_pending_case" {{ $with_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="with_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">With Pending Case</label>
                 </div>
 
                 <div class="flex items-center px-6 py-3 text-left">
-                    <input type="radio" id="withoutPendingCase" name="pendingCase" value="without" class="w-4 h-4 text-blue-600 accent-green-600">
-                    <label for="withoutPendingCase" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
+                    <input id="without_pending_case" type="checkbox" name="without_pending_case" {{ $without_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="without_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
                 </div>
             </div>
 

@@ -18,6 +18,8 @@ class Reports201Controller extends Controller
         $filter_retired = $request->input('filter_retired', 'false');
         $filter_deceased = $request->input('filter_deceased', 'false');
         $filter_retirement = $request->input('filter_retirement', 'false');
+        $with_pending_case = $request->input('with_pending_case', 'false');
+        $without_pending_case = $request->input('without_pending_case', 'false');
 
         $personalData = PersonalData::with('cesstatus')
             ->where('lastname', "LIKE" ,"%$query%")
@@ -29,6 +31,7 @@ class Reports201Controller extends Controller
             ->paginate(25);
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
-                        'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',));
+                        'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
+                        'with_pending_case', 'without_pending_case'));
     }
 }
