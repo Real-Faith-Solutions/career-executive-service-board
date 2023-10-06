@@ -44,6 +44,7 @@
                 padding-bottom: 5px;
                 font-size: 10px;
                 text-align: left;
+                border: none;
             }
         
             th {
@@ -121,7 +122,9 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Training Venue Manager Report</p>
-                <p class="city_name">{{ "( $search City )" }}</p>
+                @if ($search != null)
+                    <p class="city_name">{{ "( $search City )" }}</p>
+                @endif
             </div>
 
             <footer>
