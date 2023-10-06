@@ -14,8 +14,10 @@ return new class extends Migration
         //training_tblparticipants
         Schema::create('training_tblparticipants', function (Blueprint $table) {
             $table->id('pid');
-            $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
-            $table->foreignId('sessionid')->constrained('training_tblSessions', 'sessionid');
+            $table->integer('cesno');
+            // $table->foreignId('cesno')->constrained('profile_tblMain', 'cesno');
+            $table->integer('sessionid');
+            // $table->foreignId('sessionid')->constrained('training_tblSessions', 'sessionid');
             $table->string('status')->nullable();
             $table->string('remarks')->nullable();
             $table->integer('no_hours')->nullable();
