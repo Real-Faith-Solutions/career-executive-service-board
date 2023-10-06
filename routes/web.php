@@ -14,16 +14,13 @@ use App\Http\Controllers\Competency\CompetencyController;
 use App\Http\Controllers\Competency\ContactInformationController;
 use App\Http\Controllers\Competency\FieldSpecializationController;
 use App\Http\Controllers\Competency\CompetencyOtherTrainingManagementController;
-use App\Http\Controllers\Competency\CompetencyReportController;
 use App\Http\Controllers\Competency\GeneralReportController;
 use App\Http\Controllers\Competency\ResourceSpeakerController;
-use App\Http\Controllers\Competency\ResourceSpeakerManagerReport;
 use App\Http\Controllers\Competency\ResourceSpeakerManagerReportController;
 use App\Http\Controllers\Competency\TrainingCategoryController;
 use App\Http\Controllers\Competency\TrainingParticipantsController;
 use App\Http\Controllers\Competency\TrainingProviderManagerController;
 use App\Http\Controllers\Competency\TrainingProviderManagerReportController;
-use App\Http\Controllers\Competency\TrainingProviderReport;
 use App\Http\Controllers\Competency\TrainingSecretariatController;
 use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\Competency\TrainingVenueManagerReportController;
@@ -90,7 +87,6 @@ use App\Http\Controllers\TitleController;
 use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
-use App\Models\Plantilla\OtherAssignment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -717,8 +713,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('training-venue-manager')->group(function () {
             Route::get('report', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('generate-pdf', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdfByCity'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdfByCity')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
         });
 
         Route::prefix('resource-speaker-manager')->group(function () {

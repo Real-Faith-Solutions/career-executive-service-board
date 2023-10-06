@@ -17,7 +17,7 @@ class LanguageController extends Controller
         $language = $personalDataId->languages()
         ->select('ctrlno', 'lang_code')
         ->orderBy('encdate', 'desc')
-        ->paginate(10);
+        ->paginate(25);
 
         $profileLibTblLanguageRef = ProfileLibTblLanguageRef::all();
 
@@ -93,7 +93,7 @@ class LanguageController extends Controller
         ->onlyTrashed()
         ->select('ctrlno', 'lang_code', 'deleted_at')
         ->orderBy('deleted_at', 'desc')
-        ->paginate(10);
+        ->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.languages_dialects.trashbin', compact('profileTblLanguagesTrashedRecord','cesno'));
     }

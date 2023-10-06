@@ -3,10 +3,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Training Provider Manager Report</title>
+        <title>General Report</title>
 
         <style>
-            @page {
+           @page {
                 margin-top: 75px;
                 padding-bottom: 100px;
             }
@@ -28,7 +28,7 @@
                 font-size: 10px;
                 color: #333;
             }
-            
+
             table {
                 border-collapse: collapse;
                 padding-left: 10px;
@@ -42,16 +42,22 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 11px;
-                text-align: center;
+                font-size: 10px;
+                text-align: left;
             }
         
             th {
                 color: #284F87;
-                font-size: 12px;
+                font-size: 10px;
+                padding-right: 10px;
+                padding-left: 10px;
                 text-transform: uppercase;
-                text-align: center;
+                text-align: left;
                 background-color: white;
+            }
+        
+            span {
+                font-size: 10px;
             }
         
             tr:nth-child(even) {
@@ -91,7 +97,7 @@
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 190px;
             }
 
             .pagenum:before {
@@ -112,55 +118,61 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">Training Provider Manager Report</p>
-            </div>
+                <p class="report_name">
+                    General Report
+                    <br>
+                    <span>
+                         {{ $trainingSession->title }}
+                    </span>
+                </p>
 
-            <footer>
-                <div class="flex-container">
-                    <div class="">Page <span class="pagenum"></span></div>
-                </div>
-            </footer>
+                <footer>
+                    <div class="flex-container">
+                        <div class="">Page <span class="pagenum"></span></div>
+                    </div>
+                </footer>
+            </div>
         </header>
 
         <div>
             <table>
-                <thead>
+                <thead >
                     <div class="page-break"></div>
                     <tr>
-                        <th >
+                        <th class="thead">
                             
                         </th>
-                        
-                        <th>
-                            Provider
+
+                        <th class="thead">
+                            Particapants ID
                         </th>
-        
-                        <th>
-                            House Building
+
+                        <th class="thead">
+                            Cesno
+                        </th class="thead">
+
+                        <th class="thead">
+                            Name
+                        </th class="thead">
+
+                        <th class="thead">
+                            CES Status
                         </th>
-        
-                        <th>
-                            St. Road
+
+                        <th class="thead">
+                            Training Status
                         </th>
-        
-                        <th>
-                            Barangay
+
+                        <th class="thead">
+                            Training Hours
                         </th>
-        
-                        <th>
-                            City Code
+
+                        <th class="thead">
+                            Payment Status
                         </th>
-        
-                        <th>
-                            Contact No.
-                        </th>
-        
-                        <th>
-                            Email
-                        </th>
-        
-                        <th>
-                            Contact Person
+
+                        <th class="thead">
+                            Remarks
                         </th>
                     </tr>
                 </thead>
@@ -168,48 +180,53 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-
-                    @foreach ($competencyTrainingProvider as $competencyTrainingProviders)
+                
+                    @foreach ($trainingParticipantList as $trainingParticipantLists)
                         <tr>
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
 
                             <td>
-                                {{ $competencyTrainingProviders->provider }}
+                                {{ $trainingParticipantLists->pid }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->house_bldg }}
+                                {{ $trainingParticipantLists->cesno }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->st_road }}
+                                {{ 
+                                    $trainingParticipantLists->cesTrainingPersonalData->lastname.', '. 
+                                    $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
+                                    $trainingParticipantLists->cesTrainingPersonalData->middleinitial.', '.
+                                    $trainingParticipantLists->cesTrainingPersonalData->name_extension
+                                }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->brgy_vill }}
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->cesStatus->description ?? '' }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->trainingProviderManager->name }}
+                                {{ $trainingParticipantLists->status }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->contactno }}
+                                {{ $trainingParticipantLists->no_hours}}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->emailadd }}
+                                {{ $trainingParticipantLists->payment }}
                             </td>
         
                             <td>
-                                {{ $competencyTrainingProviders->contactperson }}
+                                {{ $trainingParticipantLists->remarks }}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>    
+        </div>
     </body>
 </html>

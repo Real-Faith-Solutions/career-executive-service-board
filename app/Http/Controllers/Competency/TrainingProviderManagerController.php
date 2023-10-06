@@ -14,7 +14,7 @@ class TrainingProviderManagerController extends Controller
     public function index()
     {
         $trainingProvider = CompetencyTrainingProvider::select('providerID', 'provider', 'house_bldg', 'st_road', 'brgy_vill', 'city_code', 'contactno', 'emailadd', 
-        'contactperson')->orderBy('providerID', 'desc')->paginate(5);
+        'contactperson')->orderBy('providerID', 'desc')->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.training_provider_manager.table', compact('trainingProvider'));
     }

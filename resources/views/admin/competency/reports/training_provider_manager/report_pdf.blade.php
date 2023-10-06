@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Training Venue Manager Report</title>
+        <title>Training Provider Manager Report</title>
 
         <style>
             @page {
@@ -42,15 +42,17 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 11px;
-                text-align: center;
+                font-size: 10px;
+                text-align: left;
             }
         
             th {
                 color: #284F87;
-                font-size: 12px;
+                padding-right: 10px;
+                padding-left: 10px;
+                font-size: 10px;
                 text-transform: uppercase;
-                text-align: center;
+                text-align: left;
                 background-color: white;
             }
         
@@ -100,7 +102,7 @@
         </style>
     </head>
 
-    <body> 
+    <body>
         <header>
             <div class="container">
                 <div class="logo">
@@ -112,7 +114,7 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">Training Venue Manager Report</p>
+                <p class="report_name">Training Provider Manager Report</p>
             </div>
 
             <footer>
@@ -127,16 +129,28 @@
                 <thead>
                     <div class="page-break"></div>
                     <tr>
-                        <th>
+                        <th >
                             
                         </th>
-
+                        
                         <th>
-                            Venue
+                            Provider
                         </th>
         
                         <th>
-                            Address
+                            House Building
+                        </th>
+        
+                        <th>
+                            St. Road
+                        </th>
+        
+                        <th>
+                            Barangay
+                        </th>
+        
+                        <th>
+                            City Code
                         </th>
         
                         <th>
@@ -157,39 +171,47 @@
                         $rowNumber = 1;
                     @endphp
 
-                    @foreach ($trainingVenueManager as $trainingVenueManagers)
+                    @foreach ($competencyTrainingProvider as $competencyTrainingProviders)
                         <tr>
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
 
                             <td>
-                                {{ $trainingVenueManagers->name }}
+                                {{ $competencyTrainingProviders->provider }}
                             </td>
         
-                            <td >
-                                {{ 
-                                    $trainingVenueManagers->no_street.', '.
-                                    $trainingVenueManagers->brgy.', '. 
-                                    $trainingVenueManagers->trainingVenueManager->name
-                                }}
+                            <td>
+                                {{ $competencyTrainingProviders->house_bldg }}
                             </td>
         
-                            <td >
-                                {{ $trainingVenueManagers->contactno }}
+                            <td>
+                                {{ $competencyTrainingProviders->st_road }}
                             </td>
         
-                            <td >
-                                {{ $trainingVenueManagers->emailadd }}
+                            <td>
+                                {{ $competencyTrainingProviders->brgy_vill }}
                             </td>
         
-                            <td >
-                                {{ $trainingVenueManagers->contactperson }}
+                            <td>
+                                {{ $competencyTrainingProviders->trainingProviderManager->name }}
+                            </td>
+        
+                            <td>
+                                {{ $competencyTrainingProviders->contactno }}
+                            </td>
+        
+                            <td>
+                                {{ $competencyTrainingProviders->emailadd }}
+                            </td>
+        
+                            <td>
+                                {{ $competencyTrainingProviders->contactperson }}
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </div>    
     </body>
 </html>
