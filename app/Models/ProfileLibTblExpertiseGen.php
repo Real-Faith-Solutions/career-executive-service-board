@@ -16,5 +16,7 @@ class ProfileLibTblExpertiseGen extends Model
 
     protected $fillable = [
         'Title',
+        'encoder',
+        'updated_by',
     ]; 
 }

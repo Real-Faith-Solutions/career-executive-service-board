@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblExpertiseGen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class FieldSpecializationController extends Controller
@@ -27,8 +28,13 @@ class FieldSpecializationController extends Controller
             'Title' => ['required','unique:profilelib_tblExpertiseGen,Title'],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         ProfileLibTblExpertiseGen::create([
             'Title' => $request->Title,
+            'encoder' => $encoder,
         ]);
 
         return to_route('field-specialization.index')->with('message', 'Save Sucessfully');
@@ -46,9 +52,14 @@ class FieldSpecializationController extends Controller
         $request->validate([
             'Title' => ['required', Rule::unique('profilelib_tblExpertiseGen')->ignore($ctrlno, 'GenExp_Code')],
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($ctrlno);
         $profileLibTblExpertiseGen->Title = $request->Title;
+        $profileLibTblExpertiseGen->updated_by = $encoder;
         $profileLibTblExpertiseGen->save();
 
         return to_route('field-specialization.index')->with('info', 'Data Update Sucessfully');

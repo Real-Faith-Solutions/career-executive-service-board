@@ -57,8 +57,13 @@ class TrainingCategoryController extends Controller
             'description' => ['required', Rule::unique('traininglib_tblcategory')->ignore($ctrlno, 'ctrlno')],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $trainingCategory = TrainingLibCategory::find($ctrlno);
         $trainingCategory->description = $request->description;
+        $trainingCategory->updated_by = $encoder;
         $trainingCategory->save();
 
         return to_route('training-category.index')->with('info', 'Data Update Sucessfully');
