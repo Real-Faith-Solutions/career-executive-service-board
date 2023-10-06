@@ -15,7 +15,7 @@ class AffiliationController extends Controller
         $personalData = PersonalData::find($cesno);
         $affiliation = $personalData->affiliations()
         ->select('ctrlno', 'organization', 'position', 'from_dt', 'to_dt')
-        ->paginate(10);
+        ->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.table', compact('affiliation' ,'cesno'));
     }
@@ -107,7 +107,7 @@ class AffiliationController extends Controller
         $affiliationsTrashedRecord = $personalData->affiliations()
         ->onlyTrashed()
         ->select('ctrlno', 'organization', 'position', 'from_dt', 'to_dt', 'deleted_at')
-        ->paginate(10);;
+        ->paginate(25);;
  
         return view('admin.201_profiling.view_profile.partials.major_civic_and_professional_affiliations.trashbin', compact('affiliationsTrashedRecord', 'cesno'));
     }

@@ -61,8 +61,4 @@
     </table>
 </div>
 
-<div class="m-5">
-    {{ $trainingEnagagement->links() }}
-</div>
-
 @endsection

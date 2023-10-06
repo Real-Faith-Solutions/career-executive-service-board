@@ -120,4 +120,8 @@
     </table>
 </div>
 
+<div class="m-5">
+    {{ $trainingVenueManager->links() }}
+</div>
+
 @endsection

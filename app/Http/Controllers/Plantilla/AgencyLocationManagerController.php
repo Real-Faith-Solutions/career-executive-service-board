@@ -66,7 +66,7 @@ class AgencyLocationManagerController extends Controller
                     ->orWhere('website', 'LIKE', "%$query");
             })
             ->orderBy('title', 'ASC')
-            ->paginate(10);
+            ->paginate(25);
 
         return view('admin.plantilla.agency_location_manager.edit', compact(
             'sector',

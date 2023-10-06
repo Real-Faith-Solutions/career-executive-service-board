@@ -12,7 +12,7 @@ class TrainingCategoryController extends Controller
 {
     public function index()
     {
-        $trainingCategory = TrainingLibCategory::paginate(10);
+        $trainingCategory = TrainingLibCategory::paginate(25);
 
         return view('admin.competency.partials.training_type_library.training_category.table', compact('trainingCategory'));
     }
@@ -74,7 +74,7 @@ class TrainingCategoryController extends Controller
 
     public function recentlyDeleted()
     {
-        $trainingCategoryTrashedRecord = TrainingLibCategory::onlyTrashed()->paginate(5);
+        $trainingCategoryTrashedRecord = TrainingLibCategory::onlyTrashed()->paginate(25);
  
         return view('admin.competency.partials.training_type_library.training_category.trashbin', compact('trainingCategoryTrashedRecord'));
     }

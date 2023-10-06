@@ -52,7 +52,7 @@ class SectorManagerController extends Controller
                     ->orWhere('acronym', 'LIKE', "%$query");
             })
             ->orderBy('title', 'ASC')
-            ->paginate(10);
+            ->paginate(25);
         $motherDepartment = MotherDept::all();
 
 
