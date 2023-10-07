@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = AgencyLocationLibrary::all();
-        return view('admin.plantilla.library.agency_location.index', compact('datas'));
+        $query = $request->input('search');
+
+        $datas = AgencyLocationLibrary::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.agency_location.index', compact(
+            'datas',
+        ));
     }
 
     public function store(Request $request)

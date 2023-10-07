@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('plantilla_tblOffice', function (Blueprint $table) {
             $table->id('officeid');
-            $table->foreignId('officelocid')->constrained('plantilla_tblAgencyLocation', 'officelocid');
+            $table->integer('officelocid')->nullable(); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('website')->nullable();
             $table->boolean('is_active')->default(true)->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

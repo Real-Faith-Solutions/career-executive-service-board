@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('profile_tblContact', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno');
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('official_email')->nullable();
             $table->string('official_mobile_number1')->nullable();
             $table->string('official_mobile_number2')->nullable();

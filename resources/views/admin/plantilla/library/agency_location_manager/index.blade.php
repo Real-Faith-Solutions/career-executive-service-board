@@ -3,10 +3,13 @@
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
+    <div>
+        @include('components.search')
+    </div>
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <div class="flex">
+    <div class="flex items-center">
         <a href="{{ route('library-agency-location-manager.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
@@ -18,65 +21,73 @@
 </div>
 
 
-<table class="dataTables">
-    <thead>
-        <tr>
-            <th>Department Agency</th>
-            <th>Location</th>
-            <th>Location Acronym</th>
-            <th>Location type</th>
-            <th>Region</th>
+<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
+    <table class="w-full text-left text-sm text-gray-500">
+        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+            <tr>
+                <th class="px-6 py-3" scope="col">Department Agency</th>
+                <th class="px-6 py-3" scope="col">Location</th>
+                <th class="px-6 py-3" scope="col">Location Acronym</th>
+                <th class="px-6 py-3" scope="col">Location type</th>
+                <th class="px-6 py-3" scope="col">Region</th>
 
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+                <th class="px-6 py-3" scope="col">
+                    <span class="sr-only">Action</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @foreach ($agencyLocation as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->departmentAgency->title }}
-            </td>
-            <td>
-                {{ $data->title }}
-            </td>
-            <td>
-                {{ $data->acronym ?? 'N/A' }}
-            </td>
-            <td>
-                {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
-            </td>
-            <td>
-                {{ $data->region ?? 'N/A' }}
-            </td>
+            @foreach ($agencyLocation as $data)
+            <tr>
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                    {{ $data->departmentAgency->title }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->title }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->acronym ?? 'N/A' }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->region ?? 'N/A' }}
+                </td>
 
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('library-agency-location-manager.edit', $data->officelocid) }}">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}"
-                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
+                <td class="text-right uppercase">
+                    <div class="flex justify-end">
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('library-agency-location-manager.edit', $data->officelocid) }}">
+                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
+                                style="width:24px;height:24px">
                             </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
+                        </a>
+                        <form class="hover:bg-slate-100 rounded-full"
+                            action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}"
+                            method="POST"
+                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#DC3545" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+
+<div class="m-5">
+    {{ $agencyLocation->links() }}
+</div>
 
 @endsection

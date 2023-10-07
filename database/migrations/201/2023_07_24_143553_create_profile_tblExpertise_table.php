@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {        
+    {
         Schema::create('profile_tblExpertise', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->integer('cesno');
@@ -19,8 +19,8 @@ return new class extends Migration
             // $table->foreignId('specialization_code')->constrained('profilelib_tblExpertiseSpec', 'SpeExp_Code');
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

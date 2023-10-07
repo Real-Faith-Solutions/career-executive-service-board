@@ -16,9 +16,13 @@ class AgencyLocationManagerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $agencyLocation = AgencyLocation::all();
+        $query = $request->input('search');
+        $agencyLocation = AgencyLocation::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->orWhere('acronym', 'LIKE', "%$query%")
+            ->paginate(25);
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
@@ -26,6 +30,7 @@ class AgencyLocationManagerController extends Controller
             'agencyLocation',
             'agencyLocationLibrary',
             'region',
+            'query',
         ));
     }
 
@@ -66,6 +71,7 @@ class AgencyLocationManagerController extends Controller
             'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
             'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
@@ -140,6 +146,9 @@ class AgencyLocationManagerController extends Controller
 
     public function update(Request $request, $officelocid)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         $request->validate([
             'deptid' => ['required'],
             'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
@@ -157,6 +166,7 @@ class AgencyLocationManagerController extends Controller
             'telno' => $request->input('telno'),
             'emailaddr' => $request->input('emailaddr'),
             'region' => $request->input('region'),
+            'updated_by' => $encoder,
         ]);
 
 

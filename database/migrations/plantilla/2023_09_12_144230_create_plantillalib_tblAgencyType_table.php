@@ -14,11 +14,13 @@ return new class extends Migration
         // migrate from legacy
         Schema::create('plantillalib_tblAgencyType', function (Blueprint $table) {
             $table->id('agency_typeid');
-            $table->foreignId('sectorid')->constrained('plantilla_tblSector', 'sectorid');
+            $table->integer('sectorid'); // FK
             $table->string('title')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->softDeletes();
-            $table->timestamps();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
         });
     }
 

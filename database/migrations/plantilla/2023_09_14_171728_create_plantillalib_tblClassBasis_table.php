@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('plantillalib_tblClassBasis', function (Blueprint $table) {
             $table->id('cbasis_code');
-            $table->string('basis');
-            $table->text('title');
+            $table->string('basis')->nullable();
+            $table->text('title')->nullable();
             $table->string('classdate')->nullable();
             $table->string('encoder')->nullable();
             $table->string('updated_by')->nullable();

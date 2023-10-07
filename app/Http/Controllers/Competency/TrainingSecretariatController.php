@@ -12,7 +12,7 @@ class TrainingSecretariatController extends Controller
 {
     public function index()
     {
-        $trainingSecretariat = TrainingSecretariat::paginate(10);
+        $trainingSecretariat = TrainingSecretariat::paginate(25);
 
         return view('admin.competency.partials.training_type_library.training_secretariat.table', compact('trainingSecretariat'));
     }
@@ -52,9 +52,14 @@ class TrainingSecretariatController extends Controller
         $request->validate([
             'description' => ['required', Rule::unique('training_secretariat')->ignore($ctrlno, 'ctrlno')],
         ]);
+
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
         
         $trainingSecretariat = TrainingSecretariat::find($ctrlno);
         $trainingSecretariat->description = $request->description;
+        $trainingSecretariat->updated_by = $encoder;
         $trainingSecretariat->save();
 
         return to_route('training-secretariat.index')->with('info', 'Data Update Sucessfully');

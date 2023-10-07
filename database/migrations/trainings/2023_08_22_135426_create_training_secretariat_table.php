@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id('ctrlno');
             $table->string('description')->nullable();
             $table->string('encoder')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('update_time')->useCurrent();
+            $table->string('updated_by')->nullable();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('update_time')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

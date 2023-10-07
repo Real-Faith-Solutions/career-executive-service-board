@@ -21,19 +21,26 @@ class DepartmentAgencyManagerController extends Controller
     public function index(Request $request)
     {
         $sectorToggle = $request->input('sectorToggle');
-        $query = DepartmentAgency::query();
+        $query = $request->input('search');
+        $filterDropdown = DepartmentAgency::query();
 
         if ($sectorToggle) {
-            $query->where('sectorid', $sectorToggle);
+            $filterDropdown->where('sectorid', $sectorToggle);
         }
 
-        $datas = $query->get();
+        if ($query) {
+            $filterDropdown->orWhere('title', 'LIKE', "%$query%")
+                ->orWhere('acronym', 'LIKE', "%$query%");
+        }
+
+        $datas = $filterDropdown->paginate(25);
         $sector = SectorManager::all();
 
         return view('admin.plantilla.library.department_agency_manager.index', compact(
             'datas',
             'sector',
             'sectorToggle',
+            'query',
         ));
     }
 
@@ -87,7 +94,7 @@ class DepartmentAgencyManagerController extends Controller
     {
         $department = DepartmentAgency::find($deptid);
         $sectorDatas = SectorManager::orderBy('title', 'ASC')->get();
-        $motherDepartment = MotherDept::all();
+        $motherDepartment = MotherDept::orderBy('title', 'ASC')->get();
 
         $departmentTypeDatas = DepartmentAgencyType::query()
             ->where('sectorid', $department->sectorid)

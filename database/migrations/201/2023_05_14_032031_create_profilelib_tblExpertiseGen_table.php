@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('profilelib_tblExpertiseGen', function (Blueprint $table) {
             $table->id('GenExp_Code');
-            $table->string('Title');
+            $table->string('Title')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('we_remarks')->nullable(); // written exam remarks
             $table->integer('numtakes')->nullable(); // number of takes
             $table->string('encoder')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

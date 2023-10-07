@@ -3,10 +3,13 @@
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
+    <div>
+        @include('components.search')
+    </div>
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <div class="flex">
+    <div class="flex items-center">
         <a href="{{ route('library-position-manager.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
@@ -18,81 +21,87 @@
 </div>
 
 
-<table class="dataTables">
-    <thead>
-        <tr>
-            <th>Plantilla ID</th>
-            <th>Position Title</th>
-            <th>Position Level</th>
-            <th>Salary Grade Level</th>
-            <th>Item No.</th>
-            <th>Vacant</th>
-            <th>Pres Appointee</th>
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
+    <table class="w-full text-left text-sm text-gray-500">
+        <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
+            <tr>
+                <th class="px-6 py-3" scope="col">Plantilla ID</th>
+                <th class="px-6 py-3" scope="col">Position Title</th>
+                <th class="px-6 py-3" scope="col">Position Level</th>
+                <th class="px-6 py-3" scope="col">Salary Grade Level</th>
+                <th class="px-6 py-3" scope="col">Item No.</th>
+                <th class="px-6 py-3" scope="col">Vacant</th>
+                <th class="px-6 py-3" scope="col">Pres Appointee</th>
+                <th class="px-6 py-3" scope="col">
+                    <span class="sr-only">Action</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @foreach ($datas as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->plantilla_id }}
-            </td>
-            <td>
-                {{ $data->positionMasterLibrary->dbm_title }}
-            </td>
+            @foreach ($datas as $data)
+            <tr>
+                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                    {{ $data->plantilla_id }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->dbm_title }}
+                </td>
 
-            <td>
-                {{ $data->positionMasterLibrary->positionLevel->title }}
-            </td>
+                <td class="px-6 py-3">
+                    {{ $data->positionMasterLibrary->positionLevel->title }}
+                </td>
 
-            <td>
-                {{ $data->corp_sg }}
-            </td>
+                <td class="px-6 py-3">
+                    {{ $data->corp_sg }}
+                </td>
 
-            <td>
-                {{ $data->item_no }}
-            </td>
-            <td>
-                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td>
-            <td>
-                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td>
+                <td class="px-6 py-3">
+                    {{ $data->item_no }}
+                </td>
+                <td class="px-6 py-3">
+                    <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
+                        {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                    </span>
+                </td>
+                <td class="px-6 py-3">
+                    <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
+                        {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
+                    </span>
+                </td>
 
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
+                <td class="text-right uppercase">
+                    <div class="flex justify-end">
 
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('library-position-manager.edit', $data->plantilla_id) }}">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-position-manager.destroy', $data->plantilla_id) }}" method="POST"
-                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('library-position-manager.edit', $data->plantilla_id) }}">
+                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
+                                style="width:24px;height:24px">
                             </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
+                        </a>
 
-    </tbody>
-</table>
+                        <form class="hover:bg-slate-100 rounded-full"
+                            action="{{ route('library-position-manager.destroy', $data->plantilla_id) }}" method="POST"
+                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#DC3545" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
 
+        </tbody>
+    </table>
+</div>
+
+<div class="m-5">
+    {{ $datas->links() }}
+</div>
 @endsection

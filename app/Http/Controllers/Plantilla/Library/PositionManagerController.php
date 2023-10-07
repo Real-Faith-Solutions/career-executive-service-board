@@ -18,7 +18,7 @@ class PositionManagerController extends Controller
 {
     public function index()
     {
-        $datas = PlanPosition::all();
+        $datas = PlanPosition::paginate(25);
         return view('admin.plantilla.library.position_manager.index', compact('datas'));
     }
 
@@ -55,6 +55,7 @@ class PositionManagerController extends Controller
             'is_generic' => $request->input('is_generic'),
             'is_head' => $request->input('is_head'),
             'created_user' => $encoder,
+            'lastupd_user' => $encoder,
         ]);
 
 

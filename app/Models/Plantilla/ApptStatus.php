@@ -15,6 +15,8 @@ class ApptStatus extends Model
     protected $primaryKey = 'appt_stat_code';
     protected $fillable = [
         'title',
+        'encoder',
+        'updated_by',
     ];
 
     public function apptStatus(): HasManyThrough

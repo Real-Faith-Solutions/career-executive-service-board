@@ -14,15 +14,14 @@ return new class extends Migration
         //family_profiles
         Schema::create('fathers', function (Blueprint $table) {
             $table->id('ctrlno');
-            // $table->bigInteger('cesno')->unique();
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno');
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('father_last_name')->nullable();
             $table->string('father_first_name')->nullable();
             $table->string('father_middle_name')->nullable();
             $table->string('name_extension')->nullable();
             $table->string('encoder')->nullable();
-            // $table->string('last_updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

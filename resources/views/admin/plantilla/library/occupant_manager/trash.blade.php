@@ -51,10 +51,10 @@
                     {{ $data->cesno }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->personalData->lastname }}
-                    {{ $data->personalData->firstname }}
-                    {{ $data->personalData->name_extension }}
-                    {{ $data->personalData->middlename }}
+                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->firstname ?? ''}}
+                    {{ $data->personalData->name_extension ?? ''}}
+                    {{ $data->personalData->middlename ?? ''}}
                 </td>
                 <td class="px-6 py-3">
                     <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">

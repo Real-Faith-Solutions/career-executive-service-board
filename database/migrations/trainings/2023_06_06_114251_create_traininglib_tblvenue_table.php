@@ -16,14 +16,15 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('no_street')->nullable();
             $table->string('brgy')->nullable();
-            $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
+            $table->integer('city_code')->nullable();
+            // $table->foreignId('city_code')->constrained('profilelib_tblcities', 'city_code');
             $table->string('contactno')->nullable();
             $table->string('emailadd')->nullable();
             $table->string('contactperson')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encoder_dt')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encoder_dt')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

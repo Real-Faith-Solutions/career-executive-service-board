@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('mothers', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno');
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('mother_last_name')->nullable();
             $table->string('mother_first_name')->nullable();
             $table->string('mother_middle_name')->nullable();

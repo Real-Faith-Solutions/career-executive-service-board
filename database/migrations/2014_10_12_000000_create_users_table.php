@@ -11,8 +11,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->unsignedBigInteger('personal_data_cesno');
-            $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
+            $table->integer('personal_data_cesno');
+            // $table->unsignedBigInteger('personal_data_cesno');
+            // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             // $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password');

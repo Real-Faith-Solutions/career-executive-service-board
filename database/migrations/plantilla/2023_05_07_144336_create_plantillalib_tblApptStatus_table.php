@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('plantillalib_tblApptStatus', function (Blueprint $table) {
             $table->id('appt_stat_code');
             $table->string('title')->nullable();
+            $table->string('encoder')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

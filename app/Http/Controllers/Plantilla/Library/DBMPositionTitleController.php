@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class DBMPositionTitleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = PositionMasterLibrary::all();
-        return view('admin.plantilla.library.dbm_title.index', compact('datas'));
+        $query = $request->input('search');
+
+        $datas = PositionMasterLibrary::query()
+            ->where('dbm_title', 'LIKE', "%$query%")
+            ->orWhere('poslevel_code', 'LIKE', "%$query%")
+            ->orWhere('sg', 'LIKE', "%$query%")
+            ->orWhere('func_title', 'LIKE', "%$query%")
+            ->paginate(25);
+        return view('admin.plantilla.library.dbm_title.index', compact(
+            'datas',
+        ));
     }
 
     public function create()

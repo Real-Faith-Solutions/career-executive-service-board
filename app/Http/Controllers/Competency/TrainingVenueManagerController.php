@@ -14,7 +14,7 @@ class TrainingVenueManagerController extends Controller
     public function index()
     {    
         $trainingVenueManager = CompetencyTrainingVenueManager::select('venueid', 'name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson')->orderBy('venueid', 'desc')
-        ->paginate(5);
+        ->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.training_venue_manager.table', compact('trainingVenueManager'));
     }

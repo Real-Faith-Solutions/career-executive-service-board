@@ -207,7 +207,7 @@
             </li>
             {{-- end Competency --}}
 
-            {{-- reports --}}
+            {{-- competency reports --}}
             <li>
                 <button type="button"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
@@ -220,7 +220,7 @@
                             d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
                     </svg>
 
-                    <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Reports</span>
+                    <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Competency Reports</span>
 
                     <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -232,78 +232,33 @@
 
                 <ul id="dropdown-reports" class="hidden space-y-2 py-2">
                     <li>
-                        <button type="button"
-                            class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                            aria-controls="competency-reports" data-collapse-toggle="competency-reports">
-                            
-                            <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Competency
-                                Reports</span>
+                        <li>
+                            <a href="{{ route('competency-management-sub-modules-report.generalReportIndex') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                General Report
+                            </a>
+                        </li>
 
-                            <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
+                        <li>
+                            <a href="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportIndex') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                Training Venue Manager Reports
+                            </a>
+                        </li>
 
-                        <ul id="competency-reports" class="hidden space-y-2 py-2">
-                            <li>
-                                <a href="{{ route('competency-management-sub-modules-report.generalReportIndex') }}"
-                                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                                    General Report
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('competency-management-sub-modules-report.trainingProviderIndexReport') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                Training Provider Manager Report
+                            </a>
+                        </li>
 
-                            <li>
-                                <a href="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportIndex') }}"
-                                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                                    Training Venue Manager Reports
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('competency-management-sub-modules-report.trainingProviderIndexReport') }}"
-                                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                                    Training Provider Manager Report
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="{{ route('competency-management-sub-modules-report.resourceSpeakerIndexReport') }}"
-                                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                                    Resource Speaker Manager Reports
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Statistical Reports</a>
-                    </li>
-
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Reports for placement</a>
-                    </li>
-
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Reports for birthday cards</a>
-                    </li>
-
-                    <li>
-                        <a href="#"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Data Portability Report</a>
+                        <li>
+                            <a href="{{ route('competency-management-sub-modules-report.resourceSpeakerIndexReport') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                Resource Speaker Manager Reports
+                            </a>
+                        </li>   
                     </li>
                 </ul>
             </li>
-            {{-- end reports --}}
+            {{-- end competency reports --}}
 
             {{-- 201 reports --}}
             <li>

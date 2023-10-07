@@ -3,15 +3,35 @@
 @section('sub', 'Resource Speaker')
 @section('content')
 
-    <div class="my-5 flex justify-between">
-        <h1 class="uppercase font-semibold text-blue-600 text-lg">Resource Speaker Manager Report</h1>
+    <h1 class="uppercase font-semibold text-blue-600 text-lg">Resource Speaker Manager Report</h1>
 
-        <form action="{{ route('competency-management-sub-modules-report.resourceSpeakerGenerateReport') }}" target="_blank" method="POST">
-            @csrf
-            <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
-                Generate PDF Report
-            </button>
-        </form>
+    <div class="my-5 flex justify-between">
+        <div class="flex items-center">
+            <form action="" method="GET">
+                @csrf
+                <select name="expertise" id="expertise" onchange="this.form.submit()">
+                    <option disabled selected>Select Expertise</option>
+                    <option value="all">All</option>
+                    @foreach ($expertise as $resourceSpeakers)
+                        @if ($resourceSpeakers->expertise == $search)
+                            <option value="{{ $resourceSpeakers->expertise }}" selected>{{ $resourceSpeakers->expertise }}</option>
+                        @else
+                            <option value="{{ $resourceSpeakers->expertise }}">{{ $resourceSpeakers->expertise }}</option>
+                        @endif
+                    @endforeach
+                </select>   
+            </form>
+        </div>
+
+        <div>
+            <form action="{{ route('competency-management-sub-modules-report.resourceSpeakerGenerateReport') }}" target="_blank" method="POST">
+                @csrf
+                <input type="text" name="expertise" value="{{ $search }}" hidden>
+                <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
+                    Generate PDF Report
+                </button>
+            </form>
+        </div>  
     </div>
 
     <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

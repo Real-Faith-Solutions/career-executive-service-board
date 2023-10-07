@@ -14,8 +14,8 @@ return new class extends Migration
 
         Schema::create('plantilla_tblAgencyLocation', function (Blueprint $table) {
             $table->id('officelocid');
-            $table->foreignId('deptid')->constrained('plantilla_tblDeptAgency', 'deptid');
-            $table->foreignId('loctype_id')->constrained('plantillalib_tblAgencyLocation', 'agencyloc_Id');
+            $table->integer('deptid')->nullable(); // FK
+            $table->integer('loctype_id')->nullable(); // FK
             $table->string('title')->nullable();
             $table->string('acronym')->nullable();
             $table->string('telno')->nullable();
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('region')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
-            $table->timestamp('encdate')->useCurrent();
-            $table->timestamp('lastupd_dt')->useCurrent();
+            $table->timestamp('encdate')->nullable()->useCurrent();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
         });
     }

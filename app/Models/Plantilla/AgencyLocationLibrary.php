@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AgencyLocationLibrary extends Model
 {
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
     use HasFactory, SoftDeletes;
     protected $table = 'plantillalib_tblAgencyLocation';
     protected $primaryKey = 'agencyloc_Id';
     protected $fillable = [
         'title',
         'encoder',
+        'updated_by',
     ];
 
     public function agencyLocation(): HasMany

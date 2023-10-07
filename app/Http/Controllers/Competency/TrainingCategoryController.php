@@ -12,7 +12,7 @@ class TrainingCategoryController extends Controller
 {
     public function index()
     {
-        $trainingCategory = TrainingLibCategory::paginate(10);
+        $trainingCategory = TrainingLibCategory::paginate(25);
 
         return view('admin.competency.partials.training_type_library.training_category.table', compact('trainingCategory'));
     }
@@ -57,8 +57,13 @@ class TrainingCategoryController extends Controller
             'description' => ['required', Rule::unique('traininglib_tblcategory')->ignore($ctrlno, 'ctrlno')],
         ]);
 
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $trainingCategory = TrainingLibCategory::find($ctrlno);
         $trainingCategory->description = $request->description;
+        $trainingCategory->updated_by = $encoder;
         $trainingCategory->save();
 
         return to_route('training-category.index')->with('info', 'Data Update Sucessfully');
@@ -74,7 +79,7 @@ class TrainingCategoryController extends Controller
 
     public function recentlyDeleted()
     {
-        $trainingCategoryTrashedRecord = TrainingLibCategory::onlyTrashed()->paginate(5);
+        $trainingCategoryTrashedRecord = TrainingLibCategory::onlyTrashed()->paginate(25);
  
         return view('admin.competency.partials.training_type_library.training_category.trashbin', compact('trainingCategoryTrashedRecord'));
     }

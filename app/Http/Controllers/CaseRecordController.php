@@ -10,13 +10,12 @@ use Illuminate\Validation\Rule;
 
 class CaseRecordController extends Controller
 {
-
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
         $caseRecord = $personalData->caseRecords()
         ->orderBy('encdate', 'desc')
-        ->paginate(10);
+        ->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.case_records.table', compact('caseRecord' ,'cesno'));
     }
@@ -132,7 +131,7 @@ class CaseRecordController extends Controller
         $caseRecordTrashedRecord = $personalData->caseRecords()
         ->onlyTrashed()
         ->orderBy('deleted_at', 'desc')
-        ->paginate(10);
+        ->paginate(25);
  
         return view('admin.201_profiling.view_profile.partials.case_records.trashbin', compact('caseRecordTrashedRecord' ,'cesno'));
     }

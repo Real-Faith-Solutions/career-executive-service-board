@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = Office::all();
+        $query = $request->input('search');
+        $datas = Office::query()
+            ->where('title', 'LIKE', "%$query%")
+            ->paginate(25);
 
         return view('admin.plantilla.library.office_manager.index', compact(
-            'datas'
+            'datas',
+            'query',
         ));
     }
 
@@ -56,6 +60,7 @@ class OfficeManagerController extends Controller
             'website' => $request->input('website'),
             // 'isActive' => $request->input('isActive'),
             'encoder' => $encoder,
+            'lastupd_enc' => $encoder,
         ]);
 
         // office address
@@ -70,6 +75,7 @@ class OfficeManagerController extends Controller
             // 'isActive' => $request->input('isActive'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'encoder' => $encoder,
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
