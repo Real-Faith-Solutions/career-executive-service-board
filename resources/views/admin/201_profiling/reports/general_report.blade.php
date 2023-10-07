@@ -60,7 +60,20 @@
                     <label for="without_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
                 </div>
 
-                
+                <div class="flex items-center px-6 py-3 text-left">
+                    <label for="cesstat_code">CES Status<sup>*</sup></label>
+                    <select id="cesstat_code" name="cesstat_code" required type="text">
+                        <option disabled selected>Select CES Status</option>
+                        @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
+                            <option value="{{ $newProfileLibTblCesStatus->code }}">{{ $newProfileLibTblCesStatus->description }}</option>
+                        @endforeach
+                    </select>
+                    @error('cesstat_code')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                    @enderror
+                </div>
             </div>
 
         </form>
