@@ -59,6 +59,8 @@
                     <input id="without_pending_case" type="checkbox" name="without_pending_case" {{ $without_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
                     <label for="without_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
                 </div>
+
+                
             </div>
 
         </form>

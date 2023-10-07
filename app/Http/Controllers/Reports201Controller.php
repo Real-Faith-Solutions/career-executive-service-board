@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblCesStatus;
 use Illuminate\Http\Request;
 
 class Reports201Controller extends Controller
@@ -21,6 +22,8 @@ class Reports201Controller extends Controller
         $with_pending_case = $request->input('with_pending_case', 'false');
         $without_pending_case = $request->input('without_pending_case', 'false');
 
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+
         $personalData = PersonalData::with('cesstatus')
             ->where('lastname', "LIKE" ,"%$query%")
             ->orWhere('firstname',  "LIKE","%$query%")
@@ -32,6 +35,6 @@ class Reports201Controller extends Controller
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
-                        'with_pending_case', 'without_pending_case'));
+                        'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus'));
     }
 }
