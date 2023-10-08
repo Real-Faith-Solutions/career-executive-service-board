@@ -17,11 +17,9 @@
 
     <section>
 
-        <form action="{{ route('general-reports.index') }}">
+        <form action="{{ route('general-reports.index') }}" class="flex flex-wrap items-center justify-between mx-auto p-4">
+
             <div class="flex">
-                {{-- <div class="">
-                    @include('components.search')
-                </div> --}}
         
                 <div class="flex items-center px-6 py-3 text-left">
                     <input id="filter_active" type="checkbox" name="filter_active" {{ $filter_active == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">

@@ -27,11 +27,6 @@ class Reports201Controller extends Controller
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
 
         $personalData = PersonalData::with('cesstatus')
-            ->where('lastname', "LIKE" ,"%$query%")
-            ->orWhere('firstname',  "LIKE","%$query%")
-            ->orWhere('middlename',  "LIKE","%$query%")
-            ->orWhere('name_extension',  "LIKE","%$query%")
-            ->orWhere('cesno',  "LIKE","%$query%")
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
