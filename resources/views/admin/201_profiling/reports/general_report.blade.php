@@ -65,7 +65,7 @@
                     <select id="cesstat_code" name="cesstat_code" required type="text" class="inline-block">
                         <option disabled selected>Select CES Status</option>
                         @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
-                            <option value="{{ $newProfileLibTblCesStatus->code }}">{{ $newProfileLibTblCesStatus->description }}</option>
+                            <option value="{{ $newProfileLibTblCesStatus->code }}" {{ $newProfileLibTblCesStatus->code == $cesstat_code ? 'selected' : '' }}>{{ $newProfileLibTblCesStatus->description }}</option>
                         @endforeach
                     </select>
                     @error('cesstat_code')
