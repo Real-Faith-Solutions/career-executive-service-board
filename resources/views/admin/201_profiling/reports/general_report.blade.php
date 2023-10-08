@@ -8,6 +8,10 @@
         <a href="#" class="flex items-center">
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">201 PROFILE - GENERAL REPORTS</span>
         </a>
+
+        <div class="flex justify-end">
+            <a href="#" class="btn btn-primary">Generate PDF Report</a>
+        </div>
     </div>
 </nav>
 
