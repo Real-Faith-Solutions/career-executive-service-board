@@ -46,12 +46,6 @@
                     <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
                 </div>
 
-                <div class="my-5 flex justify-end">
-                    <button class="btn btn-primary" type="submit">Apply Filter</button>
-                </div>
-            </div>
-
-            <div class="flex">
                 <div class="flex items-center px-6 py-3 text-left">
                     <input id="with_pending_case" type="checkbox" name="with_pending_case" {{ $with_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
                     <label for="with_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">With Pending Case</label>
@@ -61,6 +55,9 @@
                     <input id="without_pending_case" type="checkbox" name="without_pending_case" {{ $without_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
                     <label for="without_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
                 </div>
+            </div>
+
+            <div class="flex">
 
                 <div class="flex items-center px-6 py-3 text-left">
                     <label for="cesstat_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">CES Status<sup>*</sup></label>
@@ -75,6 +72,10 @@
                             <p>{{ $message }}</p>
                         </span>
                     @enderror
+                </div>
+
+                <div class="my-5 flex justify-end">
+                    <button class="btn btn-primary" type="submit">Apply Filter</button>
                 </div>
             </div>
 
