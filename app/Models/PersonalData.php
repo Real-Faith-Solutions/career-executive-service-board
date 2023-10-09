@@ -192,6 +192,11 @@ class PersonalData extends Model
         return $this->hasMany(TrainingParticipants::class, 'cesno', 'cesno');
     }
 
+    public function cities(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'birth_place', 'city_code');
+    }
+
     // plantilla
     public function planAppointee(): BelongsTo
     {

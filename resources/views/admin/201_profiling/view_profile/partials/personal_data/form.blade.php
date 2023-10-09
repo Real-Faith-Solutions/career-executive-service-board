@@ -115,7 +115,7 @@
                         <div class="mb-3">
                             <label for="birth_place">Birth Place<sup>*</sup></label>
                             <input id="birth_place" name="birth_place" readonly type="text"
-                                value="{{ $mainProfile->birth_place }}">
+                                value="{{ $mainProfile->cities->name ?? '' }}">
                         </div>
 
                         <div class="mb-3">
