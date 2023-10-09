@@ -79,27 +79,27 @@
                 @foreach ($profileTblCesStatus as $profileTblCesStatuses)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$profileTblCesStatuses->profileLibTblCesStatus->description}}
+                            {{$profileTblCesStatuses->profileLibTblCesStatus->description ?? ''}}
                         </td>
                         
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblCesStatusAcc->description}}
+                            {{$profileTblCesStatuses->profileLibTblCesStatusAcc->description ?? ''}}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblCesStatusType->description}}
+                            {{$profileTblCesStatuses->profileLibTblCesStatusType->description ?? ''}}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblAppAuthority->description}}
+                            {{$profileTblCesStatuses->profileLibTblAppAuthority->description ?? ''}}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->resolution_no}}
+                            {{$profileTblCesStatuses->resolution_no ?? ''}}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->appointed_dt}}
+                            {{$profileTblCesStatuses->appointed_dt ?? ''}}
                         </td> 
                
                        <td class="px-6 py-4 text-right uppercase">
@@ -139,145 +139,3 @@
 </div>
 
 @endsection
-{{-- 
- <div class="table-eligibility-and-rank-tracker-2">
-    <h1 class="mx-2 text-blue-500 text-bold">Assessment Center (Historical Record)</h1>
-    <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
-
-        <table class="w-full text-left text-sm text-gray-500">
-
-            <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        AC No
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Assessment Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Rating
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Competencies for D.O.
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Action</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
-                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div> 
-
-<div class="table-eligibility-and-rank-tracker-3">
-    <h1 class="mx-2 text-blue-500 text-bold">Validation (Historical Record)</h1>
-    <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
-
-        <table class="w-full text-left text-sm text-gray-500">
-
-            <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Validation Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Type of Validation
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Result
-                    </th>
-
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Action</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-
-                     <td class="px-6 py-4 text-right uppercase">
-                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td> 
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="table-eligibility-and-rank-tracker-4">
-    <h1 class="mx-2 text-blue-500 text-bold">Board Interview</h1>
-    <div class="relative overflow-x-auto sm:rounded-lg shadow-lg mb-3">
-
-        <table class="w-full text-left text-sm text-gray-500">
-
-            <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Board Interview Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Rating
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Action</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        -
-                    </td>
-                    <td class="px-6 py-3">
-                        -
-                    </td>
-
-                     <td class="px-6 py-4 text-right uppercase">
-                        <a href="#" class="mx-1 font-medium text-blue-600 hover:underline">Update</a>
-                        <a href="#" class="mx-1 font-medium text-red-600 hover:underline">Delete</a>
-                    </td> 
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
-</div>  --}}
-
-
-

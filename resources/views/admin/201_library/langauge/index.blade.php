@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Examination - 201 Library')
+@section('title', 'Language - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="{{ route('examination.recentlyDeleted') }}">
+    <a href="">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="{{ route('examination.create') }}">Add Examination</a>
+    <a class="btn btn-primary" href="{{ route('language-library.create') }}">Add Language</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -21,7 +21,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Title
+                    Description
                 </th>
 
                 <th class="px-6 py-3" scope="col">
@@ -30,15 +30,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
+            @foreach ($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                        {{ $profileLibTblExamRefs->TITLE }}
+                        {{ $profileLibTblLanguageRefs->title }}
                     </td>
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="{{ route('examination.edit', ['code'=>$profileLibTblExamRefs->CODE]) }}" method="GET">
+                            <form action="{{ route('language-library.edit', ['code'=>$profileLibTblLanguageRefs->code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -50,10 +50,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('examination.destroy', ['code'=>$profileLibTblExamRefs->CODE]) }}" method="POST" id="delete_examination_form{{$profileLibTblExamRefs->CODE}}">
+                            <form action="" method="POST" id="delete_examination_form{{$profileLibTblLanguageRefs->CODE}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteExaminationButton{{$profileLibTblExamRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteExaminationButton{{$profileLibTblLanguageRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -72,7 +72,7 @@
 </div>
 
 <div class="m-5">
-    {{ $profileLibTblExamRef->links() }}
+    {{ $profileLibTblLanguageRef->links() }}
 </div>
 
 @endsection
