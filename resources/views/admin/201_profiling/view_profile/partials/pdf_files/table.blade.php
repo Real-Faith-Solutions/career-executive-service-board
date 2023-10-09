@@ -78,7 +78,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->created_at }}
+                        {{ $approvedPdfFiles->encdate }}
                     </td>
 
                     <td class="px-6 py-3">

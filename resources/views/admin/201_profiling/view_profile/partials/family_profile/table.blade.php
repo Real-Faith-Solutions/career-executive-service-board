@@ -224,11 +224,11 @@
                         Children
                     </td>
                     <td class="px-6 py-3">
-                        {{ $newChildrenRecords->last_name }}
+                        {{ $newChildrenRecords->lname }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newChildrenRecords->first_name }}
+                        {{ $newChildrenRecords->fname }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -236,7 +236,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $newChildrenRecords->middle_name }}
+                        {{ $newChildrenRecords->mname }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

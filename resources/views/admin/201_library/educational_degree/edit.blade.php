@@ -10,12 +10,12 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Educational Degree form
+                Update Educational Degree form
             </h1>
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('educational-degree.update', $data->CODE) }}" method="POST">
+            <form action="{{ route('educational-degree.update', $data->CODE) }}" method="POST" id="update_educational_degree_form" onsubmit="return checkErrorsBeforeSubmit(update_educational_degree_form)">
                 @method('PUT')
                 @csrf
 
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
-                        Save changes
+                    <button type="button" class="btn btn-primary" id="updateEducationalDegreeButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                        Update Changes
                     </button>
                 </div>
             </form>

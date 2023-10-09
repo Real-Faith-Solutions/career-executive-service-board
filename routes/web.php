@@ -76,6 +76,7 @@ use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
 use App\Http\Controllers\ProfileLibTblEducMajorController;
+use App\Http\Controllers\ProfileLibTblExamRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
@@ -87,6 +88,7 @@ use App\Http\Controllers\TitleController;
 use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
+use App\Models\ProfileLibTblExamRef;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -863,7 +865,6 @@ Route::middleware('auth')->group(function () {
 
     // Library routes (201)
     Route::prefix('201-library')->group(function () {
-
         Route::prefix('gender-by-birth')->group(function () {
             Route::get('recently-deleted', [GenderByBirthController::class, 'recentlyDeleted'])->name('gender-by-birth.recently-deleted');
             Route::post('recently-deleted/force-delete/{ctrlno}', [GenderByBirthController::class, 'forceDelete'])->name('gender-by-birth.forceDelete');
@@ -939,6 +940,12 @@ Route::middleware('auth')->group(function () {
             Route::post('recently-deleted/force-delete/{CODE}', [ProfileLibTblEducDegreeController::class, 'forceDelete'])->name('educational-degree.forceDelete');
             Route::post('recently-deleted/restore/{CODE}', [ProfileLibTblEducDegreeController::class, 'restore'])->name('educational-degree.restore');
             Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
+        });
+
+        Route::prefix('examination')->group(function () {
+            Route::get('index', [ProfileLibTblExamRefController::class, 'index'])->name('examination.index');
+            Route::get('create', [ProfileLibTblExamRefController::class, 'create'])->name('examination.create');
+            Route::delete('destroy/{code}', [ProfileLibTblExamRefController::class, 'destroy'])->name('examination.destroy');
         });
     });
     // End of Library routes

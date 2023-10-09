@@ -14,19 +14,20 @@ return new class extends Migration
         //children_records
         Schema::create('profile_tblChildren', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->integer('personal_data_cesno')->nullable();
+            $table->integer('cesno')->nullable();
             // $table->unsignedBigInteger('personal_data_cesno');
             // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
-            $table->string('last_name')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('middle_name')->nullable();
+            $table->string('lname')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('mname')->nullable();
             $table->string('name_extension')->nullable();
             $table->string('gender')->nullable();
-            $table->date('birthdate')->nullable();
+            $table->date('bdate')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_enc')->nullable();
+            $table->timestamp('encdate')->useCurrent()->nullable();
+            $table->timestamp('lastupd_dt')->useCurrent()->nullable();
             $table->softDeletes();
         });
     }

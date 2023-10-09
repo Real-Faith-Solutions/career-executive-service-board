@@ -39,16 +39,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('profile_tblEducation');
     }
-
-
-    // $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
-    // $table->foreignId('degree_code')->constrained('profilelib_tblEducDegree', 'CODE');
-    // $table->foreignId('major_code')->constrained('profilelib_tblEducMajor', 'CODE');
-    // $table->foreignId('school_code')->constrained('profilelib_tblEducSchools', 'CODE');
-    // $table->string('level')->nullable();
-    // $table->string('school_type')->nullable();
-    // $table->string('period_of_attendance_from')->nullable();
-    // $table->string('period_of_attendance_to')->nullable();
-    // $table->string('highest_level')->nullable();
-    // $table->string('academics_honor_received')->nullable();
 };
