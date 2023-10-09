@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Form PWD Disability - 201 Library')
+@section('title', 'Form School - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
@@ -10,21 +10,20 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                PWD Disability form
+                School form
             </h1>
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('educational-schools.update', $data->CODE) }}" method="POST">
+            <form action="{{ route('educational-schools.update', $data->CODE) }}" method="POST" id="update_educational_school_form" onsubmit="return checkErrorsBeforeSubmit(update_educational_school_form)">
                 @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="name">Name</label>
-                        <input id="name" name="name" type="text" required value="{{$data->SCHOOL}}">
-                        @error('name')
+                        <label for="SCHOOL">Name</label>
+                        <input id="SCHOOL" name="SCHOOL" type="text" required value="{{$data->SCHOOL}}">
+                        @error('SCHOOL')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -33,8 +32,8 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button class="btn btn-primary">
-                        Save changes
+                    <button type="button" class="btn btn-primary" id="updateEducationalSchoolButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                        Update Changes
                     </button>
                 </div>
             </form>

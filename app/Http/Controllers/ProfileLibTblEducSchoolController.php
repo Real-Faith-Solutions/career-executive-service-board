@@ -33,8 +33,8 @@ class ProfileLibTblEducSchoolController extends Controller
     }
 
     // ui for edit
-    public function edit($CODE
-    ){
+    public function edit($CODE)
+    {
         $data = ProfileLibTblEducSchool::withTrashed()->findOrFail($CODE);
 
         return view('admin.201_library.educational_schools.edit', compact('data'));

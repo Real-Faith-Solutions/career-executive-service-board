@@ -19,19 +19,16 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                {{-- <th class="px-6 py-3" scope="col">
-                    No.
-                </th> --}}
                 <th class="px-6 py-3" scope="col">
                     Name
                 </th>
+
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-
             @php
                 $i = 1;
             @endphp
@@ -40,10 +37,7 @@
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                         {{ $data->SCHOOL }}
                     </td>
-                    {{-- <td class="px-6 py-3">
-                        {{ $data->SCHOOL }}
-                    </td> --}}
-
+                    
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
                             <a class="hover:bg-slate-100 rounded-full" href="{{ route('educational-schools.edit', $data->CODE) }}">
@@ -54,16 +48,16 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                             </a>
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-schools.destroy', $data->CODE) }}" method="POST">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-schools.destroy', $data->CODE) }}" method="POST" id="delete_educational_school_form{{$data->CODE}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <button type="button" id="deleteEducationalSchoolButton{{$data->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
                                         trigger="hover"
-                                        colors="primary:#DC3545"
+                                        colors="primary:#880808"
                                         style="width:24px;height:24px">
-
                                     </lord-icon>
                                 </button>
                             </form>
@@ -71,13 +65,12 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
+</div>
 
-    <div class="m-5">
-        {{ $datas->links() }}
-    </div>
+<div class="m-5">
+    {{ $datas->links() }}
 </div>
 
 @endsection

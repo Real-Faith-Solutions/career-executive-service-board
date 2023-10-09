@@ -21,9 +21,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                     <div class="mb-3">
-                        <label for="name">School</label>
-                        <input id="name" name="name" type="text" required>
-                        @error('name')
+                        <label for="SCHOOL">School</label>
+                        <input id="SCHOOL" name="SCHOOL" type="text" required>
+                        @error('SCHOOL')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
