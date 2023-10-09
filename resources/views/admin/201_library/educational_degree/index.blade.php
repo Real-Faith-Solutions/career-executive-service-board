@@ -68,10 +68,10 @@
 
         </tbody>
     </table>
+</div>
 
-    <div class="m-5">
-        {{ $datas->links() }}
-    </div>
+<div class="m-5">
+    {{ $datas->links() }}
 </div>
 
 @endsection
