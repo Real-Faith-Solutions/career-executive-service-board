@@ -8,10 +8,13 @@
 
     <div class="flex flex-col items-center row-span-5 text-center">
 
-        <img id="profile-avatar" class="profile-avatar w-50 h-50 rounded-full border-2 border-transparent hover:border-blue-500 cursor-pointer" src="{{ asset('images/'.($mainProfile->picture ?: 'placeholder.png')) }}" />
+        <img id="profile-avatar"
+            class="profile-avatar w-50 h-50 rounded-full border-2 border-transparent hover:border-blue-500 cursor-pointer"
+            src="{{ asset('images/'.($mainProfile->picture ?? 'placeholder.png')) }}" />
 
         <h1 class="text-bold text-2xl">
-            {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{ $mainProfile->extension_name }} {{ $mainProfile->middlename }}
+            {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{
+            $mainProfile->extension_name }} {{ $mainProfile->middlename }}
         </h1>
 
         <span class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
@@ -33,7 +36,8 @@
                     <h1 class="px-6 py-3 text-left">
                         Personal Data
                     </h1>
-                    <a href="{{ route('profile.edit', ['cesno' => $mainProfile->cesno]) }}" class="px-6 py-3 text-right">Edit</a>
+                    <a href="{{ route('profile.edit', ['cesno' => $mainProfile->cesno]) }}"
+                        class="px-6 py-3 text-right">Edit</a>
                 </div>
 
                 <div class="border-b bg-white px-6 py-3">
@@ -64,17 +68,20 @@
 
                         <div class="mb-3">
                             <label for="lastname">Lastname<sup>*</sup></label>
-                            <input id="lastname" name="lastname" readonly type="text" value="{{ $mainProfile->lastname }}">
+                            <input id="lastname" name="lastname" readonly type="text"
+                                value="{{ $mainProfile->lastname }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="firstname">Firstname<sup>*</sup></label>
-                            <input id="firstname" name="firstname" readonly type="text" value="{{ $mainProfile->firstname }}">
+                            <input id="firstname" name="firstname" readonly type="text"
+                                value="{{ $mainProfile->firstname }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="middlename">Middlename<sup>*</sup></label>
-                            <input id="middlename" name="middlename" readonly type="text" value="{{ $mainProfile->middlename }}">
+                            <input id="middlename" name="middlename" readonly type="text"
+                                value="{{ $mainProfile->middlename }}">
                         </div>
 
                         {{-- <div class="mb-3">
@@ -84,17 +91,20 @@
 
                         <div class="mb-3">
                             <label for="name_extension">Name Extension</label>
-                            <input id="name_extension" name="name_extension" readonly value="{{ $mainProfile->name_extension }}">
+                            <input id="name_extension" name="name_extension" readonly
+                                value="{{ $mainProfile->name_extension }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="nickname">Nickname</label>
-                            <input id="nickname" name="nickname" readonly type="text" value="{{ $mainProfile->nickname }}">
+                            <input id="nickname" name="nickname" readonly type="text"
+                                value="{{ $mainProfile->nickname }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="personal_birthdate">Birthdate<sup>*</sup></label>
-                            <input id="personal_birthdate" name="birthdate" readonly type="text" value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
+                            <input id="personal_birthdate" name="birthdate" readonly type="text"
+                                value="{{ \Carbon\Carbon::parse($mainProfile->birth_date)->format('F d, Y') }}">
                         </div>
 
                         <div class="mb-3">
@@ -104,7 +114,8 @@
 
                         <div class="mb-3">
                             <label for="birth_place">Birth Place<sup>*</sup></label>
-                            <input id="birth_place" name="birth_place" readonly type="text" value="{{ $mainProfile->birth_place }}">
+                            <input id="birth_place" name="birth_place" readonly type="text"
+                                value="{{ $mainProfile->birth_place }}">
                         </div>
 
                         <div class="mb-3">
@@ -114,12 +125,14 @@
 
                         <div class="mb-3">
                             <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
-                            <input id="gender_by_choice" name="gender_by_choice" readonly value="{{ $mainProfile->gender_by_choice }}">
+                            <input id="gender_by_choice" name="gender_by_choice" readonly
+                                value="{{ $mainProfile->gender_by_choice }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="civil_status">Civil Status<sup>*</sup></label>
-                            <input id="civil_status" name="civil_status" readonly value="{{ $mainProfile->civil_status }}">
+                            <input id="civil_status" name="civil_status" readonly
+                                value="{{ $mainProfile->civil_status }}">
                         </div>
 
                         <div class="mb-3">
@@ -139,7 +152,8 @@
 
                         <div class="mb-3">
                             <label for="member_of_indigenous_group">Member of Indigenous Group?<sup>*</sup></label>
-                            <input id="member_of_indigenous_group" name="member_of_indigenous_group" value="{{ $mainProfile->member_of_indigenous_group }}"readonly>
+                            <input id="member_of_indigenous_group" name="member_of_indigenous_group"
+                                value="{{ $mainProfile->member_of_indigenous_group }}" readonly>
                         </div>
 
                         <div class="mb-3">
@@ -148,8 +162,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is PWD?</label>
-                            <input id="person_with_disability" name="person_with_disability" readonly value="{{ $mainProfile->person_with_disability }}">
+                            <label class="ml-2 text-sm font-medium text-gray-900" for="person_with_disability">is
+                                PWD?</label>
+                            <input id="person_with_disability" name="person_with_disability" readonly
+                                value="{{ $mainProfile->person_with_disability }}">
                         </div>
 
                         <div class="mb-3">
@@ -157,9 +173,11 @@
                             <input id="citizenship" name="citizenship" readonly value="{{ $mainProfile->citizenship }}">
                         </div>
 
-                        <div class="mb-3" style="display: {{ $mainProfile->citizenship == 'Dual-Citizenship' ? 'block' : 'none' }}">
+                        <div class="mb-3"
+                            style="display: {{ $mainProfile->citizenship == 'Dual-Citizenship' ? 'block' : 'none' }}">
                             <label for="dual_citizenship">If Holder Dual Citizenship By Birth, By Naturalization</label>
-                            <input id="dual_citizenship" name="dual_citizenship" readonly type="text" value="{{ $mainProfile->dual_citizenship }}">
+                            <input id="dual_citizenship" name="dual_citizenship" readonly type="text"
+                                value="{{ $mainProfile->dual_citizenship }}">
                         </div>
                     </div>
                 </div>
