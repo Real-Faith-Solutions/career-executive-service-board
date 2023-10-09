@@ -30,4 +30,11 @@ class ProfileLibTblLanguageRefController extends Controller
 
         return back()->with('message', 'Save Sucessfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblLanguageRef =  ProfileLibTblLanguageRef::find($code);
+
+        return view('admin.201_library.langauge.edit', compact('profileLibTblLanguageRef'));
+    }
 }

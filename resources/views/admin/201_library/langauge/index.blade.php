@@ -38,7 +38,7 @@
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="" method="GET">
+                            <form action="{{ route('language-library.edit', ['code'=>$profileLibTblLanguageRefs->code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
