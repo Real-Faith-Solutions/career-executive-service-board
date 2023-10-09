@@ -949,6 +949,9 @@ Route::middleware('auth')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblExamRefController::class, 'edit'])->name('examination.edit');
             Route::put('update/{code}', [ProfileLibTblExamRefController::class, 'update'])->name('examination.update');
             Route::delete('destroy/{code}', [ProfileLibTblExamRefController::class, 'destroy'])->name('examination.destroy');
+            Route::get('recently-deleted', [ProfileLibTblExamRefController::class, 'recentlyDeleted'])->name('examination.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'restore'])->name('examination.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'forceDelete'])->name('examination.forceDelete');
         });
     });
     // End of Library routes

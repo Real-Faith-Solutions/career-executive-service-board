@@ -23,7 +23,7 @@ class ProfileLibTblExamRefController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'TITLE' => ['required', 'regex:/^[a-zA-Z ]*$/'],
+            'TITLE' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblExamRef,TITLE'],
         ]);
 
        ProfileLibTblExamRef::create($request->all());
@@ -56,5 +56,31 @@ class ProfileLibTblExamRefController extends Controller
         $profileLibTblExamRef->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
+    }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblExamRef =  ProfileLibTblExamRef::onlyTrashed()
+        ->select('CODE', 'TITLE', 'deleted_at')
+        ->orderByDesc('deleted_at')
+        ->paginate(25);
+
+        return view('admin.201_library.examination.recently_deleted', compact('profileLibTblExamRef'));
+    }
+
+    public function restore($code)
+    {
+        $profileLibTblExamRef =  ProfileLibTblExamRef::onlyTrashed()->find($code);
+        $profileLibTblExamRef->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblExamRef =  ProfileLibTblExamRef::onlyTrashed()->find($code);
+        $profileLibTblExamRef->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
