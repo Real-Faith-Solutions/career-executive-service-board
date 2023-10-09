@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('official_code');
             // $table->foreign('official_code')->references('code')->on('profilelib_tblappAuthority')->onDelete('cascade');
             $table->integer('resolution_no')->nullable();
-            $table->date('appointed_dt')->nullable();
+            $table->string('appointed_dt')->nullable();
             $table->timestamp('submit_dt')->nullable();
             $table->timestamp('return_dt')->nullable();
             $table->string('validator')->nullable();

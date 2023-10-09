@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('mname')->nullable();
             $table->string('name_extension')->nullable();
             $table->string('gender')->nullable();
-            $table->date('bdate')->nullable();
+            $table->string('bdate')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
@@ -39,5 +39,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('profile_tblChildren');
     }
-
 };

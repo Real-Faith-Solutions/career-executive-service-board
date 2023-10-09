@@ -18,8 +18,8 @@ return new class extends Migration
             // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('organization')->nullable();
             $table->string('position')->nullable();
-            $table->date('from_dt')->nullable();
-            $table->date('to_dt')->nullable();
+            $table->string('from_dt')->nullable();
+            $table->string('to_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();

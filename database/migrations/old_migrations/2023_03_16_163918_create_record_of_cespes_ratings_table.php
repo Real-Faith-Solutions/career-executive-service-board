@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('record_of_cespes_ratings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cesno')->nullable();
-            $table->date('date_from_rocr')->nullable();
-            $table->date('date_to_rocr')->nullable();
+            $table->string('date_from_rocr')->nullable();
+            $table->string('date_to_rocr')->nullable();
             $table->string('rating_rocr')->nullable();
             $table->string('status_rocr')->nullable();
             $table->longText('remarks_rocr')->nullable();

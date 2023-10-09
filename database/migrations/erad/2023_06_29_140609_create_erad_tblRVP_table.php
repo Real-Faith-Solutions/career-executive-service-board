@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('erad_tblRVP', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
-            $table->date('dteassign')->nullable(); // date assign
-            $table->date('dtesubmit')->nullable(); // date submnit
+            $table->string('dteassign')->nullable(); // date assign
+            $table->string('dtesubmit')->nullable(); // date submnit
             $table->string('validator')->nullable();
             $table->string('recom')->nullable(); // recommendation
             $table->string('remarks')->nullable();

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('st_cs_ces_we')->nullable();
             $table->string('aa_cs_ces_we')->nullable();
             $table->string('rn_cs_ces_we')->nullable();
-            $table->date('da_cs_ces_we')->nullable();
+            $table->string('da_cs_ces_we')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();

@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('nature_code')->nullable();
             $table->string('case_no')->nullable();
             $table->string('case_title')->nullable();
-            $table->date('filed_dt')->nullable();
+            $table->string('filed_dt')->nullable();
             $table->string('venue')->nullable();
             $table->string('status_code')->nullable();
-            $table->date('finality')->nullable();
+            $table->string('finality')->nullable();
             $table->string('decision')->nullable();
             $table->string('remarks')->nullable();
             $table->string('encoder')->nullable();

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('cesno')->nullable();
             $table->string('an_achr_ces_we')->nullable();
-            $table->date('ad_achr_ces_we')->nullable();
+            $table->string('ad_achr_ces_we')->nullable();
             $table->string('r_achr_ces_we')->nullable();
             $table->string('cfd_achr_ces_we')->nullable();
             $table->string('encoder')->nullable();

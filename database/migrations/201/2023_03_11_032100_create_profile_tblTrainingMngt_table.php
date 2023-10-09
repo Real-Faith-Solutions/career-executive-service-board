@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('sponsor')->nullable();
             $table->string('venue')->nullable();
             $table->string('no_training_hours')->nullable();
-            $table->date('from_dt')->nullable();
-            $table->date('to_dt')->nullable();
+            $table->string('from_dt')->nullable();
+            $table->string('to_dt')->nullable();
             $table->integer('classcode')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();

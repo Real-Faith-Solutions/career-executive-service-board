@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('board_interviews', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cesno')->nullable();
-            $table->date('bid_bi_ces_we')->nullable();
+            $table->string('bid_bi_ces_we')->nullable();
             $table->string('r_bi_ces_we')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();

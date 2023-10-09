@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('no_hours')->nullable();
             $table->string('sponsor')->nullable();
             $table->string('venue')->nullable();
-            $table->date('from_dt')->nullable();
-            $table->date('to_dt')->nullable();
+            $table->string('from_dt')->nullable();
+            $table->string('to_dt')->nullable();
             $table->string('specialization')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('validation_hrs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cesno')->nullable();
-            $table->date('vd_vhr_ces_we')->nullable();
+            $table->string('vd_vhr_ces_we')->nullable();
             $table->string('tov_vhr_ces_we')->nullable();
             $table->string('r_vhr_ces_we')->nullable();
             $table->string('encoder')->nullable();

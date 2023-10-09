@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('cesno')->nullable();
             $table->string('ld_ln_et')->nullable();
-            $table->date('ld_da_et')->nullable();
-            $table->date('ld_dov_et')->nullable();
+            $table->string('ld_da_et')->nullable();
+            $table->string('ld_dov_et')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();

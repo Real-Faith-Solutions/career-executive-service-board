@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('r_ctrlno')->nullable();
             $table->string('description')->nullable();
             $table->string('remarks')->nullable();
-            $table->date('submit_dt')->nullable();
+            $table->string('submit_dt')->nullable();
             $table->string('cesstatus')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();

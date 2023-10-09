@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('sd_ces_trainings')->nullable();
             $table->string('training_status_ces_trainings')->nullable();
             $table->longText('remarks_ces_trainings')->nullable();
-            $table->date('date_f_ces_trainings')->nullable();
-            $table->date('date_t_ces_trainings')->nullable();
+            $table->string('date_f_ces_trainings')->nullable();
+            $table->string('date_t_ces_trainings')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->timestamps();

@@ -18,7 +18,7 @@ return new class extends Migration
             // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('awards')->nullable();
             $table->string('sponsor')->nullable();
-            $table->date('award_dt')->nullable(); // date
+            $table->string('award_dt')->nullable(); // date
             $table->string('aw_dt')->nullable(); // i dont know
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('historical_record_of_medical_conditions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cesno')->nullable();
-            $table->date('date_hronc')->nullable();
+            $table->string('date_hronc')->nullable();
             $table->string('mci_hronc')->nullable();
             $table->longText('notes_hronc')->nullable();
             $table->string('encoder')->nullable();

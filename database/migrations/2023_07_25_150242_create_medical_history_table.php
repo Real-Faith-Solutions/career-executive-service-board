@@ -17,7 +17,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('personal_data_cesno');
             // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('illness')->nullable();
-            $table->date('illness_date')->nullable();
+            $table->string('illness_date')->nullable();
             $table->string('encoder')->nullable();
             $table->softDeletes();
             $table->timestamps();

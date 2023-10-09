@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('category')->nullable();
             $table->string('specialization')->nullable();
-            $table->date('from_dt')->nullable();
-            $table->date('to_dt')->nullable();
+            $table->string('from_dt')->nullable();
+            $table->string('to_dt')->nullable();
             $table->integer('venueId')->nullable();
             // $table->foreignId('venueId')->constrained('traininglib_tblvenue', 'venueid');
             $table->string('status')->nullable();

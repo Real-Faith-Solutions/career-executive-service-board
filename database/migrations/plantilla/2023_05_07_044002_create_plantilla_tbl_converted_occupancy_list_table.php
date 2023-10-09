@@ -58,7 +58,7 @@ return new class extends Migration
             $table->string('occu_cesstatus')->nullable();
             $table->string('occu_appstatus')->nullable();
             $table->string('occu_specAssign')->nullable();
-            $table->date('occu_appdate')->nullable();
+            $table->string('occu_appdate')->nullable();
             $table->string('occu_birthdate')->nullable();
             $table->string('sequence_no')->nullable();
             $table->timestamps();

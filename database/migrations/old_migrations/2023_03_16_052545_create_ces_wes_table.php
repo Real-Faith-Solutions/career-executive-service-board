@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ces_wes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cesno')->nullable();
-            $table->date('ed_ces_we')->nullable();
+            $table->string('ed_ces_we')->nullable();
             $table->string('r_ces_we')->nullable();
             $table->string('rd_ces_we')->nullable();
             $table->string('poe_ces_we')->nullable();
