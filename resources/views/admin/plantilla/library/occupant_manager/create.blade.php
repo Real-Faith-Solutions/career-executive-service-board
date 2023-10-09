@@ -22,7 +22,7 @@
         if ("{{ $data->sectorid }}" === val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
-            option.text = "{{ $data->title }} - {{ $data->motherDepartment->title }}";
+            option.text = "{{ $data->title }} - {{ $data->motherDepartment->title ?? ''}}";
             departmentDropdown.appendChild(option);
         }
         @endforeach
