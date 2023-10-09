@@ -9,26 +9,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ChildrenRecords extends Model
 {
+    use HasFactory, SoftDeletes;
 
-    use HasFactory;
-
-    use SoftDeletes;
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'lastupd_dt';
 
     protected $primaryKey = 'ctrlno';
 
     protected $table= 'profile_tblChildren';
 
     protected $fillable = [
-        'personal_data_cesno',
-        'last_name',
-        'first_name',
-        'middle_name',
+
+        'cesno',
+        'lname',
+        'fname',
+        'mname',
         'name_extension',
         'gender',
-        'birthdate',
+        'bdate',
         'birth_place',
         'encoder',
-        'updated_by',
+        'lastup_enc',
+
     ];
 
     public function personalData(): BelongsTo

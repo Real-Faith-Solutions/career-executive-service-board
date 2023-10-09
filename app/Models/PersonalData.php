@@ -74,7 +74,7 @@ class PersonalData extends Model
 
     public function childrens(): HasMany
     {
-        return $this->hasMany(ChildrenRecords::class);
+        return $this->hasMany(ChildrenRecords::class, 'cesno', 'cesno');
     }
 
     public function educations(): HasMany

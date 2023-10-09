@@ -22,7 +22,7 @@ class FamilyController extends Controller
     {
         $father = Father::where('personal_data_cesno', $cesno)->get();
         $mother = Mother::where('personal_data_cesno', $cesno)->get();
-        $childrenRecords = ChildrenRecords::where('personal_data_cesno', $cesno)->get();
+        $childrenRecords = ChildrenRecords::where('cesno', $cesno)->get();
         $SpouseRecords = SpouseRecords::where('personal_data_cesno', $cesno)->get();
         $nameExtensions = NameExtension::all();
         $genderLibrary = GenderByBirth::all();
@@ -146,12 +146,12 @@ class FamilyController extends Controller
 
             $childrenRecord = new ChildrenRecords([
 
-                'last_name' => $request->last_name,
-                'first_name' => $request->first_name,
-                'middle_name' => $request->middle_name,
+                'lname' => $request->last_name,
+                'fname' => $request->first_name,
+                'mname' => $request->middle_name,
                 'name_extension' => $request->name_extension,
                 'gender' => $request->gender,
-                'birthdate' => $request->birthdate,
+                'bdate' => $request->birthdate,
                 'birth_place' => $request->birth_place,
                 'encoder' => $encoder,
 
@@ -179,14 +179,19 @@ class FamilyController extends Controller
     // update children data
         public function updateChildrenRecord(ChildrenStoreRequest $request, $ctrlno)
         {
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $encoder = $user->userName(); 
+
             $childrenRecord = ChildrenRecords::find($ctrlno);
-            $childrenRecord->last_name = $request->last_name;
-            $childrenRecord->first_name = $request->first_name;
-            $childrenRecord->middle_name = $request->middle_name;
+            $childrenRecord->lname = $request->last_name;
+            $childrenRecord->fname = $request->first_name;
+            $childrenRecord->mname = $request->middle_name;
             $childrenRecord->name_extension = $request->name_extension;
             $childrenRecord->gender = $request->gender;
-            $childrenRecord->birthdate = $request->birthdate;
+            $childrenRecord->bdate = $request->birthdate;
             $childrenRecord->birth_place = $request->birth_place;
+            $childrenRecord->lastupd_enc = $encoder;
             $childrenRecord->save();
 
             return redirect()->back()->with('message', 'Updated Successfuly');
