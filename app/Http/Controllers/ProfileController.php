@@ -283,7 +283,7 @@ class ProfileController extends Controller
         $personalData->citizenship = $request->citizenship;
         $personalData->dual_citizenship = $request->dual_citizenship;
         $personalData->person_with_disability = $request->person_with_disability;
-        $personalData->encoder = $encoder;
+        $personalData->lastupd_dt = $encoder;
         $personalData->save();
 
         // Get the user based on the $cesno
