@@ -22,13 +22,13 @@
                 <th class="px-6 py-3" scope="col">
                     Degree
                 </th>
+
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-
             @php
                 $i = 1;
             @endphp
@@ -48,24 +48,23 @@
                                         style="width:24px;height:24px">
                                     </lord-icon>
                             </a>
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-degree.destroy', $data->CODE) }}" method="POST">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-degree.destroy', $data->CODE) }}" method="POST" id="delete_educational_degree_form{{$data->CODE}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                                <button type="button" id="deleteEducationalDegreeButton{{$data->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
                                         trigger="hover"
-                                        colors="primary:#DC3545"
+                                        colors="primary:#880808"
                                         style="width:24px;height:24px">
-
                                     </lord-icon>
-                                </button>
+                                </button> 
                             </form>
                         </div>
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>
