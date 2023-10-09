@@ -944,7 +944,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('educational-degree', ProfileLibTblEducDegreeController::class);
         });
 
-        Route::prefix('examination')->group(function () {
+        Route::prefix('examination-library')->group(function () {
             Route::get('index', [ProfileLibTblExamRefController::class, 'index'])->name('examination.index');
             Route::get('create', [ProfileLibTblExamRefController::class, 'create'])->name('examination.create');
             Route::post('store', [ProfileLibTblExamRefController::class, 'store'])->name('examination.store');
@@ -956,9 +956,10 @@ Route::middleware('auth')->group(function () {
             Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'forceDelete'])->name('examination.forceDelete');
         });
 
-        Route::prefix('language')->group(function () {
-            Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language.index');
-            Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language.create');
+        Route::prefix('language-library')->group(function () {
+            Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language-library.index');
+            Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language-library.create');
+            Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store');
         });
     });
     // End of Library routes
