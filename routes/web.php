@@ -961,6 +961,7 @@ Route::middleware('auth')->group(function () {
             Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language-library.create');
             Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store');
             Route::get('edit/{code}', [ProfileLibTblLanguageRefController::class, 'edit'])->name('language-library.edit');
+            Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update');
         });
     });
     // End of Library routes

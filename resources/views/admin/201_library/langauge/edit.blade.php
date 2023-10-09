@@ -15,7 +15,8 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_language_library_form" onsubmit="return checkErrorsBeforeSubmit(update_language_library_form)">
+            <form action="{{ route('language-library.update', ['code'=>$profileLibTblLanguageRef->code]) }}" method="POST" id="update_language_library_form" onsubmit="return checkErrorsBeforeSubmit(update_language_library_form)">
+                @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
