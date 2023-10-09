@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add Language</a>
+    <a class="btn btn-primary" href="{{ route('language.create') }}">Add Language</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

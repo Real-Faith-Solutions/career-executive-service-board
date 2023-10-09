@@ -958,6 +958,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('language')->group(function () {
             Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language.index');
+            Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language.create');
         });
     });
     // End of Library routes

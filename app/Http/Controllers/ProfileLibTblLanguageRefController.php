@@ -14,4 +14,9 @@ class ProfileLibTblLanguageRefController extends Controller
 
         return view('admin.201_library.langauge.index', compact('profileLibTblLanguageRef'));
     }
+
+    public function create()
+    {
+        return view('admin.201_library.langauge.create');
+    }
 }
