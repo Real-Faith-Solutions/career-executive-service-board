@@ -944,6 +944,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('examination')->group(function () {
             Route::get('index', [ProfileLibTblExamRefController::class, 'index'])->name('examination.index');
+            Route::get('create', [ProfileLibTblExamRefController::class, 'create'])->name('examination.create');
             Route::delete('destroy/{code}', [ProfileLibTblExamRefController::class, 'destroy'])->name('examination.destroy');
         });
     });

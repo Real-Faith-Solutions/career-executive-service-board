@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add Examination</a>
+    <a class="btn btn-primary" href="{{ route('examination.create') }}">Add Examination</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

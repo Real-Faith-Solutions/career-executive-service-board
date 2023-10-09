@@ -14,6 +14,11 @@ class ProfileLibTblExamRefController extends Controller
         return view('admin.201_library.examination.index', compact('profileLibTblExamRef'));
     }
 
+    public function create()
+    {
+        return view('admin.201_library.examination.create');
+    }
+
     public function destroy($code)
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::find($code);
