@@ -77,6 +77,7 @@ use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
 use App\Http\Controllers\ProfileLibTblEducMajorController;
 use App\Http\Controllers\ProfileLibTblExamRefController;
+use App\Http\Controllers\ProfileLibTblLanguageRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
@@ -89,6 +90,7 @@ use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Mail\TempCred201;
 use App\Models\ProfileLibTblExamRef;
+use App\Models\ProfileLibTblLanguageRef;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
@@ -952,6 +954,10 @@ Route::middleware('auth')->group(function () {
             Route::get('recently-deleted', [ProfileLibTblExamRefController::class, 'recentlyDeleted'])->name('examination.recentlyDeleted');
             Route::post('restore/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'restore'])->name('examination.restore');
             Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'forceDelete'])->name('examination.forceDelete');
+        });
+
+        Route::prefix('language')->group(function () {
+            Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language.index');
         });
     });
     // End of Library routes
