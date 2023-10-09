@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('profile_tblAddress', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->integer('personal_data_cesno')->nullable();
+            $table->integer('cesno')->nullable(); //legacy
+            $table->string('catid')->nullable(); //legacy
             // $table->unsignedBigInteger('personal_data_cesno');
             // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('type')->nullable();
@@ -26,8 +28,16 @@ return new class extends Migration
             $table->string('brgy_name')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('street_lot_bldg_floor')->nullable();
+            $table->string('house_bldg')->nullable(); //legacy
+            $table->string('st_road')->nullable(); //legacy
+            $table->string('brgy_vill')->nullable(); //legacy
+            $table->string('city_code')->nullable(); //legacy
+            $table->string('contactno')->nullable(); //legacy
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
+            $table->string('encdate')->nullable(); //legacy
+            $table->string('lastupd_enc')->nullable(); //legacy
+            $table->string('lastupd_dt')->nullable(); //legacy
             $table->softDeletes();
             $table->timestamps();
         });
