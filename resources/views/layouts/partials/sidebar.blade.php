@@ -45,20 +45,23 @@
                     <li>
                         <a href="{{ route('profile.add') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Add Profile</a>
+                            Add Profile
+                        </a>
                     </li>
                     @endif
 
                     <li>
                         <a href="{{ route('view-profile-201.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            View Profile</a>
+                            View Profile
+                        </a>
                     </li>
 
                     <li>
                         <a href="{{ route('show-pending-pdf-files.pendingFiles') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Pending
-                            Files</a>
+                            Files
+                        </a>
                     </li>
 
                 </ul>
@@ -137,30 +140,37 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Sector Manager
                         </a>
+
                         <a href="{{ route('library-department-manager.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Department / Agency Manager
                         </a>
+
                         <a href="{{ route('library-agency-location-manager.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Agency Location Manager
                         </a>
+
                         <a href="{{ route('library-office-manager.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Office Manager
                         </a>
+
                         <a href="{{ route('library-position-manager.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Plantilla Position Manager
                         </a>
+
                         <a href="{{ route('library-occupant-browser.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Appointee - Occupant Browser
                         </a>
+
                         <a href="{{ route('library-occupant-manager.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Appointee - Occupant Manager
                         </a>
+
                         <a href="{{ route('library-mother-dept.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Mother Agency
@@ -170,28 +180,29 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Office type
                         </a>
+
                         <a href="{{ route('library-location-type.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Location type
                         </a>
+
                         <a href="{{ route('library-dbm-position-title.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             DBM Position Title
                         </a>
+
                         <a href="{{ route('library-class-basis.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Plantilla Position Classification Manager
                         </a>
+
                         <a href="{{ route('library-personnel-movement.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Personnel Movement
                         </a>
                     </li>
-
                 </ul>
-
             </li>
-
             {{-- end Plantilla --}}
 
             {{-- Competency --}}
@@ -287,31 +298,36 @@
                     <li>
                         <a href="{{ route('general-reports.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            General Reports</a>
+                            General Reports
+                        </a>
                     </li>
 
                     <li>
                         <a href="#"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Statistical Reports</a>
+                            Statistical Reports
+                        </a>
                     </li>
 
                     <li>
                         <a href="#"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Reports for Placement</a>
+                            Reports for Placement
+                        </a>
                     </li>
 
                     <li>
                         <a href="#"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Reports for Birthday Cards</a>
+                            Reports for Birthday Cards
+                        </a>
                     </li>
 
                     <li>
                         <a href="#"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Data Portability Report</a>
+                            Data Portability Report
+                        </a>
                     </li>
                 </ul>
             </li>
@@ -349,42 +365,72 @@
                     <li>
                         <a href="{{ route('gender-by-birth.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Gender by birth</a>
+                            Gender by birth
+                        </a>
+
                         <a href="{{ route('gender-by-choice.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Gender by choice</a>
+                            Gender by choice
+                        </a>
+
                         <a href="{{ route('civil-status.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Civil Status</a>
+                            Civil Status
+                        </a>
+
                         <a href="{{ route('title.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Title</a>
+                            Title
+                        </a>
+
                         <a href="{{ route('record-status.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Record Status</a>
+                            Record Status
+                        </a>
+
                         <a href="{{ route('religion.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Religion</a>
+                            Religion
+                        </a>
+
                         <a href="{{ route('indigeneous-group.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Indigenous Group</a>
+                            Indigenous Group
+                        </a>
+
                         <a href="{{ route('pwd.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            PWD Disability</a>
+                            PWD Disability
+                        </a>
+
                         {{-- <a href="{{ route('civil-status.index') }}"
-                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Citizenship</a>
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Citizenship
+                        </a>
+
                         <a href="{{ route('civil-status.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Identification
-                            cards</a> --}}
+                            cards
+                        </a> --}}
+
                         <a href="{{ route('educational-schools.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Educational Schools</a>
+                            Educational Schools
+                        </a>
+
                         <a href="{{ route('educational-major.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Educational Major</a>
+                            Educational Major
+                        </a>
+
                         <a href="{{ route('educational-degree.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Educational Degree</a>
+                            Educational Degree
+                        </a>
+
+                        <a href="{{ route('examination.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Examination
+                        </a>
                     </li>
 
                 </ul>

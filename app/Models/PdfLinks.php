@@ -9,8 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PdfLinks extends Model
 {
-
     use HasFactory, SoftDeletes;
+
+    const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'updated_at';
 
     protected $primaryKey = 'ctrlno';
 
@@ -18,7 +20,7 @@ class PdfLinks extends Model
 
     protected $fillable = [
 
-        'personal_data_cesno',
+        'cesno',
         'pdflink',
         'original_pdflink',
         'request_date',

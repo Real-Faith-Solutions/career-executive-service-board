@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\TempCred201;
+use App\Models\ProfileLibCities;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -34,11 +35,11 @@ class ProfileController extends Controller
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
         $personalData = PersonalData::query()
-            ->where('lastname', "LIKE" ,"%$query%")
-            ->orWhere('firstname',  "LIKE","%$query%")
-            ->orWhere('middlename',  "LIKE","%$query%")
-            ->orWhere('name_extension',  "LIKE","%$query%")
-            ->orWhere('cesno',  "LIKE","%$query%")
+            ->where('lastname', "LIKE", "%$query%")
+            ->orWhere('firstname',  "LIKE", "%$query%")
+            ->orWhere('middlename',  "LIKE", "%$query%")
+            ->orWhere('name_extension',  "LIKE", "%$query%")
+            ->orWhere('cesno',  "LIKE", "%$query%")
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
@@ -54,14 +55,15 @@ class ProfileController extends Controller
         $currentDate = Carbon::now();
         $age = $currentDate->diffInYears($birthDate);
 
-        return view('admin.201_profiling.view_profile.partials.personal_data.form', 
-        compact('mainProfile', 'cesno', 'age'));
+        return view(
+            'admin.201_profiling.view_profile.partials.personal_data.form',
+            compact('mainProfile', 'cesno', 'age')
+        );
     }
 
     public function addProfile()
     {
-        if (DB::table('profile_tblMain')->count() === 0) 
-        {
+        if (DB::table('profile_tblMain')->count() === 0) {
             $cesNumber = 0;
         } else {
             $cesNumber = PersonalData::latest()->first()->cesno;
@@ -77,8 +79,9 @@ class ProfileController extends Controller
         $title = Title::all();
         $recordStatus = RecordStatus::all();
         $religion = Religion::all();
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
-        return view('admin.201_profiling.create_profile.form',[
+        return view('admin.201_profiling.create_profile.form', [
             'cesNumber' => ++$cesNumber,
             'countries' => $countries,
             'indigenousGroups' => $indigenousGroups,
@@ -90,6 +93,7 @@ class ProfileController extends Controller
             'title' => $title,
             'recordStatus' => $recordStatus,
             'religion' => $religion,
+            'cities' => $cities,
 
         ]);
     }
@@ -101,7 +105,7 @@ class ProfileController extends Controller
         $encoder = $user->userName();
 
         $newProfile = PersonalData::create([
-            
+
             'status' => $request->status,
             'title' => $request->title,
             'email' => $request->email,
@@ -133,7 +137,7 @@ class ProfileController extends Controller
         $password = Str::password(8);
         $hashedPassword = Hash::make($password);
         $imagePath = public_path('images/branding.png');
-        $loginLink= config('app.url');
+        $loginLink = config('app.url');
         $type = "addProfile";
 
         $data = [
@@ -151,7 +155,7 @@ class ProfileController extends Controller
         $user = $newProfile->users()->Create([
             'email' => $newProfile->email,
             'password' => $hashedPassword,
-            'is_active'		            => 'Active',
+            'is_active'                    => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => $encoder,
             'default_password_change'   => 'true',
@@ -160,7 +164,7 @@ class ProfileController extends Controller
         $user->assignRole('user');
         // end making account credentials for user
 
-        return back()->with('message','New profile added!');
+        return back()->with('message', 'New profile added!');
     }
 
     public function uploadAvatar(Request $request, $cesno)
@@ -170,15 +174,13 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'imageInput' => 'required|image|mimes:jpeg,png,jpg',
         ]);
-    
-        if ($validator->fails()) 
-        {
-            return back()->with('error','Invalid file type!');
+
+        if ($validator->fails()) {
+            return back()->with('error', 'Invalid file type!');
         }
 
         // Check if a file was uploaded
-        if ($request->hasFile('imageInput')) 
-        {
+        if ($request->hasFile('imageInput')) {
             // Find the user's existing image, if any
             $existingImage = $existingPerson->picture;
 
@@ -199,24 +201,23 @@ class ProfileController extends Controller
             $firstName = $personalData->firstname;
             $mI = $personalData->mi;
             $nameExtension = $personalData->name_extension;
-            $personalDataFullName = $lastName." ".$firstName." ".$mI." ".$nameExtension;
-            $filename = date('m-d-y').'_'.$personalDataFullName.'_'.time().'_'.$imageFile->getClientOriginalName();
+            $personalDataFullName = $lastName . " " . $firstName . " " . $mI . " " . $nameExtension;
+            $filename = date('m-d-y') . '_' . $personalDataFullName . '_' . time() . '_' . $imageFile->getClientOriginalName();
 
             // Save the image to the root folder
             $imageFile->move(public_path('images/avatar/'), $filename);
 
-            $pathName = 'avatar/'.$filename;
+            $pathName = 'avatar/' . $filename;
 
             // Save the image path to the database
             $existingPerson->picture = $pathName;
             $existingPerson->save();
 
-            return back()->with('message','Profile Picture Changed!');
+            return back()->with('message', 'Profile Picture Changed!');
         }
 
         // Handle the case when no file was uploaded
-        return back()->with('error','No file was uploaded!');
-
+        return back()->with('error', 'No file was uploaded!');
     }
 
     public function editProfile($cesno)
@@ -232,8 +233,9 @@ class ProfileController extends Controller
         $title = Title::all();
         $recordStatus = RecordStatus::all();
         $religion = Religion::all();
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
-        return view('admin.201_profiling.view_profile.partials.personal_data.edit',[
+        return view('admin.201_profiling.view_profile.partials.personal_data.edit', [
             'cesno' => $cesno,
             'cesNumber' => $cesno,
             'mainProfile' => $mainProfile,
@@ -247,6 +249,7 @@ class ProfileController extends Controller
             'title' => $title,
             'recordStatus' => $recordStatus,
             'religion' => $religion,
+            'cities' => $cities,
 
         ]);
     }
@@ -283,7 +286,7 @@ class ProfileController extends Controller
         $personalData->citizenship = $request->citizenship;
         $personalData->dual_citizenship = $request->dual_citizenship;
         $personalData->person_with_disability = $request->person_with_disability;
-        $personalData->encoder = $encoder;
+        $personalData->lastupd_dt = $encoder;
         $personalData->save();
 
         // Get the user based on the $cesno
@@ -294,20 +297,20 @@ class ProfileController extends Controller
         $user->save();
 
 
-        return back()->with('info','Profile Updated!');
+        return back()->with('info', 'Profile Updated!');
     }
 
     public function extractMiddleInitial($middleName)
     {
         $middleNameParts = explode(' ', $middleName);
-        
+
         $middleInitial = '';
-        
+
         foreach ($middleNameParts as $part) {
             // Extract the first character of each part as the initial
             $middleInitial .= strtoupper(substr($part, 0, 1));
         }
-        
+
         return $middleInitial;
     }
 
@@ -320,8 +323,10 @@ class ProfileController extends Controller
         $currentDate = Carbon::now();
         $age = $currentDate->diffInYears($birthDate);
 
-        return view('admin.201_profiling.view_profile.partials.personal_data.settings', 
-        compact('mainProfile', 'cesno', 'age'));
+        return view(
+            'admin.201_profiling.view_profile.partials.personal_data.settings',
+            compact('mainProfile', 'cesno', 'age')
+        );
     }
 
     public function changePassword(Request $request, $cesno)
@@ -332,12 +337,12 @@ class ProfileController extends Controller
 
         // Check if the current password is correct
         if (!Hash::check($request->currentPassword, $user->password)) {
-            return redirect()->back()->with('error','Incorrect current password!');
+            return redirect()->back()->with('error', 'Incorrect current password!');
         }
 
         // Check if the new password and confirmation match
         if ($request->password !== $request->confirmPassword) {
-            return redirect()->back()->with('error','Passwords do not match!');
+            return redirect()->back()->with('error', 'Passwords do not match!');
         }
 
         // Update the user's password
@@ -345,7 +350,6 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('message', 'Password changed successfully');
-
     }
 
     public function resendEmail(Request $request, $cesno)
@@ -359,7 +363,7 @@ class ProfileController extends Controller
         $password = Str::password(8);
         $hashedPassword = Hash::make($password);
         $imagePath = public_path('images/branding.png');
-        $loginLink= config('app.url');
+        $loginLink = config('app.url');
         $type = "forgotPassword";
 
         $data = [
@@ -378,7 +382,6 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('message', 'New Credentials Email Sent');
-
     }
 
     public function switchTwoFactor()
@@ -398,7 +401,5 @@ class ProfileController extends Controller
         }
 
         return redirect()->back()->with('error', 'User not found.');
-
     }
-
 }

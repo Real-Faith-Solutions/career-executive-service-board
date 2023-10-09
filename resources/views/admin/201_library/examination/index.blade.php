@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'PWD Disability - 201 Library')
+@section('title', 'Examination - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="{{ route('educational-schools.recently-deleted') }}">
+    <a href="">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -12,7 +12,8 @@
 
         </lord-icon>
     </a>
-    <a class="btn btn-primary" href="{{ route('educational-schools.create') }}">Add School</a>
+
+    <a class="btn btn-primary" href="{{ route('examination.create') }}">Add Examination</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -20,7 +21,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Name
+                    Title
                 </th>
 
                 <th class="px-6 py-3" scope="col">
@@ -29,29 +30,30 @@
             </tr>
         </thead>
         <tbody>
-            @php
-                $i = 1;
-            @endphp
-            @foreach ($datas as $data)
+            @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
                 <tr class="border-b bg-white">
                     <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                        {{ $data->SCHOOL }}
+                        {{ $profileLibTblExamRefs->TITLE }}
                     </td>
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <a class="hover:bg-slate-100 rounded-full" href="{{ route('educational-schools.edit', $data->CODE) }}">
+                            <form action="" method="GET">
+                                @csrf
+                                <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/bxxnzvfm.json"
                                         trigger="hover"
                                         colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                                        style="width:24px;height:24px">
+                                        style="width:30px;height:30px">
                                     </lord-icon>
-                            </a>
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-schools.destroy', $data->CODE) }}" method="POST" id="delete_educational_school_form{{$data->CODE}}">
-                                @method('DELETE')
+                                </button>
+                            </form>
+
+                            <form action="{{ route('examination.destroy', ['code'=>$profileLibTblExamRefs->CODE]) }}" method="POST" id="delete_examination_form{{$profileLibTblExamRefs->CODE}}">
                                 @csrf
-                                <button type="button" id="deleteEducationalSchoolButton{{$data->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                @method('DELETE')
+                                <button type="button" id="deleteExaminationButton{{$profileLibTblExamRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -70,7 +72,7 @@
 </div>
 
 <div class="m-5">
-    {{ $datas->links() }}
+    {{ $profileLibTblExamRef->links() }}
 </div>
 
 @endsection

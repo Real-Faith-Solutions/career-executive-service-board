@@ -23,7 +23,7 @@
 
                     <div class="mb-3">
                         <label for="last_name">Last Name<sup>*</sup></label>
-                        <input type="text" id="children_last_name" name="last_name" value="{{ $childrenRecords->last_name }}" oninput="validateInput(children_last_name, 2, 'letters')" onkeypress="validateInput(children_last_name, 2, 'letters')" onblur="checkErrorMessage(children_last_name)" required>
+                        <input type="text" id="children_last_name" name="last_name" value="{{ $childrenRecords->lname }}" oninput="validateInput(children_last_name, 2, 'letters')" onkeypress="validateInput(children_last_name, 2, 'letters')" onblur="checkErrorMessage(children_last_name)" required>
                         <p class="input_error text-red-600"></p>
                         @error('last_name')
                             <span class="invalid" role="alert">
@@ -34,7 +34,7 @@
 
                     <div class="mb-3">
                         <label for="first_name">First Name<sup>*</span></label>
-                        <input type="text" id="children_first_name" name="first_name" value="{{ $childrenRecords->first_name }}" oninput="validateInput(children_first_name, 2, 'letters')" onkeypress="validateInput(children_first_name, 2, 'letters')" onblur="checkErrorMessage(children_first_name)" required>
+                        <input type="text" id="children_first_name" name="first_name" value="{{ $childrenRecords->fname }}" oninput="validateInput(children_first_name, 2, 'letters')" onkeypress="validateInput(children_first_name, 2, 'letters')" onblur="checkErrorMessage(children_first_name)" required>
                         <p class="input_error text-red-600"></p>
                         @error('first_name')
                             <span class="invalid" role="alert">
@@ -45,7 +45,7 @@
 
                     <div class="mb-3">
                         <label for="middle_name">Middle Name</label>
-                        <input type="text" id="children_middle_name" name="middle_name" value="{{ $childrenRecords->middle_name }}" oninput="validateInput(children_middle_name, 0, 'letters')" onkeypress="validateInput(children_middle_name, 0, 'letters')" onblur="checkErrorMessage(children_middle_name)">
+                        <input type="text" id="children_middle_name" name="middle_name" value="{{ $childrenRecords->mname }}" oninput="validateInput(children_middle_name, 0, 'letters')" onkeypress="validateInput(children_middle_name, 0, 'letters')" onblur="checkErrorMessage(children_middle_name)">
                         <p class="input_error text-red-600"></p>
                         @error('middle_name')
                             <span class="invalid" role="alert">
@@ -89,7 +89,7 @@
 
                     <div class="mb-3">
                         <label for="birthdate">Birthday<sup>*</span></label>
-                        <input type="date" id="children_birthdate" name="birthdate" value="{{ $childrenRecords->birthdate }}" oninput="validateDateInput(children_birthdate)" required>
+                        <input type="date" id="children_birthdate" name="birthdate" value="{{ $childrenRecords->bdate }}" oninput="validateDateInput(children_birthdate)" required>
                         <p class="input_error text-red-600"></p>
                         @error('birthdate')
                             <span class="invalid" role="alert">

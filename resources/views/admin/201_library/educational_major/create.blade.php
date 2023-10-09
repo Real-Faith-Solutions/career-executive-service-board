@@ -19,11 +19,10 @@
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-
                     <div class="mb-3">
-                        <label for="name">Name</label>
-                        <input id="name" name="name" type="text" required>
-                        @error('name')
+                        <label for="COURSE">Name</label>
+                        <input id="COURSE" name="COURSE" type="text" required>
+                        @error('COURSE')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

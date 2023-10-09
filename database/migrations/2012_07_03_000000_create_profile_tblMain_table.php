@@ -40,8 +40,9 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->integer('acno')->nullable();
             $table->text('remarks')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
+            $table->string('lastupd_encoder')->nullable();
+            $table->timestamp('e_date')->useCurrent()->nullable();
+            $table->timestamp('lastupd_dt')->useCurrent()->nullable();
             $table->softDeletes();
         });
     }

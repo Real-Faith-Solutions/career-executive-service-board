@@ -14,7 +14,7 @@ return new class extends Migration
         //pdf_links
         Schema::create('profile_tblmain_pdflink', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->integer('personal_data_cesno')->nullable();
+            $table->integer('cesno')->nullable();
             // $table->unsignedBigInteger('personal_data_cesno');
             // $table->foreign('personal_data_cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->string('pdflink')->nullable();
@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('requested_by')->nullable();
             $table->string('encoder')->nullable();
             $table->string('remarks')->nullable();
-            $table->timestamps();
+            $table->timestamp('encdate')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->softDeletes();
         });
     }

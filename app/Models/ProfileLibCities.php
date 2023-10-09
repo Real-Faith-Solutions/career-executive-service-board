@@ -8,6 +8,7 @@ use App\Models\Plantilla\PlanPosition;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileLibCities extends Model
@@ -24,9 +25,9 @@ class ProfileLibCities extends Model
         'zipcode',
     ];
 
-    public function cities()
+    public function cities(): HasManyThrough
     {
-        return $this->hasManyThrough(OtherAssignment::class, 'city_code', OfficeAddress::class, 'city_code');
+        return $this->hasManyThrough(OtherAssignment::class, 'city_code', OfficeAddress::class, 'city_code', PersonalData::class, 'city_code');
     }
 
     public function competencyTrainingProviderManager(): HasMany
