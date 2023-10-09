@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamp('encdate')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->softDeletes();
         });
     }

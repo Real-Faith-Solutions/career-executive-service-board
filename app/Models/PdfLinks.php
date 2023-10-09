@@ -12,6 +12,7 @@ class PdfLinks extends Model
     use HasFactory, SoftDeletes;
 
     const CREATED_AT = 'encdate';
+    const UPDATED_AT = 'updated_at';
 
     protected $primaryKey = 'ctrlno';
 

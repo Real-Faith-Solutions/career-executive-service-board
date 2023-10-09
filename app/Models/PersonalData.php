@@ -159,7 +159,7 @@ class PersonalData extends Model
 
     public function pdfFile(): HasMany
     {
-        return $this->hasMany(PdfLinks::class);
+        return $this->hasMany(PdfLinks::class, 'cesno', 'cesno');
     }
 
     public function contacts(): HasOne
