@@ -45,27 +45,27 @@
                 @foreach ($inDepthValidationTrashedRecord as $inDepthValidationTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $inDepthValidationTrashedRecords->dteassign }} 
+                            {{ $inDepthValidationTrashedRecords->dteassign ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidationTrashedRecords->dtesubmit }} 
+                            {{ $inDepthValidationTrashedRecords->dtesubmit ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidationTrashedRecords->validator }} 
+                            {{ $inDepthValidationTrashedRecords->validator ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidationTrashedRecords->recom }} 
+                            {{ $inDepthValidationTrashedRecords->recom ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidationTrashedRecords->remarks }} 
+                            {{ $inDepthValidationTrashedRecords->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidationTrashedRecords->dtedefer }} 
+                            {{ $inDepthValidationTrashedRecords->dtedefer ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
