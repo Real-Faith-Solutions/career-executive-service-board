@@ -35,7 +35,7 @@
             @foreach ($language as $languages)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                       {{  $languages->languagePersonalData->title }}
+                       {{  $languages->languagePersonalData->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

@@ -30,7 +30,7 @@
             @foreach ($profileTblLanguagesTrashedRecord as $profileTblLanguagesTrashedRecords)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                       {{  $profileTblLanguagesTrashedRecords->languagePersonalData->title }}
+                       {{  $profileTblLanguagesTrashedRecords->languagePersonalData->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
