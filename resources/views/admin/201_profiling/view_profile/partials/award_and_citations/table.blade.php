@@ -50,7 +50,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardsAndCitations->award_dt ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($awardsAndCitations->award_dt)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

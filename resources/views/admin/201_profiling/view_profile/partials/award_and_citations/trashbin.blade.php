@@ -46,7 +46,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardAndCitationsTrashedRecords->award_dt ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($awardAndCitationsTrashedRecords->award_dt)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
