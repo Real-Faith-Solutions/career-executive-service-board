@@ -37,7 +37,7 @@
                 @foreach ($assessmentCenterTrashedRecord as $assessmentCenterTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $assessmentCenterTrashedRecords->acdate ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->acdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -45,7 +45,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenterTrashedRecords->docdate ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->docdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
