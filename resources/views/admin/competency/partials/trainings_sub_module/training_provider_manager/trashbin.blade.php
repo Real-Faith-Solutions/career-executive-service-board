@@ -61,43 +61,43 @@
             @foreach ($trainingProviderTrashRecord as $trainingProviderTrashRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingProviderTrashRecords->providerID }}
+                        {{ $trainingProviderTrashRecords->providerID ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingProviderTrashRecords->provider }}
+                        {{ $trainingProviderTrashRecords->provider ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->house_bldg }}
+                        {{ $trainingProviderTrashRecords->house_bldg ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->st_road }}
+                        {{ $trainingProviderTrashRecords->st_road ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->brgy_vill }}
+                        {{ $trainingProviderTrashRecords->brgy_vill ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->trainingProviderManager->name }}
+                        {{ $trainingProviderTrashRecords->trainingProviderManager->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->contactno }}
+                        {{ $trainingProviderTrashRecords->contactno ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->emailadd }}
+                        {{ $trainingProviderTrashRecords->emailadd ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->contactperson }}
+                        {{ $trainingProviderTrashRecords->contactperson ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingProviderTrashRecords->deleted_at }}
+                        {{ $trainingProviderTrashRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

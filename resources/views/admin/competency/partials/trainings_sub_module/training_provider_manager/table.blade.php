@@ -66,35 +66,35 @@
                 @foreach ($trainingProvider as $trainingProviders)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $trainingProviders->provider }}
+                            {{ $trainingProviders->provider ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->house_bldg }}
+                            {{ $trainingProviders->house_bldg ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->st_road }}
+                            {{ $trainingProviders->st_road ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->brgy_vill }}
+                            {{ $trainingProviders->brgy_vill ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->trainingProviderManager->name }}
+                            {{ $trainingProviders->trainingProviderManager->name ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->contactno }}
+                            {{ $trainingProviders->contactno ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->emailadd }}
+                            {{ $trainingProviders->emailadd ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingProviders->contactperson }}
+                            {{ $trainingProviders->contactperson ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
