@@ -19,8 +19,14 @@ class AddressController extends Controller
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         $addressProfileTemp = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Temporary')->first();
 
-        return view('admin.201_profiling.view_profile.partials.address.table', 
-        compact('addressProfile', 'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp', 'cesno'));
+        if ($addressProfile->isEmpty()) {
+            $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+            return view('admin.201_profiling.view_profile.partials.address.old_table', 
+            compact('addressProfile', 'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp', 'cesno'));
+        } else {
+            return view('admin.201_profiling.view_profile.partials.address.table', 
+            compact('addressProfile', 'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp', 'cesno'));
+        }
         
     }
 
