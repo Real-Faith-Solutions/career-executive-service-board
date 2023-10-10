@@ -41,23 +41,23 @@
                 @foreach ($panelBoardInterviewTrashedRecord as $panelBoardInterviewTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $panelBoardInterviewTrashedRecords->dteassign }} 
+                            {{ $panelBoardInterviewTrashedRecords->dteassign ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->dtesubmit }} 
+                            {{ $panelBoardInterviewTrashedRecords->dtesubmit ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->intrviewer }} 
+                            {{ $panelBoardInterviewTrashedRecords->intrviewer ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->dteiview }} 
+                            {{ $panelBoardInterviewTrashedRecords->dteiview ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->recom }} 
+                            {{ $panelBoardInterviewTrashedRecords->recom ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
