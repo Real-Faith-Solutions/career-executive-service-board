@@ -34,7 +34,7 @@
             @foreach ($expertise as $expertised)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $expertised->expertisePersonalData->Title}}
+                        {{ $expertised->expertisePersonalData->Title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
