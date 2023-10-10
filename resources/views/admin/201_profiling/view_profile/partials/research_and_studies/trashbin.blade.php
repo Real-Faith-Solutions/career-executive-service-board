@@ -37,7 +37,7 @@
             @foreach ($researchAndStudiesTrashedRecord as $researchAndStudiesTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $researchAndStudiesTrashedRecords->title }}
+                        {{ $researchAndStudiesTrashedRecords->title  }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -45,7 +45,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $researchAndStudiesTrashedRecords->from_dt." - ".$researchAndStudiesTrashedRecords->to_dt }}
+                        {{     
+                            \Carbon\Carbon::parse($researchAndStudiesTrashedRecords->from_dt)->format('m/d/Y')." - ".
+                            \Carbon\Carbon::parse($researchAndStudiesTrashedRecords->to_dt)->format('m/d/Y') ?? 'No Record'
+                        }}
                     </td>
 
                     <td class="px-6 py-3">

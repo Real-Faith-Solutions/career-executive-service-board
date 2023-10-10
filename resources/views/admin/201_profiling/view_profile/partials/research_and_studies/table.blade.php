@@ -2,7 +2,7 @@
 @section('title', 'Research and Studies')
 @section('sub', 'Research and Studies')
 @section('content')
-    @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
     <div class="my-5 flex justify-end">
         <a href="{{ route('research-studies.recycleBin', ['cesno' => $cesno]) }}">
@@ -41,15 +41,18 @@
                 @foreach ($researchAndStudies as $researchAndStudy)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $researchAndStudy->title }}
+                            {{ $researchAndStudy->title ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $researchAndStudy->sponsor }}
+                            {{ $researchAndStudy->sponsor ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $researchAndStudy->from_dt . ' - ' . $researchAndStudy->to_dt }}
+                            {{ 
+                                \Carbon\Carbon::parse($researchAndStudy->from_dt)->format('m/d/Y').' - '.
+                                \Carbon\Carbon::parse($researchAndStudy->to_dt)->format('m/d/Y') ?? 'No Record' 
+                            }}
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
