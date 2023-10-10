@@ -78,7 +78,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->encdate }}
+                        {{ \Carbon\Carbon::parse($approvedPdfFiles->encdate)->format('m/d/Y') }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -90,7 +90,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedPdfFiles->request_date }}
+                        {{ \Carbon\Carbon::parse($approvedPdfFiles->request_date)->format('m/d/Y H:i:s.v') }}
                     </td>
 
                     <td class="px-6 py-3">
