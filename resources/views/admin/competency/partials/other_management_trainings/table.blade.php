@@ -26,15 +26,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Training Category
+                    Category
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Expertise/Field of Specialization
+                    Specialization
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Sponsor/Training Provider
+                    Sponsor
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -46,7 +46,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    No. of Training Hours
+                    No. of Hours
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -58,31 +58,34 @@
             @foreach ($nonCesAccreditedTrainingCompetency as $nonCesAccreditedTrainingCompetencies)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $nonCesAccreditedTrainingCompetencies->training }}
+                        {{ $nonCesAccreditedTrainingCompetencies->training ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->training_category }}
+                        {{ $nonCesAccreditedTrainingCompetencies->training_category ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->specialization }}
+                        {{ $nonCesAccreditedTrainingCompetencies->specialization ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->sponsor }}
+                        {{ $nonCesAccreditedTrainingCompetencies->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->venue }}
+                        {{ $nonCesAccreditedTrainingCompetencies->venue ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->from_dt. ' - '.$nonCesAccreditedTrainingCompetencies->to_dt }}
+                        {{ 
+                            \Carbon\Carbon::parse($nonCesAccreditedTrainingCompetencies->from_dt)->format('m/d/Y'). ' - '.
+                            \Carbon\Carbon::parse($nonCesAccreditedTrainingCompetencies->to_dt)->format('m/d/Y') ?? 'No Record'
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $nonCesAccreditedTrainingCompetencies->no_hours }}
+                        {{ $nonCesAccreditedTrainingCompetencies->no_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

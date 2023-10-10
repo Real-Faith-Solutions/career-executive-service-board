@@ -26,15 +26,15 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Training Category
+                    Category
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Expertise/Field of Specialization
+                    Specialization
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Sponsor/Training Provider
+                    Sponsor
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -46,7 +46,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    No. of Training Hours
+                    No. of Hours
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <span class="sr-only">Action</span>
