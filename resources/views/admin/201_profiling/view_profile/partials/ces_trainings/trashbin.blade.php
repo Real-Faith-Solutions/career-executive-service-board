@@ -85,7 +85,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->from_dt.' / '.$competencyCesTrainings->participantTrainingSession->to_dt ?? 'No Record' }}
+                        {{
+                            \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y').' - '.
+                            \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
