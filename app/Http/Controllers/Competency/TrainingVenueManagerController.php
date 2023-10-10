@@ -83,7 +83,7 @@ class TrainingVenueManagerController extends Controller
         $request->validate([
 
             'name' => ['required',Rule::unique('traininglib_tblvenue')->ignore($ctrlno, 'venueid')],
-            'no_street' => ['required'],
+            'no_street' => ['nullable', 'max:60', 'min:2'],
             'brgy' => ['required'],
             'city_code' => ['required'],
             'contactno' => ['required',Rule::unique('traininglib_tblvenue')->ignore($ctrlno, 'venueid')],
