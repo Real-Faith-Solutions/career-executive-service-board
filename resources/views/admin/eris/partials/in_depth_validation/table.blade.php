@@ -54,11 +54,11 @@
                 @foreach ($inDepthValidation as $inDepthValidations) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $inDepthValidations->dteassign ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($inDepthValidations->dteassign)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidations->dtesubmit ?? 'No Record'  }} 
+                            {{ \Carbon\Carbon::parse($inDepthValidations->dtesubmit)->format('m/d/Y H:i:s.v') ?? 'No Record'  }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -74,7 +74,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $inDepthValidations->dtedefer ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($inDepthValidations->dtedefer)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
