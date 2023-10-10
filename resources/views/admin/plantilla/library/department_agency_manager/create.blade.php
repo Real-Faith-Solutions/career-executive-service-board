@@ -30,9 +30,10 @@
                             <optgroup label="{{ $sectorManager->title }}"
                                 data-sectorid="{{ $sectorManager->sectorid }}">
                                 @foreach ($agencyTypes as $agencyType)
-                                @if ($sectorManager->sectorid === $agencyType->sectorid)
+                                @if ($sectorManager->sectorid == $agencyType->sectorid)
                                 <option value="{{ $sectorManager->sectorid }}">
-                                    {{ $agencyType->title }}</option>
+                                    {{ $agencyType->title }}
+                                </option>
                                 @endif
                                 @endforeach
                             </optgroup>
