@@ -50,11 +50,11 @@
                 @foreach ($rapidValidation as $rapidValidations) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rapidValidations->dteassign ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rapidValidations->dteassign)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->dtesubmit ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rapidValidations->dtesubmit)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
