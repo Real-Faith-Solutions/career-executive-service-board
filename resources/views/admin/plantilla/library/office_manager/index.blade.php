@@ -1,6 +1,116 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sectorDropdown = document.querySelector("#sectorDropdown");
+        const departmentDropdown = document.querySelector('#departmentDropdown');
+        const agencyLocationDropdown = document.querySelector('#agencyLocationDropdown');
+        const oldDepartmentValue = @json(old('departmentDropdown', $departmentDropdown)); // Get the old input value or the initial value
+        const oldAgencyLocationValue = @json(old('agencyLocationDropdown', $agencyLocationDropdown)); // Get the old input value or the initial value
+
+        departmentDropdown.innerHTML = "";
+        agencyLocationDropdown.innerHTML = "";
+        
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Department / Agency";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        departmentDropdown.appendChild(defaultOption);
+
+        const defaultOptionAgencyLocation = document.createElement("option");
+        defaultOptionAgencyLocation.text = "Select Agency Location";
+        defaultOptionAgencyLocation.disabled = true;
+        defaultOptionAgencyLocation.selected = true;
+        agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
+        
+        // Function to populate the department dropdown
+        function populateDepartmentDropdown() {
+        departmentDropdown.innerHTML = "";
+        agencyLocationDropdown.innerHTML = "";
+        departmentDropdown.appendChild(defaultOption);
+        
+        // Populate the second dropdown based on the selected value of the first dropdown
+        @foreach($department as $data)
+            if ("{{ $data->sectorid }}" === sectorDropdown.value) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->deptid }}";
+                option.text = "{{ $data->title }}";
+                    if ("{{ $data->deptid }}" == oldDepartmentValue) {
+                        option.selected = true; // Select the option if it matches the oldDepartmentValue
+                    }
+                departmentDropdown.appendChild(option);
+            }
+        @endforeach
+        }
+
+        
+        
+        function populateAgencyLocationDropdown() {
+        agencyLocationDropdown.innerHTML = "";
+        agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
+        @foreach($agencyLocation as $data)
+            if ("{{ $data->deptid }}" === departmentDropdown.value) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->officelocid }}";
+                option.text = "{{ $data->title }}";
+                    if ("{{ $data->officelocid }}" == oldAgencyLocationValue) {
+                        option.selected = true;
+                    }
+                agencyLocationDropdown.appendChild(option);
+            }
+        @endforeach
+        }
+
+        // Initial population of department dropdown
+        populateDepartmentDropdown();
+        populateAgencyLocationDropdown();
+
+        // Add an event listener to sectorDropdown
+        sectorDropdown.addEventListener("change", function() {
+            // Reset and populate the department dropdown when sectorDropdown changes
+            populateDepartmentDropdown();
+        });
+        departmentDropdown.addEventListener("change", function() {
+            // Reset and populate the department dropdown when sectorDropdown changes
+            populateAgencyLocationDropdown();
+        });
+    });
+</script>
+
 @extends('layouts.app')
 @section('title', 'Office Manager')
 @section('content')
+
+<fieldset class="border p-4 bg-gray-50">
+    <legend>View Filter</legend>
+    <form class="sm:gid-cols-4 mb-3 grid gap-4 md:grid-cols-4 lg:grid-cols-4">
+
+        <div class="mb-3">
+            <label for="sectorDropdown">Sector</label>
+            <select id="sectorDropdown" name="sectorDropdown">
+                <option value="">Select Sector</option>
+                @foreach ($sector as $data)
+                <option value="{{ $data->sectorid }}" {{ $data->sectorid == $sectorDropdown ? 'selected' : ''}}>
+                    {{ $data->title }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="departmentDropdown">Department</label>
+            <select id="departmentDropdown" name="departmentDropdown">
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="agencyLocationDropdown">Agency Location</label>
+            <select id="agencyLocationDropdown" name="agencyLocationDropdown">
+            </select>
+        </div>
+
+        <div class=" flex items-center mt-3 gap-2">
+            <button class="btn btn-primary" type="submit">Search</button>
+            <a class="btn btn-secondary" href="{{ route('library-office-manager.index') }}">Reset</a>
+        </div>
+    </form>
+</fieldset>
 
 <div class="lg:flex lg:justify-between my-3">
     <div>
