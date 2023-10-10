@@ -99,7 +99,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $profileTblCesStatuses->appointed_dt ?? 'No Record' }}
+                            {{ \Carbon\Carbon::parse($profileTblCesStatuses->appointed_dt)->format('m/d/Y') ?? 'No Record' }}
                         </td> 
                
                        <td class="px-6 py-4 text-right uppercase">
