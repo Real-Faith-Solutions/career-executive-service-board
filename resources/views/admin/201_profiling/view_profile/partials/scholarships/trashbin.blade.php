@@ -42,23 +42,26 @@
             @foreach ($scholarshipTrashedRecord as $scholarshipTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $scholarshipTrashedRecords->type }}
+                        {{ $scholarshipTrashedRecords->type ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarshipTrashedRecords->title }}
+                        {{ $scholarshipTrashedRecords->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarshipTrashedRecords->sponsor }}
+                        {{ $scholarshipTrashedRecords->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarshipTrashedRecords->from_dt." - ".$scholarshipTrashedRecords->to_dt }}
+                        {{ 
+                            \Carbon\Carbon::parse($scholarshipTrashedRecords->from_dt)->format('m/d/Y')." - ".
+                            \Carbon\Carbon::parse($scholarshipTrashedRecords->to_dt)->format('m/d/Y') ?? 'No Record'
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarshipTrashedRecords->deleted_at }}
+                        {{ $scholarshipTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

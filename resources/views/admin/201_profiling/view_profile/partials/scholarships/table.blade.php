@@ -46,19 +46,22 @@
             @foreach ($scholarship as $scholarships)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $scholarships->type }}
+                        {{ $scholarships->type ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarships->title }}
+                        {{ $scholarships->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarships->sponsor }}
+                        {{ $scholarships->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $scholarships->from_dt." - ".$scholarships->to_dt }}
+                        {{ 
+                            \Carbon\Carbon::parse($scholarships->from_dt)->format('m/d/Y')." - ".
+                            \Carbon\Carbon::parse($scholarships->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
