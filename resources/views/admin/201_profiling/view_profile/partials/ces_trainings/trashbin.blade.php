@@ -69,55 +69,55 @@
             @foreach ($competencyCesTraining as $competencyCesTrainings)        
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $competencyCesTrainings->participantTrainingSession->title }}
+                        {{ $competencyCesTrainings->participantTrainingSession->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->sessionid }}
+                        {{ $competencyCesTrainings->participantTrainingSession->sessionid ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->category }}
+                        {{ $competencyCesTrainings->participantTrainingSession->category ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->specialization }}
+                        {{ $competencyCesTrainings->participantTrainingSession->specialization ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->from_dt.' / '.$competencyCesTrainings->participantTrainingSession->to_dt }}
+                        {{ $competencyCesTrainings->participantTrainingSession->from_dt.' / '.$competencyCesTrainings->participantTrainingSession->to_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name }}
+                        {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->no_hours }}
+                        {{ $competencyCesTrainings->participantTrainingSession->no_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->barrio }}
+                        {{ $competencyCesTrainings->participantTrainingSession->barrio ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
                         {{ 
                             $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname.', '.
                             $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname.', '.
-                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi
+                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record'
                         }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->session_director }}
+                        {{ $competencyCesTrainings->participantTrainingSession->session_director ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->status }}
+                        {{ $competencyCesTrainings->participantTrainingSession->status ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->remarks }}
+                        {{ $competencyCesTrainings->participantTrainingSession->remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

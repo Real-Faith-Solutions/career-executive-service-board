@@ -81,8 +81,8 @@ class CESTraining201Controller extends Controller
         $trainingParticipants = TrainingParticipants::find($ctrlno);
 
         // retrieve latest ces status from LatestCesStatusController
-            $cesStatusController = new LatestCesStatusController();
-            $description = $cesStatusController->latestCesStatus($personalData);
+        $cesStatusController = new LatestCesStatusController();
+        $description = $cesStatusController->latestCesStatus($personalData);
         // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.edit', compact('personalData', 'trainingSession', 'cesno', 'trainingParticipants', 'description'));
