@@ -62,35 +62,35 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->designation }}
+                        {{ $workExperienceTrashedRecords->designation ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->department }}
+                        {{ $workExperienceTrashedRecords->department ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->annually_salary }}
+                        {{ $workExperienceTrashedRecords->annually_salary ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->salary }}
+                        {{ $workExperienceTrashedRecords->salary ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->status }}
+                        {{ $workExperienceTrashedRecords->status ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->government_service }}
+                        {{ $workExperienceTrashedRecords->government_service ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->remarks }}
+                        {{ $workExperienceTrashedRecords->remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperienceTrashedRecords->deleted_at }}
+                        {{ $workExperienceTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
