@@ -57,39 +57,39 @@
             @foreach ($trainingVenueManagerTrashRecord as $trainingVenueManagerTrashRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingVenueManagerTrashRecords->venueid }}
+                        {{ $trainingVenueManagerTrashRecords->venueid ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingVenueManagerTrashRecords->name }}
+                        {{ $trainingVenueManagerTrashRecords->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->no_street }}
+                        {{ $trainingVenueManagerTrashRecords->no_street ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->brgy }}
+                        {{ $trainingVenueManagerTrashRecords->brgy ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->trainingVenueManager->name }}
+                        {{ $trainingVenueManagerTrashRecords->trainingVenueManager->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->contactno }}
+                        {{ $trainingVenueManagerTrashRecords->contactno ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->emailadd }}
+                        {{ $trainingVenueManagerTrashRecords->emailadd ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->contactperson }}
+                        {{ $trainingVenueManagerTrashRecords->contactperson ?? 'No Record'}}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagerTrashRecords->deleted_at }}
+                        {{ $trainingVenueManagerTrashRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
