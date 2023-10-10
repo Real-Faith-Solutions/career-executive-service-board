@@ -74,8 +74,8 @@
 
                     <td class="px-6 py-3">
                         {{ 
-                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->from_dt)->format('Y-m-d').' - '.
-                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->to_dt)->format('Y-m-d') ?? 'No Record' 
+                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->from_dt)->format('m/d/Y').' - '.
+                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->to_dt)->format('m/d/Y') ?? 'No Record' 
                         }}
                     </td>
 

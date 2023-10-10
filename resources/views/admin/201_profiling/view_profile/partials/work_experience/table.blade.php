@@ -65,7 +65,7 @@
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         {{ 
                             \Carbon\Carbon::parse($workExperiences->from_dt)->format('m/d/Y').' - '.
-                            \Carbon\Carbon::parse($workExperiences->to_dt)->format('m/d/Y')  
+                            \Carbon\Carbon::parse($workExperiences->to_dt)->format('m/d/Y') ?? 'No Record'
                         }} 
                     </td>
 

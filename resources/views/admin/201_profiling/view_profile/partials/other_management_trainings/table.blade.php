@@ -141,8 +141,8 @@
 
                     <td class="px-6 py-3">
                         {{ 
-                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->from_dt)->format('Y-m-d'). ' - '.
-                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->to_dt)->format('Y-m-d') ?? 'No Record' 
+                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->from_dt)->format('m/d/Y'). ' - '.
+                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->to_dt)->format('m/d/Y') ?? 'No Record' 
                         }}
                     </td>
 
