@@ -29,7 +29,8 @@
             if ("{{ $data->poslevel_code }}" === val) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->pos_code }}";
-                option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+                // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+                option.text = "{{ $data->dbm_title }}";
                 positionTitleDropdown.appendChild(option);
             }
         @endforeach
@@ -203,14 +204,14 @@
                                         Vacant
                                     </label>
                                 </div> --}}
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_occupied" name="is_occupied" type="checkbox" value="1">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_occupied">
                                         Occupied
                                     </label>
-                                </div>
+                                </div> --}}
 
                             </div>
 

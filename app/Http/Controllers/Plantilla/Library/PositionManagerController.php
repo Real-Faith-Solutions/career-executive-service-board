@@ -16,10 +16,44 @@ use Illuminate\Support\Facades\Auth;
 
 class PositionManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = PlanPosition::paginate(25);
-        return view('admin.plantilla.library.position_manager.index', compact('datas'));
+        $query = $request->input('search');
+        $sectorDropdown = $request->input('sectorDropdown');
+        $departmentDropdown = $request->input('departmentDropdown');
+        $agencyLocationDropdown = $request->input('agencyLocationDropdown');
+        $officeDropdown = $request->input('officeDropdown');
+
+        $filterDropdown = PlanPosition::query();
+
+        if ($officeDropdown) {
+            $filterDropdown->where('officeid', $officeDropdown);
+        }
+        if ($query) {
+            $filterDropdown->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('pos_default', 'LIKE', "%$query%")
+                    ->orWhere('plantilla_id', 'LIKE', "%$query%");
+            });
+        }
+
+        $datas = $filterDropdown->paginate(25);
+
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        $agencyLocation = AgencyLocation::orderBy('title', 'ASC')->get();
+        $office = Office::orderBy('title', 'ASC')->get();
+        return view('admin.plantilla.library.position_manager.index', compact(
+            'datas',
+            'query',
+            'sectorDropdown',
+            'departmentDropdown',
+            'agencyLocationDropdown',
+            'officeDropdown',
+            'sector',
+            'department',
+            'agencyLocation',
+            'office',
+        ));
     }
 
     public function store(Request $request)
@@ -44,8 +78,8 @@ class PositionManagerController extends Controller
             'corp_sg' => $request->input('corp_sg'),
             // 'pos_sequence' => $request->input('pos_sequence'),
             'is_ces_pos' => $request->input('is_ces_pos'),
-            // 'is_vacant' => $request->input('is_vacant'),
-            'is_occupied' => $request->input('is_occupied'),
+            'is_vacant' => true, // default true
+            'is_occupied' => false, // default false
             'remarks' => $request->input('remarks'),
             'cbasis_code' => $request->input('cbasis_code'),
             'cbasis_remarks' => $request->input('cbasis_remarks'),

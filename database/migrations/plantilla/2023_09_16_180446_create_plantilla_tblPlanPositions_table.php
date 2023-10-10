@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('pos_sequence')->default(1);
             $table->boolean('is_ces_pos')->nullable();
             $table->boolean('is_vacant')->default(true)->nullable();
-            $table->boolean('is_occupied')->nullable();
+            $table->boolean('is_occupied')->default(false)->nullable();
             $table->text('remarks')->nullable();
             $table->integer('cbasis_code')->nullable(); // FK
             $table->text('cbasis_remarks')->nullable();

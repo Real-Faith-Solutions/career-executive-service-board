@@ -85,8 +85,8 @@ class PlantillaPositionManagerController extends Controller
             'corp_sg' => $request->input('corp_sg'),
             // 'pos_sequence' => $request->input('pos_sequence'),
             'is_ces_pos' => $request->input('is_ces_pos'),
-            'is_vacant' => $request->input('is_vacant'),
-            'is_occupied' => $request->input('is_occupied'),
+            'is_vacant' => true, // default true
+            'is_occupied' => false, // default false
             'remarks' => $request->input('remarks'),
             'cbasis_code' => $request->input('cbasis_code'),
             'cbasis_remarks' => $request->input('cbasis_remarks'),
