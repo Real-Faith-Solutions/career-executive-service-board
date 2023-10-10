@@ -43,15 +43,15 @@
             @foreach ($affiliation as $affiliations)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $affiliations->organization }}
+                        {{ $affiliations->organization ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliations->position }}
+                        {{ $affiliations->position ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliations->from_dt." - ".$affiliations->to_dt }}
+                        {{ $affiliations->from_dt." - ".$affiliations->to_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
