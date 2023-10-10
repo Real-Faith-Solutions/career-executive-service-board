@@ -18,21 +18,44 @@ class AgencyLocationManagerController extends Controller
      */
     public function index(Request $request)
     {
+        // Get the input values
         $query = $request->input('search');
-        $agencyLocation = AgencyLocation::query()
-            ->where('title', 'LIKE', "%$query%")
-            ->orWhere('acronym', 'LIKE', "%$query%")
-            ->paginate(25);
-        $agencyLocationLibrary = AgencyLocationLibrary::all();
-        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
+        $sectorDropdown = $request->input('sectorDropdown');
+        $departmentDropdown = $request->input('departmentDropdown');
+
+        // Initialize the query builder
+        $filterDropdown = AgencyLocation::query();
+
+        // Apply search filter if a search query is provided
+        if ($query) {
+            $filterDropdown->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'LIKE', "%$query%")
+                    ->orWhere('acronym', 'LIKE', "%$query%");
+            });
+        }
+
+        // Apply department filter if a department is selected
+        if ($departmentDropdown) {
+            $filterDropdown->where('deptid', $departmentDropdown);
+        }
+
+        // Get the paginated results
+        $agencyLocation = $filterDropdown->paginate(25);
+
+        // Retrieve dropdown data
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
 
         return view('admin.plantilla.library.agency_location_manager.index', compact(
             'agencyLocation',
-            'agencyLocationLibrary',
-            'region',
             'query',
+            'sector',
+            'department',
+            'sectorDropdown',
+            'departmentDropdown'
         ));
     }
+
 
     public function create()
     {

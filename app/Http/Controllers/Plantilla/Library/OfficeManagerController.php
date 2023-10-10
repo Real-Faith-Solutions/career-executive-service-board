@@ -7,6 +7,7 @@ use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
+use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,13 +17,39 @@ class OfficeManagerController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $datas = Office::query()
-            ->where('title', 'LIKE', "%$query%")
-            ->paginate(25);
+        $sectorDropdown = $request->input('sectorDropdown');
+        $departmentDropdown = $request->input('departmentDropdown');
+        $agencyLocationDropdown = $request->input('agencyLocationDropdown');
+
+        $filterDropdown = Office::query();
+
+        // Apply search filter if a search query is provided
+        if ($query) {
+            $filterDropdown->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('title', 'LIKE', "%$query%")
+                    ->orWhere('acronym', 'LIKE', "%$query%");
+            });
+        }
+
+        if ($agencyLocationDropdown) {
+            $filterDropdown->where('officelocid', $agencyLocationDropdown);
+        }
+
+
+        $datas = $filterDropdown->paginate(25);
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        $department = DepartmentAgency::orderBy('title', 'ASC')->get();
+        $agencyLocation = AgencyLocation::orderBy('title', 'ASC')->get();
 
         return view('admin.plantilla.library.office_manager.index', compact(
             'datas',
             'query',
+            'sector',
+            'department',
+            'agencyLocation',
+            'sectorDropdown',
+            'departmentDropdown',
+            'agencyLocationDropdown',
         ));
     }
 
