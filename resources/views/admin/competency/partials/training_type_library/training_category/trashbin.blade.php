@@ -29,11 +29,11 @@
             @foreach ($trainingCategoryTrashedRecord as $trainingCategoryTrashedRecords)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                        {{ $trainingCategoryTrashedRecords->description }}
+                        {{ $trainingCategoryTrashedRecords->description ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingCategoryTrashedRecords->deleted_at }}
+                        {{ $trainingCategoryTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

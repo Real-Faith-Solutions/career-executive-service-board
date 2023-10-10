@@ -42,7 +42,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingCategories->description }}
+                        {{ $trainingCategories->description ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
