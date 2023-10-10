@@ -50,23 +50,23 @@
                 @foreach ($boardInterview as $boardInterviews) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $boardInterviews->dteassign }} 
+                            {{ $boardInterviews->dteassign ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->dtesubmit }} 
+                            {{ $boardInterviews->dtesubmit ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->intrviewer }} 
+                            {{ $boardInterviews->intrviewer ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->dteiview }} 
+                            {{ $boardInterviews->dteiview ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $boardInterviews->recom }} 
+                            {{ $boardInterviews->recom ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
