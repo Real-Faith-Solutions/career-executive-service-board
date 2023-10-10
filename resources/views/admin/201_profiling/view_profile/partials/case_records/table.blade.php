@@ -86,7 +86,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_dt ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($caseRecords->filed_dt)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -98,7 +98,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->finality ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($caseRecords->finality)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
