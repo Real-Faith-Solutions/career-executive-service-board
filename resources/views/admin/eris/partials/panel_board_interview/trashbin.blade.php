@@ -41,11 +41,11 @@
                 @foreach ($panelBoardInterviewTrashedRecord as $panelBoardInterviewTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $panelBoardInterviewTrashedRecords->dteassign ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($panelBoardInterviewTrashedRecords->dteassign)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->dtesubmit ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($panelBoardInterviewTrashedRecords->dtesubmit)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -53,7 +53,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $panelBoardInterviewTrashedRecords->dteiview ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($panelBoardInterviewTrashedRecords->dteiview)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
