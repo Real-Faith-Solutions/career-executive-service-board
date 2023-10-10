@@ -38,19 +38,19 @@
             @foreach ($awardAndCitationsTrashedRecord as $awardAndCitationsTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $awardAndCitationsTrashedRecords->awards }}
+                        {{ $awardAndCitationsTrashedRecords->awards ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardAndCitationsTrashedRecords->sponsor }}
+                        {{ $awardAndCitationsTrashedRecords->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardAndCitationsTrashedRecords->award_dt }}
+                        {{ $awardAndCitationsTrashedRecords->award_dt ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $awardAndCitationsTrashedRecords->deleted_at }}
+                        {{ $awardAndCitationsTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
