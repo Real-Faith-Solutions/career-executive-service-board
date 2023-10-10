@@ -66,47 +66,47 @@
             @foreach ($caseRecordTrashedRecord as $caseRecordTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecordTrashedRecords->parties }}
+                        {{ $caseRecordTrashedRecords->parties ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->offence }}
+                        {{ $caseRecordTrashedRecords->offence ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->nature_code }}
+                        {{ $caseRecordTrashedRecords->nature_code ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->case_no }}
+                        {{ $caseRecordTrashedRecords->case_no ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->filed_dt }}
+                        {{ $caseRecordTrashedRecords->filed_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->venue }}
+                        {{ $caseRecordTrashedRecords->venue ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->status_code }}
+                        {{ $caseRecordTrashedRecords->status_code ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->finality }}
+                        {{ $caseRecordTrashedRecords->finality ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->decision }}
+                        {{ $caseRecordTrashedRecords->decision ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecordTrashedRecords->remarks }}
+                        {{ $caseRecordTrashedRecords->remarks ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecordTrashedRecords->deleted_at }}
+                        {{ $caseRecordTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
