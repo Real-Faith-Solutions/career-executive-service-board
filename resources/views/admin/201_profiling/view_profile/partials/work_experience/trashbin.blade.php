@@ -59,8 +59,8 @@
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"> 
                         {{ 
-                            \Carbon\Carbon::parse($workExperienceTrashedRecords->from_dt)->format('Y/m/d')." - ".
-                            \Carbon\Carbon::parse($workExperienceTrashedRecords->to_dt)->format('Y/m/d') ?? 'No Record'
+                            \Carbon\Carbon::parse($workExperienceTrashedRecords->from_dt)->format('Y-m-d')." - ".
+                            \Carbon\Carbon::parse($workExperienceTrashedRecords->to_dt)->format('Y-m-d') ?? 'No Record'
                         }}
                     </td>
 

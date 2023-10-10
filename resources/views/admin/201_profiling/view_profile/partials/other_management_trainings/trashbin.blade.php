@@ -73,7 +73,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->from_dt.' - '.$otherTrainingTrashedRecords->to_dt ?? 'No Record' }}
+                        {{ 
+                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->from_dt)->format('Y-m-d').' - '.
+                            \Carbon\Carbon::parse($otherTrainingTrashedRecords->to_dt)->format('Y-m-d') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">

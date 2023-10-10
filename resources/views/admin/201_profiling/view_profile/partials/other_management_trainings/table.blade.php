@@ -140,7 +140,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->from_dt. ' - '.$competencyNonCesAccreditedTrainings->to_dt ?? 'No Record' }}
+                        {{ 
+                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->from_dt)->format('Y-m-d'). ' - '.
+                            \Carbon\Carbon::parse($competencyNonCesAccreditedTrainings->to_dt)->format('Y-m-d') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
