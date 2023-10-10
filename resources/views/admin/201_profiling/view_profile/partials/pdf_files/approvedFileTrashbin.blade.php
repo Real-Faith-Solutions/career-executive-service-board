@@ -69,7 +69,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pdfFileTrashedRecords->created_at }}
+                        {{ \Carbon\Carbon::parse($pdfFileTrashedRecords->created_at)->format('m/d/Y') }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -81,7 +81,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pdfFileTrashedRecords->request_date }}
+                        {{ \Carbon\Carbon::parse($pdfFileTrashedRecords->request_date)->format('m/d/Y H:i:s.v') }}
                     </td>
 
                     <td class="px-6 py-3">

@@ -69,51 +69,51 @@
             @foreach ($resourceSpeakerTrashedRecord as $resourceSpeakerTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->lastname. " " .$resourceSpeakerTrashedRecords->firstname. " " .$resourceSpeakerTrashedRecords->mi  }}
+                        {{ $resourceSpeakerTrashedRecords->lastname. " " .$resourceSpeakerTrashedRecords->firstname. " " .$resourceSpeakerTrashedRecords->mi ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Position }}
+                        {{ $resourceSpeakerTrashedRecords->Position ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Department }}
+                        {{ $resourceSpeakerTrashedRecords->Department ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Office }}
+                        {{ $resourceSpeakerTrashedRecords->Office ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Bldg }}
+                        {{ $resourceSpeakerTrashedRecords->Bldg ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Street }}
+                        {{ $resourceSpeakerTrashedRecords->Street ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->Brgy }}
+                        {{ $resourceSpeakerTrashedRecords->Brgy ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->City }}
+                        {{ $resourceSpeakerTrashedRecords->City ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->contactno }}
+                        {{ $resourceSpeakerTrashedRecords->contactno ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->emailadd }}
+                        {{ $resourceSpeakerTrashedRecords->emailadd ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $resourceSpeakerTrashedRecords->expertise }}
+                        {{ $resourceSpeakerTrashedRecords->expertise ?? 'No Record' }}
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $resourceSpeakerTrashedRecords->deleted_at }}
+                        {{ $resourceSpeakerTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

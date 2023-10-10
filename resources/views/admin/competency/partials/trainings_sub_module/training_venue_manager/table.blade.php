@@ -58,31 +58,31 @@
             @foreach ($trainingVenueManager as $trainingVenueManagers)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingVenueManagers->name }}
+                        {{ $trainingVenueManagers->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->no_street }}
+                        {{ $trainingVenueManagers->no_street ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->brgy }}
+                        {{ $trainingVenueManagers->brgy ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->trainingVenueManager->name }}
+                        {{ $trainingVenueManagers->trainingVenueManager->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->contactno }}
+                        {{ $trainingVenueManagers->contactno ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->emailadd }}
+                        {{ $trainingVenueManagers->emailadd ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingVenueManagers->contactperson }}
+                        {{ $trainingVenueManagers->contactperson ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

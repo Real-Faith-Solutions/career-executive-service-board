@@ -74,47 +74,47 @@
                 @foreach ($resourceSpeaker as $resourceSpeakers)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
+                            {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi ?? 'No Record'  }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Position }}
+                            {{ $resourceSpeakers->Position ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Department }}
+                            {{ $resourceSpeakers->Department ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Office }}
+                            {{ $resourceSpeakers->Office ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Bldg }}
+                            {{ $resourceSpeakers->Bldg ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Street }}
+                            {{ $resourceSpeakers->Street ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->Brgy }}
+                            {{ $resourceSpeakers->Brgy ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->City }}
+                            {{ $resourceSpeakers->City ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->contactno }}
+                            {{ $resourceSpeakers->contactno ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->emailadd }}
+                            {{ $resourceSpeakers->emailadd ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $resourceSpeakers->expertise }}
+                            {{ $resourceSpeakers->expertise ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">

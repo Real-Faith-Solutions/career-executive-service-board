@@ -66,11 +66,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->exam_date }}
+                        {{ \Carbon\Carbon::parse($examinationTakens->exam_date)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->exam_place }}
+                        {{ $examinationTakens->exam_place ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -78,11 +78,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->date_acquired ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($examinationTakens->date_acquired)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->date_validity ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($examinationTakens->date_validity)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

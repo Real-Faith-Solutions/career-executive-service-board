@@ -46,19 +46,19 @@
             @foreach ($writtenExam as $writtenExams)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $writtenExams->we_date }}
+                        {{ \Carbon\Carbon::parse($writtenExams->we_date)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $writtenExams->we_location }}
+                        {{ $writtenExams->we_location ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $writtenExams->we_rating }}
+                        {{ $writtenExams->we_rating ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $writtenExams->we_remarks }}
+                        {{ $writtenExams->we_remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

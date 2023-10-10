@@ -70,43 +70,43 @@
             @foreach ($caseRecord as $caseRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $caseRecords->parties }}
+                        {{ $caseRecords->parties ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->offence }}
+                        {{ $caseRecords->offence ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->nature_code }}
+                        {{ $caseRecords->nature_code ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->case_no }}
+                        {{ $caseRecords->case_no ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->filed_dt }}
+                        {{ \Carbon\Carbon::parse($caseRecords->filed_dt)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->venue }}
+                        {{ $caseRecords->venue ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->status_code }}
+                        {{ $caseRecords->status_code ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->finality }}
+                        {{ \Carbon\Carbon::parse($caseRecords->finality)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->decision }}
+                        {{ $caseRecords->decision ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->remarks }}
+                        {{ $caseRecords->remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

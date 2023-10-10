@@ -37,19 +37,19 @@
                 @foreach ($rankTrackerTrashedRecord as $rankTrackerTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rankTrackerTrashedRecords->ctrlno }} 
+                            {{ $rankTrackerTrashedRecords->ctrlno ?? 'No Record' }} 
                         </td>
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rankTrackerTrashedRecords->submit_dt }} 
+                            {{ \Carbon\Carbon::parse($rankTrackerTrashedRecords->submit_dt)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rankTrackerTrashedRecords->description }} 
+                            {{ $rankTrackerTrashedRecords->description ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rankTrackerTrashedRecords->remarks }} 
+                            {{ $rankTrackerTrashedRecords->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">

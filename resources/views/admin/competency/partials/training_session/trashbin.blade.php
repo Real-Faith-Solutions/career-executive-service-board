@@ -75,55 +75,61 @@
             @foreach ($trainingSessionTrashedRecord as $trainingSessionTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingSessionTrashedRecords->title }}
+                        {{ $trainingSessionTrashedRecords->title ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->sessionid }}
+                        {{ $trainingSessionTrashedRecords->sessionid ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->category }}
+                        {{ $trainingSessionTrashedRecords->category ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->specialization }}
+                        {{ $trainingSessionTrashedRecords->specialization ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->from_dt. ' - '.$trainingSessionTrashedRecords->to_dt }}
+                        {{ 
+                            \Carbon\Carbon::parse($trainingSessionTrashedRecords->from_dt)->format('m/d/Y'). ' - '.
+                            \Carbon\Carbon::parse($trainingSessionTrashedRecords->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->venuePersonalData->name }}
+                        {{ $trainingSessionTrashedRecords->venuePersonalData->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->no_hours }}
+                        {{ $trainingSessionTrashedRecords->no_hours ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->status }}
+                        {{ $trainingSessionTrashedRecords->status ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->barrio }}
+                        {{ $trainingSessionTrashedRecords->barrio ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->resourceSpeakerPersonalData->lastname.', '.$trainingSessionTrashedRecords->resourceSpeakerPersonalData->firstname }}
+                        {{ 
+                            $trainingSessionTrashedRecords->resourceSpeakerPersonalData->lastname.', '.
+                            $trainingSessionTrashedRecords->resourceSpeakerPersonalData->firstname  ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->session_director }}
+                        {{ $trainingSessionTrashedRecords->session_director ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->remarks }}
+                        {{ $trainingSessionTrashedRecords->remarks ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingSessionTrashedRecords->deleted_at }}
+                        {{ $trainingSessionTrashedRecords->deleted_at ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

@@ -200,7 +200,9 @@ class ResourceSpeakerController extends Controller
     {
         $resourceSpeaker = ResourceSpeaker::find($ctrlno);
 
-        $trainingEnagagement = $resourceSpeaker->trainingEngagement()->paginate(25);
+        $trainingEnagagement = $resourceSpeaker->trainingEngagement()
+        ->withTrashed()
+        ->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.training_engagement', compact('trainingEnagagement'));
     }

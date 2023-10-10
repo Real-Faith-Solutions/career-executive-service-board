@@ -37,19 +37,22 @@
             @foreach ($affiliationsTrashedRecord as $affiliationsTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $affiliationsTrashedRecords->organization }}
+                        {{ $affiliationsTrashedRecords->organization ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliationsTrashedRecords->position }}
+                        {{ $affiliationsTrashedRecords->position ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliationsTrashedRecords->from_dt." - ".$affiliationsTrashedRecords->to_dt }}
+                        {{ 
+                            \Carbon\Carbon::parse($affiliationsTrashedRecords->from_dt)->format('m/d/Y')." - ".
+                            \Carbon\Carbon::parse($affiliationsTrashedRecords->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliationsTrashedRecords->deleted_at }}
+                        {{ $affiliationsTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

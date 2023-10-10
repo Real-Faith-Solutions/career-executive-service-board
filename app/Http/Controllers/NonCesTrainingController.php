@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompetencyNonCesAccreditedTraining;
-use App\Models\OtherManagementTrainings;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblExpertiseSpec;
 use App\Models\ProfileTblTrainingMngt;
@@ -11,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class OtherTrainingController extends Controller
+class NonCesTrainingController extends Controller
 {
     public function index($cesno)
     {
@@ -162,7 +161,7 @@ class OtherTrainingController extends Controller
     {
         $request->validate([ 
 
-            'training' => ['required', Rule::unique('training_tblOtherAccre')->where('personal_data_cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+            'training' => ['required', Rule::unique('training_tblOtherAccre')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'venue' => ['required', 'min:2', 'max:40'],
@@ -186,7 +185,7 @@ class OtherTrainingController extends Controller
         $competencyTrainingManagement->from_dt = $request->inclusive_date_from;
         $competencyTrainingManagement->to_dt = $request->inclusive_date_to;
         $competencyTrainingManagement->specialization = $request->expertise_field_of_specialization;
-        $competencyTrainingManagement->updated_by = $encoder;
+        $competencyTrainingManagement->lastupd_enc = $encoder;
         $competencyTrainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');

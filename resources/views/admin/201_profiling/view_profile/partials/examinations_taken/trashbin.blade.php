@@ -61,11 +61,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->exam_date }}
+                        {{ \Carbon\Carbon::parse($examinationTakensTrashedRecords->exam_date)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->exam_place }}
+                        {{ $examinationTakensTrashedRecords->exam_place ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -73,15 +73,15 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->date_acquired ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($examinationTakensTrashedRecords->date_acquired)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->date_validity ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($examinationTakensTrashedRecords->date_validity)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakensTrashedRecords->deleted_at }}
+                        {{ $examinationTakensTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

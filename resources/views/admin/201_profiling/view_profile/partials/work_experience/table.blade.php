@@ -63,38 +63,38 @@
             @foreach ($workExperience as $workExperiences)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        
-                        {{ \Carbon\Carbon::parse($workExperiences->from_dt)->format('M d, Y') }} - 
-                        {{ \Carbon\Carbon::parse($workExperiences->to_dt)->format('M d, Y') }}
-                        
+                        {{ 
+                            \Carbon\Carbon::parse($workExperiences->from_dt)->format('m/d/Y').' - '.
+                            \Carbon\Carbon::parse($workExperiences->to_dt)->format('m/d/Y') ?? 'No Record'
+                        }} 
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->designation }}
+                        {{ $workExperiences->designation ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->department }}
+                        {{ $workExperiences->department ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->annually_salary }}
+                        {{ $workExperiences->annually_salary ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->salary }}
+                        {{ $workExperiences->salary ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->status }}
+                        {{ $workExperiences->status ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->government_service }}
+                        {{ $workExperiences->government_service ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $workExperiences->remarks }}
+                        {{ $workExperiences->remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

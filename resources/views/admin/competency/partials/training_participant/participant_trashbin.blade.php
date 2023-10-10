@@ -64,45 +64,48 @@
             @foreach ($trainingParticipantTrashedRecord as $trainingParticipantTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingParticipantTrashedRecords->pid }}
+                        {{ $trainingParticipantTrashedRecords->pid ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->cesno }}
+                        {{ $trainingParticipantTrashedRecords->cesno ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
                         {{ 
-                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->lastname.', '.$trainingParticipantTrashedRecords->cesTrainingPersonalData->firstname.', '.$trainingParticipantTrashedRecords->cesTrainingPersonalData->name_extension.', '.$trainingParticipantTrashedRecords->cesTrainingPersonalData->middleinitial 
+                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->lastname.', '.
+                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->firstname.', '.
+                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->name_extension.', '.
+                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->middleinitial ?? 'No Record' 
                         }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->cesstatus->description }}
+                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->cesstatus->description ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->sessionid }}
+                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->sessionid ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->title }}
+                        {{ $trainingParticipantTrashedRecords->participantTrainingSession->title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->status }}
+                        {{ $trainingParticipantTrashedRecords->status ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->no_hours }}
+                        {{ $trainingParticipantTrashedRecords->no_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->payment }}
+                        {{ $trainingParticipantTrashedRecords->payment ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantTrashedRecords->remarks }}
+                        {{ $trainingParticipantTrashedRecords->remarks ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

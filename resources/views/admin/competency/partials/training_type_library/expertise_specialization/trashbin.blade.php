@@ -29,11 +29,11 @@
             @foreach ($profileLibTblExpertiseGenTrashedRecord as $profileLibTblExpertiseGenTrashedRecords)
                 <tr class="border-b bg-white">
                     <td class="px-6 py-3">
-                        {{ $profileLibTblExpertiseGenTrashedRecords->Title }}
+                        {{ $profileLibTblExpertiseGenTrashedRecords->Title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $profileLibTblExpertiseGenTrashedRecords->deleted_at }}
+                        {{ $profileLibTblExpertiseGenTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

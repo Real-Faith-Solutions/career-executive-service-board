@@ -79,27 +79,27 @@
                 @foreach ($profileTblCesStatus as $profileTblCesStatuses)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$profileTblCesStatuses->profileLibTblCesStatus->description ?? ''}}
+                            {{ $profileTblCesStatuses->profileLibTblCesStatus->description ?? 'No Record' }}
                         </td>
                         
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblCesStatusAcc->description ?? ''}}
+                            {{ $profileTblCesStatuses->profileLibTblCesStatusAcc->description ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblCesStatusType->description ?? ''}}
+                            {{ $profileTblCesStatuses->profileLibTblCesStatusType->description ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->profileLibTblAppAuthority->description ?? ''}}
+                            {{ $profileTblCesStatuses->profileLibTblAppAuthority->description ?? 'No Record'  }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->resolution_no ?? ''}}
+                            {{ $profileTblCesStatuses->resolution_no ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatuses->appointed_dt ?? ''}}
+                            {{ \Carbon\Carbon::parse($profileTblCesStatuses->appointed_dt)->format('m/d/Y') ?? 'No Record' }}
                         </td> 
                
                        <td class="px-6 py-4 text-right uppercase">

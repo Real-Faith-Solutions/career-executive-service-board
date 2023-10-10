@@ -42,15 +42,15 @@
             @foreach ($awardsAndCitation as $awardsAndCitations)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $awardsAndCitations->awards }}
+                        {{ $awardsAndCitations->awards ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardsAndCitations->sponsor }}
+                        {{ $awardsAndCitations->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $awardsAndCitations->award_dt }}
+                        {{ \Carbon\Carbon::parse($awardsAndCitations->award_dt)->format('m/d/Y') ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

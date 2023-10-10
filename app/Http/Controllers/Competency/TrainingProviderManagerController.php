@@ -32,7 +32,7 @@ class TrainingProviderManagerController extends Controller
 
             'provider' => ['required', 'unique:training_tblProvider,provider'],
             'house_building' => ['nullable'],
-            'st_road' => ['nullable'],
+            'st_road' => ['nullable', 'max:60', 'min:2'],
             'brgy_vill' => ['nullable'],
             'city_code' => ['required'],
             'contactno' => ['required', 'unique:training_tblProvider,contactno'],
@@ -90,7 +90,7 @@ class TrainingProviderManagerController extends Controller
 
             'provider' => ['required',Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],
             'house_building' => ['required'],
-            'st_road' => ['required'],
+            'st_road' => ['nullable', 'max:60', 'min:2'],
             'brgy_vill' => ['nullable'],
             'city_code' => ['required'],
             'contactno' => ['required',Rule::unique('training_tblProvider')->ignore($ctrlno, 'providerID')],

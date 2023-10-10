@@ -50,31 +50,31 @@
                 @foreach ($profileTblCesStatusTrashedRecord as $profileTblCesStatusTrashedRecords)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$profileTblCesStatusTrashedRecords->profileLibTblCesStatus->description}}
+                            {{ $profileTblCesStatusTrashedRecords->profileLibTblCesStatus->description ?? 'No Record' }}
                         </td>
                         
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatusTrashedRecords->profileLibTblCesStatusAcc->description}}
+                            {{ $profileTblCesStatusTrashedRecords->profileLibTblCesStatusAcc->description ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatusTrashedRecords->profileLibTblCesStatusType->description}}
+                            {{ $profileTblCesStatusTrashedRecords->profileLibTblCesStatusType->description ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatusTrashedRecords->profileLibTblAppAuthority->description}}
+                            {{ $profileTblCesStatusTrashedRecords->profileLibTblAppAuthority->description ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatusTrashedRecords->resolution_no}}
+                            {{ $profileTblCesStatusTrashedRecords->resolution_no ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$profileTblCesStatusTrashedRecords->appointed_dt}}
+                            {{ \Carbon\Carbon::parse($profileTblCesStatusTrashedRecords->appointed_dt)->format('m/d/Y') ?? 'No Record' }}
                         </td> 
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$profileTblCesStatusTrashedRecords->deleted_at}}
+                            {{ $profileTblCesStatusTrashedRecords->deleted_at ?? 'No Record' }}
                         </td>
                
                        <td class="px-6 py-4 text-right uppercase">

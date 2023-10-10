@@ -41,23 +41,23 @@
                 @foreach ($rapidValidationTrashedRecord as $rapidValidationTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rapidValidationTrashedRecords->dteassign }} 
+                            {{ \Carbon\Carbon::parse($rapidValidationTrashedRecords->dteassign)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidationTrashedRecords->dtesubmit }} 
+                            {{ \Carbon\Carbon::parse($rapidValidationTrashedRecords->dtesubmit)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidationTrashedRecords->validator }} 
+                            {{ $rapidValidationTrashedRecords->validator ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidationTrashedRecords->recom }} 
+                            {{ $rapidValidationTrashedRecords->recom ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidationTrashedRecords->remarks }} 
+                            {{ $rapidValidationTrashedRecords->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
