@@ -46,19 +46,19 @@
                 @foreach ($assessmentCenter as $assessmentCenters) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $assessmentCenters->acdate }} 
+                            {{ $assessmentCenters->acdate ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->numtakes }} 
+                            {{ $assessmentCenters->numtakes ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->docdate }} 
+                            {{ $assessmentCenters->docdate ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenters->remarks }} 
+                            {{ $assessmentCenters->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">

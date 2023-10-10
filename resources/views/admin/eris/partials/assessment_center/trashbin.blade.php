@@ -37,19 +37,19 @@
                 @foreach ($assessmentCenterTrashedRecord as $assessmentCenterTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $assessmentCenterTrashedRecords->acdate }} 
+                            {{ $assessmentCenterTrashedRecords->acdate ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenterTrashedRecords->numtakes }} 
+                            {{ $assessmentCenterTrashedRecords->numtakes ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenterTrashedRecords->docdate }} 
+                            {{ $assessmentCenterTrashedRecords->docdate ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $assessmentCenterTrashedRecords->remarks }} 
+                            {{ $assessmentCenterTrashedRecords->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
@@ -67,7 +67,7 @@
                                 </form>
     
                                 <form action="{{ route('eris-assessment-center.forceDelete', ['ctrlno'=>$assessmentCenterTrashedRecords->ctrlno]) }}" method="POST" id="permanent_assessment_center_form{{$assessmentCenterTrashedRecords->ctrlno}}">
-                                    @csrf
+                                    @csrf 
                                     @method('DELETE')
                                     <button type="button" id="permanentAssessmentCenterButton{{$assessmentCenterTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
