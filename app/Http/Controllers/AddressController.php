@@ -21,6 +21,8 @@ class AddressController extends Controller
 
         if ($addressProfile->isEmpty()) {
             $addressProfile = ProfileAddress::where('cesno', $cesno)->get();
+            return view('admin.201_profiling.view_profile.partials.address.old_table', 
+            compact('addressProfile', 'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp', 'cesno'));
         } else {
             return view('admin.201_profiling.view_profile.partials.address.table', 
             compact('addressProfile', 'addressProfilePermanent', 'addressProfileMailing', 'addressProfileTemp', 'cesno'));
