@@ -51,7 +51,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $affiliations->from_dt." - ".$affiliations->to_dt ?? 'No Record' }}
+                        {{ 
+                            \Carbon\Carbon::parse($affiliations->from_dt)->format('m/d/Y')." - ".
+                            \Carbon\Carbon::parse($affiliations->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
