@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class OtherTrainingController extends Controller
+class NonCesTrainingController extends Controller
 {
     public function index($cesno)
     {
