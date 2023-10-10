@@ -57,31 +57,31 @@
             @foreach ($otherTraining as $otherTrainings)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $otherTrainings->training }}
+                        {{ $otherTrainings->training ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->training_category }}
+                        {{ $otherTrainings->training_category ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title }}
+                        {{ $otherTrainings->trainingProfileLibTblExpertiseSpec->Title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->sponsor }}
+                        {{ $otherTrainings->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->venue }}
+                        {{ $otherTrainings->venue ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt }}
+                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->no_training_hours }}
+                        {{ $otherTrainings->no_training_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
@@ -120,31 +120,31 @@
             @foreach ($competencyNonCesAccreditedTraining as $competencyNonCesAccreditedTrainings)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $competencyNonCesAccreditedTrainings->training }}
+                        {{ $competencyNonCesAccreditedTrainings->training ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->training_category }}
+                        {{ $competencyNonCesAccreditedTrainings->training_category ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->specialization }}
+                        {{ $competencyNonCesAccreditedTrainings->specialization ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->sponsor }}
+                        {{ $competencyNonCesAccreditedTrainings->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->venue }}
+                        {{ $competencyNonCesAccreditedTrainings->venue ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->from_dt. ' - '.$competencyNonCesAccreditedTrainings->to_dt }}
+                        {{ $competencyNonCesAccreditedTrainings->from_dt. ' - '.$competencyNonCesAccreditedTrainings->to_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyNonCesAccreditedTrainings->no_hours }}
+                        {{ $competencyNonCesAccreditedTrainings->no_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

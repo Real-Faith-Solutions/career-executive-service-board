@@ -53,35 +53,35 @@
             @foreach ($otherTrainingTrashedRecord as $otherTrainingTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $otherTrainingTrashedRecords->training }}
+                        {{ $otherTrainingTrashedRecords->training ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->training_category }}
+                        {{ $otherTrainingTrashedRecords->training_category ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->trainingProfileLibTblExpertiseSpec->Title }}
+                        {{ $otherTrainingTrashedRecords->trainingProfileLibTblExpertiseSpec->Title ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->sponsor }}
+                        {{ $otherTrainingTrashedRecords->sponsor ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->venue }}
+                        {{ $otherTrainingTrashedRecords->venue?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->from_dt.' - '.$otherTrainingTrashedRecords->to_dt }}
+                        {{ $otherTrainingTrashedRecords->from_dt.' - '.$otherTrainingTrashedRecords->to_dt ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->no_training_hours }}
+                        {{ $otherTrainingTrashedRecords->no_training_hours ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainingTrashedRecords->deleted_at }}
+                        {{ $otherTrainingTrashedRecords->deleted_at ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
