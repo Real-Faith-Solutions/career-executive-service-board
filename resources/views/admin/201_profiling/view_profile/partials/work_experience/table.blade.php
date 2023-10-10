@@ -63,10 +63,10 @@
             @foreach ($workExperience as $workExperiences)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        
-                        {{ \Carbon\Carbon::parse($workExperiences->from_dt)->format('M d, Y') }} - 
-                        {{ \Carbon\Carbon::parse($workExperiences->to_dt)->format('M d, Y') }} 
-                        
+                        {{ 
+                            \Carbon\Carbon::parse($workExperiences->from_dt)->format('Y/m/d').' - '.
+                            \Carbon\Carbon::parse($workExperiences->to_dt)->format('Y/m/d')  
+                        }} 
                     </td>
 
                     <td class="px-6 py-3">
