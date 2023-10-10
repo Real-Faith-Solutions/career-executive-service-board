@@ -64,7 +64,7 @@
     @endphp
 @endif
 
-<div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
+<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 id="address-form-title" class="px-6 py-3">

@@ -5,7 +5,7 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="flex items-center justify-between">
-    <p class="text-red-500">*Your address is outdated, please submit a new address.</p>
+    <p id="oldAddNotice" class="text-red-500">*Your address is outdated, please submit a new address.</p>
     <div class="my-5 flex">
         <button class="btn btn-primary" onclick="openFormAddress()">Add/Edit Address</button>
         <button class="btn btn-primary hidden" onclick="openTableAddress()">Go back</button>

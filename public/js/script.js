@@ -7731,6 +7731,11 @@ const openFormAddress = () => {
     var openForm = document.querySelector('[onclick="openFormAddress()"]');
     var table = document.querySelector('.table-address');
     var openTable = document.querySelector('[onclick="openTableAddress()"]');
+    let oldAddNotice = document.getElementById("oldAddNotice");
+
+    if(oldAddNotice){
+        oldAddNotice.classList.add('invisible');
+    }
 
     form.classList.remove('hidden');
     openForm.classList.add('hidden');
@@ -7743,6 +7748,11 @@ const openTableAddress = () => {
     var openForm = document.querySelector('[onclick="openFormAddress()"]');
     var table = document.querySelector('.table-address');
     var openTable = document.querySelector('[onclick="openTableAddress()"]');
+    let oldAddNotice = document.getElementById("oldAddNotice");
+
+    if(oldAddNotice){
+        oldAddNotice.classList.remove('invisible');
+    }
 
     form.classList.add('hidden');
     openForm.classList.remove('hidden');
