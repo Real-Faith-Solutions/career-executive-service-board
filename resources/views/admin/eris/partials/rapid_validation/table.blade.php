@@ -50,23 +50,23 @@
                 @foreach ($rapidValidation as $rapidValidations) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $rapidValidations->dteassign }} 
+                            {{ $rapidValidations->dteassign ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->dtesubmit }} 
+                            {{ $rapidValidations->dtesubmit ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->validator }} 
+                            {{ $rapidValidations->validator ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->recom }} 
+                            {{ $rapidValidations->recom ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $rapidValidations->remarks }} 
+                            {{ $rapidValidations->remarks ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
