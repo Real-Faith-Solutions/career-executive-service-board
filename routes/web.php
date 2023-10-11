@@ -72,6 +72,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
@@ -569,6 +570,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
         Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
         Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
+
+        Route::prefix('reports')->group(function () {
+            Route::get('', [StatisticsController::class, 'index'])->name('statistics.index');
+        });
     });
     // End of plantilla routes
 
@@ -837,9 +842,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('executive-201-profile ')->group(function () {
 
             Route::get('general-reports', [Reports201Controller::class, 'index'])->name('general-reports.index');
-        
         });
-
     });
     // End of Reports routes
 
