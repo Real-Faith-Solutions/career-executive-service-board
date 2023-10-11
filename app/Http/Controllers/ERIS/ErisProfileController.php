@@ -3,45 +3,57 @@
 namespace App\Http\Controllers\ERIS;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ErisStoreRequest;
 use App\Models\Eris\EradTblMain;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-
 
 class ErisProfileController extends Controller
 {
-    public function index()
+    public function personalData()
     {
-       $erisTblMain = EradTblMain::paginate(25);
+        $personalData = new PersonalData;
 
-       return view('admin.eris.view_profile.table', compact('erisTblMain'));
+        return $personalData;
+    }
+
+    public function erad()
+    {
+        $erad = new EradTblMain;
+
+        return $erad;
+    }
+
+    public function getFullNameAttribute()
+    {   
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
+    public function index(Request $request)
+    {
+        return view('admin.eris.view_profile.table', [
+            'erisTblMain' => $this->erad()->search($request->input('search'))
+        ]);
     }
 
     public function create(Request $request)
     {
-        if (DB::table('erad_tblMain')->count() === 0) 
-        {
-            $acno = 0;
-            $acbatchno = 0;
-        } else {
-            $acno = EradTblMain::latest()->first()->acno;
-            $acbatchno = EradTblMain::latest()->first()->acbatchno;
-        }
+        return view('admin.eris.view_profile.add_new_profile.form', [
+            'acno' => $this->erad()->gettingAcNo(), 
+            'acbatchno' => $this->erad()->gettingAcBacthNo(), 
+            'personalData' => $this->personalData()->search($request->input('search')),
+            'personalDataSearchResult' => $this->validateSearch($request->input('search')), 
+            'search' => $request->input('search'),
+        ]);
+    }
 
-        $search = $request->input('search');
-
-        // Perform your search query here, e.g., using Eloquent 
-        $personalData = PersonalData::query()
-            ->where('cesno', "LIKE" ,"%$search%")
-            ->orWhere('lastname',  "LIKE","%$search%")
-            ->orWhere('firstname',  "LIKE","%$search%")
-            ->orWhere('middlename',  "LIKE","%$search%")
-            ->orWhere('name_extension',  "LIKE","%$search%")
-            ->get();
-
+    public function validateSearch($search)
+    {
         if ($search !== null && !is_numeric($search)) 
         {
             return redirect()->route('eris.create')->with('error', 'Invalid Search Criteria.');
@@ -63,97 +75,36 @@ class ErisProfileController extends Controller
             $personalDataSearchResult = null;
         }
 
-        return view('admin.eris.view_profile.add_new_profile.form', ['acno' => ++$acno, 'acbatchno' => ++$acbatchno, 
-        'personalData' => $personalData, 'personalDataSearchResult' => $personalDataSearchResult, 'search' => $search]);
+        return $personalDataSearchResult;
     }
 
-    public function store(Request $request)
+    public function store(ErisStoreRequest $request)
     {
-        $request->validate([
-
-            'cesno' => ['required', 'unique:erad_tblMain,cesno'],
-            'emailadd' => ['required', 'unique:erad_tblMain,emailadd'],
-            'contactno' => ['required', 'unique:erad_tblMain,contactno'],
-            'mobileno' => ['required', 'unique:erad_tblMain,mobileno'],
-            'faxno' => ['required', 'unique:erad_tblMain,faxno'],
-        
-        ], [
-            'cesno.required' => 'The CESNO number field is required.',
-            'cesno.unique' => 'The CESNO number you entered is already in use.',
-            
-            'emailadd.required' => 'The email address field is required.',
-            'emailadd.unique' => 'The email address you entered is already in use.',
-            
-            'contactno.required' => 'The contact number field is required.',
-            'contactno.unique' => 'The contact number you entered is already in use.',
-            
-            'mobileno.required' => 'The mobile number field is required.',
-            'mobileno.unique' => 'The mobile number you entered is already in use.',
-            
-            'faxno.required' => 'The fax number field is required.',
-            'faxno.unique' => 'The fax number you entered is already in use.',
-        ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-            
-        EradTblMain::create([
-            'cesno' => $request->cesno,
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
-            'middlename' => $request->middlename,
-            'birthdate' => $request->birthdate,
-            'gender' => $request->gender,
-            'emailadd' => $request->emailadd, 
-            'contactno' => $request->contactno, 
-            'mobileno' => $request->mobileno, 
-            'faxno' => $request->faxno, 
-            'position' => $request->position, 
-            'position_remarks' => $request->position_remarks, 
-            'office' => $request->office, // bureau office
-            'department' => $request->department, // department/agency
-            'c_status' => $request->c_status, // conferment status
-            'c_resno' => $request->c_resno, // resolution no
-            'c_date' => $request->c_date, // date conferred
-            'encoder' => $encoder,
-         ]);
+        $this->erad()->create(array_merge(
+            $request->all(),
+            [
+                'encoder' => $this->getFullNameAttribute(),
+            ]
+        ));
 
         return to_route('eris-index')->with('message', 'Save Sucessfully');
     }
 
     public function edit($acno)
     {
-        $erisTblMainPersonalData = EradTblMain::find($acno);
-        $birthdate = $erisTblMainPersonalData->birthdate;
+        $userInfo = $this->erad()->getUserInfo($acno);
 
-        $birthDate = Carbon::parse($birthdate);
-        $currentDate = Carbon::now();
-        $age = $currentDate->diffInYears($birthDate);
-
-        return view('admin.eris.view_profile.add_new_profile.edit', compact('acno','erisTblMainPersonalData', 'age'));
+        return view('admin.eris.view_profile.add_new_profile.edit', [
+            'acno' => $acno,
+            'erisTblMainPersonalData' => $userInfo['erisTblMainPersonalData'], 
+            'age' =>  $userInfo['age'],
+        ]);
     }
 
     public function update(Request $request, $acno)
     { 
-        $erisTblMain = EradTblMain::find($acno);
-        $erisTblMain->lastname = $request->lastname;
-        $erisTblMain->firstname = $request->firstname;
-        $erisTblMain->middlename = $request->middlename;
-        $erisTblMain->birthdate = $request->birthdate;
-        $erisTblMain->gender = $request->gender;
-        $erisTblMain->emailadd = $request->emailadd;
-        $erisTblMain->contactno = $request->contactno;
-        $erisTblMain->mobileno =  $request->mobileno;
-        $erisTblMain->faxno =  $request->faxno;
-        $erisTblMain->position =  $request->position;
-        $erisTblMain->position_remarks =  $request->position_remarks;
-        $erisTblMain->office =  $request->office;
-        $erisTblMain->department =  $request->department;
-        $erisTblMain->c_status =  $request->c_status;
-        $erisTblMain->c_resno =  $request->c_resno;
-        $erisTblMain->c_date =  $request->c_date;
-        $erisTblMain->update();
+        $erisTblMain = $this->erad()->find($acno);
+        $erisTblMain->update($request->all());
  
         return to_route('eris.edit', ['acno' => $acno])->with('info', 'Update Sucessfully');
     }
