@@ -114,10 +114,8 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{
-                    $trainingSessions->resourceSpeakerPersonalData->lastname ?? 'No Record'.', '.
-                    $trainingSessions->resourceSpeakerPersonalData->firstname ?? 'No Record'
-                    }}
+                    {{ $trainingSessions->resourceSpeakerPersonalData->lastname ?? 'No Record' }},
+                    {{ $trainingSessions->resourceSpeakerPersonalData->firstname ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
