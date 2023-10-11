@@ -36,6 +36,7 @@ use App\Http\Controllers\ERIS\InDepthValidationController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
+use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -830,6 +831,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
     });
     //  end of ERIS routes
+
+    //  ERIS Report routes
+    Route::prefix('eris-report')->group(function () {
+        Route::prefix('board-panel-interview-report')->group(function () {
+            Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
+            Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
+        });
+    });
+    // End of ERIS Report routes
 
     // Reports routes
     Route::prefix('reports')->group(function () {

@@ -71,4 +71,8 @@
     </div>
 </div>
 
+<div class="m-5">
+    {{ $panelBoardInterview->links() }}
+</div>
+
 @endsection
