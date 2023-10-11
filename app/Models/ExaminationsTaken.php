@@ -34,9 +34,13 @@ class ExaminationsTaken extends Model
 
     ];
 
+    public function examPlace(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibCities::class, 'exam_place', 'city_code');
+    }
+
     public function profileLibTblExamRefPersonalData(): BelongsTo
     {
         return $this->belongsTo(ProfileLibTblExamRef::class, 'exam_code');
     }
-
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             // $table->foreignId('exam_code')->constrained('profilelib_tblExamRef', 'CODE');
             $table->string('rate')->nullable();
             $table->string('exam_date')->nullable();
-            $table->string('exam_place')->nullable();
+            $table->integer('exam_place')->nullable();
             $table->string('license_number')->nullable();
             $table->string('date_acquired')->nullable();
             $table->string('date_validity')->nullable();

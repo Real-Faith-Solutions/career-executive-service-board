@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExaminationsTaken;
 use App\Models\PersonalData;
+use App\Models\ProfileLibCities;
 use App\Models\ProfileLibTblExamRef;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,9 @@ class ExaminationTakenController extends Controller
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::all(['CODE', 'TITLE']);
 
-        return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno'));
+        $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
+
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno', 'profileLibCities'));
     }
 
     public function store(Request $request, $cesno)
@@ -34,7 +37,6 @@ class ExaminationTakenController extends Controller
             'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)],
             'rating' => ['nullable', 'max:40'],
             'date_of_examination' => ['required'],
-            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
         ]);
 
@@ -66,9 +68,10 @@ class ExaminationTakenController extends Controller
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $examinationTaken = ExaminationsTaken::find($ctrlno);
+        $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.edit',
-        compact('examinationTaken', 'profileLibTblExamRef', 'cesno'));
+        compact('examinationTaken', 'profileLibTblExamRef', 'cesno', 'profileLibCities'));
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -78,7 +81,6 @@ class ExaminationTakenController extends Controller
             'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'rating' => ['nullable', 'min:2', 'max:40'],
             'date_of_examination' => ['required', 'date', 'date_format:m/d/Y'],
-            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
             'date_acquired' => ['required'],
             'date_validity' => ['required'],
