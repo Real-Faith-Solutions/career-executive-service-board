@@ -168,6 +168,15 @@ class ResourceSpeakerController extends Controller
     public function destroy($ctrlno)
     {
         $resourceSpeaker = ResourceSpeaker::find($ctrlno);
+
+        $trainingEnagagement = $resourceSpeaker->trainingEngagement()->count();
+        $count = 1;
+
+        if($trainingEnagagement >= $count)
+        {
+            return back()->with('error', 'The resource speaker has already conducted a training session, so it cannot be deleted. !!');
+        }
+
         $resourceSpeaker->delete();
 
         return back()->with('message', 'Deleted Sucessfully');    
