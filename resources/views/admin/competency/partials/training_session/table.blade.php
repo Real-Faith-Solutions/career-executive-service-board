@@ -172,4 +172,8 @@
     </table>
 </div>
 
+<div class="m-5">
+    {{ $trainingSession->links() }}
+</div>
+
 @endsection

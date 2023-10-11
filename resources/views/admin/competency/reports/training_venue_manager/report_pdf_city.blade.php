@@ -181,8 +181,8 @@
         
                             <td >
                                 {{ 
-                                    $trainingVenueManagerByCities->no_street.', '.
-                                    $trainingVenueManagerByCities->brgy.', '. 
+                                    $trainingVenueManagerByCities->no_street ?? ''.', '.
+                                    $trainingVenueManagerByCities->brgy ?? ''.', '. 
                                     $trainingVenueManagerByCities->trainingVenueManager->name ?? ''
                                 }}
                             </td>
