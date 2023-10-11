@@ -2,24 +2,48 @@
 @section('title', 'Appointee Occupant Manager')
 @section('content')
 
-<div class="lg:flex lg:justify-between my-3">
-    <div>
-        @include('components.search')
-    </div>
-    <a href="#" class="text-blue-500 uppercase text-2xl">
-        @yield('title')
-    </a>
-    <div class="flex items-center">
-        <a href="{{ route('library-occupant-manager.trash') }}">
-            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
+<form>
+    <fieldset class="border p-4 bg-gray-50">
+        <legend>View Filter</legend>
+        <div class="sm:gid-cols-2 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+
+            <div class="mb-3">
+                <label for="cesStatusDropdown">CES Status</label>
+                <select id="cesStatusDropdown" name="cesStatusDropdown">
+                    <option value="">Select CES Status</option>
+                    @foreach ($cesStatus as $data)
+                    <option value="{{ $data->code }}" {{ $data->code == $cesStatusDropdown ? 'selected' : '' }}>
+                        {{ $data->description }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class=" flex items-center mt-3 gap-2">
+                <button class="btn btn-primary" type="submit">Search</button>
+                <a class="btn btn-secondary" href="{{ route('library-occupant-manager.index') }}">Reset</a>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="lg:flex lg:justify-between my-3">
+        <div>
+            @include('admin.plantilla.library.search')
+        </div>
+        <a href="#" class="text-blue-500 uppercase text-2xl">
+            @yield('title')
         </a>
+        <div class="flex items-center">
+            <a href="{{ route('library-occupant-manager.trash') }}">
+                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
+                    style="width:34px;height:34px">
+                </lord-icon>
+            </a>
 
-        <a class="btn btn-primary" href="{{ route('library-occupant-manager.create') }}">Add record</a>
+            <a class="btn btn-primary" href="{{ route('library-occupant-manager.create') }}">Add record</a>
+        </div>
     </div>
-</div>
-
+</form>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <table class="w-full text-left text-sm text-gray-500">

@@ -47,58 +47,59 @@
 @section('title', 'Agency Location Manager')
 @section('content')
 
-<fieldset class="border p-4 bg-gray-50">
-    <legend>View Filter</legend>
-    <form class="sm:gid-cols-3 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
+<form>
+    <fieldset class="border p-4 bg-gray-50">
+        <legend>View Filter</legend>
+        <div class="sm:gid-cols-3 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
 
-        <div class="mb-3">
-            <label for="sectorDropdown">Sector</label>
-            <select id="sectorDropdown" name="sectorDropdown" onchange="sectorToggle(this.value)">
-                <option value="">Select Sector</option>
-                @foreach ($sector as $data)
-                <option value="{{ $data->sectorid }}" {{ $data->sectorid == $sectorDropdown ? 'selected' : ''}}>
-                    {{ $data->title }}
-                </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="departmentDropdown">Department</label>
-            <select id="departmentDropdown" name="departmentDropdown">
-            </select>
-        </div>
+            <div class="mb-3">
+                <label for="sectorDropdown">Sector</label>
+                <select id="sectorDropdown" name="sectorDropdown" onchange="sectorToggle(this.value)">
+                    <option value="">Select Sector</option>
+                    @foreach ($sector as $data)
+                    <option value="{{ $data->sectorid }}" {{ $data->sectorid == $sectorDropdown ? 'selected' : ''}}>
+                        {{ $data->title }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="departmentDropdown">Department</label>
+                <select id="departmentDropdown" name="departmentDropdown">
+                </select>
+            </div>
 
-        <div class=" flex items-center mt-3 gap-2">
-            <button class="btn btn-primary" type="submit">Search</button>
-            <a class="btn btn-secondary" href="{{ route('library-agency-location-manager.index') }}">Reset</a>
+            <div class=" flex items-center mt-3 gap-2">
+                <button class="btn btn-primary" type="submit">Search</button>
+                <a class="btn btn-secondary" href="{{ route('library-agency-location-manager.index') }}">Reset</a>
+            </div>
         </div>
-    </form>
-</fieldset>
+    </fieldset>
 
-<div class="lg:flex lg:justify-between my-3">
-    <div>
-        @include('components.search')
-    </div>
-    <a href="#" class="text-blue-500 uppercase text-2xl">
-        @yield('title')
-    </a>
-    <div class="flex items-center">
-        <a href="{{ route('library-agency-location-manager.trash') }}">
-            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
-                style="width:34px;height:34px">
-            </lord-icon>
+    <div class="lg:flex lg:justify-between my-3">
+        <div>
+            @include('admin.plantilla.library.search')
+        </div>
+        <a href="#" class="text-blue-500 uppercase text-2xl">
+            @yield('title')
         </a>
+        <div class="flex items-center">
+            <a href="{{ route('library-agency-location-manager.trash') }}">
+                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
+                    style="width:34px;height:34px">
+                </lord-icon>
+            </a>
 
-        <a class="btn btn-primary" href="{{ route('library-agency-location-manager.create') }}">Add record</a>
+            <a class="btn btn-primary" href="{{ route('library-agency-location-manager.create') }}">Add record</a>
+        </div>
     </div>
-</div>
-
+</form>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                {{-- <th class="px-6 py-3" scope="col">Department Agency</th> --}}
+                <th class="px-6 py-3" scope="col">Location ID</th>
                 <th class="px-6 py-3" scope="col">Location</th>
                 <th class="px-6 py-3" scope="col">Location Acronym</th>
                 <th class="px-6 py-3" scope="col">Location type</th>
@@ -114,6 +115,9 @@
             @foreach ($agencyLocation as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                    {{ $data->officelocid }}
+                </td>
+                <td class="px-6 py-3">
                     {{ $data->title }}
                 </td>
                 <td class="px-6 py-3">

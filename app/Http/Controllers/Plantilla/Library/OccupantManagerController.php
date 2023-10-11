@@ -14,6 +14,7 @@ use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
+use App\Models\ProfileLibTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,24 +23,42 @@ class OccupantManagerController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $datas = PlanAppointee::query()
-            ->where('appointee_id', 'LIKE', "%$query%")
-            ->paginate(25);
-        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
-        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
-        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
-        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+        $cesStatusDropdown = $request->input('cesStatusDropdown');
+
+        $filterDropdown = PlanAppointee::query();
+
+        if ($cesStatusDropdown) {
+            $filterDropdown->whereHas('personalData', function ($queryBuilder) use ($cesStatusDropdown) {
+                $queryBuilder->where('CESStat_code', $cesStatusDropdown);
+            });
+        }
+
+        if ($query) {
+            $filterDropdown->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('cesno', 'LIKE', "%$query")
+                    ->orWhereHas('personalData', function ($subQuery) use ($query) {
+                        $subQuery->where('firstname', 'LIKE', "%$query")
+                            ->orWhere('lastname', 'LIKE', "%$query")
+                            ->orWhere('middlename', 'LIKE', "%$query")
+                            ->orWhere('name_extension', 'LIKE', "%$query");
+                    });
+                // Add more conditions if needed.
+            });
+        }
+
+        $datas = $filterDropdown->paginate(25);
+        $cesStatus = ProfileLibTblCesStatus::orderBy('description', 'ASC')->get();
 
         return view('admin.plantilla.library.occupant_manager.index', compact(
             'datas',
-            'planPositionLibrary',
-            'positionMasterLibrary',
-            'classBasis',
-            'apptStatus',
             'query',
-
-        ));;
+            'cesStatus',
+            'cesStatusDropdown'
+        ));
     }
+
+
+
 
     public function create(Request $request)
     {

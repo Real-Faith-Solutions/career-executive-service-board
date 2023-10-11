@@ -10,10 +10,28 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $datas = DepartmentAgencyType::paginate(25);
-        return view('admin.plantilla.library.office_type.index', compact('datas'));
+        $query = $request->input('search');
+        $sectorDropdown = $request->input('sectorDropdown');
+
+        $filterDropdown = DepartmentAgencyType::query();
+
+        if ($sectorDropdown) {
+            $filterDropdown->where('sectorid', $sectorDropdown);
+        }
+
+
+        $datas = $filterDropdown->paginate(25);
+
+
+        $sector = SectorManager::orderBy('title', 'ASC')->get();
+        return view('admin.plantilla.library.office_type.index', compact(
+            'datas',
+            'query',
+            'sector',
+            'sectorDropdown',
+        ));
     }
 
     public function create()

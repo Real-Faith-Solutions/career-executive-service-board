@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\TrainingSecretariat::factory(10)->create();
 
         // plantilla
-        // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
+        \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
             PermissionsTableSeeder::class,
@@ -72,10 +72,10 @@ class DatabaseSeeder extends Seeder
             // ErisTblMainSeeder::class,
 
             // plantilla
-            // SectorManagerSeeder::class,
-            // AgencyLocationSeeder::class,
-            // DepartmentAgencyTypeSeeder::class,
-            // ApptStatusSeeder::class,
+            SectorManagerSeeder::class,
+            AgencyLocationSeeder::class,
+            DepartmentAgencyTypeSeeder::class,
+            ApptStatusSeeder::class,
         ]);
     }
 }

@@ -22,6 +22,7 @@ class DBMPositionTitleController extends Controller
             ->paginate(25);
         return view('admin.plantilla.library.dbm_title.index', compact(
             'datas',
+            'query',
         ));
     }
 

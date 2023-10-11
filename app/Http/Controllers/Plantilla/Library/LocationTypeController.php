@@ -18,6 +18,7 @@ class LocationTypeController extends Controller
             ->paginate(25);
         return view('admin.plantilla.library.agency_location.index', compact(
             'datas',
+            'query',
         ));
     }
 
