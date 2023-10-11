@@ -113,12 +113,8 @@
 
                 <td class="px-6 py-3">
                     {{
-                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No
-                    Record'.',
-                    '.
-                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ?? 'No
-                    Record'.',
-                    '.
+                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No Record'. ', '.
+                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ?? 'No Record'.', '.
                     $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record'
                     }}
                 </td>
