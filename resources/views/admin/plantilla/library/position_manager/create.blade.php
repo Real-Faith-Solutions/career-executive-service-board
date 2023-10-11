@@ -3,7 +3,7 @@
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
         @foreach ($classBasis as $data)
-        if ("{{ $data->cbasis_code }}" === val) {
+        if ("{{ $data->cbasis_code }}" == val) {
             titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
         }
         @endforeach
@@ -26,7 +26,7 @@
 
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach ($positionMasterLibrary as $data)
-            if ("{{ $data->poslevel_code }}" === val) {
+            if ("{{ $data->poslevel_code }}" == val) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->pos_code }}";
                 // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
@@ -55,7 +55,7 @@
         
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach ($department as $data)
-            if ("{{ $data->sectorid }}" === val) {
+            if ("{{ $data->sectorid }}" == val) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->deptid }}";
                 option.text = "{{ $data->title }}";
@@ -77,7 +77,7 @@
         agencyDropdown.appendChild(defaultOption);
         
         @foreach ($agencyLocation as $data)
-        if ("{{ $data->officelocid }}" === val) {
+        if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officelocid }}";
             option.text = "{{ $data->title }}";
@@ -99,7 +99,7 @@
         officeDropdown.appendChild(defaultOption);
         
         @foreach ($office as $data)
-        if ("{{ $data->officelocid }}" === val) {
+        if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
             option.text = "{{ $data->title }}";

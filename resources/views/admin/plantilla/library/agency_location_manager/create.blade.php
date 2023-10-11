@@ -28,7 +28,7 @@
                             @foreach ($sectors as $sector)
                             <optgroup label="{{ $sector->title }}" data-sectorid="{{ $sector->sectorid }}">
                                 @foreach ($departmentAgencies as $departmentAgency)
-                                @if($departmentAgency->sectorid === $sector->sectorid)
+                                @if($departmentAgency->sectorid == $sector->sectorid)
                                 <option value="{{ $departmentAgency->deptid }}">
                                     {{ $departmentAgency->title }}
                                 </option>
