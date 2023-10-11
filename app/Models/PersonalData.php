@@ -52,6 +52,7 @@ class PersonalData extends Model
         'encoder',
         'acno',
         'remarks',
+        'e_date',
         'lastupd_dt',
 
     ];
