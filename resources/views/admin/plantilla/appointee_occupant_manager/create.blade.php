@@ -44,6 +44,19 @@
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
         posDefaultInput.value = selectedOption.textContent;
     }
+
+    const cesPosAndPresAppointee = () => {
+        const is_ces_pos = document.querySelector("#is_ces_pos");
+        const pres_apptee = document.querySelector("#pres_apptee");
+    
+        if (is_ces_pos.checked) {
+            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+            
+            if (confirmation){
+                pres_apptee.checked = true;
+            }
+        }
+    }
 </script>
 
 <script>
@@ -149,7 +162,8 @@
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                                        id="is_ces_pos" name="is_ces_pos" type="checkbox" value="1">
+                                        id="is_ces_pos" name="is_ces_pos" type="checkbox" value="1"
+                                        onchange="cesPosAndPresAppointee()">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_ces_pos">
                                         CES Position
                                     </label>
