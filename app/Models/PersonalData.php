@@ -22,8 +22,20 @@ class PersonalData extends Model
 
     protected $primaryKey = 'cesno';
 
+    // protected $maps = [
+    //     'email' => 'emailadd',
+    // ];
+
+    // public function getEmail()
+    // {
+    //     return $this->attributes['emailadd'];
+    // }
+
+    protected $append = ['email'];
+
     protected $fillable = [
 
+        'cesno',
         'picture',
         'email',
         'status',
@@ -56,6 +68,10 @@ class PersonalData extends Model
         'lastupd_dt',
 
     ];
+
+    protected $attributes = array(
+		'email' => 'emailadd',
+	);
 
     public function spouses(): HasMany
     {

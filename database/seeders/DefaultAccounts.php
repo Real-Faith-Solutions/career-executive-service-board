@@ -56,7 +56,7 @@ class DefaultAccounts extends Seeder
 
         // seeding power user 
         $power_user = PersonalData::create([
-            'email' => 'power_user@ces.com',
+            'emailadd' => 'power_user@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -94,7 +94,7 @@ class DefaultAccounts extends Seeder
 
         // seeding rank officer 
         $rank_officer = PersonalData::create([
-            'email' => 'rank_officer@ces.com',
+            'emailadd' => 'rank_officer@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -132,7 +132,7 @@ class DefaultAccounts extends Seeder
 
         // seeding cesb operator 
         $cesb_operator = PersonalData::create([
-            'email' => 'cesb_operator@ces.com',
+            'emailadd' => 'cesb_operator@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -170,7 +170,7 @@ class DefaultAccounts extends Seeder
 
         // seeding training officer 
         $training_officer = PersonalData::create([
-            'email' => 'training_officer@ces.com',
+            'emailadd' => 'training_officer@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -208,7 +208,7 @@ class DefaultAccounts extends Seeder
 
         // seeding cespes operator 
         $cespes_operator = PersonalData::create([
-            'email' => 'cespes_operator@ces.com',
+            'emailadd' => 'cespes_operator@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -246,7 +246,7 @@ class DefaultAccounts extends Seeder
 
         // seeding agency hr operator 
         $agency_hr_operator = PersonalData::create([
-            'email' => 'agency_hr_operator@ces.com',
+            'emailadd' => 'agency_hr_operator@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -283,7 +283,7 @@ class DefaultAccounts extends Seeder
         // end seeding agency hr operator
 
         // seeding users
-        $personalDataRecords = PersonalData::whereNotIn('email', [
+        $personalDataRecords = PersonalData::whereNotIn('emailadd', [
             'admin@ces.com',
             'power_user@ces.com',
             'rank_officer@ces.com',
