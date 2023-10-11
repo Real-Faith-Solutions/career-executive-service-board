@@ -27,12 +27,12 @@ class DatabaseSeeder extends Seeder
         // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         // \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
         // \App\Models\PersonalData::factory(50)->create();
-        // \App\Models\ProfileLibTblExamRef::factory(10)->create();
+        \App\Models\ProfileLibTblExamRef::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatus::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusAcc::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusType::factory(10)->create();
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
-        // \App\Models\ProfileLibCities::factory(10)->create();
+        \App\Models\ProfileLibCities::factory(10)->create();
         // // \App\Models\TrainingLibCategory::factory(10)->create();
         // \App\Models\TrainingSecretariat::factory(10)->create();
 
@@ -75,7 +75,7 @@ class DatabaseSeeder extends Seeder
             SectorManagerSeeder::class,
             AgencyLocationSeeder::class,
             DepartmentAgencyTypeSeeder::class,
-            ApptStatusSeeder::class,
+            // ApptStatusSeeder::class,
         ]);
     }
 }

@@ -61,8 +61,12 @@
 
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
-                        <input type="text" id="place_of_examination" name="place_of_examination" oninput="validateInput(place_of_examination, 2)" onkeypress="validateInput(place_of_examination, 2)" onblur="checkErrorMessage(place_of_examination)" required>
-                        <p class="input_error text-red-600"></p>
+                        <select name="place_of_examination">
+                            <option disabled selected>Select Examination Place</option>
+                            @foreach ($profileLibCities as $profileLibCity)
+                                <option value="{{ $profileLibCity->city_code }}">{{ $profileLibCity->name }}</option>
+                            @endforeach
+                        </select>
                         @error('place_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
