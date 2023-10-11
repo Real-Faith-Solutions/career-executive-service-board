@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PhpParser\Node\Stmt\Static_;
 
 class PersonalData extends Model
 {
@@ -55,6 +56,19 @@ class PersonalData extends Model
         'lastupd_dt',
 
     ];
+
+    public function search($search)
+    {
+        $personalData = PersonalData::query()
+        ->where('cesno', "LIKE" ,"%$search%")
+        ->orWhere('lastname',  "LIKE","%$search%")
+        ->orWhere('firstname',  "LIKE","%$search%")
+        ->orWhere('middlename',  "LIKE","%$search%")
+        ->orWhere('name_extension',  "LIKE","%$search%")
+        ->paginate(25);
+
+        return $personalData;
+    }
 
     public function spouses(): HasMany
     {
