@@ -39,7 +39,7 @@
                 <th scope="col" class="px-6 py-3">
                     No. of Training Hours
                 </th>
-                
+
                 <th scope="col" class="px-6 py-3">
                     Barrio
                 </th>
@@ -55,7 +55,7 @@
                 <th scope="col" class="px-6 py-3">
                     Training Status
                 </th>
-                
+
                 <th scope="col" class="px-6 py-3">
                     Remarks
                 </th>
@@ -66,93 +66,97 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($competencyCesTraining as $competencyCesTrainings)        
-                <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $competencyCesTrainings->participantTrainingSession->title ?? 'No Record' }}
-                    </td>
+            @foreach ($competencyCesTraining as $competencyCesTrainings)
+            <tr class="border-b bg-white">
+                <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                    {{ $competencyCesTrainings->participantTrainingSession->title ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->sessionid ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->sessionid ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->category ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->category ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->specialization ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->specialization ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{
-                            \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y').' - '.
-                            \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y') ?? 'No Record' 
-                        }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{
+                    \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y').'
+                    - '.
+                    \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y')
+                    ?? 'No Record'
+                    }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->no_hours ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->no_hours ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->barrio ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->barrio ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ 
-                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname.', '.
-                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname.', '.
-                            $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record'
-                        }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{
+                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No
+                    record'.', '.
+                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ?? 'No
+                    record'.', '.
+                    $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record'
+                    }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->session_director ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->session_director ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->status ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->status ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-3">
-                        {{ $competencyCesTrainings->participantTrainingSession->remarks ?? 'No Record' }}
-                    </td>
+                <td class="px-6 py-3">
+                    {{ $competencyCesTrainings->participantTrainingSession->remarks ?? 'No Record' }}
+                </td>
 
-                    <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            <form action="{{ route('ces-training-201.restore', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="restore_ces_training_201_form{{$competencyCesTrainings->pid}}">
-                                @csrf
-                                <button type="button" id="restoreCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/nxooksci.json"
-                                        trigger="hover"
-                                        colors="primary:#121331"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
+                <td class="px-6 py-4 text-right uppercase">
+                    <div class="flex">
+                        <form action="{{ route('ces-training-201.restore', ['ctrlno'=>$competencyCesTrainings->pid]) }}"
+                            method="POST" id="restore_ces_training_201_form{{$competencyCesTrainings->pid}}">
+                            @csrf
+                            <button type="button" id="restoreCesTraining201Button{{$competencyCesTrainings->pid}}"
+                                onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <lord-icon src="https://cdn.lordicon.com/nxooksci.json" trigger="hover"
+                                    colors="primary:#121331" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
 
-                            <form action="{{ route('ces-training-201.forceDelete', ['ctrlno'=>$competencyCesTrainings->pid]) }}" method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" id="permanentDeleteCesTraining201Button{{$competencyCesTrainings->pid}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to delete this info?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+                        <form
+                            action="{{ route('ces-training-201.forceDelete', ['ctrlno'=>$competencyCesTrainings->pid]) }}"
+                            method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button"
+                                id="permanentDeleteCesTraining201Button{{$competencyCesTrainings->pid}}"
+                                onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to delete this info?')">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#880808" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>
