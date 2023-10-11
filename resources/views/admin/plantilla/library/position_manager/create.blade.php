@@ -68,8 +68,10 @@
     const departmentToggle = (val) => {
         const departmentDropdown = document.querySelector("#department");
         const agencyDropdown = document.querySelector('#agency');
+        const officeDropdown = document.querySelector('#officeid');
 
         agencyDropdown.innerHTML = "";
+        officeDropdown.innerHTML = "";
         const defaultOption = document.createElement("option");
         defaultOption.text = "Select Agency Location";
         defaultOption.disabled = true;
