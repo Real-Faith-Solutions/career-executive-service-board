@@ -65,14 +65,23 @@
 
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
-                        <input id="place_of_examination" name="place_of_examination" value="{{ $examinationTaken->exam_place }}" required type="text">
+                        <select name="place_of_examination" id="place_of_examination">
+                            <option disabled selected>Select Examination Place</option>
+                            @foreach ($profileLibCities as $profileLibCity)
+                                @if ($examinationTaken->exam_place == $profileLibCities->city_code )
+                                    <option value="{{ $profileLibCities->city_code }}" selected>{{ $profileLibCities->name }}</option>
+                                @else
+                                    <option value="{{ $profileLibCities->city_code }}">{{ $profileLibCities->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <p class="input_error text-red-600"></p>
                         @error('place_of_examination')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                         @enderror
                     </div>
-
                 </div>
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
