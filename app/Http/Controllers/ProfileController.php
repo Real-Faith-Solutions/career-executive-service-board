@@ -267,10 +267,10 @@ class ProfileController extends Controller
         $personalData->status = $request->status;
         $personalData->title = $request->title;
         $personalData->email = $request->email;
-        $personalData->lastname = $request->lastname;
-        $personalData->firstname = $request->firstname;
+        $personalData->lastname = ucwords(strtolower($request->lastname));
+        $personalData->firstname = ucwords(strtolower($request->firstname));
         $personalData->name_extension = $request->name_extension;
-        $personalData->middlename = $request->middlename;
+        $personalData->middlename = ucwords(strtolower($request->middlename));
         $personalData->middleinitial = $middleInitial;
         $personalData->nickname = $request->nickname;
         $personalData->birth_date = $request->birthdate;
