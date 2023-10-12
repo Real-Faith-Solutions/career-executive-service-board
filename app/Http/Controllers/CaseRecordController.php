@@ -24,8 +24,8 @@ class CaseRecordController extends Controller
 
     public function create($cesno)
     {
-        $profileLibTblCaseNature = ProfileLibTblCaseNature::all();
-        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::all();
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::orderBy('TITLE', 'asc')->get();
+        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::orderBy('TITLE', 'asc')->get();
         
         return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno', 'profileLibTblCaseNature', 'profileLibTblCaseStatus'));
     }
@@ -77,8 +77,8 @@ class CaseRecordController extends Controller
     public function edit($ctrlno, $cesno)
     {
         $caseRecord = CaseRecords::find($ctrlno);
-        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::all();
-        $profileLibTblCaseNature = ProfileLibTblCaseNature::all();
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::orderBy('TITLE', 'asc')->get();
+        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::orderBy('TITLE', 'asc')->get();
 
         return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno', 'profileLibTblCaseNature', 'profileLibTblCaseStatus'));
     }
