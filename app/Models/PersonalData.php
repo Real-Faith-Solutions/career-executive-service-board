@@ -23,17 +23,6 @@ class PersonalData extends Model
 
     protected $primaryKey = 'cesno';
 
-    // protected $maps = [
-    //     'email' => 'emailadd',
-    // ];
-
-    // public function getEmail()
-    // {
-    //     return $this->attributes['emailadd'];
-    // }
-
-    protected $append = ['email'];
-
     protected $fillable = [
 
         'cesno',

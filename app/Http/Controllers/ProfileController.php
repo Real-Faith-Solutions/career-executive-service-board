@@ -279,39 +279,54 @@ class ProfileController extends Controller
         $middleName = $request->middlename;
         $middleInitial = $this->extractMiddleInitial($middleName);
 
-        $personalData = PersonalData::find($cesno);
-        $personalData->status = $request->status;
-        $personalData->title = $request->title;
-        $personalData->email = $request->email;
-        $personalData->lastname = ucwords(strtolower($request->lastname));
-        $personalData->firstname = ucwords(strtolower($request->firstname));
-        $personalData->name_extension = $request->name_extension;
-        $personalData->middlename = ucwords(strtolower($request->middlename));
-        $personalData->middleinitial = $middleInitial;
-        $personalData->nickname = $request->nickname;
-        $personalData->birth_date = $request->birthdate;
-        $personalData->birth_place = $request->birth_place;
-        $personalData->gender = $request->gender;
-        $personalData->gender_by_choice = $request->gender_by_choice;
-        $personalData->civil_status = $request->civil_status;
-        $personalData->religion = $request->religion;
-        $personalData->height = $request->height;
-        $personalData->weight = $request->weight;
-        $personalData->member_of_indigenous_group = $request->member_of_indigenous_group;
-        $personalData->single_parent = $request->single_parent;
-        $personalData->citizenship = $request->citizenship;
-        $personalData->dual_citizenship = $request->dual_citizenship;
-        $personalData->person_with_disability = $request->person_with_disability;
-        $personalData->encoder = $encoder;
-        $personalData->save();
+        DB::beginTransaction();
 
-        // Get the user based on the $cesno
-        $user = User::where('personal_data_cesno', $cesno)->first();
+        try {
 
-        // Update the user email
-        $user->email = $request->email;
-        $user->save();
+            $personalData = PersonalData::find($cesno);
+            $personalData->status = $request->status;
+            $personalData->title = $request->title;
+            $personalData->email = $request->email;
+            $personalData->lastname = ucwords(strtolower($request->lastname));
+            $personalData->firstname = ucwords(strtolower($request->firstname));
+            $personalData->name_extension = $request->name_extension;
+            $personalData->middlename = ucwords(strtolower($request->middlename));
+            $personalData->middleinitial = $middleInitial;
+            $personalData->nickname = $request->nickname;
+            $personalData->birth_date = $request->birthdate;
+            $personalData->birth_place = $request->birth_place;
+            $personalData->gender = $request->gender;
+            $personalData->gender_by_choice = $request->gender_by_choice;
+            $personalData->civil_status = $request->civil_status;
+            $personalData->religion = $request->religion;
+            $personalData->height = $request->height;
+            $personalData->weight = $request->weight;
+            $personalData->member_of_indigenous_group = $request->member_of_indigenous_group;
+            $personalData->single_parent = $request->single_parent;
+            $personalData->citizenship = $request->citizenship;
+            $personalData->dual_citizenship = $request->dual_citizenship;
+            $personalData->person_with_disability = $request->person_with_disability;
+            $personalData->encoder = $encoder;
+            $personalData->save();
 
+            // Get the user based on the $cesno
+            $user = User::where('personal_data_cesno', $cesno)->first();
+
+            // Update the user email
+            $user->email = $request->email;
+            $user->save();
+
+            // Commit the transaction if all operations succeed
+            DB::commit();
+
+            return back()->with('info', 'Profile Updated!');
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
+
+            return back()->with('error', 'An error occurred while updating.');
+        }
 
         return back()->with('info', 'Profile Updated!');
     }
