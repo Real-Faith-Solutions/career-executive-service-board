@@ -6,7 +6,7 @@
 
 
 <div class="my-5 flex justify-between">
-    <h1 class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-400"><a href="{{ route('training-session.index') }}">{{ $trainingSession->title }}</a></h1>
+    <h1 class="self-center text-l font-semibold whitespace-nowrap uppercase text-blue-400"><a href="{{ route('training-session.index') }}">{{ $trainingSession->title }}</a></h1>
 
     <a href="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" class="btn btn-primary" >Add Participant</a>
 </div>
@@ -64,12 +64,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            $trainingParticipantLists->cesTrainingPersonalData->lastname.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->name_extension.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? 'No Record'
-                        }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->lastname ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->firstname ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">

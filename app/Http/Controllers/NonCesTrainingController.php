@@ -15,8 +15,17 @@ class NonCesTrainingController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $otherTraining = $personalData->otherTraining;
-        $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining;
+
+        if($personalData->otherTraining != null)
+        {
+            $otherTraining = $personalData->otherTraining;
+            $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining;
+        }
+        else
+        {
+            return back()->with('error', 'Data Not Found');
+        }
+        
     
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.table', 
         compact('otherTraining' , 'cesno', 'competencyNonCesAccreditedTraining'));

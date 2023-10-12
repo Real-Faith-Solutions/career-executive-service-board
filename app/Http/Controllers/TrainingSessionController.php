@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompetencyTrainingVenueManager;
-use App\Models\PersonalData;
-use App\Models\ProfileLibTblCesStatus;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ResourceSpeaker;
 use App\Models\TrainingLibCategory;
-use App\Models\TrainingParticipants;
 use App\Models\TrainingSecretariat;
 use App\Models\TrainingSession;
 use Illuminate\Http\Request;

@@ -19,7 +19,7 @@ class ContactInformationController extends Controller
     public function updateOrCreate($cesno)
     {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('emailadd')->first();
         
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
 

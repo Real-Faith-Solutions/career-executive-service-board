@@ -15,7 +15,9 @@ class TrainingParticipantsController extends Controller
     public function participantList($sessionId)
     {
         $trainingSession = TrainingSession::find($sessionId);
-        $trainingParticipantList = $trainingSession->trainingParticipantList()->paginate(25);
+        $trainingParticipantList = $trainingSession->trainingParticipantList()
+        ->orderBy('cesno', 'asc')
+        ->paginate(25);
 
         return view('admin.competency.partials.training_participant.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
     }

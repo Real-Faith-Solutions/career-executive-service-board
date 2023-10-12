@@ -15,7 +15,7 @@ class ContactInfoController extends Controller
     public function index($cesno)
     {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('emailadd')->first();
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
         return view('admin.competency.partials.personal_information.contact_information', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno, 'addressProfileMailing'=>$addressProfileMailing]);
     }
@@ -24,7 +24,7 @@ class ContactInfoController extends Controller
     public function show($cesno)
     {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('emailadd')->first();
         return view('admin.201_profiling.view_profile.partials.contact_information.table', ['contacts'=>$contacts, 'email' =>$email, 'cesno'=>$cesno]);
     }
 
