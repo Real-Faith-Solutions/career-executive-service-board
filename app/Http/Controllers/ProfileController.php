@@ -406,11 +406,27 @@ class ProfileController extends Controller
         ];
         // end sending email to added user
 
-        Mail::to($recipientEmail)->send(new TempCred201($data));
+        DB::beginTransaction();
 
-        // Update the user's password
-        $user->password = $hashedPassword;
-        $user->save();
+        try {
+
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+
+            // Update the user's password
+            $user->password = $hashedPassword;
+            $user->save();
+
+            // Commit the transaction if all operations succeed
+            DB::commit();
+
+            return redirect()->back()->with('message', 'New Credentials Email Sent');
+
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'An error occurred while sending email.');
+        }
 
         return redirect()->back()->with('message', 'New Credentials Email Sent');
     }
