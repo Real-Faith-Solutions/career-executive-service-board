@@ -1,4 +1,34 @@
 <script>
+    const posCode = (val) => {
+    // Get the second dropdown element
+    const positionTitleDropdown = document.querySelector("#pos_code");
+    const posDefaultInput = document.querySelector('#pos_default');
+    
+    // Clear existing options in the second dropdown
+    positionTitleDropdown.innerHTML = "";
+    posDefaultInput.value = "";
+    
+    // Add a default "Select Position Title" option
+    const defaultOption = document.createElement("option");
+    defaultOption.text = "Select Position Title";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    positionTitleDropdown.appendChild(defaultOption);
+    
+    // Populate the second dropdown based on the selected value of the first dropdown
+    @foreach ($positionMasterLibrary as $data)
+    if ("{{ $data->poslevel_code }}" === val) {
+    const option = document.createElement("option");
+    option.value = "{{ $data->pos_code }}";
+    // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+    option.text = "{{ $data->dbm_title }}";
+    positionTitleDropdown.appendChild(option);
+    }
+    @endforeach
+    
+    }
+</script>
+<script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
@@ -8,34 +38,7 @@
         }
         @endforeach
     }
-    const posCode = (val) => {
-        // Get the second dropdown element
-        const positionTitleDropdown = document.querySelector("#pos_code");
-        const posDefaultInput = document.querySelector('#pos_default');
-
-        // Clear existing options in the second dropdown
-        positionTitleDropdown.innerHTML = "";
-        posDefaultInput.value = "";
-
-        // Add a default "Select Position Title" option
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Select Position Title";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        positionTitleDropdown.appendChild(defaultOption);
-
-        // Populate the second dropdown based on the selected value of the first dropdown
-        @foreach ($positionMasterLibrary as $data)
-            if ("{{ $data->poslevel_code }}" === val) {
-                const option = document.createElement("option");
-                option.value = "{{ $data->pos_code }}";
-                // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
-                option.text = "{{ $data->dbm_title }}";
-                positionTitleDropdown.appendChild(option);
-            }
-        @endforeach
-        
-    }
+    
 
     const sectorToggle = (val) => {
         const sectorDropdown = document.querySelector("#sector");
