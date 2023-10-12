@@ -64,12 +64,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            $trainingParticipantLists->cesTrainingPersonalData->lastname.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->name_extension.', '.
-                            $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? 'No Record'
-                        }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->lastname ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->firstname ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">

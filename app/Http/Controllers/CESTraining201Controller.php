@@ -17,6 +17,7 @@ class CESTraining201Controller extends Controller
         $competencyCesTraining = PersonalData::find($cesno)->competencyCesTraining()
         ->where('status', 'Completed')
         ->orWhere('status', 'Incomplete')
+        ->distinct()
         ->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.table', compact('cesno', 'competencyCesTraining'));
