@@ -47,10 +47,17 @@
                     <div class="mb-3">
                         <label for="nature_of_offense_edit">Nature of Offense<sup>*</sup></label>
                         <select id="nature_of_offense_edit" name="nature_of_offense" required>
-                            <option disabled selected>Select Nature of Offense</option>
-                            <option value="Administrative" {{ $caseRecord->nature_code == 'Administrative' ? 'selected' : '' }}>Administrative</option>
-                            <option value="Criminal Administrative" {{ $caseRecord->nature_code == 'Criminal Administrative' ? 'selected' : '' }}>Criminal Administrative</option>
-                            <option value="Criminal" {{ $caseRecord->nature_code == 'Criminal' ? 'selected' : '' }}>Criminal</option>
+                            @foreach ($profileLibTblCaseNature as $profileLibTblCaseNatures)
+                                @if ($profileLibTblCaseNatures->STATUS_CODE == $caseRecord->nature_code)
+                                    <option value="{{ $profileLibTblCaseNatures->STATUS_CODE }}" selected>
+                                        {{ $profileLibTblCaseNatures->TITLE }}
+                                    </option>
+                                @else
+                                    <option value="{{ $profileLibTblCaseNatures->STATUS_CODE }}">
+                                        {{ $profileLibTblCaseNatures->TITLE }}
+                                    </option>
+                                @endif
+                           @endforeach
                         </select>
                         @error('nature_of_offense')
                             <span class="invalid" role="alert">

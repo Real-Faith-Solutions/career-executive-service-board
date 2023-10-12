@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CaseRecords;
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblCaseNature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -22,7 +23,9 @@ class CaseRecordController extends Controller
 
     public function create($cesno)
     {
-        return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno'));
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::all();
+        
+        return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno', 'profileLibTblCaseNature'));
     }
     
     public function store(Request $request, $cesno)
@@ -72,8 +75,10 @@ class CaseRecordController extends Controller
     public function edit($ctrlno, $cesno)
     {
         $caseRecord = CaseRecords::find($ctrlno);
+        
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::all();
 
-        return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno', 'profileLibTblCaseNature'));
     }
 
     public function update(Request $request, $ctrlno, $cesno)
