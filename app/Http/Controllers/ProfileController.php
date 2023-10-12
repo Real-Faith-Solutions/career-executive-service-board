@@ -25,6 +25,7 @@ use App\Mail\TempCred201;
 use App\Models\ProfileLibCities;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -51,13 +52,19 @@ class ProfileController extends Controller
         $mainProfile = PersonalData::find($cesno);
         $birthdate = $mainProfile->birth_date;
 
+        $profile_picture = $mainProfile->picture;
+
+        if (!(Storage::disk('public')->exists('images/'.$profile_picture))) {
+            $profile_picture = 'placeholder.png';
+        }
+
         $birthDate = Carbon::parse($birthdate);
         $currentDate = Carbon::now();
         $age = $currentDate->diffInYears($birthDate);
 
         return view(
             'admin.201_profiling.view_profile.partials.personal_data.form',
-            compact('mainProfile', 'cesno', 'age')
+            compact('mainProfile', 'cesno', 'age', 'profile_picture')
         );
     }
 

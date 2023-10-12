@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class AdminPermissionsComposerServiceProvider extends ServiceProvider
 {
@@ -21,13 +22,18 @@ class AdminPermissionsComposerServiceProvider extends ServiceProvider
                     $userPermissions = $userRole->permissions;
 
                     $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
+                    $user_picture = $personalData->picture;
+
+                    if (!Storage::disk('public')->exists('images/'.$user_picture)) {
+                        $user_picture = 'placeholder.png';
+                    }
 
                     $view->with([
                         'userPermissions' => $userPermissions,
                         'userRole' => $userRole->role_name,
                         'userRoleTitle' => $userRole->role_title,
                         'user_cesno' => $personalData->cesno,
-                        'user_picture' => $personalData->picture,
+                        'user_picture' => $user_picture,
                         'userName' => $personalData ? $personalData->firstname.' '.$personalData->lastname : null,
                         'userFirstName' => $personalData ? $personalData->firstname : null,
                         'userLastName' => $personalData ? $personalData->lastname : null,
