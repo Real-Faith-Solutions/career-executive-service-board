@@ -1,4 +1,9 @@
 <script>
+    const sectorsToggle = () => {
+        const form = document.querySelector(".toggleForm");
+
+        form.submit();
+    }
     const plantillaStatisticsByGender = () => {
         const labels = [
             "Total Male CESO",
@@ -12,9 +17,9 @@
             datasets: [
                 {
                     label: labels,
-                    backgroundColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
-                    borderColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
-                    data: [{{ $totalMaleCESO }}, {{ $totalFemaleCESO }}, {{ $totalMaleNonCESO }}, {{ $totalFemaleNonCESO }}],
+                    backgroundColor: ["#4299E1", "#9F7AEA", "#BEE3F8", "#E9D8FD"],
+                    borderColor: ["#4299E1", "#9F7AEA", "#BEE3F8", "#E9D8FD"],
+                    data: [{{ $totalMaleCESOChart }}, {{ $totalFemaleCESOChart }}, {{ $totalMaleNonCESOChart }}, {{ $totalFemaleNonCESOChart }}],
                     fill: false,
                 },
             ],
@@ -132,46 +137,107 @@
         </div>
     </div>
 
-    <div class="card col-span-3 row-span-2 row-start-2">
+    <div class="col-span-3 row-span-2 row-start-2">
+
+
+
         <div class="w-full rounded sm:w-auto">
             <div class="bg-white">
                 <div class="rounded-lg shadow-md">
-                    <div class="bg-blue-500 text-white p-2">
-                        <h1 class="text-center font-semibold whitespace-nowrap uppercase">
-                            Plantilla Statistics
+                    <div class="bg-blue-100 text-white p-2 grid grid-cols-3 flex items-center">
+                        <h1 class=" text-center font-semibold whitespace-nowrap uppercase text-blue-500 col-start-2">
+                            Plantilla Statistics Summary by Department
                         </h1>
+
+                        <div class="flex items-center justify-end">
+                            <form class="toggleForm">
+                                <select onchange="sectorsToggle()" style="padding:5 0" name="sectorToggle">
+                                    <option value="">All</option>
+                                    @foreach ($sectors as $data)
+                                    <option value="{{ $data->sectorid }}" {{ $data->sectorid == $sectorToggle ?
+                                        'selected' :
+                                        ''}}>
+                                        {{ $data->title }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </form>
+
+                        </div>
+
                     </div>
-
-                    <canvas class="w-full p-2" id="plantillaStatistics"></canvas>
-                    <script>
-                        plantillaStatistics();
-                    </script>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Department Agency
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total Plantilla
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Male CESO - Male NonCESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Female CESO - Female NonCESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total CESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total NONCESO
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($agencyStatistics as $data)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900">
+                                            {{ $data['agency']->title }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900 text-center">
+                                            {{ $data['total_plantilla'] }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900 text-center">
+                                            {{ $data['total_male_ceso'] }} - {{ $data['total_male_nonceso'] }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900 text-center">
+                                            {{ $data['total_female_ceso'] }} - {{ $data['total_female_nonceso'] }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900 text-center">
+                                            {{ $data['total_ceso'] }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <div class="text-sm leading-5 text-gray-900 text-center">
+                                            {{ $data['total_nonceso'] }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="grid gap-4 mb-3 sm:grid-cols-1 sm:gap-3 lg:grid-cols-4 lg:gap-4">
-    <div class="w-full rounded sm:w-auto">
-        <div class="bg-white">
-            <div class="rounded-lg shadow-md">
-                <div class="bg-blue-500 text-white p-2">
-                    <h1 class="text-center font-semibold whitespace-nowrap uppercase">
-                        Plantilla Statistics
-                    </h1>
-                </div>
-
-                <canvas class="w-full p-2" id="plantillaStatistics"></canvas>
-                <script></script>
-                    plantillaStatistics();
-
-                </script>
-                <h1 class="text-center text-slate-500 font-semibold">
-                    Total Plantilla {{ $plantillaAll }}
-                </h1>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
