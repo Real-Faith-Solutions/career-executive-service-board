@@ -26,7 +26,7 @@
 
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach ($positionMasterLibrary as $data)
-            if ("{{ $data->poslevel_code }}" == val) {
+            if ("{{ $data->poslevel_code }}" === val) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->pos_code }}";
                 // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
