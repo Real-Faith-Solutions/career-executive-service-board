@@ -17,11 +17,18 @@ use Illuminate\Validation\Rule;
 
 class TrainingSessionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $trainingSession = TrainingSession::paginate(25);
+        $search = $request->input('search');
 
-        return view('admin.competency.partials.training_session.table', compact('trainingSession'));
+        $trainingSession = TrainingSession::query()
+        ->where('sessionid', "LIKE", "%$search%")
+        ->orWhere('title',  "LIKE", "%$search%")
+        ->orWhere('category',  "LIKE", "%$search%")
+        ->orWhere('status',  "LIKE", "%$search%")
+        ->paginate(25);
+
+        return view('admin.competency.partials.training_session.table', compact('trainingSession'), ['query' =>$search]);
     }
 
     public function create()
