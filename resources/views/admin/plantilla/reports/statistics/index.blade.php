@@ -17,8 +17,8 @@
             datasets: [
                 {
                     label: labels,
-                    backgroundColor: ["##1E90FF", "#8E44AD", "#2ECC71", "#FFA500"],
-                    borderColor: ["##1E90FF", "#8E44AD", "#2ECC71", "#FFA500"],
+                    backgroundColor: ["#1C64F2", "#8E44AD", "#2ECC71", "#FFA500"],
+                    borderColor: ["#1C64F2", "#8E44AD", "#2ECC71", "#FFA500"],
                     data: [{{ $totalMaleCESOChart }}, {{ $totalFemaleCESOChart }}, {{ $totalMaleNonCESOChart }}, {{ $totalFemaleNonCESOChart }}],
                     fill: false,
                 },
