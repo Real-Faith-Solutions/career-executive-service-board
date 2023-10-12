@@ -72,14 +72,12 @@
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
                         <select name="place_of_examination" id="place_of_examination">
-                            <option disabled selected>Select Examination Place</option>
+                            <option disabled>Select Examination Place</option>
                             @foreach ($profileLibCities as $profileLibCity)
-                            @if ($examinationTaken->exam_place == $profileLibCities->city_code )
-                            <option value="{{ $profileLibCities->city_code }}" selected>{{ $profileLibCities->name }}
+                            <option value="{{ $profileLibCity->city_code }}" {{ $profileLibCity->city_code ==
+                                $examinationTaken->exam_place ? 'selected' : ''}}>
+                                {{ $profileLibCities->name }}
                             </option>
-                            @else
-                            <option value="{{ $profileLibCities->city_code }}">{{ $profileLibCities->name }}</option>
-                            @endif
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
