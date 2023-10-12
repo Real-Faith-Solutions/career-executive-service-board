@@ -211,12 +211,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div class="text-sm leading-5 text-gray-900 text-center">
-                                            {{ $data['total_male_ceso'] }} - {{ $data['total_male_ceso'] }}
+                                            {{ $data['total_male_ceso'] }} - {{ $data['total_male_nonceso'] }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div class="text-sm leading-5 text-gray-900 text-center">
-                                            {{ $data['total_female_ceso'] }} - {{ $data['total_female_ceso'] }}
+                                            {{ $data['total_female_ceso'] }} - {{ $data['total_female_nonceso'] }}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
