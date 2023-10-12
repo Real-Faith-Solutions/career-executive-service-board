@@ -15,7 +15,7 @@ class TrainingParticipantsController extends Controller
     public function participantList($sessionId)
     {
         $trainingSession = TrainingSession::find($sessionId);
-        $trainingParticipantList = $trainingSession->trainingParticipantList;
+        $trainingParticipantList = $trainingSession->trainingParticipantList()->paginate(25);
 
         return view('admin.competency.partials.training_participant.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
     }
@@ -163,7 +163,7 @@ class TrainingParticipantsController extends Controller
 
     public function recentlyDeletedParticipant()
     {
-        $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->get();
+        $trainingParticipantTrashedRecord =  TrainingParticipants::onlyTrashed()->paginate(25);
     
         return view('admin.competency.partials.training_participant.participant_trashbin', compact('trainingParticipantTrashedRecord'));
     }

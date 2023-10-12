@@ -143,4 +143,8 @@
     </table>
 </div>
 
+<div class="m-5">
+    {{ $trainingParticipantTrashedRecord->links() }}
+</div>
+
 @endsection

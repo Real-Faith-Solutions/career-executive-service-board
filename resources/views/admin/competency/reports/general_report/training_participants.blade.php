@@ -84,7 +84,10 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->from_dt ?? ''. ' - '.$trainingSessions->to_dt ?? '' }}
+                            {{ 
+                                \Carbon\Carbon::parse($trainingSessions->from_dt)->format('m/d/Y') ?? ''.' - '.
+                                \Carbon\Carbon::parse($trainingSessions->to_dt)->format('m/d/Y') ?? '' 
+                            }}
                         </td>
 
                         <td class="px-6 py-3">
@@ -104,10 +107,8 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ 
-                                $trainingSessions->resourceSpeakerPersonalData->lastname ?? '' .', '.
-                                $trainingSessions->resourceSpeakerPersonalData->firstname ?? '' 
-                            }}
+                            {{ $trainingSessions->resourceSpeakerPersonalData->lastname ?? '' }},
+                            {{ $trainingSessions->resourceSpeakerPersonalData->firstname ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">

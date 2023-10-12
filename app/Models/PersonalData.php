@@ -23,17 +23,6 @@ class PersonalData extends Model
 
     protected $primaryKey = 'cesno';
 
-    // protected $maps = [
-    //     'email' => 'emailadd',
-    // ];
-
-    // public function getEmail()
-    // {
-    //     return $this->attributes['emailadd'];
-    // }
-
-    protected $append = ['email'];
-
     protected $fillable = [
 
         'cesno',
@@ -80,6 +69,42 @@ class PersonalData extends Model
     public function setEmailAttribute($value)
     {
         $this->attributes['emailadd'] = $value;
+    }
+
+    // Accessor to get the 'birth_date' attribute
+    public function getBirthDateAttribute()
+    {
+        return $this->attributes['birthdate'];
+    }
+
+    // Mutator to set the 'birth_date' attribute
+    public function setBirthDateAttribute($value)
+    {
+        $this->attributes['birthdate'] = $value;
+    }
+
+    // Accessor to get the 'birth_place' attribute
+    public function getBirthPlaceAttribute()
+    {
+        return $this->attributes['birthplace'];
+    }
+
+    // Mutator to set the 'birth_place' attribute
+    public function setBirthPlaceAttribute($value)
+    {
+        $this->attributes['birthplace'] = $value;
+    }
+
+    // Accessor to get the 'civil_status' attribute
+    public function getCivilStatusAttribute()
+    {
+        return $this->attributes['civilstatus'];
+    }
+
+    // Mutator to set the 'civil_status' attribute
+    public function setCivilStatusAttribute($value)
+    {
+        $this->attributes['civilstatus'] = $value;
     }
 
     public function search($search)

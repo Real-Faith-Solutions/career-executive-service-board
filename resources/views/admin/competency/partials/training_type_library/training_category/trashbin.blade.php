@@ -37,7 +37,7 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
+                        <div class="flex justify-end">
                             <form action="{{ route('training-category.restore', ['ctrlno'=>$trainingCategoryTrashedRecords->ctrlno]) }}" method="POST" id="restore_training_category_form{{$trainingCategoryTrashedRecords->ctrlno}}">
                                 @csrf
                                 <button title="Restore" type="button" id="restoreTrainingCategoryButton{{$trainingCategoryTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">

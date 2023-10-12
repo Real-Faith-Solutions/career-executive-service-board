@@ -14,7 +14,7 @@ class ResourceSpeakerManagerReportController extends Controller
     {
         $search = $request->input('expertise');
 
-        $expertise = ResourceSpeaker::get(['expertise']);
+        $expertise = ResourceSpeaker::distinct()->get(['expertise']);
 
         if($search == 'all')
         {
