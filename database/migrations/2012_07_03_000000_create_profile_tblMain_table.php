@@ -23,11 +23,11 @@ return new class extends Migration
             $table->string('middlename')->nullable();
             $table->string('middleinitial')->nullable();
             $table->string('nickname')->nullable();
-            $table->datetime('birth_date')->nullable();
-            $table->string('birth_place')->nullable();
+            $table->datetime('birthdate')->nullable();
+            $table->string('birthplace')->nullable();
             $table->string('gender')->nullable();
             $table->string('gender_by_choice')->nullable();
-            $table->string('civil_status')->nullable();
+            $table->string('civilstatus')->nullable();
             $table->string('religion')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
