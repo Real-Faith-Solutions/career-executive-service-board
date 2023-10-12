@@ -54,7 +54,7 @@ class ProfileController extends Controller
 
         $profile_picture = $mainProfile->picture;
 
-        if (!(Storage::disk('public')->exists('images/'.$profile_picture))) {
+        if (!(Storage::disk('public')->exists('images/' . $profile_picture))) {
             $profile_picture = 'placeholder.png';
         }
 
@@ -113,79 +113,79 @@ class ProfileController extends Controller
 
         DB::beginTransaction();
 
-        try {
+        // try {
 
-            $newProfile = PersonalData::create([
+        $newProfile = PersonalData::create([
 
-                'status' => $request->status,
-                'title' => $request->title,
-                'email' => $request->email,
-                'lastname' => ucwords(strtolower($request->lastname)),
-                'firstname' => ucwords(strtolower($request->firstname)),
-                'name_extension' => $request->name_extension,
-                'middlename' => ucwords(strtolower($request->middlename)),
-                'middleinitial' => $request->mi,
-                'nickname' => ucwords(strtolower($request->nickname)),
-                'birth_date' => $request->birthdate,
-                'birth_place' => $request->birth_place,
-                'gender' => $request->gender,
-                'gender_by_choice' => $request->gender_by_choice,
-                'civil_status' => $request->civil_status,
-                'religion' => $request->religion,
-                'height' => $request->height,
-                'weight' => $request->weight,
-                'member_of_indigenous_group' => $request->member_of_indigenous_group,
-                'single_parent' => $request->single_parent,
-                'citizenship' => $request->citizenship,
-                'dual_citizenship' => $request->dual_citizenship,
-                'person_with_disability' => $request->person_with_disability,
-                'encoder' => $encoder,
-    
-            ]);
-    
-            // sending email to added user
-            $recipientEmail = $request->email;
-            $password = Str::password(8);
-            $hashedPassword = Hash::make($password);
-            $imagePath = public_path('images/branding.png');
-            $loginLink = config('app.url');
-            $type = "addProfile";
-    
-            $data = [
-                'type' => $type,
-                'email' => $recipientEmail,
-                'password' => $password,
-                'imagePath' => $imagePath,
-                'loginLink' => $loginLink,
-            ];
-            // end sending email to added user
-    
-            Mail::to($recipientEmail)->send(new TempCred201($data));
-    
-            // making account credentials for user
-            $user = $newProfile->users()->Create([
-                'email' => $newProfile->email,
-                'password' => $hashedPassword,
-                'is_active'                    => 'Active',
-                'last_updated_by'           => 'system encode',
-                'encoder'                   => $encoder,
-                'default_password_change'   => 'true',
-            ]);
-    
-            $user->assignRole('user');
-            // end making account credentials for user
+            'status' => $request->status,
+            'title' => $request->title,
+            'email' => $request->email,
+            'lastname' => ucwords(strtolower($request->lastname)),
+            'firstname' => ucwords(strtolower($request->firstname)),
+            'name_extension' => $request->name_extension,
+            'middlename' => ucwords(strtolower($request->middlename)),
+            'middleinitial' => $request->mi,
+            'nickname' => ucwords(strtolower($request->nickname)),
+            'birth_date' => $request->birthdate,
+            'birth_place' => $request->birth_place,
+            'gender' => $request->gender,
+            'gender_by_choice' => $request->gender_by_choice,
+            'civil_status' => $request->civil_status,
+            'religion' => $request->religion,
+            'height' => $request->height,
+            'weight' => $request->weight,
+            'member_of_indigenous_group' => $request->member_of_indigenous_group,
+            'single_parent' => $request->single_parent,
+            'citizenship' => $request->citizenship,
+            'dual_citizenship' => $request->dual_citizenship,
+            'person_with_disability' => $request->person_with_disability,
+            'encoder' => $encoder,
 
-            // Commit the transaction if all operations succeed
-            DB::commit();
+        ]);
 
-            return back()->with('message', 'New profile added!');
+        // sending email to added user
+        $recipientEmail = $request->email;
+        $password = Str::password(8);
+        $hashedPassword = Hash::make($password);
+        $imagePath = public_path('images/branding.png');
+        $loginLink = config('app.url');
+        $type = "addProfile";
 
-        } catch (\Exception $e) {
-            // Rollback the transaction if any operation fails
-            DB::rollBack();
+        $data = [
+            'type' => $type,
+            'email' => $recipientEmail,
+            'password' => $password,
+            'imagePath' => $imagePath,
+            'loginLink' => $loginLink,
+        ];
+        // end sending email to added user
 
-            return back()->with('error', 'An error occurred while creating the user.');
-        }
+        Mail::to($recipientEmail)->send(new TempCred201($data));
+
+        // making account credentials for user
+        $user = $newProfile->users()->Create([
+            'email' => $newProfile->email,
+            'password' => $hashedPassword,
+            'is_active'                    => 'Active',
+            'last_updated_by'           => 'system encode',
+            'encoder'                   => $encoder,
+            'default_password_change'   => 'true',
+        ]);
+
+        $user->assignRole('user');
+        // end making account credentials for user
+
+        // Commit the transaction if all operations succeed
+        DB::commit();
+
+        return back()->with('message', 'New profile added!');
+
+        // } catch (\Exception $e) {
+        //     // Rollback the transaction if any operation fails
+        //     DB::rollBack();
+
+        //     return back()->with('error', 'An error occurred while creating the user.');
+        // }
 
         return back()->with('message', 'New profile added!');
     }
@@ -327,7 +327,6 @@ class ProfileController extends Controller
             DB::commit();
 
             return back()->with('info', 'Profile Updated!');
-
         } catch (\Exception $e) {
             // Rollback the transaction if any operation fails
             DB::rollBack();
@@ -427,7 +426,6 @@ class ProfileController extends Controller
             DB::commit();
 
             return redirect()->back()->with('message', 'New Credentials Email Sent');
-
         } catch (\Exception $e) {
             // Rollback the transaction if any operation fails
             DB::rollBack();
