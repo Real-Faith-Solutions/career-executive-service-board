@@ -109,7 +109,7 @@
                             <option disabled selected>Select Case Status</option>
                             @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
                                 @if ($profileLibTblCaseStatuses->STATUS_CODE == $caseRecord->status_code )
-                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}" selected>{{ $profileLibTblCaseStatuses->TITLE }}</option>
                                 @else
                                     <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
                                 @endif
@@ -124,7 +124,7 @@
 
                     <div class="mb-3">
                         <label for="date_finality_edit">Date of Finality<sup>*</sup></label>
-                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $caseRecord->finality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed, date_finality)" required>
+                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ \Carbon\Carbon::parse($caseRecord->finality)->format('m/d/Y') }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed, date_finality)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_finality')
                             <span class="invalid" role="alert">

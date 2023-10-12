@@ -77,8 +77,6 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ \Carbon\Carbon::parse($caseRecords->filed_dt)->format('m/d/Y') ?? 'No Record' }}
-
                         {{ 
                             \Carbon\Carbon::parse($otherTrainings->from_dt)->format('m/d/Y'). ' - '.
                             \Carbon\Carbon::parse($otherTrainings->to_dt)->format('m/d/Y') ?? 'No Record' 

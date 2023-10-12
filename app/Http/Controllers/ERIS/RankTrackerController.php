@@ -17,7 +17,7 @@ class RankTrackerController extends Controller
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
-        $rankTracker = $erisTblMain->rankTracker()->paginate(20);
+        $rankTracker = $erisTblMain->rankTracker()->paginate(25);
 
         return view('admin.eris.partials.rank_tracker.table', compact('acno', 'rankTracker'));
     }
