@@ -74,7 +74,7 @@
                         <select name="place_of_examination" id="place_of_examination">
                             <option disabled selected>Select Examination Place</option>
                             @foreach ($profileLibCities as $profileLibCity)
-                            @if ($examinationTaken->exam_place == $profileLibCities->city_code ?? '' )
+                            @if ($examinationTaken->exam_place == $profileLibCities->city_code )
                             <option value="{{ $profileLibCities->city_code }}" selected>{{ $profileLibCities->name }}
                             </option>
                             @else
