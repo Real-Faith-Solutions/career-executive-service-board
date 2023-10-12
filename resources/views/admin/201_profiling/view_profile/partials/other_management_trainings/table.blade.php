@@ -77,7 +77,12 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $otherTrainings->from_dt. ' - '.$otherTrainings->to_dt ?? 'No Record' }}
+                        {{ \Carbon\Carbon::parse($caseRecords->filed_dt)->format('m/d/Y') ?? 'No Record' }}
+
+                        {{ 
+                            \Carbon\Carbon::parse($otherTrainings->from_dt)->format('m/d/Y'). ' - '.
+                            \Carbon\Carbon::parse($otherTrainings->to_dt)->format('m/d/Y') ?? 'No Record' 
+                        }}
                     </td>
 
                     <td class="px-6 py-3">
