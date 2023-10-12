@@ -70,9 +70,17 @@ class PersonalData extends Model
 
     ];
 
-    protected $attributes = array(
-		'email' => 'emailadd',
-	);
+    // Accessor to get the 'email' attribute
+    public function getEmailAttribute()
+    {
+        return $this->attributes['emailadd'];
+    }
+
+    // Mutator to set the 'email' attribute
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['emailadd'] = $value;
+    }
 
     public function search($search)
     {

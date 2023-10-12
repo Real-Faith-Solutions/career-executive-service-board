@@ -18,7 +18,7 @@ class DefaultAccounts extends Seeder
 
         // seeding admin 
         $admin = PersonalData::create([
-            'email' => 'admin@ces.com',
+            'emailadd' => 'admin@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
@@ -56,7 +56,7 @@ class DefaultAccounts extends Seeder
 
         // seeding power user 
         $power_user = PersonalData::create([
-            'emailadd' => 'power_user@ces.com',
+            'email' => 'power_user@ces.com',
             'status' => $faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),
             'lastname' => $faker->lastName,
