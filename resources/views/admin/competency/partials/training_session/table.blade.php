@@ -4,14 +4,23 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('training-session.recentlyDeleted') }}">
-        <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
-            style="width:34px;height:34px">
-        </lord-icon>
-    </a>
+<div class="my-5 flex justify-between">
+    <div class="grid lg:grid-cols-3">
+        @include('components.search')
+    </div>
 
-    <a href="{{ route('training-session.create') }}" class="btn btn-primary">Add New Training</a>
+    <div class="flex items-center">
+        <a href="{{ route('training-session.recentlyDeleted') }}">
+            <lord-icon 
+                src="https://cdn.lordicon.com/jmkrnisz.json" 
+                trigger="hover" 
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+            </lord-icon>
+        </a>
+    
+        <a href="{{ route('training-session.create') }}" class="btn btn-primary">Add New Training</a>
+    </div>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
