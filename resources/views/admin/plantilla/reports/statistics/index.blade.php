@@ -45,7 +45,7 @@
     Plantilla Reports
 </h1>
 
-<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4 lg:grid-row-2">
+<div class="sm:gid-cols-1 mb-3 grid gap-2 md:grid-cols-2 lg:grid-cols-4 lg:grid-row-2 sm:grid-row-1">
 
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
@@ -109,8 +109,8 @@
     <div class="lg:row-span-2 sm:row-span-1 w-full rounded sm:w-auto">
         <div class="bg-white">
             <div class="rounded-lg shadow-md">
-                <div class="bg-blue-500 text-white p-2">
-                    <h1 class="text-center font-semibold whitespace-nowrap uppercase">
+                <div class="bg-blue-100 text-white p-2">
+                    <h1 class="text-center font-semibold whitespace-nowrap uppercase text-blue-500">
                         Plantilla Statistics By Gender
                     </h1>
                 </div>
@@ -137,10 +137,51 @@
         </div>
     </div>
 
+    <div class="lg:row-span-2 sm:row-span-1 w-full rounded sm:w-auto">
+        <div class="bg-white">
+            <div class="rounded-lg shadow-md">
+                <div class="bg-green-100 text-white p-2">
+                    <h1 class="text-center font-semibold whitespace-nowrap uppercase text-green-500">
+                        Recent Appointees
+                    </h1>
+                </div>
+
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th
+                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Appointee
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($recentAppointee as $data)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap">
+                                <div class="text-sm leading-5 text-gray-900 flex justify-between">
+                                    <p>
+                                        {{ $data->personalData->title }}
+                                        {{ $data->personalData->lastname }},
+                                        {{ $data->personalData->firstname }}
+                                        {{ $data->personalData->name_extension }}
+                                        {{ $data->personalData->mi }}
+                                    </p>
+                                    <p>
+                                        {{ $data->planPosition->pos_default }}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
     <div class="col-span-3 row-span-2 row-start-2">
-
-
-
         <div class="w-full rounded sm:w-auto">
             <div class="bg-white">
                 <div class="rounded-lg shadow-md">
@@ -148,7 +189,6 @@
                         <h1 class=" text-center font-semibold whitespace-nowrap uppercase text-blue-500 col-start-2">
                             Plantilla Statistics Summary by Department
                         </h1>
-
                         <div class="flex items-center justify-end">
                             <form class="toggleForm">
                                 <select onchange="sectorsToggle()" style="padding:5 0" name="sectorToggle">
@@ -162,11 +202,9 @@
                                     @endforeach
                                 </select>
                             </form>
-
                         </div>
-
                     </div>
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto overflow-y-auto" style="height: 500px;">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
@@ -232,6 +270,34 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Department Agency
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total Plantilla
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Male CESO - Male NonCESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Female CESO - Female NonCESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total CESO
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        Total NONCESO
+                                    </th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

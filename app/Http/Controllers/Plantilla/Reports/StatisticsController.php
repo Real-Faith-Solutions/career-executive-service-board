@@ -15,6 +15,7 @@ class StatisticsController extends Controller
 {
     public function index(Request $request)
     {
+        $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
         $plantillaAll = PlanAppointee::all()->count();
         $plantillaCES = PlanAppointee::where('is_appointee', 1)->count();
         $plantillaNonCES = PlanAppointee::where('is_appointee', 0)->count();
@@ -119,6 +120,7 @@ class StatisticsController extends Controller
 
 
         return view('admin.plantilla.reports.statistics.index', compact(
+            'recentAppointee',
             'sectorToggle',
             'plantillaAll',
             'plantillaCES',
