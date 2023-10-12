@@ -30,7 +30,7 @@ class AddProfile201Req extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique('profile_tblMain', 'email')->ignore($cesno, 'cesno'),
+                Rule::unique('profile_tblMain', 'emailadd')->ignore($cesno, 'cesno'), //hindi gumagana dito sa request validation yung accessors/mutators
             ],
             'lastname' => 'required|min:2',
             'firstname' => 'required|min:2',

@@ -78,7 +78,7 @@
                             <div class="mb-3">
                                 <label for="lastname">Lastname<sup>*</sup></label>
                                 <input id="lastname" name="lastname" type="text" value="{{ $mainProfile->lastname }}"
-                                    oninput="validateInput(lastname, 2, 'letters')"
+                                    oninput="validateInput(lastname, 2, 'letters'), this.value = this.value.toUpperCase();"
                                     onkeypress="validateInput(lastname, 2, 'letters')"
                                     onblur="checkErrorMessage(lastname)" required>
                                 <p class="input_error text-red-600"></p>
@@ -87,7 +87,7 @@
                             <div class="mb-3">
                                 <label for="firstname">Firstname<sup>*</sup></label>
                                 <input id="firstname" name="firstname" type="text" value="{{ $mainProfile->firstname }}"
-                                    oninput="validateInput(firstname, 2, 'letters')"
+                                    oninput="validateInput(firstname, 2, 'letters'), this.value = this.value.toUpperCase();"
                                     onkeypress="validateInput(firstname, 2, 'letters')"
                                     onblur="checkErrorMessage(firstname)" required>
                                 <p class="input_error text-red-600"></p>
@@ -97,7 +97,7 @@
                                 <label for="middlename">Middlename<sup>*</sup></label>
                                 <input id="middlename" name="middlename" type="text"
                                     value="{{ $mainProfile->middlename }}" onkeyup="generateMiddleInitial()" type="text"
-                                    oninput="validateInput(middlename, 2, 'letters')"
+                                    oninput="validateInput(middlename, 2, 'letters'), this.value = this.value.toUpperCase();"
                                     onkeypress="validateInput(middlename, 2, 'letters')"
                                     onblur="checkErrorMessage(middlename)">
                                 <p class="input_error text-red-600"></p>

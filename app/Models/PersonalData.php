@@ -23,8 +23,20 @@ class PersonalData extends Model
 
     protected $primaryKey = 'cesno';
 
+    // protected $maps = [
+    //     'email' => 'emailadd',
+    // ];
+
+    // public function getEmail()
+    // {
+    //     return $this->attributes['emailadd'];
+    // }
+
+    protected $append = ['email'];
+
     protected $fillable = [
 
+        'cesno',
         'picture',
         'email',
         'status',
@@ -53,9 +65,22 @@ class PersonalData extends Model
         'encoder',
         'acno',
         'remarks',
+        'e_date',
         'lastupd_dt',
 
     ];
+
+    // Accessor to get the 'email' attribute
+    public function getEmailAttribute()
+    {
+        return $this->attributes['emailadd'];
+    }
+
+    // Mutator to set the 'email' attribute
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['emailadd'] = $value;
+    }
 
     public function search($search)
     {
