@@ -204,7 +204,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="overflow-x-auto overflow-y-auto" style="height: 500px;">
+                    <div class="overflow-x-auto overflow-y-auto" style="max-height: 500px;">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
