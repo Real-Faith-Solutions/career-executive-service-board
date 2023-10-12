@@ -70,8 +70,8 @@ class DatabaseSeeder extends Seeder
             // TrainingLibCategorySeeder::class,
             // LibraryRankTrackerSeeder::class,
             // ErisTblMainSeeder::class,
-            profilelib_tblCaseNatureSeeder::class,
-            profilelib_tblCaseStatusSeeder::class,
+            // profilelib_tblCaseNatureSeeder::class,
+            // profilelib_tblCaseStatusSeeder::class,
 
             // plantilla
             SectorManagerSeeder::class,
