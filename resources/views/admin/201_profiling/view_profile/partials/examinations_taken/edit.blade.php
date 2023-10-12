@@ -17,7 +17,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('examination-taken.update', ['ctrlno'=>$examinationTaken->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="update_examination_taken_form" onsubmit="return checkErrorsBeforeSubmit(update_examination_taken_form)">
+            <form
+                action="{{ route('examination-taken.update', ['ctrlno'=>$examinationTaken->ctrlno, 'cesno'=>$cesno]) }}"
+                method="POST" id="update_examination_taken_form"
+                onsubmit="return checkErrorsBeforeSubmit(update_examination_taken_form)">
                 @csrf
                 @method('PUT')
 
@@ -27,17 +30,19 @@
                         <select id="type" name="exam_code" required>
                             <option disabled selected>Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
-                                @if ($profileLibTblExamRefs->CODE == $examinationTaken->exam_code)
-                                    <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE }}</option>
-                                @else
-                                    <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}</option>s
-                                @endif
+                            @if ($profileLibTblExamRefs->CODE == $examinationTaken->exam_code)
+                            <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE
+                                }}</option>
+                            @else
+                            <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}
+                            </option>s
+                            @endif
                             @endforeach
                         </select>
                         @error('exam_code')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
                 </div>
@@ -47,19 +52,20 @@
                         <label for="rating">Rating (if applicable)</label>
                         <input id="rating" name="rating" type="text" value="{{ $examinationTaken->rate }}">
                         @error('rating')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
-                        <input id="date_of_examination" name="date_of_examination" value="{{ $examinationTaken->exam_date }}" required type="text">
+                        <input id="date_of_examination" name="date_of_examination"
+                            value="{{ $examinationTaken->exam_date }}" required type="text">
                         @error('date_of_examination')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
 
@@ -68,18 +74,19 @@
                         <select name="place_of_examination" id="place_of_examination">
                             <option disabled selected>Select Examination Place</option>
                             @foreach ($profileLibCities as $profileLibCity)
-                                @if ($examinationTaken->exam_place == $profileLibCities->city_code )
-                                    <option value="{{ $profileLibCities->city_code }}" selected>{{ $profileLibCities->name }}</option>
-                                @else
-                                    <option value="{{ $profileLibCities->city_code }}">{{ $profileLibCities->name }}</option>
-                                @endif
+                            @if ($examinationTaken->exam_place == $profileLibCities->city_code ?? '' )
+                            <option value="{{ $profileLibCities->city_code }}" selected>{{ $profileLibCities->name }}
+                            </option>
+                            @else
+                            <option value="{{ $profileLibCities->city_code }}">{{ $profileLibCities->name }}</option>
+                            @endif
                             @endforeach
                         </select>
                         <p class="input_error text-red-600"></p>
                         @error('place_of_examination')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
                 </div>
@@ -87,36 +94,40 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="license_number">License details (if applicable)</label>
-                        <input id="license_number" name="license_number" value="{{ $examinationTaken->license_number }}" type="text">
+                        <input id="license_number" name="license_number" value="{{ $examinationTaken->license_number }}"
+                            type="text">
                         @error('license_number')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="date_acquired">Date Acquired</label>
-                        <input id="date_acquired" name="date_acquired" value="{{ $examinationTaken->date_acquired }}" type="date">
+                        <input id="date_acquired" name="date_acquired" value="{{ $examinationTaken->date_acquired }}"
+                            type="date">
                         @error('date_acquired')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="date_validity">Date Validity</label>
-                        <input id="date_validity" name="date_validity" value="{{ $examinationTaken->date_validity }}" type="date">
+                        <input id="date_validity" name="date_validity" value="{{ $examinationTaken->date_validity }}"
+                            type="date">
                         @error('date_validity')
-                            <span class="invalid" role="alert">
-                                <p>{{ $message }}</p>
-                            </span>
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
                         @enderror
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button type="button" class="btn btn-primary" id="updateExamTakenButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                    <button type="button" class="btn btn-primary" id="updateExamTakenButton"
+                        onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>
