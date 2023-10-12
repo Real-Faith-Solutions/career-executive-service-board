@@ -107,8 +107,13 @@
                         <label for="case_status_edit">Case Status<sup>*</sup></label>
                         <select id="case_status_edit" name="case_status" required>
                             <option disabled selected>Select Case Status</option>
-                            <option value="Dismissed" {{ $caseRecord->status_code == 'Dismissed' ? 'selected' : '' }}>Dismissed</option>
-                            <option value="Acquitted" {{ $caseRecord->status_code == 'Acquitted' ? 'selected' : '' }}>Acquitted</option>
+                            @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
+                                @if ($profileLibTblCaseStatuses->STATUS_CODE == $caseRecord->status_code )
+                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                                @else
+                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                                @endif
+                            @endforeach
                         </select>
                         @error('case_status')
                             <span class="invalid" role="alert">

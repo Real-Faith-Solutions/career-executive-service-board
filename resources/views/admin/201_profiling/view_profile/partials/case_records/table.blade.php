@@ -78,7 +78,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->nature_code ?? 'No Record' }}
+                        {{ $caseRecords->caseNatureCode->TITLE ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -94,7 +94,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $caseRecords->status_code ?? 'No Record' }}
+                        {{ $caseRecords->caseStatusCode->TITLE ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">

@@ -100,8 +100,9 @@
                         <label for="case_status">Case Status<sup>*</sup></label>
                         <select id="case_status" name="case_status" required>
                             <option disabled selected>Select Case Status</option>
-                            <option value="Dismissed">Dismissed</option>
-                            <option value="Acquitted">Acquitted</option>
+                            @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
+                                <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                            @endforeach
                         </select>
                         @error('case_status')
                             <span class="invalid" role="alert">
