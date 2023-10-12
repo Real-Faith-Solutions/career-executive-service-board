@@ -21,31 +21,31 @@ class StatisticsController extends Controller
         $percentageCES = ($plantillaCES / $plantillaAll) * 100;
         $percentageNonCES = ($plantillaNonCES / $plantillaAll) * 100;
 
-        $totalMaleCESO = PlanAppointee::where('is_appointee', 1)
+        $totalMaleCESOChart = PlanAppointee::where('is_appointee', 1)
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
             })
             ->count();
 
-        $totalFemaleCESO = PlanAppointee::where('is_appointee', 1)
+        $totalFemaleCESOChart = PlanAppointee::where('is_appointee', 1)
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');
             })
             ->count();
 
-        $totalMaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
+        $totalMaleNonCESOChart = PlanAppointee::whereNot('is_appointee', 1)
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
             })
             ->count();
-        $totalFemaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
+        $totalFemaleNonCESOChart = PlanAppointee::whereNot('is_appointee', 1)
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');
             })
             ->count();
 
-        $totalMale = $totalMaleCESO + $totalMaleNonCESO;
-        $totalFemale = $totalFemaleCESO + $totalFemaleNonCESO;
+        $totalMale = $totalMaleCESOChart + $totalMaleNonCESOChart;
+        $totalFemale = $totalFemaleCESOChart + $totalFemaleNonCESOChart;
 
         $sectorToggle = $request->input('sectorToggle');
 
@@ -123,10 +123,10 @@ class StatisticsController extends Controller
             'plantillaAll',
             'plantillaCES',
             'plantillaNonCES',
-            'totalMaleCESO',
-            'totalFemaleCESO',
-            'totalMaleNonCESO',
-            'totalFemaleNonCESO',
+            'totalMaleCESOChart',
+            'totalFemaleCESOChart',
+            'totalMaleNonCESOChart',
+            'totalFemaleNonCESOChart',
             'percentageCES',
             'percentageNonCES',
             'totalMale',

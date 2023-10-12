@@ -19,7 +19,7 @@
                     label: labels,
                     backgroundColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
                     borderColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
-                    data: [{{ $totalMaleCESO }}, {{ $totalFemaleCESO }}, {{ $totalMaleNonCESO }}, {{ $totalFemaleNonCESO }}],
+                    data: [{{ $totalMaleCESOChart }}, {{ $totalFemaleCESOChart }}, {{ $totalMaleNonCESOChart }}, {{ $totalFemaleNonCESOChart }}],
                     fill: false,
                 },
             ],
