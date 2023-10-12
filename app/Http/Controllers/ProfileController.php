@@ -104,65 +104,81 @@ class ProfileController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        $newProfile = PersonalData::create([
+        DB::beginTransaction();
 
-            'status' => $request->status,
-            'title' => $request->title,
-            'email' => $request->email,
-            'lastname' => ucwords(strtolower($request->lastname)),
-            'firstname' => ucwords(strtolower($request->firstname)),
-            'name_extension' => $request->name_extension,
-            'middlename' => ucwords(strtolower($request->middlename)),
-            'middleinitial' => $request->mi,
-            'nickname' => ucwords(strtolower($request->nickname)),
-            'birth_date' => $request->birthdate,
-            'birth_place' => $request->birth_place,
-            'gender' => $request->gender,
-            'gender_by_choice' => $request->gender_by_choice,
-            'civil_status' => $request->civil_status,
-            'religion' => $request->religion,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'member_of_indigenous_group' => $request->member_of_indigenous_group,
-            'single_parent' => $request->single_parent,
-            'citizenship' => $request->citizenship,
-            'dual_citizenship' => $request->dual_citizenship,
-            'person_with_disability' => $request->person_with_disability,
-            'encoder' => $encoder,
+        try {
 
-        ]);
+            $newProfile = PersonalData::create([
 
-        // sending email to added user
-        $recipientEmail = $request->email;
-        $password = Str::password(8);
-        $hashedPassword = Hash::make($password);
-        $imagePath = public_path('images/branding.png');
-        $loginLink = config('app.url');
-        $type = "addProfile";
+                'status' => $request->status,
+                'title' => $request->title,
+                'email' => $request->email,
+                'lastname' => ucwords(strtolower($request->lastname)),
+                'firstname' => ucwords(strtolower($request->firstname)),
+                'name_extension' => $request->name_extension,
+                'middlename' => ucwords(strtolower($request->middlename)),
+                'middleinitial' => $request->mi,
+                'nickname' => ucwords(strtolower($request->nickname)),
+                'birth_date' => $request->birthdate,
+                'birth_place' => $request->birth_place,
+                'gender' => $request->gender,
+                'gender_by_choice' => $request->gender_by_choice,
+                'civil_status' => $request->civil_status,
+                'religion' => $request->religion,
+                'height' => $request->height,
+                'weight' => $request->weight,
+                'member_of_indigenous_group' => $request->member_of_indigenous_group,
+                'single_parent' => $request->single_parent,
+                'citizenship' => $request->citizenship,
+                'dual_citizenship' => $request->dual_citizenship,
+                'person_with_disability' => $request->person_with_disability,
+                'encoder' => $encoder,
+    
+            ]);
+    
+            // sending email to added user
+            $recipientEmail = $request->email;
+            $password = Str::password(8);
+            $hashedPassword = Hash::make($password);
+            $imagePath = public_path('images/branding.png');
+            $loginLink = config('app.url');
+            $type = "addProfile";
+    
+            $data = [
+                'type' => $type,
+                'email' => $recipientEmail,
+                'password' => $password,
+                'imagePath' => $imagePath,
+                'loginLink' => $loginLink,
+            ];
+            // end sending email to added user
+    
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+    
+            // making account credentials for user
+            $user = $newProfile->users()->Create([
+                'email' => $newProfile->email,
+                'password' => $hashedPassword,
+                'is_active'                    => 'Active',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => $encoder,
+                'default_password_change'   => 'true',
+            ]);
+    
+            $user->assignRole('user');
+            // end making account credentials for user
 
-        $data = [
-            'type' => $type,
-            'email' => $recipientEmail,
-            'password' => $password,
-            'imagePath' => $imagePath,
-            'loginLink' => $loginLink,
-        ];
-        // end sending email to added user
+            // Commit the transaction if all operations succeed
+            DB::commit();
 
-        Mail::to($recipientEmail)->send(new TempCred201($data));
+            return back()->with('message', 'New profile added!');
 
-        // making account credentials for user
-        $user = $newProfile->users()->Create([
-            'email' => $newProfile->email,
-            'password' => $hashedPassword,
-            'is_active'                    => 'Active',
-            'last_updated_by'           => 'system encode',
-            'encoder'                   => $encoder,
-            'default_password_change'   => 'true',
-        ]);
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
 
-        $user->assignRole('user');
-        // end making account credentials for user
+            return back()->with('error', 'An error occurred while creating the user.');
+        }
 
         return back()->with('message', 'New profile added!');
     }
@@ -267,10 +283,10 @@ class ProfileController extends Controller
         $personalData->status = $request->status;
         $personalData->title = $request->title;
         $personalData->email = $request->email;
-        $personalData->lastname = $request->lastname;
-        $personalData->firstname = $request->firstname;
+        $personalData->lastname = ucwords(strtolower($request->lastname));
+        $personalData->firstname = ucwords(strtolower($request->firstname));
         $personalData->name_extension = $request->name_extension;
-        $personalData->middlename = $request->middlename;
+        $personalData->middlename = ucwords(strtolower($request->middlename));
         $personalData->middleinitial = $middleInitial;
         $personalData->nickname = $request->nickname;
         $personalData->birth_date = $request->birthdate;
