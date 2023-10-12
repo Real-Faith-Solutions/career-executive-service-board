@@ -73,10 +73,10 @@
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
                         <select name="place_of_examination" id="place_of_examination">
                             <option disabled>Select Examination Place</option>
-                            @foreach ($profileLibCities as $profileLibCity)
-                            <option value="{{ $profileLibCity->city_code }}" {{ $profileLibCity->city_code ==
+                            @foreach ($profileLibCities as $data)
+                            <option value="{{ $data->city_code }}" {{ $data->city_code ==
                                 $examinationTaken->exam_place ? 'selected' : ''}}>
-                                {{ $profileLibCities->name }}
+                                {{ $data->name ?? ''}}
                             </option>
                             @endforeach
                         </select>

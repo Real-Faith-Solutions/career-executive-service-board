@@ -73,7 +73,12 @@ class ExaminationTakenController extends Controller
 
         return view(
             'admin.201_profiling.view_profile.partials.examinations_taken.edit',
-            compact('examinationTaken', 'profileLibTblExamRef', 'cesno', 'profileLibCities')
+            compact(
+                'examinationTaken',
+                'profileLibTblExamRef',
+                'cesno',
+                'profileLibCities',
+            )
         );
     }
 
