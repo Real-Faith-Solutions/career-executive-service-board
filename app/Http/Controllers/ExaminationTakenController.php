@@ -68,10 +68,13 @@ class ExaminationTakenController extends Controller
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $examinationTaken = ExaminationsTaken::find($ctrlno);
-        $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
+        // $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
+        $profileLibCities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
-        return view('admin.201_profiling.view_profile.partials.examinations_taken.edit',
-        compact('examinationTaken', 'profileLibTblExamRef', 'cesno', 'profileLibCities'));
+        return view(
+            'admin.201_profiling.view_profile.partials.examinations_taken.edit',
+            compact('examinationTaken', 'profileLibTblExamRef', 'cesno', 'profileLibCities')
+        );
     }
 
     public function update(Request $request, $ctrlno, $cesno)
