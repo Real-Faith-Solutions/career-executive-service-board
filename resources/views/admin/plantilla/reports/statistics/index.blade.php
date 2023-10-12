@@ -17,9 +17,9 @@
             datasets: [
                 {
                     label: labels,
-                    backgroundColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
-                    borderColor: ["#1C64F2", "#0E8A16", "#D4C5F9", "#FBCA04"],
-                    data: [{{ $totalMaleCESO }}, {{ $totalFemaleCESO }}, {{ $totalMaleNonCESO }}, {{ $totalFemaleNonCESO }}],
+                    backgroundColor: ["#4299E1", "#9F7AEA", "#BEE3F8", "#E9D8FD"],
+                    borderColor: ["#4299E1", "#9F7AEA", "#BEE3F8", "#E9D8FD"],
+                    data: [{{ $totalMaleCESOChart }}, {{ $totalFemaleCESOChart }}, {{ $totalMaleNonCESOChart }}, {{ $totalFemaleNonCESOChart }}],
                     fill: false,
                 },
             ],
