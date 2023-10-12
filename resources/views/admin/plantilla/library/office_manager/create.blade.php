@@ -28,7 +28,7 @@
                             @foreach ($departmentAgencies as $departmentAgency)
                             <optgroup label="{{ $departmentAgency->title }}">
                                 @foreach ($agencyLocations as $agencyLocation)
-                                @if($departmentAgency->deptid === $agencyLocation->deptid)
+                                @if($departmentAgency->deptid == $agencyLocation->deptid)
                                 <option value="{{ $agencyLocation->officelocid }}">{{ $agencyLocation->title }}</option>
                                 @endif
                                 @endforeach

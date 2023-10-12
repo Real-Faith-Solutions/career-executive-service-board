@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', '')
+@section('title', 'ERIS')
 @section('content')
 
     <div class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-700">
@@ -24,9 +24,15 @@
                         <th scope="col" class="px-6 py-3">
                             AC No.
                         </th>
+
+                        <th scope="col" class="px-6 py-3">
+                            CESNO.
+                        </th>
+
                         <th scope="col" class="px-6 py-3">
                             Name
                         </th>
+                        
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Action</span>
                         </th>
@@ -37,6 +43,10 @@
                         <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
                             <th scope="col" class="px-6 py-3">
                                 {{ $erisTblMains->acno }}
+                            </th>
+
+                            <th scope="col" class="px-6 py-3">
+                                {{ $erisTblMains->cesno }}
                             </th>
 
                             <td scope="col" class="px-6 py-3">

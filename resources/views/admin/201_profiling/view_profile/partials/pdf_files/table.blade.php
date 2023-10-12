@@ -57,7 +57,7 @@
         <tbody>
             @foreach ($approvedPdfFile as $approvedPdfFiles)
                 <tr class="border-b bg-white">
-                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                    {{-- <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->original_pdflink]) }}" target="_blank" method="POST">
                             @csrf
                             <button title="View File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
@@ -71,7 +71,7 @@
                                 </lord-icon>
                             </button>
                         </form>
-                    </td>
+                    </td> --}}
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                         {{ $approvedPdfFiles->original_pdflink }}

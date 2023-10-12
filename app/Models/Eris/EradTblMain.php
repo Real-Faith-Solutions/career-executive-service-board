@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class EradTblMain extends Model
 {
@@ -45,6 +47,63 @@ class EradTblMain extends Model
         'maddress',
 
     ];
+
+    public function search($search)
+    {
+        $erisTblMain = EradTblMain::query()
+        ->where('acno', "LIKE" ,"%$search%")
+        ->orWhere('cesno',  "LIKE","%$search%")
+        ->orWhere('acbatchno',  "LIKE","%$search%")
+        ->orWhere('lastname',  "LIKE","%$search%")
+        ->orWhere('firstname',  "LIKE","%$search%")
+        ->orWhere('middlename',  "LIKE","%$search%")
+        ->paginate(25);
+
+        return $erisTblMain;
+    }
+
+    public function gettingAcNo()
+    {
+        if (DB::table('erad_tblMain')->count() === 0) 
+        {
+            $acno = 0;
+        } 
+        else 
+        {
+            $acno = EradTblMain::latest()->first()->acno;
+        }
+
+        return ++$acno;
+    }
+
+    public function gettingAcBacthNo()
+    {
+        if (DB::table('erad_tblMain')->count() === 0) 
+        {
+            $acbatchno = 0;
+        } 
+        else 
+        {
+            $acbatchno = EradTblMain::latest()->first()->acbatchno;
+        }
+
+        return ++$acbatchno;
+    }
+
+    public function getUserInfo($acno)
+    {
+        $erisTblMainPersonalData = EradTblMain::find($acno);
+        $birthdate = $erisTblMainPersonalData->birthdate;
+
+        $birthDate = Carbon::parse($birthdate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($birthDate);
+
+        return [
+            'age' => $age,
+            'erisTblMainPersonalData' => $erisTblMainPersonalData
+        ];
+    }
 
     public function writtenExam(): HasMany
     {

@@ -70,7 +70,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $examinationTakens->exam_place ?? 'No Record' }}
+                        {{ $examinationTakens->examPlace->name ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
