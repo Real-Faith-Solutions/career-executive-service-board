@@ -4,6 +4,7 @@
 
         form.submit();
     }
+    
     const plantillaStatisticsByGender = () => {
         const labels = [
             "Total Male CESO",
@@ -76,12 +77,14 @@
             </svg>
         </div>
         <br>
-        <p class="text-sm">
-            Percentage of total CES employees.
-            <span class="text-green-500 p-2 rounded opacity-75">
+        <div>
+            <p class="text-sm">
+                Percentage of total CES employees.
+            </p>
+            <span class="text-green-500 rounded opacity-75">
                 {{ $percentageCES }} %
             </span>
-        </p>
+        </div>
     </div>
 
     <div class="card bg-orange-100">
@@ -100,10 +103,10 @@
         <br>
         <p class="text-sm">
             Percentage of total non-CES employees
-            <span class="text-orange-500 p-2 rounded opacity-75">
-                {{ $percentageNonCES }} %
-            </span>
         </p>
+        <span class="text-orange-500 rounded opacity-75">
+            {{ $percentageNonCES }} %
+        </span>
     </div>
 
     <div class="lg:row-span-2 sm:row-span-1 w-full rounded sm:w-auto">
