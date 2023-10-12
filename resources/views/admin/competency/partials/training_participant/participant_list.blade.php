@@ -127,4 +127,8 @@
     </table>
 </div>
 
+<div class="m-5">
+    {{ $trainingParticipantList->links() }}
+</div>
+
 @endsection

@@ -123,7 +123,7 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Training Venue Manager Report</p>
                 @if ($search != null)
-                    <p class="city_name">{{ "( $search City )" }}</p>
+                    <p class="city_name">{{ "( $search )" }}</p>
                 @endif
             </div>
 
