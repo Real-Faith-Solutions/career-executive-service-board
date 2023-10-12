@@ -24,6 +24,8 @@ class ProfileLibCities extends Model
         'name',
         'zipcode',
     ];
+    protected $city_code;
+
 
     public function cities(): HasManyThrough
     {
