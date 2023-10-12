@@ -65,27 +65,27 @@
                 @foreach ($trainingVenueManager as $trainingVenueManagers)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $trainingVenueManagers->name }}
+                            {{ $trainingVenueManagers->name ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
                             {{ 
-                                $trainingVenueManagers->no_street.', '.
-                                $trainingVenueManagers->brgy.', '. 
-                                $trainingVenueManagers->trainingVenueManager->name
+                                $trainingVenueManagers->no_street ?? ''.', '.
+                                $trainingVenueManagers->brgy ?? ''.', '. 
+                                $trainingVenueManagers->trainingVenueManager->name ?? ''
                             }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingVenueManagers->contactno }}
+                            {{ $trainingVenueManagers->contactno ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingVenueManagers->emailadd }}
+                            {{ $trainingVenueManagers->emailadd ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingVenueManagers->contactperson }}
+                            {{ $trainingVenueManagers->contactperson ?? '' }}
                         </td>
                     </tr>
                 @endforeach

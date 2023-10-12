@@ -68,51 +68,54 @@
                 @foreach ($trainingSession as $trainingSessions)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $trainingSessions->title }}
+                            {{ $trainingSessions->title ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->sessionid }}
+                            {{ $trainingSessions->sessionid ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->category }}
+                            {{ $trainingSessions->category ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->specialization }}
+                            {{ $trainingSessions->specialization ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->from_dt. ' - '.$trainingSessions->to_dt }}
+                            {{ $trainingSessions->from_dt ?? ''. ' - '.$trainingSessions->to_dt ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->venuePersonalData->name }}
+                            {{ $trainingSessions->venuePersonalData->name ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->no_hours }}
+                            {{ $trainingSessions->no_hours ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->status }}
+                            {{ $trainingSessions->status ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->barrio }}
+                            {{ $trainingSessions->barrio ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->resourceSpeakerPersonalData->lastname.', '.$trainingSessions->resourceSpeakerPersonalData->firstname }}
+                            {{ 
+                                $trainingSessions->resourceSpeakerPersonalData->lastname ?? '' .', '.
+                                $trainingSessions->resourceSpeakerPersonalData->firstname ?? '' 
+                            }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->session_director }}
+                            {{ $trainingSessions->session_director ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $trainingSessions->remarks }}
+                            {{ $trainingSessions->remarks ?? '' }}
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
