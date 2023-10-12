@@ -66,7 +66,7 @@ class StatisticsController extends Controller
                     $query->where('gender', 'Male');
                 })
                 ->count();
-            $totalMaleNonCESO = PlanAppointee::where('is_appointee', 0)
+            $totalMaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
                 })->whereHas('personalData', function ($query) use ($agency) {
@@ -80,7 +80,7 @@ class StatisticsController extends Controller
                     $query->where('gender', 'Female');
                 })
                 ->count();
-            $totalFemaleNonCESO = PlanAppointee::where('is_appointee', 0)
+            $totalFemaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
                 })->whereHas('personalData', function ($query) use ($agency) {
@@ -93,7 +93,7 @@ class StatisticsController extends Controller
                 })
                 ->count();
 
-            $totalNonCESO = PlanAppointee::where('is_appointee', 0)
+            $totalNonCESO = PlanAppointee::whereNot('is_appointee', 1)
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
                 })
