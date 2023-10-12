@@ -127,7 +127,7 @@
             </li>
 
             <li>
-                <a href="{{ route('statistics.index') }}"
+                <a href="{{ route('statistics.index', '?sectorToggle=1') }}"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
