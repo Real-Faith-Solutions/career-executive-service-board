@@ -167,7 +167,6 @@
     </table>
 </div>
 
-
 <div class="m-5">
     {{ $trainingSessionTrashedRecord->links() }}
 </div>

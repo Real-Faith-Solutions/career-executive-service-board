@@ -188,19 +188,19 @@
                             </td>
 
                             <td>
-                                {{ $trainingParticipantLists->pid }}
+                                {{ $trainingParticipantLists->pid ?? '' }}
                             </td>
         
                             <td>
-                                {{ $trainingParticipantLists->cesno }}
+                                {{ $trainingParticipantLists->cesno ?? '' }}
                             </td>
         
                             <td>
                                 {{ 
-                                    $trainingParticipantLists->cesTrainingPersonalData->lastname.', '. 
-                                    $trainingParticipantLists->cesTrainingPersonalData->firstname.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->middleinitial.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->name_extension
+                                    $trainingParticipantLists->cesTrainingPersonalData->lastname ?? ''.', '. 
+                                    $trainingParticipantLists->cesTrainingPersonalData->firstname ?? ''.', '.
+                                    $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? ''.', '.
+                                    $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? ''
                                 }}
                             </td>
         
@@ -209,19 +209,19 @@
                             </td>
         
                             <td>
-                                {{ $trainingParticipantLists->status }}
+                                {{ $trainingParticipantLists->status ?? '' }}
                             </td>
         
                             <td>
-                                {{ $trainingParticipantLists->no_hours}}
+                                {{ $trainingParticipantLists->no_hours ?? '' }}
                             </td>
         
                             <td>
-                                {{ $trainingParticipantLists->payment }}
+                                {{ $trainingParticipantLists->payment ?? '' }}
                             </td>
         
                             <td>
-                                {{ $trainingParticipantLists->remarks }}
+                                {{ $trainingParticipantLists->remarks ?? '' }}
                             </td>
                         </tr>
                     @endforeach
