@@ -119,38 +119,42 @@
         posDefaultInput.value = selectedOption.textContent;
     }
 
+    
+</script>
+
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-            const checkBox = document.getElementById("use_func_title");
-            const input = document.getElementById("pos_func_name");
-            const posDefaultInput = document.getElementById("pos_default");
-            
-            checkBox.addEventListener("change", function () {
-                if (checkBox.checked) {
-                    input.removeAttribute("readonly");
-
-                    posDefaultInput.setAttribute("disabled", "true");
-                    // posDefaultInput.value = "";
-                } else {
-                    input.setAttribute("readonly", "true");
-                    input.value = "";
-                    posDefaultInput.removeAttribute("disabled");
-
-                }
-            });
-        });
-
-        const cesPosAndPresAppointee = () => {
-            const is_ces_pos = document.querySelector("#is_ces_pos");
-            const pres_apptee = document.querySelector("#pres_apptee");
-
-            if (is_ces_pos.checked) {
-                const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-                
-                if (confirmation){
-                    pres_apptee.checked = true;
-                }
-            }            
-        }
+    const checkBox = document.getElementById("use_func_title");
+    const input = document.getElementById("pos_func_name");
+    const posDefaultInput = document.getElementById("pos_default");
+    
+    checkBox.addEventListener("change", function () {
+    if (checkBox.checked) {
+    input.removeAttribute("readonly");
+    
+    posDefaultInput.setAttribute("disabled", "true");
+    // posDefaultInput.value = "";
+    } else {
+    input.setAttribute("readonly", "true");
+    input.value = "";
+    posDefaultInput.removeAttribute("disabled");
+    
+    }
+    });
+    });
+    
+    const cesPosAndPresAppointee = () => {
+    const is_ces_pos = document.querySelector("#is_ces_pos");
+    const pres_apptee = document.querySelector("#pres_apptee");
+    
+    if (is_ces_pos.checked) {
+    const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+    
+    if (confirmation){
+    pres_apptee.checked = true;
+    }
+    }
+    }
 </script>
 
 @extends('layouts.app')
