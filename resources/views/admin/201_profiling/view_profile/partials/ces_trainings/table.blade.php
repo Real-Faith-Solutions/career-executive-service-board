@@ -91,9 +91,11 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y') ?? 'No Record' }} -
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y') ?? 'No Record' }}
-                    
+                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt ?? 'No
+                    Record')->format('m/d/Y') }} -
+                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt ?? 'No
+                    Record')->format('m/d/Y') }}
+
                 </td>
 
                 <td class="px-6 py-3">
@@ -109,9 +111,12 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No Record' }},
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ?? 'No Record' }},
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record' }}
+                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No
+                    Record' }},
+                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ??
+                    'No Record' }},
+                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No
+                    Record' }}
                 </td>
 
                 <td class="px-6 py-3">
