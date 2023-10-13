@@ -91,10 +91,13 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt ?? 'No
-                    Record')->format('m/d/Y') }} -
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt ?? 'No
-                    Record')->format('m/d/Y') }}
+                    {{ $competencyCesTrainings->participantTrainingSession->from_dt &&
+                    $competencyCesTrainings->participantTrainingSession->to_dt ?
+                    \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y')
+                    . ' - ' .
+                    \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y') :
+                    'No Record'
+                    }}
 
                 </td>
 
