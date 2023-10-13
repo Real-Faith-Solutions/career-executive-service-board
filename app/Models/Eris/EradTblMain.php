@@ -13,6 +13,9 @@ class EradTblMain extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const CREATED_AT = 'e_date';
+    const UPDATED_AT = 'updated_at';
+
     protected $primaryKey = 'acno';
 
     protected $table = "erad_tblMain";

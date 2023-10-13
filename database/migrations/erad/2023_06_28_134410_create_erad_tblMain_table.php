@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('werating')->nullable();
             $table->string('we_remarks')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('e_date')->nullable();
             $table->string('picture')->nullable();
             $table->string('contactno')->nullable();
             $table->string('faxno')->nullable();
@@ -39,7 +38,8 @@ return new class extends Migration
             $table->string('emailadd')->nullable();
             $table->integer('cesno')->nullable();
             $table->string('maddress')->nullable();
-            $table->timestamps();
+            $table->timestamp('e_date')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->softDeletes();
         });
     }
