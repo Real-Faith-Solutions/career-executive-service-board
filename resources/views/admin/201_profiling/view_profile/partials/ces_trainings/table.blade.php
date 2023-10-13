@@ -72,64 +72,64 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($competencyCesTraining as $competencyCesTrainings)
+            @foreach ($cesTraining as $cesTrainings)
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    {{ $competencyCesTrainings->participantTrainingSession->title ?? 'No Record' }}
+                    {{ $cesTrainings->title ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->sessionid ?? 'No Record' }}
+                    {{ $cesTrainings->sessionid ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->category ?? 'No Record' }}
+                    {{ $cesTrainings->category ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->specialization ?? 'No Record' }}
+                    {{ $cesTrainings->specialization ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->from_dt)->format('m/d/Y') ?? 'No Record' }} -
-                    {{ \Carbon\Carbon::parse($competencyCesTrainings->participantTrainingSession->to_dt)->format('m/d/Y') ?? 'No Record' }}
+                    {{ \Carbon\Carbon::parse($cesTrainings->from_dt)->format('m/d/Y') ?? 'No Record' }} -
+                    {{ \Carbon\Carbon::parse($cesTrainings->to_dt)->format('m/d/Y') ?? 'No Record' }}
                     
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->venuePersonalData->name ?? 'No Record' }}
+                    {{ $cesTrainings->venuePersonalData->name ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->no_hours ?? 'No Record' }}
+                    {{ $cesTrainings->no_hours ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->barrio ?? 'No Record' }}
+                    {{ $cesTrainings->barrio ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->lastname ?? 'No Record' }},
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->firstname ?? 'No Record' }},
-                    {{ $competencyCesTrainings->participantTrainingSession->resourceSpeakerPersonalData->mi ?? 'No Record' }}
+                    {{ $cesTrainings->resourceSpeakerPersonalData->lastname ?? 'No Record' }},
+                    {{ $cesTrainings->resourceSpeakerPersonalData->firstname ?? 'No Record' }},
+                    {{ $cesTrainings->resourceSpeakerPersonalData->mi ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->session_director ?? 'No Record' }}
+                    {{ $cesTrainings->session_director ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->status ?? 'No Record' }}
+                    {{ $cesTrainings->status ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $competencyCesTrainings->participantTrainingSession->remarks ?? 'No Record' }}
+                    {{ $cesTrainings->remarks ?? 'No Record' }}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex">
-                        <form
-                            action="{{ route('ces-training-201.edit', ['cesno'=>$cesno, 'ctrlno'=>$competencyCesTrainings->pid]) }}"
+                        {{-- <form
+                            action="{{ route('ces-training-201.edit', ['cesno'=>$cesno, 'ctrlno'=>$cesTrainings->pid]) }}"
                             method="GET">
                             @csrf
                             <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
@@ -140,18 +140,18 @@
                             </button>
                         </form>
 
-                        <form action="{{ route('ces-training-201.destroy', ['ctrlno'=>$competencyCesTrainings->pid]) }}"
-                            method="POST" id="delete_ces_training_201_form{{$competencyCesTrainings->pid}}">
+                        <form action="{{ route('ces-training-201.destroy', ['ctrlno'=>$cesTrainings->pid]) }}"
+                            method="POST" id="delete_ces_training_201_form{{$cesTrainings->pid}}">
                             @csrf
                             @method('DELETE')
-                            <button type="button" id="deleteCesTraining201Button{{$competencyCesTrainings->pid}}"
+                            <button type="button" id="deleteCesTraining201Button{{$cesTrainings->pid}}"
                                 onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                 <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                     colors="primary:#880808" style="width:24px;height:24px">
                                 </lord-icon>
                             </button>
-                        </form>
+                        </form> --}}
                     </div>
                 </td>
             </tr>
@@ -161,7 +161,7 @@
 </div>
 
 <div class="m-5">
-    {{ $competencyCesTraining->links() }}
+    {{ $cesTraining->links() }}
 </div>
 
 @endsection
