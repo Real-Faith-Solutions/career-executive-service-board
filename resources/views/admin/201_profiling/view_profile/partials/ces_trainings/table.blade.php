@@ -72,7 +72,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($competencyCesTraining as $competencyCesTrainings)
+            @foreach ($cesTraining as $competencyCesTrainings)
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                     {{ $competencyCesTrainings->participantTrainingSession->title ?? 'No Record' }}
@@ -161,7 +161,7 @@
 </div>
 
 <div class="m-5">
-    {{ $competencyCesTraining->links() }}
+    {{ $cesTraining->links() }}
 </div>
 
 @endsection
