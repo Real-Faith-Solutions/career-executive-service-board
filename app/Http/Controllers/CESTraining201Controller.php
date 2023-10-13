@@ -14,13 +14,13 @@ class CESTraining201Controller extends Controller
 {
     public function index($cesno)
     {
-        // $esTraining = PersonalData::find($cesno)->competencyCesTraining()
-        // ->where('status', 'Completed')
+        $personalData = PersonalData::find($cesno);
+        $cesTraining = $personalData->competencyCesTraining()->paginate(25);
         // ->orWhere('status', 'Incomplete')
         // ->paginate(25);
 
-        $sessionId = TrainingParticipants::where('cesno', $cesno)->get(['sessionid']);
-        $cesTraining = TrainingSession::whereIn('sessionid', $sessionId)->paginate(25);
+        // $sessionId = TrainingParticipants::where('cesno', $cesno)->get(['sessionid']);
+        // $cesTraining = TrainingSession::whereIn('sessionid', $sessionId)->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.ces_trainings.table', compact('cesno', 'cesTraining'));
     }
