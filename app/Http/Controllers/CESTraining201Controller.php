@@ -15,13 +15,11 @@ class CESTraining201Controller extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $cesTraining = $personalData->competencyCesTraining()->paginate(25);
-        // ->orWhere('status', 'Incomplete')
-        // ->paginate(25);
-
-        // $sessionId = TrainingParticipants::where('cesno', $cesno)->get(['sessionid']);
-        // $cesTraining = TrainingSession::whereIn('sessionid', $sessionId)->paginate(25);
-
+        $cesTraining = $personalData->competencyCesTraining()
+        ->where('status', 'Completed')
+        ->orWhere('status', 'Incomplete')
+        ->paginate(25);
+    
         return view('admin.201_profiling.view_profile.partials.ces_trainings.table', compact('cesno', 'cesTraining'));
     }
 
@@ -32,8 +30,8 @@ class CESTraining201Controller extends Controller
         $trainingSession = TrainingSession::all();
 
         // retrieve latest ces status from LatestCesStatusController
-            $cesStatusController = new LatestCesStatusController();
-            $description = $cesStatusController->latestCesStatus($personalData);
+        $cesStatusController = new LatestCesStatusController();
+        $description = $cesStatusController->latestCesStatus($personalData);
         // end of retrieve latest ces status from LatestCesStatusController
         
         return view('admin\201_profiling\view_profile\partials\ces_trainings\form', compact('personalData', 'cesno', 'trainingSession', 'description'));
