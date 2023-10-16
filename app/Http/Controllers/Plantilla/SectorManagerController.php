@@ -9,6 +9,7 @@ use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SectorManagerController extends Controller
 {
@@ -45,14 +46,27 @@ class SectorManagerController extends Controller
             ->where('sectorid', $sectorid)
             ->orderBy('title', 'ASC')->get();
 
-        $subDatas = DepartmentAgency::query()
-            ->where('sectorid', $sectorid)
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('title', 'LIKE', "%$query")
-                    ->orWhere('acronym', 'LIKE', "%$query");
-            })
-            ->orderBy('title', 'ASC')
-            ->paginate(25);
+        // $subDatas = DepartmentAgency::where('sectorid', $sectorid)
+        //     ->whereExists(function ($queryBuilder) {
+        //         $queryBuilder->select(DB::raw(1))
+        //             ->from('plantilla_motherdept as subquery')
+        //             // ->whereColumn('plantilla_tblDeptAgency.mother_deptid', 'subquery.deptid')
+        //             ->whereNull('subquery.deleted_at')
+        //             ->orderBy('subquery.title', 'asc')
+        //             ->limit(1);
+        //     })
+        //     ->orderBy(function ($query) {
+        //         $query->select(DB::raw('MIN(subquery.title)'))
+        //             ->from('plantilla_motherdept as subquery')
+        //             ->whereColumn('plantilla_tblDeptAgency.mother_deptid', 'subquery.deptid')
+        //             ->whereNull('subquery.deleted_at');
+        //     }, 'asc')
+        //     ->orderBy('title', 'asc')
+        //     ->whereNull('plantilla_tblDeptAgency.deleted_at')
+        //     ->get();
+
+        $subDatas = DepartmentAgency::where('sectorid', $sectorid)->get();
+
         $motherDepartment = MotherDept::all();
 
 

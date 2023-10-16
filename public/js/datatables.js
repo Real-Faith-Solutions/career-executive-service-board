@@ -34,21 +34,23 @@ $.extend(DataTable.ext.classes, {
     tailwindcss: {
         paging: {
             active: "font-semibold bg-blue-500 text-white",
-            notActive: "bg-white text-gray-300",
+            notActive: "bg-white",
             button: "relative inline-flex justify-center items-center space-x-2 border px-4 py-2 -mr-px leading-6 hover:z-10 focus:z-10 active:z-10 border-gray-200 active:border-gray-200 active:shadow-none",
             first: "rounded-l-lg",
             last: "rounded-r-lg",
-            enabled:
-                "text-white hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
+            // enabled:
+            //     "text-white hover:opacity-75 hover:border-gray-300 hover:shadow-sm focus:ring focus:ring-gray-300 focus:ring-opacity-25",
+            enabled: "text-blue-500",
             notEnabled: "text-gray-300",
         },
-        table: "dataTable min-w-full text-sm align-middle whitespace-nowrap",
+        table: "dataTable min-w-full text-sm align-middle whitespace-nowrap my-3",
         thead: {
             row: "border-b border-gray-100",
             cell: "px-3 py-4 text-gray-900 bg-blue-500 font-semibold text-left text-white",
         },
         tbody: {
-            row: "even:bg-gray-50 hover:bg-gray-50",
+            // row: "even:bg-gray-50 hover:bg-gray-50",
+            row: "",
             cell: "p-3",
         },
         tfoot: {

@@ -36,7 +36,7 @@ class OfficeManagerController extends Controller
 
         $planPositions = PlanPosition::query()
             ->where('officeid', $office->officeid)
-            ->where('is_active', true)
+            // ->where('is_active', true)
             ->get();
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
