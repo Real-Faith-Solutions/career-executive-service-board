@@ -80,8 +80,8 @@ class AgencyLocationManagerController extends Controller
 
         $request->validate([
             'deptid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);
@@ -174,8 +174,8 @@ class AgencyLocationManagerController extends Controller
         $encoder = $user->userName();
         $request->validate([
             'deptid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);

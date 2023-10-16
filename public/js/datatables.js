@@ -49,7 +49,8 @@ $.extend(DataTable.ext.classes, {
             cell: "px-3 py-4 text-gray-900 bg-blue-500 font-semibold text-left text-white",
         },
         tbody: {
-            row: "even:bg-gray-50 hover:bg-gray-50",
+            // row: "even:bg-gray-50 hover:bg-gray-50",
+            row: "",
             cell: "p-3",
         },
         tfoot: {

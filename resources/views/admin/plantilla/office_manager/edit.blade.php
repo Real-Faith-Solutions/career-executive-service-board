@@ -105,7 +105,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="contactno">Office Contact No.</label>
-                            <input id="contactno" name="contactno" value="{{ $office->officeAddress->contactno }}"
+                            <input id="contactno" name="contactno" value="{{ $office->officeAddress->contactno ?? ''}} "
                                 type="tel" />
                             @error('contactno')
                             <span class="invalid" role="alert">
@@ -115,7 +115,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="emailadd">Office E-mail Address</label>
-                            <input id="emailadd" name="emailadd" value="{{ $office->officeAddress->emailadd }}"
+                            <input id="emailadd" name="emailadd" value="{{ $office->officeAddress->emailadd ?? ''}}"
                                 type="email" />
                             @error('emailadd')
                             <span class="invalid" role="alert">
@@ -132,7 +132,8 @@
 
                         <div class="mb-3">
                             <label for="floor_bldg">Floor / Bldg.</label>
-                            <input id="floor_bldg" name="floor_bldg" value="{{ $office->officeAddress->floor_bldg }}" />
+                            <input id="floor_bldg" name="floor_bldg"
+                                value="{{ $office->officeAddress->floor_bldg ?? ''}}" />
                             @error('floor_bldg')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -142,7 +143,7 @@
                         <div class="mb-3">
                             <label for="house_no_st">No. / Street</label>
                             <input id="house_no_st" name="house_no_st"
-                                value="{{ $office->officeAddress->house_no_st }}" />
+                                value="{{ $office->officeAddress->house_no_st ?? ''}}" />
                             @error('house_no_st')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -151,7 +152,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="brgy_dist">Brgy. / District</label>
-                            <input id="brgy_dist" name="brgy_dist" value="{{ $office->officeAddress->brgy_dist }}" />
+                            <input id="brgy_dist" name="brgy_dist"
+                                value="{{ $office->officeAddress->brgy_dist ?? ''}}" />
                             @error('brgy_dist')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -164,7 +166,9 @@
                                 <option disabled selected>Select City Municipality</option>
                                 @foreach ($cities as $data)
                                 <option value="{{ $data->city_code }}" {{ $office->officeAddress->city_code ==
-                                    $data->city_code ? 'selected' : ''}}>{{ $data->name }}</option>
+                                    $data->city_code ? 'selected' : ''}}>
+                                    {{ $data->name }}
+                                </option>
                                 @endforeach
                             </select>
                             @error('city_code')
@@ -177,13 +181,13 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="isActive">Office Status<sup>*</sup></label>
-                            <select id="isActive" name="isActive" required>
+                            <label for="is_active">Office Status<sup>*</sup></label>
+                            <select id="is_active" name="is_active" required>
                                 <option disabled selected>Select status</option>
-                                <option value="1" {{ $office->isActive == 1 ? 'selected' : ''}}>Active</option>
-                                <option value="0" {{ $office->isActive == 0 ? 'selected' : ''}}>Inactive</option>
+                                <option value="1" {{ $office->is_active == 1 ? 'selected' : ''}}>Active</option>
+                                <option value="0" {{ $office->is_active == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>
-                            @error('isActive')
+                            @error('is_active')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -205,6 +209,25 @@
     </div>
 </div>
 
+<div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
+
+    {{-- legend
+    active = 1 || ces + presidential = white background / black text
+    inactive = disabled text
+    vacant = 1 = yellow background / red text
+    non ces + presidential = white background / blue text
+    --}}
+
+    <span>Active</span> <br>
+    <span class="p-1 text-slate-500">Inactive</span>
+    {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
+    <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
+    <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
+
+
+</div>
+
+
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         Plantilla Position Manager
@@ -222,8 +245,8 @@
             <th>Position Level</th>
             <th>Salary Grade Level</th>
             <th>Item No.</th>
-            <th>Vacant</th>
-            <th>Pres. Appointee</th>
+            {{-- <th>Vacant</th> --}}
+            {{-- <th>Pres. Appointee</th> --}}
 
             <th>
                 <span class="sr-only">Action</span>
@@ -233,16 +256,35 @@
     <tbody>
 
         @foreach ($planPositions as $data)
-        <tr>
-            <td class="font-semibold">
+        <tr class="
+            @if($data->is_active != 1 )
+                text-slate-400
+            @endif
+
+            {{-- ces + presidential = white background / black text --}}
+            @if($data->is_ces_pos == 1 && $data->pres_apptee == 1)
+                text-slate-400
+            @endif
+
+            {{-- vacant = 1 = yellow background / red text --}}
+            @if($data->is_vacant == 1)
+                bg-yellow-100 text-red-500
+            @endif
+
+            {{-- non ces + presidential = light gray background / blue text --}}
+            @if($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                bg-gray-50 text-blue-500
+            @endif
+        ">
+            <td>
                 {{ $data->plantilla_id }}
             </td>
             <td>
-                {{ $data->positionMasterLibrary->dbm_title }}
+                {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
             </td>
 
             <td>
-                {{ $data->positionMasterLibrary->positionLevel->title }}
+                {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
             </td>
 
             <td>
@@ -252,16 +294,17 @@
             <td>
                 {{ $data->item_no }}
             </td>
-            <td>
+            {{-- <td>
                 <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
                     {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
                 </span>
-            </td>
-            <td>
+            </td> --}}
+
+            {{-- <td>
                 <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
                     {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
                 </span>
-            </td>
+            </td> --}}
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">

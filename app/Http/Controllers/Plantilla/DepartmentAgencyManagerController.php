@@ -30,8 +30,8 @@ class DepartmentAgencyManagerController extends Controller
     {
         $request->validate([
             'agency_typeid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
             'remarks' => ['required'],
             'submitted_by' => ['required'],
         ]);

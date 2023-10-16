@@ -76,8 +76,8 @@ class OfficeManagerController extends Controller
         $request->validate([
 
             'officelocid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
 
         ]);
         $primaryKey = Office::create([
@@ -126,17 +126,16 @@ class OfficeManagerController extends Controller
 
     public function update(Request $request, $officeid)
     {
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
 
         $request->validate([
             // 'officelocid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
         ]);
-
-        // dd($request->all());
 
         $office = Office::withTrashed()->findOrFail($officeid);
         $office->update([
@@ -148,7 +147,7 @@ class OfficeManagerController extends Controller
             'lastupd_enc' => $encoder,
         ]);
 
-        $officeAddress = OfficeAddress::withTrashed()->findOrFail($officeid);
+        $officeAddress = OfficeAddress::withTrashed()->find($officeid);
         $officeAddress->update([
             'floor_bldg' => $request->input('floor_bldg'),
             'house_no_st' => $request->input('house_no_st'),
@@ -156,7 +155,7 @@ class OfficeManagerController extends Controller
             'city_code' => $request->input('city_code'),
             'contactno' => $request->input('contactno'),
             'emailadd' => $request->input('emailadd'),
-            'isActive' => $request->input('isActive'),
+            'isActive' => $request->input('is_active'),
             'ofcaddrid' => $request->input('ofcaddrid'),
             'updated_by' => $encoder,
         ]);
