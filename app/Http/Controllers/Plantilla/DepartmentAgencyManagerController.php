@@ -52,19 +52,17 @@ class DepartmentAgencyManagerController extends Controller
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
         $motherDepartment = MotherDept::all();
 
-        $agencyLocation = AgencyLocation::query()
-            ->where('deptid', $deptid)
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('title', 'LIKE', "%$query")
-                    ->orWhere('acronym', 'LIKE', "%$query")
-                    ->orWhere('region', 'LIKE', "%$query");
-            })
-            ->orderBy('title', 'ASC')
-            ->paginate(25);
+        // $agencyLocation = AgencyLocation::query()
+        //     ->where('deptid', $deptid)
+        //     ->where(function ($queryBuilder) use ($query) {
+        //         $queryBuilder->where('title', 'LIKE', "%$query")
+        //             ->orWhere('acronym', 'LIKE', "%$query")
+        //             ->orWhere('region', 'LIKE', "%$query");
+        //     })
+        //     ->orderBy('title', 'ASC')
+        //     ->paginate(25);
 
-        if (!$sector) {
-            abort(404);
-        }
+        $agencyLocation = AgencyLocation::where('deptid', $deptid)->get();
 
         return view('admin.plantilla.department_agency_manager.edit', compact(
             'sector',
