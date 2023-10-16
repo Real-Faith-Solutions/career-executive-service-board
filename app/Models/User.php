@@ -38,6 +38,8 @@ class User extends Authenticatable
         'contact_no',
         'email',
         'password',
+        'attemps',
+        'suspension',
         'two_factor',
         'is_active',
         'last_updated_by',
