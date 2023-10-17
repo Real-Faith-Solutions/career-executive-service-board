@@ -176,7 +176,7 @@
                 <th class="px-6 py-3" scope="col">Salary Grade Level</th>
                 <th class="px-6 py-3" scope="col">Item No.</th>
                 <th class="px-6 py-3" scope="col">Vacant</th>
-                <th class="px-6 py-3" scope="col">Pres Appointee</th>
+                <th class="px-6 py-3" scope="col">Presidential Appointee</th>
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>

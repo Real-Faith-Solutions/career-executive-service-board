@@ -32,7 +32,7 @@
                     Vacant
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Pres Appointee
+                    Presidential Appointee
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Deleted at

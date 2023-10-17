@@ -231,7 +231,7 @@
                                         id="pres_apptee" name="pres_apptee" type="checkbox" value="1" {{
                                         $planPosition->pres_apptee == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
-                                        Pres Appointee
+                                        Presidential Appointee
                                     </label>
                                 </div>
 

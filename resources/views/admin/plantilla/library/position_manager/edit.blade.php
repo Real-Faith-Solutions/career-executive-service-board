@@ -165,7 +165,7 @@
                                 === 1 ?
                                 'checked' : '' }}>
                                 <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
-                                    Pres Appointee
+                                    Presidential Appointee
                                 </label>
                             </div>
 
