@@ -257,23 +257,19 @@
 
         @foreach ($planPositions as $data)
         <tr class="
-            @if($data->is_active != 1 )
+
+            @if($data->is_active != 1)
                 text-slate-400
-            @endif
-
-            {{-- ces + presidential = white background / black text --}}
-            @if($data->is_ces_pos == 1 && $data->pres_apptee == 1)
-                text-slate-400
-            @endif
-
-            {{-- vacant = 1 = yellow background / red text --}}
-            @if($data->is_vacant == 1)
-                bg-yellow-100 text-red-500
-            @endif
-
-            {{-- non ces + presidential = light gray background / blue text --}}
-            @if($data->is_ces_pos != 1 && $data->pres_apptee == 1)
-                bg-gray-50 text-blue-500
+            @else
+                @if($data->is_vacant == 1)
+                    bg-yellow-100 text-red-500
+                @else
+                    @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                        bg-gray-50 text-blue-500
+                    @else
+                        text-dark
+                    @endif
+                @endif
             @endif
         ">
             <td>
