@@ -29,7 +29,7 @@ class FailedAttempt extends Model
             $record->attempts += 1;
 
             // Update suspension based on attempts count
-            if ($record->attempts > 5) {
+            if ($record->attempts >= 5) {
                 if ($record->suspension == 0) {
                     $record->suspension = 5;
                     $record->attempts = 0;
