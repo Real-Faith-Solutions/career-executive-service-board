@@ -52,7 +52,7 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
+                        <div class="flex justify-end">
                             <form action="{{ route('eris-written-exam.restore', ['ctrlno'=>$writtenExamTrashedRecords->ctrlno]) }}" method="POST" id="restore_written_exam_form{{$writtenExamTrashedRecords->ctrlno}}">
                                 @csrf
                                 <button type="button" id="restoreWrittenExamButton{{$writtenExamTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
