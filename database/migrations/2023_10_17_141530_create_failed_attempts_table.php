@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('ip_address')->nullable();
             $table->integer('attempts')->nullable();
-            $table->timestamp('suspension')->nullable();
+            $table->integer('suspension')->nullable();
             $table->timestamps();
         });
     }
