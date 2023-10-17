@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ConfirmationCodeMail;
 use App\Mail\TempCred201;
 use App\Models\DeviceVerification;
+use App\Models\FailedAttempt;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,8 @@ class AuthController extends Controller
 
         $email = $request->email;
         $ip_address = $request->ip();
+
+        FailedAttempt::addOrUpdateFailedAttempts($email, $ip_address);
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }
