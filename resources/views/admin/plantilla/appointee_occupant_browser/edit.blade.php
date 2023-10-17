@@ -133,7 +133,7 @@
                                         <select id="appt_stat_code" name="appt_stat_code" required>
                                             <option disabled selected>Select Personnel Movement</option>
                                             @foreach ($apptStatus as $data)
-                                            <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                            <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ==
                                                 $appointees->appt_stat_code ? 'selected' : '' }}>
                                                 {{ $data->title }}
                                             </option>

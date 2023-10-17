@@ -84,7 +84,7 @@
                             <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
-                                    agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
+                                    agencyLocationLibrary->agencyloc_Id == $data->agencyloc_Id ? 'selected' :''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach

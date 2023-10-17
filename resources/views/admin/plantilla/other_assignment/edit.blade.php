@@ -127,7 +127,7 @@
                             <select id="appt_status_code" name="appt_status_code" required>
                                 <option disabled selected>Select Status</option>
                                 @foreach ($apptStatus as $data)
-                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ==
                                     $otherAssignment->appt_status_code ? 'selected' : ''}} >
                                     {{ $data->title }}
                                 </option>
@@ -212,7 +212,7 @@
                             <select id="city_code" name="city_code">
                                 <option disabled selected>Select City</option>
                                 @foreach ($cities as $data)
-                                <option value="{{ $data->city_code }}" {{ $data->city_code ===
+                                <option value="{{ $data->city_code }}" {{ $data->city_code ==
                                     $otherAssignment->city_code ? 'selected' : ''}}>{{ $data->name }}</option>
                                 @endforeach
                             </select>

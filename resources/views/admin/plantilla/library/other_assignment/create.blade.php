@@ -74,7 +74,7 @@
                                 <select id="city_code" name="city_code">
                                     <option disabled selected>Select City</option>
                                     @foreach ($cities as $data)
-                                    <option value="{{ $data->city_code }}" {{ $data->city_code ===
+                                    <option value="{{ $data->city_code }}" {{ $data->city_code ==
                                         $appointee->planPosition->office->officeAddress->city_code ?
                                         'selected' : ''}}>
                                         {{ $data->name }}
