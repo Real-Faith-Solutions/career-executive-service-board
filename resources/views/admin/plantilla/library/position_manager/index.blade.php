@@ -147,6 +147,14 @@
         </div>
     </fieldset>
 
+    <div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm my-3">
+        <span>Active</span> <br>
+        <span class="p-1 text-slate-500">Inactive</span>
+        {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
+        <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
+        <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
+    </div>
+
     <div class="lg:flex lg:justify-between my-3">
         <div>
             @include('admin.plantilla.library.search')
@@ -175,8 +183,8 @@
                 <th class="px-6 py-3" scope="col">Position Level</th>
                 <th class="px-6 py-3" scope="col">Salary Grade Level</th>
                 <th class="px-6 py-3" scope="col">Item No.</th>
-                <th class="px-6 py-3" scope="col">Vacant</th>
-                <th class="px-6 py-3" scope="col">Presidential Appointee</th>
+                {{-- <th class="px-6 py-3" scope="col">Vacant</th>
+                <th class="px-6 py-3" scope="col">Presidential Appointee</th> --}}
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
                 </th>
@@ -185,7 +193,21 @@
         <tbody>
 
             @foreach ($datas as $data)
-            <tr>
+            <tr class="
+                @if($data->is_active != 1)
+                    text-slate-400
+                @else
+                    @if($data->is_vacant == 1)
+                        bg-yellow-100 text-red-500
+                    @else
+                        @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                            bg-gray-50 text-blue-500
+                        @else
+                            text-dark
+                        @endif
+                    @endif
+                @endif
+            ">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                     {{ $data->plantilla_id }}
                 </td>
@@ -195,7 +217,7 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->positionLevel->title }}
+                    {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
                 </td>
 
                 <td class="px-6 py-3">
@@ -205,7 +227,7 @@
                 <td class="px-6 py-3">
                     {{ $data->item_no }}
                 </td>
-                <td class="px-6 py-3">
+                {{-- <td class="px-6 py-3">
                     <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
                         {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
                     </span>
@@ -214,7 +236,7 @@
                     <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
                         {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
                     </span>
-                </td>
+                </td> --}}
 
                 <td class="text-right uppercase">
                     <div class="flex justify-end">

@@ -43,6 +43,19 @@
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
         posDefaultInput.value = selectedOption.text;
     }
+
+    const cesPosAndPresAppointee = () => {
+        const is_ces_pos = document.querySelector("#is_ces_pos");
+        const pres_apptee = document.querySelector("#pres_apptee");
+        
+        if (is_ces_pos.checked) {
+            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+            
+            if (confirmation){
+                pres_apptee.checked = true;
+            }
+        }
+    }
 </script>
 
 <script>
@@ -219,7 +232,8 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_ces_pos" name="is_ces_pos" type="checkbox" value="1" {{
-                                        $planPosition->is_ces_pos == 1 ? 'checked' : '' }}>
+                                        $planPosition->is_ces_pos == 1 ? 'checked' : '' }}
+                                    onchange="cesPosAndPresAppointee()" />
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_ces_pos">
                                         CES Position
                                     </label>
@@ -244,15 +258,7 @@
                                         Use Func Title
                                     </label>
                                 </div>
-                                <div class="flex items-center">
-                                    <input
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                                        id="is_active" name="is_active" type="checkbox" value="1" {{
-                                        $planPosition->is_active == 1 ? 'checked' : '' }}>
-                                    <label class="ml-2 text-sm font-medium text-gray-900" for="is_active">
-                                        Active
-                                    </label>
-                                </div>
+
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -262,7 +268,18 @@
                                         Head of Agency
                                     </label>
                                 </div>
+
                                 <div class="flex items-center">
+                                    <input
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                        id="is_active" name="is_active" type="checkbox" value="1" {{
+                                        $planPosition->is_active == 1 ? 'checked' : '' }}>
+                                    <label class="ml-2 text-sm font-medium text-gray-900" for="is_active">
+                                        Active
+                                    </label>
+                                </div>
+
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_generic" name="is_generic" type="checkbox" value="1" {{
@@ -271,7 +288,7 @@
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_generic">
                                         Generic
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -282,7 +299,7 @@
                                         Vacant
                                     </label>
                                 </div>
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_occupied" name="is_occupied" type="checkbox" value="1" {{
@@ -291,7 +308,7 @@
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_occupied">
                                         Occupied
                                     </label>
-                                </div>
+                                </div> --}}
 
                             </div>
 
