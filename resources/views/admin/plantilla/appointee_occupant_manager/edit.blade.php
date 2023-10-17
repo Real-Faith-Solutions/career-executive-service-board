@@ -3,7 +3,7 @@
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
         @foreach ($classBasis as $data)
-        if ("{{ $data->cbasis_code }}" === val) {
+        if ("{{ $data->cbasis_code }}" == val) {
             titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
         }
         @endforeach
@@ -26,7 +26,7 @@
 
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach ($positionMasterLibrary as $data)
-            if ("{{ $data->poslevel_code }}" === val) {
+            if ("{{ $data->poslevel_code }}" == val) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->pos_code }}";
                 option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
@@ -173,7 +173,7 @@
                                     onchange="posCode(this.value)" disabled>
                                     <option disabled selected>Select Position Level</option>
                                     @foreach ($planPositionLibrary as $data)
-                                    <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code ===
+                                    <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code ==
                                         $planPosition->positionMasterLibrary->poslevel_code ? 'selected' : '' }}>
                                         {{ $data->title }}, SG {{ $data->sg }}
                                     </option>
@@ -190,7 +190,7 @@
                                 <select id="pos_code" name="pos_code" required onchange="posTitle()" disabled>
                                     <option disabled selected>Select Position Title</option>
                                     @foreach ($positionMasterLibrary as $data)
-                                    <option value="{{ $data->pos_code }}" {{ $data->pos_code ===
+                                    <option value="{{ $data->pos_code }}" {{ $data->pos_code ==
                                         $planPosition->pos_code ? 'selected' : ''}}>
                                         {{ $data->dbm_title }}, SG {{ $data->sg }}
                                     </option>
@@ -219,7 +219,7 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_ces_pos" name="is_ces_pos" type="checkbox" value="1" {{
-                                        $planPosition->is_ces_pos === 1 ? 'checked' : '' }}>
+                                        $planPosition->is_ces_pos == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_ces_pos">
                                         CES Position
                                     </label>
@@ -229,7 +229,7 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="pres_apptee" name="pres_apptee" type="checkbox" value="1" {{
-                                        $planPosition->pres_apptee === 1 ? 'checked' : '' }}>
+                                        $planPosition->pres_apptee == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
                                         Pres Appointee
                                     </label>
@@ -239,7 +239,7 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="use_func_title" name="use_func_title" type="checkbox" value="1" {{
-                                        $planPosition->pos_func_name === NULL ? '' : 'checked' }}>
+                                        $planPosition->pos_func_name == NULL ? '' : 'checked' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="use_func_title">
                                         Use Func Title
                                     </label>
@@ -248,7 +248,7 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_active" name="is_active" type="checkbox" value="1" {{
-                                        $planPosition->is_active === 1 ? 'checked' : '' }}>
+                                        $planPosition->is_active == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_active">
                                         Active
                                     </label>
@@ -257,7 +257,7 @@
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_head" name="is_head" type="checkbox" value="1" {{ $planPosition->is_head
-                                    === 1 ? 'checked' : '' }}>
+                                    == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_head">
                                         Head of Agency
                                     </label>
@@ -267,7 +267,7 @@
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_generic" name="is_generic" type="checkbox" value="1" {{
                                         $planPosition->is_generic
-                                    === 1 ? 'checked' : '' }}>
+                                    == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_generic">
                                         Generic
                                     </label>
@@ -277,7 +277,7 @@
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_vacant" name="is_vacant" type="checkbox" value="1" {{
                                         $planPosition->is_vacant
-                                    === 1 ? 'checked' : '' }}>
+                                    == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_vacant">
                                         Vacant
                                     </label>
@@ -287,7 +287,7 @@
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_occupied" name="is_occupied" type="checkbox" value="1" {{
                                         $planPosition->is_occupied
-                                    === 1 ? 'checked' : '' }}>
+                                    == 1 ? 'checked' : '' }}>
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_occupied">
                                         Occupied
                                     </label>
@@ -347,7 +347,7 @@
                                 <select id="cbasis_code" name="cbasis_code" onchange="classificationBasis(this.value)">
                                     <option disabled selected>Select Classification Basis</option>
                                     @foreach ($classBasis as $data)
-                                    <option value="{{ $data->cbasis_code }}" {{ $data->cbasis_code ===
+                                    <option value="{{ $data->cbasis_code }}" {{ $data->cbasis_code ==
                                         $planPosition->cbasis_code ? 'selected': ''}}>
                                         {{ $data->basis }}
                                     </option>

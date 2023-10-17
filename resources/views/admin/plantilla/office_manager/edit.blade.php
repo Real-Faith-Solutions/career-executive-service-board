@@ -280,7 +280,8 @@
                 {{ $data->plantilla_id }}
             </td>
             <td>
-                {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
+                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
+                {{ $data->pos_default ?? 'N/A'}}
             </td>
 
             <td>
