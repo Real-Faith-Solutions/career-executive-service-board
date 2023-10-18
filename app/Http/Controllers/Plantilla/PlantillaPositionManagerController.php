@@ -60,6 +60,41 @@ class PlantillaPositionManagerController extends Controller
 
         ));;
     }
+    public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
+    {
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+        $office = Office::find($officeid);
+        $planPosition = PlanPosition::find($plantilla_id);
+
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+
+
+        $planAppointee = PlanAppointee::query()
+            ->where('plantilla_id', $planPosition->plantilla_id)
+            ->get();
+
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
+
+        return view('admin.plantilla.appointee_occupant_manager.show', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'office',
+            'cities',
+            'planAppointee',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+            'planPosition',
+            'apptStatus',
+
+        ));;
+    }
 
 
     public function store(Request $request)
