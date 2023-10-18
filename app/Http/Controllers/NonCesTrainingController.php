@@ -82,17 +82,10 @@ class NonCesTrainingController extends Controller
 
     public function edit($ctrlno, $cesno)
     {
-        $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
-
-        // $dateFrom = $this->fromDate($otherManagementTraining->from_dt);
-
-        // Create a Carbon instance from the fromDate value
-        $carbonFromDate = Carbon::parse($otherManagementTraining->from_dt);
-
-        // Convert it to the m/d/y format
-        $dateFrom = $carbonFromDate->format('m/d/Y');
-  
+        $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno); 
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        $dateFrom = strtotime($otherManagementTraining->from_dt);
 
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,
         'cesno', 'dateFrom'));
