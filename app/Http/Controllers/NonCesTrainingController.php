@@ -9,6 +9,8 @@ use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+
 
 class NonCesTrainingController extends Controller
 {
@@ -81,9 +83,24 @@ class NonCesTrainingController extends Controller
     public function edit($ctrlno, $cesno)
     {
         $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
+
+        $dateFrom = $this->fromDate($otherManagementTraining->to_dt);
+
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,
+        'cesno', 'dateFrom'));
+    }
+
+    public function fromDate($fromDate)
+    {
+        // Create a Carbon instance from the fromDate value
+        $carbonFromDate = Carbon::parse($fromDate);
+
+        // Convert it to the m/d/y format
+        $dateFrom = $carbonFromDate->format('m/d/y');
+
+        return $dateFrom;
     }
 
     public function update(Request $request, $ctrlno, $cesno)
