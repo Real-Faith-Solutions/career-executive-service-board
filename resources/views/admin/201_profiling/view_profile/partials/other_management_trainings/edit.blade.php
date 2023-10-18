@@ -72,7 +72,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</sup></label>
-                        <input type="datetime-local" id="inclusive_date_from" name="inclusive_date_from" value="{{ \Carbon\Carbon::parse($otherManagementTraining->from_dt)->format('m/d/Y') }}" oninput="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
+                        <input type="datetime-local" id="inclusive_date_from" name="inclusive_date_from" value="{{ $otherManagementTraining->from_dt }}" oninput="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
@@ -83,7 +83,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</sup></label>
-                        <input type="datetime-local" id="inclusive_date_to" name="inclusive_date_to" value="{{ \Carbon\Carbon::parse($otherManagementTraining->to_dt)->format('m/d/Y') }}" oninput="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
+                        <input type="datetime-local" id="inclusive_date_to" name="inclusive_date_to" value="{{ $otherManagementTraining->to_dt }}" oninput="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
