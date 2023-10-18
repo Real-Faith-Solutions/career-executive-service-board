@@ -61,45 +61,46 @@
             @foreach ($competencyCesTrainingTrashedRecord as $competencyCesTrainingTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $competencyCesTrainingTrashedRecords->pid }}
+                        {{ $competencyCesTrainingTrashedRecords->pid ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->cesno }}
+                        {{ $competencyCesTrainingTrashedRecords->cesno ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->lastname.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->firstname.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->name_extension.', '.$competencyCesTrainingTrashedRecords->cesTrainingPersonalData->middleinitial 
-                        }}
+                        {{ $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->lastname ?? '' }}
+                        {{ $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->firstname ?? '' }}
+                        {{ $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->name_extension ?? '' }}
+                        {{ $competencyCesTrainingTrashedRecords->cesTrainingPersonalData->middleinitial ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $description }}
+                        {{ $description ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->sessionid }}
+                        {{ $competencyCesTrainingTrashedRecords->sessionid ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->participantTrainingSession->title }}
+                        {{ $competencyCesTrainingTrashedRecords->participantTrainingSession->title ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->status }}
+                        {{ $competencyCesTrainingTrashedRecords->status ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->no_hours }}
+                        {{ $competencyCesTrainingTrashedRecords->no_hours ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->payment }}
+                        {{ $competencyCesTrainingTrashedRecords->payment ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $competencyCesTrainingTrashedRecords->remarks }}
+                        {{ $competencyCesTrainingTrashedRecords->remarks ?? '' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

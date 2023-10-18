@@ -90,9 +90,9 @@ class ContactInformationController extends Controller
     // update email in profile table main and contact
     public function updateEmail(Request $request, $cesno)
     {
-        $request->validate([
-            'email' => ['required', Rule::unique('profile_tblMain')->ignore($cesno, 'cesno'), 'min:9', 'max:100'],
-        ]);
+        // $request->validate([
+        //     'email' => ['required', Rule::unique('profile_tblMain')->ignore($cesno, 'cesno'), 'min:9', 'max:100'],
+        // ]);
   
         // update email in profile_tblMain
         $email = PersonalData ::find($cesno);
