@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -42,6 +43,25 @@ class AuthController extends Controller
             'password' => 'required',
         ], $customMessages);
 
+        $email = $request->email;
+        $ip_address = $request->ip();
+
+        // Find the user by email and ip address on failed attempts
+        $user = FailedAttempt::where('email', $email)->where('ip_address', $ip_address)->first();
+
+        // Check if the user has suspension
+        $user_suspension = $user->suspension ?? 0; // Adjust as needed
+        if ($user && $user->updated_at->addMinutes($user_suspension)->isFuture()) {
+
+            $targetDateTime = Carbon::now()->addMinutes($user_suspension);
+            $diffInMinutes = $user->updated_at->diffInMinutes($targetDateTime);
+            $diffInSeconds = $user->updated_at->diffInSeconds($targetDateTime);
+            // Format the difference in minutes and seconds
+            $formattedDifference = sprintf('%02d:%02d', $diffInMinutes, $diffInSeconds % 60);
+
+            return back()->with('error','Too many failed attempts. You can try again after '.$formattedDifference);
+        }
+
         if (Auth::attempt($credentials, $request->remember)) {
             Cookie::queue(Cookie::make('email', $request->email, 120));
             Cookie::queue(Cookie::make('remember', $request->remember, 120));
@@ -54,9 +74,6 @@ class AuthController extends Controller
         // 1st suspension = 5mins, 2nd = 30mins, 3rd = 24hours, then back to 1st suspension after 24hours.
         // suspension will only take effect on the ip address of the device where the failed attemp occured.
         // when loggedin successfully, failed attemps record on user's ip address will be cleared.
-
-        $email = $request->email;
-        $ip_address = $request->ip();
 
         FailedAttempt::addOrUpdateFailedAttempts($email, $ip_address);
 
