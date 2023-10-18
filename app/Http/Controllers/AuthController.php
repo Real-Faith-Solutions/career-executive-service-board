@@ -30,17 +30,21 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
+        $customMessages = [
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.exists' => 'Invalid credentials',
+        ];
+
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required',
-        ]);
+        ], $customMessages);
 
         if (Auth::attempt($credentials, $request->remember)) {
             Cookie::queue(Cookie::make('email', $request->email, 120));
             Cookie::queue(Cookie::make('remember', $request->remember, 120));
-
-            // $userId = Auth::user()->ctrlno;
-            // $device_id = uniqid();
 
             return redirect()->intended('/dashboard');
         }
