@@ -3,9 +3,6 @@
 @section('sub', 'Sector Manager')
 @section('content')
 @include('admin.plantilla.header')
-<h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-700">
-    Plantilla Management System - (PMS)
-</h1>
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         <li>
