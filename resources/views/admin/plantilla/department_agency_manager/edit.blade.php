@@ -152,7 +152,7 @@
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Location Manager
+        Department Agency Location Manager
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -196,7 +196,7 @@
 
                     <a class="hover:bg-slate-100 rounded-full"
                         href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="Location Manager">
+                        title="Department Agency Location Manager">
                         <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
                             colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
                             style="width:24px;height:24px">

@@ -87,7 +87,7 @@
 <div class="flex justify-between my-3 items-center">
     {{-- @include('components.search') --}}
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Department Agency
+        Department Agency Manager
     </a>
     <button class="btn btn-primary" id="agencyCreateBtn">
         Add record
