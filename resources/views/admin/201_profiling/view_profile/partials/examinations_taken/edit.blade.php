@@ -104,7 +104,7 @@
                     <div class="mb-3">
                         <label for="date_acquired">Date Acquired</label>
                         <input id="date_acquired" name="date_acquired" value="{{ $examinationTaken->date_acquired }}"
-                            type="date">
+                            type="text">
                         @error('date_acquired')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -115,7 +115,7 @@
                     <div class="mb-3">
                         <label for="date_validity">Date Validity</label>
                         <input id="date_validity" name="date_validity" value="{{ $examinationTaken->date_validity }}"
-                            type="date">
+                            type="text">
                         @error('date_validity')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
