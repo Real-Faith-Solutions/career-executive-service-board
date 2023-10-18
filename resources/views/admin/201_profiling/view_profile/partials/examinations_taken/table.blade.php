@@ -120,4 +120,8 @@
     </table>
 </div>
 
+<div class="m-5">
+    {{ $examinationTaken->links() }}
+</div>
+
 @endsection

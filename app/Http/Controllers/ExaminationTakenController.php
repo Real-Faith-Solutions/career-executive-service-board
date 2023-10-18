@@ -16,7 +16,7 @@ class ExaminationTakenController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $examinationTaken = $personalData->examinationTakens;
+        $examinationTaken = $personalData->examinationTakens()->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.table', compact('examinationTaken', 'cesno'));
     }
