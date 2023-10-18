@@ -84,41 +84,45 @@ class NonCesTrainingController extends Controller
     {
         $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
 
-        $dateFrom = $this->fromDate($otherManagementTraining->from_dt);
+        // $dateFrom = $this->fromDate($otherManagementTraining->from_dt);
 
-        // dd($dateFrom);
+        // Create a Carbon instance from the fromDate value
+        $carbonFromDate = Carbon::parse($otherManagementTraining->from_dt);
 
+        // Convert it to the m/d/y format
+        $dateFrom = $carbonFromDate->format('m/d/Y');
+  
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,
         'cesno', 'dateFrom'));
     }
 
-    public function fromDate($fromDate)
-    {
-        // Create a Carbon instance from the fromDate value
-        $carbonFromDate = Carbon::parse($fromDate);
+    // public function fromDate($fromDate)
+    // {
+    //     // Create a Carbon instance from the fromDate value
+    //     $carbonFromDate = Carbon::parse($fromDate);
 
-        // Convert it to the m/d/y format
-        $dateFrom = $carbonFromDate->format('m/d/Y');
+    //     // Convert it to the m/d/y format
+    //     $dateFrom = $carbonFromDate->format('m/d/Y');
 
-        return $dateFrom;
-    }
+    //     return $dateFrom;
+    // }
 
     public function update(Request $request, $ctrlno, $cesno)
     {
-        $request->validate([ 
+        // $request->validate([ 
 
-            'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
-            'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'venue' => ['required', 'min:2', 'max:40'],
-            'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
-            'expertise_field_of_specialization' => ['required'],
+        //     'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
+        //     'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+        //     'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
+        //     'venue' => ['required', 'min:2', 'max:40'],
+        //     'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
+        //     'inclusive_date_from' => ['required'],
+        //     'inclusive_date_to' => ['required'],
+        //     'expertise_field_of_specialization' => ['required'],
             
-        ]);
+        // ]);
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
