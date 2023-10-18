@@ -453,6 +453,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'edit'])->name('office-manager.edit');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {

@@ -56,4 +56,36 @@ class OfficeManagerController extends Controller
 
         ));;
     }
+    public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid)
+    {
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+        $office = Office::find($officeid);
+
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+
+
+        $planPositions = PlanPosition::query()
+            ->where('officeid', $office->officeid)
+            // ->where('is_active', true)
+            ->get();
+
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+
+        return view('admin.plantilla.office_manager.show', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'office',
+            'cities',
+            'planPositions',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+
+        ));;
+    }
 }

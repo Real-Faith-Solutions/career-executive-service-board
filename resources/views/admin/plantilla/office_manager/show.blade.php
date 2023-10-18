@@ -60,7 +60,7 @@
     </ol>
 </nav>
 
-{{-- <div class="grid lg:grid-cols-2">
+<div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -207,132 +207,6 @@
             </div>
         </div>
     </div>
-</div> --}}
-
-<div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
-
-    {{-- legend
-    active = 1 || ces + presidential = white background / black text
-    inactive = disabled text
-    vacant = 1 = yellow background / red text
-    non ces + presidential = white background / blue text
-    --}}
-
-    <span>Active</span> <br>
-    <span class="p-1 text-slate-500">Inactive</span>
-    {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
-    <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
-    <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
-
-
 </div>
-
-
-<div class="flex justify-between">
-    <a href="#" class="text-blue-500 uppercase text-2xl">
-        Plantilla Position Manager
-    </a>
-    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
-        Add record
-    </button>
-    @include('admin.plantilla.appointee_occupant_manager.create')
-</div>
-<table class="dataTables">
-    <thead>
-        <tr>
-            <th>Plantilla ID</th>
-            <th>Position Title</th>
-            <th>Position Level</th>
-            <th>Salary Grade Level</th>
-            <th>Item No.</th>
-            {{-- <th>Vacant</th> --}}
-            {{-- <th>Pres. Appointee</th> --}}
-
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach ($planPositions as $data)
-        <tr class="
-
-            @if($data->is_active != 1)
-                text-slate-400
-            @else
-                @if($data->is_vacant == 1)
-                    bg-yellow-100 text-red-500
-                @else
-                    @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
-                        bg-gray-50 text-blue-500
-                    @else
-                        text-dark
-                    @endif
-                @endif
-            @endif
-        ">
-            <td>
-                {{ $data->plantilla_id }}
-            </td>
-            <td>
-                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
-                {{ $data->pos_default ?? 'N/A'}}
-            </td>
-
-            <td>
-                {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
-            </td>
-
-            <td>
-                {{ $data->corp_sg }}
-            </td>
-
-            <td>
-                {{ $data->item_no }}
-            </td>
-            {{-- <td>
-                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td> --}}
-
-            {{-- <td>
-                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td> --}}
-
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('plantilla-position-manager.show', [
-                        'sectorid' => $sector->sectorid,
-                        'deptid' => $department->deptid,
-                        'officelocid' => $departmentLocation->officelocid,
-                        'officeid' => $office->officeid,
-                        'plantilla_id' => $data->plantilla_id
-                    ]) }}">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-position-manager.destroy', $data->plantilla_id) }}" method="POST"
-                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
-                            </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
-
-    </tbody>
-</table>
 
 @endsection
