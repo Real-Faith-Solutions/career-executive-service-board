@@ -479,6 +479,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('appointee')->group(function () {
 
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'edit'])->name('appointee-occupant-manager.edit')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
             Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update')->middleware('checkPermission:plantilla_appointee_occupant_manager_edit');
             Route::post('store', [OtherAssignmentController::class, 'store'])->name('other-assignment.store')->middleware('checkPermission:plantilla_appointee_occupant_manager_add');
             Route::delete('/{detailed_code}/destroy', [OtherAssignmentController::class, 'destroy'])->name('other-assignment.destroy');

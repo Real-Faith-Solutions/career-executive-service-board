@@ -214,6 +214,19 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.edit', [
+                        'sectorid' => $sector->sectorid,
+                        'deptid' => $department->deptid,
+                        'officelocid' => $departmentLocation->officelocid,
+                        'officeid' => $office->officeid,
+                        'plantilla_id' => $planPosition->plantilla_id,
+                        'appointee_id' => $data->appointee_id,
+                    ]) }}">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
                     <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
                         'sectorid' => $sector->sectorid,
                         'deptid' => $department->deptid,
