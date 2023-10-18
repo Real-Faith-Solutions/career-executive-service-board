@@ -26,7 +26,7 @@
                         <label for="poslevel_code">Position Level<sup>*</span></label>
                         <select id="poslevel_code" name="poslevel_code" required>
                             @foreach ($planPositionLevelLibrary as $data)
-                            <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code === $datas->poslevel_code
+                            <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code == $datas->poslevel_code
                                 ? 'selected' : ''}}>
                                 {{ $data->title }}
                             </option>

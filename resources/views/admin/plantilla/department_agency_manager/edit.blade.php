@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -62,7 +62,7 @@
                             <label for="mother_deptid">Agency Name<sup>*</sup></label>
                             <select id="mother_deptid" name="mother_deptid" required>
                                 @foreach ($motherDepartment as $data)
-                                <option value="{{ $data->deptid }}" {{ $data->deptid === $department->mother_deptid ?
+                                <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
                                     'selected' : ''}}>
                                     {{ $data->title }}
                                 </option>

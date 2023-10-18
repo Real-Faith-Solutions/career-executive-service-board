@@ -7,7 +7,7 @@
         @yield('title')
     </a>
     <div>
-        @if($datas->is_appointee === 1)
+        @if($datas->is_appointee == 1)
         <a class="btn btn-primary mx-1"
             href="{{ route('library-other-assignment.index', ['library_occupant_manager' => $datas->appointee_id]) }}">
             Other Assignment
@@ -48,7 +48,7 @@
                             <select id="appt_stat_code" name="appt_stat_code" required>
                                 <option disabled selected>Select Personnel Movement</option>
                                 @foreach ($apptStatus as $data)
-                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ==
                                     $datas->appt_stat_code ? 'selected' : '' }}>
                                     {{ $data->title }}
                                 </option>

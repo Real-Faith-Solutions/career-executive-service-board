@@ -17,7 +17,7 @@
     
     // Populate the second dropdown based on the selected value of the first dropdown
     @foreach ($positionMasterLibrary as $data)
-    if ("{{ $data->poslevel_code }}" === val) {
+    if ("{{ $data->poslevel_code }}" == val) {
     const option = document.createElement("option");
     option.value = "{{ $data->pos_code }}";
     // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
@@ -286,7 +286,7 @@
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                     id="pres_apptee" name="pres_apptee" type="checkbox" value="1">
                                 <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
-                                    Pres Appointee
+                                    Presidential Appointee
                                 </label>
                             </div>
 

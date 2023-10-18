@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -35,7 +35,7 @@
 
         <li>
             <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                class="text-blue-500">{{
+                class="text-slate-500">{{
                 $department->title }}</a>
         </li>
         <li>
@@ -46,7 +46,7 @@
 
         <li>
             <a href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid]) }}"
-                class="text-blue-500">{{ $departmentLocation->title }}</a>
+                class="text-slate-500">{{ $departmentLocation->title }}</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@
 
         <li>
             <a href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid]) }}"
-                class="text-blue-500">{{ $office->title }}</a>
+                class="text-slate-500">{{ $office->title }}</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,7 +66,7 @@
 
         <li>
             <a href="{{ route('plantilla-position-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id]) }}"
-                class="text-blue-500">{{ $planPosition->positionMasterLibrary->dbm_title }}</a>
+                class="text-slate-500">{{ $planPosition->positionMasterLibrary->dbm_title }}</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,7 +133,7 @@
                                         <select id="appt_stat_code" name="appt_stat_code" required>
                                             <option disabled selected>Select Personnel Movement</option>
                                             @foreach ($apptStatus as $data)
-                                            <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                            <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ==
                                                 $appointees->appt_stat_code ? 'selected' : '' }}>
                                                 {{ $data->title }}
                                             </option>

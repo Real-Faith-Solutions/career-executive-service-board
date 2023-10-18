@@ -17,29 +17,42 @@ class StatisticsController extends Controller
     {
         $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
         $plantillaAll = PlanAppointee::all()->count();
-        $plantillaCES = PlanAppointee::where('is_appointee', 1)->count();
-        $plantillaNonCES = PlanAppointee::where('is_appointee', 0)->count();
+        $plantillaCES = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->where('is_ces_pos', 1);
+        })->count();
+        $plantillaNonCES = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->whereNot('is_ces_pos', 1);
+        })->count();
         $percentageCES = ($plantillaCES / $plantillaAll) * 100;
         $percentageNonCES = ($plantillaNonCES / $plantillaAll) * 100;
 
-        $totalMaleCESOChart = PlanAppointee::where('is_appointee', 1)
+        $totalMaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->where('is_ces_pos', 1);
+        })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
             })
             ->count();
 
-        $totalFemaleCESOChart = PlanAppointee::where('is_appointee', 1)
+
+        $totalFemaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->where('is_ces_pos', 1);
+        })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');
             })
             ->count();
 
-        $totalMaleNonCESOChart = PlanAppointee::whereNot('is_appointee', 1)
+        $totalMaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->whereNot('is_ces_pos', 1);
+        })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
             })
             ->count();
-        $totalFemaleNonCESOChart = PlanAppointee::whereNot('is_appointee', 1)
+        $totalFemaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
+            $query->whereNot('is_ces_pos', 1);
+        })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');
             })
@@ -60,41 +73,63 @@ class StatisticsController extends Controller
 
         foreach ($departmentAgencies as $agency) {
             // Calculate statistics for male CESO appointees in this agency
-            $totalMaleCESO = PlanAppointee::where('is_appointee', 1)
+            $totalMaleCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->where('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
-                })->whereHas('personalData', function ($query) use ($agency) {
+                })
+                ->whereHas('personalData', function ($query) {
                     $query->where('gender', 'Male');
                 })
                 ->count();
-            $totalMaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
+
+            $totalMaleNonCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->whereNot('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
-                })->whereHas('personalData', function ($query) use ($agency) {
+                })
+                ->whereHas('personalData', function ($query) {
                     $query->where('gender', 'Male');
                 })
                 ->count();
-            $totalFemaleCESO = PlanAppointee::where('is_appointee', 1)
+
+            $totalFemaleCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->where('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
-                })->whereHas('personalData', function ($query) use ($agency) {
+                })
+                ->whereHas('personalData', function ($query) {
                     $query->where('gender', 'Female');
                 })
                 ->count();
-            $totalFemaleNonCESO = PlanAppointee::whereNot('is_appointee', 1)
+
+            $totalFemaleNonCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->whereNot('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
-                })->whereHas('personalData', function ($query) use ($agency) {
+                })
+                ->whereHas('personalData', function ($query) {
                     $query->where('gender', 'Female');
                 })
                 ->count();
-            $totalCESO = PlanAppointee::where('is_appointee', 1)
+
+
+
+            $totalCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->where('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
                 })
                 ->count();
 
-            $totalNonCESO = PlanAppointee::whereNot('is_appointee', 1)
+            $totalNonCESO = PlanAppointee::whereHas('planPosition', function ($query) {
+                $query->whereNot('is_ces_pos', 1);
+            })
                 ->whereHas('planPosition.office.agencyLocation', function ($query) use ($agency) {
                     $query->where('deptid', $agency->deptid);
                 })

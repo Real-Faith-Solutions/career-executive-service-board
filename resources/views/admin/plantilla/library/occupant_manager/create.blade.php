@@ -19,7 +19,7 @@
 
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach($department as $data)
-        if ("{{ $data->sectorid }}" === val) {
+        if ("{{ $data->sectorid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
             option.text = "{{ $data->title }} - {{ $data->motherDepartment->title ?? ''}}";
@@ -47,7 +47,7 @@
         agencyDropdown.appendChild(defaultOption);
 
         @foreach($agencyLocation as $data)
-        if ("{{ $data->officelocid }}" === val) {
+        if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officelocid }}";
             option.text = "{{ $data->title }}";
@@ -73,7 +73,7 @@
         officeDropdown.appendChild(defaultOption);
 
         @foreach($office as $data)
-        if ("{{ $data->officeid }}" === val) {
+        if ("{{ $data->officeid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
             option.text = "{{ $data->title }}";
@@ -99,7 +99,7 @@
 
 
         @foreach($planPositions as $data)
-        if ("{{ $data->plantilla_id }}" === val) {
+        if ("{{ $data->plantilla_id }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->plantilla_id }}";
             option.text = "{{ $data->positionMasterLibrary->dbm_title }} - SG {{ $data->positionMasterLibrary->sg }}";
@@ -118,7 +118,7 @@
         
         // Iterate through the PHP array to find the matching classBasis
         @foreach ($classBasis as $data)
-            if ("{{ $data->cbasis_code }}" === positionValue) {
+            if ("{{ $data->cbasis_code }}" == positionValue) {
                 basisInput.value = "{{ $data->basis }}"; // Set the title in the basisInput
             }
         @endforeach

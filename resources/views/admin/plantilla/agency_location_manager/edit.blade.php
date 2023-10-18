@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -35,7 +35,7 @@
 
         <li>
             <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                class="text-blue-500">{{
+                class="text-slate-500">{{
                 $department->title }}</a>
         </li>
         <li>
@@ -84,7 +84,7 @@
                             <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
-                                    agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
+                                    agencyLocationLibrary->agencyloc_Id == $data->agencyloc_Id ? 'selected' :''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
