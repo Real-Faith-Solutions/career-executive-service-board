@@ -125,7 +125,7 @@ class EligibilityAndRankTrackerController extends Controller
         $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
         // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        $latestCestatusCode = ProfileTblCesStatus::orderBy('encdate', 'desc')
         ->value('cesstat_code');
 
         // update CESStat_code based on $latestCestatusCode
