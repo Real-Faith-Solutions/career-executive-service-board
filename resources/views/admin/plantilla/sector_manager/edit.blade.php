@@ -168,7 +168,8 @@
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Delete">
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                                title="Delete Record">
                                 <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                     colors="primary:#DC3545" style="width:24px;height:24px">
                                 </lord-icon>

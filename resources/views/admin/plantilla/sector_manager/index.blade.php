@@ -81,7 +81,7 @@
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
-                            title="Delete Sector">
+                            title="Delete Record">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>

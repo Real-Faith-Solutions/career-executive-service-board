@@ -207,7 +207,7 @@
                     </a>
                     <a class="hover:bg-slate-100 rounded-full"
                         href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="">
+                        title="View Office">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
@@ -217,7 +217,8 @@
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                            title="Delete Record">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
