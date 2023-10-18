@@ -100,7 +100,7 @@ class NonCesTrainingController extends Controller
         $carbonFromDate = Carbon::parse($fromDate);
 
         // Convert it to the m/d/y format
-        $dateFrom = $carbonFromDate->format('m/d/y');
+        $dateFrom = $carbonFromDate->format('m/d/Y');
 
         return $dateFrom;
     }
