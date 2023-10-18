@@ -90,7 +90,7 @@ class NonCesTrainingController extends Controller
         $carbonFromDate = Carbon::parse($otherManagementTraining->from_dt);
 
         // Convert it to the m/d/y format
-        $dateFrom = $carbonFromDate->format('m/d/Y');
+        $dateFrom = $carbonFromDate->format('Y/m/d');
   
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
