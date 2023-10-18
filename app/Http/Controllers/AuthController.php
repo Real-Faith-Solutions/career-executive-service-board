@@ -53,9 +53,10 @@ class AuthController extends Controller
         $user_suspension = $user->suspension ?? 0; // Adjust as needed
         if ($user && $user->updated_at->addMinutes($user_suspension)->isFuture()) {
 
-            $targetDateTime = Carbon::now()->addMinutes($user_suspension);
-            $diffInMinutes = $user->updated_at->diffInMinutes($targetDateTime);
-            $diffInSeconds = $user->updated_at->diffInSeconds($targetDateTime);
+            $currentDateTime = Carbon::now();
+            $targetDateTime = $user->updated_at->addMinutes($user_suspension);
+            $diffInMinutes = $currentDateTime->diffInMinutes($targetDateTime);
+            $diffInSeconds = $currentDateTime->diffInSeconds($targetDateTime);
             // Format the difference in minutes and seconds
             $formattedDifference = sprintf('%02d:%02d', $diffInMinutes, $diffInSeconds % 60);
 
