@@ -5,7 +5,6 @@
 @include('admin.plantilla.header')
 @include('admin.plantilla.department_agency_manager.create')
 
-
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         <li>
@@ -31,7 +30,7 @@
     </ol>
 </nav>
 
-<div class="grid lg:grid-cols-2">
+{{-- <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -83,12 +82,12 @@
         </div>
     </div>
 
-</div>
+</div> --}}
 
 <div class="flex justify-between my-3 items-center">
     {{-- @include('components.search') --}}
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Department Agency
+        Department Agency Manager
     </a>
     <button class="btn btn-primary" id="agencyCreateBtn">
         Add record
@@ -143,8 +142,19 @@
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
+
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}">
+                            href="{{ route('department-agency-manager.show', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
+                            title="Department Agency Manager">
+                            <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
+                            title="View Location">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">
@@ -155,7 +165,8 @@
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                                title="Delete Record">
                                 <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                     colors="primary:#DC3545" style="width:24px;height:24px">
                                 </lord-icon>

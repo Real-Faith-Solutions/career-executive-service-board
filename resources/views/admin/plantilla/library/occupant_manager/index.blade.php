@@ -125,6 +125,6 @@
 </div>
 
 <div class="m-5">
-    {{ $datas->links() }}
+    {{ $datas->appends(['cesStatusDropdown' => $cesStatusDropdown])->links() }}
 </div>
 @endsection
