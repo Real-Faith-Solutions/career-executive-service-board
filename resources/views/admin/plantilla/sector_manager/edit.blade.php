@@ -145,8 +145,19 @@
 
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
+
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}">
+                            href="{{ route('department-agency-manager.show', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
+                            title="Department Agency Manager">
+                            <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
+                            title="View Location">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">
@@ -157,7 +168,7 @@
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')
                             @csrf
-                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline" title="Delete">
                                 <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                     colors="primary:#DC3545" style="width:24px;height:24px">
                                 </lord-icon>

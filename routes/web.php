@@ -441,6 +441,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
+            Route::get('show/{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'show'])->name('department-agency-manager.show')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
