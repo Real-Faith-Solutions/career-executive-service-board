@@ -27,7 +27,7 @@
                         <label for="deptid">Department Agency<sup>*</sup></label>
                         <select id="deptid" name="deptid" required>
                             @foreach ($departmentAgencies as $departmentAgency)
-                            <option value="{{ $departmentAgency->deptid }}" {{ $departmentAgency->deptid ===
+                            <option value="{{ $departmentAgency->deptid }}" {{ $departmentAgency->deptid ==
                                 $agencyLocation->deptid ? 'selected' : ''}}>
                                 {{ $departmentAgency->title }}
                             </option>
@@ -63,7 +63,7 @@
                         <label for="loctype_id">Agency Type<sup>*</sup></label>
                         <select id="loctype_id" name="loctype_id" required>
                             @foreach ($agencyLocationLibrary as $data)
-                            <option value="{{ $data->agencyloc_Id }}" {{ $data->agencyloc_Id ===
+                            <option value="{{ $data->agencyloc_Id }}" {{ $data->agencyloc_Id ==
                                 $agencyLocation->loctype_id ? 'selected' : '' }}>
                                 {{ $data->title }}
                             </option>
@@ -98,7 +98,7 @@
                         <select id="region" name="region" type="region" required>
                             <option disabled selected>Select Region</option>
                             @foreach ($region as $data)
-                            <option value="{{ $data->name }}" {{ $data->name === $agencyLocation->region ? 'selected' :
+                            <option value="{{ $data->name }}" {{ $data->name == $agencyLocation->region ? 'selected' :
                                 ''}}>
                                 {{ $data->name }}
                             </option>

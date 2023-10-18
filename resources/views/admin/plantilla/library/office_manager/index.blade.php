@@ -29,7 +29,7 @@
         
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach($department as $data)
-            if ("{{ $data->sectorid }}" === sectorDropdown.value) {
+            if ("{{ $data->sectorid }}" == sectorDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->deptid }}";
                 option.text = "{{ $data->title }}";
@@ -47,7 +47,7 @@
         agencyLocationDropdown.innerHTML = "";
         agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
         @foreach($agencyLocation as $data)
-            if ("{{ $data->deptid }}" === departmentDropdown.value) {
+            if ("{{ $data->deptid }}" == departmentDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->officelocid }}";
                 option.text = "{{ $data->title }}";

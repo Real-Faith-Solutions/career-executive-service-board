@@ -19,8 +19,8 @@ class CompetencyCesTrainingController extends Controller
         $trainings = $personalData->competencyCesTraining;
 
         // retrieve latest ces status from LatestCesStatusController
-            $cesStatusController = new LatestCesStatusController();
-            $description = $cesStatusController->latestCesStatus($personalData);
+        $cesStatusController = new LatestCesStatusController();
+        $description = $cesStatusController->latestCesStatus($personalData);
         // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.table', compact('cesno', 'trainings', 'description'));
@@ -142,8 +142,8 @@ class CompetencyCesTrainingController extends Controller
         $competencyCesTrainingTrashedRecord = $personalData->competencyCesTraining()->onlyTrashed()->get();
 
         // retrieve latest ces status from LatestCesStatusController
-            $cesStatusController = new LatestCesStatusController();
-            $description = $cesStatusController->latestCesStatus($personalData);
+        $cesStatusController = new LatestCesStatusController();
+        $description = $cesStatusController->latestCesStatus($personalData);
         // end of retrieve latest ces status from LatestCesStatusController
 
         return view('admin.competency.partials.ces_training_201.trashbin', compact('competencyCesTrainingTrashedRecord', 'cesno', 'description'));

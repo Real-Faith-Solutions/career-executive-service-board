@@ -26,7 +26,7 @@
                         <label for="officelocid">Agency Location<sup>*</sup></label>
                         <select id="officelocid" name="officelocid" required>
                             @foreach ($agencyLocations as $data)
-                            <option value="{{ $data->officelocid }}" {{ $data->officelocid === $datas->officelocid ?
+                            <option value="{{ $data->officelocid }}" {{ $data->officelocid == $datas->officelocid ?
                                 'selected' : ''}}>
                                 {{ $data->title }}
                             </option>
@@ -125,7 +125,7 @@
                         <select id="city_code" name="city_code" required>
                             <option disabled selected>Select City Municipality</option>
                             @foreach ($cities as $data)
-                            <option value="{{ $data->city_code }}" {{ $data->city_code ===
+                            <option value="{{ $data->city_code }}" {{ $data->city_code ==
                                 $datas->officeAddress->city_code ?
                                 'selected' : '' }}>
                                 {{ $data->name }}
@@ -145,8 +145,8 @@
                         <label for="is_active">Office Status<sup>*</sup></label>
                         <select id="is_active" name="is_active" required>
                             <option disabled selected>Select status</option>
-                            <option value="1" {{ $datas->is_active === 1 ? 'selected' : '' }}>Active</option>
-                            <option value="0" {{ $datas->is_active === 0 ? 'selected' : '' }}>Inactive</option>
+                            <option value="1" {{ $datas->is_active == 1 ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ $datas->is_active == 0 ? 'selected' : '' }}>Inactive</option>
                         </select>
                         @error('is_active')
                         <span class="invalid" role="alert">

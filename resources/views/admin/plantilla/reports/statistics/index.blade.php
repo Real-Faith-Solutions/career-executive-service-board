@@ -90,7 +90,7 @@
     <div class="card bg-orange-100">
         <div class="flex justify-between text-orange-500 items-center">
             <div>
-                <p>Total Plantilla CES Only</p>
+                <p>Total Plantilla Non-CES Only</p>
                 <h1 class="text-3xl font-bold">{{ $plantillaNonCES }}</h1>
             </div>
 

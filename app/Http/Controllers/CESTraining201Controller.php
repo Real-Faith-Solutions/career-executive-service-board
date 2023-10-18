@@ -14,12 +14,6 @@ class CESTraining201Controller extends Controller
 {
     public function index($cesno)
     {
-        // $personalData = PersonalData::find($cesno);
-        // $cesTraining = $personalData->competencyCesTraining()
-        // ->where('status', 'Completed')
-        // ->orWhere('status', 'Incomplete')
-        // ->paginate(25);
-
         $personalData = PersonalData::find($cesno);
         $cesTraining = $personalData->competencyCesTraining()
             ->where(function ($query) {

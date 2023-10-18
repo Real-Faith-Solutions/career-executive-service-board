@@ -56,23 +56,23 @@
                 @foreach ($assessmentCenter as $assessmentCenters)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$assessmentCenters->acno}}
+                            {{ $assessmentCenters->acno ?? 'No Record' }}
                         </td>
                         
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->acdate}}
+                            {{ \Carbon\Carbon::parse($assessmentCenters->acdate)->format('m/d/Y ') ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->remarks}}
+                            {{ $assessmentCenters->remarks ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->docdate}}
+                            {{ \Carbon\Carbon::parse($assessmentCenters->docdate)->format('m/d/Y ') ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->numtakes}}
+                            {{ $assessmentCenters->numtakes ?? 'No Record' }}
                         </td>
                 @endforeach               
             </tbody>

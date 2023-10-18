@@ -37,7 +37,7 @@
                 @foreach ($assessmentCenterTrashedRecord as $assessmentCenterTrashedRecords) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->acdate)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->acdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -45,7 +45,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->docdate)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->docdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -53,7 +53,7 @@
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
-                            <div class="flex">
+                            <div class="flex justify-end">
                                 <form action="{{ route('eris-assessment-center.restore', ['ctrlno'=>$assessmentCenterTrashedRecords->ctrlno]) }}" method="POST" id="restore_assessment_center_form{{$assessmentCenterTrashedRecords->ctrlno}}">
                                     @csrf
                                     <button type="button" id="restoreAssessmentCenterButton{{$assessmentCenterTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">

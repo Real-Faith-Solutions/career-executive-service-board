@@ -70,48 +70,46 @@
             @foreach ($trainings as $training)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $training->pid }}
+                        {{ $training->pid ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->cesno }}
+                        {{ $training->cesno ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            $training->cesTrainingPersonalData->lastname.', '.
-                            $training->cesTrainingPersonalData->firstname.', '.
-                            $training->cesTrainingPersonalData->name_extension.', '.
-                            $training->cesTrainingPersonalData->middleinitial 
-                        }}
+                        {{ $training->cesTrainingPersonalData->lastname ?? '' }}
+                        {{ $training->cesTrainingPersonalData->firstname ?? '' }}
+                        {{ $training->cesTrainingPersonalData->name_extension ?? '' }}
+                        {{ $training->cesTrainingPersonalData->middleinitial ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $description }}
+                        {{ $description ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->sessionid }}
+                        {{ $training->sessionid ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->participantTrainingSession->title }}
+                        {{ $training->participantTrainingSession->title ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->status }}
+                        {{ $training->status ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->no_hours }}
+                        {{ $training->no_hours ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->payment }}
+                        {{ $training->payment ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $training->remarks }}
+                        {{ $training->remarks ?? '' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

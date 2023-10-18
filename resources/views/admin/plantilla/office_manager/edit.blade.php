@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -35,7 +35,7 @@
 
         <li>
             <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                class="text-blue-500">{{
+                class="text-slate-500">{{
                 $department->title }}</a>
         </li>
         <li>
@@ -46,7 +46,7 @@
 
         <li>
             <a href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid]) }}"
-                class="text-blue-500">{{ $departmentLocation->title }}</a>
+                class="text-slate-500">{{ $departmentLocation->title }}</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -257,30 +257,27 @@
 
         @foreach ($planPositions as $data)
         <tr class="
-            @if($data->is_active != 1 )
+
+            @if($data->is_active != 1)
                 text-slate-400
-            @endif
-
-            {{-- ces + presidential = white background / black text --}}
-            @if($data->is_ces_pos == 1 && $data->pres_apptee == 1)
-                text-slate-400
-            @endif
-
-            {{-- vacant = 1 = yellow background / red text --}}
-            @if($data->is_vacant == 1)
-                bg-yellow-100 text-red-500
-            @endif
-
-            {{-- non ces + presidential = light gray background / blue text --}}
-            @if($data->is_ces_pos != 1 && $data->pres_apptee == 1)
-                bg-gray-50 text-blue-500
+            @else
+                @if($data->is_vacant == 1)
+                    bg-yellow-100 text-red-500
+                @else
+                    @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                        bg-gray-50 text-blue-500
+                    @else
+                        text-dark
+                    @endif
+                @endif
             @endif
         ">
             <td>
                 {{ $data->plantilla_id }}
             </td>
             <td>
-                {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
+                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
+                {{ $data->pos_default ?? 'N/A'}}
             </td>
 
             <td>
