@@ -83,7 +83,7 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</sup></label>
-                        <input type="datetime-local" id="inclusive_date_to" name="inclusive_date_to" value="{{ $otherManagementTraining->to_dt }}" oninput="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
+                        <input type="datetime-local" id="inclusive_date_to" name="inclusive_date_to" value="{{ $dateFrom }}" oninput="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)" required>
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
