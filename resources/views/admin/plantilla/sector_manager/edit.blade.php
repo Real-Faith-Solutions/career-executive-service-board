@@ -4,7 +4,9 @@
 @section('content')
 @include('admin.plantilla.header')
 @include('admin.plantilla.department_agency_manager.create')
-
+<h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-700">
+    Plantilla Management System - (PMS)
+</h1>
 
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
@@ -31,7 +33,7 @@
     </ol>
 </nav>
 
-<div class="grid lg:grid-cols-2">
+{{-- <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -83,7 +85,7 @@
         </div>
     </div>
 
-</div>
+</div> --}}
 
 <div class="flex justify-between my-3 items-center">
     {{-- @include('components.search') --}}

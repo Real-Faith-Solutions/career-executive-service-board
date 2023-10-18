@@ -434,12 +434,12 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index')->middleware('checkPermission:plantilla_sector_manager_view');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create')->middleware('checkPermission:plantilla_sector_manager_add');
+            Route::get('show{sectorid}', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_add');
             Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit')->middleware('checkPermission:plantilla_sector_manager_edit');
         });
 
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
-            Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_view');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
         });
 

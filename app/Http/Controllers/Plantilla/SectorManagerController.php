@@ -27,10 +27,9 @@ class SectorManagerController extends Controller
 
     public function show($sectorid)
     {
-        $datas = DepartmentAgency::where('sectorid', $sectorid)
-            ->orderBy('title', 'ASC')
-            ->paginate(15);
-        return view('admin.plantilla.department_agency_manager.index', compact('datas'));
+        $datas = SectorManager::withTrashed()->findOrFail($sectorid);
+
+        return view('admin.plantilla.sector_manager.show', compact('datas'));
     }
 
     public function create()

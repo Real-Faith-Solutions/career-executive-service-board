@@ -62,7 +62,14 @@
                 <div class="flex justify-end">
 
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('sector-manager.edit', $data->sectorid) }}">
+                        href="{{ route('sector-manager.show', $data->sectorid) }}" title="Sector Manager">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('sector-manager.edit', $data->sectorid) }}" title="View Department Agency">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
@@ -73,7 +80,8 @@
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                            title="Delete Sector">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>
