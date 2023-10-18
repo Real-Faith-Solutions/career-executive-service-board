@@ -35,6 +35,10 @@
                         Board Interview Date
                     </th>
 
+                    <th>
+                        Interview Type
+                    </th>
+
                     <th scope="col" class="px-6 py-3">
                         Rating
                     </th>
@@ -45,7 +49,11 @@
                     @foreach ($panelBoardInterview as $panelBoardInterviews)
                         <tr class="border-b bg-white">
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ $panelBoardInterviews->dteiview }}
+                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteiview)->format('m/d/Y ') ?? 'No Record' }}
+                            </td>
+
+                            <td>
+                                Panel Board Interview
                             </td>
                                 
                             <td class="px-6 py-3">
@@ -58,7 +66,11 @@
                     @foreach ($boardInterview as $boardInterviews)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $boardInterviews->dteiview }}
+                            {{ \Carbon\Carbon::parse($boardInterviews->dteiview)->format('m/d/Y ') ?? 'No Record' }}
+                        </td>
+
+                        <td>
+                            Board Interview
                         </td>
                     
                         <td class="px-6 py-3">
