@@ -86,7 +86,7 @@ class NonCesTrainingController extends Controller
 
         $dateFrom = $this->fromDate($otherManagementTraining->from_dt);
 
-        dd($dateFrom);
+        // dd($dateFrom);
 
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
