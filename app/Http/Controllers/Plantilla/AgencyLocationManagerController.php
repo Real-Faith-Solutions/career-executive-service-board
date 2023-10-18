@@ -82,6 +82,41 @@ class AgencyLocationManagerController extends Controller
 
         ));;
     }
+    public function edit(Request $request, $sectorid, $deptid, $officelocid)
+    {
+        $query = $request->input('search');
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+
+        $agencyLocationLibrary = AgencyLocationLibrary::all();
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
+
+        // $office = Office::query()
+        //     ->where('officelocid', $officelocid)
+        //     ->where(function ($queryBuilder) use ($query) {
+        //         $queryBuilder->where('title', 'LIKE', "%$query")
+        //             ->orWhere('acronym', 'LIKE', "%$query")
+        //             ->orWhere('website', 'LIKE', "%$query");
+        //     })
+        //     ->orderBy('title', 'ASC')
+        //     ->paginate(25);
+
+        $office = Office::where('officelocid', $officelocid)->get();
+
+        return view('admin.plantilla.agency_location_manager.show', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'agencyLocationLibrary',
+            'office',
+            'query',
+            'cities',
+            'region',
+
+        ));;
+    }
 
     public function update(Request $request, $officelocid)
     {

@@ -196,8 +196,18 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
+
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}">
+                        href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        title="Location Manager">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        title="">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
