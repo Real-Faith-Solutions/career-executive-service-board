@@ -16,7 +16,7 @@ class ExaminationTakenController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $examinationTaken = $personalData->examinationTakens;
+        $examinationTaken = $personalData->examinationTakens()->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.table', compact('examinationTaken', 'cesno'));
     }
@@ -127,7 +127,7 @@ class ExaminationTakenController extends Controller
         $personalData = PersonalData::withTrashed()->find($cesno);
 
         // Access the soft deleted scholarships of the parent model
-        $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->get();
+        $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord', 'cesno'));
     }

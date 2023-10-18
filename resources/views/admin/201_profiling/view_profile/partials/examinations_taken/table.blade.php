@@ -66,7 +66,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ \Carbon\Carbon::parse($examinationTakens->exam_date)->format('m/d/Y') ?? 'No Record' }}
+                        {{ $examinationTakens->exam_date ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -78,11 +78,11 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ \Carbon\Carbon::parse($examinationTakens->date_acquired)->format('m/d/Y') ?? 'No Record' }}
+                        {{ $examinationTakens->date_acquired ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ \Carbon\Carbon::parse($examinationTakens->date_validity)->format('m/d/Y') ?? 'No Record' }}
+                        {{ $examinationTakens->date_validity ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
@@ -118,6 +118,10 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $examinationTaken->links() }}
 </div>
 
 @endsection
