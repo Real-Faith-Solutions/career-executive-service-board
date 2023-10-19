@@ -72,6 +72,7 @@ class DatabaseSeeder extends Seeder
             // ErisTblMainSeeder::class,
             profilelib_tblCaseNatureSeeder::class,
             profilelib_tblCaseStatusSeeder::class,
+            ScholarshipSeeder::class,
 
             // plantilla
             SectorManagerSeeder::class,
