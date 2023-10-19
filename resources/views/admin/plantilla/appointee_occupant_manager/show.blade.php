@@ -44,20 +44,23 @@
         posDefaultInput.value = selectedOption.text;
     }
 
-    const cesPosAndPresAppointee = () => {
-        const is_ces_pos = document.querySelector("#is_ces_pos");
-        const pres_apptee = document.querySelector("#pres_apptee");
-        
-        if (is_ces_pos.checked) {
-            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-            
-            if (confirmation){
-                pres_apptee.checked = true;
-            }
-        }
-    }
+    
 </script>
 
+<script>
+    const cesPosAndPresAppointee = () => {
+    const is_ces_pos = document.querySelector("#is_ces_pos");
+    const pres_apptee = document.querySelector("#pres_apptee");
+    
+    if (is_ces_pos.checked) {
+    const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+    
+    if (confirmation){
+    pres_apptee.checked = true;
+    }
+    }
+    }
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
             const checkBox = document.getElementById("use_func_title");

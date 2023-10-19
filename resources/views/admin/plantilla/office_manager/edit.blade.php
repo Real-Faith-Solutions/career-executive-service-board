@@ -240,13 +240,12 @@
 <table class="dataTables">
     <thead>
         <tr>
-            <th>Plantilla ID</th>
-            <th>Position Title</th>
-            <th>Position Level</th>
-            <th>Salary Grade Level</th>
-            <th>Item No.</th>
-            {{-- <th>Vacant</th> --}}
-            {{-- <th>Pres. Appointee</th> --}}
+            <th class="px-6 py-3" scope="col">DBM Position Title</th>
+            <th class="px-6 py-3" scope="col">Appointee</th>
+            <th class="px-6 py-3" scope="col">Salary Grade</th>
+            <th class="px-6 py-3" scope="col">DBM Item No</th>
+            <th class="px-6 py-3" scope="col">Appointee Status</th>
+            <th class="px-6 py-3" scope="col">Classification Basis</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -258,12 +257,21 @@
         @foreach ($planPositions as $data)
         <tr class="
 
+        
             @if($data->is_active != 1)
                 text-slate-400
             @else
-                @if($data->is_vacant == 1)
+
+            @php
+                $test = $data->planAppointee->cesno ?? 0;
+            @endphp
+
+                @if($test == 0)
                     bg-yellow-100 text-red-500
                 @else
+
+
+                    {{-- non ces + pres appointee --}}
                     @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
                         bg-gray-50 text-blue-500
                     @else
@@ -271,37 +279,32 @@
                     @endif
                 @endif
             @endif
+
         ">
-            <td>
-                {{ $data->plantilla_id }}
-            </td>
-            <td>
-                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
-                {{ $data->pos_default ?? 'N/A'}}
+            <td class="whitespace-nowrap px-6 py-4 font-medium" scope="row">
+                {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
+                {{-- cesno - {{ $data->planAppointee->cesno ?? '' }} --}}
             </td>
 
-            <td>
-                {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->personalData->lastname ?? ''}}
+                {{ $data->planAppointee->personalData->firstname ?? ''}}
+                {{ $data->planAppointee->personalData->name_extension ?? ''}}
+                {{ $data->planAppointee->personalData->middlename ?? ''}}
+            </td>
+            <td class="px-6 py-3">
+                {{ $data->corp_sg ?? ''}}
+            </td>
+            <td class="px-6 py-3">
+                {{ $data->item_no ?? ''}}
             </td>
 
-            <td>
-                {{ $data->corp_sg }}
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->apptStatus->title ?? 'N/A'}}
             </td>
-
-            <td>
-                {{ $data->item_no }}
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->basis ?? 'N/A'}}
             </td>
-            {{-- <td>
-                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td> --}}
-
-            {{-- <td>
-                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td> --}}
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
