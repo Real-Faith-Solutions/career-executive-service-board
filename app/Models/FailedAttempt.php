@@ -42,6 +42,10 @@ class FailedAttempt extends Model
                     $record->suspension = 60;
                     $record->attempts = 0;
                     $record->save();
+                } elseif ($record->suspension == 60) {
+                    $record->suspension = 60;
+                    $record->attempts = 0;
+                    $record->save();
                 }
             }else{
                 $record->timestamps = false;
