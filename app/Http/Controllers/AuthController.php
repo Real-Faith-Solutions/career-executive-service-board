@@ -74,7 +74,7 @@ class AuthController extends Controller
 
         // counting failed attemps
         // the user will get a suspension if he failed to login 5x in just 2 minutes
-        // 1st suspension = 5mins, 2nd = 30mins, 3rd = 24hours, then back to 1st suspension after 24hours.
+        // 1st suspension = 5mins, 2nd = 30mins, 3rd = 1hour, then back to 1st suspension after 24hours.
         // suspension will only take effect on the ip address of the device where the failed attemp occured.
         // when loggedin successfully, failed attemps record on user's ip address will be cleared.
 
