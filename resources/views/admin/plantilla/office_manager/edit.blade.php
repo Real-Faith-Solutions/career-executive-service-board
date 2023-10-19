@@ -242,6 +242,7 @@
         <tr>
             <th class="px-6 py-3" scope="col">DBM Position Title</th>
             <th class="px-6 py-3" scope="col">Appointee</th>
+            <th class="px-6 py-3" scope="col">Position Level</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
             <th class="px-6 py-3" scope="col">DBM Item No</th>
             <th class="px-6 py-3" scope="col">Appointee Status</th>
@@ -282,8 +283,8 @@
 
         ">
             <td class="whitespace-nowrap px-6 py-4 font-medium" scope="row">
-                {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
-                {{-- cesno - {{ $data->planAppointee->cesno ?? '' }} --}}
+                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
+                {{ $data->pos_default ?? 'N/A'}}
             </td>
 
             <td class="px-6 py-3">
@@ -291,6 +292,9 @@
                 {{ $data->planAppointee->personalData->firstname ?? ''}}
                 {{ $data->planAppointee->personalData->name_extension ?? ''}}
                 {{ $data->planAppointee->personalData->middlename ?? ''}}
+            </td>
+            <td class="px-6 py-3">
+                {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
             </td>
             <td class="px-6 py-3">
                 {{ $data->corp_sg ?? ''}}
