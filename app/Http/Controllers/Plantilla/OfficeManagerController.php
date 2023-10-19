@@ -8,6 +8,7 @@ use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
+use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
@@ -39,6 +40,10 @@ class OfficeManagerController extends Controller
             // ->where('is_active', true)
             ->get();
 
+
+
+
+
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
@@ -53,7 +58,6 @@ class OfficeManagerController extends Controller
             'planPositionLibrary',
             'positionMasterLibrary',
             'classBasis',
-
         ));;
     }
     public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid)

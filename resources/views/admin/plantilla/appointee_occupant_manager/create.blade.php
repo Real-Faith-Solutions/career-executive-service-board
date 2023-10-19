@@ -1,13 +1,16 @@
 <script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
-
+        
         @foreach ($classBasis as $data)
-        if ("{{ $data->cbasis_code }}" == val) {
-            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
-        }
+            if ("{{ $data->cbasis_code }}" == val) {
+                titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            }
         @endforeach
     }
+</script>
+
+<script>
     const posCode = (val) => {
         // Get the second dropdown element
         const positionTitleDropdown = document.querySelector("#pos_code");
@@ -37,23 +40,28 @@
         
     }
 
+</script>
+
+<script>
     const posTitle = () => {
         const positionTitleDropdown = document.querySelector("#pos_code");
         const posDefaultInput = document.querySelector('#pos_default');
-
+        
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
         posDefaultInput.value = selectedOption.textContent;
     }
+</script>
 
+<script>
     const cesPosAndPresAppointee = () => {
         const is_ces_pos = document.querySelector("#is_ces_pos");
         const pres_apptee = document.querySelector("#pres_apptee");
-    
+        
         if (is_ces_pos.checked) {
             const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-            
+        
             if (confirmation){
-                pres_apptee.checked = true;
+            pres_apptee.checked = true;
             }
         }
     }

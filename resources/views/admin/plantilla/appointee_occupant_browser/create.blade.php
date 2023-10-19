@@ -124,6 +124,11 @@
                                             <p>{{ $message }}</p>
                                         </span>
                                         @enderror
+                                        @error('plantilla_id')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -169,7 +174,7 @@
                                     <div class="mb-3">
                                         <label for="basis">Basis</label>
                                         <textarea name="basis" id="basis" cols="30" rows="10"
-                                            readonly>{{ $planPosition->classBasis->basis }}</textarea>
+                                            readonly>{{ $planPosition->classBasis->basis ?? ''}}</textarea>
                                     </div>
 
                                     <div class="mb-3">
