@@ -33,16 +33,20 @@ class FailedAttempt extends Model
                 if ($record->suspension == 0) {
                     $record->suspension = 5;
                     $record->attempts = 0;
+                    $record->save();
                 } elseif ($record->suspension == 5) {
                     $record->suspension = 30;
                     $record->attempts = 0;
+                    $record->save();
                 } elseif ($record->suspension == 30) {
                     $record->suspension = 1440;
                     $record->attempts = 0;
+                    $record->save();
                 }
+            }else{
+                $record->timestamps = false;
+                $record->save();
             }
-
-            $record->save();
 
         } else {
             // Create a new record
