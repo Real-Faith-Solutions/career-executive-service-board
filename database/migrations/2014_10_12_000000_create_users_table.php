@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('two_factor')->default(false);
             $table->string('is_active')->nullable();
+            $table->integer('attemps')->nullable();
+            $table->timestamp('suspension')->nullable();
             $table->string('encoder')->nullable();
             $table->string('last_updated_by')->nullable();
             $table->string('default_password_change')->nullable();

@@ -36,7 +36,7 @@
         </a>
     
         <div class="flex items-center">
-            <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+            <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank</a>
         </div>
     </div>
 </div>
