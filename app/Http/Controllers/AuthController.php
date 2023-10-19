@@ -67,6 +67,8 @@ class AuthController extends Controller
             Cookie::queue(Cookie::make('email', $request->email, 120));
             Cookie::queue(Cookie::make('remember', $request->remember, 120));
 
+            FailedAttempt::clearFailedAttempts($email, $ip_address);
+
             return redirect()->intended('/dashboard');
         }
 

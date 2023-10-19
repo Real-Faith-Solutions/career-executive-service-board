@@ -59,4 +59,18 @@ class FailedAttempt extends Model
         }
     }
 
+    public static function clearFailedAttempts($email, $ip_address)
+    {
+        $record = self::where('email', $email)
+            ->where('ip_address', $ip_address)
+            ->first();
+
+        if ($record) {
+            
+            $record->delete();
+
+        } 
+
+    }
+
 }
