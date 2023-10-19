@@ -14,21 +14,31 @@ class Reports201Controller extends Controller
         $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
-        $filter_active = $request->input('filter_active', 'false');
-        $filter_inactive = $request->input('filter_inactive', 'false');
+        $filter_active = $request->input('filter_active', 'true');
+        $filter_inactive = $request->input('filter_inactive', 'true');
         $filter_retired = $request->input('filter_retired', 'false');
         $filter_deceased = $request->input('filter_deceased', 'false');
         $filter_retirement = $request->input('filter_retirement', 'false');
         $with_pending_case = $request->input('with_pending_case', 'false');
         $without_pending_case = $request->input('without_pending_case', 'false');
         $cesstat_code = $request->input('cesstat_code', '');
-        
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
 
         $personalData = PersonalData::with('cesstatus')
+            ->when($filter_active == "true", function ($query) use ($request) {
+                $query->where('status', 'Active');
+            })
+            ->when($filter_inactive == "true", function ($query) use ($request) {
+                $query->where('status', 'Inactive');
+            })
+            ->when($filter_retired == "true", function ($query) use ($request) {
+                $query->where('status', 'Retired');
+            })
             ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
+
+            dd($personalData);
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
