@@ -21,4 +21,10 @@ class ProfileLibTblAppAuthority extends Model
 
     ]; 
 
+    public function appAuthorityLibrary()
+    {
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
+
+        return $profileLibTblAppAuthority;
+    }
 }

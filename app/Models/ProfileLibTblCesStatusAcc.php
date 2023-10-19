@@ -19,4 +19,10 @@ class ProfileLibTblCesStatusAcc extends Model
         'description',
     ]; 
 
+    public function cesStatusAccLibrary()
+    {
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
+
+        return $profileLibTblCesStatusAcc;
+    }
 }

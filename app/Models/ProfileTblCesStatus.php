@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class ProfileTblCesStatus extends Model
 {
@@ -36,6 +37,20 @@ class ProfileTblCesStatus extends Model
         'lastupd_enc',
 
     ];
+
+    public function latestCesStatusCode($cesno)
+    {
+        // retrieving latest ces status thru date appointed_dt
+        $cestatusCode = ProfileTblCesStatus::orderBy('encdate', 'desc')
+        ->value('cesstat_code');
+
+        // update CESStat_code based on $latestCestatusCode
+        $latestCesStatusCode =  DB::table('profile_tblMain')
+        ->where('cesno', $cesno)
+        ->update(['CESStat_code' => $cestatusCode]);
+
+        return $latestCesStatusCode;
+    }
 
     public function profileLibTblCesStatus(): BelongsTo
     {
