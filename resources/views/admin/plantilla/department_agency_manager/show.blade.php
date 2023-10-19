@@ -3,7 +3,6 @@
 @section('sub', $department->title)
 @section('content')
 @include('admin.plantilla.header')
-
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         <li>
@@ -39,7 +38,11 @@
     </ol>
 </nav>
 
-{{-- <div class="grid lg:grid-cols-2">
+<div class="flex justify-end">
+    <a href=""></a>
+</div>
+
+<div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -148,85 +151,6 @@
             </div>
         </div>
     </div>
-</div> --}}
-
-<div class="flex justify-between">
-    <a href="#" class="text-blue-500 uppercase text-2xl">
-        Department Agency Location Manager
-    </a>
-    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
-        Add record
-    </button>
-    @include('admin.plantilla.agency_location_manager.create')
 </div>
-
-
-<table class="dataTables">
-    <thead>
-        <tr>
-            <th>Location</th>
-            <th>Location Acronym</th>
-            <th>Location type</th>
-            <th>Region</th>
-
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach ($agencyLocation as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->title }}
-            </td>
-            <td>
-                {{ $data->acronym ?? 'N/A' }}
-            </td>
-            <td>
-                {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
-            </td>
-            <td>
-                {{ $data->region ?? 'N/A' }}
-            </td>
-
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
-
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="Department Agency Location Manager">
-                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
-                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                            style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="View Office">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}) }}"
-                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
-                            title="Delete Record">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
-                            </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
-
-    </tbody>
-</table>
 
 @endsection

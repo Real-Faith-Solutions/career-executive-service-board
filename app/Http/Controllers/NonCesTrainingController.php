@@ -9,6 +9,8 @@ use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+
 
 class NonCesTrainingController extends Controller
 {
@@ -80,10 +82,32 @@ class NonCesTrainingController extends Controller
 
     public function edit($ctrlno, $cesno)
     {
-        $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno);
+        $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno); 
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', compact('otherManagementTraining' ,'profileLibTblExpertiseSpec' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', [
+
+            'otherManagementTraining' => $otherManagementTraining,
+            'profileLibTblExpertiseSpec' => $profileLibTblExpertiseSpec,
+            'cesno' => $cesno,
+            'dateFrom' => $this->convertDateFrom($otherManagementTraining->from_dt),
+            'dateTo' => $this->convertDateTo($otherManagementTraining->to_dt),
+
+        ]);
+    }
+
+    public function convertDateFrom($fromDate)
+    {
+        $dateFrom = date('Y-m-d',strtotime($fromDate));
+
+        return $dateFrom;
+    }
+
+    public function convertDateTo($toDate)
+    {
+        $dateTo = date('Y-m-d',strtotime($toDate));
+
+        return $dateTo;
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -91,9 +115,9 @@ class NonCesTrainingController extends Controller
         $request->validate([ 
 
             'training' => ['required', Rule::unique('profile_tblTrainingMngt')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
-            'training_category' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'sponsor_training_provider' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
-            'venue' => ['required', 'min:2', 'max:40'],
+            'training_category' => ['required', 'min:2', 'max:40'],
+            'sponsor_training_provider' => ['required', 'min:2', 'max:100'],
+            'venue' => ['required', 'min:2', 'max:100'],
             'no_of_training_hours' => ['required', 'numeric', 'digits_between:1,4'],
             'inclusive_date_from' => ['required'],
             'inclusive_date_to' => ['required'],
