@@ -14,8 +14,8 @@ class Reports201Controller extends Controller
         $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
-        $filter_active = $request->input('filter_active', 'true');
-        $filter_inactive = $request->input('filter_inactive', 'true');
+        $filter_active = $request->input('filter_active', 'false');
+        $filter_inactive = $request->input('filter_inactive', 'false');
         $filter_retired = $request->input('filter_retired', 'false');
         $filter_deceased = $request->input('filter_deceased', 'false');
         $filter_retirement = $request->input('filter_retirement', 'false');
@@ -25,20 +25,44 @@ class Reports201Controller extends Controller
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
 
-        $personalData = PersonalData::with('cesstatus')
-            ->when($filter_active == "true", function ($query) use ($request) {
-                $query->where('status', 'Active');
-            })
-            ->when($filter_inactive == "true", function ($query) use ($request) {
-                $query->where('status', 'Inactive');
-            })
-            ->when($filter_retired == "true", function ($query) use ($request) {
-                $query->where('status', 'Retired');
-            })
-            ->orderBy($sortBy, $sortOrder)
-            ->paginate(25);
+        // $personalData = PersonalData::with('cesstatus')
+        //     ->when($filter_active == "true", function ($query) use ($request) {
+        //         $query->where('status', 'Active');
+        //     })
+        //     ->when($filter_inactive == "true", function ($query) use ($request) {
+        //         $query->where('status', 'Inactive');
+        //     })
+        //     ->when($filter_retired == "true", function ($query) use ($request) {
+        //         $query->where('status', 'Retired');
+        //     })
+        //     ->orderBy($sortBy, $sortOrder)
+        //     ->paginate(25);
 
-            dd($personalData);
+        $personalData = PersonalData::query();
+
+        $personalData->with('cesStatus');
+
+        $personalData->when($request->has('filter_active'), function ($query) {
+            return $query->orWhere('status', 'Active');
+        });
+    
+        $personalData->when($request->has('filter_inactive'), function ($query) {
+            return $query->orWhere('status', 'Inactive');
+        });
+    
+        $personalData->when($request->has('filter_retired'), function ($query) {
+            return $query->orWhere('status', 'Retired');
+        });
+
+        $personalData->when($request->has('filter_deceased'), function ($query) {
+            return $query->orWhere('status', 'Deceased');
+        });
+
+        $personalData->orderBy($sortBy, $sortOrder);
+
+        $personalData = $personalData->paginate(25);
+
+        // dd($personalData);
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',

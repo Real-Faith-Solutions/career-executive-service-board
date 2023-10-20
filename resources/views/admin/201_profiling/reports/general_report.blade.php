@@ -118,7 +118,7 @@
                             </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="">CES Status</span>
+                            <span class="">Status</span>
                         </th>
                     </tr>
                 </thead>
@@ -132,7 +132,7 @@
                                     {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                 </td>
                                 <td scope="col" class="px-6 py-3">
-                                    {{ $personalDatas->cesstatus->description ?? '' }}
+                                    {{ $personalDatas->status ?? '' }}
                                 </td>
                             </tr>
                         @endforeach
