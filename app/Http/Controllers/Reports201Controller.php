@@ -25,19 +25,6 @@ class Reports201Controller extends Controller
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
 
-        // $personalData = PersonalData::with('cesstatus')
-        //     ->when($filter_active == "true", function ($query) use ($request) {
-        //         $query->where('status', 'Active');
-        //     })
-        //     ->when($filter_inactive == "true", function ($query) use ($request) {
-        //         $query->where('status', 'Inactive');
-        //     })
-        //     ->when($filter_retired == "true", function ($query) use ($request) {
-        //         $query->where('status', 'Retired');
-        //     })
-        //     ->orderBy($sortBy, $sortOrder)
-        //     ->paginate(25);
-
         $personalData = PersonalData::query();
 
         $personalData->with('cesStatus', 'caseRecords');
