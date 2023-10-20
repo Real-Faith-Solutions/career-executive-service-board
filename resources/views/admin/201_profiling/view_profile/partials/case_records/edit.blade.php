@@ -81,7 +81,7 @@
 
                     <div class="mb-3">
                         <label for="date_filed_edit">Date Filed<sup>*</sup></label>
-                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_dt }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
+                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $dateFiled }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_filed')
                             <span class="invalid" role="alert">
@@ -124,7 +124,7 @@
 
                     <div class="mb-3">
                         <label for="date_finality_edit">Date of Finality<sup>*</sup></label>
-                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $caseRecord->finality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
+                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $dateFinality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_finality')
                             <span class="invalid" role="alert">
@@ -169,6 +169,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

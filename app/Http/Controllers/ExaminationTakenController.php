@@ -12,6 +12,14 @@ use Illuminate\Validation\Rule;
 
 class ExaminationTakenController extends Controller
 {
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
 
     public function index($cesno)
     {
@@ -40,10 +48,6 @@ class ExaminationTakenController extends Controller
             'license_number' => ['nullable', 'min:2', 'max:40'],
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $examinationTaken = new ExaminationsTaken([
 
             'exam_code' => $request->exam_code,
@@ -53,7 +57,7 @@ class ExaminationTakenController extends Controller
             'license_number' => $request->license_number,
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
 
         ]);
 
@@ -71,8 +75,7 @@ class ExaminationTakenController extends Controller
         // $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
         $profileLibCities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
-        return view(
-            'admin.201_profiling.view_profile.partials.examinations_taken.edit',
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.edit',
             compact(
                 'examinationTaken',
                 'profileLibTblExamRef',
@@ -94,11 +97,7 @@ class ExaminationTakenController extends Controller
             'date_validity' => ['required'],
 
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
+        
         $examinationTaken = ExaminationsTaken::find($ctrlno);
         $examinationTaken->exam_code = $request->exam_code;
         $examinationTaken->rate = $request->rating;
@@ -107,7 +106,7 @@ class ExaminationTakenController extends Controller
         $examinationTaken->license_number = $request->license_number;
         $examinationTaken->date_acquired = $request->date_acquired;
         $examinationTaken->date_validity = $request->date_validity;
-        $examinationTaken->lastupd_enc = $encoder;
+        $examinationTaken->lastupd_enc = $this->getFullNameAttribute();
         $examinationTaken->save();
 
         return to_route('examination-taken.index', ['cesno' => $cesno])->with('info', 'Successfuly Saved');

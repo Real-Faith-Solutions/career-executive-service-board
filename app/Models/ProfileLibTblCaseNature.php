@@ -15,4 +15,11 @@ class ProfileLibTblCaseNature extends Model
         'STATUS_CODE',
         'TITLE',
     ]; 
+
+    public function caseNature()
+    {
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::orderBy('TITLE', 'asc')->get();
+
+        return $profileLibTblCaseNature;
+    }
 }

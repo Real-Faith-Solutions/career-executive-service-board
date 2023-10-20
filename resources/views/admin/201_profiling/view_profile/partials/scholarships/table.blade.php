@@ -58,10 +58,8 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            \Carbon\Carbon::parse($scholarships->from_dt)->format('m/d/Y')." - ".
-                            \Carbon\Carbon::parse($scholarships->to_dt)->format('m/d/Y') ?? 'No Record' 
-                        }}
+                        {{ $scholarships->from_dt ?? 'No Record' }} -
+                        {{  $scholarships->to_dt ?? 'No Record'  }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
