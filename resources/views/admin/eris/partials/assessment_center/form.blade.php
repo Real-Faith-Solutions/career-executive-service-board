@@ -63,6 +63,17 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="docdate">Competencies for D.O<sup>*</sup></label>
+                        <input type="text" id="competencies_d_o" name="competencies_d_o">
+                        <p class="input_error text-red-600"></p>
+                        @error('competencies_d_o')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="mb-3">

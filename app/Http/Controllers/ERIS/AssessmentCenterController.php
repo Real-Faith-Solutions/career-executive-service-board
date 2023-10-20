@@ -7,9 +7,26 @@ use App\Models\Eris\AssessmentCenter;
 use App\Models\Eris\EradTblMain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
 
 class AssessmentCenterController extends Controller
 {
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
@@ -35,18 +52,15 @@ class AssessmentCenterController extends Controller
 
         ]);
             
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $assessmentCenter = new AssessmentCenter([
 
             'acno' => $request->acno, // assessment center date
             'acdate' => $request->acdate, // assessment center date
             'numtakes' => $request->numtakes, //  number of takes
             'docdate' => $request->docdate, //  document date
+            'competencies_d_o' => $request->competencies_d_o,
             'remarks' => $request->remarks, 
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
 
@@ -62,7 +76,14 @@ class AssessmentCenterController extends Controller
         $erisTblMainProfileData = EradTblMain::find($acno);
         $assessmentCenterProfileData = AssessmentCenter::find($ctrlno);
 
-        return view('admin.eris.partials.assessment_center.edit', compact('acno', 'erisTblMainProfileData', 'assessmentCenterProfileData', 'ctrlno'));
+        return view('admin.eris.partials.assessment_center.edit', [
+            'acno' => $acno, 
+            'ctrlno' => $ctrlno,
+            'erisTblMainProfileData' => $erisTblMainProfileData, 
+            'assessmentCenterProfileData' => $assessmentCenterProfileData,
+            'assessmentCenterDate' =>  $this->convertDateTimeToDate->convertDateFrom($assessmentCenterProfileData->acdate),
+            'documentDate' =>  $this->convertDateTimeToDate->convertDateTo($assessmentCenterProfileData->docdate),
+        ]);
     }
 
     public function update(Request $request, $acno, $ctrlno)
@@ -79,6 +100,7 @@ class AssessmentCenterController extends Controller
         $assessmentCenter->acdate = $request->acdate;
         $assessmentCenter->numtakes = $request->numtakes;
         $assessmentCenter->docdate = $request->docdate;
+        $assessmentCenter->competencies_d_o = $request->competencies_d_o;
         $assessmentCenter->remarks = $request->remarks;
         $assessmentCenter->save();
 

@@ -80,7 +80,7 @@ class EligibilityAndRankTrackerController extends Controller
             case 'Assessment Center':
 
                 $erisPersonalDataAcno = EradTblMain::where('cesno', $cesno)->value('acno');
-                $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes']);
+                $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes', 'competencies_d_o']);
 
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
                     'selectedPage'));

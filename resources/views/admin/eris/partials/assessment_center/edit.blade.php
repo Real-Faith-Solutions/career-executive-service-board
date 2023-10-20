@@ -34,7 +34,7 @@
                     
                     <div class="mb-3">
                         <label for="acdate">Assessment Center Date<sup>*</sup></label>
-                        <input type="date" id="acdate" name="acdate" oninput="validateDateInput(acdate)" value="{{ $assessmentCenterProfileData->acdate }}" required>
+                        <input type="date" id="acdate" name="acdate" oninput="validateDateInput(acdate)" value="{{ $assessmentCenterDate }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('acdate')
                             <span class="invalid" role="alert">
@@ -56,9 +56,20 @@
 
                     <div class="mb-3">
                         <label for="docdate">Submittion of Document<sup>*</sup></label>
-                        <input type="date" id="docdate" name="docdate" oninput="validateDateInput(docdate)" value="{{ $assessmentCenterProfileData->docdate }}" >
+                        <input type="date" id="docdate" name="docdate" oninput="validateDateInput(docdate)" value="{{ $documentDate }}" >
                         <p class="input_error text-red-600"></p>
                         @error('docdate')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="docdate">Competencies for D.O<sup>*</sup></label>
+                        <input type="text" id="competencies_d_o" name="competencies_d_o" value="{{ $assessmentCenterProfileData->competencies_d_o }}">
+                        <p class="input_error text-red-600"></p>
+                        @error('competencies_d_o')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
