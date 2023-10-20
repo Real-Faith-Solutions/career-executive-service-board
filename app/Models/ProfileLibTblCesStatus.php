@@ -23,6 +23,13 @@ class ProfileLibTblCesStatus extends Model
 
     ];
 
+    public function cesStatusLibrary()
+    {
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+
+        return $profileLibTblCesStatus;
+    }
+
     public function personalData(): HasMany
     {
         return $this->hasMany(PersonalData::class);

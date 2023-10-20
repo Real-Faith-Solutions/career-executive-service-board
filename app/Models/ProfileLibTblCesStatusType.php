@@ -24,4 +24,10 @@ class ProfileLibTblCesStatusType extends Model
 
     ]; 
 
+    public function cesStatusTypeLibrary()
+    {
+        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
+
+        return $profileLibTblCesStatusType;
+    }
 }

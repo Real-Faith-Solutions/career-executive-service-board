@@ -56,10 +56,10 @@ class DatabaseSeeder extends Seeder
             Title::class,
             RecordStatus::class,
             Religion::class,
-            // ProfileLibTblCesStatusTypeSeeder::class,
-            // ProfileLibTblCesStatusAccSeeder::class,
-            // ProfileLibTblCesStatusSeeder::class,
-            // ProfileLibTblAppAuthoritySeeder::class,
+            ProfileLibTblCesStatusTypeSeeder::class,
+            ProfileLibTblCesStatusAccSeeder::class,
+            ProfileLibTblCesStatusSeeder::class,
+            ProfileLibTblAppAuthoritySeeder::class,
             // ProfileLibTblExpertiseSpecSeeder::class,
             // ProfileLibTblEducSchoolSeeder::class,
             // ProfileLibTblEducMajorSeeder::class,
@@ -72,6 +72,7 @@ class DatabaseSeeder extends Seeder
             // ErisTblMainSeeder::class,
             profilelib_tblCaseNatureSeeder::class,
             profilelib_tblCaseStatusSeeder::class,
+            ScholarshipSeeder::class,
 
             // plantilla
             SectorManagerSeeder::class,

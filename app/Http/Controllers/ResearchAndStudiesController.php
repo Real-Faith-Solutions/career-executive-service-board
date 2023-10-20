@@ -8,9 +8,17 @@ use App\Models\ResearchAndStudies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Services\ConvertDateTimeToDate;
 
 class ResearchAndStudiesController extends Controller
 {
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -60,7 +68,14 @@ class ResearchAndStudiesController extends Controller
     {
         $researchAndStudies = ResearchAndStudies::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', compact('researchAndStudies' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.research_and_studies.edit', [
+
+            'researchAndStudies' => $researchAndStudies,
+            'cesno' => $cesno,
+            'dateFrom' => $this->convertDateTimeToDate->convertDateFrom($researchAndStudies->from_dt),
+            'dateTo' => $this->convertDateTimeToDate->convertDateTo($researchAndStudies->to_dt),
+
+        ]);
     }
 
     public function update(Request $request, $ctrlno, $cesno)

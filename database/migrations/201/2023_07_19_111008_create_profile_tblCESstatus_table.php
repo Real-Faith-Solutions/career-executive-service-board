@@ -14,15 +14,10 @@ return new class extends Migration
         Schema::create('profile_tblCESstatus', function (Blueprint $table) {
             $table->id('ctrlno');
             $table->integer('cesno');
-            // $table->foreign('cesno')->references('cesno')->on('profile_tblMain')->onDelete('cascade');
             $table->integer('cesstat_code');
-            // $table->foreign('cesstat_code')->references('code')->on('profilelib_tblcesstatus')->onDelete('cascade');
             $table->integer('acc_code');
-            // $table->foreign('acc_code')->references('code')->on('profilelib_tblcesstatusAcc')->onDelete('cascade');
             $table->integer('type_code');
-            // $table->foreign('type_code')->references('code')->on('profilelib_tblcesstatustype')->onDelete('cascade');
             $table->integer('official_code');
-            // $table->foreign('official_code')->references('code')->on('profilelib_tblappAuthority')->onDelete('cascade');
             $table->integer('resolution_no')->nullable();
             $table->string('appointed_dt')->nullable();
             $table->timestamp('submit_dt')->nullable();

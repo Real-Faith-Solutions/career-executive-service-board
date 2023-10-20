@@ -78,17 +78,19 @@ class AppointeeOccupantManagerController extends Controller
 
     public function store(Request $request)
     {
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
 
         $request->validate([
-            'plantilla_id' => ['required'],
+            'plantilla_id' => ['required', 'unique:plantilla_tblPlanAppointees'],
             'cesno' => ['required', 'unique:plantilla_tblPlanAppointees'],
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ], [
+            'plantilla_id.unique' => 'This Position is already occupied.',
             'cesno.unique' => 'This official is already appointed to another position.',
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
