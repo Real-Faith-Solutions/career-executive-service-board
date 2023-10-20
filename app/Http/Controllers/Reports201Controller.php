@@ -79,7 +79,7 @@ class Reports201Controller extends Controller
                 $subquery->where('TITLE', 'Pending');
             });
         });
-
+        
         $personalData->orderBy($sortBy, $sortOrder);
 
         $personalData = $personalData->paginate(25);
