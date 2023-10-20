@@ -42,41 +42,41 @@ class Reports201Controller extends Controller
 
         $personalData->with('cesStatus', 'caseRecords');
 
-        $personalData->when($request->has('filter_active'), function ($query) {
-            return $query->orWhere('status', 'Active');
-        });
+        // status filter group 
+
+        $personalData->where(function ($query) use ($request) {
+            $query->when($request->has('filter_active'), function ($query) {
+                return $query->orWhere('status', 'Active');
+            });
+        
+            $query->when($request->has('filter_inactive'), function ($query) {
+                return $query->orWhere('status', 'Inactive');
+            });
+        
+            $query->when($request->has('filter_retired'), function ($query) {
+                return $query->orWhere('status', 'Retired');
+            });
     
-        $personalData->when($request->has('filter_inactive'), function ($query) {
-            return $query->orWhere('status', 'Inactive');
-        });
-    
-        $personalData->when($request->has('filter_retired'), function ($query) {
-            return $query->orWhere('status', 'Retired');
-        });
-
-        $personalData->when($request->has('filter_deceased'), function ($query) {
-            return $query->orWhere('status', 'Deceased');
-        });
-
-        // $personalData->when($request->has('with_pending_case'), function ($query) {
-        //     // here i want to get all personal data that has a pending case.
-        //     // the CaseRecords model is child of PersonalData model, 
-        //     // on CaseRecords it has a child caseStatusCode
-        //     // on caseStatusCode theres a column named TITLE
-        //     // now i want to get all personal data that has a Pending TITLE
-        // });
-
-        $personalData->when($request->has('with_pending_case'), function ($query) {
-            // Use a subquery to get personal data with pending cases
-            $query->orWhereHas('caseRecords.caseStatusCode', function ($subquery) {
-                $subquery->where('TITLE', 'Pending');
+            $query->when($request->has('filter_deceased'), function ($query) {
+                return $query->orWhere('status', 'Deceased');
             });
         });
 
-        $personalData->when($request->has('without_pending_case'), function ($query) {
-            // Use a subquery to get personal data without pending cases
-            $query->orWhereDoesntHave('caseRecords.caseStatusCode', function ($subquery) {
-                $subquery->where('TITLE', 'Pending');
+        // pending cases group
+
+        $personalData->where(function ($query) use ($request) {
+            $query->when($request->has('with_pending_case'), function ($query) {
+                // Use a subquery to get personal data with pending cases
+                $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
+                    $subquery->where('TITLE', 'Pending');
+                });
+            });
+    
+            $query->when($request->has('without_pending_case'), function ($query) {
+                // Use a subquery to get personal data without pending cases
+                $query->orWhereDoesntHave('caseRecords.caseStatusCode', function ($subquery) {
+                    $subquery->where('TITLE', 'Pending');
+                });
             });
         });
         
