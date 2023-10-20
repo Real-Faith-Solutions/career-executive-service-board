@@ -40,7 +40,7 @@ class Reports201Controller extends Controller
 
         $personalData = PersonalData::query();
 
-        $personalData->with('cesStatus');
+        $personalData->with('cesStatus', 'caseRecords');
 
         $personalData->when($request->has('filter_active'), function ($query) {
             return $query->orWhere('status', 'Active');
@@ -56,6 +56,21 @@ class Reports201Controller extends Controller
 
         $personalData->when($request->has('filter_deceased'), function ($query) {
             return $query->orWhere('status', 'Deceased');
+        });
+
+        // $personalData->when($request->has('with_pending_case'), function ($query) {
+        //     // here i want to get all personal data that has a pending case.
+        //     // the CaseRecords model is child of PersonalData model, 
+        //     // on CaseRecords it has a child caseStatusCode
+        //     // on caseStatusCode theres a column named TITLE
+        //     // now i want to get all personal data that has a Pending TITLE
+        // });
+
+        $personalData->when($request->has('with_pending_case'), function ($query) {
+            // Use a subquery to get personal data with pending cases
+            $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
+                $subquery->where('TITLE', 'Pending');
+            });
         });
 
         $personalData->orderBy($sortBy, $sortOrder);
