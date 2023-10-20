@@ -66,6 +66,18 @@ class Reports201Controller extends Controller
                 });
             });
         });
+
+        // candidate for retirement 
+
+        $personalData->where(function ($query) use ($request) {
+
+            $query->when($request->has('filter_retirement'), function ($query) {
+                $query->whereHas('planAppointee.apptStatus', function ($subquery) {
+                    $subquery->where('appt_stat_code', 13);
+                });
+            });
+        
+        });
         
         $personalData->orderBy($sortBy, $sortOrder);
 
