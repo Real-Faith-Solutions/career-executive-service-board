@@ -8,21 +8,22 @@ use App\Models\Eris\EradTblMain;
 use App\Models\PersonalData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
 
 class ErisProfileController extends Controller
 {
-    public function personalData()
+    // App\Models
+    private PersonalData $personalData;
+    private EradTblMain $erad;
+
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
     {
-        $personalData = new PersonalData;
-
-        return $personalData;
-    }
-
-    public function erad()
-    {
-        $erad = new EradTblMain;
-
-        return $erad;
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        $this->personalData = new PersonalData();
+        $this->erad = new EradTblMain();
     }
 
     public function getFullNameAttribute()
@@ -37,16 +38,16 @@ class ErisProfileController extends Controller
     public function index(Request $request)
     {
         return view('admin.eris.view_profile.table', [
-            'erisTblMain' => $this->erad()->search($request->input('search'))
+            'erisTblMain' => $this->erad->search($request->input('search'))
         ]);
     }
 
     public function create(Request $request)
     {
         return view('admin.eris.view_profile.add_new_profile.form', [
-            'acno' => $this->erad()->gettingAcNo(), 
-            'acbatchno' => $this->erad()->gettingAcBacthNo(), 
-            'personalData' => $this->personalData()->search($request->input('search')),
+            'acno' => $this->erad->gettingAcNo(), 
+            'acbatchno' => $this->erad->gettingAcBacthNo(), 
+            'personalData' => $this->personalData->search($request->input('search')),
             'personalDataSearchResult' => $this->validateSearch($request->input('search')), 
             'search' => $request->input('search'),
         ]);
@@ -80,7 +81,7 @@ class ErisProfileController extends Controller
 
     public function store(ErisStoreRequest $request)
     {
-        $this->erad()->create(array_merge(
+        EradTblMain::create(array_merge(
             $request->all(),
             [
                 'encoder' => $this->getFullNameAttribute(),
@@ -92,18 +93,19 @@ class ErisProfileController extends Controller
 
     public function edit($acno)
     {
-        $userInfo = $this->erad()->getUserInfo($acno);
+        $userInfo = $this->erad->getUserInfo($acno);
 
         return view('admin.eris.view_profile.add_new_profile.edit', [
             'acno' => $acno,
             'erisTblMainPersonalData' => $userInfo['erisTblMainPersonalData'], 
             'age' =>  $userInfo['age'],
+            'birthDate' => $this->convertDateTimeToDate->convertDateFrom($userInfo['birthdate']),
         ]);
     }
 
     public function update(Request $request, $acno)
     { 
-        $erisTblMain = $this->erad()->find($acno);
+        $erisTblMain = EradTblMain::find($acno);
         $erisTblMain->update($request->all());
  
         return to_route('eris.edit', ['acno' => $acno])->with('info', 'Update Sucessfully');

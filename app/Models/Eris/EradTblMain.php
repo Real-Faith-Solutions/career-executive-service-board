@@ -104,6 +104,7 @@ class EradTblMain extends Model
 
         return [
             'age' => $age,
+            'birthdate' => $birthdate,
             'erisTblMainPersonalData' => $erisTblMainPersonalData
         ];
     }
