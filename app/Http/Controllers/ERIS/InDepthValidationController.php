@@ -7,9 +7,27 @@ use App\Models\Eris\EradTblMain;
 use App\Models\Eris\InDepthValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
 
 class InDepthValidationController extends Controller
 {
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno )
     {
         $erisTblMain = EradTblMain::find($acno);
@@ -27,10 +45,6 @@ class InDepthValidationController extends Controller
 
     public function store(Request $request, $acno)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $inDepthValidation = new InDepthValidation([
 
             'dteassign' => $request->dteassign, // date assign
@@ -39,7 +53,7 @@ class InDepthValidationController extends Controller
             'recom' => $request->recom, // recommendation
             'remarks' => $request->remarks,
             'dtedefer' => $request->dtedefer,  // defered date
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
 
@@ -55,7 +69,15 @@ class InDepthValidationController extends Controller
         $erisTblMainProfileData = EradTblMain::find($acno);
         $inDepthValidation = InDepthValidation::find($ctrlno);
 
-        return view('admin.eris.partials.in_depth_validation.edit', compact('acno', 'erisTblMainProfileData', 'inDepthValidation', 'ctrlno'));
+        return view('admin.eris.partials.in_depth_validation.edit', [
+            'acno' => $acno, 
+            'ctrlno' => $ctrlno,
+            'erisTblMainProfileData' => $erisTblMainProfileData, 
+            'inDepthValidation' => $inDepthValidation, 
+            'dateAssigned' => $this->convertDateTimeToDate->convertDateFrom($inDepthValidation->dteassign),
+            'dateSubmit' => $this->convertDateTimeToDate->convertDateTo($inDepthValidation->dtesubmit),
+            'dateDefer' => $this->convertDateTimeToDate->convertDateGeneral($inDepthValidation->dtedefer),
+        ]);
     }
 
     public function update(Request $request, $acno, $ctrlno)
