@@ -19,4 +19,11 @@ class ProfileLibTblExpertiseSpec extends Model
         'SpeExp_Code',
         'Title',
     ]; 
+
+    public function expertiseLibrary()
+    {
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
+
+        return $profileLibTblExpertiseSpec;
+    }
 }
