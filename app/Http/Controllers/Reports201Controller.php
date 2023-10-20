@@ -73,6 +73,13 @@ class Reports201Controller extends Controller
             });
         });
 
+        $personalData->when($request->has('without_pending_case'), function ($query) {
+            // Use a subquery to get personal data without pending cases
+            $query->whereDoesntHave('caseRecords.caseStatusCode', function ($subquery) {
+                $subquery->where('TITLE', 'Pending');
+            });
+        });
+
         $personalData->orderBy($sortBy, $sortOrder);
 
         $personalData = $personalData->paginate(25);
