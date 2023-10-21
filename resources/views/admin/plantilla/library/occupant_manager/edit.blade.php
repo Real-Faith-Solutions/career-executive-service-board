@@ -105,6 +105,12 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="official_code">Appointing Authority</label>
+                            <input id="official_code"
+                                value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}" readonly />
+                        </div>
+
+                        <div class="mb-3">
                             <label for="assum_date">Assumption Date<sup>*</sup></label>
                             <input id="assum_date" name="assum_date" type="date" value="{{ $datas->assum_date }}"
                                 required />
@@ -113,13 +119,6 @@
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                        <div class="mb-3">
-                            <label for="gender">Gender</label>
-                            <input id="gender" value="{{ $datas->personalData->gender ?? ''}}" readonly />
                         </div>
 
                         <div class="mb-3">
@@ -131,6 +130,13 @@
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="gender">Gender</label>
+                            <input id="gender" value="{{ $datas->personalData->gender ?? ''}}" readonly />
                         </div>
                     </div>
 
