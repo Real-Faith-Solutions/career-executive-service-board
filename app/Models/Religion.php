@@ -14,4 +14,10 @@ class Religion extends Model
     protected $primaryKey = 'ctrlno';
     protected $table = 'religions';
     protected $fillable = ['name'];
+
+
+    public function personalData()
+    {
+        return $this->hasMany(PersonalData::class, 'ctrlno');
+    }
 }
