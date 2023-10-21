@@ -42,11 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            UsersTableSeeder::class,
-            // DefaultAccounts::class,
-            // CesWebAppGeneralPageAccessesTableSeeder::class,
-            // ProfileData::class,
-            // ProfileAddress::class,
+            DefaultAccounts::class,
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,
