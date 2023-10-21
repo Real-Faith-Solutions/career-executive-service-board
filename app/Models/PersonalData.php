@@ -260,7 +260,7 @@ class PersonalData extends Model
         return $this->belongsTo(ProfileLibCities::class, 'birth_place', 'city_code');
     }
 
-    public function religion(): BelongsTo
+    public function religions(): BelongsTo
     {
         return $this->belongsTo(Religion::class, 'religion', 'ctrlno');
     }
