@@ -204,14 +204,6 @@
                                         </span>
                                         @enderror
                                     </div>
-                                </div>
-
-                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                    <div class="mb-3">
-                                        <label for="gender">Gender</label>
-                                        <input id="gender" value="{{ $appointees->personalData->gender ?? ''}}"
-                                            readonly />
-                                    </div>
 
                                     <div class="mb-3">
                                         <label for="appt_date">Appointment Date<sup>*</sup></label>
@@ -223,6 +215,16 @@
                                         </span>
                                         @enderror
                                     </div>
+                                </div>
+
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
+                                        <label for="gender">Gender</label>
+                                        <input id="gender" value="{{ $appointees->personalData->gender ?? ''}}"
+                                            readonly />
+                                    </div>
+
+
                                 </div>
 
                                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
