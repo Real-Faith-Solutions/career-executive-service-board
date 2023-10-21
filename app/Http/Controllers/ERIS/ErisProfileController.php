@@ -99,7 +99,7 @@ class ErisProfileController extends Controller
             'acno' => $acno,
             'erisTblMainPersonalData' => $userInfo['erisTblMainPersonalData'], 
             'age' =>  $userInfo['age'],
-            'birthDate' => $this->convertDateTimeToDate->convertDateFrom($userInfo['birthdate']),
+            'birthDate' => $this->convertDateTimeToDate->convertDateGeneral($userInfo['birthdate']),
         ]);
     }
 

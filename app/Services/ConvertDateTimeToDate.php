@@ -11,6 +11,17 @@
             return $convertDateGeneral;
         }
 
+        public function convertDateFromAndTo($fromDate, $toDate)
+        {
+            $dateFrom = date('Y-m-d', strtotime($fromDate));
+            $dateTo = date('Y-m-d', strtotime($toDate));
+            
+            return [
+                'dateFrom' => $dateFrom,
+                'dateTo' => $dateTo,
+            ];
+        }
+
         public function convertDateFrom($fromDate)
         {
             $dateFrom = date('Y-m-d', strtotime($fromDate));
