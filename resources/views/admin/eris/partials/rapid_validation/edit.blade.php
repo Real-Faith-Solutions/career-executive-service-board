@@ -34,7 +34,7 @@
                     
                     <div class="mb-3">
                         <label for="dteassign">Rapid Validation Date<sup>*</sup></label>
-                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $rapidValidation->dteassign }}" required>
+                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $dateAssigned }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('dteassign')
                             <span class="invalid" role="alert">
@@ -45,7 +45,7 @@
 
                     <div class="mb-3">
                         <label for="dtesubmit">Submittion Date<sup>*</sup></label>
-                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $rapidValidation->dtesubmit }}">
+                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $dateSubmit }}">
                         <p class="input_error text-red-600"></p>
                         @error('dtesubmit')
                             <span class="invalid" role="alert">

@@ -30,6 +30,22 @@ class BoardInterView extends Model
 
     ];
 
+    public function getUserBoardInterview($ctrlno)
+    {
+        $boardInterview = BoardInterView::find($ctrlno);
+
+        $dateFrom = $boardInterview->dteassign;
+        $dateTo = $boardInterview->dtesubmit;
+        $dteiview = $boardInterview->dteiview;
+
+        return [
+            'dateFrom' => $dateFrom,
+            'dateTo' => $dateTo,
+            'dteiview' => $dteiview,
+            'boardInterview' => $boardInterview,
+        ];
+    }
+
     public function erisTblMainBoardInterview(): BelongsTo
     {
         return $this->belongsTo(EradTblMain::class, 'acno');

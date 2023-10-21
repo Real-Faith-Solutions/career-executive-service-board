@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('numtakes')->nullable(); // number of takes
             $table->string('docdate')->nullable(); // document date
             $table->string('remarks')->nullable();
+            $table->string('competencies_d_o')->nullable();
             $table->string('encoder')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent();

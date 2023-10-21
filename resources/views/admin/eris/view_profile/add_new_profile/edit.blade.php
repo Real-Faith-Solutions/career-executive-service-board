@@ -35,7 +35,7 @@
                         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                             <div class="mb-3">
                                 <label for="birthdate">Birth Date<sup>*</sup></label>
-                                <input type="date" id="birthdate" name="birthdate" value="{{ $erisTblMainPersonalData->birthdate ?? ''  }}" value="{{ old('birthdate') }}" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" required>
+                                <input type="date" id="birthdate" name="birthdate" value="{{ $birthDate ?? ''  }}" value="{{ old('birthdate') }}" onchange="computeAge()" oninput="validateDateInput(birthdate, 18)" required>
                             <p class="input_error text-red-600"></p>
                             </div>
 

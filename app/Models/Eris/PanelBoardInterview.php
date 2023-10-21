@@ -30,6 +30,22 @@ class PanelBoardInterview extends Model
 
     ];
 
+    public function getUserPanelBoardInterview($ctrlno)
+    {
+        $panelBoardInterview = PanelBoardInterview::find($ctrlno);
+
+        $dateFrom = $panelBoardInterview->dteassign;
+        $dateTo = $panelBoardInterview->dtesubmit;
+        $dateInterview = $panelBoardInterview->dteiview;
+
+        return [
+            'dateFrom' => $dateFrom, 
+            'dateTo' => $dateTo, 
+            'panelBoardInterview' => $panelBoardInterview,
+            'dateInterview' => $dateInterview,
+        ];
+    }
+
     public function erisTblMainPanelBoardInterview(): BelongsTo
     {
         return $this->belongsTo(EradTblMain::class, 'acno');
