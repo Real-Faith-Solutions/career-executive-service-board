@@ -58,12 +58,7 @@
             @foreach ($approvedPdfFile as $approvedPdfFiles)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            @if ($approvedPdfFiles->original_pdflink == null)
-                                <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->pdflink]) }}" target="_blank" method="POST">        
-                            @else
-                                <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->original_pdflink]) }}" target="_blank" method="POST">
-                            @endif
-                        
+                            <form action="{{ route('downloadApprovedFile', ['ctrlno'=>$approvedPdfFiles->ctrlno, 'fileName'=>$approvedPdfFiles->pdflink]) }}" target="_blank" method="POST">        
                             @csrf
                             <button title="View File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -79,8 +74,8 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $approvedPdfFiles->original_pdflink }}
-                    </td>
+                        {{ $approvedPdfFiles->pdflink }}
+                    </td>    
 
                     <td class="px-6 py-3">
                         {{ \Carbon\Carbon::parse($approvedPdfFiles->encdate)->format('m/d/Y') }}
