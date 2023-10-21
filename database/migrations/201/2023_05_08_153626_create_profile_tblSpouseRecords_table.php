@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('profile_tblSpouseRecords', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            // $table->foreignId('personal_data_cesno')->constrained('profile_tblMain', 'cesno');
+            $table->integer('personal_data_cesno')->nullable();
             $table->string('last_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();

@@ -44,6 +44,13 @@ return new class extends Migration
             $table->timestamp('e_date')->nullable();
             $table->timestamp('lastupd_dt')->nullable();
             $table->softDeletes();
+            $table->string('mobileno')->nullable();
+            $table->string('mobileno2')->nullable();
+            $table->string('spouse_fname')->nullable();
+            $table->string('spouse_lname')->nullable();
+            $table->string('spouse_mname')->nullable();
+            $table->string('telno')->nullable();
+            $table->string('mailingaddr')->nullable();
         });
     }
 
