@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Religion extends Model
@@ -14,4 +15,10 @@ class Religion extends Model
     protected $primaryKey = 'ctrlno';
     protected $table = 'religions';
     protected $fillable = ['name'];
+
+
+    public function personalData(): HasMany
+    {
+        return $this->hasMany(PersonalData::class, 'ctrlno');
+    }
 }

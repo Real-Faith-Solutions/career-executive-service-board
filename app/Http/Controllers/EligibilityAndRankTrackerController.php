@@ -23,11 +23,25 @@ use App\Services\ConvertDateTimeToDate;
 class EligibilityAndRankTrackerController extends Controller
 {
     // const MODULE_201_PROFILING = 'admin.201_profiling';
+
+    // App\Models
+    private ProfileTblCesStatus $profileTblCesStatus;
+    private ProfileLibTblCesStatus $cesStatus;
+    private ProfileLibTblCesStatusAcc $cesStatusAcc;
+    private ProfileLibTblCesStatusType $cesStatusType;
+    private ProfileLibTblAppAuthority $appAuthority;
+
+    // App\Services
     private ConvertDateTimeToDate $convertDateTimeToDate;
  
     public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
     {
         $this->convertDateTimeToDate = $convertDateTimeToDate;
+        $this->profileTblCesStatus = new ProfileTblCesStatus();
+        $this->cesStatus = new ProfileLibTblCesStatus();
+        $this->cesStatusAcc = new ProfileLibTblCesStatusAcc();
+        $this->cesStatusType = new ProfileLibTblCesStatusType();
+        $this->appAuthority = new ProfileLibTblAppAuthority();
     }
 
     public function getFullNameAttribute()
@@ -37,38 +51,6 @@ class EligibilityAndRankTrackerController extends Controller
         $encoder = $user->userName();
 
         return $encoder;
-    }
-
-    public function cesStatus()
-    {
-        $cesStatus = new ProfileLibTblCesStatus;
-        $cesStatusLibrary = $cesStatus->cesStatusLibrary();
-
-        return $cesStatusLibrary;
-    }
-
-    public function cesStatusAcc()
-    {
-        $profileLibTblCesStatusAcc = new ProfileLibTblCesStatusAcc;
-        $cesStatusAcc = $profileLibTblCesStatusAcc->cesStatusAccLibrary();
-
-        return $cesStatusAcc;
-    }
-
-    public function cesStatusType()
-    {
-        $profileLibTblCesStatusType = new ProfileLibTblCesStatusType;
-        $cesStatusType = $profileLibTblCesStatusType->cesStatusTypeLibrary();
-
-        return $cesStatusType;
-    }
-
-    public function appAuthority()
-    {
-        $profileLibTblAppAuthority = new ProfileLibTblAppAuthority;
-        $appAuthority = $profileLibTblAppAuthority->appAuthorityLibrary();
-
-        return $appAuthority;
     }
 
     public function index($cesno)
@@ -130,10 +112,10 @@ class EligibilityAndRankTrackerController extends Controller
     public function create($cesno)
     {
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.form', [
-            'profileLibTblCesStatus' => $this->cesStatus(),
-            'profileLibTblCesStatusAcc' => $this->cesStatusAcc() ,
-            'profileLibTblCesStatusType' => $this->cesStatusType() ,
-            'profileLibTblAppAuthority' => $this->appAuthority() ,
+            'profileLibTblCesStatus' => $this->cesStatus->cesStatusLibrary(),
+            'profileLibTblCesStatusAcc' => $this->cesStatusAcc->cesStatusAccLibrary(),
+            'profileLibTblCesStatusType' => $this->cesStatusType->cesStatusTypeLibrary(),
+            'profileLibTblAppAuthority' => $this->appAuthority->appAuthorityLibrary(),
             'cesno' => $cesno,
         ]);
     }
@@ -167,7 +149,8 @@ class EligibilityAndRankTrackerController extends Controller
         
         $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
-        $this->updateCesStatusCode($cesno);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
@@ -178,10 +161,10 @@ class EligibilityAndRankTrackerController extends Controller
     
        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.edit', [
             'profileTblCesStatus' => $profileTblCesStatus,
-            'profileLibTblCesStatus' => $this->cesStatus(),
-            'profileLibTblCesStatusAcc' => $this->cesStatusAcc() ,
-            'profileLibTblCesStatusType' => $this->cesStatusType() ,
-            'profileLibTblAppAuthority' => $this->appAuthority() ,
+            'profileLibTblCesStatus' => $this->cesStatus->cesStatusLibrary(),
+            'profileLibTblCesStatusAcc' => $this->cesStatusAcc->cesStatusAccLibrary(),
+            'profileLibTblCesStatusType' => $this->cesStatusType->cesStatusTypeLibrary(),
+            'profileLibTblAppAuthority' => $this->appAuthority->appAuthorityLibrary(),
             'appointedDate' => $this->convertDateTimeToDate->convertDateFrom($profileTblCesStatus->appointed_dt),
             'cesno' => $cesno,
        ]);
@@ -210,7 +193,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->lastupd_enc = $this->getFullNameAttribute();
         $profileTblCesStatus->update();
 
-        $this->updateCesStatusCode($cesno);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
     }
@@ -220,7 +204,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->delete();
 
-        $this->updateCesStatusCode($cesno);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return back()->with('message', 'Deleted Sucessfully');
     }
@@ -244,7 +229,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->restore();
 
-        $this->updateCesStatusCode($cesno);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return back()->with('message', 'Data Restored Sucessfully');
     }
@@ -254,16 +240,9 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->forceDelete();
 
-        $this->updateCesStatusCode($cesno);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
   
         return back()->with('message', 'Data Permanently Deleted');
-    }
-
-    public function updateCesStatusCode($cesno)
-    {
-        $profileTblCesStatus = new ProfileTblCesStatus;
-        $latestCesStatusCode = $profileTblCesStatus->latestCesStatusCode($cesno);
-
-        return $latestCesStatusCode;
     }
 }
