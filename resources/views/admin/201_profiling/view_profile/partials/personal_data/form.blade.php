@@ -137,7 +137,8 @@
 
                         <div class="mb-3">
                             <label for="religion">Religion<sup>*</sup></label>
-                            <input id="religion" name="religion" readonly value="{{ $mainProfile->religion->name }}">
+                            <input id="religion" name="religion" readonly
+                                value="{{ $mainProfile->religion->name ?? ''}}">
                         </div>
 
                         <div class="mb-3">
