@@ -42,11 +42,6 @@
                 </div>
 
                 <div class="flex items-center px-6 py-3 text-left">
-                    <input id="filter_retirement" type="checkbox" name="filter_retirement" {{ $filter_retirement == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
-                    <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
-                </div>
-
-                <div class="flex items-center px-6 py-3 text-left">
                     <input id="with_pending_case" type="checkbox" name="with_pending_case" {{ $with_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
                     <label for="with_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">With Pending Case</label>
                 </div>
@@ -54,6 +49,11 @@
                 <div class="flex items-center px-6 py-3 text-left">
                     <input id="without_pending_case" type="checkbox" name="without_pending_case" {{ $without_pending_case == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
                     <label for="without_pending_case" class="ml-2 mt-2 text-sm font-medium text-gray-700">Without Pending Case</label>
+                </div>
+
+                <div class="flex items-center px-6 py-3 text-left">
+                    <input id="filter_retirement" type="checkbox" name="filter_retirement" {{ $filter_retirement == "true" ? 'checked' : '' }} value="true" class="w-4 h-4 text-blue-600 accent-green-600">
+                    <label for="filter_retirement" class="ml-2 mt-2 text-sm font-medium text-gray-700">Candidate For Retirement</label>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
                             </a>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="">CES Status</span>
+                            <span class="">Status</span>
                         </th>
                     </tr>
                 </thead>
@@ -132,7 +132,7 @@
                                     {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                 </td>
                                 <td scope="col" class="px-6 py-3">
-                                    {{ $personalDatas->cesstatus->description ?? '' }}
+                                    {{ $personalDatas->status ?? '' }}
                                 </td>
                             </tr>
                         @endforeach
