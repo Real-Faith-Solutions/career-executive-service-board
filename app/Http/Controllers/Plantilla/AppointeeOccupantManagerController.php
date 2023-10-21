@@ -16,6 +16,8 @@ use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
+use App\Models\ProfileLibTblAppAuthority;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,11 +52,14 @@ class AppointeeOccupantManagerController extends Controller
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
+            $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)->where('cesstat_code', $personalData->CESStat_code)->first();
+
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
             }
         } else {
             $personalData = null;
+            $authority = null;
         }
 
         return view('admin.plantilla.appointee_occupant_browser.create', compact(
@@ -72,6 +77,7 @@ class AppointeeOccupantManagerController extends Controller
             'personalData',
             'cesno',
             'personalDataList',
+            'authority',
 
         ));;
     }
@@ -175,6 +181,10 @@ class AppointeeOccupantManagerController extends Controller
             ->where('plantilla_id', $planPosition->plantilla_id)
             ->get();
 
+        $authority = ProfileTblCesStatus::where('cesno', $appointees->personalData->cesno)
+            ->where('cesstat_code', $appointees->personalData->CESStat_code)
+            ->first();
+
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
@@ -195,6 +205,7 @@ class AppointeeOccupantManagerController extends Controller
             'apptStatus',
             'appointees',
             'otherAssignment',
+            'authority',
 
         ));;
     }

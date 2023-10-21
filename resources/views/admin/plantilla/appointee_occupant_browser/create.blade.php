@@ -141,10 +141,28 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <label for="official_code">Appointing Authority</label>
+                                        <input id="official_code"
+                                            value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}"
+                                            readonly />
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
                                             value="{{ old('assum_date') }}" />
                                         @error('assum_date')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="appt_date">Appointment Date<sup>*</sup></label>
+                                        <input id="appt_date" name="appt_date" type="date"
+                                            value="{{ old('appt_date') }}" />
+                                        @error('appt_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
                                         </span>
@@ -158,16 +176,7 @@
                                         <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="appt_date">Appointment Date<sup>*</sup></label>
-                                        <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ old('appt_date') }}" />
-                                        @error('appt_date')
-                                        <span class="invalid" role="alert">
-                                            <p>{{ $message }}</p>
-                                        </span>
-                                        @enderror
-                                    </div>
+
                                 </div>
 
                                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">

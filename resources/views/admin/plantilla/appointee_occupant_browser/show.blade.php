@@ -187,6 +187,12 @@
                                             value="{{ $appointees->personalData->cesStatus->description ?? '' }}"
                                             readonly />
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="official_code">Appointing Authority</label>
+                                        <input id="official_code"
+                                            value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}"
+                                            readonly />
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
