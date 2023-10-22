@@ -25,6 +25,10 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
+                        Competencies for D.O  
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Remarks
                     </th>
 
@@ -46,6 +50,10 @@
 
                         <td class="px-6 py-3">
                             {{ \Carbon\Carbon::parse($assessmentCenterTrashedRecords->docdate)->format('m/d/Y') ?? 'No Record' }} 
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $assessmentCenterTrashedRecords->competencies_d_o ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">

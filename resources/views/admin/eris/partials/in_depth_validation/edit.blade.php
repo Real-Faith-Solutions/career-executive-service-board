@@ -34,7 +34,7 @@
                     
                     <div class="mb-3">
                         <label for="dteassign">Assigned Date<sup>*</sup></label>
-                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $inDepthValidation->dteassign }}" required>
+                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $dateAssigned }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('dteassign')
                             <span class="invalid" role="alert">
@@ -45,7 +45,7 @@
 
                     <div class="mb-3">
                         <label for="dtesubmit">Submittion Date<sup>*</sup></label>
-                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $inDepthValidation->dtesubmit }}">
+                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $dateSubmit }}">
                         <p class="input_error text-red-600"></p>
                         @error('dtesubmit')
                             <span class="invalid" role="alert">
@@ -83,7 +83,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="dtedefer">Defered Date<sup>*</sup></label>
-                        <input type="date" id="dtedefer" name="dtedefer" oninput="validateDateInput(dtedefer)"  value="{{ $inDepthValidation->dtedefer }}">
+                        <input type="date" id="dtedefer" name="dtedefer" oninput="validateDateInput(dtedefer)"  value="{{ $dateDefer }}">
                         <p class="input_error text-red-600"></p>
                         @error('dtedefer')
                             <span class="invalid" role="alert">

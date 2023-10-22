@@ -7,9 +7,32 @@ use App\Models\Eris\BoardInterView;
 use App\Models\Eris\EradTblMain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
+
 
 class BoardInterviewController extends Controller
 {
+    // App\Models
+    private BoardInterView $boardInterView;
+
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        $this->boardInterView = new BoardInterView();
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
@@ -27,10 +50,6 @@ class BoardInterviewController extends Controller
 
     public function store(Request $request, $acno)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $boardInterview = new BoardInterView([
 
             'dteassign' => $request->dteassign, // date assign
@@ -38,7 +57,7 @@ class BoardInterviewController extends Controller
             'intrviewer' => $request->intrviewer, // interviewer 
             'dteiview' => $request->dteiview, // recommendation
             'recom' => $request->recom, // recommendation
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
 
@@ -52,9 +71,19 @@ class BoardInterviewController extends Controller
     public function edit($acno, $ctrlno)
     {
         $erisTblMainProfileData = EradTblMain::find($acno);
-        $boardInterview = BoardInterView::find($ctrlno);
+        $boardInterview = $this->boardInterView->getUserBoardInterview($ctrlno);
+        $convertDateFromAndTo = $this->convertDateTimeToDate->convertDateFromAndTo($boardInterview['dateFrom'], $boardInterview['dateTo']);
 
-        return view('admin.eris.partials.board_interview.edit', compact('acno', 'erisTblMainProfileData', 'boardInterview', 'ctrlno'));
+        return view('admin.eris.partials.board_interview.edit', [
+            'acno' => $acno, 
+            'ctrlno' => $ctrlno,
+            'erisTblMainProfileData' => $erisTblMainProfileData, 
+            'boardInterview' => $boardInterview['boardInterview'], 
+            'assignedDate' => $convertDateFromAndTo['dateFrom'],
+            'submittionDate' => $convertDateFromAndTo['dateTo'],
+            'dateInterview' => $this->convertDateTimeToDate->convertDateGeneral($boardInterview['dteiview']),
+
+        ]);
     }
 
     public function update(Request $request, $acno, $ctrlno)

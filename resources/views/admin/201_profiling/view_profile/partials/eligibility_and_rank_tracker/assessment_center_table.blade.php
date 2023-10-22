@@ -68,7 +68,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($assessmentCenters->docdate)->format('m/d/Y ') ?? 'No Record' }}
+                            {{ $assessmentCenters->competencies_d_o ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
