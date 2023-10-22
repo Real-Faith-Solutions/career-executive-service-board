@@ -44,6 +44,11 @@ class ProfileTblCesStatus extends Model
         $cestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
             ->value('cesstat_code');
 
+        if(!$cestatusCode)
+        {
+            $cestatusCode = null;
+        }
+
         // update CESStat_code based on $latestCestatusCode
         $latestCesStatusCode =  DB::table('profile_tblMain')
             ->where('cesno', $cesno)

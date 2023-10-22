@@ -78,6 +78,16 @@ class Reports201Controller extends Controller
             });
         
         });
+
+        // ces status filter 
+
+        $personalData->where(function ($query) use ($request, $cesstat_code) {
+
+            $query->when($request->has('cesstat_code'), function ($query) use ($cesstat_code)  {
+                return $query->where('CESStat_code', $cesstat_code);
+            });
+        
+        });
         
         $personalData->orderBy($sortBy, $sortOrder);
 
