@@ -56,9 +56,9 @@ class EligibilityAndRankTrackerController extends Controller
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $profileTblCesStatus = $personalData->profileTblCesStatus;
-        // ->orderBy('appointed_dt', 'desc')
-        // ->get();
+        $profileTblCesStatus = $personalData->profileTblCesStatus()
+        ->orderBy('appointed_dt', 'desc')
+        ->get();
 
         return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.table', compact('profileTblCesStatus' ,'cesno'));
     }
