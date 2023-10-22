@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\EradTblMain;
 use App\Models\Eris\LibraryRankTracker;
 use App\Models\Eris\RankTracker;
+use App\Models\Eris\RankTracker201;
 use App\Models\PersonalData;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
@@ -68,6 +69,19 @@ class RankTrackerController extends Controller
         $erisTblMain = EradTblMain::find($request->acno);        
 
         $erisTblMain->rankTracker()->save($rankTracker);
+
+        // store in rank tracker 201
+        RankTracker201::create([
+
+            'cesno' =>  $cesno,
+            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
+            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
+            'description' => $request->description,
+            'remarks' => $request->remarks,
+            'submit_dt' => $request->submit_dt, //  submit date,
+            'encoder' =>  $this->getFullNameAttribute(),
+            
+        ]);
    
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('erad_tblRankTracker201', function (Blueprint $table) {
-            $table->id('ctrlno')->nullable();
+            $table->id('ctrlno');
             $table->integer('cesno')->nullable();
             $table->integer('r_catid')->nullable();
             $table->integer('r_ctrlno')->nullable();
