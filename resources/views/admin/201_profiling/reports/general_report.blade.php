@@ -74,6 +74,21 @@
                     @enderror
                 </div>
 
+                <div class="flex items-center px-6 py-3 text-left">
+                    <label for="authority_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
+                    <select id="authority_code" name="authority_code" required type="text" class="inline-block">
+                        <option disabled selected>Select Appointing Authority</option>
+                        @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
+                            <option value="{{ $newProfileLibTblAppAuthority->code }}" {{ $newProfileLibTblAppAuthority->code == $authority_code ? 'selected' : '' }}>{{ $newProfileLibTblAppAuthority->description }}</option>
+                        @endforeach
+                    </select>
+                    @error('authority_code')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                    @enderror
+                </div>
+
                 <div class="my-5 flex justify-end">
                     <button class="btn btn-primary" type="submit">Apply Filter</button>
                 </div>
@@ -117,9 +132,19 @@
                                 @endif
                             </a>
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="">Status</span>
-                        </th>
+
+                        @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">Status</span>
+                            </th>
+                        @endif
+
+                        @if ($with_pending_case == "true")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">Pending Case</span>
+                            </th>
+                        @endif
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -128,12 +153,23 @@
                                 <th scope="col" class="px-6 py-3">
                                     {{ $personalDatas->cesno }}
                                 </th>
+
                                 <td scope="col" class="px-6 py-3">
                                     {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                 </td>
-                                <td scope="col" class="px-6 py-3">
-                                    {{ $personalDatas->status ?? '' }}
-                                </td>
+
+                                @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->status ?? '' }}
+                                    </td>
+                                @endif  
+
+                                @if ($with_pending_case == "true")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->offence ?? 'none' }}
+                                    </td>
+                                @endif
+
                             </tr>
                         @endforeach
                 </tbody>

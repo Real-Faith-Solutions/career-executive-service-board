@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('blood_type')->nullable();
             $table->string('marks')->nullable();
             $table->string('handicap')->nullable();
+            $table->string('illness')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
+            $table->timestamp('ill_dt')->nullable()->useCurrent();
             $table->timestamp('encdate')->nullable()->useCurrent();
             $table->timestamp('lastupd_dt')->nullable()->useCurrent();
             $table->softDeletes();
