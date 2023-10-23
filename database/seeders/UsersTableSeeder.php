@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
         if(count($cesboard) === 0){
 
             $admin = User::create([
-                'username'                  => 'cesboard',
+                // 'username'                  => 'cesboard',
                 'email'                     => 'admin@ces.com',
                 'password'                  => Hash::make('12345'),
                 'last_name'                 => 'Dela Cruz',

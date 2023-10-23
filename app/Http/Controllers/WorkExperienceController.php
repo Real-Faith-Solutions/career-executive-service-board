@@ -7,9 +7,26 @@ use App\Models\ProfileTblWorkExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Services\ConvertDateTimeToDate;
 
 class WorkExperienceController extends Controller
 {
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -39,10 +56,6 @@ class WorkExperienceController extends Controller
 
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName(); 
-
         $workExperience = new ProfileTblWorkExperience([
 
             'from_dt' => $request->inclusive_date_from,
@@ -54,7 +67,7 @@ class WorkExperienceController extends Controller
             'department' => $request->department_or_agency,
             'government_service' => $request->government_service,
             'remarks' => $request->remarks,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
          
         ]);
 
@@ -69,7 +82,12 @@ class WorkExperienceController extends Controller
     {
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
 
-        return view('admin.201_profiling.view_profile.partials.work_experience.edit', compact('workExperience' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.work_experience.edit', [
+            'workExperience' => $workExperience ,
+            'dateFrom' => $this->convertDateTimeToDate->convertDateFrom($workExperience->from_dt),
+            'dateTo' => $this->convertDateTimeToDate->convertDateTo($workExperience->to_dt),
+            'cesno' => $cesno,
+        ]);
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -88,10 +106,6 @@ class WorkExperienceController extends Controller
 
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $workExperience = ProfileTblWorkExperience::find($ctrlno);
         $workExperience->from_dt = $request->inclusive_date_from;
         $workExperience->to_dt = $request->inclusive_date_to;
@@ -102,7 +116,7 @@ class WorkExperienceController extends Controller
         $workExperience->department = $request->department_or_agency;
         $workExperience->government_service = $request->government_service;
         $workExperience->remarks = $request->remarks;
-        $workExperience->lastupd_enc = $encoder;
+        $workExperience->lastupd_enc = $this->getFullNameAttribute();
         $workExperience->save();
 
         return to_route('work-experience.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');

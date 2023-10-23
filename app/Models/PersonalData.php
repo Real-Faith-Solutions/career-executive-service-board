@@ -110,14 +110,30 @@ class PersonalData extends Model
     public function search($search)
     {
         $personalData = PersonalData::query()
-        ->where('cesno', "LIKE" ,"%$search%")
-        ->orWhere('lastname',  "LIKE","%$search%")
-        ->orWhere('firstname',  "LIKE","%$search%")
-        ->orWhere('middlename',  "LIKE","%$search%")
-        ->orWhere('name_extension',  "LIKE","%$search%")
-        ->paginate(25);
+            ->where('cesno', "LIKE", "%$search%")
+            ->orWhere('lastname',  "LIKE", "%$search%")
+            ->orWhere('firstname',  "LIKE", "%$search%")
+            ->orWhere('middlename',  "LIKE", "%$search%")
+            ->orWhere('name_extension',  "LIKE", "%$search%")
+            ->paginate(25);
 
         return $personalData;
+    }
+
+    public function latestCesStatus($cesno)
+    {
+        $latestCestatusCode = PersonalData::find($cesno);
+        
+        if($latestCestatusCode->cesStatus != null)
+        {
+            $latestCestatusDescription = $latestCestatusCode->cesStatus->description;
+        }
+        else
+        {
+            $latestCestatusDescription = null;
+        }
+        
+        return $latestCestatusDescription;
     }
 
     public function spouses(): HasMany
@@ -258,6 +274,11 @@ class PersonalData extends Model
     public function cities(): BelongsTo
     {
         return $this->belongsTo(ProfileLibCities::class, 'birth_place', 'city_code');
+    }
+
+    public function religions(): BelongsTo
+    {
+        return $this->belongsTo(Religion::class, 'religion', 'ctrlno');
     }
 
     // plantilla

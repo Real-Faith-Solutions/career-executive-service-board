@@ -204,7 +204,13 @@ class PDFController extends Controller
 
         $myFile = public_path($pdfFileName);
 
-        return response()->file($myFile);
+        if (!file_exists($myFile)) {
+            return back()->with('error','The Document Does not exist in File Folder');
+        }
+        else
+        {
+            return response()->file($myFile);
+        }
     }
 
     // stream pending file

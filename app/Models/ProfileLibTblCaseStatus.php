@@ -15,4 +15,11 @@ class ProfileLibTblCaseStatus extends Model
         'STATUS_CODE',
         'TITLE',
     ]; 
+
+    public function caseStatus()
+    {
+        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::orderBy('TITLE', 'asc')->get();
+
+        return $profileLibTblCaseStatus;
+    }
 }

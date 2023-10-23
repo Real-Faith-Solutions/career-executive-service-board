@@ -31,8 +31,8 @@ class ScholarshipController extends Controller
             'type' => ['required'],
             'title' => ['required', Rule::unique('profile_tblScholarship')->where('cesno', $cesno), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
+            // 'inclusive_date_from' => ['required'],
+            // 'inclusive_date_to' => ['required'],
 
         ]);
 
@@ -72,8 +72,8 @@ class ScholarshipController extends Controller
             'type' => ['required'],
             'title' => ['required', Rule::unique('profile_tblScholarship')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno'), 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
             'sponsor' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'inclusive_date_from' => ['required'],
-            'inclusive_date_to' => ['required'],
+            // 'inclusive_date_from' => ['required'],
+            // 'inclusive_date_to' => ['required'],
 
         ]);
 

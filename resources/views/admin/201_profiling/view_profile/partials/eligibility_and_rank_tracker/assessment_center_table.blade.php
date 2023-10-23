@@ -15,6 +15,7 @@
                         <option value="Assessment Center" {{ $selectedPage == 'Assessment Center' ? 'selected' : '' }}>Assessment Center (Historical Record)</option>
                         <option value="Validation">Validation (Historical Record)</option>
                         <option value="Board Interview">Board Interview</option>
+                        <option value="Rank Tracker">Rank Tracker</option>
                     </select>    
                 </div>
     
@@ -68,7 +69,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($assessmentCenters->docdate)->format('m/d/Y ') ?? 'No Record' }}
+                            {{ $assessmentCenters->competencies_d_o ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">

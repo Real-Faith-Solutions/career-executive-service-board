@@ -9,11 +9,31 @@ use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Carbon\Carbon;
-
+use App\Services\ConvertDateTimeToDate;
 
 class NonCesTrainingController extends Controller
 {
+    // App\Models
+    private ProfileLibTblExpertiseSpec $profileLibTblExpertiseSpec;
+
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        $this->profileLibTblExpertiseSpec = new ProfileLibTblExpertiseSpec();
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName(); 
+
+        return $encoder;
+    }
+
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -35,9 +55,10 @@ class NonCesTrainingController extends Controller
 
     public function create($cesno)
     {
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
-
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.form', compact('profileLibTblExpertiseSpec' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.form', [
+            'profileLibTblExpertiseSpec' => $this->profileLibTblExpertiseSpec->expertiseLibrary(),
+            'cesno' => $cesno,
+        ]);
     }
     
     public function store(Request $request, $cesno)
@@ -55,10 +76,6 @@ class NonCesTrainingController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName(); 
-
         $otherTraining = new ProfileTblTrainingMngt([
 
             'training' => $request->training,
@@ -69,7 +86,7 @@ class NonCesTrainingController extends Controller
             'from_dt' => $request->inclusive_date_from,
             'to_dt' => $request->inclusive_date_to,
             'field_specialization' => $request->expertise_field_of_specialization,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
          
         ]);
 
@@ -83,31 +100,14 @@ class NonCesTrainingController extends Controller
     public function edit($ctrlno, $cesno)
     {
         $otherManagementTraining = ProfileTblTrainingMngt::find($ctrlno); 
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
-
+        
         return view('admin.201_profiling.view_profile.partials.other_management_trainings.edit', [
-
             'otherManagementTraining' => $otherManagementTraining,
-            'profileLibTblExpertiseSpec' => $profileLibTblExpertiseSpec,
+            'profileLibTblExpertiseSpec' => $this->profileLibTblExpertiseSpec->expertiseLibrary(),
             'cesno' => $cesno,
-            'dateFrom' => $this->convertDateFrom($otherManagementTraining->from_dt),
-            'dateTo' => $this->convertDateTo($otherManagementTraining->to_dt),
-
+            'dateFrom' => $this->convertDateTimeToDate->convertDateFrom($otherManagementTraining->from_dt),
+            'dateTo' => $this->convertDateTimeToDate->convertDateTo($otherManagementTraining->to_dt),
         ]);
-    }
-
-    public function convertDateFrom($fromDate)
-    {
-        $dateFrom = date('Y-m-d',strtotime($fromDate));
-
-        return $dateFrom;
-    }
-
-    public function convertDateTo($toDate)
-    {
-        $dateTo = date('Y-m-d',strtotime($toDate));
-
-        return $dateTo;
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -125,10 +125,6 @@ class NonCesTrainingController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $trainingManagement = ProfileTblTrainingMngt::find($ctrlno);
         $trainingManagement->training = $request->training;
         $trainingManagement->training_category = $request->training_category;
@@ -138,7 +134,7 @@ class NonCesTrainingController extends Controller
         $trainingManagement->from_dt = $request->inclusive_date_from;
         $trainingManagement->to_dt = $request->inclusive_date_to;
         $trainingManagement->field_specialization = $request->expertise_field_of_specialization;
-        $trainingManagement->lastupd_enc = $encoder;
+        $trainingManagement->lastupd_enc = $this->getFullNameAttribute();
         $trainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');
@@ -163,7 +159,13 @@ class NonCesTrainingController extends Controller
         // Access the soft deleted competencyNonCesAccreditedTraining of the parent model
         $competencyNonCesAccreditedTrainingTrashedRecord = $personalData->competencyNonCesAccreditedTraining()->onlyTrashed()->get();
  
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', compact('otherTrainingTrashedRecord', 'competencyNonCesAccreditedTrainingTrashedRecord','cesno'));
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.trashbin', 
+            compact(
+                'otherTrainingTrashedRecord', 
+                'competencyNonCesAccreditedTrainingTrashedRecord',
+                'cesno'
+            )
+        );
     }
 
     public function restore($ctrlno)
@@ -185,9 +187,12 @@ class NonCesTrainingController extends Controller
     public function editCompetencyNonCesTraining($ctrlno, $cesno)
     {
         $otherManagementTraining = CompetencyNonCesAccreditedTraining::find($ctrlno);
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
-
-        return view('admin.201_profiling.view_profile.partials.other_management_trainings.competency_edit', compact('otherManagementTraining', 'profileLibTblExpertiseSpec', 'cesno'));
+        
+        return view('admin.201_profiling.view_profile.partials.other_management_trainings.competency_edit', [
+            'otherManagementTraining' => $otherManagementTraining, 
+            'profileLibTblExpertiseSpec' => $this->profileLibTblExpertiseSpec->expertiseLibrary(), 
+            'cesno' => $cesno,
+        ]);
     }
 
     public function updateCompetencyNonCesTraining(Request $request, $ctrlno, $cesno)
@@ -205,10 +210,6 @@ class NonCesTrainingController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName(); 
-
         $competencyTrainingManagement = CompetencyNonCesAccreditedTraining::find($ctrlno);
         $competencyTrainingManagement->training = $request->training;
         $competencyTrainingManagement->training_category = $request->training_category;
@@ -218,7 +219,7 @@ class NonCesTrainingController extends Controller
         $competencyTrainingManagement->from_dt = $request->inclusive_date_from;
         $competencyTrainingManagement->to_dt = $request->inclusive_date_to;
         $competencyTrainingManagement->specialization = $request->expertise_field_of_specialization;
-        $competencyTrainingManagement->lastupd_enc = $encoder;
+        $competencyTrainingManagement->lastupd_enc = $this->getFullNameAttribute();
         $competencyTrainingManagement->save();
 
         return to_route('other-training.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');

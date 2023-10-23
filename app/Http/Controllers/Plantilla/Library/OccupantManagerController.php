@@ -15,6 +15,7 @@ use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibTblCesStatus;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,14 +47,18 @@ class OccupantManagerController extends Controller
             });
         }
 
+        
+
         $datas = $filterDropdown->paginate(25);
         $cesStatus = ProfileLibTblCesStatus::orderBy('description', 'ASC')->get();
+
+
 
         return view('admin.plantilla.library.occupant_manager.index', compact(
             'datas',
             'query',
             'cesStatus',
-            'cesStatusDropdown'
+            'cesStatusDropdown',
         ));
     }
 
@@ -217,6 +222,10 @@ class OccupantManagerController extends Controller
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
+        $authority = ProfileTblCesStatus::where('cesno', $datas->personalData->cesno)
+            ->where('cesstat_code', $datas->personalData->CESStat_code)
+            ->first();
+
 
         return view('admin.plantilla.library.occupant_manager.edit', compact(
             'datas',
@@ -228,6 +237,7 @@ class OccupantManagerController extends Controller
             'positionMasterLibrary',
             'classBasis',
             'apptStatus',
+            'authority',
 
         ));;
     }

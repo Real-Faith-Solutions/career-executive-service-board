@@ -7,10 +7,27 @@ use App\Models\Eris\EradTblMain;
 use App\Models\Eris\WrittenExam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+use App\Services\ConvertDateTimeToDate;
 
 class WrittenExamController extends Controller
 {
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function getFullNameAtrribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno)
     {
         $writtenExam = WrittenExam::where('acno', $acno)->paginate(25);
@@ -34,10 +51,6 @@ class WrittenExamController extends Controller
             'we_remarks' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
         ]);
             
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $writtenExam = new WrittenExam([
 
             'acno' => $request->acno, // account number from erad_tblMain
@@ -46,7 +59,7 @@ class WrittenExamController extends Controller
             'we_rating' => $request->we_rating, // written exam rating
             'we_remarks' => $request->we_remarks, // written exam remarks
             'numtakes' => $request->numtakes, // written exam number of takes
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAtrribute(),
 
         ]);
 
@@ -62,18 +75,22 @@ class WrittenExamController extends Controller
        $erisTblMainProfileData =  EradTblMain::find($acno);
        $writtenExamPRofileData = WrittenExam::find($ctrlno); 
 
-       return view('admin.eris.partials.written_exam.edit', compact('acno', 'erisTblMainProfileData', 'writtenExamPRofileData', 'ctrlno')); 
+       return view('admin.eris.partials.written_exam.edit', [
+            'acno' => $acno, 
+            'ctrlno' => $ctrlno,
+            'erisTblMainProfileData' => $erisTblMainProfileData, 
+            'writtenExamPRofileData' => $writtenExamPRofileData, 
+            'examDate' => $this->convertDateTimeToDate->convertDateTo($writtenExamPRofileData->we_date),
+       ]); 
     }
 
     public function update(Request $request, $acno, $ctrlno)
     {
         $request->validate([
-
             'we_date' => ['required'],
             'we_location' => ['nullable', 'max:60', 'min:2'],
             'we_rating' => ['required'],
             'we_remarks' => ['nullable', 'max:60', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
-            
         ]);
         
         $writtenExam = WrittenExam::find($ctrlno);

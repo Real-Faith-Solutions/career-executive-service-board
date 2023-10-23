@@ -34,7 +34,7 @@
                     
                     <div class="mb-3">
                         <label for="dteassign">Assigned Date<sup>*</sup></label>
-                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $panelBoardInterview->dteassign }}" required>
+                        <input type="date" id="dteassign" name="dteassign" oninput="validateDateInput(dteassign)" value="{{ $dateAssigned }}" required>
                         <p class="input_error text-red-600"></p>
                         @error('dteassign')
                             <span class="invalid" role="alert">
@@ -45,7 +45,7 @@
 
                     <div class="mb-3">
                         <label for="dtesubmit">Submittion Date<sup>*</sup></label>
-                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $panelBoardInterview->dtesubmit }}">
+                        <input type="date" id="dtesubmit" name="dtesubmit" oninput="validateDateInput(dtesubmit)" value="{{ $dateSubmit }}">
                         <p class="input_error text-red-600"></p>
                         @error('dtesubmit')
                             <span class="invalid" role="alert">
@@ -66,7 +66,7 @@
 
                     <div class="mb-3">
                         <label for="dteiview">Date of Interview<sup>*</sup></label>
-                        <input type="date" id="dteiview" name="dteiview" oninput="validateDateInput(dteiview)" value="{{ $panelBoardInterview->dteiview }}">
+                        <input type="date" id="dteiview" name="dteiview" oninput="validateDateInput(dteiview)" value="{{ $dateInterview }}">
                         <p class="input_error text-red-600"></p>
                         @error('dteiview')
                             <span class="invalid" role="alert">

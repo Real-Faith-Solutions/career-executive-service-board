@@ -11,24 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('profile_tblCESstatus', function (Blueprint $table) {
+        Schema::create('erad_tblRankTracker201', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->integer('cesno');
-            $table->integer('cesstat_code');
-            $table->integer('acc_code');
-            $table->integer('type_code');
-            $table->integer('official_code');
-            $table->integer('resolution_no')->nullable();
-            $table->string('appointed_dt')->nullable();
-            $table->timestamp('submit_dt')->nullable();
-            $table->timestamp('return_dt')->nullable();
-            $table->string('validator')->nullable();
+            $table->integer('cesno')->nullable();
+            $table->integer('r_catid')->nullable();
+            $table->integer('r_ctrlno')->nullable();
+            $table->string('description')->nullable();
             $table->string('remarks')->nullable();
+            $table->dateTime('submit_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->string('lastupd_enc')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();
             $table->timestamp('lastupd_dt')->nullable()->useCurrent();
-            $table->softDeletes();
         });
     }
 
@@ -37,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('profile_tblCESstatus');
+        Schema::dropIfExists('erad_tblRankTracker201');
     }
 };

@@ -27,26 +27,22 @@ class DatabaseSeeder extends Seeder
         // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         // \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
         // \App\Models\PersonalData::factory(50)->create();
-        \App\Models\ProfileLibTblExamRef::factory(10)->create();
+        // \App\Models\ProfileLibTblExamRef::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatus::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusAcc::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusType::factory(10)->create();
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
-        \App\Models\ProfileLibCities::factory(10)->create();
+        // \App\Models\ProfileLibCities::factory(10)->create();
         // // \App\Models\TrainingLibCategory::factory(10)->create();
         // \App\Models\TrainingSecretariat::factory(10)->create();
 
         // plantilla
-        \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
+        // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            // UsersTableSeeder::class,
             DefaultAccounts::class,
-            // CesWebAppGeneralPageAccessesTableSeeder::class,
-            // ProfileData::class,
-            // ProfileAddress::class,
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,
@@ -70,13 +66,14 @@ class DatabaseSeeder extends Seeder
             // TrainingLibCategorySeeder::class,
             // LibraryRankTrackerSeeder::class,
             // ErisTblMainSeeder::class,
-            profilelib_tblCaseNatureSeeder::class,
-            profilelib_tblCaseStatusSeeder::class,
+            // profilelib_tblCaseNatureSeeder::class,
+            // profilelib_tblCaseStatusSeeder::class,
+            // ScholarshipSeeder::class,
 
             // plantilla
-            SectorManagerSeeder::class,
-            AgencyLocationSeeder::class,
-            DepartmentAgencyTypeSeeder::class,
+            // SectorManagerSeeder::class,
+            // AgencyLocationSeeder::class,
+            // DepartmentAgencyTypeSeeder::class,
             // ApptStatusSeeder::class,
         ]);
     }

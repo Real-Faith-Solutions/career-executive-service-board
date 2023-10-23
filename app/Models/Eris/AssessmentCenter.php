@@ -24,6 +24,7 @@ class AssessmentCenter extends Model
         'acdate', // assessment center date
         'numtakes', // number of takes
         'docdate', // document date
+        'competencies_d_o',
         'remarks', 
         'encoder',
 
