@@ -19,4 +19,18 @@ class LibraryRankTracker extends Model
         'description',
 
     ];
+
+    public function getRankTrackerCatId($description)
+    {
+        $rankTrackerCatId = LibraryRankTracker::where('description', $description)->value('catid');
+        
+        return $rankTrackerCatId;
+    }
+
+    public function getRankTrackerControlNo($description)
+    {
+        $rankTrackerControlNo = LibraryRankTracker::where('description', $description)->value('ctrlno');
+
+        return $rankTrackerControlNo;
+    }
 }

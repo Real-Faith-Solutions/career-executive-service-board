@@ -90,7 +90,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ \Carbon\Carbon::parse($approvedPdfFiles->request_date)->format('m/d/Y H:i:s.v') }}
+                        {{ $approvedPdfFiles->request_date }}
                     </td>
 
                     <td class="px-6 py-3">

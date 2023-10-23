@@ -7,6 +7,7 @@ use App\Models\Eris\BoardInterView;
 use App\Models\Eris\EradTblMain;
 use App\Models\Eris\InDepthValidation;
 use App\Models\Eris\PanelBoardInterview;
+use App\Models\Eris\RankTracker201;
 use App\Models\Eris\RapidValidation;
 use App\Models\Eris\WrittenExam;
 use App\Models\PersonalData;
@@ -102,6 +103,13 @@ class EligibilityAndRankTrackerController extends Controller
                 
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 
                 'boardInterview', 'selectedPage'));
+
+            case 'Rank Tracker':
+
+                $rankTracker = RankTracker201::where('cesno', $cesno)->paginate(25);
+
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.rank_tracker_table', compact('rankTracker', 'cesno', 'selectedPage'));
+            
 
             default:
                 return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]);
