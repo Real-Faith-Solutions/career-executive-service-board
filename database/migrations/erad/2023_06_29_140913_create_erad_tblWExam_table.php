@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('erad_tblWExam', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->integer('acno');
             $table->string('we_date')->nullable(); // written exam date
             $table->string('we_location')->nullable(); // written exam location
             $table->string('we_rating')->nullable(); // written exam rating

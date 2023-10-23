@@ -14,7 +14,8 @@ return new class extends Migration
         // panel board interview
         Schema::create('erad_tblPBOARD', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            // $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->integer('acno');
             $table->string('dteassign')->nullable(); // date assigned
             $table->string('dtesubmit')->nullable(); // date submit
             $table->string('intrviewer')->nullable(); // interviewer
