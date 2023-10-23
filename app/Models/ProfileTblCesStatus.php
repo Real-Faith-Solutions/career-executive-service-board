@@ -41,7 +41,8 @@ class ProfileTblCesStatus extends Model
     public function latestCesStatusCode($cesno)
     {
         // retrieving latest ces status thru date appointed_dt
-        $cestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
+        $cestatusCode = ProfileTblCesStatus::where('cesno', $cesno)
+            ->orderBy('appointed_dt', 'desc')
             ->value('cesstat_code');
 
         // update CESStat_code based on $latestCestatusCode

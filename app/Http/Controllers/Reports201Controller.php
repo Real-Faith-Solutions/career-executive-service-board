@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileLibTblCesStatus;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,10 @@ class Reports201Controller extends Controller
         $with_pending_case = $request->input('with_pending_case', 'false');
         $without_pending_case = $request->input('without_pending_case', 'false');
         $cesstat_code = $request->input('cesstat_code', '');
+        $authority_code = $request->input('authority_code', '');
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
         $personalData = PersonalData::query();
 
@@ -78,6 +81,28 @@ class Reports201Controller extends Controller
             });
         
         });
+
+        // ces status filter 
+
+        $personalData->where(function ($query) use ($request, $cesstat_code) {
+
+            $query->when($request->has('cesstat_code'), function ($query) use ($cesstat_code)  {
+                return $query->where('CESStat_code', $cesstat_code);
+            });
+        
+        });
+
+        // appointing authority filter 
+
+        $personalData->where(function ($query) use ($request, $authority_code) {
+
+            $query->when($request->has('authority_code'), function ($query) use ($authority_code) {
+                $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
+                    $subquery->where('official_code', $authority_code);
+                });
+            });
+        
+        });
         
         $personalData->orderBy($sortBy, $sortOrder);
 
@@ -87,6 +112,7 @@ class Reports201Controller extends Controller
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
-                        'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code'));
+                        'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
+                        'profileLibTblAppAuthority', 'authority_code'));
     }
 }

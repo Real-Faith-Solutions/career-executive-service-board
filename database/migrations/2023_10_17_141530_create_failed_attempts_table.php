@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('failed_attempts', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('ip_address')->nullable();
             $table->integer('attempts')->nullable();
             $table->integer('suspension')->nullable();
