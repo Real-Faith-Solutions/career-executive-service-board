@@ -138,6 +138,12 @@
                                 <span class="">Status</span>
                             </th>
                         @endif
+
+                        @if ($with_pending_case == "true")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">Pending Case</span>
+                            </th>
+                        @endif
                         
                     </tr>
                 </thead>
@@ -157,6 +163,12 @@
                                         {{ $personalDatas->status ?? '' }}
                                     </td>
                                 @endif  
+
+                                @if ($with_pending_case == "true")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->offence ?? 'none' }}
+                                    </td>
+                                @endif
 
                             </tr>
                         @endforeach
