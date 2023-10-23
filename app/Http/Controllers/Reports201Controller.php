@@ -91,6 +91,18 @@ class Reports201Controller extends Controller
             });
         
         });
+
+        // appointing authority filter 
+
+        $personalData->where(function ($query) use ($request, $authority_code) {
+
+            $query->when($request->has('authority_code'), function ($query) use ($authority_code) {
+                $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
+                    $subquery->where('official_code', $authority_code);
+                });
+            });
+        
+        });
         
         $personalData->orderBy($sortBy, $sortOrder);
 
