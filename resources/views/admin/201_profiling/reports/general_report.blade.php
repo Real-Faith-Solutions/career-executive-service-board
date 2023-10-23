@@ -132,9 +132,13 @@
                                 @endif
                             </a>
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="">Status</span>
-                        </th>
+
+                        @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">Status</span>
+                            </th>
+                        @endif
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -143,12 +147,17 @@
                                 <th scope="col" class="px-6 py-3">
                                     {{ $personalDatas->cesno }}
                                 </th>
+
                                 <td scope="col" class="px-6 py-3">
                                     {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                                 </td>
-                                <td scope="col" class="px-6 py-3">
-                                    {{ $personalDatas->status ?? '' }}
-                                </td>
+
+                                @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->status ?? '' }}
+                                    </td>
+                                @endif  
+
                             </tr>
                         @endforeach
                 </tbody>
