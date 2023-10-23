@@ -56,6 +56,8 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblCesStatusTypeSeeder::class,
             ProfileLibTblCesStatusAccSeeder::class,
             ProfileLibTblAppAuthoritySeeder::class,
+            profilelib_tblCaseNatureSeeder::class,
+            profilelib_tblCaseStatusSeeder::class,
             // ProfileLibTblExpertiseSpecSeeder::class,
             // ProfileLibTblEducSchoolSeeder::class,
             // ProfileLibTblEducMajorSeeder::class,
@@ -66,8 +68,6 @@ class DatabaseSeeder extends Seeder
             // TrainingLibCategorySeeder::class,
             // LibraryRankTrackerSeeder::class,
             // ErisTblMainSeeder::class,
-            // profilelib_tblCaseNatureSeeder::class,
-            // profilelib_tblCaseStatusSeeder::class,
             // ScholarshipSeeder::class,
 
             // plantilla
