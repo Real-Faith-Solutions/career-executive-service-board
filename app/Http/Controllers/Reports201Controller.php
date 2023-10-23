@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileLibTblCesStatus;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class Reports201Controller extends Controller
         $cesstat_code = $request->input('cesstat_code', '');
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
         $personalData = PersonalData::query();
 
@@ -97,6 +99,6 @@ class Reports201Controller extends Controller
 
         return view('admin\201_profiling\reports\general_report', compact('personalData', 'query', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
-                        'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code'));
+                        'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 'profileLibTblAppAuthority'));
     }
 }
