@@ -68,6 +68,9 @@ class PositionManagerController extends Controller
             'corp_sg' => ['required', 'integer'],
             'item_no' => ['required'],
             'cbasis_code' => ['required'],
+            'item_no' => ['required', 'unique:plantilla_tblPlanPositions'],
+        ], [
+            'item_no.unique' => 'Item No. is already taken',
         ]);
         PlanPosition::create([
             'officeid' => $request->input('officeid'),

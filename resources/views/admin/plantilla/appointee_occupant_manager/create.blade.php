@@ -1,12 +1,15 @@
 <script>
     // Get the input element and the collection from PHP
-    const item_no_label = document.querySelector("#item_no_label");
-    const allPlanPosition = @json($allPlanPosition);
+    
 
     // Function to check if an item number exists
     const itemno = (val) => {
+
+        const item_no_label = document.querySelector("#item_no_label");
+        const allPlanPosition = @json($allPlanPosition);
+
         // Check if the value exists in the collection
-        const exists = allPlanPosition.some(data => data.item_no === val);
+        const exists = allPlanPosition.some(data => data.item_no == val);
 
         // Update the label accordingly
         if (exists) {
@@ -279,7 +282,7 @@
                                 <div class="mb-3">
                                     <label for="item_no">Item No.<sup>*</sup></label>
                                     <input id="item_no" name="item_no" required onchange="itemno(this.value)" />
-                                    <p class="text-red-300 text-sm" id="item_no_label"></p>
+                                    <p class="text-red-500 text-sm" id="item_no_label"></p>
 
                                     @error('item_no')
                                     <span class="invalid" role="alert">
