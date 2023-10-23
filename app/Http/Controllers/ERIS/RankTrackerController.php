@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\EradTblMain;
 use App\Models\Eris\LibraryRankTracker;
 use App\Models\Eris\RankTracker;
+use App\Models\Eris\RankTracker201;
 use App\Models\PersonalData;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
@@ -14,6 +15,25 @@ use Illuminate\Support\Facades\DB;
 
 class RankTrackerController extends Controller
 {
+    // App\Models
+    private LibraryRankTracker $libraryRankTracker;
+    private PersonalData $personalData;
+
+    public function __construct()
+    {
+        $this->libraryRankTracker = new LibraryRankTracker();
+        $this->personalData = new PersonalData();
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
@@ -32,50 +52,37 @@ class RankTrackerController extends Controller
 
     public function store(Request $request, $acno)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
-        // retrieving r_catid rank tracker catid
-        $r_catid = LibraryRankTracker::where('description', $request->description)->value('catid');
-
-        // retrieving r_ctrlno rank tracker ctrlno
-        $r_ctrlno = LibraryRankTracker::where('description', $request->description)->value('ctrlno');
-
         $cesno = EradTblMain::where('acno', $acno)->value('cesno');
-
-        $latestCestatusCode = PersonalData::find($cesno);
-        
-        if($latestCestatusCode->cesStatus != null)
-        {
-            $latestCestatusDescription = $latestCestatusCode->cesStatus->description;
-        }
-        else
-        {
-            $latestCestatusDescription = null;
-        }
 
         $rankTracker = new RankTracker([
 
-            'r_catid' => $r_catid,
-            'r_ctrlno' => $r_ctrlno,
+            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
+            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
             'description' => $request->description,
             'submit_dt' => $request->submit_dt, //  submit date
             'remarks' => $request->remarks, 
-            'cesstatus' => $latestCestatusDescription,
-            'encoder' =>  $encoder,
+            'cesstatus' => $this->personalData->latestCesStatus($cesno),
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
 
         $erisTblMain = EradTblMain::find($request->acno);        
 
         $erisTblMain->rankTracker()->save($rankTracker);
+
+        // store in rank tracker 201
+        RankTracker201::create([
+
+            'cesno' =>  $cesno,
+            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
+            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
+            'description' => $request->description,
+            'remarks' => $request->remarks,
+            'submit_dt' => $request->submit_dt, //  submit date,
+            'encoder' =>  $this->getFullNameAttribute(),
+            
+        ]);
    
-        // update ces status based on $latestCestatusDescription in erad_tblranktracker table
-        DB::table('erad_tblranktracker')
-        ->where('acno', $acno)
-        ->update(['cesstatus' => $latestCestatusDescription]);
-        
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
 

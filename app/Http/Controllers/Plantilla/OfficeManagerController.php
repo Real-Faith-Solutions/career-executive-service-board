@@ -40,6 +40,8 @@ class OfficeManagerController extends Controller
             // ->where('is_active', true)
             ->get();
 
+        $allPlanPosition = PlanPosition::all();
+
 
 
 
@@ -58,6 +60,7 @@ class OfficeManagerController extends Controller
             'planPositionLibrary',
             'positionMasterLibrary',
             'classBasis',
+            'allPlanPosition',
         ));;
     }
     public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid)

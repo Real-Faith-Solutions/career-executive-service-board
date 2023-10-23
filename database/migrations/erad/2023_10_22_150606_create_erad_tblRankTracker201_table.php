@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // rank tracker
-        Schema::create('erad_tblranktracker', function (Blueprint $table) {
+        Schema::create('erad_tblRankTracker201', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->integer('acno')->nullable();
+            $table->integer('cesno')->nullable();
             $table->integer('r_catid')->nullable();
             $table->integer('r_ctrlno')->nullable();
             $table->string('description')->nullable();
             $table->string('remarks')->nullable();
-            $table->string('submit_dt')->nullable();
-            $table->string('cesstatus')->nullable();
+            $table->dateTime('submit_dt')->nullable();
             $table->string('encoder')->nullable();
+            $table->string('lastupd_enc')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();
-            $table->timestamp('updated_at')->nullable()->useCurrent();
-            $table->softDeletes();
+            $table->timestamp('lastupd_dt')->nullable()->useCurrent();
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('erad_tblranktracker');
+        Schema::dropIfExists('erad_tblRankTracker201');
     }
 };

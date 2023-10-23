@@ -120,6 +120,22 @@ class PersonalData extends Model
         return $personalData;
     }
 
+    public function latestCesStatus($cesno)
+    {
+        $latestCestatusCode = PersonalData::find($cesno);
+        
+        if($latestCestatusCode->cesStatus != null)
+        {
+            $latestCestatusDescription = $latestCestatusCode->cesStatus->description;
+        }
+        else
+        {
+            $latestCestatusDescription = null;
+        }
+        
+        return $latestCestatusDescription;
+    }
+
     public function spouses(): HasMany
     {
         return $this->hasMany(SpouseRecords::class);

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('erad_tblAC', function (Blueprint $table) {
             $table->id('ctrlno');
             // $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
-            $table->integer('acno');
+            $table->integer('acno')->nullable();
             $table->string('acdate')->nullable(); // assessment center date
             $table->integer('numtakes')->nullable(); // number of takes
             $table->string('docdate')->nullable(); // document date
