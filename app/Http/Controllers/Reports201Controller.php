@@ -23,6 +23,7 @@ class Reports201Controller extends Controller
         $with_pending_case = $request->input('with_pending_case', 'false');
         $without_pending_case = $request->input('without_pending_case', 'false');
         $cesstat_code = $request->input('cesstat_code', '');
+        $authority_code = $request->input('authority_code', '');
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();

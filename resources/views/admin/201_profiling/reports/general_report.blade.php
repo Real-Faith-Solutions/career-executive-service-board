@@ -75,14 +75,14 @@
                 </div>
 
                 <div class="flex items-center px-6 py-3 text-left">
-                    <label for="cesstat_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
-                    <select id="cesstat_code" name="cesstat_code" required type="text" class="inline-block">
+                    <label for="authority_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
+                    <select id="authority_code" name="authority_code" required type="text" class="inline-block">
                         <option disabled selected>Select Appointing Authority</option>
-                        @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
-                            <option value="{{ $newProfileLibTblCesStatus->code }}" {{ $newProfileLibTblCesStatus->code == $cesstat_code ? 'selected' : '' }}>{{ $newProfileLibTblCesStatus->description }}</option>
+                        @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
+                            <option value="{{ $newProfileLibTblAppAuthority->code }}" {{ $newProfileLibTblAppAuthority->code == $authority_code ? 'selected' : '' }}>{{ $newProfileLibTblAppAuthority->description }}</option>
                         @endforeach
                     </select>
-                    @error('cesstat_code')
+                    @error('authority_code')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
                         </span>
