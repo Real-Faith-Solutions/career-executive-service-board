@@ -14,7 +14,8 @@ return new class extends Migration
         // rapid validation
         Schema::create('erad_tblRVP', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            // $table->foreignId('acno')->constrained('erad_tblMain', 'acno');
+            $table->integer('acno')->nullable();
             $table->string('dteassign')->nullable(); // date assign
             $table->string('dtesubmit')->nullable(); // date submnit
             $table->string('validator')->nullable();

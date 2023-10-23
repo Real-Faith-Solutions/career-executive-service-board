@@ -14,7 +14,7 @@ return new class extends Migration
         // rank tracker
         Schema::create('erad_tblranktracker', function (Blueprint $table) {
             $table->id('ctrlno');
-            $table->integer('acno');
+            $table->integer('acno')->nullable();
             $table->integer('r_catid')->nullable();
             $table->integer('r_ctrlno')->nullable();
             $table->string('description')->nullable();
