@@ -12,6 +12,7 @@ use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class RankTrackerController extends Controller
 {
@@ -37,9 +38,10 @@ class RankTrackerController extends Controller
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
+        $cesno = $erisTblMain->cesno;
         $rankTracker = $erisTblMain->rankTracker()->paginate(25);
 
-        return view('admin.eris.partials.rank_tracker.table', compact('acno', 'rankTracker'));
+        return view('admin.eris.partials.rank_tracker.table', compact('acno', 'rankTracker', 'cesno'));
     }
 
     public function create($acno)
@@ -52,6 +54,10 @@ class RankTrackerController extends Controller
 
     public function store(Request $request, $acno)
     {
+        $request->validate([
+            'description' => ['required', Rule::unique('erad_tblranktracker')->where('acno', $acno)],
+        ]);
+
         $cesno = EradTblMain::where('acno', $acno)->value('cesno');
 
         $rankTracker = new RankTracker([
@@ -106,10 +112,32 @@ class RankTrackerController extends Controller
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');
     }
 
-    public function destroy($ctrlno)
+    public function destroy($ctrlno, $cesno)
     {
         $rankTracker = RankTracker::find($ctrlno);
-        $rankTracker->delete();
+
+        if ($rankTracker) 
+        {
+            $ctrlno = RankTracker201::where('cesno', $cesno)
+                ->where('r_catid', $rankTracker->r_catid)
+                ->where('r_ctrlno', $rankTracker->r_ctrlno)
+                ->where('description', $rankTracker->description)
+                ->where('remarks', $rankTracker->remarks)
+                ->where('submit_dt', $rankTracker->submit_dt)
+                ->value('ctrlno');
+
+            $rankTracker201 = RankTracker201::find($ctrlno);
+
+            if ($rankTracker201) 
+            {
+                $rankTracker201->delete();
+                $rankTracker->delete();
+            }        
+        } 
+        else 
+        {
+            return back()->with('error', 'Data Not Found');
+        }
 
        return back()->with('message', 'Deleted Sucessfully');        
     }
@@ -118,26 +146,75 @@ class RankTrackerController extends Controller
     {
         //parent model
         $erisTblMainData = EradTblMain::withTrashed()->find($acno);
+        $cesno = $erisTblMainData->cesno;
 
         // Access the soft deleted rankTracker of the parent model
         $rankTrackerTrashedRecord = $erisTblMainData->rankTracker()->onlyTrashed()->paginate(20);
  
-        return view('admin.eris.partials.rank_tracker.trashbin', compact('rankTrackerTrashedRecord', 'acno'));
+        return view('admin.eris.partials.rank_tracker.trashbin', compact('rankTrackerTrashedRecord', 'acno', 'cesno'));
     }
 
-    public function restore($ctrlno)
+    public function restore($ctrlno, $cesno)
     {
         $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
-        $rankTrackerTrashedRecord->restore();
 
-        return back()->with('info', 'Data Restored Sucessfully');
+        if ($rankTrackerTrashedRecord) 
+        {
+            $controlNo = RankTracker201::onlyTrashed()
+                ->where('cesno', $cesno)
+                ->where('r_catid', $rankTrackerTrashedRecord->r_catid)
+                ->where('r_ctrlno', $rankTrackerTrashedRecord->r_ctrlno)
+                ->where('description', $rankTrackerTrashedRecord->description)
+                ->where('remarks', $rankTrackerTrashedRecord->remarks)
+                ->where('submit_dt', $rankTrackerTrashedRecord->submit_dt)
+                ->value('ctrlno');
+        
+            if ($controlNo) 
+            {
+                $rankTracker201TrashedRecord = RankTracker201::onlyTrashed()->find($controlNo);
+
+                if ($rankTracker201TrashedRecord) 
+                {
+                    $rankTracker201TrashedRecord->restore();
+                    $rankTrackerTrashedRecord->restore();
+
+                    return back()->with('info', 'Data Restored Successfully');
+                }
+            }
+        }
+        
+        return back()->with('error', 'Data Not Found or Could Not Be Restored');        
     }
 
-    public function forceDelete($ctrlno)
+    public function forceDelete($ctrlno, $cesno)
     {
         $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
-        $rankTrackerTrashedRecord->forceDelete();
-  
-        return back()->with('info', 'Data Permanently Deleted');
+
+        if ($rankTrackerTrashedRecord) 
+        {
+            $controlNo = RankTracker201::onlyTrashed()
+                ->where('cesno', $cesno)
+                ->where('r_catid', $rankTrackerTrashedRecord->r_catid)
+                ->where('r_ctrlno', $rankTrackerTrashedRecord->r_ctrlno)
+                ->where('description', $rankTrackerTrashedRecord->description)
+                ->where('remarks', $rankTrackerTrashedRecord->remarks)
+                ->where('submit_dt', $rankTrackerTrashedRecord->submit_dt)
+                ->value('ctrlno');
+        
+            if ($controlNo) 
+            {
+                $rankTracker201TrashedRecord = RankTracker201::onlyTrashed()->find($controlNo);
+
+                if ($rankTracker201TrashedRecord) 
+                {
+                    $rankTracker201TrashedRecord->forceDelete();
+                    $rankTrackerTrashedRecord->forceDelete();
+
+                    return back()->with('info', 'Data Permanently Deleted');
+                }
+            }
+        }
+        
+        return back()->with('error', 'Data Not Found or Could Not Be Deleted');          
     }
 }

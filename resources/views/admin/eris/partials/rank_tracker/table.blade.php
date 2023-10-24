@@ -75,7 +75,7 @@
                                     </button>
                                 </form>
                             
-                                 <form action="{{ route('eris-rank-tracker.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rank_tracker_form{{$rankTrackers->ctrlno}}">
+                                <form action="{{ route('eris-rank-tracker.destroy', ['ctrlno'=>$rankTrackers->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="delete_rank_tracker_form{{$rankTrackers->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deleteRankTrackerButton{{$rankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
