@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('lastupd_enc')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();
             $table->timestamp('lastupd_dt')->nullable()->useCurrent();
+            $table->softDeletes();
         });
     }
 
