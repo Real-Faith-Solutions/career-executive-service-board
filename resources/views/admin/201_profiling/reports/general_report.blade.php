@@ -166,7 +166,25 @@
 
                                 @if ($with_pending_case == "true")
                                     <td scope="col" class="px-6 py-3">
-                                        {{ $personalDatas->offence ?? 'none' }}
+                                        @if ($personalDatas->caseRecords->isNotEmpty())
+                                            @foreach ($personalDatas->caseRecords as $caseRecord)
+
+                                                @if ($caseRecord->caseStatusCode->TITLE !== 'Pending' && $loop->first)
+                                                    
+                                                @elseif ($caseRecord->caseStatusCode->TITLE == 'Pending' && $loop->first)
+                                                    {{ $caseRecord->offence }}
+                                                @elseif ($caseRecord->caseStatusCode->TITLE == 'Pending' && !$loop->first)
+                                                    , {{ $caseRecord->offence }}
+                                                @else
+                                                    @if ($loop->last && $loop->first)
+                                                        none 
+                                                    @endif
+                                                @endif
+
+                                            @endforeach
+                                        @else
+                                            none
+                                        @endif
                                     </td>
                                 @endif
 

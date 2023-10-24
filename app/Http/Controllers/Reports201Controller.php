@@ -30,7 +30,7 @@ class Reports201Controller extends Controller
 
         $personalData = PersonalData::query();
 
-        $personalData->with('cesStatus', 'caseRecords');
+        $personalData->with('cesStatus');
 
         // status filter group 
 
@@ -59,7 +59,8 @@ class Reports201Controller extends Controller
                 // Use a subquery to get personal data with pending cases
                 $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
                     $subquery->where('TITLE', 'Pending');
-                });
+                    // here i want to also get all values on offence column on caseRecords
+                })->with('caseRecords');
             });
     
             $query->when($request->has('without_pending_case'), function ($query) {
