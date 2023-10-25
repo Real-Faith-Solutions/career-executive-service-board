@@ -46,6 +46,7 @@ use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\NonCesTrainingController;
 use App\Http\Controllers\PDFController;
@@ -978,6 +979,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store');
             Route::get('edit/{code}', [ProfileLibTblLanguageRefController::class, 'edit'])->name('language-library.edit');
             Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update');
+        });
+
+        Route::prefix('ces-status-library')->group(function () {
+            Route::get('index', [ProfileLibTblCesStatusController::class, 'index'])->name('ces-status-library.index');
         });
     });
     // End of Library routes
