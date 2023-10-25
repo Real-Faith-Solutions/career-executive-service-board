@@ -1035,6 +1035,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index');
             Route::get('create', [ProfileLibTblCaseStatusController::class, 'create'])->name('case-status-library.create');
             Route::post('store', [ProfileLibTblCaseStatusController::class, 'store'])->name('case-status-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit');
         });
     });
     // End of Library routes
