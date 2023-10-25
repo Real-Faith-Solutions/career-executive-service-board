@@ -55,4 +55,12 @@ class ProfileLibTblCaseStatusController extends Controller
 
         return to_route('case-status-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::find($code);
+        $profileLibTblCaseStatus->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }

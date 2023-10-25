@@ -50,7 +50,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('case-nature-library.destroy', ['code'=>$profileLibTblCaseStatuses->STATUS_CODE]) }}" method="POST" id="delete_case_nature_form{{$profileLibTblCaseStatuses->STATUS_CODE}}">
+                            <form action="{{ route('case-status-library.destroy', ['code'=>$profileLibTblCaseStatuses->STATUS_CODE]) }}" method="POST" id="delete_case_nature_form{{$profileLibTblCaseStatuses->STATUS_CODE}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteCaseNatureButton{{$profileLibTblCaseStatuses->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

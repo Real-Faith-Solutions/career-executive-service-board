@@ -1037,6 +1037,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store', [ProfileLibTblCaseStatusController::class, 'store'])->name('case-status-library.store');
             Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit');
             Route::put('update/{code}', [ProfileLibTblCaseStatusController::class, 'update'])->name('case-status-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy');
         });
     });
     // End of Library routes
