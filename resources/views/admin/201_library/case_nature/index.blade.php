@@ -38,7 +38,7 @@
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="{{ route('ces-status-library.edit', ['code'=>$profileLibTblCaseNatures->STATUS_CODE]) }}" method="GET">
+                            <form action="{{ route('case-nature-library.edit', ['code'=>$profileLibTblCaseNatures->STATUS_CODE]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon

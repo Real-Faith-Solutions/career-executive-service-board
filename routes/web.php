@@ -1025,6 +1025,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [ProfileLibTblCaseNatureController::class, 'index'])->name('case-nature-library.index');
             Route::get('create', [ProfileLibTblCaseNatureController::class, 'create'])->name('case-nature-library.create');
             Route::post('store', [ProfileLibTblCaseNatureController::class, 'store'])->name('case-nature-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit');
         });
     });
     // End of Library routes
