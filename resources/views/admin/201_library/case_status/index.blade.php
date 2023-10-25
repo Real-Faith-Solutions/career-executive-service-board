@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="{{ route('case-nature-library.create') }}">Add New Case Status</a>
+    <a class="btn btn-primary" href="{{ route('case-status-library.create') }}">Add New Case Status</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

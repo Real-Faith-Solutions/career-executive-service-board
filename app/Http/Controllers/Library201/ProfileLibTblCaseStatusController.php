@@ -16,4 +16,9 @@ class ProfileLibTblCaseStatusController extends Controller
             'profileLibTblCaseStatus' => $profileLibTblCaseStatus
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.case_status.create');
+    }
 }

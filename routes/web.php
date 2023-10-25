@@ -1033,6 +1033,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('case-status-library')->group(function () {
             Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index');
+            Route::get('create', [ProfileLibTblCaseStatusController::class, 'create'])->name('case-status-library.create');
         });
     });
     // End of Library routes

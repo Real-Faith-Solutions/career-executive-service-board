@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', 'Form Case Nature - 201 Library')
+@section('title', 'Form Case Status - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('case-nature-library.index') }}">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('case-status-library.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Case Nature form
+                Case Status form
             </h1>
         </div>
 
