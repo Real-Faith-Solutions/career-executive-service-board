@@ -16,7 +16,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,7 +87,7 @@
 <div class="flex justify-between my-3 items-center">
     {{-- @include('components.search') --}}
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Department Agency Manager
+        Department Agencies
     </a>
     <button class="btn btn-primary" id="agencyCreateBtn">
         Add record
@@ -154,7 +154,7 @@
 
                         <a class="hover:bg-slate-100 rounded-full"
                             href="{{ route('department-agency-manager.showAgency', ['sectorid' => $datas->sectorid, 'deptid' => $data->deptid]) }}"
-                            title="View Location">
+                            title="View Offices">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">

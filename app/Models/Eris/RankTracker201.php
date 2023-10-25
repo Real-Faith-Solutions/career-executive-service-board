@@ -4,10 +4,11 @@ namespace App\Models\Eris;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RankTracker201 extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     const CREATED_AT = 'encdate';
     const UPDATED_AT = 'lastupd_dt';

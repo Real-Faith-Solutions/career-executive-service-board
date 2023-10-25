@@ -202,13 +202,16 @@ class PDFController extends Controller
     {
         $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
 
-        $myFile = public_path($pdfFileName);
+        $pdfFileNameOriginal = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('original_pdflink');
 
-        if (!file_exists($myFile)) {
-            return back()->with('error','The Document Does not exist in File Folder');
+        if(!$pdfFileNameOriginal)
+        {
+            return response($pdfFileName);
         }
         else
         {
+            $myFile = public_path($pdfFileName);
+
             return response()->file($myFile);
         }
     }
