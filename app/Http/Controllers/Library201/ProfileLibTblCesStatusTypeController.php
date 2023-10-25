@@ -32,4 +32,14 @@ class ProfileLibTblCesStatusTypeController extends Controller
 
         return to_route('ces-status-type-library.index')->with('message', 'Save Successfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::find($code);
+
+        return view('admin.201_library.ces_status_type.edit', [
+            'code' => $code,
+            'profileLibTblCesStatusType' => $profileLibTblCesStatusType
+        ]);
+    }
 }

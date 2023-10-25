@@ -1005,6 +1005,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [ProfileLibTblCesStatusTypeController::class, 'index'])->name('ces-status-type-library.index');
             Route::get('create', [ProfileLibTblCesStatusTypeController::class, 'create'])->name('ces-status-type-library.create');
             Route::post('store', [ProfileLibTblCesStatusTypeController::class, 'store'])->name('ces-status-type-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
         });
     });
     // End of Library routes
