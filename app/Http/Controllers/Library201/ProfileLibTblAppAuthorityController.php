@@ -21,4 +21,15 @@ class ProfileLibTblAppAuthorityController extends Controller
     {
         return view('admin.201_library.appointing_authority.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'description' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblappAuthority,description'],
+        ]);
+
+        ProfileLibTblAppAuthority::create($request->all());
+
+        return to_route('appointing-authority-library.index')->with('message', 'Save Sucessfully');
+    }
 }
