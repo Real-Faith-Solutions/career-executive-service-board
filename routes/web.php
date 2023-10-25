@@ -1045,6 +1045,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [ProfileLibTblExpertiseSpecController::class, 'index'])->name('expertise-specialization.index');
             Route::get('create', [ProfileLibTblExpertiseSpecController::class, 'create'])->name('expertise-specialization.create');
             Route::post('store', [ProfileLibTblExpertiseSpecController::class, 'store'])->name('expertise-specialization.store');
+            Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit');
         });
     });
     // End of Library routes

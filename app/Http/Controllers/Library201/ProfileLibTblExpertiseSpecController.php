@@ -32,4 +32,14 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         return to_route('expertise-specialization.index')->with('messages', 'Save Successfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
+
+        return view('admin.201_library.expertise_specialization.edit', [
+            'code' => $code,
+            'profileLibTblExpertiseSpec' => $profileLibTblExpertiseSpec,
+        ]);
+    }
 }

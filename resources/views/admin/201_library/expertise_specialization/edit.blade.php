@@ -15,15 +15,15 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('examination.update', ['code'=>$code]) }}" method="POST" id="update_examination_form" onsubmit="return checkErrorsBeforeSubmit(update_examination_form)">
+            <form action="{{ route('examination.update', ['code'=>$code]) }}" method="POST" id="update_expertise_specialization_form" onsubmit="return checkErrorsBeforeSubmit(update_expertise_specialization_form)">
                 @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="TITLE">Title</label>
-                        <input id="TITLE" name="TITLE" type="text" value="{{ $profileLibTblExamRef->TITLE }}" required>
-                        @error('TITLE')
+                        <label for="Title">Title</label>
+                        <input id="Title" name="Title" value="{{ $profileLibTblExpertiseSpec->Title }}" type="text" required>
+                        @error('Title')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="button" class="btn btn-primary" id="updateExaminationButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                    <button type="button" class="btn btn-primary" id="updateExpertiseSpecializationButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>
