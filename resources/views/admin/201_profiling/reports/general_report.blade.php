@@ -147,6 +147,12 @@
                             </th>
                         @endif
 
+                        @if ($authority_code !== "")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">Appointing Authority</span>
+                            </th>
+                        @endif
+
                         @if ($with_pending_case == "true")
                             <th scope="col" class="px-6 py-3">
                                 <span class="">Pending Case</span>
@@ -175,6 +181,12 @@
                                 @if ($cesstat_code !== "")
                                     <td scope="col" class="px-6 py-3">
                                         {{ $personalDatas->cesStatus->description ?? 'none' }}
+                                    </td>
+                                @endif
+
+                                @if ($authority_code !== "")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->getAppointingAuthorityDescription($personalDatas) ?? 'none' }}
                                     </td>
                                 @endif
 

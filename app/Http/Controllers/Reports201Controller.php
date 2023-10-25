@@ -30,7 +30,7 @@ class Reports201Controller extends Controller
 
         $personalData = PersonalData::query();
 
-        $personalData->with('cesStatus');
+        $personalData->with(['cesStatus', 'profileTblCesStatus']);
 
         // status filter group 
 
@@ -89,7 +89,6 @@ class Reports201Controller extends Controller
 
             $query->when($request->has('cesstat_code'), function ($query) use ($cesstat_code)  {
                 if($cesstat_code == "all"){
-                    // return $query->where('CESStat_code' !== null);
                 }else{
                     return $query->where('CESStat_code', $cesstat_code);
                 }
@@ -104,9 +103,7 @@ class Reports201Controller extends Controller
             $query->when($request->has('authority_code'), function ($query) use ($authority_code) {
 
                 if($authority_code == "all"){
-                    // $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
-                    //     $subquery->where('official_code' !== null);
-                    // });
+                    
                 }else{
                     $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
                         $subquery->where('official_code', $authority_code);
