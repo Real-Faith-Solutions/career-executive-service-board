@@ -50,10 +50,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('ces-status-library.destroy', ['code'=>$profileLibTblCaseNatures->STATUS_CODE]) }}" method="POST" id="delete_ces_status_form{{$profileLibTblCaseNatures->STATUS_CODE}}">
+                            <form action="{{ route('case-nature-library.destroy', ['code'=>$profileLibTblCaseNatures->STATUS_CODE]) }}" method="POST" id="delete_case_nature_form{{$profileLibTblCaseNatures->STATUS_CODE}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteCesStatusButton{{$profileLibTblCaseNatures->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteCaseNatureButton{{$profileLibTblCaseNatures->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

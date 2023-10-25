@@ -55,4 +55,12 @@ class ProfileLibTblCaseNatureController extends Controller
 
         return to_route('case-nature-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::find($code);
+        $profileLibTblCaseNature->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
