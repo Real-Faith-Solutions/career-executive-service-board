@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Update Form CES Status - 201 Library')
+@section('title', 'Update Form CES Status Acquired Thru - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('ces-status-library.index') }}">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-acquired-thru-library.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -15,14 +15,14 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('ces-status-library.update', ['code'=>$code]) }}" method="POST" id="update_ces_status_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_status_form)">
+            <form action="{{ route('ces-status-library.update', ['code'=>$code]) }}" method="POST" id="update_ces_status_acquired_thru_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_status_acquired_thru_form)">
                 @method('PUT')
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="description">Description</label>
-                        <input id="description" name="description" value="{{ $profileLibTblCesStatus->description }}" type="text" required>
+                        <input id="description" name="description" value="{{ $profileLibTblCesStatusAcc->description }}" type="text" required>
                         @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <button type="button" class="btn btn-primary" id="updateCesStatusButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
+                    <button type="button" class="btn btn-primary" id="updateCesStatusAcquiredThruButton" onclick="openConfirmationDialog(this, 'Confirm Changes', 'Are you sure you want to update this info?')">
                         Update Changes
                     </button>
                 </div>

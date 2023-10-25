@@ -32,4 +32,14 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
 
         return to_route('ces-status-acquired-thru-library.index')->with('message', 'Save Successfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::find($code);
+
+        return view('admin.201_library.ces_status_acquired_thru.edit', [
+            'code' => $code,
+            'profileLibTblCesStatusAcc' => $profileLibTblCesStatusAcc,
+        ]);
+    }
 }
