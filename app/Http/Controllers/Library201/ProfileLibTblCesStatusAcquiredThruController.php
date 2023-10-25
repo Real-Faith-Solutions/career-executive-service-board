@@ -21,4 +21,15 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
     {
         return view('admin.201_library.ces_status_acquired_thru.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'description' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblcesstatusAcc,description'],
+        ]);
+
+        ProfileLibTblCesStatusAcc::create($request->all());
+
+        return to_route('ces-status-acquired-thru-library.index')->with('message', 'Save Successfully');
+    }
 }
