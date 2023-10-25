@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add CES Status</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-library.create') }}">Add CES Status</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

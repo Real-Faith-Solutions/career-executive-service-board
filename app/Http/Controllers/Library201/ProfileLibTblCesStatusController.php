@@ -15,11 +15,10 @@ class ProfileLibTblCesStatusController extends Controller
         return view('admin.201_library.ces_status.index', [
             'profileLibTblCesStatus' => $profileLibTblCesStatus
         ]);
-
     }
 
     public function create()
     {
-
+        return view('admin.201_library.ces_status.create');
     }
 }

@@ -983,6 +983,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('ces-status-library')->group(function () {
             Route::get('index', [ProfileLibTblCesStatusController::class, 'index'])->name('ces-status-library.index');
+            Route::get('create', [ProfileLibTblCesStatusController::class, 'create'])->name('ces-status-library.create');
         });
     });
     // End of Library routes

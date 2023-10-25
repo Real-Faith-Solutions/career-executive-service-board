@@ -20,9 +20,9 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="title">Description</label>
-                        <input id="title" name="title" type="text" required>
-                        @error('title')
+                        <label for="description">Description</label>
+                        <input id="description" name="description" type="text" required>
+                        @error('description')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
