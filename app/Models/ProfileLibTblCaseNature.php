@@ -9,6 +9,8 @@ class ProfileLibTblCaseNature extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'STATUS_CODE';
+
     protected $table = "profilelib_tblCaseNature";
 
     protected $fillable = [
