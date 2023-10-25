@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Library201;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblCesStatusAcc;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileLibTblCesStatusAcquiredThruController extends Controller
 {
@@ -41,5 +42,17 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
             'code' => $code,
             'profileLibTblCesStatusAcc' => $profileLibTblCesStatusAcc,
         ]);
+    }
+
+    public function update(Request $request, $code)
+    {
+        $request->validate([
+            'description' => ['required', Rule::unique('profilelib_tblcesstatusAcc')->ignore($code, 'code')],
+        ]);
+
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::find($code);
+        $profileLibTblCesStatusAcc->update($request->all());
+
+        return to_route('ces-status-acquired-thru-library.index')->with('message', 'Data Update Successfully');
     }
 }

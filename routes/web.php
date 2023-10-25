@@ -1016,6 +1016,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('create', [ProfileLibTblCesStatusAcquiredThruController::class, 'create'])->name('ces-status-acquired-thru-library.create');
             Route::post('store', [ProfileLibTblCesStatusAcquiredThruController::class, 'store'])->name('ces-status-acquired-thru-library.store');
             Route::get('edit/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'edit'])->name('ces-status-acquired-thru-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'update'])->name('ces-status-acquired-thru-library.update');
         });
     });
     // End of Library routes

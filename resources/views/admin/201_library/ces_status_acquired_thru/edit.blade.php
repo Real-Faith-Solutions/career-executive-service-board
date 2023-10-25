@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('ces-status-library.update', ['code'=>$code]) }}" method="POST" id="update_ces_status_acquired_thru_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_status_acquired_thru_form)">
+            <form action="{{ route('ces-status-acquired-thru-library.update', ['code'=>$code]) }}" method="POST" id="update_ces_status_acquired_thru_form" onsubmit="return checkErrorsBeforeSubmit(update_ces_status_acquired_thru_form)">
                 @method('PUT')
                 @csrf
 
