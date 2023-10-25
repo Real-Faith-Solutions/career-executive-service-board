@@ -57,4 +57,12 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         return to_route('expertise-specialization.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
+        $profileLibTblExpertiseSpec->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
