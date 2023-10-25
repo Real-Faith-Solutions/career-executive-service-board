@@ -14,7 +14,7 @@
             </svg>
         </li>
         <li>
-            <a href="#" class="text-blue-500">Sector Manager</a>
+            <a href="#" class="text-blue-500">Sector</a>
         </li>
 
     </ol>
@@ -22,7 +22,7 @@
 
 <div class="my-3 sm:flex sm:justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Sector Manager
+        Sectors
     </a>
     <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
 </div>

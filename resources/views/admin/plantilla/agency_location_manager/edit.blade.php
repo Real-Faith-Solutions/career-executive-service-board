@@ -15,7 +15,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,7 +160,7 @@
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Office Manager
+        Offices
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -206,7 +206,7 @@
                     </a>
                     <a class="hover:bg-slate-100 rounded-full"
                         href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
-                        title="Position Manager">
+                        title="View Position on this office">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>

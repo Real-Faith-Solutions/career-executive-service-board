@@ -14,7 +14,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

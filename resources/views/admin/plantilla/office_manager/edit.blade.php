@@ -15,7 +15,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -230,7 +230,7 @@
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Plantilla Position Manager
+        Position Browser
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -244,6 +244,7 @@
             <th class="px-6 py-3" scope="col">Appointee</th>
             <th class="px-6 py-3" scope="col">Position Level</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
+            <th class="px-6 py-3" scope="col">Is have occupant</th>
             <th class="px-6 py-3" scope="col">DBM Item No</th>
             <th class="px-6 py-3" scope="col">Appointee Status</th>
             <th class="px-6 py-3" scope="col">Classification Basis</th>
@@ -300,6 +301,23 @@
                 {{ $data->corp_sg ?? ''}}
             </td>
             <td class="px-6 py-3">
+                @php
+                $selectedAppointee = $planAppointee
+                    ->where('plantilla_id', $data->plantilla_id)
+                    ->where('is_appointee', false);
+                if ($data->planAppointee != null && $selectedAppointee->count() >= 1) {
+                    $isHaveOccupant=true;
+                } else {
+                    $isHaveOccupant=false;
+                }
+
+                @endphp
+
+                <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">
+                    {{ $isHaveOccupant == 1 ? 'YES' : 'NO'}}
+                </span>
+            </td>
+            <td class="px-6 py-3">
                 {{ $data->item_no ?? ''}}
             </td>
 
@@ -330,7 +348,7 @@
                         'officelocid' => $departmentLocation->officelocid,
                         'officeid' => $office->officeid,
                         'plantilla_id' => $data->plantilla_id
-                    ]) }}" title="View Appointee">
+                    ]) }}" title="View Appointees on this position">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>

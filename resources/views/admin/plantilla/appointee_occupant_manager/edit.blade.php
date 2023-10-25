@@ -99,7 +99,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -158,7 +158,7 @@
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Appointee Occupant
+        Appointee - Occupant Browser
     </a>
     <a href="{{ route('appointee-occupant-manager.create',['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid, 'plantilla_id' => $planPosition->plantilla_id] ) }}"
         class="btn btn-primary">
@@ -170,7 +170,7 @@
         <tr>
             <th>CESNO</th>
             <th>Officials Name</th>
-            <th>Appointee</th>
+            <th>Is appointed on this position</th>
             <th>Appointment</th>
             <th>CES Status</th>
             <th>Appointment Date</th>
@@ -221,7 +221,7 @@
                         'officeid' => $office->officeid,
                         'plantilla_id' => $planPosition->plantilla_id,
                         'appointee_id' => $data->appointee_id,
-                    ]) }}" title="Occupant Manager">
+                    ]) }}" title="Appointee - Occupant Manager">
                         <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
                             colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
                             style="width:24px;height:24px">
@@ -234,7 +234,7 @@
                         'officeid' => $office->officeid,
                         'plantilla_id' => $planPosition->plantilla_id,
                         'appointee_id' => $data->appointee_id,
-                    ]) }}" title="View Appointee">
+                    ]) }}" title="View Other Assignment">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
