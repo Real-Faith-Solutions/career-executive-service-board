@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Library201;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblCaseStatus;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileLibTblCaseStatusController extends Controller
 {
@@ -41,5 +42,17 @@ class ProfileLibTblCaseStatusController extends Controller
             'code' => $code,
             'profileLibTblCaseStatus' => $profileLibTblCaseStatus,
         ]);
+    }
+
+    public function update(Request $request,$code)
+    {
+        $request->validate([
+            'TITLE' => ['required', Rule::unique('profilelib_tblCaseStatus')->ignore($code, 'STATUS_CODE')],
+        ]);
+
+        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::find($code);
+        $profileLibTblCaseStatus->update($request->all());
+
+        return to_route('case-status-library.index')->with('message', 'Data Update Successfully');
     }
 }
