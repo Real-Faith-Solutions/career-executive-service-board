@@ -1007,6 +1007,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store', [ProfileLibTblCesStatusTypeController::class, 'store'])->name('ces-status-type-library.store');
             Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
             Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
         });
     });
     // End of Library routes

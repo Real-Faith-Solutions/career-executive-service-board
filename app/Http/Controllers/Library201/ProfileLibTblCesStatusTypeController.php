@@ -55,4 +55,12 @@ class ProfileLibTblCesStatusTypeController extends Controller
 
         return to_route('ces-status-type-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::find($code);
+        $profileLibTblCesStatusType->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
