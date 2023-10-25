@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-library.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">

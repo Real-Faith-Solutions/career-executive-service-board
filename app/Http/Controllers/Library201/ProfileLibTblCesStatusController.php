@@ -31,12 +31,16 @@ class ProfileLibTblCesStatusController extends Controller
 
         ProfileLibTblCesStatus::create($request->all());        
 
-        return  to_route('ces-status-library.index')->with('message', 'Save Sucessfully');
+        return to_route('ces-status-library.index')->with('message', 'Save Sucessfully');
     }
 
     public function edit($code)
     {
+        $profileLibTblCesStatus =  ProfileLibTblCesStatus::find($code);        
 
+        return view('admin.201_library.ces_status.edit', [
+            'profileLibTblCesStatus' => $profileLibTblCesStatus
+        ]);
     }
 
     public function update(Request $request, $code)
