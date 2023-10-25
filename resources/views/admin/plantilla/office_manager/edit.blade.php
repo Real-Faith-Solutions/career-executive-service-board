@@ -230,7 +230,7 @@
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Plantilla Position Manager
+        Position Browser
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -330,7 +330,7 @@
                         'officelocid' => $departmentLocation->officelocid,
                         'officeid' => $office->officeid,
                         'plantilla_id' => $data->plantilla_id
-                    ]) }}" title="View Appointee">
+                    ]) }}" title="View Appointees on this position">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
