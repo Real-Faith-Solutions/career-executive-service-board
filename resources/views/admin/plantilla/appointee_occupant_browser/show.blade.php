@@ -108,7 +108,7 @@
                                 <div class="flex flex-col gap-2">
 
                                     <h1 class="font-semibold">
-                                        {{ $appointees->personalData->title ?? ''}},
+                                        {{ $appointees->personalData->title ?? ''}}
                                         {{ $appointees->personalData->lastname ?? ''}},
                                         {{ $appointees->personalData->firstname ?? ''}}
                                         {{ $appointees->personalData->name_extension ?? ''}}

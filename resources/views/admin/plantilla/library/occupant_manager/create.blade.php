@@ -218,7 +218,7 @@
                             <div class="mb-3">
                                 <label for="lastname">Name of Official</label>
                                 <input id="lastname"
-                                    value="{{ $personalData->lastname ?? ''}} {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
+                                    value="{{ $personalData->lastname ?? ''}}, {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
                                     readonly required />
                                 @error('cesno')
                                 <span class="invalid" role="alert">
