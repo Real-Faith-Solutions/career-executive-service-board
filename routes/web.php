@@ -52,6 +52,7 @@ use App\Http\Controllers\Library201\ProfileLibTblCaseStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusAcquiredThruController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusTypeController;
+use App\Http\Controllers\Library201\ProfileLibTblExpertiseSpecController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\NonCesTrainingController;
 use App\Http\Controllers\PDFController;
@@ -1038,6 +1039,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit');
             Route::put('update/{code}', [ProfileLibTblCaseStatusController::class, 'update'])->name('case-status-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy');
+        });
+
+        Route::prefix('expertise-specialization-library')->group(function () {
+            Route::get('index', [ProfileLibTblExpertiseSpecController::class, 'index'])->name('expertise-specialization.index');
         });
     });
     // End of Library routes
