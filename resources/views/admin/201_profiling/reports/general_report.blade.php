@@ -180,7 +180,13 @@
                                                 @endif
                                             @endforeach
 
-                                            @foreach ($personalDatas->caseRecords as $caseRecord)
+                                            @if ($pendingCount > 0)
+                                                {{ $pendingCount }} pending case
+                                            @else
+                                                none
+                                            @endif
+
+                                            {{-- @foreach ($personalDatas->caseRecords as $caseRecord)
 
                                                 @if ($caseRecord->caseStatusCode->TITLE !== 'Pending' && $loop->remaining <= 0 && !$loop->first)
                                                     
@@ -194,13 +200,10 @@
                                                      {{ $caseRecord->offence }},
                                                 @elseif ($caseRecord->caseStatusCode->TITLE == 'Pending' && $loop->last)
                                                      {{ $caseRecord->offence }}
-                                                {{-- @else
-                                                    @if ($loop->first && $loop->last)
-                                                        none 
-                                                    @endif --}}
                                                 @endif
 
-                                            @endforeach
+                                            @endforeach --}}
+
                                         @else
                                             none
                                         @endif
