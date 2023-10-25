@@ -66,6 +66,7 @@
                         @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
                             <option value="{{ $newProfileLibTblCesStatus->code }}" {{ $newProfileLibTblCesStatus->code == $cesstat_code ? 'selected' : '' }}>{{ $newProfileLibTblCesStatus->description }}</option>
                         @endforeach
+                        <option value="all" {{ "all" == $cesstat_code ? 'selected' : '' }}>All</option>
                     </select>
                     @error('cesstat_code')
                         <span class="invalid" role="alert">
@@ -81,6 +82,7 @@
                         @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
                             <option value="{{ $newProfileLibTblAppAuthority->code }}" {{ $newProfileLibTblAppAuthority->code == $authority_code ? 'selected' : '' }}>{{ $newProfileLibTblAppAuthority->description }}</option>
                         @endforeach
+                        <option value="all" {{ "all" == $authority_code ? 'selected' : '' }}>All</option>
                     </select>
                     @error('authority_code')
                         <span class="invalid" role="alert">
@@ -139,6 +141,12 @@
                             </th>
                         @endif
 
+                        @if ($cesstat_code !== "")
+                            <th scope="col" class="px-6 py-3">
+                                <span class="">CES Status</span>
+                            </th>
+                        @endif
+
                         @if ($with_pending_case == "true")
                             <th scope="col" class="px-6 py-3">
                                 <span class="">Pending Case</span>
@@ -163,6 +171,12 @@
                                         {{ $personalDatas->status ?? '' }}
                                     </td>
                                 @endif  
+
+                                @if ($cesstat_code !== "")
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $personalDatas->cesStatus->description ?? 'none' }}
+                                    </td>
+                                @endif
 
                                 @if ($with_pending_case == "true")
                                     <td scope="col" class="px-6 py-3">
