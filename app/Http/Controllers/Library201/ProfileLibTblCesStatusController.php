@@ -39,14 +39,20 @@ class ProfileLibTblCesStatusController extends Controller
         $profileLibTblCesStatus =  ProfileLibTblCesStatus::find($code);        
 
         return view('admin.201_library.ces_status.edit', [
-            'profileLibTblCesStatus' => $profileLibTblCesStatus
+            'profileLibTblCesStatus' => $profileLibTblCesStatus,
+            'code' => $code
         ]);
     }
 
     public function update(Request $request, $code)
     {
         $request->validate([
-            'TITLE' => ['required', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profilelib_tblExamRef')->ignore($code, 'CODE')],
+            'description' => ['required', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profilelib_tblcesstatus')->ignore($code, 'code')],
         ]);
+
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::find($code);        
+        $profileLibTblCesStatus->update($request->all());
+
+        return to_route('ces-status-library.index')->with('info', 'Data Update Sucessfully');
     }
 }
