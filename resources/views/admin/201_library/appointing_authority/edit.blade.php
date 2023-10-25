@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_appointing_authority_form" onsubmit="return checkErrorsBeforeSubmit(update_appointing_authority_form)">
+            <form action="{{ route('appointing-authority-library.update', ['code'=>$code]) }}" method="POST" id="update_appointing_authority_edit" onsubmit="return checkErrorsBeforeSubmit(update_appointing_authority_edit)">
                 @method('PUT')
                 @csrf
 

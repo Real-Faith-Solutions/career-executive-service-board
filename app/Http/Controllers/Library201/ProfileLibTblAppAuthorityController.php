@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Library201;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblAppAuthority;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileLibTblAppAuthorityController extends Controller
 {
@@ -41,5 +42,17 @@ class ProfileLibTblAppAuthorityController extends Controller
             'code' => $code,
             'profileLibTblAppAuthority' => $profileLibTblAppAuthority,
         ]);
+    }
+
+    public function update(Request $request, $code)
+    {
+        $request->validate([
+            'description' => ['required', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profilelib_tblappAuthority')->ignore($code, 'code')],
+        ]);
+
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::find($code);
+        $profileLibTblAppAuthority->update($request->all());
+
+        return to_route('appointing-authority-library.index')->with('message', 'Data Update Successfully');
     }
 }
