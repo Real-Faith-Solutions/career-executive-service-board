@@ -32,4 +32,14 @@ class ProfileLibTblAppAuthorityController extends Controller
 
         return to_route('appointing-authority-library.index')->with('message', 'Save Sucessfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::find($code);
+
+        return view('admin.201_library.appointing_authority.edit', [
+            'code' => $code,
+            'profileLibTblAppAuthority' => $profileLibTblAppAuthority,
+        ]);
+    }
 }
