@@ -21,4 +21,15 @@ class ProfileLibTblCesStatusTypeController extends Controller
     {
         return view('admin.201_library.ces_status_type.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'description' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblcesstatustype,description'],
+        ]);
+
+        ProfileLibTblCesStatusType::create($request->all());
+
+        return to_route('ces-status-type-library.index')->with('message', 'Save Successfully');
+    }
 }
