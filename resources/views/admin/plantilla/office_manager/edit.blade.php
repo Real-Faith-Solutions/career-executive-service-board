@@ -244,6 +244,7 @@
             <th class="px-6 py-3" scope="col">Appointee</th>
             <th class="px-6 py-3" scope="col">Position Level</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
+            <th class="px-6 py-3" scope="col">Is have occupant</th>
             <th class="px-6 py-3" scope="col">DBM Item No</th>
             <th class="px-6 py-3" scope="col">Appointee Status</th>
             <th class="px-6 py-3" scope="col">Classification Basis</th>
@@ -298,6 +299,20 @@
             </td>
             <td class="px-6 py-3">
                 {{ $data->corp_sg ?? ''}}
+            </td>
+            <td class="px-6 py-3">
+                @php
+                if ($data->planAppointee->count() > 1) {
+                $isHaveOccupant = true;
+                }
+                else{
+                $isHaveOccupant = false;
+                }
+                @endphp
+
+                <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">
+                    {{ $isHaveOccupant == 1 ? 'YES' : 'NO'}}
+                </span>
             </td>
             <td class="px-6 py-3">
                 {{ $data->item_no ?? ''}}
