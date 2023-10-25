@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="{{ route('ces-status-library.create') }}">Add New Acquired Thru</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-acquired-thru-library.create') }}">Add New Acquired Thru</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', 'Form CES Status - 201 Library')
+@section('title', 'Form CES Status Acquired Thru - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('ces-status-library.index') }}">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-acquired-thru-library.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                CES Status form
+                CES Status Acquired Thru form
             </h1>
         </div>
 

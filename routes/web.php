@@ -1013,6 +1013,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('ces-status-acquired-thru-library')->group(function () {
             Route::get('index', [ProfileLibTblCesStatusAcquiredThruController::class, 'index'])->name('ces-status-acquired-thru-library.index');
+            Route::get('create', [ProfileLibTblCesStatusAcquiredThruController::class, 'create'])->name('ces-status-acquired-thru-library.create');
         });
     });
     // End of Library routes

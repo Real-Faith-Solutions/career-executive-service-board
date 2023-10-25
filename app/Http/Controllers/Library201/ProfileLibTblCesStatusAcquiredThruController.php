@@ -16,4 +16,9 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
             'profileLibTblCesStatusAcc' => $profileLibTblCesStatusAcc,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.ces_status_acquired_thru.create');
+    }
 }
