@@ -36,7 +36,7 @@
                                 <div class="flex flex-col gap-2">
 
                                     <h1 class="font-semibold">
-                                        {{ $personalData->title ?? ''}},
+                                        {{ $personalData->title ?? ''}}
                                         {{ $personalData->lastname ?? ''}},
                                         {{ $personalData->firstname ?? ''}}
                                         {{ $personalData->name_extension ?? ''}}
