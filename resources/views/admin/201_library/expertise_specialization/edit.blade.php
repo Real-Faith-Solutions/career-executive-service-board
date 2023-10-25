@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('examination.update', ['code'=>$code]) }}" method="POST" id="update_expertise_specialization_form" onsubmit="return checkErrorsBeforeSubmit(update_expertise_specialization_form)">
+            <form action="{{ route('expertise-specialization.update', ['code'=>$code]) }}" method="POST" id="update_expertise_specialization_form" onsubmit="return checkErrorsBeforeSubmit(update_expertise_specialization_form)">
                 @method('PUT')
                 @csrf
 
