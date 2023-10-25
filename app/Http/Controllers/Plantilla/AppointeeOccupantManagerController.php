@@ -91,7 +91,12 @@ class AppointeeOccupantManagerController extends Controller
         $encoder = $user->userName();
 
         $cesno = $request->cesno;
-        $planAppointee = PlanAppointee::where('cesno', $cesno)->get();
+        $plantilla_id = $request->plantilla_id;
+        $planAppointee = PlanAppointee::where('cesno', $cesno)
+            ->select('is_appointee')
+            ->get();
+
+        $planPosition = PlanPosition::find($plantilla_id);
 
         $is_appointee = $request->is_appointee;
 
@@ -101,6 +106,12 @@ class AppointeeOccupantManagerController extends Controller
                 if ($data->is_appointee == true) {
                     return redirect()->back()->with('error', 'This Official is already appointed in other position');
                 }
+            }
+
+            $hasAppointee = $planPosition->planAppointee()->where('is_appointee', true)->exists();
+
+            if ($hasAppointee) {
+                return redirect()->back()->with('error', 'This Position is already have appointees');
             }
         }
 
