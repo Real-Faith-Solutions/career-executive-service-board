@@ -302,12 +302,15 @@
             </td>
             <td class="px-6 py-3">
                 @php
-                if ($data->planAppointee->count() > 1) {
-                $isHaveOccupant = true;
+                $selectedAppointee = $planAppointee
+                    ->where('plantilla_id', $data->plantilla_id)
+                    ->where('is_appointee', false);
+                if ($data->planAppointee != null && $selectedAppointee->count() >= 1) {
+                    $isHaveOccupant=true;
+                } else {
+                    $isHaveOccupant=false;
                 }
-                else{
-                $isHaveOccupant = false;
-                }
+
                 @endphp
 
                 <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">

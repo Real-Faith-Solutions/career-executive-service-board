@@ -52,10 +52,11 @@ class AppointeeOccupantManagerController extends Controller
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
-            $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)->where('cesstat_code', $personalData->CESStat_code)->first();
 
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
+            } else {
+                $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)->where('cesstat_code', $personalData->CESStat_code)->first();
             }
         } else {
             $personalData = null;
@@ -89,15 +90,25 @@ class AppointeeOccupantManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        $cesno = $request->cesno;
+        $planAppointee = PlanAppointee::where('cesno', $cesno)->get();
+
+        $is_appointee = $request->is_appointee;
+
+        if ($is_appointee == true) {
+
+            foreach ($planAppointee as $data) {
+                if ($data->is_appointee == true) {
+                    return redirect()->back()->with('error', 'This Official is already appointed in other position');
+                }
+            }
+        }
+
         $request->validate([
-            'plantilla_id' => ['required', 'unique:plantilla_tblPlanAppointees'],
-            'cesno' => ['required', 'unique:plantilla_tblPlanAppointees'],
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ], [
-            'plantilla_id.unique' => 'This Position is already occupied.',
-            'cesno.unique' => 'This official is already appointed to another position.',
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
             'appt_date.required' => 'The Appointment Date field is required.',
