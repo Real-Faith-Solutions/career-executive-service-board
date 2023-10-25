@@ -16,4 +16,9 @@ class ProfileLibTblCesStatusTypeController extends Controller
             'profileLibTblCesStatusType' => $profileLibTblCesStatusType,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.ces_status_type.create');
+    }
 }

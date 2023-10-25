@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add New CES Status Type</a>
+    <a class="btn btn-primary" href="{{ route('ces-status-type-library.create') }}">Add New CES Status Type</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

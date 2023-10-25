@@ -1003,6 +1003,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('ces-status-type-library')->group(function () {
             Route::get('index', [ProfileLibTblCesStatusTypeController::class, 'index'])->name('ces-status-type-library.index');
+            Route::get('create', [ProfileLibTblCesStatusTypeController::class, 'create'])->name('ces-status-type-library.create');
         });
     });
     // End of Library routes
