@@ -47,6 +47,7 @@ use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Library201\ProfileLibTblAppAuthorityController;
+use App\Http\Controllers\Library201\ProfileLibTblCesStatusAcquiredThruController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusTypeController;
 use App\Http\Controllers\MedicalHistoryController;
@@ -1008,6 +1009,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
             Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
+        });
+
+        Route::prefix('ces-status-acquired-thru-library')->group(function () {
+            Route::get('index', [ProfileLibTblCesStatusAcquiredThruController::class, 'index'])->name('ces-status-acquired-thru-library.index');
         });
     });
     // End of Library routes
