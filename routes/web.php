@@ -1023,6 +1023,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('case-nature-library')->group(function () {
             Route::get('index', [ProfileLibTblCaseNatureController::class, 'index'])->name('case-nature-library.index');
+            Route::get('create', [ProfileLibTblCaseNatureController::class, 'create'])->name('case-nature-library.create');
         });
     });
     // End of Library routes

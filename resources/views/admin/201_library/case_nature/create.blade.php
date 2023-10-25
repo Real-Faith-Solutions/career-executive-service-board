@@ -1,16 +1,16 @@
 @extends('layouts.app')
-@section('title', 'Form CES Status - 201 Library')
+@section('title', 'Form Case Nature - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end">
-    <a class="btn btn-primary" href="{{ route('ces-status-library.index') }}">Go Back</a>
+    <a class="btn btn-primary" href="{{ route('case-nature-library.index') }}">Go Back</a>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                CES Status form
+                Case Nature form
             </h1>
         </div>
 
@@ -20,9 +20,9 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="description">Description</label>
-                        <input id="description" name="description" type="text" required>
-                        @error('description')
+                        <label for="TITLE">Description</label>
+                        <input id="TITLE" name="dITLE" type="text" required>
+                        @error('TITLE')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>

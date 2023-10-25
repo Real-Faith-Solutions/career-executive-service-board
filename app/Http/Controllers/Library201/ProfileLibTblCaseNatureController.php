@@ -16,4 +16,9 @@ class ProfileLibTblCaseNatureController extends Controller
             'profileLibTblCaseNature' => $profileLibTblCaseNature,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.case_nature.create');
+    }
 }
