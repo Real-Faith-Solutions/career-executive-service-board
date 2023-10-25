@@ -55,4 +55,12 @@ class ProfileLibTblAppAuthorityController extends Controller
 
         return to_route('appointing-authority-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::find($code);
+        $profileLibTblAppAuthority->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }

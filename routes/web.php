@@ -997,6 +997,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store', [ProfileLibTblAppAuthorityController::class, 'store'])->name('appointing-authority-library.store');
             Route::get('edit/{code}', [ProfileLibTblAppAuthorityController::class, 'edit'])->name('appointing-authority-library.edit');
             Route::put('update/{code}', [ProfileLibTblAppAuthorityController::class, 'update'])->name('appointing-authority-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblAppAuthorityController::class, 'destroy'])->name('appointing-authority-library.destroy');
         });
     });
     // End of Library routes
