@@ -21,4 +21,15 @@ class ProfileLibTblCaseNatureController extends Controller
     {
         return view('admin.201_library.case_nature.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'TITLE' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblCaseNature,TITLE'],
+        ]);
+        
+        ProfileLibTblCaseNature::create($request->all());
+        
+        return to_route('case-nature-library.index')->with('message', 'Save Successfully');
+    }
 }
