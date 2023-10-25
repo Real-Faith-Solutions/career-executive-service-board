@@ -48,6 +48,7 @@ use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Library201\ProfileLibTblAppAuthorityController;
 use App\Http\Controllers\Library201\ProfileLibTblCaseNatureController;
+use App\Http\Controllers\Library201\ProfileLibTblCaseStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusAcquiredThruController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusTypeController;
@@ -1028,6 +1029,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit');
             Route::put('update/{code}', [ProfileLibTblCaseNatureController::class, 'update'])->name('case-nature-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy');
+        });
+
+        Route::prefix('case-status-library')->group(function () {
+            Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index');
         });
     });
     // End of Library routes
