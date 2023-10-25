@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Library201;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblCaseNature;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProfileLibTblCaseNatureController extends Controller
 {
@@ -41,5 +42,17 @@ class ProfileLibTblCaseNatureController extends Controller
             'code' => $code,
             'profileLibTblCaseNature' => $profileLibTblCaseNature,
         ]);
+    }
+
+    public function update(Request $request, $code)
+    {
+        $request->validate([
+            'TITLE' => ['required', Rule::unique('profilelib_tblCaseNature')->ignore($code, 'STATUS_CODE')],
+        ]);
+
+        $profileLibTblCaseNature = ProfileLibTblCaseNature::find($code);
+        $profileLibTblCaseNature->update($request->all());
+
+        return to_route('case-nature-library.index')->with('message', 'Data Update Successfully');
     }
 }
