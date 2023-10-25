@@ -21,4 +21,15 @@ class ProfileLibTblExpertiseSpecController extends Controller
     {
         return view('admin.201_library.expertise_specialization.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'Title' => ['required', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblExpertiseSpec,Title'],
+        ]);
+
+        ProfileLibTblExpertiseSpec::create($request->all());
+
+        return to_route('expertise-specialization.index')->with('messages', 'Save Successfully');
+    }
 }

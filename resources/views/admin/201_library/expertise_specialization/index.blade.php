@@ -38,7 +38,7 @@
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="{{ route('examination.edit', ['code'=>$profileLibTblExpertiseSpecs->CODE]) }}" method="GET">
+                            <form action="{{ route('examination.edit', ['code'=>$profileLibTblExpertiseSpecs->SpeExp_Code]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon
@@ -50,10 +50,10 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('examination.destroy', ['code'=>$profileLibTblExpertiseSpecs->CODE]) }}" method="POST" id="delete_examination_form{{$profileLibTblExpertiseSpecs->CODE}}">
+                            <form action="{{ route('examination.destroy', ['code'=>$profileLibTblExpertiseSpecs->SpeExp_Code]) }}" method="POST" id="delete_examination_form{{$profileLibTblExpertiseSpecs->SpeExp_Code}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteExaminationButton{{$profileLibTblExpertiseSpecs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteExaminationButton{{$profileLibTblExpertiseSpecs->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
