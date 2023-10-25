@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add New Expertise Specialization</a>
+    <a class="btn btn-primary" href="{{ route('expertise-specialization.create') }}">Add New Expertise Specialization</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

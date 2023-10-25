@@ -16,4 +16,9 @@ class ProfileLibTblExpertiseSpecController extends Controller
             'profileLibTblExpertiseSpec' => $profileLibTblExpertiseSpec,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.expertise_specialization.create');
+    }
 }
