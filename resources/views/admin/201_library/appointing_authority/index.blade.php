@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add New Appointing Authority</a>
+    <a class="btn btn-primary" href="{{ route('appointing-authority-library.create') }}">Add New Appointing Authority</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

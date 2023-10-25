@@ -16,4 +16,9 @@ class ProfileLibTblAppAuthorityController extends Controller
             'profileLibTblAppAuthority' => $profileLibTblAppAuthority,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.appointing_authority.create');
+    }
 }
