@@ -55,4 +55,12 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
 
         return to_route('ces-status-acquired-thru-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::find($code);
+        $profileLibTblCesStatusAcc->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
