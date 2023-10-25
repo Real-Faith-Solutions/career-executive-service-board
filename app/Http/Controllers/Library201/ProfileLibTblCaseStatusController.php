@@ -21,4 +21,15 @@ class ProfileLibTblCaseStatusController extends Controller
     {
         return view('admin.201_library.case_status.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'TITLE' => ['required', 'unique:profilelib_tblCaseStatus,TITLE'],
+        ]);
+
+        ProfileLibTblCaseStatus::create($request->all());
+
+        return to_route('case-status-library.index')->with('message', 'Save Successfully');
+    }
 }
