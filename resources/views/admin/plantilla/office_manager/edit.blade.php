@@ -289,7 +289,8 @@
             </td>
 
             <td class="px-6 py-3">
-                {{ $data->planAppointee->personalData->lastname ?? ''}}
+                {{ $data->planAppointee->personalData->title ?? ''}}
+                {{ $data->planAppointee->personalData->lastname ?? ''}},
                 {{ $data->planAppointee->personalData->firstname ?? ''}}
                 {{ $data->planAppointee->personalData->name_extension ?? ''}}
                 {{ $data->planAppointee->personalData->middlename ?? ''}}

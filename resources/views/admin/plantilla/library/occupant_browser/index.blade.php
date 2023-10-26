@@ -194,7 +194,8 @@
                 </td>
                 <td class="px-6 py-3">
                     @if ($data->is_appointee == 1)
-                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->title ?? ''}}
+                    {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}
@@ -207,7 +208,8 @@
                 </td>
                 <td class="px-6 py-3">
                     @if ($data->is_appointee !== 1)
-                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->title ?? ''}}
+                    {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}

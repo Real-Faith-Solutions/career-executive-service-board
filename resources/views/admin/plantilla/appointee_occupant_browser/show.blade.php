@@ -94,32 +94,81 @@
 
             <div class="bg-white px-6 py-3">
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <fieldset class="border p-4">
-                        <legend>Office information</legend>
-                        <div class="mb-3">
-                            <label for="Department/Agency">Department/Agency</label>
-                            <input id="Department/Agency" value="{{ $department->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Location">Location</label>
-                            <input id="Location" value="{{ $departmentLocation->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Office">Office</label>
-                            <input id="Office" value="{{ $office->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="titles">CES Level</label>
-                            <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="sg">Salary Grade Level</label>
-                            <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
-                        </div>
-                    </fieldset>
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
 
-                    <div class="">
+                    <div class="grid grid-row-2">
+                        @if ($appointees->personalData)
+                        <fieldset class="border p-4">
+                            <legend>Profile Information</legend>
+
+                            <div class="flex gap-4">
+                                <img id="" class="w-44 h-44 rounded-full object-cover"
+                                    src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/placeholder.png') }}" />
+
+                                <div class="flex flex-col gap-2">
+
+                                    <h1 class="font-semibold">
+                                        {{ $appointees->personalData->title ?? ''}}
+                                        {{ $appointees->personalData->lastname ?? ''}},
+                                        {{ $appointees->personalData->firstname ?? ''}}
+                                        {{ $appointees->personalData->name_extension ?? ''}}
+                                        {{ $appointees->personalData->middlename ?? ''}}
+                                    </h1>
+                                    <h1>
+                                        {{ $appointees->personalData->email ?? '' }}
+                                    </h1>
+                                    <h1>
+                                        {{ \Carbon\Carbon::parse($appointees->personalData->birthdate ??
+                                        '')->format('m/d/Y') }}
+                                    </h1>
+                                    <h1>
+                                        <span
+                                            class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
+                                        @if ($appointees->personalData->status === 'Active') bg-green-100 text-green-800 @endif
+                                        @if ($appointees->personalData->status === 'Inactive') bg-orange-100 text-orange-800 @endif
+                                        @if ($appointees->personalData->status === 'Retired') bg-blue-100 text-blue-800 @endif
+                                        @if ($appointees->personalData->status === 'Deceased') bg-red-100 text-red-800 @endif">
+                                            {{ $appointees->personalData->status ?? ''}}
+                                        </span>
+                                    </h1>
+                                    <a href="{{ route('personal-data.show', $appointees->personalData->cesno) }}"
+                                        class="uppercase text-sm" target="_blank">
+                                        View Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </fieldset>
+                        @endif
+
+
+                        <fieldset class="border p-4">
+                            <legend>Office information</legend>
+                            <div class="mb-3">
+                                <label for="Department/Agency">Department/Agency</label>
+                                <input id="Department/Agency" value="{{ $department->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="Location">Location</label>
+                                <input id="Location" value="{{ $departmentLocation->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="Office">Office</label>
+                                <input id="Office" value="{{ $office->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="titles">CES Level</label>
+                                <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}"
+                                    readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="sg">Salary Grade Level</label>
+                                <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+                    <div class="col-span-2">
                         <form
                             action="{{ route('appointee-occupant-manager.update', ['appointee_id' => $appointees->appointee_id]) }}"
                             method="POST">
