@@ -50,7 +50,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('expertise-specialization.destroy', ['code'=>$profileLibTblExpertiseGens->GenExp_Code]) }}" method="POST" id="delete_examination_form{{$profileLibTblExpertiseGens->GenExp_Code}}">
+                            <form action="{{ route('expertise-general.destroy', ['code'=>$profileLibTblExpertiseGens->GenExp_Code]) }}" method="POST" id="delete_examination_form{{$profileLibTblExpertiseGens->GenExp_Code}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteExaminationButton{{$profileLibTblExpertiseGens->GenExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

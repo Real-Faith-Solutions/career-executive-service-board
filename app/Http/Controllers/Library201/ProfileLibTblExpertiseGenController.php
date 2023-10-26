@@ -70,4 +70,12 @@ class ProfileLibTblExpertiseGenController extends Controller
 
         return to_route('expertise-general.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
+        $profileLibTblExpertiseGen->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
