@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('expertise-specialization.store') }}" method="POST">
+            <form action="{{ route('expertise-general.store') }}" method="POST">
                 @csrf
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

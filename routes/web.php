@@ -1054,6 +1054,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('expertise-general-library')->group(function () {
             Route::get('index', [ProfileLibTblExpertiseGenController::class, 'index'])->name('expertise-general.index');
             Route::get('create', [ProfileLibTblExpertiseGenController::class, 'create'])->name('expertise-general.create');
+            Route::post('store', [ProfileLibTblExpertiseGenController::class, 'store'])->name('expertise-general.store');
         });
     });
     // End of Library routes
