@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="flex items-center px-6 py-3 text-left">
-                    <label for="authority_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
+                    <label for="authority_code" class="mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
                     <select id="authority_code" name="authority_code" required type="text" class="inline-block">
                         <option disabled selected>Select Appointing Authority</option>
                         @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
