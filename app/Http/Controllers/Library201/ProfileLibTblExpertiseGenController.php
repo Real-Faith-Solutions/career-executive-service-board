@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblExpertiseGen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileLibTblExpertiseGenController extends Controller
 {
@@ -60,6 +61,10 @@ class ProfileLibTblExpertiseGenController extends Controller
 
     public function update(Request $request, $code)
     {
+        $request->validate([
+            'Title' => ['required', 'regex:/^[a-zA-Z ]*$/', Rule::unique('profilelib_tblExpertiseGen')->ignore($code, 'GenExp_Code')],
+        ]);
+
         $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
         $profileLibTblExpertiseGen->update(array_merge(
             $request->all(),
