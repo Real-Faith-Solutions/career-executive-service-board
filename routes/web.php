@@ -52,6 +52,7 @@ use App\Http\Controllers\Library201\ProfileLibTblCaseStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusAcquiredThruController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
 use App\Http\Controllers\Library201\ProfileLibTblCesStatusTypeController;
+use App\Http\Controllers\Library201\ProfileLibTblExpertiseGenController;
 use App\Http\Controllers\Library201\ProfileLibTblExpertiseSpecController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\NonCesTrainingController;
@@ -1048,6 +1049,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit');
             Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update');
             Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy');
+        });
+
+        Route::prefix('expertise-general-library')->group(function () {
+            Route::get('index', [ProfileLibTblExpertiseGenController::class, 'index'])->name('expertise-general.index');
         });
     });
     // End of Library routes
