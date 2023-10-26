@@ -2,7 +2,7 @@
 @section('title', 'Expertise General - 201 Library')
 @section('content')
 
-<div class="my-5 flex justify-end gap-4">
+<div class="my-5 flex justify-end gap-1">
     <a href="">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add New Expertise General</a>
+    <a class="btn btn-primary" href="{{ route('expertise-general.create') }}">Add New Expertise General</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

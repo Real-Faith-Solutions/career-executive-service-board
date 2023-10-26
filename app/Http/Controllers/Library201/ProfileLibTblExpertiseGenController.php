@@ -16,4 +16,9 @@ class ProfileLibTblExpertiseGenController extends Controller
             'profileLibTblExpertiseGen' => $profileLibTblExpertiseGen,
         ]);
     }
+
+    public function create()
+    {
+        return view('admin.201_library.expertise_general.create');
+    }
 }
