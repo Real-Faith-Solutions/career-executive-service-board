@@ -91,8 +91,12 @@
                     @enderror
                 </div>
 
-                <div class="my-5 flex justify-end">
+                <div class="my-5 mr-2 flex justify-end">
                     <button class="btn btn-primary" type="submit">Apply Filter</button>
+                </div>
+
+                <div class="my-5 flex justify-end">
+                    <a class="btn btn-primary" href="{{ route('general-reports.index') }}">Remove Filters</a>
                 </div>
             </div>
 
