@@ -126,8 +126,24 @@ class Reports201Controller extends Controller
                         'profileLibTblAppAuthority', 'authority_code'));
     }
 
-    public function generatePdf(Request $request)
+    public function generatePdf($sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
+                        $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
+                        $cesstat_code, $authority_code,)
     {
+
+        $sortBy = $sortBy ?? 'cesno';
+        $sortOrder = $sortOrder ?? 'asc';
+
+        $filter_active = $filter_active ?? 'false';
+        $filter_inactive = $filter_inactive ?? 'false';
+        $filter_retired = $filter_retired ?? 'false';
+        $filter_deceased = $filter_deceased ?? 'false';
+        $filter_retirement = $filter_retirement ?? 'false';
+        $with_pending_case = $with_pending_case ?? 'false';
+        $without_pending_case = $without_pending_case ?? 'false';
+        $cesstat_code = $cesstat_code ?? 'false';
+        $authority_code = $authority_code ?? 'false';
+
         $search = $request->input('search');
 
         $profileLibCitiesSearchResult = ProfileLibCities::where('name', $search)->first();
