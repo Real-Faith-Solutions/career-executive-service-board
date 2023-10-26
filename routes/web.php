@@ -1056,6 +1056,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('create', [ProfileLibTblExpertiseGenController::class, 'create'])->name('expertise-general.create');
             Route::post('store', [ProfileLibTblExpertiseGenController::class, 'store'])->name('expertise-general.store');
             Route::get('edit/{code}', [ProfileLibTblExpertiseGenController::class, 'edit'])->name('expertise-general.edit');
+            Route::put('update/{code}', [ProfileLibTblExpertiseGenController::class, 'update'])->name('expertise-general.update');
         });
     });
     // End of Library routes

@@ -57,4 +57,17 @@ class ProfileLibTblExpertiseGenController extends Controller
             'profileLibTblExpertiseGen' => $profileLibTblExpertiseGen,
         ]);
     }
+
+    public function update(Request $request, $code)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
+        $profileLibTblExpertiseGen->update(array_merge(
+            $request->all(),
+            [
+                'updated_by' => $this->getFullNameAttribute(),
+            ]
+        ));
+
+        return to_route('expertise-general.index')->with('message', 'Data Update Successfully');
+    }
 }
