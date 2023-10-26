@@ -125,4 +125,26 @@ class Reports201Controller extends Controller
                         'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
                         'profileLibTblAppAuthority', 'authority_code'));
     }
+
+    public function generatePdf(Request $request)
+    {
+        $search = $request->input('search');
+
+        $profileLibCitiesSearchResult = ProfileLibCities::where('name', $search)->first();
+
+        if($profileLibCitiesSearchResult != null)
+        {
+            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::where('city_code', $profileLibCitiesSearchResult->city_code)
+            ->get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
+        }
+        else
+        {
+            // get all venues
+            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
+        }
+               
+        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager.report_pdf_city', compact('trainingVenueManagerByCity', 'search'))->setPaper('a4', 'landscape');
+        return $pdf->stream('training-venue-manager-report-by-city.pdf');
+    }
+
 }
