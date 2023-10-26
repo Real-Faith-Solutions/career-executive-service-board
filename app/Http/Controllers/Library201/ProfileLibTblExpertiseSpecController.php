@@ -33,7 +33,7 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         ProfileLibTblExpertiseSpec::create($request->all());
 
-        return to_route('expertise-specialization.index')->with('messages', 'Save Successfully');
+        return to_route('expertise-specialization.index')->with('message', 'Save Successfully');
     }
 
     public function edit($code)
