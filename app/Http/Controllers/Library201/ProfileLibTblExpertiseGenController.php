@@ -47,4 +47,14 @@ class ProfileLibTblExpertiseGenController extends Controller
 
         return to_route('expertise-general.index')->with('message', 'Save Successfully');
     }
+
+    public function edit($code)
+    {
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
+
+        return view('admin.201_library.expertise_general.edit', [
+            'code' => $code,
+            'profileLibTblExpertiseGen' => $profileLibTblExpertiseGen,
+        ]);
+    }
 }
