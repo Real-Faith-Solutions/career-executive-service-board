@@ -49,7 +49,7 @@
                     
                     <div class="mb-3">
                         <label for="name">Name<sup>*</sup></label>
-                        <input type="text" id="name" name="name" value="{{ $personalDataSearchResult->lastname ?? '' }} {{ $personalDataSearchResult->firstname ?? '' }} {{ $personalDataSearchResult->middlename ?? '' }} {{ $personalDataSearchResult->name_extension ?? '' }}"  readonly>
+                        <input type="text" id="name" name="name" value="{{ $personalDataSearchResult->lastname ?? '' }}, {{ $personalDataSearchResult->firstname ?? '' }} {{ $personalDataSearchResult->middlename ?? '' }} {{ $personalDataSearchResult->name_extension ?? '' }}"  readonly>
                         @error('training_category')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
