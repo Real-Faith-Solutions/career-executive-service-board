@@ -63,4 +63,13 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblCesStatusAccTrashRecord = ProfileLibTblCesStatusAcc::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.ces_status_acquired_thru.recently_deleted', [
+            'profileLibTblCesStatusAccTrashRecord' => $profileLibTblCesStatusAccTrashRecord,
+        ]);
+    }
 }

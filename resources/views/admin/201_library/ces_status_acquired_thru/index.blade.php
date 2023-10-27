@@ -3,13 +3,12 @@
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="">
+    <a href="{{ route('ces-status-acquired-thru-library.recentlyDeleted') }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
             colors="primary:#DC3545"
             style="width:34px;height:34px">
-
         </lord-icon>
     </a>
 
