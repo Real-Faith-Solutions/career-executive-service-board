@@ -92,7 +92,9 @@
     </button>
     @include('admin.plantilla.other_assignment.create')
 </div>
-<table class="dataTables">
+
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th>Detailed ID</th>

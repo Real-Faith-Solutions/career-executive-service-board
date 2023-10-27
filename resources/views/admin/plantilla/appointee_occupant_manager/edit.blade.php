@@ -165,7 +165,8 @@
         Add record
     </a>
 </div>
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th>CESNO</th>

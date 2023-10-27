@@ -237,7 +237,8 @@
     </button>
     @include('admin.plantilla.appointee_occupant_manager.create')
 </div>
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th class="px-6 py-3" scope="col">DBM Position Title</th>
@@ -304,12 +305,12 @@
             <td class="px-6 py-3">
                 @php
                 $selectedAppointee = $planAppointee
-                    ->where('plantilla_id', $data->plantilla_id)
-                    ->where('is_appointee', false);
+                ->where('plantilla_id', $data->plantilla_id)
+                ->where('is_appointee', false);
                 if ($data->planAppointee != null && $selectedAppointee->count() >= 1) {
-                    $isHaveOccupant=true;
+                $isHaveOccupant=true;
                 } else {
-                    $isHaveOccupant=false;
+                $isHaveOccupant=false;
                 }
 
                 @endphp

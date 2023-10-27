@@ -160,8 +160,8 @@
     @include('admin.plantilla.agency_location_manager.create')
 </div>
 
-
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th>Location</th>
