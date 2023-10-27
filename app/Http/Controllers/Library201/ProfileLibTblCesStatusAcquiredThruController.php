@@ -80,4 +80,12 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
 
         return back()->with('message', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblCesStatusAccTrashRecord = ProfileLibTblCesStatusAcc::onlyTrashed()->find($code);
+        $profileLibTblCesStatusAccTrashRecord->forceDelete();
+
+        return back()->with('message', 'Data Permanent Deleted');
+    }
 }
