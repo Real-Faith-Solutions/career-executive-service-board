@@ -11,7 +11,8 @@ use App\Definitions\AppDefinitions;
 class DashboardController extends Controller
 {
 
-    public function getAllData(Request $request){
+    public function getAllData(Request $request)
+    {
         $totalCESO = PersonalData::count();
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
@@ -29,7 +30,7 @@ class DashboardController extends Controller
         $allCookies = $request->header('cookie');
 
 
-        return view('admin.dashboard', compact(
+        return view('admin.dashboard.index', compact(
             'totalCESO',
             'totalCESOActive',
             'totalCESODeceased',
@@ -38,5 +39,4 @@ class DashboardController extends Controller
             'allCookies',
         ));
     }
-
 }
