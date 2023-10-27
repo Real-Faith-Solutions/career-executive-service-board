@@ -20,6 +20,16 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
+                        <label for="Title">Expertise General</label>
+                        <select name="expertise_general" required>
+                            <option disabled selected>Select Expertise General</option>
+                            @foreach ($profileLibTblExpertiseGen as $data)
+                                <option value="{{ $data->GenExp_Code }}">{{ $data->Title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="Title">Title</label>
                         <input id="Title" name="Title" type="text" required>
                         @error('Title')

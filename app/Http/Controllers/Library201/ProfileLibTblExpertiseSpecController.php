@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProfileLibTblExpertiseGen;
+use App\Models\ProfileLibTblExpertiseMaster;
 use App\Models\ProfileLibTblExpertiseSpec;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-
-use function GuzzleHttp\Promise\all;
 
 class ProfileLibTblExpertiseSpecController extends Controller
 {
@@ -22,7 +22,11 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
     public function create()
     {
-        return view('admin.201_library.expertise_specialization.create');
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
+        
+        return view('admin.201_library.expertise_specialization.create', [
+            'profileLibTblExpertiseGen' => $profileLibTblExpertiseGen,
+        ]);
     }
 
     public function store(Request $request)
@@ -33,6 +37,13 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         ProfileLibTblExpertiseSpec::create($request->all());
 
+        $specializationCode = ProfileLibTblExpertiseSpec::latest()->value('SpeExp_Code');
+
+        ProfileLibTblExpertiseMaster::create([
+            'SpeExp_CODE' => $specializationCode,
+            'GenExp_CODE' => $request->expertise_general,
+        ]);
+
         return to_route('expertise-specialization.index')->with('message', 'Save Successfully');
     }
 
@@ -40,9 +51,15 @@ class ProfileLibTblExpertiseSpecController extends Controller
     {
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
 
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::all();
+
+        $profileLibTblExpertiseMaster = ProfileLibTblExpertiseMaster::where('SpeExp_CODE', $code)->value('GenExp_CODE');
+
         return view('admin.201_library.expertise_specialization.edit', [
             'code' => $code,
             'profileLibTblExpertiseSpec' => $profileLibTblExpertiseSpec,
+            'profileLibTblExpertiseGen' => $profileLibTblExpertiseGen,
+            'profileLibTblExpertiseMaster' => $profileLibTblExpertiseMaster,
         ]);
     }
 
@@ -54,6 +71,12 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
         $profileLibTblExpertiseSpec->update($request->all());
+
+        $expertiseMasterCode = ProfileLibTblExpertiseMaster::where('SpeExp_CODE', $code)->value('RECNUM');
+
+        $profileLibTblExpertiseMaster = ProfileLibTblExpertiseMaster::find($expertiseMasterCode);
+        $profileLibTblExpertiseMaster->GenExp_CODE = $request->expertise_general;
+        $profileLibTblExpertiseMaster->update();
 
         return to_route('expertise-specialization.index')->with('message', 'Data Update Successfully');
     }
