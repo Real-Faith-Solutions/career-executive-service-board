@@ -47,9 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-degree.forceDelete', $profileLibTblLanguageRefTrashRecords->code) }}" method="POST" id="permanent_educational_degree_form{{ $profileLibTblLanguageRefTrashRecords->code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('language-library.forceDelete', $profileLibTblLanguageRefTrashRecords->code) }}" method="POST" id="permanent_language_library_form{{ $profileLibTblLanguageRefTrashRecords->code}}">
+                                @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentEducationalDegreeButton{{ $profileLibTblLanguageRefTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentLanguageLibraryButton{{ $profileLibTblLanguageRefTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

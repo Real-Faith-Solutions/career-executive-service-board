@@ -988,7 +988,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblLanguageRefController::class, 'destroy'])->name('language-library.destroy');
             Route::get('recently-deleted', [ProfileLibTblLanguageRefController::class, 'recentlyDeleted'])->name('language-library.recentlyDeleted');
-            Route::post('restore/{code}', [ProfileLibTblLanguageRefController::class, 'restore'])->name('language-library.restore');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'restore'])->name('language-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'forceDelete'])->name('language-library.forceDelete');
         });
 
         Route::prefix('ces-status-library')->group(function () {
