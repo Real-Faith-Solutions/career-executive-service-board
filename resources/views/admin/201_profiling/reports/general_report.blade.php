@@ -111,7 +111,10 @@
                 <thead class="bg-gray-50 text-xs uppercase text-gray-700">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            <a href="{{ route('general-reports.index', ['sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}" class="flex items-center space-x-1">
+                            <a href="{{ route('general-reports.index', [
+                                            'sort_by' => 'cesno',
+                                            'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc'
+                                        ]) }}" class="flex items-center space-x-1">
                                 Ces No.
                                 @if ($sortBy === 'cesno')
                                     @if ($sortOrder === 'asc')
