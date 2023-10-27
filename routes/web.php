@@ -1000,6 +1000,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::put('update/{code}', [ProfileLibTblCesStatusController::class, 'update'])->name('ces-status-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCesStatusController::class, 'destroy'])->name('ces-status-library.destroy');
             Route::get('recently-deleted', [ProfileLibTblCesStatusController::class, 'recentlyDeleted'])->name('ces-status-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusController::class, 'restore'])->name('ces-status-library.restore');
         });
 
         Route::prefix('appointing-authority-library')->group(function () {
