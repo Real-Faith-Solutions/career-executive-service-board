@@ -1049,6 +1049,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy');
             Route::get('recently-deleted', [ProfileLibTblCaseNatureController::class, 'recentlyDeleted'])->name('case-nature-library.recentlyDeleted');
             Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'restore'])->name('case-nature-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'forceDelete'])->name('case-nature-library.forceDelete');
         });
 
         Route::prefix('case-status-library')->group(function () {

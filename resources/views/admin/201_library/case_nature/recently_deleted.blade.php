@@ -47,10 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-acquired-thru-library.forceDelete', $profileLibTblCaseNatureTrashRecords->STATUS_CODE) }}" method="POST" id="permanent_ces_status_acquired_thru_form{{ $profileLibTblCaseNatureTrashRecords->STATUS_CODE}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.forceDelete', ['code'=>$profileLibTblCaseNatureTrashRecords->STATUS_CODE]) }}" method="POST" id="permanent_case_nature_form{{ $profileLibTblCaseNatureTrashRecords->STATUS_CODE}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentCesStatusAcquiredThruButton{{ $profileLibTblCaseNatureTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentCaseNatureButton{{ $profileLibTblCaseNatureTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

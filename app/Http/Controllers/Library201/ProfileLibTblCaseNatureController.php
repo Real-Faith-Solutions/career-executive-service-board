@@ -80,4 +80,12 @@ class ProfileLibTblCaseNatureController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblCaseNatureTrashRecord = ProfileLibTblCaseNature::onlyTrashed()->find($code);
+        $profileLibTblCaseNatureTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanent Deleted');
+    }
 }
