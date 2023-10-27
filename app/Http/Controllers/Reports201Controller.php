@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PersonalData;
 use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileLibTblCesStatus;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class Reports201Controller extends Controller
@@ -128,7 +129,7 @@ class Reports201Controller extends Controller
 
     public function generatePdf($sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
-                        $cesstat_code, $authority_code,)
+                        $cesstat_code, $authority_code)
     {
 
         $sortBy = $sortBy ?? 'cesno';
@@ -144,20 +145,96 @@ class Reports201Controller extends Controller
         $cesstat_code = $cesstat_code ?? 'false';
         $authority_code = $authority_code ?? 'false';
 
-        $search = $request->input('search');
+        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
+        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
-        $profileLibCitiesSearchResult = ProfileLibCities::where('name', $search)->first();
+        $personalData = PersonalData::query();
 
-        if($profileLibCitiesSearchResult != null)
-        {
-            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::where('city_code', $profileLibCitiesSearchResult->city_code)
-            ->get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
-        }
-        else
-        {
-            // get all venues
-            $trainingVenueManagerByCity = CompetencyTrainingVenueManager::get(['name', 'no_street', 'brgy', 'city_code', 'contactno', 'emailadd', 'contactperson']);
-        }
+        $personalData->with(['cesStatus', 'profileTblCesStatus']);
+
+        // status filter group 
+
+        $personalData->where(function ($query) use ($filter_active, $filter_inactive, $filter_retired, $filter_deceased) {
+            $query->when($filter_active !== 'false', function ($query) {
+                return $query->orWhere('status', 'Active');
+            });
+        
+            $query->when($filter_inactive !== 'false', function ($query) {
+                return $query->orWhere('status', 'Inactive');
+            });
+        
+            $query->when($filter_retired !== 'false', function ($query) {
+                return $query->orWhere('status', 'Retired');
+            });
+    
+            $query->when($filter_deceased !== 'false', function ($query) {
+                return $query->orWhere('status', 'Deceased');
+            });
+        });
+
+        // pending cases group
+
+        $personalData->where(function ($query) use ($with_pending_case, $without_pending_case) {
+            $query->when($with_pending_case !== 'false', function ($query) {
+                // Use a subquery to get personal data with pending cases
+                $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
+                    $subquery->where('TITLE', 'Pending');
+                    // here i want to also get all values on offence column on caseRecords
+                })->with('caseRecords');
+            });
+    
+            $query->when($without_pending_case !== 'false', function ($query) {
+                // Use a subquery to get personal data without pending cases
+                $query->orWhereDoesntHave('caseRecords.caseStatusCode', function ($subquery) {
+                    $subquery->where('TITLE', 'Pending');
+                });
+            });
+        });
+
+        // candidate for retirement 
+
+        $personalData->where(function ($query) use ($filter_retirement) {
+
+            $query->when($filter_retirement !== 'false', function ($query) {
+                $query->whereHas('planAppointee.apptStatus', function ($subquery) {
+                    $subquery->where('appt_stat_code', 13);
+                });
+            });
+        
+        });
+
+        // ces status filter 
+
+        $personalData->where(function ($query) use ($cesstat_code) {
+
+            $query->when($cesstat_code !== 'false', function ($query) use ($cesstat_code)  {
+                if($cesstat_code == "all"){
+                }else{
+                    return $query->where('CESStat_code', $cesstat_code);
+                }
+            });
+        
+        });
+
+        // appointing authority filter 
+
+        $personalData->where(function ($query) use ($authority_code) {
+
+            $query->when($authority_code !== 'false', function ($query) use ($authority_code) {
+
+                if($authority_code == "all"){
+                    
+                }else{
+                    $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
+                        $subquery->where('official_code', $authority_code);
+                    });
+                }
+                
+            });
+        
+        });
+        
+        $personalData->orderBy($sortBy, $sortOrder);
                
         $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager.report_pdf_city', compact('trainingVenueManagerByCity', 'search'))->setPaper('a4', 'landscape');
         return $pdf->stream('training-venue-manager-report-by-city.pdf');
