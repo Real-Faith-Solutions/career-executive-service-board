@@ -59,4 +59,13 @@ class ProfileLibTblLanguageRefController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblLanguageRefTrashRecord =  ProfileLibTblLanguageRef::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.langauge.recently_deleted', [
+            'profileLibTblLanguageRefTrashRecord' => $profileLibTblLanguageRefTrashRecord,
+        ]);
+    }
 }
