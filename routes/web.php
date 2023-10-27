@@ -1061,6 +1061,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy');
             Route::get('recently-deleted', [ProfileLibTblCaseStatusController::class, 'recentlyDeleted'])->name('case-status-library.recentlyDeleted');
             Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'restore'])->name('case-status-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'forceDelete'])->name('case-status-library.forceDelete');
         });
 
         Route::prefix('expertise-specialization-library')->group(function () {

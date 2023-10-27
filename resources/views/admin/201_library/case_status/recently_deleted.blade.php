@@ -47,7 +47,7 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.forceDelete', ['code'=>$profileLibTblCaseStatusTrashRecords->STATUS_CODE]) }}" method="POST" id="permanent_case_nature_form{{ $profileLibTblCaseStatusTrashRecords->STATUS_CODE}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-status-library.forceDelete', ['code'=>$profileLibTblCaseStatusTrashRecords->STATUS_CODE]) }}" method="POST" id="permanent_case_nature_form{{ $profileLibTblCaseStatusTrashRecords->STATUS_CODE}}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="button" id="permanentCaseNatureButton{{ $profileLibTblCaseStatusTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">

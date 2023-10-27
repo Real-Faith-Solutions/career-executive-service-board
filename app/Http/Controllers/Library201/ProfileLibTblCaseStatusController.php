@@ -80,4 +80,12 @@ class ProfileLibTblCaseStatusController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblCaseStatusTrashRecord = ProfileLibTblCaseStatus::onlyTrashed()->find($code);
+        $profileLibTblCaseStatusTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanent Deleted');
+    }
 }
