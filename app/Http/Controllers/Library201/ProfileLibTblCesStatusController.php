@@ -75,9 +75,17 @@ class ProfileLibTblCesStatusController extends Controller
 
     public function restore($code)
     {
-        $profileLibTblCesStatus = ProfileLibTblCesStatus::onlyTrashed()->find($code);        
-        $profileLibTblCesStatus->restore();
+        $profileLibTblCesStatusTrashRecord = ProfileLibTblCesStatus::onlyTrashed()->find($code);        
+        $profileLibTblCesStatusTrashRecord->restore();
 
         return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblCesStatusTrashRecord = ProfileLibTblCesStatus::onlyTrashed()->find($code);        
+        $profileLibTblCesStatusTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
     }
 }
