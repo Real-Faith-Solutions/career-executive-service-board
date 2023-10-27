@@ -72,4 +72,12 @@ class ProfileLibTblCaseStatusController extends Controller
             'profileLibTblCaseStatusTrashRecord' => $profileLibTblCaseStatusTrashRecord,
         ]) ;      
     }
+
+    public function restore($code)
+    {
+        $profileLibTblCaseStatusTrashRecord = ProfileLibTblCaseStatus::onlyTrashed()->find($code);
+        $profileLibTblCaseStatusTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Successfully');
+    }
 }

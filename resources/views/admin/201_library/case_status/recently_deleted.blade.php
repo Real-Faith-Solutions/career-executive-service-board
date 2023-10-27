@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.restore', ['code'=>$profileLibTblCaseStatusTrashRecords->STATUS_CODE] ) }}" method="POST" id="restore_case_nature_thru_form{{$profileLibTblCaseStatusTrashRecords->STATUS_CODE}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-status-library.restore', ['code'=>$profileLibTblCaseStatusTrashRecords->STATUS_CODE] ) }}" method="POST" id="restore_case_status_form{{$profileLibTblCaseStatusTrashRecords->STATUS_CODE}}">
                                 @csrf
-                                <button type="button" id="restoreCaseNatureButton{{$profileLibTblCaseStatusTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreCaseStatusButton{{$profileLibTblCaseStatusTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
