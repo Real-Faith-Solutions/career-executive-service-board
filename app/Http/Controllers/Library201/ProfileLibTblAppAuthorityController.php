@@ -63,4 +63,13 @@ class ProfileLibTblAppAuthorityController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblAppAuthorityTrashRecord = ProfileLibTblAppAuthority::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.appointing_authority.recently_deleted', [
+            'profileLibTblAppAuthorityTrashRecord' => $profileLibTblAppAuthorityTrashRecord,
+        ]);
+    }
 }

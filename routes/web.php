@@ -1011,6 +1011,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblAppAuthorityController::class, 'edit'])->name('appointing-authority-library.edit');
             Route::put('update/{code}', [ProfileLibTblAppAuthorityController::class, 'update'])->name('appointing-authority-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblAppAuthorityController::class, 'destroy'])->name('appointing-authority-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblAppAuthorityController::class, 'recentlyDeleted'])->name('appointing-authority-library.recentlyDeleted');
         });
 
         Route::prefix('ces-status-type-library')->group(function () {
