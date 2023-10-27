@@ -113,7 +113,16 @@
                         <th scope="col" class="px-6 py-3">
                             <a href="{{ route('general-reports.index', [
                                             'sort_by' => 'cesno',
-                                            'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc'
+                                            'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                                            // 'filter_active' => $filter_active,
+                                            // 'filter_inactive' => $filter_inactive,
+                                            // 'filter_retired' => $filter_retired,
+                                            // 'filter_deceased' => $filter_deceased,
+                                            // 'filter_retirement' => $filter_retirement,
+                                            // 'with_pending_case' => $with_pending_case,
+                                            // 'without_pending_case' => $without_pending_case,
+                                            // 'cesstat_code' => $cesstat_code,
+                                            // 'authority_code' => $authority_code,
                                         ]) }}" class="flex items-center space-x-1">
                                 Ces No.
                                 @if ($sortBy === 'cesno')
