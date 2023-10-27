@@ -50,10 +50,10 @@
                                 </button>
                             </form>
 
-                            <form action="" method="POST" id="delete_examination_form{{$profileLibTblLanguageRefs->CODE}}">
+                            <form action="{{ route('language-library.destroy', ['code'=>$profileLibTblLanguageRefs->code]) }}" method="POST" id="delete_language_library_form{{$profileLibTblLanguageRefs->CODE}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteExaminationButton{{$profileLibTblLanguageRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteLanguageLibraryButton{{$profileLibTblLanguageRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

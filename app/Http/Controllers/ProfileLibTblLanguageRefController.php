@@ -30,7 +30,7 @@ class ProfileLibTblLanguageRefController extends Controller
 
         ProfileLibTblLanguageRef::create($request->all());
 
-        return back()->with('message', 'Save Sucessfully');
+        return to_route('language-library.index')->with('message', 'Save Sucessfully');
     }
 
     public function edit($code)
@@ -50,5 +50,13 @@ class ProfileLibTblLanguageRefController extends Controller
         $profileLibTblLanguageRef->update($request->all());
     
         return back()->with('info', 'Update Sucessfully');
+    }
+
+    public function destroy($code)
+    {
+        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::find($code);
+        $profileLibTblLanguageRef->delete();
+
+        return back()->with('message', 'Data Deleted Successfully');
     }
 }
