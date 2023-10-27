@@ -236,12 +236,12 @@ class Reports201Controller extends Controller
         
         $personalData->orderBy($sortBy, $sortOrder);
                
-        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager.report_pdf_city', 
+        $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
             compact('personalData', 'query', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
             'profileLibTblAppAuthority', 'authority_code'))->setPaper('a4');
-        return $pdf->stream('training-venue-manager-report-by-city.pdf');
+        return $pdf->stream('201-profiling-general-reports.pdf');
     }
 
 }
