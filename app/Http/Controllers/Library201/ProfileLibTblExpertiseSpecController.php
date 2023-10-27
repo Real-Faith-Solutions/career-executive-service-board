@@ -88,4 +88,13 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblExpertiseSpecTrashRecord = ProfileLibTblExpertiseSpec::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.expertise_specialization.recently_deleted', [
+            'profileLibTblExpertiseSpecTrashRecord' => $profileLibTblExpertiseSpecTrashRecord,
+        ]);
+    }
 }

@@ -1071,6 +1071,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit');
             Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update');
             Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy');
+            Route::get('recently-deleted', [ProfileLibTblExpertiseSpecController::class, 'recentlyDeleted'])->name('expertise-specialization.recentlyDeleted');
         });
 
         Route::prefix('expertise-general-library')->group(function () {
