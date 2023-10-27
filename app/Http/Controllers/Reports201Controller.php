@@ -132,19 +132,19 @@ class Reports201Controller extends Controller
                         $cesstat_code, $authority_code)
     {
 
-        dd(
-            $sortBy,
-            $sortOrder,
-            $filter_active,
-            $filter_inactive,
-            $filter_retired,
-            $filter_deceased,
-            $filter_retirement,
-            $with_pending_case,
-            $without_pending_case,
-            $cesstat_code,
-            $authority_code
-        );
+        // dd(
+        //     $sortBy,
+        //     $sortOrder,
+        //     $filter_active,
+        //     $filter_inactive,
+        //     $filter_retired,
+        //     $filter_deceased,
+        //     $filter_retirement,
+        //     $with_pending_case,
+        //     $without_pending_case,
+        //     $cesstat_code,
+        //     $authority_code
+        // );
 
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';
@@ -249,7 +249,9 @@ class Reports201Controller extends Controller
         });
         
         $personalData->orderBy($sortBy, $sortOrder);
-               
+
+        $personalData = $personalData->get();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',

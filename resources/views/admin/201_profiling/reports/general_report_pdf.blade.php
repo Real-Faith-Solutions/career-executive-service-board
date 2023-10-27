@@ -141,15 +141,11 @@
                         </th>
 
                         <th>
-                            <a href="{{ route('general-reports.index', ['sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}">
-                                Ces No.
-                            </a>
+                            Ces No.
                         </th>
 
                         <th>
-                            <a href="{{ route('general-reports.index', ['sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}">
-                                Name
-                            </a>
+                            Name
                         </th>
 
                         @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
@@ -204,13 +200,13 @@
                                 </td>
                             @endif  
 
-                            @if ($cesstat_code !== "")
+                            @if ($cesstat_code !== "false")
                                 <td>
                                     {{ $personalDatas->cesStatus->description ?? 'none' }}
                                 </td>
                             @endif
 
-                            @if ($authority_code !== "")
+                            @if ($authority_code !== "false")
                                 <td>
                                     {{ $personalDatas->getAppointingAuthorityDescription($personalDatas) ?? 'none' }}
                                 </td>
