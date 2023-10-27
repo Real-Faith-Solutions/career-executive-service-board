@@ -35,7 +35,7 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-type-library.restore', $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code) }}" method="POST" id="restore_ces_status_type_form{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.restore', ['code'=>$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code]) }}" method="POST" id="restore_ces_status_type_form{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
                                 @csrf
                                 <button type="button" id="restoreCesStatusTypeButton{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon

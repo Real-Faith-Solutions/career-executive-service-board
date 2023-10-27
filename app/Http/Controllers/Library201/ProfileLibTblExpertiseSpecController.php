@@ -83,6 +83,11 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
     public function destroy($code)
     {
+        $expertiseMasterCode = ProfileLibTblExpertiseMaster::where('SpeExp_CODE', $code)->value('RECNUM');
+
+        $profileLibTblExpertiseMasterTrashRecord = ProfileLibTblExpertiseMaster::find($expertiseMasterCode);
+        $profileLibTblExpertiseMasterTrashRecord->delete();
+
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
         $profileLibTblExpertiseSpec->delete();
 
@@ -96,5 +101,18 @@ class ProfileLibTblExpertiseSpecController extends Controller
         return view('admin.201_library.expertise_specialization.recently_deleted', [
             'profileLibTblExpertiseSpecTrashRecord' => $profileLibTblExpertiseSpecTrashRecord,
         ]);
+    }
+
+    public function restore($code)
+    {
+        $expertiseMasterCode = ProfileLibTblExpertiseMaster::onlyTrashed()->where('SpeExp_CODE', $code)->value('RECNUM');
+
+        $profileLibTblExpertiseMasterTrashRecord = ProfileLibTblExpertiseMaster::onlyTrashed()->find($expertiseMasterCode);
+        $profileLibTblExpertiseMasterTrashRecord->restore();
+        
+        $profileLibTblExpertiseSpecTrashRecord = ProfileLibTblExpertiseSpec::onlyTrashed()->find($code);
+        $profileLibTblExpertiseSpecTrashRecord->restore();
+
+        return back()->with('message', 'Data Restored Successfully');
     }
 }

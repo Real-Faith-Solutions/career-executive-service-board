@@ -1072,6 +1072,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update');
             Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy');
             Route::get('recently-deleted', [ProfileLibTblExpertiseSpecController::class, 'recentlyDeleted'])->name('expertise-specialization.recentlyDeleted');
+            Route::post('restore/{code}', [ProfileLibTblExpertiseSpecController::class, 'restore'])->name('expertise-specialization.restore');
         });
 
         Route::prefix('expertise-general-library')->group(function () {
