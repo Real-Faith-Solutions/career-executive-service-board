@@ -1025,6 +1025,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
             Route::get('recently-deleted', [ProfileLibTblCesStatusTypeController::class, 'recentlyDeleted'])->name('ces-status-type-library.recentlyDeleted');
             Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'restore'])->name('ces-status-type-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'forceDelete'])->name('ces-status-type-library.forceDelete');
         });
 
         Route::prefix('ces-status-acquired-thru-library')->group(function () {

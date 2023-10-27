@@ -80,4 +80,12 @@ class ProfileLibTblCesStatusTypeController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblCesStatusTypeTrashRecord = ProfileLibTblCesStatusType::onlyTrashed()->find($code);
+        $profileLibTblCesStatusTypeTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }
