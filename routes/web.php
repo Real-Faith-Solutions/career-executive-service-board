@@ -1047,6 +1047,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit');
             Route::put('update/{code}', [ProfileLibTblCaseNatureController::class, 'update'])->name('case-nature-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCaseNatureController::class, 'recentlyDeleted'])->name('case-nature-library.recentlyDeleted');
         });
 
         Route::prefix('case-status-library')->group(function () {

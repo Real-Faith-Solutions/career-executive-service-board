@@ -63,4 +63,13 @@ class ProfileLibTblCaseNatureController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblCaseNatureTrashRecord = ProfileLibTblCaseNature::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.case_nature.recently_deleted', [
+            'profileLibTblCaseNatureTrashRecord' => $profileLibTblCaseNatureTrashRecord,
+        ]);
+    }
 }
