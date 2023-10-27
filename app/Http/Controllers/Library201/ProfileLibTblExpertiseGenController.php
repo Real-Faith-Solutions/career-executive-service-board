@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblExpertiseGen;
+use App\Models\ProfileLibTblExpertiseMaster;
+use App\Models\ProfileLibTblExpertiseSpec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -78,9 +80,27 @@ class ProfileLibTblExpertiseGenController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
-        $profileLibTblExpertiseGen->delete();
+        $codeExist = ProfileLibTblExpertiseMaster::where('GenExp_CODE', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Expertise General already has specialization, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::find($code);
+            $profileLibTblExpertiseGen->delete();
+        }
 
         return back()->with('message', 'Data Deleted Successfully');
+    }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblExpertiseGenTrashRecord = ProfileLibTblExpertiseGen::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.expertise_general.recently_deleted', [
+            'profileLibTblExpertiseGenTrashRecord' => $profileLibTblExpertiseGenTrashRecord,
+        ]);
     }
 }
