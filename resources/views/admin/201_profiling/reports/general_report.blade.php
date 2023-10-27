@@ -149,13 +149,13 @@
                             </th>
                         @endif
 
-                        @if ($cesstat_code !== "")
+                        @if ($cesstat_code !== "false")
                             <th scope="col" class="px-6 py-3">
                                 <span class="">CES Status</span>
                             </th>
                         @endif
 
-                        @if ($authority_code !== "")
+                        @if ($authority_code !== "false")
                             <th scope="col" class="px-6 py-3">
                                 <span class="">Appointing Authority</span>
                             </th>
@@ -186,13 +186,13 @@
                                     </td>
                                 @endif  
 
-                                @if ($cesstat_code !== "")
+                                @if ($cesstat_code !== "false")
                                     <td scope="col" class="px-6 py-3">
                                         {{ $personalDatas->cesStatus->description ?? 'none' }}
                                     </td>
                                 @endif
 
-                                @if ($authority_code !== "")
+                                @if ($authority_code !== "false")
                                     <td scope="col" class="px-6 py-3">
                                         {{ $personalDatas->getAppointingAuthorityDescription($personalDatas) ?? 'none' }}
                                     </td>

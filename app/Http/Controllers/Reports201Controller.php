@@ -23,8 +23,8 @@ class Reports201Controller extends Controller
         $filter_retirement = $request->input('filter_retirement', 'false');
         $with_pending_case = $request->input('with_pending_case', 'false');
         $without_pending_case = $request->input('without_pending_case', 'false');
-        $cesstat_code = $request->input('cesstat_code', '');
-        $authority_code = $request->input('authority_code', '');
+        $cesstat_code = $request->input('cesstat_code', 'false');
+        $authority_code = $request->input('authority_code', 'false');
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
@@ -132,6 +132,8 @@ class Reports201Controller extends Controller
                         $cesstat_code, $authority_code)
     {
 
+        dd($sortBy);
+
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';
 
@@ -237,10 +239,12 @@ class Reports201Controller extends Controller
         $personalData->orderBy($sortBy, $sortOrder);
                
         $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
-            compact('personalData', 'query', 'sortBy', 'sortOrder', 'filter_active', 
+        compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code'))->setPaper('a4');
+            'profileLibTblAppAuthority', 'authority_code'
+        ))
+        ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
     }
 

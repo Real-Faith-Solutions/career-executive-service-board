@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Training Venue Manager Report</title>
+        <title>201 Profiling General Reports</title>
 
         <style>
             @page {
@@ -126,7 +126,7 @@
 
             <footer>
                 <div class="flex-container">
-                    <div class="">Page <span class="pagenum"></span></div>
+                    <div>Page <span class="pagenum"></span></div>
                 </div>
             </footer>
         </header>
@@ -140,61 +140,39 @@
                             
                         </th>
 
-                        <th scope="col" class="px-6 py-3">
-                            <a href="{{ route('general-reports.index', ['sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}" class="flex items-center space-x-1">
+                        <th>
+                            <a href="{{ route('general-reports.index', ['sort_by' => 'cesno', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}">
                                 Ces No.
-                                @if ($sortBy === 'cesno')
-                                    @if ($sortOrder === 'asc')
-                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                                        </svg>
-                                    @else
-                                        <svg class="w-4 h-4 text-gray-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                                        </svg>
-                                    @endif
-                                @endif
                             </a>
                         </th>
 
-                        <th scope="col" class="px-6 py-3">
-                            <a href="{{ route('general-reports.index', ['sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}" class="flex items-center space-x-1">
+                        <th>
+                            <a href="{{ route('general-reports.index', ['sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc', 'search' => $query]) }}">
                                 Name
-                                @if ($sortBy === 'lastname')
-                                    @if ($sortOrder === 'asc')
-                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                                        </svg>
-                                    @else
-                                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                                        </svg>
-                                    @endif
-                                @endif
                             </a>
                         </th>
 
                         @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
-                            <th scope="col" class="px-6 py-3">
-                                <span class="">Status</span>
+                            <th>
+                                <span>Status</span>
                             </th>
                         @endif
 
-                        @if ($cesstat_code !== "")
-                            <th scope="col" class="px-6 py-3">
-                                <span class="">CES Status</span>
+                        @if ($cesstat_code !== "false")
+                            <th>
+                                <span>CES Status</span>
                             </th>
                         @endif
 
-                        @if ($authority_code !== "")
-                            <th scope="col" class="px-6 py-3">
-                                <span class="">Appointing Authority</span>
+                        @if ($authority_code !== "false")
+                            <th>
+                                <span>Appointing Authority</span>
                             </th>
                         @endif
 
                         @if ($with_pending_case == "true")
-                            <th scope="col" class="px-6 py-3">
-                                <span class="">Pending Case</span>
+                            <th>
+                                <span>Pending Case</span>
                             </th>
                         @endif
 
@@ -206,40 +184,40 @@
                     @endphp
 
                     @foreach ($personalData as $personalDatas)
-                        <tr class="border-b bg-white hover:bg-slate-400 hover:text-white">
+                        <tr>
 
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
 
-                            <td scope="col" class="px-6 py-3">
+                            <td>
                                 {{ $personalDatas->cesno }}
                             </td>
 
-                            <td scope="col" class="px-6 py-3">
+                            <td>
                                 {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
                             </td>
 
                             @if ($filter_active == "true" || $filter_inactive == "true" || $filter_retired == "true" || $filter_deceased == "true")
-                                <td scope="col" class="px-6 py-3">
+                                <td>
                                     {{ $personalDatas->status ?? '' }}
                                 </td>
                             @endif  
 
                             @if ($cesstat_code !== "")
-                                <td scope="col" class="px-6 py-3">
+                                <td>
                                     {{ $personalDatas->cesStatus->description ?? 'none' }}
                                 </td>
                             @endif
 
                             @if ($authority_code !== "")
-                                <td scope="col" class="px-6 py-3">
+                                <td>
                                     {{ $personalDatas->getAppointingAuthorityDescription($personalDatas) ?? 'none' }}
                                 </td>
                             @endif
 
                             @if ($with_pending_case == "true")
-                                <td scope="col" class="px-6 py-3">
+                                <td>
                                     @if ($personalDatas->caseRecords->isNotEmpty())
 
                                         @php
