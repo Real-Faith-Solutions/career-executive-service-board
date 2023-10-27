@@ -80,4 +80,12 @@ class ProfileLibTblAppAuthorityController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblAppAuthorityTrashRecord = ProfileLibTblAppAuthority::onlyTrashed()->find($code);
+        $profileLibTblAppAuthorityTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanent Deleted');
+    }
 }

@@ -47,10 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-library.forceDelete', $profileLibTblAppAuthorityTrashRecords->code) }}" method="POST" id="permanent_ces_status_form{{ $profileLibTblAppAuthorityTrashRecords->code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('appointing-authority-library.forceDelete', $profileLibTblAppAuthorityTrashRecords->code) }}" method="POST" id="permanent_appointing_authority_form{{ $profileLibTblAppAuthorityTrashRecords->code}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentCesStatusButton{{ $profileLibTblAppAuthorityTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentAppointingAuthorityButton{{ $profileLibTblAppAuthorityTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
