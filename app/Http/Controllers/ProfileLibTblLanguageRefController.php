@@ -68,4 +68,20 @@ class ProfileLibTblLanguageRefController extends Controller
             'profileLibTblLanguageRefTrashRecord' => $profileLibTblLanguageRefTrashRecord,
         ]);
     }
+
+    public function restore($code)
+    {
+        $profileLibTblLanguageRefTrashRecord =  ProfileLibTblLanguageRef::onlyTrashed()->find($code);
+        $profileLibTblLanguageRefTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Sucessfully');
+    }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblLanguageRefTrashRecord =  ProfileLibTblLanguageRef::onlyTrashed()->find($code);
+        $profileLibTblLanguageRefTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanently Deleted');
+    }
 }

@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('educational-degree.restore', $profileLibTblLanguageRefTrashRecords->code) }}" method="POST" id="restore_educational_degree_form{{$profileLibTblLanguageRefTrashRecords->code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('language-library.restore', $profileLibTblLanguageRefTrashRecords->code) }}" method="POST" id="restore_language_library_form{{$profileLibTblLanguageRefTrashRecords->code}}">
                                 @csrf
-                                <button type="button" id="restoreEducationalDegreeButton{{$profileLibTblLanguageRefTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreLanguageLibraryButton{{$profileLibTblLanguageRefTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
