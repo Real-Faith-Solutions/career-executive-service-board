@@ -72,4 +72,12 @@ class ProfileLibTblAppAuthorityController extends Controller
             'profileLibTblAppAuthorityTrashRecord' => $profileLibTblAppAuthorityTrashRecord,
         ]);
     }
+
+    public function restore($code)
+    {
+        $profileLibTblAppAuthorityTrashRecord = ProfileLibTblAppAuthority::onlyTrashed()->find($code);
+        $profileLibTblAppAuthorityTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Successfully');
+    }
 }
