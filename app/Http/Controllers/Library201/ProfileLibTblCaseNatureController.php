@@ -72,4 +72,12 @@ class ProfileLibTblCaseNatureController extends Controller
             'profileLibTblCaseNatureTrashRecord' => $profileLibTblCaseNatureTrashRecord,
         ]);
     }
+
+    public function restore($code)
+    {
+        $profileLibTblCaseNatureTrashRecord = ProfileLibTblCaseNature::onlyTrashed()->find($code);
+        $profileLibTblCaseNatureTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Successfully');
+    }
 }

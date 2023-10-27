@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-acquired-thru-library.restore', $profileLibTblCaseNatureTrashRecords->STATUS_CODE) }}" method="POST" id="restore_ces_status_acquired_thru_form{{$profileLibTblCaseNatureTrashRecords->STATUS_CODE}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.restore', ['code'=>$profileLibTblCaseNatureTrashRecords->STATUS_CODE] ) }}" method="POST" id="restore_case_nature_thru_form{{$profileLibTblCaseNatureTrashRecords->STATUS_CODE}}">
                                 @csrf
-                                <button type="button" id="restoreCesStatusAcquiredThruButton{{$profileLibTblCaseNatureTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreCaseNatureButton{{$profileLibTblCaseNatureTrashRecords->STATUS_CODE}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
