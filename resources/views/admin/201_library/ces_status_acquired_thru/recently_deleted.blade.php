@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-type-library.restore', $profileLibTblCesStatusAccTrashRecords->code) }}" method="POST" id="restore_ces_status_type_form{{$profileLibTblCesStatusAccTrashRecords->code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-acquired-thru-library.restore', $profileLibTblCesStatusAccTrashRecords->code) }}" method="POST" id="restore_ces_status_acquired_thru_form{{$profileLibTblCesStatusAccTrashRecords->code}}">
                                 @csrf
-                                <button type="button" id="restoreCesStatusTypeButton{{$profileLibTblCesStatusAccTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreCesStatusAcquiredThruButton{{$profileLibTblCesStatusAccTrashRecords->code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
