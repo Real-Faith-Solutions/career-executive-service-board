@@ -1023,6 +1023,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
             Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update');
             Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCesStatusTypeController::class, 'recentlyDeleted'])->name('ces-status-type-library.recentlyDeleted');
         });
 
         Route::prefix('ces-status-acquired-thru-library')->group(function () {
