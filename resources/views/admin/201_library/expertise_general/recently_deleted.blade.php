@@ -47,10 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.forceDelete', ['code'=>$profileLibTblExpertiseGenTrashRecords->GenExp_Code]) }}" method="POST" id="permanent_expertise_specialization_form{{ $profileLibTblExpertiseGenTrashRecords->GenExp_Code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-general.forceDelete', ['code'=>$profileLibTblExpertiseGenTrashRecords->GenExp_Code]) }}" method="POST" id="permanent_expertise_general_form{{ $profileLibTblExpertiseGenTrashRecords->GenExp_Code}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentExpertiseSpecializationButton{{ $profileLibTblExpertiseGenTrashRecords->GenExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentExpertiseGeneralButton{{ $profileLibTblExpertiseGenTrashRecords->GenExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

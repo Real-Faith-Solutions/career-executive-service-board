@@ -110,4 +110,12 @@ class ProfileLibTblExpertiseGenController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $profileLibTblExpertiseGenTrashRecord = ProfileLibTblExpertiseGen::onlyTrashed()->find($code);
+        $profileLibTblExpertiseGenTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanent Deleted');
+    }
 }
