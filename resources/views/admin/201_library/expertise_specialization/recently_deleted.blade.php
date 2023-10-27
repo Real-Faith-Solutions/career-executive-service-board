@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.restore', ['code'=>$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code]) }}" method="POST" id="restore_ces_status_type_form{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.restore', ['code'=>$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code]) }}" method="POST" id="restore_expertise_specialization_form{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
                                 @csrf
-                                <button type="button" id="restoreCesStatusTypeButton{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreExpertiseSpecializationButton{{$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"
@@ -47,10 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('ces-status-type-library.forceDelete', $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code) }}" method="POST" id="permanent_ces_status_type_form{{ $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.forceDelete', ['code'=>$profileLibTblExpertiseSpecTrashRecords->SpeExp_Code]) }}" method="POST" id="permanent_expertise_specialization_form{{ $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentCesStatusTypeButton{{ $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentExpertiseSpecializationButton{{ $profileLibTblExpertiseSpecTrashRecords->SpeExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
