@@ -63,4 +63,13 @@ class ProfileLibTblCaseStatusController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $profileLibTblCaseStatusTrashRecord = ProfileLibTblCaseStatus::onlyTrashed()->paginate(25);
+
+        return view('admin.201_library.case_status.recently_deleted', [
+            'profileLibTblCaseStatusTrashRecord' => $profileLibTblCaseStatusTrashRecord,
+        ]) ;      
+    }
 }
