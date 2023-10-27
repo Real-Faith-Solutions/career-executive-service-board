@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Library201;
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ProfileLibTblExpertiseMaster;
-use App\Models\ProfileLibTblExpertiseSpec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -102,5 +101,13 @@ class ProfileLibTblExpertiseGenController extends Controller
         return view('admin.201_library.expertise_general.recently_deleted', [
             'profileLibTblExpertiseGenTrashRecord' => $profileLibTblExpertiseGenTrashRecord,
         ]);
+    }
+
+    public function restore($code)
+    {
+        $profileLibTblExpertiseGenTrashRecord = ProfileLibTblExpertiseGen::onlyTrashed()->find($code);
+        $profileLibTblExpertiseGenTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Successfully');
     }
 }

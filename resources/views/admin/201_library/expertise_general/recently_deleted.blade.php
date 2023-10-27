@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-specialization.restore', ['code'=>$profileLibTblExpertiseGenTrashRecords->GenExp_Code]) }}" method="POST" id="restore_expertise_specialization_form{{$profileLibTblExpertiseGenTrashRecords->GenExp_Code}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('expertise-general.restore', ['code'=>$profileLibTblExpertiseGenTrashRecords->GenExp_Code]) }}" method="POST" id="restore_expertise_general_form{{$profileLibTblExpertiseGenTrashRecords->GenExp_Code}}">
                                 @csrf
-                                <button type="button" id="restoreExpertiseSpecializationButton{{$profileLibTblExpertiseGenTrashRecords->GenExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreExpertiseGeneralButton{{$profileLibTblExpertiseGenTrashRecords->GenExp_Code}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"

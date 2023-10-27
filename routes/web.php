@@ -1084,6 +1084,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::put('update/{code}', [ProfileLibTblExpertiseGenController::class, 'update'])->name('expertise-general.update');
             Route::delete('destroy/{code}', [ProfileLibTblExpertiseGenController::class, 'destroy'])->name('expertise-general.destroy');
             Route::get('recently-deleted', [ProfileLibTblExpertiseGenController::class, 'recentlyDeleted'])->name('expertise-general.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'restore'])->name('expertise-general.restore');
         });
     });
     // End of Library routes
