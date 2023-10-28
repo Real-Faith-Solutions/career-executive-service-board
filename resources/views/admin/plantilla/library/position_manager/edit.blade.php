@@ -221,7 +221,7 @@
                                     Generic
                                 </label>
                             </div> --}}
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <input
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                     id="is_vacant" name="is_vacant" type="checkbox" value="1" {{ $datas->is_vacant
@@ -229,7 +229,7 @@
                                 <label class="ml-2 text-sm font-medium text-gray-900" for="is_vacant">
                                     Vacant
                                 </label>
-                            </div>
+                            </div> --}}
                             {{-- <div class="flex items-center">
                                 <input
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"

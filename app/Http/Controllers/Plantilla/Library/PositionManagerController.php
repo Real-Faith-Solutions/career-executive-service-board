@@ -61,6 +61,20 @@ class PositionManagerController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
+        $is_ces_pos = $request->input('is_ces_pos');
+        $pres_apptee = $request->input('pres_apptee');
+        $is_head = $request->input('is_head');
+
+        if ($is_ces_pos != 1) {
+            $is_ces_pos = 0;
+        }
+        if ($pres_apptee != 1) {
+            $pres_apptee = 0;
+        }
+        if ($is_head != 1) {
+            $is_head = 0;
+        }
+
 
         $request->validate([
             'officeid' => ['required'],
@@ -80,17 +94,17 @@ class PositionManagerController extends Controller
             'pos_default' => $request->input('pos_default'),
             'corp_sg' => $request->input('corp_sg'),
             // 'pos_sequence' => $request->input('pos_sequence'),
-            'is_ces_pos' => $request->input('is_ces_pos'),
+            'is_ces_pos' => $is_ces_pos,
             'is_vacant' => true, // default true
             'is_occupied' => false, // default false
             'remarks' => $request->input('remarks'),
             'cbasis_code' => $request->input('cbasis_code'),
             'cbasis_remarks' => $request->input('cbasis_remarks'),
             'item_no' => $request->input('item_no'),
-            'pres_apptee' => $request->input('pres_apptee'),
+            'pres_apptee' => $pres_apptee,
             // 'is_active' => $request->input('is_active'),
             'is_generic' => $request->input('is_generic'),
-            'is_head' => $request->input('is_head'),
+            'is_head' => $is_head,
             'created_user' => $encoder,
             'lastupd_user' => $encoder,
         ]);
@@ -147,6 +161,24 @@ class PositionManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        $is_ces_pos = $request->input('is_ces_pos');
+        $pres_apptee = $request->input('pres_apptee');
+        $is_head = $request->input('is_head');
+        $is_active = $request->input('is_active');
+
+        if ($is_ces_pos != 1) {
+            $is_ces_pos = 0;
+        }
+        if ($pres_apptee != 1) {
+            $pres_apptee = 0;
+        }
+        if ($is_head != 1) {
+            $is_head = 0;
+        }
+        if ($is_active != 1) {
+            $is_active = 0;
+        }
+
         $request->validate([
             // 'pos_code' => ['required'],
             'corp_sg' => ['required', 'integer'],
@@ -161,17 +193,17 @@ class PositionManagerController extends Controller
             'pos_default' => $request->input('pos_default'),
             'corp_sg' => $request->input('corp_sg'),
             // 'pos_sequence' => $request->input('pos_sequence'),
-            'is_ces_pos' => $request->input('is_ces_pos'),
+            'is_ces_pos' => $is_ces_pos,
             'is_vacant' => $request->input('is_vacant'),
             'is_occupied' => $request->input('is_occupied'),
             'remarks' => $request->input('remarks'),
             'cbasis_code' => $request->input('cbasis_code'),
             'cbasis_remarks' => $request->input('cbasis_remarks'),
             'item_no' => $request->input('item_no'),
-            'pres_apptee' => $request->input('pres_apptee'),
-            'is_active' => $request->input('is_active'),
+            'pres_apptee' => $pres_apptee,
+            'is_active' => $is_active,
             'is_generic' => $request->input('is_generic'),
-            'is_head' => $request->input('is_head'),
+            'is_head' => $pres_apptee,
             'lastupd_user' => $encoder,
         ]);
 

@@ -96,7 +96,8 @@
 
 
 {{-- <div class="relative overflow-x-auto shadow-lg sm:rounded-lg"> --}}
-    <table class="dataTables">
+    @include('layouts.partials.isLoading')
+    <table class="dataTables hidden">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 {{-- <th class="px-6 py-3" scope="col">Department ID</th> --}}
