@@ -69,12 +69,11 @@ class Reports201Controller extends Controller
 
         // pending cases group
 
-        $personalData->where(function ($query) use ($request) {
-            $query->when($request->has('with_pending_case'), function ($query) {
+        $personalData->where(function ($query) use ($request, $with_pending_case) {
+            $query->when($request->has('with_pending_case') && $with_pending_case !== 'false', function ($query) {
                 // Use a subquery to get personal data with pending cases
                 $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
                     $subquery->where('TITLE', 'Pending');
-                    // here i want to also get all values on offence column on caseRecords
                 })->with('caseRecords');
             });
     
