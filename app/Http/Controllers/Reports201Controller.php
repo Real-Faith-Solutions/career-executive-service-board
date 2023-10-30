@@ -49,7 +49,7 @@ class Reports201Controller extends Controller
 
         // status filter group 
 
-        $personalData->where(function ($query) use ($request, $filter_active, $filter_inactive) {
+        $personalData->where(function ($query) use ($request, $filter_active, $filter_inactive, $filter_retired) {
             $query->when($request->has('filter_active') && $filter_active !== 'false', function ($query) {
                 return $query->orWhere('status', 'Active');
             });
@@ -58,7 +58,7 @@ class Reports201Controller extends Controller
                 return $query->orWhere('status', 'Inactive');
             });
         
-            $query->when($request->has('filter_retired'), function ($query) {
+            $query->when($request->has('filter_retired') && $filter_retired !== 'false', function ($query) {
                 return $query->orWhere('status', 'Retired');
             });
     
