@@ -114,7 +114,7 @@ class Reports201Controller extends Controller
 
         $personalData->where(function ($query) use ($request, $authority_code) {
 
-            $query->when($request->has('authority_code'), function ($query) use ($authority_code) {
+            $query->when($request->has('authority_code') && $authority_code !== 'false', function ($query) use ($authority_code) {
 
                 if($authority_code == "all"){
                     
