@@ -69,7 +69,7 @@ class Reports201Controller extends Controller
 
         // pending cases group
 
-        $personalData->where(function ($query) use ($request, $with_pending_case) {
+        $personalData->where(function ($query) use ($request, $with_pending_case, $without_pending_case) {
             $query->when($request->has('with_pending_case') && $with_pending_case !== 'false', function ($query) {
                 // Use a subquery to get personal data with pending cases
                 $query->whereHas('caseRecords.caseStatusCode', function ($subquery) {
@@ -77,7 +77,7 @@ class Reports201Controller extends Controller
                 })->with('caseRecords');
             });
     
-            $query->when($request->has('without_pending_case'), function ($query) {
+            $query->when($request->has('without_pending_case') && $without_pending_case !== 'false', function ($query) {
                 // Use a subquery to get personal data without pending cases
                 $query->orWhereDoesntHave('caseRecords.caseStatusCode', function ($subquery) {
                     $subquery->where('TITLE', 'Pending');
