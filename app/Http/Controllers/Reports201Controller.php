@@ -87,9 +87,9 @@ class Reports201Controller extends Controller
 
         // candidate for retirement 
 
-        $personalData->where(function ($query) use ($request) {
+        $personalData->where(function ($query) use ($request, $filter_retirement) {
 
-            $query->when($request->has('filter_retirement'), function ($query) {
+            $query->when($request->has('filter_retirement') && $filter_retirement !== 'false', function ($query) {
                 $query->whereHas('planAppointee.apptStatus', function ($subquery) {
                     $subquery->where('appt_stat_code', 13);
                 });
