@@ -189,11 +189,16 @@
                                             readonly />
                                     </div>
 
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                         <label for="official_code">Appointing Authority</label>
                                         <input id="official_code"
                                             value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}"
                                             readonly />
+                                    </div> --}}
+
+                                    <div class="mb-3">
+                                        <label for="name">Position Appointee</label>
+                                        <input id="name" name="name" />
                                     </div>
 
                                     <div class="mb-3">

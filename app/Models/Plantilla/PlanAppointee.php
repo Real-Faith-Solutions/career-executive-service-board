@@ -43,4 +43,8 @@ class PlanAppointee extends Model
     {
         return $this->belongsTo(PlanPosition::class, 'plantilla_id', 'plantilla_id');
     }
+    public function positionAppointee()
+    {
+        return $this->hasOne(PositionAppointee::class, 'appointee_id');
+    }
 }

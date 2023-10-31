@@ -13,6 +13,7 @@ use App\Models\Plantilla\OtherAssignment;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
+use App\Models\Plantilla\PositionAppointee;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibCities;
@@ -37,6 +38,7 @@ class AppointeeOccupantManagerController extends Controller
         $planPosition = PlanPosition::find($plantilla_id);
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+        $positionAppointee = PositionAppointee::orderBy('name', 'asc')->get();
 
 
         $planAppointee = PlanAppointee::query()
@@ -79,6 +81,7 @@ class AppointeeOccupantManagerController extends Controller
             'cesno',
             'personalDataList',
             'authority',
+            'positionAppointee',
 
         ));;
     }
@@ -125,7 +128,7 @@ class AppointeeOccupantManagerController extends Controller
             'appt_date.required' => 'The Appointment Date field is required.',
         ]);
 
-        PlanAppointee::create([
+        $planAppointee = PlanAppointee::create([
             'plantilla_id' => $request->input('plantilla_id'),
             'cesno' => $request->input('cesno'),
             'appt_stat_code' => $request->input('appt_stat_code'),
@@ -138,6 +141,10 @@ class AppointeeOccupantManagerController extends Controller
             'lastupd_user' => $encoder,
         ]);
 
+        PositionAppointee::create([
+            'appointee_id' => $planAppointee->appointee_id,
+            'name' => $request->name,
+        ]);
 
 
         return redirect()->back()->with('message', 'The item has been successfully added!');
