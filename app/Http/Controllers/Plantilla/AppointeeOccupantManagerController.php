@@ -252,6 +252,7 @@ class AppointeeOccupantManagerController extends Controller
         ]);
 
         $planAppointee = PlanAppointee::withTrashed()->findOrFail($appointee_id);
+        $positionAppointee = PositionAppointee::withTrashed()->findOrFail($appointee_id);
         $planAppointee->update([
             'appt_stat_code' => $request->input('appt_stat_code'),
             'appt_date' => $request->input('appt_date'),
@@ -260,6 +261,10 @@ class AppointeeOccupantManagerController extends Controller
             'ofc_stat_code' => $request->input('ofc_stat_code'),
             'basis' => $request->input('basis'),
             'lastupd_user' => $encoder,
+        ]);
+
+        $positionAppointee->update([
+            'name' => $request->input('name'),
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
