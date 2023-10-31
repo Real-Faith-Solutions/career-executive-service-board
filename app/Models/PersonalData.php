@@ -231,6 +231,13 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
     }
 
+    public function getAppointingAuthorityDescription($personalData)
+    {
+        $currentStatus = ProfileTblCesStatus::where('cesstat_code', $personalData->CESStat_code)->value('official_code');
+        $authority = ProfileLibTblAppAuthority::where('code', $currentStatus)->value('description');
+        return $authority;
+    }
+
     public function medicalHistoryRecords(): HasMany
     {
         return $this->hasMany(MedicalHistory::class);
