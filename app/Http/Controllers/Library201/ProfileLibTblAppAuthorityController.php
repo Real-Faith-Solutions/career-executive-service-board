@@ -59,7 +59,7 @@ class ProfileLibTblAppAuthorityController extends Controller
 
     public function destroy($code)
     {
-        $codeExist = ProfileTblCesStatus::where('official_code', $code)->exists();
+        $codeExist = ProfileTblCesStatus::withTrashed()->where('official_code', $code)->exists();
         
         if($codeExist)
         {

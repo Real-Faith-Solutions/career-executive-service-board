@@ -59,7 +59,7 @@ class ProfileLibTblCaseNatureController extends Controller
 
     public function destroy($code)
     {
-        $codeExist = CaseRecords::where('nature_code', $code)->exists();
+        $codeExist = CaseRecords::withTrashed()->where('nature_code', $code)->exists();
 
         if($codeExist)
         {

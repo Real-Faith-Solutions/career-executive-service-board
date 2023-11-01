@@ -59,7 +59,7 @@ class ProfileLibTblCaseStatusController extends Controller
 
     public function destroy($code)
     {
-        $codeExist = CaseRecords::where('status_code', $code)->exists();
+        $codeExist = CaseRecords::withTrashed()->where('status_code', $code)->exists();
 
         if($codeExist)
         {

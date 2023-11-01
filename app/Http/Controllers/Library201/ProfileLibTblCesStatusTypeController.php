@@ -59,7 +59,7 @@ class ProfileLibTblCesStatusTypeController extends Controller
 
     public function destroy($code)
     {
-        $codeExist = ProfileTblCesStatus::where('type_code', $code)->exists();
+        $codeExist = ProfileTblCesStatus::withTrashed()->where('type_code', $code)->exists();
         
         if($codeExist)
         {

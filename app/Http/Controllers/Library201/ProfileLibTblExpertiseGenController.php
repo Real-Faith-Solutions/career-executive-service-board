@@ -79,7 +79,7 @@ class ProfileLibTblExpertiseGenController extends Controller
 
     public function destroy($code)
     {
-        $codeExist = ProfileLibTblExpertiseMaster::where('GenExp_CODE', $code)->exists();
+        $codeExist = ProfileLibTblExpertiseMaster::withTrashed()->where('GenExp_CODE', $code)->exists();
         
         if($codeExist)
         {

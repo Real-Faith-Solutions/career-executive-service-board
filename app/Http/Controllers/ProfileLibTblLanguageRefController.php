@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProfileLibTblLanguageRef;
+use App\Models\ProfileTblLanguage;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -11,7 +12,7 @@ class ProfileLibTblLanguageRefController extends Controller
     public function index()
     {
         $profileLibTblLanguageRef =  ProfileLibTblLanguageRef::select('title', 'code')
-        ->orderByDesc('code')
+        ->orderBy('code')
         ->paginate(25);
 
         return view('admin.201_library.langauge.index', compact('profileLibTblLanguageRef'));
@@ -54,9 +55,18 @@ class ProfileLibTblLanguageRefController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblLanguageRef = ProfileLibTblLanguageRef::find($code);
-        $profileLibTblLanguageRef->delete();
-
+        $codeExist = ProfileTblLanguage::withTrashed()->where('lang_code', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Langauge already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblLanguageRef = ProfileLibTblLanguageRef::find($code);
+            $profileLibTblLanguageRef->delete();
+        }
+        
         return back()->with('message', 'Data Deleted Successfully');
     }
 
