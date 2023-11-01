@@ -1101,6 +1101,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('edit/{code}', [RankTrackerLibraryController::class, 'edit'])->name('rank-tracker-library.edit');
             Route::put('update/{code}', [RankTrackerLibraryController::class, 'update'])->name('rank-tracker-library.update');
             Route::delete('destroy/{code}', [RankTrackerLibraryController::class, 'destroy'])->name('rank-tracker-library.destroy');
+            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'recentlyDeleted'])->name('rank-tracker-library.recentlyDeleted');
         });
     });
     // End of Library routes (ERIS)

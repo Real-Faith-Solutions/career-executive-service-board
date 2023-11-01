@@ -74,4 +74,14 @@ class RankTrackerLibraryController extends Controller
 
         return back()->with('message', 'Data Deleted Successfully');
     }
+
+    public function recentlyDeleted()
+    {
+        $libraryRankTrackerTrashRecord = LibraryRankTracker::onlyTrashed()
+        ->paginate(25);
+
+        return view('admin.eris_library.rank_tracker.recently_deleted', [
+            'libraryRankTrackerTrashRecord' => $libraryRankTrackerTrashRecord,
+        ]);
+    }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="">
+    <a href="{{ route('rank-tracker-library.recentlyDeleted') }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
