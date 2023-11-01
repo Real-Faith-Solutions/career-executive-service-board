@@ -15,7 +15,7 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="" method="POST" id="update_rank_tracker_library_form" onsubmit="return checkErrorsBeforeSubmit(update_rank_tracker_library_form)">
+            <form action="{{ route('rank-tracker-library.update', ['code' => $code]) }}" method="POST" id="update_rank_tracker_library_form" onsubmit="return checkErrorsBeforeSubmit(update_rank_tracker_library_form)">
                 @method('PUT')
                 @csrf
 

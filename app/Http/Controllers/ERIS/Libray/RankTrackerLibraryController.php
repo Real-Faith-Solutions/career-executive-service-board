@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\LibraryRankTracker;
 use App\Models\Eris\RankTracker;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class RankTrackerLibraryController extends Controller
 {
@@ -40,7 +41,20 @@ class RankTrackerLibraryController extends Controller
         $libraryRankTracker = LibraryRankTracker::find($code);
 
         return view('admin.eris_library.rank_tracker.edit', [
+            'code' => $code,
             'libraryRankTracker' => $libraryRankTracker,
         ]);
+    }
+
+    public function update(Request $request, $code)
+    {
+        $request->validate([
+            'description' => ['required', Rule::unique('erad_libRankTracker')->ignore($code, 'ctrlno')],
+        ]);
+
+        $ibraryRankTracker = LibraryRankTracker::find($code);
+        $ibraryRankTracker->update($request->all());
+
+        return to_route('rank-tracker-library.index')->with('message', 'Data Update Successfully');
     }
 }

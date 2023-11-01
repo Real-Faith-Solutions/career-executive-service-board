@@ -1099,6 +1099,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create');
             Route::post('store', [RankTrackerLibraryController::class, 'store'])->name('rank-tracker-library.store');
             Route::get('edit/{code}', [RankTrackerLibraryController::class, 'edit'])->name('rank-tracker-library.edit');
+            Route::put('update/{code}', [RankTrackerLibraryController::class, 'update'])->name('rank-tracker-library.update');
         });
     });
     // End of Library routes (ERIS)
