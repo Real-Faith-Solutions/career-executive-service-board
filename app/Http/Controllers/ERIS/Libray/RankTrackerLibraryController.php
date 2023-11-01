@@ -23,4 +23,15 @@ class RankTrackerLibraryController extends Controller
     {
         return view('admin.eris_library.rank_tracker.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'description' => ['required', 'unique:erad_libRankTracker,description'],
+        ]);
+        
+        LibraryRankTracker::create($request->all());
+        
+        return to_route('rank-tracker-library.index')->with('message', 'Save Successfully');
+    }
 }
