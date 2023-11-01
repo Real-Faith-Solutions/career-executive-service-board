@@ -50,7 +50,7 @@
                                 </button>
                             </form>
 
-                            <form action="{{ route('case-nature-library.destroy', ['code'=>$libraryRankTrackers->ctrlno]) }}" method="POST" id="delete_case_nature_form{{$libraryRankTrackers->ctrlno}}">
+                            <form action="{{ route('rank-tracker-library.destroy', ['code'=>$libraryRankTrackers->ctrlno]) }}" method="POST" id="delete_case_nature_form{{$libraryRankTrackers->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" id="deleteCaseNatureButton{{$libraryRankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

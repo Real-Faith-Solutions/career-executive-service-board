@@ -57,4 +57,21 @@ class RankTrackerLibraryController extends Controller
 
         return to_route('rank-tracker-library.index')->with('message', 'Data Update Successfully');
     }
+
+    public function destroy($code)
+    {
+        $codeExist = RankTracker::withTrashed()->where('r_ctrlno', $code)->exists();
+
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Rank already has user, so it cannot be deleted !!');
+        }
+        else
+        {    
+            $libraryRankTracker = LibraryRankTracker::find($code);
+            $libraryRankTracker->delete();
+        }
+
+        return back()->with('message', 'Data Deleted Successfully');
+    }
 }
