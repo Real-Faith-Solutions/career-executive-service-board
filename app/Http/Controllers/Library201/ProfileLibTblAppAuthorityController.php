@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblAppAuthority;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -58,8 +59,17 @@ class ProfileLibTblAppAuthorityController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::find($code);
-        $profileLibTblAppAuthority->delete();
+        $codeExist = ProfileTblCesStatus::where('official_code', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Appointing Authority already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblAppAuthority = ProfileLibTblAppAuthority::find($code);
+            $profileLibTblAppAuthority->delete();
+        }
 
         return back()->with('message', 'Data Deleted Successfully');
     }
