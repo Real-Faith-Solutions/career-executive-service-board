@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
+use App\Models\CaseRecords;
 use App\Models\ProfileLibTblCaseStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -58,8 +59,17 @@ class ProfileLibTblCaseStatusController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblCaseStatus = ProfileLibTblCaseStatus::find($code);
-        $profileLibTblCaseStatus->delete();
+        $codeExist = CaseRecords::where('status_code', $code)->exists();
+
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Case Status already has case record, so it cannot be deleted !!');
+        }
+        else
+        {    
+            $profileLibTblCaseStatus = ProfileLibTblCaseStatus::find($code);
+            $profileLibTblCaseStatus->delete();
+        }
 
         return back()->with('message', 'Data Deleted Successfully');
     }
