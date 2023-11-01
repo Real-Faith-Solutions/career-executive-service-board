@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
+use App\Models\CaseRecords;
 use App\Models\ProfileLibTblCaseNature;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -58,8 +59,17 @@ class ProfileLibTblCaseNatureController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblCaseNature = ProfileLibTblCaseNature::find($code);
-        $profileLibTblCaseNature->delete();
+        $codeExist = CaseRecords::where('nature_code', $code)->exists();
+
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Case Nature already has case record, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblCaseNature = ProfileLibTblCaseNature::find($code);
+            $profileLibTblCaseNature->delete();
+        }
 
         return back()->with('message', 'Data Deleted Successfully');
     }
