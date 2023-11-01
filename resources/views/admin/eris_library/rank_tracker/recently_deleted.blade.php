@@ -35,9 +35,9 @@
 
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.restore', ['code'=>$libraryRankTrackerTrashRecords->ctrlno] ) }}" method="POST" id="restore_case_nature_thru_form{{$libraryRankTrackerTrashRecords->ctrlno}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('rank-tracker-library.restore', ['code'=>$libraryRankTrackerTrashRecords->ctrlno] ) }}" method="POST" id="restore_rank_tracker_library_form{{$libraryRankTrackerTrashRecords->ctrlno}}">
                                 @csrf
-                                <button type="button" id="restoreCaseNatureButton{{$libraryRankTrackerTrashRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
+                                <button type="button" id="restoreRankTrackerLibraryButton{{$libraryRankTrackerTrashRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                     <lord-icon
                                         src="https://cdn.lordicon.com/nxooksci.json"
                                         trigger="hover"

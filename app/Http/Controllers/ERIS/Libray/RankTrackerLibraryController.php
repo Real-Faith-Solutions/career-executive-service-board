@@ -84,4 +84,12 @@ class RankTrackerLibraryController extends Controller
             'libraryRankTrackerTrashRecord' => $libraryRankTrackerTrashRecord,
         ]);
     }
+
+    public function restore($code)
+    {
+        $libraryRankTrackerTrashRecord = LibraryRankTracker::onlyTrashed()->find($code);
+        $libraryRankTrackerTrashRecord->restore();
+
+        return back()->with('info', 'Data Restored Successfully');
+    }
 }
