@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblCesStatusType;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -58,9 +59,18 @@ class ProfileLibTblCesStatusTypeController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::find($code);
-        $profileLibTblCesStatusType->delete();
-
+        $codeExist = ProfileTblCesStatus::where('type_code', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The CES Status Type already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblCesStatusType = ProfileLibTblCesStatusType::find($code);
+            $profileLibTblCesStatusType->delete();
+        }
+    
         return back()->with('message', 'Data Deleted Successfully');
     }
 
