@@ -382,7 +382,7 @@
         </li>
         {{-- end rights management --}}
 
-        {{-- libraries --}}
+        {{-- 201 libraries --}}
         <li>
             <button type="button"
                 class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
@@ -518,7 +518,34 @@
                 </li>
             </ul>
         </li>
-        {{-- end libraries --}}
+        {{-- 201 end libraries --}}
+
+        <li>
+            <button type="button"
+                class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
+                aria-controls="eris-dropdown-system-utility" data-collapse-toggle="eris-dropdown-system-utility">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                    <path
+                        d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
+                </svg>
+                <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>ERIS Library</span>
+                <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <ul id="eris-dropdown-system-utility" class="hidden space-y-2 py-2">
+                <li>
+                    <a href="{{ route('rank-tracker-library.index') }}"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Rank Tracker
+                    </a>
+                </li>
+            </ul>
+        </li>
         @endif
         </ul>
     </div>

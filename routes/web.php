@@ -33,6 +33,7 @@ use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\BoardInterviewController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
+use App\Http\Controllers\ERIS\Libray\RankTrackerLibraryController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
@@ -1089,6 +1090,13 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'forceDelete'])->name('expertise-general.forceDelete');
         });
     });
-    // End of Library routes
+    // End of Library routes (201)
 
+    // Library routes (ERIS)
+     Route::prefix('eris-library')->group(function () {
+        Route::prefix('rank-tracker-library')->group(function () {
+            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
+        });
+    });
+    // End of Library routes (ERIS)
 });
