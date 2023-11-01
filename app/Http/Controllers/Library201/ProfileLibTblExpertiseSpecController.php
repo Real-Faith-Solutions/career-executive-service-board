@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompetencyNonCesAccreditedTraining;
 use App\Models\ProfileLibTblExpertiseGen;
 use App\Models\ProfileLibTblExpertiseMaster;
 use App\Models\ProfileLibTblExpertiseSpec;
+use App\Models\ProfileTblExpertise;
+use App\Models\ProfileTblTrainingMngt;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -83,14 +86,27 @@ class ProfileLibTblExpertiseSpecController extends Controller
 
     public function destroy($code)
     {
-        $expertiseMasterCode = ProfileLibTblExpertiseMaster::where('SpeExp_CODE', $code)->value('RECNUM');
+        $description = ProfileLibTblExpertiseSpec::where('SpeExp_Code', $code)->value('Title');
 
-        $profileLibTblExpertiseMasterTrashRecord = ProfileLibTblExpertiseMaster::find($expertiseMasterCode);
-        $profileLibTblExpertiseMasterTrashRecord->delete();
+        $nonCesTraining201CodeExist = ProfileTblTrainingMngt::withTrashed()->where('field_specialization', $code)->exists();
+        $expertiseCodeExist = ProfileTblExpertise::withTrashed()->where('SpeExp_Code', $code)->exists();
+        $competencyNonCesTrainingDescription = CompetencyNonCesAccreditedTraining::withTrashed()->where('specialization', $description)->exists();
+        
+        if($nonCesTraining201CodeExist || $expertiseCodeExist || $competencyNonCesTrainingDescription)
+        {
+            return redirect()->back()->with('error', 'The Expertise Specialization already has training/s, so it cannot be deleted !!');
+        }
+        else
+        {
+            $expertiseMasterCode = ProfileLibTblExpertiseMaster::where('SpeExp_CODE', $code)->value('RECNUM');
 
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
-        $profileLibTblExpertiseSpec->delete();
+            $profileLibTblExpertiseMasterTrashRecord = ProfileLibTblExpertiseMaster::find($expertiseMasterCode);
+            $profileLibTblExpertiseMasterTrashRecord->delete();
 
+            $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::find($code);
+            $profileLibTblExpertiseSpec->delete();
+        }
+        
         return back()->with('message', 'Data Deleted Successfully');
     }
 
