@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Library201;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProfileLibTblCesStatusAcc;
+use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -58,9 +59,18 @@ class ProfileLibTblCesStatusAcquiredThruController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::find($code);
-        $profileLibTblCesStatusAcc->delete();
-
+        $codeExist = ProfileTblCesStatus::where('acc_code', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The CES Status Acquired Thru already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::find($code);
+            $profileLibTblCesStatusAcc->delete();
+        }
+        
         return back()->with('message', 'Data Deleted Successfully');
     }
 
