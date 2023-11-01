@@ -38,7 +38,7 @@
                     
                     <td class="px-6 py-4 text-right uppercase">
                         <div class="flex justify-end">
-                            <form action="{{ route('case-nature-library.edit', ['code'=>$libraryRankTrackers->ctrlno]) }}" method="GET">
+                            <form action="{{ route('rank-tracker-library.edit', ['code'=>$libraryRankTrackers->ctrlno]) }}" method="GET">
                                 @csrf
                                 <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                     <lord-icon

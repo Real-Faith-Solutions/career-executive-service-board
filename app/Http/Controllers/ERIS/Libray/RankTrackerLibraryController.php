@@ -34,4 +34,13 @@ class RankTrackerLibraryController extends Controller
         
         return to_route('rank-tracker-library.index')->with('message', 'Save Successfully');
     }
+
+    public function edit($code)
+    {
+        $libraryRankTracker = LibraryRankTracker::find($code);
+
+        return view('admin.eris_library.rank_tracker.edit', [
+            'libraryRankTracker' => $libraryRankTracker,
+        ]);
+    }
 }
