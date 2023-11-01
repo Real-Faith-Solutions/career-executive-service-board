@@ -47,10 +47,10 @@
                                 </button>
                             </form>
 
-                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('case-nature-library.forceDelete', ['code'=>$libraryRankTrackerTrashRecords->ctrlno]) }}" method="POST" id="permanent_case_nature_form{{ $libraryRankTrackerTrashRecords->ctrlno}}">
+                            <form class="hover:bg-slate-100 rounded-full" action="{{ route('rank-tracker-library.forceDelete', ['code'=>$libraryRankTrackerTrashRecords->ctrlno]) }}" method="POST" id="permanent_rank_tracker_library_form{{ $libraryRankTrackerTrashRecords->ctrlno}}">
                                 @method('DELETE')
                                 @csrf
-                                <button type="button" id="permanentCaseNatureButton{{ $libraryRankTrackerTrashRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
+                                <button type="button" id="permanentRankTrackerLibraryButton{{ $libraryRankTrackerTrashRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"

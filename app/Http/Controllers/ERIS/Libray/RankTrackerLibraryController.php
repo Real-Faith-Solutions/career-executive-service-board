@@ -92,4 +92,12 @@ class RankTrackerLibraryController extends Controller
 
         return back()->with('info', 'Data Restored Successfully');
     }
+
+    public function forceDelete($code)
+    {
+        $libraryRankTrackerTrashRecord = LibraryRankTracker::onlyTrashed()->find($code);
+        $libraryRankTrackerTrashRecord->forceDelete();
+
+        return back()->with('info', 'Data Permanent Deleted');
+    }
 }
