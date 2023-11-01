@@ -21,6 +21,6 @@ class RankTrackerLibraryController extends Controller
 
     public function create()
     {
-        return view('');
+        return view('admin.eris_library.rank_tracker.create');
     }
 }

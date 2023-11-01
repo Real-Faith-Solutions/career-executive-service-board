@@ -13,7 +13,7 @@
         </lord-icon>
     </a>
 
-    <a class="btn btn-primary" href="">Add New Rank</a>
+    <a class="btn btn-primary" href="{{ route('rank-tracker-library.create') }}">Add New Rank</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">

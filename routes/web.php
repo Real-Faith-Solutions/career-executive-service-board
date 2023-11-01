@@ -1095,7 +1095,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // Library routes (ERIS)
      Route::prefix('eris-library')->group(function () {
         Route::prefix('rank-tracker-library')->group(function () {
-            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
+            Route::get('index', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
+            Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create');
         });
     });
     // End of Library routes (ERIS)
