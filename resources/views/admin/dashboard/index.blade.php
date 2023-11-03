@@ -23,6 +23,10 @@
             </div>
         </div>
     </div>
-@endauth
+@else
+
+    @include('admin.dashboard.partials.user_ceso_status')
+
+@endif
 
 @endsection
