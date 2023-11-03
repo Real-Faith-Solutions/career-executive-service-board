@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('catid')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

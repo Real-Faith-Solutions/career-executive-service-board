@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProfileLibTblCesStatusType extends Model
 {
-    use HasFactory;
-
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = "profilelib_tblcesstatustype";
 

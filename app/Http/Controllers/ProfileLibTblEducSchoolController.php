@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EducationalAttainment;
 use App\Models\ProfileLibTblEducSchool;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class ProfileLibTblEducSchoolController extends Controller
     {
         $datas = ProfileLibTblEducSchool::query()
         ->orderBy('SCHOOL' , 'ASC')
-        ->paginate(15);
+        ->paginate(25);
 
         return view('admin.201_library.educational_schools.index', compact('datas'));
     }
@@ -24,7 +25,7 @@ class ProfileLibTblEducSchoolController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'SCHOOL' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
+            'SCHOOL' => ['required','string', 'max:100', 'min:2', 'unique:profilelib_tblEducSchools'],
         ]);
 
         ProfileLibTblEducSchool::create($request->all());
@@ -43,13 +44,31 @@ class ProfileLibTblEducSchoolController extends Controller
     public function update(Request $request, $CODE)
     {
         $request->validate([
-            'SCHOOL' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducSchools'],
+            'SCHOOL' => ['required', 'string', 'max:100', 'min:2', 'unique:profilelib_tblEducSchools'],
         ]);
 
         $data = ProfileLibTblEducSchool::withTrashed()->findOrFail($CODE);
         $data->update($request->all());
 
         return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully updated!');
+    }
+
+    // soft delete
+    public function destroy($CODE)
+    {
+        $codeExist = EducationalAttainment::withTrashed()->where('school_code', $CODE)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The School already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $data = ProfileLibTblEducSchool::findOrFail($CODE);
+            $data->delete();
+        }
+        
+        return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // recently deleted
@@ -69,15 +88,6 @@ class ProfileLibTblEducSchoolController extends Controller
         $data->restore();
 
         return redirect()->back()->with('message', 'The item has been successfully restore!');
-    }
-
-    // soft delete
-    public function destroy($CODE)
-    {
-        $data = ProfileLibTblEducSchool::findOrFail($CODE);
-        $data->delete();
-
-        return redirect()->route('educational-schools.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // force delete

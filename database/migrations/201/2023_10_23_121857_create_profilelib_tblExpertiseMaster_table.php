@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('RECNUM');
             $table->integer('SpeExp_CODE')->nullable();
             $table->integer('GenExp_CODE')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
