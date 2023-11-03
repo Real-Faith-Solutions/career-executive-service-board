@@ -100,7 +100,10 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="flex justify-end items-end">
+                        <div class="flex justify-end items-end gap-2">
+                            <button type="button" class="btn btn-secondary" data-modal-hide="large-modal">
+                                Close
+                            </button>
                             <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
                     </div>
