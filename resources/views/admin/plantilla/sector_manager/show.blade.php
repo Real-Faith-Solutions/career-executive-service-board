@@ -85,8 +85,9 @@
                             Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
                         </h1>
                         <button type="button" class="btn btn-primary"
-                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">Save
-                            Changes</button>
+                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                            Save Changes
+                        </button>
                     </div>
                 </form>
             </div>
