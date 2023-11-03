@@ -58,7 +58,6 @@
             </thead>
             <tbody>
                 {{-- panel and board interview --}}
-                @if ($interviewType == 'all') 
                     @foreach ($boardInterview as $boardInterviews) 
                         <tr class="border-b bg-white">
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
@@ -106,77 +105,8 @@
                             </td>
                         </tr>
                     @endforeach
-                @endif
                 {{-- end of panel and board interview --}}
-
-                {{-- board interview --}}
-                @foreach ($boardInterview as $boardInterviews) 
-                    <tr class="border-b bg-white">
-                        @if ($interviewType == 'Board Interview')
-                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ \Carbon\Carbon::parse($boardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($boardInterviews->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $boardInterviews->intrviewer ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($boardInterviews->dteiview)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $boardInterviews->recom ?? 'No Record' }} 
-                            </td>
-                        @endif    
-                    </tr>
-                @endforeach
-                {{-- end of board interview --}}
-                
-                {{-- panel board interview --}}
-                @foreach ($panelBoardInterview as $panelBoardInterviews) 
-                    <tr class="border-b bg-white">
-                        @if ($interviewType == 'Panel Board Interview')
-                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->intrviewer ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteiview)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->recom ?? 'No Record' }} 
-                            </td>
-                        @endif
-                    </tr>
-                @endforeach
-                {{-- end of panel board interview --}}
             </tbody>
         </table>
     </div>
-
-    @if ($interviewType == 'Board Interview')
-        <div class="m-5">
-            {{ $boardInterview->links() }}
-        </div>
-    @endif
-
-    @if ($interviewType == 'Panel Board Interview')
-        <div class="m-5">
-            {{ $panelBoardInterview->links() }}
-        </div>
-    @endif
 @endsection

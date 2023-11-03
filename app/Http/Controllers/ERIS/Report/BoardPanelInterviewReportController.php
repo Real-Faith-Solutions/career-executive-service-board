@@ -26,15 +26,29 @@ class BoardPanelInterviewReportController extends Controller
         switch ($interviewType) 
         {
             case 'Board Interview':
-                $boardInterview = BoardInterView::paginate(25);
-                return view('admin.eris.reports.board_panel_interview_reports.board_interview', compact('boardInterview', 'interviewType'));
+
+                return $this->boardInterview($interviewType);
 
             case 'Panel Board Interview':
-                $panelBoardInterview = PanelBoardInterview::paginate(25);
-                return view('admin.eris.reports.board_panel_interview_reports.panel_board_interview', compact('panelBoardInterview', 'interviewType'));
+               
+                return $this->panelBoardInterview($interviewType);
 
             default:
                 return to_route('eris-board-interview-report.index');
         }
+    }
+
+    public function boardInterview($interviewType)
+    {
+        $boardInterview = BoardInterView::paginate(25);
+        
+        return view('admin.eris.reports.board_panel_interview_reports.board_interview', compact('boardInterview', 'interviewType'));
+    }
+
+    public function panelBoardInterview($interviewType)
+    {
+        $panelBoardInterview = PanelBoardInterview::paginate(25);
+
+        return view('admin.eris.reports.board_panel_interview_reports.panel_board_interview', compact('panelBoardInterview', 'interviewType'));
     }
 }
