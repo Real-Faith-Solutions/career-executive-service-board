@@ -65,7 +65,7 @@
     </div>
 
     <div class="card bg-yellow-100">
-        <div class="flex justify-between text-orange-500 items-center">
+        <div class="flex justify-between text-yellow-500 items-center">
             <div>
                 <p>Research and Studies</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
