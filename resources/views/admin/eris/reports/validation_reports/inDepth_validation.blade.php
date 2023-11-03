@@ -56,6 +56,10 @@
                     <th scope="col" class="px-6 py-3">
                         Remarks
                     </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Deffered Date
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +84,10 @@
 
                         <td class="px-6 py-3">
                             {{ $data->remarks ?? 'No Record' }} 
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
                     </tr>
                 @endforeach
