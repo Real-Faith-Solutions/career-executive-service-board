@@ -52,7 +52,8 @@
             </div>
 
             <div class="bg-white px-6 py-3">
-                <form action="{{ route('library-department-manager.update', $department->deptid) }}" method="POST">
+                <form action="{{ route('library-department-manager.update', $department->deptid) }}" method="POST"
+                    enctype="multipart/form-data" id="updateForm" onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                     @csrf
                     @method('put')
 
@@ -143,14 +144,20 @@
                             Last update at {{ \Carbon\Carbon::parse($department->lastupd_dt)->format('m/d/Y \a\t
                             g:iA') }}
                         </h1>
-                        <button type="submit" class="btn btn-primary">
-                            Save changes
-                        </button>
+                        <div>
+                            <button type="button" id="btnEdit" class="btn btn-primary">
+                                Edit Record
+                            </button>
+                            <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                                onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                                Save Changes
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection

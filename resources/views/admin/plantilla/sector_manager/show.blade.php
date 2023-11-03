@@ -43,8 +43,7 @@
 
             <div class="bg-white px-6 py-3">
                 <form action="{{ route('library-sector.update', $datas->sectorid) }}" method="POST"
-                    enctype="multipart/form-data" id="updateSector"
-                    onsubmit="return checkErrorsBeforeSubmit(updateSector)">
+                    enctype="multipart/form-data" id="updateForm" onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                     @csrf
                     @method('put')
                     <input type="hidden" name="encoder"

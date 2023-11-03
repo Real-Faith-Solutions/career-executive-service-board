@@ -1,7 +1,7 @@
 const btnSubmit = document.querySelector("#btnSubmit");
 const btnEdit = document.querySelector("#btnEdit");
 const btnCancelEdit = document.querySelector("#btnCancelEdit");
-const form = document.querySelector("#updateSector"); // Replace 'yourFormId' with the actual form ID
+const form = document.querySelector("#updateForm"); // Replace 'yourFormId' with the actual form ID
 
 let isEditing = false;
 const originalFormValues = {}; // Store original form values
