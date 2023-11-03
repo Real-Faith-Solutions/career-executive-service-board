@@ -89,6 +89,6 @@
     </div>
 
     <div class="m-5">
-        {{ $boardInterview->links() }}
+        {{ $boardInterview->appends(['interview' => $interviewType])->links() }}
     </div>
 @endsection
