@@ -157,6 +157,12 @@
     </ol>
 </nav>
 
+<div class="flex justify-end">
+    <a href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $office->officeid]) }}"
+        class="btn btn-primary">
+        Go Back
+    </a>
+</div>
 <div class="grid">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">

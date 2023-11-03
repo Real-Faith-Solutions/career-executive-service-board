@@ -39,7 +39,7 @@
 </nav>
 
 <div class="flex justify-end">
-    <a href=""></a>
+    <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="btn btn-primary">Go Back</a>
 </div>
 
 <div class="grid lg:grid-cols-2">
