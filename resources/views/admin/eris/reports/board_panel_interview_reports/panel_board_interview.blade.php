@@ -9,8 +9,7 @@
             <form action="{{ route('eris-board-panel-interview-report.displayInterview') }}" method="GET">
                 <div class="flex gap-2">
                     <select name="interview" id="expertise">
-                        <option value="" {{ $interviewType == 'All' ? 'selected' : '' }}>All</option>
-                        <option value="Board Interview" {{ $interviewType == 'Board Interview' ? 'selected' : '' }}>Board Interview</option>
+                        <option value="">Board Interview</option>
                         <option value="Panel Board Interview" {{ $interviewType == 'Panel Board Interview' ? 'selected' : '' }}>Panel Board Interview</option>
                     </select>   
 

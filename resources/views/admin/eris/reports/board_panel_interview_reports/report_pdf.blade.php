@@ -5,15 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
             @if ($interviewType == null)
-                Panel Board and Board Interview
+                Board Interview
             @endif
 
             @if ($interviewType == 'Panel Board Interview')
                 Panel Board Interview
-            @endif
-
-            @if ($interviewType == 'Board Interview')
-                Board Interview
             @endif
         </title>
 
@@ -135,15 +131,11 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
                     @if ($interviewType == null)
-                        Panel Board and Board Interview
+                        Board Interview
                     @endif
 
                     @if ($interviewType == 'Panel Board Interview')
                         Panel Board Interview
-                    @endif
-
-                    @if ($interviewType == 'Board Interview')
-                        Board Interview
                     @endif
                 </p>
 
@@ -164,12 +156,6 @@
                             
                         </th>
 
-                        @if ($interviewType == null)
-                            <th>
-                                Interview Type
-                            </th>    
-                        @endif
-                        
                         <th>
                             Assigned Date
                         </th>
@@ -195,76 +181,8 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                    {{-- all interview --}}
-                    @if ($interviewType == null)
-                        @foreach ($panelBoardInterview as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
-
-                                <td>
-                                    Panel Board Interview
-                                </td>
-
-                                <td>
-                                    {{ $data->dteassign }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dtesubmit }}
-                                </td>
-
-                                <td>
-                                    {{ $data->intrviewer }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dteiview }}
-                                </td>
-
-                                <td>
-                                    {{ $data->recom }}
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        @foreach ($boardInterview as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
-
-                                <td>
-                                    Board Interview
-                                </td>
-
-                                <td>
-                                    {{ $data->dteassign }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dtesubmit }}
-                                </td>
-
-                                <td>
-                                    {{ $data->intrviewer }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dteiview }}
-                                </td>
-
-                                <td>
-                                    {{ $data->recom }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    {{-- end of all interview --}}
-
                     {{-- board interview --}}
-                    @if ($interviewType == 'Board Interview')
+                    @if ($interviewType == null)
                         @foreach ($boardInterview as $data)
                             <tr>
                                 <td>

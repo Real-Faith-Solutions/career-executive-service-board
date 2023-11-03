@@ -9,8 +9,7 @@
             <form action="{{ route('eris-board-panel-interview-report.displayInterview') }}" method="GET">
                 <div class="flex gap-2">
                     <select name="interview" id="expertise">
-                        <option value="" {{ $interviewType == 'All' ? 'selected' : '' }}>All</option>
-                        <option value="Board Interview" {{ $interviewType == 'Board Interview' ? 'selected' : '' }}>Board Interview</option>
+                        <option value="">Board Interview</option>
                         <option value="Panel Board Interview" {{ $interviewType == 'Panel Board Interview' ? 'selected' : '' }}>Panel Board Interview</option>
                     </select>   
 
@@ -81,30 +80,6 @@
 
                             <td class="px-6 py-3">
                                 {{ $boardInterviews->recom ?? 'No Record' }} 
-                            </td>
-                        </tr>
-                    @endforeach
-                    
-                    @foreach ($panelBoardInterview as $panelBoardInterviews) 
-                        <tr class="border-b bg-white">
-                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->intrviewer ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteiview)->format('m/d/Y') ?? 'No Record' }} 
-                            </td>
-
-                            <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->recom ?? 'No Record' }} 
                             </td>
                         </tr>
                     @endforeach

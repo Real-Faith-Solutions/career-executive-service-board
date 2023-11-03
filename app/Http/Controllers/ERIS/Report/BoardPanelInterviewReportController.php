@@ -15,9 +15,8 @@ class BoardPanelInterviewReportController extends Controller
         $interviewType = $request->input('interview');
 
         $boardInterview = BoardInterView::paginate(25);
-        $panelBoardInterview = PanelBoardInterview::paginate(25);
         
-        return view('admin.eris.reports.board_panel_interview_reports.report', compact('boardInterview', 'panelBoardInterview', 'interviewType'));
+        return view('admin.eris.reports.board_panel_interview_reports.report', compact('boardInterview', 'interviewType'));
     }
 
     public function displayInterview(Request $request)
@@ -26,10 +25,6 @@ class BoardPanelInterviewReportController extends Controller
 
         switch ($interviewType) 
         {
-            case 'Board Interview':
-
-                return $this->boardInterview($interviewType);
-
             case 'Panel Board Interview':
                
                 return $this->panelBoardInterview($interviewType);
@@ -37,13 +32,6 @@ class BoardPanelInterviewReportController extends Controller
             default:
                 return to_route('eris-board-interview-report.index');
         }
-    }
-
-    public function boardInterview($interviewType)
-    {
-        $boardInterview = BoardInterView::paginate(25);
-        
-        return view('admin.eris.reports.board_panel_interview_reports.board_interview', compact('boardInterview', 'interviewType'));
     }
 
     public function panelBoardInterview($interviewType)
@@ -57,15 +45,8 @@ class BoardPanelInterviewReportController extends Controller
     {
         $interviewType = $request->input('interview-type');
 
-        $boardInterview =  'Board Interview';
         $panelBoardInterview =  'Panel Board Interview';
 
-        if($interviewType == $boardInterview)
-        {
-            $boardInterview = BoardInterView::all();
-            $panelBoardInterview = null;
-        }
-        
         if($interviewType == $panelBoardInterview)
         {
             $panelBoardInterview = PanelBoardInterview::all();
@@ -74,7 +55,7 @@ class BoardPanelInterviewReportController extends Controller
         
         if($interviewType == null)
         {
-            $panelBoardInterview = PanelBoardInterview::all();
+            $panelBoardInterview = null;
             $boardInterview = BoardInterView::all();
         }
         
