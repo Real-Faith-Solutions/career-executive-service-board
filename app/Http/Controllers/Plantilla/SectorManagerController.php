@@ -66,7 +66,8 @@ class SectorManagerController extends Controller
 
         $subDatas = DepartmentAgency::where('sectorid', $sectorid)->get();
 
-        $motherDepartment = MotherDept::all();
+        $motherDepartment = MotherDept::orderBy('title', 'asc')
+            ->get();
 
 
         return view('admin.plantilla.sector_manager.edit', compact(
