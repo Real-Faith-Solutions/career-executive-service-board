@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'PWD Disability - 201 Library')
+@section('title', 'Educational School - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
