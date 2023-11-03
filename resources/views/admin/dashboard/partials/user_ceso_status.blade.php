@@ -78,27 +78,22 @@
             </svg>
         </div>
     </div>
-    <div class="card bg-red-100">
-        <div class="flex justify-between text-red-500 items-center">
+
+    <div class="card bg-cyan-100">
+        <div class="flex justify-between text-cyan-500 items-center">
             <div>
                 <p>CES Trainings</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
                 stroke="currentColor" class="w-12 h-12 opacity-75">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
             </svg>
         </div>
-        <br>
-        <p class="text-sm">
-            {{-- Percentage of total non-CES employees --}}
-        </p>
-        <span class="text-red-500 rounded opacity-75">
-            {{-- {{ $percentageNonCES }} % --}}
-        </span>
     </div>
+
     <div class="card bg-violet-100">
         <div class="flex justify-between text-violet-500 items-center">
             <div>
