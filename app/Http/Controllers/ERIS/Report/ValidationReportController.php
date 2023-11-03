@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Eris\InDepthValidation;
 use App\Models\Eris\RapidValidation;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class ValidationReportController extends Controller
 {
@@ -38,5 +40,32 @@ class ValidationReportController extends Controller
         $inDepthValidation = InDepthValidation::paginate(25);
 
         return view('admin.eris.reports.validation_reports.inDepth_validation', compact('inDepthValidation','validation'));
+    }
+
+    public function generatePdfReport(Request $request)
+    {
+        $validationType = $request->input('validation-type');
+
+        if($validationType == null)
+        {
+            $rapidValidation = RapidValidation::all();
+            $inDepthValidation = null;
+        }
+
+        if($validationType == 'In Depth Validation')
+        {
+            $inDepthValidation = InDepthValidation::all();
+            $rapidValidation = null;
+        }
+
+
+        $pdf = Pdf::loadView('admin.eris.reports.validation_reports.report_pdf', [
+            'rapidValidation' => $rapidValidation,
+            'inDepthValidation' => $inDepthValidation,
+            'validationType' => $validationType,
+        ])
+        ->setPaper('a4', 'landscape');
+
+        return $pdf->stream('validation-report.pdf');
     }
 }

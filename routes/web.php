@@ -857,12 +857,13 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('board-panel-interview-report')->group(function () {
             Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
             Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
-            Route::post('panel-and-board-interview', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+            Route::post('panel-and-board-interview-generate-pdf', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
         });
 
         Route::prefix('validation-report')->group(function () {
             Route::get('index', [ValidationReportController::class, 'rapidValidation'])->name('validation-report.index');
             Route::get('display-validation', [ValidationReportController::class, 'displayValidation'])->name('validation-report.displayValidation');
+            Route::post('validation-generate-pdf', [ValidationReportController::class, 'generatePdfReport'])->name('validation-report.generatePdfReport');
         });
     });
     // End of ERIS Report routes

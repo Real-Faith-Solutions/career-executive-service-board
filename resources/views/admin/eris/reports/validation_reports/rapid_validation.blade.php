@@ -21,7 +21,7 @@
         </div>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="POST">
+            <form action="{{ route('validation-report.generatePdfReport') }}" target="_blank" method="POST">
                 @csrf
 
                 <input type="text" name="validation-type" value="{{ $validation }}" hidden>

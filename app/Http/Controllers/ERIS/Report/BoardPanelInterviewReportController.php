@@ -66,6 +66,6 @@ class BoardPanelInterviewReportController extends Controller
         ])
         ->setPaper('a4', 'landscape');
 
-        return $pdf->stream('resource-speaker-manager-report.pdf');
+        return $pdf->stream('panel-and-board-interview-report.pdf');
     }
 }
