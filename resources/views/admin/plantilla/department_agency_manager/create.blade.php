@@ -30,7 +30,7 @@
 
                     <div class="grid grid-cols-2 gap-2">
                         <div class="mb-3">
-                            <label for="mother_deptid">Agency Name<sup>*</sup></label>
+                            <label for="mother_deptid">Mother Agency<sup>*</sup></label>
                             <select id="mother_deptid" name="mother_deptid" required>
                                 @foreach ($motherDepartment as $data)
                                 <option value="{{ $data->deptid }}">{{ $data->title }}</option>
@@ -56,7 +56,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="title">Agency Name</label>
+                            <label for="title">Mother Agency</label>
                             <input id="title" name="title" required />
                             @error('title')
                             <span class="invalid" role="alert">
