@@ -72,12 +72,10 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ 
-                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->lastname.', '.
-                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->firstname.', '.
-                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->name_extension.', '.
-                            $trainingParticipantTrashedRecords->cesTrainingPersonalData->middleinitial ?? 'No Record' 
-                        }}
+                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->lastname ?? 'No Record'}},
+                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->firstname ?? 'No Record' }},
+                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->name_extension ?? 'No Record' }},
+                        {{ $trainingParticipantTrashedRecords->cesTrainingPersonalData->middleinitial ?? 'No Record' }}
                     </td>
 
                     <td class="px-6 py-3">
@@ -141,6 +139,10 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $trainingParticipantTrashedRecord->links() }}
 </div>
 
 @endsection

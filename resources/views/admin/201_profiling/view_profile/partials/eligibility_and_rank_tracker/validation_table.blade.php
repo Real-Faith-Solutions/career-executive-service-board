@@ -15,6 +15,7 @@
                         <option value="Assessment Center">Assessment Center (Historical Record)</option>
                         <option value="Validation" {{ $selectedPage == 'Validation' ? 'selected' : '' }}>Validation (Historical Record)</option>
                         <option value="Board Interview">Board Interview</option>
+                        <option value="Rank Tracker">Rank Tracker</option>
                     </select>    
                 </div>
     
@@ -49,7 +50,8 @@
                     @foreach ($rapidValidation as $rapidValidations)
                         <tr class="border-b bg-white">
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ $rapidValidations->dteassign.' - '.$rapidValidations->dtesubmit }}
+                                {{ \Carbon\Carbon::parse($rapidValidations->dteassign)->format('m/d/Y ') ?? 'No Record' }} -
+                                {{ \Carbon\Carbon::parse($rapidValidations->dtesubmit)->format('m/d/Y ') ?? 'No Record' }}
                             </td>
                                 
                             <td class="px-6 py-3">
@@ -66,7 +68,8 @@
                     @foreach ($inDepthValidation as $inDepthValidations)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $inDepthValidations->dteassign.' - '.$inDepthValidations->dtesubmit }}
+                            {{ \Carbon\Carbon::parse($inDepthValidations->dteassign)->format('m/d/Y ') ?? 'No Record' }} -
+                            {{ \Carbon\Carbon::parse($inDepthValidations->dtesubmit)->format('m/d/Y ') ?? 'No Record' }}
                         </td>
                         
                         <td class="px-6 py-3">

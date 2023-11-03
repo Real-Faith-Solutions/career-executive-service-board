@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExaminationsTaken;
 use App\Models\ProfileLibTblExamRef;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -52,9 +53,18 @@ class ProfileLibTblExamRefController extends Controller
 
     public function destroy($code)
     {
-        $profileLibTblExamRef = ProfileLibTblExamRef::find($code);
-        $profileLibTblExamRef->delete();
-
+        $codeExist = ExaminationsTaken::withTrashed()->where('exam_code', $code)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Examination already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $profileLibTblExamRef = ProfileLibTblExamRef::find($code);
+            $profileLibTblExamRef->delete();
+        }
+        
         return back()->with('message', 'Deleted Sucessfully');
     }
 

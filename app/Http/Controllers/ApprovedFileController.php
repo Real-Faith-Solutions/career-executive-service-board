@@ -16,7 +16,7 @@ class ApprovedFileController extends Controller
 
     public function streamApprovedFile($ctrlno)
     {
-        $pdfFileName = ApprovedFile::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
+        $pdfFileName = ApprovedFile::where('ctrlno', $ctrlno)->value('pdflink');
 
         $myFile = public_path($pdfFileName);
 

@@ -60,93 +60,39 @@ class PlantillaPositionManagerController extends Controller
 
         ));;
     }
-
-
-    public function store(Request $request)
+    public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+        $office = Office::find($officeid);
+        $planPosition = PlanPosition::find($plantilla_id);
 
-        // dd($request->all());
-
-        $request->validate([
-            'officeid' => ['required'],
-            'pos_code' => ['required'],
-            'corp_sg' => ['required', 'integer'],
-            'item_no' => ['required'],
-        ]);
-        PlanPosition::create([
-            'officeid' => $request->input('officeid'),
-            'pos_code' => $request->input('pos_code'),
-            'pos_suffix' => $request->input('pos_suffix'),
-            'pos_func_name' => $request->input('pos_func_name'),
-            'pos_default' => $request->input('pos_default'),
-            'corp_sg' => $request->input('corp_sg'),
-            // 'pos_sequence' => $request->input('pos_sequence'),
-            'is_ces_pos' => $request->input('is_ces_pos'),
-            'is_vacant' => true, // default true
-            'is_occupied' => false, // default false
-            'remarks' => $request->input('remarks'),
-            'cbasis_code' => $request->input('cbasis_code'),
-            'cbasis_remarks' => $request->input('cbasis_remarks'),
-            'item_no' => $request->input('item_no'),
-            'pres_apptee' => $request->input('pres_apptee'),
-            'is_active' => $request->input('is_active'),
-            'is_generic' => $request->input('is_generic'),
-            'is_head' => $request->input('is_head'),
-            'created_user' => $encoder,
-        ]);
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
 
+        $planAppointee = PlanAppointee::query()
+            ->where('plantilla_id', $planPosition->plantilla_id)
+            ->get();
 
-        return redirect()->back()->with('message', 'The item has been successfully added!');
-    }
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+        $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
-    public function update(Request $request, $plantilla_id)
-    {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
+        return view('admin.plantilla.appointee_occupant_manager.show', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'office',
+            'cities',
+            'planAppointee',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+            'planPosition',
+            'apptStatus',
 
-        $request->validate([
-            'pos_code' => ['required'],
-            'corp_sg' => ['required', 'integer'],
-            'item_no' => ['required'],
-        ]);
-
-        $planPosition = PlanPosition::withTrashed()->findOrFail($plantilla_id);
-        $planPosition->update([
-            'pos_code' => $request->input('pos_code'),
-            'pos_suffix' => $request->input('pos_suffix'),
-            'pos_func_name' => $request->input('pos_func_name'),
-            'pos_default' => $request->input('pos_default'),
-            'corp_sg' => $request->input('corp_sg'),
-            // 'pos_sequence' => $request->input('pos_sequence'),
-            'is_ces_pos' => $request->input('is_ces_pos'),
-            'is_vacant' => $request->input('is_vacant'),
-            'is_occupied' => $request->input('is_occupied'),
-            'remarks' => $request->input('remarks'),
-            'cbasis_code' => $request->input('cbasis_code'),
-            'cbasis_remarks' => $request->input('cbasis_remarks'),
-            'item_no' => $request->input('item_no'),
-            'pres_apptee' => $request->input('pres_apptee'),
-            'is_active' => $request->input('is_active'),
-            'is_generic' => $request->input('is_generic'),
-            'is_head' => $request->input('is_head'),
-            'lastupd_user' => $encoder,
-        ]);
-
-
-
-        return redirect()->back()->with('message', 'The item has been successfully updated!');
-    }
-
-    public function destroy($plantilla_id)
-    {
-        $datas = PlanPosition::findOrFail($plantilla_id);
-        $datas->delete();
-
-        return redirect()->back()->with('message', 'The item has been successfully deleted!');
+        ));;
     }
 }

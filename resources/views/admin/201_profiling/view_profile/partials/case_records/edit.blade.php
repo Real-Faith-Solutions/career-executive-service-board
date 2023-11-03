@@ -47,10 +47,17 @@
                     <div class="mb-3">
                         <label for="nature_of_offense_edit">Nature of Offense<sup>*</sup></label>
                         <select id="nature_of_offense_edit" name="nature_of_offense" required>
-                            <option disabled selected>Select Nature of Offense</option>
-                            <option value="Administrative" {{ $caseRecord->nature_code == 'Administrative' ? 'selected' : '' }}>Administrative</option>
-                            <option value="Criminal Administrative" {{ $caseRecord->nature_code == 'Criminal Administrative' ? 'selected' : '' }}>Criminal Administrative</option>
-                            <option value="Criminal" {{ $caseRecord->nature_code == 'Criminal' ? 'selected' : '' }}>Criminal</option>
+                            @foreach ($profileLibTblCaseNature as $profileLibTblCaseNatures)
+                                @if ($profileLibTblCaseNatures->STATUS_CODE == $caseRecord->nature_code)
+                                    <option value="{{ $profileLibTblCaseNatures->STATUS_CODE }}" selected>
+                                        {{ $profileLibTblCaseNatures->TITLE }}
+                                    </option>
+                                @else
+                                    <option value="{{ $profileLibTblCaseNatures->STATUS_CODE }}">
+                                        {{ $profileLibTblCaseNatures->TITLE }}
+                                    </option>
+                                @endif
+                           @endforeach
                         </select>
                         @error('nature_of_offense')
                             <span class="invalid" role="alert">
@@ -74,7 +81,7 @@
 
                     <div class="mb-3">
                         <label for="date_filed_edit">Date Filed<sup>*</sup></label>
-                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $caseRecord->filed_dt }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed, date_finality)" required>
+                        <input type="date" id="date_filed_edit" name="date_filed" value="{{ $dateFiled }}" oninput="validateDateInput(date_filed_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_filed')
                             <span class="invalid" role="alert">
@@ -100,8 +107,13 @@
                         <label for="case_status_edit">Case Status<sup>*</sup></label>
                         <select id="case_status_edit" name="case_status" required>
                             <option disabled selected>Select Case Status</option>
-                            <option value="Dismissed" {{ $caseRecord->status_code == 'Dismissed' ? 'selected' : '' }}>Dismissed</option>
-                            <option value="Acquitted" {{ $caseRecord->status_code == 'Acquitted' ? 'selected' : '' }}>Acquitted</option>
+                            @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
+                                @if ($profileLibTblCaseStatuses->STATUS_CODE == $caseRecord->status_code )
+                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}" selected>{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                                @else
+                                    <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                                @endif
+                            @endforeach
                         </select>
                         @error('case_status')
                             <span class="invalid" role="alert">
@@ -112,7 +124,7 @@
 
                     <div class="mb-3">
                         <label for="date_finality_edit">Date of Finality<sup>*</sup></label>
-                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $caseRecord->finality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed, date_finality)" required>
+                        <input type="date" id="date_finality_edit" name="date_finality" value="{{ $dateFinality }}" oninput="validateDateInput(date_finality_edit), validateDateFromTo(date_filed_edit, date_finality_edit)" required>
                         <p class="input_error text-red-600"></p>
                         @error('date_finality')
                             <span class="invalid" role="alert">
@@ -157,6 +169,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

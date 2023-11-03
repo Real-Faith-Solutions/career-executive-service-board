@@ -1,13 +1,38 @@
 <script>
+    // Get the input element and the collection from PHP
+    
+
+    // Function to check if an item number exists
+    const itemno = (val) => {
+
+        const item_no_label = document.querySelector("#item_no_label");
+        const allPlanPosition = @json($allPlanPosition);
+
+        // Check if the value exists in the collection
+        const exists = allPlanPosition.some(data => data.item_no == val);
+
+        // Update the label accordingly
+        if (exists) {
+            item_no_label.textContent = val + " is already taken";
+        } else {
+            item_no_label.textContent = ""; // Clear the label
+        }
+    }
+</script>
+
+<script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
-
+        
         @foreach ($classBasis as $data)
-        if ("{{ $data->cbasis_code }}" == val) {
-            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
-        }
+            if ("{{ $data->cbasis_code }}" == val) {
+                titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            }
         @endforeach
     }
+</script>
+
+<script>
     const posCode = (val) => {
         // Get the second dropdown element
         const positionTitleDropdown = document.querySelector("#pos_code");
@@ -37,23 +62,28 @@
         
     }
 
+</script>
+
+<script>
     const posTitle = () => {
         const positionTitleDropdown = document.querySelector("#pos_code");
         const posDefaultInput = document.querySelector('#pos_default');
-
+        
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
         posDefaultInput.value = selectedOption.textContent;
     }
+</script>
 
+<script>
     const cesPosAndPresAppointee = () => {
         const is_ces_pos = document.querySelector("#is_ces_pos");
         const pres_apptee = document.querySelector("#pres_apptee");
-    
+        
         if (is_ces_pos.checked) {
             const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-            
+        
             if (confirmation){
-                pres_apptee.checked = true;
+            pres_apptee.checked = true;
             }
         }
     }
@@ -174,7 +204,7 @@
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="pres_apptee" name="pres_apptee" type="checkbox" value="1">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
-                                        Pres Appointee
+                                        Presidential Appointee
                                     </label>
                                 </div>
 
@@ -202,14 +232,14 @@
                                         Head of Agency
                                     </label>
                                 </div>
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         id="is_generic" name="is_generic" type="checkbox" value="1">
                                     <label class="ml-2 text-sm font-medium text-gray-900" for="is_generic">
                                         Generic
                                     </label>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="flex items-center">
                                     <input
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
@@ -251,7 +281,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="item_no">Item No.<sup>*</sup></label>
-                                    <input id="item_no" name="item_no" required />
+                                    <input id="item_no" name="item_no" required onchange="itemno(this.value)" />
+                                    <p class="text-red-500 text-sm" id="item_no_label"></p>
+
                                     @error('item_no')
                                     <span class="invalid" role="alert">
                                         <p>{{ $message }}</p>

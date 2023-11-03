@@ -21,32 +21,81 @@
 
             <div class="bg-white px-6 py-3">
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <fieldset class="border p-4">
-                        <legend>Office information</legend>
-                        <div class="mb-3">
-                            <label for="Department/Agency">Department/Agency</label>
-                            <input id="Department/Agency" value="{{ $department->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Location">Location</label>
-                            <input id="Location" value="{{ $departmentLocation->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="Office">Office</label>
-                            <input id="Office" value="{{ $office->title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="titles">CES Level</label>
-                            <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="sg">Salary Grade Level</label>
-                            <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
-                        </div>
-                    </fieldset>
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
 
-                    <div>
+                    <div class="grid grid-row-2">
+
+                        @if ($personalData)
+                        <fieldset class="border p-4">
+                            <legend>Profile Information</legend>
+
+                            <div class="flex gap-4">
+                                <img id="" class="w-44 h-44 rounded-full object-cover"
+                                    src="{{ file_exists(public_path('images/' . ($personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $personalData->picture) : asset('images/placeholder.png') }}" />
+
+                                <div class="flex flex-col gap-2">
+
+                                    <h1 class="font-semibold">
+                                        {{ $personalData->title ?? ''}}
+                                        {{ $personalData->lastname ?? ''}},
+                                        {{ $personalData->firstname ?? ''}}
+                                        {{ $personalData->name_extension ?? ''}}
+                                        {{ $personalData->middlename ?? ''}}
+                                    </h1>
+                                    <h1>
+                                        {{ $personalData->email ?? '' }}
+                                    </h1>
+                                    <h1>
+                                        {{ \Carbon\Carbon::parse($personalData->birthdate ?? '')->format('m/d/Y') }}
+                                    </h1>
+                                    <h1>
+                                        <span class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
+                                            @if ($personalData->status === 'Active') bg-green-100 text-green-800 @endif
+                                            @if ($personalData->status === 'Inactive') bg-orange-100 text-orange-800 @endif
+                                            @if ($personalData->status === 'Retired') bg-blue-100 text-blue-800 @endif
+                                            @if ($personalData->status === 'Deceased') bg-red-100 text-red-800 @endif">
+                                            {{ $personalData->status ?? ''}}
+                                        </span>
+                                    </h1>
+                                    <a href="{{ route('personal-data.show', $personalData->cesno) }}"
+                                        class="uppercase text-sm" target="_blank">
+                                        View Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </fieldset>
+                        @endif
+
+                        <fieldset class="border p-4">
+                            <legend>Office information</legend>
+                            <div class="mb-3">
+                                <label for="Department/Agency">Department/Agency</label>
+                                <input id="Department/Agency" value="{{ $department->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="Location">Location</label>
+                                <input id="Location" value="{{ $departmentLocation->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="Office">Office</label>
+                                <input id="Office" value="{{ $office->title }}" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="titles">CES Level</label>
+                                <input id="titles" value="{{ $planPosition->positionMasterLibrary->dbm_title }}"
+                                    readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="sg">Salary Grade Level</label>
+                                <input id="sg" value="{{ $planPosition->positionMasterLibrary->sg }}" readonly />
+                            </div>
+                            <hr />
+                        </fieldset>
+
+                    </div>
+
+
+                    <div class="col-span-2">
                         <form>
                             <div class="mb-3">
                                 <label for="cesnoSearch">CESNO<sup>*</sup></label>
@@ -117,9 +166,14 @@
                                     <div class="mb-3">
                                         <label for="lastname">Name of Official</label>
                                         <input id="lastname"
-                                            value="{{ $personalData->lastname ?? ''}} {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
+                                            value="{{ $personalData->title ?? ''}} {{ $personalData->lastname ?? ''}}, {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
                                             readonly />
                                         @error('cesno')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                        @error('plantilla_id')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
                                         </span>
@@ -135,6 +189,18 @@
                                             readonly />
                                     </div>
 
+                                    {{-- <div class="mb-3">
+                                        <label for="official_code">Appointing Authority</label>
+                                        <input id="official_code"
+                                            value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}"
+                                            readonly />
+                                    </div> --}}
+
+                                    <div class="mb-3">
+                                        <label for="name">Position Appointee</label>
+                                        <input id="name" name="name" />
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
@@ -144,13 +210,6 @@
                                             <p>{{ $message }}</p>
                                         </span>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                                    <div class="mb-3">
-                                        <label for="gender">Gender</label>
-                                        <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
                                     </div>
 
                                     <div class="mb-3">
@@ -167,9 +226,18 @@
 
                                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                     <div class="mb-3">
+                                        <label for="gender">Gender</label>
+                                        <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
+                                    </div>
+
+
+                                </div>
+
+                                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                                    <div class="mb-3">
                                         <label for="basis">Basis</label>
                                         <textarea name="basis" id="basis" cols="30" rows="10"
-                                            readonly>{{ $planPosition->classBasis->basis }}</textarea>
+                                            readonly>{{ $planPosition->classBasis->basis ?? ''}}</textarea>
                                     </div>
 
                                     <div class="mb-3">

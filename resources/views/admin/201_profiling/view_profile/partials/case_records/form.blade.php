@@ -47,10 +47,9 @@
                     <div class="mb-3">
                         <label for="nature_of_offense">Nature of Offense<sup>*</sup></label>
                         <select id="nature_of_offense" name="nature_of_offense" required>
-                            <option disabled selected>Select Nature of Offense</option>
-                            <option value="Administrative">Administrative</option>
-                            <option value="Criminal Administrative">Criminal Administrative</option>
-                            <option value="Criminal">Criminal</option>
+                           @foreach ($profileLibTblCaseNature as $profileLibTblCaseNatures)
+                               <option value="{{ $profileLibTblCaseNatures->STATUS_CODE }}">{{ $profileLibTblCaseNatures->TITLE }}</option>
+                           @endforeach
                         </select>
                         @error('nature_of_offense')
                             <span class="invalid" role="alert">
@@ -101,8 +100,9 @@
                         <label for="case_status">Case Status<sup>*</sup></label>
                         <select id="case_status" name="case_status" required>
                             <option disabled selected>Select Case Status</option>
-                            <option value="Dismissed">Dismissed</option>
-                            <option value="Acquitted">Acquitted</option>
+                            @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
+                                <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
+                            @endforeach
                         </select>
                         @error('case_status')
                             <span class="invalid" role="alert">

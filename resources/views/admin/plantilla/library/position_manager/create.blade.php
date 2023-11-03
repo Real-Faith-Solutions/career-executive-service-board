@@ -1,4 +1,34 @@
 <script>
+    const posCode = (val) => {
+    // Get the second dropdown element
+    const positionTitleDropdown = document.querySelector("#pos_code");
+    const posDefaultInput = document.querySelector('#pos_default');
+    
+    // Clear existing options in the second dropdown
+    positionTitleDropdown.innerHTML = "";
+    posDefaultInput.value = "";
+    
+    // Add a default "Select Position Title" option
+    const defaultOption = document.createElement("option");
+    defaultOption.text = "Select Position Title";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    positionTitleDropdown.appendChild(defaultOption);
+    
+    // Populate the second dropdown based on the selected value of the first dropdown
+    @foreach ($positionMasterLibrary as $data)
+    if ("{{ $data->poslevel_code }}" == val) {
+    const option = document.createElement("option");
+    option.value = "{{ $data->pos_code }}";
+    // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+    option.text = "{{ $data->dbm_title }}";
+    positionTitleDropdown.appendChild(option);
+    }
+    @endforeach
+    
+    }
+</script>
+<script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
@@ -8,34 +38,7 @@
         }
         @endforeach
     }
-    const posCode = (val) => {
-        // Get the second dropdown element
-        const positionTitleDropdown = document.querySelector("#pos_code");
-        const posDefaultInput = document.querySelector('#pos_default');
-
-        // Clear existing options in the second dropdown
-        positionTitleDropdown.innerHTML = "";
-        posDefaultInput.value = "";
-
-        // Add a default "Select Position Title" option
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Select Position Title";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        positionTitleDropdown.appendChild(defaultOption);
-
-        // Populate the second dropdown based on the selected value of the first dropdown
-        @foreach ($positionMasterLibrary as $data)
-            if ("{{ $data->poslevel_code }}" == val) {
-                const option = document.createElement("option");
-                option.value = "{{ $data->pos_code }}";
-                // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
-                option.text = "{{ $data->dbm_title }}";
-                positionTitleDropdown.appendChild(option);
-            }
-        @endforeach
-        
-    }
+    
 
     const sectorToggle = (val) => {
         const sectorDropdown = document.querySelector("#sector");
@@ -119,38 +122,42 @@
         posDefaultInput.value = selectedOption.textContent;
     }
 
+    
+</script>
+
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-            const checkBox = document.getElementById("use_func_title");
-            const input = document.getElementById("pos_func_name");
-            const posDefaultInput = document.getElementById("pos_default");
-            
-            checkBox.addEventListener("change", function () {
-                if (checkBox.checked) {
-                    input.removeAttribute("readonly");
-
-                    posDefaultInput.setAttribute("disabled", "true");
-                    // posDefaultInput.value = "";
-                } else {
-                    input.setAttribute("readonly", "true");
-                    input.value = "";
-                    posDefaultInput.removeAttribute("disabled");
-
-                }
-            });
-        });
-
-        const cesPosAndPresAppointee = () => {
-            const is_ces_pos = document.querySelector("#is_ces_pos");
-            const pres_apptee = document.querySelector("#pres_apptee");
-
-            if (is_ces_pos.checked) {
-                const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-                
-                if (confirmation){
-                    pres_apptee.checked = true;
-                }
-            }            
-        }
+    const checkBox = document.getElementById("use_func_title");
+    const input = document.getElementById("pos_func_name");
+    const posDefaultInput = document.getElementById("pos_default");
+    
+    checkBox.addEventListener("change", function () {
+    if (checkBox.checked) {
+    input.removeAttribute("readonly");
+    
+    posDefaultInput.setAttribute("disabled", "true");
+    // posDefaultInput.value = "";
+    } else {
+    input.setAttribute("readonly", "true");
+    input.value = "";
+    posDefaultInput.removeAttribute("disabled");
+    
+    }
+    });
+    });
+    
+    const cesPosAndPresAppointee = () => {
+    const is_ces_pos = document.querySelector("#is_ces_pos");
+    const pres_apptee = document.querySelector("#pres_apptee");
+    
+    if (is_ces_pos.checked) {
+    const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+    
+    if (confirmation){
+    pres_apptee.checked = true;
+    }
+    }
+    }
 </script>
 
 @extends('layouts.app')
@@ -279,7 +286,7 @@
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                     id="pres_apptee" name="pres_apptee" type="checkbox" value="1">
                                 <label class="ml-2 text-sm font-medium text-gray-900" for="pres_apptee">
-                                    Pres Appointee
+                                    Presidential Appointee
                                 </label>
                             </div>
 

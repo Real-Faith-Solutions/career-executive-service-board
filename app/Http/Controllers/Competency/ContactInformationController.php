@@ -19,7 +19,7 @@ class ContactInformationController extends Controller
     public function updateOrCreate($cesno)
     {
         $contacts = Contacts::where('personal_data_cesno', $cesno)->first();
-        $email = PersonalData::where('cesno', $cesno)->pluck('email')->first();
+        $email = PersonalData::where('cesno', $cesno)->pluck('emailadd')->first();
         
         $addressProfileMailing = ProfileAddress::where('personal_data_cesno', $cesno)->where('type', 'Mailing')->first();
 
@@ -90,9 +90,9 @@ class ContactInformationController extends Controller
     // update email in profile table main and contact
     public function updateEmail(Request $request, $cesno)
     {
-        $request->validate([
-            'email' => ['required', Rule::unique('profile_tblMain')->ignore($cesno, 'cesno'), 'min:9', 'max:100'],
-        ]);
+        // $request->validate([
+        //     'email' => ['required', Rule::unique('profile_tblMain')->ignore($cesno, 'cesno'), 'min:9', 'max:100'],
+        // ]);
   
         // update email in profile_tblMain
         $email = PersonalData ::find($cesno);

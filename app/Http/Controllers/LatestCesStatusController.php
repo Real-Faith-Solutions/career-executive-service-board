@@ -12,7 +12,7 @@ class LatestCesStatusController extends Controller
         {
             $latestCesStatus = $personalData->cesStatus()->first();
 
-            if ($latestCesStatus !== null) 
+            if ($latestCesStatus != null) 
             {
                 $description = $latestCesStatus->description;
             } 

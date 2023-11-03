@@ -70,7 +70,8 @@
                     {{ $data->cesno }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->title ?? ''}}
+                    {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}
@@ -125,6 +126,6 @@
 </div>
 
 <div class="m-5">
-    {{ $datas->links() }}
+    {{ $datas->appends(['cesStatusDropdown' => $cesStatusDropdown])->links() }}
 </div>
 @endsection

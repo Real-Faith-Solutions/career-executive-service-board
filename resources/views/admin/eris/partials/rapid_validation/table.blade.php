@@ -50,11 +50,11 @@
                 @foreach ($rapidValidation as $rapidValidations) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($rapidValidations->dteassign)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rapidValidations->dteassign)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($rapidValidations->dtesubmit)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rapidValidations->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -70,7 +70,7 @@
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
-                            <div class="flex">
+                            <div class="flex justify-end">
                                 <form action="{{ route('eris-rapid-validation.edit', ['acno'=>$acno, 'ctrlno'=>$rapidValidations->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">

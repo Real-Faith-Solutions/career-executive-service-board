@@ -15,7 +15,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -39,7 +39,7 @@
     </ol>
 </nav>
 
-<div class="grid lg:grid-cols-2">
+{{-- <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -62,7 +62,7 @@
                             <label for="mother_deptid">Agency Name<sup>*</sup></label>
                             <select id="mother_deptid" name="mother_deptid" required>
                                 @foreach ($motherDepartment as $data)
-                                <option value="{{ $data->deptid }}" {{ $data->deptid === $department->mother_deptid ?
+                                <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
                                     'selected' : ''}}>
                                     {{ $data->title }}
                                 </option>
@@ -148,11 +148,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Location Manager
+        Offices
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -160,8 +160,8 @@
     @include('admin.plantilla.agency_location_manager.create')
 </div>
 
-
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th>Location</th>
@@ -193,8 +193,18 @@
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
+
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}">
+                        href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        title="Office Manager">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                        title="View Offices">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
@@ -204,7 +214,8 @@
                         method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                            title="Delete Record">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>

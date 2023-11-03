@@ -8,6 +8,7 @@ use App\Models\Plantilla\ClassBasis;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\OfficeAddress;
+use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
@@ -36,14 +37,54 @@ class OfficeManagerController extends Controller
 
         $planPositions = PlanPosition::query()
             ->where('officeid', $office->officeid)
-            ->where('is_active', true)
+            // ->where('is_active', true)
             ->get();
+
+        $allPlanPosition = PlanPosition::all();
+        $planAppointee = PlanAppointee::all();
+
+
+
+
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
 
         return view('admin.plantilla.office_manager.edit', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'office',
+            'cities',
+            'planPositions',
+            'planPositionLibrary',
+            'positionMasterLibrary',
+            'classBasis',
+            'allPlanPosition',
+            'planAppointee',
+        ));;
+    }
+    public function edit(Request $request, $sectorid, $deptid, $officelocid, $officeid)
+    {
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+        $office = Office::find($officeid);
+
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+
+
+        $planPositions = PlanPosition::query()
+            ->where('officeid', $office->officeid)
+            // ->where('is_active', true)
+            ->get();
+
+        $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
+        $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
+        $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
+
+        return view('admin.plantilla.office_manager.show', compact(
             'sector',
             'department',
             'departmentLocation',

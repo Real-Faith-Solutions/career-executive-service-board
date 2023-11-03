@@ -15,7 +15,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -35,7 +35,7 @@
 
         <li>
             <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                class="text-blue-500">{{
+                class="text-slate-500">{{
                 $department->title }}</a>
         </li>
         <li>
@@ -50,7 +50,7 @@
     </ol>
 </nav>
 
-<div class="grid lg:grid-cols-2">
+{{-- <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -84,7 +84,7 @@
                             <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
                                 <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
-                                    agencyLocationLibrary->agencyloc_Id === $data->agencyloc_Id ? 'selected' :''}}>
+                                    agencyLocationLibrary->agencyloc_Id == $data->agencyloc_Id ? 'selected' :''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
@@ -156,11 +156,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Office Manager
+        Offices
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
@@ -168,7 +168,8 @@
     @include('admin.plantilla.office_manager.create')
 </div>
 
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
             <th>Office</th>
@@ -197,7 +198,16 @@
             <td class="text-right uppercase">
                 <div class="flex justify-end">
                     <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}">
+                        href="{{ route('office-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
+                        title="Office Manager">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
+                    <a class="hover:bg-slate-100 rounded-full"
+                        href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
+                        title="View Position on this office">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
@@ -207,7 +217,8 @@
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                            title="Delete Record">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>

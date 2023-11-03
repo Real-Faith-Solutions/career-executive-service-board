@@ -10,6 +10,15 @@ use Illuminate\Validation\Rule;
 
 class AffiliationController extends Controller
 {
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -31,14 +40,10 @@ class AffiliationController extends Controller
 
             'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('cesno', $cesno)],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
-            'date_from' => ['required'],
-            'date_to' => ['required'],
+            // 'date_from' => ['required'],
+            // 'date_to' => ['required'],
 
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
 
         $affiliation = new Affiliations([
     
@@ -46,7 +51,7 @@ class AffiliationController extends Controller
             'position' => $request->position,
             'from_dt' => $request->date_from,
             'to_dt' => $request->date_to,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
              
         ]);
     
@@ -70,21 +75,17 @@ class AffiliationController extends Controller
 
             'organization' => ['required','max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/', Rule::unique('profile_tblAffiliations')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'position' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z0-9\s]*$/'],
-            'date_from' => ['required'],
-            'date_to' => ['required'],
+            // 'date_from' => ['required'],
+            // 'date_to' => ['required'],
 
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
 
         $affiliation = Affiliations::find($ctrlno); 
         $affiliation->organization = $request->organization;
         $affiliation->position = $request->position;
         $affiliation->from_dt = $request->date_from;
         $affiliation->to_dt = $request->date_to;
-        $affiliation->lastupd_enc = $encoder;
+        $affiliation->lastupd_enc = $this->getFullNameAttribute();
         $affiliation->save();
 
         return to_route('affiliation.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');

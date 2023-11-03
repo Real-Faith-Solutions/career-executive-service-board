@@ -200,7 +200,7 @@ class PDFController extends Controller
     // stream approved file
     public function download($ctrlno)
     {
-        $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');
+        $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');      
 
         $myFile = public_path($pdfFileName);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EducationalAttainment;
 use App\Models\ProfileLibTblEducMajor;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class ProfileLibTblEducMajorController extends Controller
     public function index()
     {
         $datas = ProfileLibTblEducMajor::orderBy('COURSE', 'ASC')
-        ->paginate(15);
+        ->paginate(25);
 
         return view('admin.201_library.educational_major.index', compact('datas'));
     }
@@ -23,7 +24,7 @@ class ProfileLibTblEducMajorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'COURSE' => ['required','string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducMajor'],
+            'COURSE' => ['required','string', 'max:100', 'min:2', 'unique:profilelib_tblEducMajor'],
         ]);
 
         ProfileLibTblEducMajor::create($request->all());
@@ -42,13 +43,31 @@ class ProfileLibTblEducMajorController extends Controller
     public function update(Request $request, $CODE)
     {
         $request->validate([
-            'COURSE' => ['required', 'string', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:profilelib_tblEducMajor'],
+            'COURSE' => ['required', 'string', 'max:100', 'min:2', 'unique:profilelib_tblEducMajor'],
         ]);
 
         $data = ProfileLibTblEducMajor::withTrashed()->findOrFail($CODE);
         $data->update($request->all());
 
         return redirect()->route('educational-major.index')->with('message', 'The item has been successfully updated!');
+    }
+
+    // soft delete
+    public function destroy($CODE)
+    {
+        $codeExist = EducationalAttainment::withTrashed()->where('major_code', $CODE)->exists();
+        
+        if($codeExist)
+        {
+            return redirect()->back()->with('error', 'The Major Course already has user, so it cannot be deleted !!');
+        }
+        else
+        {
+            $data = ProfileLibTblEducMajor::findOrFail($CODE);
+            $data->delete();
+        }
+
+        return redirect()->route('educational-major.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // recently deleted
@@ -68,15 +87,6 @@ class ProfileLibTblEducMajorController extends Controller
         $data->restore();
 
         return redirect()->back()->with('message', 'The item has been successfully restore!');
-    }
-
-    // soft delete
-    public function destroy($CODE)
-    {
-        $data = ProfileLibTblEducMajor::findOrFail($CODE);
-        $data->delete();
-
-        return redirect()->route('educational-major.index')->with('message', 'The item has been successfully deleted!');
     }
 
     // force delete

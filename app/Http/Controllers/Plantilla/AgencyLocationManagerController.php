@@ -28,8 +28,8 @@ class AgencyLocationManagerController extends Controller
 
         $request->validate([
             'deptid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);
@@ -58,17 +58,54 @@ class AgencyLocationManagerController extends Controller
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
-        $office = Office::query()
-            ->where('officelocid', $officelocid)
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('title', 'LIKE', "%$query")
-                    ->orWhere('acronym', 'LIKE', "%$query")
-                    ->orWhere('website', 'LIKE', "%$query");
-            })
-            ->orderBy('title', 'ASC')
-            ->paginate(25);
+        // $office = Office::query()
+        //     ->where('officelocid', $officelocid)
+        //     ->where(function ($queryBuilder) use ($query) {
+        //         $queryBuilder->where('title', 'LIKE', "%$query")
+        //             ->orWhere('acronym', 'LIKE', "%$query")
+        //             ->orWhere('website', 'LIKE', "%$query");
+        //     })
+        //     ->orderBy('title', 'ASC')
+        //     ->paginate(25);
+
+        $office = Office::where('officelocid', $officelocid)->get();
 
         return view('admin.plantilla.agency_location_manager.edit', compact(
+            'sector',
+            'department',
+            'departmentLocation',
+            'agencyLocationLibrary',
+            'office',
+            'query',
+            'cities',
+            'region',
+
+        ));;
+    }
+    public function edit(Request $request, $sectorid, $deptid, $officelocid)
+    {
+        $query = $request->input('search');
+        $sector = SectorManager::find($sectorid);
+        $department = DepartmentAgency::find($deptid);
+        $departmentLocation = AgencyLocation::find($officelocid);
+
+        $agencyLocationLibrary = AgencyLocationLibrary::all();
+        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
+        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
+
+        // $office = Office::query()
+        //     ->where('officelocid', $officelocid)
+        //     ->where(function ($queryBuilder) use ($query) {
+        //         $queryBuilder->where('title', 'LIKE', "%$query")
+        //             ->orWhere('acronym', 'LIKE', "%$query")
+        //             ->orWhere('website', 'LIKE', "%$query");
+        //     })
+        //     ->orderBy('title', 'ASC')
+        //     ->paginate(25);
+
+        $office = Office::where('officelocid', $officelocid)->get();
+
+        return view('admin.plantilla.agency_location_manager.show', compact(
             'sector',
             'department',
             'departmentLocation',
@@ -87,8 +124,8 @@ class AgencyLocationManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
-            'acronym' => ['required', 'max:10', 'min:2', 'regex:/^[a-zA-Z ]*$/'],
+            'title' => ['required', 'max:40', 'min:2',],
+            'acronym' => ['required', 'max:10', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);

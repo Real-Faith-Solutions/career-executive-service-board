@@ -7,6 +7,7 @@ use App\Models\Eris\BoardInterView;
 use App\Models\Eris\EradTblMain;
 use App\Models\Eris\InDepthValidation;
 use App\Models\Eris\PanelBoardInterview;
+use App\Models\Eris\RankTracker201;
 use App\Models\Eris\RapidValidation;
 use App\Models\Eris\WrittenExam;
 use App\Models\PersonalData;
@@ -17,12 +18,41 @@ use App\Models\ProfileLibTblCesStatusType;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\Services\ConvertDateTimeToDate;
 
 class EligibilityAndRankTrackerController extends Controller
 {
     // const MODULE_201_PROFILING = 'admin.201_profiling';
+
+    // App\Models
+    private ProfileTblCesStatus $profileTblCesStatus;
+    private ProfileLibTblCesStatus $cesStatus;
+    private ProfileLibTblCesStatusAcc $cesStatusAcc;
+    private ProfileLibTblCesStatusType $cesStatusType;
+    private ProfileLibTblAppAuthority $appAuthority;
+
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        $this->profileTblCesStatus = new ProfileTblCesStatus();
+        $this->cesStatus = new ProfileLibTblCesStatus();
+        $this->cesStatusAcc = new ProfileLibTblCesStatusAcc();
+        $this->cesStatusType = new ProfileLibTblCesStatusType();
+        $this->appAuthority = new ProfileLibTblAppAuthority();
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
 
     public function index($cesno)
     {
@@ -51,7 +81,7 @@ class EligibilityAndRankTrackerController extends Controller
             case 'Assessment Center':
 
                 $erisPersonalDataAcno = EradTblMain::where('cesno', $cesno)->value('acno');
-                $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes']);
+                $assessmentCenter = AssessmentCenter::where('acno', $erisPersonalDataAcno)->get(['acno', 'acdate', 'remarks', 'docdate', 'numtakes', 'competencies_d_o']);
 
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.assessment_center_table', compact('cesno', 'assessmentCenter', 
                     'selectedPage'));
@@ -74,6 +104,13 @@ class EligibilityAndRankTrackerController extends Controller
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 
                 'boardInterview', 'selectedPage'));
 
+            case 'Rank Tracker':
+
+                $rankTracker = RankTracker201::where('cesno', $cesno)->paginate(25);
+
+                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.rank_tracker_table', compact('rankTracker', 'cesno', 'selectedPage'));
+            
+
             default:
                 return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]);
         }
@@ -82,13 +119,13 @@ class EligibilityAndRankTrackerController extends Controller
     
     public function create($cesno)
     {
-        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
-        $profileLibTblCesStatusAcc = ProfileLibTblCesStatusAcc::all();
-        $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
-        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
-
-        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.form', 
-        compact('profileLibTblCesStatus' ,'profileLibTblCesStatusAcc' ,'profileLibTblCesStatusType' ,'profileLibTblAppAuthority' ,'cesno'));
+        return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.form', [
+            'profileLibTblCesStatus' => $this->cesStatus->cesStatusLibrary(),
+            'profileLibTblCesStatusAcc' => $this->cesStatusAcc->cesStatusAccLibrary(),
+            'profileLibTblCesStatusType' => $this->cesStatusType->cesStatusTypeLibrary(),
+            'profileLibTblAppAuthority' => $this->appAuthority->appAuthorityLibrary(),
+            'cesno' => $cesno,
+        ]);
     }
 
     public function store(Request $request, $cesno)
@@ -104,10 +141,6 @@ class EligibilityAndRankTrackerController extends Controller
             
         ]);
             
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $profileTblCesStatus = new ProfileTblCesStatus([
 
             'cesstat_code' => $request->cesstat_code,
@@ -116,7 +149,7 @@ class EligibilityAndRankTrackerController extends Controller
             'official_code' => $request->official_code,
             'resolution_no' => $request->resolution_no,
             'appointed_dt' => $request->appointed_dt,
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
     
@@ -124,14 +157,8 @@ class EligibilityAndRankTrackerController extends Controller
         
         $personalData->ProfileTblCesStatus()->save($profileTblCesStatus);
 
-        // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
-        ->value('cesstat_code');
-
-        // update CESStat_code based on $latestCestatusCode
-        DB::table('profile_tblMain')
-        ->where('cesno', $cesno)
-        ->update(['CESStat_code' => $latestCestatusCode]);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Save Sucessfully');
     }
@@ -139,14 +166,16 @@ class EligibilityAndRankTrackerController extends Controller
     public function edit($ctrlno, $cesno)
     {
        $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
-       $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
-       $profileLibTblCesStatusAcc =  ProfileLibTblCesStatusAcc::all();
-       $profileLibTblCesStatusType = ProfileLibTblCesStatusType::all();
-       $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
-
-       return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.edit', 
-       compact('profileLibTblCesStatus', 'profileLibTblCesStatusAcc', 'profileLibTblCesStatusType', 
-       'profileLibTblAppAuthority', 'profileTblCesStatus', 'cesno'));
+    
+       return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.edit', [
+            'profileTblCesStatus' => $profileTblCesStatus,
+            'profileLibTblCesStatus' => $this->cesStatus->cesStatusLibrary(),
+            'profileLibTblCesStatusAcc' => $this->cesStatusAcc->cesStatusAccLibrary(),
+            'profileLibTblCesStatusType' => $this->cesStatusType->cesStatusTypeLibrary(),
+            'profileLibTblAppAuthority' => $this->appAuthority->appAuthorityLibrary(),
+            'appointedDate' => $this->convertDateTimeToDate->convertDateFrom($profileTblCesStatus->appointed_dt),
+            'cesno' => $cesno,
+       ]);
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -162,10 +191,6 @@ class EligibilityAndRankTrackerController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->cesstat_code = $request->cesstat_code;
         $profileTblCesStatus->acc_code = $request->acc_code;
@@ -173,17 +198,11 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus->official_code = $request->official_code;
         $profileTblCesStatus->resolution_no = $request->resolution_no;
         $profileTblCesStatus->appointed_dt = $request->appointed_dt;
-        $profileTblCesStatus->lastupd_enc = $encoder;
+        $profileTblCesStatus->lastupd_enc = $this->getFullNameAttribute();
         $profileTblCesStatus->update();
 
-        // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
-        ->value('cesstat_code');
-
-        // update CESStat_code based on $latestCestatusCode
-        DB::table('profile_tblMain')
-        ->where('cesno', $cesno)
-        ->update(['CESStat_code' => $latestCestatusCode]);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno])->with('message', 'Update Sucessfully');
     }
@@ -193,14 +212,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::find($ctrlno);
         $profileTblCesStatus->delete();
 
-        // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
-        ->value('cesstat_code');
-   
-        // update CESStat_code based on $latestCestatusCode in profile_tblMain table
-        DB::table('profile_tblMain')
-        ->where('cesno', $cesno)
-        ->update(['CESStat_code' => $latestCestatusCode]);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return back()->with('message', 'Deleted Sucessfully');
     }
@@ -224,14 +237,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->restore();
 
-        // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
-        ->value('cesstat_code');
-   
-        // update CESStat_code based on $latestCestatusCode
-        DB::table('profile_tblMain')
-        ->where('cesno', $cesno)
-        ->update(['CESStat_code' => $latestCestatusCode]);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
 
         return back()->with('message', 'Data Restored Sucessfully');
     }
@@ -241,14 +248,8 @@ class EligibilityAndRankTrackerController extends Controller
         $profileTblCesStatus = ProfileTblCesStatus::withTrashed()->find($ctrlno);
         $profileTblCesStatus->forceDelete();
 
-        // retrieving latest ces status thru date appointed_dt
-        $latestCestatusCode = ProfileTblCesStatus::orderBy('appointed_dt', 'desc')
-        ->value('cesstat_code');
-   
-        // update CESStat_code based on $latestCestatusCode
-        DB::table('profile_tblMain')
-        ->where('cesno', $cesno)
-        ->update(['CESStat_code' => $latestCestatusCode]);
+        // App\Models\ProfileTblCesStatus
+        $this->profileTblCesStatus->latestCesStatusCode($cesno);
   
         return back()->with('message', 'Data Permanently Deleted');
     }

@@ -7,9 +7,27 @@ use App\Models\Eris\EradTblMain;
 use App\Models\Eris\RapidValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
 
 class RapidValidationController extends Controller
 {
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($acno)
     {
         $erisTblMain = EradTblMain::find($acno);
@@ -27,10 +45,6 @@ class RapidValidationController extends Controller
 
     public function store(Request $request, $acno)
     {    
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $rapiValidation = new RapidValidation([
 
             'dteassign' => $request->dteassign, // date assign
@@ -38,7 +52,7 @@ class RapidValidationController extends Controller
             'validator' => $request->validator, 
             'recom' => $request->recom, // recommendation
             'remarks' => $request->remarks, 
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
 
         ]);
 
@@ -54,7 +68,14 @@ class RapidValidationController extends Controller
         $erisTblMainProfileData =  EradTblMain::find($acno);
         $rapidValidation = RapidValidation::find($ctrlno);
         
-        return view('admin.eris.partials.rapid_validation.edit', compact('acno', 'erisTblMainProfileData', 'rapidValidation', 'ctrlno'));
+        return view('admin.eris.partials.rapid_validation.edit', [
+            'acno' => $acno, 
+            'ctrlno' => $ctrlno,
+            'erisTblMainProfileData' => $erisTblMainProfileData, 
+            'rapidValidation' => $rapidValidation, 
+            'dateAssigned' => $this->convertDateTimeToDate->convertDateFrom($rapidValidation->dteassign),
+            'dateSubmit' => $this->convertDateTimeToDate->convertDateTo($rapidValidation->dtesubmit),
+        ]);
     }
 
     public function update(Request $request, $acno, $ctrlno)

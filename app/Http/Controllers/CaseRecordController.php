@@ -4,12 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Models\CaseRecords;
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblCaseNature;
+use App\Models\ProfileLibTblCaseStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Services\ConvertDateTimeToDate;
 
 class CaseRecordController extends Controller
 {
+    // App\Services
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+ 
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+    }
+
+    public function caseNatureLibrary()
+    {
+       $profileLibTblCaseNature = new ProfileLibTblCaseNature;
+       $caseNature = $profileLibTblCaseNature->caseNature();
+
+       return $caseNature;
+    }
+
+    public function caseStatusLibrary()
+    {
+       $profileLibTblCaseStatus = new ProfileLibTblCaseStatus;
+       $caseStatus = $profileLibTblCaseStatus->caseStatus();
+
+       return $caseStatus;
+    }
+
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+    
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -21,8 +57,12 @@ class CaseRecordController extends Controller
     }
 
     public function create($cesno)
-    {
-        return view('admin.201_profiling.view_profile.partials.case_records.form', compact('cesno'));
+    {        
+        return view('admin.201_profiling.view_profile.partials.case_records.form', [
+            'cesno' => $cesno,
+            'profileLibTblCaseNature' => $this->caseNatureLibrary(), 
+            'profileLibTblCaseStatus' => $this->caseStatusLibrary(),
+        ]);
     }
     
     public function store(Request $request, $cesno)
@@ -42,10 +82,6 @@ class CaseRecordController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $caseRecord = new CaseRecords([
 
             'parties' => $request->parties,
@@ -58,7 +94,7 @@ class CaseRecordController extends Controller
             'finality' => $request->date_finality,
             'decision' => $request->decision,
             'remarks' => $request->remarks,
-            'encoder' =>  $encoder,
+            'encoder' =>  $this->getFullNameAttribute(),
          
         ]);
 
@@ -72,8 +108,15 @@ class CaseRecordController extends Controller
     public function edit($ctrlno, $cesno)
     {
         $caseRecord = CaseRecords::find($ctrlno);
-
-        return view('admin.201_profiling.view_profile.partials.case_records.edit', compact('caseRecord' ,'cesno'));
+  
+        return view('admin.201_profiling.view_profile.partials.case_records.edit', [
+            'cesno' => $cesno,
+            'caseRecord' => $caseRecord , 
+            'profileLibTblCaseNature' => $this->caseNatureLibrary(), 
+            'profileLibTblCaseStatus' => $this->caseStatusLibrary(),
+            'dateFiled' => $this->convertDateTimeToDate->convertDateFrom($caseRecord->filed_dt),
+            'dateFinality' => $this->convertDateTimeToDate->convertDateTo($caseRecord->finality),
+        ]);
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -93,10 +136,6 @@ class CaseRecordController extends Controller
             
         ]);
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
         $caseRecord = CaseRecords::find($ctrlno);
         $caseRecord->parties = $request->parties;
         $caseRecord->offence = $request->offense;
@@ -108,7 +147,7 @@ class CaseRecordController extends Controller
         $caseRecord->finality = $request->date_finality;
         $caseRecord->decision = $request->decision;
         $caseRecord->remarks = $request->remarks;
-        $caseRecord->lastupd_enc = $encoder;
+        $caseRecord->lastupd_enc = $this->getFullNameAttribute();
         $caseRecord->save();
 
         return to_route('case-record.index', ['cesno'=>$cesno])->with('info', 'Updated Sucessfully');
@@ -138,7 +177,7 @@ class CaseRecordController extends Controller
 
     public function restore($ctrlno)
     {
-        $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
+        $caseRecord = CaseRecords::onlyTrashed()->find($ctrlno);
         $caseRecord->restore();
 
         return back()->with('info', 'Data Restored Sucessfully');
@@ -146,7 +185,7 @@ class CaseRecordController extends Controller
  
     public function forceDelete($ctrlno)
     {
-        $caseRecord = CaseRecords::withTrashed()->find($ctrlno);
+        $caseRecord = CaseRecords::onlyTrashed()->find($ctrlno);
         $caseRecord->forceDelete();
   
         return back()->with('info', 'Data Permanently Deleted');

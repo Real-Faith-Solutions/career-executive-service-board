@@ -132,7 +132,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $nonCesAccreditedTraining201s->trainingProfileLibTblExpertiseSpec->Title }}
+                            {{ $nonCesAccreditedTraining201s->trainingProfileLibTblExpertiseSpec->Title ?? 'No Record'}}
                         </td>
 
                         <td class="px-6 py-3">
@@ -144,7 +144,7 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $nonCesAccreditedTraining201s->from_dt. ' - '.$nonCesAccreditedTraining201s->to_dt }}
+                            {{ $nonCesAccreditedTraining201s->from_dt ?? 'No Record'. ' - '.$nonCesAccreditedTraining201s->to_dt ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">

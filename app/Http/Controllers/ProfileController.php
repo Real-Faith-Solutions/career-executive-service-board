@@ -25,6 +25,7 @@ use App\Mail\TempCred201;
 use App\Models\ProfileLibCities;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -51,13 +52,19 @@ class ProfileController extends Controller
         $mainProfile = PersonalData::find($cesno);
         $birthdate = $mainProfile->birth_date;
 
+        $profile_picture = $mainProfile->picture;
+
+        if (!(Storage::disk('public')->exists('images/' . $profile_picture))) {
+            $profile_picture = 'placeholder.png';
+        }
+
         $birthDate = Carbon::parse($birthdate);
         $currentDate = Carbon::now();
         $age = $currentDate->diffInYears($birthDate);
 
         return view(
             'admin.201_profiling.view_profile.partials.personal_data.form',
-            compact('mainProfile', 'cesno', 'age')
+            compact('mainProfile', 'cesno', 'age', 'profile_picture')
         );
     }
 
@@ -104,65 +111,80 @@ class ProfileController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
-        $newProfile = PersonalData::create([
+        DB::beginTransaction();
 
-            'status' => $request->status,
-            'title' => $request->title,
-            'email' => $request->email,
-            'lastname' => ucwords(strtolower($request->lastname)),
-            'firstname' => ucwords(strtolower($request->firstname)),
-            'name_extension' => $request->name_extension,
-            'middlename' => ucwords(strtolower($request->middlename)),
-            'middleinitial' => $request->mi,
-            'nickname' => ucwords(strtolower($request->nickname)),
-            'birth_date' => $request->birthdate,
-            'birth_place' => $request->birth_place,
-            'gender' => $request->gender,
-            'gender_by_choice' => $request->gender_by_choice,
-            'civil_status' => $request->civil_status,
-            'religion' => $request->religion,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'member_of_indigenous_group' => $request->member_of_indigenous_group,
-            'single_parent' => $request->single_parent,
-            'citizenship' => $request->citizenship,
-            'dual_citizenship' => $request->dual_citizenship,
-            'person_with_disability' => $request->person_with_disability,
-            'encoder' => $encoder,
+        try {
 
-        ]);
+            $newProfile = PersonalData::create([
 
-        // sending email to added user
-        $recipientEmail = $request->email;
-        $password = Str::password(8);
-        $hashedPassword = Hash::make($password);
-        $imagePath = public_path('images/branding.png');
-        $loginLink = config('app.url');
-        $type = "addProfile";
+                'status' => $request->status,
+                'title' => $request->title,
+                'email' => $request->email,
+                'lastname' => ucwords(strtolower($request->lastname)),
+                'firstname' => ucwords(strtolower($request->firstname)),
+                'name_extension' => $request->name_extension,
+                'middlename' => ucwords(strtolower($request->middlename)),
+                'middleinitial' => $request->mi,
+                'nickname' => ucwords(strtolower($request->nickname)),
+                'birth_date' => $request->birthdate,
+                'birth_place' => $request->birth_place,
+                'gender' => $request->gender,
+                'gender_by_choice' => $request->gender_by_choice,
+                'civil_status' => $request->civil_status,
+                'religion' => $request->religion,
+                'height' => $request->height,
+                'weight' => $request->weight,
+                'member_of_indigenous_group' => $request->member_of_indigenous_group,
+                'single_parent' => $request->single_parent,
+                'citizenship' => $request->citizenship,
+                'dual_citizenship' => $request->dual_citizenship,
+                'person_with_disability' => $request->person_with_disability,
+                'encoder' => $encoder,
 
-        $data = [
-            'type' => $type,
-            'email' => $recipientEmail,
-            'password' => $password,
-            'imagePath' => $imagePath,
-            'loginLink' => $loginLink,
-        ];
-        // end sending email to added user
+            ]);
 
-        Mail::to($recipientEmail)->send(new TempCred201($data));
+            // sending email to added user
+            $recipientEmail = $request->email;
+            $password = Str::password(8);
+            $hashedPassword = Hash::make($password);
+            $imagePath = public_path('images/branding.png');
+            $loginLink = config('app.url');
+            $type = "addProfile";
 
-        // making account credentials for user
-        $user = $newProfile->users()->Create([
-            'email' => $newProfile->email,
-            'password' => $hashedPassword,
-            'is_active'                    => 'Active',
-            'last_updated_by'           => 'system encode',
-            'encoder'                   => $encoder,
-            'default_password_change'   => 'true',
-        ]);
+            $data = [
+                'type' => $type,
+                'email' => $recipientEmail,
+                'password' => $password,
+                'imagePath' => $imagePath,
+                'loginLink' => $loginLink,
+            ];
+            // end sending email to added user
 
-        $user->assignRole('user');
-        // end making account credentials for user
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+
+            // making account credentials for user
+            $user = $newProfile->users()->Create([
+                'email' => $newProfile->email,
+                'password' => $hashedPassword,
+                'is_active'                    => 'Active',
+                'last_updated_by'           => 'system encode',
+                'encoder'                   => $encoder,
+                'default_password_change'   => 'true',
+            ]);
+
+            $user->assignRole('user');
+            // end making account credentials for user
+
+            // Commit the transaction if all operations succeed
+            DB::commit();
+
+            return back()->with('message', 'New profile added!');
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
+
+            return back()->with('error', 'An error occurred while creating the user.');
+        }
 
         return back()->with('message', 'New profile added!');
     }
@@ -263,39 +285,53 @@ class ProfileController extends Controller
         $middleName = $request->middlename;
         $middleInitial = $this->extractMiddleInitial($middleName);
 
-        $personalData = PersonalData::find($cesno);
-        $personalData->status = $request->status;
-        $personalData->title = $request->title;
-        $personalData->email = $request->email;
-        $personalData->lastname = $request->lastname;
-        $personalData->firstname = $request->firstname;
-        $personalData->name_extension = $request->name_extension;
-        $personalData->middlename = $request->middlename;
-        $personalData->middleinitial = $middleInitial;
-        $personalData->nickname = $request->nickname;
-        $personalData->birth_date = $request->birthdate;
-        $personalData->birth_place = $request->birth_place;
-        $personalData->gender = $request->gender;
-        $personalData->gender_by_choice = $request->gender_by_choice;
-        $personalData->civil_status = $request->civil_status;
-        $personalData->religion = $request->religion;
-        $personalData->height = $request->height;
-        $personalData->weight = $request->weight;
-        $personalData->member_of_indigenous_group = $request->member_of_indigenous_group;
-        $personalData->single_parent = $request->single_parent;
-        $personalData->citizenship = $request->citizenship;
-        $personalData->dual_citizenship = $request->dual_citizenship;
-        $personalData->person_with_disability = $request->person_with_disability;
-        $personalData->encoder = $encoder;
-        $personalData->save();
+        DB::beginTransaction();
 
-        // Get the user based on the $cesno
-        $user = User::where('personal_data_cesno', $cesno)->first();
+        try {
 
-        // Update the user email
-        $user->email = $request->email;
-        $user->save();
+            $personalData = PersonalData::find($cesno);
+            $personalData->status = $request->status;
+            $personalData->title = $request->title;
+            $personalData->email = $request->email;
+            $personalData->lastname = ucwords(strtolower($request->lastname));
+            $personalData->firstname = ucwords(strtolower($request->firstname));
+            $personalData->name_extension = $request->name_extension;
+            $personalData->middlename = ucwords(strtolower($request->middlename));
+            $personalData->middleinitial = $middleInitial;
+            $personalData->nickname = $request->nickname;
+            $personalData->birth_date = $request->birthdate;
+            $personalData->birth_place = $request->birth_place;
+            $personalData->gender = $request->gender;
+            $personalData->gender_by_choice = $request->gender_by_choice;
+            $personalData->civil_status = $request->civil_status;
+            $personalData->religion = $request->religion;
+            $personalData->height = $request->height;
+            $personalData->weight = $request->weight;
+            $personalData->member_of_indigenous_group = $request->member_of_indigenous_group;
+            $personalData->single_parent = $request->single_parent;
+            $personalData->citizenship = $request->citizenship;
+            $personalData->dual_citizenship = $request->dual_citizenship;
+            $personalData->person_with_disability = $request->person_with_disability;
+            $personalData->encoder = $encoder;
+            $personalData->save();
 
+            // Get the user based on the $cesno
+            $user = User::where('personal_data_cesno', $cesno)->first();
+
+            // Update the user email
+            $user->email = $request->email;
+            $user->save();
+
+            // Commit the transaction if all operations succeed
+            DB::commit();
+
+            return back()->with('info', 'Profile Updated!');
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
+
+            return back()->with('error', 'An error occurred while updating.');
+        }
 
         return back()->with('info', 'Profile Updated!');
     }
@@ -375,11 +411,26 @@ class ProfileController extends Controller
         ];
         // end sending email to added user
 
-        Mail::to($recipientEmail)->send(new TempCred201($data));
+        DB::beginTransaction();
 
-        // Update the user's password
-        $user->password = $hashedPassword;
-        $user->save();
+        try {
+
+            Mail::to($recipientEmail)->send(new TempCred201($data));
+
+            // Update the user's password
+            $user->password = $hashedPassword;
+            $user->save();
+
+            // Commit the transaction if all operations succeed
+            DB::commit();
+
+            return redirect()->back()->with('message', 'New Credentials Email Sent');
+        } catch (\Exception $e) {
+            // Rollback the transaction if any operation fails
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'An error occurred while sending email.');
+        }
 
         return redirect()->back()->with('message', 'New Credentials Email Sent');
     }

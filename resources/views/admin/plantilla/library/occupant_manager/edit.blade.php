@@ -7,7 +7,7 @@
         @yield('title')
     </a>
     <div>
-        @if($datas->is_appointee === 1)
+        @if($datas->is_appointee == 1)
         <a class="btn btn-primary mx-1"
             href="{{ route('library-other-assignment.index', ['library_occupant_manager' => $datas->appointee_id]) }}">
             Other Assignment
@@ -48,7 +48,7 @@
                             <select id="appt_stat_code" name="appt_stat_code" required>
                                 <option disabled selected>Select Personnel Movement</option>
                                 @foreach ($apptStatus as $data)
-                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ===
+                                <option value="{{ $data->appt_stat_code }}" {{ $data->appt_stat_code ==
                                     $datas->appt_stat_code ? 'selected' : '' }}>
                                     {{ $data->title }}
                                 </option>
@@ -104,6 +104,12 @@
                                 readonly />
                         </div>
 
+                        {{-- <div class="mb-3">
+                            <label for="official_code">Appointing Authority</label>
+                            <input id="official_code"
+                                value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}" readonly />
+                        </div> --}}
+
                         <div class="mb-3">
                             <label for="assum_date">Assumption Date<sup>*</sup></label>
                             <input id="assum_date" name="assum_date" type="date" value="{{ $datas->assum_date }}"
@@ -113,13 +119,6 @@
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                        <div class="mb-3">
-                            <label for="gender">Gender</label>
-                            <input id="gender" value="{{ $datas->personalData->gender ?? ''}}" readonly />
                         </div>
 
                         <div class="mb-3">
@@ -131,6 +130,13 @@
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                        <div class="mb-3">
+                            <label for="gender">Gender</label>
+                            <input id="gender" value="{{ $datas->personalData->gender ?? ''}}" readonly />
                         </div>
                     </div>
 

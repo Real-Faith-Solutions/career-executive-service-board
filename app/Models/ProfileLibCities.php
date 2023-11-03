@@ -24,10 +24,12 @@ class ProfileLibCities extends Model
         'name',
         'zipcode',
     ];
+    // protected $city_code;
+
 
     public function cities(): HasManyThrough
     {
-        return $this->hasManyThrough(OtherAssignment::class, 'city_code', OfficeAddress::class, 'city_code', PersonalData::class, 'city_code');
+        return $this->hasManyThrough(OtherAssignment::class, 'city_code', OfficeAddress::class, 'city_code', PersonalData::class, 'city_code', ExaminationsTaken::class, 'city_code');
     }
 
     public function competencyTrainingProviderManager(): HasMany

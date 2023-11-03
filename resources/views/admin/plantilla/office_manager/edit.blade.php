@@ -15,7 +15,7 @@
             </svg>
         </li>
         <li>
-            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector Manager</a>
+            <a href="{{ route('sector-manager.index') }}" class="text-slate-500">Sector</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
         </li>
 
         <li>
-            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-blue-500">{{ $sector->title
+            <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="text-slate-500">{{ $sector->title
                 }}</a>
         </li>
         <li>
@@ -35,7 +35,7 @@
 
         <li>
             <a href="{{ route('department-agency-manager.showAgency', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid]) }}"
-                class="text-blue-500">{{
+                class="text-slate-500">{{
                 $department->title }}</a>
         </li>
         <li>
@@ -46,7 +46,7 @@
 
         <li>
             <a href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid]) }}"
-                class="text-blue-500">{{ $departmentLocation->title }}</a>
+                class="text-slate-500">{{ $departmentLocation->title }}</a>
         </li>
         <li>
             <svg class="flex-shrink-0 w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@
     </ol>
 </nav>
 
-<div class="grid lg:grid-cols-2">
+{{-- <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
             <div class="bg-blue-500 uppercase text-gray-700 text-white">
@@ -105,7 +105,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="contactno">Office Contact No.</label>
-                            <input id="contactno" name="contactno" value="{{ $office->officeAddress->contactno }}"
+                            <input id="contactno" name="contactno" value="{{ $office->officeAddress->contactno ?? ''}} "
                                 type="tel" />
                             @error('contactno')
                             <span class="invalid" role="alert">
@@ -115,7 +115,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="emailadd">Office E-mail Address</label>
-                            <input id="emailadd" name="emailadd" value="{{ $office->officeAddress->emailadd }}"
+                            <input id="emailadd" name="emailadd" value="{{ $office->officeAddress->emailadd ?? ''}}"
                                 type="email" />
                             @error('emailadd')
                             <span class="invalid" role="alert">
@@ -132,7 +132,8 @@
 
                         <div class="mb-3">
                             <label for="floor_bldg">Floor / Bldg.</label>
-                            <input id="floor_bldg" name="floor_bldg" value="{{ $office->officeAddress->floor_bldg }}" />
+                            <input id="floor_bldg" name="floor_bldg"
+                                value="{{ $office->officeAddress->floor_bldg ?? ''}}" />
                             @error('floor_bldg')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -142,7 +143,7 @@
                         <div class="mb-3">
                             <label for="house_no_st">No. / Street</label>
                             <input id="house_no_st" name="house_no_st"
-                                value="{{ $office->officeAddress->house_no_st }}" />
+                                value="{{ $office->officeAddress->house_no_st ?? ''}}" />
                             @error('house_no_st')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -151,7 +152,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="brgy_dist">Brgy. / District</label>
-                            <input id="brgy_dist" name="brgy_dist" value="{{ $office->officeAddress->brgy_dist }}" />
+                            <input id="brgy_dist" name="brgy_dist"
+                                value="{{ $office->officeAddress->brgy_dist ?? ''}}" />
                             @error('brgy_dist')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -164,7 +166,9 @@
                                 <option disabled selected>Select City Municipality</option>
                                 @foreach ($cities as $data)
                                 <option value="{{ $data->city_code }}" {{ $office->officeAddress->city_code ==
-                                    $data->city_code ? 'selected' : ''}}>{{ $data->name }}</option>
+                                    $data->city_code ? 'selected' : ''}}>
+                                    {{ $data->name }}
+                                </option>
                                 @endforeach
                             </select>
                             @error('city_code')
@@ -177,13 +181,13 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="isActive">Office Status<sup>*</sup></label>
-                            <select id="isActive" name="isActive" required>
+                            <label for="is_active">Office Status<sup>*</sup></label>
+                            <select id="is_active" name="is_active" required>
                                 <option disabled selected>Select status</option>
-                                <option value="1" {{ $office->isActive == 1 ? 'selected' : ''}}>Active</option>
-                                <option value="0" {{ $office->isActive == 0 ? 'selected' : ''}}>Inactive</option>
+                                <option value="1" {{ $office->is_active == 1 ? 'selected' : ''}}>Active</option>
+                                <option value="0" {{ $office->is_active == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>
-                            @error('isActive')
+                            @error('is_active')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -203,27 +207,48 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
+
+    {{-- legend
+    active = 1 || ces + presidential = white background / black text
+    inactive = disabled text
+    vacant = 1 = yellow background / red text
+    non ces + presidential = white background / blue text
+    --}}
+
+    <span>Active</span> <br>
+    <span class="p-1 text-slate-500">Inactive</span>
+    {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
+    <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
+    <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
+
+
 </div>
+
 
 <div class="flex justify-between">
     <a href="#" class="text-blue-500 uppercase text-2xl">
-        Plantilla Position Manager
+        Position Browser
     </a>
     <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>
     @include('admin.plantilla.appointee_occupant_manager.create')
 </div>
-<table class="dataTables">
+@include('layouts.partials.isLoading')
+<table class="dataTables hidden">
     <thead>
         <tr>
-            <th>Plantilla ID</th>
-            <th>Position Title</th>
-            <th>Position Level</th>
-            <th>Salary Grade Level</th>
-            <th>Item No.</th>
-            <th>Vacant</th>
-            <th>Pres. Appointee</th>
+            <th class="px-6 py-3" scope="col">DBM Position Title</th>
+            <th class="px-6 py-3" scope="col">Appointee</th>
+            <th class="px-6 py-3" scope="col">Position Level</th>
+            <th class="px-6 py-3" scope="col">Salary Grade</th>
+            <th class="px-6 py-3" scope="col">Is have occupant</th>
+            <th class="px-6 py-3" scope="col">DBM Item No</th>
+            <th class="px-6 py-3" scope="col">Appointee Status</th>
+            <th class="px-6 py-3" scope="col">Classification Basis</th>
 
             <th>
                 <span class="sr-only">Action</span>
@@ -233,45 +258,99 @@
     <tbody>
 
         @foreach ($planPositions as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->plantilla_id }}
-            </td>
-            <td>
-                {{ $data->positionMasterLibrary->dbm_title }}
+        <tr class="
+
+        
+            @if($data->is_active != 1)
+                text-slate-400
+            @else
+
+            @php
+                $test = $data->planAppointee->cesno ?? 0;
+            @endphp
+
+                @if($test == 0)
+                    bg-yellow-100 text-red-500
+                @else
+
+
+                    {{-- non ces + pres appointee --}}
+                    @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                        bg-gray-50 text-blue-500
+                    @else
+                        text-dark
+                    @endif
+                @endif
+            @endif
+
+        ">
+            <td class="whitespace-nowrap px-6 py-4 font-medium" scope="row">
+                {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
+                {{ $data->pos_default ?? 'N/A'}}
             </td>
 
-            <td>
-                {{ $data->positionMasterLibrary->positionLevel->title }}
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->personalData->title ?? ''}}
+                {{ $data->planAppointee->personalData->lastname ?? ''}},
+                {{ $data->planAppointee->personalData->firstname ?? ''}}
+                {{ $data->planAppointee->personalData->name_extension ?? ''}}
+                {{ $data->planAppointee->personalData->middlename ?? ''}}
             </td>
+            <td class="px-6 py-3">
+                {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
+            </td>
+            <td class="px-6 py-3">
+                {{ $data->corp_sg ?? ''}}
+            </td>
+            <td class="px-6 py-3">
+                @php
+                $selectedAppointee = $planAppointee
+                ->where('plantilla_id', $data->plantilla_id)
+                ->where('is_appointee', false);
+                if ($data->planAppointee != null && $selectedAppointee->count() >= 1) {
+                $isHaveOccupant=true;
+                } else {
+                $isHaveOccupant=false;
+                }
 
-            <td>
-                {{ $data->corp_sg }}
-            </td>
+                @endphp
 
-            <td>
-                {{ $data->item_no }}
-            </td>
-            <td>
-                <span class="{{ $data->is_vacant == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_vacant == 1 ? 'YES' : 'NO'}}
+                <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">
+                    {{ $isHaveOccupant == 1 ? 'YES' : 'NO'}}
                 </span>
             </td>
-            <td>
-                <span class="{{ $data->pres_apptee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->pres_apptee == 1 ? 'YES' : 'NO'}}
-                </span>
+            <td class="px-6 py-3">
+                {{ $data->item_no ?? ''}}
+            </td>
+
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->apptStatus->title ?? 'N/A'}}
+            </td>
+            <td class="px-6 py-3">
+                {{ $data->planAppointee->basis ?? 'N/A'}}
             </td>
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">
+                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('plantilla-position-manager.edit', [
+                        'sectorid' => $sector->sectorid,
+                        'deptid' => $department->deptid,
+                        'officelocid' => $departmentLocation->officelocid,
+                        'officeid' => $office->officeid,
+                        'plantilla_id' => $data->plantilla_id
+                    ]) }}" title="Position Manager">
+                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                            style="width:24px;height:24px">
+                        </lord-icon>
+                    </a>
                     <a class="hover:bg-slate-100 rounded-full" href="{{ route('plantilla-position-manager.show', [
                         'sectorid' => $sector->sectorid,
                         'deptid' => $department->deptid,
                         'officelocid' => $departmentLocation->officelocid,
                         'officeid' => $office->officeid,
                         'plantilla_id' => $data->plantilla_id
-                    ]) }}">
+                    ]) }}" title="View Appointees on this position">
                         <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                             colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                         </lord-icon>
@@ -281,7 +360,8 @@
                         onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline">
+                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                            title="Delete Record">
                             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
                                 colors="primary:#DC3545" style="width:24px;height:24px">
                             </lord-icon>

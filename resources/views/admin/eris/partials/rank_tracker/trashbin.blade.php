@@ -41,7 +41,7 @@
                         </td>
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($rankTrackerTrashedRecords->submit_dt)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rankTrackerTrashedRecords->submit_dt)->format('m/d/Y ') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -54,7 +54,7 @@
 
                         <td class="px-6 py-4 text-right uppercase">
                             <div class="flex">
-                                <form action="{{ route('eris-rank-tracker.restore', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno]) }}" method="POST" id="restore_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
+                                <form action="{{ route('eris-rank-tracker.restore', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="restore_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
                                     @csrf
                                     <button type="button" id="restoreRankTrackerButton{{$rankTrackerTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this info?')">
                                         <lord-icon
@@ -66,7 +66,7 @@
                                     </button>
                                 </form>
     
-                                <form action="{{ route('eris-rank-tracker.forceDelete', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno]) }}" method="POST" id="permanent_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
+                                <form action="{{ route('eris-rank-tracker.forceDelete', ['ctrlno'=>$rankTrackerTrashedRecords->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="permanent_rank_tracker_form{{$rankTrackerTrashedRecords->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="permanentRankTrackerButton{{$rankTrackerTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this info?')">

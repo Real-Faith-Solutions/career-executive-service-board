@@ -32,7 +32,7 @@
                     Vacant
                 </th>
                 <th class="px-6 py-3" scope="col">
-                    Pres Appointee
+                    Presidential Appointee
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Deleted at
@@ -50,10 +50,10 @@
                     {{ $data->plantilla_id }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->dbm_title }}
+                    {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->positionLevel->title }}
+                    {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->corp_sg }}

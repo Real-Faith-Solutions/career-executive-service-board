@@ -234,7 +234,7 @@
             <input list="religion_choices" id="religion" name="religion" value="{{ old('religion') }}">
             <datalist id="religion_choices">
                 @foreach ($religion as $data)
-                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                <option value="{{ $data->reg_code }}">{{ $data->name }}</option>
                 @endforeach
             </datalist>
         </div>

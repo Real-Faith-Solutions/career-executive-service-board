@@ -37,16 +37,12 @@ class DatabaseSeeder extends Seeder
         // \App\Models\TrainingSecretariat::factory(10)->create();
 
         // plantilla
-        \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
+        // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            // UsersTableSeeder::class,
             DefaultAccounts::class,
-            // CesWebAppGeneralPageAccessesTableSeeder::class,
-            // ProfileData::class,
-            // ProfileAddress::class,
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,
@@ -56,26 +52,29 @@ class DatabaseSeeder extends Seeder
             Title::class,
             RecordStatus::class,
             Religion::class,
-            // ProfileLibTblCesStatusTypeSeeder::class,
-            // ProfileLibTblCesStatusAccSeeder::class,
-            // ProfileLibTblCesStatusSeeder::class,
-            // ProfileLibTblAppAuthoritySeeder::class,
-            // ProfileLibTblExpertiseSpecSeeder::class,
-            // ProfileLibTblEducSchoolSeeder::class,
-            // ProfileLibTblEducMajorSeeder::class,
-            // ProfileLibTblEducDegreeSeeder::class,
-            // ProfileLibTblExamRefSeeder::class,
-            // ProfileLibTblLanguageRefSeeder::class,
-            // ProfileLibTblExpertiseGenSeeder::class,
-            // TrainingLibCategorySeeder::class,
-            // LibraryRankTrackerSeeder::class,
-            // ErisTblMainSeeder::class,
+            ProfileLibTblCesStatusSeeder::class,
+            ProfileLibTblCesStatusTypeSeeder::class,
+            ProfileLibTblCesStatusAccSeeder::class,
+            ProfileLibTblAppAuthoritySeeder::class,
+            profilelib_tblCaseNatureSeeder::class,
+            profilelib_tblCaseStatusSeeder::class,
+            LibraryRankTrackerSeeder::class,
+            ProfileLibTblExpertiseSpecSeeder::class,
+            ProfileLibTblEducSchoolSeeder::class,
+            ProfileLibTblEducMajorSeeder::class,
+            ProfileLibTblEducDegreeSeeder::class,
+            ProfileLibTblExamRefSeeder::class,
+            ProfileLibTblLanguageRefSeeder::class,
+            ProfileLibTblExpertiseGenSeeder::class,
+            TrainingLibCategorySeeder::class,
+            ErisTblMainSeeder::class,
+            ScholarshipSeeder::class,
 
             // plantilla
-            SectorManagerSeeder::class,
-            AgencyLocationSeeder::class,
-            DepartmentAgencyTypeSeeder::class,
-            ApptStatusSeeder::class,
+            // SectorManagerSeeder::class,
+            // AgencyLocationSeeder::class,
+            // DepartmentAgencyTypeSeeder::class,
+            // ApptStatusSeeder::class,
         ]);
     }
 }

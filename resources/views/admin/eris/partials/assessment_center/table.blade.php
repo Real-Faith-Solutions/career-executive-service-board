@@ -34,6 +34,10 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
+                        Competencies for D.O  
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Remarks
                     </th>
 
@@ -46,7 +50,7 @@
                 @foreach ($assessmentCenter as $assessmentCenters) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($assessmentCenters->acdate)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenters->acdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -54,7 +58,11 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($assessmentCenters->docdate)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($assessmentCenters->docdate)->format('m/d/Y') ?? 'No Record' }} 
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $assessmentCenters->competencies_d_o ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -62,7 +70,7 @@
                         </td>
 
                         <td class="px-6 py-4 text-right uppercase">
-                            <div class="flex">
+                            <div class="flex justify-end">
                                 <form action="{{ route('eris-assessment-center.edit', ['acno'=>$acno, 'ctrlno'=>$assessmentCenters->ctrlno]) }}" method="GET">
                                     @csrf
                                     <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">

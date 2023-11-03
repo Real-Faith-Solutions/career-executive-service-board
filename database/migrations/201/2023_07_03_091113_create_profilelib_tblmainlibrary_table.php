@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profilelib_tblmainlibrary', function (Blueprint $table) {
-            $table->id('catid');
-            $table->integer('code');
+            $table->integer('catid');
+            $table->id('code');
             $table->string('description');
             $table->timestamps();
         });

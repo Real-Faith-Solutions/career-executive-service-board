@@ -15,6 +15,7 @@
                         <option value="Assessment Center" {{ $selectedPage == 'Assessment Center' ? 'selected' : '' }}>Assessment Center (Historical Record)</option>
                         <option value="Validation">Validation (Historical Record)</option>
                         <option value="Board Interview">Board Interview</option>
+                        <option value="Rank Tracker">Rank Tracker</option>
                     </select>    
                 </div>
     
@@ -56,23 +57,23 @@
                 @foreach ($assessmentCenter as $assessmentCenters)
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{$assessmentCenters->acno}}
+                            {{ $assessmentCenters->acno ?? 'No Record' }}
                         </td>
                         
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->acdate}}
+                            {{ \Carbon\Carbon::parse($assessmentCenters->acdate)->format('m/d/Y ') ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->remarks}}
+                            {{ $assessmentCenters->remarks ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->docdate}}
+                            {{ $assessmentCenters->competencies_d_o ?? 'No Record' }}
                         </td>
 
                         <td class="px-6 py-3">
-                            {{$assessmentCenters->numtakes}}
+                            {{ $assessmentCenters->numtakes ?? 'No Record' }}
                         </td>
                 @endforeach               
             </tbody>

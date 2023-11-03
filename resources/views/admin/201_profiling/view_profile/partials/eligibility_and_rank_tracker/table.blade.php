@@ -15,6 +15,7 @@
                         <option value="Assessment Center">Assessment Center (Historical Record)</option>
                         <option value="Validation">Validation (Historical Record)</option>
                         <option value="Board Interview">Board Interview</option>
+                        <option value="Rank Tracker">Rank Tracker</option>
                     </select>    
                 </div>
     
@@ -36,7 +37,7 @@
         </a>
     
         <div class="flex items-center">
-            <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank Tracker</a>
+            <a href="{{ route('eligibility-rank-tracker.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Eligibility and Rank</a>
         </div>
     </div>
 </div>

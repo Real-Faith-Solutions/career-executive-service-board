@@ -47,11 +47,10 @@
     @include('layouts.partials.header')
     @include('layouts.partials.sidebar')
 
-    {{-- @include('layouts.partials.preloader') --}}
-
     <div class="p-4 sm:ml-64">
         <div class="mt-14 rounded-lg p-4">
             @yield('content')
+
         </div>
     </div>
 
@@ -279,13 +278,25 @@
     {{-- end toast --}}
 
     <script>
-        // new DataTable('.dataTables');
+        const dataTables = document.querySelector(".dataTables");
+        const isLoading = document.querySelector("#isLoading");
+
+        window.onload = function () {
+            isLoading.classList.add('hidden');
+            dataTables.classList.remove('hidden');
+
         $(document).ready(function(){
-            var table = $('.dataTables').DataTable({
-                "deferRender": true
-            });
+        var table = $('.dataTables').DataTable({
+        "deferRender": true
         });
+        });    
+        };
+
+        
+
     </script>
+
+
 
 </body>
 

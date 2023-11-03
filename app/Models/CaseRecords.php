@@ -41,5 +41,13 @@ class CaseRecords extends Model
         return $this->belongsTo(PersonalData::class);
     }
 
+    public function caseNatureCode(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCaseNature::class, 'nature_code', 'STATUS_CODE');
+    }
 
+    public function caseStatusCode(): BelongsTo
+    {
+        return $this->belongsTo(ProfileLibTblCaseStatus::class, 'status_code', 'STATUS_CODE');
+    }
 }

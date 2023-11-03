@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExaminationsTaken;
 use App\Models\PersonalData;
+use App\Models\ProfileLibCities;
 use App\Models\ProfileLibTblExamRef;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,11 +12,19 @@ use Illuminate\Validation\Rule;
 
 class ExaminationTakenController extends Controller
 {
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
 
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        $examinationTaken = $personalData->examinationTakens;
+        $examinationTaken = $personalData->examinationTakens()->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.table', compact('examinationTaken', 'cesno'));
     }
@@ -24,7 +33,9 @@ class ExaminationTakenController extends Controller
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::all(['CODE', 'TITLE']);
 
-        return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno'));
+        $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
+
+        return view('admin.201_profiling.view_profile.partials.examinations_taken.form', compact('profileLibTblExamRef', 'cesno', 'profileLibCities'));
     }
 
     public function store(Request $request, $cesno)
@@ -34,13 +45,8 @@ class ExaminationTakenController extends Controller
             'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)],
             'rating' => ['nullable', 'max:40'],
             'date_of_examination' => ['required'],
-            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
 
         $examinationTaken = new ExaminationsTaken([
 
@@ -51,7 +57,7 @@ class ExaminationTakenController extends Controller
             'license_number' => $request->license_number,
             'date_acquired' => $request->date_acquired,
             'date_validity' => $request->date_validity,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
 
         ]);
 
@@ -66,9 +72,17 @@ class ExaminationTakenController extends Controller
     {
         $profileLibTblExamRef = ProfileLibTblExamRef::all();
         $examinationTaken = ExaminationsTaken::find($ctrlno);
+        // $profileLibCities = ProfileLibCities::all(['name', 'city_code']);
+        $profileLibCities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.edit',
-        compact('examinationTaken', 'profileLibTblExamRef', 'cesno'));
+            compact(
+                'examinationTaken',
+                'profileLibTblExamRef',
+                'cesno',
+                'profileLibCities',
+            )
+        );
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -78,17 +92,12 @@ class ExaminationTakenController extends Controller
             'exam_code' => ['required', Rule::unique('profile_tblExaminations')->where('cesno', $cesno)->ignore($ctrlno, 'ctrlno')],
             'rating' => ['nullable', 'min:2', 'max:40'],
             'date_of_examination' => ['required', 'date', 'date_format:m/d/Y'],
-            'place_of_examination' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z ]*$/'],
             'license_number' => ['nullable', 'min:2', 'max:40'],
             'date_acquired' => ['required'],
             'date_validity' => ['required'],
 
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
-
+        
         $examinationTaken = ExaminationsTaken::find($ctrlno);
         $examinationTaken->exam_code = $request->exam_code;
         $examinationTaken->rate = $request->rating;
@@ -97,7 +106,7 @@ class ExaminationTakenController extends Controller
         $examinationTaken->license_number = $request->license_number;
         $examinationTaken->date_acquired = $request->date_acquired;
         $examinationTaken->date_validity = $request->date_validity;
-        $examinationTaken->lastupd_enc = $encoder;
+        $examinationTaken->lastupd_enc = $this->getFullNameAttribute();
         $examinationTaken->save();
 
         return to_route('examination-taken.index', ['cesno' => $cesno])->with('info', 'Successfuly Saved');
@@ -117,7 +126,7 @@ class ExaminationTakenController extends Controller
         $personalData = PersonalData::withTrashed()->find($cesno);
 
         // Access the soft deleted scholarships of the parent model
-        $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->get();
+        $examinationTakensTrashedRecord = $personalData->examinationTakens()->onlyTrashed()->paginate(25);
 
         return view('admin.201_profiling.view_profile.partials.examinations_taken.trashbin', compact('examinationTakensTrashedRecord', 'cesno'));
     }

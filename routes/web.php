@@ -33,6 +33,7 @@ use App\Http\Controllers\ERIS\AssessmentCenterController;
 use App\Http\Controllers\ERIS\BoardInterviewController;
 use App\Http\Controllers\ERIS\ErisProfileController;
 use App\Http\Controllers\ERIS\InDepthValidationController;
+use App\Http\Controllers\ERIS\Libray\RankTrackerLibraryController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
@@ -47,6 +48,14 @@ use App\Http\Controllers\HealthRecordController;
 use App\Http\Controllers\IdentificationController;
 use App\Http\Controllers\IndigenousGroupController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Library201\ProfileLibTblAppAuthorityController;
+use App\Http\Controllers\Library201\ProfileLibTblCaseNatureController;
+use App\Http\Controllers\Library201\ProfileLibTblCaseStatusController;
+use App\Http\Controllers\Library201\ProfileLibTblCesStatusAcquiredThruController;
+use App\Http\Controllers\Library201\ProfileLibTblCesStatusController;
+use App\Http\Controllers\Library201\ProfileLibTblCesStatusTypeController;
+use App\Http\Controllers\Library201\ProfileLibTblExpertiseGenController;
+use App\Http\Controllers\Library201\ProfileLibTblExpertiseSpecController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\NonCesTrainingController;
 use App\Http\Controllers\PDFController;
@@ -73,6 +82,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
@@ -434,29 +444,33 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index')->middleware('checkPermission:plantilla_sector_manager_view');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create')->middleware('checkPermission:plantilla_sector_manager_add');
+            Route::get('show{sectorid}', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_add');
             Route::get('{sectorid}', [SectorManagerController::class, 'edit'])->name('sector-manager.edit')->middleware('checkPermission:plantilla_sector_manager_edit');
         });
 
         Route::prefix('department-agency-manager')->group(function () {
             Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
-            Route::get('{sectorid}/show', [SectorManagerController::class, 'show'])->name('sector-manager.show')->middleware('checkPermission:plantilla_sector_manager_view');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
+            Route::get('show/{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'show'])->name('department-agency-manager.show')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
             Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index')->middleware('checkPermission:plantilla_agency_location_manager_view');
             Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show')->middleware('checkPermission:plantilla_agency_location_manager_view');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'edit'])->name('agency-location-manager.edit')->middleware('checkPermission:plantilla_agency_location_manager_view');
         });
 
         Route::prefix('office-manager')->group(function () {
             Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'edit'])->name('office-manager.edit');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
             Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index')->middleware('checkPermission:plantilla_position_manager_view');
             // Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show')->middleware('checkPermission:plantilla_position_manager_view');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'edit'])->name('plantilla-position-manager.edit')->middleware('checkPermission:plantilla_position_manager_view');
             Route::post('{plantilla_id}/update', [PlantillaPositionManagerController::class, 'update'])->name('plantilla-position-manager.update')->middleware('checkPermission:plantilla_position_manager_edit');
             // Route::delete('/{plantilla_id}/destroy', [PlantillaPositionManagerController::class, 'destroy'])->name('plantilla-position-manager.destroy')->middleware('checkPermission:plantilla_position_manager_delete');
         });
@@ -475,6 +489,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('appointee')->group(function () {
 
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'show'])->name('appointee-occupant-manager.show')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
+            Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}', [AppointeeOccupantManagerController::class, 'edit'])->name('appointee-occupant-manager.edit')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
             Route::post('{appointee_id}/update', [AppointeeOccupantManagerController::class, 'update'])->name('appointee-occupant-manager.update')->middleware('checkPermission:plantilla_appointee_occupant_manager_edit');
             Route::post('store', [OtherAssignmentController::class, 'store'])->name('other-assignment.store')->middleware('checkPermission:plantilla_appointee_occupant_manager_add');
             Route::delete('/{detailed_code}/destroy', [OtherAssignmentController::class, 'destroy'])->name('other-assignment.destroy');
@@ -570,6 +585,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
         Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
         Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
+
+        Route::prefix('reports')->group(function () {
+            Route::get('', [StatisticsController::class, 'index'])->name('statistics.index');
+        });
     });
     // End of plantilla routes
 
@@ -824,10 +843,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store/{acno}', [RankTrackerController::class, 'store'])->name('eris-rank-tracker.store');
             Route::get('edit/{acno}/{ctrlno}', [RankTrackerController::class, 'edit'])->name('eris-rank-tracker.edit');
             Route::put('update/{acno}/{ctrlno}', [RankTrackerController::class, 'update'])->name('eris-rank-tracker.update');
-            Route::delete('destroy/{ctrlno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
+            Route::delete('destroy/{ctrlno}/{cesno}', [RankTrackerController::class, 'destroy'])->name('eris-rank-tracker.destroy');
             Route::get('recently-deleted/{acno}', [RankTrackerController::class, 'recentlyDeleted'])->name('eris-rank-tracker.recentlyDeleted');
-            Route::post('restore/recently-deleted/{ctrlno}', [RankTrackerController::class, 'restore'])->name('eris-rank-tracker.restore');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [RankTrackerController::class, 'forceDelete'])->name('eris-rank-tracker.forceDelete');
+            Route::post('restore/recently-deleted/{ctrlno}/{cesno}', [RankTrackerController::class, 'restore'])->name('eris-rank-tracker.restore');
+            Route::delete('force-delete/recently-deleted/{ctrlno}/{cesno}', [RankTrackerController::class, 'forceDelete'])->name('eris-rank-tracker.forceDelete');
         });
     });
     //  end of ERIS routes
@@ -847,9 +866,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('executive-201-profile ')->group(function () {
 
             Route::get('general-reports', [Reports201Controller::class, 'index'])->name('general-reports.index');
-        
+            Route::get('general-reports/pdf/{sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/{filter_retired}/{filter_deceased}/{filter_retirement}/{with_pending_case}/{without_pending_case}/{cesstat_code}/{authority_code}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf');
         });
-
     });
     // End of Reports routes
 
@@ -980,8 +998,123 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store');
             Route::get('edit/{code}', [ProfileLibTblLanguageRefController::class, 'edit'])->name('language-library.edit');
             Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblLanguageRefController::class, 'destroy'])->name('language-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblLanguageRefController::class, 'recentlyDeleted'])->name('language-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'restore'])->name('language-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'forceDelete'])->name('language-library.forceDelete');
+        });
+
+        Route::prefix('ces-status-library')->group(function () {
+            Route::get('index', [ProfileLibTblCesStatusController::class, 'index'])->name('ces-status-library.index');
+            Route::get('create', [ProfileLibTblCesStatusController::class, 'create'])->name('ces-status-library.create');
+            Route::post('store', [ProfileLibTblCesStatusController::class, 'store'])->name('ces-status-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCesStatusController::class, 'edit'])->name('ces-status-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCesStatusController::class, 'update'])->name('ces-status-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCesStatusController::class, 'destroy'])->name('ces-status-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCesStatusController::class, 'recentlyDeleted'])->name('ces-status-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusController::class, 'restore'])->name('ces-status-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusController::class, 'forceDelete'])->name('ces-status-library.forceDelete');
+        });
+
+        Route::prefix('appointing-authority-library')->group(function () {
+            Route::get('index', [ProfileLibTblAppAuthorityController::class, 'index'])->name('appointing-authority-library.index');
+            Route::get('create', [ProfileLibTblAppAuthorityController::class, 'create'])->name('appointing-authority-library.create');
+            Route::post('store', [ProfileLibTblAppAuthorityController::class, 'store'])->name('appointing-authority-library.store');
+            Route::get('edit/{code}', [ProfileLibTblAppAuthorityController::class, 'edit'])->name('appointing-authority-library.edit');
+            Route::put('update/{code}', [ProfileLibTblAppAuthorityController::class, 'update'])->name('appointing-authority-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblAppAuthorityController::class, 'destroy'])->name('appointing-authority-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblAppAuthorityController::class, 'recentlyDeleted'])->name('appointing-authority-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'restore'])->name('appointing-authority-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'forceDelete'])->name('appointing-authority-library.forceDelete');
+        });
+
+        Route::prefix('ces-status-type-library')->group(function () {
+            Route::get('index', [ProfileLibTblCesStatusTypeController::class, 'index'])->name('ces-status-type-library.index');
+            Route::get('create', [ProfileLibTblCesStatusTypeController::class, 'create'])->name('ces-status-type-library.create');
+            Route::post('store', [ProfileLibTblCesStatusTypeController::class, 'store'])->name('ces-status-type-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCesStatusTypeController::class, 'recentlyDeleted'])->name('ces-status-type-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'restore'])->name('ces-status-type-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'forceDelete'])->name('ces-status-type-library.forceDelete');
+        });
+
+        Route::prefix('ces-status-acquired-thru-library')->group(function () {
+            Route::get('index', [ProfileLibTblCesStatusAcquiredThruController::class, 'index'])->name('ces-status-acquired-thru-library.index');
+            Route::get('create', [ProfileLibTblCesStatusAcquiredThruController::class, 'create'])->name('ces-status-acquired-thru-library.create');
+            Route::post('store', [ProfileLibTblCesStatusAcquiredThruController::class, 'store'])->name('ces-status-acquired-thru-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'edit'])->name('ces-status-acquired-thru-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'update'])->name('ces-status-acquired-thru-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'destroy'])->name('ces-status-acquired-thru-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCesStatusAcquiredThruController::class, 'recentlyDeleted'])->name('ces-status-acquired-thru-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'restore'])->name('ces-status-acquired-thru-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusAcquiredThruController::class, 'forceDelete'])->name('ces-status-acquired-thru-library.forceDelete');
+        });
+
+        Route::prefix('case-nature-library')->group(function () {
+            Route::get('index', [ProfileLibTblCaseNatureController::class, 'index'])->name('case-nature-library.index');
+            Route::get('create', [ProfileLibTblCaseNatureController::class, 'create'])->name('case-nature-library.create');
+            Route::post('store', [ProfileLibTblCaseNatureController::class, 'store'])->name('case-nature-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCaseNatureController::class, 'update'])->name('case-nature-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCaseNatureController::class, 'recentlyDeleted'])->name('case-nature-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'restore'])->name('case-nature-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'forceDelete'])->name('case-nature-library.forceDelete');
+        });
+
+        Route::prefix('case-status-library')->group(function () {
+            Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index');
+            Route::get('create', [ProfileLibTblCaseStatusController::class, 'create'])->name('case-status-library.create');
+            Route::post('store', [ProfileLibTblCaseStatusController::class, 'store'])->name('case-status-library.store');
+            Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit');
+            Route::put('update/{code}', [ProfileLibTblCaseStatusController::class, 'update'])->name('case-status-library.update');
+            Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy');
+            Route::get('recently-deleted', [ProfileLibTblCaseStatusController::class, 'recentlyDeleted'])->name('case-status-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'restore'])->name('case-status-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'forceDelete'])->name('case-status-library.forceDelete');
+        });
+
+        Route::prefix('expertise-specialization-library')->group(function () {
+            Route::get('index', [ProfileLibTblExpertiseSpecController::class, 'index'])->name('expertise-specialization.index');
+            Route::get('create', [ProfileLibTblExpertiseSpecController::class, 'create'])->name('expertise-specialization.create');
+            Route::post('store', [ProfileLibTblExpertiseSpecController::class, 'store'])->name('expertise-specialization.store');
+            Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit');
+            Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update');
+            Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy');
+            Route::get('recently-deleted', [ProfileLibTblExpertiseSpecController::class, 'recentlyDeleted'])->name('expertise-specialization.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'restore'])->name('expertise-specialization.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'forceDelete'])->name('expertise-specialization.forceDelete');
+        });
+
+        Route::prefix('expertise-general-library')->group(function () {
+            Route::get('index', [ProfileLibTblExpertiseGenController::class, 'index'])->name('expertise-general.index');
+            Route::get('create', [ProfileLibTblExpertiseGenController::class, 'create'])->name('expertise-general.create');
+            Route::post('store', [ProfileLibTblExpertiseGenController::class, 'store'])->name('expertise-general.store');
+            Route::get('edit/{code}', [ProfileLibTblExpertiseGenController::class, 'edit'])->name('expertise-general.edit');
+            Route::put('update/{code}', [ProfileLibTblExpertiseGenController::class, 'update'])->name('expertise-general.update');
+            Route::delete('destroy/{code}', [ProfileLibTblExpertiseGenController::class, 'destroy'])->name('expertise-general.destroy');
+            Route::get('recently-deleted', [ProfileLibTblExpertiseGenController::class, 'recentlyDeleted'])->name('expertise-general.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'restore'])->name('expertise-general.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'forceDelete'])->name('expertise-general.forceDelete');
         });
     });
-    // End of Library routes
+    // End of Library routes (201)
 
+    // Library routes (ERIS)
+     Route::prefix('eris-library')->group(function () {
+        Route::prefix('rank-tracker-library')->group(function () {
+            Route::get('index', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
+            Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create');
+            Route::post('store', [RankTrackerLibraryController::class, 'store'])->name('rank-tracker-library.store');
+            Route::get('edit/{code}', [RankTrackerLibraryController::class, 'edit'])->name('rank-tracker-library.edit');
+            Route::put('update/{code}', [RankTrackerLibraryController::class, 'update'])->name('rank-tracker-library.update');
+            Route::delete('destroy/{code}', [RankTrackerLibraryController::class, 'destroy'])->name('rank-tracker-library.destroy');
+            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'recentlyDeleted'])->name('rank-tracker-library.recentlyDeleted');
+            Route::post('restore/recently-deleted/{code}', [RankTrackerLibraryController::class, 'restore'])->name('rank-tracker-library.restore');
+            Route::delete('force-delete/recently-deleted/{code}', [RankTrackerLibraryController::class, 'forceDelete'])->name('rank-tracker-library.forceDelete');
+        });
+    });
+    // End of Library routes (ERIS)
 });

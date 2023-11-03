@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class ProfileTblCesStatus extends Model
 {
@@ -16,11 +17,11 @@ class ProfileTblCesStatus extends Model
     const UPDATED_AT = 'lastupd_dt';
 
     protected $table = "profile_tblCESstatus";
-    
+
     protected $primaryKey = 'ctrlno';
 
     protected $fillable = [
-        
+
         'cesno',
         'cesstat_code',
         'acc_code',
@@ -36,6 +37,21 @@ class ProfileTblCesStatus extends Model
         'lastupd_enc',
 
     ];
+
+    public function latestCesStatusCode($cesno)
+    {
+        // retrieving latest ces status thru date appointed_dt
+        $cestatusCode = ProfileTblCesStatus::where('cesno', $cesno)
+            ->orderBy('appointed_dt', 'desc')
+            ->value('cesstat_code');
+
+        // update CESStat_code based on $latestCestatusCode
+        $latestCesStatusCode =  DB::table('profile_tblMain')
+            ->where('cesno', $cesno)
+            ->update(['CESStat_code' => $cestatusCode]);
+
+        return $latestCesStatusCode;
+    }
 
     public function profileLibTblCesStatus(): BelongsTo
     {
@@ -55,5 +71,10 @@ class ProfileTblCesStatus extends Model
     public function profileLibTblAppAuthority(): BelongsTo
     {
         return $this->belongsTo(ProfileLibTblAppAuthority::class, 'official_code');
+    }
+
+    public function personalData()
+    {
+        return $this->belongsTo(PersonalData::class, 'cesno');
     }
 }

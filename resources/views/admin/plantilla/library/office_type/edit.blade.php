@@ -26,7 +26,7 @@
                         <label for="sectorid">Sector name<sup>*</span></label>
                         <select id="sectorid" name="sectorid" required>
                             @foreach ($sectors as $data)
-                            <option value="{{ $data->sectorid }}" {{ $data->sectorid === $datas->sectorid ? 'selected' :
+                            <option value="{{ $data->sectorid }}" {{ $data->sectorid == $datas->sectorid ? 'selected' :
                                 '' }}>
                                 {{ $data->title }}
                             </option>

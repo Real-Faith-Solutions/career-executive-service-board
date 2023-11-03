@@ -10,6 +10,15 @@ use Illuminate\Validation\Rule;
 
 class AwardAndCitationController extends Controller
 {
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+
     public function index($cesno)
     {
         $personalData = PersonalData::find($cesno);
@@ -28,20 +37,16 @@ class AwardAndCitationController extends Controller
         $request->validate([
             'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
-            'date' => ['required'],
+            // 'date' => ['required'],
             
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
 
         $awardAndCitations = new AwardAndCitations([
 
             'awards' => $request->awards,
             'sponsor' => $request->sponsor,
             'award_dt' => $request->date,
-            'encoder' => $encoder,
+            'encoder' => $this->getFullNameAttribute(),
          
         ]);
 
@@ -87,19 +92,15 @@ class AwardAndCitationController extends Controller
 
             'awards' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
             'sponsor' => ['required', 'min:2', 'max:40', 'regex:/^[a-zA-Z0-9\s]*$/'],
-            'date' => ['required'],
+            // 'date' => ['required'],
             
         ]);
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $encoder = $user->userName();
 
         $awardAndCitation = AwardAndCitations::find($ctrlno);
         $awardAndCitation->awards = $request->awards;
         $awardAndCitation->sponsor = $request->sponsor;
         $awardAndCitation->award_dt = $request->date;
-        $awardAndCitation->lastupd_enc = $encoder;
+        $awardAndCitation->lastupd_enc = $this->getFullNameAttribute();
         $awardAndCitation->save();
 
         return to_route('award-citation.index', ['cesno'=>$cesno])->with('message', 'Updated Sucessfully');

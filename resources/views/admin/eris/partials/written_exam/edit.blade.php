@@ -34,7 +34,7 @@
                     
                     <div class="mb-3">
                         <label for="we_date">Written Exam Date<sup>*</sup></label>
-                        <input type="date" id="we_date" name="we_date" value="{{ $writtenExamPRofileData->we_date }}" oninput="validateDateInput(we_date)" required>
+                        <input type="date" id="we_date" name="we_date" value="{{ $examDate }}" oninput="validateDateInput(we_date)" required>
                         <p class="input_error text-red-600"></p>
                         @error('we_date')
                             <span class="invalid" role="alert">

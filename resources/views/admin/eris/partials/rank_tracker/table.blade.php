@@ -14,7 +14,7 @@
             </lord-icon>
         </a>
         
-        <a href="{{ route('eris-rank-tracker.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Rank Tracker</a>
+        <a href="{{ route('eris-rank-tracker.create', ['acno'=>$acno]) }}" class="btn btn-primary" >Add New Rank</a>
     </div>
 
     <div class="table-management-rankTrackers relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -50,7 +50,7 @@
                         </td>
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($rankTrackers->submit_dt)->format('m/d/Y H:i:s.v') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($rankTrackers->submit_dt)->format('m/d/Y ') ?? 'No Record' }} 
                         </td>
 
                         <td class="px-6 py-3">
@@ -75,7 +75,7 @@
                                     </button>
                                 </form>
                             
-                                 <form action="{{ route('eris-rank-tracker.destroy', ['ctrlno'=>$rankTrackers->ctrlno]) }}" method="POST" id="delete_rank_tracker_form{{$rankTrackers->ctrlno}}">
+                                <form action="{{ route('eris-rank-tracker.destroy', ['ctrlno'=>$rankTrackers->ctrlno, 'cesno'=>$cesno]) }}" method="POST" id="delete_rank_tracker_form{{$rankTrackers->ctrlno}}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" id="deleteRankTrackerButton{{$rankTrackers->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">

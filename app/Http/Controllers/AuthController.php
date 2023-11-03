@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\ConfirmationCodeMail;
 use App\Mail\TempCred201;
 use App\Models\DeviceVerification;
+use App\Models\FailedAttempt;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -29,20 +31,54 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+
+        $customMessages = [
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.exists' => 'Invalid credentials',
+        ];
+
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
             'password' => 'required',
-        ]);
+        ], $customMessages);
+
+        $email = $request->email;
+        $ip_address = $request->ip();
+
+        // Find the user by email and ip address on failed attempts
+        $user = FailedAttempt::where('email', $email)->where('ip_address', $ip_address)->first();
+
+        // Check if the user has suspension
+        $user_suspension = $user->suspension ?? 0; // Adjust as needed
+        if ($user && $user->updated_at->addMinutes($user_suspension)->isFuture()) {
+
+            $currentDateTime = Carbon::now();
+            $targetDateTime = $user->updated_at->addMinutes($user_suspension);
+            $diffInMinutes = $currentDateTime->diffInMinutes($targetDateTime);
+            $diffInSeconds = $currentDateTime->diffInSeconds($targetDateTime);
+            // Format the difference in minutes and seconds
+            $formattedDifference = sprintf('%02d:%02d', $diffInMinutes, $diffInSeconds % 60);
+
+            return back()->with('error','Too many failed attempts. You can try again after '.$formattedDifference);
+        }
 
         if (Auth::attempt($credentials, $request->remember)) {
             Cookie::queue(Cookie::make('email', $request->email, 120));
             Cookie::queue(Cookie::make('remember', $request->remember, 120));
 
-            // $userId = Auth::user()->ctrlno;
-            // $device_id = uniqid();
+            FailedAttempt::clearFailedAttempts($email, $ip_address);
 
             return redirect()->intended('/dashboard');
         }
+
+        // counting failed attemps
+        // the user will get a suspension if he failed to login 5x in just 2 minutes
+        // 1st suspension = 5mins, 2nd = 30mins, 3rd = 1hour, then another 1hour suspension if failed again.
+        // suspension will only take effect on the ip address of the device where the failed attemp occured.
+        // when loggedin successfully, failed attemps record on user's ip address will be cleared.
+
+        FailedAttempt::addOrUpdateFailedAttempts($email, $ip_address);
 
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput();
     }

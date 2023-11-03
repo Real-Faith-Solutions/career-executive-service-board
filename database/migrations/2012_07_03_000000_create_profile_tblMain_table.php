@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('profile_tblMain', function (Blueprint $table) {
             $table->id('cesno');
             $table->text('picture')->nullable();
-            $table->string('email')->nullable();
+            $table->string('emailadd')->nullable();
             $table->string('status')->nullable();
             $table->string('title')->nullable();
             $table->string('lastname')->nullable();
@@ -23,11 +23,11 @@ return new class extends Migration
             $table->string('middlename')->nullable();
             $table->string('middleinitial')->nullable();
             $table->string('nickname')->nullable();
-            $table->datetime('birth_date')->nullable();
-            $table->string('birth_place')->nullable();
+            $table->datetime('birthdate')->nullable();
+            $table->string('birthplace')->nullable();
             $table->string('gender')->nullable();
             $table->string('gender_by_choice')->nullable();
-            $table->string('civil_status')->nullable();
+            $table->string('civilstatus')->nullable();
             $table->string('religion')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
@@ -44,6 +44,13 @@ return new class extends Migration
             $table->timestamp('e_date')->nullable();
             $table->timestamp('lastupd_dt')->nullable();
             $table->softDeletes();
+            $table->string('mobileno')->nullable();
+            $table->string('mobileno2')->nullable();
+            $table->string('spouse_fname')->nullable();
+            $table->string('spouse_lname')->nullable();
+            $table->string('spouse_mname')->nullable();
+            $table->string('telno')->nullable();
+            $table->string('mailingaddr')->nullable();
         });
     }
 

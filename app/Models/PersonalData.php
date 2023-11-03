@@ -25,6 +25,7 @@ class PersonalData extends Model
 
     protected $fillable = [
 
+        'cesno',
         'picture',
         'email',
         'status',
@@ -53,21 +54,86 @@ class PersonalData extends Model
         'encoder',
         'acno',
         'remarks',
+        'e_date',
         'lastupd_dt',
 
     ];
 
+    // Accessor to get the 'email' attribute
+    public function getEmailAttribute()
+    {
+        return $this->attributes['emailadd'];
+    }
+
+    // Mutator to set the 'email' attribute
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['emailadd'] = $value;
+    }
+
+    // Accessor to get the 'birth_date' attribute
+    public function getBirthDateAttribute()
+    {
+        return $this->attributes['birthdate'];
+    }
+
+    // Mutator to set the 'birth_date' attribute
+    public function setBirthDateAttribute($value)
+    {
+        $this->attributes['birthdate'] = $value;
+    }
+
+    // Accessor to get the 'birth_place' attribute
+    public function getBirthPlaceAttribute()
+    {
+        return $this->attributes['birthplace'];
+    }
+
+    // Mutator to set the 'birth_place' attribute
+    public function setBirthPlaceAttribute($value)
+    {
+        $this->attributes['birthplace'] = $value;
+    }
+
+    // Accessor to get the 'civil_status' attribute
+    public function getCivilStatusAttribute()
+    {
+        return $this->attributes['civilstatus'];
+    }
+
+    // Mutator to set the 'civil_status' attribute
+    public function setCivilStatusAttribute($value)
+    {
+        $this->attributes['civilstatus'] = $value;
+    }
+
     public function search($search)
     {
         $personalData = PersonalData::query()
-        ->where('cesno', "LIKE" ,"%$search%")
-        ->orWhere('lastname',  "LIKE","%$search%")
-        ->orWhere('firstname',  "LIKE","%$search%")
-        ->orWhere('middlename',  "LIKE","%$search%")
-        ->orWhere('name_extension',  "LIKE","%$search%")
-        ->paginate(25);
+            ->where('cesno', "LIKE", "%$search%")
+            ->orWhere('lastname',  "LIKE", "%$search%")
+            ->orWhere('firstname',  "LIKE", "%$search%")
+            ->orWhere('middlename',  "LIKE", "%$search%")
+            ->orWhere('name_extension',  "LIKE", "%$search%")
+            ->paginate(25);
 
         return $personalData;
+    }
+
+    public function latestCesStatus($cesno)
+    {
+        $latestCestatusCode = PersonalData::find($cesno);
+        
+        if($latestCestatusCode->cesStatus != null)
+        {
+            $latestCestatusDescription = $latestCestatusCode->cesStatus->description;
+        }
+        else
+        {
+            $latestCestatusDescription = null;
+        }
+        
+        return $latestCestatusDescription;
     }
 
     public function spouses(): HasMany
@@ -165,6 +231,13 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
     }
 
+    public function getAppointingAuthorityDescription($personalData)
+    {
+        $currentStatus = ProfileTblCesStatus::where('cesstat_code', $personalData->CESStat_code)->value('official_code');
+        $authority = ProfileLibTblAppAuthority::where('code', $currentStatus)->value('description');
+        return $authority;
+    }
+
     public function medicalHistoryRecords(): HasMany
     {
         return $this->hasMany(MedicalHistory::class);
@@ -208,6 +281,11 @@ class PersonalData extends Model
     public function cities(): BelongsTo
     {
         return $this->belongsTo(ProfileLibCities::class, 'birth_place', 'city_code');
+    }
+
+    public function religions(): BelongsTo
+    {
+        return $this->belongsTo(Religion::class, 'religion', 'ctrlno');
     }
 
     // plantilla

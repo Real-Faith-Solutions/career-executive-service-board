@@ -39,7 +39,7 @@
         
             // Populate the second dropdown based on the selected value of the first dropdown
             @foreach($department as $data)
-                if ("{{ $data->sectorid }}" === sectorDropdown.value) {
+                if ("{{ $data->sectorid }}" == sectorDropdown.value) {
                     const option = document.createElement("option");
                     option.value = "{{ $data->deptid }}";
                     option.text = "{{ $data->title }}";
@@ -56,7 +56,7 @@
             officeDropdown.innerHTML = "";
             agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
             @foreach($agencyLocation as $data)
-                if ("{{ $data->deptid }}" === departmentDropdown.value) {
+                if ("{{ $data->deptid }}" == departmentDropdown.value) {
                     const option = document.createElement("option");
                     option.value = "{{ $data->officelocid }}";
                     option.text = "{{ $data->title }}";
@@ -194,7 +194,8 @@
                 </td>
                 <td class="px-6 py-3">
                     @if ($data->is_appointee == 1)
-                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->title ?? ''}}
+                    {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}
@@ -207,7 +208,8 @@
                 </td>
                 <td class="px-6 py-3">
                     @if ($data->is_appointee !== 1)
-                    {{ $data->personalData->lastname ?? ''}}
+                    {{ $data->personalData->title ?? ''}}
+                    {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}
