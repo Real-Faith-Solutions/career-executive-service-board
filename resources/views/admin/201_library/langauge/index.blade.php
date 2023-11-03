@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a href="">
+    <a href="{{ route('language-library.recentlyDeleted') }}">
         <lord-icon
             src="https://cdn.lordicon.com/jmkrnisz.json"
             trigger="hover"
@@ -50,10 +50,10 @@
                                 </button>
                             </form>
 
-                            <form action="" method="POST" id="delete_examination_form{{$profileLibTblLanguageRefs->CODE}}">
+                            <form action="{{ route('language-library.destroy', ['code'=>$profileLibTblLanguageRefs->code]) }}" method="POST" id="delete_language_library_form{{$profileLibTblLanguageRefs->code}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" id="deleteExaminationButton{{$profileLibTblLanguageRefs->CODE}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
+                                <button type="button" id="deleteLanguageLibraryButton{{$profileLibTblLanguageRefs->code}}" onclick="openConfirmationDialog(this, 'Confirm Deletion', 'Are you sure you want to delete this info?')">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com/jmkrnisz.json"
