@@ -37,7 +37,7 @@
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
             <div>
-                <p>Total CESOs</p>
+                <p>Examinations Taken</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESO }}</h1>
             </div>
 
@@ -52,7 +52,7 @@
     <div class="card bg-green-100">
         <div class="flex justify-between text-green-500 items-center">
             <div>
-                <p>Total Active CESOs</p>
+                <p>Scholarships</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOActive }}</h1>
             </div>
 
@@ -76,7 +76,7 @@
     <div class="card bg-orange-100">
         <div class="flex justify-between text-orange-500 items-center">
             <div>
-                <p>Total Deceased CESOs</p>
+                <p>Research and Studies</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
             </div>
 
@@ -97,7 +97,7 @@
     <div class="card bg-red-100">
         <div class="flex justify-between text-red-500 items-center">
             <div>
-                <p>Total Retired CESOs</p>
+                <p>CES Trainings</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
             </div>
 
@@ -118,7 +118,7 @@
     <div class="card bg-violet-100">
         <div class="flex justify-between text-violet-500 items-center">
             <div>
-                <p>Total Inactive CESOs</p>
+                <p>Non-CES Trainings</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
             </div>
 
@@ -142,7 +142,7 @@
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
             <div>
-                <p>Total CESOs</p>
+                <p>Awards and Citations</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESO }}</h1>
             </div>
 
@@ -157,7 +157,7 @@
     <div class="card bg-green-100">
         <div class="flex justify-between text-green-500 items-center">
             <div>
-                <p>Total Active CESOs</p>
+                <p>Pending Files</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOActive }}</h1>
             </div>
 
@@ -181,7 +181,7 @@
     <div class="card bg-orange-100">
         <div class="flex justify-between text-orange-500 items-center">
             <div>
-                <p>Total Deceased CESOs</p>
+                <p>Accepted Files</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
             </div>
 
@@ -202,7 +202,7 @@
     <div class="card bg-red-100">
         <div class="flex justify-between text-red-500 items-center">
             <div>
-                <p>Total Retired CESOs</p>
+                <p>Rejected Files</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
             </div>
 
@@ -223,7 +223,7 @@
     <div class="card bg-violet-100">
         <div class="flex justify-between text-violet-500 items-center">
             <div>
-                <p>Total Inactive CESOs</p>
+                <p>Pending Case</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
             </div>
 
