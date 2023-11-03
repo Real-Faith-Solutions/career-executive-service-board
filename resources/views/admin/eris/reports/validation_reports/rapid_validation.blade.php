@@ -14,7 +14,7 @@
                     </select>   
 
                     <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
-                        Search
+                        Go
                     </button>
                 </div>
             </form>
