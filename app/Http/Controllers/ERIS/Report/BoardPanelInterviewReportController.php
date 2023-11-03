@@ -57,8 +57,6 @@ class BoardPanelInterviewReportController extends Controller
     {
         $interviewType = $request->input('interview-type');
 
-        // dd($interviewType);
-
         $boardInterview =  'Board Interview';
         $panelBoardInterview =  'Panel Board Interview';
 
