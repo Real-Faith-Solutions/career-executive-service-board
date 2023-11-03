@@ -11,7 +11,6 @@
 @if($userRole !== "user")
     @include('admin.dashboard.partials.ceso_status')
 
-
     <div class="grid gap-4 mb-3 uppercase sm:grid-cols-1 sm:gap-3 lg:grid-cols-3 lg:gap-4">
         <div class="w-full rounded sm:w-auto">
             <div class="bg-white">
