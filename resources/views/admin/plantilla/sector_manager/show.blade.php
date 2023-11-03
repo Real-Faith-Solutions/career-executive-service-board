@@ -3,13 +3,6 @@
 @section('sub', 'Sector Manager')
 @section('content')
 @include('admin.plantilla.header')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    // Your code to run after the DOM has finished loading
-    console.log("DOM is ready!");
-    // You can now access and manipulate DOM elements safely.
-    });
-</script>
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         <li>
@@ -84,17 +77,21 @@
                         <h1 class="text-slate-400 text-sm font-semibold">
                             Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
                         </h1>
-                        <button type="button" class="btn btn-primary"
-                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
-                            Save Changes
-                        </button>
+                        <div>
+                            <button type="button" id="btnEdit" class="btn btn-primary">
+                                Edit Record
+                            </button>
+                            <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                                onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                                Save Changes
+                            </button>
+                        </div>
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
-
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection
