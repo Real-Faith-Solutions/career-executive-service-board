@@ -38,6 +38,7 @@ use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
+use App\Http\Controllers\ERIS\Report\ValidationReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -857,6 +858,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
             Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
             Route::post('panel-and-board-interview', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        });
+
+        Route::prefix('validation-report')->group(function () {
+            Route::get('index', [ValidationReportController::class, 'rapidValidation'])->name('validation-report.index');
+            Route::get('display-validation', [ValidationReportController::class, 'displayValidation'])->name('validation-report.displayValidation');
         });
     });
     // End of ERIS Report routes

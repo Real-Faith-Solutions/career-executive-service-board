@@ -278,6 +278,12 @@
                                 Board/Panel Interview Reports
                             </a>
                         </li>   
+
+                        <li>
+                            <a href="{{ route('validation-report.index') }}" class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                Validation Reports
+                            </a>
+                        </li>  
                     </li>
                 </ul>
             </li>

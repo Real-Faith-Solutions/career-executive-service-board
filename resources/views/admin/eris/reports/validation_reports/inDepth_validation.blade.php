@@ -2,7 +2,7 @@
 @section('title', 'Rapid Validation')
 @section('content')
 
-    <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
+    <h1 class="uppercase font-semibold text-blue-600 text-lg">In Depth Validation</h1>
 
     <div class="my-5 flex justify-between">
         <div class="flex items-center">
@@ -38,7 +38,7 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Rapid Validation Date
+                        In Depth Validation Date
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -59,7 +59,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($rapidValidation as $data) 
+                {{-- board interview --}}
+                @foreach ($inDepthValidation as $data) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                             {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
@@ -82,11 +83,12 @@
                         </td>
                     </tr>
                 @endforeach
+                {{-- end of board interview --}}
             </tbody>
         </table>
     </div>
 
     <div class="m-5">
-        {{ $rapidValidation->links() }}
+        {{ $inDepthValidation->links() }}
     </div>
 @endsection
