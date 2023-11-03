@@ -68,9 +68,14 @@
                                 ? 'disabled' : '' }}>
 
                                 @if($department->mother_deptid == 0) {{-- 0 means mother agency --}}
-                                <option value="0">
+                                <option value="0" selected>
                                     {{ $department->title }}
                                 </option>
+                                @foreach ($motherDepartment as $data)
+                                <option value="{{ $data->deptid }}">
+                                    {{ $data->title }}
+                                </option>
+                                @endforeach
 
                                 @else
                                 @foreach ($motherDepartment as $data)
