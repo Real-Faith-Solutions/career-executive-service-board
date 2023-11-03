@@ -9,7 +9,7 @@
             <form action="{{ route('eris-board-panel-interview-report.displayInterview') }}" method="GET">
                 <div class="flex gap-2">
                     <select name="interview" id="expertise">
-                        <option value="all" {{ $interviewType == 'all' ? 'selected' : '' }}>All</option>
+                        <option value="" {{ $interviewType == 'All' ? 'selected' : '' }}>All</option>
                         <option value="Board Interview" {{ $interviewType == 'Board Interview' ? 'selected' : '' }}>Board Interview</option>
                         <option value="Panel Board Interview" {{ $interviewType == 'Panel Board Interview' ? 'selected' : '' }}>Panel Board Interview</option>
                     </select>   
@@ -22,8 +22,11 @@
         </div>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="POST">
+            <form action="{{ route('eris-interview-report.generateReportPdf') }}" target="_blank" method="POST">
                 @csrf
+
+                <input type="text" name="interview-type" value="{{ $interviewType }}" hidden>
+
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
                 </button>
