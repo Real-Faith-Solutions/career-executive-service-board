@@ -2,33 +2,44 @@
 @section('title', 'Rapid Validation')
 @section('content')
 
-    <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
-
-    <div class="my-5 flex justify-between">
-        <div class="flex items-center">
-            <form action="{{ route('validation-report.displayValidation') }}" method="GET">
-                <div class="flex gap-2">
-                    <select name="validation" id="expertise">
-                        <option value="">Rapid Validation</option>
-                        <option value="In Depth Validation" {{ $validation == 'In Depth Validation' ? 'selected' : '' }}>In Depth Validation</option>
-                    </select>   
-
-                    <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
-                        Go
-                    </button>
-                </div>
-            </form>
-        </div>
-
+    <div class="flex justify-between">
+        <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
+   
         <div class="flex items-center">
             <form action="{{ route('validation-report.generatePdfReport') }}" target="_blank" method="POST">
                 @csrf
 
-                <input type="text" name="validation-type" value="{{ $validation }}" hidden>
+                <input type="date" name="startDate" value="{{ $startDate }}" hidden>
+
+                <input type="date" name="endDate" value="{{ $endDate }}" hidden>
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
                 </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="my-5 flex justify-between">
+        <div class="flex items-center gap-1">
+            <input type="text" name="startDate" value="In Depth Validation"> 
+            <a href="{{ route('in-depth-validation-report.index') }}" class="btn btn-primary mx-1 font-medium text-blue-600">Go</a>
+        </div>        
+
+        <div class="flex items-center">
+            <form action="{{ route('validation-report.index') }}" method="GET">
+                @csrf
+                <div class="flex gap-3">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" name="startDate" value="{{ $startDate }}">
+
+                    <label for="endDate">End Date</label>
+                    <input type="date" name="endDate" value="{{ $endDate }}">
+                    
+                    <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
+                        Filter
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -87,6 +98,6 @@
     </div>
 
     <div class="m-5">
-        {{ $rapidValidation->links() }}
+        {{ $rapidValidation->appends(['startDate' => $startDate, 'endDate' => $endDate])->links() }}
     </div>
 @endsection

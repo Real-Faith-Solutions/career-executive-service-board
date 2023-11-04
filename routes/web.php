@@ -38,6 +38,8 @@ use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
+use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
+use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
 use App\Http\Controllers\ERIS\Report\ValidationReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
@@ -860,10 +862,13 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('panel-and-board-interview-generate-pdf', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
         });
 
-        Route::prefix('validation-report')->group(function () {
-            Route::get('index', [ValidationReportController::class, 'rapidValidation'])->name('validation-report.index');
-            Route::get('display-validation', [ValidationReportController::class, 'displayValidation'])->name('validation-report.displayValidation');
-            Route::post('validation-generate-pdf', [ValidationReportController::class, 'generatePdfReport'])->name('validation-report.generatePdfReport');
+        Route::prefix('rapid-validation-report')->group(function () {
+            Route::get('index', [RapidValidationReportController::class, 'index'])->name('validation-report.index');
+            Route::post('validation-generate-pdf', [RapidValidationReportController::class, 'generatePdfReport'])->name('validation-report.generatePdfReport');
+        });
+
+        Route::prefix('in-depth-validation-report')->group(function () {
+            Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
         });
     });
     // End of ERIS Report routes

@@ -4,13 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            @if ($validationType == null)
-                Rapid Validation
-            @endif
-
-            @if ($validationType == 'In Depth Validation')
-                In Depth Validation
-            @endif
+            Rapid Validation
         </title>
 
         <style>
@@ -108,7 +102,7 @@
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 190px;
+                margin-top: 160px;
             }
 
             .pagenum:before {
@@ -130,13 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    @if ($validationType == null)
-                        Rapid Validation
-                    @endif
-
-                    @if ($validationType == 'In Depth Validation')
-                        In Depth Validation
-                    @endif
+                    Rapid Validation
                 </p>
 
                 <footer>
@@ -175,20 +163,12 @@
                         <th>
                             Remarks
                         </th>
-
-                        @if ($validationType == 'In Depth Validation')
-                            <th>
-                                Deffered Date
-                            </th>
-                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     @php
                         $rowNumber = 1;
                     @endphp
-                    {{-- rapid validation --}}
-                    @if ($validationType == null)
                         @foreach ($rapidValidation as $data)
                             <tr>
                                 <td>
@@ -216,44 +196,6 @@
                                 </td>
                             </tr>
                         @endforeach                 
-                    @endif
-                    {{-- end of rapid validation --}}
-
-                    {{-- In Depth Validation --}}
-                    @if ($validationType == 'In Depth Validation')
-                        @foreach ($inDepthValidation as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
-
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->validator ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->recom ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
-                                </td>
-
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-                            </tr>
-                        @endforeach                 
-                    @endif
-                    {{-- end of In Depth Validation --}}
                 </tbody>
             </table>
         </div>
