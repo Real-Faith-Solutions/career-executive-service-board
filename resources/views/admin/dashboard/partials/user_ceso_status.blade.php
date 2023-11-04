@@ -53,7 +53,7 @@
         <div class="flex justify-between text-green-500 items-center">
             <div>
                 <p>Scholarships</p>
-                <h1 class="text-3xl font-bold">{{ $totalCESOActive }}</h1>
+                <h1 class="text-3xl font-bold">{{ $scholarships }}</h1>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 

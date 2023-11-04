@@ -33,6 +33,7 @@ class DashboardController extends Controller
         $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
 
         $examinationsTaken = $personalData->examinationTakens()->count();
+        $scholarships = $personalData->scholarships()->count();
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -41,6 +42,15 @@ class DashboardController extends Controller
             'totalCESORetired',
             'totalCESOInactive',
             'examinationsTaken',
+            'scholarships',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
+            'totalCESOInactive',
         ));
     }
 }
