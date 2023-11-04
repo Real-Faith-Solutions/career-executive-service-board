@@ -34,6 +34,7 @@ class DashboardController extends Controller
 
         $examinationsTaken = $personalData->examinationTakens()->count();
         $scholarships = $personalData->scholarships()->count();
+        $research = $personalData->researchAndStudies()->count();
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -43,7 +44,7 @@ class DashboardController extends Controller
             'totalCESOInactive',
             'examinationsTaken',
             'scholarships',
-            'totalCESOInactive',
+            'research',
             'totalCESOInactive',
             'totalCESOInactive',
             'totalCESOInactive',
