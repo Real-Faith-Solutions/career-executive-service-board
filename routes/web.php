@@ -37,6 +37,7 @@ use App\Http\Controllers\ERIS\Libray\RankTrackerLibraryController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
+use App\Http\Controllers\Eris\Report\AssessmentCenterReportController;
 use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
 use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
 use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
@@ -870,6 +871,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
             Route::post('generate-pdf', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
+        });
+
+        Route::prefix('assessment-center-report')->group(function () {
+            Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
         });
     });
     // End of ERIS Report routes
