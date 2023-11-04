@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Rapid Validation
+            Assessment Center
         </title>
 
         <style>
@@ -124,7 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Rapid Validation
+                    Assessment Center
                 </p>
 
                 <footer>
@@ -145,19 +145,19 @@
                         </th>
 
                         <th>
-                            Rapid Validation Date
+                            Assessment Center Date
                         </th>
     
                         <th>
-                            Submittion of Document
+                            No. of Takes
                         </th>
     
                         <th>
-                            Validator
+                            Submittion of Docs  
                         </th>
     
                         <th>
-                            Recommendation
+                            Competencies for D.O  
                         </th>
     
                         <th>

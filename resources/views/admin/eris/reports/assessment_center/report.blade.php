@@ -67,6 +67,10 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Assessment Center Date
                     </th>
 
@@ -90,6 +94,12 @@
             <tbody>
                 @foreach ($assessmentCenter as $data) 
                     <tr class="border-b bg-white">
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
+                            {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
+                            {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
+                        </td>
+
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                             {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
                         </td>
