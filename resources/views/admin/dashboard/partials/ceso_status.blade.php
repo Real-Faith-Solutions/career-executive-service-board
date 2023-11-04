@@ -10,8 +10,8 @@
             labels: labels,
             datasets: [
                 {
-                    backgroundColor: ["#DCFCE7", "#ffedd5", "#FEE2E2","#EDE9FE"],
-                    borderColor: ["#DCFCE7", "#ffedd5", "#FEE2E2", "#EDE9FE"],
+                    backgroundColor: ["#86efac", "#fdba74", "#fca5a5","#c4b5fd"],
+                    borderColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd"],
                     data: [{{ $totalCESOActive }}, {{ $totalCESODeceased }} , {{ $totalCESORetired }}, {{ $totalCESOInactive }}],
                     fill: true,
                 },

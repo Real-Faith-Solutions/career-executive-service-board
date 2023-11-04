@@ -21,9 +21,18 @@ use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileTblCesStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ConvertDateTimeToDate;
 
 class AppointeeOccupantManagerController extends Controller
 {
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        // $this->boardInterView = new BoardInterView();
+    }
+
     public function index()
     {
         return view('admin.plantilla.appointee_occupant_manager.index');
@@ -204,6 +213,12 @@ class AppointeeOccupantManagerController extends Controller
         $office = Office::find($officeid);
         $planPosition = PlanPosition::find($plantilla_id);
         $appointees = PlanAppointee::find($appointee_id);
+        $assumDate = $appointees->assum_date;
+        $apptDate = $appointees->appt_date;
+        $convertedAssumDate = $this->convertDateTimeToDate->convertDateGeneral($assumDate);
+        $convertedApptDate = $this->convertDateTimeToDate->convertDateGeneral($apptDate);
+
+
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
 
         $planAppointee = PlanAppointee::query()
@@ -235,6 +250,8 @@ class AppointeeOccupantManagerController extends Controller
             'appointees',
             'otherAssignment',
             'authority',
+            'convertedAssumDate',
+            'convertedApptDate',
 
         ));;
     }
