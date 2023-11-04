@@ -87,7 +87,8 @@ class DepartmentAgencyManagerController extends Controller
         $department = DepartmentAgency::find($deptid);
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
-        $motherDepartment = MotherDept::all();
+        $motherDepartment = MotherDept::orderBy('title', 'asc')
+            ->get();
 
         // $agencyLocation = AgencyLocation::query()
         //     ->where('deptid', $deptid)

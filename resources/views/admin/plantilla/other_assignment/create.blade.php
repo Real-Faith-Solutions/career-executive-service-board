@@ -154,7 +154,10 @@
                         <label for="remarks">Remarks</label>
                         <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea>
                     </div>
-                    <div class="flex justify-end">
+                    <div class="flex justify-end gap-2">
+                        <button type="button" class="btn btn-secondary" data-modal-hide="large-modal">
+                            Close
+                        </button>
                         <button class="btn btn-primary" type="submit">
                             Submit
                         </button>
