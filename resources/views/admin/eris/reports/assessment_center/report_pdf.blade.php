@@ -147,6 +147,10 @@
                         <th>
                             Assessment Center Date
                         </th>
+
+                        <th>
+                            Assessment Center Date
+                        </th>
     
                         <th>
                             No. of Takes
@@ -169,28 +173,34 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($rapidValidation as $data)
+                        @foreach ($assessmentCenter as $data)
                             <tr>
                                 <td>
                                     {{ $rowNumber++ }}
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
+                                    {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
+                                    {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
+                                    {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
                                 </td>
-        
+
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
+                                    {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
                                 </td>
-        
+
                                 <td>
-                                    {{ $data->validator ?? 'No Record' }} 
+                                    {{ $data->numtakes ?? 'No Record' }} 
                                 </td>
-        
+
                                 <td>
-                                    {{ $data->recom ?? 'No Record' }} 
+                                    {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? 'No Record' }} 
                                 </td>
-        
+
+                                <td>
+                                    {{ $data->competencies_d_o ?? 'No Record' }} 
+                                </td>
+
                                 <td>
                                     {{ $data->remarks ?? 'No Record' }} 
                                 </td>

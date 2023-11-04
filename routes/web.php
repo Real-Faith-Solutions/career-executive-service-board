@@ -875,6 +875,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
+            Route::get('generate-pdf', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
         });
     });
     // End of ERIS Report routes

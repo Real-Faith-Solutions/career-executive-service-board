@@ -6,12 +6,18 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Assessment Center</h1>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="POST">
+            <form action="{{ route('assessment-center-report.generateReportPdf') }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
 
                 <input type="date" name="endDate" value="{{ $endDate }}" hidden>
+
+                <input type="text" name="retake"  value="{{ $retake }}" hidden>
+
+                <input type="text" name="failed"  value="{{ $failed }}" hidden>
+
+                <input type="text" name="passed"  value="{{ $passed }}" hidden>
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
