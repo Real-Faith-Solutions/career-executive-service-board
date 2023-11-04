@@ -27,8 +27,12 @@ class DashboardController extends Controller
             ->where('status', 'Inactive')
             ->count();
 
-        $allCookies = $request->header('cookie');
+        // $allCookies = $request->header('cookie');
 
+        $user = auth()->user();
+        $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
+
+        $examinationsTaken = $personalData->examinationTakens()->count();
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -36,7 +40,7 @@ class DashboardController extends Controller
             'totalCESODeceased',
             'totalCESORetired',
             'totalCESOInactive',
-            'allCookies',
+            'examinationsTaken',
         ));
     }
 }
