@@ -75,16 +75,11 @@
                             </span>
                         @enderror
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <label for="remarks">Remarks<sup>*</sup></label>
-                    <textarea name="remarks" id="remarks" cols="10" rows="3" >{{ $assessmentCenterProfileData->remarks }}</textarea>
-                    @error('remarks')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                    @enderror
+                    <div class="mb-3">
+                        <label for="remarks">Remarks<sup>*</sup></label>
+                        <input type="text" name="remarks" value="{{ $assessmentCenterProfileData->remarks }}">
+                    </div>
                 </div>
 
                 <div class="flex justify-end">
