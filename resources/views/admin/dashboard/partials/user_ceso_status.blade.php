@@ -98,7 +98,7 @@
         <div class="flex justify-between text-violet-500 items-center">
             <div>
                 <p>Non-CES Trainings</p>
-                <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
+                <h1 class="text-3xl font-bold">{{ $nonCesTraining }}</h1>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 

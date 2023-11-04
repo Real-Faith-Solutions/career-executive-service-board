@@ -37,6 +37,10 @@ class DashboardController extends Controller
         $research = $personalData->researchAndStudies()->count();
         $cesTraining = $personalData->competencyCesTraining->where('status', 'Completed')->count();
 
+        $otherTraining = $personalData->otherTraining()->count();
+        $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining()->count();
+        $nonCesTraining = $otherTraining + $competencyNonCesAccreditedTraining;
+
         return view('admin.dashboard.index', compact(
             'totalCESO',
             'totalCESOActive',
@@ -47,7 +51,7 @@ class DashboardController extends Controller
             'scholarships',
             'research',
             'cesTraining',
-            'totalCESOInactive',
+            'nonCesTraining',
             'totalCESOInactive',
             'totalCESOInactive',
             'totalCESOInactive',
