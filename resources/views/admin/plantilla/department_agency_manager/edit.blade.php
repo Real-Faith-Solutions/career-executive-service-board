@@ -59,7 +59,7 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="mother_deptid">Agency Name<sup>*</sup></label>
+                            <label for="mother_deptid">Mother Agency<sup>*</sup></label>
                             <select id="mother_deptid" name="mother_deptid" required>
                                 @foreach ($motherDepartment as $data)
                                 <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?

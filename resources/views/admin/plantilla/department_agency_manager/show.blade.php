@@ -39,7 +39,7 @@
 </nav>
 
 <div class="flex justify-end">
-    <a href=""></a>
+    <a href="{{ route('sector-manager.edit', $sector->sectorid) }}" class="btn btn-primary">Go Back</a>
 </div>
 
 <div class="grid lg:grid-cols-2">
@@ -63,20 +63,42 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
-                            <label for="mother_deptid">Agency Name<sup>*</sup></label>
-                            <select id="mother_deptid" name="mother_deptid" required>
+                            <label for="mother_deptid">Mother Agency<sup>*</sup></label>
+                            <select id="mother_deptid" name="mother_deptid" required {{ $department->mother_deptid == 0
+                                ? 'disabled' : '' }}>
+
+                                @if($department->mother_deptid == 0) {{-- 0 means mother agency --}}
+                                <option value="0" selected>
+                                    {{ $department->title }}
+                                </option>
+                                @foreach ($motherDepartment as $data)
+                                <option value="{{ $data->deptid }}">
+                                    {{ $data->title }}
+                                </option>
+                                @endforeach
+
+                                @else
                                 @foreach ($motherDepartment as $data)
                                 <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
                                     'selected' : ''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
+                                @endif
+
+
                             </select>
                             @error('mother_deptid')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
+                            @if($department->mother_deptid == 0)
+                            <h1 class="text-slate-500 text-sm italic">
+                                Note: This Agency is mother Agency. Cannot be change
+                            </h1>
+                            @endif
+
                         </div>
 
                         <div class="mb-3">

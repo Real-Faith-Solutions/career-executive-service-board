@@ -108,7 +108,8 @@
 
                 <form
                     action="{{ route('other-assignment.update', ['detailed_code' =>  $otherAssignment->detailed_code ]) }}"
-                    method="POST">
+                    method="POST" enctype="multipart/form-data" id="updateForm"
+                    onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                     @csrf
                     <input type="hidden" name="cesno" value="{{ $appointees->personalData->cesno }}">
                     <div class="grid grid-cols-2 gap-2">
@@ -250,9 +251,15 @@
                             rows="10">{{ $otherAssignment->remarks }}</textarea>
                     </div>
                     <div class="flex justify-end">
-                        <button class="btn btn-primary" type="submit">
-                            Submit
-                        </button>
+                        <div>
+                            <button type="button" id="btnEdit" class="btn btn-primary">
+                                Edit Record
+                            </button>
+                            <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                                onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                                Save Changes
+                            </button>
+                        </div>
                     </div>
                 </form>
 
@@ -261,5 +268,5 @@
     </div>
 </div>
 
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection
