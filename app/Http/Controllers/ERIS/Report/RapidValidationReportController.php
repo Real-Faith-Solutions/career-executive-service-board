@@ -24,7 +24,7 @@ class RapidValidationReportController extends Controller
             $rapidValidation = RapidValidation::paginate(25);
         }
 
-        return view('admin.eris.reports.validation_reports.rapid_validation', [
+        return view('admin.eris.reports.validation_reports.rapid_validation.report', [
             'rapidValidation' => $rapidValidation,
             'startDate' => $startDate,
             'endDate' => $endDate,
@@ -45,7 +45,7 @@ class RapidValidationReportController extends Controller
             $rapidValidation = RapidValidation::all();
         }
 
-        $pdf = Pdf::loadView('admin.eris.reports.validation_reports.rapid_validation_report_pdf', [
+        $pdf = Pdf::loadView('admin.eris.reports.validation_reports.rapid_validation.report_pdf', [
             'rapidValidation' => $rapidValidation,
         ])
         ->setPaper('a4', 'landscape');
@@ -56,6 +56,8 @@ class RapidValidationReportController extends Controller
     public function rapidValidationDateFilter($startDate, $endDate)
     {
         $rapidValidation = RapidValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
+        ->where('dteassign', '>=', $startDate)
+        ->where('dteassign', '<=', $endDate)
         ->paginate(25);
 
         return $rapidValidation;

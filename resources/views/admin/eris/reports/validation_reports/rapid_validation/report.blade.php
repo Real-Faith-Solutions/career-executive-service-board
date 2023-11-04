@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
    
         <div class="flex items-center">
-            <form action="{{ route('validation-report.generatePdfReport') }}" target="_blank" method="POST">
+            <form action="{{ route('rapid-validation-report.generatePdfReport') }}" target="_blank" method="POST">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -27,7 +27,7 @@
         </div>        
 
         <div class="flex items-center">
-            <form action="{{ route('validation-report.index') }}" method="GET">
+            <form action="{{ route('rapid-validation-report.index') }}" method="GET">
                 @csrf
                 <div class="flex gap-3">
                     <label for="startDate">Start Date</label>

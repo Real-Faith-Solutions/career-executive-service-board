@@ -6,10 +6,12 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">In Depth Validation</h1>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="POST">
+            <form action="{{ route('in-depth-validation-report.generateReportPdf') }}" target="_blank" method="POST">
                 @csrf
 
-                {{-- <input type="text" name="validation-type" value="{{ $validation }}" hidden> --}}
+                <input type="date" name="startDate" value="{{ $startDate }}" hidden>
+
+                <input type="date" name="endDate" value="{{ $endDate }}" hidden>
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
@@ -21,11 +23,11 @@
     <div class="my-5 flex justify-between">
         <div class="flex items-center">
             <input type="text" name="startDate" value="Rapid Validation"> 
-            <a href="{{ route('validation-report.index') }}" class="btn btn-primary mx-1 font-medium text-blue-600">Go</a>
+            <a href="{{ route('rapid-validation-report.index') }}" class="btn btn-primary mx-1 font-medium text-blue-600">Go</a>
         </div>        
 
         <div class="flex items-center">
-            <form action="" method="GET">
+            <form action="{{ route('in-depth-validation-report.index') }}" method="GET">
                 @csrf
                 <div class="flex gap-3">
                     <label for="startDate">Start Date</label>
@@ -72,7 +74,6 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- board interview --}}
                 @foreach ($inDepthValidation as $data) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
@@ -100,7 +101,6 @@
                         </td>
                     </tr>
                 @endforeach
-                {{-- end of board interview --}}
             </tbody>
         </table>
     </div>

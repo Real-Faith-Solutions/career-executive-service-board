@@ -863,12 +863,13 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('rapid-validation-report')->group(function () {
-            Route::get('index', [RapidValidationReportController::class, 'index'])->name('validation-report.index');
-            Route::post('validation-generate-pdf', [RapidValidationReportController::class, 'generatePdfReport'])->name('validation-report.generatePdfReport');
+            Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index');
+            Route::post('generate-pdf', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport');
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
+            Route::post('generate-pdf', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
         });
     });
     // End of ERIS Report routes
