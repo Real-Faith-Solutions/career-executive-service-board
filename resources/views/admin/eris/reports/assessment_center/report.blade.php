@@ -22,23 +22,23 @@
 
     {{-- <div class="my-5 flex"> --}}
         <div class="my-5 flex items-center">
-            <form action="" method="GET">
+            <form action="{{ route('assessment-center-report.index') }}" method="GET">
                 @csrf
                 <div class="flex justify-between gap-80">
                     <div class="flex items-center gap-3">
                         <div class="flex">
                             <label for="passed" class="mt-1">Passed:</label>
-                            <input type="checkbox" name="passed" value="passed">
+                            <input type="checkbox" name="passed" {{ $passed == "passed" ? 'checked' : '' }} value="passed">
                         </div>
                         
                         <div class="flex">
                             <label for="failed" class="mt-1">Failed:</label>
-                            <input type="checkbox" name="failed" value="failed">
+                            <input type="checkbox" name="failed" {{ $failed == "failed" ? 'checked' : '' }} value="failed">
                         </div>
 
                         <div class="flex">
-                            <label for="failed" class="mt-1">Retakers:</label>
-                            <input type="checkbox" name="failed" value="failed">
+                            <label for="retake" class="mt-1">Retakers:</label>
+                            <input type="checkbox" name="retake" {{ $retake == "true" ? 'checked' : '' }} value="true">
                         </div>
                     </div>        
     
