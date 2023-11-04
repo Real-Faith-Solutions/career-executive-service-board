@@ -43,6 +43,16 @@ class DashboardController extends Controller
 
         $awardsAndCitations = $personalData->awardsAndCitations()->count();
 
+        $pendingCase = 0;
+
+        if($personalData->caseRecords->isNotEmpty()){
+            foreach($personalData->caseRecords as $caseRecord){
+                if($caseRecord->caseStatusCode->TITLE === 'Pending'){
+                    $pendingCase++;
+                }
+            }
+        }
+
         return view('admin.dashboard.index', compact(
             'totalCESO',
             'totalCESOActive',
@@ -55,7 +65,7 @@ class DashboardController extends Controller
             'cesTraining',
             'nonCesTraining',
             'awardsAndCitations',
-            'totalCESOInactive',
+            'pendingCase',
         ));
     }
 }

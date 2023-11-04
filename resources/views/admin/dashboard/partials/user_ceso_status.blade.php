@@ -175,7 +175,7 @@
         <div class="flex justify-between text-orange-500 items-center">
             <div>
                 <p>Pending Case</p>
-                <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
+                <h1 class="text-3xl font-bold">{{ $pendingCase }}</h1>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
