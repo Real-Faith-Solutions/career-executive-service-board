@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Plantilla\Reports;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalData;
 use App\Models\Plantilla\DepartmentAgency;
+use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\SectorManager;
@@ -17,14 +18,21 @@ class StatisticsController extends Controller
     public function generatePDF($deptid)
     {
 
-        $motherDepartmentAgency = DepartmentAgency::find($deptid);
+        $motherDepartmentAgency = MotherDept::find($deptid);
 
         // planPosition.office.agencyLocation.departmentAgency.motherDepartment
-        $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
-            $query->where('deptid', $deptid);
+        // $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
+        //     $query->where('deptid', $deptid);
+        // })
+        //     ->where('is_ces_pos', 1)
+        //     ->where('pres_apptee', 1)
+        //     ->count();
+        $totalPosition = MotherDept::whereHas('deptAgency.agencyLocation.office.planPosition', function ($query) use ($deptid) {
+            $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1);
         })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
+            ->where('deptid', $deptid)
+
             ->count();
 
         $occupiedCESPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition.planAppointee', function ($query) {
