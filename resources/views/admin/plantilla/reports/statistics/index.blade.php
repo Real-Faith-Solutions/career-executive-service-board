@@ -190,7 +190,7 @@
                 <div class="rounded-lg shadow-md">
                     <div class="bg-blue-100 text-white p-4 grid grid-cols-3 flex items-center">
                         <h1 class=" text-center font-semibold whitespace-nowrap uppercase text-blue-500 col-start-2">
-                            Plantilla Statistics Summary per Department
+                            C E S Occupancy Report
                         </h1>
                         {{-- <div class="flex items-center justify-end">
                             <form class="toggleForm">
