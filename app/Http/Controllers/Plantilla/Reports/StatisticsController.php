@@ -16,7 +16,7 @@ class StatisticsController extends Controller
     public function index(Request $request)
     {
         $motherDepartmentAgency = DepartmentAgency::query()
-            ->where('mother_deptid', 0)
+            ->where('is_national_government', 1)
             ->select('title', 'deptid')
             ->orderBy('title', 'asc')
             ->get();
