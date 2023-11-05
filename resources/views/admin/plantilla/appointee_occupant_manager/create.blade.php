@@ -20,17 +20,7 @@
     }
 </script>
 
-<script>
-    const classificationBasis = (val) => {
-        const titleAndDateTextArea = document.querySelector('#titleAndDate');
-        
-        @foreach ($classBasis as $data)
-            if ("{{ $data->cbasis_code }}" == val) { // pansamantala basis muna ayaw gumana ng title
-                titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
-            }
-        @endforeach
-    }
-</script>
+
 
 <script>
     const posCode = (val) => {
@@ -356,3 +346,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    const classificationBasis = (val) => {
+        const titleAndDateTextArea = document.querySelector('#titleAndDate');
+        
+        @foreach ($classBasis as $data)
+            if ("{{ $data->cbasis_code }}" == val) { // pansamantala basis muna ayaw gumana ng title
+                titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            }
+        @endforeach
+    }
+</script>
