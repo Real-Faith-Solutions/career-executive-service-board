@@ -21,18 +21,11 @@ class StatisticsController extends Controller
         $motherDepartmentAgency = MotherDept::find($deptid);
 
         // planPosition.office.agencyLocation.departmentAgency.motherDepartment
-        // $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
-        //     $query->where('deptid', $deptid);
-        // })
-        //     ->where('is_ces_pos', 1)
-        //     ->where('pres_apptee', 1)
-        //     ->count();
-        $totalPosition = MotherDept::whereHas('deptAgency.agencyLocation.office.planPosition', function ($query) use ($deptid) {
-            $query->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1);
+        $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
+            $query->where('deptid', $deptid);
         })
-            ->where('deptid', $deptid)
-
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
             ->count();
 
         $occupiedCESPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition.planAppointee', function ($query) {
