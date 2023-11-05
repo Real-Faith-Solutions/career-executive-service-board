@@ -18,7 +18,7 @@ class StatisticsController extends Controller
     public function generatePDF($deptid)
     {
 
-        $motherDepartmentAgency = MotherDept::find($deptid);
+        $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
         // planPosition.office.agencyLocation.departmentAgency.motherDepartment
         $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
