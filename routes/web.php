@@ -81,6 +81,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
@@ -587,6 +588,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('reports')->group(function () {
             Route::get('', [StatisticsController::class, 'index'])->name('statistics.index');
+            Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
         });
     });
     // End of plantilla routes
@@ -1093,7 +1095,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // End of Library routes (201)
 
     // Library routes (ERIS)
-     Route::prefix('eris-library')->group(function () {
+    Route::prefix('eris-library')->group(function () {
         Route::prefix('rank-tracker-library')->group(function () {
             Route::get('index', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
             Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create');

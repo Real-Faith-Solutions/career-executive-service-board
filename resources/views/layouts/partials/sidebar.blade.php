@@ -122,11 +122,11 @@
                             d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span class="ml-3 flex-1 whitespace-nowrap">Plantilla</span>
+                    <span class="ml-3 flex-1 whitespace-nowrap">Plantilla Main Screen</span>
                 </a>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="{{ route('statistics.index') }}"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -137,8 +137,41 @@
                     </svg>
                     <span class="ml-3 flex-1 whitespace-nowrap">Plantilla reports</span>
                 </a>
-            </li>
+            </li> --}}
 
+            <li>
+                <button type="button"
+                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
+                    aria-controls="dropdown-plantilla-reports" data-collapse-toggle="dropdown-plantilla-reports">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                        <path
+                            d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
+                        <path
+                            d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
+                    </svg>
+                    <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Plantilla Reports</span>
+                    <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <ul id="dropdown-plantilla-reports" class="hidden space-y-2 py-2">
+                    <li>
+                        <a href="{{ route('statistics.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Plantilla Statistics
+                        </a>
+                        <a href="{{ route('occupancy-report.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Occupancy report
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <button type="button"
                     class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
@@ -497,23 +530,23 @@
                     </a>
 
                     <a href="{{ route('case-nature-library.index') }}"
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                         Case Nature
                     </a>
 
                     <a href="{{ route('case-status-library.index') }}"
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Case Status 
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Case Status
                     </a>
 
                     <a href="{{ route('expertise-general.index') }}"
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Expertise General 
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Expertise General
                     </a>
 
                     <a href="{{ route('expertise-specialization.index') }}"
-                    class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Expertise Specialization 
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Expertise Specialization
                     </a>
                 </li>
             </ul>

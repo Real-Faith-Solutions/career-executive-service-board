@@ -16,18 +16,33 @@ class StatisticsController extends Controller
     public function index(Request $request)
     {
         $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
+
         $plantillaAll = PlanAppointee::all()->count();
+
+
         $plantillaCES = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', 1);
+            $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1);
         })->count();
+
         $plantillaNonCES = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->whereNot('is_ces_pos', 1);
+            $query->where('is_ces_pos', '!=', 1)
+                ->orWhere('pres_apptee', '!=', 1);
         })->count();
-        $percentageCES = ($plantillaCES / $plantillaAll) * 100;
-        $percentageNonCES = ($plantillaNonCES / $plantillaAll) * 100;
+
+        if ($plantillaAll != null) {
+            $percentageCES = ($plantillaCES / $plantillaAll) * 100;
+            $percentageNonCES = ($plantillaNonCES / $plantillaAll) * 100;
+        } else {
+            $percentageCES = null;
+            $percentageNonCES = null;
+        }
+
+
 
         $totalMaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', 1);
+            $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1);
         })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
@@ -36,7 +51,8 @@ class StatisticsController extends Controller
 
 
         $totalFemaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', 1);
+            $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1);;
         })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');
@@ -44,14 +60,16 @@ class StatisticsController extends Controller
             ->count();
 
         $totalMaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->whereNot('is_ces_pos', 1);
+            $query->where('is_ces_pos', '!=', 1)
+                ->orWhere('pres_apptee', '!=', 1);
         })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Male');
             })
             ->count();
         $totalFemaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->whereNot('is_ces_pos', 1);
+            $query->where('is_ces_pos', '!=', 1)
+                ->orWhere('pres_apptee', '!=', 1);
         })
             ->whereHas('personalData', function ($query) {
                 $query->where('gender', 'Female');

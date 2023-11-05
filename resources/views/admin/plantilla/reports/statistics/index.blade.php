@@ -41,9 +41,9 @@
 
 @extends('layouts.app')
 @section('content')
-@section('title', 'Plantilla reports')
+@section('title', 'Plantilla Statistics')
 <h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500 mb-5">
-    Plantilla Reports
+    Plantilla Statistics
 </h1>
 
 <div class="sm:gid-cols-1 mb-3 grid gap-2 md:grid-cols-2 lg:grid-cols-4 lg:grid-row-2 sm:grid-row-1">
