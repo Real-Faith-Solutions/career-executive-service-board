@@ -18,6 +18,7 @@ class StatisticsController extends Controller
         $motherDepartmentAgency = DepartmentAgency::query()
             ->where('mother_deptid', 0)
             ->select('title', 'deptid')
+            ->orderBy('title', 'asc')
             ->get();
         $chartsAndDatas = $this->chartsAndDatas();
         $totalMaleCESOChart = $chartsAndDatas['totalMaleCESOChart'];
