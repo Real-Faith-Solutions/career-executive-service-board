@@ -132,6 +132,14 @@
     </div>
 
     <div class="m-5">
-        {{ $assessmentCenter->appends(['startDate' => $startDate, 'endDate' => $endDate])->links() }}
+        {{ 
+            $assessmentCenter->appends([
+                'startDate' => $startDate, 
+                'endDate' => $endDate, 
+                'passed' => $passed, 
+                'failed' => $failed,
+                'retake' => $retake, 
+            ])->links() 
+        }}
     </div>
 @endsection

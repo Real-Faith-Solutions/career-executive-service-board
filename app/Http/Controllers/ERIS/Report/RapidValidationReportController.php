@@ -38,7 +38,10 @@ class RapidValidationReportController extends Controller
 
         if($startDate && $endDate)
         {
-            $rapidValidation = $this->rapidValidationDateFilter($startDate, $endDate);
+            $rapidValidation = RapidValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
+            ->where('dteassign', '>=', $startDate)
+            ->where('dteassign', '<=', $endDate)
+            ->get();
         }
         else
         {
