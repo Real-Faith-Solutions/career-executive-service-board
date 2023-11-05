@@ -49,8 +49,31 @@ class DashboardController extends Controller
             })
             ->count();
 
-        $allCookies = $request->header('cookie');
+        // $allCookies = $request->header('cookie');
 
+        $user = auth()->user();
+        $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
+
+        $examinationsTaken = $personalData->examinationTakens()->count();
+        $scholarships = $personalData->scholarships()->count();
+        $research = $personalData->researchAndStudies()->count();
+        $cesTraining = $personalData->competencyCesTraining->where('status', 'Completed')->count();
+
+        $otherTraining = $personalData->otherTraining()->count();
+        $competencyNonCesAccreditedTraining = $personalData->competencyNonCesAccreditedTraining()->count();
+        $nonCesTraining = $otherTraining + $competencyNonCesAccreditedTraining;
+
+        $awardsAndCitations = $personalData->awardsAndCitations()->count();
+
+        $pendingCase = 0;
+
+        if($personalData->caseRecords->isNotEmpty()){
+            foreach($personalData->caseRecords as $caseRecord){
+                if($caseRecord->caseStatusCode->TITLE === 'Pending'){
+                    $pendingCase++;
+                }
+            }
+        }
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -58,7 +81,13 @@ class DashboardController extends Controller
             'totalCESODeceased',
             'totalCESORetired',
             'totalCESOInactive',
-            'allCookies',
+            'examinationsTaken',
+            'scholarships',
+            'research',
+            'cesTraining',
+            'nonCesTraining',
+            'awardsAndCitations',
+            'pendingCase',
         ));
     }
 }
