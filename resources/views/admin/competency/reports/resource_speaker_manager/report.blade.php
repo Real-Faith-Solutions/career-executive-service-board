@@ -7,23 +7,28 @@
 
     <div class="my-5 flex justify-between">
         <div class="flex items-center">
-            <form action="" method="GET">
+            <form action="{{ route('competency-management-sub-modules-report.resourceSpeakerIndexReport') }}" method="GET">
                 @csrf
-                <select name="expertise" id="expertise" onchange="this.form.submit()">
-                    <option disabled selected>Select Expertise</option>
-                    <option value="all">All</option>
-                    @foreach ($expertise as $resourceSpeakers)
-                        @if ($resourceSpeakers->expertise == $search)
-                            <option value="{{ $resourceSpeakers->expertise }}" selected>{{ $resourceSpeakers->expertise }}</option>
-                        @else
-                            <option value="{{ $resourceSpeakers->expertise }}">{{ $resourceSpeakers->expertise }}</option>
-                        @endif
-                    @endforeach
-                </select>   
+                <div class="flex gap-2">
+                    <select name="expertise" id="expertise">
+                        <option value="all">All</option>
+                        @foreach ($expertise as $resourceSpeakers)
+                            @if ($resourceSpeakers->expertise == $search)
+                                <option value="{{ $resourceSpeakers->expertise }}" selected>{{ $resourceSpeakers->expertise }}</option>
+                            @else
+                                <option value="{{ $resourceSpeakers->expertise }}">{{ $resourceSpeakers->expertise }}</option>
+                            @endif
+                        @endforeach
+                    </select>   
+
+                    <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
+                        Search
+                    </button>
+                </div>
             </form>
         </div>
 
-        <div>
+        <div class="flex items-center">
             <form action="{{ route('competency-management-sub-modules-report.resourceSpeakerGenerateReport') }}" target="_blank" method="POST">
                 @csrf
                 <input type="text" name="expertise" value="{{ $search }}" hidden>
@@ -31,7 +36,7 @@
                     Generate PDF Report
                 </button>
             </form>
-        </div>  
+        </div>
     </div>
 
     <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

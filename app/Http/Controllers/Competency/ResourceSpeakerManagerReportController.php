@@ -16,7 +16,7 @@ class ResourceSpeakerManagerReportController extends Controller
 
         $expertise = ResourceSpeaker::distinct()->get(['expertise']);
 
-        if($search == 'all')
+        if($search == null || $search == 'all')
         {
             $resourceSpeaker = ResourceSpeaker::paginate(25);
         }
@@ -24,7 +24,7 @@ class ResourceSpeakerManagerReportController extends Controller
         {
             $resourceSpeaker = ResourceSpeaker::where('expertise', $search)->paginate(25);
         }
-
+    
         return view('admin.competency.reports.resource_speaker_manager.report', compact('resourceSpeaker', 'expertise', 'search'));
     }
 
