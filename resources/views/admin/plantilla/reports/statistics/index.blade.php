@@ -221,7 +221,9 @@
                                 @foreach ($motherDepartmentAgency as $data)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-no-wrap">
-                                        <a class="text-sm leading-5 text-gray-900 hover:text-blue-500" href="#">
+                                        <a class="text-sm leading-5 text-gray-900 hover:text-blue-500"
+                                            href="{{ route('statistics.pdf', $data->deptid) }}" target="_blank"
+                                            title="Generate PDF">
                                             {{ $data->title }}
                                         </a>
                                     </td>

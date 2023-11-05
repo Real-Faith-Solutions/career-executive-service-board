@@ -592,7 +592,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
 
         Route::prefix('reports')->group(function () {
-            Route::get('', [StatisticsController::class, 'index'])->name('statistics.index');
+            Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
+            Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf');
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
         });
     });

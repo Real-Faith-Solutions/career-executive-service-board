@@ -8,11 +8,37 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\SectorManager;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Symfony\Component\Finder\Iterator\DepthRangeFilterIterator;
 
 class StatisticsController extends Controller
 {
+    public function generatePDF($deptid)
+    {
+
+        $motherDepartmentAgency = DepartmentAgency::find($deptid);
+
+        $totalPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition', function ($query) {
+        })->count();
+
+        $occupiedCESPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition.planAppointee', function ($query) {
+            // unfinish
+        })->count();
+
+
+        $pdf = Pdf::loadView(
+            'admin.plantilla.reports.statistics.pdf',
+            compact(
+                'motherDepartmentAgency',
+                'totalPosition',
+                'occupiedCESPosition',
+            )
+        )
+            ->setPaper('a4', 'portrait');
+        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+    }
+
     public function index(Request $request)
     {
         $motherDepartmentAgency = DepartmentAgency::query()
@@ -50,6 +76,7 @@ class StatisticsController extends Controller
             'recentAppointee',
         ));
     }
+
 
     private function chartsAndDatas()
     {
