@@ -74,13 +74,14 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="remarks">Remarks<sup>*</sup></label>
+                        <input type="text" name="remarks">
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="remarks">Remarks<sup>*</sup></label>
-                    <textarea name="remarks" id="remarks" cols="10" rows="3" ></textarea>
-                </div>
-
+            
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
                         Save changes

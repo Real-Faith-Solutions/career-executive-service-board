@@ -258,7 +258,8 @@
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
-                                            value="{{ $appointees->assum_date }}" required />
+                                            value="{{ $convertedAssumDate }}" required />
+
                                         @error('assum_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -269,7 +270,7 @@
                                     <div class="mb-3">
                                         <label for="appt_date">Appointment Date<sup>*</sup></label>
                                         <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ $appointees->appt_date }}" required />
+                                            value="{{ $convertedApptDate }}" required />
                                         @error('appt_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
