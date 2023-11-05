@@ -170,7 +170,7 @@
                                         {{ $data->personalData->name_extension }}
                                         {{ $data->personalData->mi }}
                                     </p>
-                                    <p>
+                                    <p class="text-end">
                                         {{ $data->planPosition->pos_default }}
                                     </p>
                                 </div>
