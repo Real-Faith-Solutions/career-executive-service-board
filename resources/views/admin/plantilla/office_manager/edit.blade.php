@@ -4,6 +4,18 @@
 @section('content')
 @include('admin.plantilla.header')
 
+<script>
+    const classificationBasis = (val) => {
+        const titleAndDateTextArea = document.querySelector('#titleAndDate');
+        
+        @foreach ($classBasis as $data)
+            if ("{{ $data->cbasis_code }}" == val) { // pansamantala basis muna ayaw gumana ng title
+                titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            }
+        @endforeach
+    }
+</script>
+
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
         <li>
