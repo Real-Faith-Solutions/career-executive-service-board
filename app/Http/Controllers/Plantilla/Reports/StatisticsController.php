@@ -15,6 +15,43 @@ class StatisticsController extends Controller
 {
     public function index(Request $request)
     {
+        $motherDepartmentAgency = DepartmentAgency::query()
+            ->where('mother_deptid', 0)
+            ->select('title', 'deptid')
+            ->get();
+        $chartsAndDatas = $this->chartsAndDatas();
+        $totalMaleCESOChart = $chartsAndDatas['totalMaleCESOChart'];
+        $totalFemaleCESOChart = $chartsAndDatas['totalFemaleCESOChart'];
+        $totalMaleNonCESOChart = $chartsAndDatas['totalMaleNonCESOChart'];
+        $totalFemaleNonCESOChart = $chartsAndDatas['totalFemaleNonCESOChart'];
+        $plantillaAll = $chartsAndDatas['plantillaAll'];
+        $plantillaCES = $chartsAndDatas['plantillaCES'];
+        $percentageCES = $chartsAndDatas['percentageCES'];
+        $plantillaNonCES = $chartsAndDatas['plantillaNonCES'];
+        $percentageNonCES = $chartsAndDatas['percentageNonCES'];
+        $totalMale = $chartsAndDatas['totalMale'];
+        $totalFemale = $chartsAndDatas['totalFemale'];
+        $recentAppointee = $chartsAndDatas['recentAppointee'];
+
+        return view('admin.plantilla.reports.statistics.index', compact(
+            'motherDepartmentAgency',
+            'totalMaleCESOChart',
+            'totalFemaleCESOChart',
+            'totalMaleNonCESOChart',
+            'totalFemaleNonCESOChart',
+            'plantillaAll',
+            'plantillaCES',
+            'percentageCES',
+            'plantillaNonCES',
+            'percentageNonCES',
+            'totalMale',
+            'totalFemale',
+            'recentAppointee',
+        ));
+    }
+
+    private function chartsAndDatas()
+    {
         $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
 
         $plantillaAll = PlanAppointee::all()->count();
@@ -37,8 +74,6 @@ class StatisticsController extends Controller
             $percentageCES = null;
             $percentageNonCES = null;
         }
-
-
 
         $totalMaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
             $query->where('is_ces_pos', 1)
@@ -79,6 +114,25 @@ class StatisticsController extends Controller
         $totalMale = $totalMaleCESOChart + $totalMaleNonCESOChart;
         $totalFemale = $totalFemaleCESOChart + $totalFemaleNonCESOChart;
 
+        $datas = [
+            'recentAppointee' => $recentAppointee,
+            'plantillaAll' => $plantillaAll,
+            'plantillaCES' => $plantillaCES,
+            'plantillaNonCES' => $plantillaNonCES,
+            'totalMaleCESOChart' => $totalMaleCESOChart,
+            'totalFemaleCESOChart' => $totalFemaleCESOChart,
+            'totalMaleNonCESOChart' => $totalMaleNonCESOChart,
+            'totalFemaleNonCESOChart' => $totalFemaleNonCESOChart,
+            'percentageCES' => $percentageCES,
+            'percentageNonCES' => $percentageNonCES,
+            'totalMale' => $totalMale,
+            'totalFemale' => $totalFemale,
+        ];
+        return $datas;
+    }
+
+    private function oldStatistics(Request $request)
+    {
         $sectorToggle = $request->input('sectorToggle');
 
         $toggleFilter = DepartmentAgency::query();
@@ -153,7 +207,6 @@ class StatisticsController extends Controller
                 })
                 ->count();
 
-            // Store the statistics for this agency in the array
             $agencyStatistics[] = [
                 'agency' => $agency,
                 'total_male_ceso' => $totalMaleCESO,
@@ -169,26 +222,13 @@ class StatisticsController extends Controller
 
         $sectors = SectorManager::orderBy('title', 'ASC')->get();
 
+        $datas = [
+            'sectorToggle' => $sectorToggle,
+            'departmentAgencies' => $departmentAgencies,
+            'agencyStatistics' => $agencyStatistics,
+            'sectors' => $sectors,
+        ];
 
-
-
-        return view('admin.plantilla.reports.statistics.index', compact(
-            'recentAppointee',
-            'sectorToggle',
-            'plantillaAll',
-            'plantillaCES',
-            'plantillaNonCES',
-            'totalMaleCESOChart',
-            'totalFemaleCESOChart',
-            'totalMaleNonCESOChart',
-            'totalFemaleNonCESOChart',
-            'percentageCES',
-            'percentageNonCES',
-            'totalMale',
-            'totalFemale',
-            'departmentAgencies',
-            'agencyStatistics',
-            'sectors',
-        ));
+        return $datas;
     }
 }

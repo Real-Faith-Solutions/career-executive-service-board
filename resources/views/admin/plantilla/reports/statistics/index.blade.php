@@ -188,11 +188,11 @@
         <div class="w-full rounded sm:w-auto">
             <div class="bg-white">
                 <div class="rounded-lg shadow-md">
-                    <div class="bg-blue-100 text-white p-2 grid grid-cols-3 flex items-center">
+                    <div class="bg-blue-100 text-white p-4 grid grid-cols-3 flex items-center">
                         <h1 class=" text-center font-semibold whitespace-nowrap uppercase text-blue-500 col-start-2">
                             Plantilla Statistics Summary per Department
                         </h1>
-                        <div class="flex items-center justify-end">
+                        {{-- <div class="flex items-center justify-end">
                             <form class="toggleForm">
                                 <select onchange="sectorsToggle()" style="padding:5 0" name="sectorToggle">
                                     <option value="">All</option>
@@ -205,10 +205,33 @@
                                     @endforeach
                                 </select>
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="overflow-x-auto overflow-y-auto" style="max-height: 500px;">
                         <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        NATIONAL GOVERNMENT AGENCIES
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($motherDepartmentAgency as $data)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <a class="text-sm leading-5 text-gray-900 hover:text-blue-500" href="#">
+                                            {{ $data->title }}
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+
+                        {{-- <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
                                     <th
@@ -301,7 +324,8 @@
                                     </th>
                                 </tr>
                             </tfoot>
-                        </table>
+                        </table> --}}
+
                     </div>
                 </div>
             </div>
