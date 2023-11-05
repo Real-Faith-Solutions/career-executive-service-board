@@ -24,9 +24,7 @@ class StatisticsController extends Controller
         })->whereHas('planPosition', function ($query) {
             $query->where('is_ces_pos', 1)
                 ->where('pres_apptee', 1);
-        })
-
-            ->count();
+        })->count();
 
         $occupiedCESPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition.planAppointee', function ($query) {
             // unfinish
