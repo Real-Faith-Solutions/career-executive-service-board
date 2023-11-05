@@ -37,6 +37,11 @@ use App\Http\Controllers\ERIS\Libray\RankTrackerLibraryController;
 use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
+use App\Http\Controllers\Eris\Report\AssessmentCenterReportController;
+use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
+use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
+use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
+use App\Http\Controllers\ERIS\Report\ValidationReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -851,6 +856,31 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
     });
     //  end of ERIS routes
+
+    //  ERIS Report routes
+    Route::prefix('eris-report')->group(function () {
+        Route::prefix('board-panel-interview-report')->group(function () {
+            Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
+            Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
+            Route::post('panel-and-board-interview-generate-pdf', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        });
+
+        Route::prefix('rapid-validation-report')->group(function () {
+            Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index');
+            Route::post('generate-pdf', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport');
+        });
+
+        Route::prefix('in-depth-validation-report')->group(function () {
+            Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
+            Route::post('generate-pdf', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
+        });
+
+        Route::prefix('assessment-center-report')->group(function () {
+            Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
+            Route::get('generate-pdf', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+        });
+    });
+    // End of ERIS Report routes
 
     // Reports routes
     Route::prefix('reports')->group(function () {
