@@ -1,4 +1,16 @@
 <script>
+    const classificationBasis = (val) => {
+        const titleAndDateTextArea = document.querySelector('#titleAndDate');
+        
+        @foreach ($classBasis as $data)
+            if ("{{ $data->cbasis_code }}" == val) { // pansamantala basis muna ayaw gumana ng title
+                titleAndDateTextArea.value = "{{ $data->basis }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            }
+        @endforeach
+    }
+</script>
+
+<script>
     // Get the input element and the collection from PHP
     
 
