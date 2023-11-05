@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('encoder')->nullable();
             $table->timestamp('encdate')->nullable()->useCurrent();
             $table->timestamp('lastupd_dt')->nullable()->useCurrent();
+            $table->integer('is_national_government')->nullable(); // new 
             $table->softDeletes();
         });
     }
