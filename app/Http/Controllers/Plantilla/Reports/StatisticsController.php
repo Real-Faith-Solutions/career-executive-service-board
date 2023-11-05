@@ -22,13 +22,11 @@ class StatisticsController extends Controller
         // planPosition.office.agencyLocation.departmentAgency
         $totalPosition = PlanAppointee::whereHas('planPosition', function ($query) use ($deptid) {
             $query->where('is_ces_pos', 1)
-                // ->where('pres_apptee', 1)
-                ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
-                    $query->where('mother_deptid', $deptid);
+                ->where('pres_apptee', 1)
+                ->whereHas('office.agencyLocation.departmentAgency.motherDepartment', function ($query) use ($deptid) {
+                    $query->where('deptid', $deptid);
                 });
-        })
-
-            ->count();
+        })->count();
 
         $occupiedCESPosition = DepartmentAgency::whereHas('agencyLocation.office.planPosition.planAppointee', function ($query) {
             // unfinish
