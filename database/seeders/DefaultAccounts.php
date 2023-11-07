@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Hash;
 
 class DefaultAccounts extends Seeder
 {
+
+    private ProfileTblCesStatus $profileTblCesStatus;
+
     public function run(): void
     {
         $faker = Faker::create(); // Create a Faker instance
@@ -310,7 +313,7 @@ class DefaultAccounts extends Seeder
                 'default_password_change'   => 'true',
             ]);
 
-            $personalData->profileTblCesStatus()->Create([
+            $profileTblCesStatus = $personalData->profileTblCesStatus()->Create([
                 'cesstat_code' => $faker->randomElement(ProfileLibTblCesStatus::pluck('code')->toArray()),
                 'acc_code' => $faker->randomElement(ProfileLibTblCesStatusType::pluck('code')->toArray()),
                 'type_code' => $faker->randomElement(ProfileLibTblCesStatusAcc::pluck('code')->toArray()),
@@ -318,6 +321,8 @@ class DefaultAccounts extends Seeder
                 'resolution_no' => $faker->randomNumber(9),
                 'appointed_dt' => Carbon::now()->format('Y-m-d'),
             ]);
+
+            $profileTblCesStatus->latestCesStatusCode($personalData->cesno);
     
             $user->assignRole('user');
 
