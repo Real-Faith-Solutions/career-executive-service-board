@@ -14,13 +14,8 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
+        // 201 and eris
         // \App\Models\ProfileLibTblEducDegree::factory(10)->create();
         // \App\Models\ProfileLibTblEducSchool::factory(10)->create();
         // \App\Models\ProfileLibTblEducMajor::factory(10)->create();
@@ -37,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\TrainingSecretariat::factory(10)->create();
 
         // plantilla
-        // \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
+        \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
 
         $this->call([
             PermissionsTableSeeder::class,
