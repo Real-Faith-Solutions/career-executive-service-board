@@ -3,8 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\PersonalData;
+use App\Models\ProfileLibTblAppAuthority;
+use App\Models\ProfileLibTblCesStatus;
+use App\Models\ProfileLibTblCesStatusAcc;
+use App\Models\ProfileLibTblCesStatusType;
+use App\Models\ProfileTblCesStatus;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -302,6 +308,15 @@ class DefaultAccounts extends Seeder
                 'last_updated_by'           => 'system encode',
                 'encoder'                   => 'system encode',
                 'default_password_change'   => 'true',
+            ]);
+
+            $personalData->profileTblCesStatus()->Create([
+                'cesstat_code' => $faker->randomElement(ProfileLibTblCesStatus::pluck('code')->toArray()),
+                'acc_code' => $faker->randomElement(ProfileLibTblCesStatusType::pluck('code')->toArray()),
+                'type_code' => $faker->randomElement(ProfileLibTblCesStatusAcc::pluck('code')->toArray()),
+                'official_code' => $faker->randomElement(ProfileLibTblAppAuthority::pluck('code')->toArray()),
+                'resolution_no' => $faker->randomNumber(9),
+                'appointed_dt' => Carbon::now()->format('Y-m-d'),
             ]);
     
             $user->assignRole('user');

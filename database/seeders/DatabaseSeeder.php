@@ -16,20 +16,20 @@ class DatabaseSeeder extends Seeder
     {
 
         // 201 and eris
-        // \App\Models\ProfileLibTblEducDegree::factory(10)->create();
-        // \App\Models\ProfileLibTblEducSchool::factory(10)->create();
-        // \App\Models\ProfileLibTblEducMajor::factory(10)->create();
-        // \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
-        // \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
-        // \App\Models\PersonalData::factory(50)->create();
-        // \App\Models\ProfileLibTblExamRef::factory(10)->create();
+        \App\Models\ProfileLibTblEducDegree::factory(10)->create();
+        \App\Models\ProfileLibTblEducSchool::factory(10)->create();
+        \App\Models\ProfileLibTblEducMajor::factory(10)->create();
+        \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
+        \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
+        \App\Models\PersonalData::factory(50)->create();
+        \App\Models\ProfileLibTblExamRef::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatus::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusAcc::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusType::factory(10)->create();
         // \App\Models\ProfileLibTblAppAuthority::factory(10)->create();
-        // \App\Models\ProfileLibCities::factory(10)->create();
-        // \App\Models\TrainingLibCategory::factory(10)->create();
-        // \App\Models\TrainingSecretariat::factory(10)->create();
+        \App\Models\ProfileLibCities::factory(10)->create();
+        \App\Models\TrainingLibCategory::factory(10)->create();
+        \App\Models\TrainingSecretariat::factory(10)->create();
 
         // plantilla
         \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();
@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
-            DefaultAccounts::class,
             IndigenousGroup::class,
             PWD::class,
             GenderByChoice::class,
@@ -64,7 +63,7 @@ class DatabaseSeeder extends Seeder
             TrainingLibCategorySeeder::class,
             ErisTblMainSeeder::class,
             ScholarshipSeeder::class,
-
+            DefaultAccounts::class,
             // plantilla
             // SectorManagerSeeder::class,
             // AgencyLocationSeeder::class,
