@@ -160,7 +160,7 @@
         <div class="flex justify-between text-red-500 items-center">
             <div>
                 <p>Rejected Files</p>
-                <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
+                <h1 class="text-3xl font-bold">{{ $declinedFiles }}</h1>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
