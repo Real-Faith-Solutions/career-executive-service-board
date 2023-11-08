@@ -8,7 +8,7 @@
     </a>
     <div class="flex gap-2">
         <a class="btn btn-primary"
-            href="{{ route('department-agency-manager.showAgency', ['sectorid' => $agencyLocation->departmentAgency->sectorid, 'deptid' => $agencyLocation->departmentAgency->deptid]) }}"
+            href="{{ route('agency-location-manager.show', ['sectorid' => $agencyLocation->departmentAgency->sectorid, 'deptid' => $agencyLocation->departmentAgency->deptid, 'officelocid' => $agencyLocation->officelocid]) }}"
             target="_blank">
             Find in Main Screen
         </a>
