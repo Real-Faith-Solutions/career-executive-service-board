@@ -25,7 +25,6 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th class="px-6 py-3" scope="col">POS CODE</th>
                 <th class="px-6 py-3" scope="col">Position Level</th>
                 <th class="px-6 py-3" scope="col">Title</th>
                 <th class="px-6 py-3" scope="col">Salary Grade Level</th>
@@ -40,9 +39,6 @@
             @foreach ($datas as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->pos_code }}
-                </td>
-                <td class="px-6 py-3">
                     {{ $data->positionLevel->title }}
                 </td>
                 <td class="px-6 py-3">
