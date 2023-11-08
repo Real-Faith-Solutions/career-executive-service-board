@@ -81,7 +81,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="title">Mother Agency<sup>*</sup></label>
+                        <label for="title">Agency / Bureau<sup>*</sup></label>
                         <input id="title" name="title" required value="{{ old('title') }}" />
                         @error('title')
                         <span class="invalid" role="alert">

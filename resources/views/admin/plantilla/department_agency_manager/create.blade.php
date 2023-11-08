@@ -56,7 +56,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="title">Mother Agency</label>
+                            <label for="title">Agency / Bureau</label>
                             <input id="title" name="title" required />
                             @error('title')
                             <span class="invalid" role="alert">
