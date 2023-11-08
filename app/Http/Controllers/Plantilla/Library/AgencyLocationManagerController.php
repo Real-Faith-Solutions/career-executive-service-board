@@ -59,10 +59,16 @@ class AgencyLocationManagerController extends Controller
 
     public function create()
     {
-        $sectors = SectorManager::all();
-        $departmentAgencies = DepartmentAgency::all();
-        $agencyLocationLibrary = AgencyLocationLibrary::all();
-        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
+        $sectors = SectorManager::select('sectorid', 'title')
+            ->get();
+        $departmentAgencies = DepartmentAgency::select('deptid', 'title', 'sectorid')
+            ->orderBy('title', 'asc')
+            ->get();
+        $agencyLocationLibrary = AgencyLocationLibrary::select('agencyloc_Id', 'title')
+            ->get();
+        $region = ProfileLibTblRegion::select('reg_code', 'name', 'acronym')
+            ->orderBy('regionSeq', 'ASC')
+            ->get();
 
         return view('admin.plantilla.library.agency_location_manager.create', compact(
             'sectors',
