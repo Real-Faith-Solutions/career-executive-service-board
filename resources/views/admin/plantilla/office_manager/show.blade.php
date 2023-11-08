@@ -60,6 +60,12 @@
     </ol>
 </nav>
 
+<div class="flex justify-end">
+    <a href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid]) }}"
+        class="btn btn-primary">
+        Go Back
+    </a>
+</div>
 <div class="grid lg:grid-cols-2">
     <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
         <div class="w-full text-left text-gray-500">
@@ -196,20 +202,21 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-between">
-                        <h1 class="text-slate-400 text-sm font-semibold">
-                            Last update at {{ \Carbon\Carbon::parse($office->lastupd_dt)->format('m/d/Y \a\t g:iA') }}
-                        </h1>
-                        <div>
-                            <button type="button" id="btnEdit" class="btn btn-primary">
-                                Edit Record
-                            </button>
-                            <button type="button" class="btn btn-primary hidden" id="btnSubmit"
-                                onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
-                                Save Changes
-                            </button>
-                        </div>
+
+                    <h1 class="text-slate-400 text-sm font-semibold">
+                        Last update at {{ \Carbon\Carbon::parse($office->lastupd_dt)->format('m/d/Y \a\t g:iA') }}
+                    </h1>
+                    <hr>
+                    <div class="flex justify-end gap-2 mt-2">
+                        <button type="button" id="btnEdit" class="btn btn-primary">
+                            Edit Record
+                        </button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                            Save Changes
+                        </button>
                     </div>
+
                 </form>
             </div>
         </div>
