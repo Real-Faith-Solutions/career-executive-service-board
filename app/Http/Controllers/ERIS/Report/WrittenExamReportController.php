@@ -12,7 +12,7 @@ class WrittenExamReportController extends Controller
     // App\Models
     private WrittenExam $writtenExam;
  
-    public function __construct(WrittenExam $WrittenExam)
+    public function __construct()
     {
         $this->writtenExam = new WrittenExam();
     }
@@ -48,6 +48,11 @@ class WrittenExamReportController extends Controller
             if ($passed && $failed && $location) {
                 $query->whereIn('we_remarks', [$passed, $failed])
                     ->where('we_location', $location);
+            }
+            elseif($passed && $failed && $retake)
+            {
+                $query->whereIn('we_remarks', [$passed, $failed])
+                        ->where('numtakes', '>', '1');
             }
             elseif($passed && $failed)
             {
