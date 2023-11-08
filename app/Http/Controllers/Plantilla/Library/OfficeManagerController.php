@@ -55,9 +55,13 @@ class OfficeManagerController extends Controller
 
     public function create()
     {
-        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-        $agencyLocations = AgencyLocation::all();
-        $departmentAgencies = DepartmentAgency::all();
+        $cities = ProfileLibCities::select('city_code', 'name')
+            ->orderBy('name', 'ASC')
+            ->get();
+        $agencyLocations = AgencyLocation::select('officelocid', 'title')
+            ->get();
+        $departmentAgencies = DepartmentAgency::select('deptid', 'title')
+            ->get();
 
         return view('admin.plantilla.library.office_manager.create', compact(
             'cities',
