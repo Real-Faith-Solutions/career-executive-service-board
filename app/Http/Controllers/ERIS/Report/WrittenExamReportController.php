@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ERIS\report;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eris\WrittenExam;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -83,7 +84,7 @@ class WrittenExamReportController extends Controller
             $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
         }
 
-        $writtenExam = $writtenExam->orderBy('we_date')->paginate(25);
+        $writtenExam = $writtenExam->orderByDesc('we_date')->paginate(25);
 
         return 
         [
@@ -95,5 +96,69 @@ class WrittenExamReportController extends Controller
             'retake' => $retake,
             'location' => $location,
         ];
+    }
+
+    public function generateReportPdf(Request $request)
+    {
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $passed = $request->input('passed');
+        $failed = $request->input('failed');
+        $retake = $request->input('retake');
+        $location = $request->input('location');
+
+        // dd($location);
+
+        $writtenExam = WrittenExam::query();
+
+        $writtenExam->where(function ($query) use ($passed, $failed, $location, $retake) {
+            if ($passed && $failed && $location) {
+                $query->whereIn('we_remarks', [$passed, $failed])
+                    ->where('we_location', $location);
+            }
+            else
+            if($passed && $failed && $retake)
+            {
+                $query->whereIn('we_remarks', [$passed, $failed])
+                        ->where('numtakes', '>', '1');
+            }
+            elseif($passed && $failed)
+            {
+                $query->whereIn('we_remarks', [$passed, $failed]);
+            }
+            else 
+            {
+                if ($passed) {
+                    $query->where('we_remarks', $passed);
+                }
+
+                if ($failed) {
+                    $query->where('we_remarks', $failed);
+                }
+
+                if ($location) {
+                    $query->where('we_location', $location);
+                }
+
+                if ($retake) {
+                    $query->where('numtakes', '>', '1');
+                }
+            }
+        });
+
+        if ($startDate && $endDate) 
+        {
+            $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
+        }
+
+        $writtenExam = $writtenExam->orderByDesc('we_date')->get();
+
+        $pdf = Pdf::loadView('admin.eris.reports.written_exam.report_pdf', [
+            'writtenExam' => $writtenExam,
+        ])
+
+        ->setPaper('a4', 'landscape');
+
+        return $pdf->stream('written-exam-report.pdf');
     }
 }

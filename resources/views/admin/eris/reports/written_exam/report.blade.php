@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Written Exam</h1>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="GET">
+            <form action="{{ route('written-exam-report.generateReportPdf') }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -16,6 +16,10 @@
                 <input type="text" name="failed"  value="{{ $failed }}" hidden>
 
                 <input type="text" name="passed"  value="{{ $passed }}" hidden>
+
+                <input type="text" name="retake"  value="{{ $retake }}" hidden>
+
+                <input type="text" name="location"  value="{{ $writtenExamLocation }}" hidden>
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
@@ -134,7 +138,6 @@
                         <td class="px-6 py-3">
                             {{ $data->we_remarks ?? '' }}
                         </td>
-    
                     </tr>
                 @endforeach
             </tbody>

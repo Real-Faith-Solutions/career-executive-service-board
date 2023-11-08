@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Assessment Center
+            Written Exam
         </title>
 
         <style>
@@ -65,7 +65,8 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                /* background-color: #3b83f6b2; */
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -124,7 +125,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Assessment Center
+                    Written Exam
                 </p>
 
                 <footer>
@@ -145,25 +146,25 @@
                         </th>
 
                         <th>
-                            Assessment Center Date
-                        </th>
-
-                        <th>
-                            Assessment Center Date
+                            Name
                         </th>
     
                         <th>
-                            No. of Takes
+                            Written Exam Date
                         </th>
     
                         <th>
-                            Submittion of Docs  
+                            Number of Takes
                         </th>
-    
+        
                         <th>
-                            Competencies for D.O  
+                            Location
                         </th>
-    
+        
+                        <th>
+                            Rating
+                        </th>
+        
                         <th>
                             Remarks
                         </th>
@@ -173,36 +174,36 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($assessmentCenter as $data)
+                        @foreach ($writtenExam as $data)
                             <tr>
                                 <td>
                                     {{ $rowNumber++ }}
                                 </td>
 
                                 <td>
-                                    {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
+                                    {{ $data->erisTblMainWrittenExam->lastname ?? '' }},
+                                    {{ $data->erisTblMainWrittenExam->firstname ?? '' }},
+                                    {{ $data->erisTblMainWrittenExam->middlename ?? '' }}.
                                 </td>
-
+        
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
+                                    {{ \Carbon\Carbon::parse($data->we_date)->format('m/d/Y') ?? '' }}
                                 </td>
-
+        
                                 <td>
-                                    {{ $data->numtakes ?? 'No Record' }} 
+                                    {{ $data->numtakes ?? '' }}
                                 </td>
-
+            
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? 'No Record' }} 
+                                    {{ $data->we_location ?? '' }}
                                 </td>
-
+            
                                 <td>
-                                    {{ $data->competencies_d_o ?? 'No Record' }} 
+                                    {{ $data->we_rating ?? '' }}
                                 </td>
-
+            
                                 <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
+                                    {{ $data->we_remarks ?? '' }}
                                 </td>
                             </tr>
                         @endforeach                 
