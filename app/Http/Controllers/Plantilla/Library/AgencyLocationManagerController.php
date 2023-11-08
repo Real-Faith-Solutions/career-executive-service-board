@@ -40,7 +40,9 @@ class AgencyLocationManagerController extends Controller
         }
 
         // Get the paginated results
-        $agencyLocation = $filterDropdown->paginate(25);
+        $agencyLocation = $filterDropdown
+            ->orderBy('title')
+            ->paginate(25);
 
         // Retrieve dropdown data
         $sector = SectorManager::orderBy('title', 'ASC')->get();
@@ -158,9 +160,10 @@ class AgencyLocationManagerController extends Controller
     public function edit($officelocid)
     {
         $agencyLocation = AgencyLocation::find($officelocid);
-
         $sectors = SectorManager::all();
-        $departmentAgencies = DepartmentAgency::all();
+        $departmentAgencies = DepartmentAgency::where('deptid', $agencyLocation->deptid)
+            ->orderBy('title', 'asc')
+            ->get();
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
