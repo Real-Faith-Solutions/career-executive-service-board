@@ -42,6 +42,7 @@ use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
 use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
 use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
 use App\Http\Controllers\ERIS\Report\ValidationReportController;
+use App\Http\Controllers\ERIS\report\WrittenExamReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -879,6 +880,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
             Route::get('generate-pdf', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+        });
+
+        Route::prefix('written-exam-report')->group(function () {
+            Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index');
         });
     });
     // End of ERIS Report routes

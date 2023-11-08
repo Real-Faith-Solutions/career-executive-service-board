@@ -30,6 +30,13 @@ class WrittenExam extends Model
 
     ];
 
+    public function writtenExamLocation()
+    {
+        $location = WrittenExam::distinct()->get(['we_location']);
+
+        return $location;
+    }
+
     public function erisTblMainWrittenExam(): BelongsTo
     {
         return $this->belongsTo(EradTblMain::class, 'acno');

@@ -69,6 +69,7 @@ class DatabaseSeeder extends Seeder
             TrainingLibCategorySeeder::class,
             ErisTblMainSeeder::class,
             ScholarshipSeeder::class,
+            // WrittenExamSeeder::class,
 
             // plantilla
             // SectorManagerSeeder::class,
