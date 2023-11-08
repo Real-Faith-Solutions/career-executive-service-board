@@ -37,7 +37,7 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
                         <label for="sectorTitle">Sector<sup>*</span></label>
-                        <select id="sectorTitle" name="sectorTitle" required>
+                        <select id="sectorTitle" name="sectorTitle" required disabled>
                             @foreach ($sectorDatas as $data)
                             <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
                                 $department->sectorid ? 'selected' : '' }}>
