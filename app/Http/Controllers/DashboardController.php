@@ -76,6 +76,7 @@ class DashboardController extends Controller
         }
 
         $pendingFiles = $personalData->requestFile()->count();
+        $approvedFiles = $personalData->pdfFile()->count();
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -91,6 +92,7 @@ class DashboardController extends Controller
             'awardsAndCitations',
             'pendingCase',
             'pendingFiles',
+            'approvedFiles',
         ));
     }
 }
