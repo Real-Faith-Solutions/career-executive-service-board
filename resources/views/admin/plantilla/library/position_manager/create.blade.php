@@ -28,7 +28,7 @@
     
     }
 </script>
-<script>
+{{-- <script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
@@ -39,7 +39,7 @@
         @endforeach
     }
 
-</script>
+</script> --}}
 
 <script>
     const sectorToggle = (val) => {
@@ -138,6 +138,16 @@
     const checkBox = document.getElementById("use_func_title");
     const input = document.getElementById("pos_func_name");
     const posDefaultInput = document.getElementById("pos_default");
+
+    const classificationBasis = (val) => {
+    const titleAndDateTextArea = document.querySelector('#titleAndDate');
+    
+    @foreach ($classBasis as $data)
+    if ("{{ $data->cbasis_code }}" == val) {
+    titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+    }
+    @endforeach
+    }
     
     checkBox.addEventListener("change", function () {
     if (checkBox.checked) {
