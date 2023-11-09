@@ -28,9 +28,9 @@ class ErisGeneralReportController extends Controller
         $conferred = "conferred";
 
         $eradTblMain = EradTblMain::where('c_status', '!=', $conferred)
-            ->orderBy('lastname')
-            ->get(['acno', 'lastname', 'firstname', 'middlename', 'c_status']);
-            // ->paginate(25);
+            ->orderBy('acno')
+            // ->get(['acno', 'lastname', 'firstname', 'middlename', 'c_status']);
+            ->paginate(25);
 
         $pdf = Pdf::loadView('admin.eris.reports.general_report.report_pdf', [
             'eradTblMain' => $eradTblMain,
