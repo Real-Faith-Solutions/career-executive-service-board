@@ -32,7 +32,7 @@ class VerifyEmailAndDevice
             if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
                 $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $pendingDeviceIdentifiers)->first();
-                $cooldownMinutes = 60; // Adjust as needed
+                $cooldownMinutes = 4; // Adjust as needed
                 if ($deviceVerification && $deviceVerification->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
                     return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
                 }
