@@ -39,13 +39,13 @@ class OccupantBrowserController extends Controller
             $filterDropdown->whereHas('planPosition.positionMasterLibrary', function ($queryBuilder) use ($query, $officeDropdown) {
                 $queryBuilder->where(function ($subQuery) use ($query, $officeDropdown) {
                     if ($query) {
-                        $subQuery->where('dbm_title', 'LIKE', "%$query");
+                        $subQuery->where('dbm_title', 'LIKE', "%$query%");
                     }
 
                     if ($officeDropdown) {
                         $subQuery->orWhereHas('planPosition.office', function ($officeQuery) use ($officeDropdown, $query) {
                             $officeQuery->where('officeid', $officeDropdown)
-                                ->orWhere('dbm_title', 'LIKE', "%$query");
+                                ->orWhere('dbm_title', 'LIKE', "%$query%");
                         });
                     }
                 });
