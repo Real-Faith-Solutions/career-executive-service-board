@@ -229,7 +229,8 @@
                         
                                 @foreach ($classBasis as $data)
                                 if ("{{ $data->cbasis_code }}" === val) {
-                                    titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+                                    titleAndDateTextArea.value = `{!! $data->title !!}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}`;
+
                                 }
                                 @endforeach
                             }
