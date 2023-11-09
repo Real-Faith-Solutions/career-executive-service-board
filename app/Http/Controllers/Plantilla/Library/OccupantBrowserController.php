@@ -20,12 +20,7 @@ class OccupantBrowserController extends Controller
         $agencyLocationDropdown = $request->input('agencyLocationDropdown');
         $officeDropdown = $request->input('officeDropdown');
 
-        $filterDropdown = PlanAppointee::query()
-
-            ->whereHas('planPosition', function ($query) {
-                $query->where('deleted_at', null)
-                    ->orderBy('corp_sg', 'asc');
-            });
+        $filterDropdown = PlanAppointee::query();
 
         // if ($query) {
         //     $filterDropdown->whereHas('planPosition.positionMasterLibrary', function ($queryBuilder) use ($query) {
@@ -57,9 +52,7 @@ class OccupantBrowserController extends Controller
             });
         }
 
-        $datas =  $filterDropdown
-
-            ->paginate(25);
+        $datas =  $filterDropdown->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
