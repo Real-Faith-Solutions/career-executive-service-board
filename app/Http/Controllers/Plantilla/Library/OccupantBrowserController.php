@@ -39,12 +39,14 @@ class OccupantBrowserController extends Controller
             $filterDropdown->whereHas('planPosition', function ($queryBuilder) use ($query, $officeDropdown) {
                 $queryBuilder->where(function ($subQuery) use ($query, $officeDropdown) {
                     if ($query) {
-                        $subQuery->where('pos_default', 'LIKE', "%$query%")
-                            ->orWhere('corp_sg', 'LIKE', "%$query%");
+                        $subQuery->where(function ($posSubQuery) use ($query) {
+                            $posSubQuery->where('pos_default', 'LIKE', "%$query%")
+                                ->orWhere('corp_sg', 'LIKE', "%$query%");
+                        });
                     }
 
                     if ($officeDropdown) {
-                        $subQuery->orWhereHas('planPosition', function ($officeQuery) use ($officeDropdown, $query) {
+                        $subQuery->orWhereHas('office', function ($officeQuery) use ($officeDropdown) {
                             $officeQuery->where('officeid', $officeDropdown);
                         });
                     }
@@ -52,11 +54,8 @@ class OccupantBrowserController extends Controller
             });
         }
 
-        $datas =  $filterDropdown
-            ->whereHas('planPosition', function ($query) {
-                $query->orderBy('corp_sg', 'desc');
-            })
-            ->paginate(25);
+
+        $datas =  $filterDropdown->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
