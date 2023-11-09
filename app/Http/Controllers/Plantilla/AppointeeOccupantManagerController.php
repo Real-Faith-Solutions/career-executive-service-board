@@ -47,7 +47,9 @@ class AppointeeOccupantManagerController extends Controller
         $planPosition = PlanPosition::find($plantilla_id);
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-        $positionAppointee = PositionAppointee::orderBy('name', 'asc')->get();
+        $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
+            ->orderBy('description', 'asc')
+            ->get();
 
 
         $planAppointee = PlanAppointee::query()
@@ -62,7 +64,9 @@ class AppointeeOccupantManagerController extends Controller
 
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
-            $personalData = PersonalData::where('cesno', $cesno)->first();
+            $personalData = PersonalData::where('cesno', $cesno)
+                ->select('cesno', 'title', 'lastname', 'firstname', 'name_extension', 'picture', 'emailadd', 'status', 'birthdate')
+                ->first();
 
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
@@ -89,8 +93,7 @@ class AppointeeOccupantManagerController extends Controller
             'personalData',
             'cesno',
             'personalDataList',
-            'authority',
-            'positionAppointee',
+            'appAuthority',
 
         ));;
     }
@@ -217,6 +220,9 @@ class AppointeeOccupantManagerController extends Controller
         $apptDate = $appointees->appt_date;
         $convertedAssumDate = $this->convertDateTimeToDate->convertDateGeneral($assumDate);
         $convertedApptDate = $this->convertDateTimeToDate->convertDateGeneral($apptDate);
+        $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
+            ->orderBy('description', 'asc')
+            ->get();
 
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
@@ -236,6 +242,7 @@ class AppointeeOccupantManagerController extends Controller
         $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->get();
 
         return view('admin.plantilla.appointee_occupant_browser.show', compact(
+            'appAuthority',
             'sector',
             'department',
             'departmentLocation',

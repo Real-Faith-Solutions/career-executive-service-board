@@ -1,10 +1,31 @@
 <script>
+    // Get the input element and the collection from PHP
+    
+
+    // Function to check if an item number exists
+    const itemno = (val) => {
+
+        const item_no_label = document.querySelector("#item_no_label");
+        const allPlanPosition = @json($allPlanPosition);
+
+        // Check if the value exists in the collection
+        const exists = allPlanPosition.some(data => data.item_no == val);
+
+        // Update the label accordingly
+        if (exists) {
+            item_no_label.textContent = val + " is already taken";
+        } else {
+            item_no_label.textContent = ""; // Clear the label
+        }
+    }
+</script>
+<script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
         @foreach ($classBasis as $data)
         if ("{{ $data->cbasis_code }}" == val) {
-            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            titleAndDateTextArea.value = `{!! $data->title !!}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}`;
         }
         @endforeach
     }
@@ -85,7 +106,18 @@
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-position-manager.index') }}">Go back</a>
+    <div class="flex gap-2">
+        <a class="btn btn-primary" href="{{ route('plantilla-position-manager.show', [
+            'sectorid' => $datas->office->agencyLocation->departmentAgency->sectorid,
+            'deptid' => $datas->office->agencyLocation->departmentAgency->deptid,
+            'officelocid' => $datas->office->agencyLocation->officelocid,
+            'officeid' => $datas->office->officeid,
+            'plantilla_id' => $datas->plantilla_id,
+            ]) }}" target="_blank">
+            Find in Main Screen
+        </a>
+        <a class="btn btn-primary" href="{{ route('library-position-manager.index') }}">Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -97,7 +129,8 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('library-position-manager.update', $datas->plantilla_id) }}" method="POST">
+            <form action="{{ route('library-position-manager.update', $datas->plantilla_id) }}" method="POST"
+                enctype="multipart/form-data" id="updateForm" onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                 @csrf
                 @method('PUT')
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -265,7 +298,9 @@
                             </div>
                             <div class="mb-3">
                                 <label for="item_no">Item No.<sup>*</sup></label>
-                                <input id="item_no" name="item_no" required value="{{ $datas->item_no }}" />
+                                <input id="item_no" name="item_no" required value="{{ $datas->item_no }}"
+                                    onchange="itemno(this.value)" />
+                                <p class="text-red-500 text-sm" id="item_no_label"></p>
                                 @error('item_no')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -330,17 +365,22 @@
 
                 </div>
 
-                <div class="flex justify-between">
-                    <h1 class="text-slate-400 text-sm font-semibold">
-                        Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
-                    </h1>
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
+
+                <h1 class="text-slate-400 text-sm font-semibold">
+                    Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
+                </h1>
+                <div class="flex justify-end gap-2 mt-2">
+                    <button type="button" id="btnEdit" class="btn btn-primary">
+                        Edit Record
+                    </button>
+                    <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                        onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                        Save Changes
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection

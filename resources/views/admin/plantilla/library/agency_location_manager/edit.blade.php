@@ -6,7 +6,14 @@
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-agency-location-manager.index') }}">Go back</a>
+    <div class="flex gap-2">
+        <a class="btn btn-primary"
+            href="{{ route('agency-location-manager.show', ['sectorid' => $agencyLocation->departmentAgency->sectorid, 'deptid' => $agencyLocation->departmentAgency->deptid, 'officelocid' => $agencyLocation->officelocid]) }}"
+            target="_blank">
+            Find in Main Screen
+        </a>
+        <a class="btn btn-primary" href="{{ route('library-agency-location-manager.index') }}">Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -19,7 +26,8 @@
 
         <div class="bg-white px-6 py-3">
             <form action="{{ route('library-agency-location-manager.update', $agencyLocation->officelocid) }}"
-                method="POST">
+                method="POST" enctype="multipart/form-data" id="updateForm"
+                onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                 @csrf
                 @method('put')
                 <div class="grid grid-cols-2 gap-2">
@@ -116,13 +124,19 @@
                         Last update at {{ \Carbon\Carbon::parse($agencyLocation->lastupd_dt)->format('m/d/Y \a\t
                         g:iA') }}
                     </h1>
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
-                    </button>
+                    <div>
+                        <button type="button" id="btnEdit" class="btn btn-primary">
+                            Edit Record
+                        </button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                            Save Changes
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection

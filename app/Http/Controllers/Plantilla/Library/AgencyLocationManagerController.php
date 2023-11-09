@@ -40,7 +40,9 @@ class AgencyLocationManagerController extends Controller
         }
 
         // Get the paginated results
-        $agencyLocation = $filterDropdown->paginate(25);
+        $agencyLocation = $filterDropdown
+            ->orderBy('title')
+            ->paginate(25);
 
         // Retrieve dropdown data
         $sector = SectorManager::orderBy('title', 'ASC')->get();
@@ -59,10 +61,16 @@ class AgencyLocationManagerController extends Controller
 
     public function create()
     {
-        $sectors = SectorManager::all();
-        $departmentAgencies = DepartmentAgency::all();
-        $agencyLocationLibrary = AgencyLocationLibrary::all();
-        $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
+        $sectors = SectorManager::select('sectorid', 'title')
+            ->get();
+        $departmentAgencies = DepartmentAgency::select('deptid', 'title', 'sectorid')
+            ->orderBy('title', 'asc')
+            ->get();
+        $agencyLocationLibrary = AgencyLocationLibrary::select('agencyloc_Id', 'title')
+            ->get();
+        $region = ProfileLibTblRegion::select('reg_code', 'name', 'acronym')
+            ->orderBy('regionSeq', 'ASC')
+            ->get();
 
         return view('admin.plantilla.library.agency_location_manager.create', compact(
             'sectors',
@@ -81,7 +89,7 @@ class AgencyLocationManagerController extends Controller
         $request->validate([
             'deptid' => ['required'],
             'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'max:10', 'min:2',],
+            'acronym' => ['required', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);
@@ -152,9 +160,10 @@ class AgencyLocationManagerController extends Controller
     public function edit($officelocid)
     {
         $agencyLocation = AgencyLocation::find($officelocid);
-
         $sectors = SectorManager::all();
-        $departmentAgencies = DepartmentAgency::all();
+        $departmentAgencies = DepartmentAgency::where('deptid', $agencyLocation->deptid)
+            ->orderBy('title', 'asc')
+            ->get();
         $agencyLocationLibrary = AgencyLocationLibrary::all();
         $region = ProfileLibTblRegion::orderBy('regionSeq', 'ASC')->get();
 
@@ -175,7 +184,7 @@ class AgencyLocationManagerController extends Controller
         $request->validate([
             'deptid' => ['required'],
             'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'max:10', 'min:2',],
+            'acronym' => ['required', 'min:2',],
             'loctype_id' => ['required'],
             'region' => ['required'],
         ]);

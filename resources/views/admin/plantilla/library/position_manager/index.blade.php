@@ -42,7 +42,7 @@
                 if ("{{ $data->sectorid }}" == sectorDropdown.value) {
                     const option = document.createElement("option");
                     option.value = "{{ $data->deptid }}";
-                    option.text = "{{ $data->title }}";
+                    option.text = "{! $data->title !}";
                     if ("{{ $data->deptid }}" == oldDepartmentValue) {
                         option.selected = true; // Select the option if it matches the oldDepartmentValue
                     }
@@ -59,7 +59,7 @@
                 if ("{{ $data->deptid }}" == departmentDropdown.value) {
                     const option = document.createElement("option");
                     option.value = "{{ $data->officelocid }}";
-                    option.text = "{{ $data->title }}";
+                    option.text = "{!! $data->title !!}";
                     if ("{{ $data->officelocid }}" == oldAgencyLocationValue) {
                         option.selected = true;
                     }
@@ -75,7 +75,7 @@
                 if ("{{ $data->officelocid }}" == agencyLocationDropdown.value) {
                     const option = document.createElement("option");
                     option.value = "{{ $data->officeid }}";
-                    option.text = "{{ $data->title }}";
+                    option.text = "{!! $data->title !!}";
                     if ("{{ $data->officeid }}" == oldOfficeValue) {
                         option.selected = true;
                     }
@@ -178,7 +178,6 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th class="px-6 py-3" scope="col">Plantilla ID</th>
                 <th class="px-6 py-3" scope="col">Position Title</th>
                 <th class="px-6 py-3" scope="col">Position Level</th>
                 <th class="px-6 py-3" scope="col">Salary Grade Level</th>
@@ -209,10 +208,6 @@
                 @endif
             ">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->plantilla_id }}
-                </td>
-                <td class="px-6 py-3">
-                    {{-- {{ $data->positionMasterLibrary->dbm_title }} --}}
                     {{ $data->pos_default }}
                 </td>
 

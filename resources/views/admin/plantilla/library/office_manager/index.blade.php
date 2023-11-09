@@ -32,7 +32,7 @@
             if ("{{ $data->sectorid }}" == sectorDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->deptid }}";
-                option.text = "{{ $data->title }}";
+                option.text = "{!! $data->title !!}";
                     if ("{{ $data->deptid }}" == oldDepartmentValue) {
                         option.selected = true; // Select the option if it matches the oldDepartmentValue
                     }
@@ -50,7 +50,7 @@
             if ("{{ $data->deptid }}" == departmentDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->officelocid }}";
-                option.text = "{{ $data->title }}";
+                option.text = "{!! $data->title !!}";
                     if ("{{ $data->officelocid }}" == oldAgencyLocationValue) {
                         option.selected = true;
                     }
@@ -136,7 +136,6 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th class="px-6 py-3" scope="col">Office ID</th>
                 <th class="px-6 py-3" scope="col">Office</th>
                 <th class="px-6 py-3" scope="col">Office Acronym</th>
                 <th class="px-6 py-3" scope="col">Office Website</th>
@@ -154,10 +153,6 @@
             @foreach ($datas as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{-- {{ $data->agencyLocation->title }} --}}
-                    {{ $data->officeid }}
-                </td>
-                <td class="px-6 py-3">
                     {{ $data->title }}
                 </td>
                 <td class="px-6 py-3">

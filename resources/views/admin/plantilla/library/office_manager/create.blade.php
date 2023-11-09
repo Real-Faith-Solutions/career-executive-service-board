@@ -1,3 +1,82 @@
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sectorDropdown = document.querySelector("#sectorDropdown");
+        const departmentDropdown = document.querySelector('#departmentDropdown');
+        const agencyLocationDropdown = document.querySelector('#agencyLocationDropdown');
+        const oldDepartmentValue = @json(old('departmentDropdown', $departmentDropdown)); // Get the old input value or the initial value
+        const oldAgencyLocationValue = @json(old('officelocid', $agencyLocationDropdown)); // Get the old input value or the initial value
+
+        departmentDropdown.innerHTML = "";
+        agencyLocationDropdown.innerHTML = "";
+        
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Department / Agency";
+        defaultOption.disabled = false;
+        defaultOption.selected = true;
+        defaultOption.value = "";
+        departmentDropdown.appendChild(defaultOption);
+
+        const defaultOptionAgencyLocation = document.createElement("option");
+        defaultOptionAgencyLocation.text = "Select Agency Location";
+        defaultOptionAgencyLocation.disabled = false;
+        defaultOptionAgencyLocation.selected = true;
+        defaultOptionAgencyLocation.value = "";
+        agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
+        
+        // Function to populate the department dropdown
+        function populateDepartmentDropdown() {
+        departmentDropdown.innerHTML = "";
+        agencyLocationDropdown.innerHTML = "";
+        departmentDropdown.appendChild(defaultOption);
+        
+        // Populate the second dropdown based on the selected value of the first dropdown
+        @foreach($department as $data)
+            if ("{{ $data->sectorid }}" == sectorDropdown.value) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->deptid }}";
+                option.text = "{!! $data->title !!}";
+                    if ("{{ $data->deptid }}" == oldDepartmentValue) {
+                        option.selected = true; // Select the option if it matches the oldDepartmentValue
+                    }
+                departmentDropdown.appendChild(option);
+            }
+        @endforeach
+        }
+
+        
+        
+        function populateAgencyLocationDropdown() {
+        agencyLocationDropdown.innerHTML = "";
+        agencyLocationDropdown.appendChild(defaultOptionAgencyLocation);
+        @foreach($agencyLocation as $data)
+            if ("{{ $data->deptid }}" == departmentDropdown.value) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->officelocid }}";
+                option.text = "{!! $data->title !!}";
+                    if ("{{ $data->officelocid }}" == oldAgencyLocationValue) {
+                        option.selected = true;
+                    }
+                agencyLocationDropdown.appendChild(option);
+            }
+        @endforeach
+        }
+
+        // Initial population of department dropdown
+        populateDepartmentDropdown();
+        populateAgencyLocationDropdown();
+
+        // Add an event listener to sectorDropdown
+        sectorDropdown.addEventListener("change", function() {
+            // Reset and populate the department dropdown when sectorDropdown changes
+            populateDepartmentDropdown();
+        });
+        departmentDropdown.addEventListener("change", function() {
+            // Reset and populate the department dropdown when sectorDropdown changes
+            populateAgencyLocationDropdown();
+        });
+    });
+</script>
+
 @extends('layouts.app')
 @section('title', 'Office Manager - Create')
 @section('content')
@@ -20,28 +99,51 @@
         <div class="bg-white px-6 py-3">
             <form action="{{ route('library-office-manager.store') }}" method="POST">
                 @csrf
+                <fieldset class="border p-4 bg-gray-50 mb-3">
+                    <legend>Select options</legend>
+                    <div class="sm:gid-cols-4 mb-3 grid gap-4 md:grid-cols-3 lg:grid-cols-3">
 
-                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                    <div class="mb-3">
-                        <label for="officelocid">Agency Location<sup>*</sup></label>
-                        <select id="officelocid" name="officelocid" required>
-                            @foreach ($departmentAgencies as $departmentAgency)
-                            <optgroup label="{{ $departmentAgency->title }}">
-                                @foreach ($agencyLocations as $agencyLocation)
-                                @if($departmentAgency->deptid == $agencyLocation->deptid)
-                                <option value="{{ $agencyLocation->officelocid }}">{{ $agencyLocation->title }}</option>
-                                @endif
+                        <div class="mb-3">
+                            <label for="sectorDropdown">Sector</label>
+                            <select id="sectorDropdown" name="sectorDropdown" required>
+                                <option value="">Select Sector</option>
+                                @foreach ($sector as $data)
+                                <option value="{{ $data->sectorid }}" {{ old('sectorDropdown')==$data->sectorid ?
+                                    'selected' : ''}}>
+                                    {{ $data->title }}
+                                </option>
                                 @endforeach
-                            </optgroup>
-                            @endforeach
-                        </select>
-
-                        @error('officelocid')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
+                                @error('sectorDropdown')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="departmentDropdown">Department</label>
+                            <select id="departmentDropdown" name="departmentDropdown" required>
+                            </select>
+                            @error('departmentDropdown')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="agencyLocationDropdown">Agency Location</label>
+                            <select id="agencyLocationDropdown" name="officelocid" required>
+                            </select>
+                            @error('officelocid')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
+                </fieldset>
+                <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+
                     <div class="mb-3">
                         <label for="title">Office<sup>*</sup></label>
                         <input name="title" id="title" value="{{ old('title') }}">
@@ -124,7 +226,7 @@
                     <div class="mb-3">
                         <label for="city_code">City Municipality<sup>*</sup></label>
                         <select id="city_code" name="city_code" required>
-                            <option disabled selected>Select City Municipality</option>
+                            <option disabled selected value="">Select City Municipality</option>
                             @foreach ($cities as $data)
                             <option value="{{ $data->city_code }}">{{ $data->name }}</option>
                             @endforeach

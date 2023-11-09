@@ -53,16 +53,31 @@ class OfficeManagerController extends Controller
         ));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-        $agencyLocations = AgencyLocation::all();
-        $departmentAgencies = DepartmentAgency::all();
+        $sectorDropdown = $request->input('sectorDropdown');
+        $departmentDropdown = $request->input('departmentDropdown');
+        $agencyLocationDropdown = $request->input('agencyLocationDropdown');
+
+        $sector = SectorManager::select('sectorid', 'title')
+            ->orderBy('title', 'ASC')
+            ->get();
+        $cities = ProfileLibCities::select('city_code', 'name')
+            ->orderBy('name', 'ASC')
+            ->get();
+        $agencyLocation = AgencyLocation::select('officelocid', 'title', 'deptid')
+            ->get();
+        $department = DepartmentAgency::select('deptid', 'title', 'sectorid')
+            ->get();
 
         return view('admin.plantilla.library.office_manager.create', compact(
             'cities',
-            'agencyLocations',
-            'departmentAgencies',
+            'agencyLocation',
+            'department',
+            'sector',
+            'sectorDropdown',
+            'departmentDropdown',
+            'agencyLocationDropdown',
         ));
     }
 
@@ -75,9 +90,13 @@ class OfficeManagerController extends Controller
 
         $request->validate([
 
+            'sectorDropdown' => ['required'],
+            'departmentDropdown' => ['required'],
+            // 'agencyLocationDropdown' => ['required'],
             'officelocid' => ['required'],
+            'city_code' => ['required'],
             'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'max:10', 'min:2',],
+            'acronym' => ['required', 'min:2',],
 
         ]);
         $primaryKey = Office::create([
@@ -134,7 +153,7 @@ class OfficeManagerController extends Controller
         $request->validate([
             // 'officelocid' => ['required'],
             'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'max:10', 'min:2',],
+            'acronym' => ['required', 'min:2',],
         ]);
 
         $office = Office::withTrashed()->findOrFail($officeid);

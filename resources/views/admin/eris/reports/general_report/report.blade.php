@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">General Report</h1>
 
         <div class="flex items-center">
-            <form action="" target="_blank" method="GET">
+            <form action="{{ route('general-report.generatePdfReport') }}" target="_blank" method="POST">
                 @csrf
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">

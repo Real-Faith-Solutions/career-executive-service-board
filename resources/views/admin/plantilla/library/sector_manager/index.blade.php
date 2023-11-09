@@ -29,7 +29,6 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
-                <th class="px-6 py-3" scope="col">Sector ID</th>
                 <th class="px-6 py-3" scope="col">Sector Name</th>
                 <th class="px-6 py-3" scope="col">Description</th>
 
@@ -43,9 +42,6 @@
             @foreach ($datas as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->sectorid }}
-                </td>
-                <td class="px-6 py-3">
                     {{ $data->title }}
                 </td>
                 <td class="px-6 py-3">

@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Assessment Center
+            Eris General Report
         </title>
 
         <style>
@@ -115,7 +115,7 @@
         <header>
             <div class="container">
                 <div class="logo">
-                    <img src="{{ public_path("images/branding.png") }}" alt="" style="width: 100px; height: 100px;">
+                    {{-- <img src="{{ public_path("images/branding.png") }}" alt="" style="width: 100px; height: 100px;"> --}}
                 </div>
             </div>
             
@@ -124,7 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Assessment Center
+                    Eris General Report
                 </p>
 
                 <footer>
@@ -145,27 +145,15 @@
                         </th>
 
                         <th>
-                            Assessment Center Date
-                        </th>
-
-                        <th>
-                            Assessment Center Date
+                            Account No
                         </th>
     
                         <th>
-                            No. of Takes
+                            Name
                         </th>
     
                         <th>
-                            Submittion of Docs  
-                        </th>
-    
-                        <th>
-                            Competencies for D.O  
-                        </th>
-    
-                        <th>
-                            Remarks
+                            Conferment Status
                         </th>
                     </tr>
                 </thead>
@@ -173,36 +161,20 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($assessmentCenter as $data)
+                        @foreach ($eradTblMainChunk as $data)
                             <tr>
                                 <td>
-                                    {{ $rowNumber++ }}
+                                    {{ $data->acno ?? '' }} 
                                 </td>
-
+        
                                 <td>
-                                    {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
+                                    {{ $data->lastname ?? '' }},
+                                    {{ $data->firstname ?? '' }},
+                                    {{ $data->middlename ?? '' }}
                                 </td>
-
+        
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-
-                                <td>
-                                    {{ $data->numtakes ?? 'No Record' }} 
-                                </td>
-
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-
-                                <td>
-                                    {{ $data->competencies_d_o ?? 'No Record' }} 
-                                </td>
-
-                                <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
+                                    {{ $data->c_status ?? '' }} 
                                 </td>
                             </tr>
                         @endforeach                 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\ERIS\report;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\GeneratePdfReport;
 use App\Models\Eris\EradTblMain;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ErisGeneralReportController extends Controller
@@ -14,11 +16,15 @@ class ErisGeneralReportController extends Controller
 
         $eradTblMain = EradTblMain::where('c_status', '!=', $conferred)
             ->orderBy('lastname')
-            ->orderBy('acno')
             ->paginate(25);
 
         return view('admin.eris.reports.general_report.report', [
             'eradTblMain' => $eradTblMain,
         ]);
+    }
+
+    public function generatePdfReport()
+    {
+
     }
 }

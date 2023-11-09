@@ -36,7 +36,9 @@ class PositionManagerController extends Controller
             });
         }
 
-        $datas = $filterDropdown->paginate(25);
+        $datas = $filterDropdown
+            ->orderBy('corp_sg', 'ASC')
+            ->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
@@ -116,6 +118,7 @@ class PositionManagerController extends Controller
 
     public function create()
     {
+        $allPlanPosition = PlanPosition::all();
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
@@ -131,10 +134,13 @@ class PositionManagerController extends Controller
             'sector',
             'department',
             'agencyLocation',
+            'allPlanPosition',
         ));
     }
     public function edit($plantilla_id)
     {
+        $allPlanPosition = PlanPosition::all();
+
         $datas = PlanPosition::findOrFail($plantilla_id);
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
@@ -152,6 +158,7 @@ class PositionManagerController extends Controller
             'sector',
             'department',
             'agencyLocation',
+            'allPlanPosition',
         ));
     }
 

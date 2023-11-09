@@ -103,13 +103,13 @@
                         <fieldset class="border p-4">
                             <legend>Profile Information</legend>
 
-                            <div class="flex gap-4">
+                            <div class="flex flex-col gap-4 lg:items-center">
                                 <img id="" class="w-44 h-44 rounded-full object-cover"
                                     src="{{ file_exists(public_path('images/' . ($personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $personalData->picture) : asset('images/placeholder.png') }}" />
 
-                                <div class="flex flex-col gap-2">
+                                <div class="flex flex-col gap-2 text-center">
 
-                                    <h1 class="font-semibold">
+                                    <h1 class="font-seFmibold">
                                         {{ $personalData->title ?? ''}}
                                         {{ $personalData->lastname ?? ''}},
                                         {{ $personalData->firstname ?? ''}}
@@ -271,19 +271,15 @@
                                     </div> --}}
 
                                     <div class="mb-3">
-                                        <label for="name">Position Appointee</label>
-                                        <input id="name" name="name" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="assum_date">Assumption Date<sup>*</sup></label>
-                                        <input id="assum_date" name="assum_date" type="date"
-                                            value="{{ old('assum_date') }}" />
-                                        @error('assum_date')
-                                        <span class="invalid" role="alert">
-                                            <p>{{ $message }}</p>
-                                        </span>
-                                        @enderror
+                                        <label for="name">Appointing Authority</label>
+                                        <select id="name" name="name">
+                                            <option value="" disabled selected>Appointing Authority</option>
+                                            @foreach ($appAuthority as $data)
+                                            <option value="{{ $data->code }}">
+                                                {{ $data->description }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="mb-3">
@@ -291,6 +287,17 @@
                                         <input id="appt_date" name="appt_date" type="date"
                                             value="{{ old('appt_date') }}" />
                                         @error('appt_date')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="assum_date">Assumption Date<sup>*</sup></label>
+                                        <input id="assum_date" name="assum_date" type="date"
+                                            value="{{ old('assum_date') }}" />
+                                        @error('assum_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
                                         </span>

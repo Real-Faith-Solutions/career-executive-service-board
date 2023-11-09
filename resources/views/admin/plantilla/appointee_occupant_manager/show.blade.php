@@ -4,7 +4,7 @@
 
         @foreach ($classBasis as $data)
         if ("{{ $data->cbasis_code }}" == val) {
-            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            titleAndDateTextArea.value = `{!! $data->title !!}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}`;
         }
         @endforeach
     }
@@ -152,7 +152,7 @@
         </li>
 
         <li>
-            <a href="#" class="text-blue-500">{{ $planPosition->positionMasterLibrary->dbm_title }}</a>
+            <a href="#" class="text-blue-500">{{ $planPosition->pos_default }}</a>
         </li>
     </ol>
 </nav>
@@ -411,20 +411,19 @@
 
                     </div>
 
-                    <div class="flex justify-between">
-                        <h1 class="text-slate-400 text-sm font-semibold">
-                            Last update at {{ \Carbon\Carbon::parse($planPosition->lastupd_dt)->format('m/d/Y \a\t
-                            g:iA') }}
-                        </h1>
-                        <div>
-                            <button type="button" id="btnEdit" class="btn btn-primary">
-                                Edit Record
-                            </button>
-                            <button type="button" class="btn btn-primary hidden" id="btnSubmit"
-                                onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
-                                Save Changes
-                            </button>
-                        </div>
+                    <h1 class="text-slate-400 text-sm font-semibold">
+                        Last update at {{ \Carbon\Carbon::parse($planPosition->lastupd_dt)->format('m/d/Y \a\t
+                        g:iA') }}
+                    </h1>
+                    <hr>
+                    <div class="flex justify-end gap-2 mt-2">
+                        <button type="button" id="btnEdit" class="btn btn-primary">
+                            Edit Record
+                        </button>
+                        <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                            onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                            Save Changes
+                        </button>
                     </div>
                 </form>
             </div>

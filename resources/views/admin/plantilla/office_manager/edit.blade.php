@@ -246,8 +246,8 @@
             <th class="px-6 py-3" scope="col">DBM Position Title</th>
             <th class="px-6 py-3" scope="col">Appointee</th>
             <th class="px-6 py-3" scope="col">Position Level</th>
+            <th class="px-6 py-3" scope="col">Have occupant on this position?</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
-            <th class="px-6 py-3" scope="col">Is have occupant</th>
             <th class="px-6 py-3" scope="col">DBM Item No</th>
             <th class="px-6 py-3" scope="col">Appointee Status</th>
             <th class="px-6 py-3" scope="col">Classification Basis</th>
@@ -296,13 +296,11 @@
                 {{ $data->planAppointee->personalData->lastname ?? ''}},
                 {{ $data->planAppointee->personalData->firstname ?? ''}}
                 {{ $data->planAppointee->personalData->name_extension ?? ''}}
-                {{ $data->planAppointee->personalData->middlename ?? ''}}
+                {{ $data->planAppointee->personalData->middlename ?? ''}},
+                {{ $data->planAppointee->personalData->cesStatus->description ?? '' }}
             </td>
             <td class="px-6 py-3">
                 {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
-            </td>
-            <td class="px-6 py-3">
-                {{ $data->corp_sg ?? ''}}
             </td>
             <td class="px-6 py-3">
                 @php
@@ -318,9 +316,13 @@
                 @endphp
 
                 <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">
-                    {{ $isHaveOccupant == 1 ? 'YES' : 'NO'}}
+                    {{ $isHaveOccupant == 1 ? 'YES' : 'NONE'}}
                 </span>
             </td>
+            <td class="px-6 py-3">
+                {{ $data->corp_sg ?? ''}}
+            </td>
+
             <td class="px-6 py-3">
                 {{ $data->item_no ?? ''}}
             </td>
