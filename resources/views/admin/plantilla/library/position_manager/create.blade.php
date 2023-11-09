@@ -1,3 +1,172 @@
+<script>
+    const classificationBasis = (val) => {
+        const titleAndDateTextArea = document.querySelector('#titleAndDate');
+
+        @foreach ($classBasis as $data)
+        if ("{{ $data->cbasis_code }}" === val) {
+            titleAndDateTextArea.value = `{!! $data->title !!}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}`;
+
+        }
+        @endforeach
+    }
+</script>
+<script>
+    const posCode = (val) => {
+        // Get the second dropdown element
+        const positionTitleDropdown = document.querySelector("#pos_code");
+        const posDefaultInput = document.querySelector('#pos_default');
+        
+        // Clear existing options in the second dropdown
+        positionTitleDropdown.innerHTML = "";
+        posDefaultInput.value = "";
+        
+        // Add a default "Select Position Title" option
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Position Title";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        positionTitleDropdown.appendChild(defaultOption);
+        
+        // Populate the second dropdown based on the selected value of the first dropdown
+        @foreach ($positionMasterLibrary as $data)
+        if ("{{ $data->poslevel_code }}" == val) {
+            const option = document.createElement("option");
+            option.value = "{{ $data->pos_code }}";
+            // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
+            option.text = "{{ $data->dbm_title }}";
+            positionTitleDropdown.appendChild(option);
+        }
+        @endforeach
+    
+    }
+</script>
+
+<script>
+    const sectorToggle = (val) => {
+        const sectorDropdown = document.querySelector("#sector");
+        const departmentDropdown = document.querySelector('#department');
+        const agencyDropdown = document.querySelector('#agency');
+        const officeDropdown = document.querySelector('#officeid');
+
+        departmentDropdown.innerHTML = "";
+        agencyDropdown.innerHTML = "";
+        officeDropdown.innerHTML = "";
+
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Department / Agency";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        departmentDropdown.appendChild(defaultOption);
+        
+        // Populate the second dropdown based on the selected value of the first dropdown
+        @foreach ($department as $data)
+            if ("{{ $data->sectorid }}" == val) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->deptid }}";
+                option.text = "{{ $data->title }}";
+                departmentDropdown.appendChild(option);
+            }
+        @endforeach
+    
+    }
+
+</script>
+<script>
+    const departmentToggle = (val) => {
+        const departmentDropdown = document.querySelector("#department");
+        const agencyDropdown = document.querySelector('#agency');
+        const officeDropdown = document.querySelector('#officeid');
+
+        agencyDropdown.innerHTML = "";
+        officeDropdown.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Agency Location";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        agencyDropdown.appendChild(defaultOption);
+        
+        @foreach ($agencyLocation as $data)
+        if ("{{ $data->officelocid }}" == val) {
+            const option = document.createElement("option");
+            option.value = "{{ $data->officelocid }}";
+            option.text = "{{ $data->title }}";
+            agencyDropdown.appendChild(option);
+        }
+        @endforeach
+    
+    }
+</script>
+<script>
+    const agencyToggle = (val) => {
+        const departmentDropdown = document.querySelector("#department");
+        const agencyDropdown = document.querySelector('#agency');
+        const officeDropdown = document.querySelector('#officeid');
+
+        officeDropdown.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.text = "Select Office";
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        officeDropdown.appendChild(defaultOption);
+        
+        @foreach ($office as $data)
+        if ("{{ $data->officelocid }}" == val) {
+            const option = document.createElement("option");
+            option.value = "{{ $data->officeid }}";
+            option.text = "{{ $data->title }}";
+            officeDropdown.appendChild(option);
+        }
+        @endforeach
+    
+    }
+
+</script>
+<script>
+    const posTitle = () => {
+        const positionTitleDropdown = document.querySelector("#pos_code");
+        const posDefaultInput = document.querySelector('#pos_default');
+
+        const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
+        posDefaultInput.value = selectedOption.textContent;
+    }
+
+    
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkBox = document.getElementById("use_func_title");
+        const input = document.getElementById("pos_func_name");
+        const posDefaultInput = document.getElementById("pos_default");
+        
+        checkBox.addEventListener("change", function () {
+            if (checkBox.checked) {
+                input.removeAttribute("readonly");
+                
+                posDefaultInput.setAttribute("disabled", "true");
+                // posDefaultInput.value = "";
+            } else {
+                input.setAttribute("readonly", "true");
+                input.value = "";
+                posDefaultInput.removeAttribute("disabled");
+            
+            }
+        });
+    });
+    
+    const cesPosAndPresAppointee = () => {
+        const is_ces_pos = document.querySelector("#is_ces_pos");
+        const pres_apptee = document.querySelector("#pres_apptee");
+        
+        if (is_ces_pos.checked) {
+            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+            
+            if (confirmation){
+                pres_apptee.checked = true;
+            }
+        }
+    }
+</script>
 @extends('layouts.app')
 @section('title', 'Position Manager - Create')
 @section('content')
@@ -223,19 +392,6 @@
 
                     <fieldset class="border p-4">
                         <legend>Classification Basis</legend>
-                        <script>
-                            const classificationBasis = (val) => {
-                                const titleAndDateTextArea = document.querySelector('#titleAndDate');
-                        
-                                @foreach ($classBasis as $data)
-                                if ("{{ $data->cbasis_code }}" === val) {
-                                    titleAndDateTextArea.value = `{!! $data->title !!}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}`;
-
-                                }
-                                @endforeach
-                            }
-                        </script>
-
                         <div class="mb-3">
                             <label for="cbasis_code">Classification Basis</label>
                             <select id="cbasis_code" name="cbasis_code" required
@@ -285,161 +441,4 @@
     </div>
 </div>
 
-<script>
-    const posCode = (val) => {
-    // Get the second dropdown element
-    const positionTitleDropdown = document.querySelector("#pos_code");
-    const posDefaultInput = document.querySelector('#pos_default');
-    
-    // Clear existing options in the second dropdown
-    positionTitleDropdown.innerHTML = "";
-    posDefaultInput.value = "";
-    
-    // Add a default "Select Position Title" option
-    const defaultOption = document.createElement("option");
-    defaultOption.text = "Select Position Title";
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    positionTitleDropdown.appendChild(defaultOption);
-    
-    // Populate the second dropdown based on the selected value of the first dropdown
-    @foreach ($positionMasterLibrary as $data)
-    if ("{{ $data->poslevel_code }}" == val) {
-    const option = document.createElement("option");
-    option.value = "{{ $data->pos_code }}";
-    // option.text = "{{ $data->dbm_title }} ,SG {{ $data->sg }}";
-    option.text = "{{ $data->dbm_title }}";
-    positionTitleDropdown.appendChild(option);
-    }
-    @endforeach
-    
-    }
-</script>
-
-<script>
-    const sectorToggle = (val) => {
-        const sectorDropdown = document.querySelector("#sector");
-        const departmentDropdown = document.querySelector('#department');
-        const agencyDropdown = document.querySelector('#agency');
-        const officeDropdown = document.querySelector('#officeid');
-
-        departmentDropdown.innerHTML = "";
-        agencyDropdown.innerHTML = "";
-        officeDropdown.innerHTML = "";
-
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Select Department / Agency";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        departmentDropdown.appendChild(defaultOption);
-        
-        // Populate the second dropdown based on the selected value of the first dropdown
-        @foreach ($department as $data)
-            if ("{{ $data->sectorid }}" == val) {
-                const option = document.createElement("option");
-                option.value = "{{ $data->deptid }}";
-                option.text = "{{ $data->title }}";
-                departmentDropdown.appendChild(option);
-            }
-        @endforeach
-    
-    }
-
-</script>
-<script>
-    const departmentToggle = (val) => {
-        const departmentDropdown = document.querySelector("#department");
-        const agencyDropdown = document.querySelector('#agency');
-        const officeDropdown = document.querySelector('#officeid');
-
-        agencyDropdown.innerHTML = "";
-        officeDropdown.innerHTML = "";
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Select Agency Location";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        agencyDropdown.appendChild(defaultOption);
-        
-        @foreach ($agencyLocation as $data)
-        if ("{{ $data->officelocid }}" == val) {
-            const option = document.createElement("option");
-            option.value = "{{ $data->officelocid }}";
-            option.text = "{{ $data->title }}";
-            agencyDropdown.appendChild(option);
-        }
-        @endforeach
-    
-    }
-</script>
-<script>
-    const agencyToggle = (val) => {
-        const departmentDropdown = document.querySelector("#department");
-        const agencyDropdown = document.querySelector('#agency');
-        const officeDropdown = document.querySelector('#officeid');
-
-        officeDropdown.innerHTML = "";
-        const defaultOption = document.createElement("option");
-        defaultOption.text = "Select Office";
-        defaultOption.disabled = true;
-        defaultOption.selected = true;
-        officeDropdown.appendChild(defaultOption);
-        
-        @foreach ($office as $data)
-        if ("{{ $data->officelocid }}" == val) {
-            const option = document.createElement("option");
-            option.value = "{{ $data->officeid }}";
-            option.text = "{{ $data->title }}";
-            officeDropdown.appendChild(option);
-        }
-        @endforeach
-    
-    }
-
-</script>
-<script>
-    const posTitle = () => {
-        const positionTitleDropdown = document.querySelector("#pos_code");
-        const posDefaultInput = document.querySelector('#pos_default');
-
-        const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
-        posDefaultInput.value = selectedOption.textContent;
-    }
-
-    
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const checkBox = document.getElementById("use_func_title");
-        const input = document.getElementById("pos_func_name");
-        const posDefaultInput = document.getElementById("pos_default");
-        
-        checkBox.addEventListener("change", function () {
-            if (checkBox.checked) {
-                input.removeAttribute("readonly");
-                
-                posDefaultInput.setAttribute("disabled", "true");
-                // posDefaultInput.value = "";
-            } else {
-                input.setAttribute("readonly", "true");
-                input.value = "";
-                posDefaultInput.removeAttribute("disabled");
-            
-            }
-        });
-    });
-    
-    const cesPosAndPresAppointee = () => {
-        const is_ces_pos = document.querySelector("#is_ces_pos");
-        const pres_apptee = document.querySelector("#pres_apptee");
-        
-        if (is_ces_pos.checked) {
-            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-            
-            if (confirmation){
-                pres_apptee.checked = true;
-            }
-        }
-    }
-</script>
 @endsection
