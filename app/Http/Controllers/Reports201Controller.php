@@ -26,20 +26,6 @@ class Reports201Controller extends Controller
         $cesstat_code = $request->input('cesstat_code', 'false');
         $authority_code = $request->input('authority_code', 'false');
 
-        // dd(
-        //     $sortBy,
-        //     $sortOrder,
-        //     $filter_active,
-        //     $filter_inactive,
-        //     $filter_retired,
-        //     $filter_deceased,
-        //     $filter_retirement,
-        //     $with_pending_case,
-        //     $without_pending_case,
-        //     $cesstat_code,
-        //     $authority_code
-        // );
-
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
@@ -144,20 +130,6 @@ class Reports201Controller extends Controller
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
                         $cesstat_code, $authority_code)
     {
-
-        // dd(
-        //     $sortBy,
-        //     $sortOrder,
-        //     $filter_active,
-        //     $filter_inactive,
-        //     $filter_retired,
-        //     $filter_deceased,
-        //     $filter_retirement,
-        //     $with_pending_case,
-        //     $without_pending_case,
-        //     $cesstat_code,
-        //     $authority_code
-        // );
 
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';

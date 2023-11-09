@@ -54,11 +54,11 @@
                 font-size: 10px;
                 text-transform: uppercase;
                 text-align: left;
-                background-color: white;
+                background-color: #f1f6ffb2;
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #f1f6ffb2;
             }
         
             .container {
