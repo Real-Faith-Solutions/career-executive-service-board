@@ -203,32 +203,33 @@ class AuthController extends Controller
                     $association['user_id'] == $ctrlno
                 ) {
 
-                    $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
-                    $cooldownMinutes = 4; // Adjust to your preferred code expiration
-                    if (!$deviceIdentifier->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
-                        
-                        $confirmation_code = mt_rand(10000, 99999);
-                        $hashed_confirmation_code = Hash::make($confirmation_code);
-                        $recipientEmail = auth()->user()->email;
-                        $imagePath = public_path('images/branding.png');
-
-                        // Update the confirmation code in the database
-                        $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
-
-                        // sending confirmation_code email to user
-                        $data = [
-                            'email' => $recipientEmail,
-                            'confirmation_code' => $confirmation_code,
-                            'imagePath' => $imagePath,
-                        ];
-                
-                        Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
-
-                        return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
-
-                    }
-
                     if (Hash::check($request->code, $deviceIdentifier->confirmation_code)) {
+
+                        $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
+                        $cooldownMinutes = 4; // Adjust to your preferred code expiration
+                        if (!($deviceIdentifier->updated_at->addMinutes($cooldownMinutes)->isFuture())) {
+                            
+                            $confirmation_code = mt_rand(10000, 99999);
+                            $hashed_confirmation_code = Hash::make($confirmation_code);
+                            $recipientEmail = auth()->user()->email;
+                            $imagePath = public_path('images/branding.png');
+
+                            // Update the confirmation code in the database
+                            $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                            // sending confirmation_code email to user
+                            $data = [
+                                'email' => $recipientEmail,
+                                'confirmation_code' => $confirmation_code,
+                                'imagePath' => $imagePath,
+                            ];
+                    
+                            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                            return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+
+                        }
+
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
