@@ -223,6 +223,18 @@
 
                     <fieldset class="border p-4">
                         <legend>Classification Basis</legend>
+                        <script>
+                            const classificationBasis = (val) => {
+                                const titleAndDateTextArea = document.querySelector('#titleAndDate');
+                        
+                                @foreach ($classBasis as $data)
+                                if ("{{ $data->cbasis_code }}" == val) {
+                                    titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+                                }
+                                @endforeach
+                            }
+                        </script>
+
                         <div class="mb-3">
                             <label for="cbasis_code">Classification Basis</label>
                             <select id="cbasis_code" name="cbasis_code" required
@@ -301,18 +313,6 @@
     @endforeach
     
     }
-</script>
-<script>
-    const classificationBasis = (val) => {
-        const titleAndDateTextArea = document.querySelector('#titleAndDate');
-
-        @foreach ($classBasis as $data)
-        if ("{{ $data->cbasis_code }}" == val) {
-            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
-        }
-        @endforeach
-    }
-
 </script>
 
 <script>
@@ -429,16 +429,16 @@
     });
     
     const cesPosAndPresAppointee = () => {
-    const is_ces_pos = document.querySelector("#is_ces_pos");
-    const pres_apptee = document.querySelector("#pres_apptee");
-    
-    if (is_ces_pos.checked) {
-    const confirmation = window.confirm("Would you like to check Presidential Appointee?");
-    
-    if (confirmation){
-    pres_apptee.checked = true;
-    }
-    }
+        const is_ces_pos = document.querySelector("#is_ces_pos");
+        const pres_apptee = document.querySelector("#pres_apptee");
+        
+        if (is_ces_pos.checked) {
+            const confirmation = window.confirm("Would you like to check Presidential Appointee?");
+            
+            if (confirmation){
+                pres_apptee.checked = true;
+            }
+        }
     }
 </script>
 @endsection
