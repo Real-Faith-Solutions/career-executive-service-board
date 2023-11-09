@@ -80,19 +80,27 @@ class OccupantBrowserController extends Controller
     public function edit($appointee_id)
     {
         $datas = PlanAppointee::find($appointee_id);
-        $address = $datas->planPosition->office->officeAddress->floor_bldg ?? '' . " " .
-            $datas->planPosition->office->officeAddress->house_no_st ?? '' . " " .
-            $datas->planPosition->office->officeAddress->brgy_dist ?? '' . " " .
-            $datas->planPosition->office->officeAddress->city_code ?? '';
 
-        $appointee = $datas->personalData->lastname ?? '' . " " .
-            $datas->personalData->firstname ?? '' . " " .
-            $datas->personalData->name_extension ?? '' . " " .
-            $datas->personalData->middlename ?? '';
+        $address = '';
+        if ($datas && $datas->planPosition && $datas->planPosition->office && $datas->planPosition->officeAddress) {
+            $address .= $datas->planPosition->office->officeAddress->floor_bldg ?? '';
+            $address .= ' ' . $datas->planPosition->office->officeAddress->house_no_st ?? '';
+            $address .= ' ' . $datas->planPosition->office->officeAddress->brgy_dist ?? '';
+            $address .= ' ' . $datas->planPosition->office->officeAddress->city_code ?? '';
+        }
+
+        $appointee = '';
+        if ($datas && $datas->personalData) {
+            $appointee .= $datas->personalData->lastname ?? '';
+            $appointee .= ' ' . $datas->personalData->firstname ?? '';
+            $appointee .= ' ' . $datas->personalData->name_extension ?? '';
+            $appointee .= ' ' . $datas->personalData->middlename ?? '';
+        }
+
         return view('admin.plantilla.library.occupant_browser.edit', compact(
             'datas',
             'address',
             'appointee',
-        ));;
+        ));
     }
 }

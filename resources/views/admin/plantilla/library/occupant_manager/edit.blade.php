@@ -36,7 +36,7 @@
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="office">Office</label>
-                            <input id="office" value="{{ $datas->planPosition->office->title }}" readonly />
+                            <input id="office" value="{{ $datas->planPosition->office->title ?? ''}}" readonly />
                         </div>
                     </div>
 
