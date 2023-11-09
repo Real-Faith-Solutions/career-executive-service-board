@@ -113,7 +113,7 @@
         officeDropdown.appendChild(defaultOption);
         
         @foreach ($office as $data)
-        if ("{{ $data->officeid }}" == val) {
+        if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
             option.text = "{{ $data->title }}";
