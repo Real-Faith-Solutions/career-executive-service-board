@@ -56,6 +56,7 @@
         defaultOption.text = "Select Department / Agency";
         defaultOption.disabled = true;
         defaultOption.selected = true;
+        defaultOption.value = "";
         departmentDropdown.appendChild(defaultOption);
         
         // Populate the second dropdown based on the selected value of the first dropdown
@@ -83,10 +84,11 @@
         defaultOption.text = "Select Agency Location";
         defaultOption.disabled = true;
         defaultOption.selected = true;
+        defaultOption.value = "";
         agencyDropdown.appendChild(defaultOption);
         
         @foreach ($agencyLocation as $data)
-        if ("{{ $data->officelocid }}" == val) {
+        if ("{{ $data->deptid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officelocid }}";
             option.text = "{{ $data->title }}";
@@ -107,10 +109,11 @@
         defaultOption.text = "Select Office";
         defaultOption.disabled = true;
         defaultOption.selected = true;
+        defaultOption.value = "";
         officeDropdown.appendChild(defaultOption);
         
         @foreach ($office as $data)
-        if ("{{ $data->officelocid }}" == val) {
+        if ("{{ $data->officeid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
             option.text = "{{ $data->title }}";
