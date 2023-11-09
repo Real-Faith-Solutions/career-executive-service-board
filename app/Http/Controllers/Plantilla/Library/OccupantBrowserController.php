@@ -36,11 +36,11 @@ class OccupantBrowserController extends Controller
         // }
 
         if ($query || $officeDropdown) {
-            $filterDropdown->whereHas('planPosition.positionMasterLibrary', function ($queryBuilder) use ($query, $officeDropdown) {
+            $filterDropdown->whereHas('planPosition', function ($queryBuilder) use ($query, $officeDropdown) {
                 $queryBuilder->where(function ($subQuery) use ($query, $officeDropdown) {
                     if ($query) {
-                        $subQuery->where('dbm_title', 'LIKE', "%$query%")
-                            ->orderBy('sg', 'desc');
+                        $subQuery->where('pos_default', 'LIKE', "%$query%")
+                            ->orWhere('corp_sg', 'LIKE', "%$query%");
                     }
 
                     if ($officeDropdown) {
@@ -52,7 +52,11 @@ class OccupantBrowserController extends Controller
             });
         }
 
-        $datas =  $filterDropdown->paginate(25);
+        $datas =  $filterDropdown
+            ->whereHas('planPosition', function ($query) {
+                $query->orderBy('corp_sg', 'desc');
+            })
+            ->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
