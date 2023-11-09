@@ -41,7 +41,8 @@ class OccupantBrowserController extends Controller
                     if ($query) {
                         $subQuery->where(function ($posSubQuery) use ($query) {
                             $posSubQuery->where('pos_default', 'LIKE', "%$query%")
-                                ->orWhere('corp_sg', 'LIKE', "%$query%");
+                                ->orWhere('corp_sg', 'LIKE', "%$query%")
+                                ->orWhere('item_no', 'LIKE', "%$query%");
                         });
                     }
 
