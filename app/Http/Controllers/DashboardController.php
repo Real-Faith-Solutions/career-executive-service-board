@@ -75,6 +75,10 @@ class DashboardController extends Controller
             }
         }
 
+        $pendingFiles = $personalData->requestFile()->count();
+        $approvedFiles = $personalData->pdfFile()->count();
+        $declinedFiles = $personalData->requestFile()->onlyTrashed()->count();
+
         return view('admin.dashboard.index', compact(
             'totalCESO',
             'totalCESOActive',
@@ -88,6 +92,9 @@ class DashboardController extends Controller
             'nonCesTraining',
             'awardsAndCitations',
             'pendingCase',
+            'pendingFiles',
+            'approvedFiles',
+            'declinedFiles',
         ));
     }
 }
