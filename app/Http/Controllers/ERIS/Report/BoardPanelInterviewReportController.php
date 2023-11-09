@@ -36,7 +36,13 @@ class BoardPanelInterviewReportController extends Controller
 
     public function panelBoardInterview($interviewType)
     {
-        $panelBoardInterview = PanelBoardInterview::paginate(25);
+        $panelBoardInterview = PanelBoardInterview::join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblPBOARD.acno')
+        ->orderBy('erad_tblMain.lastname')
+        ->select('erad_tblPBOARD.*') // Select the columns from the main table
+        ->with(['erisTblMainPanelBoardInterview' => function($query) {
+            $query->orderBy('lastname');
+        }])
+        ->paginate(25);
 
         return view('admin.eris.reports.board_panel_interview_reports.panel_board_interview', compact('panelBoardInterview', 'interviewType'));
     }

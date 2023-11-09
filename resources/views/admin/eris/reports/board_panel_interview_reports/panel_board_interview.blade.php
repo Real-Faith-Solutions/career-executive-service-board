@@ -38,11 +38,15 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Assigned Date
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Submittion of Document
+                        Submition of Document
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -59,11 +63,16 @@
                 </tr>
             </thead>
             <tbody>
-                   
                 {{-- panel board interview --}}
                 @foreach ($panelBoardInterview as $panelBoardInterviews) 
                     <tr class="border-b bg-white">
                         @if ($interviewType == 'Panel Board Interview')
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $panelBoardInterviews->erisTblMainPanelBoardInterview->lastname ?? '' }},
+                                {{ $panelBoardInterviews->erisTblMainPanelBoardInterview->firstname ?? '' }},
+                                {{ $panelBoardInterviews->erisTblMainPanelBoardInterview->middlename ?? '' }}
+                            </td>
+
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ \Carbon\Carbon::parse($panelBoardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
                             </td>
