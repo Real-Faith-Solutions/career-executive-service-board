@@ -1,9 +1,4 @@
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const checkBox = document.getElementById("use_func_title");
-    const input = document.getElementById("pos_func_name");
-    const posDefaultInput = document.getElementById("pos_default");
-
     const posCode = (val) => {
     // Get the second dropdown element
     const positionTitleDropdown = document.querySelector("#pos_code");
@@ -32,29 +27,31 @@
     @endforeach
     
     }
-    
-    checkBox.addEventListener("change", function () {
-        const classificationBasis = (val) => {
+</script>
+<script>
+    const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
-        
+
         @foreach ($classBasis as $data)
         if ("{{ $data->cbasis_code }}" == val) {
-        titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
+            titleAndDateTextArea.value = "{{ $data->title }}, dated {{ \Carbon\Carbon::parse($data->classdate)->format('m/d/Y') }}";
         }
         @endforeach
-        }
-        
-        
-        const sectorToggle = (val) => {
+    }
+
+</script>
+
+<script>
+    const sectorToggle = (val) => {
         const sectorDropdown = document.querySelector("#sector");
         const departmentDropdown = document.querySelector('#department');
         const agencyDropdown = document.querySelector('#agency');
         const officeDropdown = document.querySelector('#officeid');
-        
+
         departmentDropdown.innerHTML = "";
         agencyDropdown.innerHTML = "";
         officeDropdown.innerHTML = "";
-        
+
         const defaultOption = document.createElement("option");
         defaultOption.text = "Select Department / Agency";
         defaultOption.disabled = true;
@@ -63,21 +60,23 @@
         
         // Populate the second dropdown based on the selected value of the first dropdown
         @foreach ($department as $data)
-        if ("{{ $data->sectorid }}" == val) {
-        const option = document.createElement("option");
-        option.value = "{{ $data->deptid }}";
-        option.text = "{{ $data->title }}";
-        departmentDropdown.appendChild(option);
-        }
+            if ("{{ $data->sectorid }}" == val) {
+                const option = document.createElement("option");
+                option.value = "{{ $data->deptid }}";
+                option.text = "{{ $data->title }}";
+                departmentDropdown.appendChild(option);
+            }
         @endforeach
-        
-        }
-        
-        const departmentToggle = (val) => {
+    
+    }
+
+</script>
+<script>
+    const departmentToggle = (val) => {
         const departmentDropdown = document.querySelector("#department");
         const agencyDropdown = document.querySelector('#agency');
         const officeDropdown = document.querySelector('#officeid');
-        
+
         agencyDropdown.innerHTML = "";
         officeDropdown.innerHTML = "";
         const defaultOption = document.createElement("option");
@@ -88,19 +87,21 @@
         
         @foreach ($agencyLocation as $data)
         if ("{{ $data->officelocid }}" == val) {
-        const option = document.createElement("option");
-        option.value = "{{ $data->officelocid }}";
-        option.text = "{{ $data->title }}";
-        agencyDropdown.appendChild(option);
+            const option = document.createElement("option");
+            option.value = "{{ $data->officelocid }}";
+            option.text = "{{ $data->title }}";
+            agencyDropdown.appendChild(option);
         }
         @endforeach
-        
-        }
-        const agencyToggle = (val) => {
+    
+    }
+</script>
+<script>
+    const agencyToggle = (val) => {
         const departmentDropdown = document.querySelector("#department");
         const agencyDropdown = document.querySelector('#agency');
         const officeDropdown = document.querySelector('#officeid');
-        
+
         officeDropdown.innerHTML = "";
         const defaultOption = document.createElement("option");
         defaultOption.text = "Select Office";
@@ -110,46 +111,47 @@
         
         @foreach ($office as $data)
         if ("{{ $data->officelocid }}" == val) {
-        const option = document.createElement("option");
-        option.value = "{{ $data->officeid }}";
-        option.text = "{{ $data->title }}";
-        officeDropdown.appendChild(option);
+            const option = document.createElement("option");
+            option.value = "{{ $data->officeid }}";
+            option.text = "{{ $data->title }}";
+            officeDropdown.appendChild(option);
         }
         @endforeach
-        
-        }
-        
-        const posTitle = () => {
+    
+    }
+
+</script>
+<script>
+    const posTitle = () => {
         const positionTitleDropdown = document.querySelector("#pos_code");
         const posDefaultInput = document.querySelector('#pos_default');
-        
+
         const selectedOption = positionTitleDropdown.options[positionTitleDropdown.selectedIndex];
         posDefaultInput.value = selectedOption.textContent;
-        }
+    }
 
-        if (checkBox.checked) {
-            input.removeAttribute("readonly");
-        
-            posDefaultInput.setAttribute("disabled", "true");
-            // posDefaultInput.value = "";
-            } else {
-                input.setAttribute("readonly", "true");
-                input.value = "";
-                posDefaultInput.removeAttribute("disabled");
-            
-            }
-        });
+    
+</script>
 
-
-
-
-
-
-
-
-
-
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const checkBox = document.getElementById("use_func_title");
+    const input = document.getElementById("pos_func_name");
+    const posDefaultInput = document.getElementById("pos_default");
+    
+    checkBox.addEventListener("change", function () {
+    if (checkBox.checked) {
+    input.removeAttribute("readonly");
+    
+    posDefaultInput.setAttribute("disabled", "true");
+    // posDefaultInput.value = "";
+    } else {
+    input.setAttribute("readonly", "true");
+    input.value = "";
+    posDefaultInput.removeAttribute("disabled");
+    
+    }
+    });
     });
     
     const cesPosAndPresAppointee = () => {
@@ -320,14 +322,14 @@
                                     Head of Agency
                                 </label>
                             </div>
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <input
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                     id="is_generic" name="is_generic" type="checkbox" value="1">
                                 <label class="ml-2 text-sm font-medium text-gray-900" for="is_generic">
                                     Generic
                                 </label>
-                            </div>
+                            </div> --}}
                             {{-- <div class="flex items-center">
                                 <input
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
