@@ -106,11 +106,11 @@
                         <fieldset class="border p-4">
                             <legend>Profile Information</legend>
 
-                            <div class="flex gap-4">
+                            <div class="flex flex-col gap-4 lg:items-center">
                                 <img id="" class="w-44 h-44 rounded-full object-cover"
                                     src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/placeholder.png') }}" />
 
-                                <div class="flex flex-col gap-2">
+                                <div class="flex flex-col gap-2 text-center">
 
                                     <h1 class="font-semibold">
                                         {{ $appointees->personalData->title ?? ''}}
@@ -250,11 +250,29 @@
                                     </div> --}}
 
                                     <div class="mb-3">
-                                        <label for="name">Position Appointee</label>
-                                        <input id="name" name="name"
-                                            value="{{ $appointees->positionAppointee->name ?? '' }}" />
-                                    </div>
+                                        <label for="name">Appointing Authority</label>
+                                        <select id="name" name="name" required>
+                                            <option value="" disabled selected>Select Appointing Authority</option>
+                                            @foreach ($appAuthority as $data)
+                                            <option value="{{ $data->code }}" {{ $data->code ==
+                                                $appointees->positionAppointee->name ? 'selected' : ''}}>
+                                                {{ $data->description }}
+                                            </option>
+                                            @endforeach
+                                        </select>
 
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="appt_date">Appointment Date<sup>*</sup></label>
+                                        <input id="appt_date" name="appt_date" type="date"
+                                            value="{{ $convertedApptDate }}" required />
+                                        @error('appt_date')
+                                        <span class="invalid" role="alert">
+                                            <p>{{ $message }}</p>
+                                        </span>
+                                        @enderror
+                                    </div>
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
@@ -267,16 +285,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="appt_date">Appointment Date<sup>*</sup></label>
-                                        <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ $convertedApptDate }}" required />
-                                        @error('appt_date')
-                                        <span class="invalid" role="alert">
-                                            <p>{{ $message }}</p>
-                                        </span>
-                                        @enderror
-                                    </div>
+
                                 </div>
 
                                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
@@ -311,16 +320,19 @@
 
                             </fieldset>
 
-                            <div class="flex justify-end">
-                                <div>
-                                    <button type="button" id="btnEdit" class="btn btn-primary">
-                                        Edit Record
-                                    </button>
-                                    <button type="button" class="btn btn-primary hidden" id="btnSubmit"
-                                        onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
-                                        Save Changes
-                                    </button>
-                                </div>
+                            <h1 class="text-slate-400 text-sm font-semibold">
+                                Last update at {{ \Carbon\Carbon::parse($appointees->lastupd_dt)->format('m/d/Y \a\t
+                                g:iA') }}
+                            </h1>
+                            <hr>
+                            <div class="flex justify-end gap-2 mt-2">
+                                <button type="button" id="btnEdit" class="btn btn-primary">
+                                    Edit Record
+                                </button>
+                                <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                                    onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                                    Save Changes
+                                </button>
                             </div>
                         </form>
 
