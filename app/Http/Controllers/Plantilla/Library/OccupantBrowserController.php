@@ -52,7 +52,11 @@ class OccupantBrowserController extends Controller
             });
         }
 
-        $datas =  $filterDropdown->paginate(25);
+        $datas =  $filterDropdown
+            ->whereHas('planPosition', function ($query) {
+                $query->orderBy('corp_sg', 'asc');
+            })
+            ->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
