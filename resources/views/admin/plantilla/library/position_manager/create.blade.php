@@ -1,4 +1,25 @@
 <script>
+    // Get the input element and the collection from PHP
+    
+
+    // Function to check if an item number exists
+    const itemno = (val) => {
+
+        const item_no_label = document.querySelector("#item_no_label");
+        const allPlanPosition = @json($allPlanPosition);
+
+        // Check if the value exists in the collection
+        const exists = allPlanPosition.some(data => data.item_no == val);
+
+        // Update the label accordingly
+        if (exists) {
+            item_no_label.textContent = val + " is already taken";
+        } else {
+            item_no_label.textContent = ""; // Clear the label
+        }
+    }
+</script>
+<script>
     const classificationBasis = (val) => {
         const titleAndDateTextArea = document.querySelector('#titleAndDate');
 
@@ -373,7 +394,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="item_no">Item No.<sup>*</sup></label>
-                                <input id="item_no" name="item_no" required />
+                                <input id="item_no" name="item_no" required onchange="itemno(this.value)" />
+                                <p class="text-red-500 text-sm" id="item_no_label"></p>
                                 @error('item_no')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>

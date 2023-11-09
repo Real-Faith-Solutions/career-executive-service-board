@@ -149,7 +149,7 @@
         </li>
 
         <li>
-            <a href="#" class="text-blue-500">{{ $planPosition->positionMasterLibrary->dbm_title }}</a>
+            <a href="#" class="text-blue-500">{{ $planPosition->pos_default }}</a>
         </li>
     </ol>
 </nav>
