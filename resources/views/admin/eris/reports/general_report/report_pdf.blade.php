@@ -161,8 +161,12 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($eradTblMainChunk as $data)
+                        @foreach ($eradTblMain as $data)
                             <tr>
+                                <td>
+                                    {{ $rowNumber++ }}
+                                </td>
+
                                 <td>
                                     {{ $data->acno ?? '' }} 
                                 </td>

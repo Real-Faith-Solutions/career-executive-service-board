@@ -101,29 +101,29 @@
                 @foreach ($assessmentCenter as $data) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
-                            {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
-                            {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
+                            {{ $data->erisTblMainAssessmentCenter->lastname ?? '' }},
+                            {{ $data->erisTblMainAssessmentCenter->firstname ?? '' }},
+                            {{ $data->erisTblMainAssessmentCenter->middlename ?? '' }}
                         </td>
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->numtakes ?? 'No Record' }} 
+                            {{ $data->numtakes ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->competencies_d_o ?? 'No Record' }} 
+                            {{ $data->competencies_d_o ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->remarks ?? 'No Record' }} 
+                            {{ $data->remarks ?? '' }} 
                         </td>
                     </tr>
                 @endforeach

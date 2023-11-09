@@ -64,7 +64,11 @@ class AssessmentCenterReportController extends Controller
             $assessmentCenter->whereBetween(DB::raw('CAST(acdate AS DATE)'), [$startDate, $endDate]);
         }
 
-        $assessmentCenter = $assessmentCenter->orderBy('acdate')->get();
+        $assessmentCenter->with(['erisTblMainAssessmentCenter' => function($query) {
+            $query->orderBy('lastname');
+        }]);
+
+        $assessmentCenter = $assessmentCenter->get(['acdate', 'numtakes', 'docdate', 'competencies_d_o', 'remarks']);
 
         $pdf = Pdf::loadView('admin.eris.reports.assessment_center.report_pdf', [
             'assessmentCenter' => $assessmentCenter,
@@ -114,7 +118,11 @@ class AssessmentCenterReportController extends Controller
             $assessmentCenter->whereBetween(DB::raw('CAST(acdate AS DATE)'), [$startDate, $endDate]);
         }
 
-        $assessmentCenter = $assessmentCenter->orderBy('acdate')->paginate(25);
+        $assessmentCenter->with(['erisTblMainAssessmentCenter' => function($query) {
+            $query->orderBy('lastname');
+        }]);
+
+        $assessmentCenter = $assessmentCenter->paginate(25);
 
         return 
         [
