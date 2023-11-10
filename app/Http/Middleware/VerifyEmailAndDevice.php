@@ -24,10 +24,17 @@ class VerifyEmailAndDevice
 
         $ctrlno = auth()->user()->ctrlno;
         $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
+        // dd($deviceIdentifiers);
         $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
+
+        // test
+        dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
 
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
+
+            // test
+            dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
 
             if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
@@ -56,6 +63,9 @@ class VerifyEmailAndDevice
 
                 return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
             }
+
+            // bugs
+            return redirect()->route('reconfirm.email')->with('info','bugsss');
 
             $device_id = uniqid();
             $confirmation_code = mt_rand(10000, 99999);
@@ -96,19 +106,28 @@ class VerifyEmailAndDevice
 
     protected function isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)
     {
+        $isVefified = false;
         foreach ($deviceIdentifiers as $deviceIdentifier) {
             foreach ($associations as $association) {
                 if (
-                    $association['device_id'] === $deviceIdentifier &&
-                    $association['user_id'] === $ctrlno &&
+                    $association['device_id'] == $deviceIdentifier &&
+                    $association['user_id'] == $ctrlno &&
                     $association['verified']
                 ) {
-                    return true;
+                    // bugs
+                    // return redirect()->route('reconfirm.email')->with('info','hmmm');
+                    // return true;
+                    $isVefified = true;
                 }
             }
         }
 
-        return false;
+        if($isVefified){
+            return true;
+        }else{
+            return $associations;
+        }
+        
     }
 
     protected function getCurrentDeviceIdentifiers($ctrlno)
