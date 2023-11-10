@@ -65,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #ECECEC;
             }
         
             .container {
@@ -145,6 +145,10 @@
                         </th>
 
                         <th>
+                            Name
+                        </th>
+
+                        <th>
                             Rapid Validation Date
                         </th>
     
@@ -176,23 +180,37 @@
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
+                                    {{ $data->erisTblMainRapidValidation->lastname ?? '' }},
+                                    {{ $data->erisTblMainRapidValidation->firstname ?? '' }},
+                                    {{ $data->erisTblMainRapidValidation->middlename ?? '' }} 
+                                </td>
+
+                                <td>
+                                    @if ($data->dteassign != null)
+                                        {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dteassign ?? '' }} 
+                                    @endif
                                 </td>
         
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
+                                    @if ($data->dtesubmit != null)
+                                        {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dtesubmit ?? '' }} 
+                                    @endif
                                 </td>
         
                                 <td>
-                                    {{ $data->validator ?? 'No Record' }} 
+                                    {{ $data->validator ?? '' }} 
                                 </td>
         
                                 <td>
-                                    {{ $data->recom ?? 'No Record' }} 
+                                    {{ $data->recom ?? '' }} 
                                 </td>
         
                                 <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
+                                    {{ $data->remarks ?? '' }} 
                                 </td>
                             </tr>
                         @endforeach                 

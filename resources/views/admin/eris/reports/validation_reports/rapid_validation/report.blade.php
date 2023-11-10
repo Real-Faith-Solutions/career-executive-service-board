@@ -6,7 +6,10 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
    
         <div class="flex items-center">
-            <form action="{{ route('rapid-validation-report.generatePdfReport') }}" target="_blank" method="POST">
+            <form action="{{ route('rapid-validation-report.generatePdfReport', [
+                'sort_by' => $sort_by, 
+                'sort_order' => $sort_order
+            ]) }}" target="_blank" method="POST">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -49,11 +52,33 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Rapid Validation Date
+                        Name
+                    </th>
+                
+                    <th scope="col" class="px-6 py-3">
+                        <a href="{{ route('rapid-validation-report.index', [
+                            'sort_by' => 'dteassign',
+                            'sort_order' => $sort_order === 'desc' ? 'asc' : 'desc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                        ]) }}" class="flex items-center space-x-1">
+                            Rapid Validation Date
+                            @if ($sort_by === 'dteassign')
+                                @if ($sort_order === 'desc')
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-gray-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Submittion of Document
+                        Submition of Document
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -72,24 +97,38 @@
             <tbody>
                 @foreach ($rapidValidation as $data) 
                     <tr class="border-b bg-white">
+                        <td class="px-6 py-3">
+                            {{ $data->erisTblMainRapidValidation->lastname ?? '' }},
+                            {{ $data->erisTblMainRapidValidation->firstname ?? '' }},
+                            {{ $data->erisTblMainRapidValidation->middlename ?? '' }} 
+                        </td>
+
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
+                            @if ($data->dteassign != null)
+                                {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
+                            @else
+                                {{ $data->dteassign ?? '' }} 
+                            @endif
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
+                            @if ($data->dtesubmit != null)
+                                {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
+                            @else
+                                {{ $data->dtesubmit ?? '' }} 
+                            @endif
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->validator ?? 'No Record' }} 
+                            {{ $data->validator ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->recom ?? 'No Record' }} 
+                            {{ $data->recom ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->remarks ?? 'No Record' }} 
+                            {{ $data->remarks ?? '' }} 
                         </td>
                     </tr>
                 @endforeach
@@ -98,6 +137,12 @@
     </div>
 
     <div class="m-5">
-        {{ $rapidValidation->appends(['startDate' => $startDate, 'endDate' => $endDate])->links() }}
+        {{ $rapidValidation->appends([
+            'sort_by' => $sort_by,
+            'sort_order' => $sort_order,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+        ])->links() }}
     </div>
+    
 @endsection
