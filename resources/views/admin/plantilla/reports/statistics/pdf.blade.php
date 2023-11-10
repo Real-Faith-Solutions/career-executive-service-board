@@ -825,12 +825,12 @@
         }
 
         .front-page {
-            border-top: 5px solid #3b82f6;
-            border-right: 5px solid grey;
-            border-bottom: 5px solid #ef4444;
-            border-left: 5px solid #eab308;
+            border-top: 8px solid #3b82f6;
+            border-right: 8px solid grey;
+            border-bottom: 8px solid #ef4444;
+            border-left: 8px solid #eab308;
             width: auto;
-            height: 85%;
+            height: 80%;
 
         }
 
@@ -967,30 +967,38 @@
         td {
             padding-right: 1%;
         }
+
     </style>
 
 </head>
 
 <body>
     <section class="front-page">
-        <div style="margin-top:30%;border: 1px solid black;">
+        <div style="margin-top:20%;margin-bottom: 30%;"> 
             <center>
-                <img src="{{ public_path('images/branding.png') }}" width="100px" style="margin-top:5%">
-
-                <span>Career</span> <br>
-                <span>Executive</span> <br>
-                <span>Service</span> <br>
-                <span>Board</span> <br>
+                <table width="100%">
+                    <td>
+                        <img src="{{ public_path('images/assets/branding.png') }}" width="150px" style="margin-top:5%;margin-left:40%;margin-top:30px;">
+                    </td>
+                    <td style="font-size:30px" class="uppercase bold">
+                        <h1>Career</h1>
+                        <h1>Executive</h1>
+                        <h1>Service</h1>
+                        <h1>Board</h1>
+                    </td>
+                    
+                </table>
             </center>
         </div>
-        <div class="center-grid">
-            <p>
+        <center class="uppercase bold">
+            <h1 style="font-size:50px;">
                 {{ $motherDepartmentAgency->acronym }}
-            </p>
-            <p>
+            </h1>
+            <br><br><br>
+            <h1 style="font-size:25px;">
                 {{ $motherDepartmentAgency->title }}
-            </p>
-        </div>
+            </h1>
+        </center>
     </section>
 
     <section class="table-of-contents">
@@ -1049,7 +1057,7 @@
     <section class="page-1">
         <header>
             <center>
-                <img src="{{ public_path('images/branding.png') }}" width="100px">
+                <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
                 <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
 
                 <div style="font-size:11px;">
@@ -1125,11 +1133,11 @@
         <table class="mb-3 w-100">
             <tr>
                 <td colspan="8" class="uppercase bold">Total no. of ces positions</td>
-                <td colspan="1" class="text-white bold bg-blue text-right">193</td>
+                <td colspan="1" class="text-white bold bg-blue text-right">{{ $totalPosition }}</td>
             </tr>
             <tr>
                 <td colspan="8" class="bold pl-5">a. Occupied CES Positions</td>
-                <td colspan="1" class="text-white bold bg-yellow text-right">193</td>
+                <td colspan="1" class="text-white bold bg-yellow text-right">{{ $occupiedCESPosition }}</td>
                 <td colspan="1" class="bold text-right">78%</td>
             </tr>
             <tr>
