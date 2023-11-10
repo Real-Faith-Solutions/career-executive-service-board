@@ -2,7 +2,7 @@
 @section('title', ' Board Interview')
 @section('content')
 
-    <h1 class="uppercase font-semibold text-blue-600 text-lg">Board And Panel Interview</h1>
+    <h1 class="uppercase font-semibold text-blue-600 text-lg">Board Interview</h1>
 
     <div class="my-5 flex justify-between">
         <div class="flex items-center">
@@ -38,7 +38,37 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Assigned Date
+                        {{-- <a href="{{ route('eris-board-interview-report.index', ['sort_by' => 'lastname', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}" class="flex items-center space-x-1"> --}}
+                            Name
+                            {{-- @if ($sortBy === 'lastname')
+                                @if ($sortOrder === 'asc')
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-gray-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a> --}}
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        <a href="{{ route('eris-board-interview-report.index', ['sort_by' => 'dteassign', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}" class="flex items-center space-x-1">
+                            Assigned Date
+                            @if ($sortBy === 'dteassign')
+                                @if ($sortOrder === 'asc')
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-gray-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -59,9 +89,14 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- panel and board interview --}}
                     @foreach ($boardInterview as $boardInterviews) 
                         <tr class="border-b bg-white">
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $boardInterviews->erisTblMainBoardInterview->lastname ?? '' }},
+                                {{ $boardInterviews->erisTblMainBoardInterview->firstname ?? '' }},
+                                {{ $boardInterviews->erisTblMainBoardInterview->middlename ?? '' }}
+                            </td>
+
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ \Carbon\Carbon::parse($boardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
                             </td>
@@ -83,8 +118,15 @@
                             </td>
                         </tr>
                     @endforeach
-                {{-- end of panel and board interview --}}
             </tbody>
         </table>
+    </div>
+
+    <div class="m-5">
+        {{ $boardInterview->appends([
+            'interview' => $interviewType,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+        ])->links() }}
     </div>
 @endsection

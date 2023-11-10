@@ -74,23 +74,23 @@
                             </td>
 
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteassign)->format('m/d/Y') ?? 'No Record' }} 
+                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteassign)->format('m/d/Y') ?? '' }} 
                             </td>
 
                             <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
+                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dtesubmit)->format('m/d/Y') ?? '' }} 
                             </td>
 
                             <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->intrviewer ?? 'No Record' }} 
+                                {{ $panelBoardInterviews->intrviewer ?? '' }} 
                             </td>
 
                             <td class="px-6 py-3">
-                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteiview)->format('m/d/Y') ?? 'No Record' }} 
+                                {{ \Carbon\Carbon::parse($panelBoardInterviews->dteiview)->format('m/d/Y') ?? '' }} 
                             </td>
 
                             <td class="px-6 py-3">
-                                {{ $panelBoardInterviews->recom ?? 'No Record' }} 
+                                {{ $panelBoardInterviews->recom ?? '' }} 
                             </td>
                         @endif
                     </tr>

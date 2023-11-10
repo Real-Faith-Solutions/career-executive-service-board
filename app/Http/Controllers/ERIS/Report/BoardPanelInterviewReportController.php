@@ -13,10 +13,14 @@ class BoardPanelInterviewReportController extends Controller
     public function index(Request $request)
     {
         $interviewType = $request->input('interview');
+        $sortBy = $request->input('sort_by', 'dteassign'); // Default sorting by Ces No.
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
-        $boardInterview = BoardInterView::paginate(25);
+        $boardInterview = BoardInterView::query()
+        ->orderBy($sortBy, $sortOrder)
+        ->paginate(25);
         
-        return view('admin.eris.reports.board_panel_interview_reports.report', compact('boardInterview', 'interviewType'));
+        return view('admin.eris.reports.board_panel_interview_reports.report', compact('boardInterview', 'interviewType', 'sortBy', 'sortOrder'));
     }
 
     public function displayInterview(Request $request)
@@ -38,7 +42,7 @@ class BoardPanelInterviewReportController extends Controller
     {
         $panelBoardInterview = PanelBoardInterview::join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblPBOARD.acno')
         ->orderBy('erad_tblMain.lastname')
-        ->select('erad_tblPBOARD.*') // Select the columns from the main table
+        ->select('erad_tblPBOARD.*')
         ->with(['erisTblMainPanelBoardInterview' => function($query) {
             $query->orderBy('lastname');
         }])
