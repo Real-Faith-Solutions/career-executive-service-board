@@ -22,3 +22,4 @@ yarn-error.log
 /public/pdf_files/*
 /public/pending_pdf_files/*
 /public/decline_pdf_files/*
+/public/images/*
