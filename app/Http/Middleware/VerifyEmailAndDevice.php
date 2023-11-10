@@ -24,7 +24,6 @@ class VerifyEmailAndDevice
 
         $ctrlno = auth()->user()->ctrlno;
         $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
-        // dd($deviceIdentifiers);
         $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
 
         // test
@@ -32,9 +31,6 @@ class VerifyEmailAndDevice
 
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
-
-            // test
-            dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
 
             if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
@@ -63,9 +59,6 @@ class VerifyEmailAndDevice
 
                 return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
             }
-
-            // bugs
-            return redirect()->route('reconfirm.email')->with('info','bugsss');
 
             $device_id = uniqid();
             $confirmation_code = mt_rand(10000, 99999);
@@ -114,9 +107,6 @@ class VerifyEmailAndDevice
                     $association['user_id'] == $ctrlno &&
                     $association['verified']
                 ) {
-                    // bugs
-                    // return redirect()->route('reconfirm.email')->with('info','hmmm');
-                    // return true;
                     $isVefified = true;
                 }
             }
