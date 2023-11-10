@@ -32,7 +32,7 @@
             if ("{{ $data->sectorid }}" == sectorDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->deptid }}";
-                option.text = "{{ $data->title }}";
+                option.text = "{!! $data->title !!}";
                     if ("{{ $data->deptid }}" == oldDepartmentValue) {
                         option.selected = true; // Select the option if it matches the oldDepartmentValue
                     }
@@ -50,7 +50,7 @@
             if ("{{ $data->deptid }}" == departmentDropdown.value) {
                 const option = document.createElement("option");
                 option.value = "{{ $data->officelocid }}";
-                option.text = "{{ $data->title }}";
+                option.text = "{!! $data->title !!}";
                     if ("{{ $data->officelocid }}" == oldAgencyLocationValue) {
                         option.selected = true;
                     }

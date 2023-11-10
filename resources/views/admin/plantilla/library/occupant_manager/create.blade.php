@@ -22,7 +22,7 @@
         if ("{{ $data->sectorid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
-            option.text = "{{ $data->title }} - {{ $data->motherDepartment->title ?? ''}}";
+            option.text = "{!! $data->title !!} - {!! $data->motherDepartment->title ?? ''!!}";
             departmentDropdown.appendChild(option);
         }
         @endforeach
@@ -50,7 +50,7 @@
         if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officelocid }}";
-            option.text = "{{ $data->title }}";
+            option.text = "{!! $data->title !!}";
             agencyDropdown.appendChild(option);
         }
         @endforeach
@@ -76,7 +76,7 @@
         if ("{{ $data->officeid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
-            option.text = "{{ $data->title }}";
+            option.text = "{!! $data->title !!}";
             officeDropdown.appendChild(option);
         }
         @endforeach
