@@ -166,75 +166,115 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">DBM Position Title</th>
+                <th class="px-6 py-3" scope="col">Appointee</th>
+                <th class="px-6 py-3" scope="col">Position Level</th>
+                <th class="px-6 py-3" scope="col">Have occupant on this position?</th>
                 <th class="px-6 py-3" scope="col">Salary Grade</th>
                 <th class="px-6 py-3" scope="col">DBM Item No</th>
-                <th class="px-6 py-3" scope="col">Appointee</th>
                 <th class="px-6 py-3" scope="col">Appointee Status</th>
-                <th class="px-6 py-3" scope="col">Occupant</th>
-                <th class="px-6 py-3" scope="col">Occupant Status</th>
                 <th class="px-6 py-3" scope="col">Classification Basis</th>
 
-                <th class="px-6 py-3" scope="col">
+                <th>
                     <span class="sr-only">Action</span>
                 </th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach ($datas as $data)
-            <tr>
-                <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->planPosition->positionMasterLibrary->dbm_title ?? 'N/A'}}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->planPosition->corp_sg ?? ''}}
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->planPosition->item_no ?? ''}}
-                </td>
-                <td class="px-6 py-3">
-                    @if ($data->is_appointee == 1)
-                    {{ $data->personalData->title ?? ''}}
-                    {{ $data->personalData->lastname ?? ''}},
-                    {{ $data->personalData->firstname ?? ''}}
-                    {{ $data->personalData->name_extension ?? ''}}
-                    {{ $data->personalData->middlename ?? ''}}
-                    @else
-                    None
-                    @endif
-                </td>
-                <td class="px-6 py-3">
-                    {{ $data->is_appointee == 1 ? $data->apptStatus->title : 'None'}}
-                </td>
-                <td class="px-6 py-3">
-                    @if ($data->is_appointee !== 1)
-                    {{ $data->personalData->title ?? ''}}
-                    {{ $data->personalData->lastname ?? ''}},
-                    {{ $data->personalData->firstname ?? ''}}
-                    {{ $data->personalData->name_extension ?? ''}}
-                    {{ $data->personalData->middlename ?? ''}}
-                    @else
-                    None
-                    @endif
+            @foreach ($planPositions as $data)
+            <tr class="
+            
+                    
+                        @if($data->is_active != 1)
+                            text-slate-400
+                        @else
+            
+                        @php
+                            $test = $data->planAppointee->cesno ?? 0;
+                        @endphp
+            
+                            @if($test == 0)
+                                bg-yellow-100 text-red-500
+                            @else
+            
+            
+                                {{-- non ces + pres appointee --}}
+                                @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                                    bg-gray-50 text-blue-500
+                                @else
+                                    text-dark
+                                @endif
+                            @endif
+                        @endif
+            
+                    ">
+                <td class="whitespace-nowrap px-6 py-4 font-medium" scope="row">
+                    {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
+                    {{ $data->pos_default ?? 'N/A'}}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->is_appointee !== 1 ? $data->apptStatus->title : 'None'}}
+                    @if($data->planAppointee)
+                    {{ $data->planAppointee->personalData->lastname ?? ''}},
+                    {{ $data->planAppointee->personalData->firstname ?? ''}}
+                    {{ $data->planAppointee->personalData->name_extension ?? ''}}
+                    {{ $data->planAppointee->personalData->middlename ?? ''}},
+                    {{ $data->planAppointee->personalData->cesStatus->description ?? '' }}
+                    @endif
+
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->basis }}
+                    {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
+                </td>
+                <td class="px-6 py-3">
+                    @php
+                    $selectedAppointee = $planAppointee
+                    ->where('plantilla_id', $data->plantilla_id)
+                    ->where('is_appointee', false);
+                    if ($data->planAppointee != null && $selectedAppointee->count() >= 1) {
+                    $isHaveOccupant=true;
+                    } else {
+                    $isHaveOccupant=false;
+                    }
+
+                    @endphp
+
+                    <span class="{{ $isHaveOccupant == 1 ? 'success' : 'danger'}}">
+                        {{ $isHaveOccupant == 1 ? 'YES' : 'NONE'}}
+                    </span>
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->corp_sg ?? ''}}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->item_no ?? ''}}
+                </td>
+
+                <td class="px-6 py-3">
+                    {{ $data->planAppointee->apptStatus->title ?? 'N/A'}}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->planAppointee->basis ?? 'N/A'}}
                 </td>
 
                 <td class="text-right uppercase">
                     <div class="flex justify-end">
 
+
+                        @if($data->planAppointee)
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('library-occupant-browser.edit', $data->appointee_id) }}">
+                            href="{{ route('library-occupant-browser.edit', $data->plantilla_id) }}">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">
                             </lord-icon>
                         </a>
+                        @endif
+
+
+
+
 
                         {{-- <form class="hover:bg-slate-100 rounded-full"
                             action="{{ route('library-occupant-manager.destroy', $data->appointee_id) }}" method="POST"
@@ -257,7 +297,7 @@
 </div>
 
 <div class="m-5">
-    {{ $datas->links() }}
+    {{ $planPositions->links() }}
 </div>
 
 @endsection

@@ -268,13 +268,21 @@
             @else
 
             @php
-                $test = $data->planAppointee->cesno ?? 0;
+                $selectedAppointee = $planAppointee
+                ->where('plantilla_id', $data->plantilla_id)
+                ->where('is_appointee', true)
+                ->first();
+
+                if(!$selectedAppointee){
+                    $rawr = 0;
+                }else{
+                    $rawr = 1;
+                }
             @endphp
 
-                @if($test == 0)
+                @if($rawr == 0)
                     bg-yellow-100 text-red-500
                 @else
-
 
                     {{-- non ces + pres appointee --}}
                     @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
@@ -292,12 +300,13 @@
             </td>
 
             <td class="px-6 py-3">
-                {{ $data->planAppointee->personalData->title ?? ''}}
-                {{ $data->planAppointee->personalData->lastname ?? ''}},
-                {{ $data->planAppointee->personalData->firstname ?? ''}}
-                {{ $data->planAppointee->personalData->name_extension ?? ''}}
-                {{ $data->planAppointee->personalData->middlename ?? ''}},
-                {{ $data->planAppointee->personalData->cesStatus->description ?? '' }}
+                @if($selectedAppointee)
+                {{ $selectedAppointee->personalData->lastname ?? ''}},
+                {{ $selectedAppointee->personalData->firstname ?? ''}}
+                {{ $selectedAppointee->personalData->name_extension ?? ''}}
+                {{ $selectedAppointee->personalData->middlename ?? ''}},
+                {{ $selectedAppointee->personalData->cesStatus->description ?? '' }}
+                @endif
             </td>
             <td class="px-6 py-3">
                 {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
@@ -328,10 +337,10 @@
             </td>
 
             <td class="px-6 py-3">
-                {{ $data->planAppointee->apptStatus->title ?? 'N/A'}}
+                {{ $data->selectedAppointee->apptStatus->title ?? 'N/A'}}
             </td>
             <td class="px-6 py-3">
-                {{ $data->planAppointee->basis ?? 'N/A'}}
+                {{ $data->selectedAppointee->basis ?? 'N/A'}}
             </td>
 
             <td class="text-right uppercase">
