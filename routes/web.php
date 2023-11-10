@@ -875,7 +875,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
-            Route::post('generate-pdf', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
         });
 
         Route::prefix('assessment-center-report')->group(function () {

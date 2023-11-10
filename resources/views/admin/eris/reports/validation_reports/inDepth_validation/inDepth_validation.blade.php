@@ -6,7 +6,10 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">In Depth Validation</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('in-depth-validation-report.generateReportPdf') }}" target="_blank" method="POST">
+            <form action="{{ route('in-depth-validation-report.generateReportPdf', [
+                'sortBy' => $sortBy,
+                'sortOrder' => $sortOrder
+                ]) }}" target="_blank" method="POST">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -49,7 +52,29 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        In Depth Validation Date
+                        Name
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        <a href="{{ route('in-depth-validation-report.index', [
+                            'sortBy' => 'dteassign',
+                            'sortOrder' => $sortOrder === 'desc' ? 'asc' : 'desc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                        ]) }}" class="flex items-center space-x-1">
+                            Validation Date
+                            @if ($sortBy === 'dteassign')
+                                @if ($sortOrder === 'desc')
+                                    <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -77,27 +102,37 @@
                 @foreach ($inDepthValidation as $data) 
                     <tr class="border-b bg-white">
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
+                            <p>{{ $data->erisTblMainInDepthValidation->lastname ?? '' }},</p>
+                            <p>{{ $data->erisTblMainInDepthValidation->firstname ?? '' }},</p>
+                            <p>{{ $data->erisTblMainInDepthValidation->middlename ?? '' }}</p>
+                        </td>
+
+                        <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                            @if ($data->dteassign != null)
+                                {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }}                             
+                            @else
+                                {{ $data->dteassign ?? '' }} 
+                            @endif
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->validator ?? 'No Record' }} 
+                            {{ $data->validator ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->recom ?? 'No Record' }} 
+                            {{ $data->recom ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ $data->remarks ?? 'No Record' }} 
+                            {{ $data->remarks ?? '' }} 
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? 'No Record' }} 
+                            {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? '' }} 
                         </td>
                     </tr>
                 @endforeach
@@ -106,6 +141,11 @@
     </div>
 
     <div class="m-5">
-        {{ $inDepthValidation->links() }}
+        {{ $inDepthValidation->appends([
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder
+        ])->links() }}
     </div>
 @endsection

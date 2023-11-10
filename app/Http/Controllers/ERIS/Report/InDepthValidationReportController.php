@@ -14,35 +14,46 @@ class InDepthValidationReportController extends Controller
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
+        $sortBy = $request->input('sortBy', 'dteassign'); // Default sorting by date assign.
+        $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
         if($startDate && $endDate)
         {
-            $inDepthValidation = $this->inDepthValidationDateFilter($startDate, $endDate);
+            $inDepthValidation = $this->inDepthValidationDateFilter($startDate, $endDate, $sortBy, $sortOrder);
         }
         else
         {
-            $inDepthValidation = InDepthValidation::paginate(25);
+            $inDepthValidation = InDepthValidation::with(['erisTblMainInDepthValidation'])
+            ->orderBy($sortBy, $sortOrder)
+            ->paginate(25);
         }
 
         return view('admin.eris.reports.validation_reports.inDepth_validation.inDepth_validation', [
             'inDepthValidation' => $inDepthValidation,
             'startDate' => $startDate,
             'endDate' => $endDate,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
         ]);
     }
 
-    public function generateReportPdf(Request $request)
+    public function generateReportPdf(Request $request, $sortBy, $sortOrder)
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
         if($startDate && $endDate)
         {
-            $inDepthValidation = $this->inDepthValidationDateFilter($startDate, $endDate);
+            $inDepthValidation = InDepthValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
+            ->where('dteassign', '>=', $startDate)
+            ->where('dteassign', '<=', $endDate)
+            ->orderBy($sortBy, $sortOrder)
+            ->paginate(25);
         }
         else
         {
-            $inDepthValidation = InDepthValidation::all();
+            $inDepthValidation = InDepthValidation::orderBy($sortBy, $sortOrder)
+            ->get();
         }
 
         $pdf = Pdf::loadView('admin.eris.reports.validation_reports.inDepth_validation.report_pdf', [
@@ -53,11 +64,12 @@ class InDepthValidationReportController extends Controller
         return $pdf->stream('in-depth-validation-report.pdf');
     }
 
-    public function inDepthValidationDateFilter($startDate, $endDate)
+    public function inDepthValidationDateFilter($startDate, $endDate, $sortBy, $sortOrder)
     {
         $inDepthValidation = InDepthValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
         ->where('dteassign', '>=', $startDate)
         ->where('dteassign', '<=', $endDate)
+        ->orderBy($sortBy, $sortOrder)
         ->paginate(25);
 
         return $inDepthValidation;

@@ -65,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #ECECEC;
             }
         
             .container {
@@ -120,12 +120,12 @@
             </div>
             
             <div class="title">
-                <p class="title_name">Career Executive Service Board</p>
-                <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
-                <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
+                <p class="title_name">Career Executive Service Board
+                <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
+                <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a>
                 <p class="report_name">
                     In Depth Validation
-                </p>
+                
 
                 <footer>
                     <div class="flex-container">
@@ -142,6 +142,10 @@
                     <tr>
                         <th>
                             
+                        </th>
+
+                        <th>
+                            Name
                         </th>
 
                         <th>
@@ -180,27 +184,41 @@
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->validator ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->recom ?? 'No Record' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
+                                    {{ $data->erisTblMainInDepthValidation->lastname ?? '' }},
+                                    {{ $data->erisTblMainInDepthValidation->firstname ?? '' }},
+                                    {{ $data->erisTblMainInDepthValidation->middlename ?? '' }}
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? 'No Record' }} 
+                                    @if ($data->dteassign != null)
+                                        {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dteassign ?? '' }} 
+                                    @endif
+                                </td>
+        
+                                <td>
+                                    @if ($data->dtesubmit != null)
+                                        {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dtesubmit ?? '' }} 
+                                    @endif
+                                </td>
+        
+                                <td>
+                                    {{ $data->validator ?? '' }} 
+                                </td>
+        
+                                <td>
+                                    {{ $data->recom ?? '' }} 
+                                </td>
+        
+                                <td>
+                                    {{ $data->remarks ?? '' }} 
+                                </td>
+
+                                <td>
+                                    {{ \Carbon\Carbon::parse($data->dtedefer)->format('m/d/Y') ?? '' }} 
                                 </td>
                             </tr>
                         @endforeach                 
