@@ -230,9 +230,14 @@ class AuthController extends Controller
 
                         // }
 
-                        // here where the root og bugs lies!
+                        // here where the root of bugs lies!
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
+
+                        //test
+                        $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
+                        dd($associations);
+
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
                         $deviceIdentifier->update(['verified' => true]);
                         // return "test";

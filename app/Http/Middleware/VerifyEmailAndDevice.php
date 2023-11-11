@@ -27,7 +27,7 @@ class VerifyEmailAndDevice
         $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
 
         // test
-        dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
+        // dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
 
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
@@ -115,7 +115,7 @@ class VerifyEmailAndDevice
         if($isVefified){
             return true;
         }else{
-            return $associations;
+            return false;
         }
         
     }
