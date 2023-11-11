@@ -247,8 +247,6 @@ class AuthController extends Controller
             }
         }
 
-        dd($associations);
-        
         return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
 
     }
