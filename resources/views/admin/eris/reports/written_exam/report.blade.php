@@ -52,16 +52,16 @@
                         <select name="location">
                             <option value="">All</option>
                             @foreach ($location as $data)
-                            @if ($data->we_location === $writtenExamLocation)
-                                <option value="{{ $data->we_location }}" selected>{{ $data->we_location }}</option>
-                            @else
-                                <option value="{{ $data->we_location }}">{{ $data->we_location }}</option>
-                            @endif
+                                @if ($data->we_location === $writtenExamLocation)
+                                    <option value="{{ $data->we_location }}" selected>{{ $data->we_location }}</option>
+                                @else
+                                    <option value="{{ $data->we_location }}">{{ $data->we_location }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
                 </div>        
-    
+                
                 <div class="flex gap-2">
                     <div class="flex">
                         <label for="startDate">Start Date</label>
@@ -151,6 +151,8 @@
                 'endDate' => $endDate, 
                 'passed' => $passed, 
                 'failed' => $failed,
+                'retake' => $retake,
+                'location' => $writtenExamLocation,
             ])->links() 
         }}
     </div>

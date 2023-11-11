@@ -32,7 +32,7 @@ class WrittenExam extends Model
 
     public function writtenExamLocation()
     {
-        $location = WrittenExam::distinct()->get(['we_location']);
+        $location = WrittenExam::distinct()->orderby('we_location')->get(['we_location']);
 
         return $location;
     }

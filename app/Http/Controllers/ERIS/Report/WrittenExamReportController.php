@@ -30,7 +30,7 @@ class WrittenExamReportController extends Controller
             'retake' => $writtenExam['retake'],
             'location' => $this->writtenExam->writtenExamLocation(),
             'writtenExam' => $writtenExam['writtenExam'],
-            'writtenExamLocation' => $writtenExam['location'],
+            'writtenExamLocation' => $writtenExam['writtenExamLocation'],
         ]);
     }
 
@@ -94,7 +94,7 @@ class WrittenExamReportController extends Controller
             'passed' => $passed,
             'failed' => $failed,
             'retake' => $retake,
-            'location' => $location,
+            'writtenExamLocation' => $location,
         ];
     }
 
@@ -106,8 +106,6 @@ class WrittenExamReportController extends Controller
         $failed = $request->input('failed');
         $retake = $request->input('retake');
         $location = $request->input('location');
-
-        // dd($location);
 
         $writtenExam = WrittenExam::query();
 
