@@ -58,6 +58,6 @@ class PlanPosition extends Model
 
     public function planAppointee()
     {
-        return $this->hasOne(PlanAppointee::class, 'plantilla_id', 'plantilla_id');
+        return $this->hasMany(PlanAppointee::class, 'plantilla_id', 'plantilla_id');
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\Office;
 use App\Models\Plantilla\PlanAppointee;
+use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\SectorManager;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,9 @@ class OccupantBrowserController extends Controller
         $departmentDropdown = $request->input('departmentDropdown');
         $agencyLocationDropdown = $request->input('agencyLocationDropdown');
         $officeDropdown = $request->input('officeDropdown');
+        $planAppointee = PlanAppointee::all();
 
-        $filterDropdown = PlanAppointee::query();
+        $filterDropdown = PlanPosition::query();
 
         // if ($query) {
         //     $filterDropdown->whereHas('planPosition.positionMasterLibrary', function ($queryBuilder) use ($query) {
@@ -36,27 +38,24 @@ class OccupantBrowserController extends Controller
         // }
 
         if ($query || $officeDropdown) {
-            $filterDropdown->whereHas('planPosition', function ($queryBuilder) use ($query, $officeDropdown) {
-                $queryBuilder->where(function ($subQuery) use ($query, $officeDropdown) {
-                    if ($query) {
-                        $subQuery->where(function ($posSubQuery) use ($query) {
-                            $posSubQuery->where('pos_default', 'LIKE', "%$query%")
-                                ->orWhere('corp_sg', 'LIKE', "%$query%")
-                                ->orWhere('item_no', 'LIKE', "%$query%");
-                        });
-                    }
 
-                    if ($officeDropdown) {
-                        $subQuery->orWhereHas('office', function ($officeQuery) use ($officeDropdown) {
-                            $officeQuery->where('officeid', $officeDropdown);
-                        });
-                    }
+            if ($query) {
+                $filterDropdown->where('pos_default', 'LIKE', "%$query%")
+                    ->orWhere('corp_sg', 'LIKE', "%$query%")
+                    ->orWhere('item_no', 'LIKE', "%$query%");
+            }
+
+            if ($officeDropdown) {
+                $filterDropdown->orWhereHas('office', function ($officeQuery) use ($officeDropdown) {
+                    $officeQuery->where('officeid', $officeDropdown);
                 });
-            });
+            }
         }
 
 
-        $datas =  $filterDropdown->paginate(25);
+        $planPositions =  $filterDropdown
+            ->orderBy('corp_sg', 'desc')
+            ->paginate(25);
 
         $sector = SectorManager::orderBy('title', 'ASC')->get();
         $department = DepartmentAgency::orderBy('title', 'ASC')->get();
@@ -64,7 +63,8 @@ class OccupantBrowserController extends Controller
         $office = Office::orderBy('title', 'ASC')->get();
 
         return view('admin.plantilla.library.occupant_browser.index', compact(
-            'datas',
+            'planAppointee',
+            'planPositions',
             'query',
             'sector',
             'department',
@@ -77,24 +77,21 @@ class OccupantBrowserController extends Controller
         ));;
     }
 
-    public function edit($appointee_id)
+    public function edit($platilla_id)
     {
-        $datas = PlanAppointee::find($appointee_id);
+        $datas = PlanPosition::find($platilla_id);
 
-        $address = '';
-        if ($datas && $datas->planPosition && $datas->planPosition->office && $datas->planPosition->officeAddress) {
-            $address .= $datas->planPosition->office->officeAddress->floor_bldg ?? '';
-            $address .= ' ' . $datas->planPosition->office->officeAddress->house_no_st ?? '';
-            $address .= ' ' . $datas->planPosition->office->officeAddress->brgy_dist ?? '';
-            $address .= ' ' . $datas->planPosition->office->officeAddress->city_code ?? '';
-        }
+        $address = $datas->office->officeAddress->floor_bldg ?? '' . " " .
+            $datas->office->officeAddress->house_no_st ?? '' . " " .
+            $datas->office->officeAddress->brgy_dist ?? '' . " " .
+            $datas->office->officeAddress->cities->name ?? '';
 
         $appointee = '';
-        if ($datas && $datas->personalData) {
-            $appointee .= $datas->personalData->lastname ?? '';
-            $appointee .= ' ' . $datas->personalData->firstname ?? '';
-            $appointee .= ' ' . $datas->personalData->name_extension ?? '';
-            $appointee .= ' ' . $datas->personalData->middlename ?? '';
+        if ($datas && $datas->planAppointee->personalData) {
+            $appointee .= $datas->planAppointee->personalData->lastname ?? '';
+            $appointee .= ' ' . $datas->planAppointee->personalData->firstname ?? '';
+            $appointee .= ' ' . $datas->planAppointee->personalData->name_extension ?? '';
+            $appointee .= ' ' . $datas->planAppointee->personalData->middlename ?? '';
         }
 
         return view('admin.plantilla.library.occupant_browser.edit', compact(

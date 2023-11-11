@@ -6,7 +6,18 @@
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-occupant-browser.index') }}">Go back</a>
+    <div class="flex gap-2">
+        <a class="btn btn-primary" href="{{ route('plantilla-position-manager.show', [
+            'sectorid' => $datas->office->agencyLocation->departmentAgency->sectorid,
+            'deptid' => $datas->office->agencyLocation->departmentAgency->deptid,
+            'officelocid' => $datas->office->agencyLocation->officelocid,
+            'officeid' => $datas->office->officeid,
+            'plantilla_id' => $datas->plantilla_id,
+            ]) }}" target="_blank">
+            Find in Main Screen
+        </a>
+        <a class="btn btn-primary" href="{{ route('library-occupant-browser.index') }}">Go back</a>
+    </div>
 </div>
 
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -26,32 +37,30 @@
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="office">Office</label>
-                            <input id="office" value="{{ $datas->planPosition->office->title ?? ''}}" readonly />
+                            <input id="office" value="{{ $datas->office->title ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="acronym">Acronym</label>
-                            <input id="acronym" value="{{ $datas->planPosition->office->acronym ?? ''}}" readonly />
+                            <input id="acronym" value="{{ $datas->office->acronym ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="website">Website</label>
-                            <input id="website" value="{{ $datas->planPosition->office->website ?? ''}}" readonly />
+                            <input id="website" value="{{ $datas->office->website ?? ''}}" readonly />
                         </div>
 
                         <div class="mb-3">
                             <label for="emailadd">Email</label>
-                            <input id="emailadd"
-                                value="{{ $datas->planPosition->office->officeAddress->emailadd ?? ''}}" readonly />
+                            <input id="emailadd" value="{{ $datas->office->officeAddress->emailadd ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="contactno">Contact number</label>
-                            <input id="contactno"
-                                value="{{ $datas->planPosition->office->officeAddress->contactno ?? ''}}" readonly />
+                            <input id="contactno" value="{{ $datas->office->officeAddress->contactno ?? ''}}"
+                                readonly />
                         </div>
 
                         <div class="mb-3">
                             <label for="city">City</label>
-                            <input id="city"
-                                value="{{ $datas->planPosition->office->officeAddress->cities->name ?? ''}}" readonly />
+                            <input id="city" value="{{ $datas->office->officeAddress->cities->name ?? ''}}" readonly />
                         </div>
 
                         <div class="mb-3">
@@ -68,14 +77,15 @@
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="appointee">
-                                {{ $datas->is_appointee == 1 ? 'Appointee' : 'Occupant'}}
+                                Appointee
                             </label>
                             <input id="appointee" value="{{ $appointee }}" readonly />
                         </div>
 
                         <div class="mb-3">
                             <label for="personnelMovement">Personnel Movement</label>
-                            <input id="personnelMovement" value="{{ $datas->apptStatus->title ?? ''}}" readonly />
+                            <input id="personnelMovement" value="{{ $datas->planAppointee->apptStatus->title ?? ''}}"
+                                readonly />
                         </div>
 
                     </div>
@@ -86,17 +96,16 @@
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="dbm_title">DBM Position Title</label>
-                            <input id="dbm_title"
-                                value="{{ $datas->planPosition->positionMasterLibrary->dbm_title ?? ''}}" readonly />
-                        </div>
-                        <div class="mb-3">
-                            <label for="sg">Salary Grade Level</label>
-                            <input id="sg" value="{{ $datas->planPosition->positionMasterLibrary->sg ?? ''}}"
+                            <input id="dbm_title" value="{{ $datas->positionMasterLibrary->dbm_title ?? ''}}"
                                 readonly />
                         </div>
                         <div class="mb-3">
+                            <label for="sg">Salary Grade Level</label>
+                            <input id="sg" value="{{ $datas->positionMasterLibrary->sg ?? ''}}" readonly />
+                        </div>
+                        <div class="mb-3">
                             <label for="item_no">DBM Item no.</label>
-                            <input id="item_no" value="{{ $datas->planPosition->item_no ?? ''}}" readonly />
+                            <input id="item_no" value="{{ $datas->item_no ?? ''}}" readonly />
                         </div>
 
 
@@ -108,20 +117,19 @@
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                         <div class="mb-3">
                             <label for="basis">Basis</label>
-                            <input id="basis" value="{{ $datas->planPosition->classBasis->basis ?? ''}}" readonly />
+                            <input id="basis" value="{{ $datas->classBasis->basis ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="title">Title</label>
-                            <input id="title" value="{{ $datas->planPosition->classBasis->title ?? ''}}" readonly />
+                            <input id="title" value="{{ $datas->classBasis->title ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="classdate">Date</label>
-                            <input id="classdate" value="{{ $datas->planPosition->classBasis->classdate ?? ''}}"
-                                readonly />
+                            <input id="classdate" value="{{ $datas->classBasis->classdate ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="remarks">Remarks</label>
-                            <textarea id="remarks" readonly>{{ $datas->planPosition->remarks ?? ''}}</textarea>
+                            <textarea id="remarks" readonly>{{ $datas->remarks ?? ''}}</textarea>
                         </div>
 
                     </div>
