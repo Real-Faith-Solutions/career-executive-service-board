@@ -53,7 +53,7 @@ class DefaultAccounts extends Seeder
 
         $user = $admin->users()->Create([
             'email' => $admin->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -91,7 +91,7 @@ class DefaultAccounts extends Seeder
 
         $user = $power_user->users()->Create([
             'email' => $power_user->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -129,7 +129,7 @@ class DefaultAccounts extends Seeder
 
         $user = $rank_officer->users()->Create([
             'email' => $rank_officer->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -167,7 +167,7 @@ class DefaultAccounts extends Seeder
 
         $user = $cesb_operator->users()->Create([
             'email' => $cesb_operator->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -205,7 +205,7 @@ class DefaultAccounts extends Seeder
 
         $user = $training_officer->users()->Create([
             'email' => $training_officer->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -243,7 +243,7 @@ class DefaultAccounts extends Seeder
 
         $user = $cespes_operator->users()->Create([
             'email' => $cespes_operator->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -281,7 +281,7 @@ class DefaultAccounts extends Seeder
 
         $user = $agency_hr_operator->users()->Create([
             'email' => $agency_hr_operator->email,
-            'password' => Hash::make('12345'),
+            'password' => Hash::make('C3$board'),
             'is_active'		            => 'Active',
             'last_updated_by'           => 'system encode',
             'encoder'                   => 'system encode',
@@ -306,7 +306,7 @@ class DefaultAccounts extends Seeder
 
             $user = $personalData->users()->Create([
                 'email' => $personalData->email,
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('C3$board'),
                 'is_active'		            => 'Active',
                 'last_updated_by'           => 'system encode',
                 'encoder'                   => 'system encode',
