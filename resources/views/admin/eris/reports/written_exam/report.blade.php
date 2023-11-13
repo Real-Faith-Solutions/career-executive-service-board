@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Written Exam</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('written-exam-report.generateReportPdf') }}" target="_blank" method="GET">
+            <form action="{{ route('written-exam-report.generateReportPdf', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -90,7 +90,29 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Written Exam Date
+                        <a href="{{ route('written-exam-report.index', [
+                            'sortBy' => 'we_date',
+                            'sortOrder' => $sortOrder === 'desc' ? 'asc' : 'desc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                            'passed' => $passed, 
+                            'failed' => $failed,
+                            'retake' => $retake, 
+                            'location' => $writtenExamLocation,
+                        ]) }}" class="flex items-center space-x-1">
+                            Written Exam Date
+                            @if ($sortBy === 'we_date')
+                                @if ($sortOrder === 'desc')
+                                    <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -153,6 +175,10 @@
                 'failed' => $failed,
                 'retake' => $retake,
                 'location' => $writtenExamLocation,
+                'failed' => $failed,
+                'retake' => $retake,
+                'sortBy' => $sortBy,
+                'sortOrder' => $sortOrder,
             ])->links() 
         }}
     </div>

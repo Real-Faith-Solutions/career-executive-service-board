@@ -87,7 +87,7 @@ class AssessmentCenterReportController extends Controller
         $passed = $request->input('passed');
         $failed = $request->input('failed');
         $retake = $request->input('retake');
-        $sortBy = $request->input('sortBy', 'acdate'); // Default sorting by date assign.
+        $sortBy = $request->input('sortBy', 'acdate'); // Default sorting acdate.
         $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
         $assessmentCenter = AssessmentCenter::query();
@@ -126,7 +126,9 @@ class AssessmentCenterReportController extends Controller
             $query->orderBy('lastname');
         }]);
 
-        $assessmentCenter = $assessmentCenter->orderBy($sortBy, $sortOrder)->paginate(25);
+        $assessmentCenter = $assessmentCenter
+                            ->orderBy($sortBy, $sortOrder)
+                            ->paginate(25);
 
         return 
         [

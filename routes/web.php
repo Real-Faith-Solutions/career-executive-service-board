@@ -885,7 +885,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('written-exam-report')->group(function () {
             Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index');
-            Route::get('post', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf');
+            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf');
         });
 
         Route::prefix('eris-report-general')->group(function () {

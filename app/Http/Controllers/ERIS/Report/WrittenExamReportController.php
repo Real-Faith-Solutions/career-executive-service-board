@@ -31,6 +31,8 @@ class WrittenExamReportController extends Controller
             'location' => $this->writtenExam->writtenExamLocation(),
             'writtenExam' => $writtenExam['writtenExam'],
             'writtenExamLocation' => $writtenExam['writtenExamLocation'],
+            'sortBy' => $writtenExam['sortBy'],
+            'sortOrder' => $writtenExam['sortOrder'],
         ]);
     }
 
@@ -42,6 +44,8 @@ class WrittenExamReportController extends Controller
         $failed = $request->input('failed');
         $retake = $request->input('retake');
         $location = $request->input('location');
+        $sortBy = $request->input('sortBy', 'we_date'); // Default sorting we_date.
+        $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
         $writtenExam = WrittenExam::query();
 
@@ -84,7 +88,9 @@ class WrittenExamReportController extends Controller
             $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
         }
 
-        $writtenExam = $writtenExam->orderByDesc('we_date')->paginate(25);
+        $writtenExam->orderBy($sortBy, $sortOrder);
+
+        $writtenExam = $writtenExam->paginate(25);
 
         return 
         [
@@ -95,10 +101,12 @@ class WrittenExamReportController extends Controller
             'failed' => $failed,
             'retake' => $retake,
             'writtenExamLocation' => $location,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
         ];
     }
 
-    public function generateReportPdf(Request $request)
+    public function generateReportPdf(Request $request, $sortBy, $sortOrder)
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
@@ -149,7 +157,11 @@ class WrittenExamReportController extends Controller
             $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
         }
 
-        $writtenExam = $writtenExam->orderByDesc('we_date')->get();
+        $writtenExam->orderBy($sortBy, $sortOrder);
+
+        // $writtenExam = $writtenExam->get();
+
+        $writtenExam = $writtenExam->paginate(25);
 
         $pdf = Pdf::loadView('admin.eris.reports.written_exam.report_pdf', [
             'writtenExam' => $writtenExam,
