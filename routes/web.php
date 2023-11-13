@@ -880,7 +880,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
-            Route::get('generate-pdf', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
         });
 
         Route::prefix('written-exam-report')->group(function () {

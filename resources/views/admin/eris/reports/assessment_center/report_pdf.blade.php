@@ -180,17 +180,9 @@
                                 </td>
 
                                 <td>
-                                    @if (
-                                        $data->erisTblMainAssessmentCenter->lastname == null &&
-                                        $data->erisTblMainAssessmentCenter->firstname == null &&
-                                        $data->erisTblMainAssessmentCenter->middlename == null
-                                    )
-                                        {{ '' }}  
-                                    @else
-                                        {{ $data->erisTblMainAssessmentCenter->lastname ?? '' }},
-                                        {{ $data->erisTblMainAssessmentCenter->firstname ?? '' }},
-                                        {{ $data->erisTblMainAssessmentCenter->middlename ?? '' }}
-                                    @endif
+                                    {{ $data->erisTblMainAssessmentCenter->lastname ?? '' }},
+                                    {{ $data->erisTblMainAssessmentCenter->firstname ?? '' }},
+                                    {{ $data->erisTblMainAssessmentCenter->middlename ?? '' }}
                                 </td>
 
                                 <td>

@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Assessment Center</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('assessment-center-report.generateReportPdf') }}" target="_blank" method="GET">
+            <form action="{{ route('assessment-center-report.generateReportPdf', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -73,7 +73,28 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        <a href="{{ route('assessment-center-report.index', [
+                            'sortBy' => 'lastname',
+                            'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                            'passed' => $passed, 
+                            'failed' => $failed,
+                            'retake' => $retake, 
+                        ]) }}" class="flex items-center space-x-1">
+                            Name
+                            @if ($sortBy === 'lastname')
+                                @if ($sortOrder === 'asc')
+                                    <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -102,7 +123,28 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        No. of Takes
+                        <a href="{{ route('assessment-center-report.index', [
+                            'sortBy' => 'numtakes',
+                            'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                            'passed' => $passed, 
+                            'failed' => $failed,
+                            'retake' => $retake, 
+                        ]) }}" class="flex items-center space-x-1">
+                            No. of Takes
+                            @if ($sortBy === 'numtakes')
+                                @if ($sortOrder === 'asc')
+                                    <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
