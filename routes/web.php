@@ -890,7 +890,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('eris-report-general')->group(function () {
             Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index');
-            Route::post('generate-pdf', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport');
         });
     });
     // End of ERIS Report routes

@@ -9,25 +9,30 @@ use Illuminate\Http\Request;
 
 class ErisGeneralReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $sortBy = $request->input('sortBy', 'acno'); // Default sorting acdate.
+        $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
+
         $conferred = "conferred";
 
         $eradTblMain = EradTblMain::where('c_status', '!=', $conferred)
-            ->orderBy('acno')
+            ->orderBy($sortBy, $sortOrder)
             ->paginate(25);
 
         return view('admin.eris.reports.general_report.report', [
             'eradTblMain' => $eradTblMain,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
         ]);
     }
 
-    public function generatePdfReport()
+    public function generatePdfReport($sortBy, $sortOrder)
     {
         $conferred = "conferred";
 
         $eradTblMain = EradTblMain::where('c_status', '!=', $conferred)
-            ->orderBy('acno')
+            ->orderBy($sortBy,$sortOrder)
             ->get(['acno', 'lastname', 'firstname', 'middlename', 'c_status']);
             // ->paginate(25);
 

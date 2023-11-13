@@ -159,9 +159,9 @@ class WrittenExamReportController extends Controller
 
         $writtenExam->orderBy($sortBy, $sortOrder);
 
-        // $writtenExam = $writtenExam->get();
+        $writtenExam = $writtenExam->get();
 
-        $writtenExam = $writtenExam->paginate(25);
+        // $writtenExam = $writtenExam->paginate(25);
 
         $pdf = Pdf::loadView('admin.eris.reports.written_exam.report_pdf', [
             'writtenExam' => $writtenExam,

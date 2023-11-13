@@ -175,8 +175,6 @@
                 'failed' => $failed,
                 'retake' => $retake,
                 'location' => $writtenExamLocation,
-                'failed' => $failed,
-                'retake' => $retake,
                 'sortBy' => $sortBy,
                 'sortOrder' => $sortOrder,
             ])->links() 
