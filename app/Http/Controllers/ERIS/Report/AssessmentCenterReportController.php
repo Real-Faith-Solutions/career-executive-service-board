@@ -66,11 +66,9 @@ class AssessmentCenterReportController extends Controller
             $assessmentCenter->whereBetween(DB::raw('CAST(acdate AS DATE)'), [$startDate, $endDate]);
         }
 
-        $assessmentCenter->with(['erisTblMainAssessmentCenter' => function($query) {
-            $query->orderBy('lastname');
-        }]);
+        $assessmentCenter->with(['erisTblMainAssessmentCenter']);
 
-        $assessmentCenter = $assessmentCenter->get(['acdate', 'numtakes', 'docdate', 'competencies_d_o', 'remarks']);
+        $assessmentCenter = $assessmentCenter->get();
 
         $pdf = Pdf::loadView('admin.eris.reports.assessment_center.report_pdf', [
             'assessmentCenter' => $assessmentCenter,

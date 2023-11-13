@@ -65,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -145,7 +145,7 @@
                         </th>
 
                         <th>
-                            Assessment Center Date
+                            Name
                         </th>
 
                         <th>
@@ -180,29 +180,45 @@
                                 </td>
 
                                 <td>
-                                    {{ $data->erisTblMainAssessmentCenter->lastname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->firstname ?? 'No Record' }},
-                                    {{ $data->erisTblMainAssessmentCenter->middlename ?? 'No Record' }}
+                                    @if (
+                                        $data->erisTblMainAssessmentCenter->lastname == null &&
+                                        $data->erisTblMainAssessmentCenter->firstname == null &&
+                                        $data->erisTblMainAssessmentCenter->middlename == null
+                                    )
+                                        {{ '' }}  
+                                    @else
+                                        {{ $data->erisTblMainAssessmentCenter->lastname ?? '' }},
+                                        {{ $data->erisTblMainAssessmentCenter->firstname ?? '' }},
+                                        {{ $data->erisTblMainAssessmentCenter->middlename ?? '' }}
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? 'No Record' }} 
+                                    @if ($data->acdate != null)
+                                        {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->acdate ?? '' }} 
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{ $data->numtakes ?? 'No Record' }} 
+                                    {{ $data->numtakes ?? '' }} 
                                 </td>
 
                                 <td>
-                                    {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? 'No Record' }} 
+                                    @if ($data->docdate != null)
+                                        {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->docdate ?? '' }} 
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{ $data->competencies_d_o ?? 'No Record' }} 
+                                    {{ $data->competencies_d_o ?? '' }} 
                                 </td>
 
                                 <td>
-                                    {{ $data->remarks ?? 'No Record' }} 
+                                    {{ $data->remarks ?? '' }} 
                                 </td>
                             </tr>
                         @endforeach                 
