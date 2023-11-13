@@ -98,6 +98,7 @@ class WrittenExamController extends Controller
         $writtenExam->we_location = $request->we_location;
         $writtenExam->we_rating = $request->we_rating;
         $writtenExam->we_remarks = $request->we_remarks;
+        $writtenExam->numtakes = $request->numtakes;
         $writtenExam->update();
 
         return to_route('eris-written-exam.index', ['acno'=>$acno])->with('info', 'Update Sucessfully');

@@ -42,7 +42,7 @@ class RapidValidationReportController extends Controller
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-
+        
         $rapidValidation = RapidValidation::leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblRVP.acno')
         ->select('erad_tblRVP.*')
         ->with('erisTblMainRapidValidation')

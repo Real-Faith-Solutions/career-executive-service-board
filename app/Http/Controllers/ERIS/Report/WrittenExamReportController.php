@@ -49,43 +49,47 @@ class WrittenExamReportController extends Controller
 
         $writtenExam = WrittenExam::query();
 
+        $writtenExam->leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblWExam.acno')
+        ->select('erad_tblWExam.*')
+        ->with('erisTblMainWrittenExam');
+
         $writtenExam->where(function ($query) use ($passed, $failed, $location, $retake) {
             if ($passed && $failed && $location) {
-                $query->whereIn('we_remarks', [$passed, $failed])
-                    ->where('we_location', $location);
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed])
+                    ->where('erad_tblWExam.we_location', $location);
             }
             elseif($passed && $failed && $retake)
             {
-                $query->whereIn('we_remarks', [$passed, $failed])
-                        ->where('numtakes', '>', '1');
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed])
+                        ->where('erad_tblWExam.numtakes', '>', '1');
             }
             elseif($passed && $failed)
             {
-                $query->whereIn('we_remarks', [$passed, $failed]);
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed]);
             }
             else 
             {
                 if ($passed) {
-                    $query->where('we_remarks', $passed);
+                    $query->where('erad_tblWExam.we_remarks', $passed);
                 }
 
                 if ($failed) {
-                    $query->where('we_remarks', $failed);
+                    $query->where('erad_tblWExam.we_remarks', $failed);
                 }
 
                 if ($location) {
-                    $query->where('we_location', $location);
+                    $query->where('erad_tblWExam.we_location', $location);
                 }
 
                 if ($retake) {
-                    $query->where('numtakes', '>', '1');
+                    $query->where('erad_tblWExam.numtakes', '>', '1');
                 }
             }
         });
 
         if ($startDate && $endDate) 
         {
-            $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
+            $writtenExam->whereBetween(DB::raw('CAST(erad_tblWExam.we_date AS DATE)'), [$startDate, $endDate]);
         }
 
         $writtenExam->orderBy($sortBy, $sortOrder);
@@ -117,51 +121,54 @@ class WrittenExamReportController extends Controller
 
         $writtenExam = WrittenExam::query();
 
+        $writtenExam->leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblWExam.acno')
+        ->select('erad_tblWExam.*')
+        ->with('erisTblMainWrittenExam');
+
         $writtenExam->where(function ($query) use ($passed, $failed, $location, $retake) {
             if ($passed && $failed && $location) {
-                $query->whereIn('we_remarks', [$passed, $failed])
-                    ->where('we_location', $location);
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed])
+                    ->where('erad_tblWExam.we_location', $location);
             }
-            else
-            if($passed && $failed && $retake)
+            elseif($passed && $failed && $retake)
             {
-                $query->whereIn('we_remarks', [$passed, $failed])
-                        ->where('numtakes', '>', '1');
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed])
+                        ->where('erad_tblWExam.numtakes', '>', '1');
             }
             elseif($passed && $failed)
             {
-                $query->whereIn('we_remarks', [$passed, $failed]);
+                $query->whereIn('erad_tblWExam.we_remarks', [$passed, $failed]);
             }
             else 
             {
                 if ($passed) {
-                    $query->where('we_remarks', $passed);
+                    $query->where('erad_tblWExam.we_remarks', $passed);
                 }
 
                 if ($failed) {
-                    $query->where('we_remarks', $failed);
+                    $query->where('erad_tblWExam.we_remarks', $failed);
                 }
 
                 if ($location) {
-                    $query->where('we_location', $location);
+                    $query->where('erad_tblWExam.we_location', $location);
                 }
 
                 if ($retake) {
-                    $query->where('numtakes', '>', '1');
+                    $query->where('erad_tblWExam.numtakes', '>', '1');
                 }
             }
         });
 
         if ($startDate && $endDate) 
         {
-            $writtenExam->whereBetween(DB::raw('CAST(we_date AS DATE)'), [$startDate, $endDate]);
+            $writtenExam->whereBetween(DB::raw('CAST(erad_tblWExam.we_date AS DATE)'), [$startDate, $endDate]);
         }
 
         $writtenExam->orderBy($sortBy, $sortOrder);
 
-        $writtenExam = $writtenExam->get();
+        $writtenExam = $writtenExam->paginate(26);
 
-        // $writtenExam = $writtenExam->paginate(25);
+        // $writtenExam = $writtenExam->get();
 
         $pdf = Pdf::loadView('admin.eris.reports.written_exam.report_pdf', [
             'writtenExam' => $writtenExam,
