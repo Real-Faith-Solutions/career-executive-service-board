@@ -77,7 +77,28 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
-                        Assessment Center Date
+                        <a href="{{ route('assessment-center-report.index', [
+                            'sortBy' => 'acdate',
+                            'sortOrder' => $sortOrder === 'desc' ? 'asc' : 'desc',
+                            'startDate' => $startDate,
+                            'endDate' => $endDate,
+                            'passed' => $passed, 
+                            'failed' => $failed,
+                            'retake' => $retake, 
+                        ]) }}" class="flex items-center space-x-1">
+                            Assessment Center Date
+                            @if ($sortBy === 'acdate')
+                                @if ($sortOrder === 'desc')
+                                    <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                    </svg>
+                                @endif
+                            @endif
+                        </a>
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -107,7 +128,11 @@
                         </td>
 
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                            {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? '' }} 
+                            @if ($data->acdate != null)
+                                {{ \Carbon\Carbon::parse($data->acdate)->format('m/d/Y') ?? '' }} 
+                            @else
+                                {{ $data->acdate ?? '' }} 
+                            @endif
                         </td>
 
                         <td class="px-6 py-3">
@@ -115,7 +140,11 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? '' }} 
+                            @if ($data->docdate != null)
+                                {{ \Carbon\Carbon::parse($data->docdate)->format('m/d/Y') ?? '' }} 
+                            @else
+                                {{ $data->docdate ?? '' }} 
+                            @endif
                         </td>
 
                         <td class="px-6 py-3">
@@ -138,7 +167,9 @@
                 'endDate' => $endDate, 
                 'passed' => $passed, 
                 'failed' => $failed,
-                'retake' => $retake, 
+                'retake' => $retake,
+                'sortBy' => $sortBy,
+                'sortOrder' => $sortOrder,
             ])->links() 
         }}
     </div>
