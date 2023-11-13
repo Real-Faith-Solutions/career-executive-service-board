@@ -48,13 +48,13 @@ class RapidValidationReportController extends Controller
             ->where('dteassign', '>=', $startDate)
             ->where('dteassign', '<=', $endDate)
             ->orderBy($sortBy, $sortOrder)
-            ->get(['dteassign', 'dtesubmit', 'validator', 'recom', 'remarks']);
+            ->get();
         }
         else
         {
             $rapidValidation = RapidValidation::with(['erisTblMainRapidValidation'])
             ->orderBy($sortBy, $sortOrder)
-            ->get(['dteassign', 'dtesubmit', 'validator', 'recom', 'remarks']);
+            ->get();
         }
 
         $pdf = Pdf::loadView('admin.eris.reports.validation_reports.rapid_validation.report_pdf', [
