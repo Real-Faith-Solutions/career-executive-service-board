@@ -51,7 +51,6 @@ class AppointeeOccupantManagerController extends Controller
             ->orderBy('description', 'asc')
             ->get();
 
-
         $planAppointee = PlanAppointee::query()
             ->where('plantilla_id', $planPosition->plantilla_id)
             ->get();
@@ -71,7 +70,9 @@ class AppointeeOccupantManagerController extends Controller
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
             } else {
-                $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)->where('cesstat_code', $personalData->CESStat_code)->first();
+                $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)
+                    ->where('cesstat_code', $personalData->CESStat_code)
+                    ->first();
             }
         } else {
             $personalData = null;

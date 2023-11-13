@@ -137,7 +137,7 @@
         if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
-            option.text = "{! $data->title !}";
+            option.text = "{!! $data->title !!}";
             officeDropdown.appendChild(option);
         }
         @endforeach

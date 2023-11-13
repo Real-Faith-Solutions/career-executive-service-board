@@ -22,7 +22,7 @@
         if ("{{ $data->sectorid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->deptid }}";
-            option.text = "{!! $data->title !!} - {!! $data->motherDepartment->title ?? ''!!}";
+            option.text = "{!! $data->title !!} - {!! $data->motherDepartment->title ?? '' !!}";
             departmentDropdown.appendChild(option);
         }
         @endforeach
@@ -47,7 +47,7 @@
         agencyDropdown.appendChild(defaultOption);
 
         @foreach($agencyLocation as $data)
-        if ("{{ $data->officelocid }}" == val) {
+        if ("{{ $data->deptid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officelocid }}";
             option.text = "{!! $data->title !!}";

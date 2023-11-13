@@ -126,21 +126,21 @@
                 {{ $data->detailed_code }}
             </td>
 
-            <td>{{ $data->apptStatus->title }}</td>
-            <td>{{ $data->position }}</td>
-            <td>{{ $data->office }}</td>
-            <td>{{ $data->remarks }}</td>
+            <td>{{ $data->apptStatus->title ?? ''}}</td>
+            <td>{{ $data->position ?? ''}}</td>
+            <td>{{ $data->office ?? ''}}</td>
+            <td>{{ $data->remarks ?? ''}}</td>
             <td>
                 {{ \Carbon\Carbon::parse($data->from_dt)->format('m/d/Y') }} -
                 {{ \Carbon\Carbon::parse($data->to_dt)->format('m/d/Y') }}
             </td>
-            <td>{{ $data->house_bldg }}</td>
-            <td>{{ $data->st_road }}</td>
-            <td>{{ $data->brgy_vill }}</td>
-            <td>{{ $data->cities->name }}</td>
-            <td>{{ $data->contactno }}</td>
-            <td>{{ $data->email_addr }}</td>
-            <td>{{ $data->cesno }}</td>
+            <td>{{ $data->house_bldg ?? ''}}</td>
+            <td>{{ $data->st_road ?? ''}}</td>
+            <td>{{ $data->brgy_vill ?? ''}}</td>
+            <td>{{ $data->cities->name ?? ''}}</td>
+            <td>{{ $data->contactno ?? ''}}</td>
+            <td>{{ $data->email_addr ?? ''}}</td>
+            <td>{{ $data->cesno ?? ''}}</td>
 
             <td class="text-right uppercase">
                 <div class="flex justify-end">

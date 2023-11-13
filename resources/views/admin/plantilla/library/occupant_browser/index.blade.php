@@ -166,7 +166,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">DBM Position Title</th>
-                <th class="px-6 py-3" scope="col">Appointee</th>
+                <th class="px-6 py-3" scope="col">Appointed on this Position</th>
                 <th class="px-6 py-3" scope="col">Position Level</th>
                 <th class="px-6 py-3" scope="col">Have occupant on this position?</th>
                 <th class="px-6 py-3" scope="col">Salary Grade</th>
@@ -190,12 +190,21 @@
                         @else
             
                         @php
-                            $test = $data->planAppointee->cesno ?? 0;
+                        $selectedAppointee = $planAppointee
+                        ->where('plantilla_id', $data->plantilla_id)
+                        ->where('is_appointee', true)
+                        ->first();
+                        
+                        if(!$selectedAppointee){
+                        $isVacant = 0;
+                        }else{
+                        $isVacant = 1;
+                        }
                         @endphp
-            
-                            @if($test == 0)
-                                bg-yellow-100 text-red-500
-                            @else
+                        
+                        @if($isVacant == 0)
+                        bg-yellow-100 text-red-500
+                        @else
             
             
                                 {{-- non ces + pres appointee --}}
@@ -214,17 +223,17 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    @if($data->planAppointee)
-                    {{ $data->planAppointee->personalData->lastname ?? ''}},
-                    {{ $data->planAppointee->personalData->firstname ?? ''}}
-                    {{ $data->planAppointee->personalData->name_extension ?? ''}}
-                    {{ $data->planAppointee->personalData->middlename ?? ''}},
-                    {{ $data->planAppointee->personalData->cesStatus->description ?? '' }}
+                    @if($selectedAppointee)
+                    {{ $selectedAppointee->personalData->lastname ?? ''}},
+                    {{ $selectedAppointee->personalData->firstname ?? ''}}
+                    {{ $selectedAppointee->personalData->name_extension ?? ''}}
+                    {{ $selectedAppointee->personalData->middlename ?? ''}},
+                    {{ $selectedAppointee->personalData->cesStatus->description ?? '' }}
                     @endif
 
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->positionMasterLibrary->positionLevel->title ?? 'N/A'}}
+                    {{ $data->pos_default ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
                     @php
@@ -252,10 +261,10 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->planAppointee->apptStatus->title ?? 'N/A'}}
+                    {{ $data->selectedAppointee->apptStatus->title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->planAppointee->basis ?? 'N/A'}}
+                    {{ $data->selectedAppointee->basis ?? 'N/A'}}
                 </td>
 
                 <td class="text-right uppercase">
