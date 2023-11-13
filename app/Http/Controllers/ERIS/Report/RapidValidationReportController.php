@@ -17,16 +17,17 @@ class RapidValidationReportController extends Controller
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         
-        if($startDate && $endDate)
-        {
-            $rapidValidation = $this->rapidValidationDateFilter($startDate, $endDate, $sortBy, $sortOrder);
-        }
-        else
-        {
-            $rapidValidation = RapidValidation::with(['erisTblMainRapidValidation'])
-            ->orderBy($sortBy, $sortOrder)
-            ->paginate(25);
-        }
+        $rapidValidation = RapidValidation::leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblRVP.acno')
+        ->select('erad_tblRVP.*')
+        ->with('erisTblMainRapidValidation')
+        ->when($startDate && $endDate, function ($query) use ($startDate, $endDate, $sortBy, $sortOrder) {
+            return $query
+                ->whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
+                ->orderBy($sortBy, $sortOrder);
+        }, function ($query) use ($sortBy, $sortOrder) {
+            return $query->orderBy($sortBy, $sortOrder);
+        })
+        ->paginate(25);
 
         return view('admin.eris.reports.validation_reports.rapid_validation.report', [
             'rapidValidation' => $rapidValidation,
@@ -42,20 +43,17 @@ class RapidValidationReportController extends Controller
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
 
-        if($startDate && $endDate)
-        {
-            $rapidValidation = RapidValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
-            ->where('dteassign', '>=', $startDate)
-            ->where('dteassign', '<=', $endDate)
-            ->orderBy($sortBy, $sortOrder)
-            ->get();
-        }
-        else
-        {
-            $rapidValidation = RapidValidation::with(['erisTblMainRapidValidation'])
-            ->orderBy($sortBy, $sortOrder)
-            ->get();
-        }
+        $rapidValidation = RapidValidation::leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblRVP.acno')
+        ->select('erad_tblRVP.*')
+        ->with('erisTblMainRapidValidation')
+        ->when($startDate && $endDate, function ($query) use ($startDate, $endDate, $sortBy, $sortOrder) {
+            return $query
+                ->whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
+                ->orderBy($sortBy, $sortOrder);
+        }, function ($query) use ($sortBy, $sortOrder) {
+            return $query->orderBy($sortBy, $sortOrder);
+        })
+        ->paginate(25);
 
         $pdf = Pdf::loadView('admin.eris.reports.validation_reports.rapid_validation.report_pdf', [
             'rapidValidation' => $rapidValidation,
@@ -63,16 +61,5 @@ class RapidValidationReportController extends Controller
         ->setPaper('a4', 'landscape');
 
         return $pdf->stream('rapid-validation-report.pdf');
-    }
-
-    public function rapidValidationDateFilter($startDate, $endDate, $sortBy, $sortOrder)
-    {
-        $rapidValidation = RapidValidation::whereBetween(DB::raw('CAST(dteassign AS DATE)'), [$startDate, $endDate])
-        ->where('dteassign', '>=', $startDate)
-        ->where('dteassign', '<=', $endDate)
-        ->orderBy($sortBy, $sortOrder)
-        ->paginate(25);
-
-        return $rapidValidation;
     }
 }
