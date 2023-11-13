@@ -73,7 +73,7 @@
         officeDropdown.appendChild(defaultOption);
 
         @foreach($office as $data)
-        if ("{{ $data->officeid }}" == val) {
+        if ("{{ $data->officelocid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->officeid }}";
             option.text = "{!! $data->title !!}";
@@ -99,7 +99,7 @@
 
 
         @foreach($planPositions as $data)
-        if ("{{ $data->plantilla_id }}" == val) {
+        if ("{{ $data->officeid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->plantilla_id }}";
             option.text = "{{ $data->positionMasterLibrary->dbm_title }} - SG {{ $data->positionMasterLibrary->sg }}";
@@ -108,6 +108,7 @@
         @endforeach
     }
 
+     
     const positionToggle = () => {
         const positionDropdown = document.querySelector('#position');
         const positionInput = document.querySelector('#plantilla_id');
@@ -125,7 +126,6 @@
     }
 
 </script>
-
 @extends('layouts.app')
 @section('title', 'Appointee Occupant Manager - Create')
 @section('content')
@@ -174,15 +174,17 @@
                     <form action="{{ route('library-occupant-manager.store') }}" method="POST">
                         @csrf
                         {{-- @method('put') --}}
-                        <input type="hidden" name="cesno" value="{{ $cesno }}">
-                        <input type="hidden" name="plantilla_id" id="plantilla_id">
+                        <input type="text" name="cesno" value="{{ $cesno }}">
+                        <input type="text" name="plantilla_id" id="plantilla_id">
                         <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
                         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                             <div class="mb-3">
                                 <select id="appt_stat_code" name="appt_stat_code" required>
                                     <option disabled selected value="">Select Personnel Movement</option>
                                     @foreach ($apptStatus as $data)
-                                    <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
+                                    <option value="{{ $data->appt_stat_code }}">
+                                        {{ $data->title }}
+                                    </option>
                                     @endforeach
                                 </select>
                                 @error('appt_stat_code')
