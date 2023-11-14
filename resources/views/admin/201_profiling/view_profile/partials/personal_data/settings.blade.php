@@ -30,7 +30,7 @@
                         <div class="flex items-center">
                             <label for="currentPassword" class="w-1/4">Current Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="currentPassword" name="currentPassword" type="password" oninput="validateInput(currentPassword, 5, 'all'), checkPasswordMatch()" onkeypress="validateInput(currentPassword, 5, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(currentPassword), checkPasswordMatch()" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="currentPassword" name="currentPassword" type="password" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-current-password"></i>
                             </div>
                         </div>
@@ -44,24 +44,24 @@
                         <div class="flex items-center">
                             <label for="password" class="w-1/4">New Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="password" name="password" type="password" oninput="validateInput(password, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(password, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(password)" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="password" name="password" type="password" oninput="validateInputPassword(password), checkPasswordMatch()" onkeypress="validateInputPassword(password), checkPasswordMatch()" onblur="checkErrorMessage(password)" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-password"></i>
                             </div>
                         </div>
                         <div class="mb-3 flex items-center">
                             <label class="w-1/4"></label>
                             <div class="relative w-3/4">
+                                <p id="passwordError" class="input_error text-red-600"></p>
                                 @error('password')
                                     <p id="passwordBackError" class="input_error text-red-600">{{ $message }}</p>
                                 @enderror
-                                <p id="passwordError" class="input_error text-red-600"></p>
                             </div>
                         </div>
                         
                         <div class="flex items-center">
                             <label for="confirmPassword" class="w-1/4">Confirm Password<sup>*</sup></label>
                             <div class="relative w-3/4">
-                                <input id="confirmPassword" name="confirmPassword" type="password" oninput="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onkeypress="validateInput(confirmPassword, 8, 'all'), checkPasswordMatch()" onblur="checkErrorMessage(confirmPassword)" required class="w-full px-3 py-2 border rounded pr-10">
+                                <input id="confirmPassword" name="confirmPassword" type="password" oninput="checkPasswordMatch()" onkeypress="checkPasswordMatch()" onblur="checkErrorMessage(confirmPassword)" required class="w-full px-3 py-2 border rounded pr-10">
                                 <i class="far fa-eye absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer toggle-confirm-password"></i>
                             </div>
                         </div>
