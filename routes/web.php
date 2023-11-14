@@ -38,9 +38,11 @@ use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\Report\AssessmentCenterReportController;
+use App\Http\Controllers\ERIS\report\BoardInterviewReportController;
 use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
 use App\Http\Controllers\ERIS\report\ErisGeneralReportController;
 use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
+use App\Http\Controllers\ERIS\report\PanelBoardInterviewReportController;
 use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
 use App\Http\Controllers\ERIS\Report\ValidationReportController;
 use App\Http\Controllers\ERIS\report\WrittenExamReportController;
@@ -862,10 +864,14 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     //  ERIS Report routes
     Route::prefix('eris-report')->group(function () {
-        Route::prefix('board-panel-interview-report')->group(function () {
-            Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
-            Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
-            Route::post('panel-and-board-interview-generate-pdf', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        Route::prefix('board-interview-report')->group(function () {
+            Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
+            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        });
+
+        Route::prefix('panel-board-interview-report')->group(function () {
+            Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index');
+            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf');
         });
 
         Route::prefix('rapid-validation-report')->group(function () {

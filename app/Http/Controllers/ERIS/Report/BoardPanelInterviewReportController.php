@@ -16,11 +16,17 @@ class BoardPanelInterviewReportController extends Controller
         $sortBy = $request->input('sort_by', 'dteassign'); // Default sorting by Ces No.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
-        $boardInterview = BoardInterView::query()
+        // $boardInterview = BoardInterView::query()
+        // ->orderBy($sortBy, $sortOrder)
+        // ->paginate(25);
+
+        $boardInterview = BoardInterView::join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblBOARD.acno')
+        ->select('erad_tblBOARD.*')
+        ->with('erisTblMainBoardInterview')
         ->orderBy($sortBy, $sortOrder)
         ->paginate(25);
         
-        return view('admin.eris.reports.board_panel_interview_reports.report', compact('boardInterview', 'interviewType', 'sortBy', 'sortOrder'));
+        return view('admin.eris.reports.board_panel_interview_report.board_interview_report.index', compact('boardInterview', 'interviewType', 'sortBy', 'sortOrder'));
     }
 
     public function displayInterview(Request $request)
