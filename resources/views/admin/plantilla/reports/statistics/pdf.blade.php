@@ -931,7 +931,6 @@
 
         .bg-cyan {
             background: #93c5fd;
-            color: #fff;
         }
 
         .bg-yellow {
@@ -1090,32 +1089,32 @@
             <tr>
                 <td colspan="8" class="bold pl-5">a. Occupied CES Positions</td>
                 <td colspan="1" class="text-white bold bg-yellow text-right">{{ $occupiedCESPosition }}</td>
-                <td colspan="1" class="bold text-right">78%</td>
+                <td colspan="1" class="bold text-right">{{ $occupiedCESPositionPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="6" class="bold pl-10">a.1. CESOs and Eligibles</td>
-                <td colspan="1" class="text-white bold bg-cyan text-right">24</td>
-                <td colspan="1" class="bg-cyan text-right">16%</td>
+                <td colspan="1" class="text-dark bold bg-cyan text-right">{{ $cesosAndEligibles }}</td>
+                <td colspan="1" class="text-dark bg-cyan text-right">{{ $cesosAndEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">CESOs</td>
-                <td colspan="1" class="text-white bold text-right">16</td>
-                <td colspan="1" class="text-right">67%</td>
+                <td colspan="1" class="text-white bold text-right">{{ $ceso }}</td>
+                <td colspan="1" class="text-right">{{ $cesoPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">Eligibles</td>
-                <td colspan="1" class="text-white bold text-right">8</td>
-                <td colspan="1" class="text-right">33%</td>
+                <td colspan="1" class="text-white bold text-right">{{ $eligibles }}</td>
+                <td colspan="1" class="text-right">{{ $eligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="6" class="bold pl-10">a.2. Non-CESOs and Non-Eligibles</td>
-                <td colspan="1" class="text-white bold bg-green text-right">127</td>
-                <td colspan="1" class="bg-green text-right">84%</td>
+                <td colspan="1" class="text-white bold bg-green text-right">{{ $nonCesosAndNonEligibles }}</td>
+                <td colspan="1" class="bg-green text-right">{{ $nonCesosAndNonEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="8" class="bold pl-5">b. Vacant CES Positions</td>
-                <td colspan="1" class="text-red bold bg-yellow text-right">42</td>
-                <td colspan="1" class="bold text-right">22%</td>
+                <td colspan="1" class="text-red bold bg-yellow text-right">{{ $vacantCESPosition }}</td>
+                <td colspan="1" class="bold text-right">{{ $vacantCESPositionPercentage }}%</td>
             </tr>
         </table>
 
@@ -1138,7 +1137,7 @@
             <tr>
                 <td colspan="8" class="bold pl-5">a. Occupied CES Positions</td>
                 <td colspan="1" class="text-white bold bg-yellow text-right">{{ $occupiedCESPosition }}</td>
-                <td colspan="1" class="bold text-right">78%</td>
+                <td colspan="1" class="bold text-right">{{ $occupiedCESPositionPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">a.1. Male CESOs and Eligibles</td>
@@ -1201,8 +1200,8 @@
             </tr>
             <tr>
                 <td colspan="8" class="bold pl-5">c. Vacant CES Positions</td>
-                <td colspan="1" class="text-red bold bg-yellow text-right">42</td>
-                <td colspan="1" class="bold text-right">22%</td>
+                <td colspan="1" class="text-red bold bg-yellow text-right">{{ $vacantCESPosition }}</td>
+                <td colspan="1" class="bold text-right">{{ $vacantCESPositionPercentage }}%</td>
             </tr>
 
         </table>
