@@ -36,7 +36,7 @@ class AssessmentCenterReportController extends Controller
 
         $assessmentCenter = AssessmentCenter::query();
 
-        $assessmentCenter->leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
+        $assessmentCenter->join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
         ->select('erad_tblAC.*')
         ->with('erisTblMainAssessmentCenter');
 
@@ -96,7 +96,7 @@ class AssessmentCenterReportController extends Controller
 
         $assessmentCenter = AssessmentCenter::query();
 
-        $assessmentCenter->leftJoin('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
+        $assessmentCenter->join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
         ->select('erad_tblAC.*')
         ->with('erisTblMainAssessmentCenter');
 
