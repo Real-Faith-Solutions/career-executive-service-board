@@ -12,15 +12,25 @@ use App\Models\Plantilla\Office;
 use App\Models\Plantilla\PlanAppointee;
 use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
+use App\Models\Plantilla\PositionAppointee;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
+use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileLibTblCesStatus;
 use App\Models\ProfileTblCesStatus;
+use App\Services\ConvertDateTimeToDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OccupantManagerController extends Controller
 {
+    private ConvertDateTimeToDate $convertDateTimeToDate;
+
+    public function __construct(ConvertDateTimeToDate $convertDateTimeToDate)
+    {
+        $this->convertDateTimeToDate = $convertDateTimeToDate;
+        // $this->boardInterView = new BoardInterView();
+    }
     public function index(Request $request)
     {
         $query = $request->input('search');
@@ -47,7 +57,7 @@ class OccupantManagerController extends Controller
             });
         }
 
-        
+
 
         $datas = $filterDropdown->paginate(25);
         $cesStatus = ProfileLibTblCesStatus::orderBy('description', 'ASC')->get();
@@ -222,9 +232,18 @@ class OccupantManagerController extends Controller
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
-        $authority = ProfileTblCesStatus::where('cesno', $datas->personalData->cesno)
-            ->where('cesstat_code', $datas->personalData->CESStat_code)
-            ->first();
+        // $authority = ProfileTblCesStatus::where('cesno', $datas->personalData->cesno)
+        //     ->where('cesstat_code', $datas->personalData->CESStat_code)
+        //     ->first();
+
+        $assumDate = $datas->assum_date;
+        $apptDate = $datas->appt_date;
+        $convertedAssumDate = $this->convertDateTimeToDate->convertDateGeneral($assumDate);
+        $convertedApptDate = $this->convertDateTimeToDate->convertDateGeneral($apptDate);
+
+        $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
+            ->orderBy('description', 'asc')
+            ->get();
 
 
         return view('admin.plantilla.library.occupant_manager.edit', compact(
@@ -237,7 +256,10 @@ class OccupantManagerController extends Controller
             'positionMasterLibrary',
             'classBasis',
             'apptStatus',
-            'authority',
+            // 'authority',
+            'appAuthority',
+            'convertedAssumDate',
+            'convertedApptDate',
 
         ));;
     }
@@ -263,6 +285,10 @@ class OccupantManagerController extends Controller
             'ofc_stat_code' => $request->input('ofc_stat_code'),
             'basis' => $request->input('basis'),
             'lastupd_user' => $encoder,
+        ]);
+        $positionAppointee = PositionAppointee::withTrashed()->findOrFail($appointee_id);
+        $positionAppointee->update([
+            'name' => $request->input('name'),
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');

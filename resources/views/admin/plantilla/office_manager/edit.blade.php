@@ -244,7 +244,7 @@
     <thead>
         <tr>
             <th class="px-6 py-3" scope="col">DBM Position Title</th>
-            <th class="px-6 py-3" scope="col">Appointee</th>
+            <th class="px-6 py-3" scope="col">Appointed on this Position</th>
             <th class="px-6 py-3" scope="col">Position Level</th>
             <th class="px-6 py-3" scope="col">Have occupant on this position?</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
@@ -274,13 +274,13 @@
                 ->first();
 
                 if(!$selectedAppointee){
-                    $rawr = 0;
+                    $isVacant = 0;
                 }else{
-                    $rawr = 1;
+                    $isVacant = 1;
                 }
             @endphp
 
-                @if($rawr == 0)
+                @if($isVacant == 0)
                     bg-yellow-100 text-red-500
                 @else
 
@@ -337,10 +337,17 @@
             </td>
 
             <td class="px-6 py-3">
-                {{ $data->selectedAppointee->apptStatus->title ?? 'N/A'}}
+                @php
+                $selectedAppointee = $planAppointee
+                ->where('plantilla_id', $data->plantilla_id)
+                ->where('is_appointee', true)
+                ->first();
+                @endphp
+
+                {{ $selectedAppointee->apptStatus->title ?? 'N/A'}}
             </td>
             <td class="px-6 py-3">
-                {{ $data->selectedAppointee->basis ?? 'N/A'}}
+                {{ $data->classBasis->basis ?? 'N/A'}}
             </td>
 
             <td class="text-right uppercase">
