@@ -32,7 +32,6 @@
 <table class="dataTables hidden">
     <thead>
         <tr>
-            <th>Sector ID</th>
             <th>Sector Name</th>
             <th>Description</th>
 
@@ -46,9 +45,6 @@
         @foreach ($datas as $data)
         <tr>
             <td class="font-semibold">
-                {{ $data->sectorid }}
-            </td>
-            <td>
                 {{ $data->title }}
             </td>
             <td>

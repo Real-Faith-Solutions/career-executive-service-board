@@ -6,9 +6,19 @@
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <div>
+    <div class="flex gap-2">
+        <a class="btn btn-primary" href="{{ route('appointee-occupant-manager.show',[
+        'sectorid' => $datas->planPosition->office->agencyLocation->departmentAgency->sectorid,
+        'deptid' => $datas->planPosition->office->agencyLocation->departmentAgency->deptid,
+        'officelocid' => $datas->planPosition->office->officelocid,
+        'officeid' => $datas->planPosition->office->officeid,
+        'plantilla_id' => $datas->plantilla_id,
+        'appointee_id' => $datas->appointee_id
+        ]) }}" target="_blank">
+            Find in Main Screen
+        </a>
         @if($datas->is_appointee == 1)
-        <a class="btn btn-primary mx-1"
+        <a class="btn btn-primary"
             href="{{ route('library-other-assignment.index', ['library_occupant_manager' => $datas->appointee_id]) }}">
             Other Assignment
         </a>
@@ -27,7 +37,8 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('library-occupant-manager.update', $datas->appointee_id) }}" method="POST">
+            <form action="{{ route('library-occupant-manager.update', $datas->appointee_id) }}" method="POST"
+                enctype="multipart/form-data" id="updateForm" onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                 @csrf
                 @method('PUT')
 
@@ -66,7 +77,7 @@
                                 <div class="flex items-center mr-4">
                                     <input id="is_appointee" name="is_appointee" type="radio" value="1" {{
                                         $datas->is_appointee ?
-                                    'checked' : '' }}>
+                                    'checked' : '' }} readonly>
                                     <label class="ml-2 text-sm font-medium text-gray-900"
                                         for="is_appointee">Appointee</label>
                                 </div>
@@ -74,7 +85,7 @@
                                 <div class="flex items-center mr-4">
                                     <input id="is_occupant" name="is_appointee" type="radio" value="0" {{
                                         $datas->is_appointee ? ''
-                                    : 'checked' }}>
+                                    : 'checked' }} readonly>
                                     <label class="ml-2 text-sm font-medium text-gray-900"
                                         for="is_occupant">Occupant</label>
                                 </div>
@@ -104,28 +115,34 @@
                                 readonly />
                         </div>
 
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="official_code">Appointing Authority</label>
-                            <input id="official_code"
-                                value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}" readonly />
-                        </div> --}}
+                            <select name="name" id="official_code">
+                                @foreach ($appAuthority as $data)
+                                <option value="{{ $data->code }}" {{ $datas && $datas->positionAppointee && $data->code
+                                    ==
+                                    $selectedAppAuthority->name ? 'selected' : '' }}>
+                                    {{ $data->description }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="mb-3">
-                            <label for="assum_date">Assumption Date<sup>*</sup></label>
-                            <input id="assum_date" name="assum_date" type="date" value="{{ $datas->assum_date }}"
+                            <label for="appt_date">Appointment Date<sup>*</sup></label>
+                            <input id="appt_date" name="appt_date" type="date" value="{{ $convertedApptDate }}"
                                 required />
-                            @error('assum_date')
+                            @error('appt_date')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
                         </div>
-
                         <div class="mb-3">
-                            <label for="appt_date">Appointment Date<sup>*</sup></label>
-                            <input id="appt_date" name="appt_date" type="date" value="{{ $datas->appt_date }}"
+                            <label for="assum_date">Assumption Date<sup>*</sup></label>
+                            <input id="assum_date" name="assum_date" type="date" value="{{ $convertedAssumDate }}"
                                 required />
-                            @error('appt_date')
+                            @error('assum_date')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
@@ -163,17 +180,22 @@
                 </fieldset>
 
 
-                <div class="flex justify-between">
-                    <h1 class="text-slate-400 text-sm font-semibold">
-                        Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
-                    </h1>
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
+
+                <h1 class="text-slate-400 text-sm font-semibold">
+                    Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
+                </h1>
+                <div class="flex justify-end gap-2 mt-2">
+                    <button type="button" id="btnEdit" class="btn btn-primary">
+                        Edit Record
+                    </button>
+                    <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                        onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                        Save Changes
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection

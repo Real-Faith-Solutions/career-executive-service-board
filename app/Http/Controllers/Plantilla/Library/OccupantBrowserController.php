@@ -81,23 +81,38 @@ class OccupantBrowserController extends Controller
     {
         $datas = PlanPosition::find($platilla_id);
 
+        $selectedAppointee = PlanAppointee::where('plantilla_id', $datas->plantilla_id)
+            ->where('is_appointee', true)
+            ->first();
+
         $address = $datas->office->officeAddress->floor_bldg ?? '' . " " .
             $datas->office->officeAddress->house_no_st ?? '' . " " .
             $datas->office->officeAddress->brgy_dist ?? '' . " " .
             $datas->office->officeAddress->cities->name ?? '';
 
-        $appointee = '';
-        if ($datas && $datas->planAppointee->personalData) {
-            $appointee .= $datas->planAppointee->personalData->lastname ?? '';
-            $appointee .= ' ' . $datas->planAppointee->personalData->firstname ?? '';
-            $appointee .= ' ' . $datas->planAppointee->personalData->name_extension ?? '';
-            $appointee .= ' ' . $datas->planAppointee->personalData->middlename ?? '';
+
+        if ($selectedAppointee) {
+            $appointee = $selectedAppointee->personalData->lastname . " " .
+                $selectedAppointee->personalData->firstname . " " .
+                $selectedAppointee->personalData->name_extension . " " .
+                $selectedAppointee->personalData->middlename . ", " .
+                $selectedAppointee->personalData->cesStatus->description ?? '';
+
+            $selectedApptStatus = $selectedAppointee->apptStatus->title ?? '';
+            $selectedBasis = $selectedAppointee->basis ?? '';
+        } else {
+            $appointee = "No Appointed on this position";
+            $selectedApptStatus = "";
+            $selectedBasis = "";
         }
 
         return view('admin.plantilla.library.occupant_browser.edit', compact(
             'datas',
             'address',
             'appointee',
+            'selectedAppointee',
+            'selectedApptStatus',
+            'selectedBasis',
         ));
     }
 }

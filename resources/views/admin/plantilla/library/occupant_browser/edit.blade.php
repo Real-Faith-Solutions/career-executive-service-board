@@ -79,12 +79,12 @@
                             <label for="appointee">
                                 Appointee
                             </label>
-                            <input id="appointee" value="{{ $appointee }}" readonly />
+                            <input id="appointee" value="{{ $appointee }} " readonly />
                         </div>
 
                         <div class="mb-3">
                             <label for="personnelMovement">Personnel Movement</label>
-                            <input id="personnelMovement" value="{{ $datas->planAppointee->apptStatus->title ?? ''}}"
+                            <input id="personnelMovement" value="{{ $selectedAppointee->apptStatus->title ?? ''}}"
                                 readonly />
                         </div>
 
@@ -101,7 +101,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="sg">Salary Grade Level</label>
-                            <input id="sg" value="{{ $datas->positionMasterLibrary->sg ?? ''}}" readonly />
+                            <input id="sg" value="{{ $datas->corp_sg ?? ''}}" readonly />
                         </div>
                         <div class="mb-3">
                             <label for="item_no">DBM Item no.</label>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PositionAppointee extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'position_appointees';
+    protected $table = 'plantilla_tblPositionAppointees';
     protected $fillable = [
         'appointee_id',
         'name',

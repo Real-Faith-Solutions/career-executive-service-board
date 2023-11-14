@@ -51,7 +51,6 @@ class AppointeeOccupantManagerController extends Controller
             ->orderBy('description', 'asc')
             ->get();
 
-
         $planAppointee = PlanAppointee::query()
             ->where('plantilla_id', $planPosition->plantilla_id)
             ->get();
@@ -71,7 +70,9 @@ class AppointeeOccupantManagerController extends Controller
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
             } else {
-                $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)->where('cesstat_code', $personalData->CESStat_code)->first();
+                $authority = ProfileTblCesStatus::where('cesno', $personalData->cesno)
+                    ->where('cesstat_code', $personalData->CESStat_code)
+                    ->first();
             }
         } else {
             $personalData = null;
@@ -223,6 +224,10 @@ class AppointeeOccupantManagerController extends Controller
         $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
             ->orderBy('description', 'asc')
             ->get();
+        $selectedAppAuthority = PositionAppointee::select('id', 'name')
+            ->where('appointee_id', $appointee_id)
+            ->latest()
+            ->first();
 
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
@@ -242,6 +247,7 @@ class AppointeeOccupantManagerController extends Controller
         $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->get();
 
         return view('admin.plantilla.appointee_occupant_browser.show', compact(
+            'selectedAppAuthority',
             'appAuthority',
             'sector',
             'department',

@@ -212,21 +212,10 @@
 </div> --}}
 
 <div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
-
-    {{-- legend
-    active = 1 || ces + presidential = white background / black text
-    inactive = disabled text
-    vacant = 1 = yellow background / red text
-    non ces + presidential = white background / blue text
-    --}}
-
     <span>Active</span> <br>
     <span class="p-1 text-slate-500">Inactive</span>
-    {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
     <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
     <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
-
-
 </div>
 
 
@@ -244,7 +233,7 @@
     <thead>
         <tr>
             <th class="px-6 py-3" scope="col">DBM Position Title</th>
-            <th class="px-6 py-3" scope="col">Appointee</th>
+            <th class="px-6 py-3" scope="col">Appointed on this Position</th>
             <th class="px-6 py-3" scope="col">Position Level</th>
             <th class="px-6 py-3" scope="col">Have occupant on this position?</th>
             <th class="px-6 py-3" scope="col">Salary Grade</th>
@@ -274,13 +263,13 @@
                 ->first();
 
                 if(!$selectedAppointee){
-                    $rawr = 0;
+                    $isVacant = 0;
                 }else{
-                    $rawr = 1;
+                    $isVacant = 1;
                 }
             @endphp
 
-                @if($rawr == 0)
+                @if($isVacant == 0)
                     bg-yellow-100 text-red-500
                 @else
 
@@ -337,10 +326,17 @@
             </td>
 
             <td class="px-6 py-3">
-                {{ $data->selectedAppointee->apptStatus->title ?? 'N/A'}}
+                @php
+                $selectedAppointee = $planAppointee
+                ->where('plantilla_id', $data->plantilla_id)
+                ->where('is_appointee', true)
+                ->first();
+                @endphp
+
+                {{ $selectedAppointee->apptStatus->title ?? 'N/A'}}
             </td>
             <td class="px-6 py-3">
-                {{ $data->selectedAppointee->basis ?? 'N/A'}}
+                {{ $data->classBasis->basis ?? 'N/A'}}
             </td>
 
             <td class="text-right uppercase">

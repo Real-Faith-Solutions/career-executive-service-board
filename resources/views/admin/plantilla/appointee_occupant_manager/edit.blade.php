@@ -169,8 +169,8 @@
 <table class="dataTables hidden">
     <thead>
         <tr>
-            <th>CESNO</th>
             <th>Officials Name</th>
+            <th>CESNO</th>
             <th>Is appointed on this position</th>
             <th>Appointment</th>
             <th>CES Status</th>
@@ -187,14 +187,13 @@
         @foreach ($planAppointee as $data)
         <tr>
             <td class="font-semibold">
-                {{ $data->cesno }}
-            </td>
-            <td>
-                {{ $data->personalData->title ?? ''}}
                 {{ $data->personalData->lastname ?? ''}},
                 {{ $data->personalData->firstname ?? ''}}
                 {{ $data->personalData->name_extension ?? ''}}
                 {{ $data->personalData->middlename ?? ''}}
+            </td>
+            <td>
+                {{ $data->cesno }}
             </td>
             <td>
                 <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">
