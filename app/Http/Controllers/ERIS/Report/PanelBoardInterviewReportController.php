@@ -37,7 +37,8 @@ class PanelBoardInterviewReportController extends Controller
         ->select('erad_tblPBOARD.*')
         ->with('erisTblMainPanelBoardInterview')
         ->orderBy($sortBy, $sortOrder)
-        ->paginate(25);
+        ->get();
+        // ->paginate(25);
 
         $pdf = Pdf::loadView('admin.eris.reports.board_panel_interview_report.panel_board_interview_report.report_pdf', [
             'panelBoardInterview' => $panelBoardInterview, 
