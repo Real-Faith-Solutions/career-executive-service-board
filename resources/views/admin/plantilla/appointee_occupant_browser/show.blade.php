@@ -108,7 +108,7 @@
 
                             <div class="flex flex-col gap-4 lg:items-center">
                                 <img id="" class="w-44 h-44 rounded-full object-cover"
-                                    src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/placeholder.png') }}" />
+                                    src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/assets/placeholder.png') }}" />
 
                                 <div class="flex flex-col gap-2 text-center">
 
@@ -174,11 +174,11 @@
                     </div>
 
                     <div class="col-span-2">
-                        <form
-                            action="{{ route('appointee-occupant-manager.update', ['appointee_id' => $appointees->appointee_id]) }}"
+                        <form action="{{ route('library-occupant-manager.update', $appointees->appointee_id) }}"
                             method="POST" enctype="multipart/form-data" id="updateForm"
                             onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="plantilla_id" value="{{ $planPosition->plantilla_id }}">
                             <fieldset class="border p-4">
                                 <legend>Occupant information</legend>
@@ -252,10 +252,10 @@
                                     <div class="mb-3">
                                         <label for="name">Appointing Authority</label>
                                         <select id="name" name="name" required>
-                                            <option value="" disabled selected>Select Appointing Authority</option>
                                             @foreach ($appAuthority as $data)
-                                            <option value="{{ $data->code }}" {{ $data->code ==
-                                                $appointees->positionAppointee->name ? 'selected' : ''}}>
+                                            <option value="{{ $data->code }}" {{ $appointees && $appointees->
+                                                positionAppointee && $data->code ==
+                                                $selectedAppAuthority->name ? 'selected' : ''}}>
                                                 {{ $data->description }}
                                             </option>
                                             @endforeach

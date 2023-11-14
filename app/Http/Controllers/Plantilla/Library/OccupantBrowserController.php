@@ -97,22 +97,22 @@ class OccupantBrowserController extends Controller
                 $selectedAppointee->personalData->name_extension . " " .
                 $selectedAppointee->personalData->middlename . ", " .
                 $selectedAppointee->personalData->cesStatus->description ?? '';
+
+            $selectedApptStatus = $selectedAppointee->apptStatus->title ?? '';
+            $selectedBasis = $selectedAppointee->basis ?? '';
         } else {
             $appointee = "No Appointed on this position";
+            $selectedApptStatus = "";
+            $selectedBasis = "";
         }
-        // $appointee = '';
-        // if ($datas && $datas->planAppointee->personalData) {
-        //     $appointee .= $datas->planAppointee->personalData->lastname ?? '';
-        //     $appointee .= ' ' . $datas->planAppointee->personalData->firstname ?? '';
-        //     $appointee .= ' ' . $datas->planAppointee->personalData->name_extension ?? '';
-        //     $appointee .= ' ' . $datas->planAppointee->personalData->middlename ?? '';
-        // }
 
         return view('admin.plantilla.library.occupant_browser.edit', compact(
             'datas',
             'address',
             'appointee',
             'selectedAppointee',
+            'selectedApptStatus',
+            'selectedBasis',
         ));
     }
 }

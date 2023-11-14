@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('position_appointees', function (Blueprint $table) {
+        Schema::create('plantilla_tblPositionAppointees', function (Blueprint $table) {
             $table->id();
             $table->integer('appointee_id')->nullable();
-            $table->string('name')->nullable();
+            $table->integer('name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('position_appointees');
+        Schema::dropIfExists('plantilla_tblPositionAppointees');
     }
 };

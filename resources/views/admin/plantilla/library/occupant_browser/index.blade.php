@@ -160,6 +160,12 @@
 
     </div>
 </form>
+<div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
+    <span>Active</span> <br>
+    <span class="p-1 text-slate-500">Inactive</span>
+    <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
+    <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
+</div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
     <table class="w-full text-left text-sm text-gray-500">
@@ -183,42 +189,35 @@
 
             @foreach ($planPositions as $data)
             <tr class="
-            
-                    
-                        @if($data->is_active != 1)
-                            text-slate-400
-                        @else
-            
-                        @php
-                        $selectedAppointee = $planAppointee
-                        ->where('plantilla_id', $data->plantilla_id)
-                        ->where('is_appointee', true)
-                        ->first();
-                        
-                        if(!$selectedAppointee){
-                        $isVacant = 0;
-                        }else{
-                        $isVacant = 1;
-                        }
-                        @endphp
-                        
-                        @if($isVacant == 0)
+                @if($data->is_active != 1)
+                    text-slate-400
+                @else
+    
+                @php
+                $selectedAppointee = $planAppointee
+                    ->where('plantilla_id', $data->plantilla_id)
+                    ->where('is_appointee', true)
+                    ->first();
+                
+                if(!$selectedAppointee){
+                    $isVacant = 0;
+                }else{
+                    $isVacant = 1;
+                }
+                @endphp
+                
+                    @if($isVacant == 0)
                         bg-yellow-100 text-red-500
+                    @else
+                        @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
+                                bg-gray-50 text-blue-500
                         @else
-            
-            
-                                {{-- non ces + pres appointee --}}
-                                @if ($data->is_ces_pos != 1 && $data->pres_apptee == 1)
-                                    bg-gray-50 text-blue-500
-                                @else
-                                    text-dark
-                                @endif
-                            @endif
+                                text-dark
                         @endif
-            
-                    ">
+                    @endif
+                @endif
+                ">
                 <td class="whitespace-nowrap px-6 py-4 font-medium" scope="row">
-                    {{-- {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}} --}}
                     {{ $data->pos_default ?? 'N/A'}}
                 </td>
 
@@ -233,7 +232,7 @@
 
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->pos_default ?? 'N/A'}}
+                    {{ $data->positionMasterLibrary->dbm_title ?? 'N/A'}}
                 </td>
                 <td class="px-6 py-3">
                     @php
@@ -261,16 +260,21 @@
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $data->selectedAppointee->apptStatus->title ?? 'N/A'}}
+                    @php
+                    $selectedAppointee = $planAppointee
+                    ->where('plantilla_id', $data->plantilla_id)
+                    ->where('is_appointee', true)
+                    ->first();
+                    @endphp
+
+                    {{ $selectedAppointee->apptStatus->title ?? ''}}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->selectedAppointee->basis ?? 'N/A'}}
+                    {{ $selectedAppointee->basis ?? ''}}
                 </td>
 
                 <td class="text-right uppercase">
                     <div class="flex justify-end">
-
-
                         @if($data->planAppointee)
                         <a class="hover:bg-slate-100 rounded-full"
                             href="{{ route('library-occupant-browser.edit', $data->plantilla_id) }}">
@@ -280,11 +284,6 @@
                             </lord-icon>
                         </a>
                         @endif
-
-
-
-
-
                         {{-- <form class="hover:bg-slate-100 rounded-full"
                             action="{{ route('library-occupant-manager.destroy', $data->appointee_id) }}" method="POST"
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
