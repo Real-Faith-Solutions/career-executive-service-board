@@ -26,6 +26,7 @@ use App\Models\ProfileLibCities;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -367,6 +368,15 @@ class ProfileController extends Controller
 
     public function changePassword(Request $request, $cesno)
     {
+
+        $credentials = $request->validate([
+            'password' => ['required', Password::min(8)
+                            ->letters()
+                            ->mixedCase()
+                            ->numbers()
+                            ->symbols()
+                            ->uncompromised()],
+        ]);
 
         // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();

@@ -51,6 +51,9 @@
                         <div class="mb-3 flex items-center">
                             <label class="w-1/4"></label>
                             <div class="relative w-3/4">
+                                @error('password')
+                                    <p id="passwordBackError" class="input_error text-red-600">{{ $message }}</p>
+                                @enderror
                                 <p id="passwordError" class="input_error text-red-600"></p>
                             </div>
                         </div>
