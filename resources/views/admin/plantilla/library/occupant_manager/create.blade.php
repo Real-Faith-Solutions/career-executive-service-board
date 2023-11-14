@@ -102,7 +102,7 @@
         if ("{{ $data->officeid }}" == val) {
             const option = document.createElement("option");
             option.value = "{{ $data->plantilla_id }}";
-            option.text = "{{ $data->positionMasterLibrary->dbm_title }} - SG {{ $data->positionMasterLibrary->sg }}";
+            option.text = "{{ $data->pos_default }} - SG {{ $data->corp_sg }}";
             positionDropdown.appendChild(option);
         }
         @endforeach
@@ -174,8 +174,8 @@
                     <form action="{{ route('library-occupant-manager.store') }}" method="POST">
                         @csrf
                         {{-- @method('put') --}}
-                        <input type="text" name="cesno" value="{{ $cesno }}">
-                        <input type="text" name="plantilla_id" id="plantilla_id">
+                        <input type="hidden" name="cesno" value="{{ $cesno }}">
+                        <input type="hidden" name="plantilla_id" id="plantilla_id">
                         <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>
                         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                             <div class="mb-3">
@@ -219,9 +219,7 @@
                         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
                             <div class="mb-3">
                                 <label for="lastname">Name of Official</label>
-                                <input id="lastname"
-                                    value="{{ $personalData->lastname ?? ''}}, {{ $personalData->firstname ?? ''}} {{ $personalData->name_extension ?? ''}} {{ $personalData->middlename ?? ''}}"
-                                    readonly required />
+                                <input id="lastname" value="{{ $selectedPersonalData }}" readonly required />
                                 @error('cesno')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -239,23 +237,16 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="assum_date">Assumption Date<sup>*</sup></label>
-                                <input id="assum_date" name="assum_date" type="date" value="{{ old('assum_date') }}"
-                                    required />
-                                @error('assum_date')
-                                <span class="invalid" role="alert">
-                                    <p>{{ $message }}</p>
-                                </span>
-                                @enderror
+                                <label for="name">Appointing Authority</label>
+                                <select id="name" name="name">
+                                    <option value="" disabled selected>Appointing Authority</option>
+                                    @foreach ($appAuthority as $data)
+                                    <option value="{{ $data->code }}">
+                                        {{ $data->description }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
-                        </div>
-
-                        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-                            <div class="mb-3">
-                                <label for="gender">Gender</label>
-                                <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
-                            </div>
-
                             <div class="mb-3">
                                 <label for="appt_date">Appointment Date<sup>*</sup></label>
                                 <input id="appt_date" name="appt_date" type="date" value="{{ old('appt_date') }}"
@@ -265,6 +256,25 @@
                                     <p>{{ $message }}</p>
                                 </span>
                                 @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="assum_date">Assumption Date<sup>*</sup></label>
+                                <input id="assum_date" name="assum_date" type="date" value="{{ old('assum_date') }}"
+                                    required />
+                                @error('assum_date')
+                                <span class="invalid" role="alert">
+                                    <p>{{ $message }}</p>
+                                </span>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+                            <div class="mb-3">
+                                <label for="gender">Gender</label>
+                                <input id="gender" value="{{ $personalData->gender ?? ''}}" readonly />
                             </div>
                         </div>
 

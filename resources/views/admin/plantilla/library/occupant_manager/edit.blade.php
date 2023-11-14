@@ -119,17 +119,14 @@
                             <label for="official_code">Appointing Authority</label>
                             <select name="name" id="official_code">
                                 @foreach ($appAuthority as $data)
-                                <option value="{{ $data->code }}" {{ $data->code ==
-                                    $datas->positionAppointee->name ? 'selected' : ''}}>
+                                <option value="{{ $data->code }}" {{ $datas && $datas->positionAppointee && $data->code
+                                    ==
+                                    $selectedAppAuthority->name ? 'selected' : '' }}>
                                     {{ $data->description }}
                                 </option>
                                 @endforeach
                             </select>
-                            {{-- <input id="official_code"
-                                value="{{ $authority->profileLibTblAppAuthority->description ?? '' }}" readonly /> --}}
                         </div>
-
-
 
                         <div class="mb-3">
                             <label for="appt_date">Appointment Date<sup>*</sup></label>

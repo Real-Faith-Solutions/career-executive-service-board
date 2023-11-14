@@ -87,16 +87,25 @@ class OccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $personalDataList = PersonalData::all();
+        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'name_extension', 'middlename')->get();
+        $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
+            ->orderBy('description', 'asc')
+            ->get();
 
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
+
+            $selectedPersonalData = $personalData->lastname . " " .
+                $personalData->firstname . " " .
+                $personalData->name_extension . " " .
+                $personalData->middlename . " ";
             if (!$personalData) {
                 return redirect()->back()->with('error', 'No Personal data found.');
             }
         } else {
             $personalData = null;
+            $selectedPersonalData = null;
         }
 
         return view('admin.plantilla.library.occupant_manager.create', compact(
@@ -112,6 +121,8 @@ class OccupantManagerController extends Controller
             'personalDataList',
             'cesno',
             'personalData',
+            'selectedPersonalData',
+            'appAuthority',
 
         ));;
     }
@@ -122,21 +133,42 @@ class OccupantManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        $cesno = $request->cesno;
+        $plantilla_id = $request->plantilla_id;
+        $planAppointee = PlanAppointee::where('cesno', $cesno)
+            ->select('is_appointee')
+            ->get();
+
+        $planPosition = PlanPosition::find($plantilla_id);
+
+        $is_appointee = $request->is_appointee;
+
+        if ($is_appointee == true) {
+
+            foreach ($planAppointee as $data) {
+                if ($data->is_appointee == true) {
+                    return redirect()->back()->with('error', 'This Official is already appointed in other position');
+                }
+            }
+
+            $hasAppointee = $planPosition->planAppointee()->where('is_appointee', true)->exists();
+
+            if ($hasAppointee) {
+                return redirect()->back()->with('error', 'This Position is already have appointees');
+            }
+        }
+
         $request->validate([
-            'plantilla_id' => ['required'],
-            'cesno' => ['required', 'unique:plantilla_tblPlanAppointees'],
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ], [
-            'plantilla_id.required' => 'The Position field is required.',
-            'cesno.unique' => 'This official is already appointed to another position.',
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
             'appt_date.required' => 'The Appointment Date field is required.',
         ]);
 
-        PlanAppointee::create([
+        $planAppointee = PlanAppointee::create([
             'plantilla_id' => $request->input('plantilla_id'),
             'cesno' => $request->input('cesno'),
             'appt_stat_code' => $request->input('appt_stat_code'),
@@ -147,6 +179,11 @@ class OccupantManagerController extends Controller
             'basis' => $request->input('basis'),
             'created_user' => $encoder,
             'lastupd_user' => $encoder,
+        ]);
+
+        PositionAppointee::create([
+            'appointee_id' => $planAppointee->appointee_id,
+            'name' => $request->name,
         ]);
 
 
@@ -244,6 +281,10 @@ class OccupantManagerController extends Controller
         $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
             ->orderBy('description', 'asc')
             ->get();
+        $selectedAppAuthority = PositionAppointee::select('id', 'name')
+            ->where('appointee_id', $appointee_id)
+            ->latest()
+            ->first();
 
 
         return view('admin.plantilla.library.occupant_manager.edit', compact(
@@ -258,6 +299,7 @@ class OccupantManagerController extends Controller
             'apptStatus',
             // 'authority',
             'appAuthority',
+            'selectedAppAuthority',
             'convertedAssumDate',
             'convertedApptDate',
 
@@ -286,10 +328,16 @@ class OccupantManagerController extends Controller
             'basis' => $request->input('basis'),
             'lastupd_user' => $encoder,
         ]);
-        $positionAppointee = PositionAppointee::withTrashed()->findOrFail($appointee_id);
-        $positionAppointee->update([
-            'name' => $request->input('name'),
+        PositionAppointee::create([
+            'appointee_id' => $planAppointee->appointee_id,
+            'name' => $request->name,
         ]);
+
+        // $positionAppointee = PositionAppointee::withTrashed()->findOrFail($appointee_id);
+
+        // $positionAppointee->update([
+        //     'name' => $request->input('name'),
+        // ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }

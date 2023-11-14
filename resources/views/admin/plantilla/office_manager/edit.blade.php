@@ -212,21 +212,10 @@
 </div> --}}
 
 <div class="flex justify-end items-center gap-2 uppercase font-semibold text-sm">
-
-    {{-- legend
-    active = 1 || ces + presidential = white background / black text
-    inactive = disabled text
-    vacant = 1 = yellow background / red text
-    non ces + presidential = white background / blue text
-    --}}
-
     <span>Active</span> <br>
     <span class="p-1 text-slate-500">Inactive</span>
-    {{-- <span class="p-1 text-dark-500">CES + Presidential</span> --}}
     <span class="p-1 bg-yellow-100 text-red-500">Vacant</span>
     <span class="p-1 bg-gray-50 text-blue-500">NON ces + Presidential</span>
-
-
 </div>
 
 
