@@ -73,7 +73,7 @@ class AuthController extends Controller
         }
 
         // counting failed attemps
-        // the user will get a suspension if he failed to login 5x in just 2 minutes
+        // the user will get a suspension if he failed to login 3 consecutive times.
         // 1st suspension = 5mins, 2nd = 30mins, 3rd = 1hour, then another 1hour suspension if failed again.
         // suspension will only take effect on the ip address of the device where the failed attemp occured.
         // when loggedin successfully, failed attemps record on user's ip address will be cleared.
@@ -148,7 +148,7 @@ class AuthController extends Controller
 
             // sending email to added user
             $recipientEmail = $request->email;
-            $password = Str::password(8);
+            $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
             $imagePath = public_path('images/branding.png');
             $loginLink= config('app.url');
@@ -202,17 +202,51 @@ class AuthController extends Controller
                     $association['device_id'] == $deviceIdentifier->device_id &&
                     $association['user_id'] == $ctrlno
                 ) {
+
                     if (Hash::check($request->code, $deviceIdentifier->confirmation_code)) {
+
+                        $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
+                        $cooldownMinutes = 4; // Adjust to your preferred code expiration
+                        if (!($deviceIdentifier->updated_at->addMinutes($cooldownMinutes)->isFuture())) {
+                            
+                            $confirmation_code = mt_rand(10000, 99999);
+                            $hashed_confirmation_code = Hash::make($confirmation_code);
+                            $recipientEmail = auth()->user()->email;
+                            $imagePath = public_path('images/branding.png');
+
+                            // Update the confirmation code in the database
+                            $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                            // sending confirmation_code email to user
+                            $data = [
+                                'email' => $recipientEmail,
+                                'confirmation_code' => $confirmation_code,
+                                'imagePath' => $imagePath,
+                            ];
+                    
+                            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                            return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+
+                        }
+
+                        // here where the root of bugs lies!
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
+
+                        //test
+                        // $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
+                        // dd($associations);
+
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
                         $deviceIdentifier->update(['verified' => true]);
+                        // return "test";
                         return Redirect::to('/dashboard')->with('message', 'Account Verified!');
                     }
                 }
             }
         }
-        
+
         return redirect()->route('reconfirm.email')->with('error','Invalid Code. Please check your email');
 
     }
