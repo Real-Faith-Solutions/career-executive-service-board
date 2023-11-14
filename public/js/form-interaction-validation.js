@@ -63,6 +63,7 @@
     function checkPasswordMatch() {
         const passwordField = document.getElementById('password');
         const password = document.getElementById('password').value;
+        const confirmPasswordField = document.getElementById('confirmPassword');
         const confirmPassword = document.getElementById('confirmPassword').value;
         const confirmPasswordError = document.getElementById('confirmPasswordError');
         var form = passwordField.closest('form');
@@ -75,11 +76,32 @@
 
         if (password !== confirmPassword) {
             confirmPasswordError.textContent = 'Passwords do not match';
+            confirmPasswordField.classList.remove('focus:outline-blue-600');
+            confirmPasswordField.classList.add('border-red-600');
+            confirmPasswordField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
         } else {
             confirmPasswordError.textContent = '';
-            submitButton.disabled = false;
-            submitButton.classList.remove('cursor-not-allowed');
-            submitButton.classList.add('cursor-pointer');
+            confirmPasswordField.classList.remove('focus:outline-red-500');
+            confirmPasswordField.classList.remove('border-red-600');
+            confirmPasswordField.classList.add('focus:outline-blue-600');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
         }
     }
     // end check password if match
@@ -237,7 +259,7 @@
 
 // real-time validation
 
-    // names input validations letters only or type
+    // general input validations
     function validateInput(inputField, minLength, type = 'all') {
 
         const inputValue = inputField.value;
@@ -318,7 +340,65 @@
             
         }
     }
-    // end names input validations letters only or type
+    // end general input validations
+
+    // password input validations
+    function validateInputPassword(inputField) {
+
+        const inputValue = inputField.value;
+        let regexValidator = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/;
+        let errorMessage = ' characters and has atleast 1 lowercase, uppercase, number, and special character.';
+        const passwordError = document.getElementById('passwordError');
+
+        var form = inputField.closest('form');
+        var submitButton = form.querySelector('button[type="submit"]');
+
+        if(!submitButton){
+            submitButton = form.querySelector('button[type="button"]');
+        }
+    
+        if (inputValue.length < 8 && regexValidator.test(inputValue)) {
+            passwordError.textContent = `At least 8 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (inputValue.length < 9 && !regexValidator.test(inputValue)) {
+            passwordError.textContent = `At least 8 ${errorMessage}`;
+            inputField.classList.remove('focus:outline-blue-600');
+            inputField.classList.add('border-red-600');
+            inputField.classList.add('focus:outline-red-500');
+            submitButton.disabled = true;
+            submitButton.classList.remove('cursor-pointer');
+            submitButton.classList.add('cursor-not-allowed');
+        } else if (!regexValidator.test(inputValue)) {
+            passwordError.textContent = 'Password must contain atleast 1 lowercase, uppercase, number, and special character.';
+        } else {
+            passwordError.textContent = '';
+            inputField.classList.remove('focus:outline-red-500');
+            inputField.classList.remove('border-red-600');
+            inputField.classList.add('focus:outline-blue-600');
+
+            const errorClass = form.querySelectorAll('.input_error');
+
+            for (const error of errorClass) {
+                if (error.textContent != "") {
+                    submitButton.disabled = true;
+                    submitButton.classList.remove('cursor-pointer');
+                    submitButton.classList.add('cursor-not-allowed');
+                    break;
+                }else{
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('cursor-not-allowed');
+                    submitButton.classList.add('cursor-pointer');
+                }
+            }
+            
+        }
+    }
+    // end password input validations
 
     // email input validation
     function validateInputEmail(inputField) {

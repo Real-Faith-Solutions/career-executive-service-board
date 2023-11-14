@@ -26,13 +26,16 @@ class VerifyEmailAndDevice
         $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
         $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
 
+        // test
+        // dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
+
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
 
             if($pendingDeviceIdentifiers = $this->checkPendingConfirmation($associations, $pendingIdentifiers, $ctrlno)){
                 
                 $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $pendingDeviceIdentifiers)->first();
-                $cooldownMinutes = 60; // Adjust as needed
+                $cooldownMinutes = 4; // Adjust as needed
                 if ($deviceVerification && $deviceVerification->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
                     return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
                 }
@@ -96,19 +99,25 @@ class VerifyEmailAndDevice
 
     protected function isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)
     {
+        $isVefified = false;
         foreach ($deviceIdentifiers as $deviceIdentifier) {
             foreach ($associations as $association) {
                 if (
-                    $association['device_id'] === $deviceIdentifier &&
-                    $association['user_id'] === $ctrlno &&
+                    $association['device_id'] == $deviceIdentifier &&
+                    $association['user_id'] == $ctrlno &&
                     $association['verified']
                 ) {
-                    return true;
+                    $isVefified = true;
                 }
             }
         }
 
-        return false;
+        if($isVefified){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
 
     protected function getCurrentDeviceIdentifiers($ctrlno)

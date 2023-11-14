@@ -89,10 +89,6 @@ class OfficeManagerController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-
-            'sectorDropdown' => ['required'],
-            'departmentDropdown' => ['required'],
-            // 'agencyLocationDropdown' => ['required'],
             'officelocid' => ['required'],
             'city_code' => ['required'],
             'title' => ['required', 'max:40', 'min:2',],
