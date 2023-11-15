@@ -63,6 +63,17 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="numtakes">Number of Takes<sup>*</sup></label>
+                        <input type="text" id="numtakes" name="numtakes" oninput="validateInput(numtakes, 1, 'numbers')" onkeypress="validateInput(numtakes, 1, 'numbers')" onblur="checkErrorMessage(numtakes)" value="{{ $writtenExamPRofileData->numtakes }}" required>
+                        <p class="input_error text-red-600"></p>
+                        @error('numtakes')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="mb-3">

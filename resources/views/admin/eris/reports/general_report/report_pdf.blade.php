@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Rapid Validation
+            Eris General Report
         </title>
 
         <style>
@@ -65,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #ECECEC;
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -124,7 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Rapid Validation
+                    Eris General Report
                 </p>
 
                 <footer>
@@ -145,27 +145,15 @@
                         </th>
 
                         <th>
+                            Account No
+                        </th>
+    
+                        <th>
                             Name
                         </th>
-
-                        <th>
-                            Rapid Validation Date
-                        </th>
     
                         <th>
-                            Submittion of Document
-                        </th>
-    
-                        <th>
-                            Validator
-                        </th>
-    
-                        <th>
-                            Recommendation
-                        </th>
-    
-                        <th>
-                            Remarks
+                            Conferment Status
                         </th>
                     </tr>
                 </thead>
@@ -173,44 +161,24 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($rapidValidation as $data)
+                        @foreach ($eradTblMain as $data)
                             <tr>
                                 <td>
                                     {{ $rowNumber++ }}
                                 </td>
 
                                 <td>
-                                    {{ $data->erisTblMainRapidValidation->lastname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->firstname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->middlename ?? '' }} 
-                                </td>
-
-                                <td>
-                                    @if ($data->dteassign != null)
-                                        {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
-                                    @else
-                                        {{ $data->dteassign ?? '' }} 
-                                    @endif
+                                    {{ $data->acno ?? '' }} 
                                 </td>
         
                                 <td>
-                                    @if ($data->dtesubmit != null)
-                                        {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
-                                    @else
-                                        {{ $data->dtesubmit ?? '' }} 
-                                    @endif
+                                    {{ $data->lastname ?? '' }},
+                                    {{ $data->firstname ?? '' }},
+                                    {{ $data->middlename ?? '' }}
                                 </td>
         
                                 <td>
-                                    {{ $data->validator ?? '' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->recom ?? '' }} 
-                                </td>
-        
-                                <td>
-                                    {{ $data->remarks ?? '' }} 
+                                    {{ $data->c_status ?? '' }} 
                                 </td>
                             </tr>
                         @endforeach                 

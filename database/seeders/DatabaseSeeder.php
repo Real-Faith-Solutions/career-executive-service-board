@@ -61,8 +61,9 @@ class DatabaseSeeder extends Seeder
             ProfileLibTblLanguageRefSeeder::class,
             ProfileLibTblExpertiseGenSeeder::class,
             TrainingLibCategorySeeder::class,
-            ErisTblMainSeeder::class,
+            // ErisTblMainSeeder::class,
             ScholarshipSeeder::class,
+            // WrittenExamSeeder::class,
             DefaultAccounts::class,
             // plantilla
             // SectorManagerSeeder::class,

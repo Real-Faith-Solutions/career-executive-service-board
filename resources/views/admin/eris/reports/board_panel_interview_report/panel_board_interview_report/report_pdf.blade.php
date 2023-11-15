@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Rapid Validation
+            Panel Board Interview
         </title>
 
         <style>
@@ -65,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #ECECEC;
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -102,7 +102,7 @@
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 190px;
             }
 
             .pagenum:before {
@@ -124,7 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Rapid Validation
+                    Penel Board Interview
                 </p>
 
                 <footer>
@@ -149,7 +149,7 @@
                         </th>
 
                         <th>
-                            Rapid Validation Date
+                            Assigned Date
                         </th>
     
                         <th>
@@ -157,15 +157,15 @@
                         </th>
     
                         <th>
-                            Validator
+                            Interviewer
+                        </th>
+    
+                        <th>
+                            Interview Date
                         </th>
     
                         <th>
                             Recommendation
-                        </th>
-    
-                        <th>
-                            Remarks
                         </th>
                     </tr>
                 </thead>
@@ -173,16 +173,16 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($rapidValidation as $data)
+                        @foreach ($panelBoardInterview as $data)
                             <tr>
                                 <td>
                                     {{ $rowNumber++ }}
                                 </td>
 
                                 <td>
-                                    {{ $data->erisTblMainRapidValidation->lastname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->firstname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->middlename ?? '' }} 
+                                    {{ $data->erisTblMainPanelBoardInterview->lastname ?? '' }},
+                                    {{ $data->erisTblMainPanelBoardInterview->firstname ?? '' }},
+                                    {{ $data->erisTblMainPanelBoardInterview->middlename ?? '' }}
                                 </td>
 
                                 <td>
@@ -192,7 +192,7 @@
                                         {{ $data->dteassign ?? '' }} 
                                     @endif
                                 </td>
-        
+
                                 <td>
                                     @if ($data->dtesubmit != null)
                                         {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
@@ -200,17 +200,21 @@
                                         {{ $data->dtesubmit ?? '' }} 
                                     @endif
                                 </td>
-        
+
                                 <td>
-                                    {{ $data->validator ?? '' }} 
+                                    {{ $data->intrviewer ?? '' }}
                                 </td>
-        
+
                                 <td>
-                                    {{ $data->recom ?? '' }} 
+                                    @if ($data->dteiview != null)
+                                        {{ \Carbon\Carbon::parse($data->dteiview)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dteiview ?? '' }} 
+                                    @endif
                                 </td>
-        
+
                                 <td>
-                                    {{ $data->remarks ?? '' }} 
+                                    {{ $data->recom ?? '' }}
                                 </td>
                             </tr>
                         @endforeach                 
