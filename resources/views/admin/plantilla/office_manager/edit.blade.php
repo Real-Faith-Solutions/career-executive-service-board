@@ -289,12 +289,19 @@
             </td>
 
             <td class="px-6 py-3">
+                @php
+                    $selectedAppointee = $planAppointee
+                        ->where('plantilla_id', $data->plantilla_id)
+                        ->where('is_appointee', true)
+                        ->first();
+                @endphp
+
                 @if($selectedAppointee)
-                {{ $selectedAppointee->personalData->lastname ?? ''}},
-                {{ $selectedAppointee->personalData->firstname ?? ''}}
-                {{ $selectedAppointee->personalData->name_extension ?? ''}}
-                {{ $selectedAppointee->personalData->middlename ?? ''}},
-                {{ $selectedAppointee->personalData->cesStatus->description ?? '' }}
+                    {{ $selectedAppointee->personalData->lastname ?? ''}},
+                    {{ $selectedAppointee->personalData->firstname ?? ''}}
+                    {{ $selectedAppointee->personalData->name_extension ?? ''}}
+                    {{ $selectedAppointee->personalData->middlename ?? ''}},
+                    {{ $selectedAppointee->personalData->cesStatus->description ?? '' }}
                 @endif
             </td>
             <td class="px-6 py-3">
