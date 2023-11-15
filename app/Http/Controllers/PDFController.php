@@ -202,6 +202,8 @@ class PDFController extends Controller
     {
         $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');      
 
+        // dd($pdfFileName);
+
         $myFile = public_path($pdfFileName);
 
         return response()->file($myFile);
