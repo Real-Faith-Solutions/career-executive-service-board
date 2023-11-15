@@ -14,7 +14,7 @@
           </svg>
         </button>
         <a href="{{ route('dashboard') }}" class="flex ml-2 md:mr-24">
-          <img src="{{ asset('images/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
+          <img src="{{ asset('images/assets/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">{{ config('app.name') }}</span>
         </a>
       </div>
@@ -24,7 +24,7 @@
             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
               aria-expanded="false" data-dropdown-toggle="dropdown-user">
               <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="{{ asset('images/'.($user_picture ?: 'placeholder.png')) }}">
+              <img class="w-8 h-8 rounded-full" src="{{ asset('images/'.($user_picture ?: 'assets/placeholder.png')) }}">
             </button>
           </div>
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"

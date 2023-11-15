@@ -11,7 +11,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-login-image" style="background-image: url('{{ asset('images/branding.png') }}'); background-size: 70% auto; background-repeat: no-repeat;background-color: #4e73df;"></div>
+                    <div class="col-lg-5 d-none d-lg-block bg-login-image" style="background-image: url('{{ asset('images/assets/branding.png') }}'); background-size: 70% auto; background-repeat: no-repeat;background-color: #4e73df;"></div>
                     <div class="col-lg-7">
                         <div class="p-5 mx-5">
                             <div class="text-center">

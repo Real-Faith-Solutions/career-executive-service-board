@@ -118,7 +118,7 @@ use Illuminate\Support\Facades\Redirect;
 // email preview
 Route::get('/preview-email', function () {
 
-    $imagePath = public_path('images/branding.png');
+    $imagePath = public_path('images/assets/branding.png');
     $loginLink = config('app.url');
     $data = [
         'email' => 'recipient@example.com',

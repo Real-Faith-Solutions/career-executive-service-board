@@ -50,7 +50,7 @@
                                     @if (str_contains(Request::url(),'rights-management/edit-user'))
 
                                     <div class="row">
-                                        <img id="profile_picture" @if($user_id_data[0]->role == 'User') src="{{ ($user_id_data[0]->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/201 Photos/'. $user_id_data[0]->picture)) }}" @else src="{{ ($user_id_data[0]->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/Staff Photos/'. $user_id_data[0]->picture)) }}" @endif onerror="this.src = '{{ asset('images/placeholder.png') }}'" class="mt-2 ml-3 mb-3 rounded bg-light float-right" height="190" width="190" alt="...">
+                                        <img id="profile_picture" @if($user_id_data[0]->role == 'User') src="{{ ($user_id_data[0]->picture == '' ? asset('images/assets/branding.png') : asset('external-storage/Photos/201 Photos/'. $user_id_data[0]->picture)) }}" @else src="{{ ($user_id_data[0]->picture == '' ? asset('images/assets/branding.png') : asset('external-storage/Photos/Staff Photos/'. $user_id_data[0]->picture)) }}" @endif onerror="this.src = '{{ asset('images/assets/branding.png') }}'" class="mt-2 ml-3 mb-3 rounded bg-light float-right" height="190" width="190" alt="...">
                                     </div>
                                     @endif
 

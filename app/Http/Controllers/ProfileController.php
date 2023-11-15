@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $profile_picture = $mainProfile->picture;
 
         if (!(Storage::disk('public')->exists('images/' . $profile_picture))) {
-            $profile_picture = 'placeholder.png';
+            $profile_picture = 'assets/placeholder.png';
         }
 
         $birthDate = Carbon::parse($birthdate);
@@ -148,7 +148,7 @@ class ProfileController extends Controller
             $recipientEmail = $request->email;
             $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
-            $imagePath = public_path('images/branding.png');
+            $imagePath = public_path('images/assets/branding.png');
             $loginLink = config('app.url');
             $type = "addProfile";
 
@@ -222,15 +222,14 @@ class ProfileController extends Controller
             $personalData = PersonalData::find($cesno);
             $lastName = $personalData->lastname;
             $firstName = $personalData->firstname;
-            $mI = $personalData->mi;
-            $nameExtension = $personalData->name_extension;
-            $personalDataFullName = $lastName . " " . $firstName . " " . $mI . " " . $nameExtension;
-            $filename = date('m-d-y') . '_' . $personalDataFullName . '_' . time() . '_' . $imageFile->getClientOriginalName();
+            $middlename = $personalData->middlename;
+            $personalDataFullName = $lastName . ", " . $firstName . " " . $middlename . "." . $imageFile->getClientOriginalExtension();
+            $filename = $cesno . '-' . $personalDataFullName;
 
             // Save the image to the root folder
-            $imageFile->move(public_path('images/avatar/'), $filename);
+            $imageFile->move(public_path('images/'), $filename);
 
-            $pathName = 'avatar/' . $filename;
+            $pathName = $filename;
 
             // Save the image path to the database
             $existingPerson->picture = $pathName;
@@ -408,7 +407,7 @@ class ProfileController extends Controller
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
-        $imagePath = public_path('images/branding.png');
+        $imagePath = public_path('images/assets/branding.png');
         $loginLink = config('app.url');
         $type = "forgotPassword";
 

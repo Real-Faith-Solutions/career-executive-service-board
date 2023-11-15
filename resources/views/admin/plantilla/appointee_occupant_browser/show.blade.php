@@ -108,7 +108,7 @@
 
                             <div class="flex flex-col gap-4 lg:items-center">
                                 <img id="" class="w-44 h-44 rounded-full object-cover"
-                                    src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/placeholder.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/assets/placeholder.png') }}" />
+                                    src="{{ file_exists(public_path('images/' . ($appointees->personalData->picture ?? 'images/assets/branding.png'))) ? asset('images/' . $appointees->personalData->picture) : asset('images/assets/assets/placeholder.png') }}" />
 
                                 <div class="flex flex-col gap-2 text-center">
 

@@ -45,7 +45,7 @@
 
                         <div>
                             @foreach ($personalData as $item)
-                                <img id="profile_picture" src="{{ $item->picture == '' ? asset('images/placeholder.png') : asset('external-storage/Photos/201 Photos/' . $item->picture) }}" onerror="this.src = '{{ asset('images/placeholder.png') }}'" class="rounded-full" height="190" width="190">
+                                <img id="profile_picture" src="{{ $item->picture == '' ? asset('images/assets/branding.png') : asset('external-storage/Photos/201 Photos/' . $item->picture) }}" onerror="this.src = '{{ asset('images/assets/branding.png') }}'" class="rounded-full" height="190" width="190">
                             @endforeach
                         </div>
                     </div>

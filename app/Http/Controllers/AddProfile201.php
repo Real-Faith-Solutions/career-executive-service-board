@@ -57,7 +57,7 @@ class AddProfile201 extends Controller
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
-        $imagePath = public_path('images/branding.png');
+        $imagePath = public_path('images/assets/branding.png');
 
         $data = [
             'email' => $recipientEmail,
@@ -115,9 +115,9 @@ class AddProfile201 extends Controller
             $filename = time() . '_' . $imageFile->getClientOriginalName();
 
             // Save the image to the root folder
-            $imageFile->move(public_path('images/avatar/'), $filename);
+            $imageFile->move(public_path('images/'), $filename);
 
-            $pathName = 'avatar/'.$filename;
+            $pathName = $filename;
 
             // Save the image path to the database
             $existingPerson->picture = $pathName;
