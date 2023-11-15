@@ -25,7 +25,7 @@ class AdminPermissionsComposerServiceProvider extends ServiceProvider
                     $user_picture = $personalData->picture;
 
                     if (!Storage::disk('public')->exists('images/'.$user_picture)) {
-                        $user_picture = 'placeholder.png';
+                        $user_picture = 'assets/placeholder.png';
                     }
 
                     $view->with([

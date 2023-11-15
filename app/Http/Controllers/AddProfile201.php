@@ -57,7 +57,7 @@ class AddProfile201 extends Controller
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
-        $imagePath = public_path('assets/branding.png');
+        $imagePath = public_path('images/assets/branding.png');
 
         $data = [
             'email' => $recipientEmail,

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="png" href="{{ asset('assets/branding.png') }}">
+    <link rel="icon" type="png" href="{{ asset('images/assets/branding.png') }}">
     <title>{{ config('app.name') }}</title>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
@@ -21,7 +21,7 @@
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
         <div>
             <a href="{{ url('/') }}">
-                <img src="{{ asset('assets/branding.png') }}" class="h-20 fill-current text-gray-500">
+                <img src="{{ asset('images/assets/branding.png') }}" class="h-20 fill-current text-gray-500">
             </a>
         </div>
 

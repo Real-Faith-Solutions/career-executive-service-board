@@ -18,7 +18,7 @@ class PersonalDataFactory extends Factory
     {
         return [
 
-            // 'picture' => 'placeholder.png',
+            // 'picture' => 'assets/placeholder.png',
             'email' => $this->faker->unique()->safeEmail(),
             'status' => $this->faker->randomElement(['Active', 'Inactive', 'Retired', 'Deceased']),
             'title' => $this->faker->randomElement(['Dr.', 'Mr.', 'Ms.', 'Atty.']),

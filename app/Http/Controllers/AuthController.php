@@ -150,7 +150,7 @@ class AuthController extends Controller
             $recipientEmail = $request->email;
             $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
-            $imagePath = public_path('assets/branding.png');
+            $imagePath = public_path('images/assets/branding.png');
             $loginLink= config('app.url');
             $type = "forgotPassword";
 
@@ -212,7 +212,7 @@ class AuthController extends Controller
                             $confirmation_code = mt_rand(10000, 99999);
                             $hashed_confirmation_code = Hash::make($confirmation_code);
                             $recipientEmail = auth()->user()->email;
-                            $imagePath = public_path('assets/branding.png');
+                            $imagePath = public_path('images/assets/branding.png');
 
                             // Update the confirmation code in the database
                             $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
@@ -280,7 +280,7 @@ class AuthController extends Controller
                     $confirmation_code = mt_rand(10000, 99999);
                     $hashed_confirmation_code = Hash::make($confirmation_code);
                     $recipientEmail = auth()->user()->email;
-                    $imagePath = public_path('assets/branding.png');
+                    $imagePath = public_path('images/assets/branding.png');
 
                     // Update the confirmation code in the database
                     $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);

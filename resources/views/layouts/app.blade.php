@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="png" href="{{ asset('assets/branding.png') }}">
+    <link rel="icon" type="png" href="{{ asset('images/assets/branding.png') }}">
     <title>@yield('title') - {{ config('app.name') }}</title>
 
     <link rel='stylesheet'

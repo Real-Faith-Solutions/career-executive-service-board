@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="png" href="{{ asset('assets/branding.png') }}">
+    <link rel="icon" type="png" href="{{ asset('images/assets/branding.png') }}">
     <title>Two Factor Authentication - {{ config('app.name') }}</title>
 
     <link rel='stylesheet'
@@ -43,7 +43,7 @@
                   </svg>
                </button>
               <a href="{{ config('app.url') }}dashboard" class="flex ml-2 md:mr-24">
-                <img src="{{ asset('assets/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
+                <img src="{{ asset('images/assets/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
                 <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">{{ config('app.name') }}</span>
               </a>
             </div>
@@ -52,7 +52,7 @@
                   <div>
                     <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                       <span class="sr-only">Open user menu</span>
-                      <img class="w-8 h-8 rounded-full" src="{{ asset('images/'.($user_picture ?: 'placeholder.png')) }}">
+                      <img class="w-8 h-8 rounded-full" src="{{ asset('images/'.($user_picture ?: 'assets/placeholder.png')) }}">
                     </button>
                   </div>
                   <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">

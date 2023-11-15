@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $profile_picture = $mainProfile->picture;
 
         if (!(Storage::disk('public')->exists('images/' . $profile_picture))) {
-            $profile_picture = 'placeholder.png';
+            $profile_picture = 'assets/placeholder.png';
         }
 
         $birthDate = Carbon::parse($birthdate);
@@ -148,7 +148,7 @@ class ProfileController extends Controller
             $recipientEmail = $request->email;
             $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
-            $imagePath = public_path('assets/branding.png');
+            $imagePath = public_path('images/assets/branding.png');
             $loginLink = config('app.url');
             $type = "addProfile";
 
@@ -408,7 +408,7 @@ class ProfileController extends Controller
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
-        $imagePath = public_path('assets/branding.png');
+        $imagePath = public_path('images/assets/branding.png');
         $loginLink = config('app.url');
         $type = "forgotPassword";
 

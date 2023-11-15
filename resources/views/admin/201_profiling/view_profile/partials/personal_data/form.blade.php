@@ -10,7 +10,7 @@
 
         <img id="profile-avatar"
             class="profile-avatar w-50 h-50 rounded-full border-2 border-transparent hover:border-blue-500 cursor-pointer"
-            src="{{ asset('images/' . ($profile_picture ? $profile_picture : 'placeholder.png')) }}" />
+            src="{{ asset('images/' . ($profile_picture ? $profile_picture : 'assets/placeholder.png')) }}" />
 
         <h1 class="text-bold text-2xl">
             {{ $mainProfile->title }} {{ $mainProfile->lastname }} {{ $mainProfile->firstname }} {{
