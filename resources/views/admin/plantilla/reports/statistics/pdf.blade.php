@@ -966,18 +966,18 @@
         td {
             padding-right: 1%;
         }
-
     </style>
 
 </head>
 
 <body>
     <section class="front-page">
-        <div style="margin-top:20%;margin-bottom: 30%;"> 
+        <div style="margin-top:20%;margin-bottom: 30%;">
             <center>
                 <table width="100%">
                     <td>
-                        <img src="{{ public_path('images/images/assets/branding.png') }}" width="150px" style="margin-top:5%;margin-left:40%;margin-top:30px;">
+                        <img src="{{ public_path('images/assets/branding.png') }}" width="150px"
+                            style="margin-top:5%;margin-left:40%;margin-top:30px;">
                     </td>
                     <td style="font-size:30px" class="uppercase bold">
                         <h1>Career</h1>
@@ -985,7 +985,7 @@
                         <h1>Service</h1>
                         <h1>Board</h1>
                     </td>
-                    
+
                 </table>
             </center>
         </div>
@@ -1056,7 +1056,7 @@
     <section class="page-1">
         <header>
             <center>
-                <img src="{{ public_path('images/images/assets/branding.png') }}" width="100px">
+                <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
                 <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
 
                 <div style="font-size:11px;">
