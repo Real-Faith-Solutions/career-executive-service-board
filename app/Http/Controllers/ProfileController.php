@@ -228,9 +228,9 @@ class ProfileController extends Controller
             $filename = date('m-d-y') . '_' . $personalDataFullName . '_' . time() . '_' . $imageFile->getClientOriginalName();
 
             // Save the image to the root folder
-            $imageFile->move(public_path('images/avatar/'), $filename);
+            $imageFile->move(public_path('images/'), $filename);
 
-            $pathName = 'avatar/' . $filename;
+            $pathName = $filename;
 
             // Save the image path to the database
             $existingPerson->picture = $pathName;
