@@ -148,7 +148,7 @@ class ProfileController extends Controller
             $recipientEmail = $request->email;
             $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
-            $imagePath = public_path('images/branding.png');
+            $imagePath = public_path('assets/branding.png');
             $loginLink = config('app.url');
             $type = "addProfile";
 
@@ -408,7 +408,7 @@ class ProfileController extends Controller
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
-        $imagePath = public_path('images/branding.png');
+        $imagePath = public_path('assets/branding.png');
         $loginLink = config('app.url');
         $type = "forgotPassword";
 

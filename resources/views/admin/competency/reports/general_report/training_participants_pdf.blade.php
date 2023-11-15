@@ -110,7 +110,7 @@
         <header>
             <div class="container">
                 <div class="logo">
-                    <img src="{{ public_path("images/branding.png") }}" alt="" style="width: 100px; height: 100px;">
+                    <img src="{{ public_path("assets/branding.png") }}" alt="" style="width: 100px; height: 100px;">
                 </div>
             </div>
             

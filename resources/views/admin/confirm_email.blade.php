@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="png" href="{{ asset('images/branding.png') }}">
+    <link rel="icon" type="png" href="{{ asset('assets/branding.png') }}">
     <title>Two Factor Authentication - {{ config('app.name') }}</title>
 
     <link rel='stylesheet'
@@ -43,7 +43,7 @@
                   </svg>
                </button>
               <a href="{{ config('app.url') }}dashboard" class="flex ml-2 md:mr-24">
-                <img src="{{ asset('images/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
+                <img src="{{ asset('assets/branding.png') }}" class="h-8 mr-3" alt="{{ env('APP_NAME') }}" />
                 <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">{{ config('app.name') }}</span>
               </a>
             </div>
