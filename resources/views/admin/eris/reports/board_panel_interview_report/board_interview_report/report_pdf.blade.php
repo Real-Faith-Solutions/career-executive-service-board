@@ -4,13 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            @if ($interviewType == null)
-                Board Interview
-            @endif
-
-            @if ($interviewType == 'Panel Board Interview')
-                Panel Board Interview
-            @endif
+            Board Interview
         </title>
 
         <style>
@@ -71,7 +65,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -130,13 +124,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    @if ($interviewType == null)
-                        Board Interview
-                    @endif
-
-                    @if ($interviewType == 'Panel Board Interview')
-                        Panel Board Interview
-                    @endif
+                    Board Interview
                 </p>
 
                 <footer>
@@ -154,6 +142,10 @@
                     <tr>
                         <th>
                             
+                        </th>
+
+                        <th>
+                            Name
                         </th>
 
                         <th>
@@ -181,8 +173,6 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                    {{-- board interview --}}
-                    @if ($interviewType == null)
                         @foreach ($boardInterview as $data)
                             <tr>
                                 <td>
@@ -190,60 +180,44 @@
                                 </td>
 
                                 <td>
-                                    {{ $data->dteassign }}
+                                    {{ $data->erisTblMainBoardInterview->lastname ?? '' }},
+                                    {{ $data->erisTblMainBoardInterview->firstname ?? '' }},
+                                    {{ $data->erisTblMainBoardInterview->middlename ?? '' }}
                                 </td>
 
                                 <td>
-                                    {{ $data->dtesubmit }}
+                                    @if ($data->dteassign != null)
+                                        {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dteassign ?? '' }} 
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{ $data->intrviewer }}
+                                    @if ($data->dtesubmit != null)
+                                        {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dtesubmit ?? '' }} 
+                                    @endif
                                 </td>
 
                                 <td>
-                                    {{ $data->dteiview }}
+                                    {{ $data->intrviewer ?? '' }}
                                 </td>
 
                                 <td>
-                                    {{ $data->recom }}
+                                    @if ($data->dteiview != null)
+                                        {{ \Carbon\Carbon::parse($data->dteiview)->format('m/d/Y') ?? '' }} 
+                                    @else
+                                        {{ $data->dteiview ?? '' }} 
+                                    @endif
+                                </td>
+
+                                <td>
+                                    {{ $data->recom ?? '' }}
                                 </td>
                             </tr>
                         @endforeach                 
-                    @endif
-                    {{-- end of board interview --}}
-
-                    {{-- panel board interview --}}
-                    @if ($interviewType == 'Panel Board Interview')
-                        @foreach ($panelBoardInterview as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dteassign }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dtesubmit }}
-                                </td>
-
-                                <td>
-                                    {{ $data->intrviewer }}
-                                </td>
-
-                                <td>
-                                    {{ $data->dteiview }}
-                                </td>
-
-                                <td>
-                                    {{ $data->recom }}
-                                </td>
-                            </tr>
-                        @endforeach                 
-                    @endif
-                    {{-- end of panel board interview --}}
                 </tbody>
             </table>
         </div>

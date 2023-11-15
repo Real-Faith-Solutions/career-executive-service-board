@@ -21,10 +21,12 @@ class AssessmentCenterReportController extends Controller
             'passed' => $assessmentCenter['passed'],
             'failed' => $assessmentCenter['failed'],
             'retake' => $assessmentCenter['retake'],
+            'sortBy' => $assessmentCenter['sortBy'],
+            'sortOrder' => $assessmentCenter['sortOrder'],
         ]);
     }
 
-    public function generateReportPdf(Request $request)
+    public function generateReportPdf(Request $request, $sortBy, $sortOrder)
     {
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
@@ -33,6 +35,10 @@ class AssessmentCenterReportController extends Controller
         $retake = $request->input('retake');
 
         $assessmentCenter = AssessmentCenter::query();
+
+        $assessmentCenter->join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
+        ->select('erad_tblAC.*')
+        ->with('erisTblMainAssessmentCenter');
 
         $assessmentCenter->where(function ($query) use ($passed, $failed, $retake) {
             if ($passed && $failed && $retake) {
@@ -64,7 +70,11 @@ class AssessmentCenterReportController extends Controller
             $assessmentCenter->whereBetween(DB::raw('CAST(acdate AS DATE)'), [$startDate, $endDate]);
         }
 
-        $assessmentCenter = $assessmentCenter->orderBy('acdate')->get();
+        $assessmentCenter->orderBy($sortBy, $sortOrder);
+
+        // $assessmentCenter = $assessmentCenter->paginate(25);
+
+        $assessmentCenter = $assessmentCenter->get();
 
         $pdf = Pdf::loadView('admin.eris.reports.assessment_center.report_pdf', [
             'assessmentCenter' => $assessmentCenter,
@@ -81,8 +91,14 @@ class AssessmentCenterReportController extends Controller
         $passed = $request->input('passed');
         $failed = $request->input('failed');
         $retake = $request->input('retake');
+        $sortBy = $request->input('sortBy', 'lastname'); // Default sorting acdate.
+        $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $assessmentCenter = AssessmentCenter::query();
+
+        $assessmentCenter->join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblAC.acno')
+        ->select('erad_tblAC.*')
+        ->with('erisTblMainAssessmentCenter');
 
         $assessmentCenter->where(function ($query) use ($passed, $failed, $retake) {
             if ($passed && $failed && $retake) {
@@ -114,7 +130,9 @@ class AssessmentCenterReportController extends Controller
             $assessmentCenter->whereBetween(DB::raw('CAST(acdate AS DATE)'), [$startDate, $endDate]);
         }
 
-        $assessmentCenter = $assessmentCenter->orderBy('acdate')->paginate(25);
+        $assessmentCenter->orderBy($sortBy, $sortOrder);
+
+        $assessmentCenter = $assessmentCenter->paginate(25);
 
         return 
         [
@@ -124,6 +142,8 @@ class AssessmentCenterReportController extends Controller
             'passed' => $passed,
             'failed' => $failed,
             'retake' => $retake,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
         ];
     }
 }

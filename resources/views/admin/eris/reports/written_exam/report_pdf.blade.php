@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Rapid Validation
+            Written Exam
         </title>
 
         <style>
@@ -65,7 +65,8 @@
             }
         
             tr:nth-child(even) {
-                background-color: #ECECEC;
+                /* background-color: #3b83f6b2; */
+                background-color: #F2F2F2;
             }
         
             .container {
@@ -124,7 +125,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Rapid Validation
+                    Written Exam
                 </p>
 
                 <footer>
@@ -147,23 +148,23 @@
                         <th>
                             Name
                         </th>
-
+    
                         <th>
-                            Rapid Validation Date
+                            Written Exam Date
                         </th>
     
                         <th>
-                            Submittion of Document
+                            Number of Takes
                         </th>
-    
+        
                         <th>
-                            Validator
+                            Location
                         </th>
-    
+        
                         <th>
-                            Recommendation
+                            Rating
                         </th>
-    
+        
                         <th>
                             Remarks
                         </th>
@@ -173,44 +174,36 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                        @foreach ($rapidValidation as $data)
+                        @foreach ($writtenExam as $data)
                             <tr>
                                 <td>
                                     {{ $rowNumber++ }}
                                 </td>
 
                                 <td>
-                                    {{ $data->erisTblMainRapidValidation->lastname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->firstname ?? '' }},
-                                    {{ $data->erisTblMainRapidValidation->middlename ?? '' }} 
-                                </td>
-
-                                <td>
-                                    @if ($data->dteassign != null)
-                                        {{ \Carbon\Carbon::parse($data->dteassign)->format('m/d/Y') ?? '' }} 
-                                    @else
-                                        {{ $data->dteassign ?? '' }} 
-                                    @endif
+                                    {{ $data->erisTblMainWrittenExam->lastname ?? '' }},
+                                    {{ $data->erisTblMainWrittenExam->firstname ?? '' }},
+                                    {{ $data->erisTblMainWrittenExam->middlename ?? '' }}.
                                 </td>
         
                                 <td>
-                                    @if ($data->dtesubmit != null)
-                                        {{ \Carbon\Carbon::parse($data->dtesubmit)->format('m/d/Y') ?? '' }} 
-                                    @else
-                                        {{ $data->dtesubmit ?? '' }} 
-                                    @endif
+                                    {{ \Carbon\Carbon::parse($data->we_date)->format('m/d/Y') ?? '' }}
                                 </td>
         
                                 <td>
-                                    {{ $data->validator ?? '' }} 
+                                    {{ $data->numtakes ?? '' }}
                                 </td>
-        
+            
                                 <td>
-                                    {{ $data->recom ?? '' }} 
+                                    {{ $data->we_location ?? '' }}
                                 </td>
-        
+            
                                 <td>
-                                    {{ $data->remarks ?? '' }} 
+                                    {{ $data->we_rating ?? '' }}
+                                </td>
+            
+                                <td>
+                                    {{ $data->we_remarks ?? '' }}
                                 </td>
                             </tr>
                         @endforeach                 

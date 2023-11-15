@@ -38,10 +38,14 @@ use App\Http\Controllers\ERIS\PanelBoardInterviewController;
 use App\Http\Controllers\ERIS\RankTrackerController;
 use App\Http\Controllers\ERIS\RapidValidationController;
 use App\Http\Controllers\Eris\Report\AssessmentCenterReportController;
+use App\Http\Controllers\ERIS\report\BoardInterviewReportController;
 use App\Http\Controllers\ERIS\Report\BoardPanelInterviewReportController;
+use App\Http\Controllers\ERIS\report\ErisGeneralReportController;
 use App\Http\Controllers\Eris\Report\InDepthValidationReportController;
+use App\Http\Controllers\ERIS\report\PanelBoardInterviewReportController;
 use App\Http\Controllers\ERIS\Report\RapidValidationReportController;
 use App\Http\Controllers\ERIS\Report\ValidationReportController;
+use App\Http\Controllers\ERIS\report\WrittenExamReportController;
 use App\Http\Controllers\Eris\WrittenExamController;
 use App\Http\Controllers\ExaminationTakenController;
 use App\Http\Controllers\ExpertiseController;
@@ -860,25 +864,39 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
     //  ERIS Report routes
     Route::prefix('eris-report')->group(function () {
-        Route::prefix('board-panel-interview-report')->group(function () {
-            Route::get('index', [BoardPanelInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
-            Route::get('board-interview', [BoardPanelInterviewReportController::class, 'displayInterview'])->name('eris-board-panel-interview-report.displayInterview');
-            Route::post('panel-and-board-interview-generate-pdf', [BoardPanelInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        Route::prefix('board-interview-report')->group(function () {
+            Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
+            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+        });
+
+        Route::prefix('panel-board-interview-report')->group(function () {
+            Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index');
+            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf');
         });
 
         Route::prefix('rapid-validation-report')->group(function () {
             Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index');
-            Route::post('generate-pdf', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport');
+            Route::post('generate-pdf/{sort_by}/{sort_order}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport');
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
-            Route::post('generate-pdf', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
         });
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
-            Route::get('generate-pdf', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+        });
+
+        Route::prefix('written-exam-report')->group(function () {
+            Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index');
+            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf');
+        });
+
+        Route::prefix('eris-report-general')->group(function () {
+            Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport');
         });
     });
     // End of ERIS Report routes
