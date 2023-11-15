@@ -222,10 +222,9 @@ class ProfileController extends Controller
             $personalData = PersonalData::find($cesno);
             $lastName = $personalData->lastname;
             $firstName = $personalData->firstname;
-            $mI = $personalData->mi;
-            $nameExtension = $personalData->name_extension;
-            $personalDataFullName = $lastName . " " . $firstName . " " . $mI . " " . $nameExtension;
-            $filename = date('m-d-y') . '_' . $personalDataFullName . '_' . time() . '_' . $imageFile->getClientOriginalName();
+            $middlename = $personalData->middlename;
+            $personalDataFullName = $lastName . ", " . $firstName . " " . $middlename . "." . $imageFile->getClientOriginalExtension();
+            $filename = $cesno . '-' . $personalDataFullName;
 
             // Save the image to the root folder
             $imageFile->move(public_path('images/'), $filename);
