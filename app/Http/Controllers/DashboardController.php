@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PersonalData;
 
 use App\Definitions\AppDefinitions;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -79,8 +80,33 @@ class DashboardController extends Controller
         $approvedFiles = $personalData->pdfFile()->count();
         $declinedFiles = $personalData->requestFile()->onlyTrashed()->count();
 
-        $age25below = 10;
-        $age26to35 = 20;
+        // Get the current date
+        $currentDate = Carbon::now();
+
+        // Calculate the date 25 years ago
+        $twentyFiveYearsAgo = $currentDate->subYears(25);
+
+        // Count the users with age 25 and below
+        $age25below = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereDate('birthdate', '>=', $twentyFiveYearsAgo)
+        ->count();
+
+        // Get the current date
+        $currentDate = Carbon::now();
+
+        // Calculate the date 35 years ago
+        $thirtyFiveYearsAgo = $currentDate->subYears(35);
+
+        // Calculate the date 26 years ago
+        $twentySixYearsAgo = $currentDate->addYears(9); // 35 - 26 = 9
+
+        $age26to35 = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereDate('birthdate', '>=', $thirtyFiveYearsAgo)
+            ->whereDate('birthdate', '<=', $twentySixYearsAgo)
+            ->count();
+
         $age36to45 = 30;
         $age46to55 = 40;
         $age56to65 = 50;
