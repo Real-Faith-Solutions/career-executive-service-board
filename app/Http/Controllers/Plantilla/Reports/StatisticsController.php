@@ -89,7 +89,11 @@ class StatisticsController extends Controller
                     });
             })
             ->count();
-        $cesoPercentage = round(($ceso / $cesosAndEligibles) * 100);
+        if ($cesosAndEligibles) {
+            $cesoPercentage = round(($ceso / $cesosAndEligibles) * 100);
+        } else {
+            $cesoPercentage = null;
+        }
         $eligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
             $query->where('mother_deptid', $deptid)
                 ->orWhere('deptid', $deptid);

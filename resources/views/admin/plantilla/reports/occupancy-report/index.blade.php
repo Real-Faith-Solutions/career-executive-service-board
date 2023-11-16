@@ -16,8 +16,12 @@
 
             @foreach ($motherDepartment as $data)
             <tr>
+
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->title }}
+                    <a class="text-sm leading-5 text-gray-900 hover:text-blue-500"
+                        href="{{ route('occupancy-report.pdf', $data->deptid) }}" target="_blank" title="Generate PDF">
+                        {{ $data->title }}
+                    </a>
                 </td>
             </tr>
             @endforeach
