@@ -23,7 +23,12 @@
             type: "pie",
             data,
             options: {
-                
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'CESOs & Eligibles',
+                    }
+                }
             },
         };
 
