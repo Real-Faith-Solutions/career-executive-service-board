@@ -27,7 +27,7 @@
         @enderror
     </div>
 
-    <div class="mb-3 flex justify-start">
+    <div class="mb-3">
         {!! htmlFormSnippet() !!}
         @error('g-recaptcha-response')
         <span class="invalid" role="alert">
