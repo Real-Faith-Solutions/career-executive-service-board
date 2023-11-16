@@ -2,8 +2,178 @@
 <html>
 
 <head>
+    {{-- custom css --}}
+    <style>
+        @page {
+            /*margin-top: 15mm;*/
+            margin-bottom: 25mm;
+            margin-left: 30mm;
+            margin-right: 30mm;
 
-    <link rel="stylesheet" href="../">
+            @bottom-center {
+                counter-increment: page;
+                counter-reset: page 1;
+                content: "page " counter(page);
+            }
+        }
+
+        #page-count:after {
+            content: attr(data-pages);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        section {
+            padding: 10%;
+
+        }
+
+        .front-page {
+            border-top: 8px solid #3b82f6;
+            border-right: 8px solid grey;
+            border-bottom: 8px solid #ef4444;
+            border-left: 8px solid #eab308;
+            width: auto;
+            height: 80%;
+
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* Horizontally center items */
+            align-items: center;
+            /* Vertically center items */
+        }
+
+        .font-algerian {
+            font-family: 'Algerian';
+        }
+
+        .font-arial-black {
+            font-family: Arial;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .p-5 {
+            padding: 5%;
+        }
+
+        .pb-5 {
+            padding-bottom: 5%;
+        }
+
+        .pb-3 {
+            padding-bottom: 3%;
+        }
+
+        .p-10 {
+            padding: 10%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-end {
+            text-align: right;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .m-10 {
+            margin: 10%
+        }
+
+        .mt-10 {
+            margin-top: 10%
+        }
+
+        .mb-10 {
+            margin-bottom: 10%
+        }
+
+        .mb-3 {
+            margin-bottom: 3%
+        }
+
+        .mb-5 {
+            margin-bottom: 5%
+        }
+
+        header {
+            margin-bottom: 5%;
+            margin-top: -7%;
+        }
+
+        .text-blue {
+            color: #3b82f6;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .bg-blue {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        .bg-cyan {
+            background: #93c5fd;
+        }
+
+        .bg-yellow {
+            background: #fde047;
+        }
+
+        .bg-red {
+            background: #fda4af;
+            color: #000;
+        }
+
+        .bg-green {
+            background: #bbf7d0;
+            color: #000;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .pl-5 {
+            padding-left: 5%;
+        }
+
+        .pl-10 {
+            padding-left: 20%;
+        }
+
+        .pl-15 {
+            padding-left: 30%;
+        }
+
+        td {
+            border: 2px solid #fff;
+            padding-left: 5px;
+        }
+    </style>
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -820,166 +990,12 @@
         }
     </style>
 
-    {{-- custom css --}}
-    <style>
-        footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                text-align: center;
-                font-size: 10px; /* Adjust the font size as needed */
-            }
 
-        section {
-            padding: 10%;
-            
-        }
 
-        .front-page {
-            border-top: 8px solid #3b82f6;
-            border-right: 8px solid grey;
-            border-bottom: 8px solid #ef4444;
-            border-left: 8px solid #eab308;
-            width: auto;
-            height: 80%;
-
-        }
-
-        
-
-        .flex {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            /* Horizontally center items */
-            align-items: center;
-            /* Vertically center items */
-        }
-
-        .font-algerian {
-            font-family: 'Algerian';
-        }
-
-        .font-arial-black {
-            font-family: Arial;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        .p-5 {
-            padding: 5%;
-        }
-
-        .pb-5 {
-            padding-bottom: 5%;
-        }
-
-        .pb-3 {
-            padding-bottom: 3%;
-        }
-
-        .p-10 {
-            padding: 10%;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-end {
-            text-align: right;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .m-10 {
-            margin: 10%
-        }
-
-        .mt-10 {
-            margin-top: 10%
-        }
-
-        .mb-10 {
-            margin-bottom: 10%
-        }
-
-        .mb-3 {
-            margin-bottom: 3%
-        }
-
-        .mb-5 {
-            margin-bottom: 5%
-        }
-
-        header {
-            margin-bottom: 5%;
-            margin-top: -7%;
-        }
-
-        .text-blue {
-            color: #3b82f6;
-        }
-
-        .text-red {
-            color: red;
-        }
-
-        .bg-blue {
-            background: #3b82f6;
-            color: #fff;
-        }
-
-        .bg-cyan {
-            background: #93c5fd;
-        }
-
-        .bg-yellow {
-            background: #fde047;
-        }
-
-        .bg-red {
-            background: #fda4af;
-            color: #000;
-        }
-
-        .bg-green {
-            background: #bbf7d0;
-            color: #000;
-        }
-
-        .italic {
-            font-style: italic;
-        }
-
-        .pl-5 {
-            padding-left: 5%;
-        }
-
-        .pl-10 {
-            padding-left: 20%;
-        }
-
-        .pl-15 {
-            padding-left: 30%;
-        }
-
-        td {
-            border: 2px solid #fff;
-            padding-left: 5px;
-        }
-    </style>
 </head>
 
-<body>
+<body onload="substitutePdfVariables()">
+
     <table class="mb-3" width="100%">
         <td colspan="6">
             <h1 class="bold" style="font-size:12px">Career Executive Service Occupancy Report</h1>
@@ -1001,49 +1017,49 @@
     </table>
 
     <table class="page-break-always" width="100%">
-    <thead>
-        <tr style="font-size: 11px;">
-            <th>AGENCY / POSITION</th>
-            <th>SG</th>
-            <th>ITEM NO.</th>
-            <th>APPOINTEE</th>
-            <th>APPOINTMENT DATE</th>
-            <th>REMARKS</th>
-            <th>OCCUPANT</th>
-            <th>APPOINTMENT DATE</th>
-            <th>REMARKS</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach ($office as $officeDatas)
-        <tr style="font-size:11px">
-            <td>
-                <h1 class="text-blue bold">
-                    {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
-                </h1>    
-            </td>
-            
-        </tr>
-        @foreach($planPosition as $planPositionDatas)
+        <thead>
+            <tr style="font-size: 11px;">
+                <th>AGENCY / POSITION</th>
+                <th>SG</th>
+                <th>ITEM NO.</th>
+                <th>APPOINTEE</th>
+                <th>APPOINTMENT DATE</th>
+                <th>REMARKS</th>
+                <th>OCCUPANT</th>
+                <th>APPOINTMENT DATE</th>
+                <th>REMARKS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($office as $officeDatas)
+            <tr style="font-size:11px">
+                <td>
+                    <h1 class="text-blue bold">
+                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
+                    </h1>
+                </td>
+
+            </tr>
+            @foreach($planPosition as $planPositionDatas)
 
             @if($officeDatas->officeid == $planPositionDatas->officeid)
-                <tr style="font-size:11px;background:#e5e7eb;">
-                    <td>
-                        <h1>
-                            {{ $planPositionDatas->pos_default }}
-                        </h1>
-                    </td>
-                    <td>
-                        <h1>
-                            {{ $planPositionDatas->corp_sg }}
-                        </h1>
-                    </td>
-                    <td>
-                        <h1 >
-                            {{ $planPositionDatas->item_no }}
-                        </h1>                        
-                    </td>
-                    <td style="
+            <tr style="font-size:11px;background:#e5e7eb;">
+                <td>
+                    <h1>
+                        {{ $planPositionDatas->pos_default }}
+                    </h1>
+                </td>
+                <td>
+                    <h1>
+                        {{ $planPositionDatas->corp_sg }}
+                    </h1>
+                </td>
+                <td>
+                    <h1>
+                        {{ $planPositionDatas->item_no }}
+                    </h1>
+                </td>
+                <td style="
                         @php
                             $selectedAppointee = $planPositionDatas->planAppointee
                                 ->where('is_appointee', 1)
@@ -1066,57 +1082,57 @@
                             }
                         @endphp
                     ">
-                    
-                        @if(!$selectedAppointee)
-                            <h1>VACANT</h1>    
-                        @endif
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 1)
-                            ->first())
-                            ->personalData
-                            ->lastname ?? ''
-                        }}
 
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 1)
-                            ->first())
-                            ->personalData
-                            ->firstname ?? ''
-                        }}
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 1)
-                            ->first())
-                            ->personalData
-                            ->name_extension ?? ''
-                        }}
+                    @if(!$selectedAppointee)
+                    <h1>VACANT</h1>
+                    @endif
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first())
+                    ->personalData
+                    ->lastname ?? ''
+                    }}
 
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 1)
-                            ->first())
-                            ->personalData
-                            ->middlename ?? ''
-                        }}
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first())
+                    ->personalData
+                    ->firstname ?? ''
+                    }}
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first())
+                    ->personalData
+                    ->name_extension ?? ''
+                    }}
 
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 1)
-                            ->first())
-                            ->personalData
-                            ->cesStatus->description ?? ''
-                        }}
-                        
-                    </td>
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first())
+                    ->personalData
+                    ->middlename ?? ''
+                    }}
 
-                    <td>
-                        {{ optional(
-                            $planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first()
-                            )->appt_date ?? ''
-                        }}
-                    </td>
-                    <td>{{ $planPositionDatas->remarks ?? ''}}</td>
-                    
-                    <td style="
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first())
+                    ->personalData
+                    ->cesStatus->description ?? ''
+                    }}
+
+                </td>
+
+                <td>
+                    {{ optional(
+                    $planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first()
+                    )->appt_date ?? ''
+                    }}
+                </td>
+                <td>{{ $planPositionDatas->remarks ?? ''}}</td>
+
+                <td style="
                         @php
                             $selectedAppointee = $planPositionDatas->planAppointee
                                 ->where('is_appointee', 0)
@@ -1134,93 +1150,114 @@
                             }
                         @endphp
                     ">
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first())
-                            ->personalData
-                            ->lastname ?? ''
-                        }}
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first())
-                            ->personalData
-                            ->firstname ?? ''
-                        }}
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first())
-                            ->personalData
-                            ->middlename ?? ''
-                        }}
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first())
+                    ->personalData
+                    ->lastname ?? ''
+                    }}
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first())
+                    ->personalData
+                    ->firstname ?? ''
+                    }}
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first())
+                    ->personalData
+                    ->middlename ?? ''
+                    }}
 
-                        {{ optional($planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first())
-                            ->personalData
-                            ->cesStatus->description ?? ''
-                        }}
-                    </td>
-                    <td>
-                         {{ optional(
-                            $planPositionDatas->planAppointee
-                                ->where('is_appointee', 0)
-                                ->first()
-                            )->assum_date ?? ''
-                        }}
-                    </td>
-                    <td>
+                    {{ optional($planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first())
+                    ->personalData
+                    ->cesStatus->description ?? ''
+                    }}
+                </td>
+                <td>
+                    {{ optional(
+                    $planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first()
+                    )->assum_date ?? ''
+                    }}
+                </td>
+                <td>
                     <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
 
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
             @endif
-            
-        @endforeach
-    @endforeach
 
-    </tbody>
+            @endforeach
+            @endforeach
 
-    
-</table>
-<footer>
-    <table width="100%">
-        <tr>
-            <td class="bold">
-                Date Printed {{ $currentDate }}
-            </td>
-            <td colspan="5">
-                CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted by the Agency. 
-            </td>
+        </tbody>
 
-            <td>
-                <table>
-                <tr>
-                    <td>Legend:</td>
-                    <td>
-                        <p style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px"></p>
-                        <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
-                        <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
-                    </td>
-                    <td>
-                        <p>- Non-CES Eligible</p>
-                        <p>- Vacant CES Position</p>
-                        
-                        
-                    </td>
 
-                </tr>
-                    </table>
-                
-            </td>
-            <td>
-                <div class="page">
-                    Page no
-                </div>
-            </td>
-        </tr>
     </table>
-</footer>
+    <footer>
+        <table width="100%">
+            <tr>
+                <td class="bold">
+                    Date Printed {{ $currentDate }}
+                </td>
+                <td colspan="5">
+                    CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
+                    by the Agency.
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>Legend:</td>
+                            <td>
+                                <p
+                                    style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px">
+                                </p>
+                                <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
+                                <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
+                            </td>
+                            <td>
+                                <p>- Non-CES Eligible</p>
+                                <p>- Vacant CES Position</p>
+
+
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </td>
+                <td>
+                    <p class="bold">
+                        <span id="pdfkit_page_current" class="page-count"></span>
+                        <span id="pdfkit_page_count" class="topage"></span>
+                        <span id="page-count" data-pages="Page 1 of 1" class="page-count"></span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </footer>
+    <script>
+        var pdfInfo = {};
+        var x = document.location.search.substring(1).split('&');
+        for (var i in x) {
+            var z = x[i].split('=', 2);
+            pdfInfo[z[0]] = decodeURIComponent(z[1]);
+        }
+    
+        function getPdfInfo() {
+            var page = pdfInfo.page || 1;
+            var pageCount = pdfInfo.topage || 1;
+            document.getElementById('pdfkit_page_current').textContent = page;
+            document.getElementById('pdfkit_page_count').textContent = pageCount;
+            document.getElementById('page-count').textContent = "Page " + page + " of " + pageCount;
+        }
+    </script>
 
 </body>
 
