@@ -79,6 +79,13 @@ class DashboardController extends Controller
         $approvedFiles = $personalData->pdfFile()->count();
         $declinedFiles = $personalData->requestFile()->onlyTrashed()->count();
 
+        $age25below = 10;
+        $age26to35 = 20;
+        $age36to45 = 30;
+        $age46to55 = 40;
+        $age56to65 = 50;
+        $age66above = 60;
+
         return view('admin.dashboard.index', compact(
             'totalCESO',
             'totalCESOActive',
@@ -95,6 +102,12 @@ class DashboardController extends Controller
             'pendingFiles',
             'approvedFiles',
             'declinedFiles',
+            'age25below',
+            'age26to35',
+            'age36to45',
+            'age46to55',
+            'age56to65',
+            'age66above',
         ));
     }
 }

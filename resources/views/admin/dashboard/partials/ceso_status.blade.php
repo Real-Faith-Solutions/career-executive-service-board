@@ -22,12 +22,78 @@
         const configLineChart = {
             type: "pie",
             data,
-            options: {},
+            options: {
+                
+            },
         };
 
         var chartLine = new Chart(
             document.getElementById("profileStatus"),
             configLineChart
+        );
+    };
+
+    const ageDemographics = () => {
+        const labels = [
+            "25 & below",
+            "26 - 35",
+            "36 - 45",
+            "46 - 55",
+            "56 - 65",
+            "66 & above",
+        ];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    // backgroundColor: ["#86efac", "#fdba74", "#fca5a5","#c4b5fd"],
+                    // borderColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd"],
+                    label: 'Age Demographics',
+                    data: [{{ $age25below }}, 
+                            {{ $age26to35 }} , 
+                            {{ $age36to45 }}, 
+                            {{ $age46to55 }},
+                            {{ $age56to65 }},
+                            {{ $age66above }}
+                        ],
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    ],
+                    borderWidth: 1,
+                    fill: true,
+                },
+
+            ],
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+
+        var chartLine = new Chart(
+            document.getElementById("ageDemographics"),
+            config
         );
     };
 
