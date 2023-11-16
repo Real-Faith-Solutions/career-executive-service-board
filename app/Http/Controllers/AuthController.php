@@ -36,7 +36,13 @@ class AuthController extends Controller
             'email.required' => 'Please enter your email.',
             'email.email' => 'Please enter a valid email address.',
             'email.exists' => 'Invalid credentials',
+            'g-recaptcha-response.required' => 'Recaptcha Verification Required',
+            'g-recaptcha-response.recaptcha' => 'Invalid Recaptcha',
         ];
+
+        $request->validate([
+            'g-recaptcha-response' => 'required|recaptcha',
+        ], $customMessages);
 
         $credentials = $request->validate([
             'email' => 'required|email|exists:users,email',
