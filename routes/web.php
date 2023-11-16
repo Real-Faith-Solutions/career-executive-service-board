@@ -428,6 +428,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile')->middleware('checkPermission:pdf_files_view');
             Route::post('decline-file', [DeclineFileController::class, 'declineFile'])->name('declineFile')->middleware('checkPermission:pdf_files_delete');
             Route::delete('declined-file-force-delete/{ctrlno}', [DeclineFileController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete')->middleware('checkPermission:pdf_files_delete');
+            Route::post('restore/recently-decline-file/{ctrlno}', [DeclineFileController::class, 'restore'])->name('decline-file.restore')->middleware('checkPermission:pdf_files_delete');
             Route::get('recently-decline-file', [DeclineFileController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles')->middleware('checkPermission:pdf_files_delete');
             Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
             Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
