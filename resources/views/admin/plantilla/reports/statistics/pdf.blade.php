@@ -1190,7 +1190,7 @@
                 <td colspan="4" class="bold pl-10">b.1. Male</td>
                 <td colspan="1" class="text-white bold bg-cyan text-right">{{ $countByMale }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $countByMalePercentage }} %</td>
+                <td colspan="1" class="bold text-right">{{ $countByMalePercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">b.2. Female</td>
