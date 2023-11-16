@@ -53,7 +53,7 @@
                 {
                     // backgroundColor: ["#86efac", "#fdba74", "#fca5a5","#c4b5fd"],
                     // borderColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd"],
-                    label: 'Age Demographics',
+                    // label: 'Age',
                     data: [{{ $age25below }}, 
                             {{ $age26to35 }} , 
                             {{ $age36to45 }}, 
@@ -77,7 +77,6 @@
                     'rgb(54, 162, 235)',
                     'rgb(153, 102, 255)',
                     ],
-                    borderWidth: 1,
                     fill: true,
                 },
 
@@ -91,6 +90,15 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Age Demographics',
+                    },
+                    legend: {
+                        display: false,
                     }
                 }
             },
