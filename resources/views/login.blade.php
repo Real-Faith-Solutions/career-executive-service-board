@@ -29,6 +29,11 @@
 
     <div class="mb-3 flex justify-start">
         {!! htmlFormSnippet() !!}
+        @error('g-recaptcha-response')
+        <span class="invalid" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
     </div>
     
     <div class="flex justify-center">
