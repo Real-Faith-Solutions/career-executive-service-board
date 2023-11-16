@@ -33,6 +33,7 @@
             margin: 0;
             line-height: inherit;
             font-size: small;
+            counter-reset: page;
 
         }
 
@@ -821,9 +822,17 @@
 
     {{-- custom css --}}
     <style>
+        footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 10px; /* Adjust the font size as needed */
+            }
+
         section {
             padding: 10%;
-            page-break-after: always;
+            
         }
 
         .front-page {
@@ -836,9 +845,7 @@
 
         }
 
-        .page-break {
-            page-break-after: always;
-        }
+        
 
         .flex {
             display: flex;
@@ -966,7 +973,8 @@
         }
 
         td {
-            padding-right: 1%;
+            border: 2px solid #fff;
+            padding-left: 5px;
         }
     </style>
 </head>
@@ -992,39 +1000,228 @@
         </td>
     </table>
 
+    <table class="page-break-always" width="100%">
+    <thead>
+        <tr style="font-size: 11px;">
+            <th>AGENCY / POSITION</th>
+            <th>SG</th>
+            <th>ITEM NO.</th>
+            <th>APPOINTEE</th>
+            <th>APPOINTMENT DATE</th>
+            <th>REMARKS</th>
+            <th>OCCUPANT</th>
+            <th>APPOINTMENT DATE</th>
+            <th>REMARKS</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach ($office as $officeDatas)
+        <tr style="font-size:11px">
+            <td>
+                <h1 class="text-blue bold">
+                    {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
+                </h1>    
+            </td>
+            
+        </tr>
+        @foreach($planPosition as $planPositionDatas)
+
+            @if($officeDatas->officeid == $planPositionDatas->officeid)
+                <tr style="font-size:11px;background:#e5e7eb;">
+                    <td>
+                        <h1>
+                            {{ $planPositionDatas->pos_default }}
+                        </h1>
+                    </td>
+                    <td>
+                        <h1>
+                            {{ $planPositionDatas->corp_sg }}
+                        </h1>
+                    </td>
+                    <td>
+                        <h1 >
+                            {{ $planPositionDatas->item_no }}
+                        </h1>                        
+                    </td>
+                    <td style="
+                        @php
+                            $selectedAppointee = $planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first();
+
+                            if ($selectedAppointee &&
+                                $selectedAppointee->personalData &&
+                                $selectedAppointee->personalData->cesStatus &&
+                                (
+                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                )
+                            ) {
+                                echo 'background: yellow;';
+                            }
+
+                            if(!$selectedAppointee){
+                                echo 'background: #84A1C6;';
+                                // if this execute i want to print 'VACANT with this background color'
+                            }
+                        @endphp
+                    ">
+                    
+                        @if(!$selectedAppointee)
+                            <h1>VACANT</h1>    
+                        @endif
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                        }}
+
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->name_extension ?? ''
+                        }}
+
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                        }}
+
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                        }}
+                        
+                    </td>
+
+                    <td>
+                        {{ optional(
+                            $planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first()
+                            )->appt_date ?? ''
+                        }}
+                    </td>
+                    <td>{{ $planPositionDatas->remarks ?? ''}}</td>
+                    
+                    <td style="
+                        @php
+                            $selectedAppointee = $planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first();
+
+                            if ($selectedAppointee &&
+                                $selectedAppointee->personalData &&
+                                $selectedAppointee->personalData->cesStatus &&
+                                (
+                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                )
+                            ) {
+                                echo 'background: yellow;';
+                            }
+                        @endphp
+                    ">
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                        }}
+
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                        }}
+                    </td>
+                    <td>
+                         {{ optional(
+                            $planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first()
+                            )->assum_date ?? ''
+                        }}
+                    </td>
+                    <td>
+                    <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
+
+
+                    </td>
+                </tr>
+            @endif
+            
+        @endforeach
+    @endforeach
+
+    </tbody>
+
+    
+</table>
+<footer>
     <table width="100%">
-        <thead>
-            <tr style="font-size: 11px;">
-                <th>AGENCY / POSITION</th>
-                <th>SG</th>
-                <th>ITEM NO.</th>
-                <th>APPOINTEE</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
-                <th>OCCUPANT</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($agencyLocation as $agencyLocationDatas)
-            <h1 class="text-blue">
-                {{ $agencyLocationDatas->title }}
-            </h1>
-            @endforeach
-            @foreach ($planPosition as $planPositionDatas)
+        <tr>
+            <td class="bold">
+                Date Printed {{ $currentDate }}
+            </td>
+            <td colspan="5">
+                CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted by the Agency. 
+            </td>
 
-            <h1 class="text-blue">
-                {{ $planPositionDatas->office->agencyLocation->title }}
-            </h1>
-            <tr>
-                <td>
+            <td>
+                <table>
+                <tr>
+                    <td>Legend:</td>
+                    <td>
+                        <p style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px"></p>
+                        <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
+                        <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
+                    </td>
+                    <td>
+                        <p>- Non-CES Eligible</p>
+                        <p>- Vacant CES Position</p>
+                        
+                        
+                    </td>
 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+                </tr>
+                    </table>
+                
+            </td>
+            <td>
+                <div class="page">
+                    Page no
+                </div>
+            </td>
+        </tr>
     </table>
+</footer>
+
 </body>
 
 </html>
