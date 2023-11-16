@@ -599,6 +599,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
             Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf');
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
+            Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'pdf'])->name('occupancy-report.pdf');
         });
     });
     // End of plantilla routes
