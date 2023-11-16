@@ -201,10 +201,7 @@ class PDFController extends Controller
     public function download($ctrlno)
     {
         $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('original_pdflink');      
-        $filepath = 'pdf_files/'.$pdfFileName;
    
-        // dd($pdfFileName);
-
         if (!empty($pdfFileName)) {
             $filepath = 'pdf_files/' . $pdfFileName;
         
