@@ -22,12 +22,74 @@
         const configLineChart = {
             type: "pie",
             data,
-            options: {},
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'CESOs & Eligibles',
+                    }
+                }
+            },
         };
 
         var chartLine = new Chart(
             document.getElementById("profileStatus"),
             configLineChart
+        );
+    };
+
+    const ageDemographics = () => {
+        const labels = [
+            "25 & below",
+            "26 - 35",
+            "36 - 45",
+            "46 - 55",
+            "56 - 65",
+            "66 & above",
+        ];
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    data: [{{ $age25below }}, 
+                            {{ $age26to35 }} , 
+                            {{ $age36to45 }}, 
+                            {{ $age46to55 }},
+                            {{ $age56to65 }},
+                            {{ $age66above }}
+                        ],
+                    backgroundColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd", "#FFBC42", "#BBE1C3"],
+                    borderColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd", "#FFBC42", "#BBE1C3"],
+                    fill: true,
+                },
+
+            ],
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Age Demographics (Active CESOs & Eligibles)',
+                    },
+                    legend: {
+                        display: false,
+                    }
+                }
+            },
+        };
+
+        var chartLine = new Chart(
+            document.getElementById("ageDemographics"),
+            config
         );
     };
 

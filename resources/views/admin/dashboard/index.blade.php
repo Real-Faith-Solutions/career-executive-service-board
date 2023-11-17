@@ -11,7 +11,7 @@
 @if($userRole !== "user")
     @include('admin.dashboard.partials.ceso_status')
 
-    <div class="grid gap-4 mb-3 uppercase sm:grid-cols-1 sm:gap-3 lg:grid-cols-3 lg:gap-4">
+    <div class="grid gap-4 items-end mb-3 uppercase sm:grid-cols-1 sm:gap-3 lg:grid-cols-3 lg:gap-4">
         <div class="w-full rounded sm:w-auto">
             <div class="bg-white">
                 <div class="rounded-lg shadow-md">
@@ -22,7 +22,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="w-full rounded sm:w-auto col-span-2">
+            <div class="bg-white">
+                <div class="rounded-lg shadow-md">
+                    <canvas class="w-full p-2" id="ageDemographics"></canvas>
+                    <script>
+                        ageDemographics();
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
+
 @else
 
     @include('admin.dashboard.partials.user_ceso_status')
