@@ -2,6 +2,10 @@
 <html>
 
 <head>
+    <title>
+    {{ $motherDepartmentAgency->acronym }}.pdf
+    </title>
+
     {{-- custom css --}}
     <style>
          @page {
@@ -1065,35 +1069,58 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($office as $officeDatas)
-            <tr style="font-size:11px">
-                <td>
-                    <h1 class="text-blue bold">
-                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
-                    </h1>
-                </td>
-
-            </tr>
-            @foreach($planPosition as $planPositionDatas)
-
+    @foreach ($office as $officeDatas)
+        <tr style="font-size:11px">
+            <td>
+                <h1 class="text-blue bold">
+                    {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
+                </h1>
+            </td>
+        </tr>
+        @php
+            $currentPosDefault = null;
+            $count = 0;
+        @endphp
+        @foreach($planPosition as $planPositionDatas)
             @if($officeDatas->officeid == $planPositionDatas->officeid)
-            <tr style="font-size:11px;background:#e5e7eb;">
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->pos_default }}
-                    </h1>
-                </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->corp_sg }}
-                    </h1>
-                </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->item_no }}
-                    </h1>
-                </td>
-                <td style="
+                @if($planPositionDatas->pos_default !== $currentPosDefault)
+                    @if($currentPosDefault !== null)
+                    <tr class="bold italic" style="font-size:11px">
+                            <td>
+                                <h1>
+                                    {{ $currentPosDefault }}: {{ $count }}
+                                </h1>
+                            </td>
+                            <!-- Add your corresponding columns here for the count row -->
+                        </tr>
+                    @endif
+                    @php
+                        $currentPosDefault = $planPositionDatas->pos_default;
+                        $count = 1;
+                    @endphp
+                @else
+                    @php
+                        $count++;
+                    @endphp
+                @endif
+                <tr style="font-size:11px;background:#e5e7eb;">
+                    <td>
+                        <h1>
+                            {{ $planPositionDatas->pos_default }}
+                            {{ $planPositionDatas->pos_suffix  }}
+                        </h1>
+                    </td>
+                    <td>
+                        <h1>
+                            {{ $planPositionDatas->corp_sg }}
+                        </h1>
+                    </td>
+                    <td>
+                        <h1>
+                            {{ $planPositionDatas->item_no }}
+                        </h1>
+                    </td>
+                    <td style="
                         @php
                             $selectedAppointee = $planPositionDatas->planAppointee
                                 ->where('is_appointee', 1)
@@ -1112,61 +1139,61 @@
 
                             if(!$selectedAppointee){
                                 echo 'background: #84A1C6;';
-                                // if this execute i want to print 'VACANT with this background color'
+                                // if this executes I want to print 'VACANT with this background color'
                             }
                         @endphp
                     ">
 
-                    @if(!$selectedAppointee)
-                    <h1>VACANT</h1>
-                    @endif
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
+                        @if(!$selectedAppointee)
+                            <h1>VACANT</h1>
+                        @endif
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                        }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->name_extension ?? ''
+                        }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                        }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                        }}
 
-                </td>
+                    </td>
 
-                <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first()
-                    )->appt_date ?? ''
-                    }}
-                </td>
-                <td>{{ $planPositionDatas->remarks ?? ''}}</td>
+                    <td>
+                        {{ optional(
+                            $planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first()
+                            )->appt_date ?? ''
+                        }}
+                    </td>
+                    <td>{{ $planPositionDatas->remarks ?? ''}}</td>
 
-                <td style="
+                    <td style="
                         @php
                             $selectedAppointee = $planPositionDatas->planAppointee
                                 ->where('is_appointee', 0)
@@ -1184,50 +1211,59 @@
                             }
                         @endphp
                     ">
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                        }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
-                </td>
-                <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first()
-                    )->assum_date ?? ''
-                    }}
-                </td>
-                <td>
-                    <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
-                </td>
-            </tr>
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                        }}
+                    </td>
+                    <td>
+                        {{ optional(
+                            $planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first()
+                            )->assum_date ?? ''
+                        }}
+                    </td>
+                    <td>
+                        <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
+                    </td>
+                </tr>
             @endif
+        @endforeach
+        @if($currentPosDefault !== null)
+            <tr class="bold italic" style="font-size:11px">
+                <td>
+                    <h1>
+                        {{ $currentPosDefault }}: {{ $count }}
+                    </h1>
+                </td>
+                <!-- Add your corresponding columns here for the count row -->
+            </tr>
+        @endif
+    @endforeach
+</tbody>
 
-            @endforeach
-            @endforeach
-
-        </tbody>
 
 
     </table>

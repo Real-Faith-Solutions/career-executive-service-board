@@ -42,11 +42,26 @@ class OccupancyReportController extends Controller
         ->orderBy('corp_sg', 'desc')
         ->get();
 
+        $counts = []; // Initialize an array to store counts
+
+    foreach ($office as $officeDatas) {
+        $counts[$officeDatas->officeid] = []; // Initialize counts for each office
+        foreach ($planPosition as $planPositionDatas) {
+            if ($officeDatas->officeid == $planPositionDatas->officeid) {
+                $posDefault = $planPositionDatas->pos_default;
+                $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
+                    ? $counts[$officeDatas->officeid][$posDefault] + 1
+                    : 1;
+            }
+        }
+    }
+
         $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
             'motherDepartmentAgency',
             'planPosition',
             'office',
             'currentDate',
+            'counts',
         ))
             ->setPaper('a4', 'landscape');
         return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
