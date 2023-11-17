@@ -89,8 +89,6 @@ class DashboardController extends Controller
         ->whereDate('birthdate', '>=', $twentyFiveYearsAgo)
         ->count();
 
-        // dd($age25below);
-
         // Calculate the date 35 and 26 years ago
         $from = Carbon::today()->subYears(35);
         $to = Carbon::today()->subYears(26);
@@ -101,9 +99,16 @@ class DashboardController extends Controller
             ->whereBetween('birthdate',[$from, $to])
             ->count();
 
-        // dd($age26to35);
+        // Calculate the date 45 and 36 years ago
+        $from = Carbon::today()->subYears(45);
+        $to = Carbon::today()->subYears(36);
 
-        $age36to45 = 30;
+        // Count the users with age 36-45
+        $age36to45 = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereBetween('birthdate',[$from, $to])
+            ->count();
+
         $age46to55 = 40;
         $age56to65 = 50;
         $age66above = 60;
