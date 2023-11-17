@@ -215,8 +215,20 @@ class PDFController extends Controller
                 return abort(404);
             }
         } else {
-            // $pdfFileName is empty, return an error response
-            return abort(404);
+            $pdfLink = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');      
+            $filepathPdfLink = 'pdf_files/' . $pdfLink;
+
+            // Check if the file exists
+            if (file_exists(public_path($filepathPdfLink))) {
+                $myFilePdfLink = public_path($filepathPdfLink);
+        
+                return response()->file($myFilePdfLink);
+            } else {
+                // File doesn't exist, return an error response
+                // return back()->with('error', 'not found');
+
+                return abort(404);
+            }
         }
     }
 
