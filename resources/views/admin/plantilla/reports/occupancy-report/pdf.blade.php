@@ -4,30 +4,28 @@
 <head>
     {{-- custom css --}}
     <style>
-        @page {
-            /*margin-top: 15mm;*/
-            margin-bottom: 25mm;
-            margin-left: 30mm;
-            margin-right: 30mm;
-
-            @bottom-center {
-                counter-increment: page;
-                counter-reset: page 1;
-                content: "page " counter(page);
+         @page {
+                margin-top: 75px;
+                padding-bottom: 100px;
             }
-        }
 
-        #page-count:after {
-            content: attr(data-pages);
-        }
+            .pagenum:before {
+                content: counter(page);
+            }
 
-        footer {
+            .page-break-always {
+                page-break-after: always;
+                margin-top: 160px;
+            }
+
+            footer {
             position: fixed;
-            bottom: 0;
+            bottom: -40px; /* Adjust this value as needed */
             width: 100%;
             text-align: center;
             font-size: 10px;
         }
+
 
         section {
             padding: 10%;
@@ -1016,8 +1014,44 @@
         </td>
     </table>
 
-    <table class="page-break-always" width="100%">
-        <thead>
+    <footer>
+        <table width="100%">
+            <tr>
+                <td class="bold">
+                    Date Printed {{ $currentDate }}
+                </td>
+                <td colspan="5">
+                    CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
+                    by the Agency.
+                </td>
+
+                <td>
+                    <table>
+                        <tr>
+                            <td>Legend:</td>
+                            <td>
+                                <p
+                                    style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px">
+                                </p>
+                                <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
+                                <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
+                            </td>
+                            <td>
+                                <p>- Non-CES Eligible</p>
+                                <p>- Vacant CES Position</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <div class="">Page <span class="pagenum"></span></div>
+                </td>
+            </tr>
+        </table>
+    </footer>
+
+    <table width="100%">
+        <thead >
             <tr style="font-size: 11px;">
                 <th>AGENCY / POSITION</th>
                 <th>SG</th>
@@ -1186,8 +1220,6 @@
                 </td>
                 <td>
                     <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
-
-
                 </td>
             </tr>
             @endif
@@ -1199,66 +1231,7 @@
 
 
     </table>
-    <footer>
-        <table width="100%">
-            <tr>
-                <td class="bold">
-                    Date Printed {{ $currentDate }}
-                </td>
-                <td colspan="5">
-                    CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
-                    by the Agency.
-                </td>
-
-                <td>
-                    <table>
-                        <tr>
-                            <td>Legend:</td>
-                            <td>
-                                <p
-                                    style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px">
-                                </p>
-                                <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
-                                <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
-                            </td>
-                            <td>
-                                <p>- Non-CES Eligible</p>
-                                <p>- Vacant CES Position</p>
-
-
-                            </td>
-
-                        </tr>
-                    </table>
-
-                </td>
-                <td>
-                    <p class="bold">
-                        <span id="pdfkit_page_current" class="page-count"></span>
-                        <span id="pdfkit_page_count" class="topage"></span>
-                        <span id="page-count" data-pages="Page 1 of 1" class="page-count"></span>
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </footer>
-    <script>
-        var pdfInfo = {};
-        var x = document.location.search.substring(1).split('&');
-        for (var i in x) {
-            var z = x[i].split('=', 2);
-            pdfInfo[z[0]] = decodeURIComponent(z[1]);
-        }
     
-        function getPdfInfo() {
-            var page = pdfInfo.page || 1;
-            var pageCount = pdfInfo.topage || 1;
-            document.getElementById('pdfkit_page_current').textContent = page;
-            document.getElementById('pdfkit_page_count').textContent = pageCount;
-            document.getElementById('page-count').textContent = "Page " + page + " of " + pageCount;
-        }
-    </script>
-
 </body>
 
 </html>
