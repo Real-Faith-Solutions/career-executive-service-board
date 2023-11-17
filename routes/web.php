@@ -91,6 +91,7 @@ use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
+use App\Http\Controllers\Plantilla\Reports\PositionListController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
@@ -600,7 +601,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
             Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf');
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
-            Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'pdf'])->name('occupancy-report.pdf');
+            Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf');
+            Route::get('position-list', [PositionListController::class, 'index'])->name('position-list.index');
+            Route::get('position-list/{deptid}', [PositionListController::class, 'generatePDF'])->name('position-list.pdf');
         });
     });
     // End of plantilla routes

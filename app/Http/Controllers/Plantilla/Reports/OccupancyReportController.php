@@ -21,40 +21,40 @@ class OccupancyReportController extends Controller
         ));
     }
 
-    public function pdf($deptid)
+    public function generatePDF($deptid)
     {
         $currentDate = Carbon::now()->format('d F Y');
         $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym')
-        ->find($deptid);
+            ->find($deptid);
 
-        $office = Office::whereHas('agencyLocation', function ($query) use ($deptid){
+        $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
             $query->where('deptid', $deptid);
         })->get();
 
         $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
                 $query->where('deptid', $deptid)
-                ->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1)
-                ->where('is_active', true);
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', true);
             })
-        
-        ->orderBy('corp_sg', 'desc')
-        ->get();
+
+            ->orderBy('corp_sg', 'desc')
+            ->get();
 
         $counts = []; // Initialize an array to store counts
 
-    foreach ($office as $officeDatas) {
-        $counts[$officeDatas->officeid] = []; // Initialize counts for each office
-        foreach ($planPosition as $planPositionDatas) {
-            if ($officeDatas->officeid == $planPositionDatas->officeid) {
-                $posDefault = $planPositionDatas->pos_default;
-                $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
-                    ? $counts[$officeDatas->officeid][$posDefault] + 1
-                    : 1;
+        foreach ($office as $officeDatas) {
+            $counts[$officeDatas->officeid] = []; // Initialize counts for each office
+            foreach ($planPosition as $planPositionDatas) {
+                if ($officeDatas->officeid == $planPositionDatas->officeid) {
+                    $posDefault = $planPositionDatas->pos_default;
+                    $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
+                        ? $counts[$officeDatas->officeid][$posDefault] + 1
+                        : 1;
+                }
             }
         }
-    }
 
         $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
             'motherDepartmentAgency',
