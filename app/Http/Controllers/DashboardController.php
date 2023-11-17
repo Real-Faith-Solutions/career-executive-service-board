@@ -87,6 +87,10 @@ class DashboardController extends Controller
         $age25below = PersonalData::query()
         ->where('status', 'Active')
         ->whereDate('birthdate', '>=', $twentyFiveYearsAgo)
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', 'LIKE', '%Eli%')
+                ->orWhere('description', 'LIKE', '%CES%');
+        })
         ->count();
 
         // Calculate the date 35 and 26 years ago
@@ -97,6 +101,10 @@ class DashboardController extends Controller
         $age26to35 = PersonalData::query()
             ->where('status', 'Active')
             ->whereBetween('birthdate',[$from, $to])
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
             ->count();
 
         // Calculate the date 45 and 36 years ago
@@ -107,6 +115,10 @@ class DashboardController extends Controller
         $age36to45 = PersonalData::query()
             ->where('status', 'Active')
             ->whereBetween('birthdate',[$from, $to])
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
             ->count();
 
         // Calculate the date 55 and 46 years ago
@@ -117,6 +129,10 @@ class DashboardController extends Controller
         $age46to55 = PersonalData::query()
             ->where('status', 'Active')
             ->whereBetween('birthdate',[$from, $to])
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
             ->count();
 
         // Calculate the date 65 and 56 years ago
@@ -127,6 +143,10 @@ class DashboardController extends Controller
         $age56to65 = PersonalData::query()
             ->where('status', 'Active')
             ->whereBetween('birthdate',[$from, $to])
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
             ->count();
 
         // Calculate the date 66 years ago
@@ -136,6 +156,10 @@ class DashboardController extends Controller
         $age66above = PersonalData::query()
         ->where('status', 'Active')
         ->whereDate('birthdate', '<=', $sixtySixYearsAgo)
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', 'LIKE', '%Eli%')
+                ->orWhere('description', 'LIKE', '%CES%');
+        })
         ->count();
 
         return view('admin.dashboard.index', compact(
