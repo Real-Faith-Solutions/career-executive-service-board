@@ -80,11 +80,8 @@ class DashboardController extends Controller
         $approvedFiles = $personalData->pdfFile()->count();
         $declinedFiles = $personalData->requestFile()->onlyTrashed()->count();
 
-        // Get the current date
-        $currentDate = Carbon::now();
-
         // Calculate the date 25 years ago
-        $twentyFiveYearsAgo = $currentDate->subYears(25);
+        $twentyFiveYearsAgo = Carbon::today()->subYears(25);
 
         // Count the users with age 25 and below
         $age25below = PersonalData::query()
@@ -92,20 +89,19 @@ class DashboardController extends Controller
         ->whereDate('birthdate', '>=', $twentyFiveYearsAgo)
         ->count();
 
-        // Get the current date
-        $currentDate = Carbon::now();
+        // dd($age25below);
 
-        // Calculate the date 35 years ago
-        $thirtyFiveYearsAgo = $currentDate->subYears(35);
+        // Calculate the date 35 and 26 years ago
+        $from = Carbon::today()->subYears(35);
+        $to = Carbon::today()->subYears(26);
 
-        // Calculate the date 26 years ago
-        $twentySixYearsAgo = $currentDate->addYears(9); // 35 - 26 = 9
-
+        // Count the users with age 26-35
         $age26to35 = PersonalData::query()
             ->where('status', 'Active')
-            ->whereDate('birthdate', '>=', $thirtyFiveYearsAgo)
-            ->whereDate('birthdate', '<=', $twentySixYearsAgo)
+            ->whereBetween('birthdate',[$from, $to])
             ->count();
+
+        // dd($age26to35);
 
         $age36to45 = 30;
         $age46to55 = 40;
