@@ -18,7 +18,7 @@
                 height: 60px;
                 margin-top: -60px;
                 text-align: center;
-            }
+            } 
 
             footer {
                 position: fixed;
@@ -57,8 +57,8 @@
                 background-color: white;
             }
         
-            tr:nth-child(even) {
-                background-color: #3b83f6b2;
+            tr:nth-child(even) { 
+                background-color: #F2F2F2;
             }
         
             .container {

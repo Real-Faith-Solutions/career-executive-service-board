@@ -61,7 +61,7 @@
             }
         
             tr:nth-child(even) {
-                background-color: #3b83f6b2;
+                background-color: #F2F2F2;
             }
         
             .container {

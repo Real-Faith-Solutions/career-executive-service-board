@@ -112,7 +112,7 @@ class PDFController extends Controller
         $firstName = $personalData->firstname;
         $mI = $personalData->mi;
         $nameExtension = $personalData->name_extension;
-        $personalDataFullName = $lastName." ".$firstName." ".$mI." ".$nameExtension;
+        $personalDataFullName = $lastName."_".$firstName."_".$mI."_".$nameExtension;
         
         // getting the first data 
         $requestFile = RequestFile::find($ctrlno)->first(); 
@@ -200,13 +200,36 @@ class PDFController extends Controller
     // stream approved file
     public function download($ctrlno)
     {
-        $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');      
+        $pdfFileName = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('original_pdflink');      
+   
+        if (!empty($pdfFileName)) {
+            $filepath = 'pdf_files/' . $pdfFileName;
+        
+            // Check if the file exists
+            if (file_exists(public_path($filepath))) {
+                $myFile = public_path($filepath);
+        
+                return response()->file($myFile);
+            } else {
+                // File doesn't exist, return an error response
+                return abort(404);
+            }
+        } else {
+            $pdfLink = PdfLinks::withTrashed()->where('ctrlno', $ctrlno)->value('pdflink');      
+            $filepathPdfLink = 'pdf_files/' . $pdfLink;
 
-        // dd($pdfFileName);
+            // Check if the file exists
+            if (file_exists(public_path($filepathPdfLink))) {
+                $myFilePdfLink = public_path($filepathPdfLink);
+        
+                return response()->file($myFilePdfLink);
+            } else {
+                // File doesn't exist, return an error response
+                // return back()->with('error', 'not found');
 
-        $myFile = public_path($pdfFileName);
-
-        return response()->file($myFile);
+                return abort(404);
+            }
+        }
     }
 
     // stream pending file

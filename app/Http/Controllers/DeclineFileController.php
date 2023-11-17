@@ -15,6 +15,14 @@ class DeclineFileController extends Controller
         return view('admin.201_profiling.view_profile.partials.pdf_files.declineFilesTrashbin', compact('pendingFileTrashedRecord'));
     }
 
+    public function restore($ctrlno)
+    {
+        $pendingFile = RequestFile::onlyTrashed($ctrlno);
+        $pendingFile->restore();
+
+        return back()->with('info', 'File Restored Successfully');
+    }
+
     // decline file
     public function declineFile(Request $request)
     {
