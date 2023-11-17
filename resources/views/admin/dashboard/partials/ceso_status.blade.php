@@ -51,9 +51,6 @@
             labels: labels,
             datasets: [
                 {
-                    // backgroundColor: ["#86efac", "#fdba74", "#fca5a5","#c4b5fd"],
-                    // borderColor: ["#86efac", "#fdba74", "#fca5a5", "#c4b5fd"],
-                    // label: 'Age',
                     data: [{{ $age25below }}, 
                             {{ $age26to35 }} , 
                             {{ $age36to45 }}, 
@@ -81,7 +78,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Age Demographics',
+                        text: 'Age Demographics (Active CESOs & Eligibles)',
                     },
                     legend: {
                         display: false,
