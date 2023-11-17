@@ -129,7 +129,14 @@ class DashboardController extends Controller
             ->whereBetween('birthdate',[$from, $to])
             ->count();
 
-        $age66above = 60;
+        // Calculate the date 66 years ago
+        $sixtySixYearsAgo = Carbon::today()->subYears(66);
+
+        // Count the users with age 66 and above
+        $age66above = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereDate('birthdate', '<=', $sixtySixYearsAgo)
+        ->count();
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
