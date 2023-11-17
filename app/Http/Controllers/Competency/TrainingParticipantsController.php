@@ -35,7 +35,7 @@ class TrainingParticipantsController extends Controller
             ->orWhere('firstname',  "LIKE","%$search%")
             ->orWhere('middlename',  "LIKE","%$search%")
             ->orWhere('name_extension',  "LIKE","%$search%")
-            ->get();
+            ->paginate(200);
 
         if ($search !== null && !is_numeric($search)) 
         {
@@ -69,8 +69,15 @@ class TrainingParticipantsController extends Controller
             $description = null;
         }
         
-        return view('admin.competency.partials.training_participant.participant_form', ['personalData' => $searchPersonalData, 'personalDataSearchResult' => 
-        $personalDataSearchResult, 'search' => $search, 'description' => $description, 'sessionId' => $sessionId, 'trainingSessionDescription' => $trainingSessionDescription]);
+        return view('admin.competency.partials.training_participant.participant_form', 
+        [
+            'personalData' => $searchPersonalData, 
+            'personalDataSearchResult' => $personalDataSearchResult, 
+            'search' => $search, 
+            'description' => $description, 
+            'sessionId' => $sessionId, 
+            'trainingSessionDescription' => $trainingSessionDescription
+        ]);
     }
 
     public function storeParticipant(Request $request, $sessionId)

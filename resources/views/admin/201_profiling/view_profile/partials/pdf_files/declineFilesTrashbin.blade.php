@@ -92,7 +92,19 @@
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">         
+                        <div class="flex">      
+                            <form action="{{ route('decline-file.restore',['ctrlno' => $pendingFileTrashedRecords->ctrlno ]) }}" method="POST" id="restore_decline_file_form{{$pendingFileTrashedRecords->ctrlno}}">
+                                @csrf
+                                <button type="button" id="restoreDeclineFileButton{{$pendingFileTrashedRecords->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Restoration', 'Are you sure you want to restore this file?')">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/nxooksci.json"
+                                        trigger="hover"
+                                        colors="primary:#121331"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form>
+
                             <form action="{{ route('show-pdf-files.declineFileForceDelete', ['ctrlno'=>$pendingFileTrashedRecords->ctrlno]) }}" method="POST" id="delete_decline_pending_pdf_file_form{{$pendingFileTrashedRecords->ctrlno}}">
                                 @csrf
                                 @method('DELETE')
