@@ -166,7 +166,7 @@ class DashboardController extends Controller
         })
         ->count();
 
-        $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
+        // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
         return view('admin.dashboard.index', compact(
             'totalCESO',
@@ -190,7 +190,7 @@ class DashboardController extends Controller
             'age46to55',
             'age56to65',
             'age66above',
-            'totalAge',
+            // 'totalAge',
         ));
     }
 }
