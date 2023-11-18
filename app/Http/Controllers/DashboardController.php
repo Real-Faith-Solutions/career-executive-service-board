@@ -81,7 +81,7 @@ class DashboardController extends Controller
         $declinedFiles = $personalData->requestFile()->onlyTrashed()->count();
 
         // Calculate the date 25 years ago
-        $twentyFiveYearsAgo = Carbon::today()->subYears(25)->startOfYear()->format('Y-m-d');
+        $twentyFiveYearsAgo = Carbon::today()->subYears(26)->addDay()->format('Y-m-d');
 
         // Count the users with age 25 and below
         $age25below = PersonalData::query()
@@ -98,7 +98,7 @@ class DashboardController extends Controller
         // dd($age25below);
 
         // Calculate the date 35 and 26 years ago
-        $from = Carbon::today()->subYears(35)->startOfYear()->format('Y-m-d');;
+        $from = Carbon::today()->subYears(36)->addDay()->format('Y-m-d');
         $to = Carbon::today()->subYears(26);
 
         // Count the users with age 26-35
@@ -112,7 +112,7 @@ class DashboardController extends Controller
             ->count();
 
         // Calculate the date 45 and 36 years ago
-        $from = Carbon::today()->subYears(45)->startOfYear()->format('Y-m-d');;
+        $from = Carbon::today()->subYears(46)->addDay()->format('Y-m-d');
         $to = Carbon::today()->subYears(36);
 
         // Count the users with age 36-45
@@ -126,7 +126,7 @@ class DashboardController extends Controller
             ->count();
 
         // Calculate the date 55 and 46 years ago
-        $from = Carbon::today()->subYears(55)->startOfYear()->format('Y-m-d');;
+        $from = Carbon::today()->subYears(56)->addDay()->format('Y-m-d');
         $to = Carbon::today()->subYears(46);
 
         // Count the users with age 46-55
@@ -140,7 +140,7 @@ class DashboardController extends Controller
             ->count();
 
         // Calculate the date 65 and 56 years ago
-        $from = Carbon::today()->subYears(65)->startOfYear()->format('Y-m-d');;
+        $from = Carbon::today()->subYears(66)->addDay()->format('Y-m-d');
         $to = Carbon::today()->subYears(56);
 
         // Count the users with age 56-65
@@ -154,7 +154,7 @@ class DashboardController extends Controller
             ->count();
 
         // Calculate the date 66 years ago
-        $sixtySixYearsAgo = Carbon::today()->subYears(66)->startOfYear()->format('Y-m-d');;
+        $sixtySixYearsAgo = Carbon::today()->subYears(66)->startOfYear()->format('Y-m-d');
 
         // Count the users with age 66 and above
         $age66above = PersonalData::query()
