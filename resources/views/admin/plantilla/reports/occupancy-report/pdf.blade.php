@@ -207,7 +207,6 @@
             line-height: inherit;
             font-size: small;
             counter-reset: page;
-
         }
 
         hr {
@@ -997,7 +996,7 @@
 
 </head>
 
-<body onload="substitutePdfVariables()">
+<body>
 
     <table class="mb-3" width="100%">
         <td colspan="6">
