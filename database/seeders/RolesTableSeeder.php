@@ -173,6 +173,21 @@ class RolesTableSeeder extends Seeder
             'plantilla_appointee_occupant_browser_edit',
             'plantilla_appointee_occupant_browser_delete',
             'plantilla_appointee_occupant_browser_view',
+            '201_general_reports',
+            '201_statistical_reports',
+            '201_placement_reports',
+            '201_birthday_cards_reports',
+            '201_data_portability_reports',
+            'plantilla_statistics_reports',
+            'plantilla_occupancy_reports',
+            'plantilla_position_list_reports',
+            'plantilla_ces_bluebook_reports',
+            'plantilla_department_agency_title_reports',
+            'plantilla_list_of_appointed_reports',
+            'plantilla_vacant_ces_positions_reports',
+            'plantilla_nonces_occupying_ces_pos_reports',
+            'plantilla_mailing_list_reports',
+            'plantilla_list_of_officials_reports',
         ];
 
         foreach ($permissions_power_user as $permission) {
