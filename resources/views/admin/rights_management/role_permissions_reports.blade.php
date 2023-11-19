@@ -15,9 +15,9 @@
     </div>
 </nav>
 
-<div id="plantilla_permissions" class="">
+<div id="reports_permissions" class="">
     
-    <form method="POST" id="plantilla_permissions_form" action="{{ route('plantillaPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="reports_permissions_form" action="{{ route('reportsPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -217,7 +217,7 @@
         </div>
     
         <div class="flex justify-center mt-3">
-            <button type="button" class="btn btn-primary" id="plantilla_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
+            <button type="button" class="btn btn-primary" id="reports_permissions_btn" onclick="openConfirmationDialog(this, 'Confirm Permissions', 'Are you sure you want to submit/update this permissions?')">Save Permissions</button>
         </div>
     
     </form>

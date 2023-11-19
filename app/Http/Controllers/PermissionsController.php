@@ -225,4 +225,58 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.plantilla', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updateReportsPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
+    
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            '201_general_reports',
+            '201_statistical_reports',
+            '201_placement_reports',
+            '201_birthday_cards_reports',
+            '201_data_portability_reports',
+            'competency_general_reports',
+            'competency_training_venue_manager_reports',
+            'competency_training_provider_reports',
+            'competency_resource_speaker_manager_reports',
+            'eligibility_general_reports',
+            'eligibility_ceswe_reports',
+            'eligibility_assessment_center_reports',
+            'eligibility_validation_reports',
+            'eligibility_board_interview_reports',
+            'plantilla_statistics_reports',
+            'plantilla_occupancy_reports',
+            'plantilla_position_list_reports',
+            'plantilla_ces_bluebook_reports',
+            'plantilla_department_agency_title_reports',
+            'plantilla_list_of_appointed_reports',
+            'plantilla_vacant_ces_positions_reports',
+            'plantilla_nonces_occupying_ces_pos_reports',
+            'plantilla_mailing_list_reports',
+            'plantilla_list_of_officials_reports',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->syncWithoutDetaching($permissionName);
+        }
+
+        return redirect()->route('permissions.reports', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
+
 }
