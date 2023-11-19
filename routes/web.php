@@ -92,6 +92,7 @@ use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
@@ -610,6 +611,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index');
             Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf');
+
+            Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index');
+            Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf');
         });
     });
     // End of plantilla routes
