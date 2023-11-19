@@ -259,7 +259,7 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             Occupancy report
                         </a>
-                        <a href="{{ route('position-list.index') }}"
+                        <a href="{{ route('ceso-eligibles-ces-position.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             List of CESOs and CES Eligibles in CES Positions
                         </a>
