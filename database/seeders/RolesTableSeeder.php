@@ -281,6 +281,11 @@ class RolesTableSeeder extends Seeder
             'compentency_field_specialization_view', 'compentency_resource_speaker_view', 'compentency_training_session_view',
             'compentency_ces_training_view', 'competency_management_sub_modules_report_view',
             'plantilla_management_view',
+            '201_general_reports',
+            '201_statistical_reports',
+            '201_placement_reports',
+            '201_birthday_cards_reports',
+            '201_data_portability_reports',
         ];
         
         foreach ($permissions_cespes_operator as $permission) {
