@@ -36,22 +36,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_management_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_add') ? 'checked' : '' }} value="plantilla_management_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_management_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_add') ? 'checked' : '' }} value="plantilla_management_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_management_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_management_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_edit') ? 'checked' : '' }} value="plantilla_management_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_management_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_edit') ? 'checked' : '' }} value="plantilla_management_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_management_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_management_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_delete') ? 'checked' : '' }} value="plantilla_management_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_management_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_delete') ? 'checked' : '' }} value="plantilla_management_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_management_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_management_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_view') ? 'checked' : '' }} value="plantilla_management_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_management_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_management_view') ? 'checked' : '' }} value="plantilla_management_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_management_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -74,22 +74,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_sector_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_add') ? 'checked' : '' }} value="plantilla_sector_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_sector_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_add') ? 'checked' : '' }} value="plantilla_sector_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_sector_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_sector_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_edit') ? 'checked' : '' }} value="plantilla_sector_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_sector_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_edit') ? 'checked' : '' }} value="plantilla_sector_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_sector_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_sector_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_delete') ? 'checked' : '' }} value="plantilla_sector_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_sector_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_delete') ? 'checked' : '' }} value="plantilla_sector_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_sector_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_sector_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_view') ? 'checked' : '' }} value="plantilla_sector_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_sector_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_sector_manager_view') ? 'checked' : '' }} value="plantilla_sector_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_sector_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -112,22 +112,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_add') ? 'checked' : '' }} value="plantilla_department_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_department_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_add') ? 'checked' : '' }} value="plantilla_department_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_department_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_edit') ? 'checked' : '' }} value="plantilla_department_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_department_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_edit') ? 'checked' : '' }} value="plantilla_department_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_department_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_delete') ? 'checked' : '' }} value="plantilla_department_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_department_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_delete') ? 'checked' : '' }} value="plantilla_department_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_department_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_view') ? 'checked' : '' }} value="plantilla_department_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_department_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_view') ? 'checked' : '' }} value="plantilla_department_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_department_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -150,22 +150,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_agency_location_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_add') ? 'checked' : '' }} value="plantilla_agency_location_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_agency_location_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_add') ? 'checked' : '' }} value="plantilla_agency_location_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_agency_location_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_agency_location_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_edit') ? 'checked' : '' }} value="plantilla_agency_location_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_agency_location_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_edit') ? 'checked' : '' }} value="plantilla_agency_location_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_agency_location_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_agency_location_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_delete') ? 'checked' : '' }} value="plantilla_agency_location_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_agency_location_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_delete') ? 'checked' : '' }} value="plantilla_agency_location_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_agency_location_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_agency_location_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_view') ? 'checked' : '' }} value="plantilla_agency_location_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_agency_location_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_agency_location_manager_view') ? 'checked' : '' }} value="plantilla_agency_location_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_agency_location_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -188,22 +188,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_office_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_add') ? 'checked' : '' }} value="plantilla_office_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_office_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_add') ? 'checked' : '' }} value="plantilla_office_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_office_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_office_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_edit') ? 'checked' : '' }} value="plantilla_office_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_office_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_edit') ? 'checked' : '' }} value="plantilla_office_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_office_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_office_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_delete') ? 'checked' : '' }} value="plantilla_office_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_office_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_delete') ? 'checked' : '' }} value="plantilla_office_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_office_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_office_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_view') ? 'checked' : '' }} value="plantilla_office_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_office_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_office_manager_view') ? 'checked' : '' }} value="plantilla_office_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_office_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -226,22 +226,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_add') ? 'checked' : '' }} value="plantilla_position_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_add') ? 'checked' : '' }} value="plantilla_position_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_edit') ? 'checked' : '' }} value="plantilla_position_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_edit') ? 'checked' : '' }} value="plantilla_position_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_delete') ? 'checked' : '' }} value="plantilla_position_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_delete') ? 'checked' : '' }} value="plantilla_position_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_view') ? 'checked' : '' }} value="plantilla_position_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_manager_view') ? 'checked' : '' }} value="plantilla_position_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -264,22 +264,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_classification_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_add') ? 'checked' : '' }} value="plantilla_position_classification_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_classification_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_add') ? 'checked' : '' }} value="plantilla_position_classification_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_classification_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_classification_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_edit') ? 'checked' : '' }} value="plantilla_position_classification_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_classification_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_edit') ? 'checked' : '' }} value="plantilla_position_classification_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_classification_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_classification_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_delete') ? 'checked' : '' }} value="plantilla_position_classification_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_classification_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_delete') ? 'checked' : '' }} value="plantilla_position_classification_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_classification_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_position_classification_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_view') ? 'checked' : '' }} value="plantilla_position_classification_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_position_classification_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_position_classification_manager_view') ? 'checked' : '' }} value="plantilla_position_classification_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_position_classification_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -302,22 +302,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_add') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_add') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_edit') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_edit') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_delete') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_delete') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_view') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_manager_view') ? 'checked' : '' }} value="plantilla_appointee_occupant_manager_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
@@ -340,22 +340,22 @@
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_browser_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_add') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_browser_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_add') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_add" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_browser_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_browser_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_edit') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_browser_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_edit') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_edit" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_browser_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_browser_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_delete') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_browser_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_delete') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_delete" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_browser_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_appointee_occupant_browser_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_view') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <input id="plantilla_appointee_occupant_browser_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_appointee_occupant_browser_view') ? 'checked' : '' }} value="plantilla_appointee_occupant_browser_view" class="w-4 h-4 text-blue-600 accent-green-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                                 <label for="plantilla_appointee_occupant_browser_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
                             </div>
     
