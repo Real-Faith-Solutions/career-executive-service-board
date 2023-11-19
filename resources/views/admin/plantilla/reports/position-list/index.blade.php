@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-@section('title', 'Plantilla Position List Reports')
+@section('title', 'List of CESOs and CES Eligibles in CES Positions')
 <h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500 mb-5">
-    Plantilla Position List Reports
+    List of CESOs and CES Eligibles in CES Positions
 </h1>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
