@@ -1035,7 +1035,7 @@
                 <h1 class="text-blue uppercase" style="font-size:16px;">
                     {{ $motherDepartmentAgency->title }}
                 </h1>
-                <h1 class="uppercase">
+                <h1>
                     LIST OF CESOs and CES ELIGIBLES IN CES POSITIONS
                 </h1>
                 <p>
