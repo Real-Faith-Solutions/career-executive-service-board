@@ -258,6 +258,12 @@ class RolesTableSeeder extends Seeder
             'competency_management_sub_modules_report_add', 'competency_management_sub_modules_report_edit', 'competency_management_sub_modules_report_delete', 
             'competency_management_sub_modules_report_view',
             'plantilla_management_view',
+            '201_general_reports',
+            '201_statistical_reports',
+            'competency_general_reports',
+            'competency_training_venue_manager_reports',
+            'competency_training_provider_reports',
+            'competency_resource_speaker_manager_reports',
         ];
         
         foreach ($permissions_training_officer as $permission) {
