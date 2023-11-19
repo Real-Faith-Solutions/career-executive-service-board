@@ -604,6 +604,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf');
             Route::get('position-list', [PositionListController::class, 'index'])->name('position-list.index');
             Route::get('position-list/{deptid}', [PositionListController::class, 'generatePDF'])->name('position-list.pdf');
+            Route::get('ceso-eligibles-nonces-position', [PositionListController::class, 'indexNonCesPosition'])->name('ceso-eligibles-nonces-position.index');
+            Route::get('ceso-eligibles-nonces-position/{deptid}', [PositionListController::class, 'generatePDFNonCesPosition'])->name('ceso-eligibles-nonces-position.pdf');
         });
     });
     // End of plantilla routes
