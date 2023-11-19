@@ -82,8 +82,8 @@ class PositionListController extends Controller
                 ->orWhere('description', 'LIKE', '%Eli%');
         })
             ->whereHas('planPosition', function ($query) use ($deptid) {
-                $query->where('is_ces_pos', 1)
-                    ->where('pres_apptee', 1)
+                $query->where('is_ces_pos', '!=', 1)
+                    ->where('pres_apptee', '!=', 1)
                     ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
                         $query->where('deptid', $deptid);
                     });
