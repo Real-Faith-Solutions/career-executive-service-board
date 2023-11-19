@@ -49,3 +49,8 @@ competency_management_sub_modules_report_view
 //plantilla
 
 plantilla_management_view
+
+//reports
+
+201_general_reports
+201_statistical_reports

@@ -52,3 +52,15 @@ competency_management_sub_modules_report_view
 //plantilla
 
 plantilla_management_view
+
+//reports
+
+201_general_reports
+201_statistical_reports
+201_data_portability_reports
+
+eligibility_general_reports
+eligibility_ceswe_reports
+eligibility_assessment_center_reports
+eligibility_validation_reports
+eligibility_board_interview_reports
