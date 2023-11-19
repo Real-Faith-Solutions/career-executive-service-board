@@ -103,37 +103,42 @@
                 </div>
             </div>
     
-            {{-- Department Manager permissions --}}
+            {{-- Eligibility And Rank Tracking permissions --}}
             <div class="col-span-1">
                 <div class="relative my-2 overflow-x-auto shadow-lg sm:rounded-lg">
                     <div class="w-full text-gray-500">
     
                         <div class="bg-blue-500 uppercase text-gray-700 text-white flex justify-between">
                             <h1 class="px-6 py-3 text-xm sm:text-sm sm:py-3.5">
-                                Department Manager
+                                Eligibility And Rank Tracking
                             </h1>
                         </div>
             
                         <div class="border-b bg-white px-6 py-3">
             
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_add" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_add') ? 'checked' : '' }} value="plantilla_department_manager_add" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="plantilla_department_manager_add" class="ml-2 mt-2 text-sm font-medium text-gray-900">Add</label>
+                                <input id="eligibility_general_reports" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'eligibility_general_reports') ? 'checked' : '' }} value="eligibility_general_reports" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="eligibility_general_reports" class="ml-2 mt-2 text-sm font-medium text-gray-900">General Reports</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_edit" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_edit') ? 'checked' : '' }} value="plantilla_department_manager_edit" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="plantilla_department_manager_edit" class="ml-2 mt-2 text-sm font-medium text-gray-900">Edit</label>
+                                <input id="eligibility_ceswe_reports" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'eligibility_ceswe_reports') ? 'checked' : '' }} value="eligibility_ceswe_reports" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="eligibility_ceswe_reports" class="ml-2 mt-2 text-sm font-medium text-gray-900">CES WE Reports</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_delete" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_delete') ? 'checked' : '' }} value="plantilla_department_manager_delete" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="plantilla_department_manager_delete" class="ml-2 mt-2 text-sm font-medium text-gray-900">Delete</label>
+                                <input id="eligibility_assessment_center_reports" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'eligibility_assessment_center_reports') ? 'checked' : '' }} value="eligibility_assessment_center_reports" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="eligibility_assessment_center_reports" class="ml-2 mt-2 text-sm font-medium text-gray-900">Assessment Center Reports</label>
                             </div>
     
                             <div class="flex items-center mb-4">
-                                <input id="plantilla_department_manager_view" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'plantilla_department_manager_view') ? 'checked' : '' }} value="plantilla_department_manager_view" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                <label for="plantilla_department_manager_view" class="ml-2 mt-2 text-sm font-medium text-gray-900">View</label>
+                                <input id="eligibility_validation_reports" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'eligibility_validation_reports') ? 'checked' : '' }} value="eligibility_validation_reports" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="eligibility_validation_reports" class="ml-2 mt-2 text-sm font-medium text-gray-900">Validation Reports</label>
+                            </div>
+
+                            <div class="flex items-center mb-4">
+                                <input id="eligibility_board_interview_reports" type="checkbox" name="permissions[]" {{ $permissions->contains('permission_name', 'eligibility_board_interview_reports') ? 'checked' : '' }} value="eligibility_board_interview_reports" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                <label for="eligibility_board_interview_reports" class="ml-2 mt-2 text-sm font-medium text-gray-900">Board/Panel Interview Reports</label>
                             </div>
     
                         </div>
