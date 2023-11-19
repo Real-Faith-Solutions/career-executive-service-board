@@ -90,8 +90,10 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
-use App\Http\Controllers\Plantilla\Reports\PositionListController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
@@ -600,10 +602,18 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('reports')->group(function () {
             Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
             Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf');
+
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
             Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf');
-            Route::get('position-list', [PositionListController::class, 'index'])->name('position-list.index');
-            Route::get('position-list/{deptid}', [PositionListController::class, 'generatePDF'])->name('position-list.pdf');
+
+            Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index');
+            Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf');
+
+            Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index');
+            Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf');
+
+            Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index');
+            Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf');
         });
     });
     // End of plantilla routes

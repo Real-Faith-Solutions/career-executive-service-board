@@ -821,6 +821,10 @@
 
     {{-- custom css --}}
     <style>
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
         @page {
             margin-top: 75px;
             padding-bottom: 100px;
@@ -838,29 +842,9 @@
         footer {
             position: fixed;
             bottom: 0px;
-            /* Adjust this value as needed */
             width: 100%;
             text-align: center;
             font-size: 10px;
-        }
-
-        section {
-            /* padding: 5%; */
-            /* page-break-after: always; */
-        }
-
-        .front-page {
-            border-top: 8px solid #3b82f6;
-            border-right: 8px solid grey;
-            border-bottom: 8px solid #ef4444;
-            border-left: 8px solid #eab308;
-            width: auto;
-            height: 80%;
-
-        }
-
-        .page-break {
-            page-break-after: always;
         }
 
         .flex {
@@ -995,76 +979,103 @@
 </head>
 
 <body>
-    <section>
-        <header>
-            <center>
-                <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-                <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
-
-                <div style="font-size:11px;">
-                    <p>
-                        No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
-                    </p>
-                    <p>
-                        Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 /
-                        8363-1532 / 8255-8341
-                    </p>
-                    <p>
-                        <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
-                    </p>
-                </div>
-            </center>
-        </header>
-        <footer>
-            <table width="100%">
-                <tr>
-                    <td colspan="5">
-                        List of CESOs and CES Eligibles in CES Positions
-                    </td>
-
-                    <td>
-                        <div class="">Page <span class="pagenum"></span></div>
-                    </td>
-                </tr>
-            </table>
-        </footer>
-
-        <br>
+    <header>
         <center>
-            <section>
-                <h1 class="text-blue uppercase" style="font-size:16px;">
-                    {{ $motherDepartmentAgency->title }}
-                </h1>
-                <h1 class="uppercase">
-                    LIST OF CESOs and CES ELIGIBLES IN CES POSITIONS
-                </h1>
+            <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
+            <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
+
+            <div style="font-size:11px;">
                 <p>
-                    data as of {{ $currentDate }}
+                    No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
                 </p>
-            </section>
+                <p>
+                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 /
+                    8363-1532 / 8255-8341
+                </p>
+                <p>
+                    <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
+                </p>
+            </div>
         </center>
-        <br />
+    </header>
+    <footer>
         <table width="100%">
-            <thead>
-                <tr class="text-blue" style="font-size: 11px;">
-                    <th>NO.</th>
-                    <th>FULL NAME</th>
-                    <th>CES STATUS</th>
-                    <th>POSITION</th>
-                    <th>SG</th>
-                    <th>OFFICE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="font-size:11px">
-                    <td>
+            <tr style="color:gray">
+                <td colspan="5">
+                    List of CESOs and CES Eligibles in NonCES Positions
+                </td>
 
-                    </td>
-                </tr>
-            </tbody>
+                <td style="text-align:right;">
+                    <div class="">Page <span class="pagenum"></span></div>
+                </td>
+            </tr>
         </table>
+    </footer>
 
-    </section>
+    <br>
+    <center>
+        <h1 class="text-blue uppercase" style="font-size:16px;">
+            {{ $motherDepartmentAgency->title }}
+        </h1>
+        <h1>
+            List of CESOs and CES Eligibles in NonCES Positions
+        </h1>
+        <p>
+            data as of {{ $currentDate }}
+        </p>
+    </center>
+    <br />
+    <table width="100%" style="padding:10px; margin-bottom:10px">
+        <thead>
+            <tr class="text-blue" style="font-size: 11px;">
+                <th>NO.</th>
+                <th>FULL NAME</th>
+                <th>CES STATUS</th>
+                <th>POSITION</th>
+                <th>SG</th>
+                <th>OFFICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php
+            $no = 1;
+            @endphp
+            @foreach($planAppointee as $planAppointeeDatas)
+            <tr class="striped" style="font-size:11px">
+                <td class="text-center">
+                    {{ $no++ }}
+                    </th>
+                <td>
+                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->middlename ?? '' }}
+                </td>
+                <td class="text-center">
+                    {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
+                </td>
+
+                <td>
+                    {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
+                    @if($planAppointeeDatas->planPosition->pos_suffix)
+                    - {{ $planAppointeeDatas->planPosition->pos_suffix}}
+                    @endif
+
+                </td>
+                <td class="text-center">
+                    {{ $planAppointeeDatas->planPosition->corp_sg ?? ''}}
+                </td>
+                <td>
+                    {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
+                </td>
+            </tr>
+
+            @endforeach
+        </tbody>
+    </table>
+
+
+
+
 </body>
 
 </html>

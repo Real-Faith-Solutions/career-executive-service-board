@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-@section('title', 'Plantilla Position List Reports')
+@section('title', 'List of CESOs and CES Eligibles in CES Positions')
 <h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500 mb-5">
-    Plantilla Position List Reports
+    List of CESOs and CES Eligibles in NonCES Positions
 </h1>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -19,7 +19,8 @@
 
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                     <a class="text-sm leading-5 text-gray-900 hover:text-blue-500"
-                        href="{{ route('position-list.pdf', $data->deptid) }}" target="_blank" title="Generate PDF">
+                        href="{{ route('ceso-eligibles-nonces-position.pdf', $data->deptid) }}" target="_blank"
+                        title="Generate PDF">
                         {{ $data->title }}
                     </a>
                 </td>

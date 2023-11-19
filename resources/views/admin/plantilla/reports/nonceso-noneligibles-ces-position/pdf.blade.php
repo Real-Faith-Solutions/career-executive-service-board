@@ -2,181 +2,8 @@
 <html>
 
 <head>
-    <title>
-        {{ $motherDepartmentAgency->acronym }}.pdf
-    </title>
-
-    {{-- custom css --}}
-    <style>
-        @page {
-            margin-top: 75px;
-            padding-bottom: 100px;
-        }
-
-        .pagenum:before {
-            content: counter(page);
-        }
-
-        .page-break-always {
-            page-break-after: always;
-            margin-top: 160px;
-        }
-
-        footer {
-            position: fixed;
-            bottom: -40px;
-            /* Adjust this value as needed */
-            width: 100%;
-            text-align: center;
-            font-size: 10px;
-        }
-
-
-        section {
-            padding: 10%;
-
-        }
-
-        .front-page {
-            border-top: 8px solid #3b82f6;
-            border-right: 8px solid grey;
-            border-bottom: 8px solid #ef4444;
-            border-left: 8px solid #eab308;
-            width: auto;
-            height: 80%;
-
-        }
-
-        .flex {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            /* Horizontally center items */
-            align-items: center;
-            /* Vertically center items */
-        }
-
-        .font-algerian {
-            font-family: 'Algerian';
-        }
-
-        .font-arial-black {
-            font-family: Arial;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        .p-5 {
-            padding: 5%;
-        }
-
-        .pb-5 {
-            padding-bottom: 5%;
-        }
-
-        .pb-3 {
-            padding-bottom: 3%;
-        }
-
-        .p-10 {
-            padding: 10%;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-end {
-            text-align: right;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .m-10 {
-            margin: 10%
-        }
-
-        .mt-10 {
-            margin-top: 10%
-        }
-
-        .mb-10 {
-            margin-bottom: 10%
-        }
-
-        .mb-3 {
-            margin-bottom: 3%
-        }
-
-        .mb-5 {
-            margin-bottom: 5%
-        }
-
-        header {
-            margin-bottom: 5%;
-            margin-top: -7%;
-        }
-
-        .text-blue {
-            color: #3b82f6;
-        }
-
-        .text-red {
-            color: red;
-        }
-
-        .bg-blue {
-            background: #3b82f6;
-            color: #fff;
-        }
-
-        .bg-cyan {
-            background: #93c5fd;
-        }
-
-        .bg-yellow {
-            background: #fde047;
-        }
-
-        .bg-red {
-            background: #fda4af;
-            color: #000;
-        }
-
-        .bg-green {
-            background: #bbf7d0;
-            color: #000;
-        }
-
-        .italic {
-            font-style: italic;
-        }
-
-        .pl-5 {
-            padding-left: 5%;
-        }
-
-        .pl-10 {
-            padding-left: 20%;
-        }
-
-        .pl-15 {
-            padding-left: 30%;
-        }
-
-        td {
-            border: 2px solid #fff;
-            padding-left: 5px;
-        }
-    </style>
+    <title>{{ $motherDepartmentAgency->acronym }}.pdf</title>
+    {{-- reset attributes --}}
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -992,281 +819,262 @@
         }
     </style>
 
+    {{-- custom css --}}
+    <style>
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
+        @page {
+            margin-top: 75px;
+            padding-bottom: 100px;
+        }
+
+        .pagenum:before {
+            content: counter(page);
+        }
+
+        .page-break-always {
+            page-break-after: always;
+            margin-top: 160px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .flex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* Horizontally center items */
+            align-items: center;
+            /* Vertically center items */
+        }
+
+        .font-algerian {
+            font-family: 'Algerian';
+        }
+
+        .font-arial-black {
+            font-family: Arial;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .p-5 {
+            padding: 5%;
+        }
+
+        .pb-5 {
+            padding-bottom: 5%;
+        }
+
+        .pb-3 {
+            padding-bottom: 3%;
+        }
+
+        .p-10 {
+            padding: 10%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-end {
+            text-align: right;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .m-10 {
+            margin: 10%
+        }
+
+        .mt-10 {
+            margin-top: 10%
+        }
+
+        .mb-10 {
+            margin-bottom: 10%
+        }
+
+        .mb-3 {
+            margin-bottom: 3%
+        }
+
+        .mb-5 {
+            margin-bottom: 5%
+        }
+
+        header {
+            margin-top: -7%;
+        }
+
+        .text-blue {
+            color: #3b82f6;
+        }
+
+        .text-red {
+            color: red;
+        }
+
+        .bg-blue {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        .bg-cyan {
+            background: #93c5fd;
+        }
+
+        .bg-yellow {
+            background: #fde047;
+        }
+
+        .bg-red {
+            background: #fda4af;
+            color: #000;
+        }
+
+        .bg-green {
+            background: #bbf7d0;
+            color: #000;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .pl-5 {
+            padding-left: 5%;
+        }
+
+        .pl-10 {
+            padding-left: 20%;
+        }
+
+        .pl-15 {
+            padding-left: 30%;
+        }
+
+        td {
+            padding-right: 1%;
+        }
+    </style>
 
 </head>
 
 <body>
+    <header>
+        <center>
+            <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
+            <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
 
-    <table class="mb-3" width="100%">
-        <td colspan="6">
-            <h1 class="bold" style="font-size:12px">Career Executive Service Occupancy Report</h1>
-            <h1 class="bold uppercase text-blue">{{ $motherDepartmentAgency->title }}</h1>
-            <h1 class="bold" style="font-size:12px">
-                data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}
-            </h1>
-        </td>
-
-        <td colspan="6" style="text-align: right">
-            <h1 class="uppercase" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
-            <h1 style="font-size: 9px">No. 3 Marcelino St., Holy Spirit Drive, Diliman, Quezon City 1127</h1>
-            <h1 style="font-size: 9px">Tel. 8951-4981 to 88 Fax. 8931-5732 www.cesboard.gov.ph</h1>
-        </td>
-        <td colspan="1">
-            <img src="{{ public_path('images/assets/branding.png') }}" width="70px" />
-        </td>
-    </table>
-
+            <div style="font-size:11px;">
+                <p>
+                    No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
+                </p>
+                <p>
+                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 /
+                    8363-1532 / 8255-8341
+                </p>
+                <p>
+                    <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
+                </p>
+            </div>
+        </center>
+    </header>
     <footer>
         <table width="100%">
-            <tr>
-                <td class="bold">
-                    Date Printed {{ $currentDate }}
-                </td>
+            <tr style="color:gray">
                 <td colspan="5">
-                    CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
-                    by the Agency.
+                    List of Non-CESOs and Non-Eligibles in CES Positions
                 </td>
 
-                <td>
-                    <table>
-                        <tr>
-                            <td>Legend:</td>
-                            <td>
-                                <p
-                                    style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px">
-                                </p>
-                                <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
-                                <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
-                            </td>
-                            <td>
-                                <p>- Non-CES Eligible</p>
-                                <p>- Vacant CES Position</p>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
+                <td style="text-align:right;">
                     <div class="">Page <span class="pagenum"></span></div>
                 </td>
             </tr>
         </table>
     </footer>
 
-    <table width="100%">
+    <br>
+    <center>
+        <h1 class="text-blue uppercase" style="font-size:16px;">
+            {{ $motherDepartmentAgency->title }}
+        </h1>
+        <h1>
+            List of Non-CESOs and Non-Eligibles in CES Positions
+        </h1>
+        <p>
+            data as of {{ $currentDate }}
+        </p>
+    </center>
+    <br />
+    <table width="100%" style="padding:10px; margin-bottom:10px">
         <thead>
-            <tr style="font-size: 11px;">
-                <th>AGENCY / POSITION</th>
+            <tr class="text-blue" style="font-size: 11px;">
+                <th>NO.</th>
+                <th>FULL NAME</th>
+                <th>CES STATUS</th>
+                <th>POSITION</th>
                 <th>SG</th>
-                <th>ITEM NO.</th>
-                <th>APPOINTEE</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
-                <th>OCCUPANT</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
+                <th>OFFICE</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($office as $officeDatas)
-            <tr style="font-size:11px">
-                <td>
-                    <h1 class="text-blue bold">
-                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
-                    </h1>
-                </td>
-            </tr>
             @php
-            $currentPosDefault = null;
-            $count = 0;
+            $no = 1;
             @endphp
-            @foreach($planPosition as $planPositionDatas)
-            @if($officeDatas->officeid == $planPositionDatas->officeid)
-            @if($planPositionDatas->pos_default !== $currentPosDefault)
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
+            @foreach($planAppointee as $planAppointeeDatas)
+            <tr class="striped" style="font-size:11px">
+                <td class="text-center">
+                    {{ $no++ }}
+                    </th>
                 <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
+                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->middlename ?? '' }}
                 </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
-            @php
-            $currentPosDefault = $planPositionDatas->pos_default;
-            $count = 1;
-            @endphp
-            @else
-            @php
-            $count++;
-            @endphp
-            @endif
-            <tr style="font-size:11px;background:#e5e7eb;">
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->pos_default }}
-                        {{ $planPositionDatas->pos_suffix }}
-                    </h1>
+                <td class="text-center">
+                    {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
                 </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->corp_sg }}
-                    </h1>
-                </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->item_no }}
-                    </h1>
-                </td>
-                <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first();
 
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
-
-                            if(!$selectedAppointee){
-                                echo 'background: #84A1C6;';
-                                // if this executes I want to print 'VACANT with this background color'
-                            }
-                        @endphp
-                    ">
-
-                    @if(!$selectedAppointee)
-                    <h1>VACANT</h1>
+                <td>
+                    {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
+                    @if($planAppointeeDatas->planPosition->pos_suffix)
+                    - {{ $planAppointeeDatas->planPosition->pos_suffix}}
                     @endif
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
 
                 </td>
-
-                <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first()
-                    )->appt_date ?? ''
-                    }}
-                </td>
-                <td>{{ $planPositionDatas->remarks ?? ''}}</td>
-
-                <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 0)
-                                ->first();
-
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
-                        @endphp
-                    ">
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                <td class="text-center">
+                    {{ $planAppointeeDatas->planPosition->corp_sg ?? ''}}
                 </td>
                 <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first()
-                    )->assum_date ?? ''
-                    }}
-                </td>
-                <td>
-                    <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
+                    {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
                 </td>
             </tr>
-            @endif
-            @endforeach
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
-                <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
-                </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
+
             @endforeach
         </tbody>
-
-
-
     </table>
+
+
+
 
 </body>
 
