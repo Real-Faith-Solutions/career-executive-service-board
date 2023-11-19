@@ -105,7 +105,7 @@ class RolesController extends Controller
         $role = Role::where('role_name', $role_name)->first();
         $permissions = $role->permissions;
 
-        return view('admin.rights_management.role_permissions_plantilla', compact('role_name', 'role_title', 'permissions'));
+        return view('admin.rights_management.role_permissions_reports', compact('role_name', 'role_title', 'permissions'));
     }
 
 }
