@@ -443,6 +443,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete')->middleware('checkPermission:pdf_files_delete');
             Route::get('approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile')->middleware('checkPermission:pdf_files_view');
             Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile')->middleware('checkPermission:pdf_files_view');
+            Route::delete('delete-approved-file/{ctrlno}', [ApprovedFileController::class, 'destroy'])->name('deleteApprovedFile')->middleware('checkPermission:pdf_files_view');
         });
     });
     // End of profile routes

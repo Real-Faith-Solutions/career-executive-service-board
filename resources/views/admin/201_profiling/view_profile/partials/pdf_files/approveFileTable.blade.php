@@ -42,6 +42,10 @@
                 <th scope="col" class="px-6 py-3">
                     Reason
                 </th>
+
+                <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Action</span>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +89,24 @@
 
                     <td class="px-6 py-3">
                         {{ $approvedFiles->reason }}
+                    </td>
+
+                    <td class="px-6 py-4 text-right uppercase">
+                        <div class="flex">
+                            <form action="{{ route('deleteApprovedFile', ['ctrlno'=>$approvedFiles->ctrlno]) }}" method="POST" id="permanent_pdf_file_form{{$approvedFiles->ctrlno}}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" id="permanentPdfFileButton{{$approvedFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this file?')">
+                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                                        trigger="hover"
+                                        colors="primary:#880808"
+                                        style="width:24px;height:24px">
+                                    </lord-icon>
+                                </button>
+                            </form> 
+                        </div>
                     </td>
                 </tr>
             @endforeach
