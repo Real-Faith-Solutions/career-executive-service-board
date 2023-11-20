@@ -32,38 +32,47 @@ class OccupancyReportController extends Controller
         })->get();
 
         $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
-            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
-                $query->where('deptid', $deptid)
-                    ->where('is_ces_pos', 1)
-                    ->where('pres_apptee', 1)
-                    ->where('is_active', true);
-            })
+    ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
+        $query->where('deptid', $deptid)
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', true);
+    })
+    ->with(['planAppointee.personalData']) // Eager load relationships
+    ->orderBy('corp_sg', 'desc')
+    ->orderBy('item_no', 'desc') // Add this line to order by item_no
+    ->get();
 
-            ->orderBy('corp_sg', 'desc')
-            ->get();
+// Sorting the collection based on corp_sg, item_no, and lastname
+$planPosition = $planPosition->sortBy([
+    ['corp_sg', 'desc'],
+    ['item_no', 'asc'],
+    ['planAppointee.personalData.lastname', 'asc'],
+]);
 
-        $counts = []; // Initialize an array to store counts
-
-        foreach ($office as $officeDatas) {
-            $counts[$officeDatas->officeid] = []; // Initialize counts for each office
-            foreach ($planPosition as $planPositionDatas) {
-                if ($officeDatas->officeid == $planPositionDatas->officeid) {
-                    $posDefault = $planPositionDatas->pos_default;
-                    $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
-                        ? $counts[$officeDatas->officeid][$posDefault] + 1
-                        : 1;
-                }
-            }
+// Rest of your code remains unchanged
+$counts = [];
+foreach ($office as $officeDatas) {
+    $counts[$officeDatas->officeid] = [];
+    foreach ($planPosition as $planPositionDatas) {
+        if ($officeDatas->officeid == $planPositionDatas->officeid) {
+            $posDefault = $planPositionDatas->pos_default;
+            $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
+                ? $counts[$officeDatas->officeid][$posDefault] + 1
+                : 1;
         }
+    }
+}
 
-        $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
-            'motherDepartmentAgency',
-            'planPosition',
-            'office',
-            'currentDate',
-            'counts',
-        ))
-            ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+$pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
+    'motherDepartmentAgency',
+    'planPosition',
+    'office',
+    'currentDate',
+    'counts',
+))
+    ->setPaper('a4', 'landscape');
+return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+
     }
 }
