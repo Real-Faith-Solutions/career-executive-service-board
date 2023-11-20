@@ -1107,7 +1107,25 @@
                 <td>
                     <h1>
                         {{ $planPositionDatas->pos_default }}
-                        {{ $planPositionDatas->pos_suffix }}
+                        <br />
+                        
+
+                            @if($planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first()
+                                ->planPosition
+                                ->pos_suffix ?? '')
+                                
+                                
+                                ({{ optional($planPositionDatas->planAppointee
+                                    ->where('is_appointee', 1)
+                                    ->first())
+                                    ->planPosition
+                                    ->pos_suffix ?? ''
+                                }})
+                            @endif
+                        
+                        
                     </h1>
                 </td>
                 <td>
@@ -1147,6 +1165,8 @@
                     @if(!$selectedAppointee)
                     <h1>VACANT</h1>
                     @endif
+                    
+
                     {{ optional($planPositionDatas->planAppointee
                     ->where('is_appointee', 1)
                     ->first())
