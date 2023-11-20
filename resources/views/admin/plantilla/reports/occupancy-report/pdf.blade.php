@@ -1204,12 +1204,16 @@
                 </td>
 
                 <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first()
-                    )->appt_date ?? ''
-                    }}
+                    @php
+                        $selectedAppointee = $planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first();
+                    @endphp
+
+                    @if($selectedAppointee->appt_date ?? '')
+                        {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
+                    @endif
+                    
                 </td>
                 <td>{{ $planPositionDatas->remarks ?? ''}}</td>
 
@@ -1258,12 +1262,16 @@
                     }}
                 </td>
                 <td>
-                    {{ optional(
-                    $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first()
-                    )->assum_date ?? ''
-                    }}
+                    @php
+                        $selectedOccupant = $planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first();
+                    @endphp
+
+                    @if ($selectedOccupant && $selectedOccupant->appt_date)
+                        {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
+                    @endif
+
                 </td>
                 <td>
                     <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
