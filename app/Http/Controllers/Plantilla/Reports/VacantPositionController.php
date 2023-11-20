@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Plantilla\Reports;
 
 use App\Http\Controllers\Controller;
-use App\Models\Plantilla\AgencyLocation;
 use App\Models\Plantilla\DepartmentAgency;
-use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\Office;
+use App\Models\Plantilla\PlanPosition;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class OccupancyReportController extends Controller
+class VacantPositionController extends Controller
 {
     public function index()
     {
         $motherDepartment = DepartmentAgency::where('is_national_government', 1)->get();
-        return view('admin.plantilla.reports.occupancy-report.index', compact(
+        return view('admin.plantilla.reports.vacant-position.index', compact(
             'motherDepartment'
         ));
     }
@@ -27,10 +26,7 @@ class OccupancyReportController extends Controller
         $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym')
             ->find($deptid);
 
-        $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
-            $query->where('deptid', $deptid);
-        })->get();
-
+        $no = 1;
         $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
                 $query->where('deptid', $deptid)
@@ -50,26 +46,10 @@ class OccupancyReportController extends Controller
             ['planAppointee.personalData.lastname', 'asc'],
         ]);
 
-        // Rest of your code remains unchanged
-        $counts = [];
-        foreach ($office as $officeDatas) {
-            $counts[$officeDatas->officeid] = [];
-            foreach ($planPosition as $planPositionDatas) {
-                if ($officeDatas->officeid == $planPositionDatas->officeid) {
-                    $posDefault = $planPositionDatas->pos_default;
-                    $counts[$officeDatas->officeid][$posDefault] = isset($counts[$officeDatas->officeid][$posDefault])
-                        ? $counts[$officeDatas->officeid][$posDefault] + 1
-                        : 1;
-                }
-            }
-        }
-
-        $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
+        $pdf = Pdf::loadView('admin.plantilla.reports.vacant-position.pdf', compact(
             'motherDepartmentAgency',
             'planPosition',
-            'office',
-            'currentDate',
-            'counts',
+            'no',
         ))
             ->setPaper('a4', 'landscape');
         return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
