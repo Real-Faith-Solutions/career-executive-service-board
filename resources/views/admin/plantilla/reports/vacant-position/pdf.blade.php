@@ -1058,17 +1058,18 @@
                 <th>SG</th>
                 <th>DBM ITEM NO.</th>
                 <th>FULLNAME</th>
+                <th>CES STATUS</th>
             </tr>
         </thead>
         <tbody>
 
         @foreach ($planPosition as $planPositionDatas)
             @php
-                $selectedAppointee = $planPositionDatas->planAppointee
+                $selectedOccupant = $planPositionDatas->planAppointee
                     ->where('is_appointee', 1)
                     ->first();
 
-                if (!$selectedAppointee) {
+                if (!$selectedOccupant) {
             @endphp
             <tr style="font-size:11px">
                 <th>
@@ -1087,12 +1088,22 @@
                     {{ $planPositionDatas->item_no ?? '' }}
                 </td>
                 <td>
-                    {{ $selectedAppointee->personalData->lastname ?? '' }}
-                    {{ $selectedAppointee->personalData->middlename ?? '' }}
-                    {{ $selectedAppointee->personalData->firstname ?? '' }}
+                    @php
+                        $selectedOccupant = $planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first();
+                    @endphp
+                    {{ $selectedOccupant->personalData->lastname ?? '' }}
+                    {{ $selectedOccupant->personalData->middlename ?? '' }}
+                    {{ $selectedOccupant->personalData->firstname ?? '' }}
                 </td>
                 <td>
-                    ces status
+                    @php
+                        $selectedOccupant = $planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first();
+                    @endphp
+                    {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
                 </td>
             </tr>
                 @php
