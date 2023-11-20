@@ -1036,7 +1036,20 @@
         </table>
     </footer>
 
-    <table width="100%">
+    <br>
+    <center>
+        <h1 class="text-blue uppercase" style="font-size:16px;">
+            {{ $motherDepartmentAgency->title }}
+        </h1>
+        <h1>
+            List of Vacant Position
+        </h1>
+        <p>
+            data as of {{ $currentDate }}
+        </p>
+    </center>
+    <br />
+    <table width="100%" style="padding: 5px;">
         <thead>
             <tr style="font-size: 11px;">
                 <th>NO.</th>
@@ -1049,9 +1062,14 @@
         </thead>
         <tbody>
 
-            @foreach ($planPosition as $planPositionDatas)
+        @foreach ($planPosition as $planPositionDatas)
+            @php
+                $selectedAppointee = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first();
 
-
+                if (!$selectedAppointee) {
+            @endphp
             <tr style="font-size:11px">
                 <th>
                     {{ $no++ }}
@@ -1069,14 +1087,19 @@
                     {{ $planPositionDatas->item_no ?? '' }}
                 </td>
                 <td>
-                    fullname
+                    {{ $selectedAppointee->personalData->lastname ?? '' }}
+                    {{ $selectedAppointee->personalData->middlename ?? '' }}
+                    {{ $selectedAppointee->personalData->firstname ?? '' }}
                 </td>
                 <td>
                     ces status
                 </td>
             </tr>
-
+                @php
+                    }
+                @endphp
             @endforeach
+
 
         </tbody>
     </table>

@@ -33,20 +33,13 @@ class VacantPositionController extends Controller
                     ->where('is_ces_pos', 1)
                     ->where('pres_apptee', 1)
                     ->where('is_active', true);
-            })
-            ->with(['planAppointee.personalData']) // Eager load relationships
+            })            
             ->orderBy('corp_sg', 'desc')
-            ->orderBy('item_no', 'desc') // Add this line to order by item_no
+            ->orderBy('item_no', 'asc')
             ->get();
 
-        // Sorting the collection based on corp_sg, item_no, and lastname
-        $planPosition = $planPosition->sortBy([
-            ['corp_sg', 'desc'],
-            ['item_no', 'asc'],
-            ['planAppointee.personalData.lastname', 'asc'],
-        ]);
-
         $pdf = Pdf::loadView('admin.plantilla.reports.vacant-position.pdf', compact(
+            'currentDate',
             'motherDepartmentAgency',
             'planPosition',
             'no',
