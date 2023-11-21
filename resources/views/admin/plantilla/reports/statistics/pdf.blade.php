@@ -963,7 +963,7 @@
         }
 
         td {
-            padding: 0 3px 0 0;
+            padding: 0 10px 0 3px;
             border: 2px solid #fff;
         }
     </style>
@@ -1001,7 +1001,7 @@
     </section>
 
     <section class="table-of-contents page-break">
-        <h1 class="uppercase p-5 bold text-center mb-10 " style="border: 3px solid black; padding 5%;">
+        <h1 class="uppercase p-5 bold text-center mb-10 " style="border: 3px solid black; padding 5%;font-size: 24px;">
             Table of Contents
         </h1>
 
@@ -1074,14 +1074,14 @@
         <div class="text-center mb-3">
             <h1 class="bold">{{ $motherDepartmentAgency->title }}</h1>
 
-            <p class="italic">
+            <p class="italic" style="font-size: 12px">
                 (Data as of
                 {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
 
-        <table class="mb-3 w-100">
+        <table class="mb-3 w-100" style="font-size: 12px">
             <tr>
                 <td colspan="8" class="uppercase bold">Total no. of ces positions</td>
                 <td colspan="1" class="text-white bold bg-blue text-right p-1">{{ $totalPosition }}</td>
@@ -1122,14 +1122,14 @@
         <div class="text-center mb-3">
             <h1 class="bold">{{ $motherDepartmentAgency->title }}</h1>
 
-            <p class="italic">
+            <p class="italic" style="font-size: 12px">
                 (Data as of
                 {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
 
-        <table class="mb-3 w-100">
+        <table class="mb-3 w-100" style="font-size: 12px">
             <tr>
                 <td colspan="8" class="uppercase bold">Total no. of ces positions</td>
                 <td colspan="1" class="text-white bold bg-blue text-right">{{ $totalPosition }}</td>
