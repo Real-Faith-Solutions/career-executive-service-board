@@ -260,6 +260,9 @@ class RolesTableSeeder extends Seeder
             'plantilla_management_view',
             '201_general_reports',
             '201_statistical_reports',
+            '201_view_library',
+            'eris_view_library',
+            'plantilla_view_library',
         ];
 
         foreach ($permissions_cesb_operator as $permission) {
