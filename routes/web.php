@@ -586,11 +586,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
         Route::resource('library-occupant-manager', OccupantManagerController::class);
 
-
         Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
         Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
         Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
-
 
         Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
         Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
