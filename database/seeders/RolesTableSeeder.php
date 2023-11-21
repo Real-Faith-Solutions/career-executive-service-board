@@ -294,6 +294,9 @@ class RolesTableSeeder extends Seeder
             'competency_training_venue_manager_reports',
             'competency_training_provider_reports',
             'competency_resource_speaker_manager_reports',
+            '201_view_library',
+            'eris_view_library',
+            'plantilla_view_library',
         ];
         
         foreach ($permissions_training_officer as $permission) {
