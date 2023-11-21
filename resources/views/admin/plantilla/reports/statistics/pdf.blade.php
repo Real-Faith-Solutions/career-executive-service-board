@@ -963,7 +963,7 @@
         }
 
         td {
-            padding: 0 5px 0 0;
+            padding: 0 3px 0 0;
             border: 2px solid #fff;
         }
     </style>
