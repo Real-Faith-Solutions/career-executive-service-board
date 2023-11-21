@@ -1081,15 +1081,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('ces-status-type-library')->group(function () {
-            Route::get('index', [ProfileLibTblCesStatusTypeController::class, 'index'])->name('ces-status-type-library.index');
-            Route::get('create', [ProfileLibTblCesStatusTypeController::class, 'create'])->name('ces-status-type-library.create');
-            Route::post('store', [ProfileLibTblCesStatusTypeController::class, 'store'])->name('ces-status-type-library.store');
-            Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit');
-            Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update');
-            Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy');
-            Route::get('recently-deleted', [ProfileLibTblCesStatusTypeController::class, 'recentlyDeleted'])->name('ces-status-type-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'restore'])->name('ces-status-type-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'forceDelete'])->name('ces-status-type-library.forceDelete');
+            Route::get('index', [ProfileLibTblCesStatusTypeController::class, 'index'])->name('ces-status-type-library.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblCesStatusTypeController::class, 'create'])->name('ces-status-type-library.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblCesStatusTypeController::class, 'store'])->name('ces-status-type-library.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblCesStatusTypeController::class, 'edit'])->name('ces-status-type-library.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblCesStatusTypeController::class, 'update'])->name('ces-status-type-library.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblCesStatusTypeController::class, 'destroy'])->name('ces-status-type-library.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblCesStatusTypeController::class, 'recentlyDeleted'])->name('ces-status-type-library.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'restore'])->name('ces-status-type-library.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCesStatusTypeController::class, 'forceDelete'])->name('ces-status-type-library.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('ces-status-acquired-thru-library')->group(function () {
