@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationTypeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkPermission:plantilla_view_library')->only('index');
+ 
+        $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
+ 
+        $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
+
+        $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
+    }
+
     public function index(Request $request)
     {
         $query = $request->input('search');
@@ -35,6 +47,7 @@ class LocationTypeController extends Controller
     {
         return view('admin.plantilla.library.agency_location.create');
     }
+    
     public function edit($agencyloc_Id)
     {
         $datas = AgencyLocationLibrary::withTrashed()->findOrFail($agencyloc_Id);
