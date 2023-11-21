@@ -279,4 +279,6 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.reports', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    
+
 }

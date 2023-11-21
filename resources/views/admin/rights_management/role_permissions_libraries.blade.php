@@ -17,7 +17,7 @@
 
 <div id="libraries_permissions" class="">
     
-    <form method="POST" id="libraries_permissions_form" action="{{ route('reportsPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
+    <form method="POST" id="libraries_permissions_form" action="{{ route('librariesPermissions.update', ['role_name' => $role_name, 'role_title' => $role_title]) }}">
         @csrf
     
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">

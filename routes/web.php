@@ -950,6 +950,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('permissions/competency/update/{role_name}/{role_title}', [PermissionsController::class, 'updateCompetencyPermissions'])->name('competencyPermissions.update');
         Route::post('permissions/plantilla/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePlantillaPermissions'])->name('plantillaPermissions.update');
         Route::post('permissions/reports/update/{role_name}/{role_title}', [PermissionsController::class, 'updateReportsPermissions'])->name('reportsPermissions.update');
+        Route::post('permissions/libraries/update/{role_name}/{role_title}', [PermissionsController::class, 'updateLibrariesPermissions'])->name('librariesPermissions.update');
 
         // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
         // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
