@@ -1129,15 +1129,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('expertise-specialization-library')->group(function () {
-            Route::get('index', [ProfileLibTblExpertiseSpecController::class, 'index'])->name('expertise-specialization.index');
-            Route::get('create', [ProfileLibTblExpertiseSpecController::class, 'create'])->name('expertise-specialization.create');
-            Route::post('store', [ProfileLibTblExpertiseSpecController::class, 'store'])->name('expertise-specialization.store');
-            Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit');
-            Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update');
-            Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy');
-            Route::get('recently-deleted', [ProfileLibTblExpertiseSpecController::class, 'recentlyDeleted'])->name('expertise-specialization.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'restore'])->name('expertise-specialization.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'forceDelete'])->name('expertise-specialization.forceDelete');
+            Route::get('index', [ProfileLibTblExpertiseSpecController::class, 'index'])->name('expertise-specialization.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblExpertiseSpecController::class, 'create'])->name('expertise-specialization.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblExpertiseSpecController::class, 'store'])->name('expertise-specialization.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblExpertiseSpecController::class, 'edit'])->name('expertise-specialization.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblExpertiseSpecController::class, 'update'])->name('expertise-specialization.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblExpertiseSpecController::class, 'destroy'])->name('expertise-specialization.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblExpertiseSpecController::class, 'recentlyDeleted'])->name('expertise-specialization.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'restore'])->name('expertise-specialization.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseSpecController::class, 'forceDelete'])->name('expertise-specialization.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('expertise-general-library')->group(function () {
