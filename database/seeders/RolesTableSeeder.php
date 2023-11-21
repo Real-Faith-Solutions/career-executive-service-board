@@ -319,6 +319,9 @@ class RolesTableSeeder extends Seeder
             '201_placement_reports',
             '201_birthday_cards_reports',
             '201_data_portability_reports',
+            '201_view_library',
+            'eris_view_library',
+            'plantilla_view_library',
         ];
         
         foreach ($permissions_cespes_operator as $permission) {
