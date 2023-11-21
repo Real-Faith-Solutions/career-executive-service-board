@@ -1105,15 +1105,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('case-nature-library')->group(function () {
-            Route::get('index', [ProfileLibTblCaseNatureController::class, 'index'])->name('case-nature-library.index');
-            Route::get('create', [ProfileLibTblCaseNatureController::class, 'create'])->name('case-nature-library.create');
-            Route::post('store', [ProfileLibTblCaseNatureController::class, 'store'])->name('case-nature-library.store');
-            Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit');
-            Route::put('update/{code}', [ProfileLibTblCaseNatureController::class, 'update'])->name('case-nature-library.update');
-            Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy');
-            Route::get('recently-deleted', [ProfileLibTblCaseNatureController::class, 'recentlyDeleted'])->name('case-nature-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'restore'])->name('case-nature-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'forceDelete'])->name('case-nature-library.forceDelete');
+            Route::get('index', [ProfileLibTblCaseNatureController::class, 'index'])->name('case-nature-library.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblCaseNatureController::class, 'create'])->name('case-nature-library.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblCaseNatureController::class, 'store'])->name('case-nature-library.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblCaseNatureController::class, 'edit'])->name('case-nature-library.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblCaseNatureController::class, 'update'])->name('case-nature-library.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblCaseNatureController::class, 'destroy'])->name('case-nature-library.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblCaseNatureController::class, 'recentlyDeleted'])->name('case-nature-library.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'restore'])->name('case-nature-library.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseNatureController::class, 'forceDelete'])->name('case-nature-library.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('case-status-library')->group(function () {
