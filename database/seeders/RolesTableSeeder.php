@@ -238,6 +238,9 @@ class RolesTableSeeder extends Seeder
             'eligibility_assessment_center_reports',
             'eligibility_validation_reports',
             'eligibility_board_interview_reports',
+            '201_view_library',
+            'eris_view_library',
+            'plantilla_view_library',
         ];
         
         foreach ($permissions_rank_officer as $permission) {
