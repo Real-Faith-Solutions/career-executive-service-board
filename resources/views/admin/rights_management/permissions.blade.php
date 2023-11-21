@@ -78,6 +78,18 @@
                 </td>
             </tr>
 
+            <tr class="border-b bg-white hover:bg-slate-400 hover:text-white uppercase">
+                <td class="px-6 py-3">
+                    Libraries
+                </td>
+
+                <td class="px-6 py-4 text-right uppercase">
+                    <div class="flex justify-end">
+                        <a href="{{ route('permissions.libraries', ['role_name' => $role_name, 'role_title' => $role_title]) }}" class="font-medium hover:text-blue-300">View</a>
+                    </div>
+                </td>
+            </tr>
+
         </tbody>
     </table>
 </div>
