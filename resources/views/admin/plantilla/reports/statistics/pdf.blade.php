@@ -974,18 +974,20 @@
     <section class="front-page page-break">
         <div style="margin-top:20%;margin-bottom: 30%;">
             <center>
-                <table width="100%">
-                    <td>
-                        <img src="{{ public_path('images/assets/branding.png') }}" width="150px"
-                            style="margin-top:5%;margin-left:40%;margin-top:30px;">
-                    </td>
-                    <td style="font-size:30px" class="uppercase bold">
-                        <h1>Career</h1>
-                        <h1>Executive</h1>
-                        <h1>Service</h1>
-                        <h1>Board</h1>
-                    </td>
 
+                <table width="100%">
+                    <td style="padding-left:120px;">
+                        <img src="{{ public_path('images/assets/branding.png') }}" width="200px">
+                    </td>
+                    <td style="padding-right:120px;">
+                        <img src="{{ public_path('fonts/ces_statistics.png') }}" width="220px">
+                        {{-- <div class="uppercase bold" style="font-size:24px">
+                            <h1>Career</h1>
+                            <h1>Executive</h1>
+                            <h1>Service</h1>
+                            <h1>Board</h1>
+                        </div> --}}
+                    </td>
                 </table>
             </center>
         </div>
