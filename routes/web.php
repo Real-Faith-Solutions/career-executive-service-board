@@ -881,7 +881,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     });
     //  end of ERIS routes
 
-    //  ERIS Report routes
+    //  ERIS Report/Eligibility and Rank Tracking routes
     Route::prefix('eris-report')->group(function () {
         Route::prefix('board-interview-report')->group(function () {
             Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
