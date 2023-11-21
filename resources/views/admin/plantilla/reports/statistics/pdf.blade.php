@@ -821,7 +821,6 @@
     <style>
         section {
             padding: 10%;
-            page-break-after: always;
         }
 
         .front-page {
@@ -913,7 +912,7 @@
 
         header {
             margin-bottom: 5%;
-            margin-top: -7%;
+            margin-top: -10%;
         }
 
         .text-blue {
@@ -925,12 +924,12 @@
         }
 
         .bg-blue {
-            background: #3b82f6;
+            background: #1F4E79;
             color: #fff;
         }
 
         .bg-cyan {
-            background: #93c5fd;
+            background: #BDD7EE;
         }
 
         .bg-yellow {
@@ -943,7 +942,7 @@
         }
 
         .bg-green {
-            background: #bbf7d0;
+            background: #C5E0B4;
             color: #000;
         }
 
@@ -964,14 +963,15 @@
         }
 
         td {
-            padding-right: 1%;
+            padding: 0 5px 0 0;
+            border: 2px solid #fff;
         }
     </style>
 
 </head>
 
 <body>
-    <section class="front-page">
+    <section class="front-page page-break">
         <div style="margin-top:20%;margin-bottom: 30%;">
             <center>
                 <table width="100%">
@@ -1000,7 +1000,7 @@
         </center>
     </section>
 
-    <section class="table-of-contents">
+    <section class="table-of-contents page-break">
         <h1 class="uppercase p-5 bold text-center mb-10 " style="border: 3px solid black; padding 5%;">
             Table of Contents
         </h1>
