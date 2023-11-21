@@ -952,15 +952,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('permissions/reports/update/{role_name}/{role_title}', [PermissionsController::class, 'updateReportsPermissions'])->name('reportsPermissions.update');
         Route::post('permissions/libraries/update/{role_name}/{role_title}', [PermissionsController::class, 'updateLibrariesPermissions'])->name('librariesPermissions.update');
 
-        // Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201');
-        // Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index');
-        // Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');
-        // Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201');
-        // Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit');
-        // Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201');
-        // Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
-        // Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
-        // Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
     });
     // End of Rights management routes
 
