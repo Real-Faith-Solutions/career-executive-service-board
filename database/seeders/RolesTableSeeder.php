@@ -111,6 +111,18 @@ class RolesTableSeeder extends Seeder
             'plantilla_nonces_occupying_ces_pos_reports',
             'plantilla_mailing_list_reports',
             'plantilla_list_of_officials_reports',
+            '201_view_library',
+            '201_add_library',
+            '201_edit_library',
+            '201_delete_library',
+            'eris_view_library',
+            'eris_add_library',
+            'eris_edit_library',
+            'eris_delete_library',
+            'plantilla_view_library',
+            'plantilla_add_library',
+            'plantilla_edit_library',
+            'plantilla_delete_library',
         ];
 
         foreach ($permissions_admin as $permission) {
@@ -188,6 +200,18 @@ class RolesTableSeeder extends Seeder
             'plantilla_nonces_occupying_ces_pos_reports',
             'plantilla_mailing_list_reports',
             'plantilla_list_of_officials_reports',
+            '201_view_library',
+            '201_add_library',
+            '201_edit_library',
+            '201_delete_library',
+            'eris_view_library',
+            'eris_add_library',
+            'eris_edit_library',
+            'eris_delete_library',
+            'plantilla_view_library',
+            'plantilla_add_library',
+            'plantilla_edit_library',
+            'plantilla_delete_library',
         ];
 
         foreach ($permissions_power_user as $permission) {

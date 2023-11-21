@@ -54,3 +54,9 @@ plantilla_management_view
 
 201_general_reports
 201_statistical_reports
+
+//libraries
+
+201_view_library
+eris_view_library
+plantilla_view_library

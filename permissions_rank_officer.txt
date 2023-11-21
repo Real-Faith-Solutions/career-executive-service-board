@@ -64,3 +64,9 @@ eligibility_ceswe_reports
 eligibility_assessment_center_reports
 eligibility_validation_reports
 eligibility_board_interview_reports
+
+//libraries
+
+201_view_library
+eris_view_library
+plantilla_view_library
