@@ -279,6 +279,46 @@ class PermissionsController extends Controller
         return redirect()->route('permissions.reports', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
     }
 
+    public function updateLibrariesPermissions(Request $request, $role_name, $role_title)
+    {
+        // Get the role and its current permissions
+        $role = Role::where('role_name', $role_name)->first();
+        $permissions = $role->permissions->pluck('permission_name')->toArray();
     
+        // Define the permissions in this form
+        $permissionsInThisForm = [
+            '201_view_library',
+            '201_add_library',
+            '201_edit_library',
+            '201_delete_library',
+            'eris_view_library',
+            'eris_add_library',
+            'eris_edit_library',
+            'eris_delete_library',
+            'plantilla_view_library',
+            'plantilla_add_library',
+            'plantilla_edit_library',
+            'plantilla_delete_library',
+        ];
+
+        // Get the submitted permissions
+        $submittedPermissions = $request->input('permissions');
+    
+        // Remove permissions that are no longer needed
+        $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToRemove as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->detach($permissionName);
+        }
+
+        // Add newly selected permissions
+        $permissionsToAdd = array_intersect($permissionsInThisForm, $submittedPermissions);
+        foreach ($permissionsToAdd as $permissionName) {
+            $permissionName = Permission::where('permission_name', $permissionName)->firstOrFail();
+            $role->permissions()->syncWithoutDetaching($permissionName);
+        }
+
+        return redirect()->route('permissions.libraries', compact('role_name', 'role_title'))->with('info', 'Permissions Updated!');
+    }
 
 }
