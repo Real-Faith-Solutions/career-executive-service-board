@@ -383,6 +383,9 @@ class RolesTableSeeder extends Seeder
             'plantilla_vacant_ces_positions_reports',
             'plantilla_nonces_occupying_ces_pos_reports',
             'plantilla_list_of_officials_reports',
+            '201_view_library',
+            'eris_view_library',
+            'plantilla_view_library',
         ];
         
         foreach ($permissions_agency_hr_operator as $permission) {
