@@ -1033,27 +1033,27 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('examination-library')->group(function () {
-            Route::get('index', [ProfileLibTblExamRefController::class, 'index'])->name('examination.index');
-            Route::get('create', [ProfileLibTblExamRefController::class, 'create'])->name('examination.create');
-            Route::post('store', [ProfileLibTblExamRefController::class, 'store'])->name('examination.store');
-            Route::get('edit/{code}', [ProfileLibTblExamRefController::class, 'edit'])->name('examination.edit');
-            Route::put('update/{code}', [ProfileLibTblExamRefController::class, 'update'])->name('examination.update');
-            Route::delete('destroy/{code}', [ProfileLibTblExamRefController::class, 'destroy'])->name('examination.destroy');
-            Route::get('recently-deleted', [ProfileLibTblExamRefController::class, 'recentlyDeleted'])->name('examination.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'restore'])->name('examination.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'forceDelete'])->name('examination.forceDelete');
+            Route::get('index', [ProfileLibTblExamRefController::class, 'index'])->name('examination.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblExamRefController::class, 'create'])->name('examination.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblExamRefController::class, 'store'])->name('examination.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblExamRefController::class, 'edit'])->name('examination.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblExamRefController::class, 'update'])->name('examination.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblExamRefController::class, 'destroy'])->name('examination.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblExamRefController::class, 'recentlyDeleted'])->name('examination.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'restore'])->name('examination.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExamRefController::class, 'forceDelete'])->name('examination.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('language-library')->group(function () {
-            Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language-library.index');
-            Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language-library.create');
-            Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store');
-            Route::get('edit/{code}', [ProfileLibTblLanguageRefController::class, 'edit'])->name('language-library.edit');
-            Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update');
-            Route::delete('destroy/{code}', [ProfileLibTblLanguageRefController::class, 'destroy'])->name('language-library.destroy');
-            Route::get('recently-deleted', [ProfileLibTblLanguageRefController::class, 'recentlyDeleted'])->name('language-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'restore'])->name('language-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'forceDelete'])->name('language-library.forceDelete');
+            Route::get('index', [ProfileLibTblLanguageRefController::class, 'index'])->name('language-library.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblLanguageRefController::class, 'create'])->name('language-library.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblLanguageRefController::class, 'store'])->name('language-library.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblLanguageRefController::class, 'edit'])->name('language-library.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblLanguageRefController::class, 'update'])->name('language-library.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblLanguageRefController::class, 'destroy'])->name('language-library.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblLanguageRefController::class, 'recentlyDeleted'])->name('language-library.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'restore'])->name('language-library.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblLanguageRefController::class, 'forceDelete'])->name('language-library.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('ces-status-library')->group(function () {
