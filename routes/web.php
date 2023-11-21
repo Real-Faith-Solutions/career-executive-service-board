@@ -1117,15 +1117,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('case-status-library')->group(function () {
-            Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index');
-            Route::get('create', [ProfileLibTblCaseStatusController::class, 'create'])->name('case-status-library.create');
-            Route::post('store', [ProfileLibTblCaseStatusController::class, 'store'])->name('case-status-library.store');
-            Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit');
-            Route::put('update/{code}', [ProfileLibTblCaseStatusController::class, 'update'])->name('case-status-library.update');
-            Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy');
-            Route::get('recently-deleted', [ProfileLibTblCaseStatusController::class, 'recentlyDeleted'])->name('case-status-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'restore'])->name('case-status-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'forceDelete'])->name('case-status-library.forceDelete');
+            Route::get('index', [ProfileLibTblCaseStatusController::class, 'index'])->name('case-status-library.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblCaseStatusController::class, 'create'])->name('case-status-library.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblCaseStatusController::class, 'store'])->name('case-status-library.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblCaseStatusController::class, 'edit'])->name('case-status-library.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblCaseStatusController::class, 'update'])->name('case-status-library.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblCaseStatusController::class, 'destroy'])->name('case-status-library.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblCaseStatusController::class, 'recentlyDeleted'])->name('case-status-library.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'restore'])->name('case-status-library.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblCaseStatusController::class, 'forceDelete'])->name('case-status-library.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('expertise-specialization-library')->group(function () {
