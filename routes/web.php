@@ -1157,15 +1157,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // Library routes (ERIS)
     Route::prefix('eris-library')->group(function () {
         Route::prefix('rank-tracker-library')->group(function () {
-            Route::get('index', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index');
-            Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create');
-            Route::post('store', [RankTrackerLibraryController::class, 'store'])->name('rank-tracker-library.store');
-            Route::get('edit/{code}', [RankTrackerLibraryController::class, 'edit'])->name('rank-tracker-library.edit');
-            Route::put('update/{code}', [RankTrackerLibraryController::class, 'update'])->name('rank-tracker-library.update');
-            Route::delete('destroy/{code}', [RankTrackerLibraryController::class, 'destroy'])->name('rank-tracker-library.destroy');
-            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'recentlyDeleted'])->name('rank-tracker-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [RankTrackerLibraryController::class, 'restore'])->name('rank-tracker-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [RankTrackerLibraryController::class, 'forceDelete'])->name('rank-tracker-library.forceDelete');
+            Route::get('index', [RankTrackerLibraryController::class, 'index'])->name('rank-tracker-library.index')->middleware('checkPermission:eris_view_library');
+            Route::get('create', [RankTrackerLibraryController::class, 'create'])->name('rank-tracker-library.create')->middleware('checkPermission:eris_add_library');
+            Route::post('store', [RankTrackerLibraryController::class, 'store'])->name('rank-tracker-library.store')->middleware('checkPermission:eris_add_library');
+            Route::get('edit/{code}', [RankTrackerLibraryController::class, 'edit'])->name('rank-tracker-library.edit')->middleware('checkPermission:eris_edit_library');
+            Route::put('update/{code}', [RankTrackerLibraryController::class, 'update'])->name('rank-tracker-library.update')->middleware('checkPermission:eris_edit_library');
+            Route::delete('destroy/{code}', [RankTrackerLibraryController::class, 'destroy'])->name('rank-tracker-library.destroy')->middleware('checkPermission:eris_delete_library');
+            Route::get('recently-deleted', [RankTrackerLibraryController::class, 'recentlyDeleted'])->name('rank-tracker-library.recentlyDeleted')->middleware('checkPermission:eris_delete_library');
+            Route::post('restore/recently-deleted/{code}', [RankTrackerLibraryController::class, 'restore'])->name('rank-tracker-library.restore')->middleware('checkPermission:eris_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [RankTrackerLibraryController::class, 'forceDelete'])->name('rank-tracker-library.forceDelete')->middleware('checkPermission:eris_delete_library');
         });
     });
     // End of Library routes (ERIS)
