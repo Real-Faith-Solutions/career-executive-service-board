@@ -1069,15 +1069,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('appointing-authority-library')->group(function () {
-            Route::get('index', [ProfileLibTblAppAuthorityController::class, 'index'])->name('appointing-authority-library.index');
-            Route::get('create', [ProfileLibTblAppAuthorityController::class, 'create'])->name('appointing-authority-library.create');
-            Route::post('store', [ProfileLibTblAppAuthorityController::class, 'store'])->name('appointing-authority-library.store');
-            Route::get('edit/{code}', [ProfileLibTblAppAuthorityController::class, 'edit'])->name('appointing-authority-library.edit');
-            Route::put('update/{code}', [ProfileLibTblAppAuthorityController::class, 'update'])->name('appointing-authority-library.update');
-            Route::delete('destroy/{code}', [ProfileLibTblAppAuthorityController::class, 'destroy'])->name('appointing-authority-library.destroy');
-            Route::get('recently-deleted', [ProfileLibTblAppAuthorityController::class, 'recentlyDeleted'])->name('appointing-authority-library.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'restore'])->name('appointing-authority-library.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'forceDelete'])->name('appointing-authority-library.forceDelete');
+            Route::get('index', [ProfileLibTblAppAuthorityController::class, 'index'])->name('appointing-authority-library.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblAppAuthorityController::class, 'create'])->name('appointing-authority-library.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblAppAuthorityController::class, 'store'])->name('appointing-authority-library.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblAppAuthorityController::class, 'edit'])->name('appointing-authority-library.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblAppAuthorityController::class, 'update'])->name('appointing-authority-library.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblAppAuthorityController::class, 'destroy'])->name('appointing-authority-library.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblAppAuthorityController::class, 'recentlyDeleted'])->name('appointing-authority-library.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'restore'])->name('appointing-authority-library.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblAppAuthorityController::class, 'forceDelete'])->name('appointing-authority-library.forceDelete')->middleware('checkPermission:201_delete_library');
         });
 
         Route::prefix('ces-status-type-library')->group(function () {
