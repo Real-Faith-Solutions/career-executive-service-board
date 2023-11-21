@@ -821,7 +821,6 @@
     <style>
         section {
             padding: 10%;
-            page-break-after: always;
         }
 
         .front-page {
@@ -913,7 +912,7 @@
 
         header {
             margin-bottom: 5%;
-            margin-top: -7%;
+            margin-top: -10%;
         }
 
         .text-blue {
@@ -925,12 +924,12 @@
         }
 
         .bg-blue {
-            background: #3b82f6;
+            background: #1F4E79;
             color: #fff;
         }
 
         .bg-cyan {
-            background: #93c5fd;
+            background: #BDD7EE;
         }
 
         .bg-yellow {
@@ -943,7 +942,7 @@
         }
 
         .bg-green {
-            background: #bbf7d0;
+            background: #C5E0B4;
             color: #000;
         }
 
@@ -964,14 +963,15 @@
         }
 
         td {
-            padding-right: 1%;
+            padding: 0 10px 0 3px;
+            border: 2px solid #fff;
         }
     </style>
 
 </head>
 
 <body>
-    <section class="front-page">
+    <section class="front-page page-break">
         <div style="margin-top:20%;margin-bottom: 30%;">
             <center>
                 <table width="100%">
@@ -1000,8 +1000,8 @@
         </center>
     </section>
 
-    <section class="table-of-contents">
-        <h1 class="uppercase p-5 bold text-center mb-10 " style="border: 3px solid black; padding 5%;">
+    <section class="table-of-contents page-break">
+        <h1 class="uppercase p-5 bold text-center mb-10 " style="border: 3px solid black; padding 5%;font-size: 24px;">
             Table of Contents
         </h1>
 
@@ -1074,14 +1074,14 @@
         <div class="text-center mb-3">
             <h1 class="bold">{{ $motherDepartmentAgency->title }}</h1>
 
-            <p class="italic">
+            <p class="italic" style="font-size: 12px">
                 (Data as of
                 {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
 
-        <table class="mb-3 w-100">
+        <table class="mb-3 w-100" style="font-size: 12px">
             <tr>
                 <td colspan="8" class="uppercase bold">Total no. of ces positions</td>
                 <td colspan="1" class="text-white bold bg-blue text-right p-1">{{ $totalPosition }}</td>
@@ -1122,14 +1122,14 @@
         <div class="text-center mb-3">
             <h1 class="bold">{{ $motherDepartmentAgency->title }}</h1>
 
-            <p class="italic">
+            <p class="italic" style="font-size: 12px">
                 (Data as of
                 {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
 
-        <table class="mb-3 w-100">
+        <table class="mb-3 w-100" style="font-size: 12px">
             <tr>
                 <td colspan="8" class="uppercase bold">Total no. of ces positions</td>
                 <td colspan="1" class="text-white bold bg-blue text-right">{{ $totalPosition }}</td>
