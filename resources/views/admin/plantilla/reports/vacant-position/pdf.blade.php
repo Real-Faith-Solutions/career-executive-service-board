@@ -8,6 +8,10 @@
 
     {{-- custom css --}}
     <style>
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
         @page {
             margin-top: 75px;
             padding-bottom: 100px;
@@ -24,7 +28,7 @@
 
         footer {
             position: fixed;
-            bottom: -40px;
+            bottom: 0px;
             /* Adjust this value as needed */
             width: 100%;
             text-align: center;
@@ -1021,279 +1025,94 @@
     <footer>
         <table width="100%">
             <tr>
-                <td class="bold">
-                    Date Printed {{ $currentDate }}
-                </td>
-                <td colspan="5">
-                    CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
-                    by the Agency.
+                <td>
+                    List of Vacant CES Positions
                 </td>
 
-                <td>
-                    <table>
-                        <tr>
-                            <td>Legend:</td>
-                            <td>
-                                <p
-                                    style="border:1px solid gray; background:yellow; width:auto; padding: 5px;margin-bottom:2px">
-                                </p>
-                                <p style="border:1px solid gray; background:#84A1C6; width:auto; padding: 5px"></p>
-                                <!-- <p style="border:1px solid gray; background:#84A1C6; width:auto">.</p> -->
-                            </td>
-                            <td>
-                                <p>- Non-CES Eligible</p>
-                                <p>- Vacant CES Position</p>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
+                <td style="text-align: right">
                     <div class="">Page <span class="pagenum"></span></div>
                 </td>
             </tr>
         </table>
     </footer>
 
-    <table width="100%">
+    <br>
+    <center>
+        <h1 class="text-blue uppercase" style="font-size:16px;">
+            {{ $motherDepartmentAgency->title }}
+        </h1>
+        <h1>
+            List of Vacant Position
+        </h1>
+        <p>
+            data as of {{ $currentDate }}
+        </p>
+    </center>
+    <br />
+    <table width="100%" style="padding: 5px;">
         <thead>
             <tr style="font-size: 11px;">
-                <th>AGENCY / POSITION</th>
+                <th>NO.</th>
+                <th>OFFICE</th>
+                <th>POSITION</th>
                 <th>SG</th>
-                <th>ITEM NO.</th>
-                <th>APPOINTEE</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
-                <th>OCCUPANT</th>
-                <th>APPOINTMENT DATE</th>
-                <th>REMARKS</th>
+                <th>DBM ITEM NO.</th>
+                <th>FULLNAME</th>
+                <th>CES STATUS</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($office as $officeDatas)
+
+        @foreach ($planPosition as $planPositionDatas)
+            @php
+                $selectedOccupant = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first();
+
+                if (!$selectedOccupant) {
+            @endphp
             <tr style="font-size:11px">
+                <th>
+                    {{ $no++ }}
+                </th>
                 <td>
-                    <h1 class="text-blue bold">
-                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
-                    </h1>
-                </td>
-            </tr>
-            @php
-            $currentPosDefault = null;
-            $count = 0;
-            @endphp
-            @foreach($planPosition as $planPositionDatas)
-            @if($officeDatas->officeid == $planPositionDatas->officeid)
-            @if($planPositionDatas->pos_default !== $currentPosDefault)
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
-                <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
-                </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
-            @php
-            $currentPosDefault = $planPositionDatas->pos_default;
-            $count = 1;
-            @endphp
-            @else
-            @php
-            $count++;
-            @endphp
-            @endif
-            <tr style="font-size:11px;background:#e5e7eb;">
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->pos_default }}
-                        <br />
-                        
-
-                            @if($planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first()
-                                ->planPosition
-                                ->pos_suffix ?? '')
-                                
-                                
-                                ({{ optional($planPositionDatas->planAppointee
-                                    ->where('is_appointee', 1)
-                                    ->first())
-                                    ->planPosition
-                                    ->pos_suffix ?? ''
-                                }})
-                            @endif
-                        
-                        
-                    </h1>
+                    {{ $planPositionDatas->office->title ?? '' }}
                 </td>
                 <td>
-                    <h1>
-                        {{ $planPositionDatas->corp_sg }}
-                    </h1>
+                    {{ $planPositionDatas->pos_default ?? '' }}
+                </td>
+                <td class="text-center">
+                    {{ $planPositionDatas->corp_sg ?? '' }}
                 </td>
                 <td>
-                    <h1>
-                        {{ $planPositionDatas->item_no }}
-                    </h1>
-                </td>
-                <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first();
-
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
-
-                            if(!$selectedAppointee){
-                                echo 'background: #84A1C6;';
-                                // if this executes I want to print 'VACANT with this background color'
-                            }
-                        @endphp
-                    ">
-
-                    @if(!$selectedAppointee)
-                    <h1>VACANT</h1>
-                    @endif
-                    
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
-
-                </td>
-
-                <td>
-                    @php
-                        $selectedAppointee = $planPositionDatas->planAppointee
-                        ->where('is_appointee', 1)
-                        ->first();
-                    @endphp
-
-                    @if($selectedAppointee->appt_date ?? '')
-                        {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
-                    @endif
-                    
-                </td>
-                <td>{{ $planPositionDatas->remarks ?? ''}}</td>
-
-                <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 0)
-                                ->first();
-
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
-                        @endphp
-                    ">
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                    {{ $planPositionDatas->item_no ?? '' }}
                 </td>
                 <td>
                     @php
                         $selectedOccupant = $planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first();
+                        ->where('is_appointee', 0)
+                        ->first();
                     @endphp
-
-                    @if ($selectedOccupant && $selectedOccupant->appt_date)
-                        {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
-                    @endif
-
+                    {{ $selectedOccupant->personalData->lastname ?? '' }}
+                    {{ $selectedOccupant->personalData->middlename ?? '' }}
+                    {{ $selectedOccupant->personalData->firstname ?? '' }}
                 </td>
                 <td>
-                    <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
+                    @php
+                        $selectedOccupant = $planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first();
+                    @endphp
+                    {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
                 </td>
             </tr>
-            @endif
+                @php
+                    }
+                @endphp
             @endforeach
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
-                <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
-                </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
-            @endforeach
+
+
         </tbody>
-
-
-
     </table>
 
 </body>
