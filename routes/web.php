@@ -95,6 +95,7 @@ use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
+use App\Http\Controllers\Plantilla\Reports\VacantPositionController;
 use App\Http\Controllers\Plantilla\SectorManagerController;
 use App\Http\Controllers\ProfileLibTblEducDegreeController;
 use App\Http\Controllers\ProfileLibTblEducSchoolController;
@@ -626,6 +627,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index');
             Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf');
+
+            Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index');
+            Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf');
         });
     });
     // End of plantilla routes

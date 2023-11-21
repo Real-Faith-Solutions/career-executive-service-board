@@ -38,14 +38,22 @@ class OccupancyReportController extends Controller
                     ->where('pres_apptee', 1)
                     ->where('is_active', true);
             })
-
+            ->with(['planAppointee.personalData']) // Eager load relationships
             ->orderBy('corp_sg', 'desc')
+            ->orderBy('item_no', 'desc') // Add this line to order by item_no
             ->get();
 
-        $counts = []; // Initialize an array to store counts
+        // Sorting the collection based on corp_sg, item_no, and lastname
+        $planPosition = $planPosition->sortBy([
+            ['corp_sg', 'desc'],
+            ['item_no', 'asc'],
+            ['planAppointee.personalData.lastname', 'asc'],
+        ]);
 
+        // Rest of your code remains unchanged
+        $counts = [];
         foreach ($office as $officeDatas) {
-            $counts[$officeDatas->officeid] = []; // Initialize counts for each office
+            $counts[$officeDatas->officeid] = [];
             foreach ($planPosition as $planPositionDatas) {
                 if ($officeDatas->officeid == $planPositionDatas->officeid) {
                     $posDefault = $planPositionDatas->pos_default;
