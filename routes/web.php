@@ -1141,15 +1141,15 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('expertise-general-library')->group(function () {
-            Route::get('index', [ProfileLibTblExpertiseGenController::class, 'index'])->name('expertise-general.index');
-            Route::get('create', [ProfileLibTblExpertiseGenController::class, 'create'])->name('expertise-general.create');
-            Route::post('store', [ProfileLibTblExpertiseGenController::class, 'store'])->name('expertise-general.store');
-            Route::get('edit/{code}', [ProfileLibTblExpertiseGenController::class, 'edit'])->name('expertise-general.edit');
-            Route::put('update/{code}', [ProfileLibTblExpertiseGenController::class, 'update'])->name('expertise-general.update');
-            Route::delete('destroy/{code}', [ProfileLibTblExpertiseGenController::class, 'destroy'])->name('expertise-general.destroy');
-            Route::get('recently-deleted', [ProfileLibTblExpertiseGenController::class, 'recentlyDeleted'])->name('expertise-general.recentlyDeleted');
-            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'restore'])->name('expertise-general.restore');
-            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'forceDelete'])->name('expertise-general.forceDelete');
+            Route::get('index', [ProfileLibTblExpertiseGenController::class, 'index'])->name('expertise-general.index')->middleware('checkPermission:201_view_library');
+            Route::get('create', [ProfileLibTblExpertiseGenController::class, 'create'])->name('expertise-general.create')->middleware('checkPermission:201_add_library');
+            Route::post('store', [ProfileLibTblExpertiseGenController::class, 'store'])->name('expertise-general.store')->middleware('checkPermission:201_add_library');
+            Route::get('edit/{code}', [ProfileLibTblExpertiseGenController::class, 'edit'])->name('expertise-general.edit')->middleware('checkPermission:201_edit_library');
+            Route::put('update/{code}', [ProfileLibTblExpertiseGenController::class, 'update'])->name('expertise-general.update')->middleware('checkPermission:201_edit_library');
+            Route::delete('destroy/{code}', [ProfileLibTblExpertiseGenController::class, 'destroy'])->name('expertise-general.destroy')->middleware('checkPermission:201_delete_library');
+            Route::get('recently-deleted', [ProfileLibTblExpertiseGenController::class, 'recentlyDeleted'])->name('expertise-general.recentlyDeleted')->middleware('checkPermission:201_delete_library');
+            Route::post('restore/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'restore'])->name('expertise-general.restore')->middleware('checkPermission:201_delete_library');
+            Route::delete('force-delete/recently-deleted/{code}', [ProfileLibTblExpertiseGenController::class, 'forceDelete'])->name('expertise-general.forceDelete')->middleware('checkPermission:201_delete_library');
         });
     });
     // End of Library routes (201)
