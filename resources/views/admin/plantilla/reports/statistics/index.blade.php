@@ -228,6 +228,7 @@
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
 
                                 <tr>
                                     <td class="px-6 py-4 whitespace-no-wrap">
@@ -238,7 +239,6 @@
                                         </a>
                                     </td>
                                 </tr>
-                                @endforeach
                             </tbody>
                         </table>
 

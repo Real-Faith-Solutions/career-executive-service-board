@@ -997,6 +997,9 @@
             <h1 class="bold">
                 CES Occupancy Figures
             </h1>
+            <p class="italic" style="font-size: 12px">
+                as of {{ $currentDate }}
+            </p>
         </div>
 
         <table class="mb-3 w-100" style="font-size: 12px">
@@ -1038,12 +1041,11 @@
 
 
         <div class="text-center mb-3">
-            <h1 class="bold">{{ $motherDepartmentAgency->title }}</h1>
-
+            <h1 class="bold">
+                CES Occupancy Figures
+            </h1>
             <p class="italic" style="font-size: 12px">
-                (Data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
-                last submission of CES Plantilla)
+                as of {{ $currentDate }}
             </p>
         </div>
 
