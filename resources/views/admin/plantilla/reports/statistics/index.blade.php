@@ -228,6 +228,16 @@
                                         </a>
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap">
+                                        <a class="text-sm leading-5 text-gray-900 hover:text-blue-500"
+                                            href="{{ route('ces-occupancy-statistics-report-summary.pdf', 'occupancy') }}"
+                                            target="_blank" title="Generate PDF">
+                                            CES Occupancy Statistics Report Summary
+                                        </a>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
