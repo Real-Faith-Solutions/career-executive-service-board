@@ -26,6 +26,7 @@ use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\Competency\TrainingVenueManagerReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactInfoController;
+use App\Http\Controllers\DeclineFile201Controller;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
@@ -427,6 +428,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
 
         Route::prefix('pdf-file')->group(function () {
+            Route::prefix('201-decline-files')->group(function () {
+                Route::get('index/{cesno}', [DeclineFile201Controller::class, 'index'])->name('201-decline-files.index')->middleware('checkPermission:pdf_files_view');
+            });
+
             Route::prefix('201-pdf-files')->group(function () {
                 Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
                 Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
