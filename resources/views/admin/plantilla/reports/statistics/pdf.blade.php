@@ -4,6 +4,7 @@
 <head>
     <title>{{ $motherDepartmentAgency->acronym }}.pdf</title>
     {{-- reset attributes --}}
+    
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -819,6 +820,18 @@
 
     {{-- custom css --}}
     <style>
+        @font-face {
+            font-family: "Busorama";
+            src: url('{{ asset(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .busorama {
+            font-family: 'Busorama';
+        }
+
         section {
             padding: 10%;
         }
@@ -980,13 +993,13 @@
                         <img src="{{ public_path('images/assets/branding.png') }}" width="200px">
                     </td>
                     <td style="padding-right:120px;">
-                        <img src="{{ public_path('fonts/ces_statistics.png') }}" width="220px">
-                        {{-- <div class="uppercase bold" style="font-size:24px">
-                            <h1>Career</h1>
-                            <h1>Executive</h1>
-                            <h1>Service</h1>
-                            <h1>Board</h1>
-                        </div> --}}
+                        {{-- <img src="{{ public_path('fonts/ces_statistics.png') }}" width="220px"> --}}
+                        <div class="busorama" style="font-size:26px;">
+                            <h1>CAREER</h1>
+                            <h1>EXECUTIVE</h1>
+                            <h1>SERVICE</h1>
+                            <h1>BOARD</h1>
+                        </div>
                     </td>
                 </table>
             </center>
@@ -1059,7 +1072,9 @@
         <header>
             <center>
                 <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-                <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
+                <h1 class="text-blue busorama" style="font-size:24px;">
+                    CAREER EXECUTIVE SERVICE BOARD
+                </h1>
 
                 <div style="font-size:11px;">
                     <p>
