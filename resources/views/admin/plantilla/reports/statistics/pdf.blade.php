@@ -115,7 +115,7 @@
         }
     
         .text-blue {
-            color: #3b82f6;
+            color: #1F4E79;
         }
     
         .text-red {
