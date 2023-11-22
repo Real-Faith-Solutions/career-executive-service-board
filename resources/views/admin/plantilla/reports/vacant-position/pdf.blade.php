@@ -8,6 +8,18 @@
 
     {{-- custom css --}}
     <style>
+        @font-face {
+            font-family: "Busorama";
+            src: url('{{ asset(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .busorama {
+            font-family: 'Busorama';
+        }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -999,7 +1011,7 @@
 
     <center>
         <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-        <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
+        <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
 
         <div style="font-size:11px;">
             <p>
@@ -1044,14 +1056,14 @@
     <br />
     <table width="100%" style="padding: 5px;">
         <thead>
-            <tr class="text-blue" style="font-size: 11px;">
-                <th>NO.</th>
-                <th>OFFICE</th>
-                <th>POSITION</th>
-                <th>SG</th>
-                <th>DBM ITEM NO.</th>
-                <th>FULLNAME</th>
-                <th>CES STATUS</th>
+            <tr class="text-center text-blue" style="font-size: 11px;">
+                <td>NO.</td>
+                <td>OFFICE</td>
+                <td>POSITION</td>
+                <td>SG</td>
+                <td>DBM ITEM NO.</td>
+                <td>FULLNAME</td>
+                <td>CES STATUS</td>
             </tr>
         </thead>
         <tbody>
