@@ -386,44 +386,65 @@ class StatisticsController extends Controller
             $percentageNonCES = null;
         }
 
-        $totalMaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1);
-        })
-            ->whereHas('personalData', function ($query) {
-                $query->where('gender', 'Male');
+        $totalMaleCESOChart = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CES%')
+                                    ->orWhere('description', 'LIKE', '%Eli%');
+                            });
+                    });
             })
             ->count();
 
+        $totalMale = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male');
+                    });
+            })
+            ->count();
+        $totalMaleNonCESOChart = ($totalMale - $totalMaleCESOChart);
 
-        $totalFemaleCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1);;
-        })
-            ->whereHas('personalData', function ($query) {
-                $query->where('gender', 'Female');
+
+        $totalFemaleCESOChart = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Female')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CES%')
+                                    ->orWhere('description', 'LIKE', '%Eli%');
+                            });
+                    });
             })
             ->count();
 
-        $totalMaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', '!=', 1)
-                ->orWhere('pres_apptee', '!=', 1);
-        })
-            ->whereHas('personalData', function ($query) {
-                $query->where('gender', 'Male');
+        $totalFemale = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Female');
+                    });
             })
             ->count();
-        $totalFemaleNonCESOChart = PlanAppointee::whereHas('planPosition', function ($query) {
-            $query->where('is_ces_pos', '!=', 1)
-                ->orWhere('pres_apptee', '!=', 1);
-        })
-            ->whereHas('personalData', function ($query) {
-                $query->where('gender', 'Female');
-            })
-            ->count();
+        $totalFemaleNonCESOChart = ($totalFemale - $totalFemaleCESOChart);
 
-        $totalMale = $totalMaleCESOChart + $totalMaleNonCESOChart;
-        $totalFemale = $totalFemaleCESOChart + $totalFemaleNonCESOChart;
 
         $datas = [
             'recentAppointee' => $recentAppointee,
