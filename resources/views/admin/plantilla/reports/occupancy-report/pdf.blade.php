@@ -138,7 +138,7 @@
         }
 
         .text-blue {
-            color: #245188;
+            color: #1F4E79;
         }
 
         .text-red {
@@ -146,7 +146,7 @@
         }
 
         .bg-blue {
-            background: #245188;
+            background: #1F4E79;
             color: #fff;
         }
 
