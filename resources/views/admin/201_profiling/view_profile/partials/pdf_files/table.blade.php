@@ -4,17 +4,23 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('show-pdf-files.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-      </lord-icon>
-    </a>
+<div class="my-5 flex justify-between">
+    <div class="flex">
+        <a href="{{ route('201-decline-files.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Declined File</a>
+    </div>
 
-    <a href="{{ route('show-pdf-files.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">PDF File</a>
+    <div class="flex">
+        <a href="{{ route('show-pdf-files.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+          </lord-icon>
+        </a>
+    
+        <a href="{{ route('show-pdf-files.create', ['cesno'=>$cesno]) }}" class="btn btn-primary">PDF File</a>
+    </div>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -46,7 +52,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Request By
+                    Request By asdasdad
                 </th>
 
                 <th scope="col" class="px-6 py-3">

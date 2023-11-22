@@ -1,14 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Approved Files')
-@section('sub', 'Approved Files')
+@section('title', '201 Decline File')
+@section('sub', 'Decline File')
 @section('content')
+@include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="flex justify-between mb-7">
-    <a href="#" class="flex items-center">
-        <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">@yield('sub')</span>
-    </a>
-
-    <a href="{{ route('show-pending-pdf-files.pendingFiles') }}" class="btn btn-primary" >Go Back</a>
+<div class="flex justify-end mb-7">
+    <a href="{{ route('show-pdf-files.index', ['cesno'=>$cesno]) }}" class="btn btn-primary">Go Back</a>
 </div>
 
 <div class="relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -28,31 +25,27 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Date Approved
-                </th>
-
-                <th scope="col" class="px-6 py-3">
                     Remarks
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Approved By
+                    Decline Date
+                </th>
+
+                <th scope="col" class="px-6 py-3">
+                    Declined By
                 </th>
 
                 <th scope="col" class="px-6 py-3">
                     Reason
                 </th>
-
-                <th scope="col" class="px-6 py-3">
-                    <span class="sr-only">Action</span>
-                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($approvedFile as $approvedFiles)
+            @foreach ($pendingFileTrashedRecord as $pendingFileTrashedRecords)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        <form action="{{ route('streamApprovedFile', ['ctrlno'=>$approvedFiles->ctrlno, 'fileName'=>$approvedFiles->original_pdflink]) }}" target="_blank" method="POST">
+                        <form action="{{ route('downloadPendingFile', ['ctrlno'=>$pendingFileTrashedRecords->ctrlno, 'fileName'=>$pendingFileTrashedRecords->request_unique_file_name]) }}" target="_blank" method="POST">
                             @csrf
                             <button title="Download File" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
                                 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
@@ -68,54 +61,32 @@
                     </td>
 
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $approvedFiles->original_pdflink }}
+                        {{ $pendingFileTrashedRecords->request_unique_file_name }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedFiles->request_date }}
+                        {{ $pendingFileTrashedRecords->created_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedFiles->created_at }}
+                        {{ $pendingFileTrashedRecords->remarks }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedFiles->remarks }}
+                        {{ $pendingFileTrashedRecords->deleted_at }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedFiles->encoder }}
+                        {{ $pendingFileTrashedRecords->encoder }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $approvedFiles->reason }}
-                    </td>
-
-                    <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
-                            <form action="{{ route('deleteApprovedFile', ['ctrlno'=>$approvedFiles->ctrlno]) }}" method="POST" id="permanent_pdf_file_form{{$approvedFiles->ctrlno}}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" id="permanentPdfFileButton{{$approvedFiles->ctrlno}}" onclick="openConfirmationDialog(this, 'Confirm Permanent Deletion', 'Are you sure you want to permanently delete this file?')">
-                                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                    <lord-icon
-                                        src="https://cdn.lordicon.com/jmkrnisz.json"
-                                        trigger="hover"
-                                        colors="primary:#880808"
-                                        style="width:24px;height:24px">
-                                    </lord-icon>
-                                </button>
-                            </form> 
-                        </div>
+                        {{ $pendingFileTrashedRecords->reason }}
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</div>
-
-<div class="m-5">
-    {{ $approvedFile->links() }}
 </div>
 
 @endsection
