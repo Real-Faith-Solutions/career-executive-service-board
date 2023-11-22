@@ -1,0 +1,117 @@
+StartFontMetrics 4.1
+Notice Converted by PHP-font-lib
+Comment https://github.com/PhenX/php-font-lib
+EncodingScheme FontSpecific
+Copyright Freeware! from A. Carr Remember to vote! If you don't vote, you can't bitch!
+FontName Busorama
+FontSubfamily Regular
+UniqueID FontMonger:Busorama
+FullName Busorama
+Version 0.0
+PostScriptName Busorama
+Trademark 
+Weight Medium
+ItalicAngle 0
+IsFixedPitch false
+UnderlineThickness 24
+UnderlinePosition -49
+FontHeightOffset 0
+Ascender 779
+Descender -164
+FontBBox 0 -154 836 820
+StartCharMetrics 96
+U 32 ; WX 400 ; N space ; G 50
+U 33 ; WX 186 ; N exclam ; G 52
+U 34 ; WX 150 ; N quotedbl ; G 84
+U 35 ; WX 506 ; N numbersign ; G 54
+U 36 ; WX 445 ; N dollar ; G 55
+U 37 ; WX 691 ; N percent ; G 56
+U 38 ; WX 639 ; N ampersand ; G 58
+U 39 ; WX 156 ; N quotesingle ; G 39
+U 40 ; WX 393 ; N parenleft ; G 60
+U 41 ; WX 393 ; N parenright ; G 61
+U 42 ; WX 447 ; N asterisk ; G 59
+U 43 ; WX 512 ; N plus ; G 63
+U 44 ; WX 156 ; N comma ; G 47
+U 45 ; WX 541 ; N hyphen ; G 14
+U 46 ; WX 156 ; N period ; G 48
+U 47 ; WX 340 ; N slash ; G 49
+U 48 ; WX 863 ; N zero ; G 13
+U 49 ; WX 309 ; N one ; G 4
+U 50 ; WX 610 ; N two ; G 5
+U 51 ; WX 600 ; N three ; G 6
+U 52 ; WX 545 ; N four ; G 7
+U 53 ; WX 613 ; N five ; G 8
+U 54 ; WX 610 ; N six ; G 9
+U 55 ; WX 500 ; N seven ; G 10
+U 56 ; WX 530 ; N eight ; G 11
+U 57 ; WX 610 ; N nine ; G 12
+U 58 ; WX 176 ; N colon ; G 83
+U 59 ; WX 176 ; N semicolon ; G 38
+U 60 ; WX 545 ; N less ; G 92
+U 61 ; WX 516 ; N equal ; G 15
+U 62 ; WX 545 ; N greater ; G 93
+U 63 ; WX 456 ; N question ; G 94
+U 64 ; WX 791 ; N at ; G 53
+U 65 ; WX 530 ; N A ; G 74
+U 66 ; WX 430 ; N B ; G 89
+U 67 ; WX 720 ; N C ; G 87
+U 68 ; WX 530 ; N D ; G 76
+U 69 ; WX 460 ; N E ; G 66
+U 70 ; WX 415 ; N F ; G 77
+U 71 ; WX 720 ; N G ; G 78
+U 72 ; WX 680 ; N H ; G 79
+U 73 ; WX 150 ; N I ; G 71
+U 74 ; WX 370 ; N J ; G 80
+U 75 ; WX 520 ; N K ; G 81
+U 76 ; WX 370 ; N L ; G 82
+U 77 ; WX 665 ; N M ; G 91
+U 78 ; WX 555 ; N N ; G 90
+U 79 ; WX 865 ; N O ; G 72
+U 80 ; WX 425 ; N P ; G 73
+U 81 ; WX 865 ; N Q ; G 64
+U 82 ; WX 460 ; N R ; G 67
+U 83 ; WX 450 ; N S ; G 75
+U 84 ; WX 555 ; N T ; G 68
+U 85 ; WX 495 ; N U ; G 70
+U 86 ; WX 545 ; N V ; G 88
+U 87 ; WX 860 ; N W ; G 65
+U 88 ; WX 690 ; N X ; G 86
+U 89 ; WX 630 ; N Y ; G 69
+U 90 ; WX 580 ; N Z ; G 85
+U 91 ; WX 221 ; N bracketleft ; G 26
+U 92 ; WX 362 ; N backslash ; G 28
+U 93 ; WX 221 ; N bracketright ; G 27
+U 94 ; WX 440 ; N asciicircum ; G 57
+U 95 ; WX 540 ; N underscore ; G 62
+U 96 ; WX 225 ; N grave ; G 3
+U 97 ; WX 530 ; N a ; G 29
+U 98 ; WX 430 ; N b ; G 44
+U 99 ; WX 720 ; N c ; G 42
+U 100 ; WX 530 ; N d ; G 31
+U 101 ; WX 720 ; N e ; G 18
+U 102 ; WX 415 ; N f ; G 32
+U 103 ; WX 720 ; N g ; G 33
+U 104 ; WX 680 ; N h ; G 34
+U 105 ; WX 150 ; N i ; G 23
+U 106 ; WX 370 ; N j ; G 35
+U 107 ; WX 520 ; N k ; G 36
+U 108 ; WX 370 ; N l ; G 37
+U 109 ; WX 665 ; N m ; G 46
+U 110 ; WX 555 ; N n ; G 45
+U 111 ; WX 865 ; N o ; G 24
+U 112 ; WX 425 ; N p ; G 25
+U 113 ; WX 865 ; N q ; G 16
+U 114 ; WX 460 ; N r ; G 19
+U 115 ; WX 450 ; N s ; G 30
+U 116 ; WX 555 ; N t ; G 20
+U 117 ; WX 495 ; N u ; G 22
+U 118 ; WX 545 ; N v ; G 43
+U 119 ; WX 860 ; N w ; G 17
+U 120 ; WX 690 ; N x ; G 41
+U 121 ; WX 630 ; N y ; G 21
+U 122 ; WX 580 ; N z ; G 40
+U 126 ; WX 379 ; N asciitilde ; G 51
+U 160 ; WX 750 ; N nbspace ; G 95
+EndCharMetrics
+EndFontMetrics

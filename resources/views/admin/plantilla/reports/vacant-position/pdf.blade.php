@@ -8,6 +8,18 @@
 
     {{-- custom css --}}
     <style>
+        @font-face {
+            font-family: "Busorama";
+            src: url('{{ public_path(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .busorama {
+            font-family: 'Busorama';
+        }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -60,7 +72,7 @@
             /* Vertically center items */
         }
 
-        .font-algerian {
+        .algerian {
             font-family: 'Algerian';
         }
 
@@ -124,13 +136,8 @@
             margin-bottom: 5%
         }
 
-        header {
-            margin-bottom: 5%;
-            margin-top: -7%;
-        }
-
         .text-blue {
-            color: #3b82f6;
+            color: #1F4E79;
         }
 
         .text-red {
@@ -138,7 +145,7 @@
         }
 
         .bg-blue {
-            background: #3b82f6;
+            background: #1F4E79;
             color: #fff;
         }
 
@@ -1002,25 +1009,23 @@
 
 <body>
 
-    <table class="mb-3" width="100%">
-        <td colspan="6">
-            <h1 class="bold" style="font-size:12px">Career Executive Service Occupancy Report</h1>
-            <h1 class="bold uppercase text-blue">{{ $motherDepartmentAgency->title }}</h1>
-            <h1 class="bold" style="font-size:12px">
-                data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}
-            </h1>
-        </td>
+    <center>
+        <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
+        <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
 
-        <td colspan="6" style="text-align: right">
-            <h1 class="uppercase" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
-            <h1 style="font-size: 9px">No. 3 Marcelino St., Holy Spirit Drive, Diliman, Quezon City 1127</h1>
-            <h1 style="font-size: 9px">Tel. 8951-4981 to 88 Fax. 8931-5732 www.cesboard.gov.ph</h1>
-        </td>
-        <td colspan="1">
-            <img src="{{ public_path('images/assets/branding.png') }}" width="70px" />
-        </td>
-    </table>
+        <div style="font-size:11px;">
+            <p>
+                No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
+            </p>
+            <p>
+                Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 / 8363-1532 /
+                8255-8341
+            </p>
+            <p>
+                <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
+            </p>
+        </div>
+    </center>
 
     <footer>
         <table width="100%">
@@ -1051,25 +1056,25 @@
     <br />
     <table width="100%" style="padding: 5px;">
         <thead>
-            <tr style="font-size: 11px;">
-                <th>NO.</th>
-                <th>OFFICE</th>
-                <th>POSITION</th>
-                <th>SG</th>
-                <th>DBM ITEM NO.</th>
-                <th>FULLNAME</th>
-                <th>CES STATUS</th>
+            <tr class="text-center text-blue" style="font-size: 11px;">
+                <td>NO.</td>
+                <td>OFFICE</td>
+                <td>POSITION</td>
+                <td>SG</td>
+                <td>DBM ITEM NO.</td>
+                <td>FULLNAME</td>
+                <td>CES STATUS</td>
             </tr>
         </thead>
         <tbody>
 
-        @foreach ($planPosition as $planPositionDatas)
+            @foreach ($planPosition as $planPositionDatas)
             @php
-                $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first();
+            $selectedOccupant = $planPositionDatas->planAppointee
+            ->where('is_appointee', 1)
+            ->first();
 
-                if (!$selectedOccupant) {
+            if (!$selectedOccupant) {
             @endphp
             <tr style="font-size:11px">
                 <th>
@@ -1089,9 +1094,9 @@
                 </td>
                 <td>
                     @php
-                        $selectedOccupant = $planPositionDatas->planAppointee
-                        ->where('is_appointee', 0)
-                        ->first();
+                    $selectedOccupant = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first();
                     @endphp
                     {{ $selectedOccupant->personalData->lastname ?? '' }}
                     {{ $selectedOccupant->personalData->middlename ?? '' }}
@@ -1099,16 +1104,16 @@
                 </td>
                 <td>
                     @php
-                        $selectedOccupant = $planPositionDatas->planAppointee
-                        ->where('is_appointee', 0)
-                        ->first();
+                    $selectedOccupant = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first();
                     @endphp
                     {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
                 </td>
             </tr>
-                @php
-                    }
-                @endphp
+            @php
+            }
+            @endphp
             @endforeach
 
 

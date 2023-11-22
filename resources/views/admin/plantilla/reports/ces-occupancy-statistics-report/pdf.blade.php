@@ -2,10 +2,18 @@
 <html>
 
 <head>
-    <title>{{ $motherDepartmentAgency->acronym }}.pdf</title>
+    <title>{{ $title }}.pdf</title>
+
 
     {{-- custom css --}}
     <style>
+        .rotate {
+            transform: rotate(90deg);
+            text-align: center;
+            font-size: 8px;
+            border: 2px solid transparent;
+        }
+
         @font-face {
             font-family: "Busorama";
             src: url('{{ public_path(' fonts/busorama.ttf') }}');
@@ -16,49 +24,6 @@
 
         .busorama {
             font-family: 'Busorama';
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        @page {
-            margin-top: 75px;
-            padding-bottom: 100px;
-        }
-
-        .pagenum:before {
-            content: counter(page);
-        }
-
-        .page-break-always {
-            page-break-after: always;
-            margin-top: 160px;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0px;
-            width: 100%;
-            text-align: center;
-            font-size: 10px;
-        }
-
-        .flex {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            /* Horizontally center items */
-            align-items: center;
-            /* Vertically center items */
-        }
-
-        .algerian {
-            font-family: 'Algerian';
-        }
-
-        .font-arial-black {
-            font-family: Arial;
         }
 
         .uppercase {
@@ -117,10 +82,6 @@
             margin-bottom: 5%
         }
 
-        header {
-            margin-top: -7%;
-        }
-
         .text-blue {
             color: #1F4E79;
         }
@@ -135,7 +96,11 @@
         }
 
         .bg-cyan {
-            background: #93c5fd;
+            background: #DEEBF7;
+        }
+
+        .bg-orange {
+            background: #F4B183;
         }
 
         .bg-yellow {
@@ -148,8 +113,7 @@
         }
 
         .bg-green {
-            background: #bbf7d0;
-            color: #000;
+            background: #E2F0D9;
         }
 
         .italic {
@@ -169,7 +133,8 @@
         }
 
         td {
-            padding-right: 1%;
+            padding: 0 10px 0 3px;
+            border: 2px solid #fff;
         }
     </style>
 
@@ -201,9 +166,7 @@
 
         body {
             margin: 0;
-            line-height: inherit;
-            font-size: small;
-            counter-reset: page;
+            line-height: inherit
         }
 
         hr {
@@ -994,99 +957,355 @@
 </head>
 
 <body>
+
+
     <header>
         <center>
-            <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-            <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
+            <img src="{{ public_path('images/assets/branding.png') }}" width="50">
+            <h1 class="text-blue busorama" style="font-size:16px;">Career Executive Service Board</h1>
 
-            <div style="font-size:11px;">
+            <div style="font-size:9px;">
                 <p>
                     No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
                 </p>
                 <p>
-                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 /
-                    8363-1532 / 8255-8341
-                </p>
-                <p>
+                    Tel No. 8951-4981 to 88 * Fax No. 8931-5732 *
                     <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
                 </p>
             </div>
         </center>
     </header>
-    <footer>
-        <table width="100%">
-            <tr style="color:gray">
-                <td colspan="5">
-                    List of Non-CESOs and Non-Eligibles in CES Positions
-                </td>
-
-                <td style="text-align:right;">
-                    <div class="">Page <span class="pagenum"></span></div>
-                </td>
-            </tr>
-        </table>
-    </footer>
-
-    <br>
-    <center>
-        <h1 class="text-blue uppercase" style="font-size:16px;">
-            {{ $motherDepartmentAgency->title }}
-        </h1>
-        <h1>
-            List of Non-CESOs and Non-Eligibles in CES Positions
-        </h1>
-        <p>
-            data as of {{ $currentDate }}
-        </p>
-    </center>
     <br />
-    <table width="100%" style="padding:10px; margin-bottom:10px">
-        <thead>
-            <tr class="text-center text-blue" style="font-size: 11px;">
-                <td>NO.</td>
-                <td>FULL NAME</td>
-                <td>CES STATUS</td>
-                <td>POSITION</td>
-                <td>SG</td>
-                <td>OFFICE</td>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-            $no = 1;
-            @endphp
-            @foreach($planAppointee as $planAppointeeDatas)
-            <tr class="striped" style="font-size:11px">
-                <td class="text-center">
-                    {{ $no++ }}
-                    </th>
-                <td>
-                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
-                    {{ $planAppointeeDatas->personalData->firstname ?? '' }}
-                    {{ $planAppointeeDatas->personalData->middlename ?? '' }}
-                </td>
-                <td class="text-center">
-                    {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
-                </td>
+    <div class="text-center mb-3">
+        <h1 class="bold" style="font-size:9px">
+            CES OCCUPANCY STATISTICS
+        </h1>
+        <p class="italic" style="font-size: 9px">
+            as of {{ $currentDate }}
+        </p>
+    </div>
 
-                <td>
-                    {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
-                    @if($planAppointeeDatas->planPosition->pos_suffix)
-                    - {{ $planAppointeeDatas->planPosition->pos_suffix}}
-                    @endif
+    <table width="100%" style="border: 1px solid black;font-size: 5px;">
+        <tr>
+            <td colspan="4" style="text-decoration: underline;" class="bold">
+                Executive Branch
+            </td>
+        </tr>
 
-                </td>
-                <td class="text-center">
-                    {{ $planAppointeeDatas->planPosition->corp_sg ?? ''}}
-                </td>
-                <td>
-                    {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
-                </td>
-            </tr>
+        @php
+        $no = 1;
+        @endphp
+        @foreach ($motherDepartmentAgency as $motherDepartmentAgencyDatas)
+        <tr>
+            <td class="bold">
+                {{ $no++ }}
+            </td>
 
-            @endforeach
-        </tbody>
+            <td class="bold">
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+            <td>
+                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            </td>
+        </tr>
+        @endforeach
+
+
     </table>
+
+
+
+    {{-- <table width="80%" style="border: 5px solid green">
+
+        <td style="width:80%;">
+
+            <table style="font-size:9px;width:100%;">
+                <tr>
+                    <th style="border: 1px solid #000;" rowspan="2">
+                        SECTOR/AGENCY
+                    </th>
+
+                    <th style="border: 1px solid #000;background:#2E75B6;color:#fff;" colspan="11">
+                        BY CES POSITION
+                    </th>
+                </tr>
+
+                <tr>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            Total No. of CES Position
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            Total No. of Vacant CES Positions
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            %Vacant
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CESOs
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CES Eligibles
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0;" class="bg-cyan">
+                        <p class="rotate">
+                            Occupied by CESOs and CES Eligibles
+                        </p>
+
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0;" class="bg-cyan">
+                        <p class="rotate">
+                            %Occupied
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CSEEs
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            Non-CES Eligible
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
+                        <p class="rotate">
+                            Occupied by Non-CES Eligible
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
+                        <p class="rotate">
+                            %Occupied
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+
+        <td style="width:80%;">
+
+            <table style="font-size:9px;width:100%;">
+                <tr>
+                    <th style="border: 1px solid black;background: #604C78;color:#fff;" colspan="20">
+                        BY GENDER
+                    </th>
+                </tr>
+                <tr>
+                    <th style="border: 1px solid black;" colspan="10" class="bg-cyan">
+                        BY MALE
+                    </th>
+                    <th style="border: 1px solid black;" colspan="10" class="bg-orange">
+                        BY FEMALE
+                    </th>
+                </tr>
+
+                <tr>
+
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CESOs
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CES Eligibles
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
+                        <p class="rotate">
+                            Occupied by CES Eligible
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
+                        <p class="rotate">
+                            %Occupied
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            CSEEs
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            Non-CES Eligibles
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
+                        <p class="rotate">
+                            Occupied by Non-CES Eligible
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
+                        <p class="rotate">
+                            %Occupied
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
+                        <p class="rotate">
+                            Total No. of Male
+                        </p>
+                    </td>
+
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
+                        <p class="rotate">
+                            Total % Occupied by Male
+                        </p>
+                    </td>
+
+
+
+                    <td style="border:1px solid black;padding:0px;margin:0">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
+                        <p class="rotate">
+                            female
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+
+    </table> --}}
+
 
 
 

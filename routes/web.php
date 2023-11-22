@@ -26,6 +26,7 @@ use App\Http\Controllers\Competency\TrainingVenueManagerController;
 use App\Http\Controllers\Competency\TrainingVenueManagerReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactInfoController;
+use App\Http\Controllers\DeclineFile201Controller;
 use App\Http\Controllers\DeclineFileController;
 use App\Http\Controllers\EducationalAttainmentController;
 use App\Http\Controllers\EligibilityAndRankTrackerController;
@@ -92,6 +93,8 @@ use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportController;
+use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportSummaryController;
 use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
@@ -427,23 +430,39 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
 
         Route::prefix('pdf-file')->group(function () {
-            Route::get('pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles')->middleware('checkPermission:pdf_files_view');
-            Route::post('accepted-file', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles')->middleware('checkPermission:pdf_files_add');
-            Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile')->middleware('checkPermission:pdf_files_view');
-            Route::post('decline-file', [DeclineFileController::class, 'declineFile'])->name('declineFile')->middleware('checkPermission:pdf_files_delete');
-            Route::delete('declined-file-force-delete/{ctrlno}', [DeclineFileController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete')->middleware('checkPermission:pdf_files_delete');
-            Route::post('restore/recently-decline-file/{ctrlno}', [DeclineFileController::class, 'restore'])->name('decline-file.restore')->middleware('checkPermission:pdf_files_delete');
-            Route::get('recently-decline-file', [DeclineFileController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles')->middleware('checkPermission:pdf_files_delete');
-            Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
-            Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
-            Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store')->middleware('checkPermission:pdf_files_add');
-            Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile')->middleware('checkPermission:pdf_files_view');
-            Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy')->middleware('checkPermission:pdf_files_delete');
-            Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted')->middleware('checkPermission:pdf_files_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore')->middleware('checkPermission:pdf_files_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete')->middleware('checkPermission:pdf_files_delete');
-            Route::get('approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile')->middleware('checkPermission:pdf_files_view');
-            Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile')->middleware('checkPermission:pdf_files_view');
+            Route::prefix('201-decline-files')->group(function () {
+                Route::get('index/{cesno}', [DeclineFile201Controller::class, 'index'])->name('201-decline-files.index')->middleware('checkPermission:pdf_files_view');
+            });
+
+            Route::prefix('201-pdf-files')->group(function () {
+                Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
+                Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
+                Route::post('store/{cesno}', [PDFController::class, 'store'])->name('show-pdf-files.store')->middleware('checkPermission:pdf_files_add');
+                Route::post('download-approved-file/{ctrlno}/{fileName}', [PDFController::class, 'download'])->name('downloadApprovedFile')->middleware('checkPermission:pdf_files_view');
+                Route::delete('destroy/{ctrlno}', [PDFController::class, 'destroy'])->name('show-pdf-files.destroy')->middleware('checkPermission:pdf_files_delete');
+                Route::get('recently-deleted/{cesno}', [PDFController::class, 'recentlyDeleted'])->name('show-pdf-files.recentlyDeleted')->middleware('checkPermission:pdf_files_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore')->middleware('checkPermission:pdf_files_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete')->middleware('checkPermission:pdf_files_delete');
+            });
+
+            Route::prefix('pending-files')->group(function () {
+                Route::get('show-pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles')->middleware('checkPermission:pdf_files_view');
+                Route::post('accepted-file', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles')->middleware('checkPermission:pdf_files_add');
+                Route::post('download-pending-file/{ctrlno}/{fileName}', [PDFController::class, 'downloadPendingFile'])->name('downloadPendingFile')->middleware('checkPermission:pdf_files_view');
+            });
+
+            Route::prefix('approved-files')->group(function () {
+                Route::get('show-approved-files', [ApprovedFileController::class, 'approvedFile'])->name('show-approved-pdf-files.approvedFile')->middleware('checkPermission:pdf_files_view');
+                Route::post('stream-approved-file/{ctrlno}/{fileName}', [ApprovedFileController::class, 'streamApprovedFile'])->name('streamApprovedFile')->middleware('checkPermission:pdf_files_view');
+                Route::delete('delete-approved-file/{ctrlno}', [ApprovedFileController::class, 'destroy'])->name('deleteApprovedFile')->middleware('checkPermission:pdf_files_view');
+            });
+
+            Route::prefix('decline-files')->group(function () {
+                Route::get('recently-decline-file', [DeclineFileController::class, 'recentlyDeclineFile'])->name('show-pdf-files.recentlyDeclineFiles')->middleware('checkPermission:pdf_files_delete');
+                Route::post('soft-delete-decline-file', [DeclineFileController::class, 'declineFile'])->name('declineFile')->middleware('checkPermission:pdf_files_delete');
+                Route::delete('declined-file-force-delete/{ctrlno}', [DeclineFileController::class, 'declineFileForceDelete'])->name('show-pdf-files.declineFileForceDelete')->middleware('checkPermission:pdf_files_delete');
+                Route::post('restore/recently-decline-file/{ctrlno}', [DeclineFileController::class, 'restore'])->name('decline-file.restore')->middleware('checkPermission:pdf_files_delete');
+            });
         });
     });
     // End of profile routes
@@ -616,6 +635,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index');
             Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf');
+
+            Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf');
+            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf');
         });
     });
     // End of plantilla routes

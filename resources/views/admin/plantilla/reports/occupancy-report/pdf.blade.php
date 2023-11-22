@@ -8,6 +8,18 @@
 
     {{-- custom css --}}
     <style>
+        @font-face {
+            font-family: "Busorama";
+            src: url('{{ public_path(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .busorama {
+            font-family: 'Busorama';
+        }
+
         @page {
             margin-top: 75px;
             padding-bottom: 100px;
@@ -56,7 +68,7 @@
             /* Vertically center items */
         }
 
-        .font-algerian {
+        .algerian {
             font-family: 'Algerian';
         }
 
@@ -126,7 +138,7 @@
         }
 
         .text-blue {
-            color: #3b82f6;
+            color: #1F4E79;
         }
 
         .text-red {
@@ -134,7 +146,7 @@
         }
 
         .bg-blue {
-            background: #3b82f6;
+            background: #1F4E79;
             color: #fff;
         }
 
@@ -1009,7 +1021,7 @@
         </td>
 
         <td colspan="6" style="text-align: right">
-            <h1 class="uppercase" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
+            <h1 class="uppercase busorama text-blue" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
             <h1 style="font-size: 9px">No. 3 Marcelino St., Holy Spirit Drive, Diliman, Quezon City 1127</h1>
             <h1 style="font-size: 9px">Tel. 8951-4981 to 88 Fax. 8931-5732 www.cesboard.gov.ph</h1>
         </td>
@@ -1108,24 +1120,24 @@
                     <h1>
                         {{ $planPositionDatas->pos_default }}
                         <br />
-                        
 
-                            @if($planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first()
-                                ->planPosition
-                                ->pos_suffix ?? '')
-                                
-                                
-                                ({{ optional($planPositionDatas->planAppointee
-                                    ->where('is_appointee', 1)
-                                    ->first())
-                                    ->planPosition
-                                    ->pos_suffix ?? ''
-                                }})
-                            @endif
-                        
-                        
+
+                        @if($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first()
+                        ->planPosition
+                        ->pos_suffix ?? '')
+
+
+                        ({{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->planPosition
+                        ->pos_suffix ?? ''
+                        }})
+                        @endif
+
+
                     </h1>
                 </td>
                 <td>
@@ -1165,7 +1177,7 @@
                     @if(!$selectedAppointee)
                     <h1>VACANT</h1>
                     @endif
-                    
+
 
                     {{ optional($planPositionDatas->planAppointee
                     ->where('is_appointee', 1)
@@ -1205,15 +1217,15 @@
 
                 <td>
                     @php
-                        $selectedAppointee = $planPositionDatas->planAppointee
-                        ->where('is_appointee', 1)
-                        ->first();
+                    $selectedAppointee = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first();
                     @endphp
 
                     @if($selectedAppointee->appt_date ?? '')
-                        {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
+                    {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
                     @endif
-                    
+
                 </td>
                 <td>{{ $planPositionDatas->remarks ?? ''}}</td>
 
@@ -1263,13 +1275,13 @@
                 </td>
                 <td>
                     @php
-                        $selectedOccupant = $planPositionDatas->planAppointee
-                            ->where('is_appointee', 0)
-                            ->first();
+                    $selectedOccupant = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 0)
+                    ->first();
                     @endphp
 
                     @if ($selectedOccupant && $selectedOccupant->appt_date)
-                        {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
+                    {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
                     @endif
 
                 </td>
