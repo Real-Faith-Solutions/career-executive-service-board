@@ -7,18 +7,16 @@ use App\Models\Plantilla\DepartmentAgency;
 use App\Models\Plantilla\PlanPosition;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CESOccupancyStatisticsReportSummaryController extends Controller
 {
     public function generatePDF($deptid)
     {
+        $currentDate = Carbon::now()->format('d F Y');
         $title = $deptid;
-        $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
-        $totalPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $totalPosition = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -26,10 +24,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
 
 
 
-        $occupiedCESPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $occupiedCESPosition = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -42,10 +37,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
         $vacantCESPosition = $totalPosition - $occupiedCESPosition;
         $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
 
-        $cesosAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $cesosAndEligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -63,10 +55,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
         $nonCesosAndNonEligibles = $occupiedCESPosition - $cesosAndEligibles;
         $nonCesosAndNonEligiblesPercentage = (100 - $cesosAndEligiblesPercentage);
 
-        $ceso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $ceso = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -82,10 +71,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
         } else {
             $cesoPercentage = null;
         }
-        $eligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $eligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -98,10 +84,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
             ->count();
         $eligiblesPercentage = (100 - $cesoPercentage);
 
-        $maleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $maleCesoAndEligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -117,10 +100,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
             })
             ->count();
 
-        $maleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $maleCeso = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -134,10 +114,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
                     });
             })
             ->count();
-        $maleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $maleEligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -151,10 +128,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
                     });
             })
             ->count();
-        $femaleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $femaleCesoAndEligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -170,10 +144,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
             })
             ->count();
 
-        $femaleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $femaleCeso = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -187,10 +158,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
                     });
             })
             ->count();
-        $femaleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $femaleEligibles = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -205,10 +173,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
             })
             ->count();
 
-        $countByMale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $countByMale = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -219,10 +184,7 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
                     });
             })
             ->count();
-        $countByFemale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
+        $countByFemale = PlanPosition::query()
             ->where('is_ces_pos', 1)
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
@@ -278,13 +240,14 @@ class CESOccupancyStatisticsReportSummaryController extends Controller
                 'nonCesosAndNonEligibles',
                 'cesosAndEligiblesPercentage',
                 'cesosAndEligibles',
-                'motherDepartmentAgency',
+                // 'motherDepartmentAgency',
                 'occupiedCESPositionPercentage',
                 'vacantCESPositionPercentage',
                 'totalPosition',
                 'occupiedCESPosition',
                 'vacantCESPosition',
                 'title',
+                'currentDate',
             )
         )
             ->setPaper('a4', 'portrait');
