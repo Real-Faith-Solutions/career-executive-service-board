@@ -3,8 +3,171 @@
 
 <head>
     <title>{{ $motherDepartmentAgency->acronym }}.pdf</title>
-    {{-- reset attributes --}}
+
+    {{-- custom css --}}
+    <style>
+        @font-face {
+            font-family: "Busorama";
+            src: url('{{ asset(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
     
+        .busorama {
+            font-family: 'Busorama';
+        }
+    
+        section {
+            padding: 10%;
+        }
+    
+        .front-page {
+            border-top: 8px solid #3b82f6;
+            border-right: 8px solid grey;
+            border-bottom: 8px solid #ef4444;
+            border-left: 8px solid #eab308;
+            width: auto;
+            height: 80%;
+    
+        }
+    
+        .page-break {
+            page-break-after: always;
+        }
+    
+        .flex {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            /* Horizontally center items */
+            align-items: center;
+            /* Vertically center items */
+        }
+    
+        .font-algerian {
+            font-family: 'Algerian';
+        }
+    
+        .font-arial-black {
+            font-family: Arial;
+        }
+    
+        .uppercase {
+            text-transform: uppercase;
+        }
+    
+        .bold {
+            font-weight: bold;
+        }
+    
+        .p-5 {
+            padding: 5%;
+        }
+    
+        .pb-5 {
+            padding-bottom: 5%;
+        }
+    
+        .pb-3 {
+            padding-bottom: 3%;
+        }
+    
+        .p-10 {
+            padding: 10%;
+        }
+    
+        .text-center {
+            text-align: center;
+        }
+    
+        .text-end {
+            text-align: right;
+        }
+    
+        .w-100 {
+            width: 100%;
+        }
+    
+        .m-10 {
+            margin: 10%
+        }
+    
+        .mt-10 {
+            margin-top: 10%
+        }
+    
+        .mb-10 {
+            margin-bottom: 10%
+        }
+    
+        .mb-3 {
+            margin-bottom: 3%
+        }
+    
+        .mb-5 {
+            margin-bottom: 5%
+        }
+    
+        header {
+            margin-bottom: 5%;
+            margin-top: -10%;
+        }
+    
+        .text-blue {
+            color: #3b82f6;
+        }
+    
+        .text-red {
+            color: red;
+        }
+    
+        .bg-blue {
+            background: #1F4E79;
+            color: #fff;
+        }
+    
+        .bg-cyan {
+            background: #BDD7EE;
+        }
+    
+        .bg-yellow {
+            background: #fde047;
+        }
+    
+        .bg-red {
+            background: #fda4af;
+            color: #000;
+        }
+    
+        .bg-green {
+            background: #C5E0B4;
+            color: #000;
+        }
+    
+        .italic {
+            font-style: italic;
+        }
+    
+        .pl-5 {
+            padding-left: 5%;
+        }
+    
+        .pl-10 {
+            padding-left: 20%;
+        }
+    
+        .pl-15 {
+            padding-left: 30%;
+        }
+    
+        td {
+            padding: 0 10px 0 3px;
+            border: 2px solid #fff;
+        }
+    </style>
+    
+    {{-- reset attributes --}}
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -818,168 +981,7 @@
         }
     </style>
 
-    {{-- custom css --}}
-    <style>
-        @font-face {
-            font-family: "Busorama";
-            src: url('{{ asset(' fonts/busorama.ttf') }}');
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-        }
-
-        .busorama {
-            font-family: 'Busorama';
-        }
-
-        section {
-            padding: 10%;
-        }
-
-        .front-page {
-            border-top: 8px solid #3b82f6;
-            border-right: 8px solid grey;
-            border-bottom: 8px solid #ef4444;
-            border-left: 8px solid #eab308;
-            width: auto;
-            height: 80%;
-
-        }
-
-        .page-break {
-            page-break-after: always;
-        }
-
-        .flex {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            /* Horizontally center items */
-            align-items: center;
-            /* Vertically center items */
-        }
-
-        .font-algerian {
-            font-family: 'Algerian';
-        }
-
-        .font-arial-black {
-            font-family: Arial;
-        }
-
-        .uppercase {
-            text-transform: uppercase;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        .p-5 {
-            padding: 5%;
-        }
-
-        .pb-5 {
-            padding-bottom: 5%;
-        }
-
-        .pb-3 {
-            padding-bottom: 3%;
-        }
-
-        .p-10 {
-            padding: 10%;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-end {
-            text-align: right;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .m-10 {
-            margin: 10%
-        }
-
-        .mt-10 {
-            margin-top: 10%
-        }
-
-        .mb-10 {
-            margin-bottom: 10%
-        }
-
-        .mb-3 {
-            margin-bottom: 3%
-        }
-
-        .mb-5 {
-            margin-bottom: 5%
-        }
-
-        header {
-            margin-bottom: 5%;
-            margin-top: -10%;
-        }
-
-        .text-blue {
-            color: #3b82f6;
-        }
-
-        .text-red {
-            color: red;
-        }
-
-        .bg-blue {
-            background: #1F4E79;
-            color: #fff;
-        }
-
-        .bg-cyan {
-            background: #BDD7EE;
-        }
-
-        .bg-yellow {
-            background: #fde047;
-        }
-
-        .bg-red {
-            background: #fda4af;
-            color: #000;
-        }
-
-        .bg-green {
-            background: #C5E0B4;
-            color: #000;
-        }
-
-        .italic {
-            font-style: italic;
-        }
-
-        .pl-5 {
-            padding-left: 5%;
-        }
-
-        .pl-10 {
-            padding-left: 20%;
-        }
-
-        .pl-15 {
-            padding-left: 30%;
-        }
-
-        td {
-            padding: 0 10px 0 3px;
-            border: 2px solid #fff;
-        }
-    </style>
+    
 
 </head>
 
