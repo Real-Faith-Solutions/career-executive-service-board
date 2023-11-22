@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: "Busorama";
-            src: url('{{ asset(' fonts/busorama.ttf') }}');
+            src: url('{{ public_path(' fonts/busorama.ttf') }}');
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -20,7 +20,7 @@
 
         @font-face {
             font-family: "Algerian";
-            src: url('{{ public_path('fonts/Algerian.ttf') }}');
+            src: url('{{ public_path(' fonts/Algerian.ttf') }}');
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -30,9 +30,10 @@
         .algerian {
             font-family: 'Algerian';
         }
+
         @font-face {
             font-family: "Nexa";
-            src: url('{{ public_path('fonts/Nexa.ttf') }}');
+            src: url('{{ public_path(' fonts/Nexa.ttf') }}');
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
