@@ -4,8 +4,14 @@
 <head>
     <title>{{ $title }}.pdf</title>
 
+
     {{-- custom css --}}
     <style>
+        @font-face {
+            font-family: Busorama;
+            src: url('{{ public_path('fonts/busorama.ttf') }}');
+        }
+
         section {
             padding: 10%;
         }
@@ -103,7 +109,7 @@
         }
 
         .text-blue {
-            color: #3b82f6;
+            color: #1F4E79;
         }
 
         .text-red {
@@ -979,7 +985,7 @@
         <header>
             <center>
                 <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-                <h1 class="text-blue" style="font-size:24px;">Career Executive Service Board</h1>
+                <h1 class="text-blue" style="font-size:24px;font-family:Busorama;">Career Executive Service Board</h1>
 
                 <div style="font-size:11px;">
                     <p>
