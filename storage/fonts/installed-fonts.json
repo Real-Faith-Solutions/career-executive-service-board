@@ -1,5 +1,11 @@
 {
     "busorama": {
         "normal": "busorama_normal_dd366bbf43e957c82f717a35dfa93b46"
+    },
+    "algerian": {
+        "normal": "algerian_normal_554f9da00a5d97b4e6bcf145d4980f42"
+    },
+    "nexa": {
+        "normal": "nexa_normal_30df42bb51810f4cde28d391b3ab5447"
     }
 }

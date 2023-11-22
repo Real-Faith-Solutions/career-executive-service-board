@@ -8,8 +8,15 @@
     {{-- custom css --}}
     <style>
         @font-face {
-            font-family: Busorama;
-            src: url('{{ public_path('fonts/busorama.ttf') }}');
+            font-family: "Busorama";
+            src: url('{{ asset(' fonts/busorama.ttf') }}');
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .busorama {
+            font-family: 'Busorama';
         }
 
         section {
@@ -39,7 +46,7 @@
             /* Vertically center items */
         }
 
-        .font-algerian {
+        .algerian {
             font-family: 'Algerian';
         }
 
@@ -985,7 +992,7 @@
         <header>
             <center>
                 <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-                <h1 class="text-blue" style="font-size:24px;font-family:Busorama;">Career Executive Service Board</h1>
+                <h1 class="text-blue busorama" style="font-size:24px;">Career Executive Service Board</h1>
 
                 <div style="font-size:11px;">
                     <p>

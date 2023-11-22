@@ -72,7 +72,7 @@
             /* Vertically center items */
         }
 
-        .font-algerian {
+        .algerian {
             font-family: 'Algerian';
         }
 
