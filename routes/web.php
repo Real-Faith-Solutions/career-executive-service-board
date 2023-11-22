@@ -93,6 +93,7 @@ use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportController;
 use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportSummaryController;
 use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
@@ -638,6 +639,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf');
 
             Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf');
+            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf');
         });
     });
     // End of plantilla routes
