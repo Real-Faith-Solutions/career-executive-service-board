@@ -1029,7 +1029,7 @@
             </center>
         </div>
         <center>
-            <h1 class="algerian" style="font-size:50px;">
+            <h1 class="algerian" style="font-size:65px;">
                 {{ $motherDepartmentAgency->acronym }}
             </h1>
             <br><br><br>
