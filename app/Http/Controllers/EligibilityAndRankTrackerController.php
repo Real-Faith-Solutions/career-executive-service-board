@@ -104,13 +104,6 @@ class EligibilityAndRankTrackerController extends Controller
                 return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.board_interview_table', compact('cesno', 'panelBoardInterview', 
                 'boardInterview', 'selectedPage'));
 
-            case 'Rank Tracker':
-
-                $rankTracker = RankTracker201::where('cesno', $cesno)->paginate(25);
-
-                return view('admin.201_profiling.view_profile.partials.eligibility_and_rank_tracker.rank_tracker_table', compact('rankTracker', 'cesno', 'selectedPage'));
-            
-
             default:
                 return to_route('eligibility-rank-tracker.index', ['cesno'=>$cesno]);
         }

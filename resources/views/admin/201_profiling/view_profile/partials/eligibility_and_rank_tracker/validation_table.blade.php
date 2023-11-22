@@ -15,7 +15,7 @@
                         <option value="Assessment Center">Assessment Center (Historical Record)</option>
                         <option value="Validation" {{ $selectedPage == 'Validation' ? 'selected' : '' }}>Validation (Historical Record)</option>
                         <option value="Board Interview">Board Interview</option>
-                        <option value="Rank Tracker">Rank Tracker</option>
+                        
                     </select>    
                 </div>
     
