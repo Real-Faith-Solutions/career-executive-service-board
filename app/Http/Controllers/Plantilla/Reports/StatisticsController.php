@@ -345,30 +345,38 @@ class StatisticsController extends Controller
     {
         $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
 
-        $plantillaAll = PlanAppointee::whereHas('personalData.cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%Eli%')
-                ->orWhere('description', 'LIKE', '%CES%');
-        })
+        $plantillaAll = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
             ->count();
 
 
-        $plantillaCES = PlanAppointee::whereHas('personalData.cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%Eli%')
-                ->orWhere('description', 'LIKE', '%CES%');
-        })
-            ->whereHas('planPosition', function ($query) {
-                $query->where('is_ces_pos', 1)
-                    ->where('pres_apptee', 1);
-            })->count();
+        $plantillaCES = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%Eli%')
+                            ->orWhere('description', 'LIKE', '%CES%');
+                    });
+            })
+            ->count();
 
-        $plantillaNonCES = PlanAppointee::whereHas('personalData.cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%Eli%')
-                ->orWhere('description', 'LIKE', '%CES%');
-        })
-            ->whereHas('planPosition', function ($query) {
-                $query->where('is_ces_pos', '!=', 1)
-                    ->orWhere('pres_apptee', '!=', 1);
-            })->count();
+        $plantillaNonCES = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%-%')
+                            ->orWhere('description', 'LIKE', '%CSE%');
+                    });
+            })
+            ->count();
 
         if ($plantillaAll != null) {
             $percentageCES = ($plantillaCES / $plantillaAll) * 100;
