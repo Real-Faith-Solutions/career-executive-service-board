@@ -1378,6 +1378,7 @@
             $grandFemaleCesoAndEligibles += $femaleCesoAndEligibles;
             $grandFemaleCeso += $femaleCeso;
             $grandFemaleEligibles += $femaleEligibles;
+            $grandMaleNonCesNonEligibles += $maleNonCesNonEligibles;
 
 
         @endphp
