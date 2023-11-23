@@ -999,11 +999,15 @@
         </tr>
         
         <tr>
+            <td></td>
             <td class="bold italic">
                 National Government Agencies
             </td>
+            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
     </thead>
+
+    <tbody>
         @php
             $no = 1;
             $grandTotalPosition = 0;
@@ -1344,6 +1348,7 @@
             $grandFemaleCeso += $femaleCeso;
             $grandFemaleEligibles += $femaleEligibles;
         @endphp
+        
         <tr>
             <td class="bold">
                 {{ $no++ }}
@@ -1449,104 +1454,110 @@
         </tr>
         @endforeach
 
-        <tr class="bold" style="text-decoration: underline;">
-            <td colspan="2" class="text-right bold">
-                Grand Total:
-            </td>
-            <th>
-                {{ $grandTotalPosition }}
-            </th>
-            <th class="bg-yellow text-red">
-                {{ $grandVacantCESPosition }}
-            </th>
-            <th class="bg-yellow text-red">
-                =
-            </th>
-            <th>
-                {{ $grandCeso }}
-            </th>
-            <th>
-                {{ $grandEligibles}}
-            </th>
-            <th class="bg-cyan">
-                {{ $grandCesosAndEligibles }}
-            </th>
-            <th class="bg-cyan">
-                =
-            </th>
-            <th>
-                {{ $grandCsee }}
-            </th>
-            <th>
-                {{ $grandNonCesEligible }}
-            </th>
-            <th class="bg-green">
-                {{ $grandNonCesosAndNonEligibles }}
-            </th>
-            <th class="bg-green">
-                =
-            </th>
-            <th>
-                {{ $grandMaleCeso }}
-            </th>
-            <th>
-                {{ $grandMaleEligibles }}
-            </th>
-            <th class="bg-cyan">
-                {{ $grandMaleCesoAndEligibles }}
-            </th>
-            <th class="bg-cyan">
-                =
-            </th>
-            <th>
-                {{ $grandMaleCSEE }}
-            </th>
-            <th>
-                {{ $grandMaleNonCesEligibles }}
-            </th>
-            <th class="bg-green">
-                {{ $grandMaleNonCesNonEligibles }}
-            </th>
-            <th class="bg-green">
-                %
-            </th>
-            <th class="bg-cyan">
-                {{ $grandCountByMale }}
-            </th>
-            <th class="bg-cyan">
-                %
-            </th>
-            <th>
-                {{ $grandFemaleCeso }}
-            </th>
-            <th>
-                {{ $grandFemaleEligibles }}
-            </th>
-            <th class="bg-cyan">
-                {{ $grandFemaleCesoAndEligibles }}
-            </th>
-            <th class="bg-cyan">
-                %
-            </th>
-            <th>
-                {{ $grandFemaleCSEE }}
-            </th>
-            <th>
-                {{ $grandFemaleNonCesNonEligibles }}
-            </th>
-            <th class="bg-green">
-                {{ $grandOccupiedFemaleNonCesNonEligibles }}
-            </th>
-            <th class="bg-green">
-                %
-            </th>
-            <th class="bg-orange">
-                {{ $grandCountByFemale }}
-            </th>
-            <th class="bg-orange">
-                %
-            </th>
-        </tr>
+        </tbody>
+
+        <tfoot>
+
+            <tr class="bold" style="text-decoration: underline;">
+                <td colspan="2" class="text-right bold">
+                    Grand Total:
+                </td>
+                <th>
+                    {{ $grandTotalPosition }}
+                </th>
+                <th class="bg-yellow text-red">
+                    {{ $grandVacantCESPosition }}
+                </th>
+                <th class="bg-yellow text-red">
+                    =
+                </th>
+                <th>
+                    {{ $grandCeso }}
+                </th>
+                <th>
+                    {{ $grandEligibles}}
+                </th>
+                <th class="bg-cyan">
+                    {{ $grandCesosAndEligibles }}
+                </th>
+                <th class="bg-cyan">
+                    =
+                </th>
+                <th>
+                    {{ $grandCsee }}
+                </th>
+                <th>
+                    {{ $grandNonCesEligible }}
+                </th>
+                <th class="bg-green">
+                    {{ $grandNonCesosAndNonEligibles }}
+                </th>
+                <th class="bg-green">
+                    =
+                </th>
+                <th>
+                    {{ $grandMaleCeso }}
+                </th>
+                <th>
+                    {{ $grandMaleEligibles }}
+                </th>
+                <th class="bg-cyan">
+                    {{ $grandMaleCesoAndEligibles }}
+                </th>
+                <th class="bg-cyan">
+                    =
+                </th>
+                <th>
+                    {{ $grandMaleCSEE }}
+                </th>
+                <th>
+                    {{ $grandMaleNonCesEligibles }}
+                </th>
+                <th class="bg-green">
+                    {{ $grandMaleNonCesNonEligibles }}
+                </th>
+                <th class="bg-green">
+                    %
+                </th>
+                <th class="bg-cyan">
+                    {{ $grandCountByMale }}
+                </th>
+                <th class="bg-cyan">
+                    %
+                </th>
+                <th>
+                    {{ $grandFemaleCeso }}
+                </th>
+                <th>
+                    {{ $grandFemaleEligibles }}
+                </th>
+                <th class="bg-cyan">
+                    {{ $grandFemaleCesoAndEligibles }}
+                </th>
+                <th class="bg-cyan">
+                    %
+                </th>
+                <th>
+                    {{ $grandFemaleCSEE }}
+                </th>
+                <th>
+                    {{ $grandFemaleNonCesNonEligibles }}
+                </th>
+                <th class="bg-green">
+                    {{ $grandOccupiedFemaleNonCesNonEligibles }}
+                </th>
+                <th class="bg-green">
+                    %
+                </th>
+                <th class="bg-orange">
+                    {{ $grandCountByFemale }}
+                </th>
+                <th class="bg-orange">
+                    %
+                </th>
+            </tr>
+
+        </tfoot>
 
 
     </table>
