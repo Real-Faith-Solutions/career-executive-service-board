@@ -1500,6 +1500,9 @@
                 $grandCesOccupied = round(($grandCesosAndEligibles / $totalOccupied) * 100);
                 $grandNonCesOccupied = (100-$grandCesOccupied);
 
+                $grandMaleOccupied = round(($grandMaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
+                
+
             @endphp
 
             <tr class="bold" style="text-decoration: underline;">
@@ -1549,7 +1552,7 @@
                     {{ $grandMaleCesoAndEligibles }}
                 </th>
                 <th class="bg-cyan">
-                    =
+                    {{ $grandMaleOccupied }}%
                 </th>
                 <th>
                     {{ $grandMaleCSEE }}
