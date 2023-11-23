@@ -637,8 +637,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
             Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
 
-            Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf')->middleware('checkPermission:plantilla_statistics_reports');
-            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
+            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
         });
     });
     // End of plantilla routes
