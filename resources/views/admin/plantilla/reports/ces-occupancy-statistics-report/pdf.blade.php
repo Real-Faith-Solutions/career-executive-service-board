@@ -7,7 +7,7 @@
 
     {{-- custom css --}}
     <style>
-        tr:nth-child(even) {
+        tbody tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
