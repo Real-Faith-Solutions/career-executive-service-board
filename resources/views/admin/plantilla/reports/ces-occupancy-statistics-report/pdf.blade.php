@@ -1323,6 +1323,37 @@
             ->count();
             $occupiedFemaleNonCesNonEligibles = ($countByFemale - $femaleCesoAndEligibles);
             $femaleNonCesNonEligibles = ($occupiedFemaleNonCesNonEligibles - $femaleCSEE);
+
+
+
+
+            $maleNonCesNonEligibles = ($countByMale - $maleCesoAndEligibles);
+            $femaleNonCesNonEligibles = ($countByFemale - $femaleCesoAndEligibles);
+
+            $maleCesoAndEligiblesPercentage = round(($maleCesoAndEligibles / $occupiedCESPosition) * 100);
+            $nonMaleCesoAndEligiblesPercentage = round(($maleNonCesNonEligibles / $occupiedCESPosition) * 100);
+            $femaleCesoAndEligiblesPercentage = round(($femaleCesoAndEligibles / $occupiedCESPosition) * 100);
+            $nonFemaleCesoAndEligiblesPercentage = round(($femaleNonCesNonEligibles / $occupiedCESPosition) * 100);
+
+            $totalPercentage = $maleCesoAndEligiblesPercentage +
+                $nonMaleCesoAndEligiblesPercentage +
+                $femaleCesoAndEligiblesPercentage +
+                $nonFemaleCesoAndEligiblesPercentage;
+
+            $nonFemaleCesoAndEligiblesPercentage = round($nonFemaleCesoAndEligiblesPercentage + (100 - $totalPercentage));
+
+            $countByMalePercentage = round(($countByMale / $occupiedCESPosition) * 100);
+            $countByFemalePercentage = (100 - $countByMalePercentage);
+
+
+            $maleOccupiedPercentage = round(($maleCesoAndEligibles / $cesosAndEligibles) * $occupiedCESPercentage);
+            $femaleOccupiedPercentage = round(($femaleCesoAndEligibles / $cesosAndEligibles) * $occupiedCESPercentage);
+
+            $maleOccupiedNonCesPercentage = round(($maleNonCesNonEligibles / $nonCesosAndNonEligibles) * $occupiedNonCESPercentage);
+            $femaleOccupiedNonCesPercentage = round(($femaleNonCesNonEligibles / $nonCesosAndNonEligibles) * $occupiedNonCESPercentage);
+
+            
+
             
 
             // grandTotal
@@ -1401,7 +1432,7 @@
                 {{ $maleCesoAndEligibles ?? 0 }}
             </th>
             <th class="bg-cyan">
-                %
+                {{ $maleOccupiedPercentage ?? 0 }}%
             </th>
             <th>
                 {{ $maleCSEE ?? 0}}
@@ -1413,25 +1444,25 @@
                 {{ $maleNonCesNonEligibles ?? 0}}
             </th>
             <th class="bg-green">
-                %
+                {{ $maleOccupiedNonCesPercentage ?? 0 }}%
             </th>
             <th class="bg-cyan">
                 {{ $countByMale ?? 0}}
             </th>
             <th class="bg-cyan">
-                %
+                {{ $countByMalePercentage ?? 0 }}%
             </th>
             <th>
                 {{ $femaleCeso ?? 0}}
             </th>
             <th>
-            {{ $femaleEligibles ?? 0}}
+                {{ $femaleEligibles ?? 0}}
             </th>
             <th class="bg-cyan">
                 {{ $femaleCesoAndEligibles ?? 0 }}
             </th>
             <th class="bg-cyan">
-                %
+                {{ $femaleOccupiedPercentage ?? 0 }}%
             </th>
             <th>
                 {{ $femaleCSEE ?? 0 }}
@@ -1443,13 +1474,13 @@
                 {{ $occupiedFemaleNonCesNonEligibles ?? 0 }}                
             </th>
             <th class="bg-green">
-                %
+            {{ $femaleOccupiedNonCesPercentage ?? 0 }}%
             </th>
             <th class="bg-orange">
                 {{ $countByFemale ?? 0 }}
             </th>
             <th class="bg-orange">
-                %
+            {{ $countByFemalePercentage ?? 0 }}%
             </th>
         </tr>
         @endforeach
