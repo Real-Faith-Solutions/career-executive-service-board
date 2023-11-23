@@ -1347,10 +1347,10 @@
             <th>
                 {{ $grandTotalPosition }}
             </th>
-            <th>
+            <th class="bg-yellow text-red">
                 {{ $grandVacantCESPosition }}
             </th>
-            <th>
+            <th class="bg-yellow text-red">
                 =
             </th>
             <th>
@@ -1359,10 +1359,10 @@
             <th>
                 {{ $grandEligibles}}
             </th>
-            <th>
+            <th class="bg-cyan">
                 {{ $grandCesosAndEligibles }}
             </th>
-            <th>
+            <th class="bg-cyan">
                 =
             </th>
             <th>
@@ -1371,10 +1371,10 @@
             <th>
                 {{ $grandNonCesEligible }}
             </th>
-            <th>
+            <th class="bg-green">
                 {{ $grandNonCesosAndNonEligibles }}
             </th>
-            <th>
+            <th class="bg-green">
                 =
             </th>
             <th>
@@ -1383,10 +1383,10 @@
             <th>
                 {{ $grandMaleEligibles }}
             </th>
-            <th>
+            <th class="bg-cyan">
                 {{ $grandMaleCesoAndEligibles }}
             </th>
-            <th>
+            <th class="bg-cyan">
                 =
             </th>
             <th>
@@ -1395,14 +1395,47 @@
             <th>
                 {{ $grandMaleNonCesEligibles }}
             </th>
-            <th>
+            <th class="bg-green">
                 {{ $grandMaleNonCesNonEligibles }}
             </th>
-            <th>
+            <th class="bg-green">
+                %
+            </th>
+            <th class="bg-cyan">
+                {{ $grandCountByMale }}
+            </th>
+            <th class="bg-cyan">
                 %
             </th>
             <th>
-                {{ $grandCountByMale }}
+                -
+            </th>
+            <th>
+                -
+            </th>
+            <th class="bg-cyan">
+                -
+            </th>
+            <th class="bg-cyan">
+                %
+            </th>
+            <th>
+                -
+            </th>
+            <th>
+                -
+            </th>
+            <th class="bg-green">
+                -
+            </th>
+            <th class="bg-green">
+                %
+            </th>
+            <th class="bg-orange">
+                -
+            </th>
+            <th class="bg-orange">
+                %
             </th>
         </tr>
 
