@@ -1497,8 +1497,9 @@
 
                 $totalOccupied = ($grandTotalPosition - $grandVacantCESPosition);
 
-                $cesOccupied = round(($grandCesosAndEligibles / $totalOccupied) * 100);
-                $nonCesOccupied = (100-$cesOccupied);
+                $grandCesOccupied = round(($grandCesosAndEligibles / $totalOccupied) * 100);
+                $grandNonCesOccupied = (100-$grandCesOccupied);
+
             @endphp
 
             <tr class="bold" style="text-decoration: underline;">
@@ -1524,7 +1525,7 @@
                     {{ $grandCesosAndEligibles }}
                 </th>
                 <th class="bg-cyan">
-                    {{ $cesOccupied }}%
+                    {{ $grandCesOccupied }}%
                 </th>
                 <th>
                     {{ $grandCsee }}
@@ -1536,7 +1537,7 @@
                     {{ $grandNonCesosAndNonEligibles }}
                 </th>
                 <th class="bg-green">
-                    {{ $nonCesOccupied }}%
+                    {{ $grandNonCesOccupied }}%
                 </th>
                 <th>
                     {{ $grandMaleCeso }}
