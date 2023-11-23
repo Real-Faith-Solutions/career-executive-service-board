@@ -617,6 +617,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
         Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
 
+        // plantilla reports
         Route::prefix('reports')->group(function () {
             Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index');
             Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf');
@@ -784,8 +785,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     //  competency report routes
     Route::prefix('competency-report')->group(function () {
         Route::prefix('general-report')->group(function () {
-            Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_management_sub_modules_report_view');
-            Route::post('generate-pdf/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_management_sub_modules_report_view');
+            Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_general_reports');
+            Route::post('generate-pdf/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
         });
 
         Route::prefix('training-provider')->group(function () {
