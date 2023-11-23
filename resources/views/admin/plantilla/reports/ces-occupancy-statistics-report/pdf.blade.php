@@ -1494,6 +1494,11 @@
         <tfoot>
             @php
                 $grandVacantPercentage = round(($grandVacantCESPosition / $grandTotalPosition) * 100);
+
+                $totalOccupied = ($grandTotalPosition - $grandVacantCESPosition);
+
+                $cesOccupied = round(($grandCesosAndEligibles / $totalOccupied) * 100);
+                $nonCesOccupied = (100-$cesOccupied);
             @endphp
 
             <tr class="bold" style="text-decoration: underline;">
@@ -1519,7 +1524,7 @@
                     {{ $grandCesosAndEligibles }}
                 </th>
                 <th class="bg-cyan">
-                    {{ $grandVacantPercentage }}%
+                    {{ $cesOccupied }}%
                 </th>
                 <th>
                     {{ $grandCsee }}
@@ -1531,7 +1536,7 @@
                     {{ $grandNonCesosAndNonEligibles }}
                 </th>
                 <th class="bg-green">
-                    =
+                    {{ $nonCesOccupied }}%
                 </th>
                 <th>
                     {{ $grandMaleCeso }}
