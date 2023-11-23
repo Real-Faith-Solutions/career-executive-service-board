@@ -1000,9 +1000,24 @@
         </tr>
 
         @php
-        $no = 1;
+            $no = 1;
+            $grandTotalPosition = 0;
         @endphp
         @foreach ($motherDepartmentAgency as $motherDepartmentAgencyDatas)
+
+        @php
+            $selectedDeptid = $motherDepartmentAgencyDatas->deptid;
+            $totalPosition = \App\Models\Plantilla\PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+                ->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1)
+                ->count();
+
+                $grandTotalPosition += $totalPosition;
+        @endphp
         <tr>
             <td class="bold">
                 {{ $no++ }}
@@ -1011,92 +1026,101 @@
             <td class="bold">
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
             </td>
-            <td>
-                {{ $totalPosition ?? '' }}
-            </td>
-            <td>
+            <th>
+                {{ $totalPosition ?? 0 }}
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
-            <td>
+            </th>
+            <th>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </td>
+            </th>
         </tr>
         @endforeach
+
+        <tr class="bold" style="text-decoration: underline;">
+            <td colspan="2" class="text-right bold">
+                Grand Total: 
+            </td>
+            <th>
+                {{ $grandTotalPosition }}
+            </th>
+        </tr>
 
 
     </table>

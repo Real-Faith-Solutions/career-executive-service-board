@@ -13,6 +13,7 @@ class CESOccupancyStatisticsReportController extends Controller
 {
     public function generatePDF($deptid)
     {
+
         $motherDepartmentAgency = DepartmentAgency::query()
             ->where('is_national_government', 1)
             ->select('title', 'deptid')
@@ -22,21 +23,12 @@ class CESOccupancyStatisticsReportController extends Controller
         $currentDate = Carbon::now()->format('d F Y');
         $title = $deptid;
 
-        foreach ($motherDepartmentAgency as $agency) {
-            // Accessing properties of each $agency
-            $title = $agency->title;
-            $deptid = $agency->deptid;
 
-            $totalPosition = PlanPosition::query()
-                ->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1)
-                ->where('is_active', 1)
-                ->count();
-
-            // Now you can use $title, $deptid, and $totalPosition as needed
-        }
-
-
+        $totalPosition = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->count();
 
         $occupiedCESPosition = PlanPosition::query()
             ->where('is_ces_pos', 1)
