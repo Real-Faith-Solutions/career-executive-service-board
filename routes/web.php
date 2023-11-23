@@ -910,8 +910,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('panel-board-interview-report')->group(function () {
-            Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index');
-            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf');
+            Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('rapid-validation-report')->group(function () {
