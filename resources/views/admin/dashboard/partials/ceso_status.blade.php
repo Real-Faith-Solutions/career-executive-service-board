@@ -96,6 +96,7 @@
 </script>
 
 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
             <div>
@@ -103,10 +104,10 @@
                 <h1 class="text-3xl font-bold">{{ $totalCESO }}</h1>
             </div>
 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
                 stroke="currentColor" class="w-12 h-12 opacity-75">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
             </svg>
         </div>
     </div>
@@ -124,15 +125,6 @@
                     d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
             </svg>
         </div>
-        <br>
-        <div>
-            <p class="text-sm">
-                {{-- Percentage of total CES employees. --}}
-            </p>
-            <span class="text-green-500 rounded opacity-75">
-                {{-- {{ $percentageCES }} % --}}
-            </span>
-        </div>
     </div>
 
     <div class="card bg-orange-100">
@@ -148,14 +140,8 @@
                     d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
             </svg>
         </div>
-        <br>
-        <p class="text-sm">
-            {{-- Percentage of total non-CES employees --}}
-        </p>
-        <span class="text-orange-500 rounded opacity-75">
-            {{-- {{ $percentageNonCES }} % --}}
-        </span>
     </div>
+
     <div class="card bg-red-100">
         <div class="flex justify-between text-red-500 items-center">
             <div>
@@ -169,14 +155,8 @@
                     d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
             </svg>
         </div>
-        <br>
-        <p class="text-sm">
-            {{-- Percentage of total non-CES employees --}}
-        </p>
-        <span class="text-red-500 rounded opacity-75">
-            {{-- {{ $percentageNonCES }} % --}}
-        </span>
     </div>
+
     <div class="card bg-violet-100">
         <div class="flex justify-between text-violet-500 items-center">
             <div>
@@ -190,12 +170,6 @@
                     d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
             </svg>
         </div>
-        <br>
-        <p class="text-sm">
-            {{-- Percentage of total non-CES employees --}}
-        </p>
-        <span class="text-violet-500 rounded opacity-75">
-            {{-- {{ $percentageNonCES }} % --}}
-        </span>
     </div>
+
 </div>

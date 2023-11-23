@@ -20,6 +20,7 @@ class DashboardController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
             ->whereHas('cesStatus', function ($query) {
@@ -35,6 +36,7 @@ class DashboardController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
         $totalCESORetired = PersonalData::query()
             ->where('status', 'Retired')
             ->whereHas('cesStatus', function ($query) {
@@ -42,6 +44,7 @@ class DashboardController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+            
         $totalCESOInactive = PersonalData::query()
             ->where('status', 'Inactive')
             ->whereHas('cesStatus', function ($query) {
