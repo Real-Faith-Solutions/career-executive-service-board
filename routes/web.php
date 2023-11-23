@@ -625,11 +625,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index')->middleware('checkPermission:plantilla_occupancy_reports');
             Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
 
-            Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
-            Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
+            Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
 
-            Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
-            Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
+            Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
 
             Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
             Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
