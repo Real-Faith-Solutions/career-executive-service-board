@@ -920,23 +920,23 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
-            Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf');
+            Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('assessment-center-report')->group(function () {
-            Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index');
-            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf');
+            Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
         });
 
         Route::prefix('written-exam-report')->group(function () {
-            Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index');
-            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf');
+            Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
         });
 
         Route::prefix('eris-report-general')->group(function () {
-            Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport');
+            Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index')->middleware('checkPermission:eligibility_general_reports');
+            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
         });
     });
     // End of ERIS Report routes
