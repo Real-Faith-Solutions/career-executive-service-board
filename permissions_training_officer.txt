@@ -93,3 +93,19 @@ competency_management_sub_modules_report_view
 //plantilla
 
 plantilla_management_view
+
+//reports
+
+201_general_reports
+201_statistical_reports
+
+competency_general_reports
+competency_training_venue_manager_reports
+competency_training_provider_reports
+competency_resource_speaker_manager_reports
+
+//libraries
+
+201_view_library
+eris_view_library
+plantilla_view_library
