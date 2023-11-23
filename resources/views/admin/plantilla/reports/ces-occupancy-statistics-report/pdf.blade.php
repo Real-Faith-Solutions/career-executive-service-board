@@ -1032,6 +1032,7 @@
             $grandFemaleCesoAndEligibles = 0;
             $grandFemaleCeso = 0;
             $grandFemaleEligibles = 0;
+            $grandVacantPercentage = 0;
             
         @endphp
         @foreach ($motherDepartmentAgency as $motherDepartmentAgencyDatas)
@@ -1351,9 +1352,8 @@
 
             $maleOccupiedNonCesPercentage = round(($maleNonCesNonEligibles / $nonCesosAndNonEligibles) * $occupiedNonCESPercentage);
             $femaleOccupiedNonCesPercentage = round(($femaleNonCesNonEligibles / $nonCesosAndNonEligibles) * $occupiedNonCESPercentage);
-
             
-
+            
             
 
             // grandTotal
@@ -1378,7 +1378,11 @@
             $grandFemaleCesoAndEligibles += $femaleCesoAndEligibles;
             $grandFemaleCeso += $femaleCeso;
             $grandFemaleEligibles += $femaleEligibles;
+
+
         @endphp
+
+        
         
         <tr>
             <td class="bold">
@@ -1488,6 +1492,9 @@
         </tbody>
 
         <tfoot>
+            @php
+                $grandVacantPercentage = round(($grandVacantCESPosition / $grandTotalPosition) * 100);
+            @endphp
 
             <tr class="bold" style="text-decoration: underline;">
                 <td colspan="2" class="text-right bold">
@@ -1500,7 +1507,7 @@
                     {{ $grandVacantCESPosition }}
                 </th>
                 <th class="bg-yellow text-red">
-                    =
+                    {{ $grandVacantPercentage }}%
                 </th>
                 <th>
                     {{ $grandCeso }}
@@ -1512,7 +1519,7 @@
                     {{ $grandCesosAndEligibles }}
                 </th>
                 <th class="bg-cyan">
-                    =
+                    {{ $grandVacantPercentage }}%
                 </th>
                 <th>
                     {{ $grandCsee }}
