@@ -1011,6 +1011,16 @@
             $grandCesosAndEligibles = 0;
             $grandCeso = 0;
             $grandEligibles = 0;
+            $grandCsee = 0;
+            $grandNonCesosAndNonEligibles = 0;
+            $grandNonCesEligible = 0;
+            $grandMaleCeso = 0;
+            $grandMaleEligibles = 0;
+            $grandMaleCesoAndEligibles = 0;
+            $grandMaleCSEE = 0;
+            $grandMaleNonCesEligibles = 0;
+            $grandMaleNonCesNonEligibles = 0;
+            $grandCountByMale = 0;
         @endphp
         @foreach ($motherDepartmentAgency as $motherDepartmentAgencyDatas)
 
@@ -1040,6 +1050,9 @@
             $vacantCESPosition = $totalPosition - $occupiedCESPosition;
             $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
             $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
+
+
+            
 
             $cesosAndEligibles = \App\Models\Plantilla\PlanPosition::query()
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
@@ -1089,10 +1102,122 @@
                     });
             })
             ->count();
+            $nonCesosAndNonEligibles = $occupiedCESPosition - $cesosAndEligibles;
+
+            $csee = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%CSE%');
+                    });
+            })
+            ->count();
+            $nonCesEligible = ($nonCesosAndNonEligibles-$csee);
 
 
+            $occupiedCESPercentage = round(($cesosAndEligibles / $occupiedCESPosition) *100);
+            $occupiedNonCESPercentage = (100 - $occupiedCESPercentage);
 
+            $maleCesoAndEligibles = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CES%')
+                                    ->orWhere('description', 'LIKE', '%Eli%');
+                            });
+                    });
+            })
+            ->count();
 
+        $maleCeso = \App\Models\Plantilla\PlanPosition::query()
+        ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CES%');
+                            });
+                    });
+            })
+            ->count();
+        $maleEligibles = \App\Models\Plantilla\PlanPosition::query()
+        ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%Eli%');
+                            });
+                    });
+            })
+            ->count();
+
+        $maleCSEE = \App\Models\Plantilla\PlanPosition::query()
+        ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male')
+                            ->whereHas('cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CSE%');
+                            });
+                    });
+            })
+            ->count();
+
+            $countByMale = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData', function ($query) {
+                        $query->where('gender', 'Male');
+                    });
+            })
+            ->count();
+            $maleNonCesNonEligibles = ($countByMale - $maleCesoAndEligibles);
+            $maleNonCesEligibles = ($maleNonCesNonEligibles - $maleCSEE);
 
 
             $grandTotalPosition += $totalPosition;
@@ -1100,6 +1225,15 @@
             $grandCesosAndEligibles += $cesosAndEligibles;
             $grandCeso += $ceso;
             $grandEligibles += $eligibles;
+            $grandCsee += $csee;
+            $grandNonCesEligible += $nonCesEligible;
+            $grandNonCesosAndNonEligibles += $nonCesosAndNonEligibles;
+            $grandMaleCeso += $maleCeso;
+            $grandMaleEligibles += $maleEligibles;
+            $grandMaleCesoAndEligibles += $maleCesoAndEligibles;
+            $grandMaleCSEE += $maleCSEE;
+            $grandMaleNonCesEligibles += $maleNonCesEligibles;
+            $grandCountByMale += $countByMale;
         @endphp
         <tr>
             <td class="bold">
@@ -1128,48 +1262,50 @@
                 {{ $cesosAndEligibles ?? '0' }}
             </th>
             <th class="bg-cyan">
+                {{ $occupiedCESPercentage }}%
+
             </th>
             <th>
-                -
+                {{ $csee ?? 0 }}
             </th>
             <th>
-                -
+                {{ $nonCesEligible ?? 0 }}
             </th>
             <th class="bg-green">
-                -
+                {{ $nonCesosAndNonEligibles ?? 0 }}
             </th>
             <th class="bg-green">
-                -
+                {{ $occupiedNonCESPercentage ?? 0}}%
             </th>
             <th>
-                -
+                {{ $maleCeso ?? 0 }}
             </th>
             <th>
-                -
+                {{ $maleEligibles ?? 0 }}
             </th>
             <th class="bg-cyan">
-                -
+                {{ $maleCesoAndEligibles ?? 0 }}
             </th>
             <th class="bg-cyan">
-                -
+                %
             </th>
             <th>
-                -
+                {{ $maleCSEE ?? 0}}
             </th>
             <th>
-                -
+                {{ $maleNonCesEligibles ?? 0 }}
             </th>
             <th class="bg-green">
-                -
+                {{ $maleNonCesNonEligibles ?? 0}}
             </th>
             <th class="bg-green">
-                -
+                %
             </th>
             <th class="bg-cyan">
-                -
+                {{ $countByMale ?? 0}}
             </th>
             <th class="bg-cyan">
-                -
+                %
             </th>
             <th>
                 -
@@ -1215,16 +1351,58 @@
                 {{ $grandVacantCESPosition }}
             </th>
             <th>
-                -
+                =
             </th>
             <th>
                 {{ $grandCeso }}
             </th>
             <th>
-                {{ $grandEligibles }}
+                {{ $grandEligibles}}
             </th>
             <th>
-                {{ $grandCesosAndEligibles ?? 0}}
+                {{ $grandCesosAndEligibles }}
+            </th>
+            <th>
+                =
+            </th>
+            <th>
+                {{ $grandCsee }}
+            </th>
+            <th>
+                {{ $grandNonCesEligible }}
+            </th>
+            <th>
+                {{ $grandNonCesosAndNonEligibles }}
+            </th>
+            <th>
+                =
+            </th>
+            <th>
+                {{ $grandMaleCeso }}
+            </th>
+            <th>
+                {{ $grandMaleEligibles }}
+            </th>
+            <th>
+                {{ $grandMaleCesoAndEligibles }}
+            </th>
+            <th>
+                =
+            </th>
+            <th>
+                {{ $grandMaleCSEE }}
+            </th>
+            <th>
+                {{ $grandMaleNonCesEligibles }}
+            </th>
+            <th>
+                {{ $grandMaleNonCesNonEligibles }}
+            </th>
+            <th>
+                %
+            </th>
+            <th>
+                {{ $grandCountByMale }}
             </th>
         </tr>
 
