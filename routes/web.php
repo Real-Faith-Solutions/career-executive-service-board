@@ -622,23 +622,23 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics.index')->middleware('checkPermission:plantilla_statistics_reports');
             Route::get('{deptid}/pdf', [StatisticsController::class, 'generatePDF'])->name('statistics.pdf')->middleware('checkPermission:plantilla_statistics_reports');
 
-            Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index');
-            Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf');
+            Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index')->middleware('checkPermission:plantilla_occupancy_reports');
+            Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
 
-            Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index');
-            Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf');
+            Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
 
-            Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index');
-            Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf');
+            Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
 
-            Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index');
-            Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf');
+            Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
 
-            Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index');
-            Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf');
+            Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf')->middleware('checkPermission:plantilla_statistics_reports');
 
-            Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf');
-            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf');
+            Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf')->middleware('checkPermission:plantilla_statistics_reports');
+            Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf')->middleware('checkPermission:plantilla_statistics_reports');
         });
     });
     // End of plantilla routes
