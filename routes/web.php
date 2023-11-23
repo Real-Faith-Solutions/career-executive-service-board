@@ -905,8 +905,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     //  ERIS Report/Eligibility and Rank Tracking routes
     Route::prefix('eris-report')->group(function () {
         Route::prefix('board-interview-report')->group(function () {
-            Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index');
-            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf');
+            Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('panel-board-interview-report')->group(function () {
