@@ -15,6 +15,18 @@ use Illuminate\Validation\Rule;
 
 class DepartmentAgencyManagerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkPermission:plantilla_view_library')->only('index');
+ 
+        $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
+ 
+        $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
+
+        $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,7 +55,6 @@ class DepartmentAgencyManagerController extends Controller
             'query',
         ));
     }
-
 
     /**
      * Show the form for creating a new resource.

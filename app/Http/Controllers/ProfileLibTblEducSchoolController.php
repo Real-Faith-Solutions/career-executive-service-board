@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class ProfileLibTblEducSchoolController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkPermission:201_view_library')->only('index');
+ 
+        $this->middleware('checkPermission:201_add_library')->only(['store', 'create']);
+ 
+        $this->middleware('checkPermission:201_edit_library')->only(['edit', 'update']);
+
+        $this->middleware('checkPermission:201_delete_library')->only(['recentlyDeleted', 'restore', 'destroy', 'forceDelete']);
+    }
+
     public function index()
     {
         $datas = ProfileLibTblEducSchool::query()
