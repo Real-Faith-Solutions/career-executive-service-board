@@ -22,11 +22,19 @@ class CESOccupancyStatisticsReportController extends Controller
         $currentDate = Carbon::now()->format('d F Y');
         $title = $deptid;
 
-        $totalPosition = PlanPosition::query()
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->count();
+        foreach ($motherDepartmentAgency as $agency) {
+            // Accessing properties of each $agency
+            $title = $agency->title;
+            $deptid = $agency->deptid;
+
+            $totalPosition = PlanPosition::query()
+                ->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1)
+                ->count();
+
+            // Now you can use $title, $deptid, and $totalPosition as needed
+        }
 
 
 

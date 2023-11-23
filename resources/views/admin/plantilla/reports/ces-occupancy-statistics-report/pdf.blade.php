@@ -985,10 +985,17 @@
         </p>
     </div>
 
-    <table width="100%" style="border: 1px solid black;font-size: 5px;">
+    <table width="100%" style="font-size: 5px;">
         <tr>
             <td colspan="4" style="text-decoration: underline;" class="bold">
                 Executive Branch
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td></td>
+            <td colspan="4" class="bold italic">
+                National Government Agencies
             </td>
         </tr>
 
@@ -1005,7 +1012,7 @@
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
             </td>
             <td>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                {{ $totalPosition ?? '' }}
             </td>
             <td>
                 {{ $motherDepartmentAgencyDatas->title ?? '' }}
