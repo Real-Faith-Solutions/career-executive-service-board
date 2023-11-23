@@ -7,6 +7,10 @@
 
     {{-- custom css --}}
     <style>
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
         .rotate {
             transform: rotate(90deg);
             text-align: center;
@@ -132,10 +136,10 @@
             padding-left: 30%;
         }
 
-        td {
+        /* td {
             padding: 0 10px 0 3px;
             border: 2px solid #fff;
-        }
+        } */
     </style>
 
     {{-- reset attributes --}}
@@ -985,23 +989,28 @@
         </p>
     </div>
 
-    <table width="100%" style="font-size: 5px;">
+
+    <table width="100%" style="font-size: 9px;">
+    <thead>
         <tr>
-            <td colspan="4" style="text-decoration: underline;" class="bold">
+            <td style="text-decoration: underline;" class="bold">
                 Executive Branch
             </td>
         </tr>
-        <br>
+        
         <tr>
-            <td></td>
-            <td colspan="4" class="bold italic">
+            <td class="bold italic">
                 National Government Agencies
             </td>
         </tr>
-
+    </thead>
         @php
             $no = 1;
             $grandTotalPosition = 0;
+            $grandVacantCESPosition = 0;
+            $grandCesosAndEligibles = 0;
+            $grandCeso = 0;
+            $grandEligibles = 0;
         @endphp
         @foreach ($motherDepartmentAgency as $motherDepartmentAgencyDatas)
 
@@ -1016,7 +1025,81 @@
                 ->where('is_active', 1)
                 ->count();
 
-                $grandTotalPosition += $totalPosition;
+            $occupiedCESPosition = \App\Models\Plantilla\PlanPosition::query()
+                ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+                ->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1)
+                ->whereHas('planAppointee', function ($query) {
+                    $query->where('is_appointee', 1);
+                })
+                ->count();
+            $vacantCESPosition = $totalPosition - $occupiedCESPosition;
+            $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
+            $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
+
+            $cesosAndEligibles = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%Eli%')
+                            ->orWhere('description', 'LIKE', '%CES%');
+                    });
+            })
+            ->count();
+
+            $ceso = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%CES%');
+                    });
+            })
+            ->count();
+
+            $eligibles = \App\Models\Plantilla\PlanPosition::query()
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($selectedDeptid) {
+                    $query->where('deptid', $selectedDeptid)
+                        ->orWhere('mother_deptid', $selectedDeptid);
+                })
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1)
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'LIKE', '%Eli%');
+                    });
+            })
+            ->count();
+
+
+
+
+
+
+            $grandTotalPosition += $totalPosition;
+            $grandVacantCESPosition += $vacantCESPosition;
+            $grandCesosAndEligibles += $cesosAndEligibles;
+            $grandCeso += $ceso;
+            $grandEligibles += $eligibles;
         @endphp
         <tr>
             <td class="bold">
@@ -1029,86 +1112,94 @@
             <th>
                 {{ $totalPosition ?? 0 }}
             </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            <th class="bg-yellow text-red">
+                {{ $vacantCESPosition ?? 0}}
+            </th>
+            <th class="bg-yellow text-red">
+                {{ $vacantCESPositionPercentage ?? 0 }}%
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                {{ $ceso ?? '0' }}
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                {{ $eligibles ?? '0' }}
+            </th>
+            <th class="bg-cyan">
+                {{ $cesosAndEligibles ?? '0' }}
+            </th>
+            <th class="bg-cyan">
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
+            </th>
+            <th class="bg-green">
+                -
+            </th>
+            <th class="bg-green">
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
+            </th>
+            <th class="bg-cyan">
+                -
+            </th>
+            <th class="bg-cyan">
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
+            </th>
+            <th class="bg-green">
+                -
+            </th>
+            <th class="bg-green">
+                -
+            </th>
+            <th class="bg-cyan">
+                -
+            </th>
+            <th class="bg-cyan">
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
+            </th>
+            <th class="bg-cyan">
+                -
+            </th>
+            <th class="bg-cyan">
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
             <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+                -
             </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            <th class="bg-green">
+                -
             </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            <th class="bg-green">
+                -
             </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            <th class="bg-orange">
+                -
             </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
-            </th>
-            <th>
-                {{ $motherDepartmentAgencyDatas->title ?? '' }}
+            <th class="bg-orange">
+                -
             </th>
         </tr>
         @endforeach
@@ -1119,6 +1210,21 @@
             </td>
             <th>
                 {{ $grandTotalPosition }}
+            </th>
+            <th>
+                {{ $grandVacantCESPosition }}
+            </th>
+            <th>
+                -
+            </th>
+            <th>
+                {{ $grandCeso }}
+            </th>
+            <th>
+                {{ $grandEligibles }}
+            </th>
+            <th>
+                {{ $grandCesosAndEligibles ?? 0}}
             </th>
         </tr>
 
