@@ -108,14 +108,12 @@ class Reports201Controller extends Controller
 
             $query->when($request->has('authority_code') && $authority_code !== 'false', function ($query) use ($authority_code) {
 
-                if($authority_code == "all"){
-                    
-                }else{
+                if ($authority_code !== "all") {
                     $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
                         $subquery->where('official_code', $authority_code);
                     });
                 }
-                
+        
             });
         
         });
