@@ -231,6 +231,11 @@ class PersonalData extends Model
         return $this->hasMany(ProfileTblCesStatus::class, 'cesno', 'cesno');
     }
 
+    public function latestProfileTblCesStatus(): HasOne
+    {
+        return $this->hasOne(ProfileTblCesStatus::class, 'cesno', 'cesno')->latestOfMany('appointed_dt');
+    }
+
     public function getAppointingAuthorityDescription($personalData)
     {
         $currentStatus = ProfileTblCesStatus::where('cesno', $personalData->cesno)
