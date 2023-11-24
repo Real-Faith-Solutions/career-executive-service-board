@@ -1503,6 +1503,13 @@
 
                 $grandMaleOccupied = round(($grandMaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
                 $grandMaleCesOccupiedPercentage = ($grandCesOccupied - $grandMaleOccupied);
+
+                $grandFemaleOccupied = round(($grandFemaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
+                $grandFemaleCesOccupiedPercentage = ($grandCesOccupied - $grandFemaleOccupied);
+
+
+                $grandOccupiedMale = round(($grandCountByMale / $totalOccupied) * 100);
+                $grandOccupiedFemale = round(($grandCountByFemale / $totalOccupied) * 100);
                 
 
             @endphp
@@ -1572,7 +1579,7 @@
                     {{ $grandCountByMale }}
                 </th>
                 <th class="bg-cyan">
-                    %
+                    {{ $grandOccupiedMale }}%
                 </th>
                 <th>
                     {{ $grandFemaleCeso }}
@@ -1584,7 +1591,7 @@
                     {{ $grandFemaleCesoAndEligibles }}
                 </th>
                 <th class="bg-cyan">
-                    %
+                    {{ $grandFemaleOccupied }}%
                 </th>
                 <th>
                     {{ $grandFemaleCSEE }}
@@ -1596,16 +1603,15 @@
                     {{ $grandOccupiedFemaleNonCesNonEligibles }}
                 </th>
                 <th class="bg-green">
-                    %
+                    {{ $grandFemaleCesOccupiedPercentage }}%
                 </th>
                 <th class="bg-orange">
                     {{ $grandCountByFemale }}
                 </th>
                 <th class="bg-orange">
-                    %
+                    {{ $grandOccupiedFemale }}%
                 </th>
             </tr>
-
         </tfoot>
 
 
