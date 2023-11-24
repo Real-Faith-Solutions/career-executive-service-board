@@ -103,7 +103,7 @@ class Reports201Controller extends Controller
         });
 
         // appointing authority filter 
-
+        // there is a bug when the user have multiple ces status
         $personalData->where(function ($query) use ($request, $authority_code) {
 
             $query->when($request->has('authority_code') && $authority_code !== 'false', function ($query) use ($authority_code) {
