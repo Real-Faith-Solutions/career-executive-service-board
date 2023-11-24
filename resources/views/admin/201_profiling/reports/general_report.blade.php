@@ -71,6 +71,8 @@
                             <option value="{{ $newProfileLibTblCesStatus->code }}" {{ $newProfileLibTblCesStatus->code == $cesstat_code ? 'selected' : '' }}>{{ $newProfileLibTblCesStatus->description }}</option>
                         @endforeach
                         <option value="all" {{ "all" == $cesstat_code ? 'selected' : '' }}>All</option>
+                        <option value="cesos" {{ "cesos" == $cesstat_code ? 'selected' : '' }}>CESOs</option>
+                        <option value="cesoseli" {{ "cesoseli" == $cesstat_code ? 'selected' : '' }}>CESOs & Eligibles</option>
                     </select>
                     @error('cesstat_code')
                         <span class="invalid" role="alert">
