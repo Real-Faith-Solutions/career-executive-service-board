@@ -111,6 +111,7 @@ class Reports201Controller extends Controller
                 if ($authority_code !== "all") {
                     $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
                         $subquery->where('official_code', $authority_code);
+                        // ->latest('appointed_dt')->limit(1)
                     });
                 }
         
