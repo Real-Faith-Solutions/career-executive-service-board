@@ -6,6 +6,14 @@
         <title>Resource Speaker Manager Report</title>
 
         <style>
+            @font-face {
+                font-family: "Busorama";
+                src: url('{{ asset(' fonts/busorama.ttf') }}');
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+            }
+
             @page {
                 margin-top: 75px;
                 padding-bottom: 100px;
@@ -70,6 +78,7 @@
         
             .title_name {
                 text-transform: uppercase;
+                font-family: 'Busorama';
                 font-size: 20px;
                 color: #284F87;
             }
