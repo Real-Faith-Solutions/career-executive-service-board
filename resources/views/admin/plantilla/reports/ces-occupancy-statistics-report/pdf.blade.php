@@ -1502,10 +1502,10 @@
                 $grandNonCesOccupied = (100-$grandCesOccupied);
 
                 $grandMaleOccupied = round(($grandMaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
-                $grandMaleCesOccupiedPercentage = ($grandCesOccupied - $grandMaleOccupied);
+                $grandMaleCesOccupiedPercentage = round(($grandMaleNonCesNonEligibles / $grandCesosAndEligibles ) * $grandCesOccupied);
 
                 $grandFemaleOccupied = round(($grandFemaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
-                $grandFemaleCesOccupiedPercentage = ($grandCesOccupied - $grandFemaleOccupied);
+                $grandFemaleCesOccupiedPercentage = ($grandNonCesOccupied - $grandMaleCesOccupiedPercentage);
 
 
                 $grandOccupiedMale = round(($grandCountByMale / $totalOccupied) * 100);
