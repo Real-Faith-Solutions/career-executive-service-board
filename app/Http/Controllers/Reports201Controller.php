@@ -89,6 +89,10 @@ class Reports201Controller extends Controller
 
             $query->when($request->has('cesstat_code') && $cesstat_code !== 'false', function ($query) use ($cesstat_code)  {
                 if($cesstat_code == "all"){
+                }elseif($cesstat_code == "cesos"){
+
+                }elseif($cesstat_code == "cesoseli"){
+
                 }else{
                     $cesstat_code = [1, 2, 3, 4, 5, 6];
                     return $query->whereIn('CESStat_code', $cesstat_code);
