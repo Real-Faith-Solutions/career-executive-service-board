@@ -233,8 +233,12 @@ class PersonalData extends Model
 
     public function getAppointingAuthorityDescription($personalData)
     {
-        $currentStatus = ProfileTblCesStatus::where('cesstat_code', $personalData->CESStat_code)->value('official_code');
+        $currentStatus = ProfileTblCesStatus::where('cesno', $personalData->cesno)
+                        ->where('cesstat_code', $personalData->CESStat_code)
+                        ->value('official_code');
+
         $authority = ProfileLibTblAppAuthority::where('code', $currentStatus)->value('description');
+
         return $authority;
     }
 
