@@ -93,7 +93,8 @@ class Reports201Controller extends Controller
                     $cesstat_code = [1, 2, 3, 4, 5, 6];
                     return $query->whereIn('CESStat_code', $cesstat_code);
                 }elseif($cesstat_code == "cesoseli"){
-
+                    $cesstat_code = [1, 2, 3, 4, 5, 6, 7];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
                 }else{
                     return $query->where('CESStat_code', $cesstat_code);
                 }
@@ -213,6 +214,12 @@ class Reports201Controller extends Controller
 
             $query->when($cesstat_code !== 'false', function ($query) use ($cesstat_code)  {
                 if($cesstat_code == "all"){
+                }elseif($cesstat_code == "cesos"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
+                }elseif($cesstat_code == "cesoseli"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6, 7];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
                 }else{
                     return $query->where('CESStat_code', $cesstat_code);
                 }
