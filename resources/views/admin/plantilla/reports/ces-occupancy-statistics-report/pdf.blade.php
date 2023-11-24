@@ -14,8 +14,7 @@
         .rotate {
             transform: rotate(90deg);
             text-align: center;
-            font-size: 8px;
-            border: 2px solid transparent;
+            font-size: 7px;
         }
 
         @font-face {
@@ -991,7 +990,81 @@
 
 
     <table width="100%" style="font-size: 9px;">
-    <thead>
+
+    <tr>
+        <td colspan="2">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black" rowspan="3">
+                        <th style="border:2px solid black" colspan="2" >SECTOR/AGENCY</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td colspan="11">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black">
+                        <th style="border:2px solid black" colspan="11">BY CES POSITION</th>
+                    </tr>
+                    <tr>
+                        <th>Total No. of CES Positions</th>
+                        <th class="bg-yellow text-red">Total No. of CES Positions</th>
+                        <th class="bg-yellow text-red">% Vacant</th>
+                        <th>CESOs</th>
+                        <th>CES Eligibles</th>
+                        <th class="bg-cyan">Occupied by CESOs and CES Eligibles</th>
+                        <th class="bg-cyan">% Occupied</th>
+                        <th>CSEEs</th>
+                        <th>Non-CES Eligible</th>
+                        <th class="bg-green">Occupied by NonCES Eligible</th>
+                        <th class="bg-green">% Occupied</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td colspan="20">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black">
+                        <th style="border:2px solid black" colspan="20">BY GENDER</th>
+                    </tr>
+
+                    <tr>
+                        <th style="border:1px solid black" colspan="10">Male</th>
+                        <th style="border:1px solid black" colspan="10">Female</th>
+                    </tr>
+
+                    <tr>
+                        <th style="border:1px solid black">1</th>
+                        <th style="border:1px solid black">2</th>
+                        <th style="border:1px solid black">3</th>
+                        <th style="border:1px solid black">4</th>
+                        <th style="border:1px solid black">5</th>
+                        <th style="border:1px solid black">6</th>
+                        <th style="border:1px solid black">7</th>
+                        <th style="border:1px solid black">8</th>
+                        <th style="border:1px solid black">9</th>
+                        <th style="border:1px solid black">10</th>
+                        <th style="border:1px solid black">1</th>
+                        <th style="border:1px solid black">2</th>
+                        <th style="border:1px solid black">3</th>
+                        <th style="border:1px solid black">4</th>
+                        <th style="border:1px solid black">5</th>
+                        <th style="border:1px solid black">6</th>
+                        <th style="border:1px solid black">7</th>
+                        <th style="border:1px solid black">8</th>
+                        <th style="border:1px solid black">9</th>
+                        <th style="border:1px solid black">10</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+    </tr>
+
+
+
+    <!-- <thead>
         <tr>
             <td style="text-decoration: underline;" class="bold">
                 Executive Branch
@@ -1004,7 +1077,7 @@
                 National Government Agencies
             </td>
         </tr>
-    </thead>
+    </thead> -->
 
     <tbody>
         @php
