@@ -14,8 +14,7 @@
         .rotate {
             transform: rotate(90deg);
             text-align: center;
-            font-size: 8px;
-            border: 2px solid transparent;
+            font-size: 7px;
         }
 
         @font-face {
@@ -991,7 +990,81 @@
 
 
     <table width="100%" style="font-size: 9px;">
-    <thead>
+
+    <tr>
+        <td colspan="2">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black" rowspan="3">
+                        <th style="border:2px solid black" colspan="2" >SECTOR/AGENCY</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td colspan="11">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black">
+                        <th style="border:2px solid black" colspan="11">BY CES POSITION</th>
+                    </tr>
+                    <tr>
+                        <th>Total No. of CES Positions</th>
+                        <th class="bg-yellow text-red">Total No. of CES Positions</th>
+                        <th class="bg-yellow text-red">% Vacant</th>
+                        <th>CESOs</th>
+                        <th>CES Eligibles</th>
+                        <th class="bg-cyan">Occupied by CESOs and CES Eligibles</th>
+                        <th class="bg-cyan">% Occupied</th>
+                        <th>CSEEs</th>
+                        <th>Non-CES Eligible</th>
+                        <th class="bg-green">Occupied by NonCES Eligible</th>
+                        <th class="bg-green">% Occupied</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+        <td colspan="20">
+            <table width="100%" style="font-size: 9px;">
+                <thead style="border:2px solid black">
+                    <tr style="border:2px solid black">
+                        <th style="border:2px solid black" colspan="20">BY GENDER</th>
+                    </tr>
+
+                    <tr>
+                        <th style="border:1px solid black" colspan="10">Male</th>
+                        <th style="border:1px solid black" colspan="10">Female</th>
+                    </tr>
+
+                    <tr>
+                        <th style="border:1px solid black">1</th>
+                        <th style="border:1px solid black">2</th>
+                        <th style="border:1px solid black">3</th>
+                        <th style="border:1px solid black">4</th>
+                        <th style="border:1px solid black">5</th>
+                        <th style="border:1px solid black">6</th>
+                        <th style="border:1px solid black">7</th>
+                        <th style="border:1px solid black">8</th>
+                        <th style="border:1px solid black">9</th>
+                        <th style="border:1px solid black">10</th>
+                        <th style="border:1px solid black">1</th>
+                        <th style="border:1px solid black">2</th>
+                        <th style="border:1px solid black">3</th>
+                        <th style="border:1px solid black">4</th>
+                        <th style="border:1px solid black">5</th>
+                        <th style="border:1px solid black">6</th>
+                        <th style="border:1px solid black">7</th>
+                        <th style="border:1px solid black">8</th>
+                        <th style="border:1px solid black">9</th>
+                        <th style="border:1px solid black">10</th>
+                    </tr>
+                </thead>
+            </table>
+        </td>
+    </tr>
+
+
+
+    <!-- <thead>
         <tr>
             <td style="text-decoration: underline;" class="bold">
                 Executive Branch
@@ -1003,9 +1076,8 @@
             <td class="bold italic">
                 National Government Agencies
             </td>
-            <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
-    </thead>
+    </thead> -->
 
     <tbody>
         @php
@@ -1502,10 +1574,10 @@
                 $grandNonCesOccupied = (100-$grandCesOccupied);
 
                 $grandMaleOccupied = round(($grandMaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
-                $grandMaleCesOccupiedPercentage = ($grandCesOccupied - $grandMaleOccupied);
+                $grandMaleCesOccupiedPercentage = round(($grandMaleNonCesNonEligibles / $grandCesosAndEligibles ) * $grandCesOccupied);
 
                 $grandFemaleOccupied = round(($grandFemaleCesoAndEligibles / $grandCesosAndEligibles) * $grandCesOccupied);
-                $grandFemaleCesOccupiedPercentage = ($grandCesOccupied - $grandFemaleOccupied);
+                $grandFemaleCesOccupiedPercentage = ($grandNonCesOccupied - $grandMaleCesOccupiedPercentage);
 
 
                 $grandOccupiedMale = round(($grandCountByMale / $totalOccupied) * 100);
@@ -1613,225 +1685,7 @@
                 </th>
             </tr>
         </tfoot>
-
-
     </table>
-
-
-
-    {{-- <table width="80%" style="border: 5px solid green">
-
-        <td style="width:80%;">
-
-            <table style="font-size:9px;width:100%;">
-                <tr>
-                    <th style="border: 1px solid #000;" rowspan="2">
-                        SECTOR/AGENCY
-                    </th>
-
-                    <th style="border: 1px solid #000;background:#2E75B6;color:#fff;" colspan="11">
-                        BY CES POSITION
-                    </th>
-                </tr>
-
-                <tr>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            Total No. of CES Position
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            Total No. of Vacant CES Positions
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            %Vacant
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CESOs
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CES Eligibles
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0;" class="bg-cyan">
-                        <p class="rotate">
-                            Occupied by CESOs and CES Eligibles
-                        </p>
-
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0;" class="bg-cyan">
-                        <p class="rotate">
-                            %Occupied
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CSEEs
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            Non-CES Eligible
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
-                        <p class="rotate">
-                            Occupied by Non-CES Eligible
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
-                        <p class="rotate">
-                            %Occupied
-                        </p>
-                    </td>
-                </tr>
-
-            </table>
-
-        </td>
-
-        <td style="width:80%;">
-
-            <table style="font-size:9px;width:100%;">
-                <tr>
-                    <th style="border: 1px solid black;background: #604C78;color:#fff;" colspan="20">
-                        BY GENDER
-                    </th>
-                </tr>
-                <tr>
-                    <th style="border: 1px solid black;" colspan="10" class="bg-cyan">
-                        BY MALE
-                    </th>
-                    <th style="border: 1px solid black;" colspan="10" class="bg-orange">
-                        BY FEMALE
-                    </th>
-                </tr>
-
-                <tr>
-
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CESOs
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CES Eligibles
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
-                        <p class="rotate">
-                            Occupied by CES Eligible
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
-                        <p class="rotate">
-                            %Occupied
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            CSEEs
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            Non-CES Eligibles
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
-                        <p class="rotate">
-                            Occupied by Non-CES Eligible
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-green">
-                        <p class="rotate">
-                            %Occupied
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
-                        <p class="rotate">
-                            Total No. of Male
-                        </p>
-                    </td>
-
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-cyan">
-                        <p class="rotate">
-                            Total % Occupied by Male
-                        </p>
-                    </td>
-
-
-
-                    <td style="border:1px solid black;padding:0px;margin:0">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                    <td style="border:1px solid black;padding:0px;margin:0" class="bg-yellow text-red">
-                        <p class="rotate">
-                            female
-                        </p>
-                    </td>
-                </tr>
-
-            </table>
-
-        </td>
-
-    </table> --}}
-
-
-
-
 
 </body>
 
