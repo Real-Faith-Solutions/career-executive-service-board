@@ -52,6 +52,9 @@
         .p-10 {
             padding: 10%;
         }
+        .text-white{
+            color:#fff;
+        }
 
         .text-center {
             text-align: center;
@@ -998,6 +1001,7 @@
                     <tr style="border:2px solid black" rowspan="3">
                         <th style="border:2px solid black" colspan="2" >SECTOR/AGENCY</th>
                     </tr>
+
                 </thead>
             </table>
         </td>
@@ -1005,20 +1009,23 @@
             <table width="100%" style="font-size: 9px;">
                 <thead style="border:2px solid black">
                     <tr style="border:2px solid black">
-                        <th style="border:2px solid black" colspan="11">BY CES POSITION</th>
+                        <th class="text-white" style="border:2px solid black;background:#2E75B6;" colspan="11">BY CES POSITION</th>
+                    </tr>
+                    <tr style="font-size: 5px">
+                        <th rowspan="2">Total No. of CES Positions</th>
+                        <th rowspan="2" class="bg-yellow text-red">Total No. of CES Positions</th>
+                        <th rowspan="2" class="bg-yellow text-red">% Vacant</th>
+                        <th rowspan="2">CESOs</th>
+                        <th rowspan="2">CES Eligibles</th>
+                        <th rowspan="2" class="bg-cyan">Occupied by CESOs and CES Eligibles</th>
+                        <th rowspan="2" class="bg-cyan">% Occupied</th>
+                        <th rowspan="2">CSEEs</th>
+                        <th rowspan="2">Non-CES Eligible</th>
+                        <th rowspan="2" class="bg-green">Occupied by Non-CES Eligible</th>
+                        <th rowspan="2" class="bg-green">% Occupied</th>
                     </tr>
                     <tr>
-                        <th>Total No. of CES Positions</th>
-                        <th class="bg-yellow text-red">Total No. of CES Positions</th>
-                        <th class="bg-yellow text-red">% Vacant</th>
-                        <th>CESOs</th>
-                        <th>CES Eligibles</th>
-                        <th class="bg-cyan">Occupied by CESOs and CES Eligibles</th>
-                        <th class="bg-cyan">% Occupied</th>
-                        <th>CSEEs</th>
-                        <th>Non-CES Eligible</th>
-                        <th class="bg-green">Occupied by NonCES Eligible</th>
-                        <th class="bg-green">% Occupied</th>
+
                     </tr>
                 </thead>
             </table>
@@ -1027,35 +1034,39 @@
             <table width="100%" style="font-size: 9px;">
                 <thead style="border:2px solid black">
                     <tr style="border:2px solid black">
-                        <th style="border:2px solid black" colspan="20">BY GENDER</th>
+                        <th class="text-white" style="border:2px solid black;background:#604C78" colspan="20">BY GENDER</th>
                     </tr>
 
                     <tr>
-                        <th style="border:1px solid black" colspan="10">Male</th>
-                        <th style="border:1px solid black" colspan="10">Female</th>
+                        <th class="bg-cyan" style="border:1px solid black;" colspan="10">Male</th>
+                        <th class="bg-orange" style="border:1px solid black;" colspan="10">Female</th>
                     </tr>
 
-                    <tr>
-                        <th style="border:1px solid black">1</th>
-                        <th style="border:1px solid black">2</th>
-                        <th style="border:1px solid black">3</th>
-                        <th style="border:1px solid black">4</th>
-                        <th style="border:1px solid black">5</th>
-                        <th style="border:1px solid black">6</th>
-                        <th style="border:1px solid black">7</th>
-                        <th style="border:1px solid black">8</th>
-                        <th style="border:1px solid black">9</th>
-                        <th style="border:1px solid black">10</th>
-                        <th style="border:1px solid black">1</th>
-                        <th style="border:1px solid black">2</th>
-                        <th style="border:1px solid black">3</th>
-                        <th style="border:1px solid black">4</th>
-                        <th style="border:1px solid black">5</th>
-                        <th style="border:1px solid black">6</th>
-                        <th style="border:1px solid black">7</th>
-                        <th style="border:1px solid black">8</th>
-                        <th style="border:1px solid black">9</th>
-                        <th style="border:1px solid black">10</th>
+                    <tr style="font-size: 5px">
+                        <!-- Male -->
+                        <th style="border:1px solid black">CESOs</th>
+                        <th style="border:1px solid black">CES Eligibles</th>
+                        <th class="bg-cyan" style="border:1px solid black">Occupied by CESOs and CES Eligibles</th>
+                        <th class="bg-cyan" style="border:1px solid black">% Occupied</th>
+                        <th style="border:1px solid black">CSEEs</th>
+                        <th style="border:1px solid black">Non-CES Eligibles</th>
+                        <th class="bg-green" style="border:1px solid black">Occupied by Non-CES Eligible</th>
+                        <th class="bg-green" style="border:1px solid black">% Occupied</th>
+                        <th class="bg-cyan" style="border:1px solid black">Total No. of Male</th>
+                        <th class="bg-cyan" style="border:1px solid black">Total % Occupied by Male</th>
+                        
+                        <!-- Female -->
+                        <th style="border:1px solid black">CESOs</th>
+                        <th style="border:1px solid black">CES Eligibles</th>
+                        <th class="bg-cyan" style="border:1px solid black">Occupied by CESOs and CES Eligibles</th>
+                        <th class="bg-cyan" style="border:1px solid black">% Occupied</th>
+                        <th style="border:1px solid black">CSEEs</th>
+                        <th style="border:1px solid black">Non-CES Eligibles</th>
+                        <th class="bg-green" style="border:1px solid black">Occupied by Non-CES Eligible</th>
+                        <th class="bg-green" style="border:1px solid black">% Occupied</th>
+                        <th class="bg-orange" style="border:1px solid black">Total No. of Male</th>
+                        <th class="bg-orange" style="border:1px solid black">Total % Occupied by Male</th>
+                        
                     </tr>
                 </thead>
             </table>
