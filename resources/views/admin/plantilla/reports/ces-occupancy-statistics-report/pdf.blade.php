@@ -14,7 +14,7 @@
         .rotate {
             transform: rotate(90deg);
             text-align: center;
-            /* font-size: 7px; */
+            border: 1px solid transparent;
         }
 
         @font-face {
@@ -959,7 +959,7 @@
 </head>
 
 <body>
-    <header>
+    <header style="margin-bottom: 5px">
         <center>
             <img src="{{ public_path('images/assets/branding.png') }}" width="50">
             <h1 class="text-blue busorama" style="font-size:16px;">Career Executive Service Board</h1>
@@ -975,8 +975,8 @@
             </div>
         </center>
     </header>
-    <br />
-    <div class="text-center mb-3">
+    
+    <div class="text-center" style="margin-bottom: 5px">
         <h1 class="bold" style="font-size:9px">
             CES OCCUPANCY STATISTICS
         </h1>
@@ -990,9 +990,9 @@
 
     <thead style="border:1px solid black">
         <tr>
-            <th style="border:1px solid black" colspan="2" rowspan="3">SECTOR/AGENCY</th>
-            <th style="border:1px solid black;background:#2E75B6" class="text-white" colspan="11" class="text-white">BY CES POSITION</th>
-            <th style="border:1px solid black;background:#604C78" class="text-white" colspan="20">BY GENDER</th>
+            <th style="border:1px solid black;font-size:8px;" colspan="2" rowspan="3">SECTOR/AGENCY</th>
+            <th style="border:1px solid black;font-size:8px;background:#2E75B6" class="text-white" colspan="11" class="text-white">BY CES POSITION</th>
+            <th style="border:1px solid black;font-size:8px;background:#604C78" class="text-white" colspan="20">BY GENDER</th>
         </tr>
         <tr style="border:1px solid black">
             <th style="border:1px solid black" rowspan="2">
@@ -1051,8 +1051,12 @@
                 </p>
             </th>
 
-            <th rowspan="1" colspan="10" class="bg-cyan" style="border:1px solid black;">Male</th>
-            <th rowspan="1" colspan="10" class="bg-orange" style="border:1px solid black;">Female</th>
+            <th rowspan="1" colspan="10" class="bg-cyan" style="border:1px solid black;font-size:8px;">
+                Male
+            </th>
+            <th rowspan="1" colspan="10" class="bg-orange" style="border:1px solid black;font-size:8px;">
+                Female
+            </th>
         </tr>
 
         <tr>
