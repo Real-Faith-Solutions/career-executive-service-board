@@ -14,7 +14,7 @@
         .rotate {
             transform: rotate(90deg);
             text-align: center;
-            font-size: 7px;
+            border: 1px solid transparent;
         }
 
         @font-face {
@@ -137,11 +137,6 @@
         .pl-15 {
             padding-left: 30%;
         }
-
-        /* td {
-            padding: 0 10px 0 3px;
-            border: 2px solid #fff;
-        } */
     </style>
 
     {{-- reset attributes --}}
@@ -750,7 +745,8 @@
 
         .underline {
             -webkit-text-decoration-line: underline;
-            text-decoration-line: underline
+            text-decoration-line: underline;
+            text-decoration: underline;
         }
 
         .antialiased {
@@ -963,9 +959,7 @@
 </head>
 
 <body>
-
-
-    <header>
+    <header style="margin-bottom: 5px">
         <center>
             <img src="{{ public_path('images/assets/branding.png') }}" width="50">
             <h1 class="text-blue busorama" style="font-size:16px;">Career Executive Service Board</h1>
@@ -981,8 +975,8 @@
             </div>
         </center>
     </header>
-    <br />
-    <div class="text-center mb-3">
+    
+    <div class="text-center" style="margin-bottom: 5px">
         <h1 class="bold" style="font-size:9px">
             CES OCCUPANCY STATISTICS
         </h1>
@@ -992,105 +986,201 @@
     </div>
 
 
-    <table width="100%" style="font-size: 9px;">
+    <table width="100%" style="font-size: 5px;">
 
-    <tr>
-        <td colspan="2">
-            <table width="100%" style="font-size: 9px;">
-                <thead style="border:2px solid black">
-                    <tr style="border:2px solid black" rowspan="3">
-                        <th style="border:2px solid black" colspan="2" >SECTOR/AGENCY</th>
-                    </tr>
-
-                </thead>
-            </table>
-        </td>
-        <td colspan="11">
-            <table width="100%" style="font-size: 9px;">
-                <thead style="border:2px solid black">
-                    <tr style="border:2px solid black">
-                        <th class="text-white" style="border:2px solid black;background:#2E75B6;" colspan="11">BY CES POSITION</th>
-                    </tr>
-                    <tr style="font-size: 5px">
-                        <th rowspan="2">Total No. of CES Positions</th>
-                        <th rowspan="2" class="bg-yellow text-red">Total No. of CES Positions</th>
-                        <th rowspan="2" class="bg-yellow text-red">% Vacant</th>
-                        <th rowspan="2">CESOs</th>
-                        <th rowspan="2">CES Eligibles</th>
-                        <th rowspan="2" class="bg-cyan">Occupied by CESOs and CES Eligibles</th>
-                        <th rowspan="2" class="bg-cyan">% Occupied</th>
-                        <th rowspan="2">CSEEs</th>
-                        <th rowspan="2">Non-CES Eligible</th>
-                        <th rowspan="2" class="bg-green">Occupied by Non-CES Eligible</th>
-                        <th rowspan="2" class="bg-green">% Occupied</th>
-                    </tr>
-                    <tr>
-
-                    </tr>
-                </thead>
-            </table>
-        </td>
-        <td colspan="20">
-            <table width="100%" style="font-size: 9px;">
-                <thead style="border:2px solid black">
-                    <tr style="border:2px solid black">
-                        <th class="text-white" style="border:2px solid black;background:#604C78" colspan="20">BY GENDER</th>
-                    </tr>
-
-                    <tr>
-                        <th class="bg-cyan" style="border:1px solid black;" colspan="10">Male</th>
-                        <th class="bg-orange" style="border:1px solid black;" colspan="10">Female</th>
-                    </tr>
-
-                    <tr style="font-size: 5px">
-                        <!-- Male -->
-                        <th style="border:1px solid black">CESOs</th>
-                        <th style="border:1px solid black">CES Eligibles</th>
-                        <th class="bg-cyan" style="border:1px solid black">Occupied by CESOs and CES Eligibles</th>
-                        <th class="bg-cyan" style="border:1px solid black">% Occupied</th>
-                        <th style="border:1px solid black">CSEEs</th>
-                        <th style="border:1px solid black">Non-CES Eligibles</th>
-                        <th class="bg-green" style="border:1px solid black">Occupied by Non-CES Eligible</th>
-                        <th class="bg-green" style="border:1px solid black">% Occupied</th>
-                        <th class="bg-cyan" style="border:1px solid black">Total No. of Male</th>
-                        <th class="bg-cyan" style="border:1px solid black">Total % Occupied by Male</th>
-                        
-                        <!-- Female -->
-                        <th style="border:1px solid black">CESOs</th>
-                        <th style="border:1px solid black">CES Eligibles</th>
-                        <th class="bg-cyan" style="border:1px solid black">Occupied by CESOs and CES Eligibles</th>
-                        <th class="bg-cyan" style="border:1px solid black">% Occupied</th>
-                        <th style="border:1px solid black">CSEEs</th>
-                        <th style="border:1px solid black">Non-CES Eligibles</th>
-                        <th class="bg-green" style="border:1px solid black">Occupied by Non-CES Eligible</th>
-                        <th class="bg-green" style="border:1px solid black">% Occupied</th>
-                        <th class="bg-orange" style="border:1px solid black">Total No. of Male</th>
-                        <th class="bg-orange" style="border:1px solid black">Total % Occupied by Male</th>
-                        
-                    </tr>
-                </thead>
-            </table>
-        </td>
-    </tr>
-
-
-
-    <!-- <thead>
+    <thead style="border:1px solid black">
         <tr>
-            <td style="text-decoration: underline;" class="bold">
+            <th style="border:1px solid black;font-size:8px;" colspan="2" rowspan="3">SECTOR/AGENCY</th>
+            <th style="border:1px solid black;font-size:8px;background:#2E75B6" class="text-white" colspan="11" class="text-white">BY CES POSITION</th>
+            <th style="border:1px solid black;font-size:8px;background:#604C78" class="text-white" colspan="20">BY GENDER</th>
+        </tr>
+        <tr style="border:1px solid black">
+            <th style="border:1px solid black" rowspan="2">
+                <p class="rotate">
+                    Total No. of CES Positions
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-yellow text-red">
+                <p class="rotate">
+                    Total No. of CES Positions
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-yellow text-red">
+                <p class="rotate">
+                    % Vacant
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2">
+                <p class="rotate">
+                    CESOs
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2">
+                <p class="rotate">
+                    CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-cyan">
+                <p class="rotate">
+                    Occupied by CESOs and CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-cyan">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2">
+                <p class="rotate">
+                    CSEEs
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2">
+                <p class="rotate">
+                    Non-CES Eligible
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-green">
+                <p class="rotate">
+                    Occupied by Non-CES Eligible
+                </p>
+            </th>
+            <th style="border:1px solid black" rowspan="2" class="bg-green">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+
+            <th rowspan="1" colspan="10" class="bg-cyan" style="border:1px solid black;font-size:8px;">
+                Male
+            </th>
+            <th rowspan="1" colspan="10" class="bg-orange" style="border:1px solid black;font-size:8px;">
+                Female
+            </th>
+        </tr>
+
+        <tr>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CESOs
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    Occupied by CESOs and CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CSEEs
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    Non-CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-green">
+                <p class="rotate">
+                    Occupied by Non-CES Eligible
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-green">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    Total No. of Male
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    Total % Occupied by Male
+                </p>
+            </th>
+
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CESOs
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    Occupied by CESOs and CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-cyan">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    CSEEs
+                </p>
+            </th>
+            <th style="border:1px solid black">
+                <p class="rotate">
+                    Non-CES Eligibles
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-green">
+                <p class="rotate">
+                    Occupied by Non-CES Eligible
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-green">
+                <p class="rotate">
+                    % Occupied
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-orange">
+                <p class="rotate">
+                    Total No. of Female
+                </p>
+            </th>
+            <th style="border:1px solid black" class="bg-orange">
+                <p class="rotate">
+                    Total % Occupied by Female</th>       
+                </p>
+
+        </tr>
+
+        
+
+    </thead>
+   
+
+    <tbody>
+        <tr style="background:none">
+            <td colspan="33" class="underline bold">
                 Executive Branch
             </td>
         </tr>
-        
-        <tr>
+        <tr style="background:none">
             <td></td>
-            <td class="bold italic">
+            <td colspan="32" class="italic bold">
                 National Government Agencies
             </td>
         </tr>
-    </thead> -->
-
-    <tbody>
+        
         @php
             $no = 1;
             $grandTotalPosition = 0;
@@ -1465,8 +1555,6 @@
 
 
         @endphp
-
-        
         
         <tr>
             <td class="bold">
@@ -1597,7 +1685,7 @@
 
             @endphp
 
-            <tr class="bold" style="text-decoration: underline;">
+            <tr class="bold underline">
                 <td colspan="2" class="text-right bold">
                     Grand Total:
                 </td>
