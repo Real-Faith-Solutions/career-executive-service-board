@@ -7,5 +7,12 @@
     },
     "nexa": {
         "normal": "nexa_normal_e27bea5be65e15007e2308998b8f42a7"
+    },
+    "roboto": {
+        "300": "C:\\Users\\manuel\\Desktop\\career-executive-service-board\\storage\\fonts\/roboto_300_21960201651f2ea862182ff34dfd5ead",
+        "normal": "C:\\Users\\manuel\\Desktop\\career-executive-service-board\\storage\\fonts\/roboto_normal_9fa47a070a8b30b595086d70bb7ac78c",
+        "500": "C:\\Users\\manuel\\Desktop\\career-executive-service-board\\storage\\fonts\/roboto_500_d0dcda9e813eb9b854a1cc044831f6fe",
+        "bold": "C:\\Users\\manuel\\Desktop\\career-executive-service-board\\storage\\fonts\/roboto_bold_3d0ad20d45ace845335f9e6c390a09d9",
+        "900": "roboto_900_509a5e5b153550862359e315131088d5"
     }
 }

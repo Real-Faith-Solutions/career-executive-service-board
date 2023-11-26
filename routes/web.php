@@ -108,6 +108,7 @@ use App\Http\Controllers\ProfileLibTblLanguageRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Report201\DataPortabilityReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
@@ -953,6 +954,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                         {with_pending_case}/{without_pending_case}/{cesstat_code}/
                         {authority_code}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf')->middleware('checkPermission:201_general_reports');
                         
+        });
+
+        Route::prefix('data-portability-201-profile')->group(function () {
+            Route::get('data-portability-reports', [DataPortabilityReportController::class, 'index'])->name('data-portability.index')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('data-portability-generate-reports/{cesno}', [DataPortabilityReportController::class, 'generateReport'])->name('data-portability.generateReport')->middleware('checkPermission:201_data_portability_reports');
         });
     });
     // End of Reports routes
