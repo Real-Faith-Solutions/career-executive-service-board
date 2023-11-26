@@ -164,31 +164,79 @@
 
             .birthday{
                 position: fixed;
-                top: 545px;
+                top: 525px;
                 padding-left: 50px;
+            }
+
+            .age{
+                position: fixed;
+                top: 555px;
+                padding-left: 50px;                
             }
 
             .birthplace{
                 position: fixed;
-                top: 595px;
+                top: 585px;
                 padding-left: 50px;
             }
 
             .gender_by_birth{
                 position: fixed;
-                top: 645px;
+                top: 615px;
                 padding-left: 50px;
             }
 
             .gender_by_choice{
                 position: fixed;
-                top: 695px;
+                top: 645px;
                 padding-left: 50px;
             }
 
             .civil_status{
                 position: fixed;
-                top: 745px;
+                top: 675px;
+                padding-left: 50px;
+            }
+
+            .religion{
+                position: fixed;
+                top: 705px;
+                padding-left: 50px;
+            }
+
+            .height{
+                position: fixed;
+                top: 735px;
+                padding-left: 50px;
+            }
+
+            .weight{
+                position: fixed;
+                top: 765px;
+                padding-left: 50px;
+            }
+
+            .indigineous_group{
+                position: fixed;
+                top: 795px;
+                padding-left: 50px;
+            }
+
+            .solo_parent{
+                position: fixed;
+                top: 825px;
+                padding-left: 50px;
+            }
+
+            .pwd{
+                position: fixed;
+                top: 855px;
+                padding-left: 50px;
+            }
+
+            .citizenship{
+                position: fixed;
+                top: 885px;
                 padding-left: 50px;
             }
         </style>
@@ -317,10 +365,10 @@
                     </span> 
                 </div>
 
-                <div class="birthday">
+                <div class="age">
                     Age: 
                     <span style="color: #2b6cb0;">
-                        {{ \Carbon\Carbon::parse($personalData->birth_date)->format('M-d-Y ')}}
+                        {{ ($age) }}
                     </span> 
                 </div>
 
@@ -345,10 +393,60 @@
                     </span> 
                 </div>
 
-                 <div class="civil_status">
+                <div class="civil_status">
                     Civil Status:
                     <span style="color: #2b6cb0;">
                         {{ $personalData->civil_status }}
+                    </span> 
+                </div>
+
+                <div class="religion">
+                    Religion:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->religion }}
+                    </span> 
+                </div>
+
+                <div class="height">
+                    Height:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->height }}
+                    </span> 
+                </div>
+
+                <div class="weight">
+                    Weight:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->weight }}
+                    </span> 
+                </div>
+
+                <div class="indigineous_group">
+                    Member of Indigineous Group:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->member_of_indigenous_group }}
+                    </span> 
+                </div>
+
+                <div class="solo_parent">
+                    Solo Parent:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->single_parent }}
+                    </span> 
+                </div>
+
+                <div class="pwd">
+                    is PWD:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->person_with_disability }}
+                    </span> 
+                </div>
+
+                <div class="citizenship">
+                    Citizenship:
+                    <span style="color: #2b6cb0;">
+                        {{ $personalData->citizenship }} <br>
+                        {{ $personalData->citizenship }}
                     </span> 
                 </div>
             </div>
