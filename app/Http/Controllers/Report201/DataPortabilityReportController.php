@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Report201;
 
-use App\Http\Controllers\ContactInfoController;
 use App\Http\Controllers\Controller;
 use App\Models\Contacts;
 use App\Models\PersonalData;
 use App\Models\ProfileAddress;
 use App\Models\ProfileLibTblCesStatus;
-use App\Models\ProfileTblCesStatus;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DataPortabilityReportController extends Controller
@@ -41,7 +40,8 @@ class DataPortabilityReportController extends Controller
     public function generateReport($cesno)
     {
         $personalData = PersonalData::find($cesno);
-        
+        $birthdate = $personalData->birth_date;
+
         $address = ProfileAddress::where('personal_data_cesno', $cesno)
                     ->where('type', 'Permanent')
                     ->get();
@@ -51,13 +51,18 @@ class DataPortabilityReportController extends Controller
 
         $cesStatus = ProfileLibTblCesStatus::where('code', $personalData->CESStat_code)->value('description');
 
+        $birthDate = Carbon::parse($birthdate);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($birthDate);
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.data_portability.personal_data_pdf', [
             'personalData' => $personalData,
             'contactNumber' => $contactNumber,
             'address' => $address,
             'cesStatus' => $cesStatus,
-        ]);
-        // ->setPaper('a4', 'portrait');
+            'age' => $age,
+        ])
+        ->setPaper('a4', 'portrait');
 
         return $pdf->stream('data-portability-report.pdf');
     }
