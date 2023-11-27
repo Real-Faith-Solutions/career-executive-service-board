@@ -124,7 +124,7 @@ class Reports201Controller extends Controller
 
         // dd($personalData);
 
-        return view('admin\201_profiling\reports\general_report', compact('personalData', 'sortBy', 'sortOrder',
+        return view('admin.201_profiling.reports.general_report', compact('personalData', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
                         'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
                         'profileLibTblAppAuthority', 'authority_code'));
