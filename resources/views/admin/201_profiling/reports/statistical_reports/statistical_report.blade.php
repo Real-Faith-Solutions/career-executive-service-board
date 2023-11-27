@@ -17,24 +17,30 @@
 
     <section>
 
-        <div class="relative my-5 overflow-x-auto sm:rounded-lg">
-            <table class="w-full text-left text-sm text-gray-500">
-                <thead class="bg-gray-50 text-xs uppercase text-gray-700">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            sample1
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            sample2
-                        </th>
+        @include('admin.dashboard.partials.ceso_status')
 
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                        
-                </tbody>
-            </table>
+        <div class="grid gap-4 items-end mb-3 uppercase sm:grid-cols-1 sm:gap-3 lg:grid-cols-3 lg:gap-4">
+            <div class="w-full rounded sm:w-auto">
+                <div class="bg-white">
+                    <div class="rounded-lg shadow-md">
+                        <canvas class="w-full p-2" id="profileStatus"></canvas>
+                        <script>
+                            profileStatus();
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full rounded sm:w-auto col-span-2">
+                <div class="bg-white">
+                    <div class="rounded-lg shadow-md">
+                        <canvas class="w-full p-2" id="ageDemographics"></canvas>
+                        <script>
+                            ageDemographics();
+                        </script>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>
