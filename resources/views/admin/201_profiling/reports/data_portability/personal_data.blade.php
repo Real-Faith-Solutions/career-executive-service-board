@@ -2,10 +2,15 @@
 @section('title', '201 profiling table')
 @section('content')
 
+<nav class="bg-gray-200 border-gray-200 mb-3">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="#" class="flex items-center">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">201 PROFILE - DATA PORTABILITY</span>
+        </a>
+    </div>
+</nav>
+
     <section>   
-        <div class="text-center">
-            Data Portability
-        </div>
 
         <div class="grid lg:grid-cols-3">
             @include('components.search')
