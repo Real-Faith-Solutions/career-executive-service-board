@@ -109,6 +109,7 @@ use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\Report201\DataPortabilityReportController;
+use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
@@ -960,8 +961,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('statistical-reports')->group(function () {
-            Route::get('index', [DataPortabilityReportController::class, 'index'])->name('data-portability.index')->middleware('checkPermission:201_data_portability_reports');
-            Route::get('generate-reports/{cesno}', [DataPortabilityReportController::class, 'generateReport'])->name('data-portability.generateReport')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('generate-reports/{cesno}', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
         });
 
     });
