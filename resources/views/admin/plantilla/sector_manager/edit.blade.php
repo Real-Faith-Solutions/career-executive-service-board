@@ -119,11 +119,13 @@
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                     @if($data->mother_deptid == 0)
-                    {{ $data->title ?? 'N/A' }}
+                        {{ $data->title ?? 'N/A' }}
 
                     @else
-                    {{ $data->motherDepartment->title ?? 'N/A'}}
+                        {{ $data->motherDepartment->title ?? 'N/A'}}
                     @endif
+
+                    
 
                 </td>
                 <td class="px-6 py-3">
@@ -181,7 +183,7 @@
         </tbody>
     </table>
     <div class="m-5">
-        {{ $subDatas->links() }}
+        {{ $subDatas->appends(['search' => $query])->links() }}
     </div>
 
 
