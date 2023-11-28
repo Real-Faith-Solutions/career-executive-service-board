@@ -89,6 +89,12 @@ class Reports201Controller extends Controller
 
             $query->when($request->has('cesstat_code') && $cesstat_code !== 'false', function ($query) use ($cesstat_code)  {
                 if($cesstat_code == "all"){
+                }elseif($cesstat_code == "cesos"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
+                }elseif($cesstat_code == "cesoseli"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6, 7];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
                 }else{
                     return $query->where('CESStat_code', $cesstat_code);
                 }
@@ -97,19 +103,17 @@ class Reports201Controller extends Controller
         });
 
         // appointing authority filter 
-
+        // there is a bug when the user have multiple ces status
         $personalData->where(function ($query) use ($request, $authority_code) {
 
             $query->when($request->has('authority_code') && $authority_code !== 'false', function ($query) use ($authority_code) {
 
-                if($authority_code == "all"){
-                    
-                }else{
-                    $query->whereHas('profileTblCesStatus', function ($subquery) use ($authority_code) {
+                if ($authority_code !== "all") {
+                    $query->whereHas('latestProfileTblCesStatus', function ($subquery) use ($authority_code) {
                         $subquery->where('official_code', $authority_code);
                     });
                 }
-                
+        
             });
         
         });
@@ -120,7 +124,7 @@ class Reports201Controller extends Controller
 
         // dd($personalData);
 
-        return view('admin\201_profiling\reports\general_report', compact('personalData', 'sortBy', 'sortOrder',
+        return view('admin.201_profiling.reports.general_report', compact('personalData', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
                         'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
                         'profileLibTblAppAuthority', 'authority_code'));
@@ -208,6 +212,12 @@ class Reports201Controller extends Controller
 
             $query->when($cesstat_code !== 'false', function ($query) use ($cesstat_code)  {
                 if($cesstat_code == "all"){
+                }elseif($cesstat_code == "cesos"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
+                }elseif($cesstat_code == "cesoseli"){
+                    $cesstat_code = [1, 2, 3, 4, 5, 6, 7];
+                    return $query->whereIn('CESStat_code', $cesstat_code);
                 }else{
                     return $query->where('CESStat_code', $cesstat_code);
                 }

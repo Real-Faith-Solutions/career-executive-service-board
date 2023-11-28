@@ -108,6 +108,8 @@ use App\Http\Controllers\ProfileLibTblLanguageRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Report201\DataPortabilityReportController;
+use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
 use App\Http\Controllers\RolesController;
@@ -942,18 +944,27 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // End of ERIS Report routes
 
     // 201 Reports routes
-    Route::prefix('reports')->group(function () {
+    Route::prefix('201-reports')->group(function () {
 
-        Route::prefix('executive-201-profile ')->group(function () {
-
-            Route::get('general-reports', [Reports201Controller::class, 'index'])->name('general-reports.index')->middleware('checkPermission:201_general_reports');
-            Route::get('general-reports/pdf/
+        Route::prefix('general-reports')->group(function () {
+            Route::get('index', [Reports201Controller::class, 'index'])->name('general-reports.index')->middleware('checkPermission:201_general_reports');
+            Route::get('generate-reports/
                         {sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/
                         {filter_retired}/{filter_deceased}/{filter_retirement}/
                         {with_pending_case}/{without_pending_case}/{cesstat_code}/
                         {authority_code}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf')->middleware('checkPermission:201_general_reports');
-                        
         });
+
+        Route::prefix('data-portability-reports')->group(function () {
+            Route::get('index', [DataPortabilityReportController::class, 'index'])->name('data-portability.index')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('generate-reports/{cesno}', [DataPortabilityReportController::class, 'generateReport'])->name('data-portability.generateReport')->middleware('checkPermission:201_data_portability_reports');
+        });
+
+        Route::prefix('statistical-reports')->group(function () {
+            Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
+        });
+
     });
     // End of Reports routes
 

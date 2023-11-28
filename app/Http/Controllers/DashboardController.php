@@ -53,8 +53,6 @@ class DashboardController extends Controller
             })
             ->count();
 
-        // $allCookies = $request->header('cookie');
-
         $user = auth()->user();
         $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
 
@@ -95,10 +93,6 @@ class DashboardController extends Controller
                 ->orWhere('description', 'LIKE', '%CES%');
         })
         ->count();
-        // ->orderBy('birthdate')
-        // ->pluck('birthdate');
-
-        // dd($age25below);
 
         // Calculate the date 35 and 26 years ago
         $from = Carbon::today()->subYears(36)->addDay()->format('Y-m-d');
