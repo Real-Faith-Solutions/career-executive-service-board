@@ -164,6 +164,54 @@
                 66 years old & above:
                 <span style="color: #2b6cb0;">{{ $age66above }}</span>
             </div>
+
+            <div class="line">
+                <hr style="margin-top: 15px;">
+
+                <p class="section_title">
+                    CES Status Summary (Active CESOs)
+                </p>
+            </div>
+
+            <div class="bullets">
+                CESO I:
+                <span style="color: #2b6cb0;">{{ $age25below }}</span>
+            </div>
+    
+            <div class="bullets">
+                CESO II:
+                <span style="color: #2b6cb0;">{{ $age26to35 }}</span>
+            </div>
+    
+            <div class="bullets">
+                CESO III:
+                <span style="color: #2b6cb0;">{{ $age36to45 }}</span>
+            </div>
+    
+            <div class="bullets">
+                CESO IV:
+                <span style="color: #2b6cb0;">{{ $age46to55 }}</span>
+            </div>
+    
+            <div class="bullets">
+                CESO V:
+                <span style="color: #2b6cb0;">{{ $age56to65 }}</span>
+            </div>
+
+            <div class="bullets">
+                CESO VI:
+                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+            </div>
+
+            <div class="bullets">
+                Eligible:
+                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+            </div>
+
+            <div class="bullets">
+                CSEE:
+                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+            </div>
             
         </div>
 
