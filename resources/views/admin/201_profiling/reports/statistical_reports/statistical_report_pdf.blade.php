@@ -175,27 +175,27 @@
 
             <div class="bullets">
                 CESO I:
-                <span style="color: #2b6cb0;">{{ $age25below }}</span>
+                <span style="color: #2b6cb0;">{{ $ceso1 }}</span>
             </div>
     
             <div class="bullets">
                 CESO II:
-                <span style="color: #2b6cb0;">{{ $age26to35 }}</span>
+                <span style="color: #2b6cb0;">{{ $ceso2 }}</span>
             </div>
     
             <div class="bullets">
                 CESO III:
-                <span style="color: #2b6cb0;">{{ $age36to45 }}</span>
+                <span style="color: #2b6cb0;">{{ $ceso3 }}</span>
             </div>
     
             <div class="bullets">
                 CESO IV:
-                <span style="color: #2b6cb0;">{{ $age46to55 }}</span>
+                <span style="color: #2b6cb0;">{{ $ceso4 }}</span>
             </div>
     
             <div class="bullets">
                 CESO V:
-                <span style="color: #2b6cb0;">{{ $age56to65 }}</span>
+                <span style="color: #2b6cb0;">{{ $ceso5 }}</span>
             </div>
 
             <div class="bullets">
@@ -205,12 +205,12 @@
 
             <div class="bullets">
                 Eligible:
-                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+                <span style="color: #2b6cb0;">{{ $eligible }}</span>
             </div>
 
             <div class="bullets">
                 CSEE:
-                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+                <span style="color: #2b6cb0;">{{ $csee }}</span>
             </div>
             
         </div>
