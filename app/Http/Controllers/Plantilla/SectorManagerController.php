@@ -66,22 +66,17 @@ class SectorManagerController extends Controller
 
 
         $subDatas = DepartmentAgency::where('sectorid', $sectorid)
-            ->leftJoin('plantilla_motherdept', 'plantilla_tblDeptAgency.mother_deptid', '=', 'plantilla_motherdept.deptid')
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('plantilla_motherdept.title', 'like', "%$query%")
-                    ->orWhere('plantilla_tblDeptAgency.title', 'like', "%$query%")
-                    ->orWhere('plantilla_tblDeptAgency.acronym', 'like', "%$query%");
-            })
-            ->orderByRaw('
-                CASE
-                    WHEN plantilla_motherdept.title IS NOT NULL THEN 0
-                    ELSE 1
-                END,
-                plantilla_motherdept.title ASC,
-                plantilla_tblDeptAgency.title ASC
-            ')
-            ->select('plantilla_tblDeptAgency.*') // Select the columns you need from the main table
-            ->paginate(25);
+    ->leftJoin('plantilla_motherdept', 'plantilla_tblDeptAgency.mother_deptid', '=', 'plantilla_motherdept.deptid')
+    ->where(function ($queryBuilder) use ($query) {
+        $queryBuilder->where('plantilla_motherdept.title', 'like', "%$query%")
+            ->orWhere('plantilla_tblDeptAgency.title', 'like', "%$query%")
+            ->orWhere('plantilla_tblDeptAgency.acronym', 'like', "%$query%");
+    })
+    ->orderBy('plantilla_motherdept.title', 'asc')
+    ->orderBy('plantilla_tblDeptAgency.title', 'asc')
+    ->select('plantilla_tblDeptAgency.*') // Select the columns you need from the main table
+    ->paginate(25);
+
 
 
 

@@ -182,10 +182,8 @@
 
         </tbody>
     </table>
-    <div class="m-5">
-        {{ $subDatas->appends(['search' => $query])->links() }}
-    </div>
-
-
+</div>
+<div class="m-5">
+    {{ $subDatas->appends(['search' => $query])->links() }}
 </div>
 @endsection
