@@ -85,7 +85,7 @@
 </div> --}}
 
 <div class="flex justify-between my-3 items-center">
-    {{-- @include('components.search') --}}
+    @include('components.search')
     <a href="#" class="text-blue-500 uppercase text-2xl">
         Department Agencies
     </a>
@@ -95,9 +95,9 @@
 </div>
 
 
-{{-- <div class="relative overflow-x-auto shadow-lg sm:rounded-lg"> --}}
-    @include('layouts.partials.isLoading')
-    <table class="dataTables hidden">
+<div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
+    <!-- @include('layouts.partials.isLoading') -->
+    <table class="dataTables">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 {{-- <th class="px-6 py-3" scope="col">Department ID</th> --}}
@@ -180,10 +180,10 @@
 
         </tbody>
     </table>
-    {{-- <div class="m-5">
+    <div class="m-5">
         {{ $subDatas->links() }}
-    </div> --}}
+    </div>
 
-    {{--
-</div> --}}
+
+</div>
 @endsection
