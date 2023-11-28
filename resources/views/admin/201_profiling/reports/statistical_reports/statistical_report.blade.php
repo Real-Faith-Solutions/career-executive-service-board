@@ -10,7 +10,7 @@
         </a>
 
         <div class="flex justify-end">
-            <a href="#" target='_blank' class="btn btn-primary">Generate PDF Report</a>
+            <a href="{{ route('statistical-report.pdf') }}" target='_blank' class="btn btn-primary">Generate PDF Report</a>
         </div>
     </div>
 </nav>

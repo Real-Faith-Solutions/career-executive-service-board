@@ -280,7 +280,7 @@ class StatisticalReportController extends Controller
 
         // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
-        $pdf = Pdf::loadView('admin.201_profiling.reports.data_portability.personal_data_pdf', compact(
+        $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalCESO',
             'totalCESOActive',
             'totalCESODeceased',
