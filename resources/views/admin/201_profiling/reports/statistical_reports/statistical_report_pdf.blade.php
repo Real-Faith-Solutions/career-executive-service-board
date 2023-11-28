@@ -136,27 +136,32 @@
             </div>
 
             <div class="bullets">
-                Total CESOs:
+                25 years old & below:
                 <span style="color: #2b6cb0;">{{ $totalCESO }}</span>
             </div>
     
             <div class="bullets">
-                Total Active CESOs:
+                26 to 35 years old:
                 <span style="color: #2b6cb0;">{{ $totalCESOActive }}</span>
             </div>
     
             <div class="bullets">
-                Total Retired CESOs:
+                36 to 45 years old:
                 <span style="color: #2b6cb0;">{{ $totalCESORetired }}</span>
             </div>
     
             <div class="bullets">
-                Total Inactive CESOs:
+                46 to 55 years old:
                 <span style="color: #2b6cb0;">{{ $totalCESOInactive }}</span>
             </div>
     
             <div class="bullets">
-                Total Deceased CESOs:
+                56 to 65 years old:
+                <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
+            </div>
+
+            <div class="bullets">
+                66 years old & above:
                 <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
             </div>
             
