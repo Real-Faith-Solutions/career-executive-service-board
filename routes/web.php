@@ -962,7 +962,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('statistical-reports')->group(function () {
             Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
-            Route::get('generate-reports/{cesno}', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
+            Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
         });
 
     });
