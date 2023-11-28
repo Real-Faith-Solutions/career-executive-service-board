@@ -48,5 +48,18 @@
         .dataTables_length select{
             @apply w-1/5 
         }
+        .table-responsive{
+            @apply relative overflow-x-auto shadow-lg sm:rounded-lg;
+        }
+        table{
+            @apply w-full text-left text-sm text-gray-500;
+        }
+        
+        table thead{
+            @apply bg-blue-500 text-xs uppercase text-gray-700 text-white;
+        }
+        table thead tr th,td{
+            @apply px-6 py-3
+        }
     }
 </style>

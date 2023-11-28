@@ -21,7 +21,7 @@ class SectorManagerController extends Controller
             ->where('title', 'LIKE', "%$query%")
             ->orWhere('description', 'LIKE', "%$query%")
             ->orWhere('encoder', 'LIKE', "%$query%")
-            ->get();
+            ->paginate(25);
         return view('admin.plantilla.sector_manager.index', compact('datas', 'query'));
     }
 
@@ -64,7 +64,21 @@ class SectorManagerController extends Controller
         //     ->whereNull('plantilla_tblDeptAgency.deleted_at')
         //     ->get();
 
-        $subDatas = DepartmentAgency::where('sectorid', $sectorid)->get();
+
+        $subDatas = DepartmentAgency::where('sectorid', $sectorid)
+            ->leftJoin('plantilla_motherdept', 'plantilla_tblDeptAgency.mother_deptid', '=', 'plantilla_motherdept.deptid')
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('plantilla_motherdept.title', 'like', "%$query%")
+                    ->orWhere('plantilla_tblDeptAgency.title', 'like', "%$query%")
+                    ->orWhere('plantilla_tblDeptAgency.acronym', 'like', "%$query%");
+            })
+            ->orderBy('plantilla_motherdept.title', 'asc')
+            ->orderBy('plantilla_tblDeptAgency.title', 'asc')
+            ->select('plantilla_tblDeptAgency.*') // Select the columns you need from the main table
+            ->paginate(25);
+
+
+
 
         $motherDepartment = MotherDept::orderBy('title', 'asc')
             ->get();

@@ -190,7 +190,7 @@ class AppointeeOccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->get();
+        $otherAssignment = OtherAssignment::where('cesno', $appointees->cesno)->paginate(25);
 
         return view('admin.plantilla.appointee_occupant_browser.edit', compact(
             'sector',

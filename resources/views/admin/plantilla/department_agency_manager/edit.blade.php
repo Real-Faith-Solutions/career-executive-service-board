@@ -151,82 +151,88 @@
 </div> --}}
 
 <div class="flex justify-between">
+    @include('components.search')
     <a href="#" class="text-blue-500 uppercase text-2xl">
         Offices
     </a>
-    <button class="btn btn-primary" data-modal-target="large-modal" data-modal-toggle="large-modal">
+    <button class="btn btn-primary mb-3" data-modal-target="large-modal" data-modal-toggle="large-modal">
         Add record
     </button>
     @include('admin.plantilla.agency_location_manager.create')
 </div>
 
-@include('layouts.partials.isLoading')
-<table class="dataTables hidden">
-    <thead>
-        <tr>
-            <th>Location</th>
-            <th>Location Acronym</th>
-            <th>Location type</th>
-            <th>Region</th>
+{{-- @include('layouts.partials.isLoading') --}}
 
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
+    <table class="dataTables">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Location Acronym</th>
+                <th>Location type</th>
+                <th>Region</th>
 
-        @foreach ($agencyLocation as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->title }}
-            </td>
-            <td>
-                {{ $data->acronym ?? 'N/A' }}
-            </td>
-            <td>
-                {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
-            </td>
-            <td>
-                {{ $data->region ?? 'N/A' }}
-            </td>
+                <th>
+                    <span class="sr-only">Action</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
+            @foreach ($agencyLocation as $data)
+            <tr>
+                <td class="font-semibold">
+                    {{ $data->title }}
+                </td>
+                <td>
+                    {{ $data->acronym ?? 'N/A' }}
+                </td>
+                <td>
+                    {{ $data->agencyLocationLibrary->title ?? 'N/A'}}
+                </td>
+                <td>
+                    {{ $data->region ?? 'N/A' }}
+                </td>
 
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="Office Manager">
-                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
-                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                            style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
-                        title="View Offices">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}) }}"
-                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
-                            title="Delete Record">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
+                <td class="text-right uppercase">
+                    <div class="flex justify-end">
+
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('agency-location-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                            title="Office Manager">
+                            <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
                             </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
+                        </a>
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('agency-location-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $data->officelocid]) }}"
+                            title="View Offices">
+                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+                        <form class="hover:bg-slate-100 rounded-full"
+                            action="{{ route('library-agency-location-manager.destroy', $data->officelocid) }}) }}"
+                            method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                                title="Delete Record">
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#DC3545" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-    </tbody>
-</table>
-
+    <div class="m-5">
+        {{ $agencyLocation->appends(['search' => $query])->links() }}
+    </div>
+</div>
 @endsection

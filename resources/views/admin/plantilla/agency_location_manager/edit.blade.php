@@ -158,7 +158,8 @@
     </div>
 </div> --}}
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-3">
+    @include('components.search')
     <a href="#" class="text-blue-500 uppercase text-2xl">
         Offices
     </a>
@@ -168,68 +169,72 @@
     @include('admin.plantilla.office_manager.create')
 </div>
 
-@include('layouts.partials.isLoading')
-<table class="dataTables hidden">
-    <thead>
-        <tr>
-            <th>Office</th>
-            <th>Office Acronym</th>
-            <th>Office Website</th>
+{{-- @include('layouts.partials.isLoading') --}}
+<div class="table-responsive">
+    <table class="dataTables">
+        <thead>
+            <tr>
+                <th>Office</th>
+                <th>Office Acronym</th>
+                <th>Office Website</th>
 
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+                <th>
+                    <span class="sr-only">Action</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @foreach ($office as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->title }}
-            </td>
-            <td>
-                {{ $data->acronym ?? 'N/A' }}
-            </td>
-            <td>
-                {{ $data->website ?? 'N/A' }}
-            </td>
+            @foreach ($office as $data)
+            <tr>
+                <td class="font-semibold">
+                    {{ $data->title }}
+                </td>
+                <td>
+                    {{ $data->acronym ?? 'N/A' }}
+                </td>
+                <td>
+                    {{ $data->website ?? 'N/A' }}
+                </td>
 
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('office-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
-                        title="Office Manager">
-                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
-                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                            style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <a class="hover:bg-slate-100 rounded-full"
-                        href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
-                        title="View Position on this office">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('library-office-manager.destroy', $data->officeid) }}" method="POST"
-                        onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
-                            title="Delete Record">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
+                <td class="text-right uppercase">
+                    <div class="flex justify-end">
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('office-manager.edit', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
+                            title="Office Manager">
+                            <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
                             </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
+                        </a>
+                        <a class="hover:bg-slate-100 rounded-full"
+                            href="{{ route('office-manager.show', ['sectorid' => $sector->sectorid, 'deptid' => $department->deptid, 'officelocid' => $departmentLocation->officelocid, 'officeid' => $data->officeid]) }}"
+                            title="View Position on this office">
+                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+                        <form class="hover:bg-slate-100 rounded-full"
+                            action="{{ route('library-office-manager.destroy', $data->officeid) }}" method="POST"
+                            onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                                title="Delete Record">
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#DC3545" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
 
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
+<div class="m-5">
+    {{ $office->appends(['search' => $query])->links() }}
+</div>
 @endsection
