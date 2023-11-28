@@ -277,7 +277,7 @@
     @endif
     {{-- end toast --}}
 
-    <script>
+    {{-- <script>
         const dataTables = document.querySelector(".dataTables");
         const isLoading = document.querySelector("#isLoading");
 
@@ -294,7 +294,7 @@
 
         
 
-    </script>
+    </script> --}}
 
 
 

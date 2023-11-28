@@ -28,8 +28,8 @@
 </div>
 </div>
 
-@include('layouts.partials.isLoading')
-<table class="dataTables hidden">
+{{-- @include('layouts.partials.isLoading') --}}
+<table class="dataTables">
     <thead>
         <tr>
             <th>Sector Name</th>
@@ -44,7 +44,7 @@
 
         @foreach ($datas as $data)
         <tr>
-            <td class="font-semibold">
+            <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                 {{ $data->title }}
             </td>
             <td>
