@@ -64,6 +64,11 @@ class DataPortabilityReportController extends Controller
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream('data-portability-report.pdf');
+        return $pdf->stream(
+            $personalData->lastname.'-'.
+            $personalData->firstname.'-'.
+            $personalData->middlename.'.'.
+            'data-portability-report.pdf'
+        );
     }
 }

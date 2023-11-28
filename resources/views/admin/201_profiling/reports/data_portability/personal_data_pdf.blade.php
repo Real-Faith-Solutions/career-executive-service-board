@@ -368,14 +368,14 @@
                 <div class="age">
                     Age: 
                     <span style="color: #2b6cb0;">
-                        {{ ($age) }}
+                        {{ $age }}
                     </span> 
                 </div>
 
                 <div class="birthplace">
                     Birth Place: 
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->birth_place }}
+                        {{ $personalData->cities->name }}
                     </span> 
                 </div>
 
@@ -403,7 +403,7 @@
                 <div class="religion">
                     Religion:
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->religion }}
+                        {{ $personalData->religions->name }}
                     </span> 
                 </div>
 
@@ -445,8 +445,8 @@
                 <div class="citizenship">
                     Citizenship:
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->citizenship }} <br>
                         {{ $personalData->citizenship }}
+                        {{ $personalData->dual_citizenship }}
                     </span> 
                 </div>
             </div>
