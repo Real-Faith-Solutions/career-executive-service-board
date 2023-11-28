@@ -131,38 +131,38 @@
                 <hr style="margin-top: 15px;">
 
                 <p class="section_title">
-                    Age Demographics
+                    Age Demographics (Active CESOs)
                 </p>
             </div>
 
             <div class="bullets">
                 25 years old & below:
-                <span style="color: #2b6cb0;">{{ $totalCESO }}</span>
+                <span style="color: #2b6cb0;">{{ $age25below }}</span>
             </div>
     
             <div class="bullets">
                 26 to 35 years old:
-                <span style="color: #2b6cb0;">{{ $totalCESOActive }}</span>
+                <span style="color: #2b6cb0;">{{ $age26to35 }}</span>
             </div>
     
             <div class="bullets">
                 36 to 45 years old:
-                <span style="color: #2b6cb0;">{{ $totalCESORetired }}</span>
+                <span style="color: #2b6cb0;">{{ $age36to45 }}</span>
             </div>
     
             <div class="bullets">
                 46 to 55 years old:
-                <span style="color: #2b6cb0;">{{ $totalCESOInactive }}</span>
+                <span style="color: #2b6cb0;">{{ $age46to55 }}</span>
             </div>
     
             <div class="bullets">
                 56 to 65 years old:
-                <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
+                <span style="color: #2b6cb0;">{{ $age56to65 }}</span>
             </div>
 
             <div class="bullets">
                 66 years old & above:
-                <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
+                <span style="color: #2b6cb0;">{{ $age66above }}</span>
             </div>
             
         </div>
