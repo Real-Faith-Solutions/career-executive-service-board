@@ -37,8 +37,11 @@ class PlantillaPositionManagerController extends Controller
 
 
         $planAppointee = PlanAppointee::query()
+            ->join('profile_tblMain', 'plantilla_tblPlanAppointees.cesno', '=', 'profile_tblMain.cesno')
             ->where('plantilla_id', $planPosition->plantilla_id)
-            ->get();
+            ->orderBy('is_appointee', 'desc')
+            ->orderBy('profile_tblMain.lastname')
+            ->paginate(25);
 
         $planPositionLibrary = PlanPositionLevelLibrary::orderBy('title', 'ASC')->get();
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();

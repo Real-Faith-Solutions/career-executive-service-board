@@ -156,7 +156,7 @@
 
 
 
-<div class="flex justify-between">
+<div class="flex justify-between mb-3">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         Appointee - Occupant Browser
     </a>
@@ -165,99 +165,102 @@
         Add record
     </a>
 </div>
-@include('layouts.partials.isLoading')
-<table class="dataTables hidden">
-    <thead>
-        <tr>
-            <th>Officials Name</th>
-            <th>CESNO</th>
-            <th>Is appointed on this position</th>
-            <th>Appointment</th>
-            <th>CES Status</th>
-            <th>Appointment Date</th>
-            <th>Assumption Date</th>
+{{-- @include('layouts.partials.isLoading') --}}
+<div class="table-responsive">
+    <table class="dataTables">
+        <thead>
+            <tr>
+                <th>Officials Name</th>
+                <th>CESNO</th>
+                <th>Is appointed on this position</th>
+                <th>Appointment</th>
+                <th>CES Status</th>
+                <th>Appointment Date</th>
+                <th>Assumption Date</th>
 
-            <th>
-                <span class="sr-only">Action</span>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+                <th>
+                    <span class="sr-only">Action</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
 
-        @foreach ($planAppointee as $data)
-        <tr>
-            <td class="font-semibold">
-                {{ $data->personalData->lastname ?? ''}},
-                {{ $data->personalData->firstname ?? ''}}
-                {{ $data->personalData->name_extension ?? ''}}
-                {{ $data->personalData->middlename ?? ''}}
-            </td>
-            <td>
-                {{ $data->cesno }}
-            </td>
-            <td>
-                <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">
-                    {{ $data->is_appointee == 1 ? 'YES' : 'NO'}}
-                </span>
-            </td>
-            <td>
-                {{ $data->apptStatus->title }}
-            </td>
-            <td>
-                {{ $data->personalData->cesStatus->description ?? 'N/A'}}
-            </td>
-            <td>
-                {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}
-            </td>
-            <td>
-                {{ \Carbon\Carbon::parse($data->assum_date)->format('m/d/Y') }}
-            </td>
+            @foreach ($planAppointee as $data)
+            <tr>
+                <td class="font-semibold">
+                    {{ $data->personalData->lastname ?? ''}},
+                    {{ $data->personalData->firstname ?? ''}}
+                    {{ $data->personalData->name_extension ?? ''}}
+                    {{ $data->personalData->middlename ?? ''}}
+                </td>
+                <td>
+                    {{ $data->cesno }}
+                </td>
+                <td>
+                    <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">
+                        {{ $data->is_appointee == 1 ? 'YES' : 'NO'}}
+                    </span>
+                </td>
+                <td>
+                    {{ $data->apptStatus->title }}
+                </td>
+                <td>
+                    {{ $data->personalData->cesStatus->description ?? 'N/A'}}
+                </td>
+                <td>
+                    {{ \Carbon\Carbon::parse($data->appt_date)->format('m/d/Y') }}
+                </td>
+                <td>
+                    {{ \Carbon\Carbon::parse($data->assum_date)->format('m/d/Y') }}
+                </td>
 
-            <td class="text-right uppercase">
-                <div class="flex justify-end">
-                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.edit', [
-                        'sectorid' => $sector->sectorid,
-                        'deptid' => $department->deptid,
-                        'officelocid' => $departmentLocation->officelocid,
-                        'officeid' => $office->officeid,
-                        'plantilla_id' => $planPosition->plantilla_id,
-                        'appointee_id' => $data->appointee_id,
-                    ]) }}" title="Appointee - Occupant Manager">
-                        <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
-                            colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
-                            style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
-                        'sectorid' => $sector->sectorid,
-                        'deptid' => $department->deptid,
-                        'officelocid' => $departmentLocation->officelocid,
-                        'officeid' => $office->officeid,
-                        'plantilla_id' => $planPosition->plantilla_id,
-                        'appointee_id' => $data->appointee_id,
-                    ]) }}" title="View Other Assignment">
-                        <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
-                            colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
-                        </lord-icon>
-                    </a>
-                    <form class="hover:bg-slate-100 rounded-full"
-                        action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
-                        method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
-                            title="Delete Record">
-                            <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
-                                colors="primary:#DC3545" style="width:24px;height:24px">
+                <td class="text-right uppercase">
+                    <div class="flex justify-end">
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.edit', [
+                            'sectorid' => $sector->sectorid,
+                            'deptid' => $department->deptid,
+                            'officelocid' => $departmentLocation->officelocid,
+                            'officeid' => $office->officeid,
+                            'plantilla_id' => $planPosition->plantilla_id,
+                            'appointee_id' => $data->appointee_id,
+                        ]) }}" title="Appointee - Occupant Manager">
+                            <lord-icon src="https://cdn.lordicon.com/bxxnzvfm.json" trigger="hover"
+                                colors="primary:#3a3347,secondary:#ffc738,tertiary:#f9c9c0,quaternary:#ebe6ef"
+                                style="width:24px;height:24px">
                             </lord-icon>
-                        </button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
+                        </a>
+                        <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.show', [
+                            'sectorid' => $sector->sectorid,
+                            'deptid' => $department->deptid,
+                            'officelocid' => $departmentLocation->officelocid,
+                            'officeid' => $office->officeid,
+                            'plantilla_id' => $planPosition->plantilla_id,
+                            'appointee_id' => $data->appointee_id,
+                        ]) }}" title="View Other Assignment">
+                            <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
+                                colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
+                            </lord-icon>
+                        </a>
+                        <form class="hover:bg-slate-100 rounded-full"
+                            action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
+                            method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mx-1 font-medium text-red-600 hover:underline"
+                                title="Delete Record">
+                                <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover"
+                                    colors="primary:#DC3545" style="width:24px;height:24px">
+                                </lord-icon>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 
+{{ $planAppointee->links() }}
 @endsection
