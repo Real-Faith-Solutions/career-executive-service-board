@@ -279,99 +279,35 @@
                 <div class="nickname">
                     Total CESOs: 
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->nickname }}
+                        {{ $totalCESO }}
                     </span> 
                 </div>
 
                 <div class="birthday">
                     Total Active CESOs: 
                     <span style="color: #2b6cb0;">
-                        {{ \Carbon\Carbon::parse($personalData->birth_date)->format('M-d-Y ')}}
+                        {{ $totalCESOActive }}
                     </span> 
                 </div>
 
                 <div class="age">
                     Total Retired CESOs: 
                     <span style="color: #2b6cb0;">
-                        {{ ($age) }}
+                        {{ $totalCESORetired }}
                     </span> 
                 </div>
 
                 <div class="birthplace">
                     Total Inactive CESOs: 
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->birth_place }}
+                        {{ $totalCESOInactive }}
                     </span> 
                 </div>
 
                 <div class="gender_by_birth">
                     Total Deceased CESOs: 
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->gender }}
-                    </span> 
-                </div>
-
-                <div class="gender_by_choice">
-                    Gender By Choice: 
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->gender_by_choice }}
-                    </span> 
-                </div>
-
-                <div class="civil_status">
-                    Civil Status:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->civil_status }}
-                    </span> 
-                </div>
-
-                <div class="religion">
-                    Religion:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->religion }}
-                    </span> 
-                </div>
-
-                <div class="height">
-                    Height:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->height }}
-                    </span> 
-                </div>
-
-                <div class="weight">
-                    Weight:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->weight }}
-                    </span> 
-                </div>
-
-                <div class="indigineous_group">
-                    Member of Indigineous Group:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->member_of_indigenous_group }}
-                    </span> 
-                </div>
-
-                <div class="solo_parent">
-                    Solo Parent:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->single_parent }}
-                    </span> 
-                </div>
-
-                <div class="pwd">
-                    is PWD:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->person_with_disability }}
-                    </span> 
-                </div>
-
-                <div class="citizenship">
-                    Citizenship:
-                    <span style="color: #2b6cb0;">
-                        {{ $personalData->citizenship }} <br>
-                        {{ $personalData->citizenship }}
+                        {{ $totalCESODeceased }}
                     </span> 
                 </div>
             </div>
