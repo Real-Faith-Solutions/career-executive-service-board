@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Data Portability Report</title>
+        <title>201 Profiling Statistical Reports</title>
 
         <style>
             @font-face {
@@ -277,35 +277,35 @@
 
             <div>
                 <div class="nickname">
-                    Nick Name: 
+                    Total CESOs: 
                     <span style="color: #2b6cb0;">
                         {{ $personalData->nickname }}
                     </span> 
                 </div>
 
                 <div class="birthday">
-                    Birthday: 
+                    Total Active CESOs: 
                     <span style="color: #2b6cb0;">
                         {{ \Carbon\Carbon::parse($personalData->birth_date)->format('M-d-Y ')}}
                     </span> 
                 </div>
 
                 <div class="age">
-                    Age: 
+                    Total Retired CESOs: 
                     <span style="color: #2b6cb0;">
                         {{ ($age) }}
                     </span> 
                 </div>
 
                 <div class="birthplace">
-                    Birth Place: 
+                    Total Inactive CESOs: 
                     <span style="color: #2b6cb0;">
                         {{ $personalData->birth_place }}
                     </span> 
                 </div>
 
                 <div class="gender_by_birth">
-                    Gender By Birth: 
+                    Total Deceased CESOs: 
                     <span style="color: #2b6cb0;">
                         {{ $personalData->gender }}
                     </span> 
