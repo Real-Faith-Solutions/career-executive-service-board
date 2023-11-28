@@ -253,7 +253,7 @@
                     <li>
                         <a href="{{ route('statistics.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                            Plantilla Statistics
+                            Blue Book Agency Selector
                         </a>
                         <a href="{{ route('occupancy-report.index') }}"
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
