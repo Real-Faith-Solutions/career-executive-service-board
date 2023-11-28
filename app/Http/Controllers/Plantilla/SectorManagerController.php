@@ -21,7 +21,7 @@ class SectorManagerController extends Controller
             ->where('title', 'LIKE', "%$query%")
             ->orWhere('description', 'LIKE', "%$query%")
             ->orWhere('encoder', 'LIKE', "%$query%")
-            ->get();
+            ->paginate(25);
         return view('admin.plantilla.sector_manager.index', compact('datas', 'query'));
     }
 

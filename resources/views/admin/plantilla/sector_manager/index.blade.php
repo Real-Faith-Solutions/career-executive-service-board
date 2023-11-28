@@ -26,7 +26,6 @@
     </a>
     <a class="btn btn-primary" href="{{ route('sector-manager.create') }}">Add record</a>
 </div>
-</div>
 
 {{-- @include('layouts.partials.isLoading') --}}
 <div class="table-responsive">
@@ -88,5 +87,9 @@
 
         </tbody>
     </table>
+</div>
+
+<div class="m-5">
+    {{ $datas->links() }}
 </div>
 @endsection
