@@ -37,8 +37,9 @@ class OfficeManagerController extends Controller
 
         $planPositions = PlanPosition::query()
             ->where('officeid', $office->officeid)
-            // ->where('is_active', true)
-            ->get();
+            ->orderBy('corp_sg', 'desc')
+            ->orderBy('item_no', 'asc')
+            ->paginate(25);
 
         $allPlanPosition = PlanPosition::all();
         $planAppointee = PlanAppointee::all();
