@@ -158,7 +158,7 @@ class StatisticalReportController extends Controller
     {
 
         $totalCESO = PersonalData::query()
-            ->whereHas('profileTblCesStatus', function ($query) {
+            ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
