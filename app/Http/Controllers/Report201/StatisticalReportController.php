@@ -158,7 +158,7 @@ class StatisticalReportController extends Controller
     {
 
         $totalCESO = PersonalData::query()
-            ->whereHas('cesStatus', function ($query) {
+            ->whereHas('profileTblCesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
@@ -286,7 +286,7 @@ class StatisticalReportController extends Controller
         $ceso1 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO I%');
+            $query->where('description', '=', 'CESO I');
         })
         ->count();
 
@@ -294,7 +294,7 @@ class StatisticalReportController extends Controller
         $ceso2 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO II%');
+            $query->where('description', '=', 'CESO II');
         })
         ->count();
 
@@ -302,7 +302,7 @@ class StatisticalReportController extends Controller
         $ceso3 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO III%');
+            $query->where('description', '=', 'CESO III');
         })
         ->count();
 
@@ -310,7 +310,7 @@ class StatisticalReportController extends Controller
         $ceso4 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO IV%');
+            $query->where('description', '=', 'CESO IV');
         })
         ->count();
 
@@ -318,7 +318,7 @@ class StatisticalReportController extends Controller
         $ceso5 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO V%');
+            $query->where('description', '=', 'CESO V');
         })
         ->count();
 
@@ -326,7 +326,7 @@ class StatisticalReportController extends Controller
         $ceso6 = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO VI%');
+            $query->where('description', '=', 'CESO VI');
         })
         ->count();
 
@@ -334,7 +334,7 @@ class StatisticalReportController extends Controller
         $eligible = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO Eligible%');
+            $query->where('description', '=', 'Eligible');
         })
         ->count();
 
@@ -342,7 +342,7 @@ class StatisticalReportController extends Controller
         $csee = PersonalData::query()
         ->where('status', 'Active')
         ->whereHas('cesStatus', function ($query) {
-            $query->where('description', 'LIKE', '%CESO CSEE%');
+            $query->where('description', '=', 'CSEE');
         })
         ->count();
 
