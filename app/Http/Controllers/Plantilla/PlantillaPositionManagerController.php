@@ -20,10 +20,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PlantillaPositionManagerController extends Controller
 {
-    public function index()
-    {
-        return view('admin.plantilla.plantilla_office_manager.index');
-    }
 
     public function show(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
     {

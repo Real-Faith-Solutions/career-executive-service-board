@@ -70,7 +70,6 @@ use App\Http\Controllers\NonCesTrainingController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
-use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
@@ -89,7 +88,6 @@ use App\Http\Controllers\Plantilla\Library\PositionManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
-use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
@@ -472,10 +470,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // Plantilla routes
     Route::prefix('plantilla')->group(function () {
 
-        Route::prefix('plantilla-management')->group(function () {
-            Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index')->middleware('checkPermission:plantilla_management_view');
-        });
-
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index')->middleware('checkPermission:plantilla_sector_manager_view');
             Route::get('create', [SectorManagerController::class, 'create'])->name('sector-manager.create')->middleware('checkPermission:plantilla_sector_manager_add');
@@ -484,25 +478,21 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('department-agency-manager')->group(function () {
-            Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('show/{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'show'])->name('department-agency-manager.show')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
-            Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index')->middleware('checkPermission:plantilla_agency_location_manager_view');
             Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show')->middleware('checkPermission:plantilla_agency_location_manager_view');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'edit'])->name('agency-location-manager.edit')->middleware('checkPermission:plantilla_agency_location_manager_view');
         });
 
         Route::prefix('office-manager')->group(function () {
-            Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'edit'])->name('office-manager.edit');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
-            Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index')->middleware('checkPermission:plantilla_position_manager_view');
             // Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show')->middleware('checkPermission:plantilla_position_manager_view');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'edit'])->name('plantilla-position-manager.edit')->middleware('checkPermission:plantilla_position_manager_view');
@@ -511,7 +501,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
-            Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
             Route::match(['get', 'post'], '/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{cesno?}', [AppointeeOccupantManagerController::class, 'create'])
                 ->name('appointee-occupant-manager.create')
                 ->where('cesno', '.*');
@@ -530,10 +519,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::delete('/{detailed_code}/destroy', [OtherAssignmentController::class, 'destroy'])->name('other-assignment.destroy');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{appointee_id}/{detailed_code}', [OtherAssignmentController::class, 'show'])->name('other-assignment.show');
             Route::post('/other-assignment/{detailed_code}/update', [OtherAssignmentController::class, 'update'])->name('other-assignment.update');
-        });
-
-        Route::prefix('appointee-occupant-browser')->group(function () {
-            Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index')->middleware('checkPermission:plantilla_appointee_occupant_browser_view');
         });
 
         Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'trash'])->name('library-sector.trash');
@@ -964,7 +949,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
             Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
         });
-
     });
     // End of Reports routes
 
@@ -988,7 +972,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('permissions/plantilla/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePlantillaPermissions'])->name('plantillaPermissions.update');
         Route::post('permissions/reports/update/{role_name}/{role_title}', [PermissionsController::class, 'updateReportsPermissions'])->name('reportsPermissions.update');
         Route::post('permissions/libraries/update/{role_name}/{role_title}', [PermissionsController::class, 'updateLibrariesPermissions'])->name('librariesPermissions.update');
-
     });
     // End of Rights management routes
 
