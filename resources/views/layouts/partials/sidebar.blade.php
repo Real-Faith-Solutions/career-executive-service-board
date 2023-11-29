@@ -275,6 +275,10 @@
                             class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                             List of Vacant Position
                         </a>
+                        <a href="{{ route('attached-occupancy-report.index') }}"
+                            class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                            Attached Occupancy report
+                        </a>
                     </li>
                 </ul>
             </li>

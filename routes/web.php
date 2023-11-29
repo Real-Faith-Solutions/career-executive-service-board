@@ -91,6 +91,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\AttachedOccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportController;
@@ -626,6 +627,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('occupany-report', [OccupancyReportController::class, 'index'])->name('occupancy-report.index')->middleware('checkPermission:plantilla_occupancy_reports');
             Route::get('occupany-report/{deptid}', [OccupancyReportController::class, 'generatePDF'])->name('occupancy-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
+
+            Route::get('attached-occupancy-report', [AttachedOccupancyReportController::class, 'index'])->name('attached-occupancy-report.index')->middleware('checkPermission:plantilla_occupancy_reports');
+            Route::get('attached-occupancy-report/{deptid}', [AttachedOccupancyReportController::class, 'generatePDF'])->name('attached-occupancy-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
 
             Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
             Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
