@@ -67,12 +67,12 @@ btnEdit.addEventListener("click", function () {
 
 btnCancelEdit.addEventListener("click", function (event) {
     // Reset the form to its original values
-    const formElements = form.querySelectorAll("input, select, textarea");
-    formElements.forEach((element) => {
-        if (originalFormValues[element.id]) {
-            element.value = originalFormValues[element.id];
-        }
-    });
+    // const formElements = form.querySelectorAll("input, select, textarea");
+    // formElements.forEach((element) => {
+    //     if (originalFormValues[element.id]) {
+    //         element.value = originalFormValues[element.id];
+    //     }
+    // });
 
     // isEditing = false;
     // updateUI();

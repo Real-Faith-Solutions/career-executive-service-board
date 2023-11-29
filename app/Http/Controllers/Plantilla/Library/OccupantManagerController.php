@@ -33,9 +33,9 @@ class OccupantManagerController extends Controller
 
         //permissions
         $this->middleware('checkPermission:plantilla_view_library')->only('index');
- 
+
         $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
- 
+
         $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
 
         $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
@@ -94,7 +94,8 @@ class OccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'name_extension', 'middlename')->get();
+        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'middlename', 'name_extension')
+            ->paginate(500);
         $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
             ->orderBy('description', 'asc')
             ->get();

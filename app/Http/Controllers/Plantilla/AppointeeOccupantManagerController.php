@@ -59,7 +59,8 @@ class AppointeeOccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $personalDataList = PersonalData::all();
+        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'middlename', 'name_extension')
+            ->paginate(500);
 
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
