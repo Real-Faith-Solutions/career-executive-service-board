@@ -49,13 +49,16 @@
                     <h1 class="text-slate-400 text-sm font-semibold">
                         Last update at {{ \Carbon\Carbon::parse($datas->lastupd_date)->format('m/d/Y \a\t g:iA') }}
                     </h1>
-                    <div class="flex justify-end gap-2 mt-2">
+                    <div>
                         <button type="button" id="btnEdit" class="btn btn-primary">
                             Edit Record
                         </button>
-                        <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                        <button type="button" id="btnSubmit" class="btn btn-primary hidden"
                             onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
                             Save Changes
+                        </button>
+                        <button type="button" id="btnCancelEdit" class="btn btn-secondary hidden">
+                            Cancel Edit
                         </button>
                     </div>
                 </div>
