@@ -2,7 +2,7 @@
 @section('content')
 @section('title', 'List of CESOs and CES Eligibles in CES Positions')
 <h1 class="text-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500 mb-5">
-    List of CESOs and CES Eligibles in NonCES Positions
+    List of CESOs and CES Eligibles in Non-CES Positions
 </h1>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
