@@ -53,6 +53,10 @@
 
         }
 
+        header {
+            margin-top: -7%;
+        }
+
         .front-page {
             border-top: 8px solid #3b82f6;
             border-right: 8px solid grey;
@@ -1009,23 +1013,26 @@
 
 <body>
 
-    <center>
-        <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-        <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
+    <header>
+        <center>
+            <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
+            <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
 
-        <div style="font-size:11px;">
-            <p>
-                No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
-            </p>
-            <p>
-                Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 / 8363-1532 /
-                8255-8341
-            </p>
-            <p>
-                <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
-            </p>
-        </div>
-    </center>
+            <div style="font-size:11px;">
+                <p>
+                    No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
+                </p>
+                <p>
+                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 / 8363-1532
+                    /
+                    8255-8341
+                </p>
+                <p>
+                    <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
+                </p>
+            </div>
+        </center>
+    </header>
 
     <footer>
         <table width="100%">
