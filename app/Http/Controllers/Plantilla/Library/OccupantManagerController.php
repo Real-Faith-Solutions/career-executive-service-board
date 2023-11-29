@@ -104,17 +104,19 @@ class OccupantManagerController extends Controller
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
 
+            if (!$personalData) {
+                return redirect()->back()->with('error', 'No Personal data found.');
+            }
+
             $selectedPersonalData = $personalData->lastname . " " .
                 $personalData->firstname . " " .
                 $personalData->name_extension . " " .
                 $personalData->middlename . " ";
-            if (!$personalData) {
-                return redirect()->back()->with('error', 'No Personal data found.');
-            }
         } else {
             $personalData = null;
             $selectedPersonalData = null;
         }
+
 
         return view('admin.plantilla.library.occupant_manager.create', compact(
             'planPositions',
@@ -170,11 +172,14 @@ class OccupantManagerController extends Controller
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
+            'plantilla_id' => ['required'],
         ], [
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
             'appt_date.required' => 'The Appointment Date field is required.',
+            'plantilla_id.required' => 'The Position field is required.',
         ]);
+
 
         $planAppointee = PlanAppointee::create([
             'plantilla_id' => $request->input('plantilla_id'),
