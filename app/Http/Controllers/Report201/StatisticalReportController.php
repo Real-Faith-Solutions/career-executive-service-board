@@ -14,6 +14,10 @@ class StatisticalReportController extends Controller
     public function index(Request $request)
     {
 
+        // this count is not accurate because it counts all users that has ces status of ceso or eligible 
+        // regardless if the ces status is the user's current status
+        // for example: the user become ceso 1 on 2010 then on 2023 the user is no longer a ceso.
+        // even though he's not a ceso anymore he's still counted on this query because he has a record of ces status.
         $totalCESO = PersonalData::query()
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
@@ -280,6 +284,80 @@ class StatisticalReportController extends Controller
 
         // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
+        // CES Status Summary
+
+        // Count the users who's currently active and CESO I
+        $ceso1 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO I');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO II
+        $ceso2 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO II');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO III
+        $ceso3 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO III');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO IV
+        $ceso4 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO IV');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO V
+        $ceso5 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO V');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO VI
+        $ceso6 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO VI');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO Eligible
+        $eligible = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'Eligible');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO CSEE
+        $csee = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CSEE');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO CSEE
+        $noStatus = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', '-');
+        })
+        ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalCESO',
             'totalCESOActive',
@@ -291,7 +369,16 @@ class StatisticalReportController extends Controller
             'age36to45',
             'age46to55',
             'age56to65',
-            'age66above'
+            'age66above',
+            'ceso1',
+            'ceso2',
+            'ceso3',
+            'ceso4',
+            'ceso5',
+            'ceso6',
+            'eligible',
+            'csee',
+            'noStatus',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
