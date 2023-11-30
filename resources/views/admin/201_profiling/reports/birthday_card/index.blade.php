@@ -1,4 +1,4 @@
-<p>Hello World</p>@extends('layouts.app')
+@extends('layouts.app')
 @section('title', '201 Birthday Card')
 @section('content')
 
@@ -11,6 +11,18 @@
         </a>
     </div>
 </nav>
+
+<div class="flex justify-start mb-5 gap-2">
+    <div class="btn btn-primary">
+        Weekly Celebrant
+    </div>
+
+    <div class="btn btn-primary">
+        <a href="{{ route('birthday.monthlyCelebrant') }}">
+            Monthly Celebrant
+        </a> 
+    </div>
+</div>
 
     <section>   
         <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-5">

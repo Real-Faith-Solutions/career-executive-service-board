@@ -38,4 +38,22 @@ class BirthdayCardController extends Controller
             'numberOfCelebrant' => $numberOfCelebrant,
         ]);
     }
+
+    public function monthlyCelebrant()
+    {
+        $currentMonthInNumber = Carbon::now()->format('m');
+        $currentMonthFullName = Carbon::now()->format('F');
+    
+        $personalData = PersonalData::query()
+        ->where('status', '=', 'Active')
+        ->whereMonth('birthdate', '=', $currentMonthInNumber)
+        ->orderByRaw('DAY(CONVERT(DATE, birthdate))')
+        ->paginate(25);
+    ;
+
+        return view('admin.201_profiling.reports.birthday_card.monthly_birthday.index', [
+            'personalData' => $personalData,
+            'currentMonthFullName' => $currentMonthFullName,
+        ]);
+    }   
 }
