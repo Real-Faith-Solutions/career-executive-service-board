@@ -1099,6 +1099,7 @@
             $currentPosDefault = null;
             $count = 0;
             @endphp
+
             @foreach($planPosition as $planPositionDatas)
             @if($officeDatas->officeid == $planPositionDatas->officeid)
             @if($planPositionDatas->pos_default !== $currentPosDefault)
@@ -1112,6 +1113,7 @@
                 <!-- Add your corresponding columns here for the count row -->
             </tr>
             @endif
+
             @php
             $currentPosDefault = $planPositionDatas->pos_default;
             $count = 1;
@@ -1121,6 +1123,7 @@
             $count++;
             @endphp
             @endif
+
             <tr style="font-size:11px;background:#e5e7eb;">
                 <td>
                     <h1>
@@ -1157,28 +1160,28 @@
                     </h1>
                 </td>
                 <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 1)
-                                ->first();
+                                        @php
+                                            $selectedAppointee = $planPositionDatas->planAppointee
+                                                ->where('is_appointee', 1)
+                                                ->first();
 
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
+                                            if ($selectedAppointee &&
+                                                $selectedAppointee->personalData &&
+                                                $selectedAppointee->personalData->cesStatus &&
+                                                (
+                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                                )
+                                            ) {
+                                                echo 'background: yellow;';
+                                            }
 
-                            if(!$selectedAppointee){
-                                echo 'background: #84A1C6;';
-                                // if this executes I want to print 'VACANT with this background color'
-                            }
-                        @endphp
-                    ">
+                                            if(!$selectedAppointee){
+                                                echo 'background: #84A1C6;';
+                                                // if this executes I want to print 'VACANT with this background color'
+                                            }
+                                        @endphp
+                                    ">
 
                     @if(!$selectedAppointee)
                     <h1>VACANT</h1>
@@ -1236,23 +1239,23 @@
                 <td>{{ $planPositionDatas->remarks ?? ''}}</td>
 
                 <td style="
-                        @php
-                            $selectedAppointee = $planPositionDatas->planAppointee
-                                ->where('is_appointee', 0)
-                                ->first();
+                                        @php
+                                            $selectedAppointee = $planPositionDatas->planAppointee
+                                                ->where('is_appointee', 0)
+                                                ->first();
 
-                            if ($selectedAppointee &&
-                                $selectedAppointee->personalData &&
-                                $selectedAppointee->personalData->cesStatus &&
-                                (
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                )
-                            ) {
-                                echo 'background: yellow;';
-                            }
-                        @endphp
-                    ">
+                                            if ($selectedAppointee &&
+                                                $selectedAppointee->personalData &&
+                                                $selectedAppointee->personalData->cesStatus &&
+                                                (
+                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                                )
+                                            ) {
+                                                echo 'background: yellow;';
+                                            }
+                                        @endphp
+                                    ">
                     {{ optional($planPositionDatas->planAppointee
                     ->where('is_appointee', 0)
                     ->first())
@@ -1295,8 +1298,10 @@
                     <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
                 </td>
             </tr>
+
             @endif
             @endforeach
+
             @if($currentPosDefault !== null)
             <tr class="bold italic" style="font-size:11px">
                 <td>
