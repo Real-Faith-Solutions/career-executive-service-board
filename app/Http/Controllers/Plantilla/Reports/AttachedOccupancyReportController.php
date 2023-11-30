@@ -27,8 +27,8 @@ class AttachedOccupancyReportController extends Controller
             ->find($deptid);
 
 
-        $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
-            $query->where('deptid', $deptid);
+        $office = Office::whereHas('agencyLocation.departmentAgency', function ($query) use ($deptid) {
+            $query->where('mother_deptid', $deptid);
         })->get();
 
         $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
