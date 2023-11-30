@@ -208,9 +208,22 @@
                 <span style="color: #2b6cb0;">{{ $eligible }}</span>
             </div>
 
+            <div class="line">
+                <hr style="margin-top: 15px;">
+
+                <p class="section_title">
+                    Non-CES Status Summary (Active Non-CESOs)
+                </p>
+            </div>
+
             <div class="bullets">
                 CSEE:
                 <span style="color: #2b6cb0;">{{ $csee }}</span>
+            </div>
+    
+            <div class="bullets">
+                No Status:
+                <span style="color: #2b6cb0;">{{ $none }}</span>
             </div>
             
         </div>
