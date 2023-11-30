@@ -1091,6 +1091,7 @@
                 <td>
                     <h1 class="text-blue bold">
                         {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
+                        data as of {{ $currentDate }}
                     </h1>
                 </td>
             </tr>
