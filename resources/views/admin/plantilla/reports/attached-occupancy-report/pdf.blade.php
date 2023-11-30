@@ -1090,7 +1090,7 @@
             <tr style="font-size:11px">
                 <td>
                     <h1 class="text-blue bold">
-                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
+                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
                     </h1>
                 </td>
             </tr>
