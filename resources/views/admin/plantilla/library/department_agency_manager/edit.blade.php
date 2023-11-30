@@ -36,8 +36,8 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                     <div class="mb-3">
-                        <label for="sectorTitle">Sector<sup>*</span></label>
-                        <select id="sectorTitle" name="sectorTitle" required disabled>
+                        <label for="sectorid">Sector<sup>*</span></label>
+                        <select id="sectorid" name="sectorid" required disabled>
                             @foreach ($sectorDatas as $data)
                             <option value="{{ $data->sectorid }}" {{ $data->sectorid ==
                                 $department->sectorid ? 'selected' : '' }}>
@@ -46,7 +46,7 @@
                             @endforeach
 
                         </select>
-                        @error('sectorTitle')
+                        @error('sectorid')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
                         </span>
