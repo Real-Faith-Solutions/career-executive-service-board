@@ -58,6 +58,10 @@
                         <th>
                             Name
                         </th>
+
+                        <th>
+                            CES Status
+                        </th>
     
                         <th scope="col" class="px-6 py-3">
                             Birth Date
@@ -80,12 +84,16 @@
                                     />
                                 </svg>
                             </td>
-    
+
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ $datas->lastname }},
                                 {{ $datas->firstname }},
                                 {{ $datas->middlename }},
                                 {{ $datas->name_extension }}
+                            </td>
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $datas->cesStatus->description }}
                             </td>
     
                             <td class="px-6 py-3">

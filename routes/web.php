@@ -107,6 +107,7 @@ use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\Report201\BirthdayCardController;
+use App\Http\Controllers\Report201\BirthdayCardReportController;
 use App\Http\Controllers\Report201\DataPortabilityReportController;
 use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
@@ -952,8 +953,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('birthday')->group(function () {
-            Route::get('index', [BirthdayCardController::class, 'index'])->name('birthday.index')->middleware('checkPermission:201_birthday_cards_reports');
-            Route::get('monthly-celebrant', [BirthdayCardController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('index', [BirthdayCardReportController::class, 'index'])->name('birthday.index')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('monthly-celebrant', [BirthdayCardReportController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
         });
     });
     // End of Reports routes

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class BirthdayCardController extends Controller
+class BirthdayCardReportController extends Controller
 {
     public function index()
     {
@@ -45,11 +45,11 @@ class BirthdayCardController extends Controller
         $currentMonthFullName = Carbon::now()->format('F');
     
         $personalData = PersonalData::query()
+        ->with('cesStatus')
         ->where('status', '=', 'Active')
         ->whereMonth('birthdate', '=', $currentMonthInNumber)
         ->orderByRaw('DAY(CONVERT(DATE, birthdate))')
         ->paginate(25);
-    ;
 
         return view('admin.201_profiling.reports.birthday_card.monthly_birthday.index', [
             'personalData' => $personalData,
