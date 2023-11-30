@@ -223,7 +223,7 @@
     
             <div class="bullets">
                 No Status:
-                <span style="color: #2b6cb0;">{{ $none }}</span>
+                <span style="color: #2b6cb0;">{{ $noStatus }}</span>
             </div>
             
         </div>

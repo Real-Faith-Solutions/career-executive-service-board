@@ -350,6 +350,14 @@ class StatisticalReportController extends Controller
         })
         ->count();
 
+        // Count the users who's currently active and CESO CSEE
+        $noStatus = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', '-');
+        })
+        ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalCESO',
             'totalCESOActive',
@@ -370,6 +378,7 @@ class StatisticalReportController extends Controller
             'ceso6',
             'eligible',
             'csee',
+            'noStatus',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
