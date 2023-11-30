@@ -1036,7 +1036,7 @@
 
     <footer>
         <table width="100%">
-            <tr>
+            <tr style="color:gray">
                 <td>
                     List of Vacant CES Positions
                 </td>
@@ -1061,7 +1061,7 @@
         </p>
     </center>
     <br />
-    <table width="100%" style="padding: 5px;">
+    <table width="100%" style="padding:10px; margin-bottom:10px">
         <thead>
             <tr class="text-center text-blue" style="font-size: 11px;">
                 <td>NO.</td>
