@@ -22,6 +22,12 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
                 BIRTHDAY CELEBRANTS FOR THIS {{ $currentMonthFullName }}
             </span>
+            
+            <div class="flex justify-end">
+                <a href="" class="btn btn-primary">
+                    Generate PDF Report
+                </a>
+            </div>
         </a>
     </div>
 </nav>
@@ -46,6 +52,7 @@
                 <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                     <tr>
                         <th>
+
                         </th>
 
                         <th>
