@@ -49,7 +49,7 @@ class BirthdayCardReportController extends Controller
     // generating pdf for all user has birthday today
     public function birthdayCelebrantGeneratePdfReport()
     {
-        $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01, 2023
+        $fullDateName = Carbon::now()->format('l-F-d-Y-'); // getting full name attribute of the month example: Friday, December 01, 2023
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
 
@@ -105,6 +105,7 @@ class BirthdayCardReportController extends Controller
         ]);
     }   
 
+    // generating pdf for all users has birthday this month
     public function monthlyCelebrantGeneratePdfReport($sortBy, $sortOrder)
     {
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
