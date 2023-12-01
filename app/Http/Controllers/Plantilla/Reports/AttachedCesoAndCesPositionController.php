@@ -30,10 +30,11 @@ class AttachedCesoAndCesPositionController extends Controller
         $currentDate = Carbon::now()->format('d F Y');
         $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
-        $departments = DepartmentAgency::where('mother_deptid', $deptid)
-        ->whereHas('agencyLocation.office.planPosition.planAppointee')
-        ->orderBy('title', 'asc')
-        ->get();
+        $departments = DepartmentAgency::with(['agencyLocation.office.planPosition.planAppointee'])
+            ->where('mother_deptid', $deptid)
+            ->whereHas('agencyLocation.office.planPosition.planAppointee')
+            ->orderBy('title', 'asc')
+            ->get();
 
         $office = Office::whereHas('agencyLocation', function ($query) use($deptid){
             $query->where('deptid', $deptid);
