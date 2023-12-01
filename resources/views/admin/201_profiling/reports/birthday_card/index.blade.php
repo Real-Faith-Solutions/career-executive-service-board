@@ -5,7 +5,7 @@
 <nav class="bg-gray-200 border-gray-200 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
+            <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 w-6 h-6 text-blue-500">
                     <path 
                         stroke-linecap="round" 
@@ -19,8 +19,14 @@
                 </svg>
             </span>
             
-            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
+            <span class="self-center text-xl font-semibold whitespace-nowrap uppercase text-blue-500 ml-5">
                 BIRTHDAY CELEBRANTS FOR THIS {{ $fullDateName }}, TOTAL ({{ $numberOfCelebrant }})
+            </span>
+
+            <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
+                <a href="{{ route('birthday.birthdayCelebrantGeneratePdfReport') }}" target="_blank" class="btn btn-primary">
+                    Generate PDF Report
+                </a> 
             </span>
         </a>
     </div>

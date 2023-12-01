@@ -956,6 +956,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [BirthdayCardReportController::class, 'index'])->name('birthday.index')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('monthly-celebrant', [BirthdayCardReportController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('monthly/celebrant/report/pdf/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGeneratePdfReport'])->name('birthday.monthlyCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('birthdayCelebrantGeneratePdfReport', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
         });
     });
     // End of Reports routes
