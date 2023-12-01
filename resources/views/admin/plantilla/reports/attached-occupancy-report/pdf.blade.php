@@ -1086,232 +1086,238 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach ($office as $officeDatas)
-            <tr style="font-size:11px">
-                <td>
-                    <h1 class="text-blue bold">
-                        {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
-                        data as of {{ $currentDate }}
-                    </h1>
-                </td>
-            </tr>
-            @php
-            $currentPosDefault = null;
-            $count = 0;
-            @endphp
 
-            @foreach($planPosition as $planPositionDatas)
-            @if($officeDatas->officeid == $planPositionDatas->officeid)
-            @if($planPositionDatas->pos_default !== $currentPosDefault)
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
-                <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
-                </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
+                <tr style="font-size:11px">
+                    <td>
+                        <h1 class="text-blue bold">
+                            {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
+                            data as of {{ $currentDate }}
+                        </h1>
+                    </td>
+                </tr>
+                @php
+                    $currentPosDefault = null;
+                    $count = 0;
+                @endphp
 
-            @php
-            $currentPosDefault = $planPositionDatas->pos_default;
-            $count = 1;
-            @endphp
-            @else
-            @php
-            $count++;
-            @endphp
-            @endif
+                @foreach($planPosition as $planPositionDatas)
+                    @if($officeDatas->officeid == $planPositionDatas->officeid)
+                        @if($planPositionDatas->pos_default !== $currentPosDefault)
+                            @if($currentPosDefault !== null)
+                            <tr class="bold italic" style="font-size:11px">
+                                <td>
+                                    <h1>
+                                        {{ $currentPosDefault }}: {{ $count }}
+                                    </h1>
+                                </td>
+                                <!-- Add your corresponding columns here for the count row -->
+                            </tr>
+                            @endif
 
-            <tr style="font-size:11px;background:#e5e7eb;">
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->pos_default }}
-                        <br />
+                            @php
+                                $currentPosDefault = $planPositionDatas->pos_default;
+                                $count = 1;
+                            @endphp
 
+                        @else
 
-                        @if($planPositionDatas->planAppointee
-                        ->where('is_appointee', 1)
-                        ->first()
-                        ->planPosition
-                        ->pos_suffix ?? '')
+                            @php
+                                $count++;
+                            @endphp
 
-
-                        ({{ optional($planPositionDatas->planAppointee
-                        ->where('is_appointee', 1)
-                        ->first())
-                        ->planPosition
-                        ->pos_suffix ?? ''
-                        }})
                         @endif
 
+                    <tr style="font-size:11px;background:#e5e7eb;">
+                        <td>
+                            <h1>
+                                {{ $planPositionDatas->pos_default }}
+                                <br />
 
-                    </h1>
-                </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->corp_sg }}
-                    </h1>
-                </td>
-                <td>
-                    <h1>
-                        {{ $planPositionDatas->item_no }}
-                    </h1>
-                </td>
-                <td style="
-                                        @php
-                                            $selectedAppointee = $planPositionDatas->planAppointee
-                                                ->where('is_appointee', 1)
-                                                ->first();
 
-                                            if ($selectedAppointee &&
-                                                $selectedAppointee->personalData &&
-                                                $selectedAppointee->personalData->cesStatus &&
-                                                (
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                                )
-                                            ) {
-                                                echo 'background: yellow;';
-                                            }
+                                @if($planPositionDatas->planAppointee
+                                    ->where('is_appointee', 1)
+                                    ->first()
+                                    ->planPosition
+                                    ->pos_suffix ?? '')
 
-                                            if(!$selectedAppointee){
-                                                echo 'background: #84A1C6;';
-                                                // if this executes I want to print 'VACANT with this background color'
-                                            }
-                                        @endphp
-                                    ">
 
-                    @if(!$selectedAppointee)
-                    <h1>VACANT</h1>
+                                ({{ optional($planPositionDatas->planAppointee
+                                    ->where('is_appointee', 1)
+                                    ->first())
+                                    ->planPosition
+                                    ->pos_suffix ?? ''
+                                }})
+                                @endif
+
+
+                            </h1>
+                        </td>
+                        <td>
+                            <h1>
+                                {{ $planPositionDatas->corp_sg }}
+                            </h1>
+                        </td>
+                        <td>
+                            <h1>
+                                {{ $planPositionDatas->item_no }}
+                            </h1>
+                        </td>
+                        <td style="
+                                                @php
+                                                    $selectedAppointee = $planPositionDatas->planAppointee
+                                                        ->where('is_appointee', 1)
+                                                        ->first();
+
+                                                    if ($selectedAppointee &&
+                                                        $selectedAppointee->personalData &&
+                                                        $selectedAppointee->personalData->cesStatus &&
+                                                        (
+                                                            Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                                            Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                                        )
+                                                    ) {
+                                                        echo 'background: yellow;';
+                                                    }
+
+                                                    if(!$selectedAppointee){
+                                                        echo 'background: #84A1C6;';
+                                                        // if this executes I want to print 'VACANT with this background color'
+                                                    }
+                                                @endphp
+                                            ">
+
+                            @if(!$selectedAppointee)
+                            <h1>VACANT</h1>
+                            @endif
+
+
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                            }}
+
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                            }}
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->name_extension ?? ''
+                            }}
+
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                            }}
+
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                            }}
+
+                        </td>
+
+                        <td>
+                            @php
+                            $selectedAppointee = $planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first();
+                            @endphp
+
+                            @if($selectedAppointee->appt_date ?? '')
+                            {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
+                            @endif
+
+                        </td>
+                        <td>{{ $planPositionDatas->remarks ?? ''}}</td>
+
+                        <td style="
+                                                @php
+                                                    $selectedAppointee = $planPositionDatas->planAppointee
+                                                        ->where('is_appointee', 0)
+                                                        ->first();
+
+                                                    if ($selectedAppointee &&
+                                                        $selectedAppointee->personalData &&
+                                                        $selectedAppointee->personalData->cesStatus &&
+                                                        (
+                                                            Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                                            Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                                                        )
+                                                    ) {
+                                                        echo 'background: yellow;';
+                                                    }
+                                                @endphp
+                                            ">
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                            }}
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                            }}
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                            }}
+
+                            {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->cesStatus->description ?? ''
+                            }}
+                        </td>
+                        <td>
+                            @php
+                            $selectedOccupant = $planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first();
+                            @endphp
+
+                            @if ($selectedOccupant && $selectedOccupant->appt_date)
+                            {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
+                            @endif
+
+                        </td>
+                        <td>
+                            <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
+                        </td>
+                    </tr>
+
                     @endif
+                @endforeach
 
+                @if($currentPosDefault !== null)
+                    <tr class="bold italic" style="font-size:11px">
+                        <td>
+                            <h1>
+                                {{ $currentPosDefault }}: {{ $count }}
+                            </h1>
+                        </td>
+                        <!-- Add your corresponding columns here for the count row -->
+                    </tr>
+                @endif
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
-
-                </td>
-
-                <td>
-                    @php
-                    $selectedAppointee = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first();
-                    @endphp
-
-                    @if($selectedAppointee->appt_date ?? '')
-                    {{ \Carbon\Carbon::parse($selectedAppointee->appt_date)->format('d/m/Y') }}
-                    @endif
-
-                </td>
-                <td>{{ $planPositionDatas->remarks ?? ''}}</td>
-
-                <td style="
-                                        @php
-                                            $selectedAppointee = $planPositionDatas->planAppointee
-                                                ->where('is_appointee', 0)
-                                                ->first();
-
-                                            if ($selectedAppointee &&
-                                                $selectedAppointee->personalData &&
-                                                $selectedAppointee->personalData->cesStatus &&
-                                                (
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                                )
-                                            ) {
-                                                echo 'background: yellow;';
-                                            }
-                                        @endphp
-                                    ">
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
-                </td>
-                <td>
-                    @php
-                    $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first();
-                    @endphp
-
-                    @if ($selectedOccupant && $selectedOccupant->appt_date)
-                    {{ \Carbon\Carbon::parse($selectedOccupant->appt_date)->format('d/m/Y') }}
-                    @endif
-
-                </td>
-                <td>
-                    <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
-                </td>
-            </tr>
-
-            @endif
-            @endforeach
-
-            @if($currentPosDefault !== null)
-            <tr class="bold italic" style="font-size:11px">
-                <td>
-                    <h1>
-                        {{ $currentPosDefault }}: {{ $count }}
-                    </h1>
-                </td>
-                <!-- Add your corresponding columns here for the count row -->
-            </tr>
-            @endif
             @endforeach
         </tbody>
 
