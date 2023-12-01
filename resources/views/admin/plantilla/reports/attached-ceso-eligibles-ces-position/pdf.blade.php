@@ -18,7 +18,7 @@
             font-family: 'Busorama';
         }
 
-        tr:nth-child(even) {
+        .striped tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
@@ -1013,6 +1013,7 @@
             </div>
         </center>
     </header>
+
     <footer>
         <table width="100%">
             <tr style="color:gray">
