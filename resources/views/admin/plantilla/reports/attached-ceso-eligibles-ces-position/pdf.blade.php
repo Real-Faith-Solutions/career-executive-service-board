@@ -1052,7 +1052,7 @@
                         @foreach ($office->planPosition as $planPosition)
                             @foreach ($planPosition->planAppointee as $planAppointeeDatas)
                                 <tr class="striped" style="font-size:11px">
-                                    <td class="text-center">{{ $no++ }}</td>
+                                    {{-- <td class="text-center">{{ $no++ }}</td> --}}
                                     <td>
                                         {{ $planAppointeeDatas->personalData->lastname ?? '' }}
                                         {{ $planAppointeeDatas->personalData->firstname ?? '' }}
