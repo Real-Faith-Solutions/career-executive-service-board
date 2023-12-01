@@ -31,8 +31,13 @@ class AttachedCesoAndCesPositionController extends Controller
         $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
         $departments = DepartmentAgency::where('mother_deptid', $deptid)
+        ->whereHas('agencyLocation.office.planPosition.planAppointee')
         ->orderBy('title', 'asc')
         ->get();
+
+        $office = Office::whereHas('agencyLocation', function ($query) use($deptid){
+            $query->where('deptid', $deptid);
+        })->get();
 
 
 
@@ -58,6 +63,7 @@ class AttachedCesoAndCesPositionController extends Controller
             'admin.plantilla.reports.attached-ceso-eligibles-ces-position.pdf',
             compact(
                 'departments',
+                'office',
                 'motherDepartmentAgency',
                 'currentDate',
                 'planAppointee',
