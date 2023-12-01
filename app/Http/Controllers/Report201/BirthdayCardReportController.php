@@ -110,6 +110,7 @@ class BirthdayCardReportController extends Controller
     {
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
+        $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
             ->with('cesStatus')
@@ -132,6 +133,6 @@ class BirthdayCardReportController extends Controller
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream('birthday-celebrant-report.pdf');
+        return $pdf->stream($monthYear.'birthday-celebrant-report.pdf');
     }
 }
