@@ -109,6 +109,7 @@ use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\Report201\BirthdayCardController;
 use App\Http\Controllers\Report201\BirthdayCardReportController;
 use App\Http\Controllers\Report201\DataPortabilityReportController;
+use App\Http\Controllers\Report201\PlacementReportController;
 use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
@@ -957,6 +958,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('monthly-celebrant', [BirthdayCardReportController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('monthly/celebrant/report/pdf/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGeneratePdfReport'])->name('birthday.monthlyCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('birthdayCelebrantGeneratePdfReport', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+        });
+
+        Route::prefix('reports-for-placement')->group(function () {
+            Route::get('index', [PlacementReportController::class, 'index'])->name('reports-for-placement.index')->middleware('checkPermission:201_placement_reports');
         });
     });
     // End of Reports routes
