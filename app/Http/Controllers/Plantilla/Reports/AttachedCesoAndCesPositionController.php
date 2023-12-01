@@ -31,14 +31,16 @@ class AttachedCesoAndCesPositionController extends Controller
         $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
         $departments = DepartmentAgency::where('mother_deptid', $deptid)
-        ->whereHas('agencyLocation.office.planPosition', function ($query) {
-            $query->whereHas('planAppointee');
-        })
-        ->orderBy('title', 'asc')
-        ->get();
+            ->whereHas('agencyLocation.office.planPosition', function ($query) {
+                $query->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->whereHas('planAppointee');
+            })
+            ->orderBy('title', 'asc')
+            ->get();
 
 
-        $office = Office::whereHas('agencyLocation', function ($query) use($deptid){
+        $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
             $query->where('deptid', $deptid);
         })->get();
 
