@@ -36,6 +36,7 @@ class AttachedCesoAndCesPositionController extends Controller
             ->orderBy('title', 'asc')
             ->get();
 
+
         $office = Office::whereHas('agencyLocation', function ($query) use($deptid){
             $query->where('deptid', $deptid);
         })->get();
