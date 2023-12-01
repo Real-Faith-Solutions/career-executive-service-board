@@ -255,7 +255,7 @@
 
                                             <!-- Use a unique ID for this link -->
                                             <a class="text-gray-900 hover:text-blue-500"
-                                                id="multiLink_{{ $loop->index }}" href="#"
+                                                id="department_{{ $loop->index }}" href="#"
                                                 title="Extract Department Bluebook Report Forms">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -276,24 +276,31 @@
                                                 </svg>
                                             </a>
 
-                                            <a class="text-gray-900 hover:text-blue-500" href="#"
-                                                title="Extract Attached Department Bluebook Report Forms">
+                                            <a class="text-gray-900 hover:text-blue-500"
+                                                id="attachedAgency_{{ $loop->index }}" href="#"
+                                                title="Extract Attached Agency Bluebook Report Forms">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                                                 </svg>
                                             </a>
+
                                         </div>
                                     </td>
 
                                     <script>
                                         // Use the unique ID for this link in JavaScript
-                                        document.getElementById("multiLink_{{ $loop->index }}").addEventListener("click", function() {
+                                        document.getElementById("department_{{ $loop->index }}").addEventListener("click", function() {
                                             window.open("{{ route('ceso-eligibles-ces-position.pdf', $data->deptid) }}", "_blank");
                                             window.open("{{ route('ceso-eligibles-nonces-position.pdf', $data->deptid) }}", "_blank");
                                             window.open("{{ route('nonceso-noneligibles-ces-position.pdf', $data->deptid) }}", "_blank");
                                             window.open("{{ route('vacant-position.pdf', $data->deptid) }}", "_blank");
+                                        });
+
+                                        document.getElementById("attachedAgency_{{ $loop->index }}").addEventListener("click", function() {
+                                            window.open("{{ route('attached-ceso-eligibles-ces-position.pdf', $data->deptid) }}", "_blank");
+                                            
                                         });
                                     </script>
                                 </tr>

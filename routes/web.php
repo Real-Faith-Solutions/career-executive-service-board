@@ -91,6 +91,7 @@ use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
+use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedOccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
@@ -633,6 +634,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('ceso-eligibles-ces-position', [CesoAndCesPositionController::class, 'index'])->name('ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
             Route::get('ceso-eligibles-ces-position/{deptid}', [CesoAndCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
+
+            Route::get('attached-ceso-eligibles-ces-position', [AttachedCesoAndCesPositionController::class, 'index'])->name('attached-ceso-eligibles-ces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
+            Route::get('attached-ceso-eligibles-ces-position/{deptid}', [AttachedCesoAndCesPositionController::class, 'generatePDF'])->name('attached-ceso-eligibles-ces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
 
             Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
             Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');

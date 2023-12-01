@@ -31,7 +31,6 @@ class AttachedOccupancyReportController extends Controller
             $query->where('mother_deptid', $deptid)
                 ->where('is_active', true);
         })
-            // ->whereHas('planPosition')
             ->orderBy('title', 'asc')
             ->get();
 
