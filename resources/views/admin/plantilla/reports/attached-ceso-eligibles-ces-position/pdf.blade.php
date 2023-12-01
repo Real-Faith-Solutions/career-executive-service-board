@@ -1047,39 +1047,64 @@
         <tbody>
 
             @foreach ($departments as $departmentDatas)
-                @foreach ($departmentDatas->agencyLocation as $agencyLocation)
-                    @foreach ($agencyLocation->office as $office)
-                        @foreach ($office->planPosition as $planPosition)
-                            @foreach ($planPosition->planAppointee as $planAppointeeDatas)
-                                <tr class="striped" style="font-size:11px">
-                                    {{-- <td class="text-center">{{ $no++ }}</td> --}}
-                                    <td>
-                                        {{ $planAppointeeDatas->personalData->lastname ?? '' }}
-                                        {{ $planAppointeeDatas->personalData->firstname ?? '' }}
-                                        {{ $planAppointeeDatas->personalData->middlename ?? '' }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
-                                    </td>
-                                    <td>
-                                        {{ $planPosition->pos_default ?? '' }}
-                                        @if($planPosition->pos_suffix)
-                                            - {{ $planPosition->pos_suffix }}
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $planPosition->corp_sg ?? '' }}
-                                    </td>
-                                    <td>
-                                        {{ $office->title ?? '' }}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                @endforeach
-            @endforeach
+                 @php
+                    $no = 1;
+                    $currentDeptID = $departmentDatas->deptid;
+                    // $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition.office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
+                    //     $query->where('deptid', $currentDeptID);
+                    // })->count();
+                    // dd($filteredPlanAppointee);
+                @endphp
 
+                {{-- @if($filteredPlanAppointee > 1) --}}
+
+                    <tr class="bg-blue text-white text-center">
+                        <td colspan="6" class="p-3">
+                            <span class="uppercase">{{ $departmentDatas->title }}</span>
+                            <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastupd_dt)->format('d F Y') }})</span>
+                        </td>
+                    </tr>
+                    <tr class="text-center text-blue" style="font-size: 11px;background: none">
+                        <td>NO.</td>
+                        <td>FULL NAME</td>
+                        <td>CES STATUS</td>
+                        <td>POSITION</td>
+                        <td>SG</td>
+                        <td>OFFICE</td>
+                    </tr>
+
+                    @foreach($planAppointee as $planAppointeeDatas)
+                    
+                        @if($departmentDatas->deptid == $planAppointeeDatas->planPosition->office->agencyLocation->deptid)
+                            
+                            <tr class="striped" style="font-size:11px">
+                                <td class="text-center">{{ $no++ }}</td>
+                                <td>
+                                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->middlename ?? '' }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
+                                    @if($planAppointeeDatas->planPosition->pos_suffix)
+                                        - {{ $planAppointeeDatas->planPosition->pos_suffix }}
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    {{ $planAppointeeDatas->planPosition->corp_sg ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                
+                {{-- @endif --}}
+            @endforeach
 
         </tbody>
     </table>
