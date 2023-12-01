@@ -20,7 +20,7 @@
             </span>
 
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
-                BIRTHDAY CELEBRANTS FOR THIS {{ $currentMonthFullName }}
+                BIRTHDAY CELEBRANTS FOR THIS {{ $currentMonthFullName }}, TOTAL ( {{ $numberOfCelebrant }} )
             </span>
             
             <div class="flex justify-end">

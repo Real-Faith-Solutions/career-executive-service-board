@@ -80,7 +80,7 @@ class BirthdayCardReportController extends Controller
         $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
-        $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
+        $currentMonthFullName = Carbon::now()->format('F, Y'); // getting month in name example: December = 12
     
         $personalData = PersonalData::query()
             ->with('cesStatus')
@@ -97,11 +97,22 @@ class BirthdayCardReportController extends Controller
             })
             ->paginate(25);
 
+        
+        $numberOfCelebrant = PersonalData::query()
+            ->where('status', '=', 'Active')
+            ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
         return view('admin.201_profiling.reports.birthday_card.monthly_birthday.index', [
             'sortBy' => $sortBy,
             'sortOrder' => $sortOrder,
             'personalData' => $personalData,
             'currentMonthFullName' => $currentMonthFullName,
+            'numberOfCelebrant' => $numberOfCelebrant,
         ]);
     }   
 
