@@ -34,7 +34,9 @@ class AttachedCesoAndCesPositionController extends Controller
             ->whereHas('agencyLocation.office.planPosition', function ($query) {
                 $query->where('is_ces_pos', 1)
                     ->where('pres_apptee', 1)
-                    ->whereHas('planAppointee');
+                    ->whereHas('planAppointee', function ($query){
+                        $query->where('is_appointee', true);
+                    });
             })
             ->orderBy('title', 'asc')
             ->get();
