@@ -35,13 +35,13 @@ class AttachedCesoAndCesPositionController extends Controller
                 $query->where('is_ces_pos', 1)
                     ->where('pres_apptee', 1)
                     ->where('is_active', 1)
-                    ->whereHas('planAppointee', function ($query){
+                    ->whereHas('planAppointee', function ($query) {
                         $query->where('is_appointee', true);
                     });
             })
+            ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
             ->orderBy('title', 'asc')
             ->get();
-
 
         $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
             $query->where('deptid', $deptid);
