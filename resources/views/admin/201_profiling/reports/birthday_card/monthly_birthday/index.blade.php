@@ -24,7 +24,7 @@
             </span>
             
             <div class="flex justify-end">
-                <a href="" class="btn btn-primary">
+                <a href="{{ route('birthday.monthlyCelebrantGeneratePdfReport', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" class="btn btn-primary">
                     Generate PDF Report
                 </a>
             </div>
@@ -36,12 +36,6 @@
     <div class="btn btn-primary">
         <a href="{{ route('birthday.index') }}">
             Birthday Celebrant
-        </a>
-    </div>
-
-    <div class="btn btn-primary">
-        <a href="">
-            Weekly Celebrant
         </a>
     </div>
 </div>
@@ -56,7 +50,23 @@
                         </th>
 
                         <th>
-                            Name
+                            <a href="{{ route('birthday.monthlyCelebrant', [
+                                'sortBy' => 'lastname',
+                                'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                            ]) }}" class="flex items-center space-x-1">
+                                Name
+                                @if ($sortBy === 'lastname')
+                                    @if ($sortOrder === 'asc')
+                                        <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @endif
+                                @endif
+                            </a>
                         </th>
 
                         <th>
@@ -64,7 +74,23 @@
                         </th>
     
                         <th scope="col" class="px-6 py-3">
-                            Birth Date
+                            <a href="{{ route('birthday.monthlyCelebrant', [
+                                'sortBy' => 'birthdate',
+                                'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                            ]) }}" class="flex items-center space-x-1">
+                                Birth Date
+                                @if ($sortBy === 'birthdate')
+                                    @if ($sortOrder === 'asc')
+                                        <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @else
+                                        <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                        </svg>
+                                    @endif
+                                @endif
+                            </a>
                         </th>
                     </tr>
                 </thead>
