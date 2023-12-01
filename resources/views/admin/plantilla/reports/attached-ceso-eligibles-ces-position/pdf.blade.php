@@ -1041,25 +1041,22 @@
     </center>
     <br />
     <table width="100%" style="padding:10px; margin-bottom:10px">
+       
         
         <tbody>
-            @php
-                $no = 1;
-            @endphp
 
-            @foreach ($office as $officeDatas)
-
-                @php
-                    $filteredPlanAppointee = $officeDatas->planPosition;
-                    
+            @foreach ($departments as $departmentDatas)
+                 @php
+                    $no = 1;
+                    $filteredPlanAppointee = $departmentDatas->agencyLocation;
                 @endphp
 
                 @if($filteredPlanAppointee->isNotEmpty())
 
                     <tr class="bg-blue text-white text-center">
                         <td colspan="6" class="p-3">
-                            <span class="uppercase">{{ $officeDatas->title }}</span>
-                            <span>(data as of {{ \Carbon\Carbon::parse($officeDatas->lastupd_dt)->format('d F Y') }})</span>
+                            <span class="uppercase">{{ $departmentDatas->title }}</span>
+                            <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastupd_dt)->format('d F Y') }})</span>
                         </td>
                     </tr>
                     <tr class="text-center text-blue" style="font-size: 11px;background: none">
@@ -1072,12 +1069,11 @@
                     </tr>
 
                     @foreach($planAppointee as $planAppointeeDatas)
-                        @if($officeDatas->officeid == $planAppointeeDatas->planPosition->officeid)
-
+                    
+                        @if($departmentDatas->deptid == $planAppointeeDatas->planPosition->office->agencyLocation->deptid)
+                            
                             <tr class="striped" style="font-size:11px">
-                                <td class="text-center">
-                                    {{ $no++ }}
-                                    </th>
+                                <td class="text-center">{{ $no++ }}</td>
                                 <td>
                                     {{ $planAppointeeDatas->personalData->lastname ?? '' }}
                                     {{ $planAppointeeDatas->personalData->firstname ?? '' }}
@@ -1086,16 +1082,14 @@
                                 <td class="text-center">
                                     {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
                                 </td>
-
                                 <td>
                                     {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
                                     @if($planAppointeeDatas->planPosition->pos_suffix)
-                                    - {{ $planAppointeeDatas->planPosition->pos_suffix}}
+                                        - {{ $planAppointeeDatas->planPosition->pos_suffix }}
                                     @endif
-
                                 </td>
                                 <td class="text-center">
-                                    {{ $planAppointeeDatas->planPosition->corp_sg ?? ''}}
+                                    {{ $planAppointeeDatas->planPosition->corp_sg ?? '' }}
                                 </td>
                                 <td>
                                     {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
@@ -1103,6 +1097,7 @@
                             </tr>
                         @endif
                     @endforeach
+                
                 @endif
             @endforeach
 

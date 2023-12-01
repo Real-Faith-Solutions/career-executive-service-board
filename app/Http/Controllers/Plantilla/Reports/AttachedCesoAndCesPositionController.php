@@ -30,12 +30,11 @@ class AttachedCesoAndCesPositionController extends Controller
         $currentDate = Carbon::now()->format('d F Y');
         $motherDepartmentAgency = DepartmentAgency::find($deptid);
 
-        $office = Office::whereHas('agencyLocation.departmentAgency', function ($query) use ($deptid) {
-            $query->where('mother_deptid', $deptid)
-                ->where('is_active', true);
-        })
-            ->orderBy('title', 'asc')
-            ->get();
+        $departments = DepartmentAgency::where('mother_deptid', $deptid)
+        ->orderBy('title', 'asc')
+        ->get();
+
+
 
         $planAppointee = PlanAppointee::whereHas('personalData.cesStatus', function ($query) use ($deptid) {
             $query->where('description', 'LIKE', '%Ces%')
@@ -58,7 +57,7 @@ class AttachedCesoAndCesPositionController extends Controller
         $pdf = Pdf::loadView(
             'admin.plantilla.reports.attached-ceso-eligibles-ces-position.pdf',
             compact(
-                'office',
+                'departments',
                 'motherDepartmentAgency',
                 'currentDate',
                 'planAppointee',
