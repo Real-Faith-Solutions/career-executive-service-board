@@ -18,7 +18,7 @@
     <section>
 
         @foreach ($downloadLinks as $link)
-            <a href="{{ $link['url'] }}" download="{{ $link['label'] }}">{{ $link['label'] }}</a>
+            <a class="btn btn-primary" href="{{ $link['url'] }}" download="{{ $link['label'] }}">{{ $link['label'] }}</a>
         @endforeach
 
     </section>
