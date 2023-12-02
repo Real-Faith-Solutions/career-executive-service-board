@@ -130,7 +130,8 @@ class Reports201Controller extends Controller
                         'profileLibTblAppAuthority', 'authority_code'));
     }
 
-    public function generatePdf(Request $request, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
+    public function generatePdf(Request $request, $recordsPerPartition, $partitionNumber, $skippedData, $filename,
+                        $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
                         $cesstat_code, $authority_code)
     {
@@ -150,6 +151,10 @@ class Reports201Controller extends Controller
 
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
+
+        // *
+        // start of filters, conditions, operations, sortings
+        // *
 
         $personalData = PersonalData::query();
 
@@ -245,7 +250,12 @@ class Reports201Controller extends Controller
         
         $personalData->orderBy($sortBy, $sortOrder);
 
-        $personalData = $personalData->get();
+        // *
+        // end of filters, conditions, operations, sortings
+        // *
+
+        // getting the data and applying the skipped data and records per partition to get the correct part of the report
+        $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get()->get();
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
@@ -254,7 +264,7 @@ class Reports201Controller extends Controller
             'profileLibTblAppAuthority', 'authority_code'
         ))
         ->setPaper('a4', 'portrait');
-        return $pdf->stream('201-profiling-general-reports.pdf');
+        return $pdf->stream($filename);
     }
 
     public function generateDownloadLinks(Request $request, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
@@ -278,15 +288,15 @@ class Reports201Controller extends Controller
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
+        // *
         // start of filters, conditions, operations, sortings
+        // *
 
         $personalData = PersonalData::query();
 
         $personalData->with(['cesStatus', 'profileTblCesStatus']);
-
-        // *
+        
         // status filter group 
-        // *
 
         $personalData->where(function ($query) use ($filter_active, $filter_inactive, $filter_retired, $filter_deceased) {
             $query->when($filter_active !== 'false', function ($query) {
