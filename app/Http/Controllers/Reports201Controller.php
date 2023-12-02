@@ -278,11 +278,15 @@ class Reports201Controller extends Controller
         $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
         $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
 
+        // start of filters, conditions, operations, sortings
+
         $personalData = PersonalData::query();
 
         $personalData->with(['cesStatus', 'profileTblCesStatus']);
 
+        // *
         // status filter group 
+        // *
 
         $personalData->where(function ($query) use ($filter_active, $filter_inactive, $filter_retired, $filter_deceased) {
             $query->when($filter_active !== 'false', function ($query) {
@@ -372,20 +376,44 @@ class Reports201Controller extends Controller
         
         $personalData->orderBy($sortBy, $sortOrder);
 
-        $personalData = $personalData->get();
+        // *
+        // end of filters, conditions, operations, sortings
+        // *
+
+
+        // Get the total count of records
+        $totalCount = $personalData->count();
 
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
 
+        // number of partitions
+        $partitionNumber = 0;
+
+        // number of data that will be skipped
+        $skippedData = 0;
+
         // Initialize an array to store download links
         $downloadLinks = [];
 
-        // Chunk the results based on the defined limit
-        $personalData->chunk($recordsPerPartition, function ($partition) use ($sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code, &$downloadLinks) {
+        // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
+        // the other parameter here is based on your applied filters change it according to your needs)
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
+
+            // calculating how many data should be skipped for this partition
+            $skippedData = $recordsPerPartition * $partitionNumber;
+
+            // incrementing the partition number
+            $partitionNumber++;
+
+            // filename for this partition (concatinate the partition number as part number)
+            $filename = '201-profiling-general-reports-part'.$partitionNumber.'.pdf';
 
             // Create a route to handle the download action for each partition
+            // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
             $downloadRoute = route('general-reports.pdf', 
-                                ['sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 
+                                'sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
                                 'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
                                 'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
                                 'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code]);
@@ -393,25 +421,22 @@ class Reports201Controller extends Controller
             // Store the download link in the array
             $downloadLinks[] = [
                 'url' => $downloadRoute,
-                'label' => 'Download Partition ' . count($downloadLinks) + 1,
+                'label' => '201 Profiling General Reports Part ' . $partitionNumber,
             ];
-
-            // Optionally, you can store additional information about each partition if needed
-            // ...
 
         });
 
-        // Pass the download links to the next page
-        return view('your_next_page', compact('downloadLinks'));
+        // Pass the download links to the next download page
+        return view('admin.201_profiling.reports.download_general_reports', compact('downloadLinks'));
 
-        $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
-        compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
-            'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
-            'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code'
-        ))
-        ->setPaper('a4', 'portrait');
-        return $pdf->stream('201-profiling-general-reports.pdf');
+        // $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
+        // compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
+        //     'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
+        //     'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
+        //     'profileLibTblAppAuthority', 'authority_code'
+        // ))
+        // ->setPaper('a4', 'portrait');
+        // return $pdf->stream('201-profiling-general-reports.pdf');
     }
 
 }
