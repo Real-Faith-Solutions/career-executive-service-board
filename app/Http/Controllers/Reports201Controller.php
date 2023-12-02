@@ -255,7 +255,7 @@ class Reports201Controller extends Controller
         // *
 
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
-        $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get()->get();
+        $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
@@ -390,9 +390,10 @@ class Reports201Controller extends Controller
         // end of filters, conditions, operations, sortings
         // *
 
+        // $personalData = $personalData->get();
 
-        // Get the total count of records
-        $totalCount = $personalData->count();
+        // // Get the total count of records
+        // $totalCount = $personalData->count();
 
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
@@ -439,14 +440,6 @@ class Reports201Controller extends Controller
         // Pass the download links to the next download page
         return view('admin.201_profiling.reports.download_general_reports', compact('downloadLinks'));
 
-        // $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
-        // compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
-        //     'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
-        //     'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-        //     'profileLibTblAppAuthority', 'authority_code'
-        // ))
-        // ->setPaper('a4', 'portrait');
-        // return $pdf->stream('201-profiling-general-reports.pdf');
     }
 
 }
