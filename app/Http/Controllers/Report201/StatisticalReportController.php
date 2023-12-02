@@ -14,10 +14,6 @@ class StatisticalReportController extends Controller
     public function index(Request $request)
     {
 
-        // this count is not accurate because it counts all users that has ces status of ceso or eligible 
-        // regardless if the ces status is the user's current status
-        // for example: the user become ceso 1 on 2010 then on 2023 the user is no longer a ceso.
-        // even though he's not a ceso anymore he's still counted on this query because he has a record of ces status.
         $totalCESO = PersonalData::query()
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
