@@ -968,6 +968,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('reports-for-placement')->group(function () {
             Route::get('index', [PlacementReportController::class, 'index'])->name('reports-for-placement.index')->middleware('checkPermission:201_placement_reports');
+            Route::get('download-report-pdf', [PlacementReportController::class, 'generateDownloadLinks'])->name('reports-for-placement.generateDownloadLinks')->middleware('checkPermission:201_placement_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{expertise}/{degree}', [PlacementReportController::class, 'generatePdfReport'])->name('reports-for-placement.generatePdfReport')->middleware('checkPermission:201_placement_reports');
         });
     });
     // End of Reports routes

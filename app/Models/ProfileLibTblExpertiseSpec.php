@@ -22,7 +22,7 @@ class ProfileLibTblExpertiseSpec extends Model
 
     public function expertiseLibrary()
     {
-        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::orderBy('Title')->get();
+        $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
         return $profileLibTblExpertiseSpec;
     }
