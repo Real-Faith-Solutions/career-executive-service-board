@@ -11,10 +11,18 @@ class ProfileLibTblEducDegree extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = "profilelib_tblEducDegree";
+
     protected $primaryKey = 'CODE';
+
     protected $fillable = [
         'CODE',
         'DEGREE',
     ];
 
+    public function educationDegreeLibrary()
+    {
+        $profileLibTblEducDegree = ProfileLibTblEducDegree::orderBy('DEGREE')->get();
+
+        return $profileLibTblEducDegree;
+    }
 }
