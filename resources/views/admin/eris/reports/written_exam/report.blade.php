@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Written Exam</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('written-exam-report.generateReportPdf', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
+            <form action="{{ route('written-exam-report.generateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>

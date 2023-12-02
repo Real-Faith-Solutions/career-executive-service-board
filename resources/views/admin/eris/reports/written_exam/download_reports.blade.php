@@ -6,11 +6,11 @@
 <nav class="bg-gray-200 border-gray-200 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
-            <span class="self-center text-xl font-semibold whitespace-nowrap uppercase text-blue-500">ERIS - DOWNLOAD GENERAL REPORTS</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap uppercase text-blue-500">ERIS - DOWNLOAD WRITTEN EXAM REPORTS</span>
         </a>
 
         <div class="flex justify-end">
-            <a href="{{ route('general-report.index') }}" class="btn btn-primary">Back</a>
+            <a href="{{ route('written-exam-report.index') }}" class="btn btn-primary">Back</a>
         </div>
     </div>
 </nav>

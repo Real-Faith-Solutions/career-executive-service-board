@@ -921,7 +921,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('written-exam-report')->group(function () {
             Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index')->middleware('checkPermission:eligibility_ceswe_reports');
-            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateDownloadLinks'])->name('written-exam-report.generateDownloadLinks')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
         });
 
         Route::prefix('eris-report-general')->group(function () {
