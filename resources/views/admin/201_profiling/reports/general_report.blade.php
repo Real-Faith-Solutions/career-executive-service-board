@@ -10,7 +10,7 @@
         </a>
 
         <div class="flex justify-end">
-            <a href="{{ route('general-reports.pdf', 
+            <a href="{{ route('download-general-reports.pdf', 
                 ['sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
                  'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
                  'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
