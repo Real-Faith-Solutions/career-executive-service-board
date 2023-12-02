@@ -9,7 +9,7 @@
                 REPORTS FOR PLACEMENT
             </span>
 
-            <div class="flex justify-end">
+            <div class="flex justify-en">
                 <form action="{{ route('reports-for-placement.generateDownloadLinks') }}" target="_blank" method="GET">
                     @csrf
 
@@ -18,13 +18,12 @@
                     <input type="text" name="sortBy" value="{{ $sortBy }}" hidden>
                     <input type="text" name="sortOrder" value="{{ $sortOrder }}" hidden>
 
-                    {{-- <div class="flex items-center mt-7 gap-2"> --}}
-                        <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
+                    <div class="flex items-center ml-40">
+                        <button class="btn btn-primary mx-1 font-medium text-blue-600 ml-80" type="submit">
                             Generate PDF Report
                         </button>
-                    {{-- </div> --}}
-                </div>
-            </form>
+                    </div>
+                </form>
             </div>
         </a>
     </div>

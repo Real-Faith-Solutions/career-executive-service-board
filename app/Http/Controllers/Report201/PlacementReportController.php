@@ -95,13 +95,6 @@ class PlacementReportController extends Controller
             return $query->with('expertise','educations');
         })
         ->orderBy($sortBy, $sortOrder);
-        // ->paginate(25);
-
-
-        // $personalData = $personalData->get();
-
-        // Get the total count of records
-        // $totalCount = $personalData->count();
 
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
@@ -141,8 +134,6 @@ class PlacementReportController extends Controller
             ];
 
         });
-
-        // dd($downloadLinks);
 
         // Pass the download links to the next download page
         return view('admin/201_profiling/reports/report_for_placement/download_report', compact('downloadLinks'));
