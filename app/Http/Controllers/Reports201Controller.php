@@ -374,6 +374,36 @@ class Reports201Controller extends Controller
 
         $personalData = $personalData->get();
 
+        // Set the maximum number of records per partition
+        $recordsPerPartition = 500;
+
+        // Initialize an array to store download links
+        $downloadLinks = [];
+
+        // Chunk the results based on the defined limit
+        $personalData->chunk($recordsPerPartition, function ($partition) use ($sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code, &$downloadLinks) {
+
+            // Create a route to handle the download action for each partition
+            $downloadRoute = route('general-reports.pdf', 
+                                ['sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
+                                'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
+                                'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
+                                'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code]);
+
+            // Store the download link in the array
+            $downloadLinks[] = [
+                'url' => $downloadRoute,
+                'label' => 'Download Partition ' . count($downloadLinks) + 1,
+            ];
+
+            // Optionally, you can store additional information about each partition if needed
+            // ...
+
+        });
+
+        // Pass the download links to the next page
+        return view('your_next_page', compact('downloadLinks'));
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
