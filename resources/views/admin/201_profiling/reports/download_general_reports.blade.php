@@ -17,7 +17,7 @@
 
     <section>
 
-        <div class="flex flex-wrap justify-between items-center mx-auto p-4">
+        <div class="flex flex-wrap flex-col items-center mx-auto p-4">
             @foreach ($downloadLinks as $link)
                 <a class="btn btn-primary mb-2" href="{{ $link['url'] }}" target='_blank'>{{ $link['label'] }}</a>
             @endforeach

@@ -392,7 +392,7 @@ class Reports201Controller extends Controller
 
         // $personalData = $personalData->get();
 
-        // // Get the total count of records
+        // Get the total count of records
         // $totalCount = $personalData->count();
 
         // Set the maximum number of records per partition
@@ -409,7 +409,7 @@ class Reports201Controller extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -432,10 +432,12 @@ class Reports201Controller extends Controller
             // Store the download link in the array
             $downloadLinks[] = [
                 'url' => $downloadRoute,
-                'label' => '201 Profiling General Reports Part ' . $partitionNumber,
+                'label' => '201 Profiling General Reports Part '.$partitionNumber,
             ];
 
         });
+
+        // dd($downloadLinks);
 
         // Pass the download links to the next download page
         return view('admin.201_profiling.reports.download_general_reports', compact('downloadLinks'));
