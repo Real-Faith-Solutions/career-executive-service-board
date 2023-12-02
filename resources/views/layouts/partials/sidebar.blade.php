@@ -26,7 +26,7 @@
 
                     <button type="button"
                         class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                        aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard">
+                        aria-controls="dropdown-dashboard" data-collapse-toggle="dropdown-dashboard" aria-expanded="{{ request()->is('201-profile*') ? 'true' : 'false' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                             <path fill-rule="evenodd"
@@ -44,12 +44,12 @@
                         </svg>
                     </button>
 
-                    <ul id="dropdown-dashboard" class="hidden space-y-2 py-2">
+                    <ul id="dropdown-dashboard" class="{{ request()->is('201-profile*') ? '' : 'hidden' }} space-y-2 py-2">
 
                         @if ($userPermissions->contains('permission_name', 'personal_data_add'))
                         <li>
                             <a href="{{ route('profile.add') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-profile/create') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Add Profile
                             </a>
                         </li>
@@ -57,15 +57,15 @@
 
                         <li>
                             <a href="{{ route('view-profile-201.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-profile/personal-data*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 View Profile
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('show-pending-pdf-files.pendingFiles') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">Pending
-                                Files
+                                class="{{ request()->is('201-profile/pdf-file*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                Pending Files
                             </a>
                         </li>
 
