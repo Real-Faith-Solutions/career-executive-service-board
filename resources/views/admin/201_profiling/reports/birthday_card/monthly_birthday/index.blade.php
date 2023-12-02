@@ -24,7 +24,7 @@
             </span>
             
             <div class="flex justify-end">
-                <a href="{{ route('birthday.monthlyCelebrantGeneratePdfReport', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" class="btn btn-primary">
+                <a href="{{ route('birthday.monthlyCelebrantGenerateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" class="btn btn-primary">
                     Generate PDF Report
                 </a>
             </div>

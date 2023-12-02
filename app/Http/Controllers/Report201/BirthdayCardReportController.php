@@ -178,7 +178,7 @@ class BirthdayCardReportController extends Controller
     }   
 
     // generating pdf for all users has birthday this month
-    public function monthlyCelebrantGeneratePdfReport($sortBy, $sortOrder)
+    public function monthlyCelebrantGeneratePdfReport($recordsPerPartition, $partitionNumber, $skippedData, $filename, $sortBy, $sortOrder)
     {
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
@@ -196,8 +196,11 @@ class BirthdayCardReportController extends Controller
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
-            })
-            ->get();
+            });
+            // ->get();
+
+        // getting the data and applying the skipped data and records per partition to get the correct part of the report
+        $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.birthday_card.monthly_birthday.report_pdf', [
             'personalData' => $personalData,
@@ -207,4 +210,70 @@ class BirthdayCardReportController extends Controller
 
         return $pdf->stream($monthYear.'birthday-celebrant-report.pdf');
     }
+
+    public function monthlyCelebrantGenerateDownloadLinks($sortBy, $sortOrder)
+    {
+        $sortBy = $sortBy ?? 'cesno';
+        $sortOrder = $sortOrder ?? 'asc';
+
+        $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
+        $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
+        $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
+
+        $personalData = PersonalData::query()
+            ->with('cesStatus')
+            ->where('status', '=', 'Active')
+            ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+                return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
+            }, function ($query) use ($sortBy, $sortOrder) {
+                return $query->orderBy($sortBy, $sortOrder);
+            });
+
+        // Set the maximum number of records per partition
+        $recordsPerPartition = 500;
+
+        // number of partitions
+        $partitionNumber = 0;
+
+        // number of data that will be skipped
+        $skippedData = 0;
+
+        // Initialize an array to store download links
+        $downloadLinks = [];
+
+        // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
+        // the other parameter here is based on your applied filters change it according to your needs)
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $monthYear) {
+
+            // calculating how many data should be skipped for this partition
+            $skippedData = $recordsPerPartition * $partitionNumber;
+
+            // incrementing the partition number
+            $partitionNumber++;
+
+            // filename for this partition (concatinate the partition number as part number)
+            $filename = '201-profiling-birthday-'.$monthYear.'-reports-part'.$partitionNumber.'.pdf';
+
+            // Create a route to handle the download action for each partition
+            // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
+            $downloadRoute = route('birthday.monthlyCelebrantGeneratePdfReport', 
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 'sortBy' => $sortBy, 'sortOrder' => $sortOrder]);
+
+            // Store the download link in the array
+            $downloadLinks[] = [
+                'url' => $downloadRoute,
+                'label' => 'Birthday Reports '.$monthYear.' Part '.$partitionNumber,
+            ];
+
+        });
+
+        // Pass the download links to the next download page
+        return view('admin.201_profiling.reports.birthday_card.monthly_birthday.download_reports', compact('downloadLinks', 'monthYear'));
+    }
+
 }
