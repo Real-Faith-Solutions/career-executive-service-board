@@ -46,8 +46,67 @@ class BirthdayCardReportController extends Controller
         ]);
     }
 
+    public function generateDownloadLinks()
+    {
+        $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01
+        $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
+        $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
+    
+        $personalData = PersonalData::query()
+                        ->where('status', '=', 'Active')
+                        ->whereMonth('birthdate', '=', $currentMonthInNumber)
+                        ->whereDay('birthdate', '=', $specificDay)
+                        ->whereHas('cesStatus', function ($query) {
+                            $query->where('description', 'LIKE', '%Eli%')
+                                ->orWhere('description', 'LIKE', '%CES%');
+                        })
+                        ->orderBy('lastname');
+
+        // Set the maximum number of records per partition
+        $recordsPerPartition = 500;
+
+        // number of partitions
+        $partitionNumber = 0;
+
+        // number of data that will be skipped
+        $skippedData = 0;
+
+        // Initialize an array to store download links
+        $downloadLinks = [];
+
+        // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
+        // the other parameter here is based on your applied filters change it according to your needs)
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $fullDateName) {
+
+            // calculating how many data should be skipped for this partition
+            $skippedData = $recordsPerPartition * $partitionNumber;
+
+            // incrementing the partition number
+            $partitionNumber++;
+
+            // filename for this partition (concatinate the partition number as part number)
+            $filename = '201-profiling-birthday-'.$fullDateName.'-reports-part'.$partitionNumber.'.pdf';
+
+            // Create a route to handle the download action for each partition
+            // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
+            $downloadRoute = route('birthday.birthdayCelebrantGeneratePdfReport', 
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename]);
+
+            // Store the download link in the array
+            $downloadLinks[] = [
+                'url' => $downloadRoute,
+                'label' => '201 Profiling Birthdays for '.$fullDateName.' Reports Part '.$partitionNumber,
+            ];
+
+        });
+
+        // Pass the download links to the next download page
+        return view('admin.201_profiling.reports.birthday_card.download_reports', compact('downloadLinks', 'fullDateName'));
+    }
+
+
     // generating pdf for all user has birthday today
-    public function birthdayCelebrantGeneratePdfReport()
+    public function birthdayCelebrantGeneratePdfReport($recordsPerPartition, $partitionNumber, $skippedData, $filename,)
     {
         $fullDateName = Carbon::now()->format('l-F-d-Y-'); // getting full name attribute of the month example: Friday, December 01, 2023
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
@@ -61,8 +120,10 @@ class BirthdayCardReportController extends Controller
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->orderBy('lastname')
-            ->get();
+            ->orderBy('lastname');
+
+        // getting the data and applying the skipped data and records per partition to get the correct part of the report
+        $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.birthday_card.report_pdf', [
             'personalData' => $personalData,
@@ -70,7 +131,7 @@ class BirthdayCardReportController extends Controller
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream($fullDateName.'birthday-celebrant-report.pdf');
+        return $pdf->stream($fullDateName.$filename);
     }
 
     // fetching all users has birthday this month

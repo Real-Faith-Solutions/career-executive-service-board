@@ -24,7 +24,7 @@
             </span>
 
             <span class="self-center text-2xl font-semibold whitespace-nowrap uppercase text-blue-500">
-                <a href="{{ route('birthday.birthdayCelebrantGeneratePdfReport') }}" target="_blank" class="btn btn-primary">
+                <a href="{{ route('birthday.generateDownloadLinks') }}" target="_blank" class="btn btn-primary">
                     Generate PDF Report
                 </a> 
             </span>
