@@ -7,7 +7,7 @@
             {{-- dashboard --}}
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
+                    class="{{ request()->is('dashboard') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                         class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
@@ -49,7 +49,7 @@
                         @if ($userPermissions->contains('permission_name', 'personal_data_add'))
                         <li>
                             <a href="{{ route('profile.add') }}"
-                                class="{{ request()->is('201-profile/create') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-profile/create*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Add Profile
                             </a>
                         </li>
