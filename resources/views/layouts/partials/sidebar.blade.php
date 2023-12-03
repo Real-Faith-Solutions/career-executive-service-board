@@ -432,7 +432,7 @@
                 {{-- Competency --}}
                 <li>
                     <a href="{{ route('competency-data.index') }}"
-                        class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        class="{{ request()->is('competency/*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                             <path fill-rule="evenodd"
