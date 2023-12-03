@@ -207,14 +207,14 @@
 
                         <li>
                             <a href="{{ route('appointing-authority-library.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-library/appointing-authority-library*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Appointing Authority
                             </a>
                         </li>
 
                         <li>
                             <a href="{{ route('ces-status-type-library.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-library/ces-status-type-library*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Status Type
                             </a>
                         </li>
