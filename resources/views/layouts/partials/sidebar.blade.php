@@ -261,7 +261,7 @@
                 <li>
                     <button type="button"
                         class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                        aria-controls="dropdown-201-reports" data-collapse-toggle="dropdown-201-reports">
+                        aria-controls="dropdown-201-reports" data-collapse-toggle="dropdown-201-reports" aria-expanded="{{ request()->is('201-reports*') ? 'true' : 'false' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                             <path
@@ -280,7 +280,7 @@
                         </svg>
                     </button>
 
-                    <ul id="dropdown-201-reports" class="hidden space-y-2 py-2">
+                    <ul id="dropdown-201-reports" class="{{ request()->is('201-reports*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('general-reports.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
