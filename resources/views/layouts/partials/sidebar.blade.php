@@ -103,7 +103,7 @@
 
                         <li>
                             <a href="{{ route('gender-by-choice.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-library/gender-by-choice*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Gender by choice
                             </a>
                         </li>
