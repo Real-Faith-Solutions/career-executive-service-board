@@ -56,9 +56,9 @@
         
             th {
                 color: #284F87;
-                font-size: 10px;
-                padding-right: 10px;
-                padding-left: 10px;
+                font-size: 9px;
+                padding-right: 5px;
+                padding-left: 5px;
                 text-transform: uppercase;
                 text-align: left;
                 background-color: white;
@@ -153,7 +153,7 @@
                         </th>
 
                         <th class="thead">
-                            Particapants ID
+                            Participants ID
                         </th>
 
                         <th class="thead">
@@ -205,12 +205,10 @@
                             </td>
         
                             <td>
-                                {{ 
-                                    $trainingParticipantLists->cesTrainingPersonalData->lastname ?? ''.', '. 
-                                    $trainingParticipantLists->cesTrainingPersonalData->firstname ?? ''.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? ''.', '.
-                                    $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? ''
-                                }}
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->lastname ?? '' }},
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->firstname ?? '' }},
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? '' }}
+                                {{ $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? '' }}
                             </td>
         
                             <td>

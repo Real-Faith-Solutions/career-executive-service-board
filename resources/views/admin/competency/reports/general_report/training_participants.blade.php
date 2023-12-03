@@ -12,6 +12,10 @@
             <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                 <tr>
                     <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Action</span>
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Session Title
                     </th>
 
@@ -58,15 +62,28 @@
                     <th scope="col" class="px-6 py-3">
                         Remarks
                     </th>
-
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Action</span>
-                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($trainingSession as $trainingSessions)
                     <tr class="border-b bg-white">
+                        <td class="px-6 py-4 text-right uppercase">
+                            <div class="flex">
+                                <form action="{{ route('competency-general-report.generateDownloadLinks', ['sessionId'=>$trainingSessions->sessionid]) }}" target="_blank" method="GET">
+                                    @csrf
+                                    <button title="Generate PDF" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                        <lord-icon
+                                            src="https://cdn.lordicon.com/iiixgoqp.json"
+                                            trigger="hover"
+                                            colors="primary:#121331"
+                                            style="width:34px;height:34px">
+                                        </lord-icon>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+
                         <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                             {{ $trainingSessions->title ?? '' }}
                         </td>
@@ -117,23 +134,6 @@
 
                         <td class="px-6 py-3">
                             {{ $trainingSessions->remarks ?? '' }}
-                        </td>
-
-                        <td class="px-6 py-4 text-right uppercase">
-                            <div class="flex">
-                                <form action="{{ route('competency-management-sub-modules-report.generalReportGeneratePdf', ['sessionId'=>$trainingSessions->sessionid, 'title'=> $trainingSessions->title]) }}" target="_blank" method="POST">
-                                    @csrf
-                                    <button class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                        <lord-icon
-                                            src="https://cdn.lordicon.com/iiixgoqp.json"
-                                            trigger="hover"
-                                            colors="primary:#121331"
-                                            style="width:34px;height:34px">
-                                        </lord-icon>
-                                    </button>
-                                </form>
-                            </div>
                         </td>
                     </tr>
                 @endforeach
