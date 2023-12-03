@@ -145,7 +145,7 @@
 
                         <li>
                             <a href="{{ route('pwd.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-library/pwd*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 PWD Disability
                             </a>
                         </li>
