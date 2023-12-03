@@ -785,8 +785,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('training-venue-manager')->group(function () {
-            Route::get('report', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
-            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('index', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('downloaddsdsadada-reportdadasdada', [TrainingVenueManagerReportController::class, 'generateDownloadLinks'])->name('training-venue-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('generatssssse-pdfss/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{search}', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
         });
 
         Route::prefix('resource-speaker-manager')->group(function () {
