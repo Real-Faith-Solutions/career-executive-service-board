@@ -782,7 +782,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('training-provider')->group(function () {
             Route::get('index', [TrainingProviderManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_training_provider_reports');
-            Route::post('generate-pdf', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('download-reports', [TrainingProviderManagerReportController::class, 'generateDownloadLinks'])->name('training-provider-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
         });
 
         Route::prefix('training-venue-manager')->group(function () {
