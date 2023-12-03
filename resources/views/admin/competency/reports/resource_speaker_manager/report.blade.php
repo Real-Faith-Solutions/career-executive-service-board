@@ -29,7 +29,7 @@
         </div>
 
         <div class="flex items-center">
-            <form action="{{ route('competency-management-sub-modules-report.resourceSpeakerGenerateReport') }}" target="_blank" method="POST">
+            <form action="{{ route('competency-management-sub-modules-report.generateDownloadLinks') }}" target="_blank" method="GET">
                 @csrf
                 <input type="text" name="expertise" value="{{ $search }}" hidden>
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
