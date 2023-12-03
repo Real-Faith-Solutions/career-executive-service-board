@@ -311,7 +311,7 @@
 
                         <li>
                             <a href="{{ route('data-portability.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-reports/data-portability-reports*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Data Portability Report
                             </a>
                         </li>
