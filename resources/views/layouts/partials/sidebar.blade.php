@@ -393,7 +393,7 @@
                     <ul id="eris-dropdown-reports" class="{{ request()->is('eris-report*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('general-report.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('eris-report/eris-report-general*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 General Reports
                             </a>
                         </li>
