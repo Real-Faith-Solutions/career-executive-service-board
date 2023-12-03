@@ -242,7 +242,7 @@
 
                         <li>
                             <a href="{{ route('expertise-general.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('201-library/expertise-general-library*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Expertise General
                             </a>
                         </li>
