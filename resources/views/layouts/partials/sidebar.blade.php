@@ -541,7 +541,7 @@
                     <ul id="dropdown-plantilla-library" class="{{ request()->is('plantilla/library*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('library-sector.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('plantilla/library/library-sector*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Sector Manager
                             </a>
 
