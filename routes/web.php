@@ -524,88 +524,86 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('/other-assignment/{detailed_code}/update', [OtherAssignmentController::class, 'update'])->name('other-assignment.update');
         });
 
-        Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'trash'])->name('library-sector.trash');
-        Route::post('library-sector/{sectorid}/force-delete', [LibrarySectorManagerController::class, 'forceDelete'])->name('library-sector.forceDelete');
-        Route::post('library-sector/{sectorid}/restore', [LibrarySectorManagerController::class, 'restore'])->name('library-sector.restore');
-        Route::resource('library-sector', LibrarySectorManagerController::class);
+        Route::prefix('library')->group(function () {
 
-        Route::get('library-department-manager/trash', [LibraryDepartmentAgencyManagerController::class, 'trash'])->name('library-department-manager.trash');
-        Route::post('library-department-manager/{deptid}/force-delete', [LibraryDepartmentAgencyManagerController::class, 'forceDelete'])->name('library-department-manager.forceDelete');
-        Route::post('library-department-manager/{deptid}/restore', [LibraryDepartmentAgencyManagerController::class, 'restore'])->name('library-department-manager.restore');
-        Route::resource('library-department-manager', LibraryDepartmentAgencyManagerController::class);
+            Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'trash'])->name('library-sector.trash');
+            Route::post('library-sector/{sectorid}/force-delete', [LibrarySectorManagerController::class, 'forceDelete'])->name('library-sector.forceDelete');
+            Route::post('library-sector/{sectorid}/restore', [LibrarySectorManagerController::class, 'restore'])->name('library-sector.restore');
+            Route::resource('library-sector', LibrarySectorManagerController::class);
 
-        Route::get('library-agency-location-manager/trash', [LibraryAgencyLocationManagerController::class, 'trash'])->name('library-agency-location-manager.trash');
-        Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
-        Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
-        Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
+            Route::get('library-department-manager/trash', [LibraryDepartmentAgencyManagerController::class, 'trash'])->name('library-department-manager.trash');
+            Route::post('library-department-manager/{deptid}/force-delete', [LibraryDepartmentAgencyManagerController::class, 'forceDelete'])->name('library-department-manager.forceDelete');
+            Route::post('library-department-manager/{deptid}/restore', [LibraryDepartmentAgencyManagerController::class, 'restore'])->name('library-department-manager.restore');
+            Route::resource('library-department-manager', LibraryDepartmentAgencyManagerController::class);
 
-        Route::get('library-office-manager/trash', [LibraryOfficeManagerController::class, 'trash'])->name('library-office-manager.trash');
-        Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
-        Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
-        Route::resource('library-office-manager', LibraryOfficeManagerController::class);
+            Route::get('library-agency-location-manager/trash', [LibraryAgencyLocationManagerController::class, 'trash'])->name('library-agency-location-manager.trash');
+            Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
+            Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
+            Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
 
-        Route::get('library-office-type/trash', [OfficeTypeController::class, 'trash'])->name('library-office-type.trash');
-        Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
-        Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
-        Route::resource('library-office-type', OfficeTypeController::class);
+            Route::get('library-office-manager/trash', [LibraryOfficeManagerController::class, 'trash'])->name('library-office-manager.trash');
+            Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
+            Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
+            Route::resource('library-office-manager', LibraryOfficeManagerController::class);
 
-        Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
-        Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
-        Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
-        Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
+            Route::get('library-office-type/trash', [OfficeTypeController::class, 'trash'])->name('library-office-type.trash');
+            Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
+            Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
+            Route::resource('library-office-type', OfficeTypeController::class);
 
-        Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
-        Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
-        Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
-        Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
+            Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
+            Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
+            Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
+            Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
 
-        Route::get('library-class-basis/trash', [ClassBasisController::class, 'trash'])->name('library-class-basis.trash');
-        Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
-        Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
-        Route::resource('library-class-basis', ClassBasisController::class);
+            Route::get('library-class-basis/trash', [ClassBasisController::class, 'trash'])->name('library-class-basis.trash');
+            Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
+            Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
+            Route::resource('library-class-basis', ClassBasisController::class);
 
-        Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
-        Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
-        Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
-        Route::resource('library-personnel-movement', PersonnelMovementController::class);
+            Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
+            Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
+            Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
+            Route::resource('library-personnel-movement', PersonnelMovementController::class);
 
+            Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
+            Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
+            Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
+            Route::resource('library-location-type', LocationTypeController::class);
 
-        Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
-        Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
-        Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
-        Route::resource('library-location-type', LocationTypeController::class);
+            Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
+            Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
+            Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');
+            Route::resource('library-mother-dept', MotherDeptController::class);
 
-        Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
-        Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
-        Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');
-        Route::resource('library-mother-dept', MotherDeptController::class);
+            Route::get('library-position-manager/trash', [PositionManagerController::class, 'trash'])->name('library-position-manager.trash');
+            Route::post('library-position-manager/{officeid}/force-delete', [PositionManagerController::class, 'forceDelete'])->name('library-position-manager.forceDelete');
+            Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
+            Route::resource('library-position-manager', PositionManagerController::class);
 
-        Route::get('library-position-manager/trash', [PositionManagerController::class, 'trash'])->name('library-position-manager.trash');
-        Route::post('library-position-manager/{officeid}/force-delete', [PositionManagerController::class, 'forceDelete'])->name('library-position-manager.forceDelete');
-        Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
-        Route::resource('library-position-manager', PositionManagerController::class);
+            Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
+            Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
+            Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
+            Route::resource('library-occupant-browser', OccupantBrowserController::class);
 
-        Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
-        Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
-        Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
-        Route::resource('library-occupant-browser', OccupantBrowserController::class);
+            Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
+            Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
+            Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
+            Route::resource('library-occupant-manager', OccupantManagerController::class);
 
-        Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
-        Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
-        Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
-        Route::resource('library-occupant-manager', OccupantManagerController::class);
+            Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
+            Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
+            Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
 
-        Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
-        Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
-        Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
+            Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
+            Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+            Route::get('library-other-assignment/{library_occupant_manager}/create', [LibraryOtherAssignmentController::class, 'create'])->name('library-other-assignment.create');
+            Route::post('library-other-assignment/store', [LibraryOtherAssignmentController::class, 'store'])->name('library-other-assignment.store');
+            Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
+            Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+            Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
 
-        Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
-        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
-        Route::get('library-other-assignment/{library_occupant_manager}/create', [LibraryOtherAssignmentController::class, 'create'])->name('library-other-assignment.create');
-        Route::post('library-other-assignment/store', [LibraryOtherAssignmentController::class, 'store'])->name('library-other-assignment.store');
-        Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
-        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
-        Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
+        });
 
         // plantilla reports
         Route::prefix('reports')->group(function () {
