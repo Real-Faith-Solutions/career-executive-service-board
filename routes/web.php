@@ -924,7 +924,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index')->middleware('checkPermission:eligibility_assessment_center_reports');
-            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateDownloadLinks'])->name('assessment-center-report.generateDownloadLinks')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
         });
 
         Route::prefix('written-exam-report')->group(function () {
