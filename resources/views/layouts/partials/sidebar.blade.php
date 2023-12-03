@@ -359,7 +359,7 @@
                     <ul id="eris-dropdown-system-utility" class="{{ request()->is('eris-library*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('rank-tracker-library.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('eris-library/rank-tracker-library*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Rank Tracker
                             </a>
                         </li>
