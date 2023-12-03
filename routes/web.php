@@ -896,7 +896,8 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     Route::prefix('eris-report')->group(function () {
         Route::prefix('board-interview-report')->group(function () {
             Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
-            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateDownloadLinks'])->name('eris-board-interview-report.generateDownloadLinks')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('panel-board-interview-report')->group(function () {
