@@ -633,25 +633,30 @@
                     <ul id="dropdown-plantilla-reports" class="{{ request()->is('plantilla/reports*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('statistics.index') }}"
-                                class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                                class="{{ request()->is('plantilla/reports/statistics*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Plantilla Statistics
                             </a>
+
                             <a href="{{ route('occupancy-report.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 Occupancy report
                             </a>
+
                             <a href="{{ route('ceso-eligibles-ces-position.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 List of CESOs and CES Eligibles in CES Positions
                             </a>
+
                             <a href="{{ route('ceso-eligibles-nonces-position.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 List of CESOs and CES Eligibles in NONCES Positions
                             </a>
+
                             <a href="{{ route('nonceso-noneligibles-ces-position.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 List of Non-CESOs and Non-Eligibles in CES Positions
                             </a>
+
                             <a href="{{ route('vacant-position.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
                                 List of Vacant Position
