@@ -341,7 +341,7 @@
                 <li>
                     <button type="button"
                         class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                        aria-controls="eris-dropdown-system-utility" data-collapse-toggle="eris-dropdown-system-utility">
+                        aria-controls="eris-dropdown-system-utility" data-collapse-toggle="eris-dropdown-system-utility" aria-expanded="{{ request()->is('eris-library*') ? 'true' : 'false' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
                             <path
@@ -356,7 +356,7 @@
                         </svg>
                     </button>
 
-                    <ul id="eris-dropdown-system-utility" class="hidden space-y-2 py-2">
+                    <ul id="eris-dropdown-system-utility" class="{{ request()->is('eris-library*') ? '' : 'hidden' }} space-y-2 py-2">
                         <li>
                             <a href="{{ route('rank-tracker-library.index') }}"
                                 class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
