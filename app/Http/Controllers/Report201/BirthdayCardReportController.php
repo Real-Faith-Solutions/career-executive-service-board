@@ -46,6 +46,7 @@ class BirthdayCardReportController extends Controller
         ]);
     }
 
+    // generate download link for birthday celebrants per day
     public function generateDownloadLinks()
     {
         $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01
@@ -181,8 +182,7 @@ class BirthdayCardReportController extends Controller
     public function monthlyCelebrantGeneratePdfReport($recordsPerPartition, $partitionNumber, $skippedData, $filename, $sortBy, $sortOrder)
     {
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
-        $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
-        $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
+        $monthYear = Carbon::now()->format('F-Y, '); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
             ->with('cesStatus')
@@ -204,13 +204,14 @@ class BirthdayCardReportController extends Controller
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.birthday_card.monthly_birthday.report_pdf', [
             'personalData' => $personalData,
-            'currentMonthFullName' => $currentMonthFullName,
+            'monthYear' => $monthYear,
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream($monthYear.'birthday-celebrant-report.pdf');
+        return $pdf->stream($filename);
     }
 
+    // generate download link for monthly birthday celebrants
     public function monthlyCelebrantGenerateDownloadLinks($sortBy, $sortOrder)
     {
         $sortBy = $sortBy ?? 'cesno';
@@ -218,7 +219,7 @@ class BirthdayCardReportController extends Controller
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
-        $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
+        $monthYear = Carbon::now()->format('F-Y'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
             ->with('cesStatus')
