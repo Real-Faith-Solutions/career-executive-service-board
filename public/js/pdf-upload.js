@@ -5,7 +5,7 @@ let uploadButtonPDF = document.getElementById('uploadButtonPDF');
     // Submit the form when the upload button is clicked
     document.getElementById('uploadButtonPDF').addEventListener('click', function(event) {
         
-      if (ErrorMessagePDF.textContent != '' || pdfFile.value == '') {
+      if (pdfFile.value == '') {
           event.preventDefault();
           return;
       }
