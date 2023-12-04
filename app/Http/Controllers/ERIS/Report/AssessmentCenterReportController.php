@@ -44,21 +44,25 @@ class AssessmentCenterReportController extends Controller
 
         $assessmentCenter->where(function ($query) use ($passed, $failed, $retake) {
             if ($passed && $failed && $retake) {
-                $query->whereIn('remarks', [$passed, $failed])
-                    ->where('numtakes', '>', 1);
+                $query->where(function ($q) use ($passed, $failed) {
+                    $q->where('remarks', 'LIKE', "%$passed%")
+                          ->orWhere('remarks', 'LIKE', "%$failed%");
+                })
+                ->where('numtakes', '>', 1);
             }
             elseif($passed && $failed)
             {
-                $query->whereIn('remarks', [$passed, $failed]);
+                $query->where('remarks', 'LIKE', "%$passed%")
+                      ->orWhere('remarks', 'LIKE', "%$failed%");
             }
             else 
             {
                 if ($passed) {
-                    $query->where('remarks', $passed);
+                    $query->where('remarks', 'LIKE', "%$passed%");
                 }
 
                 if ($failed) {
-                    $query->where('remarks', $failed);
+                    $query->where('remarks', 'LIKE', "%$failed%");
                 }
 
                 if ($retake) {
@@ -105,21 +109,25 @@ class AssessmentCenterReportController extends Controller
 
         $assessmentCenter->where(function ($query) use ($passed, $failed, $retake) {
             if ($passed && $failed && $retake) {
-                $query->whereIn('remarks', [$passed, $failed])
-                    ->where('numtakes', '>', 1);
+                $query->where(function ($q) use ($passed, $failed) {
+                    $q->where('remarks', 'LIKE', "%$passed%")
+                          ->orWhere('remarks', 'LIKE', "%$failed%");
+                })
+                ->where('numtakes', '>', 1);
             }
             elseif($passed && $failed)
             {
-                $query->whereIn('remarks', [$passed, $failed]);
+                $query->where('remarks', 'LIKE', "%$passed%")
+                      ->orWhere('remarks', 'LIKE', "%$failed%");
             }
             else 
             {
                 if ($passed) {
-                    $query->where('remarks', $passed);
+                    $query->where('remarks', 'LIKE', "%$passed%");
                 }
 
                 if ($failed) {
-                    $query->where('remarks', $failed);
+                    $query->where('remarks', 'LIKE', "%$failed%");
                 }
 
                 if ($retake) {
@@ -165,21 +173,25 @@ class AssessmentCenterReportController extends Controller
 
         $assessmentCenter->where(function ($query) use ($passed, $failed, $retake) {
             if ($passed && $failed && $retake) {
-                $query->whereIn('remarks', [$passed, $failed])
-                    ->where('numtakes', '>', 1);
+                $query->where(function ($q) use ($passed, $failed) {
+                    $q->where('remarks', 'LIKE', "%$passed%")
+                          ->orWhere('remarks', 'LIKE', "%$failed%");
+                })
+                ->where('numtakes', '>', 1);
             }
             elseif($passed && $failed)
             {
-                $query->whereIn('remarks', [$passed, $failed]);
+                $query->where('remarks', 'LIKE', "%$passed%")
+                      ->orWhere('remarks', 'LIKE', "%$failed%");
             }
             else 
             {
                 if ($passed) {
-                    $query->where('remarks', $passed);
+                    $query->where('remarks', 'LIKE', "%$passed%");
                 }
 
                 if ($failed) {
-                    $query->where('remarks', $failed);
+                    $query->where('remarks', 'LIKE', "%$failed%");
                 }
 
                 if ($retake) {
