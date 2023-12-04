@@ -26,7 +26,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -60,7 +60,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -98,7 +98,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -140,7 +140,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -206,7 +206,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -260,7 +260,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
@@ -302,7 +302,7 @@ class PermissionsController extends Controller
         ];
 
         // Get the submitted permissions
-        $submittedPermissions = $request->input('permissions');
+        $submittedPermissions = $request->input('permissions') ?? [];
     
         // Remove permissions that are no longer needed
         $permissionsToRemove = array_diff($permissionsInThisForm, $submittedPermissions);
