@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>
-            Assessment Center
+            {{ $fullDateName }}Birthday Celebrants                               
         </title>
 
         <style>
@@ -133,11 +133,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    <img src="{{ public_path("images/assets/cake.png") }}" alt="">
-                    
                     {{ $fullDateName }} Birthday Celebrants
-
-                    <img src="{{ public_path("images/assets/cake.png") }}" alt="">
                 </p>
 
                 <footer>
@@ -155,10 +151,6 @@
                     <tr>
                         <th>
                             
-                        </th>
-
-                        <th>
-
                         </th>
 
                         <th>
@@ -184,10 +176,6 @@
                                     {{ $rowNumber++ }}
                                 </td>
 
-                                <td>
-                                    <img src="{{ public_path("images/assets/cake.png") }}" alt="">
-                                </td>
-    
                                 <td>
                                     {{ $datas->lastname }},
                                     {{ $datas->firstname }},
