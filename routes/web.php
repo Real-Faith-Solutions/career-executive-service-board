@@ -962,7 +962,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // Rights management routes
     Route::prefix('rights-management')->group(function () {
 
-        Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
+        Route::get('roles', [RolesController::class, 'index'])->name('roles.index')->middleware('checkRole:admin');
         Route::get('roles/show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');
         Route::post('change', [RolesController::class, 'change'])->name('roles.change');
         Route::get('permissions/show/{role_name}/{role_title}', [RolesController::class, 'showPermissions'])->name('permissions.show');
