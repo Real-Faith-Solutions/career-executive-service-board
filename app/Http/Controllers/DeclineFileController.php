@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\RequestFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeclineFileController extends Controller
 {
+    public function getFullNameAttribute()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        return $encoder;
+    }
+    
     // show soft deleted decline file
     public function recentlyDeclineFile()
     {
@@ -17,7 +27,10 @@ class DeclineFileController extends Controller
 
     public function restore($ctrlno)
     {
-        $pendingFile = RequestFile::onlyTrashed($ctrlno);
+        $pendingFile = RequestFile::onlyTrashed()->find($ctrlno);
+        $pendingFile->update([
+            'decline_by' => "",
+        ]);
         $pendingFile->restore();
 
         return back()->with('info', 'File Restored Successfully');
@@ -29,8 +42,12 @@ class DeclineFileController extends Controller
         $ctrlno = $request->decline_file_ctrlno;
         $cesno = $request->decline_file_personal_data_cesno;
         $reason = $request->decline_file_reason;
-        $pendingFile = RequestFile::find($ctrlno);
-        $pendingFile->update(['reason' => $reason]);
+        
+        $pendingFile = RequestFile::find($ctrlno); 
+        $pendingFile->update([
+            'reason' => $reason,
+            'decline_by' => $this->getFullNameAttribute(),
+        ]);
         $pendingFile->delete();
 
         return back()->with('message', 'Deleted Sucessfully');
