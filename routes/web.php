@@ -93,6 +93,7 @@ use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndNonCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\AttachedNonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedOccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
@@ -647,6 +648,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
             Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
+
+            Route::get('attached-nonceso-noneligibles-ces-position', [AttachedNonCesoAndCesPositionController::class, 'index'])->name('attached-nonceso-noneligibles-ces-position.index')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
+            Route::get('attached-nonceso-noneligibles-ces-position/{deptid}', [AttachedNonCesoAndCesPositionController::class, 'generatePDF'])->name('attached-nonceso-noneligibles-ces-position.pdf')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
 
             Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
             Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');

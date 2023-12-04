@@ -301,7 +301,7 @@
                                         document.getElementById("attachedAgency_{{ $loop->index }}").addEventListener("click", function() {
                                             window.open("{{ route('attached-ceso-eligibles-ces-position.pdf', $data->deptid) }}", "_blank");
                                             window.open("{{ route('attached-ceso-eligibles-nonces-position.pdf', $data->deptid) }}", "_blank");
-                                            
+                                            window.open("{{ route('attached-nonceso-noneligibles-ces-position.pdf', $data->deptid) }}", "_blank");
                                         });
                                     </script>
                                 </tr>
