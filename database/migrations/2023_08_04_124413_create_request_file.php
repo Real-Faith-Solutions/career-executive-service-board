@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('request_unique_file_name');
             $table->string('remarks');
             $table->string('reason')->nullable();
-            $table->string('encoder');
+            $table->string('encoder')->nullable();
+            $table->string('decline_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

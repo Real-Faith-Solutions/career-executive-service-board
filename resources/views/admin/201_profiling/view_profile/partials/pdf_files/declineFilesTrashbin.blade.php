@@ -84,7 +84,7 @@
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $pendingFileTrashedRecords->encoder }}
+                        {{ $pendingFileTrashedRecords->decline_by }}
                     </td>
 
                     <td class="px-6 py-3">
