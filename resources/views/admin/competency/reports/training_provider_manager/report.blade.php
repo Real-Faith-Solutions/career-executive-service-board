@@ -6,7 +6,7 @@
     <div class="my-5 flex justify-between">
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Training Provider Manager Report</h1>
 
-        <form action="{{ route('competency-management-sub-modules-report.trainingProviderGenerateReport') }}" target="_blank" method="POST">
+        <form action="{{ route('training-provider-manager.generateDownloadLinks') }}" target="_blank" method="GET">
             @csrf
             <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                 Generate PDF Report

@@ -22,7 +22,7 @@
         </div>
 
         <div class="flex items-center">
-            <form action="{{ route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf') }}" target="_blank" method="POST">
+            <form action="{{ route('training-venue-manager.generateDownloadLinks') }}" target="_blank" method="GET">
                 @csrf
                 <input type="hidden" name="search" value="{{ $search }}">
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">

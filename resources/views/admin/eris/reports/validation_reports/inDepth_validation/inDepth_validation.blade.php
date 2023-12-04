@@ -1,20 +1,17 @@
 @extends('layouts.app')
-@section('title', 'Rapid Validation')
+@section('title', 'In Depth Validation')
 @section('content')
 
     <div class="flex justify-between">
         <h1 class="uppercase font-semibold text-blue-600 text-lg">In Depth Validation</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('in-depth-validation-report.generateReportPdf', [
-                'sortBy' => $sortBy,
-                'sortOrder' => $sortOrder
-                ]) }}" target="_blank" method="POST">
+            <form action="{{ route('in-depth-validation-report.generateDownloadLinks', ['sortBy' => $sortBy,'sortOrder' => $sortOrder, 'startDate' => $startDate, 'endDate' => $endDate]) }}" target="_blank" method="GET">
                 @csrf
 
-                <input type="date" name="startDate" value="{{ $startDate }}" hidden>
+                {{-- <input type="date" name="startDate" value="{{ $startDate }}" hidden>
 
-                <input type="date" name="endDate" value="{{ $endDate }}" hidden>
+                <input type="date" name="endDate" value="{{ $endDate }}" hidden> --}}
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report

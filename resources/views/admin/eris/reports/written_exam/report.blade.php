@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Written Exam</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('written-exam-report.generateReportPdf', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
+            <form action="{{ route('written-exam-report.generateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
                 @csrf
 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
@@ -35,12 +35,12 @@
                 <div class="flex items-center gap-1">
                     <div class="flex">
                         <label for="passed" class="mt-1">Passed:</label>
-                        <input type="checkbox" name="passed" {{ $passed == "passed" ? 'checked' : '' }} value="passed">
+                        <input type="checkbox" name="passed" {{ $passed == "pass" ? 'checked' : '' }} value="pass">
                     </div>
                         
                     <div class="flex">
                         <label for="failed" class="mt-1">Failed:</label>
-                        <input type="checkbox" name="failed" {{ $failed == "failed" ? 'checked' : '' }} value="failed">
+                        <input type="checkbox" name="failed" {{ $failed == "fail" ? 'checked' : '' }} value="fail">
                     </div>
 
                     <div class="flex">
