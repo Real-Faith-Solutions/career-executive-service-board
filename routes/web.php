@@ -92,6 +92,7 @@ use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndCesPositionController;
+use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedOccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
@@ -641,6 +642,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('ceso-eligibles-nonces-position', [CesoAndNonCesPositionController::class, 'index'])->name('ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
             Route::get('ceso-eligibles-nonces-position/{deptid}', [CesoAndNonCesPositionController::class, 'generatePDF'])->name('ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
 
+            Route::get('attached-ceso-eligibles-nonces-position', [AttachedCesoAndNonCesPositionController::class, 'index'])->name('attached-ceso-eligibles-nonces-position.index')->middleware('checkPermission:plantilla_position_list_reports');
+            Route::get('attached-ceso-eligibles-nonces-position/{deptid}', [AttachedCesoAndNonCesPositionController::class, 'generatePDF'])->name('attached-ceso-eligibles-nonces-position.pdf')->middleware('checkPermission:plantilla_position_list_reports');
+
             Route::get('nonceso-noneligibles-ces-position', [NonCesoAndCesPositionController::class, 'index'])->name('nonceso-noneligibles-ces-position.index')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
             Route::get('nonceso-noneligibles-ces-position/{deptid}', [NonCesoAndCesPositionController::class, 'generatePDF'])->name('nonceso-noneligibles-ces-position.pdf')->middleware('checkPermission:plantilla_nonces_occupying_ces_pos_reports');
 
@@ -972,7 +976,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
             Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
         });
-
     });
     // End of Reports routes
 
@@ -996,7 +999,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::post('permissions/plantilla/update/{role_name}/{role_title}', [PermissionsController::class, 'updatePlantillaPermissions'])->name('plantillaPermissions.update');
         Route::post('permissions/reports/update/{role_name}/{role_title}', [PermissionsController::class, 'updateReportsPermissions'])->name('reportsPermissions.update');
         Route::post('permissions/libraries/update/{role_name}/{role_title}', [PermissionsController::class, 'updateLibrariesPermissions'])->name('librariesPermissions.update');
-
     });
     // End of Rights management routes
 
