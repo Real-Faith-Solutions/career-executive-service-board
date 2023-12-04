@@ -1078,9 +1078,9 @@
                         @if($departmentDatas->deptid == $planPositionDatas->office->agencyLocation->deptid)
                             @php
                             $selectedOccupant = $planPositionDatas
-                                    ->planAppointee
-                                    ->where('is_appointee', 0)
-                                    ->first();
+                                ->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first();
                             @endphp
                             
                             <tr class="striped" style="font-size:11px">
