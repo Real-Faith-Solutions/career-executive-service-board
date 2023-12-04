@@ -53,7 +53,7 @@
                 padding-left: 10px;
                 padding-bottom: 5px;
                 font-size: 10px;
-                text-align: left;
+                text-align: center;
             }
         
             th {
@@ -62,7 +62,7 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 text-transform: uppercase;
-                text-align: left;
+                text-align: center;
                 background-color: white;
                 font-weight: bold; /* Add font weight bold */
             }
@@ -88,7 +88,6 @@
                 text-transform: uppercase;
                 font-family: 'Busorama';
                 font-size: 20px;
-                
                 color: #284F87;
             }
         
@@ -111,7 +110,7 @@
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 190px;
+                margin-top: 180px;
             }
 
             .pagenum:before {
@@ -133,7 +132,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
-                    Penel Board Interview
+                    Panel Board Interview
                 </p>
 
                 <footer>

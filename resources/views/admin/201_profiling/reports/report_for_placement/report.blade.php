@@ -3,7 +3,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Resource Speaker Manager Report</title>
+        <title>
+            Report for Placement
+        </title>
 
         <style>
             @font-face {
@@ -14,7 +16,7 @@
                 font-stretch: normal;
             }
 
-            @page {
+           @page {
                 margin-top: 75px;
                 padding-bottom: 100px;
             }
@@ -50,18 +52,24 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 11px;
+                font-size: 10px;
                 text-align: left;
             }
         
             th {
                 color: #284F87;
+                font-size: 9px;
                 padding-right: 10px;
                 padding-left: 10px;
-                font-size: 10px;
                 text-transform: uppercase;
                 text-align: left;
                 background-color: white;
+                font-weight: bold; /* Add font weight bold */
+            }
+
+        
+            span {
+                font-size: 10px;
             }
         
             tr:nth-child(even) {
@@ -80,12 +88,13 @@
                 text-transform: uppercase;
                 font-family: 'Busorama';
                 font-size: 20px;
+                
                 color: #284F87;
             }
         
             .title_street {
                 margin-top: -20px;
-                font-size: 12px;
+                font-size: 9px;
             }
         
             .link {
@@ -123,14 +132,16 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">Resource Speaker Manager Report</p>
-            </div> 
+                <p class="report_name">
+                    Report for Placement
+                </p>
 
-            <footer>
-                <div class="flex-container">
-                    <div class="">Page <span class="pagenum"></span></div>
-                </div>
-            </footer>
+                <footer>
+                    <div class="flex-container">
+                        <div class="">Page <span class="pagenum"></span></div>
+                    </div>
+                </footer>
+            </div>
         </header>
 
         <div>
@@ -138,40 +149,32 @@
                 <thead >
                     <div class="page-break"></div>
                     <tr>
-                        <th >
+                        <th>
                             
                         </th>
 
-                        <th class="thead">
+                        <th>
+                            CES No.
+                        </th>
+
+                        <th>
                             Name
                         </th>
 
-                        <th class="thead">
-                            Position
-                        </th class="thead">
-
-                        <th class="thead">
-                            Department
-                        </th class="thead">
-
-                        <th class="thead">
-                            Office
+                        <th>
+                            Status
                         </th>
 
-                        <th class="thead">
-                            Address
+                        <th>
+                            CES Status
                         </th>
 
-                        <th class="thead">
-                            Contact No.
-                        </th>
-
-                        <th class="thead">
-                            Email Address
-                        </th>
-
-                        <th class="thead">
+                        <th>
                             Expertise
+                        </th>
+
+                        <th>
+                            Degree
                         </th>
                     </tr>
                 </thead>
@@ -179,54 +182,57 @@
                     @php
                         $rowNumber = 1;
                     @endphp
-                
-                    @foreach ($resourceSpeaker as $resourceSpeakers)
-                        <tr>
+                         @foreach ($personalData as $datas) 
+                         <tr>
                             <td>
                                 {{ $rowNumber++ }}
                             </td>
-
+                            
                             <td>
-                                {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
+                                {{ $datas->cesno }}
                             </td>
-
+ 
                             <td>
-                                {{ $resourceSpeakers->Position }}
+                                {{ $datas->lastname }},
+                                {{ $datas->firstname }},
+                                {{ $datas->middlename }},
+                                {{ $datas->name_extension }} 
                             </td>
-
+ 
                             <td>
-                                {{ $resourceSpeakers->Department }}
+                                {{ $datas->status}}
                             </td>
-
+ 
                             <td>
-                                {{ $resourceSpeakers->Office }}
+                                {{ $datas->cesStatus->description }}
                             </td>
-
+ 
                             <td>
-                                {{ 
-                                    $resourceSpeakers->Bldg.' '.
-                                    $resourceSpeakers->Street.' '.
-                                    $resourceSpeakers->Brgy.' '.
-                                    $resourceSpeakers->City
-                                }}
+                                 @foreach ($datas->expertise as $expertised)
+                                    @if ($expertise)
+                                        @if ($expertised->SpeExp_Code == $expertise)
+                                            {{ $expertised->expertisePersonalData->Title ?? '' }}, <br>
+                                        @endif
+                                    @else
+                                        {{ $expertised->expertisePersonalData->Title ?? '' }}, <br>
+                                    @endif
+                                 @endforeach
                             </td>
-
-                            <td>
-                                {{ $resourceSpeakers->contactno }}
-                            </td>
-
-                            <td>
-                                {{ $resourceSpeakers->emailadd }}
-                            </td>
-
-                            <td>
-                                {{ $resourceSpeakers->expertise }}
+                             
+                            <td>          
+                                @foreach ($datas->educations as $educations)
+                                    @if ($degree)
+                                        @if ($educations->degree_code == $degree)
+                                            {{ $educations->profileLibTblEducDegree->DEGREE ?? '' }}, <br>
+                                        @endif
+                                    @else
+                                        {{ $educations->profileLibTblEducDegree->DEGREE ?? '' }}, <br>
+                                    @endif
+                                @endforeach
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
             </table>
-        </div>    
-        
+        </div>
     </body>
 </html>

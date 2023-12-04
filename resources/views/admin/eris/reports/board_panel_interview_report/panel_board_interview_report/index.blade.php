@@ -11,12 +11,12 @@
         </div>
 
         <div class="flex items-center">
-            <form action="{{ route('panel-board-interview-report.generateReportPdf') }}" target="_blank" method="POST">
+            <form action="{{ route('panel-board-interview-report.generateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GET">
                 @csrf
-
+{{-- 
                 <input type="text" name="sort_by" value="{{ $sortBy }}" hidden>
 
-                <input type="text" name="sort_order" value="{{ $sortOrder }}" hidden>
+                <input type="text" name="sort_order" value="{{ $sortOrder }}" hidden> --}}
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report

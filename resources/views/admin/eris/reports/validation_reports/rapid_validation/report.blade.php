@@ -6,15 +6,12 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">Rapid Validation</h1>
    
         <div class="flex items-center">
-            <form action="{{ route('rapid-validation-report.generatePdfReport', [
-                'sort_by' => $sort_by, 
-                'sort_order' => $sort_order
-            ]) }}" target="_blank" method="POST">
+            <form action="{{ route('rapid-validation-report.generateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'startDate' => $startDate, 'endDate' => $endDate]) }}" target="_blank" method="GET">
                 @csrf
-
+            {{-- 
                 <input type="date" name="startDate" value="{{ $startDate }}" hidden>
 
-                <input type="date" name="endDate" value="{{ $endDate }}" hidden>
+                <input type="date" name="endDate" value="{{ $endDate }}" hidden> --}}
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
@@ -53,14 +50,14 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         <a href="{{ route('rapid-validation-report.index', [
-                            'sort_by' => 'lastname',
-                            'sort_order' => $sort_order === 'asc' ? 'desc' : 'asc',
+                            'sortBy' => 'lastname',
+                            'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
                             'startDate' => $startDate,
                             'endDate' => $endDate,
                         ]) }}" class="flex items-center space-x-1">
                             Name
-                            @if ($sort_by === 'lastname')
-                                @if ($sort_order === 'asc')
+                            @if ($sortBy === 'lastname')
+                                @if ($sortOrder === 'asc')
                                     <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                                     </svg>
@@ -75,14 +72,14 @@
                 
                     <th scope="col" class="px-6 py-3">
                         <a href="{{ route('rapid-validation-report.index', [
-                            'sort_by' => 'dteassign',
-                            'sort_order' => $sort_order === 'desc' ? 'asc' : 'desc',
+                            'sortBy' => 'dteassign',
+                            'sortOrder' => $sortOrder === 'desc' ? 'asc' : 'desc',
                             'startDate' => $startDate,
                             'endDate' => $endDate,
                         ]) }}" class="flex items-center space-x-1">
                             Rapid Validation Date
-                            @if ($sort_by === 'dteassign')
-                                @if ($sort_order === 'desc')
+                            @if ($sortBy === 'dteassign')
+                                @if ($sortOrder === 'desc')
                                     <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                                     </svg>
@@ -156,8 +153,8 @@
 
     <div class="m-5">
         {{ $rapidValidation->appends([
-            'sort_by' => $sort_by,
-            'sort_order' => $sort_order,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
             'startDate' => $startDate,
             'endDate' => $endDate,
         ])->links() }}

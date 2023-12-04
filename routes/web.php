@@ -106,7 +106,10 @@ use App\Http\Controllers\ProfileLibTblLanguageRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Report201\BirthdayCardController;
+use App\Http\Controllers\Report201\BirthdayCardReportController;
 use App\Http\Controllers\Report201\DataPortabilityReportController;
+use App\Http\Controllers\Report201\PlacementReportController;
 use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
@@ -773,22 +776,26 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     Route::prefix('competency-report')->group(function () {
         Route::prefix('general-report')->group(function () {
             Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_general_reports');
-            Route::post('generate-pdf/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
+            Route::get('download-report/{sessionId}', [GeneralReportController::class, 'generateDownloadLinks'])->name('competency-general-report.generateDownloadLinks')->middleware('checkPermission:competency_general_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
         });
 
         Route::prefix('training-provider')->group(function () {
             Route::get('index', [TrainingProviderManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_training_provider_reports');
-            Route::post('generate-pdf', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('download-reports', [TrainingProviderManagerReportController::class, 'generateDownloadLinks'])->name('training-provider-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
         });
 
         Route::prefix('training-venue-manager')->group(function () {
-            Route::get('report', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
-            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('index', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('download-report', [TrainingVenueManagerReportController::class, 'generateDownloadLinks'])->name('training-venue-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{search}', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
         });
 
         Route::prefix('resource-speaker-manager')->group(function () {
             Route::get('report', [ResourceSpeakerManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
-            Route::post('report-generate-pdf', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
+            Route::get('download-report', [ResourceSpeakerManagerReportController::class, 'generateDownloadLinks'])->name('competency-management-sub-modules-report.generateDownloadLinks')->middleware('checkPermission:competency_resource_speaker_manager_reports');
+            Route::get('report-generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{expertise}', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
         });
     });
     //  end of competency report routes
@@ -889,41 +896,48 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     });
     //  end of ERIS routes
 
-    //  ERIS Report/Eligibility and Rank Tracking routes
+    //  ERIS Report
     Route::prefix('eris-report')->group(function () {
         Route::prefix('board-interview-report')->group(function () {
             Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
-            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateDownloadLinks'])->name('eris-board-interview-report.generateDownloadLinks')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('panel-board-interview-report')->group(function () {
             Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
-            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [PanelBoardInterviewReportController::class, 'generateDownloadLinks'])->name('panel-board-interview-report.generateDownloadLinks')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('rapid-validation-report')->group(function () {
             Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
-            Route::post('generate-pdf/{sort_by}/{sort_order}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generateDownloadLinks'])->name('rapid-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateDownloadLinks'])->name('in-depth-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index')->middleware('checkPermission:eligibility_assessment_center_reports');
-            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateDownloadLinks'])->name('assessment-center-report.generateDownloadLinks')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
         });
 
         Route::prefix('written-exam-report')->group(function () {
             Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index')->middleware('checkPermission:eligibility_ceswe_reports');
-            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateDownloadLinks'])->name('written-exam-report.generateDownloadLinks')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
         });
 
         Route::prefix('eris-report-general')->group(function () {
             Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index')->middleware('checkPermission:eligibility_general_reports');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generateDownloadLinks'])->name('general-report.generateDownloadLinks')->middleware('checkPermission:eligibility_general_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
         });
     });
     // End of ERIS Report routes
@@ -954,6 +968,21 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('statistical-reports')->group(function () {
             Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
             Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
+        });
+
+        Route::prefix('birthday')->group(function () {
+            Route::get('index', [BirthdayCardReportController::class, 'index'])->name('birthday.index')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('monthly-celebrant', [BirthdayCardReportController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('download-monthly-celebrant-report/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGenerateDownloadLinks'])->name('birthday.monthlyCelebrantGenerateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('monthly/celebrant/report/pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGeneratePdfReport'])->name('birthday.monthlyCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('download-report', [BirthdayCardReportController::class, 'generateDownloadLinks'])->name('birthday.generateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+        });
+
+        Route::prefix('reports-for-placement')->group(function () {
+            Route::get('index', [PlacementReportController::class, 'index'])->name('reports-for-placement.index')->middleware('checkPermission:201_placement_reports');
+            Route::get('download-report-pdf', [PlacementReportController::class, 'generateDownloadLinks'])->name('reports-for-placement.generateDownloadLinks')->middleware('checkPermission:201_placement_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{expertise}/{degree}', [PlacementReportController::class, 'generatePdfReport'])->name('reports-for-placement.generatePdfReport')->middleware('checkPermission:201_placement_reports');
         });
     });
     // End of Reports routes
