@@ -70,7 +70,6 @@ use App\Http\Controllers\NonCesTrainingController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\Plantilla\AgencyLocationManagerController;
-use App\Http\Controllers\Plantilla\AppointeeOccupantBrowserController;
 use App\Http\Controllers\Plantilla\AppointeeOccupantManagerController;
 use App\Http\Controllers\Plantilla\DepartmentAgencyManagerController;
 use App\Http\Controllers\Plantilla\Library\AgencyLocationManagerController as LibraryAgencyLocationManagerController;
@@ -89,7 +88,6 @@ use App\Http\Controllers\Plantilla\Library\PositionManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
-use App\Http\Controllers\Plantilla\PlantillaManagementController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndNonCesPositionController;
@@ -113,7 +111,10 @@ use App\Http\Controllers\ProfileLibTblLanguageRefController;
 use App\Http\Controllers\PWDController;
 use App\Http\Controllers\RecordStatusController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\Report201\BirthdayCardController;
+use App\Http\Controllers\Report201\BirthdayCardReportController;
 use App\Http\Controllers\Report201\DataPortabilityReportController;
+use App\Http\Controllers\Report201\PlacementReportController;
 use App\Http\Controllers\Report201\StatisticalReportController;
 use App\Http\Controllers\Reports201Controller;
 use App\Http\Controllers\ResearchAndStudiesController;
@@ -179,266 +180,268 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     // Profile routes (201)
     Route::prefix('201-profile')->group(function () {
 
-        Route::prefix('personal-data')->group(function () {
+        Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('checkPermission:personal_data_add');
+        Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201')->middleware('checkPermission:personal_data_add');
+        Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
+        Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
+        Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
+        Route::get('switch/two-factor', [ProfileController::class, 'switchTwoFactor'])->name('two-factor.switch');
 
-            Route::get('create', [ProfileController::class, 'addProfile'])->name('profile.add')->middleware('checkPermission:personal_data_add');
-            Route::post('create/{cesno}', [ProfileController::class, 'store'])->name('add-profile-201')->middleware('checkPermission:personal_data_add');
+        Route::prefix('personal-data')->group(function () {
+            
             Route::get('list', [ProfileController::class, 'index'])->name('view-profile-201.index')->middleware('checkPermission:personal_data_view');
             Route::get('show/{cesno}', [ProfileController::class, 'show'])->name('personal-data.show');
             Route::post('upload-avatar-profile-201/{cesno}', [ProfileController::class, 'uploadAvatar'])->name('/upload-avatar-profile-201')->middleware('checkPermission:personal_data_edit');
             Route::get('edit/{cesno}', [ProfileController::class, 'editProfile'])->name('profile.edit')->middleware('checkPermission:personal_data_edit');
             Route::post('update/{cesno}', [ProfileController::class, 'update'])->name('edit-profile-201')->middleware('checkPermission:personal_data_edit');
-            Route::get('settings/{cesno}', [ProfileController::class, 'settings'])->name('profile.settings');
-            Route::post('change-password/{cesno}', [ProfileController::class, 'changePassword'])->name('change.password');
-            Route::post('resend-email/{cesno}', [ProfileController::class, 'resendEmail'])->name('resend-email');
-            Route::get('switch/two-factor', [ProfileController::class, 'switchTwoFactor'])->name('two-factor.switch');
-        });
 
-        Route::prefix('family-profile')->group(function () {
-            Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show')->middleware('checkPermission:family_profile_view');
-            Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted')->middleware('checkPermission:family_profile_delete');
+            Route::prefix('family-profile')->group(function () {
+                Route::get('show/{cesno}', [FamilyController::class, 'show'])->name('family-profile.show')->middleware('checkPermission:family_profile_view');
+                Route::get('recently-deleted/{cesno}', [FamilyController::class, 'familyProfileRecentlyDeleted'])->name('family-profile.recently-deleted')->middleware('checkPermission:family_profile_delete');
 
-            Route::prefix('spouse')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse')->middleware('checkPermission:family_profile_edit');
-                Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store')->middleware('checkPermission:family_profile_add');
-                Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord')->middleware('checkPermission:family_profile_edit');
-                Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete')->middleware('checkPermission:family_profile_delete');
-                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'spouseRestore'])->name('family-profile-spouse.restore')->middleware('checkPermission:family_profile_delete');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'spouseForceDelete'])->name('family-profile-spouse.forceDelete')->middleware('checkPermission:family_profile_delete');
+                Route::prefix('spouse')->group(function () {
+                    Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editSpouse'])->name('family-profile.editSpouse')->middleware('checkPermission:family_profile_edit');
+                    Route::post('store/{cesno}', [FamilyController::class, 'storeSpouse'])->name('family-profile.store')->middleware('checkPermission:family_profile_add');
+                    Route::put('update/{ctrlno}', [FamilyController::class, 'updateSpouseRecord'])->name('family-profile.updateSpouseRecord')->middleware('checkPermission:family_profile_edit');
+                    Route::delete('destroy/{ctrlno}', [FamilyController::class, 'destroySpouse'])->name('family-profile-spouse.delete')->middleware('checkPermission:family_profile_delete');
+                    Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'spouseRestore'])->name('family-profile-spouse.restore')->middleware('checkPermission:family_profile_delete');
+                    Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'spouseForceDelete'])->name('family-profile-spouse.forceDelete')->middleware('checkPermission:family_profile_delete');
+                });
+
+                Route::prefix('children')->group(function () {
+                    Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren')->middleware('checkPermission:family_profile_edit');
+                    Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store')->middleware('checkPermission:family_profile_add');
+                    Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren')->middleware('checkPermission:family_profile_edit');
+                    Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete')->middleware('checkPermission:family_profile_delete');
+                    Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'childrenRestore'])->name('family-profile-children.restore')->middleware('checkPermission:family_profile_delete');
+                    Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'childrenForceDelete'])->name('family-profile-children.forceDelete')->middleware('checkPermission:family_profile_delete');
+                });
+
+                Route::prefix('father')->group(function () {
+                    Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather')->middleware('checkPermission:family_profile_edit');
+                    Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store')->middleware('checkPermission:family_profile_add');
+                    Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord')->middleware('checkPermission:family_profile_edit');
+                    Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy')->middleware('checkPermission:family_profile_delete');
+                    Route::post('recently-deleted/father-restore/{ctrlno}', [FamilyController::class, 'fatherRestore'])->name('family-profile-father.fatherRestore')->middleware('checkPermission:family_profile_delete');
+                    Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'fatherForceDelete'])->name('family-profile-father.fatherForceDelete')->middleware('checkPermission:family_profile_delete');
+                });
+
+                Route::prefix('mother')->group(function () {
+                    Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother')->middleware('checkPermission:family_profile_edit');
+                    Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store')->middleware('checkPermission:family_profile_add');
+                    Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord')->middleware('checkPermission:family_profile_edit');
+                    Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy')->middleware('checkPermission:family_profile_delete');
+                });
             });
 
-            Route::prefix('children')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editChildren'])->name('family-profile.editChildren')->middleware('checkPermission:family_profile_edit');
-                Route::post('{cesno}', [FamilyController::class, 'storeChildren'])->name('family-profile-children.store')->middleware('checkPermission:family_profile_add');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateChildrenRecord'])->name('family-profile.updateChildren')->middleware('checkPermission:family_profile_edit');
-                Route::delete('{ctrlno}', [FamilyController::class, 'destroyChildren'])->name('family-profile-children.delete')->middleware('checkPermission:family_profile_delete');
-                Route::post('recently-deleted/restore/{ctrlno}', [FamilyController::class, 'childrenRestore'])->name('family-profile-children.restore')->middleware('checkPermission:family_profile_delete');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'childrenForceDelete'])->name('family-profile-children.forceDelete')->middleware('checkPermission:family_profile_delete');
+            Route::prefix('address')->group(function () {
+                Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show')->middleware('checkPermission:personal_data_view');
+                Route::post('/add-address-permanent-201/{cesno}', [AddressController::class, 'addAddressPermanent'])->name('add-address-permanent-201')->middleware('checkPermission:personal_data_add');
+                Route::post('/add-address-mailing-201/{cesno}', [AddressController::class, 'addAddressMailing'])->name('add-address-mailing-201')->middleware('checkPermission:personal_data_add');
+                Route::post('/add-address-temporary-201/{cesno}', [AddressController::class, 'addAddressTemporary'])->name('add-address-temporary-201')->middleware('checkPermission:personal_data_add');
+                Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.delete')->middleware('checkPermission:personal_data_delete');
+
+                // Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
+                // Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
+                // Route::get('edit/{ctrlno}', [AddressController::class, 'edit'])->name('personal-data-address.edit');
+                // Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.destroy');
             });
 
-            Route::prefix('father')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editFather'])->name('family-profile-father.editFather')->middleware('checkPermission:family_profile_edit');
-                Route::post('store/{cesno}', [FamilyController::class, 'storeFather'])->name('family-profile-father.store')->middleware('checkPermission:family_profile_add');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateFatherRecord'])->name('family-profile-father.updateFatherRecord')->middleware('checkPermission:family_profile_edit');
-                Route::delete('delete/{ctrlno}', [FamilyController::class, 'destroyFather'])->name('family-profile-father.destroy')->middleware('checkPermission:family_profile_delete');
-                Route::post('recently-deleted/father-restore/{ctrlno}', [FamilyController::class, 'fatherRestore'])->name('family-profile-father.fatherRestore')->middleware('checkPermission:family_profile_delete');
-                Route::delete('recently-deleted/force-delete/{ctrlno}', [FamilyController::class, 'fatherForceDelete'])->name('family-profile-father.fatherForceDelete')->middleware('checkPermission:family_profile_delete');
+            Route::prefix('identification/card')->group(function () {
+                Route::get('show/{cesno}', [IdentificationController::class, 'show'])->name('personal-data-identification.show')->middleware('checkPermission:personal_data_view');
+                Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store')->middleware('checkPermission:personal_data_add');
+                Route::post('update/{ctrlno}/{cesno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update')->middleware('checkPermission:personal_data_edit');
+                Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit')->middleware('checkPermission:personal_data_edit');
+                Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy')->middleware('checkPermission:personal_data_delete');
             });
 
-            Route::prefix('mother')->group(function () {
-                Route::get('edit/{ctrlno}/{cesno}', [FamilyController::class, 'editMother'])->name('family-profile-mother.editMother')->middleware('checkPermission:family_profile_edit');
-                Route::post('{cesno}', [FamilyController::class, 'storeMother'])->name('family-profile-mother.store')->middleware('checkPermission:family_profile_add');
-                Route::put('{ctrlno}', [FamilyController::class, 'updateMotherRecord'])->name('family-profile-mother.updateMotherRecord')->middleware('checkPermission:family_profile_edit');
-                Route::delete('{ctrlno}', [FamilyController::class, 'destroyMother'])->name('family-profile-mother.destroy')->middleware('checkPermission:family_profile_delete');
+            Route::prefix('contact-information')->group(function () {
+                Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show')->middleware('checkPermission:personal_data_view');
+                Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store')->middleware('checkPermission:personal_data_add');
+                Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update')->middleware('checkPermission:personal_data_edit');
             });
-        });
 
-        Route::prefix('address')->group(function () {
-            Route::get('show/{cesno}', [AddressController::class, 'show'])->name('personal-data-address.show')->middleware('checkPermission:personal_data_view');
-            Route::post('/add-address-permanent-201/{cesno}', [AddressController::class, 'addAddressPermanent'])->name('add-address-permanent-201')->middleware('checkPermission:personal_data_add');
-            Route::post('/add-address-mailing-201/{cesno}', [AddressController::class, 'addAddressMailing'])->name('add-address-mailing-201')->middleware('checkPermission:personal_data_add');
-            Route::post('/add-address-temporary-201/{cesno}', [AddressController::class, 'addAddressTemporary'])->name('add-address-temporary-201')->middleware('checkPermission:personal_data_add');
-            Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.delete')->middleware('checkPermission:personal_data_delete');
-
-            // Route::post('store/{cesno}', [AddressController::class, 'store'])->name('personal-data-address.store');
-            // Route::post('update/{ctrlno}/{cesno}', [AddressController::class, 'update'])->name('personal-data-address.update');
-            // Route::get('edit/{ctrlno}', [AddressController::class, 'edit'])->name('personal-data-address.edit');
-            // Route::delete('destroy/{ctrlno}', [AddressController::class, 'destroy'])->name('personal-data-address.destroy');
-        });
-
-        Route::prefix('identification/card')->group(function () {
-            Route::get('show/{cesno}', [IdentificationController::class, 'show'])->name('personal-data-identification.show')->middleware('checkPermission:personal_data_view');
-            Route::post('store/{cesno}', [IdentificationController::class, 'store'])->name('personal-data-identification.store')->middleware('checkPermission:personal_data_add');
-            Route::post('update/{ctrlno}/{cesno}', [IdentificationController::class, 'update'])->name('personal-data-identification.update')->middleware('checkPermission:personal_data_edit');
-            Route::get('edit/{ctrlno}', [IdentificationController::class, 'edit'])->name('personal-data-identification.edit')->middleware('checkPermission:personal_data_edit');
-            Route::delete('destroy/{ctrlno}', [IdentificationController::class, 'destroyIdentification'])->name('personal-data-identification.destroy')->middleware('checkPermission:personal_data_delete');
-        });
-
-        Route::prefix('contact-information')->group(function () {
-            Route::get('show/{cesno}', [ContactInfoController::class, 'show'])->name('contact-info.show')->middleware('checkPermission:personal_data_view');
-            Route::post('store/{cesno}', [ContactInfoController::class, 'store'])->name('contact-info.store')->middleware('checkPermission:personal_data_add');
-            Route::post('update/{ctrlno}/{cesno}', [ContactInfoController::class, 'update'])->name('contact-info.update')->middleware('checkPermission:personal_data_edit');
-        });
-
-        Route::prefix('educational-attainment')->group(function () {
-            Route::get('show/{cesno}', [EducationalAttainmentController::class, 'showForm'])->name('educational-attainment.form')->middleware('checkPermission:educational_attainment_view');
-            Route::get('index/{cesno}', [EducationalAttainmentController::class, 'index'])->name('educational-attainment.index')->middleware('checkPermission:educational_attainment_view');
-            Route::get('edit/{ctrlno}/{cesno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit')->middleware('checkPermission:educational_attainment_edit');
-            Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store')->middleware('checkPermission:educational_attainment_add');
-            Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update')->middleware('checkPermission:educational_attainment_edit');
-            Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy')->middleware('checkPermission:educational_attainment_delete');
-            Route::get('recently-deleted/{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin')->middleware('checkPermission:educational_attainment_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore')->middleware('checkPermission:educational_attainment_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete')->middleware('checkPermission:educational_attainment_delete');
-        });
-
-        Route::prefix('examination-taken')->group(function () {
-            Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create')->middleware('checkPermission:examinations_taken_add');
-            Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index')->middleware('checkPermission:examinations_taken_view');
-            Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit')->middleware('checkPermission:examinations_taken_edit');
-            Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store')->middleware('checkPermission:examinations_taken_add');
-            Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update')->middleware('checkPermission:examinations_taken_edit');
-            Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy')->middleware('checkPermission:examinations_taken_delete');
-            Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted')->middleware('checkPermission:examinations_taken_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore')->middleware('checkPermission:examinations_taken_delete');
-            Route::delete('recently-deleted/force-deleted/{ctrlno}', [ExaminationTakenController::class, 'forceDelete'])->name('examination-taken.forceDelete')->middleware('checkPermission:examinations_taken_delete');
-        });
-
-        Route::prefix('scholarship-taken')->group(function () {
-            Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create')->middleware('checkPermission:scholarships_taken_add');
-            Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index')->middleware('checkPermission:scholarships_taken_view');
-            Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit')->middleware('checkPermission:scholarships_taken_edit');
-            Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store')->middleware('checkPermission:scholarships_taken_add');
-            Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update')->middleware('checkPermission:scholarships_taken_edit');
-            Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy')->middleware('checkPermission:scholarships_taken_delete');
-            Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin')->middleware('checkPermission:scholarships_taken_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore')->middleware('checkPermission:scholarships_taken_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete')->middleware('checkPermission:scholarships_taken_delete');
-        });
-
-        Route::prefix('research-studies')->group(function () {
-            Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index')->middleware('checkPermission:research_and_studies_view');
-            Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create')->middleware('checkPermission:research_and_studies_add');
-            Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit')->middleware('checkPermission:research_and_studies_edit');
-            Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store')->middleware('checkPermission:research_and_studies_add');
-            Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update')->middleware('checkPermission:research_and_studies_edit');
-            Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy')->middleware('checkPermission:research_and_studies_delete');
-            Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin')->middleware('checkPermission:research_and_studies_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore')->middleware('checkPermission:research_and_studies_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [ResearchAndStudiesController::class, 'forceDelete'])->name('research-studies.forceDelete')->middleware('checkPermission:research_and_studies_delete');
-        });
-
-        Route::prefix('work-experience')->group(function () {
-            Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create')->middleware('checkPermission:work_experience_add');
-            Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index')->middleware('checkPermission:work_experience_view');
-            Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit')->middleware('checkPermission:work_experience_edit');
-            Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store')->middleware('checkPermission:work_experience_add');
-            Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update')->middleware('checkPermission:work_experience_edit');
-            Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy')->middleware('checkPermission:work_experience_delete');
-            Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin')->middleware('checkPermission:work_experience_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore')->middleware('checkPermission:work_experience_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [WorkExperienceController::class, 'forceDelete'])->name('work-experience.forceDelete')->middleware('checkPermission:work_experience_delete');
-        });
-
-        Route::prefix('award-citation')->group(function () {
-            Route::get('index/{cesno}', [AwardAndCitationController::class, 'index'])->name('award-citation.index')->middleware('checkPermission:awards_and_citations_view');
-            Route::get('create/{cesno}', [AwardAndCitationController::class, 'create'])->name('award-citation.create')->middleware('checkPermission:awards_and_citations_add');
-            Route::get('edit/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit')->middleware('checkPermission:awards_and_citations_edit');
-            Route::post('store/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store')->middleware('checkPermission:awards_and_citations_add');
-            Route::put('update/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update')->middleware('checkPermission:awards_and_citations_edit');
-            Route::delete('delete/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy')->middleware('checkPermission:awards_and_citations_delete');
-            Route::get('recently-deleted/{cesno}', [AwardAndCitationController::class, 'recentlyDeleted'])->name('award-citation.recentlyDeleted')->middleware('checkPermission:awards_and_citations_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [AwardAndCitationController::class, 'restore'])->name('award-citation.restore')->middleware('checkPermission:awards_and_citations_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [AwardAndCitationController::class, 'forceDelete'])->name('award-citation.forceDelete')->middleware('checkPermission:awards_and_citations_delete');
-        });
-
-        Route::prefix('affiliation')->group(function () {
-            Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index')->middleware('checkPermission:affiliations_view');
-            Route::get('create/{cesno}', [AffiliationController::class, 'create'])->name('affiliation.create')->middleware('checkPermission:affiliations_add');
-            Route::get('edit/{ctrlno}/{cesno}', [AffiliationController::class, 'edit'])->name('affiliation.edit')->middleware('checkPermission:affiliations_edit');
-            Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store')->middleware('checkPermission:affiliations_add');
-            Route::put('update/{ctrlno}/{cesno}', [AffiliationController::class, 'update'])->name('affiliation.update')->middleware('checkPermission:affiliations_edit');
-            Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy')->middleware('checkPermission:affiliations_delete');
-            Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin')->middleware('checkPermission:affiliations_delete');
-            Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore')->middleware('checkPermission:affiliations_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [AffiliationController::class, 'forceDelete'])->name('affiliation.forceDelete')->middleware('checkPermission:affiliations_delete');
-        });
-
-        Route::prefix('case-record')->group(function () {
-            Route::get('index/{cesno}', [CaseRecordController::class, 'index'])->name('case-record.index')->middleware('checkPermission:case_records_view');
-            Route::get('create/{cesno}', [CaseRecordController::class, 'create'])->name('case-record.create')->middleware('checkPermission:case_records_add');
-            Route::get('edit/{ctrlno}/{cesno}', [CaseRecordController::class, 'edit'])->name('case-record.edit')->middleware('checkPermission:case_records_edit');
-            Route::post('store/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store')->middleware('checkPermission:case_records_add');
-            Route::put('update/{ctrlno}/{cesno}', [CaseRecordController::class, 'update'])->name('case-record.update')->middleware('checkPermission:case_records_edit');
-            Route::delete('destroy/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy')->middleware('checkPermission:case_records_delete');
-            Route::get('recently-deleted/{cesno}', [CaseRecordController::class, 'recentlyDeleted'])->name('case-record.recentlyDeleted')->middleware('checkPermission:case_records_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [CaseRecordController::class, 'restore'])->name('case-record.restore')->middleware('checkPermission:case_records_delete');
-            Route::delete('recently-deleted/force-deleted/{ctrlno}', [CaseRecordController::class, 'forceDelete'])->name('case-record.forceDelete')->middleware('checkPermission:case_records_delete');
-        });
-
-        Route::prefix('health-record')->group(function () {
-            Route::get('index/{cesno}', [HealthRecordController::class, 'index'])->name('health-record.index')->middleware('checkPermission:health_records_view');
-            Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store')->middleware('checkPermission:health_records_add');
-            Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy')->middleware('checkPermission:health_records_delete');
-        });
-
-        Route::prefix('medical-history')->group(function () {
-            Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store')->middleware('checkPermission:health_records_add');
-            Route::delete('{ctrlno}', [MedicalHistoryController::class, 'destroy'])->name('medical-history.destroy')->middleware('checkPermission:health_records_delete');
-        });
-
-        Route::prefix('expertise')->group(function () {
-            Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create')->middleware('checkPermission:work_experience_add');
-            Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index')->middleware('checkPermission:work_experience_view');
-            Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit')->middleware('checkPermission:work_experience_edit');
-            Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store')->middleware('checkPermission:work_experience_add');
-            Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update')->middleware('checkPermission:work_experience_edit');
-            Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy')->middleware('checkPermission:work_experience_delete');
-            Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted')->middleware('checkPermission:work_experience_delete');
-            Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore')->middleware('checkPermission:work_experience_delete');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [ExpertiseController::class, 'forceDelete'])->name('expertise.forceDelete')->middleware('checkPermission:work_experience_delete');
-        });
-
-        Route::prefix('language')->group(function () {
-            Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index')->middleware('checkPermission:language_dialects_view');
-            Route::get('edit/{ctrlno}/{cesno}', [LanguageController::class, 'edit'])->name('language.edit')->middleware('checkPermission:language_dialects_edit');
-            Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store')->middleware('checkPermission:language_dialects_add');
-            Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update')->middleware('checkPermission:language_dialects_edit');
-            Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy')->middleware('checkPermission:language_dialects_delete');
-            Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted')->middleware('checkPermission:language_dialects_delete');
-            Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore')->middleware('checkPermission:language_dialects_delete');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete')->middleware('checkPermission:language_dialects_delete');
-        });
-
-        Route::prefix('ces-training-201')->group(function () {
-            Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index')->middleware('checkPermission:ces_trainings_view');
-            Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create')->middleware('checkPermission:ces_trainings_add');
-            Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store')->middleware('checkPermission:ces_trainings_add');
-            Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit')->middleware('checkPermission:ces_trainings_edit');
-            Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update')->middleware('checkPermission:ces_trainings_edit');
-            Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy')->middleware('checkPermission:ces_trainings_delete');
-            Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted')->middleware('checkPermission:ces_trainings_delete');
-            Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore')->middleware('checkPermission:ces_trainings_delete');
-            Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete')->middleware('checkPermission:ces_trainings_delete');
-        });
-
-        Route::prefix('non-accredited-ces-training')->group(function () {
-            Route::get('create/{cesno}', [NonCesTrainingController::class, 'create'])->name('other-training.create')->middleware('checkPermission:non_ces_trainings_add');
-            Route::get('index/{cesno}', [NonCesTrainingController::class, 'index'])->name('other-training.index')->middleware('checkPermission:non_ces_trainings_view');
-            Route::get('edit/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'edit'])->name('other-training.edit')->middleware('checkPermission:non_ces_trainings_edit');
-            Route::post('store/{cesno}', [NonCesTrainingController::class, 'store'])->name('other-training.store')->middleware('checkPermission:non_ces_trainings_add');
-            Route::put('update/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'update'])->name('other-training.update')->middleware('checkPermission:non_ces_trainings_edit');
-            Route::delete('destroy/{ctrlno}', [NonCesTrainingController::class, 'destroy'])->name('other-training.destroy')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::get('recently-deleted/{cesno}', [NonCesTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::post('recently-deleted/restore/{ctrlno}', [NonCesTrainingController::class, 'restore'])->name('other-training.restore')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}', [NonCesTrainingController::class, 'forceDelete'])->name('other-training.forceDelete')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
-            Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
-            Route::delete('destroy-competency-non-ces-training{ctrlno}', [NonCesTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::post('recently-deleted/restore-competency-non-ces-training/{ctrlno}', [NonCesTrainingController::class, 'restoreCompetencyNonCesTraining'])->name('other-training.restoreCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
-            Route::delete('recently-deleted/force-delete-competency-non-ces-training{ctrlno}', [NonCesTrainingController::class, 'forceDeleteCompetencyNonCesTraining'])->name('other-training.forceDeleteCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
-        });
-
-        Route::prefix('eligibility-rank-tracker')->group(function () {
-            Route::get('index/{cesno}', [EligibilityAndRankTrackerController::class, 'index'])->name('eligibility-rank-tracker.index')->middleware('checkPermission:eligibility_rank_tracker_view');
-            Route::get('create/{cesno}', [EligibilityAndRankTrackerController::class, 'create'])->name('eligibility-rank-tracker.create')->middleware('checkPermission:eligibility_rank_tracker_add');
-            Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit')->middleware('checkPermission:eligibility_rank_tracker_edit');
-            Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store')->middleware('checkPermission:eligibility_rank_tracker_add');
-            Route::put('update/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update')->middleware('checkPermission:eligibility_rank_tracker_edit');
-            Route::delete('destroy/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy')->middleware('checkPermission:eligibility_rank_tracker_delete');
-            Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted')->middleware('checkPermission:eligibility_rank_tracker_delete');
-            Route::post('recently-deleted/restore/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
-            Route::delete('recently-deleted/force-delete/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
-
-            Route::prefix('eligibility-rank-tracker-erad')->group(function () {
-                Route::get('navigate/{cesno}', [EligibilityAndRankTrackerController::class, 'navigate'])->name('eligibility-rank-tracker.navigate');
+            Route::prefix('educational-attainment')->group(function () {
+                Route::get('show/{cesno}', [EducationalAttainmentController::class, 'showForm'])->name('educational-attainment.form')->middleware('checkPermission:educational_attainment_view');
+                Route::get('index/{cesno}', [EducationalAttainmentController::class, 'index'])->name('educational-attainment.index')->middleware('checkPermission:educational_attainment_view');
+                Route::get('edit/{ctrlno}/{cesno}', [EducationalAttainmentController::class, 'edit'])->name('educational-attainment.edit')->middleware('checkPermission:educational_attainment_edit');
+                Route::post('store/{cesno}', [EducationalAttainmentController::class, 'storeEducationAttainment'])->name('educational-attainment.store')->middleware('checkPermission:educational_attainment_add');
+                Route::put('updated/{ctrlno}', [EducationalAttainmentController::class, 'update'])->name('educational-attainment.update')->middleware('checkPermission:educational_attainment_edit');
+                Route::delete('destroy/{ctrlno}', [EducationalAttainmentController::class, 'destroyEducationalAttainment'])->name('educational-attainment.destroy')->middleware('checkPermission:educational_attainment_delete');
+                Route::get('recently-deleted/{cesno}', [EducationalAttainmentController::class, 'recycleBin'])->name('educational-attainment.recycleBin')->middleware('checkPermission:educational_attainment_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [EducationalAttainmentController::class, 'restore'])->name('educational-attainment.restore')->middleware('checkPermission:educational_attainment_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [EducationalAttainmentController::class, 'forceDelete'])->name('educational-attainment.forceDelete')->middleware('checkPermission:educational_attainment_delete');
             });
-        });
 
+            Route::prefix('examination-taken')->group(function () {
+                Route::get('create/{cesno}', [ExaminationTakenController::class, 'create'])->name('examination-taken.create')->middleware('checkPermission:examinations_taken_add');
+                Route::get('index/{cesno}', [ExaminationTakenController::class, 'index'])->name('examination-taken.index')->middleware('checkPermission:examinations_taken_view');
+                Route::get('edit/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'edit'])->name('examination-taken.edit')->middleware('checkPermission:examinations_taken_edit');
+                Route::post('store/{cesno}', [ExaminationTakenController::class, 'store'])->name('examination-taken.store')->middleware('checkPermission:examinations_taken_add');
+                Route::put('update/{ctrlno}/{cesno}', [ExaminationTakenController::class, 'update'])->name('examination-taken.update')->middleware('checkPermission:examinations_taken_edit');
+                Route::delete('taken/delete/{ctrlno}', [ExaminationTakenController::class, 'destroy'])->name('examination-taken.destroy')->middleware('checkPermission:examinations_taken_delete');
+                Route::get('recently-deleted/{cesno}', [ExaminationTakenController::class, 'recentlyDeleted'])->name('examination-taken.recentlyDeleted')->middleware('checkPermission:examinations_taken_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [ExaminationTakenController::class, 'restore'])->name('examination-taken.restore')->middleware('checkPermission:examinations_taken_delete');
+                Route::delete('recently-deleted/force-deleted/{ctrlno}', [ExaminationTakenController::class, 'forceDelete'])->name('examination-taken.forceDelete')->middleware('checkPermission:examinations_taken_delete');
+            });
 
-        Route::prefix('pdf-file')->group(function () {
+            Route::prefix('scholarship-taken')->group(function () {
+                Route::get('create/{cesno}', [ScholarshipController::class, 'create'])->name('scholarship.create')->middleware('checkPermission:scholarships_taken_add');
+                Route::get('index/{cesno}', [ScholarshipController::class, 'index'])->name('scholarship.index')->middleware('checkPermission:scholarships_taken_view');
+                Route::get('edit/{ctrlno}/{cesno}', [ScholarshipController::class, 'edit'])->name('scholarship.edit')->middleware('checkPermission:scholarships_taken_edit');
+                Route::post('store/{cesno}', [ScholarshipController::class, 'store'])->name('scholarship.store')->middleware('checkPermission:scholarships_taken_add');
+                Route::put('update/{ctrlno}/{cesno}', [ScholarshipController::class, 'update'])->name('scholarship.update')->middleware('checkPermission:scholarships_taken_edit');
+                Route::delete('destroy/{ctrlno}', [ScholarshipController::class, 'destroy'])->name('scholarship.destroy')->middleware('checkPermission:scholarships_taken_delete');
+                Route::get('recently-deleted/{cesno}', [ScholarshipController::class, 'recycleBin'])->name('scholarship.recycleBin')->middleware('checkPermission:scholarships_taken_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [ScholarshipController::class, 'restore'])->name('scholarship.restore')->middleware('checkPermission:scholarships_taken_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [ScholarshipController::class, 'forceDelete'])->name('scholarship.forceDelete')->middleware('checkPermission:scholarships_taken_delete');
+            });
+
+            Route::prefix('research-studies')->group(function () {
+                Route::get('index/{cesno}', [ResearchAndStudiesController::class, 'index'])->name('research-studies.index')->middleware('checkPermission:research_and_studies_view');
+                Route::get('create/{cesno}', [ResearchAndStudiesController::class, 'create'])->name('research-studies.create')->middleware('checkPermission:research_and_studies_add');
+                Route::get('edit/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'edit'])->name('research-studies.edit')->middleware('checkPermission:research_and_studies_edit');
+                Route::post('store/{cesno}', [ResearchAndStudiesController::class, 'store'])->name('research-studies.store')->middleware('checkPermission:research_and_studies_add');
+                Route::put('update/{ctrlno}/{cesno}', [ResearchAndStudiesController::class, 'update'])->name('research-studies.update')->middleware('checkPermission:research_and_studies_edit');
+                Route::delete('destroy/{ctrlno}', [ResearchAndStudiesController::class, 'destroy'])->name('research-studies.destroy')->middleware('checkPermission:research_and_studies_delete');
+                Route::get('recently-deleted/{cesno}', [ResearchAndStudiesController::class, 'recycleBin'])->name('research-studies.recycleBin')->middleware('checkPermission:research_and_studies_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [ResearchAndStudiesController::class, 'restore'])->name('research-studies.restore')->middleware('checkPermission:research_and_studies_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [ResearchAndStudiesController::class, 'forceDelete'])->name('research-studies.forceDelete')->middleware('checkPermission:research_and_studies_delete');
+            });
+
+            Route::prefix('work-experience')->group(function () {
+                Route::get('create/{cesno}', [WorkExperienceController::class, 'create'])->name('work-experience.create')->middleware('checkPermission:work_experience_add');
+                Route::get('index/{cesno}', [WorkExperienceController::class, 'index'])->name('work-experience.index')->middleware('checkPermission:work_experience_view');
+                Route::get('edit/{ctrlno}/{cesno}', [WorkExperienceController::class, 'edit'])->name('work-experience.edit')->middleware('checkPermission:work_experience_edit');
+                Route::post('store/{cesno}', [WorkExperienceController::class, 'store'])->name('work-experience.store')->middleware('checkPermission:work_experience_add');
+                Route::put('update/{ctrlno}/{cesno}', [WorkExperienceController::class, 'update'])->name('work-experience.update')->middleware('checkPermission:work_experience_edit');
+                Route::delete('destroy/{ctrlno}', [WorkExperienceController::class, 'destroy'])->name('work-experience.destroy')->middleware('checkPermission:work_experience_delete');
+                Route::get('recently-deleted/{cesno}', [WorkExperienceController::class, 'recycleBin'])->name('work-experience.recycleBin')->middleware('checkPermission:work_experience_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [WorkExperienceController::class, 'restore'])->name('work-experience.restore')->middleware('checkPermission:work_experience_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [WorkExperienceController::class, 'forceDelete'])->name('work-experience.forceDelete')->middleware('checkPermission:work_experience_delete');
+            });
+
+            Route::prefix('award-citation')->group(function () {
+                Route::get('index/{cesno}', [AwardAndCitationController::class, 'index'])->name('award-citation.index')->middleware('checkPermission:awards_and_citations_view');
+                Route::get('create/{cesno}', [AwardAndCitationController::class, 'create'])->name('award-citation.create')->middleware('checkPermission:awards_and_citations_add');
+                Route::get('edit/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'edit'])->name('award-citation.edit')->middleware('checkPermission:awards_and_citations_edit');
+                Route::post('store/{cesno}', [AwardAndCitationController::class, 'store'])->name('award-citation.store')->middleware('checkPermission:awards_and_citations_add');
+                Route::put('update/{ctrlno}/{cesno}', [AwardAndCitationController::class, 'update'])->name('award-citation.update')->middleware('checkPermission:awards_and_citations_edit');
+                Route::delete('delete/{ctrlno}', [AwardAndCitationController::class, 'destroy'])->name('award-citation.destroy')->middleware('checkPermission:awards_and_citations_delete');
+                Route::get('recently-deleted/{cesno}', [AwardAndCitationController::class, 'recentlyDeleted'])->name('award-citation.recentlyDeleted')->middleware('checkPermission:awards_and_citations_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [AwardAndCitationController::class, 'restore'])->name('award-citation.restore')->middleware('checkPermission:awards_and_citations_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [AwardAndCitationController::class, 'forceDelete'])->name('award-citation.forceDelete')->middleware('checkPermission:awards_and_citations_delete');
+            });
+
+            Route::prefix('affiliation')->group(function () {
+                Route::get('index/{cesno}', [AffiliationController::class, 'index'])->name('affiliation.index')->middleware('checkPermission:affiliations_view');
+                Route::get('create/{cesno}', [AffiliationController::class, 'create'])->name('affiliation.create')->middleware('checkPermission:affiliations_add');
+                Route::get('edit/{ctrlno}/{cesno}', [AffiliationController::class, 'edit'])->name('affiliation.edit')->middleware('checkPermission:affiliations_edit');
+                Route::post('save/{cesno}', [AffiliationController::class, 'store'])->name('affiliation.store')->middleware('checkPermission:affiliations_add');
+                Route::put('update/{ctrlno}/{cesno}', [AffiliationController::class, 'update'])->name('affiliation.update')->middleware('checkPermission:affiliations_edit');
+                Route::delete('destroy/{ctrlno}', [AffiliationController::class, 'destroy'])->name('affiliation.destroy')->middleware('checkPermission:affiliations_delete');
+                Route::get('recently-deleted/{cesno}', [AffiliationController::class, 'recycleBin'])->name('affiliations.recycleBin')->middleware('checkPermission:affiliations_delete');
+                Route::post('restore/{ctrlno}', [AffiliationController::class, 'restore'])->name('affiliation.restore')->middleware('checkPermission:affiliations_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [AffiliationController::class, 'forceDelete'])->name('affiliation.forceDelete')->middleware('checkPermission:affiliations_delete');
+            });
+
+            Route::prefix('case-record')->group(function () {
+                Route::get('index/{cesno}', [CaseRecordController::class, 'index'])->name('case-record.index')->middleware('checkPermission:case_records_view');
+                Route::get('create/{cesno}', [CaseRecordController::class, 'create'])->name('case-record.create')->middleware('checkPermission:case_records_add');
+                Route::get('edit/{ctrlno}/{cesno}', [CaseRecordController::class, 'edit'])->name('case-record.edit')->middleware('checkPermission:case_records_edit');
+                Route::post('store/{cesno}', [CaseRecordController::class, 'store'])->name('case-record.store')->middleware('checkPermission:case_records_add');
+                Route::put('update/{ctrlno}/{cesno}', [CaseRecordController::class, 'update'])->name('case-record.update')->middleware('checkPermission:case_records_edit');
+                Route::delete('destroy/{ctrlno}', [CaseRecordController::class, 'destroy'])->name('case-record.destroy')->middleware('checkPermission:case_records_delete');
+                Route::get('recently-deleted/{cesno}', [CaseRecordController::class, 'recentlyDeleted'])->name('case-record.recentlyDeleted')->middleware('checkPermission:case_records_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [CaseRecordController::class, 'restore'])->name('case-record.restore')->middleware('checkPermission:case_records_delete');
+                Route::delete('recently-deleted/force-deleted/{ctrlno}', [CaseRecordController::class, 'forceDelete'])->name('case-record.forceDelete')->middleware('checkPermission:case_records_delete');
+            });
+
+            Route::prefix('health-record')->group(function () {
+                Route::get('index/{cesno}', [HealthRecordController::class, 'index'])->name('health-record.index')->middleware('checkPermission:health_records_view');
+                Route::post('{cesno}', [HealthRecordController::class, 'store'])->name('health-record.store')->middleware('checkPermission:health_records_add');
+                Route::delete('{ctrlno}', [HealthRecordController::class, 'destroy'])->name('health-record.destroy')->middleware('checkPermission:health_records_delete');
+            });
+
+            Route::prefix('medical-history')->group(function () {
+                Route::post('{cesno}', [MedicalHistoryController::class, 'store'])->name('medical-history.store')->middleware('checkPermission:health_records_add');
+                Route::delete('{ctrlno}', [MedicalHistoryController::class, 'destroy'])->name('medical-history.destroy')->middleware('checkPermission:health_records_delete');
+            });
+
+            Route::prefix('expertise')->group(function () {
+                Route::get('create/{cesno}', [ExpertiseController::class, 'create'])->name('expertise.create')->middleware('checkPermission:work_experience_add');
+                Route::get('index/{cesno}', [ExpertiseController::class, 'index'])->name('expertise.index')->middleware('checkPermission:work_experience_view');
+                Route::get('edit/{cesno}/{ctrlno}', [ExpertiseController::class, 'edit'])->name('expertise.edit')->middleware('checkPermission:work_experience_edit');
+                Route::post('store/{cesno}', [ExpertiseController::class, 'store'])->name('expertise.store')->middleware('checkPermission:work_experience_add');
+                Route::put('update/{cesno}/{ctrlno}', [ExpertiseController::class, 'update'])->name('expertise.update')->middleware('checkPermission:work_experience_edit');
+                Route::delete('destroy/{ctrlno}', [ExpertiseController::class, 'destroy'])->name('expertise.destroy')->middleware('checkPermission:work_experience_delete');
+                Route::get('recently-deleted/{cesno}', [ExpertiseController::class, 'recentlyDeleted'])->name('expertise.recentlyDeleted')->middleware('checkPermission:work_experience_delete');
+                Route::post('restore/recently-deleted/{ctrlno}', [ExpertiseController::class, 'restore'])->name('expertise.restore')->middleware('checkPermission:work_experience_delete');
+                Route::delete('force-delete/recently-deleted/{ctrlno}', [ExpertiseController::class, 'forceDelete'])->name('expertise.forceDelete')->middleware('checkPermission:work_experience_delete');
+            });
+
+            Route::prefix('language')->group(function () {
+                Route::get('index/{cesno}', [LanguageController::class, 'index'])->name('language.index')->middleware('checkPermission:language_dialects_view');
+                Route::get('edit/{ctrlno}/{cesno}', [LanguageController::class, 'edit'])->name('language.edit')->middleware('checkPermission:language_dialects_edit');
+                Route::post('store/{cesno}', [LanguageController::class, 'store'])->name('language.store')->middleware('checkPermission:language_dialects_add');
+                Route::put('update/{cesno}/{ctrlno}', [LanguageController::class, 'update'])->name('language.update')->middleware('checkPermission:language_dialects_edit');
+                Route::delete('destroy/{ctrlno}', [LanguageController::class, 'destroy'])->name('language.destroy')->middleware('checkPermission:language_dialects_delete');
+                Route::get('recently-deleted/{cesno}', [LanguageController::class, 'recentlyDeleted'])->name('language.recentlyDeleted')->middleware('checkPermission:language_dialects_delete');
+                Route::post('restore/recently-deleted/{ctrlno}', [LanguageController::class, 'restore'])->name('language.restore')->middleware('checkPermission:language_dialects_delete');
+                Route::delete('force-delete/recently-deleted/{ctrlno}', [LanguageController::class, 'forceDelete'])->name('language.forceDelete')->middleware('checkPermission:language_dialects_delete');
+            });
+
+            Route::prefix('ces-training-201')->group(function () {
+                Route::get('index/{cesno}', [CESTraining201Controller::class, 'index'])->name('ces-training-201.index')->middleware('checkPermission:ces_trainings_view');
+                Route::get('create/{cesno}', [CESTraining201Controller::class, 'create'])->name('ces-training-201.create')->middleware('checkPermission:ces_trainings_add');
+                Route::post('store/{cesno}', [CESTraining201Controller::class, 'store'])->name('ces-training-201.store')->middleware('checkPermission:ces_trainings_add');
+                Route::get('edit/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'edit'])->name('ces-training-201.edit')->middleware('checkPermission:ces_trainings_edit');
+                Route::put('update/{cesno}/{ctrlno}', [CESTraining201Controller::class, 'update'])->name('ces-training-201.update')->middleware('checkPermission:ces_trainings_edit');
+                Route::delete('destroy/{ctrlno}', [CESTraining201Controller::class, 'destroy'])->name('ces-training-201.destroy')->middleware('checkPermission:ces_trainings_delete');
+                Route::get('recently-deleted/{cesno}', [CESTraining201Controller::class, 'recentlyDeleted'])->name('ces-training-201.recentlyDeleted')->middleware('checkPermission:ces_trainings_delete');
+                Route::post('restore/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'restore'])->name('ces-training-201.restore')->middleware('checkPermission:ces_trainings_delete');
+                Route::delete('force-delete/recently-deleted/{ctrlno}', [CESTraining201Controller::class, 'forceDelete'])->name('ces-training-201.forceDelete')->middleware('checkPermission:ces_trainings_delete');
+            });
+
+            Route::prefix('non-accredited-ces-training')->group(function () {
+                Route::get('create/{cesno}', [NonCesTrainingController::class, 'create'])->name('other-training.create')->middleware('checkPermission:non_ces_trainings_add');
+                Route::get('index/{cesno}', [NonCesTrainingController::class, 'index'])->name('other-training.index')->middleware('checkPermission:non_ces_trainings_view');
+                Route::get('edit/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'edit'])->name('other-training.edit')->middleware('checkPermission:non_ces_trainings_edit');
+                Route::post('store/{cesno}', [NonCesTrainingController::class, 'store'])->name('other-training.store')->middleware('checkPermission:non_ces_trainings_add');
+                Route::put('update/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'update'])->name('other-training.update')->middleware('checkPermission:non_ces_trainings_edit');
+                Route::delete('destroy/{ctrlno}', [NonCesTrainingController::class, 'destroy'])->name('other-training.destroy')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::get('recently-deleted/{cesno}', [NonCesTrainingController::class, 'recentlyDeleted'])->name('other-training.recentlyDeleted')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::post('recently-deleted/restore/{ctrlno}', [NonCesTrainingController::class, 'restore'])->name('other-training.restore')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}', [NonCesTrainingController::class, 'forceDelete'])->name('other-training.forceDelete')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::get('edit-competency-non-ces-training/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'editCompetencyNonCesTraining'])->name('other-training.editCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
+                Route::put('update-competency-non-ces-training/{ctrlno}/{cesno}', [NonCesTrainingController::class, 'updateCompetencyNonCesTraining'])->name('other-training.updateCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_edit');
+                Route::delete('destroy-competency-non-ces-training{ctrlno}', [NonCesTrainingController::class, 'destroyCompetencyNonCesTraining'])->name('other-training.destroyCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::post('recently-deleted/restore-competency-non-ces-training/{ctrlno}', [NonCesTrainingController::class, 'restoreCompetencyNonCesTraining'])->name('other-training.restoreCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
+                Route::delete('recently-deleted/force-delete-competency-non-ces-training{ctrlno}', [NonCesTrainingController::class, 'forceDeleteCompetencyNonCesTraining'])->name('other-training.forceDeleteCompetencyNonCesTraining')->middleware('checkPermission:non_ces_trainings_delete');
+            });
+
+            Route::prefix('eligibility-rank-tracker')->group(function () {
+                Route::get('index/{cesno}', [EligibilityAndRankTrackerController::class, 'index'])->name('eligibility-rank-tracker.index')->middleware('checkPermission:eligibility_rank_tracker_view');
+                Route::get('create/{cesno}', [EligibilityAndRankTrackerController::class, 'create'])->name('eligibility-rank-tracker.create')->middleware('checkPermission:eligibility_rank_tracker_add');
+                Route::get('edit/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'edit'])->name('eligibility-rank-tracker.edit')->middleware('checkPermission:eligibility_rank_tracker_edit');
+                Route::post('store/{cesno}', [EligibilityAndRankTrackerController::class, 'store'])->name('eligibility-rank-tracker.store')->middleware('checkPermission:eligibility_rank_tracker_add');
+                Route::put('update/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'update'])->name('eligibility-rank-tracker.update')->middleware('checkPermission:eligibility_rank_tracker_edit');
+                Route::delete('destroy/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'destroy'])->name('eligibility-rank-tracker.destroy')->middleware('checkPermission:eligibility_rank_tracker_delete');
+                Route::get('recently-deleted/{cesno}', [EligibilityAndRankTrackerController::class, 'recentlyDeleted'])->name('eligibility-rank-tracker.recentlyDeleted')->middleware('checkPermission:eligibility_rank_tracker_delete');
+                Route::post('recently-deleted/restore/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'restore'])->name('eligibility-rank-tracker.restore')->middleware('checkPermission:eligibility_rank_tracker_delete');
+                Route::delete('recently-deleted/force-delete/{ctrlno}/{cesno}', [EligibilityAndRankTrackerController::class, 'forceDelete'])->name('eligibility-rank-tracker.forceDelete')->middleware('checkPermission:eligibility_rank_tracker_delete');
+
+                Route::prefix('eligibility-rank-tracker-erad')->group(function () {
+                    Route::get('navigate/{cesno}', [EligibilityAndRankTrackerController::class, 'navigate'])->name('eligibility-rank-tracker.navigate');
+                });
+            });
+
             Route::prefix('201-decline-files')->group(function () {
                 Route::get('index/{cesno}', [DeclineFile201Controller::class, 'index'])->name('201-decline-files.index')->middleware('checkPermission:pdf_files_view');
+            });
+
+            Route::prefix('201-pending-files')->group(function () {
+                Route::get('index/{cesno}', [PDFController::class, 'userPendingFiles'])->name('201-pending-files.userPendingFiles')->middleware('checkPermission:pdf_files_view');
             });
 
             Route::prefix('201-pdf-files')->group(function () {
@@ -451,7 +454,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                 Route::post('recently-deleted/restore/{ctrlno}', [PDFController::class, 'restore'])->name('show-pdf-files.restore')->middleware('checkPermission:pdf_files_delete');
                 Route::delete('recently-deleted/force-delete/{ctrlno}', [PDFController::class, 'forceDelete'])->name('show-pdf-files.forceDelete')->middleware('checkPermission:pdf_files_delete');
             });
+            
 
+        });
+
+        Route::prefix('pdf-file')->group(function () {
             Route::prefix('pending-files')->group(function () {
                 Route::get('show-pending-files', [PDFController::class, 'pendingFiles'])->name('show-pending-pdf-files.pendingFiles')->middleware('checkPermission:pdf_files_view');
                 Route::post('accepted-file', [PDFController::class, 'acceptedFiles'])->name('show-pdf-files.acceptedFiles')->middleware('checkPermission:pdf_files_add');
@@ -471,15 +478,12 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                 Route::post('restore/recently-decline-file/{ctrlno}', [DeclineFileController::class, 'restore'])->name('decline-file.restore')->middleware('checkPermission:pdf_files_delete');
             });
         });
+
     });
     // End of profile routes
 
     // Plantilla routes
     Route::prefix('plantilla')->group(function () {
-
-        Route::prefix('plantilla-management')->group(function () {
-            Route::get('/', [PlantillaManagementController::class, 'index'])->name('plantilla-management.index')->middleware('checkPermission:plantilla_management_view');
-        });
 
         Route::prefix('sector-manager')->group(function () {
             Route::get('/', [SectorManagerController::class, 'index'])->name('sector-manager.index')->middleware('checkPermission:plantilla_sector_manager_view');
@@ -489,25 +493,21 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('department-agency-manager')->group(function () {
-            Route::get('/', [DepartmentAgencyManagerController::class, 'index'])->name('department-agency-manager.index')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'showAgency'])->name('department-agency-manager.showAgency')->middleware('checkPermission:plantilla_department_manager_view');
             Route::get('show/{sectorid}/{deptid}', [DepartmentAgencyManagerController::class, 'show'])->name('department-agency-manager.show')->middleware('checkPermission:plantilla_department_manager_view');
         });
 
         Route::prefix('agency-location-manager')->group(function () {
-            Route::get('/', [AgencyLocationManagerController::class, 'index'])->name('agency-location-manager.index')->middleware('checkPermission:plantilla_agency_location_manager_view');
             Route::get('{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'show'])->name('agency-location-manager.show')->middleware('checkPermission:plantilla_agency_location_manager_view');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}', [AgencyLocationManagerController::class, 'edit'])->name('agency-location-manager.edit')->middleware('checkPermission:plantilla_agency_location_manager_view');
         });
 
         Route::prefix('office-manager')->group(function () {
-            Route::get('/', [OfficeManagerController::class, 'index'])->name('office-manager.index');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'show'])->name('office-manager.show');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}', [OfficeManagerController::class, 'edit'])->name('office-manager.edit');
         });
 
         Route::prefix('plantilla-position-manager')->group(function () {
-            Route::get('/', [PlantillaPositionManagerController::class, 'index'])->name('plantilla-position-manager.index')->middleware('checkPermission:plantilla_position_manager_view');
             // Route::post('store', [PlantillaPositionManagerController::class, 'store'])->name('plantilla-position-manager.store')->middleware('checkPermission:plantilla_position_manager_add');
             Route::get('{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'show'])->name('plantilla-position-manager.show')->middleware('checkPermission:plantilla_position_manager_view');
             Route::get('edit/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}', [PlantillaPositionManagerController::class, 'edit'])->name('plantilla-position-manager.edit')->middleware('checkPermission:plantilla_position_manager_view');
@@ -516,7 +516,6 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         });
 
         Route::prefix('appointee-occupant-manager')->group(function () {
-            Route::get('/', [AppointeeOccupantManagerController::class, 'index'])->name('appointee-occupant-manager.index')->middleware('checkPermission:plantilla_appointee_occupant_manager_view');
             Route::match(['get', 'post'], '/{sectorid}/{deptid}/{officelocid}/{officeid}/{plantilla_id}/{cesno?}', [AppointeeOccupantManagerController::class, 'create'])
                 ->name('appointee-occupant-manager.create')
                 ->where('cesno', '.*');
@@ -537,92 +536,86 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('/other-assignment/{detailed_code}/update', [OtherAssignmentController::class, 'update'])->name('other-assignment.update');
         });
 
-        Route::prefix('appointee-occupant-browser')->group(function () {
-            Route::get('/', [AppointeeOccupantBrowserController::class, 'index'])->name('appointee-occupant-browser.index')->middleware('checkPermission:plantilla_appointee_occupant_browser_view');
+        Route::prefix('library')->group(function () {
+
+            Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'trash'])->name('library-sector.trash');
+            Route::post('library-sector/{sectorid}/force-delete', [LibrarySectorManagerController::class, 'forceDelete'])->name('library-sector.forceDelete');
+            Route::post('library-sector/{sectorid}/restore', [LibrarySectorManagerController::class, 'restore'])->name('library-sector.restore');
+            Route::resource('library-sector', LibrarySectorManagerController::class);
+
+            Route::get('library-department-manager/trash', [LibraryDepartmentAgencyManagerController::class, 'trash'])->name('library-department-manager.trash');
+            Route::post('library-department-manager/{deptid}/force-delete', [LibraryDepartmentAgencyManagerController::class, 'forceDelete'])->name('library-department-manager.forceDelete');
+            Route::post('library-department-manager/{deptid}/restore', [LibraryDepartmentAgencyManagerController::class, 'restore'])->name('library-department-manager.restore');
+            Route::resource('library-department-manager', LibraryDepartmentAgencyManagerController::class);
+
+            Route::get('library-agency-location-manager/trash', [LibraryAgencyLocationManagerController::class, 'trash'])->name('library-agency-location-manager.trash');
+            Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
+            Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
+            Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
+
+            Route::get('library-office-manager/trash', [LibraryOfficeManagerController::class, 'trash'])->name('library-office-manager.trash');
+            Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
+            Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
+            Route::resource('library-office-manager', LibraryOfficeManagerController::class);
+
+            Route::get('library-office-type/trash', [OfficeTypeController::class, 'trash'])->name('library-office-type.trash');
+            Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
+            Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
+            Route::resource('library-office-type', OfficeTypeController::class);
+
+            Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
+            Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
+            Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
+            Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
+
+            Route::get('library-class-basis/trash', [ClassBasisController::class, 'trash'])->name('library-class-basis.trash');
+            Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
+            Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
+            Route::resource('library-class-basis', ClassBasisController::class);
+
+            Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
+            Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
+            Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
+            Route::resource('library-personnel-movement', PersonnelMovementController::class);
+
+            Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
+            Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
+            Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
+            Route::resource('library-location-type', LocationTypeController::class);
+
+            Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
+            Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
+            Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');
+            Route::resource('library-mother-dept', MotherDeptController::class);
+
+            Route::get('library-position-manager/trash', [PositionManagerController::class, 'trash'])->name('library-position-manager.trash');
+            Route::post('library-position-manager/{officeid}/force-delete', [PositionManagerController::class, 'forceDelete'])->name('library-position-manager.forceDelete');
+            Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
+            Route::resource('library-position-manager', PositionManagerController::class);
+
+            Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
+            Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
+            Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
+            Route::resource('library-occupant-browser', OccupantBrowserController::class);
+
+            Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
+            Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
+            Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
+            Route::resource('library-occupant-manager', OccupantManagerController::class);
+
+            Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
+            Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
+            Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
+
+            Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
+            Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+            Route::get('library-other-assignment/{library_occupant_manager}/create', [LibraryOtherAssignmentController::class, 'create'])->name('library-other-assignment.create');
+            Route::post('library-other-assignment/store', [LibraryOtherAssignmentController::class, 'store'])->name('library-other-assignment.store');
+            Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
+            Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
+            Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
+
         });
-
-        Route::get('library-sector/trash', [LibrarySectorManagerController::class, 'trash'])->name('library-sector.trash');
-        Route::post('library-sector/{sectorid}/force-delete', [LibrarySectorManagerController::class, 'forceDelete'])->name('library-sector.forceDelete');
-        Route::post('library-sector/{sectorid}/restore', [LibrarySectorManagerController::class, 'restore'])->name('library-sector.restore');
-        Route::resource('library-sector', LibrarySectorManagerController::class);
-
-        Route::get('library-department-manager/trash', [LibraryDepartmentAgencyManagerController::class, 'trash'])->name('library-department-manager.trash');
-        Route::post('library-department-manager/{deptid}/force-delete', [LibraryDepartmentAgencyManagerController::class, 'forceDelete'])->name('library-department-manager.forceDelete');
-        Route::post('library-department-manager/{deptid}/restore', [LibraryDepartmentAgencyManagerController::class, 'restore'])->name('library-department-manager.restore');
-        Route::resource('library-department-manager', LibraryDepartmentAgencyManagerController::class);
-
-        Route::get('library-agency-location-manager/trash', [LibraryAgencyLocationManagerController::class, 'trash'])->name('library-agency-location-manager.trash');
-        Route::post('library-agency-location-manager/{deptid}/force-delete', [LibraryAgencyLocationManagerController::class, 'forceDelete'])->name('library-agency-location-manager.forceDelete');
-        Route::post('library-agency-location-manager/{deptid}/restore', [LibraryAgencyLocationManagerController::class, 'restore'])->name('library-agency-location-manager.restore');
-        Route::resource('library-agency-location-manager', LibraryAgencyLocationManagerController::class);
-
-        Route::get('library-office-manager/trash', [LibraryOfficeManagerController::class, 'trash'])->name('library-office-manager.trash');
-        Route::post('library-office-manager/{officeid}/force-delete', [LibraryOfficeManagerController::class, 'forceDelete'])->name('library-office-manager.forceDelete');
-        Route::post('library-office-manager/{officeid}/restore', [LibraryOfficeManagerController::class, 'restore'])->name('library-office-manager.restore');
-        Route::resource('library-office-manager', LibraryOfficeManagerController::class);
-
-        Route::get('library-office-type/trash', [OfficeTypeController::class, 'trash'])->name('library-office-type.trash');
-        Route::post('library-office-type/{officeid}/force-delete', [OfficeTypeController::class, 'forceDelete'])->name('library-office-type.forceDelete');
-        Route::post('library-office-type/{officeid}/restore', [OfficeTypeController::class, 'restore'])->name('library-office-type.restore');
-        Route::resource('library-office-type', OfficeTypeController::class);
-
-        Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
-        Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
-        Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
-        Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
-
-        Route::get('library-dbm-position-title/trash', [DBMPositionTitleController::class, 'trash'])->name('library-dbm-position-title.trash');
-        Route::post('library-dbm-position-title/{officeid}/force-delete', [DBMPositionTitleController::class, 'forceDelete'])->name('library-dbm-position-title.forceDelete');
-        Route::post('library-dbm-position-title/{officeid}/restore', [DBMPositionTitleController::class, 'restore'])->name('library-dbm-position-title.restore');
-        Route::resource('library-dbm-position-title', DBMPositionTitleController::class);
-
-        Route::get('library-class-basis/trash', [ClassBasisController::class, 'trash'])->name('library-class-basis.trash');
-        Route::post('library-class-basis/{officeid}/force-delete', [ClassBasisController::class, 'forceDelete'])->name('library-class-basis.forceDelete');
-        Route::post('library-class-basis/{officeid}/restore', [ClassBasisController::class, 'restore'])->name('library-class-basis.restore');
-        Route::resource('library-class-basis', ClassBasisController::class);
-
-        Route::get('library-personnel-movement/trash', [PersonnelMovementController::class, 'trash'])->name('library-personnel-movement.trash');
-        Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
-        Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
-        Route::resource('library-personnel-movement', PersonnelMovementController::class);
-
-
-        Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
-        Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
-        Route::post('library-location-type/{officeid}/restore', [LocationTypeController::class, 'restore'])->name('library-location-type.restore');
-        Route::resource('library-location-type', LocationTypeController::class);
-
-        Route::get('library-mother-dept/trash', [MotherDeptController::class, 'trash'])->name('library-mother-dept.trash');
-        Route::post('library-mother-dept/{officeid}/force-delete', [MotherDeptController::class, 'forceDelete'])->name('library-mother-dept.forceDelete');
-        Route::post('library-mother-dept/{officeid}/restore', [MotherDeptController::class, 'restore'])->name('library-mother-dept.restore');
-        Route::resource('library-mother-dept', MotherDeptController::class);
-
-        Route::get('library-position-manager/trash', [PositionManagerController::class, 'trash'])->name('library-position-manager.trash');
-        Route::post('library-position-manager/{officeid}/force-delete', [PositionManagerController::class, 'forceDelete'])->name('library-position-manager.forceDelete');
-        Route::post('library-position-manager/{officeid}/restore', [PositionManagerController::class, 'restore'])->name('library-position-manager.restore');
-        Route::resource('library-position-manager', PositionManagerController::class);
-
-        Route::get('library-occupant-browser/trash', [OccupantBrowserController::class, 'trash'])->name('library-occupant-browser.trash');
-        Route::post('library-occupant-browser/{officeid}/force-delete', [OccupantBrowserController::class, 'forceDelete'])->name('library-occupant-browser.forceDelete');
-        Route::post('library-occupant-browser/{officeid}/restore', [OccupantBrowserController::class, 'restore'])->name('library-occupant-browser.restore');
-        Route::resource('library-occupant-browser', OccupantBrowserController::class);
-
-        Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
-        Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
-        Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
-        Route::resource('library-occupant-manager', OccupantManagerController::class);
-
-        Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');
-        Route::post('library-other-assignment/{detailed_code}/force-delete', [LibraryOtherAssignmentController::class, 'forceDelete'])->name('library-other-assignment.forceDelete');
-        Route::post('library-other-assignment/{detailed_code}/restore', [LibraryOtherAssignmentController::class, 'restore'])->name('library-other-assignment.restore');
-
-        Route::get('library-other-assignment/{library_occupant_manager}', [LibraryOtherAssignmentController::class, 'index'])->name('library-other-assignment.index');
-        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
-        Route::get('library-other-assignment/{library_occupant_manager}/create', [LibraryOtherAssignmentController::class, 'create'])->name('library-other-assignment.create');
-        Route::post('library-other-assignment/store', [LibraryOtherAssignmentController::class, 'store'])->name('library-other-assignment.store');
-        Route::post('library-other-assignment/{detailed_code}/update', [LibraryOtherAssignmentController::class, 'update'])->name('library-other-assignment.update');
-        Route::get('library-other-assignment/{library_occupant_manager}/{detailed_code}/edit', [LibraryOtherAssignmentController::class, 'edit'])->name('library-other-assignment.edit');
-        Route::delete('library-other-assignment/destroy/{detailed_code}', [LibraryOtherAssignmentController::class, 'destroy'])->name('library-other-assignment.destroy');
 
         // plantilla reports
         Route::prefix('reports')->group(function () {
@@ -808,22 +801,26 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     Route::prefix('competency-report')->group(function () {
         Route::prefix('general-report')->group(function () {
             Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_general_reports');
-            Route::post('generate-pdf/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
+            Route::get('download-report/{sessionId}', [GeneralReportController::class, 'generateDownloadLinks'])->name('competency-general-report.generateDownloadLinks')->middleware('checkPermission:competency_general_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
         });
 
         Route::prefix('training-provider')->group(function () {
             Route::get('index', [TrainingProviderManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingProviderIndexReport')->middleware('checkPermission:competency_training_provider_reports');
-            Route::post('generate-pdf', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('download-reports', [TrainingProviderManagerReportController::class, 'generateDownloadLinks'])->name('training-provider-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_provider_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}', [TrainingProviderManagerReportController::class, 'generatePDF'])->name('competency-management-sub-modules-report.trainingProviderGenerateReport')->middleware('checkPermission:competency_training_provider_reports');
         });
 
         Route::prefix('training-venue-manager')->group(function () {
-            Route::get('report', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
-            Route::post('generate-pdf-by-city', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('index', [TrainingVenueManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.trainingVenueManagerReportIndex')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('download-report', [TrainingVenueManagerReportController::class, 'generateDownloadLinks'])->name('training-venue-manager.generateDownloadLinks')->middleware('checkPermission:competency_training_venue_manager_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{search}', [TrainingVenueManagerReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf')->middleware('checkPermission:competency_training_venue_manager_reports');
         });
 
         Route::prefix('resource-speaker-manager')->group(function () {
             Route::get('report', [ResourceSpeakerManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
-            Route::post('report-generate-pdf', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
+            Route::get('download-report', [ResourceSpeakerManagerReportController::class, 'generateDownloadLinks'])->name('competency-management-sub-modules-report.generateDownloadLinks')->middleware('checkPermission:competency_resource_speaker_manager_reports');
+            Route::get('report-generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{expertise}', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
         });
     });
     //  end of competency report routes
@@ -924,41 +921,48 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
     });
     //  end of ERIS routes
 
-    //  ERIS Report/Eligibility and Rank Tracking routes
+    //  ERIS Report
     Route::prefix('eris-report')->group(function () {
         Route::prefix('board-interview-report')->group(function () {
             Route::get('index', [BoardInterviewReportController::class, 'index'])->name('eris-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
-            Route::post('generate-pdf', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateDownloadLinks'])->name('eris-board-interview-report.generateDownloadLinks')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BoardInterviewReportController::class, 'generateReportPdf'])->name('eris-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('panel-board-interview-report')->group(function () {
             Route::get('index', [PanelBoardInterviewReportController::class, 'index'])->name('panel-board-interview-report.index')->middleware('checkPermission:eligibility_board_interview_reports');
-            Route::post('generate-pdf', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [PanelBoardInterviewReportController::class, 'generateDownloadLinks'])->name('panel-board-interview-report.generateDownloadLinks')->middleware('checkPermission:eligibility_board_interview_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [PanelBoardInterviewReportController::class, 'generateReportPdf'])->name('panel-board-interview-report.generateReportPdf')->middleware('checkPermission:eligibility_board_interview_reports');
         });
 
         Route::prefix('rapid-validation-report')->group(function () {
             Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
-            Route::post('generate-pdf/{sort_by}/{sort_order}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generateDownloadLinks'])->name('rapid-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateDownloadLinks'])->name('in-depth-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('assessment-center-report')->group(function () {
             Route::get('index', [AssessmentCenterReportController::class, 'index'])->name('assessment-center-report.index')->middleware('checkPermission:eligibility_assessment_center_reports');
-            Route::get('generate-pdf/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateDownloadLinks'])->name('assessment-center-report.generateDownloadLinks')->middleware('checkPermission:eligibility_assessment_center_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [AssessmentCenterReportController::class, 'generateReportPdf'])->name('assessment-center-report.generateReportPdf')->middleware('checkPermission:eligibility_assessment_center_reports');
         });
 
         Route::prefix('written-exam-report')->group(function () {
             Route::get('index', [WrittenExamReportController::class, 'index'])->name('written-exam-report.index')->middleware('checkPermission:eligibility_ceswe_reports');
-            Route::get('post/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateDownloadLinks'])->name('written-exam-report.generateDownloadLinks')->middleware('checkPermission:eligibility_ceswe_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [WrittenExamReportController::class, 'generateReportPdf'])->name('written-exam-report.generateReportPdf')->middleware('checkPermission:eligibility_ceswe_reports');
         });
 
         Route::prefix('eris-report-general')->group(function () {
             Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index')->middleware('checkPermission:eligibility_general_reports');
-            Route::post('generate-pdf/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
+            Route::get('download-reports/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generateDownloadLinks'])->name('general-report.generateDownloadLinks')->middleware('checkPermission:eligibility_general_reports');
+            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
         });
     });
     // End of ERIS Report routes
@@ -969,10 +973,16 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('general-reports')->group(function () {
             Route::get('index', [Reports201Controller::class, 'index'])->name('general-reports.index')->middleware('checkPermission:201_general_reports');
             Route::get('generate-reports/
+                        {recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/
                         {sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/
                         {filter_retired}/{filter_deceased}/{filter_retirement}/
                         {with_pending_case}/{without_pending_case}/{cesstat_code}/
                         {authority_code}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf')->middleware('checkPermission:201_general_reports');
+            Route::get('download-general-reports/
+                        {sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/
+                        {filter_retired}/{filter_deceased}/{filter_retirement}/
+                        {with_pending_case}/{without_pending_case}/{cesstat_code}/
+                        {authority_code}', [Reports201Controller::class, 'generateDownloadLinks'])->name('download-general-reports.pdf')->middleware('checkPermission:201_general_reports');
         });
 
         Route::prefix('data-portability-reports')->group(function () {
@@ -984,11 +994,26 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('index', [StatisticalReportController::class, 'index'])->name('statistical-report.index')->middleware('checkPermission:201_data_portability_reports');
             Route::get('generate-reports/', [StatisticalReportController::class, 'generatePdf'])->name('statistical-report.pdf')->middleware('checkPermission:201_data_portability_reports');
         });
+
+        Route::prefix('birthday')->group(function () {
+            Route::get('index', [BirthdayCardReportController::class, 'index'])->name('birthday.index')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('monthly-celebrant', [BirthdayCardReportController::class, 'monthlyCelebrant'])->name('birthday.monthlyCelebrant')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('download-monthly-celebrant-report/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGenerateDownloadLinks'])->name('birthday.monthlyCelebrantGenerateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('monthly/celebrant/report/pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGeneratePdfReport'])->name('birthday.monthlyCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('download-report', [BirthdayCardReportController::class, 'generateDownloadLinks'])->name('birthday.generateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+        });
+
+        Route::prefix('reports-for-placement')->group(function () {
+            Route::get('index', [PlacementReportController::class, 'index'])->name('reports-for-placement.index')->middleware('checkPermission:201_placement_reports');
+            Route::get('download-report-pdf', [PlacementReportController::class, 'generateDownloadLinks'])->name('reports-for-placement.generateDownloadLinks')->middleware('checkPermission:201_placement_reports');
+            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{expertise}/{degree}', [PlacementReportController::class, 'generatePdfReport'])->name('reports-for-placement.generatePdfReport')->middleware('checkPermission:201_placement_reports');
+        });
     });
     // End of Reports routes
 
     // Rights management routes
-    Route::prefix('rights-management')->group(function () {
+    Route::prefix('rights-management')->middleware('checkRole:admin')->group(function () {
 
         Route::get('roles', [RolesController::class, 'index'])->name('roles.index');
         Route::get('roles/show/{role_name}/{role_title}', [RolesController::class, 'show'])->name('roles.show');

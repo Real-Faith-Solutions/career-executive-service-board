@@ -17,13 +17,14 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('show-pdf-files.store', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" method="POST">
+            <form id="uploadFormPDF" action="{{ route('show-pdf-files.store', ['cesno'=>$cesno]) }}" enctype="multipart/form-data" method="POST">
                 @csrf
         
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="pdfFile">PDF File<sup>*</sup></label>
                         <input type="file" id="pdfFile" name="pdfFile" required>
+                        <p class="" id="ErrorMessagePDF"></p>
                         @error('pdfFile')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -43,7 +44,7 @@
                 </div>
         
                 <div class="flex justify-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" id="uploadButtonPDF" class="btn btn-primary">
                         Save changes
                     </button>
                 </div>

@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibTblEducMajor::factory(10)->create();
         \App\Models\ProfileLibTblExpertiseSpec::factory(10)->create();
         \App\Models\ProfileLibTblLanguageRef::factory(10)->create();
-        \App\Models\PersonalData::factory(100)->create();
-        \App\Models\ProfileLibTblExamRef::factory(10)->create();
+        \App\Models\PersonalData::factory(500)->create();
+        \App\Models\ProfileLibTblExamRef::factory(20)->create();
         // \App\Models\ProfileLibTblCesStatus::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusAcc::factory(10)->create();
         // \App\Models\ProfileLibTblCesStatusType::factory(10)->create();
@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\ProfileLibCities::factory(10)->create();
         \App\Models\TrainingLibCategory::factory(10)->create();
         \App\Models\TrainingSecretariat::factory(10)->create();
+        \App\Models\CompetencyTrainingProvider::factory(1000)->create();
 
         // plantilla
         \App\Models\Plantilla\PositionLevelLibrary::factory(2)->create();

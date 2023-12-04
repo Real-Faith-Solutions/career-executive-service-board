@@ -24,6 +24,7 @@ class RequestFile extends Model
         'remarks',
         'reason',
         'encoder',
+        'decline_by'
 
     ];
 

@@ -375,7 +375,7 @@
                 <div class="birthplace">
                     Birth Place: 
                     <span style="color: #2b6cb0;">
-                        {{ $personalData->cities->name }}
+                        {{ $personalData->cities->name ?? '' }}
                     </span> 
                 </div>
 

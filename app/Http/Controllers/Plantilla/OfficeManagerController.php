@@ -19,11 +19,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OfficeManagerController extends Controller
 {
-    public function index()
-    {
-        return view('admin.plantilla.office_manager.index');
-    }
-
 
     public function show(Request $request, $sectorid, $deptid, $officelocid, $officeid)
     {

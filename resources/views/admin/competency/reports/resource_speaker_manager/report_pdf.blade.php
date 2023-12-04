@@ -204,9 +204,9 @@
 
                             <td>
                                 {{ 
-                                    $resourceSpeakers->Bldg.', '.
-                                    $resourceSpeakers->Street.', '.
-                                    $resourceSpeakers->Brgy.', '.
+                                    $resourceSpeakers->Bldg.' '.
+                                    $resourceSpeakers->Street.' '.
+                                    $resourceSpeakers->Brgy.' '.
                                     $resourceSpeakers->City
                                 }}
                             </td>

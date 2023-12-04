@@ -47,7 +47,8 @@
     }
     
     function confirmTwoFactorConfirmationDialog() {
-        window.location.href = "/201-profile/personal-data/switch/two-factor";
+        // this is a route to activate the two factor auth
+        window.location.href = "/201-profile/switch/two-factor";
     }
     
     // Close the modal when the user clicks outside the modal content

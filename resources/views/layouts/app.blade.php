@@ -199,6 +199,10 @@
     <script src="{{ asset('js/profile-avatar.js') }}"></script>
     {{-- end --}}
 
+    {{-- js script for uploading image --}}
+    <script src="{{ asset('js/pdf-upload.js') }}"></script>
+    {{-- end --}}
+
     {{-- js script for adding medical history --}}
     <script src="{{ asset('js/medical-history.js') }}"></script>
     {{-- end --}}

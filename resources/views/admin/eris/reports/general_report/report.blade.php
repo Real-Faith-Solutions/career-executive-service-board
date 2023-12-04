@@ -6,7 +6,7 @@
         <h1 class="uppercase font-semibold text-blue-600 text-lg">General Report</h1>
 
         <div class="flex items-center">
-            <form action="{{ route('general-report.generatePdfReport', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="POST">
+            <form action="{{ route('general-report.generateDownloadLinks', ['sortBy' => $sortBy, 'sortOrder' => $sortOrder]) }}" target="_blank" method="GETT">
                 @csrf
 
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">

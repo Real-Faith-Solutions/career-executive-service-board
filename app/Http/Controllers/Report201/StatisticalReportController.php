@@ -280,6 +280,80 @@ class StatisticalReportController extends Controller
 
         // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
+        // CES Status Summary
+
+        // Count the users who's currently active and CESO I
+        $ceso1 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO I');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO II
+        $ceso2 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO II');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO III
+        $ceso3 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO III');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO IV
+        $ceso4 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO IV');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO V
+        $ceso5 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO V');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO VI
+        $ceso6 = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CESO VI');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO Eligible
+        $eligible = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'Eligible');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO CSEE
+        $csee = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', 'CSEE');
+        })
+        ->count();
+
+        // Count the users who's currently active and CESO CSEE
+        $noStatus = PersonalData::query()
+        ->where('status', 'Active')
+        ->whereHas('cesStatus', function ($query) {
+            $query->where('description', '=', '-');
+        })
+        ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalCESO',
             'totalCESOActive',
@@ -291,7 +365,16 @@ class StatisticalReportController extends Controller
             'age36to45',
             'age46to55',
             'age56to65',
-            'age66above'
+            'age66above',
+            'ceso1',
+            'ceso2',
+            'ceso3',
+            'ceso4',
+            'ceso5',
+            'ceso6',
+            'eligible',
+            'csee',
+            'noStatus',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');

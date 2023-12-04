@@ -11,7 +11,6 @@
 </nav>
 
     <section>   
-
         <div class="grid lg:grid-cols-3">
             @include('components.search')
         </div>
@@ -77,7 +76,6 @@
                 {{ $personalData->links() }}
             </div>
         </div>
-
     </section>
 
 @endsection

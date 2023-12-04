@@ -14,17 +14,6 @@ use Illuminate\Http\Request;
 
 class DepartmentAgencyManagerController extends Controller
 {
-    public function index(Request $request,)
-    {
-        $query = $request->input('search');
-        $datas = DepartmentAgency::orderBy('title', 'ASC')
-            ->where('title', 'LIKE', "%$query%")
-            ->orWhere('acronym', 'LIKE', "%$query%")
-            ->orWhere('website', 'LIKE', "%$query%")
-            ->orWhere('agency_typeid', 'LIKE', "%$query%")
-            ->paginate(15);
-        return view('admin.plantilla.department_agency_manager.index', compact('datas', 'query'));
-    }
 
     public function store(Request $request)
     {

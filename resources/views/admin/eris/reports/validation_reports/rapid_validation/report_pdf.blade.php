@@ -162,7 +162,7 @@
                         </th>
     
                         <th>
-                            Submittion of Document
+                            Submition of Document
                         </th>
     
                         <th>

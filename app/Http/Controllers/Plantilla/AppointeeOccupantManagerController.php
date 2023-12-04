@@ -33,11 +33,6 @@ class AppointeeOccupantManagerController extends Controller
         // $this->boardInterView = new BoardInterView();
     }
 
-    public function index()
-    {
-        return view('admin.plantilla.appointee_occupant_manager.index');
-    }
-
     public function create(Request $request, $sectorid, $deptid, $officelocid, $officeid, $plantilla_id)
     {
         $sector = SectorManager::find($sectorid);
