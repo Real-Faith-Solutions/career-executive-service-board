@@ -35,12 +35,12 @@
                 <div class="flex items-center gap-1">
                     <div class="flex">
                         <label for="passed" class="mt-1">Passed:</label>
-                        <input type="checkbox" name="passed" {{ $passed == "passed" ? 'checked' : '' }} value="passed">
+                        <input type="checkbox" name="passed" {{ $passed == "pass" ? 'checked' : '' }} value="pass">
                     </div>
                         
                     <div class="flex">
                         <label for="failed" class="mt-1">Failed:</label>
-                        <input type="checkbox" name="failed" {{ $failed == "failed" ? 'checked' : '' }} value="failed">
+                        <input type="checkbox" name="failed" {{ $failed == "fail" ? 'checked' : '' }} value="fail">
                     </div>
 
                     <div class="flex">
