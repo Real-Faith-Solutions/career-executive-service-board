@@ -5,11 +5,17 @@
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
 <div class="my-5 flex justify-between">
-    <div class="flex">
-        <a href="{{ route('201-decline-files.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Declined File</a>
+    <div class="flex items-center">
+        <div>
+            <a href="{{ route('201-decline-files.index', ['cesno' => $cesno]) }}" class="btn btn-primary">Declined File</a>
+        </div>
+        
+        <div class="ml-2">
+            <a href="{{ route('201-pending-files.userPendingFiles', ['cesno' => $cesno]) }}" class="btn btn-primary">Pending File</a>
+        </div>  
     </div>
 
-    <div class="flex">
+    <div class="flex items-center">
         <a href="{{ route('show-pdf-files.recentlyDeleted', ['cesno'=>$cesno]) }}" title="Trash Bin">
             <lord-icon
                 src="https://cdn.lordicon.com/jmkrnisz.json"
@@ -52,7 +58,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3">
-                    Request By asdasdad
+                    Request By
                 </th>
 
                 <th scope="col" class="px-6 py-3">

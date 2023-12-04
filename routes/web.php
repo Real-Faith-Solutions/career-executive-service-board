@@ -437,6 +437,10 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                 Route::get('index/{cesno}', [DeclineFile201Controller::class, 'index'])->name('201-decline-files.index')->middleware('checkPermission:pdf_files_view');
             });
 
+            Route::prefix('201-pending-files')->group(function () {
+                Route::get('index/{cesno}', [PDFController::class, 'userPendingFiles'])->name('201-pending-files.userPendingFiles')->middleware('checkPermission:pdf_files_view');
+            });
+
             Route::prefix('201-pdf-files')->group(function () {
                 Route::get('index/{cesno}', [PDFController::class, 'index'])->name('show-pdf-files.index')->middleware('checkPermission:pdf_files_view');
                 Route::get('create/{cesno}', [PDFController::class, 'create'])->name('show-pdf-files.create')->middleware('checkPermission:pdf_files_add');
