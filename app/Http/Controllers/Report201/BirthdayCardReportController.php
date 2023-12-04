@@ -46,6 +46,7 @@ class BirthdayCardReportController extends Controller
         ]);
     }
 
+    // generate download link for all users has birthday today
     public function generateDownloadLinks()
     {
         $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01
