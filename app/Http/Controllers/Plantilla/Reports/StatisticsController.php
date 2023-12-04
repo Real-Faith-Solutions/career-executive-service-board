@@ -343,7 +343,11 @@ class StatisticsController extends Controller
 
     private function chartsAndDatas()
     {
-        $recentAppointee = PlanAppointee::orderBy('plantilla_id', 'DESC')->take(5)->get();
+        $recentAppointee = PlanAppointee::query()
+            ->where('is_appointee', 1)
+            ->orderBy('plantilla_id', 'DESC')
+            ->take(5)
+            ->get();
 
         $plantillaAll = PlanPosition::query()
             ->where('is_ces_pos', 1)

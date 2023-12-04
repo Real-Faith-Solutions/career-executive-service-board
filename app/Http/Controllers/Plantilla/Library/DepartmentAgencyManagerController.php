@@ -19,9 +19,9 @@ class DepartmentAgencyManagerController extends Controller
     public function __construct()
     {
         $this->middleware('checkPermission:plantilla_view_library')->only('index');
- 
+
         $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
- 
+
         $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
 
         $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
@@ -132,9 +132,11 @@ class DepartmentAgencyManagerController extends Controller
             'remarks' => ['required'],
             'mother_deptid' => ['required'],
         ]);
+        // dd($request->all());
 
         $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
         $department->update($request->only([
+            'sectorid',
             'title',
             'agency_typeid',
             'website',

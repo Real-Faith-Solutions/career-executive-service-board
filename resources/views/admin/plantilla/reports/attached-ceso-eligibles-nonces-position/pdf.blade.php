@@ -2,9 +2,7 @@
 <html>
 
 <head>
-    <title>
-        {{ $motherDepartmentAgency->acronym }}.pdf
-    </title>
+    <title>{{ $motherDepartmentAgency->acronym }}.pdf</title>
 
     {{-- custom css --}}
     <style>
@@ -20,7 +18,7 @@
             font-family: 'Busorama';
         }
 
-        tr:nth-child(even) {
+        .striped tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
@@ -41,30 +39,9 @@
         footer {
             position: fixed;
             bottom: 0px;
-            /* Adjust this value as needed */
             width: 100%;
             text-align: center;
             font-size: 10px;
-        }
-
-
-        section {
-            padding: 10%;
-
-        }
-
-        header {
-            margin-top: -7%;
-        }
-
-        .front-page {
-            border-top: 8px solid #3b82f6;
-            border-right: 8px solid grey;
-            border-bottom: 8px solid #ef4444;
-            border-left: 8px solid #eab308;
-            width: auto;
-            height: 80%;
-
         }
 
         .flex {
@@ -140,6 +117,10 @@
             margin-bottom: 5%
         }
 
+        header {
+            margin-top: -7%;
+        }
+
         .text-blue {
             color: #1F4E79;
         }
@@ -188,10 +169,11 @@
         }
 
         td {
-            border: 2px solid #fff;
-            padding-left: 5px;
+            padding-right: 1%;
         }
     </style>
+
+    {{-- reset attributes --}}
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -1012,7 +994,6 @@
 </head>
 
 <body>
-
     <header>
         <center>
             <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
@@ -1023,9 +1004,8 @@
                     No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127
                 </p>
                 <p>
-                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 / 8363-1532
-                    /
-                    8255-8341
+                    Trunkline: 8951-4981 to 85 / 8951-4988 * Direct Line 8366-7192 * Fiber Direct: 8366-1169 /
+                    8363-1532 / 8255-8341
                 </p>
                 <p>
                     <a href="https://www.cesboard.gov.ph/" target="_blank">www.cesboard.gov.ph</a>
@@ -1037,11 +1017,11 @@
     <footer>
         <table width="100%">
             <tr style="color:gray">
-                <td>
-                    List of Vacant CES Positions
+                <td colspan="5">
+                    LIST OF CESOs and CES ELIGIBLES IN NON-CES POSITIONS
                 </td>
 
-                <td style="text-align: right">
+                <td style="text-align:right;">
                     <div class="">Page <span class="pagenum"></span></div>
                 </td>
             </tr>
@@ -1054,7 +1034,7 @@
             {{ $motherDepartmentAgency->title }}
         </h1>
         <h1>
-            List of Vacant Position
+            LIST OF CESOs and CES ELIGIBLES IN NON-CES POSITIONS
         </h1>
         <p>
             data as of {{ $currentDate }}
@@ -1062,70 +1042,75 @@
     </center>
     <br />
     <table width="100%" style="padding:10px; margin-bottom:10px">
-        <thead>
-            <tr class="text-center text-blue" style="font-size: 11px;">
-                <td>NO.</td>
-                <td>OFFICE</td>
-                <td>POSITION</td>
-                <td>SG</td>
-                <td>DBM ITEM NO.</td>
-                <td>FULLNAME</td>
-                <td>CES STATUS</td>
-            </tr>
-        </thead>
+       
+        
         <tbody>
 
-            @foreach ($planPosition as $planPositionDatas)
-            @php
-            $selectedOccupant = $planPositionDatas->planAppointee
-            ->where('is_appointee', 1)
-            ->first();
+            @foreach ($departments as $departmentDatas)
+                 @php
+                    $no = 1;
+                    $currentDeptID = $departmentDatas->deptid;
+                    // $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition.office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
+                    //     $query->where('deptid', $currentDeptID);
+                    // })->count();
+                    // dd($filteredPlanAppointee);
+                @endphp
 
-            if (!$selectedOccupant) {
-            @endphp
-            <tr style="font-size:11px">
-                <th>
-                    {{ $no++ }}
-                </th>
-                <td>
-                    {{ $planPositionDatas->office->title ?? '' }}
-                </td>
-                <td>
-                    {{ $planPositionDatas->pos_default ?? '' }}
-                </td>
-                <td class="text-center">
-                    {{ $planPositionDatas->corp_sg ?? '' }}
-                </td>
-                <td>
-                    {{ $planPositionDatas->item_no ?? '' }}
-                </td>
-                <td>
-                    @php
-                    $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first();
-                    @endphp
-                    {{ $selectedOccupant->personalData->lastname ?? '' }}
-                    {{ $selectedOccupant->personalData->middlename ?? '' }}
-                    {{ $selectedOccupant->personalData->firstname ?? '' }}
-                </td>
-                <td>
-                    @php
-                    $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first();
-                    @endphp
-                    {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
-                </td>
-            </tr>
-            @php
-            }
-            @endphp
+                {{-- @if($filteredPlanAppointee > 1) --}}
+
+                    <tr class="bg-blue text-white text-center">
+                        <td colspan="6" class="p-3">
+                            <span class="uppercase">{{ $departmentDatas->title }}</span>
+                            <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastupd_dt)->format('d F Y') }})</span>
+                        </td>
+                    </tr>
+                    <tr class="text-center text-blue" style="font-size: 11px;background: none">
+                        <td>NO.</td>
+                        <td>FULL NAME</td>
+                        <td>CES STATUS</td>
+                        <td>POSITION</td>
+                        <td>SG</td>
+                        <td>OFFICE</td>
+                    </tr>
+
+                    @foreach($planAppointee as $planAppointeeDatas)
+                    
+                        @if($departmentDatas->deptid == $planAppointeeDatas->planPosition->office->agencyLocation->deptid)
+                            
+                            <tr class="striped" style="font-size:11px">
+                                <td class="text-center">{{ $no++ }}</td>
+                                <td>
+                                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->middlename ?? '' }}
+                                </td>
+                                <td class="text-center">
+                                    {{ $planAppointeeDatas->personalData->cesStatus->description ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $planAppointeeDatas->planPosition->pos_default ?? '' }}
+                                    @if($planAppointeeDatas->planPosition->pos_suffix)
+                                        - {{ $planAppointeeDatas->planPosition->pos_suffix }}
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    {{ $planAppointeeDatas->planPosition->corp_sg ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $planAppointeeDatas->planPosition->office->title ?? '' }}
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                
+                {{-- @endif --}}
             @endforeach
-
 
         </tbody>
     </table>
+
+
+
 
 </body>
 

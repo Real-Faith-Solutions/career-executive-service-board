@@ -185,8 +185,8 @@
         }
 
         td {
-            border: 2px solid #fff;
-            padding-left: 5px;
+            border: 4px solid #fff;
+            padding: 0 0 15px 5px;
         }
     </style>
     <style>
@@ -1081,9 +1081,20 @@
             </tr>
         </thead>
         <tbody>
+            @php
+            $totalCount = 0;
+            @endphp
             @foreach ($office as $officeDatas)
+
+            @php
+            $filteredPlanPositions = $officeDatas->planPosition
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1);
+            @endphp
+
+            @if($filteredPlanPositions->isNotEmpty())
             <tr style="font-size:11px">
-                <td>
+                <td style="padding: 0">
                     <h1 class="text-blue bold">
                         {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
                     </h1>
@@ -1289,8 +1300,14 @@
                     <!-- {{ $planPositionDatas->cbasis_remarks ?? ''}} -->
                 </td>
             </tr>
+
+            @php
+            $totalCount += $count;
+            @endphp
+
             @endif
             @endforeach
+
             @if($currentPosDefault !== null)
             <tr class="bold italic" style="font-size:11px">
                 <td>
@@ -1300,8 +1317,19 @@
                 </td>
                 <!-- Add your corresponding columns here for the count row -->
             </tr>
+
+
+            @endif
             @endif
             @endforeach
+
+            <tr class="bold italic" style="font-size:11px">
+                <td colspan="9">
+                    <h1>
+                        TOTAL NO. OF POSITIONS: {{ $totalCount }}
+                    </h1>
+                </td>
+            </tr>
         </tbody>
 
 
