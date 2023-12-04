@@ -182,7 +182,6 @@ class BirthdayCardReportController extends Controller
     public function monthlyCelebrantGeneratePdfReport($recordsPerPartition, $partitionNumber, $skippedData, $filename, $sortBy, $sortOrder)
     {
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
-        $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
         $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
@@ -198,18 +197,17 @@ class BirthdayCardReportController extends Controller
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
             });
-            // ->get();
-
+        
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
 
         $pdf = Pdf::loadView('admin.201_profiling.reports.birthday_card.monthly_birthday.report_pdf', [
             'personalData' => $personalData,
-            'currentMonthFullName' => $currentMonthFullName,
+            'monthYear' => $monthYear,
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream($monthYear.'birthday-celebrant-report.pdf');
+        return $pdf->stream($filename);
     }
 
     public function monthlyCelebrantGenerateDownloadLinks($sortBy, $sortOrder)
@@ -219,7 +217,7 @@ class BirthdayCardReportController extends Controller
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
-        $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
+        $monthYear = Carbon::now()->format('F-Y'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
             ->with('cesStatus')
@@ -276,5 +274,4 @@ class BirthdayCardReportController extends Controller
         // Pass the download links to the next download page
         return view('admin.201_profiling.reports.birthday_card.monthly_birthday.download_reports', compact('downloadLinks', 'monthYear'));
     }
-
 }
