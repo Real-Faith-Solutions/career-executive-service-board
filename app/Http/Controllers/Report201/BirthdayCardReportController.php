@@ -13,7 +13,7 @@ class BirthdayCardReportController extends Controller
     // fetching all users has birthday today
     public function index()
     {
-        $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01
+        $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01, 2023
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
