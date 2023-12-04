@@ -6,7 +6,7 @@
 <nav class="bg-gray-200 border-gray-200 mb-3">
     <div class="flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" class="flex items-center">
-            <span class="self-center text-xl font-semibold whitespace-nowrap uppercase text-blue-500">201 PROFILE - DOWNLOAD BIRTHDAY CELEBRANTS FOR THIS {{ $fullDateName }} REPORTS</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap uppercase text-blue-500">201 PROFILE - DOWNLOAD BIRTHDAY CARDS {{ $fullDateName }} REPORTS</span>
         </a>
 
         <div class="flex justify-end">

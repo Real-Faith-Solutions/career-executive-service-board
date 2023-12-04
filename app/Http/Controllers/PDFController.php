@@ -22,6 +22,15 @@ class PDFController extends Controller
         return view('admin.201_profiling.view_profile.partials.pdf_files.table', compact('approvedPdfFile', 'cesno'));
     }
 
+    // pending file for each users
+    public function userPendingFiles($cesno)
+    {
+        $pdfFile = RequestFile::where('personal_data_cesno', $cesno)->paginate(25);
+
+        return view('admin.201_profiling.view_profile.partials.pdf_files.userPendingFile', compact('pdfFile','cesno'));
+    }
+
+    // pending file for all users
     public function pendingFiles()
     {
         $pdfFile = RequestFile::all();
