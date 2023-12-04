@@ -95,6 +95,7 @@ use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedCesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedNonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\AttachedOccupancyReportController;
+use App\Http\Controllers\Plantilla\Reports\AttachedVacantPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportController;
@@ -654,6 +655,9 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('vacant-position', [VacantPositionController::class, 'index'])->name('vacant-position.index')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
             Route::get('vacant-position/{deptid}', [VacantPositionController::class, 'generatePDF'])->name('vacant-position.pdf')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
+            
+            Route::get('attached-vacant-position', [AttachedVacantPositionController::class, 'index'])->name('attached-vacant-position.index')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
+            Route::get('attached-vacant-position/{deptid}', [AttachedVacantPositionController::class, 'generatePDF'])->name('attached-vacant-position.pdf')->middleware('checkPermission:plantilla_vacant_ces_positions_reports');
 
             Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
             Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
