@@ -1054,7 +1054,7 @@
             {{ $motherDepartmentAgency->title }}
         </h1>
         <h1>
-            List of Vacant Position
+            LIST OF VACANT CES POSITIONS
         </h1>
         <p>
             data as of {{ $currentDate }}

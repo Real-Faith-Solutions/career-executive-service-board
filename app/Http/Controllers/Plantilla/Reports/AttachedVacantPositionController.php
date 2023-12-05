@@ -36,17 +36,18 @@ class AttachedVacantPositionController extends Controller
                 $query->where('is_ces_pos', 1)
                     ->where('pres_apptee', 1)
                     ->where('is_active', 1)
-                    ->whereHas('planAppointee', function ($query) {
-                        $query->where('is_appointee', true);
+                    ->whereDoesntHave('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1);
                     });
             })
+            
             ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
             ->orderBy('title', 'asc')
             ->get();
 
             $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
-                $query->where('deptid', $deptid);
+                $query->where('mother_deptid', $deptid);
             })
             ->whereDoesntHave('planAppointee', function ($query) {
                 $query->where('is_appointee', 1);
