@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -149,36 +150,50 @@ class AuthController extends Controller
         if ($user && $user->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
             return back()->with('error','New password already sent. Please check your email');
         }
-        
+
         if ($user) {
 
-            // sending email to added user
-            $recipientEmail = $request->email;
-            $password = Str::password(8, true, true, true, false);
-            $hashedPassword = Hash::make($password);
-            $imagePath = public_path('images/assets/branding.png');
-            $loginLink= config('app.url');
-            $type = "forgotPassword";
+            DB::beginTransaction();
 
-            $data = [
-                'type' => $type,
-                'email' => $recipientEmail,
-                'password' => $password,
-                'imagePath' => $imagePath,
-                'loginLink' => $loginLink,
-            ];
-            // end sending email to added user
+            try {
 
-            Mail::to($recipientEmail)->send(new TempCred201($data));
+                // initializing assets and data needed for sending email
+                $recipientEmail = $request->email;
+                $password = Str::password(8, true, true, true, false);
+                $hashedPassword = Hash::make($password);
+                $imagePath = public_path('images/assets/branding.png');
+                $loginLink= config('app.url');
+                $type = "forgotPassword";
 
-            // Update the user's password with the hashed temporary password
-            $user->update([
-                'password' => $hashedPassword,
-            ]);
+                $data = [
+                    'type' => $type,
+                    'email' => $recipientEmail,
+                    'password' => $password,
+                    'imagePath' => $imagePath,
+                    'loginLink' => $loginLink,
+                ];
+                // end initializing assets and data needed for sending email
 
-            // Send an email or notification to the user with the new temporary password
+                // Send an email or notification to the user with the new temporary password
+                Mail::to($recipientEmail)->send(new TempCred201($data));
 
-            return back()->with('message','New temporary password sent!');
+                // Update the user's password with the hashed temporary password
+                $user->update([
+                    'password' => $hashedPassword,
+                ]);
+
+                // Commit the transaction if all operations succeed
+                DB::commit();
+
+                return back()->with('message','New temporary password sent!');
+
+            } catch (\Exception $e) {
+                // Rollback the transaction if any operation fails
+                DB::rollBack();
+
+                return back()->with('error', 'An error occurred while sending an email.');
+            }
+            
         }
 
         return back()->with('error','User not found!');
