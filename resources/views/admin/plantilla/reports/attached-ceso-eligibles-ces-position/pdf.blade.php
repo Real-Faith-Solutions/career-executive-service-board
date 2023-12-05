@@ -1031,14 +1031,14 @@
     <br>
     <center>
         <h1 class="text-blue uppercase" style="font-size:16px;">
-            {{ $motherDepartmentAgency->title }}
+            {{ $motherDepartmentAgency->title }} Attached Agencies
         </h1>
         <h1>
             LIST OF CESOs and CES ELIGIBLES IN CES POSITIONS
         </h1>
-        <p>
+        {{-- <p>
             data as of {{ $currentDate }}
-        </p>
+        </p> --}}
     </center>
     <br />
     <table width="100%" style="padding:10px; margin-bottom:10px">
