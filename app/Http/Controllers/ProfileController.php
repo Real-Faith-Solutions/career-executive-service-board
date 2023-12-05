@@ -161,8 +161,6 @@ class ProfileController extends Controller
             ];
             // end sending email to added user
 
-            Mail::to($recipientEmail)->send(new TempCred201($data));
-
             // making account credentials for user
             $user = $newProfile->users()->Create([
                 'email' => $newProfile->email,
@@ -175,6 +173,9 @@ class ProfileController extends Controller
 
             $user->assignRole('user');
             // end making account credentials for user
+
+            // sending email
+            Mail::to($recipientEmail)->send(new TempCred201($data));
 
             // Commit the transaction if all operations succeed
             DB::commit();
