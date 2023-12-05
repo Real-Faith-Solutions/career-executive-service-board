@@ -309,25 +309,40 @@ class AuthController extends Controller
                         return redirect()->route('reconfirm.email')->with('info','Confirmation Code Already Sent. Please check your email and spam');
                     }
 
-                    $confirmation_code = mt_rand(10000, 99999);
-                    $hashed_confirmation_code = Hash::make($confirmation_code);
-                    $recipientEmail = auth()->user()->email;
-                    $imagePath = public_path('images/assets/branding.png');
+                    DB::beginTransaction();
 
-                    // Update the confirmation code in the database
-                    $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+                    try {
 
-                    // sending confirmation_code email to user
-                    $data = [
-                        'email' => $recipientEmail,
-                        'confirmation_code' => $confirmation_code,
-                        'imagePath' => $imagePath,
-                    ];
-            
-                    Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+                        // initializing assets and data needed for sending email
+                        $confirmation_code = mt_rand(10000, 99999);
+                        $hashed_confirmation_code = Hash::make($confirmation_code);
+                        $recipientEmail = auth()->user()->email;
+                        $imagePath = public_path('images/assets/branding.png');
 
-                    return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+                        // Update the confirmation code in the database
+                        $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
 
+                        // sending confirmation_code email to user
+                        $data = [
+                            'email' => $recipientEmail,
+                            'confirmation_code' => $confirmation_code,
+                            'imagePath' => $imagePath,
+                        ];
+                
+                        Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                        // Commit the transaction if all operations succeed
+                        DB::commit();
+
+                        return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+
+                    } catch (\Exception $e) {
+                        // Rollback the transaction if any operation fails
+                        DB::rollBack();
+
+                        return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending an email.');
+                    }
+                    
                 }
             }
         }
