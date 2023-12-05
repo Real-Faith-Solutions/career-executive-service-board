@@ -174,13 +174,13 @@ class AuthController extends Controller
                 ];
                 // end initializing assets and data needed for sending email
 
-                // Send an email or notification to the user with the new temporary password
-                Mail::to($recipientEmail)->send(new TempCred201($data));
-
                 // Update the user's password with the hashed temporary password
                 $user->update([
                     'password' => $hashedPassword,
                 ]);
+
+                // Send an email or notification to the user with the new temporary password
+                Mail::to($recipientEmail)->send(new TempCred201($data));
 
                 // Commit the transaction if all operations succeed
                 DB::commit();
