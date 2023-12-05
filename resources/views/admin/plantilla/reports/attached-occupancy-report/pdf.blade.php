@@ -1035,7 +1035,7 @@
         </table>
 
         <footer>
-            <table width="100%">
+            <table width="100%" >
                 <tr>
                     <td class="bold">
                         Date Printed {{ $currentDate }}
@@ -1070,7 +1070,7 @@
             </table>
         </footer>
 
-        <table width="100%">
+        <table width="100%" style="padding:10px; margin-bottom:10px">
             <thead>
                 <tr style="font-size: 11px;">
                     <th>AGENCY / POSITION</th>
