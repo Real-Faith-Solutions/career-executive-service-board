@@ -18,9 +18,10 @@
         </div>
 
         <div class="bg-white px-6 py-3">
-            <form action="{{ route('library-mother-dept.update', $datas->deptid) }}" method="POST">
+            <form action="{{ route('library-mother-dept.update', $datas->deptid) }}" method="POST"
+                enctype="multipart/form-data" id="updateForm" onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                 @csrf
-                @method('PUT')
+                @method('put')
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="title">Title<sup>*</span></label>
@@ -33,17 +34,26 @@
                     </div>
                 </div>
 
-                <div class="flex justify-between">
-                    <h1 class="text-slate-400 text-sm font-semibold">
-                        Last update at {{ \Carbon\Carbon::parse($datas->updated_at)->format('m/d/Y \a\t g:iA') }}
-                    </h1>
-                    <button type="submit" class="btn btn-primary">
-                        Save changes
+                <h1 class="text-slate-400 text-sm font-semibold">
+                    Last update at {{ \Carbon\Carbon::parse($datas->updated_at)->format('m/d/Y \a\t g:iA') }}
+                </h1>
+
+                <div class="flex justify-end gap-2">
+
+                    <button type="button" id="btnEdit" class="btn btn-primary">
+                        Edit Record
+                    </button>
+                    <button type="button" id="btnSubmit" class="btn btn-primary hidden"
+                        onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
+                        Save Changes
+                    </button>
+                    <button type="button" id="btnCancelEdit" class="btn btn-secondary hidden">
+                        Cancel Edit
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
+<script src="{{ asset('js/plantilla/editForm.js') }}"></script>
 @endsection

@@ -159,9 +159,12 @@
                         <button type="button" id="btnEdit" class="btn btn-primary">
                             Edit Record
                         </button>
-                        <button type="button" class="btn btn-primary hidden" id="btnSubmit"
+                        <button type="button" id="btnSubmit" class="btn btn-primary hidden"
                             onclick="openConfirmationDialog(this, 'Confirm changes', 'Are you sure you want to update this record?')">
                             Save Changes
+                        </button>
+                        <button type="button" id="btnCancelEdit" class="btn btn-secondary hidden">
+                            Cancel Edit
                         </button>
                     </div>
                 </form>

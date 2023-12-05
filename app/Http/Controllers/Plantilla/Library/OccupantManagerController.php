@@ -33,9 +33,9 @@ class OccupantManagerController extends Controller
 
         //permissions
         $this->middleware('checkPermission:plantilla_view_library')->only('index');
- 
+
         $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
- 
+
         $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
 
         $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
@@ -94,7 +94,8 @@ class OccupantManagerController extends Controller
         $positionMasterLibrary = PositionMasterLibrary::orderBy('dbm_title', 'ASC')->get();
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
-        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'name_extension', 'middlename')->get();
+        $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'middlename', 'name_extension')
+            ->paginate(500);
         $appAuthority = ProfileLibTblAppAuthority::select('code', 'description')
             ->orderBy('description', 'asc')
             ->get();
@@ -103,17 +104,19 @@ class OccupantManagerController extends Controller
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)->first();
 
+            if (!$personalData) {
+                return redirect()->back()->with('error', 'No Personal data found.');
+            }
+
             $selectedPersonalData = $personalData->lastname . " " .
                 $personalData->firstname . " " .
                 $personalData->name_extension . " " .
                 $personalData->middlename . " ";
-            if (!$personalData) {
-                return redirect()->back()->with('error', 'No Personal data found.');
-            }
         } else {
             $personalData = null;
             $selectedPersonalData = null;
         }
+
 
         return view('admin.plantilla.library.occupant_manager.create', compact(
             'planPositions',
@@ -169,11 +172,14 @@ class OccupantManagerController extends Controller
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
+            'plantilla_id' => ['required'],
         ], [
             'appt_stat_code.required' => 'The Personnel Movement field is required.',
             'assum_date.required' => 'The Assumption Date field is required.',
             'appt_date.required' => 'The Appointment Date field is required.',
+            'plantilla_id.required' => 'The Position field is required.',
         ]);
+
 
         $planAppointee = PlanAppointee::create([
             'plantilla_id' => $request->input('plantilla_id'),

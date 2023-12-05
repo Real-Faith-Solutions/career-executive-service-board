@@ -1017,7 +1017,7 @@
         <table width="100%">
             <tr style="color:gray">
                 <td colspan="5">
-                    List of CESOs and CES Eligibles in NonCES Positions
+                    List of CESOs and CES Eligibles in Non-CES Positions
                 </td>
 
                 <td style="text-align:right;">
@@ -1033,7 +1033,7 @@
             {{ $motherDepartmentAgency->title }}
         </h1>
         <h1>
-            List of CESOs and CES Eligibles in NonCES Positions
+            List of CESOs and CES Eligibles in Non-CES Positions
         </h1>
         <p>
             data as of {{ $currentDate }}

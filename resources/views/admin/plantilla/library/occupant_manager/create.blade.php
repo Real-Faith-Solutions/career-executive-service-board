@@ -304,45 +304,93 @@
                     </form>
                 </fieldset>
 
-                <fieldset class="border p-4">
-                    <legend>View Filters</legend>
-                    <div class="mb-3">
-                        <label for="sector">Sector</label>
-                        <select id="sector" name="sector" required onchange="sectorToggle(this.value)">
-                            <option disabled selected>Select Sector</option>
-                            @foreach ($sector as $data)
-                            <option value="{{ $data->sectorid }}">{{ $data->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="department">Department/Agency</label>
-                        <select id="department" name="department" required onchange="departmentToggle(this.value)">
-                        </select>
-                        <span class="text-slate-400 text-sm italic">Note: after agency is mother agency</span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="agencyLocation">Agency Location</label>
-                        <select id="agencyLocation" name="agencyLocation" required
-                            onchange="agencyLocationToggle(this.value)">
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="office">Office</label>
-                        <select id="office" name="office" required onchange="officeToggle(this.value)">
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="position">Position</label>
-                        <select id="position" name="position" required onchange="positionToggle(this.value)">
-                        </select>
-                        @error('plantilla_id')
-                        <span class="invalid" role="alert">
-                            <p>{{ $message }}</p>
-                        </span>
-                        @enderror
-                    </div>
-                </fieldset>
+
+                <div class="grid grid-row-2">
+
+                    @if ($personalData)
+                    <fieldset class="border p-4">
+                        <legend>Profile Information</legend>
+
+                        <div class="flex flex-col gap-4 lg:items-center">
+                            <img id="" class="w-44 h-44 rounded-full object-cover"
+                                src="{{ file_exists(public_path('images/' . ($personalData->picture ?? 'images/assets/branding.png'))) ? asset('images/' . $personalData->picture) : asset('images/assets/branding.png') }}" />
+
+                            <div class="flex flex-col gap-2 text-center">
+
+                                <h1 class="font-seFmibold">
+                                    {{ $personalData->title ?? ''}}
+                                    {{ $personalData->lastname ?? ''}},
+                                    {{ $personalData->firstname ?? ''}}
+                                    {{ $personalData->name_extension ?? ''}}
+                                    {{ $personalData->middlename ?? ''}}
+                                </h1>
+                                <h1>
+                                    {{ $personalData->email ?? '' }}
+                                </h1>
+                                <h1>
+                                    {{ \Carbon\Carbon::parse($personalData->birthdate ?? '')->format('m/d/Y') }}
+                                </h1>
+                                <h1>
+                                    <span class="mr-2 rounded px-2.5 py-0.5 text-xs font-medium
+                                            @if ($personalData->status === 'Active') bg-green-100 text-green-800 @endif
+                                            @if ($personalData->status === 'Inactive') bg-orange-100 text-orange-800 @endif
+                                            @if ($personalData->status === 'Retired') bg-blue-100 text-blue-800 @endif
+                                            @if ($personalData->status === 'Deceased') bg-red-100 text-red-800 @endif">
+                                        {{ $personalData->status ?? ''}}
+                                    </span>
+                                </h1>
+                                <a href="{{ route('personal-data.show', $personalData->cesno) }}"
+                                    class="uppercase text-sm" target="_blank">
+                                    View Profile
+                                </a>
+                            </div>
+                        </div>
+                    </fieldset>
+                    @endif
+
+
+                    <fieldset class="border p-4">
+                        <legend>Office Information</legend>
+                        <div class="mb-3">
+                            <label for="sector">Sector</label>
+                            <select id="sector" name="sector" required onchange="sectorToggle(this.value)">
+                                <option disabled selected>Select Sector</option>
+                                @foreach ($sector as $data)
+                                <option value="{{ $data->sectorid }}">{{ $data->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="department">Department/Agency</label>
+                            <select id="department" name="department" required onchange="departmentToggle(this.value)">
+                            </select>
+                            <span class="text-slate-400 text-sm italic">Note: after agency is mother agency</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="agencyLocation">Agency Location</label>
+                            <select id="agencyLocation" name="agencyLocation" required
+                                onchange="agencyLocationToggle(this.value)">
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="office">Office</label>
+                            <select id="office" name="office" required onchange="officeToggle(this.value)">
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="position">Position</label>
+                            <select id="position" name="position" required onchange="positionToggle(this.value)">
+                            </select>
+                            @error('plantilla_id')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+
+                        </div>
+                    </fieldset>
+
+                </div>
             </div>
 
         </div>
