@@ -229,39 +229,50 @@ class AuthController extends Controller
                         $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
                         $cooldownMinutes = 4; // Adjust to your preferred code expiration
                         if (!($deviceIdentifier->updated_at->addMinutes($cooldownMinutes)->isFuture())) {
-                            
-                            $confirmation_code = mt_rand(10000, 99999);
-                            $hashed_confirmation_code = Hash::make($confirmation_code);
-                            $recipientEmail = auth()->user()->email;
-                            $imagePath = public_path('images/assets/branding.png');
 
-                            // Update the confirmation code in the database
-                            $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+                            DB::beginTransaction();
 
-                            // sending confirmation_code email to user
-                            $data = [
-                                'email' => $recipientEmail,
-                                'confirmation_code' => $confirmation_code,
-                                'imagePath' => $imagePath,
-                            ];
-                    
-                            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+                            try {
 
-                            return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+                                // initializing assets and data needed for sending email
+                                $confirmation_code = mt_rand(10000, 99999);
+                                $hashed_confirmation_code = Hash::make($confirmation_code);
+                                $recipientEmail = auth()->user()->email;
+                                $imagePath = public_path('images/assets/branding.png');
+
+                                // Update the confirmation code in the database
+                                $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                                // sending confirmation_code email to user
+                                $data = [
+                                    'email' => $recipientEmail,
+                                    'confirmation_code' => $confirmation_code,
+                                    'imagePath' => $imagePath,
+                                ];
+                        
+                                Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                                // Commit the transaction if all operations succeed
+                                DB::commit();
+
+                                return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+
+                            } catch (\Exception $e) {
+                                // Rollback the transaction if any operation fails
+                                DB::rollBack();
+
+                                return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending an email.');
+                            }
 
                         }
 
-                        // here where the root of bugs lies!
+                        // saving new data on cookie associations
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
 
-                        //test
-                        // $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
-                        // dd($associations);
-
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
                         $deviceIdentifier->update(['verified' => true]);
-                        // return "test";
+
                         return Redirect::to('/dashboard')->with('message', 'Account Verified!');
                     }
                 }
