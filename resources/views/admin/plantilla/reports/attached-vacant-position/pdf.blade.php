@@ -1075,7 +1075,7 @@
 
                     @foreach($planPosition as $planPositionDatas)
                     
-                        @if($departmentDatas->deptid == $planPositionDatas->office->agencyLocation->deptid)
+                        @if($departmentDatas->deptid == $planPositionDatas->office->agencyLocation->departmentAgency->deptid)
                             @php
                             $selectedOccupant = $planPositionDatas
                                 ->planAppointee
