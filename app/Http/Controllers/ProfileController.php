@@ -403,6 +403,10 @@ class ProfileController extends Controller
 
         // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();
+        $cooldownMinutes = 1; // Adjust as needed
+        if ($user && $user->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
+            return redirect()->back()->with('info','New Credentials Email Already Sent');
+        }
 
         // sending email to added user
         $recipientEmail = $request->email;
@@ -425,11 +429,11 @@ class ProfileController extends Controller
 
         try {
 
-            Mail::to($recipientEmail)->send(new TempCred201($data));
-
             // Update the user's password
             $user->password = $hashedPassword;
             $user->save();
+
+            Mail::to($recipientEmail)->send(new TempCred201($data));
 
             // Commit the transaction if all operations succeed
             DB::commit();
