@@ -199,7 +199,7 @@
     <script src="{{ asset('js/profile-avatar.js') }}"></script>
     {{-- end --}}
 
-    {{-- js script for uploading image --}}
+    {{-- js script for uploading pdf --}}
     <script src="{{ asset('js/pdf-upload.js') }}"></script>
     {{-- end --}}
 

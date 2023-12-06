@@ -7,6 +7,7 @@ use App\Models\DeviceVerification;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +27,6 @@ class VerifyEmailAndDevice
         $deviceIdentifiers = $this->getCurrentDeviceIdentifiers($ctrlno);
         $pendingIdentifiers = $this->getPendingDeviceIdentifiers($ctrlno);
 
-        // test
-        // dd($this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno));
-
         // Check if the user's email is verified for any of the current device identifiers
         if (!$this->isEmailConfirmedForDevice($associations, $deviceIdentifiers, $ctrlno)) {
 
@@ -45,8 +43,52 @@ class VerifyEmailAndDevice
                 $recipientEmail = auth()->user()->email;
                 $imagePath = public_path('images/assets/branding.png');
 
-                // Update the confirmation code in the database
-                $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+                DB::beginTransaction();
+
+                try {
+
+                    // Update the confirmation code in the database
+                    $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                    // sending confirmation_code email to user
+                    $data = [
+                        'email' => $recipientEmail,
+                        'confirmation_code' => $confirmation_code,
+                        'imagePath' => $imagePath,
+                    ];
+            
+                    Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                    // Commit the transaction if all operations succeed
+                    DB::commit();
+
+                    return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
+                
+                } catch (\Exception $e) {
+                    // Rollback the transaction if any operation fails
+                    DB::rollBack();
+
+                    return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending email.');
+                }
+                
+            }
+
+            DB::beginTransaction();
+
+            try {
+
+                $device_id = uniqid();
+                $confirmation_code = mt_rand(10000, 99999);
+                $hashed_confirmation_code = Hash::make($confirmation_code);
+                $recipientEmail = auth()->user()->email;
+                $imagePath = public_path('images/assets/branding.png');
+
+                DeviceVerification::create([
+                    'user_ctrlno' => $ctrlno,
+                    'confirmation_code' => $hashed_confirmation_code,
+                    'device_id' => $device_id,
+                    'verified' => false, // Set verified to false initially
+                ]);
 
                 // sending confirmation_code email to user
                 $data = [
@@ -57,41 +99,27 @@ class VerifyEmailAndDevice
         
                 Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
 
+                // Add the new association to the array
+                $associations[] = [
+                    'user_id' => $ctrlno,
+                    'device_id' => $device_id,
+                    'verified' => false, // Set verified to false initially
+                ];
+
+                Cookie::queue(Cookie::make('user_device_associations', json_encode($associations), 30 * 24 * 60));
+
+                // Commit the transaction if all operations succeed
+                DB::commit();
+
                 return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
+            
+            } catch (\Exception $e) {
+                // Rollback the transaction if any operation fails
+                DB::rollBack();
+
+                return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending email.');
             }
-
-            $device_id = uniqid();
-            $confirmation_code = mt_rand(10000, 99999);
-            $hashed_confirmation_code = Hash::make($confirmation_code);
-            $recipientEmail = auth()->user()->email;
-            $imagePath = public_path('images/assets/branding.png');
-
-            DeviceVerification::create([
-                'user_ctrlno' => $ctrlno,
-                'confirmation_code' => $hashed_confirmation_code,
-                'device_id' => $device_id,
-                'verified' => false, // Set verified to false initially
-            ]);
-
-            // sending confirmation_code email to user
-            $data = [
-                'email' => $recipientEmail,
-                'confirmation_code' => $confirmation_code,
-                'imagePath' => $imagePath,
-            ];
-    
-            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
-
-            // Add the new association to the array
-            $associations[] = [
-                'user_id' => $ctrlno,
-                'device_id' => $device_id,
-                'verified' => false, // Set verified to false initially
-            ];
-
-            Cookie::queue(Cookie::make('user_device_associations', json_encode($associations), 30 * 24 * 60));
-
-            return redirect()->route('reconfirm.email')->with('info','Enter Confirmation Code. Please check your email');
+            
         }
 
         return $next($request);

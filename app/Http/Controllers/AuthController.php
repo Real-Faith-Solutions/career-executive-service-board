@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -149,36 +150,50 @@ class AuthController extends Controller
         if ($user && $user->updated_at->addMinutes($cooldownMinutes)->isFuture()) {
             return back()->with('error','New password already sent. Please check your email');
         }
-        
+
         if ($user) {
 
-            // sending email to added user
-            $recipientEmail = $request->email;
-            $password = Str::password(8, true, true, true, false);
-            $hashedPassword = Hash::make($password);
-            $imagePath = public_path('images/assets/branding.png');
-            $loginLink= config('app.url');
-            $type = "forgotPassword";
+            DB::beginTransaction();
 
-            $data = [
-                'type' => $type,
-                'email' => $recipientEmail,
-                'password' => $password,
-                'imagePath' => $imagePath,
-                'loginLink' => $loginLink,
-            ];
-            // end sending email to added user
+            try {
 
-            Mail::to($recipientEmail)->send(new TempCred201($data));
+                // initializing assets and data needed for sending email
+                $recipientEmail = $request->email;
+                $password = Str::password(8, true, true, true, false);
+                $hashedPassword = Hash::make($password);
+                $imagePath = public_path('images/assets/branding.png');
+                $loginLink= config('app.url');
+                $type = "forgotPassword";
 
-            // Update the user's password with the hashed temporary password
-            $user->update([
-                'password' => $hashedPassword,
-            ]);
+                $data = [
+                    'type' => $type,
+                    'email' => $recipientEmail,
+                    'password' => $password,
+                    'imagePath' => $imagePath,
+                    'loginLink' => $loginLink,
+                ];
+                // end initializing assets and data needed for sending email
 
-            // Send an email or notification to the user with the new temporary password
+                // Update the user's password with the hashed temporary password
+                $user->update([
+                    'password' => $hashedPassword,
+                ]);
 
-            return back()->with('message','New temporary password sent!');
+                // Send an email or notification to the user with the new temporary password
+                Mail::to($recipientEmail)->send(new TempCred201($data));
+
+                // Commit the transaction if all operations succeed
+                DB::commit();
+
+                return back()->with('message','New temporary password sent!');
+
+            } catch (\Exception $e) {
+                // Rollback the transaction if any operation fails
+                DB::rollBack();
+
+                return back()->with('error', 'An error occurred while sending an email.');
+            }
+            
         }
 
         return back()->with('error','User not found!');
@@ -214,39 +229,50 @@ class AuthController extends Controller
                         $deviceVerification = DeviceVerification::where('user_ctrlno', $ctrlno)->where('device_id', $association['device_id'])->first();
                         $cooldownMinutes = 4; // Adjust to your preferred code expiration
                         if (!($deviceIdentifier->updated_at->addMinutes($cooldownMinutes)->isFuture())) {
-                            
-                            $confirmation_code = mt_rand(10000, 99999);
-                            $hashed_confirmation_code = Hash::make($confirmation_code);
-                            $recipientEmail = auth()->user()->email;
-                            $imagePath = public_path('images/assets/branding.png');
 
-                            // Update the confirmation code in the database
-                            $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+                            DB::beginTransaction();
 
-                            // sending confirmation_code email to user
-                            $data = [
-                                'email' => $recipientEmail,
-                                'confirmation_code' => $confirmation_code,
-                                'imagePath' => $imagePath,
-                            ];
-                    
-                            Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+                            try {
 
-                            return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+                                // initializing assets and data needed for sending email
+                                $confirmation_code = mt_rand(10000, 99999);
+                                $hashed_confirmation_code = Hash::make($confirmation_code);
+                                $recipientEmail = auth()->user()->email;
+                                $imagePath = public_path('images/assets/branding.png');
+
+                                // Update the confirmation code in the database
+                                $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+
+                                // sending confirmation_code email to user
+                                $data = [
+                                    'email' => $recipientEmail,
+                                    'confirmation_code' => $confirmation_code,
+                                    'imagePath' => $imagePath,
+                                ];
+                        
+                                Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                                // Commit the transaction if all operations succeed
+                                DB::commit();
+
+                                return redirect()->route('reconfirm.email')->with('error','Expired Code. Please check your new confirmation code');
+
+                            } catch (\Exception $e) {
+                                // Rollback the transaction if any operation fails
+                                DB::rollBack();
+
+                                return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending an email.');
+                            }
 
                         }
 
-                        // here where the root of bugs lies!
+                        // saving new data on cookie associations
                         $association['verified'] = true;
                         $cookieValue = json_encode($associations);
 
-                        //test
-                        // $associations = json_decode(Cookie::get('user_device_associations'), true) ?: [];
-                        // dd($associations);
-
                         Cookie::queue('user_device_associations', $cookieValue, 30 * 24 * 60);
                         $deviceIdentifier->update(['verified' => true]);
-                        // return "test";
+
                         return Redirect::to('/dashboard')->with('message', 'Account Verified!');
                     }
                 }
@@ -283,25 +309,40 @@ class AuthController extends Controller
                         return redirect()->route('reconfirm.email')->with('info','Confirmation Code Already Sent. Please check your email and spam');
                     }
 
-                    $confirmation_code = mt_rand(10000, 99999);
-                    $hashed_confirmation_code = Hash::make($confirmation_code);
-                    $recipientEmail = auth()->user()->email;
-                    $imagePath = public_path('images/assets/branding.png');
+                    DB::beginTransaction();
 
-                    // Update the confirmation code in the database
-                    $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
+                    try {
 
-                    // sending confirmation_code email to user
-                    $data = [
-                        'email' => $recipientEmail,
-                        'confirmation_code' => $confirmation_code,
-                        'imagePath' => $imagePath,
-                    ];
-            
-                    Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+                        // initializing assets and data needed for sending email
+                        $confirmation_code = mt_rand(10000, 99999);
+                        $hashed_confirmation_code = Hash::make($confirmation_code);
+                        $recipientEmail = auth()->user()->email;
+                        $imagePath = public_path('images/assets/branding.png');
 
-                    return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+                        // Update the confirmation code in the database
+                        $deviceVerification->update(['confirmation_code' => $hashed_confirmation_code]);
 
+                        // sending confirmation_code email to user
+                        $data = [
+                            'email' => $recipientEmail,
+                            'confirmation_code' => $confirmation_code,
+                            'imagePath' => $imagePath,
+                        ];
+                
+                        Mail::to($recipientEmail)->send(new ConfirmationCodeMail($data));
+
+                        // Commit the transaction if all operations succeed
+                        DB::commit();
+
+                        return redirect()->route('reconfirm.email')->with('info','New Confirmation Code Sent. Please check your email and spam');
+
+                    } catch (\Exception $e) {
+                        // Rollback the transaction if any operation fails
+                        DB::rollBack();
+
+                        return redirect()->route('reconfirm.email')->with('error', 'An error occurred while sending an email.');
+                    }
+                    
                 }
             }
         }
