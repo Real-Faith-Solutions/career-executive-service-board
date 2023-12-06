@@ -1056,7 +1056,7 @@
                     // dd($filteredPlanAppointee);
                 @endphp
 
-                @if($filteredPlanAppointee > 1)
+                @if($filteredPlanAppointee > 0)
 
                     <tr class="bg-blue text-white text-center">
                         <td colspan="6" class="p-3">
