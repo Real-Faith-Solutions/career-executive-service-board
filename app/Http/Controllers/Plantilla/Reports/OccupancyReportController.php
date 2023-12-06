@@ -46,7 +46,7 @@ class OccupancyReportController extends Controller
         // Sorting the collection based on corp_sg, item_no, and lastname
         $planPosition = $planPosition->sortBy([
             ['corp_sg', 'desc'],
-            ['item_no', 'asc'],
+            ['item_no', 'desc'],
             ['planAppointee.personalData.lastname', 'asc'],
         ]);
 
