@@ -26,6 +26,7 @@ class DepartmentAgency extends Model
         'remarks',
         'submitted_by',
         'encoder',
+        'is_national_government',
     ];
 
     public function sectorManager(): BelongsTo

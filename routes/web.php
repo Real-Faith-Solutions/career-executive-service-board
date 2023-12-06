@@ -98,6 +98,7 @@ use App\Http\Controllers\Plantilla\Reports\CesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CesoAndNonCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportController;
 use App\Http\Controllers\Plantilla\Reports\CESOccupancyStatisticsReportSummaryController;
+use App\Http\Controllers\Plantilla\Reports\DepartmentBlueBookSelectorController;
 use App\Http\Controllers\Plantilla\Reports\NonCesoAndCesPositionController;
 use App\Http\Controllers\Plantilla\Reports\OccupancyReportController;
 use App\Http\Controllers\Plantilla\Reports\StatisticsController;
@@ -654,6 +655,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
 
             Route::get('ces-occupancy-statistics-report-summary/{deptid}', [CESOccupancyStatisticsReportSummaryController::class, 'generatePDF'])->name('ces-occupancy-statistics-report-summary.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
             Route::get('ces-occupancy-statistics-report/{deptid}', [CESOccupancyStatisticsReportController::class, 'generatePDF'])->name('ces-occupancy-statistics-report.pdf')->middleware('checkPermission:plantilla_occupancy_reports');
+
+
+            Route::get('blue-book-selector', [DepartmentBlueBookSelectorController::class, 'index'])->name('blue-book-selector.index')->middleware('checkPermission:plantilla_occupancy_reports');
+            Route::post('blue-book-selector/{deptid}setAsNational', [DepartmentBlueBookSelectorController::class, 'setAsNational'])->name('blue-book-selector.setAsNational')->middleware('checkPermission:plantilla_occupancy_reports');
+            Route::post('blue-book-selector/{deptid}setAsNotNational', [DepartmentBlueBookSelectorController::class, 'setAsNotNational'])->name('blue-book-selector.setAsNotNational')->middleware('checkPermission:plantilla_occupancy_reports');
         });
     });
     // End of plantilla routes
