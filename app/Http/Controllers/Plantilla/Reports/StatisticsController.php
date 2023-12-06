@@ -49,7 +49,11 @@ class StatisticsController extends Controller
                 $query->where('is_appointee', 1);
             })
             ->count();
-        $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
+        if($totalPosition){
+            $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
+        }else{
+            $occupiedCESPositionPercentage = 0;
+        }
 
         $vacantCESPosition = $totalPosition - $occupiedCESPosition;
         $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
@@ -70,7 +74,11 @@ class StatisticsController extends Controller
             })
             ->count();
 
-        $cesosAndEligiblesPercentage = round(($cesosAndEligibles / $occupiedCESPosition) * 100);
+        if($occupiedCESPosition){
+            $cesosAndEligiblesPercentage = round(($cesosAndEligibles / $occupiedCESPosition) * 100);
+        }else{
+            $cesosAndEligiblesPercentage = 0;
+        }
 
         $nonCesosAndNonEligibles = $occupiedCESPosition - $cesosAndEligibles;
         $nonCesosAndNonEligiblesPercentage = (100 - $cesosAndEligiblesPercentage);
@@ -248,10 +256,19 @@ class StatisticsController extends Controller
         $maleNonCesNonEligibles = ($countByMale - $maleCesoAndEligibles);
         $femaleNonCesNonEligibles = ($countByFemale - $femaleCesoAndEligibles);
 
-        $maleCesoAndEligiblesPercentage = round(($maleCesoAndEligibles / $occupiedCESPosition) * 100);
-        $nonMaleCesoAndEligiblesPercentage = round(($maleNonCesNonEligibles / $occupiedCESPosition) * 100);
-        $femaleCesoAndEligiblesPercentage = round(($femaleCesoAndEligibles / $occupiedCESPosition) * 100);
-        $nonFemaleCesoAndEligiblesPercentage = round(($femaleNonCesNonEligibles / $occupiedCESPosition) * 100);
+        if($occupiedCESPosition){
+            $maleCesoAndEligiblesPercentage = round(($maleCesoAndEligibles / $occupiedCESPosition) * 100);
+            $nonMaleCesoAndEligiblesPercentage = round(($maleNonCesNonEligibles / $occupiedCESPosition) * 100);
+            $femaleCesoAndEligiblesPercentage = round(($femaleCesoAndEligibles / $occupiedCESPosition) * 100);
+            $nonFemaleCesoAndEligiblesPercentage = round(($femaleNonCesNonEligibles / $occupiedCESPosition) * 100);
+
+        }else{
+            $maleCesoAndEligiblesPercentage = 0;
+            $nonMaleCesoAndEligiblesPercentage = 0;
+            $femaleCesoAndEligiblesPercentage = 0;
+            $nonFemaleCesoAndEligiblesPercentage = 0;
+        }
+        
 
         $totalPercentage = $maleCesoAndEligiblesPercentage +
             $nonMaleCesoAndEligiblesPercentage +
@@ -260,7 +277,12 @@ class StatisticsController extends Controller
 
         $nonFemaleCesoAndEligiblesPercentage = round($nonFemaleCesoAndEligiblesPercentage + (100 - $totalPercentage));
 
-        $countByMalePercentage = round(($countByMale / $occupiedCESPosition) * 100);
+        if($occupiedCESPosition){
+            $countByMalePercentage = round(($countByMale / $occupiedCESPosition) * 100);
+        }else{
+            $countByMalePercentage = 0;
+        }
+        
         $countByFemalePercentage = (100 - $countByMalePercentage);
 
         $pdf = Pdf::loadView(
