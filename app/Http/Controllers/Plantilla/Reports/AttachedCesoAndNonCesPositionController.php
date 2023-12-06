@@ -39,7 +39,7 @@ class AttachedCesoAndNonCesPositionController extends Controller
                         $query->where('is_appointee', true);
                     });
             })
-            ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
+            // ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
             ->orderBy('title', 'asc')
             ->get();
 

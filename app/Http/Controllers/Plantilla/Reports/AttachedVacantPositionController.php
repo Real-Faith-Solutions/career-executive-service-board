@@ -40,12 +40,12 @@ class AttachedVacantPositionController extends Controller
                         $query->where('is_appointee', 1);
                     });
             })
-            
-            ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
+
+            // ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
             ->orderBy('title', 'asc')
             ->get();
 
-            $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
+        $planPosition = PlanPosition::select('plantilla_id', 'pos_default', 'corp_sg', 'item_no', 'officeid', 'is_ces_pos', 'pres_apptee')
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
                 $query->where('mother_deptid', $deptid);
             })
