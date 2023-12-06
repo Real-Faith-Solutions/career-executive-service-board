@@ -1058,7 +1058,7 @@
                 {{-- @if($filteredPlanAppointee > 1) --}}
 
                     <tr class="bg-blue text-white text-center">
-                        <td colspan="7" class="p-3">
+                        <td colspan="7">
                             <span class="uppercase">{{ $departmentDatas->title }}</span>
                             <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastupd_dt)->format('d F Y') }})</span>
                         </td>
@@ -1110,13 +1110,14 @@
                                     {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
                                 </td>
 
-
                             </tr>
                         @endif
                     @endforeach
-                
+                    <br>
+                    
                 {{-- @endif --}}
             @endforeach
+            
 
         </tbody>
     </table>

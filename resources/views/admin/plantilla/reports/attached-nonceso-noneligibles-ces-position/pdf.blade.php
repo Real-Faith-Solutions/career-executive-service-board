@@ -1112,7 +1112,7 @@
                             </tr>
                         @endif
                     @endforeach
-                
+                    <br>
                 @endif
             @endforeach
 
