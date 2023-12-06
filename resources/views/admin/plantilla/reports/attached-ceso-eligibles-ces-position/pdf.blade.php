@@ -1050,13 +1050,13 @@
                  @php
                     $no = 1;
                     $currentDeptID = $departmentDatas->deptid;
-                    // $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition.office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
-                    //     $query->where('deptid', $currentDeptID);
-                    // })->count();
+                    $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition.office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
+                        $query->where('deptid', $currentDeptID);
+                    })->count();
                     // dd($filteredPlanAppointee);
                 @endphp
 
-                {{-- @if($filteredPlanAppointee > 1) --}}
+                @if($filteredPlanAppointee > 1)
 
                     <tr class="bg-blue text-white text-center">
                         <td colspan="6" class="p-3">
@@ -1103,7 +1103,7 @@
                         @endif
                     @endforeach
                 
-                {{-- @endif --}}
+                @endif
             @endforeach
 
         </tbody>
