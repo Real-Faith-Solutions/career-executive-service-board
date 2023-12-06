@@ -1094,7 +1094,7 @@
 
             @if($filteredPlanPositions->isNotEmpty())
             <tr style="font-size:11px">
-                <td style="padding: 0">
+                <td style="padding: 0" colspan="9">
                     <h1 class="text-blue bold">
                         {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->title }})
                     </h1>
