@@ -36,254 +36,268 @@ class StatisticsController extends Controller
             ->where('is_active', 1)
             ->count();
 
-
-
-        $occupiedCESPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1);
+        if ($totalPosition) {
+            $occupiedCESPosition = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                $query->where('mother_deptid', $deptid)
+                    ->orWhere('deptid', $deptid);
             })
-            ->count();
-        if($totalPosition){
-            $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
-        }else{
-            $occupiedCESPositionPercentage = 0;
-        }
+                ->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1)
+                ->whereHas('planAppointee', function ($query) {
+                    $query->where('is_appointee', 1);
+                })
+                ->count();
 
-        $vacantCESPosition = $totalPosition - $occupiedCESPosition;
-        $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
+            if ($occupiedCESPosition) {
+                $occupiedCESPositionPercentage = round(($occupiedCESPosition / $totalPosition) * 100);
+                $vacantCESPosition = $totalPosition - $occupiedCESPosition;
+                $vacantCESPositionPercentage = (100 - $occupiedCESPositionPercentage);
 
-        $cesosAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData.cesStatus', function ($query) {
-                        $query->where('description', 'LIKE', '%Eli%')
-                            ->orWhere('description', 'LIKE', '%CES%');
-                    });
-            })
-            ->count();
+                $cesosAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData.cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%Eli%')
+                                    ->orWhere('description', 'LIKE', '%CES%');
+                            });
+                    })
+                    ->count();
 
-        if($occupiedCESPosition){
-            $cesosAndEligiblesPercentage = round(($cesosAndEligibles / $occupiedCESPosition) * 100);
-        }else{
-            $cesosAndEligiblesPercentage = 0;
-        }
+                $cesosAndEligiblesPercentage = round(($cesosAndEligibles / $occupiedCESPosition) * 100);
 
-        $nonCesosAndNonEligibles = $occupiedCESPosition - $cesosAndEligibles;
-        $nonCesosAndNonEligiblesPercentage = (100 - $cesosAndEligiblesPercentage);
 
-        $ceso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData.cesStatus', function ($query) {
-                        $query->where('description', 'LIKE', '%CES%');
-                    });
-            })
-            ->count();
-        if ($cesosAndEligibles) {
-            $cesoPercentage = round(($ceso / $cesosAndEligibles) * 100);
+                $nonCesosAndNonEligibles = $occupiedCESPosition - $cesosAndEligibles;
+                $nonCesosAndNonEligiblesPercentage = (100 - $cesosAndEligiblesPercentage);
+
+                $ceso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData.cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%CES%');
+                            });
+                    })
+                    ->count();
+                $cesoPercentage = round(($ceso / $cesosAndEligibles) * 100);
+                $eligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData.cesStatus', function ($query) {
+                                $query->where('description', 'LIKE', '%Eli%');
+                            });
+                    })
+                    ->count();
+                $eligiblesPercentage = (100 - $cesoPercentage);
+
+                $maleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Male')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%CES%')
+                                            ->orWhere('description', 'LIKE', '%Eli%');
+                                    });
+                            });
+                    })
+                    ->count();
+
+                $maleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Male')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%CES%');
+                                    });
+                            });
+                    })
+                    ->count();
+                $maleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Male')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%Eli%');
+                                    });
+                            });
+                    })
+                    ->count();
+                $femaleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Female')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%CES%')
+                                            ->orWhere('description', 'LIKE', '%Eli%');
+                                    });
+                            });
+                    })
+                    ->count();
+
+                $femaleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Female')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%CES%');
+                                    });
+                            });
+                    })
+                    ->count();
+                $femaleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Female')
+                                    ->whereHas('cesStatus', function ($query) {
+                                        $query->where('description', 'LIKE', '%Eli%');
+                                    });
+                            });
+                    })
+                    ->count();
+
+                $countByMale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Male');
+                            });
+                    })
+                    ->count();
+                $countByFemale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
+                    $query->where('mother_deptid', $deptid)
+                        ->orWhere('deptid', $deptid);
+                })
+                    ->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1)
+                    ->whereHas('planAppointee', function ($query) {
+                        $query->where('is_appointee', 1)
+                            ->whereHas('personalData', function ($query) {
+                                $query->where('gender', 'Female');
+                            });
+                    })
+                    ->count();
+                $maleNonCesNonEligibles = ($countByMale - $maleCesoAndEligibles);
+                $femaleNonCesNonEligibles = ($countByFemale - $femaleCesoAndEligibles);
+
+                $maleCesoAndEligiblesPercentage = round(($maleCesoAndEligibles / $occupiedCESPosition) * 100);
+                $nonMaleCesoAndEligiblesPercentage = round(($maleNonCesNonEligibles / $occupiedCESPosition) * 100);
+                $femaleCesoAndEligiblesPercentage = round(($femaleCesoAndEligibles / $occupiedCESPosition) * 100);
+                $nonFemaleCesoAndEligiblesPercentage = round(($femaleNonCesNonEligibles / $occupiedCESPosition) * 100);
+
+
+                $totalPercentage = $maleCesoAndEligiblesPercentage +
+                    $nonMaleCesoAndEligiblesPercentage +
+                    $femaleCesoAndEligiblesPercentage +
+                    $nonFemaleCesoAndEligiblesPercentage;
+
+                $nonFemaleCesoAndEligiblesPercentage = round($nonFemaleCesoAndEligiblesPercentage + (100 - $totalPercentage));
+
+                $countByMalePercentage = round(($countByMale / $occupiedCESPosition) * 100);
+
+
+                $countByFemalePercentage = (100 - $countByMalePercentage);
+            }
         } else {
-            $cesoPercentage = null;
-        }
-        $eligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData.cesStatus', function ($query) {
-                        $query->where('description', 'LIKE', '%Eli%');
-                    });
-            })
-            ->count();
-        $eligiblesPercentage = (100 - $cesoPercentage);
-
-        $maleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Male')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%CES%')
-                                    ->orWhere('description', 'LIKE', '%Eli%');
-                            });
-                    });
-            })
-            ->count();
-
-        $maleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Male')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%CES%');
-                            });
-                    });
-            })
-            ->count();
-        $maleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Male')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%Eli%');
-                            });
-                    });
-            })
-            ->count();
-        $femaleCesoAndEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Female')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%CES%')
-                                    ->orWhere('description', 'LIKE', '%Eli%');
-                            });
-                    });
-            })
-            ->count();
-
-        $femaleCeso = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Female')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%CES%');
-                            });
-                    });
-            })
-            ->count();
-        $femaleEligibles = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Female')
-                            ->whereHas('cesStatus', function ($query) {
-                                $query->where('description', 'LIKE', '%Eli%');
-                            });
-                    });
-            })
-            ->count();
-
-        $countByMale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Male');
-                    });
-            })
-            ->count();
-        $countByFemale = PlanPosition::whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid, $motherDepartmentAgency) {
-            $query->where('mother_deptid', $deptid)
-                ->orWhere('deptid', $deptid);
-        })
-            ->where('is_ces_pos', 1)
-            ->where('pres_apptee', 1)
-            ->where('is_active', 1)
-            ->whereHas('planAppointee', function ($query) {
-                $query->where('is_appointee', 1)
-                    ->whereHas('personalData', function ($query) {
-                        $query->where('gender', 'Female');
-                    });
-            })
-            ->count();
-        $maleNonCesNonEligibles = ($countByMale - $maleCesoAndEligibles);
-        $femaleNonCesNonEligibles = ($countByFemale - $femaleCesoAndEligibles);
-
-        if($occupiedCESPosition){
-            $maleCesoAndEligiblesPercentage = round(($maleCesoAndEligibles / $occupiedCESPosition) * 100);
-            $nonMaleCesoAndEligiblesPercentage = round(($maleNonCesNonEligibles / $occupiedCESPosition) * 100);
-            $femaleCesoAndEligiblesPercentage = round(($femaleCesoAndEligibles / $occupiedCESPosition) * 100);
-            $nonFemaleCesoAndEligiblesPercentage = round(($femaleNonCesNonEligibles / $occupiedCESPosition) * 100);
-
-        }else{
-            $maleCesoAndEligiblesPercentage = 0;
-            $nonMaleCesoAndEligiblesPercentage = 0;
-            $femaleCesoAndEligiblesPercentage = 0;
-            $nonFemaleCesoAndEligiblesPercentage = 0;
-        }
-        
-
-        $totalPercentage = $maleCesoAndEligiblesPercentage +
-            $nonMaleCesoAndEligiblesPercentage +
-            $femaleCesoAndEligiblesPercentage +
-            $nonFemaleCesoAndEligiblesPercentage;
-
-        $nonFemaleCesoAndEligiblesPercentage = round($nonFemaleCesoAndEligiblesPercentage + (100 - $totalPercentage));
-
-        if($occupiedCESPosition){
-            $countByMalePercentage = round(($countByMale / $occupiedCESPosition) * 100);
-        }else{
+            $countByFemalePercentage = 0;
             $countByMalePercentage = 0;
+            $nonMaleCesoAndEligiblesPercentage = 0;
+            $nonFemaleCesoAndEligiblesPercentage = 0;
+            $femaleCesoAndEligiblesPercentage = 0;
+            $maleCesoAndEligiblesPercentage = 0;
+            $femaleNonCesNonEligibles = 0;
+            $maleNonCesNonEligibles = 0;
+            $countByFemale = 0;
+            $countByMale = 0;
+            $femaleEligibles = 0;
+            $femaleCeso = 0;
+            $femaleCesoAndEligibles = 0;
+            $maleEligibles = 0;
+            $maleCeso = 0;
+            $maleCesoAndEligibles = 0;
+            $eligiblesPercentage = 0;
+            $eligibles = 0;
+            $cesoPercentage = 0;
+            $ceso = 0;
+            $nonCesosAndNonEligiblesPercentage = 0;
+            $nonCesosAndNonEligibles = 0;
+            $cesosAndEligiblesPercentage = 0;
+            $cesosAndEligibles = 0;
+            $occupiedCESPositionPercentage = 0;
+            $vacantCESPositionPercentage = 0;
+            $totalPosition = 0;
+            $occupiedCESPosition = 0;
+            $vacantCESPosition = 0;
         }
-        
-        $countByFemalePercentage = (100 - $countByMalePercentage);
+
+
+
+
 
         $pdf = Pdf::loadView(
             'admin.plantilla.reports.statistics.pdf',
