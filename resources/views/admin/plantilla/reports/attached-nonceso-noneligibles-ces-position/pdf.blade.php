@@ -1051,17 +1051,22 @@
                     $no = 1;
                     $currentDeptID = $departmentDatas->deptid;
                     $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition', function ($query) use($currentDeptID) {
-                        $query->where('is_ces_pos', 1)
-                        ->where('pres_apptee', 1)
+                        $query->where('is_ces_pos', '!=', 1)
+                        ->orWhere('pres_apptee', '!=', 1)
                         ->where('is_active', 1)
-                        ->whereHas('office.agencyLocation', function ($query) use($currentDeptID){
-                        $query->where('deptid', $currentDeptID);
-                    });
-                })
+                        ->whereHas('office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
+                            $query->where('deptid', $currentDeptID);
+                        });
+                    })
+                    ->whereHas('personalData.cesStatus', function ($query) {
+                        $query->where('description', 'not like', '%Ces%')
+                        ->where('description', 'not like', '%Eli%');
+                    })
+                    ->where('is_appointee', 1)
                     ->count();
                 @endphp
 
-                @if($filteredPlanAppointee > 1)
+                @if($filteredPlanAppointee > 0)
 
                     <tr class="bg-blue text-white text-center">
                         <td colspan="6" class="p-3">
