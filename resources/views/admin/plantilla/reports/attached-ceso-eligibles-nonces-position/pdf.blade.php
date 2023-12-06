@@ -1053,17 +1053,18 @@
                     $filteredPlanAppointee = \App\Models\Plantilla\PlanAppointee::whereHas('planPosition', function ($query) use($currentDeptID) {
                         $query->where('is_ces_pos', '!=', 1)
                         ->orWhere('pres_apptee', '!=', 1)
-                        ->where('is_active', 1)
-                        ->whereHas('office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
-                            $query->where('deptid', $currentDeptID);
-                        });
+                        ->where('is_active', 1);
                     })
                     ->whereHas('personalData.cesStatus', function ($query) {
                         $query->where('description', 'LIKE', '%Ces%')
                             ->orWhere('description', 'LIKE', '%Eli%');
                     })
+                    ->whereHas('planPosition.office.agencyLocation.departmentAgency', function ($query) use($currentDeptID){
+                            $query->where('deptid', $currentDeptID);
+                        })
                     ->where('is_appointee', 1)
                     ->count();
+                    // dd($filteredPlanAppointee);
                 @endphp
 
                 @if($filteredPlanAppointee > 0)
