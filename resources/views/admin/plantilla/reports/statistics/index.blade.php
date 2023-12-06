@@ -51,7 +51,7 @@
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
             <div>
-                <p>Total Plantilla</p>
+                <p>TOTAL NO. OF CES POSITIONS</p>
                 <h1 class="text-3xl font-bold">{{ $plantillaAll }}</h1>
             </div>
 
@@ -67,7 +67,7 @@
     <div class="card bg-green-100">
         <div class="flex justify-between text-green-500 items-center">
             <div>
-                <p>Total Plantilla CES Only</p>
+                <p>CESOs and Eligibles</p>
                 <h1 class="text-3xl font-bold">{{ $plantillaCES }}</h1>
             </div>
 
@@ -80,7 +80,7 @@
         <br>
         <div>
             <p class="text-sm">
-                Percentage of total CES employees.
+                Percentage of total Occupied CES Positions
             </p>
             <span class="text-green-500 rounded opacity-75">
                 {{ $percentageCES }} %
@@ -91,7 +91,7 @@
     <div class="card bg-orange-100">
         <div class="flex justify-between text-orange-500 items-center">
             <div>
-                <p>Total Plantilla Non-CES Only</p>
+                <p>Non-CESOs and Non-Eligibles</p>
                 <h1 class="text-3xl font-bold">{{ $plantillaNonCES }}</h1>
             </div>
 
@@ -103,7 +103,7 @@
         </div>
         <br>
         <p class="text-sm">
-            Percentage of total non-CES employees
+            Percentage of total Occupied CES Positions
         </p>
         <span class="text-orange-500 rounded opacity-75">
             {{ $percentageNonCES }} %

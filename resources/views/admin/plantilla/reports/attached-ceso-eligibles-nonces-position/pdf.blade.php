@@ -1075,7 +1075,7 @@
 
                     @foreach($planAppointee as $planAppointeeDatas)
                     
-                        @if($departmentDatas->deptid == $planAppointeeDatas->planPosition->office->agencyLocation->deptid)
+                        @if($departmentDatas->deptid == $planAppointeeDatas->planPosition->office->agencyLocation->departmentAgency->deptid)
                             
                             <tr class="striped" style="font-size:11px">
                                 <td class="text-center">{{ $no++ }}</td>
