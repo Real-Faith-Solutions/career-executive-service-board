@@ -36,7 +36,7 @@ class AttachedCesoAndCesPositionController extends Controller
                     ->where('pres_apptee', 1)
                     ->where('is_active', 1)
                     ->whereHas('planAppointee', function ($query) {
-                        $query->where('is_appointee', true);
+                        $query->where('is_appointee', 1);
                     });
             })
             // ->has('agencyLocation.office.planPosition.planAppointee') // Ensure at least one planAppointee
