@@ -355,6 +355,15 @@ class StatisticsController extends Controller
             ->where('is_active', 1)
             ->count();
 
+        $occupiedCESPosition = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('planAppointee', function ($query) {
+                $query->where('is_appointee', 1);
+            })
+            ->count();
+
 
         $plantillaCES = PlanPosition::query()
             ->where('is_ces_pos', 1)
@@ -383,8 +392,8 @@ class StatisticsController extends Controller
             ->count();
 
         if ($plantillaAll != null) {
-            $percentageCES = ($plantillaCES / $plantillaAll) * 100;
-            $percentageNonCES = ($plantillaNonCES / $plantillaAll) * 100;
+            $percentageCES = ($plantillaCES / $occupiedCESPosition) * 100;
+            $percentageNonCES = (100 - $percentageCES);
         } else {
             $percentageCES = null;
             $percentageNonCES = null;
