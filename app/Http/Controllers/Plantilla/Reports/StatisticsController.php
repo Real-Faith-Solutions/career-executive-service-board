@@ -389,9 +389,15 @@ class StatisticsController extends Controller
     {
         $recentAppointee = PlanAppointee::query()
             ->where('is_appointee', 1)
-            ->orderBy('plantilla_id', 'DESC')
-            ->take(5)
+            ->whereHas('planPosition', function ($query) {
+                $query->where('is_ces_pos', 1)
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1);
+            })
+            ->orderBy('created_dt', 'desc')
+            ->limit(5)
             ->get();
+
 
         $plantillaAll = PlanPosition::query()
             ->where('is_ces_pos', 1)
