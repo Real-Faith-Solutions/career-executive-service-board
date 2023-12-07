@@ -321,6 +321,11 @@ class ProfileController extends Controller
             // Get the user based on the $cesno
             $user = User::where('personal_data_cesno', $cesno)->first();
 
+            if($user){
+                // Update the user email
+                $user->email = $request->email;
+                $user->save();
+            }
 
             // Commit the transaction if all operations succeed
             DB::commit();
