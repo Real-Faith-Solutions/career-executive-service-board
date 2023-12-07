@@ -56,12 +56,22 @@
                     <div class="mb-3">
                         <label for="mother_deptid">Mother Agency<sup>*</sup></label>
                         <select id="mother_deptid" name="mother_deptid" required>
-                            @foreach ($motherDepartment as $data)
-                            <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
-                                'selected' : ''}}>
-                                {{ $data->title }}
-                            </option>
-                            @endforeach
+
+                            @if($department->mother_deptid == 0)
+                                
+                                <option value="0">{{$department->title}}</option>
+
+                            @else
+                                @foreach ($motherDepartment as $data)
+                                <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
+                                    'selected' : ''}}>
+                                    {{ $data->title }}
+                                </option>
+                                @endforeach
+
+                            @endif
+
+                            
                         </select>
                         @error('mother_deptid')
                         <span class="invalid" role="alert">

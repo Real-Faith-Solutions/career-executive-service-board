@@ -114,7 +114,7 @@
 </div>
 
 <div class="m-5">
-    {{ $datas->links() }}
+    {{ $datas->appends(['search' => $query, 'sectorToggle' => $sectorToggle])->links() }}
 </div>
 
 @endsection
