@@ -73,7 +73,7 @@
                     {{ $data->acronym }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->motherDepartment->title ?? 'N/A'}}
+                    {{ $data->motherDepartment->title ?? $data->title }}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->departmentAgencyType->title ?? 'N/A' }}
