@@ -18,8 +18,8 @@ class DepartmentBlueBookSelectorController extends Controller
 
         $motherDepartmentAgencySelector = DepartmentAgency::query()
             ->select('deptid', 'title')
-            ->where('is_national_government', 0)
-            ->orWhere('is_national_government', null)
+            // ->where('is_national_government', 0)
+            // ->orWhere('is_national_government', null)
             ->where('mother_deptid', 0)
             ->whereHas('agencyLocation.office.planPosition', function ($query){
                 $query->where('is_ces_pos', 1)

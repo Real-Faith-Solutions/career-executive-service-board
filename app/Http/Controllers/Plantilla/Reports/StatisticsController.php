@@ -341,10 +341,25 @@ class StatisticsController extends Controller
     public function index(Request $request)
     {
         $motherDepartmentAgency = DepartmentAgency::query()
-            ->where('is_national_government', 1)
-            ->select('title', 'deptid')
+            ->select('deptid', 'title')
+            // ->where('is_national_government', 0)
+            // ->orWhere('is_national_government', null)
+            ->where('mother_deptid', 0)
+            ->whereHas('agencyLocation.office.planPosition', function ($query){
+                $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1);
+            })
             ->orderBy('title', 'asc')
             ->get();
+
+        //     ->where('is_national_government', 1)
+        //     ->select('title', 'deptid')
+        //     ->orderBy('title', 'asc')
+        //     ->get();
+
+        
+
         $chartsAndDatas = $this->chartsAndDatas();
         $totalMaleCESOChart = $chartsAndDatas['totalMaleCESOChart'];
         $totalFemaleCESOChart = $chartsAndDatas['totalFemaleCESOChart'];
