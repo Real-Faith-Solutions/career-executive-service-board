@@ -165,10 +165,11 @@ class ProfileController extends Controller
             $user = $newProfile->users()->Create([
                 'email' => $newProfile->email,
                 'password' => $hashedPassword,
-                'is_active'                    => 'Active',
-                'last_updated_by'           => 'system encode',
-                'encoder'                   => $encoder,
-                'default_password_change'   => 'true',
+                'is_active' => 'Active',
+                'last_updated_by' => 'system encode',
+                'encoder' => $encoder,
+                'default_password_change' => 'true',
+                'two_factor' => true,
             ]);
 
             $user->assignRole('user');
