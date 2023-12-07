@@ -14,7 +14,17 @@ class VacantPositionController extends Controller
 {
     public function index()
     {
-        $motherDepartment = DepartmentAgency::where('is_national_government', 1)->get();
+        $motherDepartment = DepartmentAgency::query()
+            ->select('deptid', 'title')
+            ->where('mother_deptid', 0)
+            ->whereHas('agencyLocation.office.planPosition', function ($query){
+                $query->where('is_ces_pos', 1)
+                ->where('pres_apptee', 1)
+                ->where('is_active', 1);
+            })
+            ->orderBy('title', 'asc')
+            ->get();
+
         return view('admin.plantilla.reports.vacant-position.index', compact(
             'motherDepartment'
         ));
