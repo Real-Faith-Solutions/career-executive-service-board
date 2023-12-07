@@ -76,19 +76,6 @@ class RankTrackerController extends Controller
 
         $erisTblMain->rankTracker()->save($rankTracker);
 
-        // store in rank tracker 201
-        RankTracker201::create([
-
-            'cesno' =>  $cesno,
-            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
-            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
-            'description' => $request->description,
-            'remarks' => $request->remarks,
-            'submit_dt' => $request->submit_dt, //  submit date,
-            'encoder' =>  $this->getFullNameAttribute(),
-            
-        ]);
-   
         return to_route('eris-rank-tracker.index', ['acno'=>$acno])->with('message', 'Save Sucessfully');
     }
 
@@ -103,19 +90,6 @@ class RankTrackerController extends Controller
 
     public function update(Request $request, $acno, $ctrlno)
     {
-        $cesno = EradTblMain::where('acno', $acno)->value('cesno');
-
-        DB::table('erad_tblRankTracker201')
-        ->where('cesno', $cesno)
-        ->update([
-            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
-            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
-            'description' => $request->description,
-            'remarks' => $request->remarks,
-            'submit_dt' => $request->submit_dt, //  submit date,
-            'lastupd_enc' => $this->getFullNameAttribute(),
-        ]);
-
         $rankTracker = RankTracker::find($ctrlno);
         $rankTracker->description = $request->description;
         $rankTracker->submit_dt = $request->submit_dt; // submit date
@@ -128,31 +102,9 @@ class RankTrackerController extends Controller
     public function destroy($ctrlno, $cesno)
     {
         $rankTracker = RankTracker::find($ctrlno);
-
-        if ($rankTracker) 
-        {
-            $ctrlno = RankTracker201::where('cesno', $cesno)
-                ->where('r_catid', $rankTracker->r_catid)
-                ->where('r_ctrlno', $rankTracker->r_ctrlno)
-                ->where('description', $rankTracker->description)
-                ->where('remarks', $rankTracker->remarks)
-                ->where('submit_dt', $rankTracker->submit_dt)
-                ->value('ctrlno');
-
-            $rankTracker201 = RankTracker201::find($ctrlno);
-
-            if ($rankTracker201) 
-            {
-                $rankTracker201->delete();
-                $rankTracker->delete();
-            }        
-        } 
-        else 
-        {
-            return back()->with('error', 'Data Not Found');
-        }
-
-       return back()->with('message', 'Deleted Sucessfully');        
+        $rankTracker->delete();
+       
+        return back()->with('message', 'Deleted Sucessfully');        
     }
 
     public function recentlyDeleted($acno)
@@ -170,64 +122,16 @@ class RankTrackerController extends Controller
     public function restore($ctrlno, $cesno)
     {
         $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
+        $rankTrackerTrashedRecord->restore();
 
-        if ($rankTrackerTrashedRecord) 
-        {
-            $controlNo = RankTracker201::onlyTrashed()
-                ->where('cesno', $cesno)
-                ->where('r_catid', $rankTrackerTrashedRecord->r_catid)
-                ->where('r_ctrlno', $rankTrackerTrashedRecord->r_ctrlno)
-                ->where('description', $rankTrackerTrashedRecord->description)
-                ->where('remarks', $rankTrackerTrashedRecord->remarks)
-                ->where('submit_dt', $rankTrackerTrashedRecord->submit_dt)
-                ->value('ctrlno');
-        
-            if ($controlNo) 
-            {
-                $rankTracker201TrashedRecord = RankTracker201::onlyTrashed()->find($controlNo);
-
-                if ($rankTracker201TrashedRecord) 
-                {
-                    $rankTracker201TrashedRecord->restore();
-                    $rankTrackerTrashedRecord->restore();
-
-                    return back()->with('info', 'Data Restored Successfully');
-                }
-            }
-        }
-        
-        return back()->with('error', 'Data Not Found or Could Not Be Restored');        
+        return back()->with('info', 'Data Restored Successfully');
     }
 
     public function forceDelete($ctrlno, $cesno)
     {
         $rankTrackerTrashedRecord = RankTracker::onlyTrashed()->find($ctrlno);
+        $rankTrackerTrashedRecord->forceDelete();
 
-        if ($rankTrackerTrashedRecord) 
-        {
-            $controlNo = RankTracker201::onlyTrashed()
-                ->where('cesno', $cesno)
-                ->where('r_catid', $rankTrackerTrashedRecord->r_catid)
-                ->where('r_ctrlno', $rankTrackerTrashedRecord->r_ctrlno)
-                ->where('description', $rankTrackerTrashedRecord->description)
-                ->where('remarks', $rankTrackerTrashedRecord->remarks)
-                ->where('submit_dt', $rankTrackerTrashedRecord->submit_dt)
-                ->value('ctrlno');
-        
-            if ($controlNo) 
-            {
-                $rankTracker201TrashedRecord = RankTracker201::onlyTrashed()->find($controlNo);
-
-                if ($rankTracker201TrashedRecord) 
-                {
-                    $rankTracker201TrashedRecord->forceDelete();
-                    $rankTrackerTrashedRecord->forceDelete();
-
-                    return back()->with('info', 'Data Permanently Deleted');
-                }
-            }
-        }
-        
-        return back()->with('error', 'Data Not Found or Could Not Be Deleted');          
+        return back()->with('info', 'Data Permanently Deleted');     
     }
 }
