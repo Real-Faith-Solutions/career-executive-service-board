@@ -103,6 +103,19 @@ class RankTrackerController extends Controller
 
     public function update(Request $request, $acno, $ctrlno)
     {
+        $cesno = EradTblMain::where('acno', $acno)->value('cesno');
+
+        DB::table('erad_tblRankTracker201')
+        ->where('cesno', $cesno)
+        ->update([
+            'r_catid' => $this->libraryRankTracker->getRankTrackerCatId($request->description),
+            'r_ctrlno' => $this->libraryRankTracker->getRankTrackerControlNo($request->description),
+            'description' => $request->description,
+            'remarks' => $request->remarks,
+            'submit_dt' => $request->submit_dt, //  submit date,
+            'lastupd_enc' => $this->getFullNameAttribute(),
+        ]);
+
         $rankTracker = RankTracker::find($ctrlno);
         $rankTracker->description = $request->description;
         $rankTracker->submit_dt = $request->submit_dt; // submit date
