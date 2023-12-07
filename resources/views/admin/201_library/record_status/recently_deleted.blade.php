@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Recently Deleted - Civil Status - 201 Library')
+@section('title', 'Recently Deleted - Record Status - 201 Library')
 @section('content')
 
 <div class="my-5 flex justify-end gap-4">
-    <a class="btn btn-primary" href="{{ route('civil-status.index') }}">Go back</a>
+    <a class="btn btn-primary" href="{{ route('record-status.index') }}">Go back</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
