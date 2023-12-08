@@ -43,6 +43,7 @@
                         </li>
 
                         <li>
+                            {{-- Field of Specializatio --}}
                             <a class="btn category-button inline-flex" href="{{ route('field-specialization.index') }}" >Field of Specialization</a>
                         </li>
 
