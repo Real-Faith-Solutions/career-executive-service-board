@@ -1340,7 +1340,7 @@
             <tr class="bold italic" style="font-size:11px">
                 <td colspan="9">
                     <h1>
-                        TOTAL NO. OF POSITIONS: {{ $totalCount }}
+                        TOTAL NO. OF POSITIONS: {{ $totalPosition }}
                     </h1>
                 </td>
             </tr>
