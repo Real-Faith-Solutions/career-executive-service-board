@@ -1118,7 +1118,7 @@
 
             <p class="italic" style="font-size: 12px">
                 (Data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
+                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
@@ -1166,7 +1166,7 @@
 
             <p class="italic" style="font-size: 12px">
                 (Data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}, date of
+                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}, date of
                 last submission of CES Plantilla)
             </p>
         </div>
