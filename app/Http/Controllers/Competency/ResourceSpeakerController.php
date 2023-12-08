@@ -32,7 +32,7 @@ class ResourceSpeakerController extends Controller
             ->orWhere('firstname',  "LIKE","%$search%")
             ->orWhere('middlename',  "LIKE","%$search%")
             ->orWhere('name_extension',  "LIKE","%$search%")
-            ->get();
+            ->paginate(100);
 
         if ($search !== null && !is_numeric($search)) 
         {
@@ -213,6 +213,6 @@ class ResourceSpeakerController extends Controller
         ->withTrashed()
         ->paginate(25);
 
-        return view('admin.competency.partials.trainings_sub_module.resource_speaker.training_engagement', compact('trainingEnagagement'));
+        return view('admin.competency.partials.trainings_sub_module.resource_speaker.training_engagement', compact('trainingEnagagement', 'resourceSpeaker'));
     }
 }
