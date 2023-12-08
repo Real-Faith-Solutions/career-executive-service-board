@@ -1036,7 +1036,7 @@
             List of Non-CESOs and Non-Eligibles in CES Positions
         </h1>
         <p>
-            data as of {{ $currentDate }}
+            data as of {{ $motherDepartmentAgency->lastsubmit_dt }}
         </p>
     </center>
     <br />

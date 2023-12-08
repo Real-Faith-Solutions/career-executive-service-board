@@ -1103,7 +1103,7 @@
                 <td colspan="9" style="padding: 0 0;">
                     <h1 class="text-blue bold">
                         {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
-                        {{-- data as of {{ $currentDate }} --}}
+                        {{-- data as of {{ $officeDatas->agencyLocation->departmentAgency->lastsubmit_dt }} --}}
                     </h1>
                 </td>
             </tr>
