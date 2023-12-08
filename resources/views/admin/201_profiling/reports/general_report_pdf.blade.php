@@ -192,15 +192,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rowNumber = 1;
-                    @endphp
 
                     @foreach ($personalData as $personalDatas)
                         <tr>
 
                             <td>
-                                {{ $rowNumber++ }}
+                                {{ ++$skippedData }}
                             </td>
 
                             <td>

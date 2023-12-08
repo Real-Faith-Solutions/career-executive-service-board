@@ -261,7 +261,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData'
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream($filename);
