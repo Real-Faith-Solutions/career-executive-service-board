@@ -1060,7 +1060,7 @@
                     <tr class="bg-blue text-white text-center">
                         <td colspan="7">
                             <span class="uppercase">{{ $departmentDatas->title }}</span>
-                            <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastupd_dt)->format('d F Y') }})</span>
+                            <span>(data as of {{ \Carbon\Carbon::parse($departmentDatas->lastsubmit_dt)->format('d F Y') }})</span>
                         </td>
                     </tr>
                     <tr class="text-center text-blue" style="font-size: 11px;background: none">
