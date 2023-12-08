@@ -157,9 +157,9 @@
                             
                         </th>
 
-                        <th>
+                        {{-- <th>
                             Ces No.
-                        </th>
+                        </th> --}}
 
                         <th>
                             Name
@@ -200,9 +200,9 @@
                                 {{ ++$skippedData }}
                             </td>
 
-                            <td>
+                            {{-- <td>
                                 {{ $personalDatas->cesno }}
-                            </td>
+                            </td> --}}
 
                             <td>
                                 {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
