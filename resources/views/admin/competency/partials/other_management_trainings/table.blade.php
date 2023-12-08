@@ -4,17 +4,23 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-<div class="my-5 flex justify-end">
-    <a href="{{ route('non-ces-training-management.recentlyDeleted', ['cesno'=>$cesno]) }}">
-        <lord-icon
-            src="https://cdn.lordicon.com/jmkrnisz.json"
-            trigger="hover"
-            colors="primary:#DC3545"
-            style="width:34px;height:34px">
-        </lord-icon>
-    </a>
-    
-    <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
+<div class="my-5 flex justify-between">
+    <div class="flex items-center">
+        <a href="{{ route('competency-data.index') }}" class="btn btn-primary" >Go Back</a>
+    </div>
+
+    <div class="flex items-center">   
+        <a href="{{ route('non-ces-training-management.recentlyDeleted', ['cesno'=>$cesno]) }}">
+            <lord-icon
+                src="https://cdn.lordicon.com/jmkrnisz.json"
+                trigger="hover"
+                colors="primary:#DC3545"
+                style="width:34px;height:34px">
+            </lord-icon>
+        </a>
+        
+        <a href="{{ route('non-ces-training-management.create', ['cesno'=>$cesno]) }}" class="btn btn-primary" >Add Management Training</a>
+    </div>
 </div>
 
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
