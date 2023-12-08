@@ -95,7 +95,7 @@
 
 </script>
 
-<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+<div class="mb-3 grid gap-4 sm:gid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-cols-1">
 
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
@@ -103,7 +103,7 @@
                 <p>Total Active and Retired (CESOs and CES Eligibles)</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESO }}</h1>
                 
-                <div class="flex justify-between">
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
                     <p>
                         Total Active CESOs
                         <span class="font-bold">
@@ -133,7 +133,7 @@
                 <p>Total Active CESOs and CES Eligibles</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOActive }}</h1>
                 
-                <div class="flex justify-between">
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
                     <p>
                         Total Active CESOs
                         <span class="font-bold">
@@ -164,7 +164,7 @@
                 <p>Total Retired CESOs</p>
                 <br>
                 <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
-                <div class="flex justify-between">
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
                     <p>
                         Total Retired CESOs
                         <span class="font-bold">
@@ -196,7 +196,7 @@
                 <br>
                 <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
                 
-                <div class="flex justify-between">
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
                     <p>
                         Total Deceased CESOs
                         <span class="font-bold">
@@ -229,7 +229,7 @@
                 <p>Total Inactive CESOs</p>
                 <br>
                 <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
-                <div class="flex justify-between">
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
                     <p>
                         Total Inactive CESOs
                         <span class="font-bold">
