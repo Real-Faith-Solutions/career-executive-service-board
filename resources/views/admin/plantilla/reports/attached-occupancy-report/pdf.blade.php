@@ -1020,7 +1020,7 @@
             </div>
             <h1 class="bold" style="font-size:12px">
                 data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}
+                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}
             </h1>
         </td>
 
@@ -1103,7 +1103,7 @@
                 <td colspan="9" style="padding: 0 0;">
                     <h1 class="text-blue bold">
                         {{ $officeDatas->title }} ({{ $officeDatas->agencyLocation->departmentAgency->title ?? '' }})
-                        {{-- data as of {{ $currentDate }} --}}
+                        {{-- data as of {{ $officeDatas->agencyLocation->departmentAgency->lastsubmit_dt }} --}}
                     </h1>
                 </td>
             </tr>

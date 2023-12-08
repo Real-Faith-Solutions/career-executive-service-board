@@ -1016,7 +1016,8 @@
             <h1 class="bold uppercase text-blue">{{ $motherDepartmentAgency->title }}</h1>
             <h1 class="bold" style="font-size:12px">
                 data as of
-                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastupd_dt)->format('d F Y') }}
+                {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}
+
             </h1>
         </td>
 

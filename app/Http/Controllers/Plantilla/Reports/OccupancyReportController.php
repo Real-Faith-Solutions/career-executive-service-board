@@ -37,14 +37,13 @@ class OccupancyReportController extends Controller
             ->where('pres_apptee', 1)
             ->where('is_active', 1)
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
-                $query->where('deptid', $deptid)
-                    ->orWhere('mother_deptid', $deptid);
+                $query->where('deptid', $deptid);
             })
             
             ->count();
 
         $currentDate = Carbon::now()->format('d F Y');
-        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym')
+        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym', 'lastsubmit_dt')
             ->find($deptid);
 
         $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
