@@ -264,6 +264,7 @@ class Reports201Controller extends Controller
             'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts'
         ))
         ->setPaper('a4', 'portrait');
+
         return $pdf->stream($filename);
     }
 
