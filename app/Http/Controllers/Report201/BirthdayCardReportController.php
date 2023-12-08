@@ -184,7 +184,7 @@ class BirthdayCardReportController extends Controller
         $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {
@@ -204,7 +204,7 @@ class BirthdayCardReportController extends Controller
             'personalData' => $personalData,
             'monthYear' => $monthYear,
         ])
-        ->setPaper('a4', 'portrait');
+        ->setPaper('a4', 'landscape');
 
         return $pdf->stream($filename);
     }
@@ -219,7 +219,7 @@ class BirthdayCardReportController extends Controller
         $monthYear = Carbon::now()->format('F-Y'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {

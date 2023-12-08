@@ -74,6 +74,10 @@
                         </th>
 
                         <th>
+                            Email
+                        </th>
+
+                        <th>
                             Mailing Address
                         </th>
     
@@ -124,6 +128,10 @@
 
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ $datas->cesStatus->description }}
+                            </td>
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $datas->email }} 
                             </td>
 
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">

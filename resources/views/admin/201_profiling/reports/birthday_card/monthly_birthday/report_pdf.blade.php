@@ -160,8 +160,16 @@
                         <th>
                             CES Status
                         </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Mailing Address
+                        </th>
     
-                        <th scope="col" class="px-6 py-3">
+                        <th>
                             Birth Date
                         </th>
                     </tr>
@@ -185,6 +193,20 @@
     
                                 <td>
                                     {{ $datas->cesStatus->description }}
+                                </td>
+
+                                
+                                <td>
+                                    {{ $datas->email }} 
+                                </td>
+
+                                <td>
+                                    {{ optional($datas->mailingAddress)->region_name ? $datas->mailingAddress->region_name . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->city_or_municipality_name ? $datas->mailingAddress->city_or_municipality_name . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->brgy_name ? $datas->mailingAddress->brgy_name . ', ' : '' }}
+                                    <br>
+                                    {{ optional($datas->mailingAddress)->street_lot_bldg_floor ? $datas->mailingAddress->street_lot_bldg_floor . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->zip_code ?? '' }}
                                 </td>
         
                                 <td>
