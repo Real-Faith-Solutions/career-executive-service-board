@@ -14,12 +14,6 @@ class DashboardController extends Controller
 
     public function getAllData(Request $request)
     {
-        $totalCESO = PersonalData::query()
-            ->whereHas('cesStatus', function ($query) {
-                $query->where('description', 'LIKE', '%Eli%')
-                    ->orWhere('description', 'LIKE', '%CES%');
-            })
-            ->count();
 
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
@@ -52,6 +46,59 @@ class DashboardController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
+        $totalActiveCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalActiveEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalRetiredCES = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalRetiredEligibles = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalDeceasedCES = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalDeceasedEligibles = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalInactiveCES = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalInactiveEligibles = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalCESO = $totalCESOActive + $totalCESORetired;
+        $totalActiveRetiredCES = $totalActiveCES + $totalRetiredCES;
+        $totalActiveRetiredEligibles = $totalActiveEligibles + $totalRetiredEligibles;
+
 
         $user = auth()->user();
         $personalData = PersonalData::where('cesno', $user->personal_data_cesno)->first();
@@ -166,6 +213,16 @@ class DashboardController extends Controller
         // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
         return view('admin.dashboard.index', compact(
+            'totalActiveRetiredEligibles',
+            'totalActiveRetiredCES',
+            'totalInactiveEligibles',
+            'totalInactiveCES',
+            'totalDeceasedEligibles',
+            'totalDeceasedCES',
+            'totalRetiredEligibles',
+            'totalRetiredCES',
+            'totalActiveCES',
+            'totalActiveEligibles',
             'totalCESO',
             'totalCESOActive',
             'totalCESODeceased',
