@@ -64,14 +64,17 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="trainingsTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
+                            {{-- Resource Speaker --}}
                             <a class="btn category-button inline-flex" href="{{ route('resource-speaker.index') }}" >Resource Speakers/Persons Manager</a>
                         </li>
 
                         <li>
+                            {{-- Training Venue Manager --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-venue-manager.index') }}" >Training Venue Manager</a>
                         </li>
 
                         <li>
+                            {{-- Training Provider Manager --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-provider-manager.index') }}" >Training Provider Manager</a>
                         </li>
                     </ul>
