@@ -26,14 +26,21 @@
     @endphp
 @endif
 
+<div class="flex justify-end">
+    <a href="{{ route('competency-data.index') }}" class="btn btn-primary" >Go Back</a>
+</div>
+
 <div class="relative my-10 overflow-x-auto shadow-lg sm:rounded-lg">
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-               Personal Email
+              {{ $personalData->lastname }},
+              {{ $personalData->firstname }}, 
+              {{ $personalData->middlename }} -  
+              Personal Email
             </h1>
         </div>
-        
+
         <div class="bg-white px-6 py-3">
             <form action="{{ route('competency-contact-email.update', ['cesno'=>$cesno]) }}" method="POST" id="competency_email_contact_info_form" onsubmit="return checkErrorsBeforeSubmit(competency_email_contact_info_form)">
                 @method('PUT')
@@ -68,7 +75,10 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Contact Informations
+                {{ $personalData->lastname }},
+                {{ $personalData->firstname }}, 
+                {{ $personalData->middlename }} - 
+                 Contact Informations
             </h1>
         </div>
 
@@ -162,7 +172,10 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Mailing Address
+                {{ $personalData->lastname }},
+                {{ $personalData->firstname }}, 
+                {{ $personalData->middlename }} - 
+                 Mailing Address
             </h1>
         </div>
 
