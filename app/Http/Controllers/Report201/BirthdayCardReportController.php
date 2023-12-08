@@ -18,6 +18,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
         $personalData = PersonalData::query()
+                        ->with('cesStatus')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
                         ->whereDay('birthdate', '=', $specificDay)
@@ -54,6 +55,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
         $personalData = PersonalData::query()
+                        ->with('cesStatus', 'mailingAddress')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
                         ->whereDay('birthdate', '=', $specificDay)
@@ -114,6 +116,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
 
         $personalData = PersonalData::query()
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereDay('birthdate', '=', $specificDay)
@@ -130,7 +133,7 @@ class BirthdayCardReportController extends Controller
             'personalData' => $personalData,
             'fullDateName' => $fullDateName,
         ])
-        ->setPaper('a4', 'portrait');
+        ->setPaper('a4', 'landscape');
 
         return $pdf->stream($filename);
     }
