@@ -39,6 +39,7 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="othersTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
+                            {{-- Training Category --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-category.index') }}" >Training Category</a>
                         </li>
 
