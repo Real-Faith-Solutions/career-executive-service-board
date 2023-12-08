@@ -285,9 +285,6 @@ class Reports201Controller extends Controller
         $cesstat_code = $cesstat_code ?? 'false';
         $authority_code = $authority_code ?? 'false';
 
-        $profileLibTblCesStatus = ProfileLibTblCesStatus::all();
-        $profileLibTblAppAuthority = ProfileLibTblAppAuthority::all();
-
         // *
         // start of filters, conditions, operations, sortings
         // *
@@ -390,10 +387,6 @@ class Reports201Controller extends Controller
         // end of filters, conditions, operations, sortings
         // *
 
-        // $personalData = $personalData->get();
-
-        // Get the total count of records
-        // $totalCount = $personalData->count();
 
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
@@ -436,8 +429,6 @@ class Reports201Controller extends Controller
             ];
 
         });
-
-        // dd($downloadLinks);
 
         // Pass the download links to the next download page
         return view('admin.201_profiling.reports.download_general_reports', compact('downloadLinks'));
