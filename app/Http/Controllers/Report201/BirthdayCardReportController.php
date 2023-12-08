@@ -26,7 +26,7 @@ class BirthdayCardReportController extends Controller
                                 ->orWhere('description', 'LIKE', '%CES%');
                         })
                         ->orderBy('lastname')
-                        ->get();
+                        ->paginate(25);
 
         $numberOfCelebrant = PersonalData::query()
                         ->where('status', '=', 'Active')
