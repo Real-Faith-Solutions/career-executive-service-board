@@ -30,9 +30,8 @@
 
             footer {
                 position: fixed;
+                text-align: justify;
                 bottom: -20px;
-                right: 20px;
-                text-align: right;
                 font-size: 10px;
                 color: #333;
             }
@@ -123,6 +122,20 @@
             .pagenum:before {
                 content: counter(page);
             }
+
+            .part-left,
+            .page-right {
+                display: inline-block;
+            }
+
+            .part-left {
+                text-align: left;
+            }
+
+            .page-right {
+                margin-left: 600px;
+                text-align: right;
+            }
         </style>
     </head>
 
@@ -143,13 +156,13 @@
         </header>
 
         <footer>
-            <div class="part-left">
+            <span class="part-left">
                 Part {{ $partitionNumber }}
-            </div>
-
-            <div class="page-right">
+            </span>
+    
+            <span class="page-right">
                 Page <span class="pagenum"></span>
-            </div>
+            </span>
         </footer>
 
         <div>
