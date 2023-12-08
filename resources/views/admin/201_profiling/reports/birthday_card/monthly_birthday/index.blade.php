@@ -45,11 +45,11 @@
             <table class="w-full text-left text-sm text-gray-500">
                 <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
                     <tr>
-                        <th>
+                        <th scope="col" class="px-6 py-3">
 
                         </th>
 
-                        <th>
+                        <th scope="col" class="px-6 py-3">
                             <a href="{{ route('birthday.monthlyCelebrant', [
                                 'sortBy' => 'lastname',
                                 'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
@@ -69,18 +69,30 @@
                             </a>
                         </th>
 
-                        <th>
+                        <th scope="col" class="px-6 py-3">
                             CES Status
                         </th>
 
-                        <th>
+                        <th scope="col" class="px-6 py-3">
                             Email
                         </th>
 
-                        <th>
+                        <th scope="col" class="px-6 py-3">
                             Mailing Address
                         </th>
-    
+
+                        <th scope="col" class="px-6 py-3">
+                            Office
+                        </th>
+
+                        <th scope="col" class="px-6 py-3">
+                            Office Address
+                        </th>
+
+                        <th scope="col" class="px-6 py-3">
+                            Office Email
+                        </th> 
+                       
                         <th scope="col" class="px-6 py-3">
                             <a href="{{ route('birthday.monthlyCelebrant', [
                                 'sortBy' => 'birthdate',
@@ -143,7 +155,22 @@
                                 {{ optional($datas->mailingAddress)->zip_code ?? '' }}
                             </td>
 
-                            <td class="px-6 py-3">
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ $datas->planAppointee->planPosition->office->title ?? '' }}
+                            </td>
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->floor_bldg ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->floor_bldg . ', ' : '' }}
+                                {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->house_no_st ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->house_no_st . ', ' : '' }} <br>
+                                {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->brgy_dist ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->brgy_dist . ', ' : '' }} 
+                                {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->cities ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->cities->name . ', ' : '' }}                                
+                            </td>
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->emailadd ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->emailadd : '' }}
+                            </td>
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ \Carbon\Carbon::parse($datas->birthdate)->format('m/d/Y ') ?? '' }}
                             </td>
                         </tr>
