@@ -143,7 +143,11 @@
         </header>
 
         <footer>
-            <div class="flex-container">
+            <div class="part-left">
+                Part {{ $partitionNumber }}
+            </div>
+
+            <div class="page-right">
                 Page <span class="pagenum"></span>
             </div>
         </footer>
