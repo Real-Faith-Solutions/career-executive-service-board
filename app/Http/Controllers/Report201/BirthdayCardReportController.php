@@ -145,7 +145,7 @@ class BirthdayCardReportController extends Controller
         $currentMonthFullName = Carbon::now()->format('F, Y'); // getting month in name example: December = 12
     
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {

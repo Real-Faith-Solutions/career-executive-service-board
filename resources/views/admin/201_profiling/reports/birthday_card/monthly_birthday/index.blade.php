@@ -72,6 +72,10 @@
                         <th>
                             CES Status
                         </th>
+
+                        <th>
+                            Mailing Address
+                        </th>
     
                         <th scope="col" class="px-6 py-3">
                             <a href="{{ route('birthday.monthlyCelebrant', [
@@ -121,7 +125,16 @@
                             <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
                                 {{ $datas->cesStatus->description }}
                             </td>
-    
+
+                            <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
+                                {{ optional($datas->mailingAddress)->region_name ? $datas->mailingAddress->region_name . ', ' : '' }}
+                                {{ optional($datas->mailingAddress)->city_or_municipality_name ? $datas->mailingAddress->city_or_municipality_name . ', ' : '' }}
+                                {{ optional($datas->mailingAddress)->brgy_name ? $datas->mailingAddress->brgy_name . ', ' : '' }}
+                                <br>
+                                {{ optional($datas->mailingAddress)->street_lot_bldg_floor ? $datas->mailingAddress->street_lot_bldg_floor . ', ' : '' }}
+                                {{ optional($datas->mailingAddress)->zip_code ?? '' }}
+                            </td>
+
                             <td class="px-6 py-3">
                                 {{ \Carbon\Carbon::parse($datas->birthdate)->format('m/d/Y ') ?? '' }}
                             </td>
