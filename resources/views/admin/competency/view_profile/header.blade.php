@@ -47,6 +47,7 @@
                         </li>
 
                         <li>
+                            {{-- Training Secreteriat --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-secretariat.index') }}" >Training Secreteriat</a>
                         </li>
                     </ul>
