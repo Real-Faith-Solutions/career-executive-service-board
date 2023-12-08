@@ -132,7 +132,7 @@ class BirthdayCardReportController extends Controller
         ])
         ->setPaper('a4', 'portrait');
 
-        return $pdf->stream($fullDateName.$filename);
+        return $pdf->stream($filename);
     }
 
     // fetching all users has birthday this month
