@@ -528,7 +528,87 @@
                 <span class="ml-3 flex-1 whitespace-nowrap">Plantilla Main Screen</span>
             </a>
         </li>
-        {{-- end Plantilla main screen --}}
+        {{-- end Plantilla main screen --}}        
+
+        {{-- Plantilla reports --}}
+        <li>
+            <a href="{{ route('statistics.index') }}"
+                class="{{ request()->is('plantilla/reports*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                    <path fill-rule="evenodd"
+                        d="M7.502 6h7.128A3.375 3.375 0 0118 9.375v9.375a3 3 0 003-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 00-.673-.05A3 3 0 0015 1.5h-1.5a3 3 0 00-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6zM13.5 3A1.5 1.5 0 0012 4.5h4.5A1.5 1.5 0 0015 3h-1.5z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                        d="M3 9.375C3 8.339 3.84 7.5 4.875 7.5h9.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V9.375zM6 12a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V12zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM6 15a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V15zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75zM6 18a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V18zm2.25 0a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H9a.75.75 0 01-.75-.75z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span class="ml-3 flex-1 whitespace-nowrap">Plantilla Reports</span>
+            </a>
+        </li>
+
+        {{-- <li>
+            <button type="button"
+                class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
+                aria-controls="dropdown-plantilla-reports" data-collapse-toggle="dropdown-plantilla-reports"
+                aria-expanded="{{ request()->is('plantilla/reports*') ? 'true' : 'false' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                    <path
+                        d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
+                    <path
+                        d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
+                </svg>
+                <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Plantilla Reports</span>
+                <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
+            <ul id="dropdown-plantilla-reports"
+                class="{{ request()->is('plantilla/reports*') ? '' : 'hidden' }} space-y-2 py-2">
+                <li>
+                    <a href="{{ route('statistics.index') }}"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Blue Book Agency Selector
+                    </a>
+                    <a href="{{ route('blue-book-selector.index') }}"
+                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Department For Bluebook Selector
+                    </a>
+
+                    <a href="{{ route('occupancy-report.index') }}"
+                        class="{{ request()->is('plantilla/reports/occupany-report*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        Occupancy report
+                    </a>
+
+                    <a href="{{ route('ceso-eligibles-ces-position.index') }}"
+                        class="{{ request()->is('plantilla/reports/ceso-eligibles-ces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        List of CESOs and CES Eligibles in CES Positions
+                    </a>
+
+                    <a href="{{ route('ceso-eligibles-nonces-position.index') }}"
+                        class="{{ request()->is('plantilla/reports/ceso-eligibles-nonces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        List of CESOs and CES Eligibles in NONCES Positions
+                    </a>
+
+                    <a href="{{ route('nonceso-noneligibles-ces-position.index') }}"
+                        class="{{ request()->is('plantilla/reports/nonceso-noneligibles-ces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        List of Non-CESOs and Non-Eligibles in CES Positions
+                    </a>
+
+                    <a href="{{ route('vacant-position.index') }}"
+                        class="{{ request()->is('plantilla/reports/vacant-position*') ? 'bg-gray-100' : '' }} group group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
+                        List of Vacant Position
+                    </a>
+                </li>
+            </ul>
+        </li> --}}
+
+        {{-- end Plantilla reports --}}
 
         {{-- Plantilla library --}}
         <li>
@@ -622,68 +702,7 @@
         </li>
         {{-- end Plantilla library --}}
 
-        {{-- Plantilla reports --}}
-        <li>
-            <button type="button"
-                class="group flex w-full items-center rounded-lg p-2 text-gray-900 transition duration-75 hover:bg-gray-100"
-                aria-controls="dropdown-plantilla-reports" data-collapse-toggle="dropdown-plantilla-reports"
-                aria-expanded="{{ request()->is('plantilla/reports*') ? 'true' : 'false' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                    class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900">
-                    <path
-                        d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
-                    <path
-                        d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
-                </svg>
-                <span class="ml-3 flex-1 whitespace-nowrap text-left" sidebar-toggle-item>Plantilla Reports</span>
-                <svg sidebar-toggle-item class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clip-rule="evenodd"></path>
-                </svg>
-            </button>
 
-            <ul id="dropdown-plantilla-reports"
-                class="{{ request()->is('plantilla/reports*') ? '' : 'hidden' }} space-y-2 py-2">
-                <li>
-                    <a href="{{ route('statistics.index') }}"
-                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Blue Book Agency Selector
-                    </a>
-                    {{-- <a href="{{ route('blue-book-selector.index') }}"
-                        class="group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Department For Bluebook Selector
-                    </a> --}}
-
-                    <a href="{{ route('occupancy-report.index') }}"
-                        class="{{ request()->is('plantilla/reports/occupany-report*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        Occupancy report
-                    </a>
-
-                    <a href="{{ route('ceso-eligibles-ces-position.index') }}"
-                        class="{{ request()->is('plantilla/reports/ceso-eligibles-ces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        List of CESOs and CES Eligibles in CES Positions
-                    </a>
-
-                    <a href="{{ route('ceso-eligibles-nonces-position.index') }}"
-                        class="{{ request()->is('plantilla/reports/ceso-eligibles-nonces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        List of CESOs and CES Eligibles in NONCES Positions
-                    </a>
-
-                    <a href="{{ route('nonceso-noneligibles-ces-position.index') }}"
-                        class="{{ request()->is('plantilla/reports/nonceso-noneligibles-ces-position*') ? 'bg-gray-100' : '' }} group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        List of Non-CESOs and Non-Eligibles in CES Positions
-                    </a>
-
-                    <a href="{{ route('vacant-position.index') }}"
-                        class="{{ request()->is('plantilla/reports/vacant-position*') ? 'bg-gray-100' : '' }} group group flex w-full items-center rounded-lg p-2 pl-11 text-gray-900 transition duration-75 hover:bg-gray-100">
-                        List of Vacant Position
-                    </a>
-                </li>
-            </ul>
-        </li>
-        {{-- end Plantilla reports --}}
 
         {{-- rights management --}}
         <li>
