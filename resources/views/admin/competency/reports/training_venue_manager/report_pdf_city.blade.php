@@ -159,6 +159,10 @@
                         <th>
                             Address
                         </th>
+
+                        <th>
+                            City
+                        </th>
         
                         <th>
                             Contact No.
@@ -189,11 +193,12 @@
                             </td>
         
                             <td >
-                                {{ 
-                                    $trainingVenueManagerByCities->no_street ?? ''.', '.
-                                    $trainingVenueManagerByCities->brgy ?? ''.', '. 
-                                    $trainingVenueManagerByCities->trainingVenueManager->name ?? ''
-                                }}
+                                {{ $trainingVenueManagerByCities->no_street ?? '' }}
+                                {{ $trainingVenueManagerByCities->brgy ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $trainingVenueManagerByCities->trainingVenueManager->name ?? '' }}
                             </td>
         
                             <td >

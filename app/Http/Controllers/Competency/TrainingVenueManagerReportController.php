@@ -48,6 +48,8 @@ class TrainingVenueManagerReportController extends Controller
     {
         $search = $search ?? 'all';
 
+        // dd($search);
+
         $profileLibCitiesSearchResult = ProfileLibCities::where('name', $search)->first();
 
         if($profileLibCitiesSearchResult != null)
