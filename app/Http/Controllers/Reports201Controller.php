@@ -130,7 +130,7 @@ class Reports201Controller extends Controller
                         'profileLibTblAppAuthority', 'authority_code'));
     }
 
-    public function generatePdf(Request $request, $recordsPerPartition, $partitionNumber, $skippedData, $filename,
+    public function generatePdf(Request $request, $totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename,
                         $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
                         $cesstat_code, $authority_code)
@@ -261,7 +261,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts'
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream($filename);
@@ -387,9 +387,11 @@ class Reports201Controller extends Controller
         // end of filters, conditions, operations, sortings
         // *
 
-
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
+
+        $totalData = $personalData->count();
+        $totalParts = ceil($totalData/$recordsPerPartition);
 
         // number of partitions
         $partitionNumber = 0;
@@ -402,7 +404,7 @@ class Reports201Controller extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
+        $personalData->chunk($recordsPerPartition, function ($partition) use ($totalParts, &$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -420,7 +422,7 @@ class Reports201Controller extends Controller
                                 'sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
                                 'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
                                 'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
-                                'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code]);
+                                'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code, 'totalParts' => $totalParts]);
 
             // Store the download link in the array
             $downloadLinks[] = [

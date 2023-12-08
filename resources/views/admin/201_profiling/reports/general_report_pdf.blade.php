@@ -157,7 +157,7 @@
 
         <footer>
             <span class="part-left">
-                Part {{ $partitionNumber }}
+                Part {{ $partitionNumber }} of {{ $totalParts }}
             </span>
     
             <span class="page-right">
