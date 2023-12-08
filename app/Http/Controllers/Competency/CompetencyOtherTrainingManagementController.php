@@ -20,15 +20,25 @@ class CompetencyOtherTrainingManagementController extends Controller
         $nonCesAccreditedTrainingCompetency = $personalData->competencyNonCesAccreditedTraining;
         $nonCesAccreditedTraining201 = $personalData->otherTraining;
 
-        return view('admin.competency.partials.other_management_trainings.table', compact('nonCesAccreditedTrainingCompetency' , 'nonCesAccreditedTraining201', 'cesno'));
+        return view('admin.competency.partials.other_management_trainings.table', 
+        compact(
+            'nonCesAccreditedTrainingCompetency' , 
+            'nonCesAccreditedTraining201', 
+            'cesno'
+        ));
     }
 
     public function create($cesno)
     {
-       $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
-       $competencyTrainingProvider = CompetencyTrainingProvider::all();
+        $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
+        $competencyTrainingProvider = CompetencyTrainingProvider::all();
 
-       return view('admin.competency.partials.other_management_trainings.form', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider'));
+        return view('admin.competency.partials.other_management_trainings.form', 
+        compact(
+            'cesno', 
+            'profileLibTblExpertiseSpec', 
+            'competencyTrainingProvider'
+        ));
     }
 
     public function store(Request $request, $cesno)
@@ -82,7 +92,13 @@ class CompetencyOtherTrainingManagementController extends Controller
         $profileLibTblExpertiseSpec =  ProfileLibTblExpertiseSpec::all();
         $competencyTrainingProvider = CompetencyTrainingProvider::all();
 
-        return view('admin.competency.partials.other_management_trainings.edit', compact('cesno', 'profileLibTblExpertiseSpec', 'competencyTrainingProvider', 'nonCesAccreditedTraining'));    
+        return view('admin.competency.partials.other_management_trainings.edit', 
+        compact(
+            'cesno', 
+            'profileLibTblExpertiseSpec', 
+            'competencyTrainingProvider', 
+            'nonCesAccreditedTraining'
+        ));    
     }
 
     public function update(Request $request, $ctrlno, $cesno)
@@ -142,7 +158,12 @@ class CompetencyOtherTrainingManagementController extends Controller
         // Access the soft deleted otherTraining of the parent model
         $nonCesAccreditedTraining201TrashedRecord = $personalData->otherTraining()->onlyTrashed()->get();
  
-        return view('admin.competency.partials.other_management_trainings.trashbin', compact('competencyNonCesAccreditedTrainingTrashedRecord', 'nonCesAccreditedTraining201TrashedRecord', 'cesno'));
+        return view('admin.competency.partials.other_management_trainings.trashbin', 
+        compact(
+            'competencyNonCesAccreditedTrainingTrashedRecord', 
+            'nonCesAccreditedTraining201TrashedRecord', 
+            'cesno'
+        ));
     }
 
     public function restore($ctrlno)
@@ -167,7 +188,12 @@ class CompetencyOtherTrainingManagementController extends Controller
         $nonCesTraining201 = ProfileTblTrainingMngt::find($ctrlno);
         $profileLibTblExpertiseSpec = ProfileLibTblExpertiseSpec::all();
 
-        return view('admin.competency.partials.other_management_trainings.profile201_edit', compact('cesno', 'nonCesTraining201', 'profileLibTblExpertiseSpec'));
+        return view('admin.competency.partials.other_management_trainings.profile201_edit', 
+        compact(
+            'cesno', 
+            'nonCesTraining201', 
+            'profileLibTblExpertiseSpec'
+        ));
     }
 
     public function updateNonCesTraining201(Request $request, $ctrlno, $cesno)

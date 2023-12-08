@@ -4,17 +4,23 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-    <div class="my-5 flex justify-end">
-        <a href="{{ route('resource-speaker.recentlyDeleted') }}">
-            <lord-icon
-                src="https://cdn.lordicon.com/jmkrnisz.json"
-                trigger="hover"
-                colors="primary:#DC3545"
-                style="width:34px;height:34px">
-        </lord-icon>
-        </a>
+    <div class="my-5 flex justify-between">
+        <div class="flex items-center">
+            <a href="{{ route('competency-data.index') }}" class="btn btn-primary" >Go Back</a>
+        </div>
 
-        <a href="{{ route('resource-speaker.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
+        <div class="flex items-center">
+            <a href="{{ route('resource-speaker.recentlyDeleted') }}">
+                <lord-icon
+                    src="https://cdn.lordicon.com/jmkrnisz.json"
+                    trigger="hover"
+                    colors="primary:#DC3545"
+                    style="width:34px;height:34px">
+                </lord-icon>
+            </a>
+    
+            <a href="{{ route('resource-speaker.create') }}" class="btn btn-primary" >Add Resource Speaker</a>
+        </div>
     </div>
 
     <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">

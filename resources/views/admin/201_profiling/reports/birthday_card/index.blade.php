@@ -75,5 +75,9 @@
                     </div>        
             @endforeach
         </div>
+
+        <div class="m-5">
+            {{ $personalData->links() }}
+        </div>
     </section>
 @endsection

@@ -176,6 +176,11 @@ class PersonalData extends Model
         return $this->hasMany(ProfileAddress::class);
     }
 
+    public function mailingAddress(): HasOne
+    {
+        return $this->hasOne(ProfileAddress::class)->where('type', 'Mailing');
+    }
+
     public function scholarships(): HasMany
     {
         return $this->hasMany(Scholarships::class, 'cesno', 'cesno');

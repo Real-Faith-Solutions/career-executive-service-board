@@ -85,6 +85,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
+                                {{-- View Profile --}}
                                 <a href="{{ route('competency-view-profile.updateOrCreate', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium"  title="View Profile">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
@@ -95,6 +96,7 @@
                                     </lord-icon>
                                 </a>
                                 
+                                {{-- Non Ces Trainings --}}
                                 <a href="{{ route('non-ces-training-management.index', ['cesno'=>$competencyDatas->cesno]) }}" class="font-medium" title="Non-Ces Trainings">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
@@ -105,6 +107,7 @@
                                     </lord-icon>
                                 </a>
 
+                                {{-- Ces Training --}}
                                 <a href="{{ route('ces-training.index', ['cesno'=>$competencyDatas->cesno]) }}" title="CES Trainings">
                                     <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                     <lord-icon
