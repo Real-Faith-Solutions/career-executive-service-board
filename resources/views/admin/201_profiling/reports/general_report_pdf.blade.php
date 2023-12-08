@@ -112,9 +112,18 @@
                 margin-top: 190px;
             }
 
-            .pagenum:before {
-                content: counter(page);
+            body {
+                counter-reset: page 13; /* Start the counter from 14 */
             }
+
+            footer .pagenum:before {
+                content: counter(page);
+                /* counter-increment: page; */
+            }
+
+            /* .pagenum:before {
+                content: counter(page);
+            } */
         </style>
     </head>
 
@@ -132,13 +141,13 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">201 Profiling General Reports</p>
             </div>
-
-            <footer>
-                <div class="flex-container">
-                    <div>Page <span class="pagenum"></span></div>
-                </div>
-            </footer>
         </header>
+
+        <footer>
+            <div class="flex-container">
+                Page <span class="pagenum"></span>
+            </div>
+        </footer>
 
         <div>
             <table>
