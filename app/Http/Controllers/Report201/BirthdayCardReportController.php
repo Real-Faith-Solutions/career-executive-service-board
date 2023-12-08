@@ -138,7 +138,7 @@ class BirthdayCardReportController extends Controller
     // fetching all users has birthday this month
     public function monthlyCelebrant(Request $request)
     {
-        $sortBy = $request->input('sortBy', 'birthdate'); // Default sorting birthdate.
+        $sortBy = $request->input('sortBy', 'lastname'); // Default sorting birthdate.
         $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
@@ -152,14 +152,13 @@ class BirthdayCardReportController extends Controller
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
             })
             ->paginate(25);
 
-        
         $numberOfCelebrant = PersonalData::query()
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
@@ -192,7 +191,7 @@ class BirthdayCardReportController extends Controller
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
@@ -212,7 +211,7 @@ class BirthdayCardReportController extends Controller
 
     public function monthlyCelebrantGenerateDownloadLinks($sortBy, $sortOrder)
     {
-        $sortBy = $sortBy ?? 'cesno';
+        $sortBy = $sortBy ?? 'lastname';
         $sortOrder = $sortOrder ?? 'asc';
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
@@ -227,7 +226,7 @@ class BirthdayCardReportController extends Controller
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
