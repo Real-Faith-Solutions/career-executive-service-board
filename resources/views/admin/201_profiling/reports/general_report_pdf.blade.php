@@ -112,18 +112,17 @@
                 margin-top: 190px;
             }
 
-            body {
-                counter-reset: page 13; /* Start the counter from 14 */
+            /* body {
+                counter-reset: page 13; 
             }
 
             footer .pagenum:before {
                 content: counter(page);
-                /* counter-increment: page; */
-            }
-
-            /* .pagenum:before {
-                content: counter(page);
             } */
+
+            .pagenum:before {
+                content: counter(page);
+            }
         </style>
     </head>
 
