@@ -235,7 +235,7 @@ return array(
          *
          * @var bool
          */
-        "enable_php" => true,
+        "enable_php" => false,
 
         /**
          * Enable inline Javascript
