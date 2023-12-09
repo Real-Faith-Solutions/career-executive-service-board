@@ -247,7 +247,7 @@
             {{-- Here's the magic. This MUST be inside body tag. Page count / total, centered at bottom of page --}}
             <script type="text/php">
                 if (isset($pdf)) {
-                    $text = "Page {PAGE_NUM} / {PAGE_COUNT}";
+                    $text = "Page {PAGE_NUM} of {PAGE_COUNT}";
                     $size = 7;
                     $font = $fontMetrics->getFont("Verdana");
                     $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
