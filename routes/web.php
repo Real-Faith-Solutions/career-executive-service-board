@@ -808,7 +808,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('general-report')->group(function () {
             Route::get('index', [GeneralReportController::class, 'index'])->name('competency-management-sub-modules-report.generalReportIndex')->middleware('checkPermission:competency_general_reports');
             Route::get('download-report/{sessionId}', [GeneralReportController::class, 'generateDownloadLinks'])->name('competency-general-report.generateDownloadLinks')->middleware('checkPermission:competency_general_reports');
-            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
+            Route::get('generate-pdf/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sessionId}', [GeneralReportController::class, 'generatePdf'])->name('competency-management-sub-modules-report.generalReportGeneratePdf')->middleware('checkPermission:competency_general_reports');
         });
 
         Route::prefix('training-provider')->group(function () {
