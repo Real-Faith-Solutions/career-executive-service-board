@@ -968,7 +968,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('eris-report-general')->group(function () {
             Route::get('index', [ErisGeneralReportController::class, 'index'])->name('general-report.index')->middleware('checkPermission:eligibility_general_reports');
             Route::get('download-reports/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generateDownloadLinks'])->name('general-report.generateDownloadLinks')->middleware('checkPermission:eligibility_general_reports');
-            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
+            Route::get('generate-pdf/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [ErisGeneralReportController::class, 'generatePdfReport'])->name('general-report.generatePdfReport')->middleware('checkPermission:eligibility_general_reports');
         });
     });
     // End of ERIS Report routes
