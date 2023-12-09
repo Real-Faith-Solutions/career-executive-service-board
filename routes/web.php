@@ -950,7 +950,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('in-depth-validation-report')->group(function () {
             Route::get('index', [InDepthValidationReportController::class, 'index'])->name('in-depth-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
             Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateDownloadLinks'])->name('in-depth-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
-            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [InDepthValidationReportController::class, 'generateReportPdf'])->name('in-depth-validation-report.generateReportPdf')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('assessment-center-report')->group(function () {
