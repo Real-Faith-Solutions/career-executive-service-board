@@ -33,7 +33,7 @@ class VacantPositionController extends Controller
     public function generatePDF($deptid)
     {
         $currentDate = Carbon::now()->format('d F Y');
-        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym')
+        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym', 'lastsubmit_dt')
             ->find($deptid);
 
         $no = 1;

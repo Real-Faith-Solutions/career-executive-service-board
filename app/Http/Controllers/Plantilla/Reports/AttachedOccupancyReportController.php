@@ -42,7 +42,7 @@ class AttachedOccupancyReportController extends Controller
         ->count();
 
         $currentDate = Carbon::now()->format('d F Y');
-        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym', 'mother_deptid')
+        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym', 'mother_deptid', 'lastsubmit_dt')
             ->find($deptid);
 
 

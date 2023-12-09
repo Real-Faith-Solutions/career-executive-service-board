@@ -1037,7 +1037,7 @@
             List of Vacant CES Positions
         </h1>
         {{-- <p>
-            data as of {{ $motherDepartmentAgency->lastsubmit_dt }}
+            data as of {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}
         </p> --}}
     </center>
     <br />
