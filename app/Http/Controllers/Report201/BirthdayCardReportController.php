@@ -7,6 +7,7 @@ use App\Models\PersonalData;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class BirthdayCardReportController extends Controller
 {
@@ -68,6 +69,9 @@ class BirthdayCardReportController extends Controller
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
 
+        $totalData = $personalData->count();
+        $totalParts = ceil($totalData/$recordsPerPartition);
+
         // number of partitions
         $partitionNumber = 0;
 
@@ -79,7 +83,7 @@ class BirthdayCardReportController extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $fullDateName) {
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $fullDateName, $totalParts) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -93,7 +97,7 @@ class BirthdayCardReportController extends Controller
             // Create a route to handle the download action for each partition
             // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
             $downloadRoute = route('birthday.birthdayCelebrantGeneratePdfReport', 
-                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename]);
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 'totalParts' => $totalParts]);
 
             // Store the download link in the array
             $downloadLinks[] = [
@@ -109,7 +113,7 @@ class BirthdayCardReportController extends Controller
 
 
     // generating pdf for all user has birthday today
-    public function birthdayCelebrantGeneratePdfReport($recordsPerPartition, $partitionNumber, $skippedData, $filename,)
+    public function birthdayCelebrantGeneratePdfReport($totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename,)
     {
         $fullDateName = Carbon::now()->format('l-F-d-Y-'); // getting full name attribute of the month example: Friday, December 01, 2023
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
@@ -129,9 +133,15 @@ class BirthdayCardReportController extends Controller
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
 
+        $data = array();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf = Pdf::loadView('admin.201_profiling.reports.birthday_card.report_pdf', [
             'personalData' => $personalData,
             'fullDateName' => $fullDateName,
+            'totalParts' => $totalParts,
+            'partitionNumber' => $partitionNumber,
+            '$data' => $data,
         ])
         ->setPaper('a4', 'landscape');
 

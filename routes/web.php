@@ -1007,7 +1007,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('download-monthly-celebrant-report/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGenerateDownloadLinks'])->name('birthday.monthlyCelebrantGenerateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('monthly/celebrant/report/pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}', [BirthdayCardReportController::class, 'monthlyCelebrantGeneratePdfReport'])->name('birthday.monthlyCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
             Route::get('download-report', [BirthdayCardReportController::class, 'generateDownloadLinks'])->name('birthday.generateDownloadLinks')->middleware('checkPermission:201_birthday_cards_reports');
-            Route::get('generate-report/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
+            Route::get('generate-report/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/', [BirthdayCardReportController::class, 'birthdayCelebrantGeneratePdfReport'])->name('birthday.birthdayCelebrantGeneratePdfReport')->middleware('checkPermission:201_birthday_cards_reports');
         });
 
         Route::prefix('reports-for-placement')->group(function () {
