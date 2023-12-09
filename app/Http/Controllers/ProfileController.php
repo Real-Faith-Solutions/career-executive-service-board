@@ -144,7 +144,7 @@ class ProfileController extends Controller
 
             ]);
 
-            // sending email to added user
+            // initializing infos for email to user
             $recipientEmail = $request->email;
             $password = Str::password(8, true, true, true, false);
             $hashedPassword = Hash::make($password);
@@ -159,9 +159,9 @@ class ProfileController extends Controller
                 'imagePath' => $imagePath,
                 'loginLink' => $loginLink,
             ];
-            // end sending email to added user
+            // end initializing infos for email to user
 
-            // making account credentials for user
+            // making new account credentials for user
             $user = $newProfile->users()->Create([
                 'email' => $newProfile->email,
                 'password' => $hashedPassword,
@@ -172,6 +172,7 @@ class ProfileController extends Controller
                 'two_factor' => true,
             ]);
 
+            // assigning default user role
             $user->assignRole('user');
             // end making account credentials for user
 
@@ -320,9 +321,11 @@ class ProfileController extends Controller
             // Get the user based on the $cesno
             $user = User::where('personal_data_cesno', $cesno)->first();
 
-            // Update the user email
-            $user->email = $request->email;
-            $user->save();
+            if($user){
+                // Update the user email
+                $user->email = $request->email;
+                $user->save();
+            }
 
             // Commit the transaction if all operations succeed
             DB::commit();
@@ -402,6 +405,10 @@ class ProfileController extends Controller
     public function resendEmail(Request $request, $cesno)
     {
 
+        /** @var \App\Models\User $encoder */
+        $encoder = Auth::user();
+        $encoder = $encoder->userName();
+
         // Get the user based on the $cesno
         $user = User::where('personal_data_cesno', $cesno)->first();
         $cooldownMinutes = 1; // Adjust as needed
@@ -409,7 +416,7 @@ class ProfileController extends Controller
             return redirect()->back()->with('info','New Credentials Email Already Sent');
         }
 
-        // sending email to added user
+        // initializing infos for email to user
         $recipientEmail = $request->email;
         $password = Str::password(8, true, true, true, false);
         $hashedPassword = Hash::make($password);
@@ -424,16 +431,41 @@ class ProfileController extends Controller
             'imagePath' => $imagePath,
             'loginLink' => $loginLink,
         ];
-        // end sending email to added user
+        // end initializing infos for email to user
 
         DB::beginTransaction();
 
         try {
 
-            // Update the user's password
-            $user->password = $hashedPassword;
-            $user->save();
+            if($user){
 
+                // Update the user's password
+                $user->password = $hashedPassword;
+                $user->save();
+
+            }else{
+
+                $newProfile = PersonalData::find($cesno);
+
+                // making new account credentials for user
+                $user = $newProfile->users()->Create([
+                    'email' => $newProfile->email,
+                    'password' => $hashedPassword,
+                    'is_active' => 'Active',
+                    'last_updated_by' => 'system encode',
+                    'encoder' => $encoder,
+                    'default_password_change' => 'true',
+                    'two_factor' => true,
+                ]);
+
+                // assigning default user role
+                $user->assignRole('user');
+                // end making account credentials for user
+
+            }
+            
+
+            // sending email
             Mail::to($recipientEmail)->send(new TempCred201($data));
 
             // Commit the transaction if all operations succeed

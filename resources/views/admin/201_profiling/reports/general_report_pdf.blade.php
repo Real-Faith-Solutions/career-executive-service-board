@@ -30,9 +30,8 @@
 
             footer {
                 position: fixed;
+                text-align: justify;
                 bottom: -20px;
-                right: 20px;
-                text-align: right;
                 font-size: 10px;
                 color: #333;
             }
@@ -112,8 +111,30 @@
                 margin-top: 190px;
             }
 
+            /* body {
+                counter-reset: page 13; 
+            }
+
+            footer .pagenum:before {
+                content: counter(page);
+            } */
+
             .pagenum:before {
                 content: counter(page);
+            }
+
+            .part-left,
+            .page-right {
+                display: inline-block;
+            }
+
+            .part-left {
+                text-align: left;
+            }
+
+            .page-right {
+                margin-left: 600px;
+                text-align: right;
             }
         </style>
     </head>
@@ -132,13 +153,17 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">201 Profiling General Reports</p>
             </div>
-
-            <footer>
-                <div class="flex-container">
-                    <div>Page <span class="pagenum"></span></div>
-                </div>
-            </footer>
         </header>
+
+        <footer>
+            <span class="part-left">
+                Part {{ $partitionNumber }} of {{ $totalParts }}
+            </span>
+    
+            <span class="page-right">
+                Page <span class="pagenum"></span>
+            </span>
+        </footer>
 
         <div>
             <table>
@@ -149,9 +174,9 @@
                             
                         </th>
 
-                        <th>
+                        {{-- <th>
                             Ces No.
-                        </th>
+                        </th> --}}
 
                         <th>
                             Name
@@ -184,20 +209,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rowNumber = 1;
-                    @endphp
 
                     @foreach ($personalData as $personalDatas)
                         <tr>
 
                             <td>
-                                {{ $rowNumber++ }}
+                                {{ ++$skippedData }}
                             </td>
 
-                            <td>
+                            {{-- <td>
                                 {{ $personalDatas->cesno }}
-                            </td>
+                            </td> --}}
 
                             <td>
                                 {{ $personalDatas->lastname }}, {{ $personalDatas->firstname }} {{ $personalDatas->middlename }}
