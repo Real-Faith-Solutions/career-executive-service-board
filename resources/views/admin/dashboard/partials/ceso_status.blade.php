@@ -95,13 +95,28 @@
 
 </script>
 
-<div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+<div class="mb-3 grid gap-4 sm:gid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 grid-cols-1">
 
     <div class="card bg-blue-100">
         <div class="flex justify-between text-blue-500 items-center">
             <div>
-                <p>Total CESOs</p>
+                <p>Total Active and Retired (CESOs and CES Eligibles)</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESO }}</h1>
+                
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
+                    <p>
+                        Total Active CESOs
+                        <span class="font-bold">
+                            {{ $totalActiveRetiredCES }}
+                        </span>
+                    </p>
+                    <p>
+                        Total Active Eligibles
+                        <span class="font-bold">
+                            {{ $totalActiveRetiredEligibles }}
+                        </span>                    
+                    </p>
+                </div>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
@@ -115,8 +130,23 @@
     <div class="card bg-green-100">
         <div class="flex justify-between text-green-500 items-center">
             <div>
-                <p>Total Active CESOs</p>
+                <p>Total Active CESOs and CES Eligibles</p>
                 <h1 class="text-3xl font-bold">{{ $totalCESOActive }}</h1>
+                
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
+                    <p>
+                        Total Active CESOs
+                        <span class="font-bold">
+                            {{ $totalActiveCES }}
+                        </span>
+                    </p>
+                    <p>
+                        Total Active Eligibles
+                        <span class="font-bold">
+                            {{ $totalActiveEligibles }}
+                        </span>                    
+                    </p>
+                </div>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
@@ -128,27 +158,26 @@
         </div>
     </div>
 
-    <div class="card bg-orange-100">
-        <div class="flex justify-between text-orange-500 items-center">
-            <div>
-                <p>Total Deceased CESOs</p>
-                <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
-            </div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
-                stroke="currentColor" class="w-12 h-12 opacity-75">
-                <path stroke-linecap="round" stroke-linejoin="round" 
-                    d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-            </svg>
-              
-        </div>
-    </div>
-
     <div class="card bg-red-100">
         <div class="flex justify-between text-red-500 items-center">
             <div>
                 <p>Total Retired CESOs</p>
+                <br>
                 <h1 class="text-3xl font-bold">{{ $totalCESORetired }}</h1>
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
+                    <p>
+                        Total Retired CESOs
+                        <span class="font-bold">
+                            {{ $totalRetiredCES }}
+                        </span>
+                    </p>
+                    <p>
+                        Total Retired Eligibles
+                        <span class="font-bold">
+                            {{ $totalRetiredEligibles }}
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
@@ -160,11 +189,60 @@
         </div>
     </div>
 
+    <div class="card bg-orange-100">
+        <div class="flex justify-between text-orange-500 items-center">
+            <div>
+                <p>Total Deceased CESOs</p>
+                <br>
+                <h1 class="text-3xl font-bold">{{ $totalCESODeceased }}</h1>
+                
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
+                    <p>
+                        Total Deceased CESOs
+                        <span class="font-bold">
+                            {{ $totalDeceasedCES }}
+                        </span>
+                    </p>
+                    <p>
+                        Total Deceased Eligibles
+                        <span class="font-bold">
+                            {{ $totalDeceasedEligibles }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
+                stroke="currentColor" class="w-12 h-12 opacity-75">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+            </svg>
+              
+        </div>
+    </div>
+
+    
+
     <div class="card bg-violet-100">
         <div class="flex justify-between text-violet-500 items-center">
             <div>
                 <p>Total Inactive CESOs</p>
+                <br>
                 <h1 class="text-3xl font-bold">{{ $totalCESOInactive }}</h1>
+                <div class="lg:flex md:flex-col sm:flex-col justify-between gap-2 ">
+                    <p>
+                        Total Inactive CESOs
+                        <span class="font-bold">
+                            {{ $totalInactiveCES }}
+                        </span>
+                    </p>
+                    <p>
+                        Total Inactive Eligibles
+                        <span class="font-bold">
+                            {{ $totalInactiveEligibles }}
+                        </span>
+                    </p>
+                </div>
             </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" 

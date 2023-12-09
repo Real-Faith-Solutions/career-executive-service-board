@@ -22,6 +22,7 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="workExperienceTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
+                            {{-- Training Session List Grid --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-session.index') }}" >Training Session List Grid</a>
                         </li>
                     </ul>
@@ -39,14 +40,17 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="othersTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
+                            {{-- Training Category --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-category.index') }}" >Training Category</a>
                         </li>
 
                         <li>
+                            {{-- Field of Specializatio --}}
                             <a class="btn category-button inline-flex" href="{{ route('field-specialization.index') }}" >Field of Specialization</a>
                         </li>
 
                         <li>
+                            {{-- Training Secreteriat --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-secretariat.index') }}" >Training Secreteriat</a>
                         </li>
                     </ul>
@@ -64,14 +68,17 @@
                 <div class="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white shadow" id="trainingsTab">
                     <ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm uppercase text-gray-700">
                         <li>
+                            {{-- Resource Speaker --}}
                             <a class="btn category-button inline-flex" href="{{ route('resource-speaker.index') }}" >Resource Speakers/Persons Manager</a>
                         </li>
 
                         <li>
+                            {{-- Training Venue Manager --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-venue-manager.index') }}" >Training Venue Manager</a>
                         </li>
 
                         <li>
+                            {{-- Training Provider Manager --}}
                             <a class="btn category-button inline-flex" href="{{ route('training-provider-manager.index') }}" >Training Provider Manager</a>
                         </li>
                     </ul>

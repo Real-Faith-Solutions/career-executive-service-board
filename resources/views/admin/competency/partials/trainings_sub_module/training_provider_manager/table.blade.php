@@ -4,21 +4,30 @@
 @section('content')
 @include('admin.competency.view_profile.header')
 
-    <div class="my-5 flex justify-end">
-        <form action="{{ route('training-provider-manager.recentlyDeleted') }}" method="GET">
-            @csrf
-            <button title="Trash Bin" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
-                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                <lord-icon
-                    src="https://cdn.lordicon.com/jmkrnisz.json"
-                    trigger="hover"
-                    colors="primary:#880808"
-                    style="width:34px;height:34px">
-                </lord-icon>
-            </button>
-        </form>
+    <div class="my-5 flex justify-between">
+        <div class="flex items-center">
+            {{-- Go Back Button --}}
+            <a href="{{ route('competency-data.index') }}" class="btn btn-primary" >Go Back</a>
+        </div>
 
-        <a href="{{ route('training-provider-manager.create') }}" class="btn btn-primary" >Add Training Provider Manager</a>
+        <div class="flex items-center">
+            {{-- Trash Bin Icon Button --}}
+            <form action="{{ route('training-provider-manager.recentlyDeleted') }}" method="GET">
+                @csrf
+                <button title="Trash Bin" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">
+                    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/jmkrnisz.json"
+                        trigger="hover"
+                        colors="primary:#880808"
+                        style="width:34px;height:34px">
+                    </lord-icon>
+                </button>
+            </form>
+    
+            {{-- Add Training Provider Manager Button --}}
+            <a href="{{ route('training-provider-manager.create') }}" class="btn btn-primary" >Add Training Provider Manager</a>
+        </div>
     </div>
 
     <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
@@ -137,3 +146,19 @@
     </div>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+{{-- 
+    Created By: Manuel, Jon Rolando Desunia
+
+    {{ add your name here if you update this file }}
+    Updated by: 
+--}}

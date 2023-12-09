@@ -25,6 +25,7 @@ class DepartmentAgency extends Model
         'website',
         'remarks',
         'submitted_by',
+        'lastsubmit_dt',
         'encoder',
         'is_national_government',
     ];

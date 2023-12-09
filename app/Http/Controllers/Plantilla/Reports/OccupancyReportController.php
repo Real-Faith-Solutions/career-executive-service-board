@@ -32,8 +32,18 @@ class OccupancyReportController extends Controller
 
     public function generatePDF($deptid)
     {
+        $totalPosition = PlanPosition::query()
+            ->where('is_ces_pos', 1)
+            ->where('pres_apptee', 1)
+            ->where('is_active', 1)
+            ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
+                $query->where('deptid', $deptid);
+            })
+            
+            ->count();
+
         $currentDate = Carbon::now()->format('d F Y');
-        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym')
+        $motherDepartmentAgency = DepartmentAgency::select('deptid', 'title', 'acronym', 'lastsubmit_dt')
             ->find($deptid);
 
         $office = Office::whereHas('agencyLocation', function ($query) use ($deptid) {
@@ -74,6 +84,7 @@ class OccupancyReportController extends Controller
         }
 
         $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
+            'totalPosition',
             'motherDepartmentAgency',
             'planPosition',
             'office',

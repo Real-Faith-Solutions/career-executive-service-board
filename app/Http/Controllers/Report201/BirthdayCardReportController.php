@@ -18,6 +18,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
         $personalData = PersonalData::query()
+                        ->with('cesStatus')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
                         ->whereDay('birthdate', '=', $specificDay)
@@ -26,7 +27,7 @@ class BirthdayCardReportController extends Controller
                                 ->orWhere('description', 'LIKE', '%CES%');
                         })
                         ->orderBy('lastname')
-                        ->get();
+                        ->paginate(25);
 
         $numberOfCelebrant = PersonalData::query()
                         ->where('status', '=', 'Active')
@@ -54,6 +55,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
         $personalData = PersonalData::query()
+                        ->with('cesStatus', 'mailingAddress')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
                         ->whereDay('birthdate', '=', $specificDay)
@@ -114,6 +116,7 @@ class BirthdayCardReportController extends Controller
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
 
         $personalData = PersonalData::query()
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereDay('birthdate', '=', $specificDay)
@@ -130,36 +133,35 @@ class BirthdayCardReportController extends Controller
             'personalData' => $personalData,
             'fullDateName' => $fullDateName,
         ])
-        ->setPaper('a4', 'portrait');
+        ->setPaper('a4', 'landscape');
 
-        return $pdf->stream($fullDateName.$filename);
+        return $pdf->stream($filename);
     }
 
     // fetching all users has birthday this month
     public function monthlyCelebrant(Request $request)
     {
-        $sortBy = $request->input('sortBy', 'birthdate'); // Default sorting birthdate.
+        $sortBy = $request->input('sortBy', 'lastname'); // Default sorting birthdate.
         $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F, Y'); // getting month in name example: December = 12
     
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
             })
             ->paginate(25);
 
-        
         $numberOfCelebrant = PersonalData::query()
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
@@ -185,14 +187,14 @@ class BirthdayCardReportController extends Controller
         $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);
@@ -205,14 +207,14 @@ class BirthdayCardReportController extends Controller
             'personalData' => $personalData,
             'monthYear' => $monthYear,
         ])
-        ->setPaper('a4', 'portrait');
+        ->setPaper('a4', 'landscape');
 
         return $pdf->stream($filename);
     }
 
     public function monthlyCelebrantGenerateDownloadLinks($sortBy, $sortOrder)
     {
-        $sortBy = $sortBy ?? 'cesno';
+        $sortBy = $sortBy ?? 'lastname';
         $sortOrder = $sortOrder ?? 'asc';
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
@@ -220,14 +222,14 @@ class BirthdayCardReportController extends Controller
         $monthYear = Carbon::now()->format('F-Y'); // getting full name month and year attribute example: December, 2023
 
         $personalData = PersonalData::query()
-            ->with('cesStatus')
+            ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
             })
-            ->when($sortBy == 'birthdate', function ($query) use ($sortBy, $sortOrder) {
+            ->when($sortBy === 'birthdate', function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderByRaw('DAY(CONVERT(DATE, '. $sortBy .'))' . $sortOrder);
             }, function ($query) use ($sortBy, $sortOrder) {
                 return $query->orderBy($sortBy, $sortOrder);

@@ -1036,7 +1036,7 @@
             List of CESOs and CES Eligibles in Non-CES Positions
         </h1>
         <p>
-            data as of {{ $currentDate }}
+            data as of {{ \Carbon\Carbon::parse($motherDepartmentAgency->lastsubmit_dt)->format('d F Y') }}
         </p>
     </center>
     <br />

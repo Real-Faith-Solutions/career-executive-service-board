@@ -41,8 +41,8 @@
 
             table {
                 border-collapse: collapse;
-                padding-left: 10px;
-                padding-right: 10px;
+                /* padding-left: 10px;
+                padding-right: 10px; */
                 font-family: Arial;
                 width: 100%;
             }
@@ -52,7 +52,7 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 10px;
+                font-size: 9px;
                 text-align: left;
             }
         
@@ -160,8 +160,28 @@
                         <th>
                             CES Status
                         </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Mailing Address
+                        </th>
+
+                        <th>
+                            Office
+                        </th>
+
+                        <th>
+                            Office Address
+                        </th>
+
+                        <th>
+                            Office Email
+                        </th>
     
-                        <th scope="col" class="px-6 py-3">
+                        <th>
                             Birth Date
                         </th>
                     </tr>
@@ -186,7 +206,35 @@
                                 <td>
                                     {{ $datas->cesStatus->description }}
                                 </td>
-        
+
+                                
+                                <td>
+                                    {{ $datas->email }} 
+                                </td>
+
+                               <td>
+                                    {{ optional($datas->mailingAddress)->region_name ? $datas->mailingAddress->region_name . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->city_or_municipality_name ? $datas->mailingAddress->city_or_municipality_name . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->brgy_name ? $datas->mailingAddress->brgy_name . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->street_lot_bldg_floor ? $datas->mailingAddress->street_lot_bldg_floor . ', ' : '' }}
+                                    {{ optional($datas->mailingAddress)->zip_code ?? '' }}
+                                </td>
+
+                                <td>
+                                    {{ $datas->planAppointee->planPosition->office->title ?? '' }}
+                                </td>
+    
+                                <td>
+                                    {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->floor_bldg ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->floor_bldg . ', ' : '' }}
+                                    {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->house_no_st ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->house_no_st . ', ' : '' }} <br>
+                                    {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->brgy_dist ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->brgy_dist . ', ' : '' }} 
+                                    {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->cities ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->cities->name . ', ' : '' }}                                
+                                </td>
+ 
+                                <td>
+                                    {{ optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->emailadd ? optional(optional(optional(optional($datas->planAppointee)->planPosition)->office)->officeAddress)->emailadd : '' }}
+                                </td>
+                                    
                                 <td>
                                     {{ \Carbon\Carbon::parse($datas->birthdate)->format('m/d/Y ') ?? '' }}
                                 </td>

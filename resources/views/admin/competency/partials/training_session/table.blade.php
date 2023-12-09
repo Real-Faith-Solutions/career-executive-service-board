@@ -20,6 +20,11 @@
         </a>
     
         <a href="{{ route('training-session.create') }}" class="btn btn-primary">Add New Training</a>
+
+        <div class="flex items-center ml-2">
+            {{-- Go Back Button --}}
+            <a href="{{ route('competency-data.index') }}" class="btn btn-primary" >Go Back</a>
+        </div>
     </div>
 </div>
 
