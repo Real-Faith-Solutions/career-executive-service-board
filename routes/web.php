@@ -944,7 +944,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('rapid-validation-report')->group(function () {
             Route::get('index', [RapidValidationReportController::class, 'index'])->name('rapid-validation-report.index')->middleware('checkPermission:eligibility_validation_reports');
             Route::get('download-reports/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generateDownloadLinks'])->name('rapid-validation-report.generateDownloadLinks')->middleware('checkPermission:eligibility_validation_reports');
-            Route::get('generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
+            Route::get('generate-pdf/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{sortBy}/{sortOrder}/{startDate}/{endDate}', [RapidValidationReportController::class, 'generatePdfReport'])->name('rapid-validation-report.generatePdfReport')->middleware('checkPermission:eligibility_validation_reports');
         });
 
         Route::prefix('in-depth-validation-report')->group(function () {
