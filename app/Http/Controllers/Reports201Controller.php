@@ -134,7 +134,7 @@ class Reports201Controller extends Controller
     public function generatePdf(Request $request, $totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename,
                         $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
-                        $cesstat_code, $authority_code)
+                        $cesstat_code, $authority_code, $report_title)
     {
 
         $sortBy = $sortBy ?? 'cesno';
@@ -262,7 +262,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'report_title'
         ))
         ->setPaper('a4', 'portrait');
 
@@ -275,7 +275,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'pageCount'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'pageCount', 'report_title'
         ))
         ->setPaper('a4', 'portrait');
 
