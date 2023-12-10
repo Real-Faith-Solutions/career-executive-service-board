@@ -97,6 +97,8 @@
                     @enderror
                 </div>
 
+                <input type="hidden" id="report_title" name="report_title">
+
                 <div class="my-5 mr-2 flex justify-end">
                     <button class="btn btn-primary" type="submit">Apply Filter</button>
                 </div>
@@ -292,5 +294,32 @@
         </div>
 
     </section>
+
+    <!-- Modal for generate report -->
+    <div id="general_report_modal"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+        <div class="modal-content bg-white p-6 rounded-lg shadow-lg">
+            <div class="sm:gid-cols-1 mb-2 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+
+                <div class="flex flex-col items-center mb-2">
+                    <label for="input_report_title" class="mb-2">Report Title<sup>*</sup></label>
+                    <input type="text" id="input_report_title" name="input_report_title" placeholder="Enter Report Title..."
+                        oninput="validateInput(input_report_title, 4)"
+                        onkeypress="validateInput(input_report_title, 4)"
+                        onblur="checkErrorMessage(input_report_title)" required>
+                    <p class="input_error text-red-600"></p>
+                    @error('input_report_title')
+                    <span class="invalid" role="alert">
+                        <p>{{ $message }}</p>
+                    </span>
+                    @enderror
+                </div>
+
+            </div>
+            <button id="input_report_title_btn"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Confirm</button>
+        </div>
+    </div>
+    {{-- end --}}
 
 @endsection
