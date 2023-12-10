@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ERIS\report;
 use App\Http\Controllers\Controller;
 use App\Models\Eris\PanelBoardInterview;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -92,8 +93,7 @@ class PanelBoardInterviewReportController extends Controller
         $sortBy = $sortBy ?? 'lastname';
         $sortOrder = $sortOrder ?? 'asc';
 
-        // $sortBy = $request->input('sort_by', 'lastname'); // Default sorting by lastname.
-        // $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
+        $fullDateName = Carbon::now()->format('d  F  Y'); // getting full name attribute of the month example: 01 December 2023
 
         $panelBoardInterview = PanelBoardInterview::query()
         ->join('erad_tblMain', 'erad_tblMain.acno', '=', 'erad_tblPBOARD.acno')
@@ -111,6 +111,7 @@ class PanelBoardInterviewReportController extends Controller
             'totalParts' => $totalParts,
             'partitionNumber' => $partitionNumber,
             'skippedData' => $skippedData,
+            'fullDateName' => $fullDateName,
         ])
         ->setPaper('a4', 'portrait');
 
