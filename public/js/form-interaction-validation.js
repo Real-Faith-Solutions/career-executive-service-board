@@ -287,6 +287,9 @@
         }else if(type == 'email'){
             regexValidator = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             errorMessage = ' characters and has a valid email format.';
+        }else if(type == 'file'){
+            regexValidator = /^[a-zA-Z0-9_\-\s]*$/;
+            errorMessage = ' characters and has a valid file name.';
         }
     
         var form = inputField.closest('form');
