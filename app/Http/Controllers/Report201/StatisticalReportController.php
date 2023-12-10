@@ -582,6 +582,9 @@ class StatisticalReportController extends Controller
             'pwd',
             'pwdCES',
             'pwdEligibles',
+            'singleParents',
+            'singleParentsCES',
+            'singleParentsEligibles',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
