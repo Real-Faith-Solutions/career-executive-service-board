@@ -164,6 +164,18 @@
                 Total Inactive CESOs:
                 <span style="color: #2b6cb0;">{{ $totalCESOInactive }}</span>
             </div>
+
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $totalRetiredCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $totalActiveEligibles }}</span>
+            </div>
+
+            <br>
     
             <div class="bullets">
                 Total Deceased CESOs:
