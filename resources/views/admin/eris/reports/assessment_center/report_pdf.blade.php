@@ -67,7 +67,6 @@
                 font-weight: bold; /* Add font weight bold */
             }
 
-        
             span {
                 font-size: 10px;
             }
@@ -88,7 +87,6 @@
                 text-transform: uppercase;
                 font-family: 'Busorama';
                 font-size: 20px;
-                
                 color: #284F87;
             }
         
@@ -103,7 +101,8 @@
             } 
 
             .report_name {
-                text-transform: uppercase;
+                /* text-transform: uppercase; */
+                font-weight: 100;
                 font-size: 16px;
                 color: #000006;
                 margin-top: 15px;
