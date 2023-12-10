@@ -189,7 +189,7 @@
 
             <div class="bullet-child">
                 * Eligibles:
-                <span style="color: #2b6cb0;">{{ $totalInactiveEligibles }}</span>
+                <span style="color: #2b6cb0;">{{ $totalDeceasedEligibles }}</span>
             </div>
 
             <div class="line">
