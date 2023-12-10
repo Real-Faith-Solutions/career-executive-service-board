@@ -641,7 +641,6 @@ class StatisticalReportController extends Controller
             'dualCitizenship',
             'dualCitizenshipCES',
             'dualCitizenshipEligibles',
-            'pageCount'
         ))
         ->setPaper('a4', 'portrait');
 
