@@ -13,7 +13,7 @@ class Reports201Controller extends Controller
     public function index(Request $request)
     {
 
-        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
+        $sortBy = $request->input('sort_by', 'lastname'); // Default sorting by lastname.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
         $filter_active = $request->input('filter_active', 'false');
