@@ -284,12 +284,13 @@ class Reports201Controller extends Controller
 
     public function generateDownloadLinks(Request $request, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
-                        $cesstat_code, $authority_code)
+                        $cesstat_code, $authority_code, $report_title)
     {
 
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';
 
+        $report_title = $request->input('report_title', '201 PROFILING GENERAL REPORTS');
         $filter_active = $filter_active ?? 'false';
         $filter_inactive = $filter_inactive ?? 'false';
         $filter_retired = $filter_retired ?? 'false';
