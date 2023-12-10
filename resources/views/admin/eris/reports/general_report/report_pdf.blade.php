@@ -101,19 +101,25 @@
             } 
 
             .report_name {
-                text-transform: uppercase;
+                /* text-transform: uppercase; */
+                font-weight: 100;
                 font-size: 16px;
-                color: #284F87;
+                color: #000006;
                 margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 185px;
             }
 
             .pagenum:before {
                 content: counter(page);
+            }
+
+            .date {
+                margin-top: -10px;
+                font-size: 12px;
             }
         </style>
     </head>
@@ -132,6 +138,7 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
                     Eris General Report
+                    <p class="date"> as of {{ $fullDateName }}</p>
                 </p>
 
                 <footer>
@@ -161,26 +168,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rowNumber = 1;
-                    @endphp
-                        @foreach ($eradTblMain as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
+                    @foreach ($eradTblMain as $data)
+                        <tr>
+                            <td>
+                                {{ ++$skippedData }}
+                            </td>
 
-                                <td>
-                                    {{ $data->lastname ?? '' }},
-                                    {{ $data->firstname ?? '' }},
-                                    {{ $data->middlename ?? '' }}
-                                </td>
+                            <td>
+                                {{ $data->lastname ?? '' }},
+                                {{ $data->firstname ?? '' }},
+                                {{ $data->middlename ?? '' }}
+                            </td>
         
-                                <td>
-                                    {{ $data->c_status ?? '' }} 
-                                </td>
-                            </tr>
-                        @endforeach                 
+                            <td>
+                                {{ $data->c_status ?? '' }} 
+                            </td>
+                        </tr>
+                    @endforeach                 
                 </tbody>
             </table>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ERIS\report;
 use App\Http\Controllers\Controller;
 use App\Models\Eris\EradTblMain;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -86,6 +87,8 @@ class ErisGeneralReportController extends Controller
     {
         $conferred = "conferred";
 
+        $fullDateName = Carbon::now()->format('d  F  Y'); // getting full name attribute of the month example: 01 December 2023
+
         $eradTblMain = EradTblMain::where('c_status', '!=', $conferred)
             ->orderBy($sortBy,$sortOrder);
 
@@ -98,8 +101,10 @@ class ErisGeneralReportController extends Controller
             'eradTblMain' => $eradTblMain,
             'totalParts' => $totalParts,
             'partitionNumber' => $partitionNumber,
+            'skippedData' => $skippedData,
+            'fullDateName' => $fullDateName,
         ])
-        ->setPaper('a4', 'landscape');
+        ->setPaper('a4', 'portrait');
 
         return $pdf->stream($filename);
     }
