@@ -155,7 +155,7 @@
 
             <div class="bullet-child">
                 * Eligibles:
-                <span style="color: #2b6cb0;">{{ $totalActiveEligibles }}</span>
+                <span style="color: #2b6cb0;">{{ $totalRetiredEligibles }}</span>
             </div>
 
             <br>
@@ -190,6 +190,29 @@
             <div class="bullet-child">
                 * Eligibles:
                 <span style="color: #2b6cb0;">{{ $totalDeceasedEligibles }}</span>
+            </div>
+
+            <div class="line">
+                <hr style="margin-top: 15px;">
+
+                <p class="section_title">
+                    Gender By Birth Demographics (Active CESOs)
+                </p>
+            </div>
+
+            <div class="bullets">
+                Male:
+                <span style="color: #2b6cb0;">{{ $male }}</span>
+            </div>
+    
+            <div class="bullets">
+                Female:
+                <span style="color: #2b6cb0;">{{ $female }}</span>
+            </div>
+    
+            <div class="bullets">
+                Prefer Not to Say:
+                <span style="color: #2b6cb0;">{{ $preferNotToSay }}</span>
             </div>
 
             <div class="line">
