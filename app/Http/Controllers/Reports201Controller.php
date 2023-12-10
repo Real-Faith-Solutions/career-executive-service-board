@@ -16,6 +16,7 @@ class Reports201Controller extends Controller
         $sortBy = $request->input('sort_by', 'lastname'); // Default sorting by lastname.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
+        $report_title = $request->input('report_title', '201 PROFILING GENERAL REPORTS');
         $filter_active = $request->input('filter_active', 'false');
         $filter_inactive = $request->input('filter_inactive', 'false');
         $filter_retired = $request->input('filter_retired', 'false');
