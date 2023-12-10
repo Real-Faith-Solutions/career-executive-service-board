@@ -95,6 +95,22 @@ class AttachedOccupancyReportController extends Controller
             'counts',
         ))
             ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+
+        $filename = $motherDepartmentAgency->acronym . '.pdf';
+        $pdf->render($filename);
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = Pdf::loadView('admin.plantilla.reports.attached-occupancy-report.pdf', compact(
+            'pageCount',
+            'totalPosition',
+            'motherDepartmentAgency',
+            'planPosition',
+            'office',
+            'currentDate',
+            'counts',
+        ))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->stream($filename);
     }
 }

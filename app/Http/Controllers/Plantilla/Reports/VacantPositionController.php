@@ -55,6 +55,21 @@ class VacantPositionController extends Controller
             'no',
         ))
             ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+
+        $filename = $motherDepartmentAgency->acronym . '.pdf';
+        $pdf->render($filename);
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = Pdf::loadView('admin.plantilla.reports.vacant-position.pdf', compact(
+            'pageCount',
+            'currentDate',
+            'motherDepartmentAgency',
+            'planPosition',
+            'no',
+        ))
+            ->setPaper('a4', 'landscape');
+
+
+        return $pdf->stream($filename);
     }
 }

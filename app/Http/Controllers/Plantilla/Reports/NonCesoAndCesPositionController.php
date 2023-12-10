@@ -61,6 +61,23 @@ class NonCesoAndCesPositionController extends Controller
             )
         )
             ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+
+        $filename = $motherDepartmentAgency->acronym . '.pdf';
+        $pdf->render($filename);
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+        
+        $pdf = Pdf::loadView(
+            'admin.plantilla.reports.nonceso-noneligibles-ces-position.pdf',
+            compact(
+                'pageCount',
+                'motherDepartmentAgency',
+                'currentDate',
+                'planAppointee',
+            )
+        )
+            ->setPaper('a4', 'landscape');
+
+
+        return $pdf->stream($filename);
     }
 }

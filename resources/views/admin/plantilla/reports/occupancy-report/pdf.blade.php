@@ -9,6 +9,17 @@
     {{-- custom css --}}
     <style>
         @font-face {
+            font-family: "CG Omega";
+            src: url('{{ public_path(' fonts/CG Omega.ttf') }}');
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .cg-omega {
+            font-family: 'CG Omega';
+        }
+        @font-face {
             font-family: "Busorama";
             src: url('{{ public_path(' fonts/busorama.ttf') }}');
             font-weight: normal;
@@ -1022,7 +1033,7 @@
         </td>
 
         <td colspan="6" style="text-align: right">
-            <h1 class="uppercase busorama text-blue" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
+            <h1 class="uppercase cg-omega text-blue" style="font-size: 18px;">CAREER EXECUTIVE SERVICE BOARD</h1>
             <h1 style="font-size: 9px">No. 3 Marcelino St., Holy Spirit Drive, Diliman, Quezon City 1127</h1>
             <h1 style="font-size: 9px">Tel. 8951-4981 to 88 Fax. 8931-5732 www.cesboard.gov.ph</h1>
         </td>
@@ -1035,7 +1046,7 @@
         <table width="100%">
             <tr>
                 <td class="bold">
-                    Date Printed {{ $currentDate }}
+                    Date Printed: {{ $currentDate }}
                 </td>
                 <td colspan="5">
                     CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted
@@ -1061,7 +1072,7 @@
                     </table>
                 </td>
                 <td>
-                    <div class="">Page <span class="pagenum"></span></div>
+                    <div class="">Page <span class="pagenum"></span> of {{ $pageCount ?? '1'}}</div>
                 </td>
             </tr>
         </table>

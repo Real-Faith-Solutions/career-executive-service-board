@@ -16,10 +16,10 @@ class CesoAndCesPositionController extends Controller
         $motherDepartmentAgency = DepartmentAgency::query()
             ->select('deptid', 'title')
             ->where('mother_deptid', 0)
-            ->whereHas('agencyLocation.office.planPosition', function ($query){
+            ->whereHas('agencyLocation.office.planPosition', function ($query) {
                 $query->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1)
-                ->where('is_active', 1);
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1);
             })
             ->orderBy('title', 'asc')
             ->get();
@@ -52,6 +52,7 @@ class CesoAndCesPositionController extends Controller
             ->orderBy('personalData.lastname') // Second sorting by lastname
             ->get();
 
+
         $pdf = Pdf::loadView(
             'admin.plantilla.reports.ceso-eligibles-ces-position.pdf',
             compact(
@@ -61,6 +62,21 @@ class CesoAndCesPositionController extends Controller
             )
         )
             ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+
+        $filename = $motherDepartmentAgency->acronym . '.pdf';
+        $pdf->render($filename);
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+        
+        $pdf = Pdf::loadView(
+            'admin.plantilla.reports.ceso-eligibles-ces-position.pdf',
+            compact(
+                'motherDepartmentAgency',
+                'currentDate',
+                'planAppointee',
+                'pageCount',
+            )
+        )
+            ->setPaper('a4', 'landscape');
+        return $pdf->stream($filename);
     }
 }

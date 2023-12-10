@@ -18,10 +18,10 @@ class OccupancyReportController extends Controller
         $motherDepartment = DepartmentAgency::query()
             ->select('deptid', 'title')
             ->where('mother_deptid', 0)
-            ->whereHas('agencyLocation.office.planPosition', function ($query){
+            ->whereHas('agencyLocation.office.planPosition', function ($query) {
                 $query->where('is_ces_pos', 1)
-                ->where('pres_apptee', 1)
-                ->where('is_active', 1);
+                    ->where('pres_apptee', 1)
+                    ->where('is_active', 1);
             })
             ->orderBy('title', 'asc')
             ->get();
@@ -39,7 +39,7 @@ class OccupancyReportController extends Controller
             ->whereHas('office.agencyLocation.departmentAgency', function ($query) use ($deptid) {
                 $query->where('deptid', $deptid);
             })
-            
+
             ->count();
 
         $currentDate = Carbon::now()->format('d F Y');
@@ -83,15 +83,30 @@ class OccupancyReportController extends Controller
             }
         }
 
-        $pdf = Pdf::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
+
+        $pdf = PDF::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
             'totalPosition',
             'motherDepartmentAgency',
             'planPosition',
             'office',
             'currentDate',
             'counts',
-        ))
-            ->setPaper('a4', 'landscape');
-        return $pdf->stream($motherDepartmentAgency->acronym . '.pdf');
+        ))->setPaper('a4', 'landscape');
+
+        $filename = $motherDepartmentAgency->acronym . '.pdf';
+        $pdf->render($filename);
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = PDF::loadView('admin.plantilla.reports.occupancy-report.pdf', compact(
+            'pageCount',
+            'totalPosition',
+            'motherDepartmentAgency',
+            'planPosition',
+            'office',
+            'currentDate',
+            'counts',
+        ))->setPaper('a4', 'landscape');
+
+        return $pdf->stream($filename);
     }
 }
