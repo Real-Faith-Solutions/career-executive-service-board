@@ -610,6 +610,9 @@ class StatisticalReportController extends Controller
             'singleParents',
             'singleParentsCES',
             'singleParentsEligibles',
+            'indigenous',
+            'indigenousCES',
+            'indigenousEligibles',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
