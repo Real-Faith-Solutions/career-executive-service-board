@@ -132,6 +132,12 @@
             </div>
         </header>
 
+        <footer>
+            <span class="page-right">
+                Page <span class="pagenum"></span> {{ isset($pageCount) ? 'of '.$pageCount : '' }}
+            </span>
+        </footer>
+
         <div class="whole_section">
 
             <div class="line">
