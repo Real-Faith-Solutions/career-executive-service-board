@@ -519,6 +519,31 @@ class StatisticalReportController extends Controller
             })
             ->count();
 
+        $singleParents = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $singleParentsCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $singleParentsEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })
+            ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalActiveRetiredEligibles',
             'totalActiveRetiredCES',
