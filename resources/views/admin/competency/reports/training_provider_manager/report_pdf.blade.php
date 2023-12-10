@@ -27,14 +27,13 @@
                 margin-top: -60px;
                 text-align: center;
             }
-
             footer {
                 position: fixed;
                 bottom: -20px;
-                right: 20px;
+                left: 20px;
                 text-align: right;
                 font-size: 10px;
-                color: #333;
+                color: black;
             }
             
             table {
@@ -94,19 +93,25 @@
             } 
 
             .report_name {
-                text-transform: uppercase;
+                /* text-transform: uppercase; */
+                font-weight: 100;
                 font-size: 16px;
-                color: #284F87;
+                color: #000006;
                 margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 185px;
             }
 
             .pagenum:before {
                 content: counter(page);
+            }
+
+            .date {
+                margin-top: -10px;
+                font-size: 12px;
             }
         </style>
     </head>
@@ -124,11 +129,12 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Training Provider Manager Report</p>
+                <p class="date"> as  of <span></span> {{ $fullDateName }}</p>
             </div>
 
             <footer>
                 <div class="flex-container">
-                    <div class="">Page <span class="pagenum"></span></div>
+                    Part {{ $partitionNumber }} of {{ $totalParts }}
                 </div>
             </footer>
         </header>
@@ -159,7 +165,7 @@
                         </th>
         
                         <th>
-                            City Code
+                            City
                         </th>
         
                         <th>
@@ -176,14 +182,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rowNumber = 1;
-                    @endphp
-
                     @foreach ($competencyTrainingProvider as $competencyTrainingProviders)
                         <tr>
                             <td>
-                                {{ $rowNumber++ }}
+                                {{ ++$skippedData }}
                             </td>
 
                             <td>
@@ -221,6 +223,19 @@
                     @endforeach
                 </tbody>
             </table>
+
+            {{-- Here's the magic. This MUST be inside body tag. Page count / total, centered at bottom of page --}}
+            <script type="text/php">
+                if (isset($pdf)) {
+                    $text = "Page {PAGE_NUM} of  {PAGE_COUNT}";
+                    $size = 7;
+                    $font = $fontMetrics->getFont("Verdana");
+                    $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
+                    $x = ($pdf->get_width() - $width);
+                    $y = $pdf->get_height() - 28;
+                    $pdf->page_text($x, $y, $text, $font, $size);
+                }
+            </script>
         </div>    
     </body>
 </html>
