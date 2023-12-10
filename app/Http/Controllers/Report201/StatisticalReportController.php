@@ -586,9 +586,9 @@ class StatisticalReportController extends Controller
             })
             ->count();
 
-        $indigenousEligibles = PersonalData::query()
+        $dualCitizenshipEligibles = PersonalData::query()
             ->where('status', 'Active')
-            ->where('member_of_indigenous_group', 'Yes')
+            ->where('citizenship', 'Dual-Citizenship')
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%');
             })
