@@ -100,7 +100,7 @@
                 <div class="flex items-center px-6 py-3 text-left">
                     <label for="report_title" class="mt-2 text-sm font-medium text-gray-700">Report Title<sup>*</sup></label>
                     <input id="report_title" name="report_title" type="text" value="{{ $report_title ?? old('report_title') }}" placeholder="Enter Report Title..."
-                            oninput="validateInput(report_title, 2, 'letters')" onkeypress="validateInput(report_title, 2, 'letters')" onblur="checkErrorMessage(report_title)">
+                            oninput="validateInput(report_title, 4, 'file')" onkeypress="validateInput(report_title, 4, 'file')" onblur="checkErrorMessage(report_title)" required>
                     @error('report_title')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
