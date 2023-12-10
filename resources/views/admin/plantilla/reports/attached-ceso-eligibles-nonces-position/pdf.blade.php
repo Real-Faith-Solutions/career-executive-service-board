@@ -1022,7 +1022,7 @@
                 </td>
 
                 <td style="text-align:right;">
-                    <div class="">Page <span class="pagenum"></span></div>
+                    <div class="">Page <span class="pagenum"></span> of {{ $pageCount ?? '1'}}</div>
                 </td>
             </tr>
         </table>

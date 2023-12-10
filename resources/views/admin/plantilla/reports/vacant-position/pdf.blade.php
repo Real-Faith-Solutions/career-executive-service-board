@@ -1042,7 +1042,7 @@
                 </td>
 
                 <td style="text-align: right">
-                    <div class="">Page <span class="pagenum"></span></div>
+                    <div class="">Page <span class="pagenum"></span> of {{ $pageCount ?? '1'}}</div>
                 </td>
             </tr>
         </table>
@@ -1076,53 +1076,52 @@
         <tbody>
 
             @foreach ($planPosition as $planPositionDatas)
-            @php
-            $selectedOccupant = $planPositionDatas->planAppointee
-            ->where('is_appointee', 1)
-            ->first();
+                @php
+                    $selectedOccupant = $planPositionDatas->planAppointee
+                    ->where('is_appointee', 1)
+                    ->first();
 
-            if (!$selectedOccupant) {
-            @endphp
-            <tr style="font-size:11px">
-                <th>
-                    {{ $no++ }}
-                </th>
-                <td>
-                    {{ $planPositionDatas->office->title ?? '' }}
-                </td>
-                <td>
-                    {{ $planPositionDatas->pos_default ?? '' }}
-                </td>
-                <td class="text-center">
-                    {{ $planPositionDatas->corp_sg ?? '' }}
-                </td>
-                <td>
-                    {{ $planPositionDatas->item_no ?? '' }}
-                </td>
-                <td>
-                    @php
-                    $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first();
-                    @endphp
-                    {{ $selectedOccupant->personalData->lastname ?? '' }}
-                    {{ $selectedOccupant->personalData->middlename ?? '' }}
-                    {{ $selectedOccupant->personalData->firstname ?? '' }}
-                </td>
-                <td>
-                    @php
-                    $selectedOccupant = $planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first();
-                    @endphp
-                    {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
-                </td>
-            </tr>
-            @php
-            }
-            @endphp
+                    if (!$selectedOccupant) {
+                @endphp
+                    <tr style="font-size:11px">
+                        <th>
+                            {{ $no++ }}
+                        </th>
+                        <td>
+                            {{ $planPositionDatas->office->title ?? '' }}
+                        </td>
+                        <td>
+                            {{ $planPositionDatas->pos_default ?? '' }}
+                        </td>
+                        <td class="text-center">
+                            {{ $planPositionDatas->corp_sg ?? '' }}
+                        </td>
+                        <td>
+                            {{ $planPositionDatas->item_no ?? '' }}
+                        </td>
+                        <td>
+                            @php
+                                $selectedOccupant = $planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first();
+                            @endphp
+                            {{ $selectedOccupant->personalData->lastname ?? '' }}
+                            {{ $selectedOccupant->personalData->middlename ?? '' }}
+                            {{ $selectedOccupant->personalData->firstname ?? '' }}
+                        </td>
+                        <td>
+                            @php
+                                $selectedOccupant = $planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first();
+                            @endphp
+                            {{ $selectedOccupant->personalData->cesStatus->description ?? '' }}
+                        </td>
+                    </tr>
+                @php
+                    }
+                @endphp
             @endforeach
-
 
         </tbody>
     </table>
