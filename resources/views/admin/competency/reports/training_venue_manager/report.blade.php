@@ -45,6 +45,10 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
+                        City
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Contact No.
                     </th>
 
@@ -69,11 +73,12 @@
                         </td>
 
                         <td class="px-6 py-3">
-                            {{ 
-                                $trainingVenueManagers->no_street ?? ''.', '.
-                                $trainingVenueManagers->brgy ?? ''.', '. 
-                                $trainingVenueManagers->trainingVenueManager->name ?? ''
-                            }}
+                            {{ $trainingVenueManagers->no_street ?? '' }}
+                            {{ $trainingVenueManagers->brgy ?? '' }}
+                        </td>
+
+                        <td class="px-6 py-3">
+                            {{ $trainingVenueManagers->trainingVenueManager->name ?? '' }}
                         </td>
 
                         <td class="px-6 py-3">

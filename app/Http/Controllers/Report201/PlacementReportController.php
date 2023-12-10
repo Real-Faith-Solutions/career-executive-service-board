@@ -8,6 +8,7 @@ use App\Models\ProfileLibTblEducDegree;
 use App\Models\ProfileLibTblExpertiseSpec;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PlacementReportController extends Controller
 {
@@ -23,7 +24,7 @@ class PlacementReportController extends Controller
 
     public function index(Request $request)
     {
-        $sortBy = $request->input('sortBy', 'cesno'); // Default sorting we_date.
+        $sortBy = $request->input('sortBy', 'lastname'); // Default sorting we_date.
         $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $expertise = $request->input('expertise');
@@ -64,8 +65,7 @@ class PlacementReportController extends Controller
 
     public function generateDownloadLinks(Request $request)
     {
-
-        $sortBy = $request->input('sortBy', 'cesno'); // Default sorting we_date.
+        $sortBy = $request->input('sortBy', 'lastname'); // Default sorting we_date.
         $sortOrder = $request->input('sortOrder', 'asc'); // Default sorting order
 
         $expertise = $request->input('expertise');
@@ -99,6 +99,9 @@ class PlacementReportController extends Controller
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
 
+        $totalData = $personalData->count();
+        $totalParts = ceil($totalData/$recordsPerPartition);
+
         // number of partitions
         $partitionNumber = 0;
 
@@ -110,7 +113,7 @@ class PlacementReportController extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $expertise, $degree) {
+        $personalData->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $expertise, $degree, $totalParts) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -124,8 +127,7 @@ class PlacementReportController extends Controller
             // Create a route to handle the download action for each partition
             // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
             $downloadRoute = route('reports-for-placement.generatePdfReport', 
-                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 
-                                'sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'expertise' => $expertise, 'degree' => $degree]);
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 'sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'expertise' => $expertise, 'degree' => $degree, 'totalParts' => $totalParts]);
 
             // Store the download link in the array
             $downloadLinks[] = [
@@ -139,7 +141,7 @@ class PlacementReportController extends Controller
         return view('admin/201_profiling/reports/report_for_placement/download_report', compact('downloadLinks'));
     }
 
-    public function generatePdfReport(Request $request,  $recordsPerPartition, $partitionNumber, $skippedData, $filename, $sortBy, $sortOrder, $expertise, $degree)
+    public function generatePdfReport(Request $request,  $totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename, $sortBy, $sortOrder, $expertise, $degree)
     {
         $personalData = PersonalData::query()
         ->whereIn('status', ['Active', 'Retired'])
@@ -164,14 +166,18 @@ class PlacementReportController extends Controller
 
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
-                
-        $pdf = Pdf::loadView('admin.201_profiling.reports.report_for_placement.report', 
+        
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('admin.201_profiling.reports.report_for_placement.report', 
         compact(
             'personalData',
             'sortBy',
             'sortOrder',
             'expertise',
             'degree',
+            'totalParts',
+            'partitionNumber',
         ))
         ->setPaper('a4', 'portrait');
 
