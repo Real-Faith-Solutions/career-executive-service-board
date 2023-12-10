@@ -16,6 +16,10 @@
                 </datalist>
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>
+
+            <div class="m-5 hidden">
+                {{ $personalData->links() }}
+            </div>
         </form>
     </div>
 

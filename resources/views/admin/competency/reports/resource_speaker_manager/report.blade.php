@@ -11,7 +11,7 @@
                 @csrf
                 <div class="flex gap-2">
                     <select name="expertise" id="expertise">
-                        <option value="all">All</option>
+                        <option value="" selected>All</option>
                         @foreach ($expertise as $resourceSpeakers)
                             @if ($resourceSpeakers->expertise == $search)
                                 <option value="{{ $resourceSpeakers->expertise }}" selected>{{ $resourceSpeakers->expertise }}</option>
@@ -20,6 +20,10 @@
                             @endif
                         @endforeach
                     </select>   
+
+                    <input type="date" name="startDate" value="{{ $startDate }}">
+
+                    <input type="date" name="endDate" value="{{ $endDate }}">
 
                     <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                         Search
@@ -31,6 +35,8 @@
         <div class="flex items-center">
             <form action="{{ route('competency-management-sub-modules-report.generateDownloadLinks') }}" target="_blank" method="GET">
                 @csrf
+                <input type="date" name="startDate" value="{{ $startDate }}" hidden>
+                <input type="date" name="endDate" value="{{ $endDate }}" hidden>
                 <input type="text" name="expertise" value="{{ $search }}" hidden>
                 <button class="btn btn-primary mx-1 font-medium text-blue-600" type="submit">
                     Generate PDF Report
@@ -45,6 +51,10 @@
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Name
+                    </th>
+                    
+                    <th scope="col" class="px-6 py-3">
+                        Training Session's
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -95,6 +105,23 @@
                             {{ $resourceSpeakers->lastname. " " .$resourceSpeakers->firstname. " " .$resourceSpeakers->mi  }}
                         </td>
 
+                        <td class="whitespace-nowrap font-medium text-gray-900">
+                            @foreach ($resourceSpeakers->trainingEngagement as $trainingEngagement)
+                                @php
+                                    $fromDate = \Carbon\Carbon::parse($trainingEngagement->from_dt)->format('Y-m-d');
+                                    $toDate = \Carbon\Carbon::parse($trainingEngagement->to_dt)->format('Y-m-d');
+                                @endphp
+                                
+                                @if ($startDate != null && $endDate != null)
+                                    @if (($startDate <= $fromDate) && ($endDate >= $toDate))
+                                        {{ $trainingEngagement->title ?? '' }},<br>
+                                    @endif    
+                                @else
+                                    {{ $trainingEngagement->title ?? '' }},<br>
+                                @endif
+                            @endforeach
+                        </td>                            
+                        
                         <td class="px-6 py-3">
                             {{ $resourceSpeakers->Position }}
                         </td>

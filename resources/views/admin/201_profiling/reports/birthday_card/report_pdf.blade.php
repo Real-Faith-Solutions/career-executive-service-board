@@ -33,10 +33,10 @@
             footer {
                 position: fixed;
                 bottom: -20px;
-                right: 20px;
+                left: 20px;
                 text-align: right;
                 font-size: 10px;
-                color: #333;
+                color: black;
             }
 
             table {
@@ -114,9 +114,11 @@
                 margin-top: 160px;
             }
 
-            .pagenum:before {
-                content: counter(page);
-            }
+            /* 
+                .pagenum:before {
+                    content: counter(page);
+                } 
+            */
         </style>
     </head>
 
@@ -138,7 +140,7 @@
 
                 <footer>
                     <div class="flex-container">
-                        <div class="">Page <span class="pagenum"></span></div>
+                       Part {{ $partitionNumber }} of {{ $totalParts }}
                     </div>
                 </footer>
             </div>
@@ -241,6 +243,19 @@
                         @endforeach                 
                 </tbody>
             </table>
+
+            {{-- Here's the magic. This MUST be inside body tag. Page count / total, centered at bottom of page --}}
+            <script type="text/php">
+                if (isset($pdf)) {
+                    $text = "Page {PAGE_NUM} of {PAGE_COUNT}";
+                    $size = 7;
+                    $font = $fontMetrics->getFont("Verdana");
+                    $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
+                    $x = ($pdf->get_width() - $width);
+                    $y = $pdf->get_height() - 28;
+                    $pdf->page_text($x, $y, $text, $font, $size);
+                }
+            </script>
         </div>
     </body>
 </html>

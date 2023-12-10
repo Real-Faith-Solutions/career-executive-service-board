@@ -7,6 +7,7 @@ use App\Models\CompetencyTrainingVenueManager;
 use App\Models\ProfileLibCities;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class TrainingVenueManagerReportController extends Controller
 {
@@ -44,7 +45,7 @@ class TrainingVenueManagerReportController extends Controller
         return view('admin.competency.reports.training_venue_manager.report', compact('trainingVenueManager','searchProfileLibCities', 'search'));
     }
 
-    public function generatePdf(Request $request, $recordsPerPartition, $partitionNumber, $skippedData, $filename, $search)
+    public function generatePdf(Request $request, $totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename, $search)
     {
         $search = $search ?? 'all';
 
@@ -63,10 +64,15 @@ class TrainingVenueManagerReportController extends Controller
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $trainingVenueManagerByCity = $trainingVenueManagerByCity->skip($skippedData)->take($recordsPerPartition)->get();
                
-        $pdf = Pdf::loadView('admin.competency.reports.training_venue_manager.report_pdf_city', 
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('admin.competency.reports.training_venue_manager.report_pdf_city', 
         compact(
             'trainingVenueManagerByCity', 
-            'search'
+            'search',
+            'totalParts',
+            'partitionNumber',
+            'skippedData',
         ))
         ->setPaper('a4', 'landscape');
 
@@ -94,6 +100,9 @@ class TrainingVenueManagerReportController extends Controller
         // Set the maximum number of records per partition
         $recordsPerPartition = 500;
 
+        $totalData = $trainingVenueManagerByCity->count();
+        $totalParts = ceil($totalData/$recordsPerPartition);
+
         // number of partitions
         $partitionNumber = 0;
 
@@ -105,7 +114,7 @@ class TrainingVenueManagerReportController extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $trainingVenueManagerByCity->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $search) {
+        $trainingVenueManagerByCity->chunk($recordsPerPartition, function ($partition) use (&$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $search, $totalParts) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -119,7 +128,7 @@ class TrainingVenueManagerReportController extends Controller
             // Create a route to handle the download action for each partition
             // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
             $downloadRoute = route('competency-management-sub-modules-report.trainingVenueManagerReportGeneratePdf', 
-                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 'search' => $search]);
+                                ['recordsPerPartition' => $recordsPerPartition, 'partitionNumber' => $partitionNumber, 'skippedData' => $skippedData, 'filename' => $filename, 'search' => $search, 'totalParts' => $totalParts]);
 
             // Store the download link in the array
             $downloadLinks[] = [
