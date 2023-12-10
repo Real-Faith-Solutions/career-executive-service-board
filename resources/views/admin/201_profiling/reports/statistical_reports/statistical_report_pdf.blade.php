@@ -130,7 +130,7 @@
             <br>
     
             <div class="bullets">
-                Total Active CESOs and CES Eligibles:
+                Total Active (CESOs and CES Eligibles):
                 <span style="color: #2b6cb0;">{{ $totalCESOActive }}</span>
             </div>
 
@@ -147,7 +147,7 @@
             <br>
     
             <div class="bullets">
-                Total Retired CESOs:
+                Total Retired (CESOs and CES Eligibles):
                 <span style="color: #2b6cb0;">{{ $totalCESORetired }}</span>
             </div>
 
@@ -164,7 +164,7 @@
             <br>
     
             <div class="bullets">
-                Total Inactive CESOs:
+                Total Inactive (CESOs and CES Eligibles):
                 <span style="color: #2b6cb0;">{{ $totalCESOInactive }}</span>
             </div>
 
@@ -181,7 +181,7 @@
             <br>
     
             <div class="bullets">
-                Total Deceased CESOs:
+                Total Deceased (CESOs and CES Eligibles):
                 <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
             </div>
 
