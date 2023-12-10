@@ -494,6 +494,15 @@ class StatisticalReportController extends Controller
             })
             ->count();
 
+        $pwd = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalActiveRetiredEligibles',
             'totalActiveRetiredCES',
@@ -529,6 +538,7 @@ class StatisticalReportController extends Controller
             'female',
             'preferNotToSay',
             'nonGender',
+            'pwd',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');

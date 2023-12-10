@@ -320,6 +320,31 @@
                 No Status:
                 <span style="color: #2b6cb0;">{{ $noStatus }}</span>
             </div>
+
+            <div class="line">
+                <hr style="margin-top: 15px;">
+
+                <p class="section_title">
+                    Others
+                </p>
+            </div>
+
+            <div class="bullets">
+                Total Person with Disability (Active CESOs and CES Eligibles):
+                <span style="color: #2b6cb0;">{{ $pwd }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $totalActiveRetiredEligibles }}</span>
+            </div>
+
+            <br>
             
         </div>
 
