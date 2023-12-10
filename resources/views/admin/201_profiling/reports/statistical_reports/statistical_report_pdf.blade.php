@@ -336,12 +336,12 @@
 
             <div class="bullet-child">
                 * CESOs:
-                <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
+                <span style="color: #2b6cb0;">{{ $pwdCES }}</span>
             </div>
 
             <div class="bullet-child">
                 * Eligibles:
-                <span style="color: #2b6cb0;">{{ $totalActiveRetiredEligibles }}</span>
+                <span style="color: #2b6cb0;">{{ $pwdEligibles }}</span>
             </div>
 
             <br>

@@ -555,6 +555,8 @@ class StatisticalReportController extends Controller
             'preferNotToSay',
             'nonGender',
             'pwd',
+            'pwdCES',
+            'pwdEligibles',
         ))
         ->setPaper('a4', 'portrait');
         return $pdf->stream('201-profiling-general-reports.pdf');
