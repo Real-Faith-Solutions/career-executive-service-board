@@ -127,9 +127,21 @@
             <br>
     
             <div class="bullets">
-                Total Active CESOs:
+                Total Active CESOs and CES Eligibles:
                 <span style="color: #2b6cb0;">{{ $totalCESOActive }}</span>
             </div>
+
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $totalActiveRetiredEligibles }}</span>
+            </div>
+
+            <br>
     
             <div class="bullets">
                 Total Retired CESOs:
