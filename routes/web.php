@@ -826,7 +826,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
         Route::prefix('resource-speaker-manager')->group(function () {
             Route::get('report', [ResourceSpeakerManagerReportController::class, 'index'])->name('competency-management-sub-modules-report.resourceSpeakerIndexReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
             Route::get('download-report', [ResourceSpeakerManagerReportController::class, 'generateDownloadLinks'])->name('competency-management-sub-modules-report.generateDownloadLinks')->middleware('checkPermission:competency_resource_speaker_manager_reports');
-            Route::get('report-generate-pdf/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{expertise}', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
+            Route::get('report-generate-pdf/{totalParts}/{recordsPerPartition}/{partitionNumber}/{skippedData}/{filename}/{expertise}/{startDate}/{endDate}', [ResourceSpeakerManagerReportController::class, 'generateReport'])->name('competency-management-sub-modules-report.resourceSpeakerGenerateReport')->middleware('checkPermission:competency_resource_speaker_manager_reports');
         });
     });
     //  end of competency report routes
