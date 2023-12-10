@@ -103,8 +103,13 @@
             </div>
 
             <div class="bullets">
-                Total CESOs:
+                Total Active and Retired (CESOs and CES Eligibles):
                 <span style="color: #2b6cb0;">{{ $totalCESO }}</span>
+            </div>
+
+            <div class="bullets">
+                CESOs:
+                <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
             </div>
     
             <div class="bullets">
