@@ -76,10 +76,10 @@
             }
 
             .bullet-child{
-                font-size: 16px;
+                font-size: 14px;
                 font-family: 'Times New Roman', Times, serif;
-                padding-left: 15px;
-                margin-top: 5px;
+                padding-left: 50px;
+                margin-top: 3px;
             }
 
         </style>
@@ -115,14 +115,16 @@
             </div>
 
             <div class="bullet-child">
-                CESOs:
+                * CESOs:
                 <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
             </div>
 
             <div class="bullet-child">
-                Eligibles:
+                * Eligibles:
                 <span style="color: #2b6cb0;">{{ $totalActiveRetiredEligibles }}</span>
             </div>
+
+            <br>
     
             <div class="bullets">
                 Total Active CESOs:
