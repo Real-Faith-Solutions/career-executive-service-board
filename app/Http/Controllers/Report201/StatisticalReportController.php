@@ -14,13 +14,6 @@ class StatisticalReportController extends Controller
     public function index(Request $request)
     {
 
-        $totalCESO = PersonalData::query()
-            ->whereHas('cesStatus', function ($query) {
-                $query->where('description', 'LIKE', '%Eli%')
-                    ->orWhere('description', 'LIKE', '%CES%');
-            })
-            ->count();
-
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
             ->whereHas('cesStatus', function ($query) {
@@ -52,6 +45,58 @@ class StatisticalReportController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
+        $totalActiveCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalActiveEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalRetiredCES = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalRetiredEligibles = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalDeceasedCES = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalDeceasedEligibles = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalInactiveCES = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalInactiveEligibles = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalCESO = $totalCESOActive + $totalCESORetired;
+        $totalActiveRetiredCES = $totalActiveCES + $totalRetiredCES;
+        $totalActiveRetiredEligibles = $totalActiveEligibles + $totalRetiredEligibles;
 
         // Calculate the date 25 years ago
         $twentyFiveYearsAgo = Carbon::today()->subYears(26)->addDay()->format('Y-m-d');
