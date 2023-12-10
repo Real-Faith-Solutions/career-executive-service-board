@@ -265,6 +265,19 @@ class Reports201Controller extends Controller
         ))
         ->setPaper('a4', 'portrait');
 
+        $pdf->render($filename);
+
+        // Get the page count
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = Pdf::loadView('admin.201_profiling.reports.general_report_pdf', 
+        compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
+            'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
+            'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'pageCount'
+        ))
+        ->setPaper('a4', 'portrait');
+
         return $pdf->stream($filename);
     }
 
