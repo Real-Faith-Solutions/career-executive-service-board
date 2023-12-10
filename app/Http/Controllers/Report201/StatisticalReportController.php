@@ -546,7 +546,7 @@ class StatisticalReportController extends Controller
 
         $indigenous = PersonalData::query()
             ->where('status', 'Active')
-            ->where('single_parent', 'Yes')
+            ->where('member_of_indigenous_group', 'Yes')
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
@@ -555,7 +555,7 @@ class StatisticalReportController extends Controller
 
         $indigenousCES = PersonalData::query()
             ->where('status', 'Active')
-            ->where('single_parent', 'Yes')
+            ->where('member_of_indigenous_group', 'Yes')
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%CES%');
             })
