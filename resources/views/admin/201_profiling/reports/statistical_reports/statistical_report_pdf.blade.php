@@ -215,6 +215,11 @@
                 <span style="color: #2b6cb0;">{{ $preferNotToSay }}</span>
             </div>
 
+            <div class="bullets">
+                None:
+                <span style="color: #2b6cb0;">{{ $nonGender }}</span>
+            </div>
+
             <div class="line">
                 <hr style="margin-top: 15px;">
 
