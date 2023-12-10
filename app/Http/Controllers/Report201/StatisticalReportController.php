@@ -483,7 +483,11 @@ class StatisticalReportController extends Controller
 
         $nonGender = PersonalData::query()
             ->where('status', 'Active')
-            ->where('gender', '')
+            ->where(function ($query) {
+                $query->where('gender', '')
+                    ->orWhereNull('gender')
+                    ->orWhere('gender', '-');
+            })
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
