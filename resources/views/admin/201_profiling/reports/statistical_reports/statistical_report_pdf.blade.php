@@ -361,6 +361,23 @@
             </div>
 
             <br>
+
+            <div class="bullets">
+                Total Member of Indigenous Group (Active CESOs and CES Eligibles):
+                <span style="color: #2b6cb0;">{{ $singleParents }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $singleParentsCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $singleParentsEligibles }}</span>
+            </div>
+
+            <br>
             
         </div>
 
