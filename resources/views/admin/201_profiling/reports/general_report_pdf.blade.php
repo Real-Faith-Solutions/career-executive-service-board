@@ -31,7 +31,7 @@
             footer {
                 position: fixed;
                 text-align: justify;
-                bottom: -20px;
+                bottom: -10px;
                 font-size: 10px;
                 color: #333;
             }
@@ -129,12 +129,16 @@
             }
 
             .part-left {
-                text-align: left;
+                /* text-align: left; */
+                position: fixed;
+                left: 20px;
             }
 
             .page-right {
-                margin-left: 600px;
-                text-align: right;
+                /* margin-left: 550px;
+                text-align: right; */
+                position: fixed;
+                right: 20px;
             }
         </style>
     </head>
@@ -161,7 +165,7 @@
             </span>
     
             <span class="page-right">
-                Page <span class="pagenum"></span>
+                Page <span class="pagenum"></span> {{ isset($pageCount) ? 'of '.$pageCount : '' }}
             </span>
         </footer>
 
