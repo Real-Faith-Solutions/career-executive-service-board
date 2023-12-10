@@ -49,7 +49,6 @@
                 margin-top: -7px;
                 font-size: 15px;
             } 
-
             .report_name {
                 text-transform: uppercase;
                 font-size: 16px;
@@ -80,6 +79,10 @@
                 font-family: 'Times New Roman', Times, serif;
                 padding-left: 50px;
                 margin-top: 3px;
+            }
+
+            .page-break {
+                page-break-after: always;
             }
 
         </style>
@@ -196,34 +199,6 @@
                 <hr style="margin-top: 15px;">
 
                 <p class="section_title">
-                    Gender By Birth Demographics (Active CESOs)
-                </p>
-            </div>
-
-            <div class="bullets">
-                Male:
-                <span style="color: #2b6cb0;">{{ $male }}</span>
-            </div>
-    
-            <div class="bullets">
-                Female:
-                <span style="color: #2b6cb0;">{{ $female }}</span>
-            </div>
-    
-            <div class="bullets">
-                Prefer Not to Say:
-                <span style="color: #2b6cb0;">{{ $preferNotToSay }}</span>
-            </div>
-
-            <div class="bullets">
-                None:
-                <span style="color: #2b6cb0;">{{ $nonGender }}</span>
-            </div>
-
-            <div class="line">
-                <hr style="margin-top: 15px;">
-
-                <p class="section_title">
                     Age Demographics (Active CESOs)
                 </p>
             </div>
@@ -261,6 +236,33 @@
             <div class="line">
                 <hr style="margin-top: 15px;">
 
+                <p class="section_title">
+                    Gender By Birth Demographics (Active CESOs)
+                </p>
+            </div>
+
+            <div class="bullets">
+                Male:
+                <span style="color: #2b6cb0;">{{ $male }}</span>
+            </div>
+    
+            <div class="bullets">
+                Female:
+                <span style="color: #2b6cb0;">{{ $female }}</span>
+            </div>
+
+
+            <div class="page-break"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="line margined-line">
                 <p class="section_title">
                     CES Status Summary (Active CESOs)
                 </p>
