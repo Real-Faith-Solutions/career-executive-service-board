@@ -538,7 +538,7 @@ class StatisticalReportController extends Controller
 
         $singleParentsEligibles = PersonalData::query()
             ->where('status', 'Active')
-            ->where('person_with_disability', 'Yes')
+            ->where('single_parent', 'Yes')
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%');
             })
