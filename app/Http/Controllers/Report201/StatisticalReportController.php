@@ -641,8 +641,66 @@ class StatisticalReportController extends Controller
             'dualCitizenship',
             'dualCitizenshipCES',
             'dualCitizenshipEligibles',
+            'pageCount'
         ))
         ->setPaper('a4', 'portrait');
+
+        $pdf->render('201-profiling-general-reports.pdf');
+
+        // Get the page count
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
+            'totalActiveRetiredEligibles',
+            'totalActiveRetiredCES',
+            'totalInactiveEligibles',
+            'totalInactiveCES',
+            'totalDeceasedEligibles',
+            'totalDeceasedCES',
+            'totalRetiredEligibles',
+            'totalRetiredCES',
+            'totalActiveCES',
+            'totalActiveEligibles',
+            'totalCESO',
+            'totalCESOActive',
+            'totalCESODeceased',
+            'totalCESORetired',
+            'totalCESOInactive',
+            'age25below',
+            'age26to35',
+            'age36to45',
+            'age46to55',
+            'age56to65',
+            'age66above',
+            'ceso1',
+            'ceso2',
+            'ceso3',
+            'ceso4',
+            'ceso5',
+            'ceso6',
+            'eligible',
+            'csee',
+            'noStatus',
+            'male',
+            'female',
+            'preferNotToSay',
+            'nonGender',
+            'pwd',
+            'pwdCES',
+            'pwdEligibles',
+            'singleParents',
+            'singleParentsCES',
+            'singleParentsEligibles',
+            'indigenous',
+            'indigenousCES',
+            'indigenousEligibles',
+            'dualCitizenship',
+            'dualCitizenshipCES',
+            'dualCitizenshipEligibles',
+            'pageCount'
+        ))
+        ->setPaper('a4', 'portrait');
+
         return $pdf->stream('201-profiling-general-reports.pdf');
 
     }
