@@ -195,76 +195,11 @@
                 <span style="color: #2b6cb0;">{{ $totalDeceasedEligibles }}</span>
             </div>
 
-            <div class="line">
-                <hr style="margin-top: 15px;">
-
-                <p class="section_title">
-                    Age Demographics (Active CESOs and CES Eligibles)
-                </p>
-            </div>
-
-            <div class="bullets">
-                25 years old & below:
-                <span style="color: #2b6cb0;">{{ $age25below }}</span>
-            </div>
-    
-            <div class="bullets">
-                26 to 35 years old:
-                <span style="color: #2b6cb0;">{{ $age26to35 }}</span>
-            </div>
-    
-            <div class="bullets">
-                36 to 45 years old:
-                <span style="color: #2b6cb0;">{{ $age36to45 }}</span>
-            </div>
-    
-            <div class="bullets">
-                46 to 55 years old:
-                <span style="color: #2b6cb0;">{{ $age46to55 }}</span>
-            </div>
-    
-            <div class="bullets">
-                56 to 65 years old:
-                <span style="color: #2b6cb0;">{{ $age56to65 }}</span>
-            </div>
-
-            <div class="bullets">
-                66 years old & above:
-                <span style="color: #2b6cb0;">{{ $age66above }}</span>
-            </div>
-
-            <div class="line">
-                <hr style="margin-top: 15px;">
-
-                <p class="section_title">
-                    Gender By Birth Demographics (Active CESOs and CES Eligibles)
-                </p>
-            </div>
-
-            <div class="bullets">
-                Male:
-                <span style="color: #2b6cb0;">{{ $male }}</span>
-            </div>
-    
-            <div class="bullets">
-                Female:
-                <span style="color: #2b6cb0;">{{ $female }}</span>
-            </div>
-
-
-            <div class="page-break"></div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-
             <div class="line margined-line">
+                <hr style="margin-top: 15px;">
+
                 <p class="section_title">
-                    CES Status Summary (Active CESOs)
+                    CES Status Summary (Active CESOs and CES Eligibles)
                 </p>
             </div>
 
@@ -319,6 +254,70 @@
             <div class="bullets">
                 No Status:
                 <span style="color: #2b6cb0;">{{ $noStatus }}</span>
+            </div>
+
+            <div class="page-break"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <div class="line">
+                <p class="section_title">
+                    Age Demographics (Active CESOs and CES Eligibles)
+                </p>
+            </div>
+
+            <div class="bullets">
+                25 years old & below:
+                <span style="color: #2b6cb0;">{{ $age25below }}</span>
+            </div>
+    
+            <div class="bullets">
+                26 to 35 years old:
+                <span style="color: #2b6cb0;">{{ $age26to35 }}</span>
+            </div>
+    
+            <div class="bullets">
+                36 to 45 years old:
+                <span style="color: #2b6cb0;">{{ $age36to45 }}</span>
+            </div>
+    
+            <div class="bullets">
+                46 to 55 years old:
+                <span style="color: #2b6cb0;">{{ $age46to55 }}</span>
+            </div>
+    
+            <div class="bullets">
+                56 to 65 years old:
+                <span style="color: #2b6cb0;">{{ $age56to65 }}</span>
+            </div>
+
+            <div class="bullets">
+                66 years old & above:
+                <span style="color: #2b6cb0;">{{ $age66above }}</span>
+            </div>
+
+            <div class="line">
+                <hr style="margin-top: 15px;">
+
+                <p class="section_title">
+                    Gender By Birth Demographics (Active CESOs and CES Eligibles)
+                </p>
+            </div>
+
+            <div class="bullets">
+                Male:
+                <span style="color: #2b6cb0;">{{ $male }}</span>
+            </div>
+    
+            <div class="bullets">
+                Female:
+                <span style="color: #2b6cb0;">{{ $female }}</span>
             </div>
 
             <div class="line">
