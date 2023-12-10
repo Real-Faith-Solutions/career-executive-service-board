@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ERIS\report;
 use App\Http\Controllers\Controller;
 use App\Models\Eris\WrittenExam;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -299,12 +300,16 @@ class WrittenExamReportController extends Controller
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $writtenExam = $writtenExam->skip($skippedData)->take($recordsPerPartition)->get();
 
+        $fullDateName = Carbon::now()->format('d  F  Y'); // getting full name attribute of the month example: 01 December 2023
+
         $pdf = App::make('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf->loadView('admin.eris.reports.written_exam.report_pdf', [
             'writtenExam' => $writtenExam,
             'totalParts' => $totalParts,
             'partitionNumber' => $partitionNumber,
+            'fullDateName' => $fullDateName,
+            'skippedData' => $skippedData,
         ])
 
         ->setPaper('a4', 'landscape');

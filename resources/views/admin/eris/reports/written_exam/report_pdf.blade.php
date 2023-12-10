@@ -8,7 +8,7 @@
         </title>
 
         <style>
-             @font-face {
+            @font-face {
                 font-family: "Busorama";
                 src: url('{{ asset(' fonts/busorama.ttf') }}');
                 font-weight: normal;
@@ -33,7 +33,7 @@
             footer {
                 position: fixed;
                 bottom: -20px;
-                left: 20px;
+                left: 10px;
                 text-align: right;
                 font-size: 10px;
                 color: black;
@@ -66,7 +66,6 @@
                 font-weight: bold; /* Add font weight bold */
             }
 
-        
             span {
                 font-size: 10px;
             }
@@ -102,19 +101,25 @@
             } 
 
             .report_name {
-                text-transform: uppercase;
+                /* text-transform: uppercase; */
+                font-weight: 100;
                 font-size: 16px;
-                color: #284F87;
+                color: #000006;
                 margin-top: 15px;
             }
                 
             .page-break {
                 page-break-after: always;
-                margin-top: 160px;
+                margin-top: 185px;
             }
 
             .pagenum:before {
                 content: counter(page);
+            }
+
+            .date {
+                margin-top: -10px;
+                font-size: 12px;
             }
         </style>
     </head>
@@ -133,6 +138,7 @@
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">
                     Written Exam
+                    <p class="date"> as of {{ $fullDateName }}</p>
                 </p>
 
                 <footer>
@@ -178,42 +184,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $rowNumber = 1;
-                    @endphp
-                        @foreach ($writtenExam as $data)
-                            <tr>
-                                <td>
-                                    {{ $rowNumber++ }}
-                                </td>
+                    @foreach ($writtenExam as $data)
+                        <tr>
+                            <td>
+                                {{ ++$skippedData }}
+                            </td>
 
-                                <td>
-                                    {{ $data->erisTblMainWrittenExam->lastname ?? '' }},
-                                    {{ $data->erisTblMainWrittenExam->firstname ?? '' }},
-                                    {{ $data->erisTblMainWrittenExam->middlename ?? '' }}.
-                                </td>
+                            <td>
+                                {{ $data->erisTblMainWrittenExam->lastname ?? '' }},
+                                {{ $data->erisTblMainWrittenExam->firstname ?? '' }},
+                                {{ $data->erisTblMainWrittenExam->middlename ?? '' }}.
+                            </td>
         
-                                <td>
-                                    {{ \Carbon\Carbon::parse($data->we_date)->format('m/d/Y') ?? '' }}
-                                </td>
+                            <td>
+                                {{ \Carbon\Carbon::parse($data->we_date)->format('m/d/Y') ?? '' }}
+                            </td>
         
-                                <td>
-                                    {{ $data->numtakes ?? '' }}
-                                </td>
+                            <td>
+                                {{ $data->numtakes ?? '' }}
+                            </td>
             
-                                <td>
-                                    {{ $data->we_location ?? '' }}
-                                </td>
+                            <td>
+                                {{ $data->we_location ?? '' }}
+                            </td>
             
-                                <td>
-                                    {{ $data->we_rating ?? '' }}
-                                </td>
+                            <td>
+                                {{ $data->we_rating ?? '' }}
+                            </td>
             
-                                <td>
-                                    {{ $data->we_remarks ?? '' }}
-                                </td>
-                            </tr>
-                        @endforeach                 
+                            <td>
+                                {{ $data->we_remarks ?? '' }}
+                            </td>
+                        </tr>
+                    @endforeach                 
                 </tbody>
             </table>
 
@@ -221,11 +224,11 @@
             <script type="text/php">
                 if (isset($pdf)) {
                     $text = "Page {PAGE_NUM}  of  {PAGE_COUNT}";
-                    $size = 7;
+                    $size = 7.5;
                     $font = $fontMetrics->getFont("Verdana");
                     $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
                     $x = ($pdf->get_width() - $width);
-                    $y = $pdf->get_height() - 28;
+                    $y = $pdf->get_height() - 26;
                     $pdf->page_text($x, $y, $text, $font, $size);
                 }
             </script>
