@@ -378,6 +378,23 @@
             </div>
 
             <br>
+
+            <div class="bullets">
+                Total Person with Dual Citizenship (Active CESOs and CES Eligibles):
+                <span style="color: #2b6cb0;">{{ $indigenous }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $indigenousCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $indigenousEligibles }}</span>
+            </div>
+
+            <br>
             
         </div>
 
