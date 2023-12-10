@@ -135,8 +135,6 @@
             }
 
             .page-right {
-                /* margin-left: 550px;
-                text-align: right; */
                 position: fixed;
                 right: 20px;
             }

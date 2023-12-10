@@ -28,6 +28,34 @@
                 text-align: center;
             }
 
+            footer {
+                position: fixed;
+                text-align: justify;
+                bottom: -10px;
+                font-size: 10px;
+                color: #333;
+            }
+
+            .pagenum:before {
+                content: counter(page);
+            }
+
+            .part-left,
+            .page-right {
+                display: inline-block;
+            }
+
+            .part-left {
+                /* text-align: left; */
+                position: fixed;
+                left: 20px;
+            }
+
+            .page-right {
+                position: fixed;
+                right: 20px;
+            }
+
             .title {
                 margin-top: -20px;
             }
