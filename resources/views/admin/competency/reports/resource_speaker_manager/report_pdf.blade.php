@@ -115,11 +115,10 @@
                 font-size: 12px;
             }
 
-            .long-text {
-                /* word-wrap: break-word; */
-                /* OR */
-                overflow-wrap: break-word;
-                font-size: 10px;
+            .date {
+                margin-top: -10px;
+                font-size: 12px;
+                color: #000006;
             }
         </style>
     </head>
@@ -137,6 +136,7 @@
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
                 <p class="report_name">Resource Speaker Manager Report</p>
+                <p class="date"> as  of  {{ $fullDateName }}</p>
             </div> 
 
             <footer>
@@ -148,14 +148,14 @@
 
         <div>
             <table>
-                <thead >
+                <thead>
                     <div class="page-break"></div>
                     <tr>
                         <th >
                             
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Name
                         </th>
 
@@ -163,31 +163,31 @@
                             Training Session's
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Position
-                        </th class="thead">
+                        </th>
 
-                        <th class="thead">
+                        <th>
                             Department
-                        </th class="thead">
+                        </th>
 
-                        <th class="thead">
+                        <th>
                             Office
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Address
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Contact No.
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Email Address
                         </th>
 
-                        <th class="thead">
+                        <th>
                             Expertise
                         </th>
                     </tr>

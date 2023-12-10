@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Competency;
 use App\Http\Controllers\Controller;
 use App\Models\ResourceSpeaker;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -50,8 +51,8 @@ class ResourceSpeakerManagerReportController extends Controller
         $expertise = $expertise ?? 'all';
         $startDate = $startDate ?? '0';
         $endDate = $endDate ?? '0';
-
-        // dd($startDate, $endDate);
+        
+        $fullDateName = Carbon::now()->format('d F Y'); // getting full name attribute of the month example: 01 December 2023
 
         $resourceSpeaker = ResourceSpeaker::query()
         ->with('trainingEngagement')
@@ -74,6 +75,7 @@ class ResourceSpeakerManagerReportController extends Controller
         $pdf->loadView('admin.competency.reports.resource_speaker_manager.report_pdf', 
         compact(
             'resourceSpeaker',
+            'fullDateName',
             'totalParts',
             'partitionNumber',
             'skippedData',
