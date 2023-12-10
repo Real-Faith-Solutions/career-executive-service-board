@@ -133,7 +133,7 @@
 
             <div class="bullet-child">
                 * CESOs:
-                <span style="color: #2b6cb0;">{{ $totalActiveRetiredCES }}</span>
+                <span style="color: #2b6cb0;">{{ $totalActiveCES }}</span>
             </div>
 
             <div class="bullet-child">
