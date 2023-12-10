@@ -983,12 +983,12 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
                         {sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/
                         {filter_retired}/{filter_deceased}/{filter_retirement}/
                         {with_pending_case}/{without_pending_case}/{cesstat_code}/
-                        {authority_code}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf')->middleware('checkPermission:201_general_reports');
+                        {authority_code}/{report_title}', [Reports201Controller::class, 'generatePdf'])->name('general-reports.pdf')->middleware('checkPermission:201_general_reports');
             Route::get('download-general-reports/
                         {sortBy}/{sortOrder}/{filter_active}/{filter_inactive}/
                         {filter_retired}/{filter_deceased}/{filter_retirement}/
                         {with_pending_case}/{without_pending_case}/{cesstat_code}/
-                        {authority_code}', [Reports201Controller::class, 'generateDownloadLinks'])->name('download-general-reports.pdf')->middleware('checkPermission:201_general_reports');
+                        {authority_code}/{report_title}', [Reports201Controller::class, 'generateDownloadLinks'])->name('download-general-reports.pdf')->middleware('checkPermission:201_general_reports');
         });
 
         Route::prefix('data-portability-reports')->group(function () {
