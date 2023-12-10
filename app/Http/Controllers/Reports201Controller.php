@@ -290,7 +290,7 @@ class Reports201Controller extends Controller
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';
 
-        $report_title = $request->input('report_title', '201 PROFILING GENERAL REPORTS');
+        $report_title = $report_title ?? '201 PROFILING GENERAL REPORTS';
         $filter_active = $filter_active ?? 'false';
         $filter_inactive = $filter_inactive ?? 'false';
         $filter_retired = $filter_retired ?? 'false';
@@ -443,7 +443,7 @@ class Reports201Controller extends Controller
             // Store the download link in the array
             $downloadLinks[] = [
                 'url' => $downloadRoute,
-                'label' => '201 Profiling General Reports Part '.$partitionNumber,
+                'label' => $report_title.' Part '.$partitionNumber,
             ];
 
         });
