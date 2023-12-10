@@ -278,8 +278,6 @@ class Reports201Controller extends Controller
         ))
         ->setPaper('a4', 'portrait');
 
-        // dd($pageCount);
-
         return $pdf->stream($filename);
     }
 
