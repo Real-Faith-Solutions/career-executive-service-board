@@ -182,6 +182,16 @@
                 <span style="color: #2b6cb0;">{{ $totalCESODeceased }}</span>
             </div>
 
+            <div class="bullet-child">
+                * CESOs:
+                <span style="color: #2b6cb0;">{{ $totalInactiveCES }}</span>
+            </div>
+
+            <div class="bullet-child">
+                * Eligibles:
+                <span style="color: #2b6cb0;">{{ $totalInactiveEligibles }}</span>
+            </div>
+
             <div class="line">
                 <hr style="margin-top: 15px;">
 
