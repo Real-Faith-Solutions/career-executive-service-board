@@ -454,6 +454,15 @@ class StatisticalReportController extends Controller
         })
         ->count();
 
+        $male = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('gender', 'Male')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
             'totalActiveRetiredEligibles',
             'totalActiveRetiredCES',
