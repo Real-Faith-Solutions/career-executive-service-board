@@ -199,7 +199,7 @@
                 <hr style="margin-top: 15px;">
 
                 <p class="section_title">
-                    Age Demographics (Active CESOs)
+                    Age Demographics (Active CESOs and CES Eligibles)
                 </p>
             </div>
 
@@ -237,7 +237,7 @@
                 <hr style="margin-top: 15px;">
 
                 <p class="section_title">
-                    Gender By Birth Demographics (Active CESOs)
+                    Gender By Birth Demographics (Active CESOs and CES Eligibles)
                 </p>
             </div>
 
