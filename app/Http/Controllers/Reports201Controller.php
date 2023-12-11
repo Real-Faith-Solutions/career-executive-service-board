@@ -13,9 +13,10 @@ class Reports201Controller extends Controller
     public function index(Request $request)
     {
 
-        $sortBy = $request->input('sort_by', 'cesno'); // Default sorting by Ces No.
+        $sortBy = $request->input('sort_by', 'lastname'); // Default sorting by lastname.
         $sortOrder = $request->input('sort_order', 'asc'); // Default sorting order
 
+        $report_title = $request->input('report_title', '201 PROFILING GENERAL REPORTS');
         $filter_active = $request->input('filter_active', 'false');
         $filter_inactive = $request->input('filter_inactive', 'false');
         $filter_retired = $request->input('filter_retired', 'false');
@@ -127,13 +128,13 @@ class Reports201Controller extends Controller
         return view('admin.201_profiling.reports.general_report', compact('personalData', 'sortBy', 'sortOrder',
                         'filter_active', 'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
                         'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-                        'profileLibTblAppAuthority', 'authority_code'));
+                        'profileLibTblAppAuthority', 'authority_code', 'report_title'));
     }
 
     public function generatePdf(Request $request, $totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename,
                         $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
-                        $cesstat_code, $authority_code)
+                        $cesstat_code, $authority_code, $report_title)
     {
 
         $sortBy = $sortBy ?? 'cesno';
@@ -261,7 +262,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'report_title'
         ))
         ->setPaper('a4', 'portrait');
 
@@ -274,7 +275,7 @@ class Reports201Controller extends Controller
         compact('personalData', 'sortBy', 'sortOrder', 'filter_active', 
             'filter_inactive', 'filter_retired', 'filter_deceased', 'filter_retirement',
             'with_pending_case', 'without_pending_case', 'profileLibTblCesStatus', 'cesstat_code', 
-            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'pageCount'
+            'profileLibTblAppAuthority', 'authority_code', 'skippedData', 'partitionNumber', 'totalParts', 'pageCount', 'report_title'
         ))
         ->setPaper('a4', 'portrait');
 
@@ -283,12 +284,13 @@ class Reports201Controller extends Controller
 
     public function generateDownloadLinks(Request $request, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired,
                         $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case,
-                        $cesstat_code, $authority_code)
+                        $cesstat_code, $authority_code, $report_title)
     {
 
         $sortBy = $sortBy ?? 'cesno';
         $sortOrder = $sortOrder ?? 'asc';
 
+        $report_title = $report_title ?? '201 PROFILING GENERAL REPORTS';
         $filter_active = $filter_active ?? 'false';
         $filter_inactive = $filter_inactive ?? 'false';
         $filter_retired = $filter_retired ?? 'false';
@@ -418,7 +420,7 @@ class Reports201Controller extends Controller
 
         // Chunk the results based on the defined limit (don't remove the &$downloadLinks, $recordsPerPartition, $partitionNumber, $skippedData; 
         // the other parameter here is based on your applied filters change it according to your needs)
-        $personalData->chunk($recordsPerPartition, function ($partition) use ($totalParts, &$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
+        $personalData->chunk($recordsPerPartition, function ($partition) use ($report_title, $totalParts, &$downloadLinks, $recordsPerPartition, &$partitionNumber, &$skippedData, $sortBy, $sortOrder, $filter_active, $filter_inactive, $filter_retired, $filter_deceased, $filter_retirement, $with_pending_case, $without_pending_case, $cesstat_code, $authority_code) {
 
             // calculating how many data should be skipped for this partition
             $skippedData = $recordsPerPartition * $partitionNumber;
@@ -427,7 +429,7 @@ class Reports201Controller extends Controller
             $partitionNumber++;
 
             // filename for this partition (concatinate the partition number as part number)
-            $filename = '201-profiling-general-reports-part'.$partitionNumber.'.pdf';
+            $filename = $report_title.' Part '.$partitionNumber.'.pdf';
 
             // Create a route to handle the download action for each partition
             // don't remove the $recordsPerPartition, $partitionNumber, $skippedData, $filename
@@ -436,12 +438,12 @@ class Reports201Controller extends Controller
                                 'sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
                                 'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
                                 'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
-                                'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code, 'totalParts' => $totalParts]);
+                                'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code, 'totalParts' => $totalParts, 'report_title' => $report_title]);
 
             // Store the download link in the array
             $downloadLinks[] = [
                 'url' => $downloadRoute,
-                'label' => '201 Profiling General Reports Part '.$partitionNumber,
+                'label' => $report_title.' Part '.$partitionNumber,
             ];
 
         });

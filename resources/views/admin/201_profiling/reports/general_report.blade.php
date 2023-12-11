@@ -14,7 +14,7 @@
                 ['sortBy' => $sortBy, 'sortOrder' => $sortOrder, 'filter_active' => $filter_active, 'filter_inactive' => $filter_inactive, 
                  'filter_retired' => $filter_retired, 'filter_deceased' => $filter_deceased, 'filter_retirement' => $filter_retirement, 
                  'with_pending_case' => $with_pending_case, 'without_pending_case' => $without_pending_case, 
-                 'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code]) }}" target='_blank' class="btn btn-primary">Generate PDF Report</a>
+                 'cesstat_code' => $cesstat_code, 'authority_code' => $authority_code, 'report_title' => $report_title]) }}" target='_blank' class="btn btn-primary">Generate PDF Report</a>
         </div>
     </div>
 </nav>
@@ -97,6 +97,17 @@
                     @enderror
                 </div>
 
+                <div class="flex items-center px-6 py-3 text-left">
+                    <label for="report_title" class="mt-2 text-sm font-medium text-gray-700">Report Title<sup>*</sup></label>
+                    <input id="report_title" name="report_title" type="text" value="{{ $report_title ?? old('report_title') }}" placeholder="Enter Report Title..."
+                            oninput="validateInput(report_title, 4, 'file')" onkeypress="validateInput(report_title, 4, 'file')" onblur="checkErrorMessage(report_title)" required>
+                    @error('report_title')
+                        <span class="invalid" role="alert">
+                            <p>{{ $message }}</p>
+                        </span>
+                    @enderror
+                </div>
+
                 <div class="my-5 mr-2 flex justify-end">
                     <button class="btn btn-primary" type="submit">Apply Filter</button>
                 </div>
@@ -126,7 +137,7 @@
                                             'cesstat_code' => $cesstat_code,
                                             'authority_code' => $authority_code,
                                         ]) }}" class="flex items-center space-x-1">
-                                Ces No. {{ $filter_active }}
+                                Ces No.
                                 @if ($sortBy === 'cesno')
                                     @if ($sortOrder === 'asc')
                                         <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

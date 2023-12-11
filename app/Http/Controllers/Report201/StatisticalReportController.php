@@ -14,13 +14,6 @@ class StatisticalReportController extends Controller
     public function index(Request $request)
     {
 
-        $totalCESO = PersonalData::query()
-            ->whereHas('cesStatus', function ($query) {
-                $query->where('description', 'LIKE', '%Eli%')
-                    ->orWhere('description', 'LIKE', '%CES%');
-            })
-            ->count();
-
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
             ->whereHas('cesStatus', function ($query) {
@@ -52,6 +45,58 @@ class StatisticalReportController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
+        $totalActiveCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalActiveEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalRetiredCES = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalRetiredEligibles = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalDeceasedCES = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalDeceasedEligibles = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalInactiveCES = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalInactiveEligibles = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalCESO = $totalCESOActive + $totalCESORetired;
+        $totalActiveRetiredCES = $totalActiveCES + $totalRetiredCES;
+        $totalActiveRetiredEligibles = $totalActiveEligibles + $totalRetiredEligibles;
 
         // Calculate the date 25 years ago
         $twentyFiveYearsAgo = Carbon::today()->subYears(26)->addDay()->format('Y-m-d');
@@ -138,6 +183,16 @@ class StatisticalReportController extends Controller
         // $totalAge = $age25below+$age26to35+$age36to45+$age46to55+$age56to65+$age66above;
 
         return view('admin.201_profiling.reports.statistical_reports.statistical_report', compact(
+            'totalActiveRetiredEligibles',
+            'totalActiveRetiredCES',
+            'totalInactiveEligibles',
+            'totalInactiveCES',
+            'totalDeceasedEligibles',
+            'totalDeceasedCES',
+            'totalRetiredEligibles',
+            'totalRetiredCES',
+            'totalActiveCES',
+            'totalActiveEligibles',
             'totalCESO',
             'totalCESOActive',
             'totalCESODeceased',
@@ -156,13 +211,6 @@ class StatisticalReportController extends Controller
 
     public function generatePdf(Request $request)
     {
-
-        $totalCESO = PersonalData::query()
-            ->whereHas('cesStatus', function ($query) {
-                $query->where('description', 'LIKE', '%Eli%')
-                    ->orWhere('description', 'LIKE', '%CES%');
-            })
-            ->count();
 
         $totalCESOActive = PersonalData::query()
             ->where('status', 'Active')
@@ -195,6 +243,58 @@ class StatisticalReportController extends Controller
                     ->orWhere('description', 'LIKE', '%CES%');
             })
             ->count();
+
+        $totalActiveCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalActiveEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalRetiredCES = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalRetiredEligibles = PersonalData::query()
+            ->where('status', 'Retired')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalDeceasedCES = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalDeceasedEligibles = PersonalData::query()
+            ->where('status', 'Deceased')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalInactiveCES = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })->count();
+
+        $totalInactiveEligibles = PersonalData::query()
+            ->where('status', 'Inactive')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })->count();
+
+        $totalCESO = $totalCESOActive + $totalCESORetired;
+        $totalActiveRetiredCES = $totalActiveCES + $totalRetiredCES;
+        $totalActiveRetiredEligibles = $totalActiveEligibles + $totalRetiredEligibles;
 
         // Calculate the date 25 years ago
         $twentyFiveYearsAgo = Carbon::today()->subYears(26)->addDay()->format('Y-m-d');
@@ -354,7 +454,157 @@ class StatisticalReportController extends Controller
         })
         ->count();
 
+        $male = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('gender', 'Male')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $female = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('gender', 'Female')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $preferNotToSay = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('gender', 'Prefer Not to Say')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $nonGender = PersonalData::query()
+            ->where('status', 'Active')
+            ->where(function ($query) {
+                $query->where('gender', '')
+                    ->orWhereNull('gender')
+                    ->orWhere('gender', '-');
+            })
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $pwd = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $pwdCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $pwdEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('person_with_disability', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })
+            ->count();
+
+        $singleParents = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('single_parent', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $singleParentsCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('single_parent', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $singleParentsEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('single_parent', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })
+            ->count();
+
+        $indigenous = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('member_of_indigenous_group', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $indigenousCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('member_of_indigenous_group', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $indigenousEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('member_of_indigenous_group', 'Yes')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })
+            ->count();
+
+        $dualCitizenship = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('citizenship', 'Dual-Citizenship')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%')
+                    ->orWhere('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $dualCitizenshipCES = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('citizenship', 'Dual-Citizenship')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%CES%');
+            })
+            ->count();
+
+        $dualCitizenshipEligibles = PersonalData::query()
+            ->where('status', 'Active')
+            ->where('citizenship', 'Dual-Citizenship')
+            ->whereHas('cesStatus', function ($query) {
+                $query->where('description', 'LIKE', '%Eli%');
+            })
+            ->count();
+
         $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
+            'totalActiveRetiredEligibles',
+            'totalActiveRetiredCES',
+            'totalInactiveEligibles',
+            'totalInactiveCES',
+            'totalDeceasedEligibles',
+            'totalDeceasedCES',
+            'totalRetiredEligibles',
+            'totalRetiredCES',
+            'totalActiveCES',
+            'totalActiveEligibles',
             'totalCESO',
             'totalCESOActive',
             'totalCESODeceased',
@@ -375,8 +625,81 @@ class StatisticalReportController extends Controller
             'eligible',
             'csee',
             'noStatus',
+            'male',
+            'female',
+            'preferNotToSay',
+            'nonGender',
+            'pwd',
+            'pwdCES',
+            'pwdEligibles',
+            'singleParents',
+            'singleParentsCES',
+            'singleParentsEligibles',
+            'indigenous',
+            'indigenousCES',
+            'indigenousEligibles',
+            'dualCitizenship',
+            'dualCitizenshipCES',
+            'dualCitizenshipEligibles',
         ))
         ->setPaper('a4', 'portrait');
+
+        $pdf->render('201-profiling-general-reports.pdf');
+
+        // Get the page count
+        $pageCount = $pdf->getDompdf()->getCanvas()->get_page_count();
+
+        $pdf = Pdf::loadView('admin.201_profiling.reports.statistical_reports.statistical_report_pdf', compact(
+            'totalActiveRetiredEligibles',
+            'totalActiveRetiredCES',
+            'totalInactiveEligibles',
+            'totalInactiveCES',
+            'totalDeceasedEligibles',
+            'totalDeceasedCES',
+            'totalRetiredEligibles',
+            'totalRetiredCES',
+            'totalActiveCES',
+            'totalActiveEligibles',
+            'totalCESO',
+            'totalCESOActive',
+            'totalCESODeceased',
+            'totalCESORetired',
+            'totalCESOInactive',
+            'age25below',
+            'age26to35',
+            'age36to45',
+            'age46to55',
+            'age56to65',
+            'age66above',
+            'ceso1',
+            'ceso2',
+            'ceso3',
+            'ceso4',
+            'ceso5',
+            'ceso6',
+            'eligible',
+            'csee',
+            'noStatus',
+            'male',
+            'female',
+            'preferNotToSay',
+            'nonGender',
+            'pwd',
+            'pwdCES',
+            'pwdEligibles',
+            'singleParents',
+            'singleParentsCES',
+            'singleParentsEligibles',
+            'indigenous',
+            'indigenousCES',
+            'indigenousEligibles',
+            'dualCitizenship',
+            'dualCitizenshipCES',
+            'dualCitizenshipEligibles',
+            'pageCount'
+        ))
+        ->setPaper('a4', 'portrait');
+
         return $pdf->stream('201-profiling-general-reports.pdf');
 
     }

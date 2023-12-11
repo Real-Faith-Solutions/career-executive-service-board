@@ -135,8 +135,6 @@
             }
 
             .page-right {
-                /* margin-left: 550px;
-                text-align: right; */
                 position: fixed;
                 right: 20px;
             }
@@ -155,7 +153,7 @@
                 <p class="title_name">Career Executive Service Board</p>
                 <p class="title_street">No. 3 Marcelino St., Isidora Hills, Holy Spirit Drive, Diliman, Quezon City 1127</p>
                 <p class="link"><a href="www.cesboard.gov.ph" target="_blank">www.cesboard.gov.ph</a></p>
-                <p class="report_name">201 Profiling General Reports</p>
+                <p class="report_name">{{ $report_title }}</p>
             </div>
         </header>
 
