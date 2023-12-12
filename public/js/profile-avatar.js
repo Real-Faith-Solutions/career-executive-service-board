@@ -62,6 +62,20 @@ let uploadButtonAvatar = document.getElementById('uploadButtonAvatar');
           return;
       }
 
+      // size validation
+      let maxSize = 5 * 1024 * 1024; // 5MB
+      let minSize = 100 * 1024; // 100KB
+
+      if (file.size < minSize || file.size > maxSize) {
+        this.value = '';
+        imagePreview.src = '';
+        imagePreview.classList.add('hidden');
+        errorMessageAvatar.textContent = "Please upload an image file with a size 100KB to 5MB.";
+        uploadButtonAvatar.classList.add('cursor-not-allowed');
+        uploadButtonAvatar.classList.remove('cursor-pointer');
+        return;
+      }
+
       let input = event.target;
       let reader = new FileReader();
     
