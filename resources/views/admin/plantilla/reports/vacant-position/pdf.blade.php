@@ -9,6 +9,17 @@
     {{-- custom css --}}
     <style>
         @font-face {
+            font-family: "CG Omega";
+            src: url('{{ public_path(' fonts/CG Omega.ttf') }}');
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+        }
+
+        .cg-omega {
+            font-family: 'CG Omega';
+        }
+        @font-face {
             font-family: "Busorama";
             src: url('{{ public_path(' fonts/busorama.ttf') }}');
             font-weight: normal;
@@ -1016,7 +1027,7 @@
     <header>
         <center>
             <img src="{{ public_path('images/assets/branding.png') }}" width="100px">
-            <h1 class="text-blue busorama" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
+            <h1 class="text-blue cg-omega" style="font-size:24px;">CAREER EXECUTIVE SERVICE BOARD</h1>
 
             <div style="font-size:11px;">
                 <p>

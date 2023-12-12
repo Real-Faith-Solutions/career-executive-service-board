@@ -1030,7 +1030,7 @@
                     </td>
                     <td style="padding-right:120px;">
                         {{-- <img src="{{ public_path('fonts/ces_statistics.png') }}" width="220px"> --}}
-                        <div class="busorama" style="font-size:26px;">
+                        <div class="cg-omega" style="font-size:26px;">
                             <h1>CAREER</h1>
                             <h1>EXECUTIVE</h1>
                             <h1>SERVICE</h1>
@@ -1041,11 +1041,11 @@
             </center>
         </div>
         <center>
-            <h1 class="algerian" style="font-size:65px;">
+            <h1 class="cg-omega" style="font-size:65px;">
                 {{ $motherDepartmentAgency->acronym }}
             </h1>
             <br><br><br>
-            <h1 class="nexa" style="font-size:25px;">
+            <h1 class="cg-omega" style="font-size:25px;">
                 {{ $motherDepartmentAgency->title }}
             </h1>
         </center>
