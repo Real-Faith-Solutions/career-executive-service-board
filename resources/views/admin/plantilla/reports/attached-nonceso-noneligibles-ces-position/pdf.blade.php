@@ -1103,8 +1103,9 @@
                             <tr class="striped" style="font-size:11px">
                                 <td class="text-center">{{ $no++ }}</td>
                                 <td>
-                                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->lastname ?? '' }},
                                     {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                                    {{ $planAppointeeDatas->personalData->name_extension ?? '' }}
                                     {{ $planAppointeeDatas->personalData->middlename ?? '' }}
                                 </td>
                                 <td class="text-center">
