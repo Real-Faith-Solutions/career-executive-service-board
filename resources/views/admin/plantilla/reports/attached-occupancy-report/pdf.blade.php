@@ -1314,19 +1314,12 @@
                         ->middlename ?? ''
                     }}
 
-                    @if($planPositionDatas->planAppointee
+                    {{ optional($planPositionDatas->planAppointee
                         ->where('is_appointee', 0)
-                        ->first()
+                        ->first())
                         ->personalData
-                        ->cesStatus->description)
-                            , {{ optional($planPositionDatas->planAppointee
-                                ->where('is_appointee', 0)
-                                ->first())
-                                ->personalData
-                                ->cesStatus->description ?? ''
-                            }}    
-                    @endif
-                    
+                        ->cesStatus->description ?? ''
+                    }}
                 </td>
                 <td>
                     @php
