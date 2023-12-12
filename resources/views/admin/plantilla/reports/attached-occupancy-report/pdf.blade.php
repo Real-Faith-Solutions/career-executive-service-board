@@ -1242,12 +1242,19 @@
                         ->middlename ?? ''
                         }}
     
-                        {{ optional($planPositionDatas->planAppointee
+                        @if($planPositionDatas->planAppointee
                         ->where('is_appointee', 1)
-                        ->first())
+                        ->first()
                         ->personalData
-                        ->cesStatus->description ?? ''
-                        }}
+                        ->cesStatus->description)
+                            , {{ optional($planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first())
+                                ->personalData
+                                ->cesStatus->description ?? ''
+                            }}    
+                        @endif
+                        
                     @endif
 
                     
@@ -1314,7 +1321,7 @@
                         ->middlename ?? ''
                     }}
 
-                    {{ optional($planPositionDatas->planAppointee
+                    , {{ optional($planPositionDatas->planAppointee
                         ->where('is_appointee', 0)
                         ->first())
                         ->personalData
