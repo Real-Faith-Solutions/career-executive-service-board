@@ -1199,43 +1199,50 @@
 
                     @if(!$selectedAppointee)
                     <h1>VACANT</h1>
+
+                    @else
+                    {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->lastname ?? ''
+                        }},
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->name_extension ?? ''
+                        }}
+    
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->middlename ?? ''
+                        }}
+    
+                        @if($planPositionDatas->planAppointee
+                            ->where('is_appointee', 1)
+                            ->first()
+                            ->personalData
+                            ->cesStatus->description)
+                            
+                            , {{ optional($planPositionDatas->planAppointee
+                                ->where('is_appointee', 1)
+                                ->first())
+                                ->personalData
+                                ->cesStatus->description ?? ''
+                            }}
+                            
+                        @endif
+                        
                     @endif
-
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
-
                 </td>
 
                 <td>
@@ -1270,31 +1277,50 @@
                             }
                         @endphp
                     ">
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
+                    @if($planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first())
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->lastname ?? ''
+                        }},
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->firstname ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->name_extension ?? ''
+                        }}
+                        {{ optional($planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first())
+                            ->personalData
+                            ->middlename ?? ''
+                        }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                        @if($planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first()
+                        ->personalData
+                        ->cesStatus)
+                        , {{ optional($planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first())
+                                ->personalData
+                                ->cesStatus->description ?? ''
+                            }}
+                            
+                        @endif
+                        
+
+                    @endif
                 </td>
                 <td>
                     @php
