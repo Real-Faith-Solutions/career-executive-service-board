@@ -1211,43 +1211,46 @@
                                     ">
 
                     @if(!$selectedAppointee)
-                    <h1>VACANT</h1>
+                        <h1>VACANT</h1>
+
+                    @else
+                    {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->lastname ?? ''
+                        }},
+    
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->firstname ?? ''
+                        }}
+    
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->name_extension ?? ''
+                        }}
+    
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->middlename ?? ''
+                        }}
+    
+                        {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 1)
+                        ->first())
+                        ->personalData
+                        ->cesStatus->description ?? ''
+                        }}
                     @endif
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->name_extension ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
-                    }}
-
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 1)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                    
 
                 </td>
 
@@ -1266,51 +1269,64 @@
                 <td>{{ $planPositionDatas->remarks ?? ''}}</td>
 
                 <td style="
-                                        @php
-                                            $selectedAppointee = $planPositionDatas->planAppointee
-                                                ->where('is_appointee', 0)
-                                                ->first();
+                    @php
+                        $selectedAppointee = $planPositionDatas->planAppointee
+                            ->where('is_appointee', 0)
+                            ->first();
 
-                                            if ($selectedAppointee &&
-                                                $selectedAppointee->personalData &&
-                                                $selectedAppointee->personalData->cesStatus &&
-                                                (
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
-                                                    Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
-                                                )
-                                            ) {
-                                                echo 'background: yellow;';
-                                            }
-                                        @endphp
-                                    ">
+                        if ($selectedAppointee &&
+                            $selectedAppointee->personalData &&
+                            $selectedAppointee->personalData->cesStatus &&
+                            (
+                                Str::contains($selectedAppointee->personalData->cesStatus->description, '-') ||
+                                Str::contains($selectedAppointee->personalData->cesStatus->description, 'CSEE')
+                            )
+                        ) {
+                            echo 'background: yellow;';
+                        }
+                    @endphp
+                ">
 
                     {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->lastname ?? ''
+                        ->where('is_appointee', 0)
+                        ->first())
+                        ->personalData
+                        ->lastname ?? ''
                     }}
 
                     {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->firstname ?? ''
+                        ->where('is_appointee', 0)
+                        ->first())
+                        ->personalData
+                        ->firstname ?? ''
                     }}
 
                     {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->middlename ?? ''
+                        ->where('is_appointee', 0)
+                        ->first())
+                        ->personalData
+                        ->name_extension ?? ''
+                    }}
+                    {{ optional($planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first())
+                        ->personalData
+                        ->middlename ?? ''
                     }}
 
-                    {{ optional($planPositionDatas->planAppointee
-                    ->where('is_appointee', 0)
-                    ->first())
-                    ->personalData
-                    ->cesStatus->description ?? ''
-                    }}
+                    @if($planPositionDatas->planAppointee
+                        ->where('is_appointee', 0)
+                        ->first()
+                        ->personalData
+                        ->cesStatus->description)
+                            , {{ optional($planPositionDatas->planAppointee
+                                ->where('is_appointee', 0)
+                                ->first())
+                                ->personalData
+                                ->cesStatus->description ?? ''
+                            }}    
+                    @endif
+                    
                 </td>
                 <td>
                     @php

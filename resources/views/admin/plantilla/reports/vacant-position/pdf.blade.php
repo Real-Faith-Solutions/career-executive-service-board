@@ -1116,9 +1116,13 @@
                                 ->where('is_appointee', 0)
                                 ->first();
                             @endphp
-                            {{ $selectedOccupant->personalData->lastname ?? '' }}
-                            {{ $selectedOccupant->personalData->middlename ?? '' }}
-                            {{ $selectedOccupant->personalData->firstname ?? '' }}
+                            @if($selectedOccupant)
+                                {{ $selectedOccupant->personalData->lastname ?? '' }},
+                                {{ $selectedOccupant->personalData->firstname ?? '' }}
+                                {{ $selectedOccupant->personalData->name_extension ?? '' }}
+                                {{ $selectedOccupant->personalData->middlename ?? '' }}
+                            @endif
+                            
                         </td>
                         <td>
                             @php

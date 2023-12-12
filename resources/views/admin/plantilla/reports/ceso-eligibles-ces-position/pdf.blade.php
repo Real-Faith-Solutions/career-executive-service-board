@@ -1072,8 +1072,9 @@
                     {{ $no++ }}
                     </th>
                 <td>
-                    {{ $planAppointeeDatas->personalData->lastname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->lastname ?? '' }},
                     {{ $planAppointeeDatas->personalData->firstname ?? '' }}
+                    {{ $planAppointeeDatas->personalData->name_extension ?? '' }}
                     {{ $planAppointeeDatas->personalData->middlename ?? '' }}
                 </td>
                 <td class="text-center">
