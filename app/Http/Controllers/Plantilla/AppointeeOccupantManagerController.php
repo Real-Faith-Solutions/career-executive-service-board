@@ -55,12 +55,12 @@ class AppointeeOccupantManagerController extends Controller
         $classBasis = ClassBasis::orderBy('basis', 'ASC')->get();
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
         $personalDataList = PersonalData::select('cesno', 'lastname', 'firstname', 'middlename', 'name_extension')
-            ->paginate(500);
+            ->get();
 
         $cesno = $request->input('cesnoSearch');
         if ($cesno !== null) {
             $personalData = PersonalData::where('cesno', $cesno)
-                ->select('cesno', 'title', 'lastname', 'firstname', 'name_extension', 'picture', 'emailadd', 'status', 'birthdate')
+                ->select('cesno', 'title', 'lastname', 'firstname', 'name_extension', 'picture', 'emailadd', 'status', 'birthdate', 'gender', 'CESStat_code')
                 ->first();
 
             if (!$personalData) {

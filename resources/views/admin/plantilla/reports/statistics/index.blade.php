@@ -245,7 +245,7 @@
 
                                             <a class="text-gray-900 hover:text-blue-500"
                                                 href="{{ route('occupancy-report.pdf', $data->deptid) }}"
-                                                target="_blank" title="Generate Agency Bluebook report">
+                                                target="_blank" title="Generate Department Bluebook Occupancy">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -256,7 +256,7 @@
                                             <!-- Use a unique ID for this link -->
                                             <a class="text-gray-900 hover:text-blue-500"
                                                 id="department_{{ $loop->index }}" href="#"
-                                                title="Extract Department Bluebook Report Forms">
+                                                title="Generate Agency Buebook Report">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -268,7 +268,7 @@
                                             {{-- Attached agencies --}}
                                             <a class="text-gray-900 hover:text-blue-500"
                                                 href="{{ route('attached-occupancy-report.pdf', $data->deptid) }}"
-                                                target="_blank" title="Generate Attached Agency Bluebook report">
+                                                target="_blank" title="Generate Attached Agency Bluebook Occupancy">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -278,7 +278,7 @@
 
                                             <a class="text-gray-900 hover:text-blue-500"
                                                 id="attachedAgency_{{ $loop->index }}" href="#"
-                                                title="Extract Attached Agency Bluebook Report Forms">
+                                                title="Generate Attached Agency Buebook Report">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"

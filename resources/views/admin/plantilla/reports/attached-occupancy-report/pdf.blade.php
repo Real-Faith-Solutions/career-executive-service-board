@@ -1049,7 +1049,7 @@
         <table width="100%">
             <tr>
                 <td class="bold">
-                    Date Printed: {{ $currentDate }}
+                    Date Generated: {{ $currentDate }}
                 </td>
                 <td colspan="5">
                     CESB IIS-Generated Report |NOTE: Data from this report were sourced from the CES plantilla submitted

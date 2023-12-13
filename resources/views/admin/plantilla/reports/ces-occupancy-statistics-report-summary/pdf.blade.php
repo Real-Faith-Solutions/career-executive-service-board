@@ -148,7 +148,7 @@
         }
 
         .bg-red {
-            background: #fda4af;
+            background: #EFD3D2;
             color: #000;
         }
 
@@ -1037,7 +1037,8 @@
                 <td colspan="1" class="bold text-right">{{ $occupiedCESPositionPercentage }}%</td>
             </tr>
             <tr>
-                <td colspan="6" class="bold pl-10">a.1. CESOs and Eligibles</td>
+                <td colspan="4" class="bold pl-10">a.1. CESOs and Eligibles</td>
+                <td colspan="2"></td>
                 <td colspan="1" class="text-dark bold bg-cyan text-right">{{ $cesosAndEligibles }}</td>
                 <td colspan="1" class="text-dark bg-cyan text-right">{{ $cesosAndEligiblesPercentage }}%</td>
             </tr>
@@ -1085,62 +1086,62 @@
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">a.1. Male CESOs and Eligibles</td>
-                <td colspan="1" class="text-white bold bg-cyan text-right">{{ $maleCesoAndEligibles }}</td>
+                <td colspan="2" class="text-white bold bg-cyan text-right">{{ $maleCesoAndEligibles }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $maleCesoAndEligiblesPercentage }}%</td>
+                <td colspan="1" class="bold">{{ $maleCesoAndEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">CESOs</td>
-                <td colspan="1" class="text-white bold text-right">{{ $maleCeso }}</td>
+                <td colspan="2" class="text-white bold text-right">{{ $maleCeso }}</td>
                 <td colspan="1" class="text-right"></td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">CES Eligibles</td>
-                <td colspan="1" class="text-white bold text-right">{{ $maleEligibles }}</td>
+                <td colspan="2" class="text-white bold text-right">{{ $maleEligibles }}</td>
                 <td colspan="1" class="text-right"></td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">a.2. Female CESOs and Eligibles</td>
-                <td colspan="1" class="text-white bold bg-red text-right">{{ $femaleCesoAndEligibles }}</td>
+                <td colspan="2" class="text-white bold bg-red text-right">{{ $femaleCesoAndEligibles }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $femaleCesoAndEligiblesPercentage }}%</td>
+                <td colspan="1" class="bold">{{ $femaleCesoAndEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">CESOs</td>
-                <td colspan="1" class="text-white bold text-right">{{ $femaleCeso }}</td>
+                <td colspan="2" class="text-white bold text-right">{{ $femaleCeso }}</td>
                 <td colspan="1" class="text-right"></td>
             </tr>
             <tr>
                 <td colspan="4" class="pl-15 italic">CES Eligibles</td>
-                <td colspan="1" class="text-white bold text-right">{{ $femaleEligibles }}</td>
+                <td colspan="2" class="text-white bold text-right">{{ $femaleEligibles }}</td>
                 <td colspan="1" class="text-right"></td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">a.3. Male Non-CES Eligibles</td>
-                <td colspan="1" class="text-white bold bg-cyan text-right">{{ $maleNonCesNonEligibles }}</td>
+                <td colspan="2" class="text-white bold bg-cyan text-right">{{ $maleNonCesNonEligibles }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $nonMaleCesoAndEligiblesPercentage }}%</td>
+                <td colspan="1" class="bold">{{ $nonMaleCesoAndEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">a.4. Female Non-CES Eligibles</td>
-                <td colspan="1" class="text-white bold bg-red text-right">{{ $femaleNonCesNonEligibles }}</td>
+                <td colspan="2" class="text-white bold bg-red text-right">{{ $femaleNonCesNonEligibles }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $nonFemaleCesoAndEligiblesPercentage }}%</td>
+                <td colspan="1" class="bold">{{ $nonFemaleCesoAndEligiblesPercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-5">b. Count by Gender</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">b.1. Male</td>
-                <td colspan="1" class="text-white bold bg-cyan text-right">{{ $countByMale }}</td>
+                <td colspan="2" class="text-white bold bg-cyan text-right">{{ $countByMale }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $countByMalePercentage }}%</td>
+                <td colspan="1" class="bold">{{ $countByMalePercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="4" class="bold pl-10">b.2. Female</td>
-                <td colspan="1" class="text-white bold bg-red text-right">{{ $countByFemale }}</td>
+                <td colspan="2" class="text-white bold bg-red text-right">{{ $countByFemale }}</td>
                 <td colspan="1"></td>
-                <td colspan="1" class="bold text-right">{{ $countByFemalePercentage }}%</td>
+                <td colspan="1" class="bold">{{ $countByFemalePercentage }}%</td>
             </tr>
             <tr>
                 <td colspan="8" class="bold pl-5">c. Vacant CES Positions</td>
