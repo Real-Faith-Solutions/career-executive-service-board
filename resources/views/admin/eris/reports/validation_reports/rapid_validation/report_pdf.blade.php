@@ -10,7 +10,7 @@
         <style>
             @font-face {
                 font-family: "Busorama";
-                src: url('{{ asset(' fonts/busorama.ttf') }}');
+                src: url('{{ asset(' fonts/CG Omega.ttf') }}');
                 font-weight: normal;
                 font-style: normal;
                 font-stretch: normal;
