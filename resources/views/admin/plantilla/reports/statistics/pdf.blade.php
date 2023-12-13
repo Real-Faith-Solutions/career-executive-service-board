@@ -8,7 +8,7 @@
     <style>
         @font-face {
             font-family: "CG Omega";
-            src: url('{{ public_path(' fonts/CG Omega.ttf') }}');
+            src: url('{{ public_path('fonts/CG Omega.ttf') }}');
             font-weight: bold;
             font-style: normal;
             font-stretch: normal;
@@ -19,10 +19,8 @@
         }
         @font-face {
             font-family: "Busorama";
-            src: url('{{ public_path(' fonts/busorama.ttf') }}');
-            font-weight: bold;
-            font-style: normal;
-            font-stretch: normal;
+            src: url('{{ public_path('fonts/busorama.ttf') }}');
+            
         }
 
         .busorama {
@@ -152,7 +150,7 @@
         }
 
         .text-red {
-            color: #EFD3D2;
+            color: red;
         }
 
         .bg-blue {
@@ -169,7 +167,7 @@
         }
 
         .bg-red {
-            background: #fda4af;
+            background: #EFD3D2;
             color: #000;
         }
 
@@ -1030,7 +1028,7 @@
                     </td>
                     <td style="padding-right:120px;">
                         {{-- <img src="{{ public_path('fonts/ces_statistics.png') }}" width="220px"> --}}
-                        <div class="cg-omega bold" style="font-size:26px;">
+                        <div class="cg-omega" style="font-size:26px;">
                             <h1>CAREER</h1>
                             <h1>EXECUTIVE</h1>
                             <h1>SERVICE</h1>
