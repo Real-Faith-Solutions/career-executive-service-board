@@ -44,7 +44,7 @@
             
                     <div class="mb-3">
                         <label for="father_middle_name">Middle name</label>
-                        <input type="text" id="father_middle_name" name="father_middle_name" value="{{ $father->father_middle_name }}" oninput="validateInput(father_middle_name, 0, 'letters')" onkeypress="validateInput(father_middle_name, 0, 'letters')" onblur="checkErrorMessage(father_middle_name)">
+                        <input type="text" id="father_middle_name" name="father_middle_name" value="{{ $father->father_middle_name }}" oninput="validateInput(father_middle_name, 2, 'letters')" onkeypress="validateInput(father_middle_name, 2, 'letters')" onblur="checkErrorMessage(father_middle_name)" required>
                         <p class="input_error text-red-600"></p>
                         @error('father_middle_name')
                             <span class="invalid" role="alert">
