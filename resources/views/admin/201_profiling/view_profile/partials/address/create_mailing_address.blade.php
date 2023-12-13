@@ -51,7 +51,7 @@
         </div>
 
         <div class="mb-3 col-span-2">
-            <label for="street_lot_bldg_floor_Mailing">Street/Lot no./Building/Floor no.</label>
+            <label for="street_lot_bldg_floor_Mailing">Street/Lot no./Building/Floor no.<sup>*</span></label>
             <input id="street_lot_bldg_floor_Mailing" name="street_lot_bldg_floor_Mailing" type="text" value="{{ $street_lot_bldg_floor_Mailing }}" oninput="validateInput(street_lot_bldg_floor_Mailing, 4)" onkeypress="validateInput(street_lot_bldg_floor_Mailing, 4)" onblur="checkErrorMessage(street_lot_bldg_floor_Mailing)" required>
             <p class="input_error text-red-600"></p>
             @error('street_lot_bldg_floor_Mailing')
