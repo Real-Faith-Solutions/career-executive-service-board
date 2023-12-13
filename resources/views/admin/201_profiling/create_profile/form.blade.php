@@ -114,7 +114,7 @@
             <input id="middlename" name="middlename" type="text" value="{{ old('middlename') }}"
                 onkeyup="generateMiddleInitial()" type="text"
                 oninput="validateInput(middlename, 2, 'letters'), this.value = this.value.toUpperCase();"
-                onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)">
+                onkeypress="validateInput(middlename, 2, 'letters')" onblur="checkErrorMessage(middlename)" required>
             <p class="input_error text-red-600"></p>
             @error('middlename')
             <span class="invalid" role="alert">
@@ -205,9 +205,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="gender_by_choice">Gender By Choice<sup>*</sup></label>
+            <label for="gender_by_choice">Gender By Choice</label>
             <input id="gender_by_choice" list="gender_by_choice_choices" name="gender_by_choice"
-                value="{{ old('gender_by_choice') }}" required type="search">
+                value="{{ old('gender_by_choice') }}" type="search">
             <datalist id="gender_by_choice_choices">
                 @foreach ($genderByChoices as $data)
                 <option value="{{ $data->name }}">{{ $data->name }}</option>
@@ -231,7 +231,7 @@
 
         <div class="mb-3">
             <label for="religion">Religion<sup>*</sup></label>
-            <input list="religion_choices" id="religion" name="religion" value="{{ old('religion') }}">
+            <input list="religion_choices" id="religion" name="religion" value="{{ old('religion') }}" required>
             <datalist id="religion_choices">
                 @foreach ($religion as $data)
                 <option value="{{ $data->ctrlno }}" {{ old('religion')==$data->ctrlno ? 'selected' : '' }}>{{ $data->name }}</option>
@@ -243,7 +243,7 @@
             <label for="profile_height">Height (in meters)<sup>*</sup></label>
             <input id="profile_height" name="height" type="text" value="{{ old('height') }}"
                 oninput="validateHeight(profile_height)" onkeypress="validateHeight(profile_height)"
-                onblur="checkErrorMessage(profile_height)">
+                onblur="checkErrorMessage(profile_height)" required>
             <p class="input_error text-red-600"></p>
             @error('height')
             <span class="invalid" role="alert">
@@ -257,7 +257,7 @@
             <input id="profile_weight" name="weight" type="text" value="{{ old('weight') }}"
                 oninput="validateInput(profile_weight, 2, 'numbersWithSpecial')"
                 onkeypress="validateInput(profile_weight, 2, 'numbersWithSpecial')"
-                onblur="checkErrorMessage(profile_weight)">
+                onblur="checkErrorMessage(profile_weight)" required>
             <p class="input_error text-red-600"></p>
             @error('weight')
             <span class="invalid" role="alert">
@@ -272,7 +272,7 @@
 
         <div class="mb-3">
             <label for="single_parent">Solo Parent?<sup>*</sup></label>
-            <select class="w-100 form-control mb-3" id="single_parent" name="single_parent">
+            <select class="w-100 form-control mb-3" id="single_parent" name="single_parent" required>
                 <option disabled selected>Please Select</option>
                 <option value="Yes" {{ old('single_parent')=="Yes" ? 'selected' : '' }}>Yes</option>
                 <option value="No" {{ old('single_parent')=="No" ? 'selected' : '' }}>No</option>
