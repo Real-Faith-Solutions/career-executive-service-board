@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="middle_name">Middle Name</label>
+                        <label for="middle_name">Middle Name<sup>*</span></label>
                         <input type="text" id="spouse_middle_name" name="middle_name"  value="{{ $spouseRecord->middle_name }}" oninput="validateInput(spouse_middle_name, 2, 'letters')" onkeypress="validateInput(spouse_middle_name, 2, 'letters')" onblur="checkErrorMessage(spouse_middle_name)" required>
                         <p class="input_error text-red-600"></p>
                         @error('middle_name')
