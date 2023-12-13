@@ -43,7 +43,7 @@
                     </div>
             
                     <div class="mb-3">
-                        <label for="father_middle_name">Middle name</label>
+                        <label for="father_middle_name">Middle name<sup>*</span></label>
                         <input type="text" id="father_middle_name" name="father_middle_name" value="{{ $father->father_middle_name }}" oninput="validateInput(father_middle_name, 2, 'letters')" onkeypress="validateInput(father_middle_name, 2, 'letters')" onblur="checkErrorMessage(father_middle_name)" required>
                         <p class="input_error text-red-600"></p>
                         @error('father_middle_name')
