@@ -84,7 +84,7 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="sss_no">Office Telephone No.<sup>*</sup></label>
+                        <label for="sss_no">Office Telephone No.</label>
                         <input id="office_telephone_number" name="office_telephone_number" type="text" value="{{ old('office_telephone_number') ?? ($contacts->office_telephone_number ?? '') }}" oninput="validateInput(office_telephone_number, 0, 'all')" onkeypress="validateInput(office_telephone_number, 0, 'all')" onblur="checkErrorMessage(office_telephone_number)">
                         <p class="input_error text-red-600"></p>
                         @error('office_telephone_number')
