@@ -28,7 +28,7 @@
 
         <div class="mb-3">
             <label for="middle_name">Middle Name</label>
-            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 0, 'letters')" onkeypress="validateInput(children_middle_name, 0, 'letters')" onblur="checkErrorMessage(children_middle_name)">
+            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 2, 'letters')" onkeypress="validateInput(children_middle_name, 2, 'letters')" onblur="checkErrorMessage(children_middle_name)" required>
             <p class="input_error text-red-600"></p>
             @error('middle_name')
                 <span class="invalid" role="alert">
