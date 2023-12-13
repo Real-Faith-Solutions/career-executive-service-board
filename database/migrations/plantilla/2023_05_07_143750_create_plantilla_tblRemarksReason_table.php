@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantilla_tbl_remarks_reasons', function (Blueprint $table) {
+        Schema::create('plantilla_tblRemarksReason', function (Blueprint $table) {
             $table->id();
             $table->string('cesno')->nullable();
             $table->string('subject')->nullable();
