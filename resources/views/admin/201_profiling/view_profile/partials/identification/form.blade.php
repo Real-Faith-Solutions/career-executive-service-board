@@ -60,7 +60,7 @@
         
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                         <div class="col-md-4">
-                            <label for="sss_no">SSS ID No.</label>
+                            <label for="sss_no">SSS ID No.<sup>*</sup></label>
                             <input id="sss_no" name="sss_no" type="text" value="{{ old('sss_no') ?? ($identification->sss_no ?? '') }}" oninput="validateInput(sss_no, 9, 'all'), this.value = this.value.toUpperCase();" onkeypress="validateInput(sss_no, 9, 'all')" onblur="checkErrorMessage(sss_no)">
                             <p class="input_error text-red-600"></p>
                             @error('sss_no')
@@ -70,7 +70,7 @@
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="tin">TIN ID No.</label>
+                            <label for="tin">TIN ID No.<sup>*</sup></label>
                             <input id="tin" name="tin" type="text" value="{{ old('tin') ?? ($identification->tin ?? '') }}" oninput="validateInput(tin, 9, 'all'), this.value = this.value.toUpperCase();" onkeypress="validateInput(tin, 9, 'all')" onblur="checkErrorMessage(tin)">
                             <p class="input_error text-red-600"></p>
                             @error('tin')
