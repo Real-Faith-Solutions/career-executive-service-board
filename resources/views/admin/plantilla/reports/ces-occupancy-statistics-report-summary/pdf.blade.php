@@ -1053,7 +1053,8 @@
                 <td colspan="1" class="text-right">{{ $eligiblesPercentage }}%</td>
             </tr>
             <tr>
-                <td colspan="6" class="bold pl-10">a.2. Non-CESOs and Non-Eligibles</td>
+                <td colspan="4" class="bold pl-10">a.2. Non-CESOs and Non-Eligibles</td>
+                <td colspan="2"></td>
                 <td colspan="1" class="text-white bold bg-green text-right">{{ $nonCesosAndNonEligibles }}</td>
                 <td colspan="1" class="bg-green text-right">{{ $nonCesosAndNonEligiblesPercentage }}%</td>
             </tr>
