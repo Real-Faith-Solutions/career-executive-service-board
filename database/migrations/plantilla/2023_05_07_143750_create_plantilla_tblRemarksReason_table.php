@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cesno')->nullable();
             $table->string('subject')->nullable();
-            $table->string('notes')->nullable();
+            $table->text('notes')->nullable();
             $table->string('effect_dt')->nullable();
             $table->string('encoder')->nullable();
             $table->string('source')->nullable();
