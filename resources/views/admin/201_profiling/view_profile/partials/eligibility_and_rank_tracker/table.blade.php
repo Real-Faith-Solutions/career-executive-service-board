@@ -4,8 +4,8 @@
 @section('content')
 @include('admin.201_profiling.view_profile.header', ['cesno' => $cesno])
 
-<div class="my-5 flex justify-between">
-    <div class="flex">
+<div class="my-5 flex justify-end">
+    {{-- <div class="flex">
         <form action="{{ route('eligibility-rank-tracker.navigate', ['cesno'=>$cesno]) }}" method="GET">
             <div class="grid grid-cols-2 justify-center item-center gap-3 w-full">
                 <div>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div> --}}
 
     <div class="flex">
         <a href="{{ route('eligibility-rank-tracker.recentlyDeleted', ['cesno'=>$cesno]) }}">
