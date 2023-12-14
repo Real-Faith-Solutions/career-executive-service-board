@@ -214,7 +214,7 @@
                     {{ \Carbon\Carbon::parse($data->assum_date)->format('m/d/Y') }}
                 </td>
 
-                <td class="text-right uppercase">
+                <td class="uppercase">
                     <div class="flex justify-end">
                         <a class="hover:bg-slate-100 rounded-full" href="{{ route('appointee-occupant-manager.edit', [
                             'sectorid' => $sector->sectorid,
@@ -241,7 +241,9 @@
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347" style="width:24px;height:24px">
                             </lord-icon>
                         </a>
-                        <form class="hover:bg-slate-100 rounded-full"
+                        @include('admin\plantilla\appointee_occupant_manager\reason', ['appointee_id' => $data->appointee_id])
+
+                        <!-- <form class="hover:bg-slate-100 rounded-full"
                             action="{{ route('appointee-occupant-manager.destroy', ['appointee_id' => $data->appointee_id]) }}"
                             method="POST" onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')
@@ -252,7 +254,7 @@
                                     colors="primary:#DC3545" style="width:24px;height:24px">
                                 </lord-icon>
                             </button>
-                        </form>
+                        </form> -->
                     </div>
                 </td>
             </tr>

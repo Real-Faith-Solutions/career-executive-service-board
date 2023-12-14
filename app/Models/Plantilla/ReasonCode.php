@@ -5,7 +5,7 @@ namespace App\Models\Plantilla;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ResonCode extends Model
+class ReasonCode extends Model
 {
     use HasFactory;
     protected $table = 'plantillalib_tblReasonCode';
