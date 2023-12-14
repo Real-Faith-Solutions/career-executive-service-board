@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
-# /storage/fonts/*
+/storage/fonts/*
 .env
 .env.example
 .env.backup
