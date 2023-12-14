@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plantillalib_tbl_reason_codes', function (Blueprint $table) {
-            $table->id();
-            $table->string('reason_code')->nullable();
+        Schema::create('plantillalib_tblReasonCode', function (Blueprint $table) {
+            $table->id('reason_code');
             $table->string('module')->nullable();
             $table->string('title')->nullable();
             $table->timestamps();
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plantillalib_tbl_reason_codes');
+        Schema::dropIfExists('plantillalib_tblReasonCode');
     }
 };

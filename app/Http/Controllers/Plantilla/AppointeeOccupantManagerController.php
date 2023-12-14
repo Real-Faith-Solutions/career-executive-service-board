@@ -16,6 +16,7 @@ use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionAppointee;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
+use App\Models\Plantilla\RemarksReason;
 use App\Models\ProfileLibCities;
 use App\Models\ProfileLibTblAppAuthority;
 use App\Models\ProfileTblCesStatus;
@@ -159,11 +160,23 @@ class AppointeeOccupantManagerController extends Controller
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
-    public function destroy($appointee_id)
+    public function destroy(Request $request, $appointee_id)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+        
         $datas = PlanAppointee::findOrFail($appointee_id);
-        $datas->delete();
+        $datas->forceDelete();
 
+        RemarksReason::create([
+            'cesno' => $datas->cesno,
+            'subject' => $request->subject,
+            'notes' => $request->notes,
+            'effect_dt' => $request->effect_dt,
+            'encoder' => $encoder,
+            'source' => "Plantilla Manager"
+        ]);
         return redirect()->back()->with('message', 'The item has been successfully deleted!');
     }
 

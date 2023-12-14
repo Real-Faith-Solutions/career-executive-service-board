@@ -14,6 +14,7 @@ use App\Models\Plantilla\PlanPosition;
 use App\Models\Plantilla\PlanPositionLevelLibrary;
 use App\Models\Plantilla\PositionMasterLibrary;
 use App\Models\Plantilla\SectorManager;
+use App\Models\Plantilla\ReasonCode;
 use App\Models\ProfileLibCities;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,9 @@ class PlantillaPositionManagerController extends Controller
         $planPosition = PlanPosition::find($plantilla_id);
 
         $cities = ProfileLibCities::orderBy('name', 'ASC')->get();
-
+        $reasonCode = ReasonCode::where('module', 'occupant')
+            ->orderBy('title', 'asc')
+            ->get();
 
         $planAppointee = PlanAppointee::query()
             ->join('profile_tblMain', 'plantilla_tblPlanAppointees.cesno', '=', 'profile_tblMain.cesno')
@@ -45,6 +48,7 @@ class PlantillaPositionManagerController extends Controller
         $apptStatus = ApptStatus::orderBy('title', 'ASC')->get();
 
         return view('admin.plantilla.appointee_occupant_manager.edit', compact(
+            'reasonCode',
             'sector',
             'department',
             'departmentLocation',
