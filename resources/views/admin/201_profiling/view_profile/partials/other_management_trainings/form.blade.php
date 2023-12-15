@@ -12,7 +12,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form Other Non-CES Accredited Training/s (formerly other trainings)
+                Non-CES Accredited Training/s (formerly other trainings)
             </h1>
         </div>
         
