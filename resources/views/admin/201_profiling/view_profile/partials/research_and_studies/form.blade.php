@@ -47,7 +47,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)<sup>*</span></label>
-                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" oninput="validateDateInput(inclusive_date_from)" required>
+                        <input type="date" id="inclusive_date_from" name="inclusive_date_from" required
+                            oninput="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)"
+                            onkeypress="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)">
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
@@ -58,7 +60,9 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)<sup>*</span></label>
-                        <input type="date" id="inclusive_date_to" name="inclusive_date_to"  oninput="validateDateInput(inclusive_date_to, 0, true)" required>
+                        <input type="date" id="inclusive_date_to" name="inclusive_date_to" required
+                            oninput="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)"
+                            onkeypress="validateDateInput(inclusive_date_to), validateDateFromTo(inclusive_date_from, inclusive_date_to)">
                         <p class="input_error text-red-600"></p>
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">

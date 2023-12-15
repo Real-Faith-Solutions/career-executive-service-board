@@ -205,7 +205,7 @@
                                 {{ $resourceSpeakers->mi ?? '' }}
                             </td>
 
-                            <td style='vertical-align: top; width: 230px; word-wrap: break-word; text-align: left;'>
+                            <td style='vertical-align: top; width: 275px; word-wrap: break-word; text-align: left;'>
                                 <div style="width: inherit">
                                     @foreach ($resourceSpeakers->trainingEngagement as $trainingEngagement)
                                         @php

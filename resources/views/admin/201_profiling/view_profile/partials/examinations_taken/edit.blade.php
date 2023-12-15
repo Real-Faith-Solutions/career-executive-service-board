@@ -61,7 +61,9 @@
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
                         <input id="date_of_examination" name="date_of_examination"
-                            value="{{ $examinationTaken->exam_date }}" required type="text">
+                            value="{{ $examinationTaken->exam_date }}" required type="text"
+                            oninput="validateDateInput(date_of_examination), validateDateFromTo(date_of_examination, date_acquired)"
+                            onkeypress="validateDateInput(date_of_examination), validateDateFromTo(date_of_examination, date_acquired)">
                         @error('date_of_examination')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -103,8 +105,9 @@
 
                     <div class="mb-3">
                         <label for="date_acquired">Date Acquired</label>
-                        <input id="date_acquired" name="date_acquired" value="{{ $examinationTaken->date_acquired }}"
-                            type="text">
+                        <input id="date_acquired" name="date_acquired" value="{{ $examinationTaken->date_acquired }}" type="text"
+                            oninput="validateDateInput(date_acquired), validateDateFromTo(date_of_examination, date_acquired)"
+                            onkeypress="validateDateInput(date_acquired), validateDateFromTo(date_of_examination, date_acquired)">
                         @error('date_acquired')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>

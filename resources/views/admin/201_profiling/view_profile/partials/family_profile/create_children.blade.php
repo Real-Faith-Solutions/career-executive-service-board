@@ -27,8 +27,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="middle_name">Middle Name</label>
-            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 0, 'letters')" onkeypress="validateInput(children_middle_name, 0, 'letters')" onblur="checkErrorMessage(children_middle_name)">
+            <label for="middle_name">Middle Name<sup>*</span></label>
+            <input type="text" id="children_middle_name" name="middle_name" oninput="validateInput(children_middle_name, 2, 'letters')" onkeypress="validateInput(children_middle_name, 2, 'letters')" onblur="checkErrorMessage(children_middle_name)" required>
             <p class="input_error text-red-600"></p>
             @error('middle_name')
                 <span class="invalid" role="alert">
@@ -48,8 +48,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender">
+            <label for="gender">Gender<sup>*</span></label>
+            <select id="gender" name="gender" required>
                 @foreach ($genderLibrary as $data)
                     <option value="{{$data->name}}">{{$data->name}}</option>
                 @endforeach

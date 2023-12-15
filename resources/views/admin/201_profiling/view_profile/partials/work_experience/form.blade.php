@@ -122,8 +122,8 @@
 
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
-                        <label for="remarks">Remarks</label>
-                        <input id="remarks" name="remarks" type="text">
+                        <label for="remarks">Remarks<sup>*</span></label>
+                        <input id="remarks" name="remarks" type="text" required>
                         @error('remarks')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
-                        Add Work Exp
+                        Add Work Experience
                     </button>
                 </div>
             </form>
