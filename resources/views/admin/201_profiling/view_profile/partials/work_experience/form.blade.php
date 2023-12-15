@@ -133,7 +133,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button type="submit" class="btn btn-primary">
-                        Add Work Exp
+                        Add Work Experience
                     </button>
                 </div>
             </form>
