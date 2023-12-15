@@ -70,7 +70,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="inclusive_date_from">Inclusive Dates (From)</label>
-                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $scholarship->from_dt }}" type="date">
+                        <input id="inclusive_date_from" name="inclusive_date_from" value="{{ $scholarship->from_dt }}" type="date" required
+                            oninput="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)"
+                            onkeypress="validateDateInput(inclusive_date_from), validateDateFromTo(inclusive_date_from, inclusive_date_to)">
                         @error('inclusive_date_from')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -80,7 +82,9 @@
 
                     <div class="mb-3">
                         <label for="inclusive_date_to">Inclusive Dates (To)</label>
-                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $scholarship->to_dt }}" type="date">
+                        <input id="inclusive_date_to" name="inclusive_date_to" value="{{ $scholarship->to_dt }}" type="date" required
+                            oninput="validateDateInput(inclusive_date_to, 0, true), validateDateFromTo(inclusive_date_from, inclusive_date_to)"
+                            onkeypress="validateDateInput(inclusive_date_to, 0, true), validateDateFromTo(inclusive_date_from, inclusive_date_to)">
                         @error('inclusive_date_to')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
