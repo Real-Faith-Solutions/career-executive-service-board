@@ -65,7 +65,7 @@
         }
 
         header {
-            margin-top: -7%;
+           top: 0;
         }
 
         .front-page {

@@ -130,7 +130,7 @@
         }
 
         header {
-            margin-top: -7%;
+           top: 0;
         }
 
         .text-blue {

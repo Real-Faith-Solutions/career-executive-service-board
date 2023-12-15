@@ -145,7 +145,7 @@
 
         header {
             margin-bottom: 5%;
-            margin-top: -7%;
+           top: 0;
         }
 
         .text-blue {
