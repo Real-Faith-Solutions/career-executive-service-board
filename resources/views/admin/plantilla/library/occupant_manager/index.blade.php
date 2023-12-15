@@ -51,6 +51,8 @@
             <tr>
                 <th class="px-6 py-3" scope="col">CESNO</th>
                 <th class="px-6 py-3" scope="col">Officials Name</th>
+                <th class="px-6 py-3" scope="col">Department</th>
+                <th class="px-6 py-3" scope="col">Office</th>
                 <th class="px-6 py-3" scope="col">Appointee</th>
                 <th class="px-6 py-3" scope="col">Personnel Movement</th>
                 <th class="px-6 py-3" scope="col">CES Status</th>
@@ -70,11 +72,16 @@
                     {{ $data->cesno }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->personalData->title ?? ''}}
                     {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
                     {{ $data->personalData->middlename ?? ''}}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->planPosition->office->agencyLocation->departmentAgency->title ?? '' }}
+                </td>
+                <td class="px-6 py-3">
+                    {{ $data->planPosition->office->title ?? '' }}
                 </td>
                 <td class="px-6 py-3">
                     <span class="{{ $data->is_appointee == 1 ? 'success' : 'danger'}}">

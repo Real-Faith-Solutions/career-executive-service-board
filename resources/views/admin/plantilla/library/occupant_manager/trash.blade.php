@@ -51,7 +51,6 @@
                     {{ $data->cesno }}
                 </td>
                 <td class="px-6 py-3">
-                    {{ $data->personalData->title ?? ''}}
                     {{ $data->personalData->lastname ?? ''}},
                     {{ $data->personalData->firstname ?? ''}}
                     {{ $data->personalData->name_extension ?? ''}}
