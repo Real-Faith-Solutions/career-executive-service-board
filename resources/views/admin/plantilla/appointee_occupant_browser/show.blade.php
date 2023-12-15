@@ -174,12 +174,13 @@
                     </div>
 
                     <div class="col-span-2">
-                        <form action="{{ route('library-occupant-manager.update', $appointees->appointee_id) }}"
+                        <form action="{{ route('library-occupant-manager.updateMainScreen', $appointees->appointee_id) }}"
                             method="POST" enctype="multipart/form-data" id="updateForm"
                             onsubmit="return checkErrorsBeforeSubmit(updateForm)">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="plantilla_id" value="{{ $planPosition->plantilla_id }}">
+                            <input type="hidden" name="cesno" value="{{ $appointees->cesno }}">
                             <fieldset class="border p-4">
                                 <legend>Occupant information</legend>
                                 <label for="appt_stat_code">Personnel Movement<sup>*</sup></label>

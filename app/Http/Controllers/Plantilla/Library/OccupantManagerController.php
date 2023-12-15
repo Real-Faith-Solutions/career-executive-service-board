@@ -325,12 +325,95 @@ class OccupantManagerController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
 
+        $planAppointee = PlanAppointee::where('appointee_id', $appointee_id)
+            ->select('is_appointee')
+            ->get();
+
+        $plantilla_id = $request->plantilla_id;
+
+        $planPosition = PlanPosition::find($plantilla_id);
+        $is_appointee = $request->is_appointee;
+
+        if($is_appointee){
+            foreach ($planAppointee as $data) {
+                if ($data->is_appointee == true) {
+                    return redirect()->back()->with('error', 'This Official is already appointed in other position');
+                }
+            }
+            $hasAppointee = $planPosition->planAppointee()->where('is_appointee', true)->exists();
+
+            if ($hasAppointee) {
+                return redirect()->back()->with('error', 'This Position is already have appointees');
+            }
+        }
+    
+
         $request->validate([
             'appt_stat_code' => ['required'],
             'appt_date' => ['required'],
             'assum_date' => ['required'],
         ]);
 
+        $planAppointee = PlanAppointee::withTrashed()->findOrFail($appointee_id);
+        $planAppointee->update([
+            'appt_stat_code' => $request->input('appt_stat_code'),
+            'appt_date' => $request->input('appt_date'),
+            'assum_date' => $request->input('assum_date'),
+            'is_appointee' => $request->input('is_appointee'),
+            'ofc_stat_code' => $request->input('ofc_stat_code'),
+            'basis' => $request->input('basis'),
+            'lastupd_user' => $encoder,
+        ]);
+        PositionAppointee::create([
+            'appointee_id' => $planAppointee->appointee_id,
+            'name' => $request->name,
+        ]);
+
+        // $positionAppointee = PositionAppointee::withTrashed()->findOrFail($appointee_id);
+
+        // $positionAppointee->update([
+        //     'name' => $request->input('name'),
+        // ]);
+
+        return redirect()->back()->with('message', 'The item has been successfully updated!');
+    }
+
+    public function updateMainScreen(Request $request, $appointee_id)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
+        $cesno = $request->cesno;
+        $planAppointee = PlanAppointee::where('appointee_id', $appointee_id)
+            ->select('is_appointee')
+            ->get();
+        $plantilla_id = $request->plantilla_id;
+
+        $planPosition = PlanPosition::find($plantilla_id);
+
+        $is_appointee = $request->is_appointee;
+
+        if($is_appointee){
+            foreach ($planAppointee as $data) {
+                if ($data->is_appointee == true) {
+                    return redirect()->back()->with('error', 'This Official is already appointed in other position');
+                }
+            }
+            $hasAppointee = $planPosition->planAppointee()->where('is_appointee', true)->exists();
+
+            if ($hasAppointee) {
+                return redirect()->back()->with('error', 'This Position is already have appointees');
+            }
+        }
+
+
+        $request->validate([
+            'appt_stat_code' => ['required'],
+            'appt_date' => ['required'],
+            'assum_date' => ['required'],
+        ]);
+        
         $planAppointee = PlanAppointee::withTrashed()->findOrFail($appointee_id);
         $planAppointee->update([
             'appt_stat_code' => $request->input('appt_stat_code'),

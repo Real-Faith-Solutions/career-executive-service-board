@@ -602,6 +602,7 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::get('library-occupant-manager/trash', [OccupantManagerController::class, 'trash'])->name('library-occupant-manager.trash');
             Route::post('library-occupant-manager/{officeid}/force-delete', [OccupantManagerController::class, 'forceDelete'])->name('library-occupant-manager.forceDelete');
             Route::post('library-occupant-manager/{officeid}/restore', [OccupantManagerController::class, 'restore'])->name('library-occupant-manager.restore');
+            Route::put('library-occupant-manager/{officeid}/updateMainScreen', [OccupantManagerController::class, 'updateMainScreen'])->name('library-occupant-manager.updateMainScreen');
             Route::resource('library-occupant-manager', OccupantManagerController::class);
 
             Route::get('library-other-assignment/{library_occupant_manager}/trash', [LibraryOtherAssignmentController::class, 'trash'])->name('library-other-assignment.trash');

@@ -100,6 +100,7 @@
 
                     <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-1 lg:grid-cols-1">
                         <div class="mb-3">
+                            <input type="hidden" name="plantilla_id" value="{{ $datas->plantilla_id }}">
                             <label for="lastname">Name of Official</label>
                             <input id="lastname"
                                 value="{{ $datas->personalData->lastname }} {{ $datas->personalData->firstname }} {{ $datas->personalData->name_extension }} {{ $datas->personalData->middlename }}"
