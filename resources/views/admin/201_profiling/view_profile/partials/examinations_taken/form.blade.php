@@ -50,7 +50,9 @@
 
                     <div class="mb-3">
                         <label for="date_of_examination">Date of Examination<sup>*</span></label>
-                        <input type="date" id="date_of_examination" name="date_of_examination" oninput="validateDateInput(date_of_examination)" required>
+                        <input type="date" id="date_of_examination" name="date_of_examination" required
+                            oninput="validateDateInput(date_of_examination), validateDateFromTo(date_of_examination, date_acquired)"
+                            onkeypress="validateDateInput(date_of_examination), validateDateFromTo(date_of_examination, date_acquired)">
                         <p class="input_error text-red-600"></p>
                         @error('date_of_examination')
                             <span class="invalid" role="alert">
@@ -89,7 +91,9 @@
 
                     <div class="mb-3">
                         <label for="date_acquired">Date Acquired</label>
-                        <input type="date" id="date_acquired" name="date_acquired" oninput="validateDateInput(date_acquired)">
+                        <input type="date" id="date_acquired" name="date_acquired"
+                            oninput="validateDateInput(date_acquired), validateDateFromTo(date_of_examination, date_acquired)"
+                            onkeypress="validateDateInput(date_acquired), validateDateFromTo(date_of_examination, date_acquired)">
                         <p class="input_error text-red-600"></p>
                         @error('date_acquired')
                             <span class="invalid" role="alert">
