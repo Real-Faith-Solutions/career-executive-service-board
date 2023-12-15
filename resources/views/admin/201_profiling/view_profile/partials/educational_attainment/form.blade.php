@@ -111,7 +111,9 @@
                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <div class="mb-3">
                         <label for="period_of_attendance_from">Period of attendance (From)<sup>*</span></label>
-                        <input id="period_of_attendance_from" name="period_of_attendance_from" required type="text" placeholder="mm/dd/yyyy" oninput="validateDateInput(period_of_attendance_from), validateDateFromTo(period_of_attendance_from, period_of_attendance_to)">
+                        <input id="period_of_attendance_from" name="period_of_attendance_from" required type="text" placeholder="mm/dd/yyyy" 
+                            oninput="validateDateInput(period_of_attendance_from), validateDateFromTo(period_of_attendance_from, period_of_attendance_to)"
+                            onkeypress="validateDateInput(period_of_attendance_from), validateDateFromTo(period_of_attendance_from, period_of_attendance_to)">
                         <p class="input_error text-red-600"></p>
                         @error('period_of_attendance_from')
                             <span class="invalid" role="alert">
