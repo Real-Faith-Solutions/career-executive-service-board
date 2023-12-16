@@ -17,11 +17,15 @@ class BirthdayCardReportController extends Controller
         $fullDateName = Carbon::now()->format('l, F, d, Y'); // getting full name attribute of the month example: Friday, December 01, 2023
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
+
+        // Calculate the date 25 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
     
         $personalData = PersonalData::query()
                         ->with('cesStatus')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
+                        ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
                         ->whereDay('birthdate', '=', $specificDay)
                         ->whereHas('cesStatus', function ($query) {
                             $query->where('description', 'LIKE', '%Eli%')
@@ -33,6 +37,7 @@ class BirthdayCardReportController extends Controller
         $numberOfCelebrant = PersonalData::query()
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
+                        ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
                         ->whereDay('birthdate', '=', $specificDay)
                         ->whereHas('cesStatus', function ($query) {
                             $query->where('description', 'LIKE', '%Eli%')
@@ -55,10 +60,14 @@ class BirthdayCardReportController extends Controller
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
     
+        // Calculate the date 25 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
+    
         $personalData = PersonalData::query()
-                        ->with('cesStatus', 'mailingAddress')
+                        ->with('cesStatus')
                         ->where('status', '=', 'Active')
                         ->whereMonth('birthdate', '=', $currentMonthInNumber)
+                        ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
                         ->whereDay('birthdate', '=', $specificDay)
                         ->whereHas('cesStatus', function ($query) {
                             $query->where('description', 'LIKE', '%Eli%')
@@ -118,16 +127,20 @@ class BirthdayCardReportController extends Controller
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $specificDay = Carbon::now()->format('d'); // getting current day example: 01 of December
 
+        // Calculate the date 25 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
+    
         $personalData = PersonalData::query()
-            ->with('cesStatus', 'mailingAddress')
-            ->where('status', '=', 'Active')
-            ->whereMonth('birthdate', '=', $currentMonthInNumber)
-            ->whereDay('birthdate', '=', $specificDay)
-            ->whereHas('cesStatus', function ($query) {
-                $query->where('description', 'LIKE', '%Eli%')
-                    ->orWhere('description', 'LIKE', '%CES%');
-            })
-            ->orderBy('lastname');
+                        ->with('cesStatus')
+                        ->where('status', '=', 'Active')
+                        ->whereMonth('birthdate', '=', $currentMonthInNumber)
+                        ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
+                        ->whereDay('birthdate', '=', $specificDay)
+                        ->whereHas('cesStatus', function ($query) {
+                            $query->where('description', 'LIKE', '%Eli%')
+                                ->orWhere('description', 'LIKE', '%CES%');
+                        })
+                        ->orderBy('lastname');
 
         // getting the data and applying the skipped data and records per partition to get the correct part of the report
         $personalData = $personalData->skip($skippedData)->take($recordsPerPartition)->get();
