@@ -111,7 +111,6 @@ class BirthdayCardReportController extends Controller
         return view('admin.201_profiling.reports.birthday_card.download_reports', compact('downloadLinks', 'fullDateName'));
     }
 
-
     // generating pdf for all user has birthday today
     public function birthdayCelebrantGeneratePdfReport($totalParts, $recordsPerPartition, $partitionNumber, $skippedData, $filename,)
     {
@@ -154,11 +153,15 @@ class BirthdayCardReportController extends Controller
 
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $currentMonthFullName = Carbon::now()->format('F, Y'); // getting month in name example: December = 12
+
+        // Calculate the date 25 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
     
         $personalData = PersonalData::query()
             ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
@@ -173,6 +176,7 @@ class BirthdayCardReportController extends Controller
         $numberOfCelebrant = PersonalData::query()
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
@@ -198,10 +202,14 @@ class BirthdayCardReportController extends Controller
         $currentMonthFullName = Carbon::now()->format('F'); // getting month in name example: December = 12
         $monthYear = Carbon::now()->format('F-Y'); // getting full name month and year attribute example: December, 2023
 
+        // Calculate the date 65 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
+    
         $personalData = PersonalData::query()
             ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
@@ -263,10 +271,14 @@ class BirthdayCardReportController extends Controller
         $currentMonthInNumber = Carbon::now()->format('m'); // getting month in number example: 12 = December
         $monthYear = Carbon::now()->format('F-Y-'); // getting full name month and year attribute example: December, 2023
 
+        // Calculate the date 25 years ago
+        $sixtyFiveYearsAgo = Carbon::today()->subYears(65)->addDay()->format('Y-m-d');
+    
         $personalData = PersonalData::query()
             ->with('cesStatus', 'mailingAddress')
             ->where('status', '=', 'Active')
             ->whereMonth('birthdate', '=', $currentMonthInNumber)
+            ->whereDate('birthdate', '>=', $sixtyFiveYearsAgo)
             ->whereHas('cesStatus', function ($query) {
                 $query->where('description', 'LIKE', '%Eli%')
                     ->orWhere('description', 'LIKE', '%CES%');
