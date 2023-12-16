@@ -176,6 +176,7 @@ class PlacementReportController extends Controller
             'sortOrder',
             'expertise',
             'degree',
+            'skippedData',
             'totalParts',
             'partitionNumber',
         ))
