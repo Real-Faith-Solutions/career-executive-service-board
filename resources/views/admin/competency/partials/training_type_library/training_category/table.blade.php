@@ -106,7 +106,13 @@
 </div>
 
 <div class="my-5">
-    {{ $trainingCategory->links() }}
+    {{ 
+        $trainingCategory->appends([
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+        ])
+        ->links() 
+    }}
 </div>
 
 @endsection

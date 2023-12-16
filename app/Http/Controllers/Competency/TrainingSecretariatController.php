@@ -15,7 +15,7 @@ class TrainingSecretariatController extends Controller
         $sortBy = $request->input('sortBy', 'ctrlno'); // Default sorting GenExp_Code.
         $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
-        $trainingSecretariat = TrainingSecretariat::orderBy($sortBy, $sortOrder)->paginate(5);
+        $trainingSecretariat = TrainingSecretariat::orderBy($sortBy, $sortOrder)->paginate(25);
 
         return view('admin.competency.partials.training_type_library.training_secretariat.table', compact('trainingSecretariat', 'sortBy', 'sortOrder'));
     }
