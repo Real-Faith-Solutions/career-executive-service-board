@@ -31,7 +31,23 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Ctrlno
+                    <a href="{{ route('field-specialization.index', [
+                        'sortBy' => 'GenExp_Code',
+                        'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                    ]) }}" class="flex items-center space-x-1">
+                        Ctrlno
+                        @if ($sortBy === 'GenExp_Code')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -47,15 +63,15 @@
             @foreach ($profileLibTblExpertiseGen as $profileLibTblExpertiseGens)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $profileLibTblExpertiseGens->GenExp_Code ?? 'No Record' }}
+                        {{ $profileLibTblExpertiseGens->GenExp_Code ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $profileLibTblExpertiseGens->Title ?? 'No Record' }}
+                        {{ $profileLibTblExpertiseGens->Title ?? '' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">
-                        <div class="flex">
+                        <div class="flex justify-end">
                             <form action="{{ route('field-specialization.edit', ['ctrlno'=>$profileLibTblExpertiseGens->GenExp_Code]) }}" method="GET">
                                 @csrf
                                 <button title="Edit" class="mx-1 font-medium text-blue-600 hover:underline" type="submit">

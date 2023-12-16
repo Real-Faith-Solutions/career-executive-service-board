@@ -12,7 +12,7 @@ class TrainingSecretariatController extends Controller
 {
     public function index()
     {
-        $trainingSecretariat = TrainingSecretariat::paginate(25);
+        $trainingSecretariat = TrainingSecretariat::orderBy('ctrlno', 'desc')->paginate(25);
 
         return view('admin.competency.partials.training_type_library.training_secretariat.table', compact('trainingSecretariat'));
     }
