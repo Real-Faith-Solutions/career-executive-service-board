@@ -14,7 +14,7 @@ class ResourceSpeakerController extends Controller
 {
     public function index()
     {
-        $resourceSpeaker = ResourceSpeaker::paginate(25);
+        $resourceSpeaker = ResourceSpeaker::orderBy('speakerID', 'desc')->paginate(25);
 
         return view('admin.competency.partials.trainings_sub_module.resource_speaker.table', compact('resourceSpeaker'));
     }

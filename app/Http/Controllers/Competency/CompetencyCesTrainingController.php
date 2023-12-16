@@ -52,6 +52,11 @@ class CompetencyCesTrainingController extends Controller
             
         ]);
 
+        if($request->status == 'Completed' && $request->no_of_hours == 0)
+        {
+            return to_route('ces-training.create', ['cesno'=>$cesno])->with('error', 'Completed Status requires training hours');
+        }
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();

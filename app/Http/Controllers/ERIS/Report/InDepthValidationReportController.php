@@ -144,7 +144,7 @@ class InDepthValidationReportController extends Controller
             'skippedData' => $skippedData,
             'fullDateName' => $fullDateName,
         ])
-        ->setPaper('a4', 'portrait');
+        ->setPaper('a4', 'landscape');
 
         return $pdf->stream($filename);
     }

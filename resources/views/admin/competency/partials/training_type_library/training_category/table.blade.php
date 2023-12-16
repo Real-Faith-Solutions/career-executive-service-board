@@ -31,7 +31,23 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Ctrlno
+                    <a href="{{ route('training-category.index', [
+                        'sortBy' => 'ctrlno',
+                        'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                    ]) }}" class="flex items-center space-x-1">
+                        Ctrlno
+                        @if ($sortBy === 'ctrlno')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -90,7 +106,13 @@
 </div>
 
 <div class="my-5">
-    {{ $trainingCategory->links() }}
+    {{ 
+        $trainingCategory->appends([
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+        ])
+        ->links() 
+    }}
 </div>
 
 @endsection
