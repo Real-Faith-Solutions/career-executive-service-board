@@ -10,11 +10,14 @@ use Illuminate\Validation\Rule;
 
 class TrainingCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $trainingCategory = TrainingLibCategory::paginate(25);
+        $sortBy = $request->input('sortBy', 'ctrlno'); // Default sorting GenExp_Code.
+        $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
-        return view('admin.competency.partials.training_type_library.training_category.table', compact('trainingCategory'));
+        $trainingCategory = TrainingLibCategory::orderBy($sortBy, $sortOrder)->paginate(25);
+
+        return view('admin.competency.partials.training_type_library.training_category.table', compact('trainingCategory', 'sortBy', 'sortOrder'));
     }
 
     public function create()
