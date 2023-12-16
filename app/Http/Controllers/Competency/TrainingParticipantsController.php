@@ -101,6 +101,11 @@ class TrainingParticipantsController extends Controller
             
         ]);
 
+        if($request->status == 'Completed' && $request->no_of_hours == 0)
+        {
+            return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'Completed Status requires training hours');
+        }
+
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
