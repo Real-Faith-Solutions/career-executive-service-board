@@ -50,13 +50,13 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 10px;
+                font-size: 12px;
                 text-align: left;
             }
         
             th {
                 color: #284F87;
-                font-size: 9px;
+                font-size: 12px;
                 padding-right: 5px;
                 padding-left: 5px;
                 text-transform: uppercase;
