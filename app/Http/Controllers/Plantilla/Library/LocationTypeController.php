@@ -37,7 +37,7 @@ class LocationTypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantillalib_tblagencylocation'],
+            'title' => ['required', 'max:50', 'min:2', 'unique:plantillalib_tblagencylocation'],
         ]);
         AgencyLocationLibrary::create($request->all());
         return redirect()->back()->with('message', 'The item has been successfully added!');
@@ -63,7 +63,7 @@ class LocationTypeController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantillalib_tblagencylocation'],
+            'title' => ['required', 'max:50', 'min:2', 'unique:plantillalib_tblagencylocation'],
         ]);
 
         $datas = AgencyLocationLibrary::withTrashed()->findOrFail($agencyloc_Id);

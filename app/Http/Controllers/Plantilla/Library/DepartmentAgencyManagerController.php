@@ -80,7 +80,7 @@ class DepartmentAgencyManagerController extends Controller
         $request->validate([
             'agency_typeid' => ['required'],
             'title' => ['required', 'min:2', 'unique:plantilla_tblDeptAgency'],
-            'acronym' => ['required', 'min:2',],
+            'acronym' => ['required', 'min:2', 'max:25'],
             'remarks' => ['required'],
             'mother_deptid' => ['required'],
             'submitted_by' => ['required'],
@@ -125,10 +125,10 @@ class DepartmentAgencyManagerController extends Controller
     public function update(Request $request, $deptid)
     {
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2',],
+            'title' => ['required', 'max:50', 'min:2',],
             'agency_typeid' => ['required'],
             'website' => ['max:40', 'min:2', 'url'],
-            'acronym' => ['required', 'min:2',],
+            'acronym' => ['required', 'min:2', 'max:25'],
             'remarks' => ['required'],
             'mother_deptid' => ['required'],
         ]);

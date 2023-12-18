@@ -102,8 +102,8 @@ class OfficeManagerController extends Controller
         $request->validate([
             'officelocid' => ['required'],
             'city_code' => ['required'],
-            'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'min:2',],
+            'title' => ['required', 'max:50', 'min:2',],
+            'acronym' => ['required', 'min:2', 'max:25'],
 
         ]);
         $primaryKey = Office::create([
@@ -159,8 +159,8 @@ class OfficeManagerController extends Controller
 
         $request->validate([
             // 'officelocid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'min:2',],
+            'title' => ['required', 'max:50', 'min:2',],
+            'acronym' => ['required', 'min:2', 'max:25'],
         ]);
 
         $office = Office::withTrashed()->findOrFail($officeid);

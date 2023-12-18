@@ -100,8 +100,8 @@ class SectorManagerController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_tblSector'],
-            'description' => ['required', 'max:255', 'min:2', 'regex:/^[a-zA-Z ]*$/',],
+            'title' => ['required', 'max:50', 'min:2', 'unique:plantilla_tblSector'],
+            'description' => ['required', 'max:255', 'min:2',],
         ]);
 
         $datas = SectorManager::withTrashed()->findOrFail($sectorid);

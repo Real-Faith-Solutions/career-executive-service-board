@@ -39,7 +39,7 @@ class MotherDeptController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'regex:/^[a-zA-Z ]*$/', 'unique:plantilla_motherdept'],
+            'title' => ['required', 'max:50', 'min:2', 'unique:plantilla_motherdept'],
         ]);
         MotherDept::create([
             'title' => $request->input('title'),
@@ -69,7 +69,7 @@ class MotherDeptController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2', 'unique:plantilla_motherdept',],
+            'title' => ['required', 'max:50', 'min:2', 'unique:plantilla_motherdept',],
         ]);
 
         $datas = MotherDept::withTrashed()->findOrFail($deptid);

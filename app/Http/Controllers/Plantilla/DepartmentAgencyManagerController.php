@@ -19,8 +19,8 @@ class DepartmentAgencyManagerController extends Controller
     {
         $request->validate([
             'agency_typeid' => ['required'],
-            'title' => ['required', 'max:40', 'min:2',],
-            'acronym' => ['required', 'min:2',],
+            'title' => ['required', 'max:50', 'min:2',],
+            'acronym' => ['required', 'min:2', 'max:25'],
             'remarks' => ['required'],
             'submitted_by' => ['required'],
         ]);
