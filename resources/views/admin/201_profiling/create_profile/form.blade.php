@@ -29,7 +29,7 @@
 
             <label for="title">Title<sup>*</sup></label>
             <select id="title" name="title" required>
-                <option disabled selected>Please Select Title</option>
+                <option disabled selected value="">Please Select Title</option>
                 @foreach ($title as $data)
                 <option value="{{ $data->name }}" {{ old('title')==$data->name ? 'selected' : '' }}>{{ $data->name }}
                 </option>
@@ -42,7 +42,7 @@
 
             <label for="status">Record Status<sup>*</span></label>
             <select id="status" name="status" required>
-                <option disabled selected>Please Select Record Status</option>
+                <option disabled selected value="">Please Select Record Status</option>
                 @foreach ($recordStatus as $data)
                 <option value="{{ $data->name }}" {{ old('status')==$data->name ? 'selected' : '' }}>{{ $data->name }}
                 </option>
@@ -196,7 +196,7 @@
         <div class="mb-3">
             <label for="gender">Gender By Birth<sup>*</sup></label>
             <select id="gender" name="gender" required>
-                <option disabled selected>Please Select Gender by Birth</option>
+                <option disabled selected value="">Please Select Gender by Birth</option>
                 @foreach ($genderByBirths as $data)
                 <option value="{{ $data->name }}" {{ old('gender')==$data->name ? 'selected' : '' }}>{{ $data->name }}
                 </option>
@@ -218,7 +218,7 @@
         <div class="mb-3">
             <label for="civil_status">Civil Status<sup>*</sup></label>
             <select id="civil_status" name="civil_status" required>
-                <option disabled selected>Please Select Civil Status</option>
+                <option disabled selected value="">Please Select Civil Status</option>
                 @foreach ($civilStatus as $data)
                 <option value="{{ $data->name }}" {{ old('civil_status')==$data->name ? 'selected' : '' }}>{{
                     $data->name }}</option>
@@ -273,7 +273,7 @@
         <div class="mb-3">
             <label for="single_parent">Solo Parent?<sup>*</sup></label>
             <select class="w-100 form-control mb-3" id="single_parent" name="single_parent" required>
-                <option disabled selected>Please Select</option>
+                <option disabled selected value="">Please Select</option>
                 <option value="Yes" {{ old('single_parent')=="Yes" ? 'selected' : '' }}>Yes</option>
                 <option value="No" {{ old('single_parent')=="No" ? 'selected' : '' }}>No</option>
             </select>
@@ -310,7 +310,7 @@
             <label for="citizenship">Citizenship<sup>*</sup></label>
             <select class="form-control w-100 citizenShip mb-3" id="citizenship" name="citizenship"
                 onchange="toggleCitizenshipDependentField()" required>
-                <option disabled selected>Please Select Citizenship</option>
+                <option disabled selected value="">Please Select Citizenship</option>
                 <option value="Filipino" {{ old('citizenship')=="Filipino" ? 'selected' : '' }}>Filipino</option>
                 <option value="Dual-Citizenship">Dual-Citizenship</option>
             </select>

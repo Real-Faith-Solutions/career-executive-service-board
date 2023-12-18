@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label for="level">Level<sup>*</sup></label>
                         <select id="level" name="level" required>
-                            <option disabled selected>Select Level</option>
+                            <option disabled selected value="">Select Level</option>
                             @if ($educationalAttainment->level == "Elementary")
                                 <option value="Elementary" selected>Elementary</option>
                                 <option value="Secondary">Secondary</option>
@@ -76,7 +76,7 @@
                     <div class="mb-3">
                         <label for="school_code">School</label>
                         <select id="school_code" name="school_code" required>
-                            <option disabled selected>Select School</option>
+                            <option disabled selected value="">Select School</option>
                             @foreach($profileLibTblEducSchool as $profileLibTblEducSchools)
                                 @if ($profileLibTblEducSchools->CODE == $educationalAttainment->school_code)
                                     <option value="{{ $profileLibTblEducSchools->CODE }}" selected>
@@ -99,7 +99,7 @@
                     <div class="mb-3">
                         <label for="major_code">Specialization<sup>*</span></label>
                         <select id="major_code" name="major_code" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach($profileLibTblEducMajor as $profileLibTblEducMajors)
                                 @if ($profileLibTblEducMajors->CODE == $educationalAttainment->major_code)
                                     <option value="{{ $profileLibTblEducMajors->CODE }}" selected>
@@ -122,7 +122,7 @@
                     <div class="mb-3">
                         <label for="degree_code">Degree<sup>*</span></label>
                         <select id="degree_code" name="degree_code" required>
-                            <option disabled selected>Select Degree</option>
+                            <option disabled selected value="">Select Degree</option>
                             @foreach($profileLibTblEducDegree as $profileLibTblEducDegrees)
                                 @if ($profileLibTblEducDegrees->CODE == $educationalAttainment->degree_code)
                                     <option value="{{ $profileLibTblEducDegrees->CODE }}" selected>
@@ -145,7 +145,7 @@
                     <div class="mb-3">
                         <label for="school_type">School type<sup>*</span></label>
                         <select id="school_type" name="school_type" required>
-                            <option disabled selected>Select School type</option>
+                            <option disabled selected value="">Select School type</option>
                             @if ($educationalAttainment->school_status == "Local")
                                 <option value="Local" selected>Local</option>
                                 <option value="Foreign">Foreign</option>

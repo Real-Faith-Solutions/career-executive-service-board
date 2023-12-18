@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label for="cesstat_code">CES Status<sup>*</sup></label>
                         <select id="cesstat_code" name="cesstat_code" required type="text">
-                            <option disabled selected>Select CES Status</option>
+                            <option disabled selected value="">Select CES Status</option>
                             @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
                                 <option value="{{ $newProfileLibTblCesStatus->code }}">{{ $newProfileLibTblCesStatus->description }}</option>
                             @endforeach
@@ -39,7 +39,7 @@
                      <div class="mb-3">
                         <label for="acc_code">Acquired Thru<sup>*</sup></label>
                         <select id="acc_code" name="acc_code" required type="text">
-                            <option disabled selected>Select Acquired Thru</option>
+                            <option disabled selected value="">Select Acquired Thru</option>
                             @foreach ($profileLibTblCesStatusAcc as $newProfileLibTblCesStatusAcc)
                                 <option value="{{ $newProfileLibTblCesStatusAcc->code }}">{{ $newProfileLibTblCesStatusAcc->description }}</option>
                             @endforeach
@@ -54,7 +54,7 @@
                     <div class="mb-3">
                         <label for="type_code">Status Type<sup>*</sup></label>
                         <select id="type_code" name="type_code" required type="text">
-                            <option disabled selected>Select Status Type</option>
+                            <option disabled selected value="">Select Status Type</option>
                             @foreach ($profileLibTblCesStatusType as $newProfileLibTblCesStatusType)
                                 <option value="{{ $newProfileLibTblCesStatusType->code }}">{{ $newProfileLibTblCesStatusType->description }}</option>
                             @endforeach
@@ -69,7 +69,7 @@
                     <div class="mb-3">
                         <label for="official_code">Appointing Authority<sup>*</sup></label>
                         <select id="official_code" name="official_code" required type="text">
-                            <option disabled selected>Select Appointing Authority</option>
+                            <option disabled selected value="">Select Appointing Authority</option>
                             @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
                                 <option value="{{ $newProfileLibTblAppAuthority->code }}">{{ $newProfileLibTblAppAuthority->description }}</option>
                             @endforeach

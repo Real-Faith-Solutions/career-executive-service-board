@@ -8,7 +8,7 @@
                 @if ($regionMailing != '')
                     <option value="{{ $regionMailing }}" selected></option>
                 @else
-                    <option disabled selected>Select Region</option>
+                    <option disabled selected value="">Select Region</option>
                 @endif
             </select>
         </div>
@@ -19,7 +19,7 @@
                 @if ($cityMailing != '')
                     <option value="{{ $cityMailing }}" selected></option>
                 @else
-                    <option disabled selected>Select City or Municipality</option>
+                    <option disabled selected value="">Select City or Municipality</option>
                 @endif
             </select>
         </div>
@@ -30,7 +30,7 @@
                 @if ($brgyMailing != '')
                     <option value="{{ $brgyMailing }}" selected></option>
                 @else
-                    <option disabled selected>Select Barangay</option>
+                    <option disabled selected value="">Select Barangay</option>
                 @endif
             </select>
         </div>

@@ -99,7 +99,7 @@
                     <div class="mb-3">
                         <label for="case_status">Case Status<sup>*</sup></label>
                         <select id="case_status" name="case_status" required>
-                            <option disabled selected>Select Case Status</option>
+                            <option disabled selected value="">Select Case Status</option>
                             @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
                                 <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}">{{ $profileLibTblCaseStatuses->TITLE }}</option>
                             @endforeach

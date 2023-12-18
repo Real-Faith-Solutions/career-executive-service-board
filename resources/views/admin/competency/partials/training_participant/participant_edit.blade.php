@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <label for="status">Status<sup>*</sup></label>
                         <select name="status" id="status">
-                            <option disabled selected>Select Status</option>
+                            <option disabled selected value="">Select Status</option>
                             <option value="Completed" {{ $trainingParticipant->status == 'Completed' ? 'selected' : '' }}>Completed</option>
                             <option value="Incomplete" {{ $trainingParticipant->status == 'Incomplete' ? 'selected' : '' }}>Incomplete</option>
                             <option value="Reserved" {{ $trainingParticipant->status == 'Reserved' ? 'selected' : '' }}>Reserved</option>
@@ -90,7 +90,7 @@
                     <div class="mb-3">
                         <label for="payment">Payment<sup>*</sup></label>
                         <select id="payment" name="payment" required>
-                            <option disabled selected>Select Payment</option>
+                            <option disabled selected value="">Select Payment</option>
                             <option value="Paid" {{ $trainingParticipant->payment == 'Paid' ? 'selected' : '' }}>Paid</option>
                             <option value="Unpaid" {{ $trainingParticipant->payment == 'Unpaid' ? 'selected' : '' }}>UnPaid</option>
                             <option value="Partial" {{ $trainingParticipant->payment == 'Partial' ? 'selected' : '' }}>Partial</option>

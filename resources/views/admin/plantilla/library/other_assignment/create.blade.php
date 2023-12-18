@@ -72,7 +72,7 @@
                             <div class="mb-3">
                                 <label for="city_code">City</label>
                                 <select id="city_code" name="city_code">
-                                    <option disabled selected>Select City</option>
+                                    <option disabled selected value="">Select City</option>
                                     @foreach ($cities as $data)
                                     <option value="{{ $data->city_code }}" {{ $data->city_code ==
                                         $appointee->planPosition->office->officeAddress->city_code ?
@@ -127,7 +127,7 @@
                             <div class="mb-3">
                                 <label for="appt_status_code">Status<sup>*</sup></label>
                                 <select id="appt_status_code" name="appt_status_code" required>
-                                    <option disabled selected>Select Status</option>
+                                    <option disabled selected value="">Select Status</option>
                                     @foreach ($apptStatus as $data)
                                     <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
                                     @endforeach

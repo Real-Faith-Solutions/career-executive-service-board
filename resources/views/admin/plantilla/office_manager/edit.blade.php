@@ -89,7 +89,7 @@
                         <div class="mb-3">
                             <label for="acronym">Office acronym<sup>*</sup></label>
                             <input name="acronym" id="acronym" value="{{ $office->acronym }}" minlength="2"
-                                maxlength="10">
+                                maxlength="25">
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -165,7 +165,7 @@
                         <div class="mb-3">
                             <label for="city_code">City Municipality<sup>*</sup></label>
                             <select id="city_code" name="city_code" required>
-                                <option disabled selected>Select City Municipality</option>
+                                <option disabled selected value="">Select City Municipality</option>
                                 @foreach ($cities as $data)
                                 <option value="{{ $data->city_code }}" {{ $office->officeAddress->city_code ==
                                     $data->city_code ? 'selected' : ''}}>
@@ -185,7 +185,7 @@
                         <div class="mb-3">
                             <label for="is_active">Office Status<sup>*</sup></label>
                             <select id="is_active" name="is_active" required>
-                                <option disabled selected>Select status</option>
+                                <option disabled selected value="">Select status</option>
                                 <option value="1" {{ $office->is_active == 1 ? 'selected' : ''}}>Active</option>
                                 <option value="0" {{ $office->is_active == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>

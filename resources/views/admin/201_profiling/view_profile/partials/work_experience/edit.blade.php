@@ -95,7 +95,7 @@
                     <div class="mb-3">
                         <label for="status_of_appointment">Status of Appointment<sup>*</span></label>
                         <select id="status_of_appointment"  name="status_of_appointment" required>
-                            <option disabled selected>Select Status of Appointment</option>
+                            <option disabled selected value="">Select Status of Appointment</option>
                             @if ($workExperience->status == "Permanent")
                                 <option value="Permanent" selected>Permanent</option>
                                 <option value="Contractual">Contractual</option>
@@ -117,7 +117,7 @@
                     <div class="mb-3">
                         <label for="government_service">Government Service<sup>*</span></label>
                         <select id="government_service" name="government_service" required>
-                            <option disabled selected>Select Government Service</option>
+                            <option disabled selected value="">Select Government Service</option>
                             @if ($workExperience->government_service == "Yes")
                                 <option value="Yes" selected>Yes</option>
                                 <option value="No">No</option>

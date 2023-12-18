@@ -49,7 +49,7 @@
                             <div class="mb-3">
                                 <label for="gender">Gender</label>
                                 <select name="gender" id="gender">
-                                    <option disabled selected>Select Gender</option>
+                                    <option disabled selected value="">Select Gender</option>
                                     @if ($erisTblMainPersonalData->gender == "Male")
                                         <option value="Male" selected>Male</option>
                                         <option value="Female">Female</option>    

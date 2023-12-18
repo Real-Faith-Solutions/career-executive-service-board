@@ -90,8 +90,7 @@
                             <label for="loctype_id">Location type<sup>*</sup></label>
                             <select name="loctype_id" id="loctype_id">
                                 @foreach ($agencyLocationLibrary as $data)
-                                <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->
-                                    agencyLocationLibrary->agencyloc_Id == $data->agencyloc_Id ? 'selected' :''}}>
+                                <option value="{{ $data->agencyloc_Id }}" {{ $departmentLocation->agencyLocationLibrary->agencyloc_Id == $data->agencyloc_Id ? 'selected' :''}}>
                                     {{ $data->title }}
                                 </option>
                                 @endforeach
@@ -105,7 +104,7 @@
                         <div class="mb-3">
                             <label for="acronym">Acronym<sup>*</sup></label>
                             <input name="acronym" id="acronym" value="{{ $departmentLocation->acronym }}" minlength="2"
-                                maxlength="10">
+                                maxlength="25">
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -115,7 +114,7 @@
                         <div class="mb-3">
                             <label for="region">Region<sup>*</sup></label>
                             <select name="region" id="region">
-                                <option disabled selected>Select Region</option>
+                                <option disabled selected value="">Select Region</option>
                                 @foreach ($region as $data)
                                 <option value="{{ $data->name }}" {{ $data->name == $departmentLocation->region ?
                                     'selected' : ''}}>{{

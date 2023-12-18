@@ -91,7 +91,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="acronym">Acronym<sup>*</sup></label>
-                        <input id="acronym" name="acronym" required minlength="2" maxlength="10"
+                        <input id="acronym" name="acronym" required minlength="2" maxlength="25"
                             value="{{ old('acronym') }}" />
                         @error('acronym')
                         <span class="invalid" role="alert">

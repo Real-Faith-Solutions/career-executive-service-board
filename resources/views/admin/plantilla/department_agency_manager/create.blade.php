@@ -43,7 +43,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="agencyType">Agency Type</label>
+                            <label for="agencyType">Agency Type<sup>*</sup></label>
                             <select id="agencyType" name="agency_typeid" required>
                                 @foreach ($agencyType as $data)
                                 <option value="{{ $data->agency_typeid }}">{{ $data->title }}</option>
@@ -56,7 +56,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="title">Agency / Bureau</label>
+                            <label for="title">Agency / Bureau<sup>*</sup></label>
                             <input id="title" name="title" required />
                             @error('title')
                             <span class="invalid" role="alert">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="acronym">Acronym</label>
-                            <input id="acronym" name="acronym" required minlength="2" maxlength="10" />
+                            <input id="acronym" name="acronym" required minlength="2" maxlength="25" />
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -83,7 +83,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="submitted_by">Submitted by</label>
+                            <label for="submitted_by">Submitted by<sup>*</sup></label>
                             <input id="submitted_by" name="submitted_by" required />
                             @error('submitted_by')
                             <span class="invalid" role="alert">
@@ -92,8 +92,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="remarks">Remarks</label>
-                            <textarea name="remarks" id="remarks" cols="30" rows="10"></textarea>
+                            <label for="remarks">Remarks<sup>*</sup></label>
+                            <textarea name="remarks" id="remarks" cols="30" rows="10" required></textarea>
                             @error('remarks')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

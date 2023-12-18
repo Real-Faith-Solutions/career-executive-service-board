@@ -46,7 +46,7 @@
                     <div class="mb-3">
                         <label for="expertise_field_of_specialization">Expertise / Field of Specialization<sup>*</sup></label>
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
                                 <option value="{{ $profileLibTblExpertiseSpecs->Title }}">{{ $profileLibTblExpertiseSpecs->Title }}</option>
                             @endforeach
@@ -85,7 +85,7 @@
                     <div class="mb-3">
                         <label for="sponsor_training_provider">Sponsor / Training Provider<sup>*</sup></label>
                         <select id="sponsor_training_provider" name="sponsor_training_provider" required>
-                            <option disabled selected>Select Sponsor/Provider</option>
+                            <option disabled selected value="">Select Sponsor/Provider</option>
                             @foreach ($competencyTrainingProvider as $competencyTrainingProviders)
                                 <option value="{{ $competencyTrainingProviders->provider }}">{{ $competencyTrainingProviders->provider }}</option>
                             @endforeach

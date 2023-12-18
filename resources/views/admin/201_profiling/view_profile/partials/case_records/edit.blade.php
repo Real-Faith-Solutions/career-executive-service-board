@@ -106,7 +106,7 @@
                     <div class="mb-3">
                         <label for="case_status_edit">Case Status<sup>*</sup></label>
                         <select id="case_status_edit" name="case_status" required>
-                            <option disabled selected>Select Case Status</option>
+                            <option disabled selected value="">Select Case Status</option>
                             @foreach ($profileLibTblCaseStatus as $profileLibTblCaseStatuses)
                                 @if ($profileLibTblCaseStatuses->STATUS_CODE == $caseRecord->status_code )
                                     <option value="{{ $profileLibTblCaseStatuses->STATUS_CODE }}" selected>{{ $profileLibTblCaseStatuses->TITLE }}</option>

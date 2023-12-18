@@ -35,7 +35,7 @@
                     <div class="mb-3">
                         <label for="category">Category<sup>*</sup></label>
                         <select name="category" id="category">
-                            <option disabled selected>Select Category</option>
+                            <option disabled selected value="">Select Category</option>
                             @foreach ($trainingLibCategory as $trainingLibCategories)
                                 <option value="{{ $trainingLibCategories->description }}">{{ $trainingLibCategories->description }}</option>
                             @endforeach
@@ -51,7 +51,7 @@
                     <div class="mb-3">
                         <label for="specialization">Specialization<sup>*</sup></label>
                         <select name="specialization" id="specialization">
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach ($profileLibTblExpertiseGen as $profileLibTblExpertiseGen)
                                 <option value="{{ $profileLibTblExpertiseGen->Title }}">{{ $profileLibTblExpertiseGen->Title }}</option>
                             @endforeach
@@ -91,7 +91,7 @@
                     <div class="mb-3">
                         <label for="venue">Venue<sup>*</sup></label>
                         <select name="venue" id="venue">
-                            <option disabled selected>Select Venue</option>
+                            <option disabled selected value="">Select Venue</option>
                             @foreach ($competencyTrainingVenueManager as $competencyTrainingVenueManagers)
                                 <option value="{{ $competencyTrainingVenueManagers->venueid }}">{{ $competencyTrainingVenueManagers->name }}</option>
                             @endforeach
@@ -131,7 +131,7 @@
                     <div class="mb-3">
                         <label for="resource_speaker">Resource Speaker<sup>*</sup></label>
                         <select name="resource_speaker" id="resource_speaker">
-                            <option disabled selected>Select Speaker</option>
+                            <option disabled selected value="">Select Speaker</option>
                             @foreach ($resourceSpeaker as $resourceSpeakers)
                                 <option value="{{ $resourceSpeakers->speakerID }}">{{ $resourceSpeakers->lastname. ' '. $resourceSpeakers->firstname }}</option>
                             @endforeach
@@ -149,7 +149,7 @@
                     <div class="mb-3">
                         <label for="session_director">Session Director<sup>*</sup></label>
                         <select name="session_director" id="session_director">
-                            <option disabled selected>Select Director</option>
+                            <option disabled selected value="">Select Director</option>
                             @foreach ($trainingSecretariat as $trainingSecretariats)
                                 <option value="{{ $trainingSecretariats->description }}">{{ $trainingSecretariats->description }}</option>
                             @endforeach
@@ -165,7 +165,7 @@
                     <div class="mb-3">
                         <label for="status">Status<sup>*</sup></label>  
                         <select name="status" id="status">
-                            <option disabled selected>Select Status</option>
+                            <option disabled selected value="">Select Status</option>
                             <option value="Registration">Registration</option>
                             <option value="Completed">Completed</option>
                             <option value="Pending">Pending</option>

@@ -71,7 +71,7 @@
                     <div class="mb-3">
                         <label for="city_code">City/Province<sup>*</sup></label>
                         <select id="city_code" name="city_code" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach($profileLibTblCities as $profileLibTblCity)
                                 @if ($profileLibTblCity->city_code == $trainingProvider->city_code)
                                     <option value="{{ $profileLibTblCity->city_code }}" selected>

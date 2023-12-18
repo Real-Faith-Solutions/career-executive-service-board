@@ -93,8 +93,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="acronym">Office acronym<sup>*</sup></label>
-                            <input name="acronym" id="acronym" value="{{ $office->acronym }}" minlength="2"
-                                maxlength="10">
+                            <input name="acronym" id="acronym" value="{{ $office->acronym }}" minlength="2" maxlength="25">
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -102,7 +101,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="website">Office website<sup>*</sup></label>
+                            <label for="website">Office website</label>
                             <input name="website" id="website" value="{{ $office->website }}" type="url">
                             @error('website')
                             <span class="invalid" role="alert">
@@ -138,9 +137,9 @@
 
 
                         <div class="mb-3">
-                            <label for="floor_bldg">Floor / Bldg.</label>
+                            <label for="floor_bldg">Floor / Bldg.<sup>*</sup></label>
                             <input id="floor_bldg" name="floor_bldg"
-                                value="{{ $office->officeAddress->floor_bldg ?? ''}}" />
+                                value="{{ $office->officeAddress->floor_bldg ?? ''}}" required/>
                             @error('floor_bldg')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -148,9 +147,9 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="house_no_st">No. / Street</label>
+                            <label for="house_no_st">No. / Street<sup>*</sup></label>
                             <input id="house_no_st" name="house_no_st"
-                                value="{{ $office->officeAddress->house_no_st ?? ''}}" />
+                                value="{{ $office->officeAddress->house_no_st ?? ''}}" required/>
                             @error('house_no_st')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -158,9 +157,9 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="brgy_dist">Brgy. / District</label>
+                            <label for="brgy_dist">Brgy. / District<sup>*</sup></label>
                             <input id="brgy_dist" name="brgy_dist"
-                                value="{{ $office->officeAddress->brgy_dist ?? ''}}" />
+                                value="{{ $office->officeAddress->brgy_dist ?? ''}}" required/>
                             @error('brgy_dist')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -170,7 +169,7 @@
                         <div class="mb-3">
                             <label for="city_code">City Municipality<sup>*</sup></label>
                             <select id="city_code" name="city_code" required>
-                                <option disabled selected>Select City Municipality</option>
+                                <option disabled selected value="">Select City Municipality</option>
                                 @foreach ($cities as $data)
                                 <option value="{{ $data->city_code }}" {{ $office->officeAddress->city_code ==
                                     $data->city_code ? 'selected' : ''}}>
@@ -190,7 +189,7 @@
                         <div class="mb-3">
                             <label for="is_active">Office Status<sup>*</sup></label>
                             <select id="is_active" name="is_active" required>
-                                <option disabled selected>Select status</option>
+                                <option disabled selected value="">Select status</option>
                                 <option value="1" {{ $office->is_active == 1 ? 'selected' : ''}}>Active</option>
                                 <option value="0" {{ $office->is_active == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>

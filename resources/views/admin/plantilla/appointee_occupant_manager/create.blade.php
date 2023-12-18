@@ -49,6 +49,7 @@
         defaultOption.text = "Select Position Title";
         defaultOption.disabled = true;
         defaultOption.selected = true;
+        defaultOption.value = "";
         positionTitleDropdown.appendChild(defaultOption);
 
         // Populate the second dropdown based on the selected value of the first dropdown
@@ -143,8 +144,8 @@
                         <fieldset class="border p-4">
                             <legend>Position Details</legend>
                             <div class="mb-3">
-                                <label for="pos_suffix">Position Suffix<sup>*</sup></label>
-                                <input id="pos_suffix" name="pos_suffix" required />
+                                <label for="pos_suffix">Position Suffix</label>
+                                <input id="pos_suffix" name="pos_suffix" />
                                 @error('pos_suffix')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -155,7 +156,7 @@
                                 <label for="ces_equivalent">CES Equivalent<sup>*</sup></label>
                                 <select id="ces_equivalent" name="ces_equivalent" required
                                     onchange="posCode(this.value)">
-                                    <option disabled selected>Select Position Level</option>
+                                    <option disabled selected value="">Select Position Level</option>
                                     @foreach ($planPositionLibrary as $data)
                                     <option value="{{ $data->poslevel_code }}">
                                         {{ $data->title }}, SG {{ $data->sg }}
@@ -171,7 +172,7 @@
                             <div class="mb-3">
                                 <label for="pos_code">Position Title<sup>*</sup></label>
                                 <select id="pos_code" name="pos_code" required onchange="posTitle()">
-                                    <option disabled selected>Select Position Title</option>
+                                    <option disabled selected value="">Select Position Title</option>
                                 </select>
                                 @error('pos_code')
                                 <span class="invalid" role="alert">
@@ -181,8 +182,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="pos_func_name">Functional Title<sup>*</sup></label>
-                                <input id="pos_func_name" name="pos_func_name" required readonly />
+                                <label for="pos_func_name">Functional Title</label>
+                                <input id="pos_func_name" name="pos_func_name" readonly />
                                 @error('pos_func_name')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -296,7 +297,7 @@
 
                             <div class="mb-3">
                                 <label for="remarks">Remarks<sup>*</sup></label>
-                                <textarea name="remarks" id="remarks" cols="50" rows="3"></textarea>
+                                <textarea name="remarks" id="remarks" cols="50" rows="3" required></textarea>
                                 @error('remarks')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>
@@ -308,9 +309,9 @@
                         <fieldset class="border p-4">
                             <legend>Classification Basis</legend>
                             <div class="mb-3">
-                                <label for="cbasis_code">Classification Basis</label>
-                                <select id="cbasis_code" name="cbasis_code" onchange="classificationBasis(this.value)">
-                                    <option disabled selected>Select Classification Basis</option>
+                                <label for="cbasis_code">Classification Basis<sup>*</sup></label>
+                                <select id="cbasis_code" name="cbasis_code" onchange="classificationBasis(this.value)" required>
+                                    <option disabled selected value="">Select Classification Basis</option>
                                     @foreach ($classBasis as $data)
                                     <option value="{{ $data->cbasis_code }}">{{ $data->basis }}</option>
                                     @endforeach
@@ -332,8 +333,8 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="cbasis_remarks">Notes</label>
-                                <textarea name="cbasis_remarks" id="cbasis_remarks" cols="50" rows="3"></textarea>
+                                <label for="cbasis_remarks">Notes<sup>*</sup></label>
+                                <textarea name="cbasis_remarks" id="cbasis_remarks" cols="50" rows="3" required></textarea>
                                 @error('cbasis_remarks')
                                 <span class="invalid" role="alert">
                                     <p>{{ $message }}</p>

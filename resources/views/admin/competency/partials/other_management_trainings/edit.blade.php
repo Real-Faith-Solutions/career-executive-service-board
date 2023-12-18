@@ -47,7 +47,7 @@
                     <div class="mb-3">
                         <label for="expertise_field_of_specialization">Expertise / Field of Specialization<sup>*</sup></label>
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
                                 @if ($profileLibTblExpertiseSpecs->Title == $nonCesAccreditedTraining->specialization)
                                     <option value="{{ $profileLibTblExpertiseSpecs->Title }}" selected>{{ $profileLibTblExpertiseSpecs->Title }}</option>
@@ -90,7 +90,7 @@
                     <div class="mb-3">
                         <label for="sponsor_training_provider">Sponsor / Training Provider<sup>*</sup></label>
                         <select id="sponsor_training_provider" name="sponsor_training_provider" required>
-                            <option disabled selected>Select Sponsor/Provider</option>
+                            <option disabled selected value="">Select Sponsor/Provider</option>
                             @foreach ($competencyTrainingProvider as $competencyTrainingProviders)
                                 @if ($competencyTrainingProviders->provider == $nonCesAccreditedTraining->sponsor)
                                     <option value="{{ $competencyTrainingProviders->provider }}" selected>{{ $competencyTrainingProviders->provider }}</option>

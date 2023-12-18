@@ -23,7 +23,7 @@
                     <div class="mb-3">
                         <label for="exam_code">Type of Examination<sup>*</sup></label>
                         <select id="type" name="exam_code" required>
-                            <option disabled selected>Select Type of Examination</option>
+                            <option disabled selected value="">Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
                                 <option value="{{ $profileLibTblExamRefs->CODE }}">{{ $profileLibTblExamRefs->TITLE }}</option>
                             @endforeach
@@ -64,7 +64,7 @@
                     <div class="mb-3">
                         <label for="place_of_examination">Place of Examination<sup>*</span></label>
                         <select name="place_of_examination">
-                            <option disabled selected>Select Examination Place</option>
+                            <option disabled selected value="">Select Examination Place</option>
                             @foreach ($profileLibCities as $profileLibCity)
                                 <option value="{{ $profileLibCity->city_code }}">{{ $profileLibCity->name }}</option>
                             @endforeach

@@ -12,7 +12,7 @@
                 <div class="mb-3">
                     <label for="relationship">Relationship<sup>*</span></label>
                     <select id="relationship" name="relationship" required onchange="toggleRelationshipStatus(this.value)">
-                        {{-- <option disabled selected>Select Relationship</option> --}}
+                        {{-- <option disabled selected value="">Select Relationship</option> --}}
                         <option value="Children" selected>Children</option>
                         <option value="Father">Father</option>
                         <option value="Mother">Mother</option>

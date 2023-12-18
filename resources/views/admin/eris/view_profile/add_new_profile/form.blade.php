@@ -89,7 +89,7 @@
                         <div class="mb-3">
                             <label for="gender">Gender</label>
                             <select name="gender" id="gender">
-                                <option disabled selected>Select Gender</option>
+                                <option disabled selected value="">Select Gender</option>
                                 <option value="Male" >Male</option>
                                 <option value="Female">Female</option>
                             </select>

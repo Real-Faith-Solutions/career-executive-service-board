@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <label for="exam_code">Type of Examination<sup>*</sup></label>
                         <select id="type" name="exam_code" required>
-                            <option disabled selected>Select Type of Examination</option>
+                            <option disabled selected value="">Select Type of Examination</option>
                             @foreach ($profileLibTblExamRef as $profileLibTblExamRefs)
                             @if ($profileLibTblExamRefs->CODE == $examinationTaken->exam_code)
                             <option value="{{ $profileLibTblExamRefs->CODE }}" selected>{{ $profileLibTblExamRefs->TITLE

@@ -47,7 +47,7 @@
                     <div class="mb-3">
                         <label for="description">Description<sup>*</sup></label>
                         <select name="description" id="description">
-                            <option disabled selected>Select Description</option>
+                            <option disabled selected value="">Select Description</option>
                             @foreach ($libraryRankTracker as $libraryRankTrackers)
                                 <option value="{{ $libraryRankTrackers->description }}">
                                     {{ $libraryRankTrackers->description }}

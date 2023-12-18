@@ -10,6 +10,7 @@ use App\Models\Plantilla\DepartmentAgencyType;
 use App\Models\Plantilla\MotherDept;
 use App\Models\Plantilla\SectorManager;
 use App\Models\ProfileLibTblRegion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -77,6 +78,7 @@ class DepartmentAgencyManagerController extends Controller
      */
     public function store(Request $request)
     {
+        $currentDateTime = Carbon::now();
         $request->validate([
             'agency_typeid' => ['required'],
             'title' => ['required', 'min:2', 'unique:plantilla_tblDeptAgency'],
@@ -85,8 +87,11 @@ class DepartmentAgencyManagerController extends Controller
             'mother_deptid' => ['required'],
             'submitted_by' => ['required'],
         ]);
-        // dd($request->all());
-        DepartmentAgency::create($request->all());
+
+        $data = $request->all();
+        $data['lastsubmit_dt'] = $currentDateTime;
+        DepartmentAgency::create($data);
+
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
@@ -124,6 +129,8 @@ class DepartmentAgencyManagerController extends Controller
      */
     public function update(Request $request, $deptid)
     {
+        $currentDateTime = Carbon::now();
+
         $request->validate([
             'title' => ['required', 'max:50', 'min:2',],
             'agency_typeid' => ['required'],
@@ -132,18 +139,14 @@ class DepartmentAgencyManagerController extends Controller
             'remarks' => ['required'],
             'mother_deptid' => ['required'],
         ]);
-        // dd($request->all());
 
+        $data = $request->all();
+        $data['lastsubmit_dt'] = $currentDateTime;
         $department = DepartmentAgency::withTrashed()->findOrFail($deptid);
-        $department->update($request->only([
-            'sectorid',
-            'title',
-            'agency_typeid',
-            'website',
-            'acronym',
-            'remarks',
-            'mother_deptid',
-        ]));
+
+        $department->update($data);
+
+        // $department->update($request->only($data));
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
     }

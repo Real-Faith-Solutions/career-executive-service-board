@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label for="type">Scholarship Type<sup>*</sup></label>
                         <select id="type" name="type" required>
-                            <option disabled selected>Select Type of Scholarship</option>
+                            <option disabled selected value="">Select Type of Scholarship</option>
                                 @if ($scholarship->type == "Local")
                                     <option value="Local" selected>Local</option>
                                     <option value="Foreign">Foreign</option>

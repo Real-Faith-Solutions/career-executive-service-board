@@ -23,7 +23,7 @@
                     <div class="mb-3">
                         <label for="Title">Expertise General</label>
                         <select name="expertise_general" required>
-                            <option disabled selected>Select Expertise General</option>
+                            <option disabled selected value="">Select Expertise General</option>
                             @foreach ($profileLibTblExpertiseGen as $data)
                                 @if ($data->GenExp_Code == $profileLibTblExpertiseMaster)
                                     <option value="{{ $data->GenExp_Code }}" selected>{{ $data->Title }}</option>

@@ -149,7 +149,7 @@
 
                     <label for="new_role">Role<sup>*</sup></label>
                     <select id="new_role" name="new_role" required>
-                        <option disabled selected>Select Role</option>
+                        <option disabled selected value="">Select Role</option>
                         @foreach($roles as $role)
                             <option value="{{ $role->role_name }}">
                                 {{ $role->role_title }}

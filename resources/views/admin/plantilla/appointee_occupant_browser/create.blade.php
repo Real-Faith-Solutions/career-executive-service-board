@@ -202,7 +202,7 @@
                                 <div class="sm:gid-cols-1 mb-3 grid gap-4 md:grid-cols-2 lg:grid-cols-2">
                                     <div class="mb-3">
                                         <select id="appt_stat_code" name="appt_stat_code" required>
-                                            <option disabled selected>Select Personnel Movement</option>
+                                            <option disabled selected value="">Select Personnel Movement</option>
                                             @foreach ($apptStatus as $data)
                                             <option value="{{ $data->appt_stat_code }}">{{ $data->title }}</option>
                                             @endforeach
@@ -271,8 +271,8 @@
                                     </div> --}}
 
                                     <div class="mb-3">
-                                        <label for="name">Appointing Authority</label>
-                                        <select id="name" name="name">
+                                        <label for="name">Appointing Authority<sup>*</sup></label>
+                                        <select id="name" name="name" required>
                                             <option value="" disabled selected>Appointing Authority</option>
                                             @foreach ($appAuthority as $data)
                                             <option value="{{ $data->code }}">
@@ -285,7 +285,7 @@
                                     <div class="mb-3">
                                         <label for="appt_date">Appointment Date<sup>*</sup></label>
                                         <input id="appt_date" name="appt_date" type="date"
-                                            value="{{ old('appt_date') }}" />
+                                            value="{{ old('appt_date') }}" required/>
                                         @error('appt_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>
@@ -296,7 +296,7 @@
                                     <div class="mb-3">
                                         <label for="assum_date">Assumption Date<sup>*</sup></label>
                                         <input id="assum_date" name="assum_date" type="date"
-                                            value="{{ old('assum_date') }}" />
+                                            value="{{ old('assum_date') }}" required/>
                                         @error('assum_date')
                                         <span class="invalid" role="alert">
                                             <p>{{ $message }}</p>

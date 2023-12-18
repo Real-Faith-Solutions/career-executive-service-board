@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label for="expertise_specialization">Expertise / Field of Specialization<sup>*</span></label>
                         <select id="expertise_specialization" name="SpeExp_Code" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
                                 @if ($profileLibTblExpertiseSpecs->SpeExp_Code == $profileTblExpertise->SpeExp_Code)
                                     <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}" selected>

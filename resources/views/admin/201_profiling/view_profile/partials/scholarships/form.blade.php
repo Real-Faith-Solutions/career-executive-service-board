@@ -23,7 +23,7 @@
                     <div class="mb-3">
                         <label for="type">Scholarship Type<sup>*</sup></label>
                         <select id="type" name="type" required>
-                            <option disabled selected>Select Type of Scholarship</option>
+                            <option disabled selected value="">Select Type of Scholarship</option>
                             <option value="Local">Local</option>
                             <option value="Foreign">Foreign</option>
                         </select>
