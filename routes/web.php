@@ -86,6 +86,7 @@ use App\Http\Controllers\Plantilla\Library\OtherAssignmentController as LibraryO
 use App\Http\Controllers\Plantilla\Library\PersonnelMovementController;
 use App\Http\Controllers\Plantilla\Library\PositionManagerController;
 use App\Http\Controllers\Plantilla\Library\SectorManagerController as LibrarySectorManagerController;
+use App\Http\Controllers\Plantilla\Library\ReasonCodeLibraryController;
 use App\Http\Controllers\Plantilla\OfficeManagerController;
 use App\Http\Controllers\Plantilla\OtherAssignmentController;
 use App\Http\Controllers\Plantilla\PlantillaPositionManagerController;
@@ -578,6 +579,11 @@ Route::middleware('auth', 'verify.email.and.device')->group(function () {
             Route::post('library-personnel-movement/{officeid}/force-delete', [PersonnelMovementController::class, 'forceDelete'])->name('library-personnel-movement.forceDelete');
             Route::post('library-personnel-movement/{officeid}/restore', [PersonnelMovementController::class, 'restore'])->name('library-personnel-movement.restore');
             Route::resource('library-personnel-movement', PersonnelMovementController::class);
+            
+            Route::get('library-reason-code/trash', [ReasonCodeLibraryController::class, 'trash'])->name('library-reason-code.trash');
+            Route::post('library-reason-code/{officeid}/force-delete', [ReasonCodeLibraryController::class, 'forceDelete'])->name('library-reason-code.forceDelete');
+            Route::post('library-reason-code/{officeid}/restore', [ReasonCodeLibraryController::class, 'restore'])->name('library-reason-code.restore');
+            Route::resource('library-reason-code', ReasonCodeLibraryController::class);
 
             Route::get('library-location-type/trash', [LocationTypeController::class, 'trash'])->name('library-location-type.trash');
             Route::post('library-location-type/{officeid}/force-delete', [LocationTypeController::class, 'forceDelete'])->name('library-location-type.forceDelete');
