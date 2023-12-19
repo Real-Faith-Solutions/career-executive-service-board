@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Personnel Movement - Edit')
+@section('title', 'Appointment Status - Edit')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">
@@ -13,7 +13,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Personnel Movement
+                Appointment Status
             </h1>
         </div>
 

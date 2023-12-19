@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Personnel Movement - Trash')
+@section('title', 'Appointment Status - Trash')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">

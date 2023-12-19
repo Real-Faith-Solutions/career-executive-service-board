@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Personnel Movement')
+@section('title', 'Appointment Status')
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
