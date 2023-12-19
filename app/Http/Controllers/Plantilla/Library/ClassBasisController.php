@@ -46,8 +46,8 @@ class ClassBasisController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
         $request->validate([
-            'basis' => ['required', 'max:40', 'min:2', 'unique:plantillalib_tblclassbasis'],
-            'title' => ['required', 'max:40', 'min:2'],
+            'basis' => ['required', 'min:2',],
+            'title' => ['required', 'min:2'],
             'classdate' => ['required'],
         ]);
         $data = $request->all();
@@ -72,8 +72,8 @@ class ClassBasisController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'basis' => ['required', 'max:40', 'min:2'],
-            'title' => ['required', 'max:40', 'min:2'],
+            'basis' => ['required', 'min:2',],
+            'title' => ['required', 'min:2'],
             'classdate' => ['required'],
         ]);
 

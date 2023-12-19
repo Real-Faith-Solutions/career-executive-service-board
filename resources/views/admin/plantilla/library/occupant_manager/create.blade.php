@@ -354,7 +354,7 @@
                         <div class="mb-3">
                             <label for="sector">Sector</label>
                             <select id="sector" name="sector" required onchange="sectorToggle(this.value)">
-                                <option disabled selected>Select Sector</option>
+                                <option disabled selected value="">Select Sector</option>
                                 @foreach ($sector as $data)
                                 <option value="{{ $data->sectorid }}">{{ $data->title }}</option>
                                 @endforeach

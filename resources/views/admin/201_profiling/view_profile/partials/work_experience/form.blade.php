@@ -94,7 +94,7 @@
                     <div class="mb-3">
                         <label for="status_of_appointment">Status of Appointment<sup>*</span></label>
                         <select id="status_of_appointment"  name="status_of_appointment" required>
-                            <option disabled selected>Select Status of Appointment</option>
+                            <option disabled selected value="">Select Status of Appointment</option>
                             <option value="Permanent">Permanent</option>
                             <option value="Contractual">Contractual</option>
                         </select>
@@ -108,7 +108,7 @@
                     <div class="mb-3">
                         <label for="government_service">Government Service<sup>*</span></label>
                         <select id="government_service" name="government_service" required>
-                            <option disabled selected>Select Government Service</option>
+                            <option disabled selected value="">Select Government Service</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>

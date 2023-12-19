@@ -60,7 +60,7 @@ class OfficeTypeController extends Controller
         $user = Auth::user();
         $encoder = $user->userName();
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2'],
+            'title' => ['required', 'max:50', 'min:2'],
             'sectorid' => ['required'],
         ]);
 
@@ -115,7 +115,7 @@ class OfficeTypeController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:40', 'min:2'],
+            'title' => ['required', 'max:50', 'min:2'],
             'sectorid' => ['required'],
         ]);
 

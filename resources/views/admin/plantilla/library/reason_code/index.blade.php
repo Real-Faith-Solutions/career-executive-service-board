@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Appointment Status')
+@section('title', 'Reason Code')
 @section('content')
 
 <div class="lg:flex lg:justify-between my-3">
@@ -10,13 +10,13 @@
         @yield('title')
     </a>
     <div class="flex items-center">
-        <a href="{{ route('library-personnel-movement.trash') }}">
+        <a href="{{ route('library-reason-code.trash') }}">
             <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#DC3545"
                 style="width:34px;height:34px">
             </lord-icon>
         </a>
 
-        <a class="btn btn-primary" href="{{ route('library-personnel-movement.create') }}">Add record</a>
+        <a class="btn btn-primary" href="{{ route('library-reason-code.create') }}">Add record</a>
     </div>
 </div>
 
@@ -25,6 +25,7 @@
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
+                <th class="px-6 py-3" scope="col">Module</th>
                 <th class="px-6 py-3" scope="col">Title</th>
                 <th class="px-6 py-3" scope="col">
                     <span class="sr-only">Action</span>
@@ -36,6 +37,9 @@
             @foreach ($datas as $data)
             <tr>
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                    {{ $data->module }}
+                </td>
+                <td class="px-6 py-3">
                     {{ $data->title }}
                 </td>
 
@@ -43,7 +47,7 @@
                     <div class="flex justify-end">
 
                         <a class="hover:bg-slate-100 rounded-full"
-                            href="{{ route('library-personnel-movement.edit', $data->appt_stat_code) }}">
+                            href="{{ route('library-reason-code.edit', $data->reason_code) }}">
                             <lord-icon src="https://cdn.lordicon.com/hbvgknxo.json" trigger="hover"
                                 colors="primary:#ebe6ef,secondary:#4bb3fd,tertiary:#3a3347"
                                 style="width:24px;height:24px">
@@ -51,7 +55,7 @@
                         </a>
 
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('library-personnel-movement.destroy', $data->appt_stat_code) }}"
+                            action="{{ route('library-reason-code.destroy', $data->reason_code) }}"
                             method="POST"
                             onsubmit="return window.confirm('Are you sure you want to delete this item?')">
                             @method('DELETE')

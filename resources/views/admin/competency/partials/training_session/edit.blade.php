@@ -36,7 +36,7 @@
                     <div class="mb-3">
                         <label for="category">Category<sup>*</sup></label>
                         <select name="category" id="category">
-                            <option disabled selected>Select Category</option>
+                            <option disabled selected value="">Select Category</option>
                             @foreach ($trainingLibCategory as $trainingLibCategories)
                                 @if ($trainingLibCategories->description == $trainingSession->category )
                                     <option value="{{ $trainingLibCategories->description }}" selected>{{ $trainingLibCategories->description }}</option>
@@ -56,7 +56,7 @@
                     <div class="mb-3">
                         <label for="specialization">Specialization<sup>*</sup></label>
                         <select name="specialization" id="specialization">
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach ($profileLibTblExpertiseGen as $profileLibTblExpertiseGen)
                                 @if ($profileLibTblExpertiseGen->Title == $trainingSession->specialization)
                                     <option value="{{ $profileLibTblExpertiseGen->Title }}" selected>{{ $profileLibTblExpertiseGen->Title }}</option>
@@ -100,7 +100,7 @@
                     <div class="mb-3">
                         <label for="venue">Venue<sup>*</sup></label>
                         <select name="venue" id="venue">
-                            <option disabled selected>Select Venue</option>
+                            <option disabled selected value="">Select Venue</option>
                             @foreach ($competencyTrainingVenueManager as $competencyTrainingVenueManagers)
                                 @if ($competencyTrainingVenueManagers->venueid == $trainingSession->venueId)
                                     <option value="{{ $competencyTrainingVenueManagers->venueid }}" selected>{{ $competencyTrainingVenueManagers->name }}</option>
@@ -144,7 +144,7 @@
                     <div class="mb-3">
                         <label for="resource_speaker">Resource Speaker<sup>*</sup></label>
                         <select name="resource_speaker" id="resource_speaker">
-                            <option disabled selected>Select Speaker</option>
+                            <option disabled selected value="">Select Speaker</option>
                             @foreach ($resourceSpeaker as $resourceSpeakers)
                                 @if ($resourceSpeakers->speakerID == $trainingSession->speakerid )
                                     <option value="{{ $resourceSpeakers->speakerID }}" selected>{{ $resourceSpeakers->lastname. ' '. $resourceSpeakers->firstname }}</option>
@@ -166,7 +166,7 @@
                     <div class="mb-3">
                         <label for="session_director">Session Director<sup>*</sup></label>
                         <select name="session_director" id="session_director">
-                            <option disabled selected>Select Director</option>
+                            <option disabled selected value="">Select Director</option>
                             @foreach ($trainingSecretariat as $trainingSecretariats)
                                 @if ($trainingSecretariats->description == $trainingSession->session_director)
                                     <option value="{{ $trainingSecretariats->description }}" selected>{{ $trainingSecretariats->description }}</option>
@@ -186,7 +186,7 @@
                     <div class="mb-3">
                         <label for="status">Status<sup>*</sup></label>  
                         <select name="status" id="status">
-                            <option disabled selected>Select Status</option>
+                            <option disabled selected value="">Select Status</option>
                             <option value="Registration" {{ $trainingSession->status == 'Registration' ? 'selected' : '' }}>Registration</option>
                             <option value="Completed" {{ $trainingSession->status == 'Completed' ? 'selected' : '' }}>Completed</option>
                             <option value="Pending" {{ $trainingSession->status == 'Pending' ? 'selected' : '' }}>Pending</option>

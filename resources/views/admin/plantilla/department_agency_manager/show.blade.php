@@ -68,35 +68,38 @@
                                 ? 'disabled' : '' }}>
 
                                 @if($department->mother_deptid == 0) {{-- 0 means mother agency --}}
-                                <option value="0" selected>
-                                    {{ $department->title }}
-                                </option>
-                                @foreach ($motherDepartment as $data)
-                                <option value="{{ $data->deptid }}">
-                                    {{ $data->title }}
-                                </option>
-                                @endforeach
+                                        <option value="0" selected>
+                                            {{ $department->title }}
+                                        </option>
+                                    @foreach ($motherDepartment as $data)
+                                        <option value="{{ $data->deptid }}">
+                                            {{ $data->title }}
+                                        </option>
+                                    @endforeach
 
                                 @else
-                                @foreach ($motherDepartment as $data)
-                                <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
-                                    'selected' : ''}}>
-                                    {{ $data->title }}
-                                </option>
-                                @endforeach
+
+                                    @foreach ($motherDepartment as $data)
+                                        <option value="{{ $data->deptid }}" {{ $data->deptid == $department->mother_deptid ?
+                                            'selected' : ''}}>
+                                            {{ $data->title }}
+                                        </option>
+                                    @endforeach
+
                                 @endif
 
-
                             </select>
+
                             @error('mother_deptid')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
                             </span>
                             @enderror
+
                             @if($department->mother_deptid == 0)
-                            <h1 class="text-slate-500 text-sm italic">
-                                Note: This Agency is mother Agency. Cannot be change
-                            </h1>
+                                <h1 class="text-slate-500 text-sm italic">
+                                    Note: This Department is Mother Agency.
+                                </h1>
                             @endif
 
                         </div>
@@ -105,10 +108,10 @@
                             <label for="departmentTypeDatas">Office Type<sup>*</span></label>
                             <select id="departmentTypeDatas" name="agency_typeid" required>
                                 @foreach ($departmentTypeDatas as $data)
-                                <option value="{{ $data->agency_typeid }}" {{ $data->agency_typeid ==
-                                    $department->agency_typeid ? 'selected' : '' }}>
-                                    {{ $data->title }}
-                                </option>
+                                    <option value="{{ $data->agency_typeid }}" {{ $data->agency_typeid ==
+                                        $department->agency_typeid ? 'selected' : '' }}>
+                                        {{ $data->title }}
+                                    </option>
                                 @endforeach
 
                             </select>
@@ -131,7 +134,7 @@
                         <div class="mb-3">
                             <label for="acronym">Agency / Bureau Acronym<sup>*</span></label>
                             <input id="acronym" name="acronym" value="{{ $department->acronym }}" minlength="2"
-                                maxlength="10" required>
+                                maxlength="25" required>
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>
@@ -148,9 +151,21 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="remarks">Remarks</label>
+                            <label for="lastsubmit_dt">Last date submission</label>
+                            <input id="lastsubmit_dt" name="lastsubmit_dt" value="{{ \Carbon\Carbon::parse($department->lastsubmit_dt)->format('d, F Y') }}" readonly>
+                            <h1 class="text-slate-500 text-sm italic">
+                                Note: This field will automatically update.
+                            </h1>
+                            @error('lastsubmit_dt')
+                            <span class="invalid" role="alert">
+                                <p>{{ $message }}</p>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="remarks">Remarks<sup>*</sup></label>
                             <textarea name="remarks" id="remarks" cols="30"
-                                rows="10">{{ $department->remarks }}</textarea>
+                                rows="10" required>{{ $department->remarks }}</textarea>
                             @error('remarks')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

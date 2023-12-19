@@ -92,7 +92,7 @@
                 <div class="mb-1">
                     <label for="language_code">Language Dialect<sup>*</sup></label>
                     <select id="language_code" name="lang_code" required>
-                        <option disabled selected>Select language</option>
+                        <option disabled selected value="">Select language</option>
                         @foreach($profileLibTblLanguageRef as $profileLibTblLanguageRefs)
                             <option value="{{ $profileLibTblLanguageRefs->code }}">
                                 {{ $profileLibTblLanguageRefs->title }}

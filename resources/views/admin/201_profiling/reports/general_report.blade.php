@@ -66,7 +66,7 @@
                 <div class="flex items-center px-6 py-3 text-left">
                     <label for="cesstat_code" class="mr-2 mt-2 text-sm font-medium text-gray-700">CES Status<sup>*</sup></label>
                     <select id="cesstat_code" name="cesstat_code" required type="text" class="inline-block">
-                        <option disabled selected>Select CES Status</option>
+                        <option disabled selected value="">Select CES Status</option>
                         @foreach ($profileLibTblCesStatus as $newProfileLibTblCesStatus)
                             <option value="{{ $newProfileLibTblCesStatus->code }}" {{ $newProfileLibTblCesStatus->code == $cesstat_code ? 'selected' : '' }}>{{ $newProfileLibTblCesStatus->description }}</option>
                         @endforeach
@@ -84,7 +84,7 @@
                 <div class="flex items-center px-6 py-3 text-left">
                     <label for="authority_code" class="mt-2 text-sm font-medium text-gray-700">Appointing Authority<sup>*</sup></label>
                     <select id="authority_code" name="authority_code" required type="text" class="inline-block">
-                        <option disabled selected>Select Appointing Authority</option>
+                        <option disabled selected value="">Select Appointing Authority</option>
                         @foreach ($profileLibTblAppAuthority as $newProfileLibTblAppAuthority)
                             <option value="{{ $newProfileLibTblAppAuthority->code }}" {{ $newProfileLibTblAppAuthority->code == $authority_code ? 'selected' : '' }}>{{ $newProfileLibTblAppAuthority->description }}</option>
                         @endforeach

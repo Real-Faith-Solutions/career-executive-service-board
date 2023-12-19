@@ -12,14 +12,24 @@ use Illuminate\Support\Facades\Auth;
 
 class TrainingParticipantsController extends Controller
 {
-    public function participantList($sessionId)
+    public function participantList(Request $request, $sessionId)
     {
+        $sortBy = $request->input('sortBy', 'pid'); // Default sorting GenExp_Code.
+        $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
+
         $trainingSession = TrainingSession::find($sessionId);
         $trainingParticipantList = $trainingSession->trainingParticipantList()
-        ->orderBy('cesno', 'asc')
+        ->orderBy($sortBy, $sortOrder)
         ->paginate(25);
 
-        return view('admin.competency.partials.training_participant.participant_list', compact('trainingParticipantList', 'trainingSession', 'sessionId'));
+        return view('admin.competency.partials.training_participant.participant_list', 
+        compact(
+            'trainingParticipantList', 
+            'trainingSession', 
+            'sessionId', 
+            'sortBy',
+            'sortOrder'
+        ));
     }
 
     public function addParticipant(Request $request, $sessionId)
@@ -90,6 +100,11 @@ class TrainingParticipantsController extends Controller
             'payment' => ['required'],
             
         ]);
+
+        if($request->status == 'Completed' && $request->no_of_hours == 0)
+        {
+            return to_route('training-session.addParticipant', ['sessionId'=>$sessionId])->with('error', 'Completed Status requires training hours');
+        }
 
         /** @var \App\Models\User $user */
         $user = Auth::user();

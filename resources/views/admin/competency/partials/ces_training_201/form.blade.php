@@ -12,7 +12,7 @@
     <div class="w-full text-left text-gray-500">
         <div class="bg-blue-500 uppercase text-gray-700 text-white">
             <h1 class="px-6 py-3">
-                Form CES Training
+                Form CES Trainingssawaw
             </h1>
         </div>
         
@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label for="sessionid">Training Session<sup>*</sup></label>
                         <select name="sessionid" id="sessionid">
-                            <option disabled selected>Select Training Session</option>
+                            <option disabled selected value="">Select Training Session</option>
                             @foreach ($trainingSession as $trainingSessions)
                                 <option value="{{ $trainingSessions->sessionid }}" >{{ $trainingSessions->title }}</option>
                             @endforeach
@@ -73,7 +73,7 @@
                     <div class="mb-3">
                         <label for="status">Status<sup>*</sup></label>
                         <select name="status" id="status">
-                            <option disabled selected>Select Status</option>
+                            <option disabled selected value="">Select Status</option>
                             <option value="Completed">Completed</option>
                             <option value="Incomplete">Incomplete</option>
                             <option value="Reserved">Reserved</option>
@@ -101,7 +101,7 @@
                     <div class="mb-3">
                         <label for="payment">Payment<sup>*</sup></label>
                         <select id="payment" name="payment" required>
-                            <option disabled selected>Select Payment</option>
+                            <option disabled selected value="">Select Payment</option>
                             <option value="Paid">Paid</option>
                             <option value="Unpaid">UnPaid</option>
                             <option value="Partial">Partial</option>

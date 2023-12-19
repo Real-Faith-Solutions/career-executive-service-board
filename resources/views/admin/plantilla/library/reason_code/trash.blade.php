@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Appointment Status - Trash')
+@section('title', 'Reason Code - Trash')
 @section('content')
 
 <div class="my-5 flex justify-between gap-4">
     <a href="#" class="text-blue-500 uppercase text-2xl">
         @yield('title')
     </a>
-    <a class="btn btn-primary" href="{{ route('library-personnel-movement.index') }}">Go back</a>
+    <a class="btn btn-primary" href="{{ route('library-reason-code.index') }}">Go back</a>
 </div>
 
 <div class="relative overflow-x-auto shadow-lg sm:rounded-lg">
@@ -14,7 +14,7 @@
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th class="px-6 py-3" scope="col">
-                    Appointee status code
+                    Module
                 </th>
                 <th class="px-6 py-3" scope="col">
                     Title
@@ -32,7 +32,7 @@
             @foreach ($datas as $data)
             <tr class="border-b bg-white">
                 <td class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
-                    {{ $data->appt_stat_code }}
+                    {{ $data->module }}
                 </td>
                 <td class="px-6 py-3">
                     {{ $data->title }}
@@ -44,7 +44,7 @@
                 <td class="px-6 py-4 text-right uppercase">
                     <div class="flex justify-end">
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('library-personnel-movement.restore', $data->appt_stat_code) }}"
+                            action="{{ route('library-reason-code.restore', $data->reason_code) }}"
                             method="POST"
                             onsubmit="return window.confirm('Are you sure you want to restore this item?')">
                             @csrf
@@ -55,7 +55,7 @@
                             </button>
                         </form>
                         <form class="hover:bg-slate-100 rounded-full"
-                            action="{{ route('library-personnel-movement.forceDelete', $data->appt_stat_code) }}"
+                            action="{{ route('library-reason-code.forceDelete', $data->reason_code) }}"
                             method="POST"
                             onsubmit="return window.confirm('Are you sure you want to delete this item permanently?')">
 

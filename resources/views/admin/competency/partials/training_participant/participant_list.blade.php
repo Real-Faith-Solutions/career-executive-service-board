@@ -10,13 +10,30 @@
 
     <a href="{{ route('training-session.addParticipant', ['sessionId'=>$sessionId]) }}" class="btn btn-primary" >Add Participant</a>
 </div>
-
+    
 <div class="table-management-training relative overflow-x-auto sm:rounded-lg shadow-lg">
     <table class="w-full text-left text-sm text-gray-500">
         <thead class="bg-blue-500 text-xs uppercase text-gray-700 text-white">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    Participants ID
+                    <a href="{{ route('training-session.participantList', [
+                        'sessionId' => $sessionId,
+                        'sortBy' => 'pid',
+                        'sortOrder' => $sortOrder === 'asc' ? 'desc' : 'asc',
+                    ]) }}" class="flex items-center space-x-1">
+                        Participants ID
+                        @if ($sortBy === 'pid')
+                            @if ($sortOrder === 'asc')
+                                <svg class="w-4 h-4 text-white-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @else
+                                <svg class="w-4 h-4 text-white-500 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+                                </svg>
+                            @endif
+                        @endif
+                    </a>
                 </th>
 
                 <th scope="col" class="px-6 py-3">
@@ -56,38 +73,38 @@
             @foreach ($trainingParticipantList as $trainingParticipantLists)
                 <tr class="border-b bg-white">
                     <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                        {{ $trainingParticipantLists->pid ?? 'No Record' }}
+                        {{ $trainingParticipantLists->pid ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->cesno ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesno ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->lastname ?? 'No Record' }}
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->firstname ?? 'No Record' }}
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? 'No Record' }}
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->lastname ?? '' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->firstname ?? '' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->name_extension ?? '' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->middleinitial ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->cesTrainingPersonalData->cesStatus->description ?? 'No Record' }}
+                        {{ $trainingParticipantLists->cesTrainingPersonalData->cesStatus->description ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->status ?? 'No Record' }}
+                        {{ $trainingParticipantLists->status ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->no_hours ?? 'No Record' }}
+                        {{ $trainingParticipantLists->no_hours ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->payment ?? 'No Record' }}
+                        {{ $trainingParticipantLists->payment ?? '' }}
                     </td>
 
                     <td class="px-6 py-3">
-                        {{ $trainingParticipantLists->remarks ?? 'No Record' }}
+                        {{ $trainingParticipantLists->remarks ?? '' }}
                     </td>
 
                     <td class="px-6 py-4 text-right uppercase">

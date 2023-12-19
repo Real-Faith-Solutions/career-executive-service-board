@@ -3,32 +3,22 @@
 namespace App\Http\Controllers\Plantilla\Library;
 
 use App\Http\Controllers\Controller;
-use App\Models\Plantilla\AgencyLocationLibrary;
 use Illuminate\Http\Request;
+use App\Models\Plantilla\ReasonCode;
 use Illuminate\Support\Facades\Auth;
 
-class LocationTypeController extends Controller
+
+class ReasonCodeLibraryController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('checkPermission:plantilla_view_library')->only('index');
- 
-        $this->middleware('checkPermission:plantilla_add_library')->only(['store', 'create']);
- 
-        $this->middleware('checkPermission:plantilla_edit_library')->only(['edit', 'update']);
-
-        $this->middleware('checkPermission:plantilla_delete_library')->only(['trash', 'restore', 'destroy', 'forceDelete']);
-    }
-
     public function index(Request $request)
     {
         $query = $request->input('search');
 
-        $datas = AgencyLocationLibrary::query()
+        $datas = ReasonCode::query()
             ->where('title', 'LIKE', "%$query%")
+            ->orWhere('module', 'LIKE', "%$query%")
             ->paginate(25);
-        return view('admin.plantilla.library.agency_location.index', compact(
+        return view('admin.plantilla.library.reason_code.index', compact(
             'datas',
             'query',
         ));
@@ -36,40 +26,50 @@ class LocationTypeController extends Controller
 
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $encoder = $user->userName();
+
         $request->validate([
-            'title' => ['required', 'max:50', 'min:2', 'unique:plantillalib_tblagencylocation'],
+            'module' => ['required', 'max:50', 'min:2'],
+            'title' => ['required', 'max:50', 'min:2'],
         ]);
-        AgencyLocationLibrary::create($request->all());
+        $data = $request->all();
+        $data['encoder'] = $encoder;
+        $data['updated_by'] = $encoder;
+        ReasonCode::create($data);
         return redirect()->back()->with('message', 'The item has been successfully added!');
     }
 
     public function create()
     {
-        return view('admin.plantilla.library.agency_location.create');
+        return view('admin.plantilla.library.reason_code.create');
     }
     
-    public function edit($agencyloc_Id)
+    public function edit($reason_code)
     {
-        $datas = AgencyLocationLibrary::withTrashed()->findOrFail($agencyloc_Id);
-        return view('admin.plantilla.library.agency_location.edit', compact(
+        $datas = ReasonCode::withTrashed()->findOrFail($reason_code);
+        return view('admin.plantilla.library.reason_code.edit', compact(
             'datas',
         ));
     }
 
-    public function update(Request $request, $agencyloc_Id)
+    public function update(Request $request, $reason_code)
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $encoder = $user->userName();
 
         $request->validate([
-            'title' => ['required', 'max:50', 'min:2', 'unique:plantillalib_tblagencylocation'],
+            'module' => ['required', 'max:50', 'min:2'],
+            'title' => ['required', 'max:50', 'min:2'],
         ]);
 
-        $datas = AgencyLocationLibrary::withTrashed()->findOrFail($agencyloc_Id);
+        $datas = ReasonCode::withTrashed()->findOrFail($reason_code);
         $datas->update([
             'title' => $request->input('title'),
-            'encoder' => $encoder,
+            'module' => $request->input('module'),
+            'updated_by' => $encoder,
         ]);
 
         return redirect()->back()->with('message', 'The item has been successfully updated!');
@@ -77,26 +77,26 @@ class LocationTypeController extends Controller
 
     public function trash()
     {
-        $datas = AgencyLocationLibrary::onlyTrashed()
+        $datas = ReasonCode::onlyTrashed()
             ->get();
-        return view('admin.plantilla.library.agency_location.trash', compact('datas'));
+        return view('admin.plantilla.library.reason_code.trash', compact('datas'));
     }
 
-    public function restore($agencyloc_Id)
+    public function restore($reason_code)
     {
-        $datas = AgencyLocationLibrary::onlyTrashed()->findOrFail($agencyloc_Id);
+        $datas = ReasonCode::onlyTrashed()->findOrFail($reason_code);
         $datas->restore();
 
         return redirect()->back()->with('message', 'The item has been successfully restore!');
     }
 
-    public function destroy($agencyloc_Id)
+    public function destroy($reason_code)
     {
-        $data = AgencyLocationLibrary::findOrFail($agencyloc_Id);
+        $data = ReasonCode::findOrFail($reason_code);
 
-        if ($data->agencyLocation()->exists()) {
-            return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
-        }
+        // if ($data->apptStatus()->exists()) {
+        //     return redirect()->back()->with('error', 'Cannot delete this item because it has related records.');
+        // }
 
         try {
             $data->delete();
@@ -113,11 +113,11 @@ class LocationTypeController extends Controller
         }
     }
 
-    public function forceDelete($agencyloc_Id)
+    public function forceDelete($reason_code)
     {
         try {
             // Find the soft-deleted record by its ID
-            $data = AgencyLocationLibrary::onlyTrashed()->findOrFail($agencyloc_Id);
+            $data = ReasonCode::onlyTrashed()->findOrFail($reason_code);
 
             // Permanently delete the record
             $data->forceDelete();

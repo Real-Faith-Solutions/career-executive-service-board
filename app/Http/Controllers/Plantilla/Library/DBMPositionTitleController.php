@@ -49,10 +49,10 @@ class DBMPositionTitleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'dbm_title' => ['required', 'max:40', 'min:2'],
+            'dbm_title' => ['required', 'max:50', 'min:2'],
             'poslevel_code' => ['required'],
             'sg' => ['required'],
-            'func_title' => ['required'],
+            // 'func_title' => ['required'],
         ]);
         PositionMasterLibrary::create($request->all());
         return redirect()->back()->with('message', 'The item has been successfully added!');
@@ -141,10 +141,10 @@ class DBMPositionTitleController extends Controller
         $encoder = $user->userName();
 
         $request->validate([
-            'dbm_title' => ['required', 'max:40', 'min:2'],
+            'dbm_title' => ['required', 'max:50', 'min:2'],
             'poslevel_code' => ['required'],
             'sg' => ['required'],
-            'func_title' => ['required'],
+            // 'func_title' => ['required'],
         ]);
 
         $datas = PositionMasterLibrary::withTrashed()->findOrFail($sectorid);

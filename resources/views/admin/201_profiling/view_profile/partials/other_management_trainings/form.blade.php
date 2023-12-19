@@ -46,7 +46,7 @@
                     <div class="mb-3">
                         <label for="expertise_field_of_specialization">Expertise / Field of Specialization<sup>*</sup></label>
                         <select id="expertise_field_of_specialization" name="expertise_field_of_specialization" required>
-                            <option disabled selected>Select Specialization</option>
+                            <option disabled selected value="">Select Specialization</option>
                             @foreach ($profileLibTblExpertiseSpec as $profileLibTblExpertiseSpecs)
                                 <option value="{{ $profileLibTblExpertiseSpecs->SpeExp_Code }}">{{ $profileLibTblExpertiseSpecs->Title }}</option>
                             @endforeach

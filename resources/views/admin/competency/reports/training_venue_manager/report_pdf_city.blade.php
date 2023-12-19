@@ -50,7 +50,7 @@
                 padding-right: 10px;
                 padding-left: 10px;
                 padding-bottom: 5px;
-                font-size: 10px;
+                font-size: 12px;
                 text-align: left;
                 border: none;
             }
@@ -59,7 +59,7 @@
                 color: #284F87;
                 padding-right: 10px;
                 padding-left: 10px;
-                font-size: 10px;
+                font-size: 12px;
                 text-transform: uppercase;
                 text-align: left;
                 background-color: white;

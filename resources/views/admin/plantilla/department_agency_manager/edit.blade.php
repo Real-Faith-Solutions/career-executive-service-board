@@ -105,7 +105,7 @@
                         <div class="mb-3">
                             <label for="acronym">Agency / Bureau Acronym<sup>*</span></label>
                             <input id="acronym" name="acronym" value="{{ $department->acronym }}" minlength="2"
-                                maxlength="10" required>
+                                maxlength="25" required>
                             @error('acronym')
                             <span class="invalid" role="alert">
                                 <p>{{ $message }}</p>

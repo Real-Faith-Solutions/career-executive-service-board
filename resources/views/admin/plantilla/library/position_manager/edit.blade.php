@@ -137,7 +137,7 @@
                     <fieldset class="border p-4">
                         <legend>Position Details</legend>
                         <div class="mb-3">
-                            <label for="pos_suffix">Position Suffix<sup>*</sup></label>
+                            <label for="pos_suffix">Position Suffix</label>
                             <input id="pos_suffix" name="pos_suffix" value="{{ $datas->pos_suffix }}" />
                             @error('pos_suffix')
                             <span class="invalid" role="alert">
@@ -149,7 +149,7 @@
                             <label for="ces_equivalent">CES Equivalent<sup>*</sup></label>
                             <select id="ces_equivalent" name="ces_equivalent" required onchange="posCode(this.value)"
                                 disabled>
-                                <option disabled selected>Select Position Level</option>
+                                <option disabled selected value="">Select Position Level</option>
                                 @foreach ($planPositionLibrary as $data)
                                 <option value="{{ $data->poslevel_code }}" {{ $data->poslevel_code ==
                                     $datas->positionMasterLibrary->poslevel_code ? 'selected' : '' }}>
@@ -166,7 +166,7 @@
                         <div class="mb-3">
                             <label for="pos_code">Position Title<sup>*</sup></label>
                             <select id="pos_code" name="pos_code" required onchange="posTitle()" disabled>
-                                <option disabled selected>Select Position Title</option>
+                                <option disabled selected value="">Select Position Title</option>
                                 @foreach ($positionMasterLibrary as $data)
                                 <option value="{{ $data->pos_code }}" {{ $data->pos_code ==
                                     $datas->pos_code ? 'selected' : ''}}>
@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="pos_func_name">Functional Title<sup>*</sup></label>
+                            <label for="pos_func_name">Functional Title</label>
                             <input id="pos_func_name" name="pos_func_name" required readonly
                                 value="{{ $datas->pos_func_name }}" />
                             @error('pos_func_name')
@@ -325,7 +325,7 @@
                         <div class="mb-3">
                             <label for="cbasis_code">Classification Basis</label>
                             <select id="cbasis_code" name="cbasis_code" onchange="classificationBasis(this.value)">
-                                <option disabled selected>Select Classification Basis</option>
+                                <option disabled selected value="">Select Classification Basis</option>
                                 @foreach ($classBasis as $data)
                                 <option value="{{ $data->cbasis_code }}" {{ $data->cbasis_code ==
                                     $datas->cbasis_code ? 'selected': ''}}>

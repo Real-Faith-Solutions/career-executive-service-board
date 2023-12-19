@@ -155,7 +155,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="acronym">Office acronym<sup>*</sup></label>
-                        <input name="acronym" id="acronym" value="{{ old('acronym') }}" minlength="2" maxlength="10">
+                        <input name="acronym" id="acronym" value="{{ old('acronym') }}" minlength="2" maxlength="25" required>
                         @error('acronym')
                         <span class="invalid" role="alert">
                             <p>{{ $message }}</p>
@@ -243,7 +243,7 @@
                     <div class="mb-3">
                         <label for="isActive">Office Status<sup>*</sup></label>
                         <select id="isActive" name="isActive" required>
-                            <option disabled selected>Select status</option>
+                            <option disabled selected value="">Select status</option>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>

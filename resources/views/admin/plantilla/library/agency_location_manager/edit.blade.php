@@ -59,7 +59,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="acronym">Acronym<sup>*</sup></label>
-                        <input id="acronym" name="acronym" minlength="2" maxlength="10" required
+                        <input id="acronym" name="acronym" minlength="2" maxlength="25" required
                             value="{{ $agencyLocation->acronym}}" />
                         @error('acronym')
                         <span class="invalid" role="alert">
@@ -104,7 +104,7 @@
                     <div class="mb-3">
                         <label for="region">Region<sup>*</sup></label>
                         <select id="region" name="region" type="region" required>
-                            <option disabled selected>Select Region</option>
+                            <option disabled selected value="">Select Region</option>
                             @foreach ($region as $data)
                             <option value="{{ $data->name }}" {{ $data->name == $agencyLocation->region ? 'selected' :
                                 ''}}>

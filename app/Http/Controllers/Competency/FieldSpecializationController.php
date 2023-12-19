@@ -10,11 +10,14 @@ use Illuminate\Validation\Rule;
 
 class FieldSpecializationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::paginate(25);    
+        $sortBy = $request->input('sortBy', 'GenExp_Code'); // Default sorting GenExp_Code.
+        $sortOrder = $request->input('sortOrder', 'desc'); // Default sorting order
 
-        return view('admin.competency.partials.training_type_library.expertise_specialization.table', compact('profileLibTblExpertiseGen'));
+        $profileLibTblExpertiseGen = ProfileLibTblExpertiseGen::orderBy($sortBy, $sortOrder)->paginate(25);    
+
+        return view('admin.competency.partials.training_type_library.expertise_specialization.table', compact('profileLibTblExpertiseGen', 'sortBy', 'sortOrder'));
     }
 
     public function create()

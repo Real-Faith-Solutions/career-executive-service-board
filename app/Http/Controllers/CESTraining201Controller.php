@@ -41,7 +41,6 @@ class CESTraining201Controller extends Controller
 
     public function store(Request $request, $cesno)
     {
-        
         $request->validate([
 
             'sessionid' => ['required',Rule::unique('training_tblparticipants')->where('cesno', $cesno)],
@@ -51,6 +50,11 @@ class CESTraining201Controller extends Controller
             'payment' => ['required'],
             
         ]);
+
+        if($request->status == 'Completed' && $request->no_of_hours == 0)
+        {
+            return to_route('ces-training-201.create', ['cesno'=>$cesno])->with('error', 'Completed Status requires training hours');
+        }
 
         /** @var \App\Models\User $user */
         $user = Auth::user();

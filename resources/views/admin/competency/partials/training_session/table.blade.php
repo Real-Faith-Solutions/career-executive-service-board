@@ -89,55 +89,55 @@
             @foreach ($trainingSession as $trainingSessions)
             <tr class="border-b bg-white">
                 <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">
-                    {{ $trainingSessions->title ?? 'No Record' }}
+                    {{ $trainingSessions->title ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->sessionid ?? 'No Record' }}
+                    {{ $trainingSessions->sessionid ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->category ?? 'No Record' }}
+                    {{ $trainingSessions->category ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->specialization ?? 'No Record' }}
+                    {{ $trainingSessions->specialization ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
                     {{
                     \Carbon\Carbon::parse($trainingSessions->from_dt)->format('m/d/Y'). ' - '.
-                    \Carbon\Carbon::parse($trainingSessions->to_dt)->format('m/d/Y') ?? 'No Record'
+                    \Carbon\Carbon::parse($trainingSessions->to_dt)->format('m/d/Y') ?? ''
                     }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->venuePersonalData->name ?? 'No Record' }}
+                    {{ $trainingSessions->venuePersonalData->name ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->no_hours ?? 'No Record' }}
+                    {{ $trainingSessions->no_hours ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->status ?? 'No Record' }}
+                    {{ $trainingSessions->status ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->barrio ?? 'No Record' }}
+                    {{ $trainingSessions->barrio ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->resourceSpeakerPersonalData->lastname ?? 'No Record' }},
-                    {{ $trainingSessions->resourceSpeakerPersonalData->firstname ?? 'No Record' }}
+                    {{ $trainingSessions->resourceSpeakerPersonalData->lastname ?? '' }},
+                    {{ $trainingSessions->resourceSpeakerPersonalData->firstname ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->session_director ?? 'No Record' }}
+                    {{ $trainingSessions->session_director ?? '' }}
                 </td>
 
                 <td class="px-6 py-3">
-                    {{ $trainingSessions->remarks ?? 'No Record' }}
+                    {{ $trainingSessions->remarks ?? '' }}
                 </td>
 
                 <td class="px-6 py-4 text-right uppercase">
